@@ -1,0 +1,6 @@
+"sample","filename","period","periodtime","family","genus","species","comment","maxn","marine.region","latitude","longitude","date","time","site","location","status","depth","successful.count","successful.length"
+"S1","S1_R377.avi",1,15.46667,"Sparidae","Chrysophrys","auratus",NA,1,"South-west",-31.98670238,115.5188948,23032020,"12:00","Site.1","Deep","Fished",40,"Yes","Yes"
+"S2","S2_L361.avi",1,0.514,"Labridae","Coris","auricularis",NA,2,"South-west",-31.98680238,115.5187948,23032020,"12:00","Site.2","Deep","No-take",35,"Yes","Yes"
+"S3","S3_L370.avi",1,0.71933,"Anthiinae","Othos","dentex",NA,1,"North-west",-24.638399,113.537039,24032020,"12:00","Site.3","Shallow","Fished",12,"Yes","Yes"
+"S3","S3_L370.avi",1,0.71933,"Labridae","Coris","auricularis",NA,1,"North-west",-24.638399,113.537039,24032020,"12:00","Site.3","Shallow","Fished",12,"Yes","Yes"
+"S3","S3_L370.avi",1,0.71933,"Sparidae","Chrysophrys","auratus",NA,1,"North-west",-24.638399,113.537039,24032020,"12:00","Site.3","Shallow","Fished",12,"Yes","Yes"

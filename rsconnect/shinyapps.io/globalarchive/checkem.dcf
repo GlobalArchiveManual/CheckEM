@@ -1,0 +1,12 @@
+name: checkem
+title: checkem
+username:
+account: globalarchive
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2019084
+bundleId: 3014807
+url: https://globalarchive.shinyapps.io/checkem/
+when: 1586921359.81761
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,41 @@
+To do
+- length vs maxn
+- downloads work
+- preview data as a modal window
+- get rid of row names on modal windows
+- metadata - errors downloadable
+- maxn - errors downloadable
+- length - errors downloadable
+- maxn - number of species 
+- maxn - download complete, download complete filter out all errors
+- get "sample" vs "samples" to work in value boxes
+- add tick box to remove sp1, sp2 to species not observed
+- fix tables that overhang their modal window
+- add how to's
+- summary tabs (within create maxn and length)
+
+Done
+- turn life history into .csv
+- turn synoynms into .csv
+- fix why life history won't read in properly
+- expand life history for shapefile checks.
+- add shapefile check to get marine region per drop.
+- add shapefile method to life hsitory check.
+- metadata map - popup with 8 comp columns
+- maxn - box plots - status, location, site
+- add length initial
+- add length plot
+- add vlines for cut offs
+- add easy close
+- out of range
+- pretty up maxn plots - new theme - blue and white bars
+- for spatial maxn plot - if blank genus then family
+- add in title to plots for species (top left)
+- fix colours in length histogram
+- top ten species
+- increase plot size of length plot
+
+
+time tracker
+days
+23-28 almost every day
