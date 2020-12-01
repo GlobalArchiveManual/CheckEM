@@ -38,6 +38,27 @@ library(GlobalArchive)
 # Googlesheets (for now)
 library(googlesheets4)
 
+
+dbHeader <- dashboardHeader()
+dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
+                                           tags$img(src='https://www.nespmarine.edu.au/sites/default/themes/nespmarine/logo.png',height='60',width='200'))
+
+dbHeader <- dashboardHeader(title = "CheckEM",
+                            tags$li(a(href = 'https://marineecology.io/',
+                                      img(src = 'https://github.com/UWAMEGFisheries/UWAMEGFisheries.github.io/blob/master/images/MEG-white.png?raw=true',
+                                          title = "Marine Ecology Group", height = "50px"),
+                                      style = "padding-top:10px; padding-bottom:10px;"),
+                                    class = "dropdown"),
+                            tags$li(a(href = 'https://www.nespmarine.edu.au/',
+                                      img(src = 'https://github.com/UWAMEGFisheries/UWAMEGFisheries.github.io/blob/master/images/mbh-logo-white-cropped.png?raw=true',
+                                          title = "Marine Biodiversity Hub", height = "50px"),
+                                      style = "padding-top:10px; padding-bottom:10px;"),
+                                    class = "dropdown"))
+
+
+
+
+
 # Read in life history sheet ----
 master<-read_csv("data/australia.life.history_200805.csv")%>%
   ga.clean.names()%>%

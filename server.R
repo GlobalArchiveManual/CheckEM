@@ -186,7 +186,7 @@ output$table.length <- renderTable({
 
 threedpoints <- reactive({
   if(is.null(input$upload.3dpoints)){
-    threedpoints<- read.delim("data/example_3Dpoints.txt", na.strings = "")%>%
+    threedpoints<- read.delim("data/example_3DPoints.txt", na.strings = "")%>%
           as.data.frame()%>%
           ga.clean.names()%>%
           dplyr::mutate(genus=ifelse(genus%in%c("NA","NANA",NA,"unknown"),"Unknown",as.character(genus)))%>%

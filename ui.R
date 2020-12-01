@@ -1,16 +1,18 @@
 tagList(
   useShinyjs(),
   dashboardPage(
-  dashboardHeader(title = "CheckEM"),
-  dashboardSidebar(
-    sidebarMenu(
+    dbHeader,
+    # dashboardHeader(title = "habitatMAPPer"),
+    dashboardSidebar(
+      sidebarMenu(
     menuItem("Upload data", tabName = "upload", icon = icon("upload")),
     menuItem("Check metadata", tabName = "checkmetadata", icon = icon("check")),
     menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
     menuItem("Check Length & 3D points", tabName = "createlength", icon = icon("check")),
     menuItem("Compare MaxN & Length", tabName = "maxnlength", icon = icon("equals")),
     menuItem("Create Mass", tabName = "createmass", icon = icon("check")),
-    menuItem("Download data", tabName = "downloads", icon = icon("download"))
+    menuItem("Download data", tabName = "downloads", icon = icon("download")),
+    menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome"))
   )
   ),
   dashboardBody(
@@ -167,6 +169,16 @@ tagList(
                 
                        div(id="click.download.mass",
                        infoBoxOutput("info.download.mass",width=6))
+              )
+      ),
+      
+      tabItem(tabName = "acknowledgements",
+              fluidRow(box(width = 4, status = "primary", height = 800,
+                           "     ",imageOutput("logos")
+                           
+              ),
+              box(width = 8, status = "primary", height = 800, title = "Acknowledgments",
+                  "The Marine Biodiversity Hub is funded by the Australian Government's National Environmental Science Program.", br(), br())
               )
       )
       
