@@ -1,10 +1,3 @@
-# rsconnect::setAccountInfo(name='globalarchive',
-#                           token='6CEEEFEBB8A0CEB1997210A7E9B6B94A',
-#                           secret='2SI4c31ff1LWL44+IPmT3zsl4IOps7wDY8uiRrNR')
-
-
-
-
 # Load shiny packages
 library(shiny)
 library(shinythemes)
@@ -93,7 +86,6 @@ genus.max.length<-master%>%
   ungroup()
 
 # Create a new master list with family and genus average maximum length where missing species max.length ----
-
 master.min.max<-left_join(master,family.max.length,by=c("family"))%>% # add in family values
   left_join(.,genus.max.length)%>% # add in genus values
   dplyr::mutate(fb.length_max=ifelse((is.na(fb.length_max)),genuslength_max,fb.length_max))%>%
@@ -102,8 +94,6 @@ master.min.max<-left_join(master,family.max.length,by=c("family"))%>% # add in f
   mutate(min.length=0.15*fb.length_max)%>% # change values here
   mutate(max.length=0.85*fb.length_max)%>% # change values here
   glimpse()
-
-
 
 # Synonyms ----
 synonyms <- read_csv("data/synonyms_200813.csv")%>%
