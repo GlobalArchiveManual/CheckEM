@@ -97,7 +97,6 @@ metadata.regions<-metadata.3%>%
     # req(input$upload.metadata)
     metadata.regions()
   })
-
   
 # Read in points data ----
 points <- reactive({

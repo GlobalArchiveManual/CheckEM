@@ -5,8 +5,8 @@ account: globalarchive
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2019084
-bundleId: 3952647
+bundleId: 3953498
 url: https://globalarchive.shinyapps.io/checkem/
-when: 1607303995.91323
+when: 1607320512.81681
 asMultiple: FALSE
 asStatic: FALSE
