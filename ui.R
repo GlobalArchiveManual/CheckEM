@@ -151,6 +151,11 @@ tagList(
                            # infoBoxOutput("info.download.maxn.clean")),
                 box(width=6,title = "Select 'errors' to filter out of downloaded data",
                     status="primary",solidHeader = TRUE,
+                    
+                    h4("Add project and campaign information"),
+                    textInput("project.name", label = "Project name:", value = ""),
+                    textInput("campaign.name", label = "CampaignID:", value = ""),
+                    
                     h4("Filters for MaxN, Length and Mass"),
                     checkboxInput("error.synonyms", label = "Keep species names that have been updated", value = TRUE), 
                     checkboxInput("error.area", label = "Remove species not observed in the area before", value = FALSE), 

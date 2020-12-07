@@ -406,7 +406,8 @@ maxn.complete <- maxn.clean()%>%
 # MAXN - create filtered maxn download -----
 maxn.complete.download <- reactive({
   
-  maxn <- maxn.raw() # can't use clean as have already changed synonyms
+  maxn <- maxn.raw()# can't use clean as have already changed synonyms
+
   
   if (input$error.synonyms==TRUE) {
     maxn.complete <- dplyr::left_join(maxn, synonyms,by=c("family","genus","species")) %>%
@@ -423,7 +424,11 @@ maxn.complete.download <- reactive({
       dplyr::group_by(sample,family,genus,species)%>%
       dplyr::summarise(maxn=sum(maxn))%>%
       ungroup()%>%
-      dplyr::left_join(metadata.regions())
+      dplyr::left_join(metadata.regions())%>%
+      dplyr::mutate(campaignid = input$campaign.name) %>%
+      dplyr::mutate(project = input$project.name)%>%
+      dplyr::mutate(id=paste(project,campaignid,sep="."))%>%
+      dplyr::mutate(scientific = paste(genus,species,sep=" "))
   } 
   else{ 
     maxn.complete <- maxn%>%
@@ -433,7 +438,11 @@ maxn.complete.download <- reactive({
       dplyr::group_by(sample,family,genus,species)%>%
       dplyr::summarise(maxn=sum(maxn))%>%
       ungroup()%>%
-      dplyr::left_join(metadata.regions())
+      dplyr::left_join(metadata.regions())%>%
+      dplyr::mutate(campaignid = input$campaign.name) %>%
+      dplyr::mutate(project = input$project.name)%>%
+      dplyr::mutate(id=paste(project,campaignid,sep="."))%>%
+      dplyr::mutate(scientific = paste(genus,species,sep=" "))
   }
   
   maxn.complete <- maxn.complete
@@ -451,7 +460,9 @@ maxn.complete.download <- reactive({
     maxn.area <- anti_join(maxn.complete,species.out.of.area)
   }
   
-  maxn.area<-maxn.area
+  maxn.area<-maxn.area%>%
+    dplyr::mutate(campaignid = input$campaign.name) %>%
+    dplyr::mutate(project = input$project.name) 
     
 })
 
@@ -829,7 +840,11 @@ length.complete.download <- reactive({
       dplyr::mutate(marine.region=as.character(marine.region))
   }
   
-  length.complete <- length.complete
+  length.complete <- length.complete%>%
+    dplyr::mutate(campaignid = input$campaign.name) %>%
+    dplyr::mutate(project = input$project.name)%>%
+    dplyr::mutate(id=paste(project,campaignid,sep="."))%>%
+    dplyr::mutate(scientific = paste(genus,species,sep=" "))
   
   species.out.of.area <- master.expanded%>%
     dplyr::mutate(marine.region=as.character(marine.region))%>%
@@ -880,7 +895,11 @@ length.complete.download <- reactive({
     replace_na(list(number = 0))%>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::mutate(length=as.numeric(length))%>%
     dplyr::left_join(metadata.regions())%>%
-    filter(!is.na(family))
+    filter(!is.na(family))%>%
+    dplyr::mutate(campaignid = input$campaign.name) %>%
+    dplyr::mutate(project = input$project.name)%>%
+    dplyr::mutate(id=paste(project,campaignid,sep="."))%>%
+    dplyr::mutate(scientific = paste(genus,species,sep=" "))
   
 })
 
@@ -1469,7 +1488,11 @@ mass.complete.download <- reactive({
       dplyr::mutate(length=as.numeric(length))%>%
       dplyr::left_join(metadata.regions())%>%
       dplyr::filter(successful.length%in%c("Yes","Y","y","yes"))%>%
-      dplyr::mutate(marine.region=as.character(marine.region))
+      dplyr::mutate(marine.region=as.character(marine.region))%>%
+      dplyr::mutate(campaignid = input$campaign.name) %>%
+      dplyr::mutate(project = input$project.name)%>%
+      dplyr::mutate(id=paste(project,campaignid,sep="."))%>%
+      dplyr::mutate(scientific = paste(genus,species,sep=" "))
   }
   
   complete.length.number.mass <- complete.length.number.mass
@@ -1522,7 +1545,11 @@ mass.complete.download <- reactive({
     tidyr::complete(nesting(sample),nesting(family,genus,species)) %>%
     replace_na(list(number = 0))%>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::left_join(metadata.regions())%>%
-    filter(!is.na(family))
+    filter(!is.na(family))%>%
+    dplyr::mutate(campaignid = input$campaign.name) %>%
+    dplyr::mutate(project = input$project.name)%>%
+    dplyr::mutate(id=paste(project,campaignid,sep="."))%>%
+    dplyr::mutate(scientific = paste(genus,species,sep=" "))
   
 })
 
@@ -1772,7 +1799,8 @@ output$info.download.maxn <- renderInfoBox({
 
 output$download.maxn <- downloadHandler(
   filename = function() {
-    paste("maxn.summary_", Sys.Date(), ".csv", sep="")
+    req(input$campaign.name)
+    paste(input$campaign.name,"_maxn.summary_", Sys.Date(), ".csv", sep="")
   },
   content = function(file) {
     write.csv(maxn.complete.download(), file, row.names = FALSE)
@@ -1781,7 +1809,8 @@ output$download.maxn <- downloadHandler(
 
 output$download.maxn.fst <- downloadHandler(
   filename = function() {
-    paste("maxn.summary_", Sys.Date(), ".fst", sep="")
+    req(input$campaign.name)
+    paste(input$campaign.name,"_maxn.summary_", Sys.Date(), ".fst", sep="")
   },
   content = function(file) {
     write.fst(maxn.complete.download(), file)
@@ -1832,7 +1861,8 @@ output$info.download.length <- renderInfoBox({
 
 output$download.length <- downloadHandler(
   filename = function() {
-    paste("length.summary_", Sys.Date(), ".csv", sep="")
+    req(input$campaign.name)
+    paste(input$campaign.name,"_length.summary_", Sys.Date(), ".csv", sep="")
   },
   content = function(file) {
     write.csv(length.complete.download(), file, row.names = FALSE)
@@ -1841,7 +1871,7 @@ output$download.length <- downloadHandler(
 
 output$download.length.fst <- downloadHandler(
   filename = function() {
-    paste("length.summary_", Sys.Date(), ".fst", sep="")
+    paste(input$campaign.name,"_length.summary_", Sys.Date(), ".fst", sep="")
   },
   content = function(file) {
     write.fst(length.complete.download(), file)
@@ -1863,7 +1893,7 @@ output$info.download.mass <- renderInfoBox({
 
 output$download.mass <- downloadHandler(
   filename = function() {
-    paste("mass.summary_", Sys.Date(), ".csv", sep="")
+    paste(input$campaign.name,"_mass.summary_", Sys.Date(), ".csv", sep="")
   },
   content = function(file) {
     write.csv(mass.complete.download(), file, row.names = FALSE)
@@ -1872,7 +1902,7 @@ output$download.mass <- downloadHandler(
 
 output$download.mass.fst <- downloadHandler(
   filename = function() {
-    paste("mass.summary_", Sys.Date(), ".fst", sep="")
+    paste(input$campaign.name,"_mass.summary_", Sys.Date(), ".fst", sep="")
   },
   content = function(file) {
     write.fst(length.complete.download(), file)
