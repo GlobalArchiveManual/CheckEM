@@ -1772,16 +1772,26 @@ output$info.download.maxn <- renderInfoBox({
 
 output$download.maxn <- downloadHandler(
   filename = function() {
-    paste("maxn.complete_", Sys.Date(), ".csv", sep="")
+    paste("maxn.summary_", Sys.Date(), ".csv", sep="")
   },
   content = function(file) {
     write.csv(maxn.complete.download(), file, row.names = FALSE)
   }
 )
 
+output$download.maxn.fst <- downloadHandler(
+  filename = function() {
+    paste("maxn.summary_", Sys.Date(), ".fst", sep="")
+  },
+  content = function(file) {
+    write.fst(maxn.complete.download(), file)
+  }
+)
+
 onclick('click.download.maxn',showModal(modalDialog(
-  title = "Complete maxn: adds zeros where a species is not present", size="l",easyClose = TRUE,
-  downloadButton("download.maxn","Download as csv"))))
+  title = "Summarised maxn: adds zeros where a species is not present", size="l",easyClose = TRUE,
+  downloadButton("download.maxn","Download as csv"),
+  downloadButton("download.maxn.fst","Download as FST"))))
 
 # output$download.length.wrong.big <- downloadHandler(
 #   filename = function() {
@@ -1822,16 +1832,26 @@ output$info.download.length <- renderInfoBox({
 
 output$download.length <- downloadHandler(
   filename = function() {
-    paste("length.complete_", Sys.Date(), ".csv", sep="")
+    paste("length.summary_", Sys.Date(), ".csv", sep="")
   },
   content = function(file) {
     write.csv(length.complete.download(), file, row.names = FALSE)
   }
 )
 
+output$download.length.fst <- downloadHandler(
+  filename = function() {
+    paste("length.summary_", Sys.Date(), ".fst", sep="")
+  },
+  content = function(file) {
+    write.fst(length.complete.download(), file)
+  }
+)
+
 onclick('click.download.length',showModal(modalDialog(
-  title = "Complete length: adds zeros where a species is not present", size="l",easyClose = TRUE,
-  downloadButton("download.length","Download as csv"))))
+  title = "Summarised length: adds zeros where a species is not present", size="l",easyClose = TRUE,
+  downloadButton("download.length","Download as csv"),
+  downloadButton("download.length.fst","Download as FST"))))
 
 # Download mass complete ----
 output$info.download.mass <- renderInfoBox({
@@ -1843,16 +1863,26 @@ output$info.download.mass <- renderInfoBox({
 
 output$download.mass <- downloadHandler(
   filename = function() {
-    paste("mass.complete_", Sys.Date(), ".csv", sep="")
+    paste("mass.summary_", Sys.Date(), ".csv", sep="")
   },
   content = function(file) {
     write.csv(mass.complete.download(), file, row.names = FALSE)
   }
 )
 
+output$download.mass.fst <- downloadHandler(
+  filename = function() {
+    paste("mass.summary_", Sys.Date(), ".fst", sep="")
+  },
+  content = function(file) {
+    write.fst(length.complete.download(), file)
+  }
+)
+
 onclick('click.download.mass',showModal(modalDialog(
   title = "Complete mass: adds zeros where a species is not present", size="l",easyClose = TRUE,
-  downloadButton("download.mass","Download as csv"))))
+  downloadButton("download.mass","Download as csv"),
+  downloadButton("download.length.fst","Download as FST"))))
 
 }
 

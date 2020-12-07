@@ -18,6 +18,7 @@ library(tidyr)
 library(readr)
 library(fuzzyjoin)
 library(forcats)
+library(fst)
 
 # Plotting
 library(ggplot2)
