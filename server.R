@@ -57,9 +57,9 @@ metadata.2<-as.data.frame(nearest.region)%>%
 metadata.commonwealth.marineparks <- over(metadata, commonwealth.marineparks)
 
 metadata.3<-metadata.2%>%
-  dplyr::select(-c(status))%>%
+  #dplyr::select(-c(status))%>%
   bind_cols(metadata.commonwealth.marineparks)%>%
-  dplyr::rename(status=ZoneName)
+  dplyr::rename(zone=ZoneName)
 
 # add in state reserves
 metadata.wa.marineparks <- over(metadata, wa.marineparks)%>%
@@ -68,10 +68,10 @@ metadata.wa.marineparks <- over(metadata, wa.marineparks)%>%
 
 metadata.regions<-metadata.3%>%
   bind_cols(metadata.wa.marineparks)%>%
-  dplyr::mutate(status=ifelse(status%in%c(NA),as.character(ZONE_TYPE),as.character(status)))%>%
+  dplyr::mutate(zone=ifelse(zone%in%c(NA),as.character(ZONE_TYPE),as.character(zone)))%>%
   dplyr::select(-c(ZONE_TYPE))%>%
-  dplyr::mutate(status=str_replace_all(.$status,c(" Zone"="","Zone "="","(IUCN II)"="","(IUCN IV)"="","(IUCN IA)"="","[^[:alnum:] ]"=""," Benthic Protection"="","Use "="Use","y "="y")))%>%
-  dplyr::mutate(status.simple=str_replace_all(.$status,c("General Use"="Fished",
+  dplyr::mutate(zone=str_replace_all(.$zone,c(" Zone"="","Zone "="","(IUCN II)"="","(IUCN IV)"="","(IUCN IA)"="","[^[:alnum:] ]"=""," Benthic Protection"="","Use "="Use","y "="y")))%>%
+  dplyr::mutate(status=str_replace_all(.$zone,c("General Use"="Fished",
                                                          "Recreational Use"="Fished",
                                                          "Multiple Use"="Fished",
                                                          "National Park"="No-take",
@@ -672,13 +672,13 @@ output$maxn.status.plot <- renderPlot({
     Theme1
 })
 
-# MAXN - Status simple plot ----
-output$maxn.status.plot.simple <- renderPlot({
+# MAXN - Zone plot ----
+output$maxn.zone.simple <- renderPlot({
   maxn.per.sample.simple<-maxn.complete()%>%
     dplyr::left_join(metadata.regions())%>%
     dplyr::mutate(scientific=paste(genus,species,sep=" "))%>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown))%>%
-    group_by(sample,status.simple)%>%
+    group_by(sample,zone)%>%
     summarise(maxn=sum(maxn))%>%
     ungroup()
   
@@ -686,7 +686,7 @@ output$maxn.status.plot.simple <- renderPlot({
   grob.sci <- grobTree(textGrob(as.character(scientific.name), x=0.01,  y=0.97, hjust=0,
                                 gp=gpar(col="black", fontsize=13, fontface="italic")))
   
-  ggplot(maxn.per.sample.simple, aes(x = status.simple,y=maxn, fill = status.simple)) + 
+  ggplot(maxn.per.sample.simple, aes(x = zone,y=maxn, fill = zone)) + 
     stat_summary(fun.y=mean, geom="bar",colour="black") +
     stat_summary(fun.ymin = se.min, fun.ymax = se.max, geom = "errorbar", width = 0.1) +
     geom_hline(aes(yintercept=0))+
@@ -1258,14 +1258,14 @@ output$length.histogram <- renderPlot({
     Theme1
 })
 
-# LENGTH - histogram zone ----
+# LENGTH - histogram status ----
 output$length.histogram.status <- renderPlot({
   req(input$length.species.dropdown)
   
   length3dpoints<-length3dpoints.clean()%>%
     dplyr::mutate(scientific=paste(genus,species,sep=" "))%>%
     filter(scientific%in%c(input$length.species.dropdown))%>%
-    replace_na(list(status.simple="Fished"))
+    replace_na(list(status="Fished"))
   
   sizes<-master.min.max%>%
     mutate(scientific=paste(genus,species,sep =" "))%>%
@@ -1294,7 +1294,7 @@ output$length.histogram.status <- renderPlot({
     geom_text(aes(x=max.85, label="\n  85% of fishbase maximum", y=0), colour="black", angle=90, text=element_text(size=14),hjust = 0,vjust=0)+
     annotation_custom(grob.sci)+ 
     Theme1+ 
-    facet_wrap(vars(status.simple), ncol = 1)
+    facet_wrap(vars(status), ncol = 1)
     
 })
 
@@ -1311,7 +1311,7 @@ output$length.status.plot <- renderPlot({
   grob.sci <- grobTree(textGrob(as.character(scientific.name), x=0.01,  y=0.97, hjust=0,
                                 gp=gpar(col="black", fontsize=13, fontface="italic")))
 
-ggplot(length3dpoints,aes(x = factor(status), y = length,  fill = status, notch=FALSE, outlier.shape = NA),alpha=0.5) + 
+ggplot(length3dpoints,aes(x = factor(zone), y = length,  fill = zone, notch=FALSE, outlier.shape = NA),alpha=0.5) + 
   stat_boxplot(geom='errorbar')+
   geom_boxplot(outlier.color = NA, notch=FALSE)+
   stat_summary(fun.y=mean, geom="point", shape=23, size=4)+ #this is adding the dot for the mean
@@ -1323,19 +1323,19 @@ ggplot(length3dpoints,aes(x = factor(status), y = length,  fill = status, notch=
 })
 
 # LENGTH - species plot - status ----
-output$length.status.simple.plot <- renderPlot({
+output$length.zone.plot <- renderPlot({
   req(input$length.species.dropdown)
   length3dpoints<-length3dpoints.clean()%>%
     dplyr::mutate(scientific=paste(genus,species,sep=" "))%>%
     filter(scientific%in%c(input$length.species.dropdown))%>%
-    replace_na(list(status.simple="Fished"))
+    replace_na(list(status="Fished"))
   
   scientific.name<-input$length.species.dropdown
   
   grob.sci <- grobTree(textGrob(as.character(scientific.name), x=0.01,  y=0.97, hjust=0,
                                 gp=gpar(col="black", fontsize=13, fontface="italic")))
   
-  ggplot(length3dpoints,aes(x = factor(status.simple), y = length,  fill = status.simple, notch=FALSE, outlier.shape = NA),alpha=0.5) + 
+  ggplot(length3dpoints,aes(x = factor(status), y = length,  fill = status, notch=FALSE, outlier.shape = NA),alpha=0.5) + 
     stat_boxplot(geom='errorbar')+
     geom_boxplot(outlier.color = NA, notch=FALSE)+
     stat_summary(fun.y=mean, geom="point", shape=23, size=4)+ #this is adding the dot for the mean
@@ -1628,13 +1628,13 @@ output$mass.status.plot <- renderPlot({
     stat_summary(fun.y=mean, geom="point", shape=23, size=4)+ #this is adding the dot for the mean
     scale_y_continuous(expand = expand_scale(mult = c(0, .1)))+
     # scale_fill_manual(values = c("Fished" = "grey", "No-take" = "#1470ad"))+
-    xlab("Zone") + ylab("Mass (g)") +
+    xlab("Status") + ylab("Mass (g)") +
     annotation_custom(grob.sci)+ 
     Theme1
 })
 
 # MASS - species plot - Status ----
-output$mass.status.simple.plot <- renderPlot({
+output$mass.zone.plot <- renderPlot({
   req(input$mass.species.dropdown)
   mass<-mass()%>%
     dplyr::mutate(scientific=paste(genus,species,sep=" "))%>%
@@ -1644,7 +1644,7 @@ output$mass.status.simple.plot <- renderPlot({
   grob.sci <- grobTree(textGrob(as.character(scientific.name), x=0.01,  y=0.97, hjust=0,
                                 gp=gpar(col="black", fontsize=13, fontface="italic")))
   
-  ggplot(mass,aes(x = factor(status.simple), y = mass.g,  fill = status.simple, notch=FALSE, outlier.shape = NA),alpha=0.5) + 
+  ggplot(mass,aes(x = factor(zone), y = mass.g,  fill = zone, notch=FALSE, outlier.shape = NA),alpha=0.5) + 
     stat_boxplot(geom='errorbar')+
     geom_boxplot(outlier.color = NA, notch=FALSE)+
     stat_summary(fun.y=mean, geom="point", shape=23, size=4)+ #this is adding the dot for the mean
@@ -1905,14 +1905,14 @@ output$download.mass.fst <- downloadHandler(
     paste(input$campaign.name,"_mass.summary_", Sys.Date(), ".fst", sep="")
   },
   content = function(file) {
-    write.fst(length.complete.download(), file)
+    write.fst(mass.complete.download(), file)
   }
 )
 
 onclick('click.download.mass',showModal(modalDialog(
   title = "Summarised mass: adds zeros where a species is not present", size="l",easyClose = TRUE,
   downloadButton("download.mass","Download as csv"),
-  downloadButton("download.length.fst","Download as FST"))))
+  downloadButton("download.mass.fst","Download as FST"))))
 
 }
 

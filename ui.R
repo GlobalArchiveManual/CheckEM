@@ -78,8 +78,8 @@ tagList(
                        #box(width=3,title = "Complete maxn:", status = "primary", solidHeader = TRUE, downloadButton("download.maxn.complete")),
                        #box(width=3,title = "Clean maxn:", status = "primary", solidHeader = TRUE, downloadButton("download.maxn.clean")),
                        box(width=12,leafletOutput("maxn.spatial.plot")),
-                       box(width=12,title = "Plot of abundance by Zone", status = "primary", plotOutput("maxn.status.plot", height = 250)),
-                       box(width=12,title = "Plot of abundance by Status", status = "primary", plotOutput("maxn.status.plot.simple", height = 250)),
+                       box(width=12,title = "Plot of abundance by Status", status = "primary", plotOutput("maxn.status.plot", height = 250)),
+                       box(width=12,title = "Plot of abundance by Zone", status = "primary", plotOutput("maxn.zone.simple", height = 250)),
                        box(width=12,title = "Plot of abundance by Location", status = "primary", plotOutput("maxn.location.plot", height = 250)),
                        box(width=12,title = "Plot of abundance by Site", status = "primary", plotOutput("maxn.site.plot", height = 250))
                        )
@@ -109,7 +109,7 @@ tagList(
               box(width=12, title = "Length histogram", status = "primary", plotOutput("length.histogram", height = 250)),
               box(width=12, title = "Length histogram status", status = "primary", plotOutput("length.histogram.status", height = 600)),
               box(width=12, title = "Zone", status = "primary", plotOutput("length.status.plot", height = 250)),
-              box(width=12, title = "Status", status = "primary", plotOutput("length.status.simple.plot", height = 250))
+              box(width=12, title = "Status", status = "primary", plotOutput("length.zone.plot", height = 250))
               )
       ),
     
@@ -139,8 +139,8 @@ tagList(
                        box(width=12,title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("mass.species.dropdown",multiple=TRUE)),
                        box(width=12,leafletOutput("mass.spatial.plot")),
-                       box(width=12, title = "Zone", status = "primary", plotOutput("mass.status.plot", height = 250)),
-                       box(width=12, title = "Status", status = "primary", plotOutput("mass.status.simple.plot", height = 250))
+                       box(width=12, title = "Status", status = "primary", plotOutput("mass.status.plot", height = 250)),
+                       box(width=12, title = "Zone", status = "primary", plotOutput("mass.zone.plot", height = 250))
       )),
       
       
