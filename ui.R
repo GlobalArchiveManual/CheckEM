@@ -10,7 +10,7 @@ tagList(
     menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
     menuItem("Check Length & 3D points", tabName = "createlength", icon = icon("check")),
     menuItem("Compare MaxN & Length", tabName = "maxnlength", icon = icon("equals")),
-    menuItem("Create Mass", tabName = "createmass", icon = icon("check")),
+    menuItem("Create & check Mass", tabName = "createmass", icon = icon("check")),
     menuItem("Download data", tabName = "downloads", icon = icon("download")),
     menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome"))
   )
