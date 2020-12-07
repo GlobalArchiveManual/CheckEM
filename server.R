@@ -1880,7 +1880,7 @@ output$download.mass.fst <- downloadHandler(
 )
 
 onclick('click.download.mass',showModal(modalDialog(
-  title = "Complete mass: adds zeros where a species is not present", size="l",easyClose = TRUE,
+  title = "Summarised mass: adds zeros where a species is not present", size="l",easyClose = TRUE,
   downloadButton("download.mass","Download as csv"),
   downloadButton("download.length.fst","Download as FST"))))
 
