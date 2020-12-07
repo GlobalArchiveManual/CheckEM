@@ -130,7 +130,7 @@ tagList(
       
       #Create mass ----
       tabItem(tabName = "createmass",
-              fluidRow(box(width=9,height = 500,title = "Plot of top species by biomass", status = "primary",
+              fluidRow(box(width=9,height = 500,title = "Plot of top species by mass", status = "primary",
                            plotOutput("mass.top.species")),
                        box(width=3,title = "Species to plot",status="primary",solidHeader = TRUE,numericInput("mass.species.limit", "Number:", 15, min = 5, max = 20)),
                        box(width=3,title = "Include elasmobranchs?",status="primary",solidHeader = TRUE,selectInput("mass.include.sharks", "",
