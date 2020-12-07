@@ -178,7 +178,12 @@ tagList(
                            
               ),
               box(width = 8, status = "primary", height = 800, title = "Acknowledgments",
-                  "The Marine Biodiversity Hub is funded by the Australian Government's National Environmental Science Program.", br(), br())
+                  "The Marine Biodiversity Hub is funded by the Australian Government's National Environmental Science Program.",
+                  br(),br(),
+                  "Ningaloo Marine Park example stereo-BRUV data was from the benchmark survey of deepwater fish in the Ningaloo Marine Park, Commonwealth waters. Funded by the Marine Biodiversity Hub, Parks Australia, the CSIRO and the University of Western Australia.",
+                  br(),br(),
+                  "GlobalArchive and CheckEM development has been supported by the Australian Research Data Commons and the
+                  National Environmental Science Program's Marine Biodiversity Hub.", br(), br())
               )
       )
       
