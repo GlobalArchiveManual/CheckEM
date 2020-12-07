@@ -1,4 +1,4 @@
-metadata<-read.csv("data/ningaloo_metadata.csv")%>%
+metadata<-read.csv("data/example_metadata.csv")%>%
   mutate(sample=as.character(sample))%>%
   ga.clean.names()
 
@@ -62,10 +62,11 @@ test<-bind_cols(metadata,metadata.commonwealth.marineparks)%>%
                                                          "Recreational Use"="Fished",
                                                          "Multiple Use"="Fished",
                                                          "National Park"="No-take",
-                                                         "Sanctuary"="No-take")))%>%
+                                                         "Sanctuary"="No-take",
+                                                         "Special Purpose "="Fished")))%>%
   glimpse()
 
-unique(test$status)
+unique(test$status.simple)
 
 test2$status <- fct_collapse(test$status,
                       fished=c("General Use","Recreational Use","Multiple Use"),

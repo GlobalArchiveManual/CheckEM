@@ -71,11 +71,25 @@ metadata.regions<-metadata.3%>%
   dplyr::mutate(zone=ifelse(zone%in%c(NA),as.character(ZONE_TYPE),as.character(zone)))%>%
   dplyr::select(-c(ZONE_TYPE))%>%
   dplyr::mutate(zone=str_replace_all(.$zone,c(" Zone"="","Zone "="","(IUCN II)"="","(IUCN IV)"="","(IUCN IA)"="","[^[:alnum:] ]"=""," Benthic Protection"="","Use "="Use","y "="y")))%>%
-  dplyr::mutate(status=str_replace_all(.$zone,c("General Use"="Fished",
+  dplyr::mutate(status=stringr::str_replace_all(.$zone,c("General Use"="Fished",
                                                          "Recreational Use"="Fished",
                                                          "Multiple Use"="Fished",
                                                          "National Park"="No-take",
-                                                         "Sanctuary"="No-take")))
+                                                         "Sanctuary"="No-take",
+                                                         "Special Purpose "="Fished"
+                                                )))%>%
+  dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", 
+                                            "No-take" = "NoTake", 
+                                            "No-take" = "No Take", 
+                                            "Fished" = "FISHED",
+                                            "Fished" = "Outside",
+                                            "Fished" = "Fishes", 
+                                            "Fished" = "FALSE",
+                                            "No-take" = "Reserve",
+                                            "No-take" = "No take", 
+                                            "No-take" = "Not Fished", 
+                                            "No-take" = "No-Take",
+                                            "Fished" = "Special Purpose"))
 })
 
 # Preview metadata ----
@@ -83,16 +97,6 @@ metadata.regions<-metadata.3%>%
     # req(input$upload.metadata)
     metadata.regions()
   })
-
-
-# output$mytable <- renderDataTable(
-#   DT::datatable(x, rownames=FALSE,extensions = c('FixedColumns',"FixedHeader"), 
-#                 options = list(dom = 't', 
-#                                scrollX = TRUE, 
-#                                paging=FALSE,
-#                                fixedHeader=TRUE,
-#                                fixedColumns = list(leftColumns = 1, rightColumns = 0))
-#   )
 
   
 # Read in points data ----
