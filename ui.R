@@ -182,7 +182,7 @@ tagList(
                            "     ",HTML('<center><img src="logos-stacked.png" width="100%"></center>')
                            
               ),
-              box(width = 8, status = "primary", height = 800, title = "Acknowledgments",
+              box(width = 8, status = "primary", height = 800, title = "Acknowledgements",
                   "The Marine Biodiversity Hub is funded by the Australian Government's National Environmental Science Program.",
                   br(),br(),
                   "Ningaloo Marine Park example stereo-BRUV data was from the benchmark survey of deepwater fish in the Ningaloo Marine Park, Commonwealth waters. Funded by the Marine Biodiversity Hub, Parks Australia, the CSIRO and the University of Western Australia.",
