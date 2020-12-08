@@ -179,7 +179,7 @@ tagList(
       
       tabItem(tabName = "acknowledgements",
               fluidRow(box(width = 4, status = "primary", height = 800,
-                           "     ",imageOutput("logos")
+                           "     ",HTML('<center><img src="logos-stacked.png" width="100%"></center>')
                            
               ),
               box(width = 8, status = "primary", height = 800, title = "Acknowledgments",
