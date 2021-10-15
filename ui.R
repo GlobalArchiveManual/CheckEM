@@ -1,6 +1,7 @@
 tagList(
   useShinyjs(),
   dashboardPage(
+
     dbHeader,
     # dashboardHeader(title = "habitatMAPPer"),
     dashboardSidebar(
@@ -16,6 +17,7 @@ tagList(
   )
   ),
   dashboardBody(
+    tags$head(includeHTML(("google-analytics.html"))),
     tabItems(
       # Upload data ----
       tabItem(tabName = "upload",
