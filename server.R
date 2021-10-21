@@ -364,7 +364,7 @@ maxn.raw <- reactive({
 maxn <- points() %>%
   dplyr::mutate(number=as.numeric(number)) %>%
   tidyr::replace_na(list(species="spp",genus="Unknown"))%>%
-  dplyr::group_by(sample,filename,period,periodtime,frame,family,genus,species,comment) %>%
+  dplyr::group_by(sample,filename,period,periodtime,frame,family,genus,species) %>% # removed comment 21/10/21
   dplyr::summarise(maxn=sum(number)) %>%
   dplyr::group_by(sample,family,genus,species) %>%
   dplyr::slice(which.max(maxn)) %>%
