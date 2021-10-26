@@ -39,6 +39,8 @@ library(GlobalArchive)
 # Googlesheets (for now)
 library(googlesheets4)
 
+# R markdown
+library(rmarkdown)
 
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',

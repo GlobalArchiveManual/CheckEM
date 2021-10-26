@@ -1,6 +1,7 @@
 tagList(
   useShinyjs(),
   dashboardPage(
+    
 
     dbHeader,
     # dashboardHeader(title = "habitatMAPPer"),
@@ -13,11 +14,13 @@ tagList(
     menuItem("Compare MaxN & Length", tabName = "maxnlength", icon = icon("equals")),
     menuItem("Create & check Mass", tabName = "createmass", icon = icon("check")),
     menuItem("Download data", tabName = "downloads", icon = icon("download")),
-    menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome"))
+    menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome")),
+    menuItem("User guide", tabName = "guide", icon = icon("info", lib="font-awesome"))
   )
   ),
   dashboardBody(
     tags$head(includeHTML(("google-analytics.html"))),
+    tags$head(tags$link(rel = "shortcut icon", href = "favicon.ico")),
     tabItems(
       # Upload data ----
       tabItem(tabName = "upload",
@@ -192,6 +195,15 @@ tagList(
                   "GlobalArchive and CheckEM development has been supported by the Australian Research Data Commons and the
                   National Environmental Science Program's Marine Biodiversity Hub.", br(), br())
               )
+      ),
+      
+      tabItem(tabName= "guide", 
+               fluidRow(
+                 box(width = 8, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
+                     includeMarkdown("aims.Rmd")),
+                 box(width = 8, status = "primary", collapsible = TRUE, title = "How to use CheckEM", solidHeader = TRUE, 
+                     includeMarkdown("howto.Rmd"))
+                 )
       )
       
     )

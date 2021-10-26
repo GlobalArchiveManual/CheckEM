@@ -1,0 +1,35 @@
+---
+title: "Aims"
+author: "Brooke Gibbons"
+date: "26/10/2021"
+output: html_document
+---
+<img align="right" width= "20%" src='/checkem.png'>           
+
+
+#### A shiny app to check EventMeasure outputs against life history traits, synonyms and fishbase
+CheckEM’s aims to provide a web based application to upload database exports from EventMeasure to:
+
+##### *Check metadata:*
+- Check samples in the points data that are missing metadata
+- Connect to shapefiles of marine regions and marine parks to determine region and status.
+
+##### *Check MaxN:*
+- Create MaxN from points text file
+- Change synonyms (from curated list)
+- Check species that haven’t been observed in the area before (from life history list)
+- Plot distribution spatially
+- Plot patterns in abundance (by status, location and site).
+
+##### *Check Length and 3D points:*
+- Limit range
+- Plot patterns in length distribution (by status)
+- Compare MaxN to number of individuals measured (Length)
+
+##### *Create biomass:*
+- Plot top species by biomass
+- With option to exclude elasmobranchs
+- Plot individual species (by zone and status)
+
+##### *Download data*
+- “clean” data (maxn and length)
