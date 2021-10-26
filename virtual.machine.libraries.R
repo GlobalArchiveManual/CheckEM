@@ -72,3 +72,5 @@ sudo su - -c "R -e \"install.packages('shinythemes', repos='http://cran.rstudio.
 sudo su - -c "R -e \"install.packages('stringr', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('tidyr', repos='http://cran.rstudio.com/')\""
 
+sudo su - -c "R -e \"install.packages('shinyMobile', repos='http://cran.rstudio.com/')\""
+
