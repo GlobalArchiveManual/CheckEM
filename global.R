@@ -41,6 +41,7 @@ library(googlesheets4)
 
 # R markdown
 library(rmarkdown)
+library(sf)
 
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
@@ -177,6 +178,16 @@ se <- function(x) sd(x) / sqrt(length(x))
 se.min <- function(x) (mean(x)) - se(x)
 se.max <- function(x) (mean(x)) + se(x)
 
+#australia.regions <- SpatialPolygons(marine.regions@polygons)
+#test <- SpatialPolygonsDataFrame(australia.regions, data = data.frame(australia.regions$polygons))
+
+world.regions<-st_read(dsn = "data/spatial/MEOW.shp") %>%
+  st_transform(crs="+init=epsg:4326") 
+
+#world.regions <- st_transform(world.regions,)
+#proj4string(world.regions)<-CRS("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
+
+#world.regions <- SpatialPolygons(world@polygons)
 #
 # length.sample <- length%>%distinct(campaignid,sample) # only examine samples where lengths were possible
 # 

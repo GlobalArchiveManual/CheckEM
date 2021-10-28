@@ -1917,6 +1917,38 @@ onclick('click.download.mass',showModal(modalDialog(
   downloadButton("download.mass","Download as csv"),
   downloadButton("download.mass.fst","Download as FST"))))
 
+
+# Leaflet map - australia marine regions ----
+output$australia.regions <- renderLeaflet({
+  
+  leaflet <- leaflet() %>% 
+    addTiles(group = "Open Street Map")%>%
+    addPolygons(data = marine.regions, weight = 1, label = marine.regions@data$REGION, 
+                fillColor = "white",
+                color = "black",
+                fillOpacity = 0.9)
+  
+  leaflet
+  
+  return(leaflet)
+  
+})
+
+# World regions
+output$world.regions.leaflet <- renderLeaflet({
+  
+  leaflet1 <- leaflet() %>% 
+    addTiles(group = "Open Street Map")%>%
+    addPolygons(data = world.regions, weight = 1, label = world.regions$ECOREGION, 
+                fillColor = "white",
+                color = "black",
+                fillOpacity = 0.9)%>% 
+    fitBounds(-180, -90, 180, 90, )
+  
+  leaflet1
+  
+  return(leaflet1)
+  
+})
+
 }
-
-

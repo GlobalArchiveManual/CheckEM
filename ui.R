@@ -1,8 +1,6 @@
 tagList(
   useShinyjs(),
   dashboardPage(
-    
-
     dbHeader,
     # dashboardHeader(title = "habitatMAPPer"),
     dashboardSidebar(
@@ -14,8 +12,9 @@ tagList(
     menuItem("Compare MaxN & Length", tabName = "maxnlength", icon = icon("equals")),
     menuItem("Create & check Mass", tabName = "createmass", icon = icon("check")),
     menuItem("Download data", tabName = "downloads", icon = icon("download")),
-    menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome")),
-    menuItem("User guide", tabName = "guide", icon = icon("info", lib="font-awesome"))
+    menuItem("User guide", tabName = "guide", icon = icon("info", lib="font-awesome")),
+    menuItem("Feedback", tabName = "feedback", icon = icon("comment", lib="font-awesome")),
+    menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome"))
   )
   ),
   dashboardBody(
@@ -24,28 +23,35 @@ tagList(
     tabItems(
       # Upload data ----
       tabItem(tabName = "upload",
-              fluidRow(tags$head(tags$style( type = 'text/css',  '.rpivotTable{ overflow-x: scroll; }')),
-                  box(title = "Upload metadata", status = "primary", solidHeader = TRUE,
+              fluidRow(tags$head(tags$style(type = 'text/css',  '.rpivotTable{ overflow-x: scroll; }')),
+                       
+                  box(width = 6, height = 700, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
+                           includeMarkdown("aims.Rmd")),     
+                       
+                  box(width = 6, title = "Upload metadata", status = "primary", solidHeader = TRUE,
                     fileInput("upload.metadata", ".csv only:",
                                  accept = c("image/vnd.csv",".csv"))),
                        
-                  box(title = "Upload points file", status = "primary",solidHeader = TRUE,
+                  box(width = 6, title = "Upload points file", status = "primary",solidHeader = TRUE,
                       fileInput("upload.points", ".txt file only",
                                  accept = c("image/vnd.txt",".txt"))),
                        
-                  box(title = "Upload length file", status = "primary",solidHeader = TRUE,
+                  box(width = 6, title = "Upload length file", status = "primary",solidHeader = TRUE,
                       fileInput("upload.length", ".txt file only",
                                  accept = c("image/vnd.txt",".txt"))),
                        
-                  box(title = "Upload 3D points file", status = "primary",solidHeader = TRUE,
+                  box(width = 6, title = "Upload 3D points file", status = "primary",solidHeader = TRUE,
                       fileInput("upload.3dpoints", ".txt file only",
                                  accept = c("image/vnd.txt",".txt")))
                   ),
                   
-                  tabBox(width = 12,
+                  tabBox(width = 12, height = 800,
                     # Title can include an icon
                     title = tagList(shiny::icon("gear"), "Preview data"),
-                    tabPanel("Metadata", div(style = 'overflow-x: scroll', tableOutput("table.metadata"))),
+                    tabPanel("Metadata", div(style = 'overflow-x: scroll', 
+                                             tableOutput("table.metadata")
+                                             )
+                             ),
                     tabPanel("Points", tableOutput("table.points")),
                     tabPanel("Lengths", tableOutput("table.length")),
                     tabPanel("3D Points", tableOutput("table.3dpoints"))
@@ -62,7 +68,7 @@ tagList(
                        div(id="click.points.samples.without.metadata",
                            valueBoxOutput("points.samples.without.metadata")),
                        #box(width = 4, actionButton("count", "Increment progress")),
-                       box(width=12,leafletOutput("map.metadata")))
+                       box(width=12, height = 825, leafletOutput("map.metadata", height = 800)))
       ),
       
       # Create maxn -----
@@ -199,11 +205,25 @@ tagList(
       
       tabItem(tabName= "guide", 
                fluidRow(
-                 box(width = 8, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
-                     includeMarkdown("aims.Rmd")),
-                 box(width = 8, status = "primary", collapsible = TRUE, title = "How to use CheckEM", solidHeader = TRUE, 
-                     includeMarkdown("howto.Rmd"))
-                 )
+                 
+                 box(width = 6, status = "primary", collapsible = TRUE, title = "How to use CheckEM", solidHeader = TRUE, 
+                     includeMarkdown("howto.Rmd")),
+                 
+                 box(width = 6,height = 760, status = "primary", collapsible = TRUE, title = "Marine Ecoregions of the World", solidHeader = TRUE, 
+                     leafletOutput("world.regions.leaflet", height = 700)),
+                 
+                 box(width = 6, status = "primary", collapsible = TRUE, title = "Australia's Marine Regions", solidHeader = TRUE, 
+                     leafletOutput("australia.regions"))
+               )
+      ),
+      
+      tabItem(tabName= "feedback", 
+              fluidRow(
+                
+                HTML('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeMIO3UIrkciATxmRA96xs36XejdO6GV-G6yHGXjxZOrzRBVA/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>')
+              )
+              
+              
       )
       
     )

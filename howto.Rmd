@@ -6,51 +6,110 @@ output: html_document
 ---
 
 #### Set Up
-- Navigate to globalarchive.shinyapps.io/checkem
-- On the ‘Upload data’ tab, upload your metadata.csv, and the exports from EventMeasure (points, length and 3D points). The table at the bottom will display a preview of your data if it has been successfully uploaded.
-- NOTE: Metadata will need to have the following columns (sample, latitude, longitude, date, time, site, status, location, depth, successful.count, successful.length, observer) formatted as per requirements in the global archive user manual (globalarchivemanual.github.io/metadata-file).
 
-Screenshot of the upload data tab.
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/upload.png'> 
+
+- On the *'Upload data'* tab, upload your metadata.csv, and the database output tables from EventMeasure (points, length and 3D points). The table at the bottom will display a preview of your data if it has been successfully uploaded.
+- **NOTE: Metadata will need to have the following columns (sample, latitude, longitude, date, time, site, status, location, depth, successful.count, successful.length, observer)** formatted as per requirements in the [global archive user manual](globalarchivemanual.github.io/metadata-file).
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<hr>
 
 #### Check Metadata
-- On the ‘Check metadata’ tab:
-- The green box displays the number of metadata samples.
-- The yellow box displays samples that do not have any points (either no fish were observed) or there could be an error.
-- The red box displays any sample name(s) in the points file that do not have a match in the metadata. Click the yellow box to view the names.
-- The map displays the points spatially. Clicking on the points displays the associated metadata.
 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/metadata.png'> 
+
+- On the *‘Check metadata’* tab:
+- The green box displays the number of metadata samples.
+- The yellow box displays samples that do not have any points (either no fish were observed or there could be an error in the naming of the samples). Clicking the yellow box displays a pop-up with the names of any samples that do not have any points.
+- The red box displays any sample name(s) in the points file that do not have a match in the metadata. Click the red box to view the names of the samples.
+- The interactive map displays the points spatially. Clicking on the points displays the associated metadata with that point.
+<br>
+<br>
+<br>
+<hr>
 
 #### Check MaxN
-- On the ‘Create & check MaxN’ tab:
+
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/maxn.png'> 
+
+- On the *'Create & check MaxN'* tab:
 - First the app turns the points into MaxN using the functions in the GlobalArchive R package.
 - The green box displays the total number of fish observed. Clicking this box displays the total abundance per sample.
 - The yellow box displays the number of species that had their named changed by the synonyms list. Click the box to display the name updates. There is also a button to download the list as a report.
-- The red box displays the number of species not previously observed in the area before. Click the box to see the report (also downloadable). Sp1, sp2, spp can be filtered out by clicking the check box (these are not included in the life history sheet so will come up as an error (even though they are not an error).
+- The red box displays the number of species not previously observed in the area before. Click the box to see the report (also downloadable). Sp1, sp2, spp can be filtered out by clicking the check box (these are not included in the life history sheet so will come up as an error).
 - The first plot displays the most abundant species, change the number of species plotted using the ‘Species to plot’ box on the right.
-- The next group of plots will plot the most abundant species first, use the drop down to change the species. The ‘Plot of abundance by Zone’ plot uses the ‘Zone’s from the commonwealth marine park shapefiles.
+- The next group of plots will plot the most abundant species first, use the drop down to change the species to be plotted. The ‘Plot of abundance by Zone’ plot uses the ‘Zone’s from Australia's commonwealth marine park shapefiles.
 
+https://geospatial.tnc.org/datasets/ed2be4cf8b7a425f84fd093c2e7660e3_0/explore?location=-1.040302%2C0.000000%2C1.57 # the MEOW
+https://academic.oup.com/bioscience/article/57/7/573/238419
+https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-regions
 
+<hr>
 
 #### Check Length
-- On the ‘Check Length & 3D points’ tab:
-- The two green boxes display the number of lengths and 3D points.
-- The yellow box displays synonyms as above.
+
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/length.png'> 
+
+- On the *‘Check Length & 3D points’* tab:
+- The two green boxes display the number of lengths and 3D points. Clicking these boxes summarises the number of lengths and 3d points per sample, respectively.
+- The yellow box displays the number of species that had their named changed by the synonyms list. Click the box to display the name updates. There is also a button to download the list as a report.
 - The red boxes are potential errors, including species not observed in the area, fish that are smaller than 15% of the maximum length on FishBase or larger than 85% and fish that are ‘out of range’ (change the ‘Limit range’ box to adjust this report). All errors are clickable.
 - Change the species dropdown to plot the length distribution (automatically populated with the most abundant, and ordered by descending total abundance).
 - The 15% of max, 85% of max and the fishbase maximum are displayed on the length distributions.
 
+<hr>
 
 #### Compare MaxN versus number of individuals measured
-- On the ‘Compare MaxN and Length’ tab:
-- The red box displays the number of errors.
-- Clicking the box displays the sample name and the number in the MaxN and the number measured/3D points and the difference.
-- Also displayed in a plot.
 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" "51%" src='/screenshots/lengthmaxn.png'> 
+
+- On the *‘Compare MaxN and Length’* tab:
+- The red box displays the number of errors (where MaxN does not equal the number measured).
+- Clicking the box displays the sample name and the number in the MaxN and the number measured/3D points and the difference.
+- Also displayed in a plot below.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<hr>
 
 #### Create biomass
-- On the ‘Create Mass’ tab:
+
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/mass.png'> 
+
+- On the *‘Create Mass’* tab:
 - The length-weight equations from the life history sheet are used to calculate biomass.
 - The first plot shows the top species by biomass. Use the filters on the right to change the number of species displayed and to exclude elasmobranchs.
 - Use the second drop down to change the species specific plots below.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<hr>
 
-#### Download data (still needs some work)
+#### Download data
+
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/download.png'>
+
+- On the *‘Download data’* tab:
+- Add your project and campaign names into the text inputs (following the naming convention outlined in the [GlobalArchive user manual](https://globalarchivemanual.github.io/definitions)). 
+- Click the check boxes for any errors to remove (we recommend fixing these errors in your .EMObs and running through CheckEM again)
+- Click on each of the download buttons to download that dataframe, you will then be given a choice to download as a .csv or as a .fst
+- Zeros will be added where a species is not present.
+<br>
+<br>
+<br>
+<br>
+<hr>
