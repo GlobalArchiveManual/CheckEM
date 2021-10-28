@@ -21,7 +21,7 @@ output: html_document
 
 #### Check Metadata
 
-<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/metadata.png'> 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='screenshots/metadata.png'> 
 
 - On the *‘Check metadata’* tab:
 - The green box displays the number of metadata samples.
@@ -35,7 +35,7 @@ output: html_document
 
 #### Check MaxN
 
-<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/maxn.png'> 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='screenshots/maxn.png'> 
 
 - On the *'Create & check MaxN'* tab:
 - First the app turns the points into MaxN using the functions in the GlobalArchive R package.
@@ -53,7 +53,7 @@ https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-region
 
 #### Check Length
 
-<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/length.png'> 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='screenshots/length.png'> 
 
 - On the *‘Check Length & 3D points’* tab:
 - The two green boxes display the number of lengths and 3D points. Clicking these boxes summarises the number of lengths and 3d points per sample, respectively.
@@ -66,7 +66,7 @@ https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-region
 
 #### Compare MaxN versus number of individuals measured
 
-<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" "51%" src='/screenshots/lengthmaxn.png'> 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" "51%" src='screenshots/lengthmaxn.png'> 
 
 - On the *‘Compare MaxN and Length’* tab:
 - The red box displays the number of errors (where MaxN does not equal the number measured).
@@ -84,7 +84,7 @@ https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-region
 
 #### Create biomass
 
-<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/mass.png'> 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='screenshots/mass.png'> 
 
 - On the *‘Create Mass’* tab:
 - The length-weight equations from the life history sheet are used to calculate biomass.
@@ -101,7 +101,7 @@ https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-region
 
 #### Download data
 
-<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/download.png'>
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='screenshots/download.png'>
 
 - On the *‘Download data’* tab:
 - Add your project and campaign names into the text inputs (following the naming convention outlined in the [GlobalArchive user manual](https://globalarchivemanual.github.io/definitions)). 
