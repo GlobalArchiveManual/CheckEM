@@ -7,7 +7,7 @@ output: html_document
 
 #### Set Up
 
-<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='/screenshots/upload.png'> 
+<img style="float: right; margin-left: 30px; margin-right: 30px;" width= "51%" src='screenshots/upload.png'> 
 
 - On the *'Upload data'* tab, upload your metadata.csv, and the database output tables from EventMeasure (points, length and 3D points). The table at the bottom will display a preview of your data if it has been successfully uploaded.
 - **NOTE: Metadata will need to have the following columns (sample, latitude, longitude, date, time, site, status, location, depth, successful.count, successful.length, observer)** formatted as per requirements in the [global archive user manual](globalarchivemanual.github.io/metadata-file).
