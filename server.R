@@ -401,6 +401,7 @@ maxn.clean <- dplyr::left_join(maxn.raw(),synonyms,by=c("family","genus","specie
 maxn.complete <- reactive({
 
 maxn.complete <- maxn.clean()%>%
+  full_join(metadata.regions())%>%
   dplyr::select(c(sample,family,genus,species,maxn))%>%
   tidyr::complete(nesting(sample),nesting(family,genus,species)) %>%
   replace_na(list(maxn = 0))%>%
