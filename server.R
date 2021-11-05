@@ -376,6 +376,9 @@ maxn <- points() %>%
   dplyr::filter(maxn>0) %>%
   dplyr::inner_join(metadata.regions()) %>%
   dplyr::filter(successful.count%in%c("Yes","Y","y","yes")) %>%
+  mutate(family = if_else(family%in%c("Na","NA","na",NA), "Unknown",family)) %>%
+  mutate(genus = if_else(genus%in%c("Na","NA","na",NA), "Unknown",genus)) %>%
+  mutate(species = if_else(species%in%c("Na","NA","na",NA), "spp",species)) %>%
   dplyr::mutate(species = tolower(species)) %>%
   dplyr::mutate(genus = ga.capitalise(genus)) %>%
   dplyr::mutate(family = ga.capitalise(family))
@@ -808,6 +811,9 @@ length3dpoints <- reactive({
     dplyr::mutate(sample=as.character(sample))%>%
     dplyr::left_join(metadata.regions())%>%
     replace_na(list(family="Unknown",genus="Unknown",species="spp"))%>% # remove any NAs in taxa name
+    mutate(family = if_else(family%in%c("Na","NA","na",NA), "Unknown",family)) %>%
+    mutate(genus = if_else(genus%in%c("Na","NA","na",NA), "Unknown",genus)) %>%
+    mutate(species = if_else(species%in%c("Na","NA","na",NA), "spp",species)) %>%
     dplyr::mutate(species = tolower(species)) %>%
     dplyr::mutate(genus = ga.capitalise(genus)) %>%
     dplyr::mutate(family = ga.capitalise(family))
