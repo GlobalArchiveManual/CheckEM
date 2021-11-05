@@ -806,7 +806,10 @@ length3dpoints <- reactive({
     tidyr::replace_na(list(species="spp"))%>%
     dplyr::select(-c(time))%>%
     dplyr::mutate(sample=as.character(sample))%>%
-    dplyr::left_join(metadata.regions())
+    dplyr::left_join(metadata.regions())%>%
+    dplyr::mutate(species = tolower(species)) %>%
+    dplyr::mutate(genus = ga.capitalise(genus)) %>%
+    dplyr::mutate(family = ga.capitalise(family))
 })
 
 # LENGTH - create filtered length download -----
