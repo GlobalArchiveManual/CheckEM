@@ -363,7 +363,7 @@ output$map.metadata <- renderLeaflet({
 maxn.raw <- reactive({
 maxn <- points() %>%
   dplyr::mutate(number=as.numeric(number)) %>%
-  tidyr::replace_na(list(species="spp",genus="Unknown"))%>%
+  replace_na(list(family="Unknown",genus="Unknown",species="spp"))%>% # remove any NAs in taxa name
   dplyr::group_by(sample,filename,period,periodtime,frame,family,genus,species) %>% # removed comment 21/10/21
   dplyr::summarise(maxn=sum(number)) %>%
   dplyr::group_by(sample,family,genus,species) %>%
@@ -807,6 +807,7 @@ length3dpoints <- reactive({
     dplyr::select(-c(time))%>%
     dplyr::mutate(sample=as.character(sample))%>%
     dplyr::left_join(metadata.regions())%>%
+    replace_na(list(family="Unknown",genus="Unknown",species="spp"))%>% # remove any NAs in taxa name
     dplyr::mutate(species = tolower(species)) %>%
     dplyr::mutate(genus = ga.capitalise(genus)) %>%
     dplyr::mutate(family = ga.capitalise(family))
@@ -908,15 +909,6 @@ length.complete.download <- reactive({
     dplyr::mutate(scientific = paste(genus,species,sep=" "))
   
 })
-
-
-
-
-
-
-
-
-
 
 
 length3dpoints.clean <- reactive({
