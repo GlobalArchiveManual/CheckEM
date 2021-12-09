@@ -37,6 +37,7 @@ tidyr
 # For GlobalArchive
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"devtools::install_github('UWAMEGFisheries/GlobalArchive')\""
+sudo su - -c "R -e \"devtools::install_github('szelepke/shinyRadioMatrix')\""
 
 # For all others
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
@@ -51,6 +52,7 @@ sudo su - -c "R -e \"install.packages('googleVis', repos='http://cran.rstudio.co
 sudo su - -c "R -e \"install.packages('grid', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('htmltools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('htmlwidgets', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('leafem', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('leaflet', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('leaflet.minicharts', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('leafgl', repos='http://cran.rstudio.com/')\""
@@ -61,6 +63,7 @@ sudo su - -c "R -e \"install.packages('plyr', repos='http://cran.rstudio.com/')\
 sudo su - -c "R -e \"install.packages('profvis', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('purrr', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('raster', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('rdrop2', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('readr', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('rgdal', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('rgeos', repos='http://cran.rstudio.com/')\""
@@ -68,15 +71,19 @@ sudo su - -c "R -e \"install.packages('rmapshaper', repos='http://cran.rstudio.c
 sudo su - -c "R -e \"install.packages('rpivotTable', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('rrapply', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('sf', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('sp', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shiny', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinyalert', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinyBS', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinybusy', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shinycssloaders', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinydashboard', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinyjs', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shinysurveys', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinythemes', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinyTree', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('shinyWidgets', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('stringi', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('stringr', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('tidyr', repos='http://cran.rstudio.com/')\""
 

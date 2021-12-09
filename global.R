@@ -43,6 +43,10 @@ library(googlesheets4)
 library(rmarkdown)
 library(sf)
 
+# https://geospatial.tnc.org/datasets/ed2be4cf8b7a425f84fd093c2e7660e3_0/explore?location=-1.040302%2C0.000000%2C1.57 # the MEOW
+# https://academic.oup.com/bioscience/article/57/7/573/238419
+# https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-regions
+
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
                                            tags$img(src='https://www.nespmarine.edu.au/sites/default/themes/nespmarine/logo.png',height='60',width='200'))

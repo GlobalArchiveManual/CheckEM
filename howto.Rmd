@@ -45,10 +45,6 @@ output: html_document
 - The first plot displays the most abundant species, change the number of species plotted using the ‘Species to plot’ box on the right.
 - The next group of plots will plot the most abundant species first, use the drop down to change the species to be plotted. The ‘Plot of abundance by Zone’ plot uses the ‘Zone’s from Australia's commonwealth marine park shapefiles.
 
-https://geospatial.tnc.org/datasets/ed2be4cf8b7a425f84fd093c2e7660e3_0/explore?location=-1.040302%2C0.000000%2C1.57 # the MEOW
-https://academic.oup.com/bioscience/article/57/7/573/238419
-https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-regions
-
 <hr>
 
 #### Check Length
