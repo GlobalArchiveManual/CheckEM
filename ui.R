@@ -20,6 +20,7 @@ tagList(
   dashboardBody(
     tags$head(includeHTML(("google-analytics.html"))),
     tags$head(tags$link(rel = "shortcut icon", href = "favicon.ico")),
+    tags$head(tags$style('.selectize-dropdown {z-index: 10000}')),
     tabItems(
       # Upload data ----
       tabItem(tabName = "upload",
