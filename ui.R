@@ -26,24 +26,27 @@ tagList(
       tabItem(tabName = "upload",
               fluidRow(tags$head(tags$style(type = 'text/css',  '.rpivotTable{ overflow-x: scroll; }')),
                        
-                  box(width = 6, height = 700, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
+                  box(width = 6, height = 825, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
                            includeMarkdown("aims.Rmd")),     
                        
                   box(width = 6, title = "Upload metadata", status = "primary", solidHeader = TRUE,
-                    fileInput("upload.metadata", ".csv only:",
+                    fileInput("upload.metadata", ".csv only:", multiple = TRUE,
                                  accept = c("image/vnd.csv",".csv"))),
                        
                   box(width = 6, title = "Upload points file", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.points", ".txt file only",
+                      fileInput("upload.points", ".txt file only", multiple = TRUE,
                                  accept = c("image/vnd.txt",".txt"))),
                        
                   box(width = 6, title = "Upload length file", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.length", ".txt file only",
+                      fileInput("upload.length", ".txt file only", multiple = TRUE,
                                  accept = c("image/vnd.txt",".txt"))),
                        
                   box(width = 6, title = "Upload 3D points file", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.3dpoints", ".txt file only",
-                                 accept = c("image/vnd.txt",".txt")))
+                      fileInput("upload.3dpoints", ".txt file only", multiple = TRUE,
+                                 accept = c("image/vnd.txt",".txt"))),
+                  
+                  box(width = 6, title = "Transect based data", status = "primary", solidHeader = TRUE,
+                      checkboxInput("transect", "Tick if uploading transect based data", value = FALSE, width = NULL))
                   ),
                   
                   tabBox(width = 12, height = 800,
@@ -166,7 +169,6 @@ tagList(
                     
                     h4("Add project and campaign information"),
                     textInput("project.name", label = "Project name:", value = ""),
-                    textInput("campaign.name", label = "CampaignID:", value = ""),
                     
                     h4("Filters for MaxN, Length and Mass"),
                     checkboxInput("error.synonyms", label = "Keep species names that have been updated", value = TRUE), 

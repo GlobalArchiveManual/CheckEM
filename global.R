@@ -9,6 +9,7 @@ library(profvis)
 
 # Tables
 library(rpivotTable)
+library(data.table)
 
 # Data manipulation
 library(plyr)
