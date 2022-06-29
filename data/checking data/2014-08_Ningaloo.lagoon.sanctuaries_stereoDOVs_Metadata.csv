@@ -1,0 +1,103 @@
+Sample,Latitude,Longitude,Date,Time,Location,Status,Site,Depth,Observer,Successful.count,Successful.length,Successful,OldDate,Visibility,Opcode-old,Boat,L.cam,R.cam,L.card,R.card,Raw.HD,Con.HD,Time.In,Time.Out,Waypoint,Field.staff,Habitat.Image.(Y/N),Habitat.classification.(Y/N),MaxN.complete.(dd/mm/yy),MaxN.Checker,Length.analyst,Length.completed.(dd/mm/yy),DOV.sites,DOV.Comments
+Fish_MB1_1,-21.96544236,113.9222645,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB1_2,-21.96544236,113.9222645,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB1_3,-21.96544236,113.9222645,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB1_4,-21.96544236,113.9222645,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB1_5,-21.96544236,113.9222645,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB1_6,-21.96544236,113.9222645,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB5_1,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB5_2,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB5_3,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB5_4,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB5_5,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_MB5_6,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M2_1,-22.08061,113.89336,20140801,0:00:00,Mandu Sanctuary,No-take,ManduSZ_1,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M2_2,-22.08061,113.89336,20140801,0:00:00,Mandu Sanctuary,No-take,ManduSZ_1,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M2_3,-22.08061,113.89336,20140801,0:00:00,Mandu Sanctuary,No-take,ManduSZ_1,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M2_4,-22.08061,113.89336,20140801,0:00:00,Mandu Sanctuary,No-take,ManduSZ_1,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M2_5,-22.08061,113.89336,20140801,0:00:00,Mandu Sanctuary,No-take,ManduSZ_1,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M2_6,-22.08061,113.89336,20140801,0:00:00,Mandu Sanctuary,No-take,ManduSZ_1,2,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M3_1,-22.05195,113.89831,20140801,0:00:00,Between Mangrove and Mandu,Fished,MangroveMandu_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M3_2,-22.05195,113.89831,20140801,0:00:00,Between Mangrove and Mandu,Fished,MangroveMandu_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M3_3,-22.05195,113.89831,20140801,0:00:00,Between Mangrove and Mandu,Fished,MangroveMandu_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M3_4,-22.05195,113.89831,20140801,0:00:00,Between Mangrove and Mandu,Fished,MangroveMandu_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M3_5,-22.05195,113.89831,20140801,0:00:00,Between Mangrove and Mandu,Fished,MangroveMandu_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_M3_6,-22.05195,113.89831,20140801,0:00:00,Between Mangrove and Mandu,Fished,MangroveMandu_1,2,Ryan Douglas,,,Left108,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O3_1,-22.22635,113.83485,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O3_2,-22.22635,113.83485,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O3_3,-22.22635,113.83485,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O3_4,-22.22635,113.83485,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O3_5,-22.22635,113.83485,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O3_6,-22.22635,113.83485,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O4_1,-22.20492,113.84399,20140801,0:00:00,Between Mandu and Osprey,Fished,ManduOsprey_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O4_2,-22.20492,113.84399,20140801,0:00:00,Between Mandu and Osprey,Fished,ManduOsprey_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O4_3,-22.20492,113.84399,20140801,0:00:00,Between Mandu and Osprey,Fished,ManduOsprey_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O4_4,-22.20492,113.84399,20140801,0:00:00,Between Mandu and Osprey,Fished,ManduOsprey_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O4_5,-22.20492,113.84399,20140801,0:00:00,Between Mandu and Osprey,Fished,ManduOsprey_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O4_6,-22.20492,113.84399,20140801,0:00:00,Between Mandu and Osprey,Fished,ManduOsprey_1,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL3_1,-22.64138,113.62766,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_1,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL3_2,-22.64138,113.62766,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_1,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL3_3,-22.64138,113.62766,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_1,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL3_4,-22.64138,113.62766,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_1,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL3_5,-22.64138,113.62766,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_1,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL3_6,-22.64138,113.62766,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_1,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL4_1,-22.55429,113.65923,20140801,0:00:00,Between Winderabandi and Cloates,Fished,WinderabandiCloates_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL4_2,-22.55429,113.65923,20140801,0:00:00,Between Winderabandi and Cloates,Fished,WinderabandiCloates_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL4_3,-22.55429,113.65923,20140801,0:00:00,Between Winderabandi and Cloates,Fished,WinderabandiCloates_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL4_4,-22.55429,113.65923,20140801,0:00:00,Between Winderabandi and Cloates,Fished,WinderabandiCloates_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL4_5,-22.55429,113.65923,20140801,0:00:00,Between Winderabandi and Cloates,Fished,WinderabandiCloates_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL4_6,-22.55429,113.65923,20140801,0:00:00,Between Winderabandi and Cloates,Fished,WinderabandiCloates_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O1_1,-22.28751284,113.8107905,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O1_2,-22.28751284,113.8107905,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O1_3,-22.28751284,113.8107905,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O1_4,-22.28751284,113.8107905,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O1_5,-22.28751284,113.8107905,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_O1_6,-22.28751284,113.8107905,20140801,0:00:00,Osprey Sanctuary,No-take,OspreySZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W1_1,-22.48597,113.70692,20140801,0:00:00,Winderabandi Sanctuary,No-take,WinderabandiSZ_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W1_2,-22.48597,113.70692,20140801,0:00:00,Winderabandi Sanctuary,No-take,WinderabandiSZ_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W1_3,-22.48597,113.70692,20140801,0:00:00,Winderabandi Sanctuary,No-take,WinderabandiSZ_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W1_4,-22.48597,113.70692,20140801,0:00:00,Winderabandi Sanctuary,No-take,WinderabandiSZ_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W1_5,-22.48597,113.70692,20140801,0:00:00,Winderabandi Sanctuary,No-take,WinderabandiSZ_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W1_6,-22.48597,113.70692,20140801,0:00:00,Winderabandi Sanctuary,No-take,WinderabandiSZ_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W2_1,-22.36853,113.75797,20140801,0:00:00,Between Osprey and Winderabandi,Fished,OspreyWinderabandi_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W2_2,-22.36853,113.75797,20140801,0:00:00,Between Osprey and Winderabandi,Fished,OspreyWinderabandi_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W2_3,-22.36853,113.75797,20140801,0:00:00,Between Osprey and Winderabandi,Fished,OspreyWinderabandi_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W2_4,-22.36853,113.75797,20140801,0:00:00,Between Osprey and Winderabandi,Fished,OspreyWinderabandi_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W2_5,-22.36853,113.75797,20140801,0:00:00,Between Osprey and Winderabandi,Fished,OspreyWinderabandi_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_W2_6,-22.36853,113.75797,20140801,0:00:00,Between Osprey and Winderabandi,Fished,OspreyWinderabandi_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL1_1,-22.86949725,113.7641107,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_3,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL1_2,-22.86949725,113.7641107,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_3,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL1_3,-22.86949725,113.7641107,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_3,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL1_4,-22.86949725,113.7641107,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_3,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL1_5,-22.86949725,113.7641107,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_3,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL1_6,-22.86949725,113.7641107,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_3,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL2_1,-22.92785891,113.7787183,20140801,0:00:00,Between Cloates and Maud,Fished,CloatesMaud_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL2_2,-22.92785891,113.7787183,20140801,0:00:00,Between Cloates and Maud,Fished,CloatesMaud_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL2_3,-22.92785891,113.7787183,20140801,0:00:00,Between Cloates and Maud,Fished,CloatesMaud_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL2_4,-22.92785891,113.7787183,20140801,0:00:00,Between Cloates and Maud,Fished,CloatesMaud_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL2_5,-22.92785891,113.7787183,20140801,0:00:00,Between Cloates and Maud,Fished,CloatesMaud_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL2_6,-22.92785891,113.7787183,20140801,0:00:00,Between Cloates and Maud,Fished,CloatesMaud_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL5_1,-22.71045,113.65596,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL5_2,-22.71045,113.65596,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL5_3,-22.71045,113.65596,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL5_4,-22.71045,113.65596,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL5_5,-22.71045,113.65596,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_CL5_6,-22.71045,113.65596,20140801,0:00:00,Cloates Sanctuary,No-take,CloatesSZ_2,2,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P1_1,-23.32832188,113.7808493,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_2,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P1_2,-23.32832188,113.7808493,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_2,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P1_3,-23.32832188,113.7808493,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_2,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P1_4,-23.32832188,113.7808493,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_2,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P1_5,-23.32832188,113.7808493,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_2,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P1_6,-23.32832188,113.7808493,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_2,3,Todd Bond,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P2_1,-23.31876,113.78,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P2_2,-23.31876,113.78,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P2_3,-23.31876,113.78,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P2_4,-23.31876,113.78,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P2_5,-23.31876,113.78,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P2_6,-23.31876,113.78,20140801,0:00:00,Pelican Sanctuary,No-take,PelicanSZ_1,3,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P3_1,-23.23191306,113.762107,20140801,0:00:00,Between Maud and Pelican,Fished,MaudPelican_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P3_2,-23.23191306,113.762107,20140801,0:00:00,Between Maud and Pelican,Fished,MaudPelican_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P3_3,-23.23191306,113.762107,20140801,0:00:00,Between Maud and Pelican,Fished,MaudPelican_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P3_4,-23.23191306,113.762107,20140801,0:00:00,Between Maud and Pelican,Fished,MaudPelican_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P3_5,-23.23191306,113.762107,20140801,0:00:00,Between Maud and Pelican,Fished,MaudPelican_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fish_P3_6,-23.23191306,113.762107,20140801,0:00:00,Between Maud and Pelican,Fished,MaudPelican_1,4,Nicole Ryan,,,NA,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

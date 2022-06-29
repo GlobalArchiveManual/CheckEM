@@ -3,7 +3,7 @@ function(input, output) {
 # Increase size of files that can be uploaded
   options(shiny.maxRequestSize = 50*1024^2)
   
-# Functions -----
+## FUNCTIONS -----
   # |- Create a dropdown ----
   create_dropdown <- function(input_name, choices, label) {
     if (!is.null(input[[input_name]]) && input[[input_name]] %in% choices) {
@@ -20,98 +20,7 @@ function(input, output) {
     )
   }
   
-# Read in metadata ----
-metadata <- reactive({
-  # if no metadata file uploaded then use the example ningaloo dataset
-    if(is.null(input$upload.metadata)){
-      
-      metadata <-  read.csv("data/example_metadata.csv") %>%
-        ga.clean.names() %>%
-        dplyr::select(sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
-        as.data.frame()
-      
-      } else {
-      
-      metadata <- lapply(input$upload.metadata$datapath, fread)
-      names(metadata) <- input$upload.metadata$name 
-      
-      metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-        ga.clean.names() %>%
-        dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", "")) %>%
-        dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
-        glimpse()
-      }
-    
-      metadata <- metadata
-  })  
-
-metadata.regions <- reactive({
-  metadata <- metadata()
-  
-  coordinates(metadata) <- c('longitude', 'latitude')
-  proj4string(metadata) <- CRS(wgs.84)
-
-  n <- nrow(metadata())
-
-  nearest.region <- character(n)
-
-## For each point, find name of nearest polygon (in this case, Belgian cantons)
-  for (i in seq_along(nearest.region)) {
-  nearest.region[i] <- marine.regions$REGION[which.min(gDistance(metadata[i, ], marine.regions, byid = TRUE))]}
-
-## Check that it worked
-metadata.2 <- as.data.frame(nearest.region) %>%
-  bind_cols(metadata()) %>%
-  dplyr::rename(marine.region = nearest.region) %>%
-  dplyr::mutate(sample = as.character(sample))
-
-# add in commonwealth reserves
-metadata.commonwealth.marineparks <- over(metadata, commonwealth.marineparks)
-
-metadata.3 <- metadata.2 %>%
-  #dplyr::select(-c(status)) %>%
-  bind_cols(metadata.commonwealth.marineparks) %>%
-  dplyr::rename(zone = ZoneName)
-
-# add in state reserves
-metadata.wa.marineparks <- over(metadata, wa.marineparks) %>%
-  dplyr::select(ZONE_TYPE) %>%
-  mutate(ZONE_TYPE = as.character(ZONE_TYPE))
-
-metadata.regions <- metadata.3 %>%
-  bind_cols(metadata.wa.marineparks) %>%
-  dplyr::mutate(zone = ifelse(zone%in%c(NA), as.character(ZONE_TYPE), as.character(zone))) %>%
-  dplyr::select(-c(ZONE_TYPE)) %>%
-  dplyr::mutate(zone = str_replace_all(.$zone, c(" Zone" = "", "Zone " = "", "(IUCN II)" = "", "(IUCN IV)" = "", "(IUCN IA)" = "", "[^[:alnum:] ]" = "", " Benthic Protection" = "", "Use " = "Use", "y " = "y"))) %>%
-  dplyr::mutate(status = stringr::str_replace_all(.$zone, c("General Use" = "Fished", 
-                                                         "Recreational Use" = "Fished", 
-                                                         "Multiple Use" = "Fished", 
-                                                         "National Park" = "No-take", 
-                                                         "Sanctuary" = "No-take",
-                                                         "Special Purpose Mining Exclusion" = "Fished",
-                                                         "Special Purpose " = "Fished",
-                                                         "Unassigned IUCN VI" = "Fished"
-                                                ))) %>%
-  dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", 
-                                            "No-take" = "NoTake", 
-                                            "No-take" = "No Take", 
-                                            "Fished" = "FISHED", 
-                                            "Fished" = "Outside", 
-                                            "Fished" = "Fishes", 
-                                            "Fished" = "FALSE", 
-                                            "No-take" = "Reserve", 
-                                            "No-take" = "No take", 
-                                            "No-take" = "Not Fished", 
-                                            "No-take" = "No-Take", 
-                                            "Fished" = "Special Purpose"))
-})
-
-# |- Preview metadata ----
-  output$table.metadata <- renderTable({
-    metadata.regions()
-  })
-  
-# Read in points data ----
+  ## |- Read in points data ----
 points <- reactive({
   
   if(is.null(input$upload.points)){
@@ -120,6 +29,7 @@ points <- reactive({
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown"), "Unknown", as.character(genus))) %>%
       as.data.frame()
     
@@ -158,6 +68,7 @@ length <- reactive({
       ga.clean.names() %>%
       mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown"), "Unknown", as.character(genus))) %>%
       dplyr::rename(sample = opcode) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       dplyr::filter(number>0) %>%
       dplyr::filter(!is.na(number)) %>%
       dplyr::filter(!is.na(family))
@@ -185,7 +96,7 @@ length <- reactive({
   
 })
 
-# Preview length ----
+# |- Preview length ----
 output$table.length <- renderTable({
   length()
 })  
@@ -194,14 +105,15 @@ output$table.length <- renderTable({
 threedpoints <- reactive({
   if(is.null(input$upload.3dpoints)){
     threedpoints <-  read.delim("data/example_3DPoints.txt", na.strings = "") %>%
-          as.data.frame() %>%
-          ga.clean.names() %>%
-          dplyr::mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown"), "Unknown", as.character(genus))) %>%
-          dplyr::filter(!comment%in%c("sync")) %>%
-          dplyr::rename(sample = opcode) %>%
-          dplyr::mutate(number = as.numeric(number)) %>%
-          dplyr::filter(number>0) %>%
-          dplyr::filter(!is.na(number)) %>%
+      as.data.frame() %>%
+      ga.clean.names() %>%
+      dplyr::mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown"), "Unknown", as.character(genus))) %>%
+      dplyr::filter(!comment%in%c("sync")) %>%
+      dplyr::rename(sample = opcode) %>%
+      dplyr::mutate(number = as.numeric(number)) %>%
+      dplyr::filter(number>0) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      dplyr::filter(!is.na(number)) %>%
       dplyr::filter(!is.na(family))
     
   } else {
@@ -228,44 +140,140 @@ threedpoints <- reactive({
   
 })
 
-# Preview 3D points ----
+# |- Preview 3D points ----
 output$table.3dpoints <- renderTable({
   threedpoints()
+}) 
+
+## _______________________________________________________ ----
+##                        METADATA                         ----
+## _______________________________________________________ ----
+
+### |- Read in metadata ----
+metadata <- reactive({
+  # if no metadata file uploaded then use the example ningaloo dataset
+  if(is.null(input$upload.metadata)){
+    
+    metadata <-  read.csv("data/example_metadata.csv") %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
+      as.data.frame()
+    
+  } else {
+    
+    metadata <- lapply(input$upload.metadata$datapath, fread)
+    names(metadata) <- input$upload.metadata$name 
+    
+    metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", "")) %>%
+      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
+      glimpse()
+  }
+  
+  metadata <- metadata
 })  
 
-# METADATA - Number of samples - Valuebox ----
+## |- Find nearest marine regions add commonwealth and state zoning ----
+metadata.regions <- reactive({
+  metadata <- metadata()
+  
+  coordinates(metadata) <- c('longitude', 'latitude')
+  proj4string(metadata) <- CRS(wgs.84)
+  
+  n <- nrow(metadata())
+  
+  nearest.region <- character(n)
+  
+  ## For each point, find name of nearest polygon
+  for (i in seq_along(nearest.region)) {
+    nearest.region[i] <- marine.regions$REGION[which.min(gDistance(metadata[i, ], marine.regions, byid = TRUE))]}
+  
+  ## Check that it worked
+  metadata.2 <- as.data.frame(nearest.region) %>%
+    bind_cols(metadata()) %>%
+    dplyr::rename(marine.region = nearest.region) %>%
+    dplyr::mutate(sample = as.character(sample))
+  
+  # add in commonwealth reserves
+  metadata.commonwealth.marineparks <- over(metadata, commonwealth.marineparks)
+  
+  metadata.3 <- metadata.2 %>%
+    bind_cols(metadata.commonwealth.marineparks) %>%
+    dplyr::rename(zone = ZoneName)
+  
+  # add in state reserves
+  metadata.wa.marineparks <- over(metadata, wa.marineparks) %>%
+    dplyr::select(ZONE_TYPE) %>%
+    mutate(ZONE_TYPE = as.character(ZONE_TYPE))
+  
+  metadata.regions <- metadata.3 %>%
+    bind_cols(metadata.wa.marineparks) %>%
+    dplyr::mutate(zone = ifelse(zone%in%c(NA), as.character(ZONE_TYPE), as.character(zone))) %>%
+    dplyr::select(-c(ZONE_TYPE)) %>%
+    dplyr::mutate(zone = str_replace_all(.$zone, c(" Zone" = "", "Zone " = "", "(IUCN II)" = "", "(IUCN IV)" = "", "(IUCN IA)" = "", "[^[:alnum:] ]" = "", " Benthic Protection" = "", "Use " = "Use", "y " = "y"))) %>%
+    dplyr::mutate(status = stringr::str_replace_all(.$zone, c("General Use" = "Fished", 
+                                                              "Recreational Use" = "Fished", 
+                                                              "Multiple Use" = "Fished", 
+                                                              "National Park" = "No-take", 
+                                                              "Sanctuary" = "No-take",
+                                                              "Special Purpose Mining Exclusion" = "Fished",
+                                                              "Special Purpose " = "Fished",
+                                                              "Unassigned IUCN VI" = "Fished"
+    ))) %>%
+    dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", 
+                                      "No-take" = "NoTake", 
+                                      "No-take" = "No Take", 
+                                      "Fished" = "FISHED", 
+                                      "Fished" = "Outside", 
+                                      "Fished" = "Fishes", 
+                                      "Fished" = "FALSE", 
+                                      "No-take" = "Reserve", 
+                                      "No-take" = "No take", 
+                                      "No-take" = "Not Fished", 
+                                      "No-take" = "No-Take", 
+                                      "Fished" = "Special Purpose"))
+})
+
+## |- Preview metadata in dashboard ----
+output$table.metadata <- renderTable({
+  metadata.regions()
+})
+
+## _______________________________________________________ ----
+##        Metadata checking for single point campaigns     ----
+## _______________________________________________________ ----
+
+## |- Total number of samples - valueBox ----
 output$metadata.no.samples <- renderValueBox({
   
   metadata.samples <- metadata() %>%
-    mutate(campaignid = "metadata") %>%
-    dplyr::group_by(campaignid) %>%
-    dplyr::summarise(no.of.samples = n()) %>%
-    ungroup() %>%
-    dplyr::select(no.of.samples)
+    dplyr::distinct(campaignid, sample)
   
-    valueBox(width = 3, metadata.samples$no.of.samples, "Metadata samples", 
+    valueBox(width = 3, nrow(metadata.samples), "Metadata samples", 
              icon = icon("list"), color = "green"
     )
   })
 
-# METADATA - Empty point samples - Valuebox ----
-output$metadata.samples.without.fish <- renderValueBox({
+## |- Samples without points - dataframe----
+metadata.samples.without.fish <- reactive({
   
   metadata.samples <- metadata() %>%
-    distinct(sample) %>%
+    distinct(campaignid, sample, successful.count, successful.length) %>%
     mutate(sample = as.factor(sample))
   
   points.samples <- points() %>%
-    distinct(sample)
+    distinct(campaignid, sample)
   
-  missing.fish <- anti_join(metadata.samples, points.samples) %>%
-    dplyr::mutate(test = "missing fish") %>%
-    distinct(test, sample) %>%
-    dplyr::group_by(test) %>%
-    dplyr::summarise(no.of.samples = n())
+  missing.fish <- anti_join(metadata.samples, points.samples)
+})
+
+## |- Samples without points - valueBox ----
+output$metadata.samples.without.fish <- renderValueBox({
   
-  if (dim(missing.fish)[1] > 0) {
-    total <- missing.fish$no.of.samples
+  if (dim(metadata.samples.without.fish())[1] > 0) {
+    total <- nrow(metadata.samples.without.fish())
   }
   else{
     total = 0
@@ -278,77 +286,53 @@ output$metadata.samples.without.fish <- renderValueBox({
   )
 })
 
-# METADATA - Empty point samples - Dataframe ----
-metadata.samples.without.fish <- reactive({
-  # req(input$upload.metadata, input$upload.points)
-  
-  metadata.samples <- metadata() %>%
-    distinct(sample, successful.count, successful.length) %>%
-    mutate(sample = as.factor(sample))
-  
-  points.samples <- points() %>%
-    distinct(sample)
-  
-  missing.fish <- anti_join(metadata.samples, points.samples)
-})
-
-# METADATA - Empty point samples - on click
-onclick('click.metadata.samples.without.fish', showModal(modalDialog(
-  title = "Samples without fish in points text file", 
-  renderDataTable(metadata.samples.without.fish(), rownames = FALSE, 
-                  options = list(paging = FALSE, searching = TRUE)))
+## |- Samples without points - onclick----
+onclick('click.metadata.samples.without.fish', 
+        showModal(modalDialog(
+          title = "Samples without fish in the points text file", 
+          easyClose = TRUE,
+          renderDataTable(metadata.samples.without.fish(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
 ))
 
-# METADATA - Samples without metadata - Valuebox ----
-output$points.samples.without.metadata <- renderValueBox({
-  
-  metadata.samples <- metadata() %>%
-    distinct(sample) %>%
-    mutate(sample = as.factor(sample))
-  
-  points.samples <- points() %>%
-    distinct(sample)
-  
-  missing.metadata <- anti_join(points.samples, metadata.samples) %>%
-    dplyr::mutate(test = "missing metadata") %>%
-    distinct(test, sample) %>%
-    dplyr::group_by(test) %>%
-    dplyr::summarise(no.of.samples = n())
-  
-  if (dim(missing.metadata)[1] > 0) {
-    total <- missing.metadata$no.of.samples
-  }
-  else{
-    total = 0
-  }
-  
-  valueBox(width = 2, 
-    total, 
-    "Sample(s) in points file missing metadata", 
-    icon = icon("exclamation-circle"), color = "red"
-  )
-})
-
-# METADATA - Samples without metadata - Dataframe ----
+## |- Samples without metadata - dataframe ----
 points.samples.without.metadata <- reactive({
-  # req(input$upload.metadata, input$upload.points)
   metadata.samples <- metadata() %>%
-    distinct(sample) %>%
+    distinct(campaignid, sample) %>%
     mutate(sample = as.factor(sample))
   
   points.samples <- points() %>%
-    distinct(sample)
+    distinct(campaignid, sample)
   
   missing.metadata <- anti_join(points.samples, metadata.samples)
 })
 
-# METADATA - Samples without metadata - onclick ----
-onclick('click.points.samples.without.metadata', showModal(modalDialog(
-  title = "Samples in points without metadata", 
-  renderDataTable(points.samples.without.metadata(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+## |- Samples without metadata - valueBox ----
+output$points.samples.without.metadata <- renderValueBox({
+  
+  if (dim(points.samples.without.metadata())[1] > 0) {
+    total <- nrow(points.samples.without.metadata())
+    
+  } else {
+    total = 0
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "Sample(s) in points file missing metadata", 
+           icon = icon("exclamation-circle"), color = "red"
+  )
+})
+
+## |- Samples without metadata - onclick ----
+onclick('click.points.samples.without.metadata', 
+        showModal(modalDialog(
+          title = "Samples in points without metadata", 
+          easyClose = TRUE,
+          renderDataTable(points.samples.without.metadata(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
 ))
 
-# METADATA - Leaflet map ----
+## |- Leaflet map ----
 output$map.metadata <- renderLeaflet({
   
   metadata <- metadata.regions() %>%
@@ -367,34 +351,150 @@ output$map.metadata <- renderLeaflet({
     addMarkers(lng = ~longitude, lat = ~latitude, label = ~as.character(sample), popup = ~content)
 })
 
+## _______________________________________________________ ----
+##      Metadata checking for transect based campaigns     ----
+## _______________________________________________________ ----
 
-# MAXN - Create maxn (Raw) -----
-maxn.raw <- reactive({
-maxn <- points() %>%
-  dplyr::mutate(number = as.numeric(number)) %>%
-  replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
-  dplyr::group_by(sample, filename, period, periodtime, frame, family, genus, species) %>% # removed comment 21/10/21
-  dplyr::summarise(maxn = sum(number)) %>%
-  dplyr::group_by(sample, family, genus, species) %>%
-  dplyr::slice(which.max(maxn)) %>%
-  dplyr::ungroup() %>%
-  dplyr::filter(!is.na(maxn)) %>%
-  dplyr::select(-frame) %>%
-  tidyr::replace_na(list(maxn = 0)) %>%
-  dplyr::mutate(maxn = as.numeric(maxn)) %>%
-  dplyr::filter(maxn>0) %>%
-  dplyr::inner_join(metadata.regions()) %>%
-  dplyr::filter(successful.count%in%c("Yes", "Y", "y", "yes")) %>%
-  mutate(family = if_else(family%in%c("Na", "NA", "na", NA), "Unknown", family)) %>%
-  mutate(genus = if_else(genus%in%c("Na", "NA", "na", NA), "Unknown", genus)) %>%
-  mutate(species = if_else(species%in%c("Na", "NA", "na", NA), "spp", species)) %>%
-  dplyr::mutate(species = tolower(species)) %>%
-  dplyr::mutate(genus = ga.capitalise(genus)) %>%
-  dplyr::mutate(family = ga.capitalise(family))
-    
+## |- Total number of samples - valueBox ----
+output$metadata.no.samples.t <- renderValueBox({
+  
+  metadata.samples <- metadata() %>%
+    dplyr::distinct(campaignid, sample)
+  
+  valueBox(width = 3, nrow(metadata.samples), "Metadata samples", 
+           icon = icon("list"), color = "green"
+  )
 })
 
-# MAXN - Create maxn (Clean) -----
+## |- Samples without lengths - dataframe----
+metadata.samples.without.fish.t <- reactive({
+  
+  metadata.samples <- metadata() %>%
+    distinct(campaignid, sample, successful.count, successful.length) %>%
+    mutate(sample = as.factor(sample))
+  
+  length.samples <- length() %>%
+    distinct(campaignid, sample, period) %>%
+    mutate(sample = paste(sample, period, sep = "_"))
+  
+  missing.fish <- anti_join(metadata.samples, length.samples)
+})
+
+## |- Samples without lengths - valueBox ----
+output$metadata.samples.without.fish.t <- renderValueBox({
+  
+  if (dim(metadata.samples.without.fish.t())[1] > 0) {
+    total <- nrow(metadata.samples.without.fish.t())
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Sample(s) without lengths", 
+           icon = icon("question"), color = "yellow"
+  )
+})
+
+## |- Samples without lengths - onclick----
+onclick('click.metadata.samples.without.fish.t', 
+        showModal(modalDialog(
+          title = "Samples without fish in the length text file", 
+          easyClose = TRUE,
+          renderDataTable(metadata.samples.without.fish.t(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## |- Samples without metadata - dataframe ----
+length.samples.without.metadata.t <- reactive({
+  metadata.samples <- metadata() %>%
+    distinct(campaignid, sample) %>%
+    mutate(sample = as.factor(sample))
+  
+  length.samples <- length() %>%
+    distinct(campaignid, sample, period) %>%
+    mutate(sample = paste(sample, period, sep = "_"))
+  
+  missing.metadata <- anti_join(length.samples, metadata.samples)
+})
+
+## |- Samples without metadata - valueBox ----
+output$length.samples.without.metadata.t <- renderValueBox({
+  
+  if (dim(length.samples.without.metadata.t())[1] > 0) {
+    total <- nrow(length.samples.without.metadata.t())
+    
+  } else {
+    total = 0
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "Sample(s) in length file missing metadata", 
+           icon = icon("exclamation-circle"), color = "red"
+  )
+})
+
+## |- Samples without metadata - onclick ----
+onclick('click.length.samples.without.metadata.t', 
+        showModal(modalDialog(
+          title = "Samples in length without metadata", 
+          easyClose = TRUE,
+          renderDataTable(length.samples.without.metadata.t(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## |- Leaflet map ----
+output$map.metadata.t <- renderLeaflet({
+  
+  metadata <- metadata.regions() %>%
+    mutate(content = paste(sep = " ", 
+                           "<b>Sample:", sample, "</b>", "<br/>", 
+                           "<b>Status:</b>", status, "<br/>", 
+                           "<b>Depth:</b>", depth, "m", "<br/>", 
+                           "<b>Site:</b>", site, "<br/>", 
+                           "<b>Location:</b>", location, "<br/>", 
+                           "<b>Date:</b>", date, "<br/>", 
+                           "<b>Time:</b>", time, "<br/>"
+    ))
+  
+  leaflet(data = metadata) %>%
+    addTiles() %>%
+    addMarkers(lng = ~longitude, lat = ~latitude, label = ~as.character(sample), popup = ~content)
+})
+
+
+## _______________________________________________________ ----
+##                          MAXN                           ----
+## _______________________________________________________ ----
+
+## |- Create MaxN (Raw) ----
+maxn.raw <- reactive({
+  maxn <- points() %>%
+    dplyr::mutate(number = as.numeric(number)) %>%
+    replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
+    dplyr::group_by(sample, filename, period, periodtime, frame, family, genus, species) %>% # removed comment 21/10/21
+    dplyr::summarise(maxn = sum(number)) %>%
+    dplyr::group_by(sample, family, genus, species) %>%
+    dplyr::slice(which.max(maxn)) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(maxn)) %>%
+    dplyr::select(-frame) %>%
+    tidyr::replace_na(list(maxn = 0)) %>%
+    dplyr::mutate(maxn = as.numeric(maxn)) %>%
+    dplyr::filter(maxn>0) %>%
+    dplyr::inner_join(metadata.regions()) %>%
+    dplyr::filter(successful.count%in%c("Yes", "Y", "y", "yes")) %>%
+    mutate(family = if_else(family%in%c("Na", "NA", "na", NA), "Unknown", family)) %>%
+    mutate(genus = if_else(genus%in%c("Na", "NA", "na", NA), "Unknown", genus)) %>%
+    mutate(species = if_else(species%in%c("Na", "NA", "na", NA), "spp", species)) %>%
+    dplyr::mutate(species = tolower(species)) %>%
+    dplyr::mutate(genus = ga.capitalise(genus)) %>%
+    dplyr::mutate(family = ga.capitalise(family))
+  
+})
+
+
 maxn.clean <- reactive({
 maxn.clean <- dplyr::left_join(maxn.raw(), synonyms, by = c("family", "genus", "species")) %>%
     dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%

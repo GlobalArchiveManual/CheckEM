@@ -2,21 +2,37 @@ tagList(
   useShinyjs(),
   dashboardPage(
     dbHeader,
-    # dashboardHeader(title = "habitatMAPPer"),
     dashboardSidebar(
       sidebarMenu(
     menuItem("Upload data", tabName = "upload", icon = icon("upload")),
-    menuItem("Check metadata", tabName = "checkmetadata", icon = icon("check")),
-    menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
-    menuItem("Check Length & 3D points", tabName = "createlength", icon = icon("check")),
-    menuItem("Compare MaxN & Length", tabName = "maxnlength", icon = icon("equals")),
-    menuItem("Create & check Mass", tabName = "createmass", icon = icon("check")),
-    menuItem("Download data", tabName = "downloads", icon = icon("download")),
+    
+    # BRUV tabs
+    shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
+                            sidebarMenu(
+                              menuItem("Check metadata", tabName = "checkmetadata", icon = icon("check")),
+                              menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
+                              menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
+                              menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
+                              menuItem("Create & check mass", tabName = "createmass", icon = icon("check")),
+                              menuItem("Download data", tabName = "downloads", icon = icon("download")))
+                            ),
+    
+    # Transect tabs
+    shiny::conditionalPanel(condition = "input.transect == 'Transect based e.g. DOV'", 
+                            sidebarMenu(
+                              menuItem("Check metadata", tabName = "checkmetadatat", icon = icon("check")),
+                              menuItem("Check abundance", tabName = "createmaxnt", icon = icon("check")),
+                              menuItem("Check length & 3D points", tabName = "createlengtht", icon = icon("check")),
+                              menuItem("Create & check mass", tabName = "createmasst", icon = icon("check")),
+                              menuItem("Download data", tabName = "downloadst", icon = icon("download")))
+                            ),
+    
     menuItem("User guide", tabName = "guide", icon = icon("info", lib="font-awesome")),
     menuItem("Feedback", tabName = "feedback", icon = icon("comment", lib="font-awesome")),
     menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome"))
   )
   ),
+  
   dashboardBody(
     tags$head(includeHTML(("google-analytics.html"))),
     tags$head(tags$link(rel = "shortcut icon", href = "favicon.ico")),
@@ -28,14 +44,23 @@ tagList(
                        
                   box(width = 6, height = 825, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
                            includeMarkdown("aims.Rmd")),     
+                  
+                  box(width = 6, title = "Single point or Transect based", status = "primary", solidHeader = TRUE,
+                      radioButtons("transect", "Choose the type of data:",
+                                   c("Non-transect e.g. BRUV",
+                                     "Transect based e.g. DOV"), 
+                                   selected = "Non-transect e.g. BRUV")),
                        
                   box(width = 6, title = "Upload metadata", status = "primary", solidHeader = TRUE,
                     fileInput("upload.metadata", ".csv only:", multiple = TRUE,
                                  accept = c("image/vnd.csv",".csv"))),
                        
-                  box(width = 6, title = "Upload points file", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.points", ".txt file only", multiple = TRUE,
-                                 accept = c("image/vnd.txt",".txt"))),
+                  
+                  shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
+                                          box(width = 6, title = "Upload points file", status = "primary",solidHeader = TRUE,
+                                              fileInput("upload.points", ".txt file only", multiple = TRUE,
+                                                        accept = c("image/vnd.txt",".txt")))
+                                          ),
                        
                   box(width = 6, title = "Upload length file", status = "primary",solidHeader = TRUE,
                       fileInput("upload.length", ".txt file only", multiple = TRUE,
@@ -43,10 +68,7 @@ tagList(
                        
                   box(width = 6, title = "Upload 3D points file", status = "primary",solidHeader = TRUE,
                       fileInput("upload.3dpoints", ".txt file only", multiple = TRUE,
-                                 accept = c("image/vnd.txt",".txt"))),
-                  
-                  box(width = 6, title = "Transect based data", status = "primary", solidHeader = TRUE,
-                      checkboxInput("transect", "Tick if uploading transect based data", value = FALSE, width = NULL))
+                                 accept = c("image/vnd.txt",".txt")))
                   ),
                   
                   tabBox(width = 12, height = 800,
@@ -63,7 +85,7 @@ tagList(
                   )
       ),
       
-      # Check metadata -----
+      # Check metadata - point based data -----
       tabItem(tabName = "checkmetadata",
               fluidRow(div(id="click.metadata.no.samples",
                            valueBoxOutput("metadata.no.samples")),
@@ -71,8 +93,18 @@ tagList(
                            valueBoxOutput("metadata.samples.without.fish")),
                        div(id="click.points.samples.without.metadata",
                            valueBoxOutput("points.samples.without.metadata")),
-                       #box(width = 4, actionButton("count", "Increment progress")),
                        box(width=12, height = 825, leafletOutput("map.metadata", height = 800)))
+      ),
+      
+      # Check metadata - transect based data ----
+      tabItem(tabName = "checkmetadatat",
+              fluidRow(div(id="click.metadata.no.samples.t",
+                           valueBoxOutput("metadata.no.samples.t")),
+                       div(id="click.metadata.samples.without.fish.t",
+                           valueBoxOutput("metadata.samples.without.fish.t")),
+                       div(id="click.length.samples.without.metadata.t",
+                           valueBoxOutput("length.samples.without.metadata.t")),
+                       box(width=12, height = 825, leafletOutput("map.metadata.t", height = 800)))
       ),
       
       # Create maxn -----
@@ -90,8 +122,6 @@ tagList(
                        box(width=2,title = "Species to plot",status="primary",solidHeader = TRUE,numericInput("species.limit", "Number:", 15, min = 5, max = 20)),
                        box(width=12,title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("maxn.species.dropdown",multiple=TRUE)),
-                       #box(width=3,title = "Complete maxn:", status = "primary", solidHeader = TRUE, downloadButton("download.maxn.complete")),
-                       #box(width=3,title = "Clean maxn:", status = "primary", solidHeader = TRUE, downloadButton("download.maxn.clean")),
                        box(width=12,leafletOutput("maxn.spatial.plot")),
                        box(width=12,title = "Plot of abundance by Status", status = "primary", plotOutput("maxn.status.plot", height = 250)),
                        box(width=12,title = "Plot of abundance by Zone", status = "primary", plotOutput("maxn.zone.simple", height = 250)),
@@ -162,8 +192,6 @@ tagList(
       # Create downloads -----
       tabItem(tabName = "downloads",
               fluidRow(
-                # div(width=3,id="click.info.download.maxn.clean",
-                           # infoBoxOutput("info.download.maxn.clean")),
                 box(width=6,title = "Select 'errors' to filter out of downloaded data",
                     status="primary",solidHeader = TRUE,
                     
@@ -176,7 +204,6 @@ tagList(
                     br(),
                     h4("Filters for Length and Mass"),
                     numericInput("error.range.limit", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
-                    # checkboxInput("error.range", label = "Filter out 3D measurements greater than range limit (above)", value = TRUE), # DO i need a way to set the range BG 21/08/2020
                     checkboxInput("error.length.small", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
                     checkboxInput("error.length.big", label = "Filter out length measurements larger than fishbase maximum", value = FALSE)),
                 
