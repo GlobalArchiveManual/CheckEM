@@ -1441,40 +1441,40 @@ threedpoints.t <- reactive({
 # |- Combine lengths and 3d points ----
 length3dpoints.t <- reactive({
   length3dpoints <- length() %>%
-    # dplyr::mutate(sample = paste(sample, period, sep = "_")) %>%
-    # plyr::rbind.fill(threedpoints()) %>%
-    # dplyr::mutate(length = as.numeric(length)) %>%
-    # dplyr::mutate(number = as.numeric(number)) %>%
-    # dplyr::filter(!is.na(number)) %>%
-    # tidyr::replace_na(list(species = "spp")) %>%
-    # dplyr::select(-c(time)) %>%
-    # dplyr::mutate(sample = as.character(sample)) %>%
-    # dplyr::left_join(metadata.regions()) %>%
-    # replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
-    # mutate(family = if_else(family%in%c("Na", "NA", "na", NA), "Unknown", family)) %>%
-    # mutate(genus = if_else(genus%in%c("Na", "NA", "na", NA), "Unknown", genus)) %>%
-    # mutate(species = if_else(species%in%c("Na", "NA", "na", NA), "spp", species)) %>%
-    # dplyr::mutate(species = tolower(species)) %>%
-    # dplyr::mutate(genus = ga.capitalise(genus)) %>%
-    # dplyr::mutate(family = ga.capitalise(family)) %>%
+    dplyr::mutate(sample = paste(sample, period, sep = "_")) %>%
+    plyr::rbind.fill(threedpoints()) %>%
+    dplyr::mutate(length = as.numeric(length)) %>%
+    dplyr::mutate(number = as.numeric(number)) %>%
+    dplyr::filter(!is.na(number)) %>%
+    tidyr::replace_na(list(species = "spp")) %>%
+    dplyr::select(-c(time)) %>%
+    dplyr::mutate(sample = as.character(sample)) %>%
+    dplyr::left_join(metadata.regions()) %>%
+    replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
+    mutate(family = if_else(family%in%c("Na", "NA", "na", NA), "Unknown", family)) %>%
+    mutate(genus = if_else(genus%in%c("Na", "NA", "na", NA), "Unknown", genus)) %>%
+    mutate(species = if_else(species%in%c("Na", "NA", "na", NA), "spp", species)) %>%
+    dplyr::mutate(species = tolower(species)) %>%
+    dplyr::mutate(genus = ga.capitalise(genus)) %>%
+    dplyr::mutate(family = ga.capitalise(family)) %>%
     glimpse()
 })
 
 length3dpoints.clean.t <- reactive({
-  length3dpoints.clean <-  dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) #%>%
-    # dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
-    # dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
-    # dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
-    # dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-    # dplyr::filter(range<(input$range.limit.t*1000)) %>%
-    # dplyr::right_join(metadata.regions()) %>% # add in all samples
-    # dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright) %>%
-    # tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-    # replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
-    # dplyr::ungroup() %>%
-    # dplyr::mutate(length = as.numeric(length)) %>%
-    # dplyr::left_join(metadata.regions()) %>%
-    # dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
+  length3dpoints.clean <-  dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
+    dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+    dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+    dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+    dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+    dplyr::filter(range<(input$range.limit.t*1000)) %>%
+    dplyr::right_join(metadata.regions()) %>% # add in all samples
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+    dplyr::ungroup() %>%
+    dplyr::mutate(length = as.numeric(length)) %>%
+    dplyr::left_join(metadata.regions()) %>%
+    dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
     # 
 })
 ## |- Number of lengths - dataframe ----
