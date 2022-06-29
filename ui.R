@@ -21,7 +21,6 @@ tagList(
     shiny::conditionalPanel(condition = "input.transect == 'Transect based e.g. DOV'", 
                             sidebarMenu(
                               menuItem("Check metadata", tabName = "checkmetadatat", icon = icon("check")),
-                              menuItem("Check abundance", tabName = "createmaxnt", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlengtht", icon = icon("check")),
                               menuItem("Create & check mass", tabName = "createmasst", icon = icon("check")),
                               menuItem("Download data", tabName = "downloadst", icon = icon("download")))
