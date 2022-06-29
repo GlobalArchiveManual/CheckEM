@@ -42,8 +42,7 @@ metadata <- reactive({
     metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       ga.clean.names() %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", "")) %>%
-      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
-      glimpse()
+      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
   }
   
   metadata <- metadata
@@ -130,7 +129,7 @@ output$metadata.no.samples <- renderValueBox({
     )
   })
 
-## |- Samples without points - dataframe----
+## |- Samples without points - dataframe ----
 metadata.samples.without.fish <- reactive({
   
   metadata.samples <- metadata() %>%
@@ -366,8 +365,7 @@ points <- reactive({
       mutate(sample = as.factor(sample)) %>%
       mutate(genus =  ifelse(genus %in% c("NA", "NANA", NA, "unknown"), "Unknown", as.character(genus))) %>%
       dplyr::select(-c(.id)) %>%
-      dplyr::filter(!is.na(family)) %>%
-      glimpse()
+      dplyr::filter(!is.na(family))
     
   }
   
@@ -385,9 +383,9 @@ maxn.raw <- reactive({
   maxn <- points() %>%
     dplyr::mutate(number = as.numeric(number)) %>%
     replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
-    dplyr::group_by(sample, filename, period, periodtime, frame, family, genus, species) %>% # removed comment 21/10/21
+    dplyr::group_by(campaignid, sample, filename, period, periodtime, frame, family, genus, species) %>% # removed comment 21/10/21
     dplyr::summarise(maxn = sum(number)) %>%
-    dplyr::group_by(sample, family, genus, species) %>%
+    dplyr::group_by(campaignid, sample, family, genus, species) %>%
     dplyr::slice(which.max(maxn)) %>%
     dplyr::ungroup() %>%
     dplyr::filter(!is.na(maxn)) %>%
@@ -413,7 +411,7 @@ maxn.clean <- dplyr::left_join(maxn.raw(), synonyms, by = c("family", "genus", "
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-    dplyr::group_by(sample, family, genus, species) %>%
+    dplyr::group_by(campaignid, sample, family, genus, species) %>%
     dplyr::slice(which.max(maxn)) %>%
     dplyr::ungroup()
 })
@@ -423,10 +421,10 @@ maxn.complete <- reactive({
 
 maxn.complete <- maxn.clean() %>%
   full_join(metadata.regions()) %>%
-  dplyr::select(c(sample, family, genus, species, maxn)) %>%
-  tidyr::complete(nesting(sample), nesting(family, genus, species)) %>%
+  dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>%
+  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
   replace_na(list(maxn = 0)) %>%
-  dplyr::group_by(sample, family, genus, species) %>%
+  dplyr::group_by(campaignid, sample, family, genus, species) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
   ungroup()
 })
@@ -559,7 +557,7 @@ onclick('click.maxn.synonym', showModal(modalDialog(
 ## |-  Total abundance - dataframe ----
 maxn.total.abundances <- reactive({
   maxn <- maxn.clean() %>%
-    dplyr::group_by(sample) %>%
+    dplyr::group_by(campaignid, sample) %>%
     dplyr::summarise(total.abundance = sum(maxn))
 })
 
@@ -674,7 +672,7 @@ output$maxn.status.plot <- renderPlot({
     left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(sample, status) %>%
+    group_by(campaignid, sample, status) %>%
     summarise(maxn = sum(maxn))
   
   scientific.name <- input$maxn.species.dropdown
@@ -700,7 +698,7 @@ output$maxn.zone.simple <- renderPlot({
     dplyr::left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(sample, zone) %>%
+    group_by(campaignid, sample, zone) %>%
     summarise(maxn = sum(maxn)) %>%
     ungroup()
   
@@ -726,7 +724,7 @@ output$maxn.location.plot <- renderPlot({
     left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(sample, location) %>%
+    group_by(campaignid, sample, location) %>%
     summarise(maxn = sum(maxn))
   
   scientific.name <- input$maxn.species.dropdown
@@ -752,7 +750,7 @@ output$maxn.site.plot <- renderPlot({
     left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(sample, site) %>%
+    group_by(campaignid, sample, site) %>%
     summarise(maxn = sum(maxn))
   
   
@@ -824,8 +822,7 @@ length <- reactive({
       dplyr::select(-c(.id)) %>%
       dplyr::filter(number>0) %>%
       dplyr::filter(!is.na(number)) %>%
-      dplyr::filter(!is.na(family)) %>%
-      glimpse()
+      dplyr::filter(!is.na(family)) 
     
   }
   
@@ -869,8 +866,7 @@ threedpoints <- reactive({
       dplyr::filter(number > 0) %>%
       dplyr::filter(!is.na(number)) %>%
       dplyr::filter(!comment%in%c("sync")) %>%
-      dplyr::filter(!is.na(family)) %>%
-      glimpse()
+      dplyr::filter(!is.na(family)) 
   }
   
   threedpoints <- threedpoints
@@ -881,6 +877,10 @@ threedpoints <- reactive({
 output$table.3dpoints <- renderTable({
   threedpoints()
 }) 
+
+## _______________________________________________________ ----
+##              Lengths for single point campaigns         ----
+## _______________________________________________________ ----
 
 # |- Combine lengths and 3d points ----
 length3dpoints <- reactive({
@@ -902,9 +902,25 @@ length3dpoints <- reactive({
     dplyr::mutate(family = ga.capitalise(family))
 })
 
-## _______________________________________________________ ----
-##              Lengths for single point campaigns         ----
-## _______________________________________________________ ----
+
+
+length3dpoints.clean <- reactive({
+  length3dpoints.clean <-  dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
+    dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+    dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+    dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+    dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+    dplyr::filter(range<(input$range.limit*1000)) %>%
+    dplyr::right_join(metadata.regions()) %>% # add in all samples
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+    dplyr::ungroup() %>%
+    dplyr::mutate(length = as.numeric(length)) %>%
+    dplyr::left_join(metadata.regions()) %>%
+    dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
+  
+})
 
 ## |- Create filtered length download -----
 length.complete.download <- reactive({
@@ -1002,24 +1018,6 @@ length.complete.download <- reactive({
 })
 
 
-length3dpoints.clean <- reactive({
-  length3dpoints.clean <-  dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
-  dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
-  dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
-  dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
-  dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-  dplyr::filter(range<(input$range.limit*1000)) %>%
-  dplyr::right_join(metadata.regions()) %>% # add in all samples
-  dplyr::select(sample, family, genus, species, length, number, range, frameleft, frameright) %>%
-  tidyr::complete(nesting(sample), nesting(family, genus, species)) %>%
-  replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
-  dplyr::ungroup() %>%
-  dplyr::mutate(length = as.numeric(length)) %>%
-  dplyr::left_join(metadata.regions()) %>%
-  dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
-  
-})
-
 ## |- Species dropdown ----
 output$length.species.dropdown <- renderUI({
   df <- length3dpoints.clean()
@@ -1040,7 +1038,7 @@ output$length.species.dropdown <- renderUI({
 length.abundance <- reactive({
   length <- length3dpoints.clean() %>%
     dplyr::filter(!length%in%c(NA)) %>%
-    dplyr::group_by(sample) %>%
+    dplyr::group_by(campaignid, sample) %>%
     dplyr::summarise(total.abundance = sum(number))
 })
 
@@ -1065,7 +1063,7 @@ onclick('click.length.abundance', showModal(modalDialog(
 threedpoints.abundance <- reactive({
   threedpoints.abundance <- length3dpoints.clean() %>%
     dplyr::filter(length%in%c(NA)) %>%
-    dplyr::group_by(sample) %>%
+    dplyr::group_by(campaignid, sample) %>%
     dplyr::summarise(total.abundance = sum(number)) %>%
     dplyr::ungroup() %>%
     tidyr::replace_na(list(total.abundance = 0))
@@ -1104,7 +1102,6 @@ length.synonym <- reactive({
     dplyr::filter(!is.na(genus_correct)) %>%
     dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
     dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
-    #dplyr::select(sample, family, genus, species, family_correct, genus_correct, species_correct) %>%
     dplyr::select('old name', 'new name') %>%
     dplyr::distinct()
 })
@@ -1193,7 +1190,7 @@ length.wrong <- reactive({
   length.wrong <- left_join(length3dpoints.clean(), master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>max.length) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big")) %>%
-    dplyr::select(sample, family, genus, species, length, min.length, max.length, fb.length_max, reason) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason) %>%
     mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
     dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))
   
@@ -1236,7 +1233,7 @@ onclick('click.length.wrong.small', showModal(modalDialog(
   renderDataTable(filter(length.wrong(), reason == "too small"), rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
 
-# LENGTH - species wrong length big - valuebox ----
+## |- Species wrong length big - valuebox ----
 output$length.wrong.big <- renderValueBox({
   length.wrong.big <- length.wrong() %>%
     dplyr::filter(reason%in%c("too big")) %>%
@@ -1281,7 +1278,7 @@ length.out.of.range <- reactive({
   
   length.out.of.range <- length3dpoints() %>%
     dplyr::filter(range>range.limit) %>%
-    dplyr::select(sample, family, genus, species, range, frameleft, frameright)
+    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright)
 })
 
 output$length.out.of.range <- renderValueBox({
@@ -1436,8 +1433,317 @@ output$length.zone.plot <- renderPlot({
 ##                Lengths for transect campaigns           ----
 ## _______________________________________________________ ----
 
+threedpoints.t <- reactive({
+  threedpoints <- threedpoints()%>%
+    dplyr::mutate(sample = paste(sample, period, sep = "_"))
+})
 
+# |- Combine lengths and 3d points ----
+length3dpoints.t <- reactive({
+  length3dpoints <- length() %>%
+    # dplyr::mutate(sample = paste(sample, period, sep = "_")) %>%
+    # plyr::rbind.fill(threedpoints()) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(number = as.numeric(number)) %>%
+    # dplyr::filter(!is.na(number)) %>%
+    # tidyr::replace_na(list(species = "spp")) %>%
+    # dplyr::select(-c(time)) %>%
+    # dplyr::mutate(sample = as.character(sample)) %>%
+    # dplyr::left_join(metadata.regions()) %>%
+    # replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
+    # mutate(family = if_else(family%in%c("Na", "NA", "na", NA), "Unknown", family)) %>%
+    # mutate(genus = if_else(genus%in%c("Na", "NA", "na", NA), "Unknown", genus)) %>%
+    # mutate(species = if_else(species%in%c("Na", "NA", "na", NA), "spp", species)) %>%
+    # dplyr::mutate(species = tolower(species)) %>%
+    # dplyr::mutate(genus = ga.capitalise(genus)) %>%
+    # dplyr::mutate(family = ga.capitalise(family)) %>%
+    glimpse()
+})
 
+length3dpoints.clean.t <- reactive({
+  length3dpoints.clean <-  dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) #%>%
+    # dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+    # dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+    # dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+    # dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+    # dplyr::filter(range<(input$range.limit.t*1000)) %>%
+    # dplyr::right_join(metadata.regions()) %>% # add in all samples
+    # dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright) %>%
+    # tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    # replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+    # dplyr::ungroup() %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::left_join(metadata.regions()) %>%
+    # dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
+    # 
+})
+## |- Number of lengths - dataframe ----
+length.abundance.t <- reactive({
+  length <- length3dpoints.clean.t() %>%
+    dplyr::filter(!length%in%c(NA)) %>%
+    dplyr::group_by(campaignid, sample) %>%
+    dplyr::summarise(total.abundance = sum(number))
+})
+
+## |- Number of lengths - value box ----
+output$length.abundance.t <- renderValueBox({
+  total <- sum(length.abundance.t()$total.abundance)
+  valueBox(width = 3, 
+           total, 
+           "Length measurements", 
+           icon = icon("ruler"), color = "green"
+  )
+})
+
+## |- Number of lengths - onclick ----
+onclick('click.length.abundance.t', showModal(modalDialog(
+  title = "Number of fish measured per sample", size = "l", easyClose = TRUE, 
+  renderDataTable(length.abundance.t(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## |- 3D points - number of 3d points - dataframe ----
+threedpoints.abundance.t <- reactive({
+  threedpoints.abundance <- length3dpoints.clean.t() %>%
+    dplyr::filter(length %in% c(NA)) %>%
+    dplyr::group_by(campaignid, sample) %>%
+    dplyr::summarise(total.abundance = sum(number)) %>%
+    dplyr::ungroup() %>%
+    tidyr::replace_na(list(total.abundance = 0))
+})
+
+## |- 3D points - number of 3d points - value box ----
+output$threedpoints.abundance.t <- renderValueBox({
+  threedpoints.abundance <- threedpoints.abundance.t()
+  
+  if (dim(threedpoints.abundance)[1] > 0) {
+    total <- sum(threedpoints.abundance$total.abundance)
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "3D points", 
+           icon = icon("dot-circle"), color = "green"
+  )
+})
+
+## |- 3D points - number of lengths - onclick ----
+onclick('click.threedpoints.abundance.t', showModal(modalDialog(
+  title = "Number of fish with 3D points per sample", size = "l", easyClose = TRUE, 
+  renderDataTable(threedpoints.abundance.t(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## |- Taxa replaced by synonym - dataframe -----
+length.synonym.t <- reactive({
+  length <- length3dpoints.t()
+  
+  length.synonym <- dplyr::left_join(length, synonyms, by = c("family", "genus", "species")) %>% 
+    dplyr::filter(!is.na(genus_correct)) %>%
+    dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
+    dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
+    dplyr::select('old name', 'new name') %>%
+    dplyr::distinct()
+})
+
+## |- Taxa replaced by synonym - Valuebox ----
+output$length.synonym.t <- renderValueBox({
+  
+  length.synonym <- length.synonym.t() %>%
+    dplyr::rename(old.name = 'old name') %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.synonym)[1] > 0) {
+    total <- sum(length.synonym$count)
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Species names updated", 
+           icon = icon("exclamation-circle"), color = "yellow"
+  )
+})
+
+## |- Taxa replaced by synonym - download ----
+output$download.length.synonyms.t <- downloadHandler(
+  filename = function() {
+    paste("length.synonyms", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(length.synonym(), file, row.names = FALSE)
+  }
+)
+
+## |- Taxa replaced by synonym - onclick ----
+onclick('click.length.synonym.t', showModal(modalDialog(
+  title = "Samples with species name updates", size = "l", easyClose = TRUE, 
+  downloadButton("download.length.synonyms", "Download as csv"), 
+  renderDataTable(length.synonym.t(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## |- Species not observed - dataframe ----
+length.species.not.observed.t <- reactive({
+  length <- master.expanded %>%
+    anti_join(length3dpoints.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
+    distinct(family, genus, species, marine.region) %>% # use this line to show specific drops OR
+    dplyr::rename('marine region not observed in' = marine.region) %>%
+    filter(!species%in%c("spp"))# %>% # Ignore spp in the report 
+  
+})
+
+## |- Species not observed - onclick ----
+onclick('click.length.species.not.observed.t', showModal(modalDialog(
+  title = "Species not previously observed in the marine region", size = "l", easyClose = TRUE, 
+  checkboxInput("length.filter.spp.t", label = "Filter out sp1, sp2, spp etc.", value = FALSE), 
+  renderDataTable(
+    if(input$length.filter.spp.t == TRUE)
+      length.species.not.observed.t() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10"))
+    else
+      length.species.not.observed.t(),  rownames = FALSE, 
+    options = list(paging = FALSE, searching = TRUE)))))
+
+## |- Species not observed - valuebox ----
+output$length.species.not.observed.t <- renderValueBox({
+  length.species.not.observed <- length.species.not.observed.t() %>%
+    mutate(scientific = paste(family, genus, species, sep = " "))
+  
+  if (dim(length.species.not.observed)[1] > 0) {
+    total <- base::length(unique(length.species.not.observed$scientific))
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Species not observed in area before", 
+           icon = icon("map-marked"), color = "red"
+  )
+})
+
+## |- Species wrong length - dataframe ----
+length.wrong <- reactive({
+  length.wrong <- left_join(length3dpoints.clean(), master.min.max, by = c("family", "genus", "species")) %>%
+    dplyr::filter(length<min.length|length>max.length) %>%
+    mutate(reason = ifelse(length<min.length, "too small", "too big")) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason) %>%
+    mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
+    dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))
+  
+})
+
+## |- Species wrong length small - valuebox ----
+output$length.wrong.small <- renderValueBox({
+  length.wrong.small <- length.wrong() %>%
+    dplyr::filter(reason%in%c("too small")) %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.small)[1] > 0) {
+    total <- sum(length.wrong.small$count)
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Lengths smaller than 15% of max", 
+           icon = icon("less-than"), color = "red"
+  )
+})
+
+## |- Species wrong length small - download ----
+output$download.length.wrong.small <- downloadHandler(
+  filename = function() {
+    paste("length.15.percent.of.max", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(dplyr::filter(length.wrong(), reason%in%c("too small")), file, row.names = FALSE)
+  }
+)
+
+## |- Species wrong length small - onclick ----
+onclick('click.length.wrong.small', showModal(modalDialog(
+  title = "Length measurement smaller than 15% of the fishbase maximum", size = "l", easyClose = TRUE, 
+  downloadButton("download.length.wrong.small", "Download as csv"), 
+  renderDataTable(filter(length.wrong(), reason == "too small"), rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## |- Species wrong length big - valuebox ----
+output$length.wrong.big <- renderValueBox({
+  length.wrong.big <- length.wrong() %>%
+    dplyr::filter(reason%in%c("too big")) %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.big)[1] > 0) {
+    total <- sum(length.wrong.big$count)
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Lengths bigger than 85% of max", 
+           icon = icon("greater-than"), color = "red"
+  )
+})
+
+## |- Species wrong length big - download ----
+output$download.length.wrong.big <- downloadHandler(
+  filename = function() {
+    paste("length.85.percent.of.max", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(dplyr::filter(length.wrong(), reason%in%c("too big")), file, row.names = FALSE)
+  }
+)
+
+## |- Species wrong length big - onclick ----
+onclick('click.length.wrong.big', showModal(modalDialog(
+  title = "Length measurement bigger than 85% of the fishbase maximum", size = "l", easyClose = TRUE, 
+  downloadButton("download.length.wrong.big", "Download as csv"), 
+  renderDataTable(filter(length.wrong(), reason == "too big"), rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## |- Out of range - dataframe ----
+length.out.of.range <- reactive({
+  req(input$range.limit)
+  
+  range.limit <- (input$range.limit*1000)
+  
+  length.out.of.range <- length3dpoints() %>%
+    dplyr::filter(range>range.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright)
+})
+
+output$length.out.of.range <- renderValueBox({
+  length.out.of.range <- length.out.of.range() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.out.of.range)[1] > 0) {
+    total <- sum(length.out.of.range$count)
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Out of range", 
+           icon = icon("greater-than"), color = "red"
+  )
+})
+
+onclick('click.length.out.of.range', showModal(modalDialog(
+  title = "Length measurement out of range", size = "l", easyClose = TRUE, 
+  #downloadButton("download.maxn.synonyms", "Download as csv"), 
+  renderDataTable(length.out.of.range(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
 
 
 ## _______________________________________________________ ----
@@ -1505,8 +1811,8 @@ mass.complete.download <- reactive({
   length3dpoints <-  dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(sample, family, genus, species, length, number, range) %>%
-    tidyr::complete(nesting(sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
     dplyr::mutate(length = as.numeric(length)) %>%
@@ -1582,7 +1888,7 @@ mass.complete.download <- reactive({
     complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
-      tidyr::complete(campaignid, nesting(sample), nesting(family, genus, species)) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       dplyr::mutate(length = as.numeric(length)) %>%
@@ -1794,7 +2100,7 @@ maxn <- maxn.complete()
 
 # summarise length and then compare to maxn
 length.vs.maxn <- length3dpoints.clean() %>%
-  dplyr::group_by(sample, family, genus, species) %>%
+  dplyr::group_by(campaignid, sample, family, genus, species) %>%
   dplyr::summarise(length.maxn = sum(number)) %>%
   dplyr::ungroup() %>%
   dplyr::full_join(maxn.complete()) %>%
@@ -1807,7 +2113,7 @@ length.vs.maxn <- length3dpoints.clean() %>%
   dplyr::mutate(difference = (maxn-length.maxn)) %>%
   dplyr::mutate(difference = abs(difference)) %>%
   dplyr::mutate(percent.difference = abs(percent.difference)) %>%
-  dplyr::select(sample, family, genus, species, maxn, length.maxn, difference, percent.difference) %>%
+  dplyr::select(campaignid, sample, family, genus, species, maxn, length.maxn, difference, percent.difference) %>%
   arrange(-difference)
 })
 

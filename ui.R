@@ -130,7 +130,7 @@ tagList(
       )
       ,
       
-      # Create length ----
+      # Check length - point based data -----
       tabItem(tabName = "createlength",
               fluidRow(div(width=3,id="click.length.abundance",
                            valueBoxOutput("length.abundance")),
@@ -156,7 +156,34 @@ tagList(
               box(width=12, title = "Status", status = "primary", plotOutput("length.zone.plot", height = 250))
               )
       ),
-    
+      
+      # Check length - transect based data -----
+      tabItem(tabName = "createlengtht",
+              fluidRow(div(width=3,id="click.length.abundance.t",
+                           valueBoxOutput("length.abundance.t")),
+                       div(width=3,id="click.threedpoints.abundance.t",
+                           valueBoxOutput("threedpoints.abundance.t")),
+                       div(width=3,id="click.length.synonym.t",
+                           valueBoxOutput("length.synonym.t")),
+                       div(width=3,id="click.length.species.not.observed.t",
+                           valueBoxOutput("length.species.not.observed.t")),
+                       div(width=3,id="click.length.wrong.small.t",
+                           valueBoxOutput("length.wrong.small.t")),
+                       div(width=3,id="click.length.wrong.big.t",
+                           valueBoxOutput("length.wrong.big.t")),
+                       
+                       box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
+                           htmlOutput("length.species.dropdown.t",multiple=TRUE)),
+                       box(width=2,title = "Limit range",status="primary",solidHeader = TRUE,numericInput("range.limit.t", "Metres:", 10, min = 0.5, max = 10)),
+                       div(width=3,id="click.length.out.of.range.t",
+                           valueBoxOutput("length.out.of.range.t")),
+                       box(width=12, title = "Length histogram", status = "primary", plotOutput("length.histogram.t", height = 250)),
+                       box(width=12, title = "Length histogram status", status = "primary", plotOutput("length.histogram.status.t", height = 600)),
+                       box(width=12, title = "Zone", status = "primary", plotOutput("length.status.plot.t", height = 250)),
+                       box(width=12, title = "Status", status = "primary", plotOutput("length.zone.plot.t", height = 250))
+              )
+      ),
+      
       
       
       #Create length vs maxn ----
