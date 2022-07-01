@@ -215,7 +215,7 @@ tagList(
       )),
       
       
-      # Create downloads -----
+      # Create downloads - point based data -----
       tabItem(tabName = "downloads",
               fluidRow(
                 box(width=6,title = "Select 'errors' to filter out of downloaded data",
@@ -241,6 +241,32 @@ tagList(
                 
                        div(id="click.download.mass",
                        infoBoxOutput("info.download.mass",width=6))
+              )
+      ),
+      
+      # Create downloads - transect based data -----
+      tabItem(tabName = "downloadst",
+              fluidRow(
+                box(width=6,title = "Select 'errors' to filter out of downloaded data",
+                    status="primary",solidHeader = TRUE,
+                    
+                    h4("Add project and campaign information"),
+                    textInput("project.name.t", label = "Project name:", value = ""),
+                    
+                    h4("Filters for MaxN, Length and Mass"),
+                    checkboxInput("error.synonyms.t", label = "Keep species names that have been updated", value = TRUE), 
+                    checkboxInput("error.area.t", label = "Remove species not observed in the area before", value = FALSE), 
+                    br(),
+                    h4("Filters for Length and Mass"),
+                    numericInput("error.range.limit.t", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
+                    checkboxInput("error.length.small.t", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
+                    checkboxInput("error.length.big.t", label = "Filter out length measurements larger than fishbase maximum", value = FALSE)),
+                
+                div(id="click.download.length.t",
+                    infoBoxOutput("info.download.length.t",width=6)),
+                
+                div(id="click.download.mass.t",
+                    infoBoxOutput("info.download.mass.t",width=6))
               )
       ),
       
