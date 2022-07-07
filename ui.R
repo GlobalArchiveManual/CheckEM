@@ -9,8 +9,7 @@ tagList(
     # BRUV tabs
     shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
                             sidebarMenu(
-                              menuItem("Check metadata", tabName = "checkmetadata", icon = icon("check")),
-                              menuItem("Check periods", tabName = "checkperiods", icon = icon("check")),
+                              menuItem("Check metadata and periods", tabName = "checkmetadata", icon = icon("check")),
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
                               menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
@@ -45,11 +44,19 @@ tagList(
                   box(width = 6, height = 825, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
                            includeMarkdown("aims.Rmd")),     
                   
-                  box(width = 6, title = "Single point or Transect based", status = "primary", solidHeader = TRUE,
-                      radioButtons("transect", "Choose the type of data:",
+                  box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
+                      radioButtons("transect", "Choose the type of method:",
                                    c("Non-transect e.g. BRUV",
                                      "Transect based e.g. DOV"), 
-                                   selected = "Non-transect e.g. BRUV")),
+                                   selected = "Non-transect e.g. BRUV", 
+                                   inline = TRUE),
+                      
+                      shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
+                                              radioButtons("opcodeperiod", "How did you record the sample name in EventMeasure:",
+                                                           c("OpCode = Sample",
+                                                             "Period = Sample"), 
+                                                           selected = "OpCode = Sample", 
+                                                           inline = TRUE))),
                        
                   box(width = 6, title = "Upload metadata", status = "primary", solidHeader = TRUE,
                     fileInput("upload.metadata", ".csv only:", multiple = TRUE,
@@ -98,6 +105,33 @@ tagList(
                            valueBoxOutput("metadata.samples.without.fish")),
                        div(id="click.points.samples.without.metadata",
                            valueBoxOutput("points.samples.without.metadata")),
+                       
+                       
+                       
+                       
+                       div(id="click.periods.no.end",
+                           valueBoxOutput("periods.no.end")),
+                       div(id="click.samples.without.periods",
+                           valueBoxOutput("samples.without.periods")),
+                       
+                       
+                       div(id="click.points.outside.periods",
+                           valueBoxOutput("points.outside.periods")),
+                       div(id="click.lengths.outside.periods",
+                           valueBoxOutput("lengths.outside.periods")),
+                       
+                       
+                       box(width = 4, title = "Enter your correct period time:", status = "primary", solidHeader = TRUE,
+                           numericInput("period.limit", "Period time in minutes:", 60, min = 1, max = 300)),
+                       
+                       
+                       
+
+                       
+                       div(id="click.periods.wrong",
+                           valueBoxOutput("periods.wrong")),
+                       
+
                        box(width=12, height = 825, leafletOutput("map.metadata", height = 800)))
       ),
       
@@ -112,26 +146,6 @@ tagList(
                        box(width=12, height = 825, leafletOutput("map.metadata.t", height = 800)))
       ),
       
-      # Check periods - point based data -----
-      tabItem(tabName = "checkperiods",
-              fluidRow(div(id="click.periods.no.end",
-                           valueBoxOutput("periods.no.end")),
-                       div(id="click.samples.without.periods",
-                           valueBoxOutput("samples.without.periods")),
-                       div(id="click.points.outside.periods",
-                           valueBoxOutput("points.outside.periods")),
-                       div(id="click.lengths.outside.periods",
-                           valueBoxOutput("lengths.outside.periods")),
-                       div(id="click.periods.average",
-                           valueBoxOutput("periods.average")),
-                       div(id="click.periods.max",
-                           valueBoxOutput("periods.max")),
-                       div(id="click.periods.min",
-                           valueBoxOutput("periods.min"))
-                       )
-      ),
-      
-      
       # Create maxn -----
       tabItem(tabName = "createmaxn",
               fluidRow(div(id="click.maxn.total.number",
@@ -145,7 +159,7 @@ tagList(
                            plotOutput("maxn.top.species")),
                        
                        box(width=2,title = "Species to plot",status="primary",solidHeader = TRUE,numericInput("species.limit", "Number:", 15, min = 5, max = 20)),
-                       box(width=12,title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
+                       box(width=12, title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("maxn.species.dropdown",multiple=TRUE)),
                        box(width=12,leafletOutput("maxn.spatial.plot")),
                        box(width=12,title = "Plot of abundance by Status", status = "primary", plotOutput("maxn.status.plot", height = 250)),

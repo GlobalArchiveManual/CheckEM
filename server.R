@@ -150,15 +150,17 @@ output$metadata.samples.without.fish <- renderValueBox({
   
   if (dim(metadata.samples.without.fish())[1] > 0) {
     total <- nrow(metadata.samples.without.fish())
+    col <- "yellow"
   }
   else{
     total = 0
+    col <- "green"
   }
   
   valueBox(width = 3, 
     total, 
     "Sample(s) without points", 
-    icon = icon("question"), color = "yellow"
+    icon = icon("question"), color = col
   )
 })
 
@@ -188,15 +190,17 @@ output$points.samples.without.metadata <- renderValueBox({
   
   if (dim(points.samples.without.metadata())[1] > 0) {
     total <- nrow(points.samples.without.metadata())
+    col <- "red"
     
   } else {
     total = 0
+    col <- "green"
   }
   
   valueBox(width = 2, 
            total, 
            "Sample(s) in points file missing metadata", 
-           icon = icon("exclamation-circle"), color = "red"
+           icon = icon("exclamation-circle"), color = col
   )
 })
 
@@ -386,7 +390,7 @@ output$table.periods <- renderTable({
 periods.no.end <- reactive({
   
   periods.no.end <- periods() %>%
-    distinct(campaignid, sample, period, framestart, frameend, timestart, timeend, hasend) %>%
+    distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
     mutate(sample = as.factor(sample)) %>%
     filter(hasend == 0)
 })
@@ -396,12 +400,14 @@ output$periods.no.end <- renderValueBox({
   
   if (dim(periods.no.end())[1] > 0) {
     total <- nrow(periods.no.end())
+    col <- "red"
   }
   else{
     total = 0
+    col <- "green"
   }
   
-  valueBox(width = 3, 
+  valueBox(width = 4, 
            total, 
            "Period(s) without an end", 
            icon = icon("question"), color = "red"
@@ -435,15 +441,17 @@ output$samples.without.periods <- renderValueBox({
   
   if (dim(samples.without.periods())[1] > 0) {
     total <- nrow(samples.without.periods())
+    col <- "red"
   }
   else{
     total = 0
+    col <- "green"
   }
   
-  valueBox(width = 3, 
+  valueBox(width = 4, 
            total, 
            "Sample(s) without periods", 
-           icon = icon("question"), color = "red"
+           icon = icon("question"), color = col
   )
 })
 
@@ -456,74 +464,112 @@ onclick('click.samples.without.periods',
                           options = list(paging = FALSE, searching = TRUE)))
         ))
 
-## ► Periods summary - dataframe ----
-periods.summary <- reactive({
+## ► Periods wrong length - dataframe ----
+periods.wrong <- reactive({
   
-  periods.summary <- periods() %>%
-    filter(hasend == 1) %>%
-    distinct(campaignid, sample, period, framestart, frameend, timestart, timeend, hasend) %>%
-    mutate(sample = as.factor(sample)) %>%
-    mutate(period.length = timeend - timestart) %>%
-    group_by(campaignid) %>%
-    summarise(average.period = mean(period.length), min.period = min(period.length), max.period = max(period.length))
-    
+  periods.wrong <- periods() %>%
+    distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
+    mutate(period.time = round(timeend - timestart)) %>%
+    filter(!period.time %in% c(input$period.limit))
 })
 
-## ► Periods average - valueBox ----
-output$periods.average <- renderValueBox({
+## ► Periods wrong length - valueBox ----
+output$periods.wrong <- renderValueBox({
   
-  valueBox(width = 3, 
-           round(mean(periods.summary()$average.period), digits = 2), 
-           "Average period time (mins)", 
-           icon = icon("question"), color = "yellow"
+  if (dim(periods.wrong())[1] > 0) {
+    total <- nrow(periods.wrong())
+    col <- "red"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           paste("Periods not", input$period.limit, "mins long", sep = " "), 
+           icon = icon("question"), color = col
   )
 })
 
-## ► Periods average - onclick----
-onclick('click.periods.average', 
+## ► Periods wrong length - onclick----
+onclick('click.periods.wrong', 
         showModal(modalDialog(
-          title = "Summary of period times by CampaignID", 
+          title = "Samples without periods", 
           easyClose = TRUE,
-          renderDataTable(periods.summary(), rownames = FALSE, 
+          renderDataTable(periods.wrong(), rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))
         ))
 
-
-## ► Periods min - valueBox ----
-output$periods.min <- renderValueBox({
+## ► Points without periods - dataframe ----
+points.outside.periods <- reactive({
   
-  valueBox(width = 3, 
-           round(min(periods.summary()$min.period), digits = 2), 
-           "Minimum period time (mins)", 
-           icon = icon("question"), color = "yellow"
+  points <- points() %>%
+    dplyr::filter(is.na(period))%>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number)
+})
+
+## ► Points without periods - valueBox ----
+output$points.outside.periods <- renderValueBox({
+  
+  if (dim(points.outside.periods())[1] > 0) {
+    total <- nrow(points.outside.periods())
+    col <- "red"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           "Point(s) outside periods", 
+           icon = icon("question"), color = col
   )
 })
 
-## ► Periods min - onclick----
-onclick('click.periods.min', 
+## ► Points without periods - onclick----
+onclick('click.points.outside.periods', 
         showModal(modalDialog(
-          title = "Summary of period times by CampaignID", 
+          title = "Points without periods", 
           easyClose = TRUE,
-          renderDataTable(periods.summary(), rownames = FALSE, 
+          renderDataTable(points.outside.periods(), rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))
         ))
 
-## ► Periods max - valueBox ----
-output$periods.max <- renderValueBox({
+## ► Lengths without periods - dataframe ----
+lengths.outside.periods <- reactive({
   
-  valueBox(width = 3, 
-           round(max(periods.summary()$max.period), digits = 2), 
-           "Maximum period time (mins)", 
-           icon = icon("question"), color = "yellow"
+  lengths <- length3dpoints() %>%
+    dplyr::filter(is.na(period)) %>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, frameleft)
+})
+
+## ► Lengths without periods - valueBox ----
+output$lengths.outside.periods <- renderValueBox({
+  
+  if (dim(lengths.outside.periods())[1] > 0) {
+    total <- nrow(lengths.outside.periods())
+    col <- "yellow"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           "Length(s) or 3D point(s) outside periods", 
+           icon = icon("question"), color = col
   )
 })
 
-## ► Periods max - onclick----
-onclick('click.periods.max', 
+## ► Lengths without periods - onclick----
+onclick('click.lengths.outside.periods', 
         showModal(modalDialog(
-          title = "Summary of period times by CampaignID", 
+          title = "Length(s) or 3D point(s) outside periods", 
           easyClose = TRUE,
-          renderDataTable(periods.summary(), rownames = FALSE, 
+          renderDataTable(lengths.outside.periods(), rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))
         ))
 
@@ -1052,9 +1098,9 @@ threedpoints <- reactive({
       dplyr::filter(!comment%in%c("sync")) %>%
       dplyr::rename(sample = opcode) %>%
       dplyr::mutate(number = as.numeric(number)) %>%
-      dplyr::filter(number>0) %>%
+      # dplyr::filter(number>0) %>%
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      dplyr::filter(!is.na(number)) %>%
+      # dplyr::filter(!is.na(number)) %>%
       dplyr::mutate(species = tolower(species)) %>%
       dplyr::mutate(genus = ga.capitalise(genus)) %>%
       dplyr::mutate(family = ga.capitalise(family))
@@ -1076,9 +1122,9 @@ threedpoints <- reactive({
       mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
       dplyr::select(-c(.id)) %>%
       dplyr::mutate(number = as.numeric(number)) %>%
-      dplyr::filter(number > 0) %>%
-      dplyr::filter(!is.na(number)) %>%
-      dplyr::filter(!comment%in%c("sync")) %>%
+      # dplyr::filter(number > 0) %>%
+      # dplyr::filter(!is.na(number)) %>%
+      # dplyr::filter(!comment %in% c("sync")) %>%
       dplyr::mutate(species = tolower(species)) %>%
       dplyr::mutate(genus = ga.capitalise(genus)) %>%
       dplyr::mutate(family = ga.capitalise(family)) %>%
@@ -1111,7 +1157,7 @@ length3dpoints <- reactive({
     mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::mutate(number = as.numeric(number)) %>%
-    dplyr::filter(!is.na(number)) %>%
+    # dplyr::filter(!is.na(number)) %>%
     tidyr::replace_na(list(species = "spp")) %>%
     dplyr::select(-c(time)) %>%
     dplyr::mutate(sample = as.character(sample)) %>%
