@@ -172,12 +172,21 @@ tagList(
                        div(width=3,id="click.length.wrong.big.t",
                            valueBoxOutput("length.wrong.big.t")),
                        
+                       box(width = 2, title = "Limit range", status = "primary", solidHeader = TRUE, 
+                           numericInput("range.limit.t", "Metres:", 10, min = 0.5, max = 10)),
+                       
+                       div(width = 2,id="click.length.out.of.range.t",
+                           valueBoxOutput("length.out.of.range.t")),
+                       
+                       box(width = 2, title = "Transect bounds", status = "primary", solidHeader = TRUE, 
+                           numericInput("transect.limit.t", "Metres:", 2.5, min = 0.5, max = 5)),
+                       
+                       div(width = 2,id="click.length.out.of.transect.t",
+                           valueBoxOutput("length.out.of.transect.t")),
+                       
                        box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("length.species.dropdown.t",multiple=TRUE)),
-                       box(width=2, title = "Limit range",status="primary",solidHeader = TRUE, 
-                           numericInput("range.limit.t", "Metres:", 10, min = 0.5, max = 10)),
-                       div(width=3,id="click.length.out.of.range.t",
-                           valueBoxOutput("length.out.of.range.t")),
+                       
                        box(width=12, title = "Length histogram", status = "primary", plotOutput("length.histogram.t", height = 250)),
                        box(width=12, title = "Length histogram status", status = "primary", plotOutput("length.histogram.status.t", height = 600)),
                        box(width=12, title = "Zone", status = "primary", plotOutput("length.status.plot.t", height = 250)),
