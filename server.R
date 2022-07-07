@@ -339,6 +339,194 @@ output$map.metadata.t <- renderLeaflet({
     addMarkers(lng = ~longitude, lat = ~latitude, label = ~as.character(sample), popup = ~content)
 })
 
+## _______________________________________________________ ----
+##                          PERIODS                        ----
+## _______________________________________________________ ----
+## ► Read in periods ----
+periods <- reactive({
+  
+  if(is.null(input$upload.period)){
+    
+    periods <- read.delim("data/example_Period.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::rename(sample = opcode) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      as.data.frame()
+    
+  } else {
+    
+    periods <- lapply(input$upload.period$datapath, fread)
+    names(periods) <- input$upload.period$name
+    
+    periods <- rbindlist(periods, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::rename(sample = opcode) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Period.txt", ""))
+    
+  }
+  
+  periods <- periods
+  
+})
+
+# ► Preview periods ----
+output$table.periods <- renderTable({
+  
+  periods()
+  
+})  
+
+## _______________________________________________________ ----
+##        Period checking for single point campaigns       ----
+## _______________________________________________________ ----
+
+## ► Periods without end - dataframe ----
+periods.no.end <- reactive({
+  
+  periods.no.end <- periods() %>%
+    distinct(campaignid, sample, period, framestart, frameend, timestart, timeend, hasend) %>%
+    mutate(sample = as.factor(sample)) %>%
+    filter(hasend == 0)
+})
+
+## ► Periods without end - valueBox ----
+output$periods.no.end <- renderValueBox({
+  
+  if (dim(periods.no.end())[1] > 0) {
+    total <- nrow(periods.no.end())
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Period(s) without an end", 
+           icon = icon("question"), color = "red"
+  )
+})
+
+## ► Periods without end - onclick----
+onclick('click.periods.no.end', 
+        showModal(modalDialog(
+          title = "Period(s) without an end", 
+          easyClose = TRUE,
+          renderDataTable(periods.no.end(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Samples without periods - dataframe ----
+samples.without.periods <- reactive({
+  
+  metadata.samples <- metadata() %>%
+    distinct(campaignid, sample, successful.count, successful.length) %>%
+    mutate(sample = as.factor(sample))
+  
+  periods.samples <- periods() %>%
+    distinct(campaignid, sample)
+  
+  missing.periods <- anti_join(metadata.samples, periods.samples)
+})
+
+## ► Samples without periods - valueBox ----
+output$samples.without.periods <- renderValueBox({
+  
+  if (dim(samples.without.periods())[1] > 0) {
+    total <- nrow(samples.without.periods())
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Sample(s) without periods", 
+           icon = icon("question"), color = "red"
+  )
+})
+
+## ► Samples without periods - onclick----
+onclick('click.samples.without.periods', 
+        showModal(modalDialog(
+          title = "Samples without periods", 
+          easyClose = TRUE,
+          renderDataTable(samples.without.periods(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Periods summary - dataframe ----
+periods.summary <- reactive({
+  
+  periods.summary <- periods() %>%
+    filter(hasend == 1) %>%
+    distinct(campaignid, sample, period, framestart, frameend, timestart, timeend, hasend) %>%
+    mutate(sample = as.factor(sample)) %>%
+    mutate(period.length = timeend - timestart) %>%
+    group_by(campaignid) %>%
+    summarise(average.period = mean(period.length), min.period = min(period.length), max.period = max(period.length))
+    
+})
+
+## ► Periods average - valueBox ----
+output$periods.average <- renderValueBox({
+  
+  valueBox(width = 3, 
+           round(mean(periods.summary()$average.period), digits = 2), 
+           "Average period time (mins)", 
+           icon = icon("question"), color = "yellow"
+  )
+})
+
+## ► Periods average - onclick----
+onclick('click.periods.average', 
+        showModal(modalDialog(
+          title = "Summary of period times by CampaignID", 
+          easyClose = TRUE,
+          renderDataTable(periods.summary(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+
+## ► Periods min - valueBox ----
+output$periods.min <- renderValueBox({
+  
+  valueBox(width = 3, 
+           round(min(periods.summary()$min.period), digits = 2), 
+           "Minimum period time (mins)", 
+           icon = icon("question"), color = "yellow"
+  )
+})
+
+## ► Periods min - onclick----
+onclick('click.periods.min', 
+        showModal(modalDialog(
+          title = "Summary of period times by CampaignID", 
+          easyClose = TRUE,
+          renderDataTable(periods.summary(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Periods max - valueBox ----
+output$periods.max <- renderValueBox({
+  
+  valueBox(width = 3, 
+           round(max(periods.summary()$max.period), digits = 2), 
+           "Maximum period time (mins)", 
+           icon = icon("question"), color = "yellow"
+  )
+})
+
+## ► Periods max - onclick----
+onclick('click.periods.max', 
+        showModal(modalDialog(
+          title = "Summary of period times by CampaignID", 
+          easyClose = TRUE,
+          renderDataTable(periods.summary(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
 
 ## _______________________________________________________ ----
 ##                          MAXN                           ----
@@ -1861,8 +2049,8 @@ length.out.of.range.t <- reactive({
   range.limit <- (input$range.limit.t*1000)
   
   length.out.of.range <- length3dpoints.t() %>%
-    dplyr::filter(range > range.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright)
+    dplyr::filter(range > range.limit) %>% 
+    dplyr::select(campaignid, sample, family, genus, species, range, length,  frameleft, frameright)
 })
 
 output$length.out.of.range.t <- renderValueBox({
@@ -1885,9 +2073,45 @@ output$length.out.of.range.t <- renderValueBox({
 
 onclick('click.length.out.of.range.t', 
         showModal(modalDialog(
-          title = "Length measurement out of range", size = "l", easyClose = TRUE, 
+          title = "Length measurement(s) and 3D point(s) out of range", size = "l", easyClose = TRUE, 
           renderDataTable(length.out.of.range.t(),  rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))))
+
+## ► Out of transect - dataframe ----
+length.out.of.transect.t <- reactive({
+  req(input$transect.limit.t)
+  
+  transect.limit <- (input$transect.limit.t*1000)
+  
+  length.out.of.transect <- length3dpoints.t() %>%
+    dplyr::filter(c(midx > transect.limit | midx < -transect.limit | midy > transect.limit | midy < -transect.limit | x > transect.limit | x < -transect.limit | y > transect.limit | y < -transect.limit)) %>% 
+    dplyr::select(campaignid, sample, family, genus, species, range, length, frameleft, frameright, midx, midy, x, y)
+})
+
+output$length.out.of.transect.t <- renderValueBox({
+  length.out.of.transect <- length.out.of.transect.t() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.out.of.transect)[1] > 0) {
+    total <- sum(length.out.of.transect$count)
+  }
+  else{
+    total = 0
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Out of transect", 
+           icon = icon("greater-than"), color = "red"
+  )
+})
+
+onclick('click.length.out.of.transect.t', 
+        showModal(modalDialog(
+          title = "Length measurement(s) and 3D point(s) out of transect", size = "l", easyClose = TRUE, 
+          renderDataTable(length.out.of.transect.t(),  rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))))
+
 ## ► Histogram ----
 output$length.histogram.t <- renderPlot({
   req(input$length.species.dropdown.t)

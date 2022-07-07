@@ -10,6 +10,7 @@ tagList(
     shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
                             sidebarMenu(
                               menuItem("Check metadata", tabName = "checkmetadata", icon = icon("check")),
+                              menuItem("Check periods", tabName = "checkperiods", icon = icon("check")),
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
                               menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
@@ -60,6 +61,10 @@ tagList(
                                               fileInput("upload.points", ".txt file only", multiple = TRUE,
                                                         accept = c("image/vnd.txt",".txt")))
                                           ),
+                  
+                  box(width = 6, title = "Upload period file", status = "primary",solidHeader = TRUE,
+                                              fileInput("upload.period", ".txt file only", multiple = TRUE,
+                                                        accept = c("image/vnd.txt",".txt"))),
                        
                   box(width = 6, title = "Upload length file", status = "primary",solidHeader = TRUE,
                       fileInput("upload.length", ".txt file only", multiple = TRUE,
@@ -79,7 +84,8 @@ tagList(
                              ),
                     tabPanel("Points", tableOutput("table.points")),
                     tabPanel("Lengths", tableOutput("table.length")),
-                    tabPanel("3D Points", tableOutput("table.3dpoints"))
+                    tabPanel("3D Points", tableOutput("table.3dpoints")),
+                    tabPanel("Periods", tableOutput("table.periods"))
                   
                   )
       ),
@@ -105,6 +111,26 @@ tagList(
                            valueBoxOutput("length.samples.without.metadata.t")),
                        box(width=12, height = 825, leafletOutput("map.metadata.t", height = 800)))
       ),
+      
+      # Check periods - point based data -----
+      tabItem(tabName = "checkperiods",
+              fluidRow(div(id="click.periods.no.end",
+                           valueBoxOutput("periods.no.end")),
+                       div(id="click.samples.without.periods",
+                           valueBoxOutput("samples.without.periods")),
+                       div(id="click.points.outside.periods",
+                           valueBoxOutput("points.outside.periods")),
+                       div(id="click.lengths.outside.periods",
+                           valueBoxOutput("lengths.outside.periods")),
+                       div(id="click.periods.average",
+                           valueBoxOutput("periods.average")),
+                       div(id="click.periods.max",
+                           valueBoxOutput("periods.max")),
+                       div(id="click.periods.min",
+                           valueBoxOutput("periods.min"))
+                       )
+      ),
+      
       
       # Create maxn -----
       tabItem(tabName = "createmaxn",
