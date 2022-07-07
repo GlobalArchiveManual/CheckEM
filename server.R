@@ -1489,7 +1489,7 @@ length3dpoints.clean.t <- reactive({
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::filter(range < (input$range.limit.t * 1000)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, precision, rms) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, precision, rms, x, y, z, midx, midy, midz) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>%
     dplyr::ungroup() %>%
