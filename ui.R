@@ -174,7 +174,8 @@ tagList(
                        
                        box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("length.species.dropdown.t",multiple=TRUE)),
-                       box(width=2,title = "Limit range",status="primary",solidHeader = TRUE,numericInput("range.limit.t", "Metres:", 10, min = 0.5, max = 10)),
+                       box(width=2, title = "Limit range",status="primary",solidHeader = TRUE, 
+                           numericInput("range.limit.t", "Metres:", 10, min = 0.5, max = 10)),
                        div(width=3,id="click.length.out.of.range.t",
                            valueBoxOutput("length.out.of.range.t")),
                        box(width=12, title = "Length histogram", status = "primary", plotOutput("length.histogram.t", height = 250)),

@@ -1768,10 +1768,10 @@ output$length.species.not.observed.t <- renderValueBox({
 })
 
 ## ► Species wrong length - dataframe ----
-length.wrong <- reactive({
-  length.wrong <- left_join(length3dpoints.clean(), master.min.max, by = c("family", "genus", "species")) %>%
-    dplyr::filter(length<min.length|length>max.length) %>%
-    mutate(reason = ifelse(length<min.length, "too small", "too big")) %>%
+length.wrong.t <- reactive({
+  length.wrong <- left_join(length3dpoints.clean.t(), master.min.max, by = c("family", "genus", "species")) %>%
+    dplyr::filter(length < min.length | length > max.length) %>%
+    mutate(reason = ifelse(length < min.length, "too small", "too big")) %>%
     dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason) %>%
     mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
     dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))
@@ -1779,8 +1779,8 @@ length.wrong <- reactive({
 })
 
 ## ► Species wrong length small - valuebox ----
-output$length.wrong.small <- renderValueBox({
-  length.wrong.small <- length.wrong() %>%
+output$length.wrong.small.t <- renderValueBox({
+  length.wrong.small <- length.wrong.t() %>%
     dplyr::filter(reason%in%c("too small")) %>%
     dplyr::mutate(count = 1)
   
@@ -1799,25 +1799,25 @@ output$length.wrong.small <- renderValueBox({
 })
 
 ## ► Species wrong length small - download ----
-output$download.length.wrong.small <- downloadHandler(
+output$download.length.wrong.small.t <- downloadHandler(
   filename = function() {
     paste("length.15.percent.of.max", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
-    write.csv(dplyr::filter(length.wrong(), reason%in%c("too small")), file, row.names = FALSE)
+    write.csv(dplyr::filter(length.wrong.t(), reason%in%c("too small")), file, row.names = FALSE)
   }
 )
 
 ## ► Species wrong length small - onclick ----
-onclick('click.length.wrong.small', showModal(modalDialog(
+onclick('click.length.wrong.small.t', showModal(modalDialog(
   title = "Length measurement smaller than 15% of the fishbase maximum", size = "l", easyClose = TRUE, 
-  downloadButton("download.length.wrong.small", "Download as csv"), 
-  renderDataTable(filter(length.wrong(), reason == "too small"), rownames = FALSE, 
+  downloadButton("download.length.wrong.small.t", "Download as csv"), 
+  renderDataTable(filter(length.wrong.t(), reason == "too small"), rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
 
 ## ► Species wrong length big - valuebox ----
-output$length.wrong.big <- renderValueBox({
-  length.wrong.big <- length.wrong() %>%
+output$length.wrong.big.t <- renderValueBox({
+  length.wrong.big <- length.wrong.t() %>%
     dplyr::filter(reason%in%c("too big")) %>%
     dplyr::mutate(count = 1)
   
@@ -1836,35 +1836,37 @@ output$length.wrong.big <- renderValueBox({
 })
 
 ## ► Species wrong length big - download ----
-output$download.length.wrong.big <- downloadHandler(
+output$download.length.wrong.big.t <- downloadHandler(
   filename = function() {
     paste("length.85.percent.of.max", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
-    write.csv(dplyr::filter(length.wrong(), reason%in%c("too big")), file, row.names = FALSE)
+    write.csv(dplyr::filter(length.wrong.t(), reason %in% c("too big")), file, row.names = FALSE)
   }
 )
 
 ## ► Species wrong length big - onclick ----
-onclick('click.length.wrong.big', showModal(modalDialog(
-  title = "Length measurement bigger than 85% of the fishbase maximum", size = "l", easyClose = TRUE, 
-  downloadButton("download.length.wrong.big", "Download as csv"), 
-  renderDataTable(filter(length.wrong(), reason == "too big"), rownames = FALSE, 
-                  options = list(paging = FALSE, searching = TRUE)))))
+onclick('click.length.wrong.big.t', 
+        showModal(modalDialog(
+          title = "Length measurement bigger than 85% of the fishbase maximum", size = "l", 
+          easyClose = TRUE, 
+          downloadButton("download.length.wrong.big.t", "Download as csv"), 
+          renderDataTable(filter(length.wrong.t(), reason == "too big"), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))))
 
 ## ► Out of range - dataframe ----
-length.out.of.range <- reactive({
-  req(input$range.limit)
+length.out.of.range.t <- reactive({
+  req(input$range.limit.t)
   
-  range.limit <- (input$range.limit*1000)
+  range.limit <- (input$range.limit.t*1000)
   
-  length.out.of.range <- length3dpoints() %>%
-    dplyr::filter(range>range.limit) %>%
+  length.out.of.range <- length3dpoints.t() %>%
+    dplyr::filter(range > range.limit) %>%
     dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright)
 })
 
-output$length.out.of.range <- renderValueBox({
-  length.out.of.range <- length.out.of.range() %>%
+output$length.out.of.range.t <- renderValueBox({
+  length.out.of.range <- length.out.of.range.t() %>%
     dplyr::mutate(count = 1)
   
   if (dim(length.out.of.range)[1] > 0) {
@@ -1881,11 +1883,11 @@ output$length.out.of.range <- renderValueBox({
   )
 })
 
-onclick('click.length.out.of.range', showModal(modalDialog(
-  title = "Length measurement out of range", size = "l", easyClose = TRUE, 
-  #downloadButton("download.maxn.synonyms", "Download as csv"), 
-  renderDataTable(length.out.of.range(),  rownames = FALSE, 
-                  options = list(paging = FALSE, searching = TRUE)))))
+onclick('click.length.out.of.range.t', 
+        showModal(modalDialog(
+          title = "Length measurement out of range", size = "l", easyClose = TRUE, 
+          renderDataTable(length.out.of.range.t(),  rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))))
 
 
 ## _______________________________________________________ ----
