@@ -1888,6 +1888,128 @@ onclick('click.length.out.of.range.t',
           title = "Length measurement out of range", size = "l", easyClose = TRUE, 
           renderDataTable(length.out.of.range.t(),  rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))))
+## ► Histogram ----
+output$length.histogram.t <- renderPlot({
+  req(input$length.species.dropdown.t)
+  
+  length3dpoints <- length3dpoints.clean.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    filter(scientific %in% c(input$length.species.dropdown.t)) %>%
+    replace_na(list(status = "Fished"))
+  
+  sizes <- master.min.max %>%
+    mutate(scientific = paste(genus, species, sep  = " ")) %>%
+    filter(scientific %in% c(input$length.species.dropdown.t)) %>%
+    distinct(scientific, fb.length_max, min.length, max.length)
+  
+  fishbase.max <- sum(sizes$fb.length_max)
+  min.15 <- sum(sizes$min.length)
+  max.85 <- sum(sizes$max.length)
+  
+  scientific.name <- input$length.species.dropdown.t
+  
+  grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
+                                gp = gpar(col = "black", fontsize = 13, fontface = "italic")))
+  
+  ggplot(length3dpoints, aes(x = length), col = "black", alpha = 0.5)+
+    geom_histogram(alpha = 0.5, position = "identity", binwidth = input$length.binwidth, col = "black")+
+    xlab("Length (mm)") + ylab("Count") +
+    scale_y_continuous(expand = expand_scale(mult = c(0, .1)))+
+    geom_vline(xintercept = fishbase.max, colour = "red", size = 1) +
+    geom_vline(xintercept = min.15, colour = "grey", size = 1) +
+    geom_vline(xintercept = max.85, colour = "grey", size = 1) +
+    geom_text(aes(x = fishbase.max, label = "\n  Fishbase maximum", y = 0), colour = "black", angle = 90, text = element_text(size = 14), hjust = 0, vjust = 0)+
+    geom_text(aes(x = min.15, label = "\n  15% of fishbase maximum", y = 0), colour = "black", angle = 90, text = element_text(size = 14), hjust = 0, vjust = 0)+
+    geom_text(aes(x = max.85, label = "\n  85% of fishbase maximum", y = 0), colour = "black", angle = 90, text = element_text(size = 14), hjust = 0, vjust = 0)+
+    # scale_fill_manual(values = c("Fished" = "grey", "No-take" = "#3c8dbc"))+
+    annotation_custom(grob.sci)+ 
+    Theme1
+})
+
+## ► Histogram status ----
+output$length.histogram.status.t <- renderPlot({
+  req(input$length.species.dropdown.t)
+  
+  length3dpoints <- length3dpoints.clean.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    filter(scientific %in% c(input$length.species.dropdown.t)) %>%
+    replace_na(list(status = "Fished"))
+  
+  sizes <- master.min.max %>%
+    mutate(scientific = paste(genus, species, sep  = " ")) %>%
+    filter(scientific %in% c(input$length.species.dropdown.t)) %>%
+    distinct(scientific, fb.length_max, min.length, max.length)
+  
+  fishbase.max <- sum(sizes$fb.length_max)
+  min.15 <- sum(sizes$min.length)
+  max.85 <- sum(sizes$max.length)
+  
+  scientific.name <- input$length.species.dropdown.t
+  
+  grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
+                                gp = gpar(col = "black", fontsize = 13, fontface = "italic")))
+  
+  ggplot(length3dpoints, aes(x = length), col = "black", alpha = 0.5)+
+    geom_histogram(alpha = 0.5, position = "identity", binwidth = input$length.binwidth, col = "black")+
+    xlab("Length (mm)") + ylab("Count") +
+    scale_y_continuous(expand = expand_scale(mult = c(0, .1)))+
+    geom_vline(xintercept = fishbase.max, colour = "red", size = 1) +
+    geom_vline(xintercept = min.15, colour = "grey", size = 1) +
+    geom_vline(xintercept = max.85, colour = "grey", size = 1) +
+    geom_text(aes(x = fishbase.max, label = "\n  Fishbase maximum", y = 0), colour = "black", angle = 90, text = element_text(size = 14), hjust = 0, vjust = 0)+
+    geom_text(aes(x = min.15, label = "\n  15% of fishbase maximum", y = 0), colour = "black", angle = 90, text = element_text(size = 14), hjust = 0, vjust = 0)+
+    geom_text(aes(x = max.85, label = "\n  85% of fishbase maximum", y = 0), colour = "black", angle = 90, text = element_text(size = 14), hjust = 0, vjust = 0)+
+    annotation_custom(grob.sci)+ 
+    Theme1+ 
+    facet_wrap(vars(status), ncol = 1)
+  
+})
+
+## ► Species plot - zone ----
+output$length.status.plot.t <- renderPlot({
+  req(input$length.species.dropdown.t)
+  length3dpoints <- length3dpoints.clean.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    filter(scientific %in% c(input$length.species.dropdown.t))
+  
+  scientific.name <- input$length.species.dropdown.t
+  
+  grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
+                                gp = gpar(col = "black", fontsize = 13, fontface = "italic")))
+  
+  ggplot(length3dpoints, aes(x = factor(zone), y = length,  fill = zone, notch = FALSE, outlier.shape = NA), alpha = 0.5) + 
+    stat_boxplot(geom = 'errorbar')+
+    geom_boxplot(outlier.color = NA, notch = FALSE)+
+    stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)+ #this is adding the dot for the mean
+    scale_y_continuous(expand = expand_scale(mult = c(0, .1)))+
+    xlab("Zone") + ylab("Length (mm)") +
+    annotation_custom(grob.sci)+ 
+    Theme1
+})
+
+## ► Species plot - status ----
+output$length.zone.plot.t <- renderPlot({
+  req(input$length.species.dropdown.t)
+  
+  length3dpoints <- length3dpoints.clean.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    filter(scientific %in% c(input$length.species.dropdown.t)) %>%
+    replace_na(list(status = "Fished"))
+  
+  scientific.name <- input$length.species.dropdown.t
+  
+  grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
+                                gp = gpar(col = "black", fontsize = 13, fontface = "italic")))
+  
+  ggplot(length3dpoints, aes(x = factor(status), y = length,  fill = status, notch = FALSE, outlier.shape = NA), alpha = 0.5) + 
+    stat_boxplot(geom = 'errorbar')+
+    geom_boxplot(outlier.color = NA, notch = FALSE)+
+    stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)+ #this is adding the dot for the mean
+    scale_y_continuous(expand = expand_scale(mult = c(0, .1)))+
+    xlab("Status") + ylab("Length (mm)") +
+    annotation_custom(grob.sci)+ 
+    Theme1
+})
 
 
 ## _______________________________________________________ ----
