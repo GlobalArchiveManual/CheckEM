@@ -10,7 +10,7 @@ tagList(
     shiny::conditionalPanel("input.method == 'point'",
     # shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
                             sidebarMenu(
-                              menuItem("Check metadata and periods", tabName = "checkmetadata", icon = icon("check")),
+                              menuItem("Check metadata & periods", tabName = "checkmetadata", icon = icon("check")),
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
                               menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
@@ -22,7 +22,7 @@ tagList(
     shiny::conditionalPanel("input.method == 'transect'",
     # shiny::conditionalPanel(condition = "input.transect == 'Transect based e.g. DOV'", 
                             sidebarMenu(
-                              menuItem("Check metadata", tabName = "checkmetadatat", icon = icon("check")),
+                              menuItem("Check metadata & periods", tabName = "checkmetadatat", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlengtht", icon = icon("check")),
                               menuItem("Create & check mass", tabName = "createmasst", icon = icon("check")),
                               menuItem("Download data", tabName = "downloadst", icon = icon("download")))
@@ -132,8 +132,8 @@ tagList(
                            valueBoxOutput("lengths.outside.periods")),
                        
                        
-                       box(width = 4, title = "Enter your correct period time:", status = "primary", solidHeader = TRUE,
-                           numericInput("period.limit", "Period time in minutes:", 60, min = 1, max = 300)),
+                       box(width = 4, title = "Enter your correct period time (mins):", status = "primary", solidHeader = TRUE,
+                           numericInput("period.limit", NULL, 60, min = 1, max = 300)),
                        
                        
                        div(id="click.periods.wrong",
@@ -151,6 +151,9 @@ tagList(
                            valueBoxOutput("metadata.samples.without.fish.t")),
                        div(id="click.length.samples.without.metadata.t",
                            valueBoxOutput("length.samples.without.metadata.t")),
+                       
+                       div(id="click.samples.without.periods.t",
+                           valueBoxOutput("samples.without.periods.t")),
                        
                        div(id="click.periods.no.end.t",
                            valueBoxOutput("periods.no.end.t")),
@@ -221,7 +224,8 @@ tagList(
                        
                        box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("length.species.dropdown", multiple=TRUE)),
-                       box(width = 2, title = "Limit range", status="primary", solidHeader = TRUE, numericInput("range.limit", "Metres:", 10, min = 0.5, max = 10)),
+                       box(width = 2, title = "Range limit (m)?", status="primary", solidHeader = TRUE, 
+                           numericInput("range.limit", NULL, 10, min = 0.5, max = 10)),
                        div(width = 3, id = "click.length.out.of.range",
                            valueBoxOutput("length.out.of.range")),
               box(width = 12, title = "Length histogram", status = "primary", plotOutput("length.histogram", height = 250)),

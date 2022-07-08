@@ -755,6 +755,47 @@ onclick('click.periods.avg.t',
           renderDataTable(periods.avg.t(), rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))
         ))
+## ► Samples without periods - dataframe ----
+samples.without.periods.t <- reactive({
+  
+  metadata.samples <- metadata() %>%
+    distinct(campaignid, sample, successful.count, successful.length) %>%
+    mutate(sample = as.factor(sample))
+  
+  periods.samples <- periods() %>%
+    mutate(sample = paste(sample,period, sep = "_")) %>%
+    distinct(campaignid, sample)
+  
+  missing.periods <- anti_join(metadata.samples, periods.samples)
+})
+
+## ► Samples without periods - valueBox ----
+output$samples.without.periods.t <- renderValueBox({
+  
+  if (dim(samples.without.periods.t())[1] > 0) {
+    total <- nrow(samples.without.periods.t())
+    col <- "red"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           "Sample(s) without periods", 
+           icon = icon("question"), color = col
+  )
+})
+
+## ► Samples without periods - onclick----
+onclick('click.samples.without.periods.t', 
+        showModal(modalDialog(
+          title = "Samples without periods", 
+          easyClose = TRUE,
+          renderDataTable(samples.without.periods.t(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
 
 ## _______________________________________________________ ----
 ##                          MAXN                           ----
