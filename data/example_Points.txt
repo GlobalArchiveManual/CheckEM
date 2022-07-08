@@ -1,5 +1,5 @@
 OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family	Genus	Species	Code	Number	Stage	Activity	Comment	Attribute9	Attribute10
-1.01	0	1.01_L373.avi	13293	8.862	1	0.018	1257.16684	985.29851	Labridae	Coris	caudimacula	37384092	1	AD	Passing			
+1.01	0	1.01_L373.avi	13293	8.862	1	0.018	1257.16684	985.29851	Labridae	Coris	caudimacula	37384092		AD	Passing			
 1.01	1	1.01_L373.avi	16267	10.84467	1	2.00067	861.17647	784.70588	Pinguipedidae	Parapercis	nebulosa	37390005	1	AD	Passing			
 1.01	2	1.01_L373.avi	16267	10.84467	1	2.00067	843.52941	744.70588	Nemipteridae	Pentapodus	nagasakiensis	37347012	1	AD	Passing			
 1.01	3	1.01_L373.avi	16267	10.84467	1	2.00067	691.76471	700	Nemipteridae	Pentapodus	nagasakiensis	37347012	1	AD	Passing			
@@ -3067,7 +3067,7 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 5.03	644	5.03_L372.avi	90379	60.25267	1	53.55667	425.31646	521.16985	Carangidae	Carangoides	chrysophrys	37337011	1	AD	Passing			
 5.03	645	5.03_L372.avi	94645	63.09667	1	56.40067	488.50633	669.38133	Carangidae	Carangoides	chrysophrys	37337011	1	AD	Passing			
 5.03	646	5.03_L372.avi	97257	64.838	1	58.142	1267.58448	500.95662	Carangidae	Carangoides	chrysophrys	37337011	1	AD	Passing			
-5.03	647	5.03_L372.avi	106548	71.032		-1	1289.21151	341.17909	Carangidae	Carangoides	gymnostethus	37337022	1	AD	Passing			
+5.03	647	5.03_L372.avi	106548	71.032		-1	1289.21151	341.17909	Carangidae	Carangoides	gymnostethus	37337022		AD	Passing			
 5.07	0	5.07_L375.avi	17039	11.35933	1	1.62133	98.43038	172.50844	Carangidae	Decapterus	spp		1	AD	Passing			
 5.07	1	5.07_L375.avi	18991	12.66067	1	2.92267	64.40506	89.89876	Tetraodontidae	Lagocephalus	sceleratus	37467007	1	AD	Passing			
 5.07	2	5.07_L375.avi	18991	12.66067	1	2.92267	1370.73418	32.8009	Tetraodontidae	Lagocephalus	sceleratus	37467007	1	AD	Passing			

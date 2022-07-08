@@ -128,7 +128,7 @@ output$metadata.no.samples <- renderValueBox({
     dplyr::distinct(campaignid, sample)
   
     valueBox(width = 3, nrow(metadata.samples), "Metadata samples", 
-             icon = icon("list"), color = "green"
+             icon = icon("list"), color = "blue"
     )
   })
 
@@ -242,7 +242,7 @@ output$metadata.no.samples.t <- renderValueBox({
     dplyr::distinct(campaignid, sample)
   
   valueBox(width = 3, nrow(metadata.samples), "Metadata samples", 
-           icon = icon("list"), color = "green"
+           icon = icon("list"), color = "blue"
   )
 })
 
@@ -265,15 +265,17 @@ output$metadata.samples.without.fish.t <- renderValueBox({
   
   if (dim(metadata.samples.without.fish.t())[1] > 0) {
     total <- nrow(metadata.samples.without.fish.t())
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Sample(s) without lengths", 
-           icon = icon("question"), color = "yellow"
+           icon = icon("question"), color = col
   )
 })
 
@@ -304,15 +306,16 @@ output$length.samples.without.metadata.t <- renderValueBox({
   
   if (dim(length.samples.without.metadata.t())[1] > 0) {
     total <- nrow(length.samples.without.metadata.t())
-    
+    col = "red"
   } else {
     total = 0
+    col = "green"
   }
   
   valueBox(width = 2, 
            total, 
            "Sample(s) in length file missing metadata", 
-           icon = icon("exclamation-circle"), color = "red"
+           icon = icon("exclamation-circle"), color = col
   )
 })
 
@@ -410,7 +413,7 @@ output$periods.no.end <- renderValueBox({
   valueBox(width = 4, 
            total, 
            "Period(s) without an end", 
-           icon = icon("question"), color = "red"
+           icon = icon("question"), color = col
   )
 })
 
@@ -573,6 +576,185 @@ onclick('click.lengths.outside.periods',
                           options = list(paging = FALSE, searching = TRUE)))
         ))
 
+## _______________________________________________________ ----
+##      Period checking for transect based campaigns       ----
+## _______________________________________________________ ----
+
+## ► Periods without end - dataframe ----
+periods.no.end.t <- reactive({
+  
+  periods.no.end <- periods() %>%
+    distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
+    mutate(sample = as.factor(sample)) %>%
+    filter(hasend == 0)
+})
+
+## ► Periods without end - valueBox ----
+output$periods.no.end.t <- renderValueBox({
+  
+  if (dim(periods.no.end.t())[1] > 0) {
+    total <- nrow(periods.no.end.t())
+    col <- "red"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           "Period(s) without an end", 
+           icon = icon("question"), color = col
+  )
+})
+
+## ► Periods without end - onclick----
+onclick('click.periods.no.end.t', 
+        showModal(modalDialog(
+          title = "Period(s) without an end", 
+          easyClose = TRUE,
+          renderDataTable(periods.no.end.t(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Periods wrong length - dataframe ----
+periods.wrong <- reactive({
+  
+  periods.wrong <- periods() %>%
+    distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
+    mutate(period.time = round(timeend - timestart)) %>%
+    filter(!period.time %in% c(input$period.limit))
+})
+
+## ► Periods wrong length - valueBox ----
+output$periods.wrong <- renderValueBox({
+  
+  if (dim(periods.wrong())[1] > 0) {
+    total <- nrow(periods.wrong())
+    col <- "red"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           paste("Periods not", input$period.limit, "mins long", sep = " "), 
+           icon = icon("question"), color = col
+  )
+})
+
+## ► Periods wrong length - onclick----
+onclick('click.periods.wrong', 
+        showModal(modalDialog(
+          title = "Samples without periods", 
+          easyClose = TRUE,
+          renderDataTable(periods.wrong(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Points without periods - dataframe ----
+points.outside.periods.t <- reactive({
+  
+  points <- points() %>%
+    dplyr::filter(is.na(period))%>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number)
+})
+
+## ► Points without periods - valueBox ----
+output$points.outside.periods.t <- renderValueBox({
+  
+  if (dim(points.outside.periods.t())[1] > 0) {
+    total <- nrow(points.outside.periods.t())
+    col <- "red"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           "Point(s) outside periods", 
+           icon = icon("question"), color = col
+  )
+})
+
+## ► Points without periods - onclick----
+onclick('click.points.outside.periods.t', 
+        showModal(modalDialog(
+          title = "Points without periods", 
+          easyClose = TRUE,
+          renderDataTable(points.outside.periods.t(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Lengths without periods - dataframe ----
+lengths.outside.periods.t <- reactive({
+  
+  lengths <- length3dpoints.t() %>%
+    dplyr::filter(is.na(period)) %>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, frameleft)
+})
+
+## ► Lengths without periods - valueBox ----
+output$lengths.outside.periods.t <- renderValueBox({
+  
+  if (dim(lengths.outside.periods.t())[1] > 0) {
+    total <- nrow(lengths.outside.periods.t())
+    col <- "yellow"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 4, 
+           total, 
+           "Length(s) or 3D point(s) outside periods", 
+           icon = icon("question"), color = col
+  )
+})
+
+## ► Lengths without periods - onclick----
+onclick('click.lengths.outside.periods.t', 
+        showModal(modalDialog(
+          title = "Length(s) or 3D point(s) outside periods", 
+          easyClose = TRUE,
+          renderDataTable(lengths.outside.periods.t(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Average period time - dataframe ----
+periods.avg.t <- reactive({
+  
+  periods <- periods() %>%
+    distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
+    mutate(period.time = round(timeend - timestart, digits = 2)) %>%
+    replace_na(list(period.time = 0)) 
+})
+
+## ► Lengths without periods - valueBox ----
+output$periods.avg.t <- renderValueBox({
+  
+  average <- mean(periods.avg.t()$period.time)
+  
+  valueBox(width = 4, 
+           round(average, digits = 2), 
+           "Average period time (mins)", 
+           icon = icon("question"), color = "blue"
+  )
+})
+
+## ► Lengths without periods - onclick----
+onclick('click.periods.avg.t', 
+        showModal(modalDialog(
+          title = "Period times", 
+          easyClose = TRUE,
+          renderDataTable(periods.avg.t(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
 
 ## _______________________________________________________ ----
 ##                          MAXN                           ----
@@ -766,15 +948,17 @@ output$maxn.synonym <- renderValueBox({
   
   if (dim(maxn.synonym)[1] > 0) {
     total <- sum(maxn.synonym$count)
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 2, 
            total, 
            "Species names updated", 
-           icon = icon("exclamation-circle"), color = "yellow"
+           icon = icon("exclamation-circle"), color = col
   )
 })
 
@@ -809,7 +993,7 @@ output$maxn.total.number <- renderValueBox({
   valueBox(width = 2, 
            total, 
            "Fish observed", 
-           icon = icon("fish"), color = "green"
+           icon = icon("fish"), color = "blue"
   )
 })
 
@@ -821,6 +1005,48 @@ onclick('click.maxn.total.number',
           easyClose = TRUE, 
           renderDataTable(maxn.total.abundances(),  
                           options = list(paging = FALSE, row.names = FALSE, searching = FALSE)))))
+
+## ►  Points without a number - dataframe ----
+points.no.number <- reactive({
+  points.no.number <- points() %>%
+    filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frame) %>%
+    glimpse()
+})
+
+## ►  Points without a number - value box ----
+output$points.no.number <- renderValueBox({
+  
+  points.no.number <- points.no.number() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(points.no.number)[1] > 0) {
+    total <- sum(points.no.number$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "Point(s) without a number", 
+           icon = icon("fish"), color = col
+  )
+})
+
+## ►  Points without a number - onclick ----
+onclick('click.points.no.number', 
+        showModal(modalDialog(
+          title = "Points without a number", 
+          size = "l", 
+          easyClose = TRUE, 
+          renderDataTable(points.no.number(),  
+                          options = list(paging = FALSE, row.names = FALSE, searching = FALSE)))))
+
+
+
 
 ## ► Species not observed - dataframe ----
 maxn.species.not.observed <- reactive({
@@ -861,15 +1087,17 @@ output$maxn.species.not.observed <- renderValueBox({
   
   if (dim(maxn.species.not.observed)[1] > 0) {
      total <- base::length(unique(maxn.species.not.observed$scientific))
+     col = "red"
     }
   else{
     total = 0
+    col = "green"
     }
     
   valueBox(width = 2, 
            total, 
            "Species not observed in area before", 
-           icon = icon("map-marked"), color = "red"
+           icon = icon("map-marked"), color = col
   )
 })
 
@@ -1021,7 +1249,7 @@ maxn.sum <- maxn.complete() %>%
   ungroup() %>%
   top_n(input$species.limit)
 
-## ►  Total frequency of occurance ----
+## ►  Total frequency of occurrence ----
 ggplot(maxn.sum, aes(x = reorder(scientific, maxn), y = maxn)) +   
   geom_bar(stat = "identity", position = position_dodge())+
   coord_flip()+
@@ -1049,8 +1277,8 @@ length <- reactive({
       mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
       dplyr::rename(sample = opcode) %>%
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      dplyr::filter(number>0) %>%
-      dplyr::filter(!is.na(number)) %>%
+      # dplyr::filter(number > 0) %>%
+      # dplyr::filter(!is.na(number)) %>%
       dplyr::mutate(species = tolower(species)) %>%
       dplyr::mutate(genus = ga.capitalise(genus)) %>%
       dplyr::mutate(family = ga.capitalise(family))
@@ -1069,8 +1297,8 @@ length <- reactive({
       mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
       mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
       dplyr::select(-c(.id)) %>%
-      dplyr::filter(number>0) %>%
-      dplyr::filter(!is.na(number)) %>%
+      # dplyr::filter(number > 0) %>%
+      # dplyr::filter(!is.na(number)) %>%
       dplyr::mutate(species = tolower(species)) %>%
       dplyr::mutate(genus = ga.capitalise(genus)) %>%
       dplyr::mutate(family = ga.capitalise(family))
@@ -1095,10 +1323,10 @@ threedpoints <- reactive({
       mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
       mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
       mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-      dplyr::filter(!comment%in%c("sync")) %>%
+      # dplyr::filter(!comment%in%c("sync")) %>%
       dplyr::rename(sample = opcode) %>%
       dplyr::mutate(number = as.numeric(number)) %>%
-      # dplyr::filter(number>0) %>%
+      # dplyr::filter(number > 0) %>%
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       # dplyr::filter(!is.na(number)) %>%
       dplyr::mutate(species = tolower(species)) %>%
@@ -1308,7 +1536,7 @@ output$length.abundance <- renderValueBox({
   valueBox(width = 3, 
            total, 
            "Length measurements", 
-           icon = icon("ruler"), color = "green"
+           icon = icon("ruler"), color = "blue"
   )
 })
 
@@ -1318,7 +1546,7 @@ onclick('click.length.abundance', showModal(modalDialog(
   renderDataTable(length.abundance(),  rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
 
-## ► 3D points - number of 3d points - dataframe ----
+## ► Number of 3d points - dataframe ----
 threedpoints.abundance <- reactive({
   threedpoints.abundance <- length3dpoints.clean() %>%
     dplyr::filter(length%in%c(NA)) %>%
@@ -1328,7 +1556,7 @@ threedpoints.abundance <- reactive({
     tidyr::replace_na(list(total.abundance = 0))
 })
 
-## ► 3D points - number of 3d points - value box ----
+## ► Number of 3d points - value box ----
 output$threedpoints.abundance <- renderValueBox({
   threedpoints.abundance <- threedpoints.abundance()
   
@@ -1342,15 +1570,92 @@ output$threedpoints.abundance <- renderValueBox({
   valueBox(width = 3, 
            total, 
            "3D points", 
-           icon = icon("dot-circle"), color = "green"
+           icon = icon("dot-circle"), color = "blue"
   )
 })
 
-## ► 3D points - number of lengths - onclick ----
+## ► Number of 3d points - onclick ----
 onclick('click.threedpoints.abundance', showModal(modalDialog(
-  title = "Number of fish with 3D points per sample", size = "l", easyClose = TRUE, 
+  title = "Number of 3D points per sample", size = "l", easyClose = TRUE, 
   renderDataTable(threedpoints.abundance(),  rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
+
+## ►  Lengths without a number - dataframe ----
+lengths.no.number <- reactive({
+  lengths.no.number <- length() %>%
+    filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft)
+})
+
+## ►  Lengths without a number - value box ----
+output$lengths.no.number <- renderValueBox({
+  
+  lengths.no.number <- lengths.no.number() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(lengths.no.number)[1] > 0) {
+    total <- sum(lengths.no.number$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "Length(s) without a number", 
+           icon = icon("fish"), color = col
+  )
+})
+
+## ►  Lengths without a number - onclick ----
+onclick('click.lengths.no.number', 
+        showModal(modalDialog(
+          title = "Length(s) without a number", 
+          size = "l", 
+          easyClose = TRUE, 
+          renderDataTable(lengths.no.number(),  
+                          options = list(paging = FALSE, row.names = FALSE, searching = FALSE)))))
+
+## ►  3d points without a number - dataframe ----
+threedpoints.no.number <- reactive({
+  threedpoints.no.number <- threedpoints() %>%
+    filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frameleft)
+})
+
+## ►  3d points without a number - value box ----
+output$threedpoints.no.number <- renderValueBox({
+  
+  threedpoints.no.number <- threedpoints.no.number() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(threedpoints.no.number)[1] > 0) {
+    total <- sum(threedpoints.no.number$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "3D point(s) without a number", 
+           icon = icon("fish"), color = col
+  )
+})
+
+## ►  3d points without a number - onclick ----
+onclick('click.threedpoints.no.number', 
+        showModal(modalDialog(
+          title = "3D points(s) without a number", 
+          size = "l", 
+          easyClose = TRUE, 
+          renderDataTable(threedpoints.no.number(),  
+                          options = list(paging = FALSE, row.names = FALSE, searching = FALSE)))))
+
 
 ## ► Taxa replaced by synonym - dataframe -----
 length.synonym <- reactive({
@@ -1373,15 +1678,17 @@ output$length.synonym <- renderValueBox({
   
   if (dim(length.synonym)[1] > 0) {
     total <- sum(length.synonym$count)
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Species names updated", 
-           icon = icon("exclamation-circle"), color = "yellow"
+           icon = icon("exclamation-circle"), color = col
   )
 })
 
@@ -1430,15 +1737,17 @@ output$length.species.not.observed <- renderValueBox({
   
   if (dim(length.species.not.observed)[1] > 0) {
     total <- base::length(unique(length.species.not.observed$scientific))
+    col = "red"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Species not observed in area before", 
-           icon = icon("map-marked"), color = "red"
+           icon = icon("map-marked"), color = col
   )
 })
 
@@ -1461,15 +1770,17 @@ output$length.wrong.small <- renderValueBox({
   
   if (dim(length.wrong.small)[1] > 0) {
     total <- sum(length.wrong.small$count)
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Lengths smaller than 15% of max", 
-           icon = icon("less-than"), color = "red"
+           icon = icon("less-than"), color = col
   )
 })
 
@@ -1498,15 +1809,17 @@ output$length.wrong.big <- renderValueBox({
   
   if (dim(length.wrong.big)[1] > 0) {
     total <- sum(length.wrong.big$count)
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Lengths bigger than 85% of max", 
-           icon = icon("greater-than"), color = "red"
+           icon = icon("greater-than"), color = col
   )
 })
 
@@ -1527,6 +1840,47 @@ onclick('click.length.wrong.big', showModal(modalDialog(
   renderDataTable(filter(length.wrong(), reason == "too big"), rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
 
+## ► Species wrong length bigger than 100% - valuebox ----
+output$length.wrong.big.100 <- renderValueBox({
+  length.wrong.big <- length.wrong() %>%
+    dplyr::filter(reason %in% c("too big")) %>%
+    dplyr::filter(fb.length_max < length) %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.big)[1] > 0) {
+    total <- sum(length.wrong.big$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Lengths bigger than 100% of max", 
+           icon = icon("greater-than"), color = col
+  )
+})
+
+## ► Species wrong length bigger than 100% - download ----
+output$download.length.wrong.big.100 <- downloadHandler(
+  filename = function() {
+    paste("length.100.percent.of.max", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(dplyr::filter(length.wrong(), fb.length_max < length), file, row.names = FALSE)
+  }
+)
+
+## ► Species wrong length bigger than 100% - onclick ----
+onclick('click.length.wrong.big.100', showModal(modalDialog(
+  title = "Length measurement bigger than 100% of the fishbase maximum", size = "l", easyClose = TRUE, 
+  downloadButton("download.length.wrong.big.100", "Download as csv"), 
+  renderDataTable(filter(length.wrong(), fb.length_max < length), rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+
 ## ► Out of range - dataframe ----
 length.out.of.range <- reactive({
   req(input$range.limit)
@@ -1538,24 +1892,28 @@ length.out.of.range <- reactive({
     dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright)
 })
 
+## ► Out of range - valuebox ----
 output$length.out.of.range <- renderValueBox({
   length.out.of.range <- length.out.of.range() %>%
     dplyr::mutate(count = 1)
   
   if (dim(length.out.of.range)[1] > 0) {
     total <- sum(length.out.of.range$count)
+    col = "red"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Out of range", 
-           icon = icon("greater-than"), color = "red"
+           icon = icon("greater-than"), color = col
   )
 })
 
+## ► Out of range - onclick ----
 onclick('click.length.out.of.range', showModal(modalDialog(
   title = "Length measurement out of range", size = "l", easyClose = TRUE, 
   #downloadButton("download.maxn.synonyms", "Download as csv"), 
@@ -1864,7 +2222,7 @@ output$length.abundance.t <- renderValueBox({
   valueBox(width = 3, 
            total, 
            "Length measurements", 
-           icon = icon("ruler"), color = "green"
+           icon = icon("ruler"), color = "blue"
   )
 })
 
@@ -1874,7 +2232,7 @@ onclick('click.length.abundance.t', showModal(modalDialog(
   renderDataTable(length.abundance.t(),  rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
 
-## ► 3D points - number of 3d points - dataframe ----
+## ► Number of 3d points - dataframe ----
 threedpoints.abundance.t <- reactive({
   print("3d point")
   
@@ -1887,7 +2245,7 @@ threedpoints.abundance.t <- reactive({
     tidyr::replace_na(list(total.abundance = 0))
 })
 
-## ► 3D points - number of 3d points - value box ----
+## ► Number of 3d points - value box ----
 output$threedpoints.abundance.t <- renderValueBox({
   threedpoints.abundance <- threedpoints.abundance.t()
   
@@ -1901,15 +2259,92 @@ output$threedpoints.abundance.t <- renderValueBox({
   valueBox(width = 3, 
            total, 
            "3D points", 
-           icon = icon("dot-circle"), color = "green"
+           icon = icon("dot-circle"), color = "blue"
   )
 })
 
-## ► 3D points - number of lengths - onclick ----
+## ► Number of 3d points - onclick ----
 onclick('click.threedpoints.abundance.t', showModal(modalDialog(
   title = "Number of fish with 3D points per sample", size = "l", easyClose = TRUE, 
   renderDataTable(threedpoints.abundance.t(),  rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
+
+
+## ►  Lengths without a number - dataframe ----
+lengths.no.number.t <- reactive({
+  lengths.no.number.t <- length() %>%
+    filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft)
+})
+
+## ►  Lengths without a number - value box ----
+output$lengths.no.number.t <- renderValueBox({
+  
+  lengths.no.number.t <- lengths.no.number.t() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(lengths.no.number.t)[1] > 0) {
+    total <- sum(lengths.no.number.t$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "Length(s) without a number", 
+           icon = icon("fish"), color = col
+  )
+})
+
+## ►  Lengths without a number - onclick ----
+onclick('click.lengths.no.number.t', 
+        showModal(modalDialog(
+          title = "Length(s) without a number", 
+          size = "l", 
+          easyClose = TRUE, 
+          renderDataTable(lengths.no.number.t(),  
+                          options = list(paging = FALSE, row.names = FALSE, searching = FALSE)))))
+
+## ►  3d points without a number - dataframe ----
+threedpoints.no.number.t <- reactive({
+  threedpoints.no.number.t <- threedpoints() %>%
+    filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
+    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frameleft)
+})
+
+## ►  3d points without a number - value box ----
+output$threedpoints.no.number.t <- renderValueBox({
+  
+  threedpoints.no.number.t <- threedpoints.no.number.t() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(threedpoints.no.number.t)[1] > 0) {
+    total <- sum(threedpoints.no.number.t$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "3D point(s) without a number", 
+           icon = icon("fish"), color = col
+  )
+})
+
+## ►  3d points without a number - onclick ----
+onclick('click.threedpoints.no.number.t', 
+        showModal(modalDialog(
+          title = "3D points(s) without a number", 
+          size = "l", 
+          easyClose = TRUE, 
+          renderDataTable(threedpoints.no.number.t(),  
+                          options = list(paging = FALSE, row.names = FALSE, searching = FALSE)))))
 
 ## ► Taxa replaced by synonym - dataframe -----
 length.synonym.t <- reactive({
@@ -1932,15 +2367,17 @@ output$length.synonym.t <- renderValueBox({
   
   if (dim(length.synonym)[1] > 0) {
     total <- sum(length.synonym$count)
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Species names updated", 
-           icon = icon("exclamation-circle"), color = "yellow"
+           icon = icon("exclamation-circle"), color = col
   )
 })
 
@@ -1989,15 +2426,17 @@ output$length.species.not.observed.t <- renderValueBox({
   
   if (dim(length.species.not.observed)[1] > 0) {
     total <- base::length(unique(length.species.not.observed$scientific))
+    col = "red"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Species not observed in area before", 
-           icon = icon("map-marked"), color = "red"
+           icon = icon("map-marked"), color = col
   )
 })
 
@@ -2020,15 +2459,17 @@ output$length.wrong.small.t <- renderValueBox({
   
   if (dim(length.wrong.small)[1] > 0) {
     total <- sum(length.wrong.small$count)
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Lengths smaller than 15% of max", 
-           icon = icon("less-than"), color = "red"
+           icon = icon("less-than"), color = col
   )
 })
 
@@ -2057,15 +2498,17 @@ output$length.wrong.big.t <- renderValueBox({
   
   if (dim(length.wrong.big)[1] > 0) {
     total <- sum(length.wrong.big$count)
+    col = "yellow"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Lengths bigger than 85% of max", 
-           icon = icon("greater-than"), color = "red"
+           icon = icon("greater-than"), color = col
   )
 })
 
@@ -2088,6 +2531,48 @@ onclick('click.length.wrong.big.t',
           renderDataTable(filter(length.wrong.t(), reason == "too big"), rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))))
 
+## ► Species wrong length 100% too big - valuebox ----
+output$length.wrong.big.100.t <- renderValueBox({
+  length.wrong.big <- length.wrong.t() %>%
+    dplyr::filter(reason %in% c("too big")) %>%
+    dplyr::filter(fb.length_max < length) %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.big)[1] > 0) {
+    total <- sum(length.wrong.big$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Lengths bigger than 100% of max", 
+           icon = icon("greater-than"), color = col
+  )
+})
+
+## ► Species wrong length 100% too big - download ----
+output$download.length.wrong.big.100.t <- downloadHandler(
+  filename = function() {
+    paste("length.100.percent.of.max", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(dplyr::filter(length.wrong.t(), fb.length_max < length), file, row.names = FALSE)
+  }
+)
+
+## ► Species wrong length 100% too big - onclick ----
+onclick('click.length.wrong.big.100.t', 
+        showModal(modalDialog(
+          title = "Length measurements bigger than 100% of the fishbase maximum", size = "l", 
+          easyClose = TRUE, 
+          downloadButton("download.length.wrong.big.100.t", "Download as csv"), 
+          renderDataTable(filter(length.wrong.t(), fb.length_max < length), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))))
+
 ## ► Out of range - dataframe ----
 length.out.of.range.t <- reactive({
   req(input$range.limit.t)
@@ -2099,24 +2584,28 @@ length.out.of.range.t <- reactive({
     dplyr::select(campaignid, sample, family, genus, species, range, length,  frameleft, frameright)
 })
 
+## ► Out of range - valuebox ----
 output$length.out.of.range.t <- renderValueBox({
   length.out.of.range <- length.out.of.range.t() %>%
     dplyr::mutate(count = 1)
   
   if (dim(length.out.of.range)[1] > 0) {
     total <- sum(length.out.of.range$count)
+    col = "red"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
            total, 
            "Out of range", 
-           icon = icon("greater-than"), color = "red"
+           icon = icon("greater-than"), color = col
   )
 })
 
+## ► Out of range - onclick ----
 onclick('click.length.out.of.range.t', 
         showModal(modalDialog(
           title = "Length measurement(s) and 3D point(s) out of range", size = "l", easyClose = TRUE, 
@@ -2134,15 +2623,18 @@ length.out.of.transect.t <- reactive({
     dplyr::select(campaignid, sample, family, genus, species, range, length, frameleft, frameright, midx, midy, x, y)
 })
 
+## ► Out of transect - valuebox ----
 output$length.out.of.transect.t <- renderValueBox({
   length.out.of.transect <- length.out.of.transect.t() %>%
     dplyr::mutate(count = 1)
   
   if (dim(length.out.of.transect)[1] > 0) {
     total <- sum(length.out.of.transect$count)
+    col = "red"
   }
   else{
     total = 0
+    col = "green"
   }
   
   valueBox(width = 3, 
@@ -2152,6 +2644,7 @@ output$length.out.of.transect.t <- renderValueBox({
   )
 })
 
+## ► Out of transect - onclick ----
 onclick('click.length.out.of.transect.t', 
         showModal(modalDialog(
           title = "Length measurement(s) and 3D point(s) out of transect", size = "l", easyClose = TRUE, 

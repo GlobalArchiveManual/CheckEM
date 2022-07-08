@@ -7,7 +7,8 @@ tagList(
     menuItem("Upload data", tabName = "upload", icon = icon("upload")),
     
     # BRUV tabs
-    shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
+    shiny::conditionalPanel("input.method == 'point'",
+    # shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
                             sidebarMenu(
                               menuItem("Check metadata and periods", tabName = "checkmetadata", icon = icon("check")),
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
@@ -18,7 +19,8 @@ tagList(
                             ),
     
     # Transect tabs
-    shiny::conditionalPanel(condition = "input.transect == 'Transect based e.g. DOV'", 
+    shiny::conditionalPanel("input.method == 'transect'",
+    # shiny::conditionalPanel(condition = "input.transect == 'Transect based e.g. DOV'", 
                             sidebarMenu(
                               menuItem("Check metadata", tabName = "checkmetadatat", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlengtht", icon = icon("check")),
@@ -36,6 +38,11 @@ tagList(
     tags$head(includeHTML(("google-analytics.html"))),
     tags$head(tags$link(rel = "shortcut icon", href = "favicon.ico")),
     tags$head(tags$style('.selectize-dropdown {z-index: 10000}')),
+    tags$style(
+      type = 'text/css',
+      '.modal-dialog { width: fit-content !important; }'
+    ),
+    
     tabItems(
       # Upload data ----
       tabItem(tabName = "upload",
@@ -45,29 +52,36 @@ tagList(
                            includeMarkdown("aims.Rmd")),     
                   
                   box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
-                      radioButtons("transect", "Choose the type of method:",
-                                   c("Non-transect e.g. BRUV",
-                                     "Transect based e.g. DOV"), 
-                                   selected = "Non-transect e.g. BRUV", 
+
+                      radioButtons("method", "Choose the type of method:",
+                                   c("Single point e.g. BRUV & BOSS" = "point",
+                                     "Transect e.g. DOV & ROV" = "transect"),
+                                   selected = "point",
                                    inline = TRUE),
                       
-                      shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
-                                              radioButtons("opcodeperiod", "How did you record the sample name in EventMeasure:",
-                                                           c("OpCode = Sample",
-                                                             "Period = Sample"), 
-                                                           selected = "OpCode = Sample", 
-                                                           inline = TRUE))),
+                      shiny::conditionalPanel("input.method == 'point'",
+                                              radioButtons("sample", "How did you record the sample name in EventMeasure:",
+                                                           c("OpCode" = "opcode",
+                                                             "Period" = "period"),
+                                                           selected = "opcode",
+                                                           inline = TRUE)),
+
+                      shiny::conditionalPanel("input.method == 'transect'",
+                                          radioButtons("sample.t", "How did you record the sample name in EventMeasure:",
+                                                       c("OpCode and Period" = "opcodeperiod",
+                                                         "Period only" = "period"),
+                                                       selected = "opcodeperiod",
+                                                       inline = TRUE))
+                      ),
                        
                   box(width = 6, title = "Upload metadata", status = "primary", solidHeader = TRUE,
                     fileInput("upload.metadata", ".csv only:", multiple = TRUE,
                                  accept = c("image/vnd.csv",".csv"))),
                        
                   
-                  shiny::conditionalPanel(condition = "input.transect == 'Non-transect e.g. BRUV'", 
-                                          box(width = 6, title = "Upload points file", status = "primary",solidHeader = TRUE,
-                                              fileInput("upload.points", ".txt file only", multiple = TRUE,
-                                                        accept = c("image/vnd.txt",".txt")))
-                                          ),
+                   box(width = 6, title = "Upload points file", status = "primary",solidHeader = TRUE,
+                       fileInput("upload.points", ".txt file only", multiple = TRUE,
+                                 accept = c("image/vnd.txt",".txt"))),
                   
                   box(width = 6, title = "Upload period file", status = "primary",solidHeader = TRUE,
                                               fileInput("upload.period", ".txt file only", multiple = TRUE,
@@ -106,9 +120,6 @@ tagList(
                        div(id="click.points.samples.without.metadata",
                            valueBoxOutput("points.samples.without.metadata")),
                        
-                       
-                       
-                       
                        div(id="click.periods.no.end",
                            valueBoxOutput("periods.no.end")),
                        div(id="click.samples.without.periods",
@@ -125,9 +136,6 @@ tagList(
                            numericInput("period.limit", "Period time in minutes:", 60, min = 1, max = 300)),
                        
                        
-                       
-
-                       
                        div(id="click.periods.wrong",
                            valueBoxOutput("periods.wrong")),
                        
@@ -143,6 +151,19 @@ tagList(
                            valueBoxOutput("metadata.samples.without.fish.t")),
                        div(id="click.length.samples.without.metadata.t",
                            valueBoxOutput("length.samples.without.metadata.t")),
+                       
+                       div(id="click.periods.no.end.t",
+                           valueBoxOutput("periods.no.end.t")),
+                       
+                       div(id="click.points.outside.periods.t",
+                           valueBoxOutput("points.outside.periods.t")),
+                       
+                       div(id="click.lengths.outside.periods.t",
+                           valueBoxOutput("lengths.outside.periods.t")),
+                       
+                       div(id="click.periods.avg.t",
+                           valueBoxOutput("periods.avg.t")),
+                       
                        box(width=12, height = 825, leafletOutput("map.metadata.t", height = 800)))
       ),
       
@@ -150,6 +171,10 @@ tagList(
       tabItem(tabName = "createmaxn",
               fluidRow(div(id="click.maxn.total.number",
                            valueBoxOutput("maxn.total.number")),
+                       
+                       div(id="click.points.no.number",
+                           valueBoxOutput("points.no.number")),
+                       
                        div(id="click.maxn.synonym",
                            valueBoxOutput("maxn.synonym")),
                        div(id="click.maxn.species.not.observed",
@@ -172,30 +197,42 @@ tagList(
       
       # Check length - point based data -----
       tabItem(tabName = "createlength",
-              fluidRow(div(width=3,id="click.length.abundance",
+              fluidRow(div(width = 3, id="click.length.abundance",
                            valueBoxOutput("length.abundance")),
-                       div(width=3,id="click.threedpoints.abundance",
+                       div(width = 3, id="click.threedpoints.abundance",
                            valueBoxOutput("threedpoints.abundance")),
-                       div(width=3,id="click.length.synonym",
+                       div(width = 3, id="click.length.synonym",
                            valueBoxOutput("length.synonym")),
-                       div(width=3,id="click.length.species.not.observed",
+                       
+                       div(width = 3, id = "click.lengths.no.number",
+                           valueBoxOutput("lengths.no.number")),
+                       div(width = 3, id = "click.threedpoints.no.number",
+                           valueBoxOutput("threedpoints.no.number")),
+                       
+                       div(width = 3, id = "click.length.species.not.observed",
                            valueBoxOutput("length.species.not.observed")),
-                       div(width=3,id="click.length.wrong.small",
+                       
+                       div(width = 3, id = "click.length.wrong.small",
                            valueBoxOutput("length.wrong.small")),
-                       div(width=3,id="click.length.wrong.big",
+                       div(width = 3, id = "click.length.wrong.big",
                            valueBoxOutput("length.wrong.big")),
+                       div(width = 3, id = "click.length.wrong.big.100",
+                           valueBoxOutput("length.wrong.big.100")),
                        
                        box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
-                           htmlOutput("length.species.dropdown",multiple=TRUE)),
-                       box(width=2,title = "Limit range",status="primary",solidHeader = TRUE,numericInput("range.limit", "Metres:", 10, min = 0.5, max = 10)),
-                       div(width=3,id="click.length.out.of.range",
+                           htmlOutput("length.species.dropdown", multiple=TRUE)),
+                       box(width = 2, title = "Limit range", status="primary", solidHeader = TRUE, numericInput("range.limit", "Metres:", 10, min = 0.5, max = 10)),
+                       div(width = 3, id = "click.length.out.of.range",
                            valueBoxOutput("length.out.of.range")),
-              box(width=12, title = "Length histogram", status = "primary", plotOutput("length.histogram", height = 250)),
-              box(width=12, title = "Length histogram status", status = "primary", plotOutput("length.histogram.status", height = 600)),
-              box(width=12, title = "Zone", status = "primary", plotOutput("length.status.plot", height = 250)),
-              box(width=12, title = "Status", status = "primary", plotOutput("length.zone.plot", height = 250))
+              box(width = 12, title = "Length histogram", status = "primary", plotOutput("length.histogram", height = 250)),
+              box(width = 12, title = "Length histogram status", status = "primary", plotOutput("length.histogram.status", height = 600)),
+              box(width = 12, title = "Zone", status = "primary", plotOutput("length.status.plot", height = 250)),
+              box(width = 12, title = "Status", status = "primary", plotOutput("length.zone.plot", height = 250))
               )
       ),
+      
+      
+      
       
       # Check length - transect based data -----
       tabItem(tabName = "createlengtht",
@@ -203,28 +240,40 @@ tagList(
                            valueBoxOutput("length.abundance.t")),
                        div(width=3,id="click.threedpoints.abundance.t",
                            valueBoxOutput("threedpoints.abundance.t")),
+                       
+                       
                        div(width=3,id="click.length.synonym.t",
                            valueBoxOutput("length.synonym.t")),
+                       
+                       div(width = 3, id = "click.lengths.no.number.t",
+                           valueBoxOutput("lengths.no.number.t")),
+                       div(width = 3, id = "click.threedpoints.no.number.t",
+                           valueBoxOutput("threedpoints.no.number.t")),
+                       
                        div(width=3,id="click.length.species.not.observed.t",
                            valueBoxOutput("length.species.not.observed.t")),
+                       
+                       
                        div(width=3,id="click.length.wrong.small.t",
                            valueBoxOutput("length.wrong.small.t")),
                        div(width=3,id="click.length.wrong.big.t",
                            valueBoxOutput("length.wrong.big.t")),
+                       div(width = 3, id = "click.length.wrong.big.100.t",
+                           valueBoxOutput("length.wrong.big.100.t")),
                        
-                       box(width = 2, title = "Limit range", status = "primary", solidHeader = TRUE, 
-                           numericInput("range.limit.t", "Metres:", 10, min = 0.5, max = 10)),
+                       box(width = 2, title = "Range limit (m)?", status = "primary", solidHeader = TRUE, 
+                           numericInput("range.limit.t", NULL, 10, min = 0.5, max = 10)),
                        
                        div(width = 2,id="click.length.out.of.range.t",
                            valueBoxOutput("length.out.of.range.t")),
                        
-                       box(width = 2, title = "Transect bounds", status = "primary", solidHeader = TRUE, 
-                           numericInput("transect.limit.t", "Metres:", 2.5, min = 0.5, max = 5)),
+                       box(width = 2, title = "Transect bounds (m)?", status = "primary", solidHeader = TRUE, 
+                           numericInput("transect.limit.t", NULL, 2.5, min = 0.5, max = 5)),
                        
                        div(width = 2,id="click.length.out.of.transect.t",
                            valueBoxOutput("length.out.of.transect.t")),
                        
-                       box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
+                       box(width = 12, title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("length.species.dropdown.t",multiple=TRUE)),
                        
                        box(width=12, title = "Length histogram", status = "primary", plotOutput("length.histogram.t", height = 250)),
