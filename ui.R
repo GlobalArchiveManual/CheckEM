@@ -74,26 +74,46 @@ tagList(
                                                        inline = TRUE))
                       ),
                        
-                  box(width = 6, title = "Upload metadata", status = "primary", solidHeader = TRUE,
-                    fileInput("upload.metadata", ".csv only:", multiple = TRUE,
+                  
+                  # box(width = 6, title = "Upload data", status = "primary", solidHeader = TRUE,
+                  #     fileInput("upload.metadata", "Metadata (CSV):", multiple = TRUE,
+                  #               accept = c("image/vnd.csv",".csv")),
+                  #     fileInput("upload.points", "Points (TXT)", multiple = TRUE,
+                  #               accept = c("image/vnd.txt",".txt")),
+                  #     fileInput("upload.period", "Period (TXT)", multiple = TRUE,
+                  #               accept = c("image/vnd.txt",".txt")),
+                  #     fileInput("upload.length", "Length (TXT)", multiple = TRUE,
+                  #               accept = c("image/vnd.txt",".txt")),
+                  #     fileInput("upload.3dpoints", "3D points (TXT)", multiple = TRUE,
+                  #               accept = c("image/vnd.txt",".txt")),
+                  #     fileInput("upload.dotpoints", "Dot Point Measurements (TXT)", multiple = TRUE,
+                  #               accept = c("image/vnd.txt",".txt")))
+                  
+                  
+                  box(width = 6, height = 100, title = "Upload metadata (csv)", status = "primary", solidHeader = TRUE,
+                    fileInput("upload.metadata", NULL, multiple = TRUE,
                                  accept = c("image/vnd.csv",".csv"))),
-                       
-                  
-                   box(width = 6, title = "Upload points file", status = "primary",solidHeader = TRUE,
-                       fileInput("upload.points", ".txt file only", multiple = TRUE,
+
+
+                   box(width = 6, height = 100, title = "Upload points file (txt)", status = "primary",solidHeader = TRUE,
+                       fileInput("upload.points", NULL, multiple = TRUE,
                                  accept = c("image/vnd.txt",".txt"))),
-                  
-                  box(width = 6, title = "Upload period file", status = "primary",solidHeader = TRUE,
-                                              fileInput("upload.period", ".txt file only", multiple = TRUE,
+
+                  box(width = 6, height = 100, title = "Upload period file (txt)", status = "primary",solidHeader = TRUE,
+                                              fileInput("upload.period", NULL, multiple = TRUE,
                                                         accept = c("image/vnd.txt",".txt"))),
-                       
-                  box(width = 6, title = "Upload length file", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.length", ".txt file only", multiple = TRUE,
+
+                  box(width = 6, height = 100, title = "Upload length file (txt)", status = "primary",solidHeader = TRUE,
+                      fileInput("upload.length", NULL, multiple = TRUE,
                                  accept = c("image/vnd.txt",".txt"))),
-                       
-                  box(width = 6, title = "Upload 3D points file", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.3dpoints", ".txt file only", multiple = TRUE,
-                                 accept = c("image/vnd.txt",".txt")))
+
+                  box(width = 6, height = 100, title = "Upload 3D points file (txt)", status = "primary",solidHeader = TRUE,
+                      fileInput("upload.3dpoints", NULL, multiple = TRUE,
+                                 accept = c("image/vnd.txt",".txt"))),
+                  
+                  box(width = 6, height = 100, title = "Upload Dot Point Measurements (txt)", status = "primary",solidHeader = TRUE,
+                      fileInput("upload.3dpoints", NULL, multiple = TRUE,
+                                accept = c("image/vnd.txt",".txt")))
                   ),
                   
                   tabBox(width = 12, height = 800,
@@ -302,20 +322,38 @@ tagList(
               ),
       
       
-      #Create mass ----
+
+      
+      #Create mass - point based data ----
       tabItem(tabName = "createmass",
-              fluidRow(box(width=9,height = 500,title = "Plot of top species by mass", status = "primary",
+              fluidRow(box(width = 9,height = 500,title = "Plot of top species by mass", status = "primary",
                            plotOutput("mass.top.species")),
-                       box(width=3,title = "Species to plot",status="primary",solidHeader = TRUE,numericInput("mass.species.limit", "Number:", 15, min = 5, max = 20)),
-                       box(width=3,title = "Include elasmobranchs?",status="primary",solidHeader = TRUE,selectInput("mass.include.sharks", "",
-                                   c("Yes" = "yes",
-                                     "No" = "no"))),
-                       box(width=12,title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
+                       box(width = ,title = "Species to plot",status="primary",solidHeader = TRUE,numericInput("mass.species.limit", "Number:", 15, min = 5, max = 20)),
+                       box(width = 3,title = "Include elasmobranchs?",status="primary",solidHeader = TRUE,selectInput("mass.include.sharks", "",
+                                                                                                                    c("Yes" = "yes",
+                                                                                                                      "No" = "no"))),
+                       box(width = 12,title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("mass.species.dropdown",multiple=TRUE)),
-                       box(width=12,leafletOutput("mass.spatial.plot")),
-                       box(width=12, title = "Status", status = "primary", plotOutput("mass.status.plot", height = 250)),
-                       box(width=12, title = "Zone", status = "primary", plotOutput("mass.zone.plot", height = 250))
-      )),
+                       box(width = 12,leafletOutput("mass.spatial.plot")),
+                       box(width = 12, title = "Status", status = "primary", plotOutput("mass.status.plot", height = 250)),
+                       box(width = 12, title = "Zone", status = "primary", plotOutput("mass.zone.plot", height = 250))
+              )),
+      
+      #Create mass  - transect based data ----
+      tabItem(tabName = "createmasst",
+              fluidRow(box(width = 9,height = 500,title = "Plot of top species by mass", status = "primary",
+                           plotOutput("mass.top.species.t")),
+                       box(width = 3,title = "Species to plot",status="primary",solidHeader = TRUE,
+                           numericInput("mass.species.limit.t", "Number:", 15, min = 5, max = 20)),
+                       box(width = 3,title = "Include elasmobranchs?", status="primary", solidHeader = TRUE, selectInput("mass.include.sharks.t", "",
+                                                                                                                       c("Yes" = "yes",
+                                                                                                                         "No" = "no"))),
+                       box(width = 12, title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
+                           htmlOutput("mass.species.dropdown.t",multiple=TRUE)),
+                       box(width = 12,leafletOutput("mass.spatial.plot.t")),
+                       box(width = 12, title = "Status", status = "primary", plotOutput("mass.status.plot.t", height = 250)),
+                       box(width = 12, title = "Zone", status = "primary", plotOutput("mass.zone.plot.t", height = 250))
+              )),
       
       
       # Create downloads - point based data -----

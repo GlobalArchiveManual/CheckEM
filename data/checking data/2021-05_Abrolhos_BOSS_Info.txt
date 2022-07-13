@@ -1,0 +1,8 @@
+OpCode	TapeReader	Depth	Comment	Info5Name	Info5Value	Info6Name	Info6Value	Info7Name	Info7Value	Info8Name	Info8Value	Info9Name	Info9Value	Info10Name	Info10Value	Info11Name	Info11Value	Info12Name	Info12Value
+20210511_1	Claude																		
+20210511_2	Claude																		
+20210511_3	Claude																		
+20210513_1	Claude																		
+20210513_2	Claude																		
+20210514_1	Claude																		
+20210514_2	Claude																		

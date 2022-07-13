@@ -25,8 +25,8 @@ function(input, output) {
 
 ### ► Read in metadata ----
 metadata <- reactive({
-  # if no metadata file uploaded then use the example ningaloo dataset
-  if(is.null(input$upload.metadata)){
+  # if no metadata file uploaded and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$upload.metadata) & input$method == "point" & input$sample == "opcode") {
     
     metadata <-  read.csv("data/example_metadata.csv") %>%
       ga.clean.names() %>%
@@ -34,16 +34,59 @@ metadata <- reactive({
       dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
       as.data.frame()
     
-  } else {
+    # If no metadata file and method = transect. dataset = Ningaloo DOVs
+  } else if(is.null(input$upload.metadata) & input$method == "transect") {
+  
+    ## ONLY ONE EXAMPLE METADATA FOR DOVs BG 13/07/2022
+    
+    metadata <-  read.csv("data/2014-08_small subset_stereoDOVs_Metadata.csv") %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
+      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) 
+    
+    # IF metadata file uploaded AND method = single point
+  } else if(!is.null(input$upload.metadata) & input$method == "point") {
     
     metadata <- lapply(input$upload.metadata$datapath, fread)
     names(metadata) <- input$upload.metadata$name 
     
+    lookup <- c(sample = "opcode", sample = "period") # If people have used opcode or period name in the metadata change it to sample, if they have used sample will be ok too
+
+    print("testing metadata")
+    
     metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       ga.clean.names() %>%
+      dplyr::rename(dplyr::any_of(lookup)) %>%
+      glimpse() %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", "")) %>%
       dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
-  }
+    
+    # IF metadata file uploaded AND method = transect
+  } else if(!is.null(input$upload.metadata) & input$method == "transect") {
+    
+    metadata <- lapply(input$upload.metadata$datapath, fread)
+    names(metadata) <- input$upload.metadata$name 
+    
+    # Need to make sample from either OpCode + Period or Period
+    metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", ""))
+    
+    if (input$sample.t == "opcodeperiod") {
+      metadata <- metadata %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+        dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
+        
+    } else {
+      
+      lookup <- c(sample = "period") # If people have used period or sample then this will work
+      
+      metadata <- metadata %>%
+        dplyr::rename(dplyr::any_of(lookup)) %>%
+        dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
+    }
+  } 
   
   metadata <- metadata
 })  
@@ -254,8 +297,7 @@ metadata.samples.without.fish.t <- reactive({
     mutate(sample = as.factor(sample))
   
   length.samples <- length() %>%
-    distinct(campaignid, sample, period) %>%
-    mutate(sample = paste(sample, period, sep = "_"))
+    distinct(campaignid, sample, period) 
   
   missing.fish <- anti_join(metadata.samples, length.samples)
 })
@@ -295,8 +337,7 @@ length.samples.without.metadata.t <- reactive({
     mutate(sample = as.factor(sample))
   
   length.samples <- length() %>%
-    distinct(campaignid, sample, period) %>%
-    mutate(sample = paste(sample, period, sep = "_"))
+    distinct(campaignid, sample, period)
   
   missing.metadata <- anti_join(length.samples, metadata.samples)
 })
@@ -351,8 +392,8 @@ output$map.metadata.t <- renderLeaflet({
 ## _______________________________________________________ ----
 ## ► Read in periods ----
 periods <- reactive({
-  
-  if(is.null(input$upload.period)){
+  # if no period file uploaded and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$upload.period) & input$method == "point" & input$sample == "opcode") {
     
     periods <- read.delim("data/example_Period.txt", na.strings = "") %>%
       ga.clean.names() %>%
@@ -361,19 +402,60 @@ periods <- reactive({
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       as.data.frame()
     
-  } else {
+    # If no period file and method = transect. dataset = Ningaloo DOVs
+  } else if(is.null(input$upload.period) & input$method == "transect") {
     
+    periods <- read.delim("data/2014-08_small subset_stereoDOVs_Period.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
+      dplyr::select(campaignid, sample, everything())
+    
+    # IF period file uploaded AND method = single point AND sample = OpCode
+  } else if(!is.null(input$upload.period) & input$method == "point" & input$sample == "opcode") {
     periods <- lapply(input$upload.period$datapath, fread)
     names(periods) <- input$upload.period$name
-    
+      
     periods <- rbindlist(periods, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_Period.txt", ""))
     
-  }
-  
+    # IF metadata file uploaded AND method = single point AND sample = period
+  } else if(!is.null(input$upload.period) & input$method == "point" & input$sample == "period") {
+    periods <- lapply(input$upload.period$datapath, fread)
+    names(periods) <- input$upload.period$name
+    
+    periods <- rbindlist(periods, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(sample = period) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Period.txt", ""))
+    
+    # IF period file uploaded AND method = transect
+  } else if(!is.null(input$upload.period) & input$method == "transect") {
+    
+    periods <- lapply(input$upload.period$datapath, fread)
+    names(periods) <- input$upload.period$name
+    
+    # Need to make sample from either OpCode + Period or Period
+    periods <- rbindlist(periods, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Period.txt", ""))
+    
+    if (input$sample.t == "opcodeperiod") {
+      periods <- periods %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    } else {
+      
+      periods <- periods %>%
+        dplyr::mutate(sample = period)
+    }
+  } 
+   
   periods <- periods
   
 })
@@ -508,7 +590,7 @@ onclick('click.periods.wrong',
 points.outside.periods <- reactive({
   
   points <- points() %>%
-    dplyr::filter(is.na(period))%>%
+    dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
     dplyr::select(campaignid, sample, period, family, genus, species, number)
 })
 
@@ -544,7 +626,7 @@ onclick('click.points.outside.periods',
 lengths.outside.periods <- reactive({
   
   lengths <- length3dpoints() %>%
-    dplyr::filter(is.na(period)) %>%
+    dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
     dplyr::select(campaignid, sample, period, family, genus, species, number, length, frameleft)
 })
 
@@ -658,7 +740,7 @@ onclick('click.periods.wrong',
 points.outside.periods.t <- reactive({
   
   points <- points() %>%
-    dplyr::filter(is.na(period))%>%
+    dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
     dplyr::select(campaignid, sample, period, family, genus, species, number)
 })
 
@@ -694,7 +776,7 @@ onclick('click.points.outside.periods.t',
 lengths.outside.periods.t <- reactive({
   
   lengths <- length3dpoints.t() %>%
-    dplyr::filter(is.na(period)) %>%
+    dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
     dplyr::select(campaignid, sample, period, family, genus, species, number, length, frameleft)
 })
 
@@ -763,7 +845,7 @@ samples.without.periods.t <- reactive({
     mutate(sample = as.factor(sample))
   
   periods.samples <- periods() %>%
-    mutate(sample = paste(sample,period, sep = "_")) %>%
+    # mutate(sample = paste(sample,period, sep = "_")) %>%
     distinct(campaignid, sample)
   
   missing.periods <- anti_join(metadata.samples, periods.samples)
@@ -801,45 +883,84 @@ onclick('click.samples.without.periods.t',
 ##                          MAXN                           ----
 ## _______________________________________________________ ----
 ## ► Read in points data ----
+
 points <- reactive({
   
-  if(is.null(input$upload.points)){
+  # if no points file uploaded and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$upload.points) & input$method == "point" & input$sample == "opcode") {
     
     points <- read.delim("data/example_Points.txt", na.strings = "") %>%
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-      mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-      mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", " ", NA_character_), "spp", as.character(species))) %>%
-      as.data.frame() %>%
-      dplyr::mutate(species = tolower(species)) %>%
-      dplyr::mutate(genus = ga.capitalise(genus)) %>%
-      dplyr::mutate(family = ga.capitalise(family)) 
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs")
     
-  } else {
+    # If no points file and method = transect. dataset = Ningaloo DOVs
+  } else if(is.null(input$upload.points) & input$method == "transect") {
+    
+    points <- read.delim("data/2014-08_small subset_stereoDOVs_Points.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
+    
+    # IF points file uploaded AND method = single point AND sample = opcode
+  } else if(!is.null(input$upload.points) & input$method == "point" & input$sample == "opcode"){
     
     points <- lapply(input$upload.points$datapath, fread)
     names(points) <- input$upload.points$name
     
     points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", "")) %>%
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
-      mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-      mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-      mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-      dplyr::select(-c(.id)) %>%
-      dplyr::filter(!is.na(family)) %>%
-      dplyr::mutate(species = tolower(species)) %>%
-      dplyr::mutate(genus = ga.capitalise(genus)) %>%
-      dplyr::mutate(family = ga.capitalise(family))
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", ""))%>%
+      dplyr::select(-c(.id))
     
-  }
+    # IF points file uploaded AND method = single point AND sample = period
+  } else if(!is.null(input$upload.points) & input$method == "point" & input$sample == "period") {
+    
+    points <- lapply(input$upload.points$datapath, fread)
+    names(points) <- input$upload.points$name
+    
+    points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(sample = period) %>%
+      dplyr::mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", ""))%>%
+      dplyr::select(-c(.id))
+    
+    # IF points file uploaded AND method = transect
+  } else if(!is.null(input$upload.points) & input$method == "transect") {
+    
+    points <- lapply(input$upload.points$datapath, fread)
+    names(points) <- input$upload.points$name
+    
+    # Need to make sample from either OpCode + Period or Period
+    points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", "")) %>%
+      dplyr::select(-c(.id))
+    
+    if (input$sample.t == "opcodeperiod") {
+      points <- points %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    } else {
+      
+      points <- points %>%
+        dplyr::mutate(sample = period)
+    }
+  } 
   
-  points <- points
+  points <- points %>%
+    mutate(sample = as.factor(sample)) %>%
+    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+    mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    dplyr::filter(!is.na(family)) %>%
+    dplyr::mutate(species = tolower(species)) %>%
+    dplyr::mutate(genus = ga.capitalise(genus)) %>%
+    dplyr::mutate(family = ga.capitalise(family))
 })
 
 # ► Preview points ----
@@ -1308,45 +1429,80 @@ ggplot(maxn.sum, aes(x = reorder(scientific, maxn), y = maxn)) +
 
 ## ► Read in length data ----
 length <- reactive({
-  
-  if(is.null(input$upload.length)){
-    length <-  read.delim("data/example_Lengths.txt", na.strings = "") %>%
-      as.data.frame() %>%
-      ga.clean.names() %>%
-      mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-      mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-      mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-      dplyr::rename(sample = opcode) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      # dplyr::filter(number > 0) %>%
-      # dplyr::filter(!is.na(number)) %>%
-      dplyr::mutate(species = tolower(species)) %>%
-      dplyr::mutate(genus = ga.capitalise(genus)) %>%
-      dplyr::mutate(family = ga.capitalise(family))
+  # if no lengths file uploaded and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$upload.length) & input$method == "point" & input$sample == "opcode") {
     
-  } else {
+    length <- read.delim("data/example_Lengths.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::rename(sample = opcode) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs")
+
+    # If no lengths file and method = transect. dataset = Ningaloo DOVs
+  } else if(is.null(input$upload.length) & input$method == "transect") {
+    
+    length <- read.delim("data/2014-08_small subset_stereoDOVs_Lengths.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
+    
+    # IF length file uploaded AND method = single point AND sample = opcode
+  } else if(!is.null(input$upload.length) & input$method == "point" & input$sample == "opcode"){
     
     length <- lapply(input$upload.length$datapath, fread)
     names(length) <- input$upload.length$name
     
     length <- rbindlist(length, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Lengths.txt", "")) %>%
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
-      mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-      mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-      mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-      dplyr::select(-c(.id)) %>%
-      # dplyr::filter(number > 0) %>%
-      # dplyr::filter(!is.na(number)) %>%
-      dplyr::mutate(species = tolower(species)) %>%
-      dplyr::mutate(genus = ga.capitalise(genus)) %>%
-      dplyr::mutate(family = ga.capitalise(family))
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Lengths.txt", ""))%>%
+      dplyr::select(-c(.id))
     
-  }
+    # IF length file uploaded AND method = single point AND sample = period
+  } else if(!is.null(input$upload.length) & input$method == "point" & input$sample == "period") {
+    
+    length <- lapply(input$upload.length$datapath, fread)
+    names(length) <- input$upload.length$name
+    
+    length <- rbindlist(length, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(sample = period) %>%
+      dplyr::mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Lengths.txt", ""))%>%
+      dplyr::select(-c(.id))
+    
+    # IF lengths file uploaded AND method = transect
+  } else if(!is.null(input$upload.length) & input$method == "transect") {
+    
+    length <- lapply(input$upload.length$datapath, fread)
+    names(length) <- input$upload.length$name
+    
+    # Need to make sample from either OpCode + Period or Period
+    length <- rbindlist(length, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Lengths.txt", "")) %>%
+      dplyr::select(-c(.id))
+    
+    if (input$sample.t == "opcodeperiod") {
+      length <- length %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    } else {
+      
+      length <- length %>%
+        dplyr::mutate(sample = period)
+    }
+  } 
   
-  length <- length
+  length <- length %>%
+    mutate(sample = as.factor(sample)) %>%
+    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+    mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    dplyr::mutate(species = tolower(species)) %>%
+    dplyr::mutate(genus = ga.capitalise(genus)) %>%
+    dplyr::mutate(family = ga.capitalise(family))
   
 })
 
@@ -1357,54 +1513,81 @@ output$table.length <- renderTable({
 
 ## ► Read in 3D points data ----
 threedpoints <- reactive({
-  if(is.null(input$upload.3dpoints)){
-    threedpoints <-  read.delim("data/example_3DPoints.txt", na.strings = "") %>%
-      as.data.frame() %>%
-      ga.clean.names() %>%
-      mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-      mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-      mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-      # dplyr::filter(!comment%in%c("sync")) %>%
-      dplyr::rename(sample = opcode) %>%
-      dplyr::mutate(number = as.numeric(number)) %>%
-      # dplyr::filter(number > 0) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      # dplyr::filter(!is.na(number)) %>%
-      dplyr::mutate(species = tolower(species)) %>%
-      dplyr::mutate(genus = ga.capitalise(genus)) %>%
-      dplyr::mutate(family = ga.capitalise(family))
+  # if no 3dpoints file uploaded and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "opcode") {
     
-  } else {
+    threedpoints <- read.delim("data/example_3DPoints.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::rename(sample = opcode) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs")
+    
+    # If no 3dpoints file and method = transect. dataset = Ningaloo DOVs
+  } else if(is.null(input$upload.3dpoints) & input$method == "transect") {
+    
+    threedpoints <- read.delim("data/2014-08_small subset_stereoDOVs_3DPoints.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
+    
+    # IF 3dpoints file uploaded AND method = single point AND sample = opcode
+  } else if(!is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "opcode"){
     
     threedpoints <- lapply(input$upload.3dpoints$datapath, fread)
     names(threedpoints) <- input$upload.3dpoints$name
     
-    print("3d points")
+    threedpoints <- rbindlist(threedpoints, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::rename(sample = opcode) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", ""))%>%
+      dplyr::select(-c(.id))
+    
+    # IF 3dpoints file uploaded AND method = single point AND sample = period
+  } else if(!is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "period") {
+    
+    threedpoints <- lapply(input$upload.3dpoints$datapath, fread)
+    names(threedpoints) <- input$upload.3dpoints$name
     
     threedpoints <- rbindlist(threedpoints, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", "")) %>%
-      dplyr::rename(sample = opcode) %>%
-      mutate(sample = as.factor(sample)) %>%
-      mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-      mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-      mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-      dplyr::select(-c(.id)) %>%
-      dplyr::mutate(number = as.numeric(number)) %>%
-      # dplyr::filter(number > 0) %>%
-      # dplyr::filter(!is.na(number)) %>%
-      # dplyr::filter(!comment %in% c("sync")) %>%
-      dplyr::mutate(species = tolower(species)) %>%
-      dplyr::mutate(genus = ga.capitalise(genus)) %>%
-      dplyr::mutate(family = ga.capitalise(family)) %>%
-      glimpse()
+      dplyr::mutate(sample = period) %>%
+      dplyr::mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", ""))%>%
+      dplyr::select(-c(.id))
     
-    unique(threedpoints$family) %>% sort()
-    unique(threedpoints$genus) %>% sort()
-    unique(threedpoints$species) %>% sort()
-  }
+    # IF 3dpoints file uploaded AND method = transect
+  } else if(!is.null(input$upload.3dpoints) & input$method == "transect") {
+    
+    threedpoints <- lapply(input$upload.3dpoints$datapath, fread)
+    names(threedpoints) <- input$upload.3dpoints$name
+    
+    # Need to make sample from either OpCode + Period or Period
+    threedpoints <- rbindlist(threedpoints, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", "")) %>%
+      dplyr::select(-c(.id))
+    
+    if (input$sample.t == "opcodeperiod") {
+      threedpoints <- threedpoints %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    } else {
+      
+      threedpoints <- threedpoints %>%
+        dplyr::mutate(sample = period)
+    }
+  } 
   
-  threedpoints <- threedpoints
+  threedpoints <- threedpoints %>%
+    mutate(sample = as.factor(sample)) %>%
+    mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+    mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    dplyr::mutate(number = as.numeric(number)) %>%
+    dplyr::mutate(species = tolower(species)) %>%
+    dplyr::mutate(genus = ga.capitalise(genus)) %>%
+    dplyr::mutate(family = ga.capitalise(family)) 
   
 })
 
@@ -1421,12 +1604,11 @@ output$table.3dpoints <- renderTable({
 length3dpoints <- reactive({
   length3dpoints <- length() %>%
     plyr::rbind.fill(threedpoints()) %>%
-    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-    mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-    mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+    mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::mutate(number = as.numeric(number)) %>%
-    # dplyr::filter(!is.na(number)) %>%
     tidyr::replace_na(list(species = "spp")) %>%
     dplyr::select(-c(time)) %>%
     dplyr::mutate(sample = as.character(sample)) %>%
@@ -1443,7 +1625,7 @@ length3dpoints.clean <- reactive({
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
@@ -1566,7 +1748,7 @@ output$length.species.dropdown <- renderUI({
 ## ► Number of lengths - dataframe ----
 length.abundance <- reactive({
   length <- length3dpoints.clean() %>%
-    dplyr::filter(!length%in%c(NA)) %>%
+    dplyr::filter(!length %in% c(NA)) %>%
     dplyr::group_by(campaignid, sample) %>%
     dplyr::summarise(total.abundance = sum(number))
 })
@@ -1756,8 +1938,10 @@ length.species.not.observed <- reactive({
     anti_join(length3dpoints.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>% # use this line to show specific drops OR
     dplyr::rename('marine region not observed in' = marine.region) %>%
-    filter(!species%in%c("spp"))# %>% # Ignore spp in the report 
-  
+    filter(!species%in%c("spp"))%>% # %>% # Ignore spp in the report 
+    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    filter(!family %in% c("Unknown")) %>%
+    glimpse()
 })
 
 ## ► Species not observed - onclick ----
@@ -2090,14 +2274,13 @@ output$length.zone.plot <- renderPlot({
 ## _______________________________________________________ ----
 
 threedpoints.t <- reactive({
-  threedpoints <- threedpoints()%>%
-    dplyr::mutate(sample = paste(sample, period, sep = "_"))
+  threedpoints <- threedpoints()
 })
 
 # ► Combine lengths and 3d points ----
 length3dpoints.t <- reactive({
   length3dpoints <- length() %>%
-    dplyr::mutate(sample = paste(sample, period, sep = "_")) %>%
+    # dplyr::mutate(sample = paste(sample, period, sep = "_")) %>%
     plyr::rbind.fill(threedpoints.t()) %>%
     mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
     mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
@@ -2445,7 +2628,9 @@ length.species.not.observed.t <- reactive({
     anti_join(length3dpoints.clean.t(), ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
     dplyr::rename('marine region not observed in' = marine.region) %>%
-    filter(!species%in%c("spp"))# %>% # Ignore spp in the report 
+    filter(!species%in%c("spp")) %>% # %>% # Ignore spp in the report 
+    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    filter(!family %in% c("Unknown"))
   
 })
 
@@ -2820,6 +3005,9 @@ output$length.zone.plot.t <- renderPlot({
 ##                            MASS                         ----
 ## _______________________________________________________ ----
 
+## _______________________________________________________ ----
+##                Mass for single point campaigns           ----
+## _______________________________________________________ ----
 
 
 ## ► Create mass dataframe ----
@@ -3074,12 +3262,14 @@ output$mass.top.species <- renderPlot({
     scale_y_continuous(expand = expand_scale(mult = c(0, .1)))
 })
 
-## ► Species plot - zone ----
+## ► Species plot - status ----
 output$mass.status.plot <- renderPlot({
   req(input$mass.species.dropdown)
   mass <- mass() %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-    dplyr::filter(scientific%in%c(input$mass.species.dropdown))
+    dplyr::filter(scientific%in%c(input$mass.species.dropdown)) %>%
+    dplyr::group_by(campaignid, sample, scientific, status) %>%
+    dplyr::summarise(mass.g = sum(mass.g))
   
   scientific.name <- input$mass.species.dropdown
   grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
@@ -3096,12 +3286,14 @@ output$mass.status.plot <- renderPlot({
     Theme1
 })
 
-## ► Species plot - Status ----
+## ► Species plot - zone ----
 output$mass.zone.plot <- renderPlot({
   req(input$mass.species.dropdown)
   mass <- mass() %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-    filter(scientific%in%c(input$mass.species.dropdown))
+    filter(scientific%in%c(input$mass.species.dropdown)) %>%
+    dplyr::group_by(campaignid, sample, scientific, zone) %>%
+    dplyr::summarise(mass.g = sum(mass.g))
   
   scientific.name <- input$mass.species.dropdown
   grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
@@ -3124,9 +3316,11 @@ output$mass.spatial.plot <- renderLeaflet({
   req(input$mass.species.dropdown)
   
   mass <- mass() %>%
-    left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-    filter(scientific == input$mass.species.dropdown)
+    filter(scientific == input$mass.species.dropdown) %>%
+    dplyr::group_by(campaignid, sample, scientific) %>%
+    dplyr::summarise(mass.g = sum(mass.g)) %>%
+    left_join(metadata.regions()) 
   
   map <- leaflet(mass) %>%
     addTiles() %>%
@@ -3134,6 +3328,351 @@ output$mass.spatial.plot <- renderLeaflet({
   
   overzero <- filter(mass, mass.g > 0)
   equalzero <- filter(mass, mass.g ==  0)
+  
+  if (nrow(overzero)) {
+    map <- map %>%
+      addCircleMarkers(
+        data = overzero, lat = ~ latitude, lng = ~ longitude, 
+        radius = ~((mass.g/max(mass.g))*15), fillOpacity = 0.5, stroke = FALSE, 
+        label = ~as.character(mass.g)
+      )
+  }
+  if (nrow(equalzero)) {
+    map <- map %>%
+      addCircleMarkers(
+        data = equalzero, lat = ~ latitude, lng = ~ longitude, 
+        radius = 2, fillOpacity = 0.5, color = "white", stroke = FALSE, 
+        label = ~as.character(mass.g)
+      )
+  }
+  map
+})
+
+
+## _______________________________________________________ ----
+##             Mass for transect based campaigns           ----
+## _______________________________________________________ ----
+
+
+## ► Create mass dataframe ----
+mass.t <- reactive({
+  # 1. Check for missing length weight relationship
+  taxa.missing.lw <- length3dpoints.clean.t() %>%
+    dplyr::distinct(family, genus, species) %>%
+    dplyr::anti_join(filter(master, !is.na(a)), by = c("family", "genus", "species"))
+  
+  #2. Fill length data with relevant a and b and if blank use family---
+  length.species.ab <- master %>% # done this way around to avoid duplicating Family coloum
+    dplyr::select(-family) %>%
+    dplyr::inner_join(length3dpoints.clean.t(), ., by = c("genus", "species")) # only keeps row if has a and b
+  
+  # 3. Make family length.weight
+  family.lw <- master %>%
+    dplyr::group_by(family, length.measure) %>%
+    dplyr::mutate(log.a = log10(a)) %>%     
+    dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
+                     b = mean(b, na.rm = T), 
+                     all = mean(all, na.rm = T), 
+                     bll = mean(bll, na.rm = T)) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(a)) %>%
+    dplyr::mutate(all = str_replace_all(all, "NaN", "0")) %>%
+    dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
+    dplyr::mutate(all = as.numeric(all)) %>%
+    dplyr::mutate(bll = as.numeric(bll)) %>%
+    dplyr::mutate(rank = ifelse(length.measure == "FL", 1, ifelse(length.measure == "TL", 2, 3))) %>%
+    dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
+    dplyr::filter(min.rank ==  0)
+  
+  length.family.ab <- length3dpoints.clean.t() %>%
+    dplyr::anti_join(master, by = c("genus", "species")) %>%
+    dplyr::left_join(family.lw, by = "family")
+  
+  # 5. Fill length data with relevant a and b and if blank use family---
+  complete.length.number.mass <- length.species.ab %>%
+    bind_rows(length.family.ab) %>%
+    dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
+    dplyr::mutate(length.cm = length/10) %>%
+    dplyr::mutate(all = ifelse(is.na(all)&length.measure%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+    dplyr::mutate(bll = ifelse(is.na(bll)&length.measure%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+    dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>% 
+    dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
+    dplyr::filter(mass.g>0) %>%
+    dplyr::full_join(metadata.regions()) %>%
+    dplyr::select(c(sample, family, genus, species, length, range, number, mass.g, length.cm)) %>%
+    tidyr::complete(sample, nesting(family, genus, species)) %>%
+    tidyr::replace_na(list(mass.g = 0)) %>%
+    dplyr::mutate(mass.kg = mass.g/1000) %>%
+    dplyr::left_join(metadata.regions())
+})
+
+
+## ► Create filtered MASS download -----
+mass.complete.download.t <- reactive({
+  
+  length3dpoints <-  dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
+    dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+    dplyr::right_join(metadata.regions()) %>% # add in all samples
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+    dplyr::ungroup() %>%
+    dplyr::mutate(length = as.numeric(length)) %>%
+    dplyr::left_join(metadata.regions()) %>%
+    dplyr::mutate(marine.region = as.character(marine.region)) %>%
+    dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
+  
+  # 1. Check for missing length weight relationship
+  taxa.missing.lw <- length3dpoints %>%
+    dplyr::distinct(family, genus, species) %>%
+    dplyr::anti_join(filter(master, !is.na(a)), by = c("family", "genus", "species"))
+  
+  #2. Fill length data with relevant a and b and if blank use family---
+  length.species.ab <- master %>% # done this way around to avoid duplicating Family coloum
+    dplyr::select(-family) %>%
+    dplyr::inner_join(length3dpoints, ., by = c("genus", "species")) # only keeps row if has a and b
+  
+  # 3. Make family length.weight
+  family.lw <- master %>%
+    dplyr::group_by(family, length.measure) %>%
+    dplyr::mutate(log.a = log10(a)) %>%     
+    dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
+                     b = mean(b, na.rm = T), 
+                     all = mean(all, na.rm = T), 
+                     bll = mean(bll, na.rm = T)) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(a)) %>%
+    dplyr::mutate(all = str_replace_all(all, "NaN", "0")) %>%
+    dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
+    dplyr::mutate(all = as.numeric(all)) %>%
+    dplyr::mutate(bll = as.numeric(bll)) %>%
+    dplyr::mutate(rank = ifelse(length.measure == "FL", 1, ifelse(length.measure == "TL", 2, 3))) %>%
+    dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
+    dplyr::filter(min.rank ==  0)
+  
+  length.family.ab <- length3dpoints %>%
+    dplyr::anti_join(master, by = c("genus", "species")) %>%
+    dplyr::left_join(family.lw, by = "family")
+  
+  # 5. Fill length data with relevant a and b and if blank use family---
+  complete.length.number.mass <- length.species.ab %>%
+    bind_rows(length.family.ab) %>%
+    dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
+    dplyr::mutate(length.cm = length/10) %>%
+    dplyr::mutate(all = ifelse(is.na(all)&length.measure%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+    dplyr::mutate(bll = ifelse(is.na(bll)&length.measure%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+    dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>% 
+    dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
+    dplyr::filter(mass.g>0) %>%
+    dplyr::full_join(metadata.regions()) %>%
+    dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm)) %>%
+    tidyr::complete(campaignid, sample, nesting(family, genus, species)) %>%
+    tidyr::replace_na(list(mass.g = 0)) %>%
+    dplyr::mutate(mass.kg = mass.g/1000)
+  
+  if (input$error.synonyms == TRUE) {
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms, by = c("family", "genus", "species")) %>%
+      dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+      dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+      dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+      dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+      dplyr::right_join(metadata.regions()) %>% # add in all samples
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+      dplyr::ungroup() %>%
+      dplyr::mutate(length = as.numeric(length)) %>%
+      dplyr::left_join(metadata.regions()) %>%
+      dplyr::mutate(marine.region = as.character(marine.region)) %>%
+      dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
+  } 
+  else{ 
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms, by = c("family", "genus", "species")) %>%
+      dplyr::right_join(metadata.regions()) %>% # add in all samples
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+      dplyr::ungroup() %>%
+      dplyr::mutate(length = as.numeric(length)) %>%
+      dplyr::left_join(metadata.regions()) %>%
+      dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes")) %>%
+      dplyr::mutate(marine.region = as.character(marine.region)) %>%
+      dplyr::mutate(project = input$project.name) %>%
+      dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
+      dplyr::mutate(scientific = paste(genus, species, sep = " "))
+  }
+  
+  complete.length.number.mass <- complete.length.number.mass
+  
+  species.out.of.area <- master.expanded %>%
+    dplyr::mutate(marine.region = as.character(marine.region)) %>%
+    anti_join(complete.length.number.mass, ., by = c("family", "genus", "species", "marine.region")) %>%
+    distinct(family, genus, species, marine.region) %>%
+    filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp"))
+  
+  
+  if (input$error.area.t == FALSE) {
+    mass.area <- complete.length.number.mass
+  } 
+  else{ 
+    mass.area <- anti_join(complete.length.number.mass, species.out.of.area)
+  }
+  
+  mass.area <- mass.area %>%
+    dplyr::filter(range < (input$error.range.limit.t*1000))
+  
+  length.wrong <- left_join(mass.area, master.min.max, by = c("family", "genus", "species")) %>%
+    dplyr::filter(length<min.length|length>fb.length_max) %>%
+    mutate(reason = ifelse(length<min.length, "too small", "too big"))
+  
+  length.too.small <- length.wrong %>%
+    dplyr::filter(reason%in%c("too small"))
+  
+  length.too.big <- length.wrong %>%
+    dplyr::filter(reason%in%c("too big"))
+  
+  if (input$error.length.small.t == TRUE) {
+    mass.small <- anti_join(mass.area, length.too.small)
+  }
+  else{
+    mass.small <- mass.area
+  }
+  
+  mass.small <- mass.small
+  
+  if (input$error.length.big.t == TRUE) {
+    mass.big <- anti_join(mass.small, length.too.big)
+  }
+  else{
+    mass.big <- mass.small
+  }
+  mass.big <- mass.big %>%
+    dplyr::right_join(metadata.regions()) %>% # add in all samples
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+    dplyr::left_join(metadata.regions()) %>%
+    filter(!is.na(family)) %>%
+    dplyr::mutate(project = input$project.name) %>%
+    dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " "))
+  
+})
+
+## ► Species dropdown ----
+output$mass.species.dropdown.t <- renderUI({
+  df <- mass.t()
+  
+  options <- df %>%
+    dplyr::mutate(genus = ifelse(genus%in%c(NA, "NA", "Unknown"), as.character(family), as.character(genus))) %>%
+    dplyr::group_by(family, genus, species) %>%
+    dplyr::summarise(sum.mass = sum(mass.g)) %>%
+    dplyr::arrange(-sum.mass) %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    distinct(scientific) %>%
+    pull("scientific")
+  
+  create_dropdown("mass.species.dropdown.t", options, NULL)
+})
+
+## ► Top species ----
+output$mass.top.species.t <- renderPlot({
+  mass.sum <- mass.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    left_join(classes) %>%
+    dplyr::group_by(class, scientific) %>%
+    dplyr::summarise(sum.mass.g = sum(mass.g)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(sum.mass.kg = sum.mass.g/1000)
+  
+  if (input$mass.include.sharks.t == "yes"){
+    mass.sum <- mass.sum %>%
+      top_n(input$mass.species.limit.t)
+  } else {
+    mass.sum <- mass.sum %>%
+      dplyr::filter(!class%in%c("Elasmobranchii")) %>%
+      top_n(input$mass.species.limit.t)
+  }
+  
+  ## Total frequency of occurance
+  ggplot(mass.sum, aes(x = reorder(scientific, sum.mass.kg), y = sum.mass.kg)) +   
+    geom_bar(stat = "identity", position = position_dodge())+
+    coord_flip()+
+    xlab("Species")+
+    ylab(expression(Total~mass~(Sigma~Kg)))+
+    Theme1+
+    theme(axis.text.y = element_text(face = "italic"))+
+    theme_collapse+
+    scale_y_continuous(expand = expand_scale(mult = c(0, .1)))
+})
+
+## ► Species plot - status ----
+output$mass.status.plot.t <- renderPlot({
+  req(input$mass.species.dropdown.t)
+  mass <- mass.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    dplyr::filter(scientific%in%c(input$mass.species.dropdown.t)) %>%
+    dplyr::group_by(campaignid, sample, scientific, status) %>%
+    dplyr::summarise(mass.g = sum(mass.g))
+  
+  scientific.name <- input$mass.species.dropdown.t
+  grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
+                                gp = gpar(col = "black", fontsize = 13, fontface = "italic")))
+  
+  ggplot(mass, aes(x = factor(status), y = mass.g,  fill = status, notch = FALSE, outlier.shape = NA), alpha = 0.5) + 
+    stat_boxplot(geom = 'errorbar')+
+    geom_boxplot(outlier.color = NA, notch = FALSE)+
+    stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)+ #this is adding the dot for the mean
+    scale_y_continuous(expand = expand_scale(mult = c(0, .1)))+
+    # scale_fill_manual(values = c("Fished" = "grey", "No-take" = "#1470ad"))+
+    xlab("Status") + ylab("Mass (g)") +
+    annotation_custom(grob.sci)+ 
+    Theme1
+})
+
+## ► Species plot - zone ----
+output$mass.zone.plot.t <- renderPlot({
+  req(input$mass.species.dropdown.t)
+  mass <- mass.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    filter(scientific%in%c(input$mass.species.dropdown.t)) %>%
+    dplyr::group_by(campaignid, sample, scientific, zone) %>%
+    dplyr::summarise(mass.g = sum(mass.g))
+  
+  scientific.name <- input$mass.species.dropdown.t
+  grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
+                                gp = gpar(col = "black", fontsize = 13, fontface = "italic")))
+  
+  ggplot(mass, aes(x = factor(zone), y = mass.g,  fill = zone, notch = FALSE, outlier.shape = NA), alpha = 0.5) + 
+    stat_boxplot(geom = 'errorbar')+
+    geom_boxplot(outlier.color = NA, notch = FALSE)+
+    stat_summary(fun.y = mean, geom = "point", shape = 23, size = 4)+ #this is adding the dot for the mean
+    scale_y_continuous(expand = expand_scale(mult = c(0, .1)))+
+    # scale_fill_manual(values = c("Fished" = "grey", "No-take" = "#1470ad"))+
+    xlab("Zone") + ylab("Mass (g)") +
+    annotation_custom(grob.sci)+ 
+    Theme1
+})
+
+## ► Spatial plot ----
+output$mass.spatial.plot.t <- renderLeaflet({
+  
+  req(input$mass.species.dropdown.t)
+  
+  mass <- mass.t() %>%
+    dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+    filter(scientific == input$mass.species.dropdown.t) %>%
+    dplyr::group_by(campaignid, sample, scientific) %>%
+    dplyr::summarise(mass.g = sum(mass.g)) %>%
+    left_join(metadata.regions()) %>%
+    glimpse()
+  
+  map <- leaflet(mass) %>%
+    addTiles() %>%
+    fitBounds(~min(longitude), ~min(latitude), ~max(longitude), ~max(latitude))
+  
+  overzero <- filter(mass, mass.g > 0) %>% glimpse()
+  equalzero <- filter(mass, mass.g ==  0) %>% glimpse()
   
   if (nrow(overzero)) {
     map <- map %>%
