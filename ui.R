@@ -14,6 +14,7 @@ tagList(
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
                               menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
+                              menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
                               menuItem("Create & check mass", tabName = "createmass", icon = icon("check")),
                               menuItem("Download data", tabName = "downloads", icon = icon("download")))
                             ),
@@ -24,6 +25,7 @@ tagList(
                             sidebarMenu(
                               menuItem("Check metadata & periods", tabName = "checkmetadatat", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlengtht", icon = icon("check")),
+                              menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
                               menuItem("Create & check mass", tabName = "createmasst", icon = icon("check")),
                               menuItem("Download data", tabName = "downloadst", icon = icon("download")))
                             ),
@@ -48,76 +50,103 @@ tagList(
       tabItem(tabName = "upload",
               fluidRow(tags$head(tags$style(type = 'text/css',  '.rpivotTable{ overflow-x: scroll; }')),
                        
-                  box(width = 6, height = 825, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE, 
-                           includeMarkdown("aims.Rmd")),     
-                  
-                  box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
-
-                      radioButtons("method", "Choose the type of method:",
-                                   c("Single point e.g. BRUV & BOSS" = "point",
-                                     "Transect e.g. DOV & ROV" = "transect"),
-                                   selected = "point",
-                                   inline = TRUE),
-                      
-                      shiny::conditionalPanel("input.method == 'point'",
-                                              radioButtons("sample", "How did you record the sample name in EventMeasure:",
-                                                           c("OpCode" = "opcode",
-                                                             "Period" = "period"),
-                                                           selected = "opcode",
-                                                           inline = TRUE)),
-
-                      shiny::conditionalPanel("input.method == 'transect'",
-                                          radioButtons("sample.t", "How did you record the sample name in EventMeasure:",
-                                                       c("OpCode and Period" = "opcodeperiod",
-                                                         "Period only" = "period"),
-                                                       selected = "opcodeperiod",
-                                                       inline = TRUE))
-                      ),
+                       column(width = 6,
+                              
+                              box(width = NULL, title = "Format of data", status = "primary", solidHeader = TRUE,
+                                  
+                                  radioButtons("method", "Choose the type of method:",
+                                               c("Single point e.g. BRUV & BOSS" = "point",
+                                                 "Transect e.g. DOV & ROV" = "transect"),
+                                               selected = "point",
+                                               inline = TRUE),
+                                  
+                                  shiny::conditionalPanel("input.method == 'point'",
+                                                          radioButtons("sample", "How did you record the sample name in EventMeasure:",
+                                                                       c("OpCode" = "opcode",
+                                                                         "Period" = "period"),
+                                                                       selected = "opcode",
+                                                                       inline = TRUE)),
+                                  
+                                  shiny::conditionalPanel("input.method == 'transect'",
+                                                          radioButtons("sample.t", "How did you record the sample name in EventMeasure:",
+                                                                       c("OpCode and Period" = "opcodeperiod",
+                                                                         "Period only" = "period"),
+                                                                       selected = "opcodeperiod",
+                                                                       inline = TRUE)),
+                                  
+                                  radioButtons("habdirection", "If checking habitat, which directions were annotated?",
+                                               c("Forwards only" = "forwards",
+                                                 "Forwards and backwards" = "both"),
+                                               selected = "forwards",
+                                               inline = TRUE),
+                                  
+                                  radioButtons("habreliefsep", "If checking habitat, was relief annotated separately?",
+                                               c("No" = "no",
+                                                 "Yes" = "yes"),
+                                               selected = "no",
+                                               inline = TRUE)
+                                  ),
+                              
+                              box(width = NULL, height = 700, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE,
+                                  includeMarkdown("aims.Rmd"))
+                              ),
                        
-                  
-                  # box(width = 6, title = "Upload data", status = "primary", solidHeader = TRUE,
-                  #     fileInput("upload.metadata", "Metadata (CSV):", multiple = TRUE,
-                  #               accept = c("image/vnd.csv",".csv")),
-                  #     fileInput("upload.points", "Points (TXT)", multiple = TRUE,
-                  #               accept = c("image/vnd.txt",".txt")),
-                  #     fileInput("upload.period", "Period (TXT)", multiple = TRUE,
-                  #               accept = c("image/vnd.txt",".txt")),
-                  #     fileInput("upload.length", "Length (TXT)", multiple = TRUE,
-                  #               accept = c("image/vnd.txt",".txt")),
-                  #     fileInput("upload.3dpoints", "3D points (TXT)", multiple = TRUE,
-                  #               accept = c("image/vnd.txt",".txt")),
-                  #     fileInput("upload.dotpoints", "Dot Point Measurements (TXT)", multiple = TRUE,
-                  #               accept = c("image/vnd.txt",".txt")))
-                  
-                  
-                  box(width = 6, height = 100, title = "Upload metadata (csv)", status = "primary", solidHeader = TRUE,
-                    fileInput("upload.metadata", NULL, multiple = TRUE,
-                                 accept = c("image/vnd.csv",".csv"))),
-
-
-                   box(width = 6, height = 100, title = "Upload points file (txt)", status = "primary",solidHeader = TRUE,
-                       fileInput("upload.points", NULL, multiple = TRUE,
-                                 accept = c("image/vnd.txt",".txt"))),
-
-                  box(width = 6, height = 100, title = "Upload period file (txt)", status = "primary",solidHeader = TRUE,
-                                              fileInput("upload.period", NULL, multiple = TRUE,
-                                                        accept = c("image/vnd.txt",".txt"))),
-
-                  box(width = 6, height = 100, title = "Upload length file (txt)", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.length", NULL, multiple = TRUE,
-                                 accept = c("image/vnd.txt",".txt"))),
-
-                  box(width = 6, height = 100, title = "Upload 3D points file (txt)", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.3dpoints", NULL, multiple = TRUE,
-                                 accept = c("image/vnd.txt",".txt"))),
-                  
-                  box(width = 6, height = 100, title = "Upload Dot Point Measurements (txt)", status = "primary",solidHeader = TRUE,
-                      fileInput("upload.3dpoints", NULL, multiple = TRUE,
-                                accept = c("image/vnd.txt",".txt")))
-                  ),
-                  
+                       box(width = 6, height = 110, title = "Upload metadata (csv)", status = "primary", solidHeader = FALSE,
+                           fileInput("upload.metadata", NULL, multiple = TRUE,
+                                     accept = c("image/vnd.csv",".csv"))),
+                       
+                       box(width = 6, title = "Upload EventMeasure exports  (txt files)", status = "primary", solidHeader = FALSE,
+                           
+                           box(width = 6, height = 110, title = "Points file", status = "primary", solidHeader = TRUE,
+                               fileInput("upload.points", NULL, multiple = TRUE,
+                                         accept = c("image/vnd.txt",".txt"))),
+                      
+                           box(width = 6, height = 110, title = "Period file", status = "primary", solidHeader = TRUE,
+                               fileInput("upload.period", NULL, multiple = TRUE,
+                                          accept = c("image/vnd.txt",".txt"))),
+                      
+                           box(width = 6, height = 110, title = "Length file", status = "primary", solidHeader = TRUE,
+                               fileInput("upload.length", NULL, multiple = TRUE,
+                                          accept = c("image/vnd.txt",".txt"))),
+                      
+                           box(width = 6, height = 110, title = "3D points file", status = "primary", solidHeader = TRUE,
+                               fileInput("upload.3dpoints", NULL, multiple = TRUE,
+                                          accept = c("image/vnd.txt",".txt")))
+                           ),
+                       
+                       box(width = 6, title = "Upload TransectMeasure exports (txt files)", status = "primary", solidHeader = FALSE,
+                           
+                           box(width = 6, height = 110, title = "Forward facing Dot Point Measurements", 
+                               status = "primary", solidHeader = TRUE,
+                               
+                               fileInput("upload.f.dotpoints", NULL, multiple = TRUE,
+                                         accept = c("image/vnd.txt",".txt"))),
+                           
+                           shiny::conditionalPanel("input.habdirection == 'both'",
+                                                   box(width = 6, height = 110, title = "Backward facing Dot Point Measurements", 
+                                                       status = "primary", solidHeader = TRUE,
+                                                       fileInput("upload.b.dotpoints", NULL, multiple = TRUE,
+                                                                 accept = c("image/vnd.txt",".txt")))
+                                                   ),
+                           
+                           shiny::conditionalPanel("input.habreliefsep == 'yes'",
+                                                   
+                                                   box(width = 6, height = 110, title = "Forwards Relief Dot Point Measurements", 
+                                                       status = "primary", solidHeader = TRUE,
+                                                       fileInput("upload.r.f.dotpoints", NULL, multiple = TRUE,
+                                                                 accept = c("image/vnd.txt",".txt"))),
+                                                   
+                                                   shiny::conditionalPanel("input.habdirection == 'both'",
+                                                                           box(width = 6, height = 110, title = "Backwards Relief Dot Point Measurements", 
+                                                                               status = "primary", solidHeader = TRUE,
+                                                                               fileInput("upload.r.b.dotpoints", NULL, multiple = TRUE,
+                                                                                         accept = c("image/vnd.txt",".txt")))
+                                                   )
+                           )
+                           ),
+              
                   tabBox(width = 12, height = 800,
-                    # Title can include an icon
+                         
                     title = tagList(shiny::icon("gear"), "Preview data"),
                     tabPanel("Metadata", div(style = 'overflow-x: scroll', 
                                              tableOutput("table.metadata")
@@ -126,10 +155,11 @@ tagList(
                     tabPanel("Points", tableOutput("table.points")),
                     tabPanel("Lengths", tableOutput("table.length")),
                     tabPanel("3D Points", tableOutput("table.3dpoints")),
-                    tabPanel("Periods", tableOutput("table.periods"))
+                    tabPanel("Periods", tableOutput("table.periods")),
+                    tabPanel("Habitat", tableOutput("table.habitat"))
                   
                   )
-      ),
+      )),
       
       # Check metadata - point based data -----
       tabItem(tabName = "checkmetadata",
@@ -356,6 +386,19 @@ tagList(
               )),
       
       
+      # Check habitat - point based data -----
+      tabItem(tabName = "checkhab",
+              fluidRow(div(id="click.metadata.samples.without.hab",
+                           valueBoxOutput("metadata.samples.without.hab")),
+                       div(id="click.habitat.samples.without.metadata",
+                           valueBoxOutput("habitat.samples.without.metadata")),
+                       div(id="click.habitat.annotations.per.sample",
+                           valueBoxOutput("habitat.annotations.per.sample"))
+                       
+                       )
+      ),
+      
+      
       # Create downloads - point based data -----
       tabItem(tabName = "downloads",
               fluidRow(
@@ -453,5 +496,3 @@ tagList(
   )
 )
 )
-
-# fluidRow

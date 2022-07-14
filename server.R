@@ -58,7 +58,6 @@ metadata <- reactive({
     metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       ga.clean.names() %>%
       dplyr::rename(dplyr::any_of(lookup)) %>%
-      glimpse() %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", "")) %>%
       dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
     
@@ -151,8 +150,7 @@ metadata.regions <- reactive({
                                       "No-take" = "Not Fished", 
                                       "No-take" = "No-Take", 
                                       "Fished" = "Special Purpose")) %>%
-    dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length, zone, marine.region) %>%
-    glimpse()
+    dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length, zone, marine.region)
 })
 
 ## ► Preview metadata in dashboard ----
@@ -1172,8 +1170,7 @@ onclick('click.maxn.total.number',
 points.no.number <- reactive({
   points.no.number <- points() %>%
     filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frame) %>%
-    glimpse()
+    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frame)
 })
 
 ## ►  Points without a number - value box ----
@@ -1214,6 +1211,7 @@ onclick('click.points.no.number',
 maxn.species.not.observed <- reactive({
   maxn <- master.expanded %>%
     anti_join(maxn.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
+    filter(maxn > 0) %>%
     distinct(family, genus, species, marine.region) %>% # use this line to show specific drops OR
     dplyr::rename('marine region not observed in' = marine.region) %>%
     filter(!species%in%c("spp"))# %>% # Ignore spp in the report 
@@ -1936,12 +1934,12 @@ onclick('click.length.synonym', showModal(modalDialog(
 length.species.not.observed <- reactive({
   length <- master.expanded %>%
     anti_join(length3dpoints.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
+    filter(number > 0) %>%
     distinct(family, genus, species, marine.region) %>% # use this line to show specific drops OR
     dplyr::rename('marine region not observed in' = marine.region) %>%
     filter(!species%in%c("spp"))%>% # %>% # Ignore spp in the report 
     mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-    filter(!family %in% c("Unknown")) %>%
-    glimpse()
+    filter(!family %in% c("Unknown"))
 })
 
 ## ► Species not observed - onclick ----
@@ -2311,8 +2309,7 @@ length3dpoints.clean.t <- reactive({
     dplyr::ungroup() %>%
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
-    dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) %>%
-    glimpse()
+    dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) 
     
 })
 
@@ -2465,7 +2462,6 @@ threedpoints.abundance.t <- reactive({
     dplyr::group_by(campaignid, sample) %>%
     dplyr::summarise(total.abundance = sum(number)) %>%
     dplyr::ungroup() %>%
-    glimpse() %>%
     tidyr::replace_na(list(total.abundance = 0))
 })
 
@@ -2626,6 +2622,7 @@ onclick('click.length.synonym.t', showModal(modalDialog(
 length.species.not.observed.t <- reactive({
   length <- master.expanded %>%
     anti_join(length3dpoints.clean.t(), ., by = c("family", "genus", "species", "marine.region")) %>%
+    filter(number > 0) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
     dplyr::rename('marine region not observed in' = marine.region) %>%
     filter(!species%in%c("spp")) %>% # %>% # Ignore spp in the report 
@@ -3664,15 +3661,14 @@ output$mass.spatial.plot.t <- renderLeaflet({
     filter(scientific == input$mass.species.dropdown.t) %>%
     dplyr::group_by(campaignid, sample, scientific) %>%
     dplyr::summarise(mass.g = sum(mass.g)) %>%
-    left_join(metadata.regions()) %>%
-    glimpse()
+    left_join(metadata.regions()) 
   
   map <- leaflet(mass) %>%
     addTiles() %>%
     fitBounds(~min(longitude), ~min(latitude), ~max(longitude), ~max(latitude))
   
-  overzero <- filter(mass, mass.g > 0) %>% glimpse()
-  equalzero <- filter(mass, mass.g ==  0) %>% glimpse()
+  overzero <- filter(mass, mass.g > 0)
+  equalzero <- filter(mass, mass.g ==  0)
   
   if (nrow(overzero)) {
     map <- map %>%
@@ -3748,7 +3744,6 @@ output$length.vs.maxn <- renderValueBox({
 ## ► Onclick ----
 onclick('click.length.vs.maxn', showModal(modalDialog(
   title = "Number of lengths/3D points does not match MaxN", size = "l", easyClose = TRUE, 
-  #downloadButton("download.maxn.synonyms", "Download as csv"), 
   renderDataTable(length.vs.maxn(),  rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
 
@@ -3794,6 +3789,277 @@ output$length.vs.maxn.species.plot <- renderPlot({
     scale_x_continuous(expand = expand_scale(mult = c(-0.5, .5)))+
     Theme1
 })
+
+## _______________________________________________________ ----
+##                        HABITAT                          ----
+## _______________________________________________________ ----
+
+### ► Read in habitat points----
+hab.points <- reactive({
+  
+  # IF forwards habitat is uploaded and only forwards has been annotated
+  if(!is.null(input$upload.f.dotpoints) & input$habdirection == "forwards") {
+    
+    points <- lapply(input$upload.f.dotpoints$datapath, fread)
+    names(points) <- input$upload.f.dotpoints$name 
+    
+    points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      dplyr::select(-c(Spare)) %>%
+      ga.clean.names() %>%
+      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+      mutate(sample=as.character(sample)) %>% 
+      dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+                                                          "_Forwards" = "",
+                                                          ".Forwards" = "",
+                                                          "_forwards" = "",
+                                                          ".forwards" = ""
+                                                          ))) %>%
+      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+      mutate(direction = "forwards") # BG Broad, morph and type????
+    
+    if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints)){
+      
+      relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
+      names(relief) <- input$upload.r.f.dotpoints$name 
+      
+      relief <- rbindlist(relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+        dplyr::select(-c(Spare)) %>%
+        ga.clean.names() %>%
+        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+        mutate(sample=as.character(sample)) %>% 
+        dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+                                                            "_Forwards" = "",
+                                                            ".Forwards" = "",
+                                                            "_forwards" = "",
+                                                            ".forwards" = "",
+                                                            "_Relief" = "",
+                                                            "_relief" = "",
+                                                            ".relief" = "",
+                                                            ".Relief" = ""
+        ))) %>%
+        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+        mutate(direction = "forwards")
+      
+      points <- bind_rows(points, relief)
+    }
+    
+    # IF forwards and backwards habitat uploaded and both directions annotated
+  } else if(!is.null(input$upload.f.dotpoints) & !is.null(input$upload.b.dotpoints) &
+            input$habdirection == "both") {
+    
+    f.points <- lapply(input$upload.f.dotpoints$datapath, fread)
+    names(f.points) <- input$upload.f.dotpoints$name 
+    
+    f.points <- rbindlist(f.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      dplyr::select(-c(Spare)) %>%
+      ga.clean.names() %>%
+      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+      mutate(sample=as.character(sample)) %>% 
+      dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+                                                          "_Forwards" = "",
+                                                          ".Forwards" = "",
+                                                          "_forwards" = "",
+                                                          ".forwards" = ""
+      ))) %>%
+      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+      mutate(direction = "forwards") # BG Broad, morph and type????
+    
+    b.points <- lapply(input$upload.b.dotpoints$datapath, fread)
+    names(b.points) <- input$upload.b.dotpoints$name 
+    
+    b.points <- rbindlist(b.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      dplyr::select(-c(Spare)) %>%
+      ga.clean.names() %>%
+      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+      mutate(sample=as.character(sample)) %>% 
+      dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+                                                          "_Backwards" = "",
+                                                          ".Backwards" = "",
+                                                          "_backwards" = "",
+                                                          ".backwards" = ""
+      ))) %>%
+      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+      mutate(direction = "backwards") # BG Broad, morph and type????
+    
+    points <- rbind(f.points, b.points)
+    
+    if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints) & !is.null(input$upload.r.b.dotpoints)){
+      
+      f.relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
+      names(f.relief) <- input$upload.r.f.dotpoints$name 
+      
+      f.relief <- rbindlist(f.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+        dplyr::select(-c(Spare)) %>%
+        ga.clean.names() %>%
+        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+        mutate(sample=as.character(sample)) %>% 
+        dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+                                                            "_Forwards" = "",
+                                                            ".Forwards" = "",
+                                                            "_forwards" = "",
+                                                            ".forwards" = "",
+                                                            "_Relief" = "",
+                                                            "_relief" = "",
+                                                            ".relief" = "",
+                                                            ".Relief" = ""
+        ))) %>%
+        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+        mutate(direction = "forwards")
+      
+      b.relief <- lapply(input$upload.r.b.dotpoints$datapath, fread)
+      names(b.relief) <- input$upload.r.b.dotpoints$name 
+      
+      b.relief <- rbindlist(b.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+        dplyr::select(-c(Spare)) %>%
+        ga.clean.names() %>%
+        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+        mutate(sample=as.character(sample)) %>% 
+        dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+                                                            "_Backwards" = "",
+                                                            ".Backwards" = "",
+                                                            "_backwards" = "",
+                                                            ".backwards" = "",
+                                                            "_Relief" = "",
+                                                            "_relief" = "",
+                                                            ".relief" = "",
+                                                            ".Relief" = ""
+        ))) %>%
+        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+        mutate(direction = "backwards")
+      
+      relief <- rbind(f.relief, b.relief)
+      
+      points <- bind_rows(points, relief)
+    }
+  }
+  
+  points <- points %>% glimpse()
+})  
+
+
+## ► Preview habitat in dashboard ----
+output$table.habitat <- renderTable({
+  hab.points()
+})
+
+## ► Samples without habitat - dataframe ----
+metadata.samples.without.hab <- reactive({
+  
+  metadata.samples <- metadata() %>%
+    distinct(campaignid, sample, successful.count, successful.length) %>%
+    mutate(sample = as.factor(sample))
+  
+  points.samples <- hab.points() %>%
+    distinct(campaignid, sample)
+  
+  missing.fish <- anti_join(metadata.samples, points.samples)
+})
+
+## ► Samples without habitat - valueBox ----
+output$metadata.samples.without.hab <- renderValueBox({
+  
+  if (dim(metadata.samples.without.hab())[1] > 0) {
+    total <- nrow(metadata.samples.without.hab())
+    col <- "red"
+  }
+  else{
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Sample(s) without habitat", 
+           icon = icon("question"), color = col
+  )
+})
+
+## ► Samples without habitat - onclick----
+onclick('click.metadata.samples.without.hab', 
+        showModal(modalDialog(
+          title = "Samples without habitat", 
+          easyClose = TRUE,
+          renderDataTable(metadata.samples.without.hab(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Habitat samples without metadata - dataframe ----
+habitat.samples.without.metadata <- reactive({
+  metadata.samples <- metadata() %>%
+    distinct(campaignid, sample) %>%
+    mutate(sample = as.factor(sample))
+  
+  points.samples <- hab.points() %>%
+    distinct(campaignid, sample)
+  
+  missing.metadata <- anti_join(points.samples, metadata.samples)
+})
+
+## ► Habitat samples without metadata - valueBox ----
+output$habitat.samples.without.metadata <- renderValueBox({
+  
+  if (dim(habitat.samples.without.metadata())[1] > 0) {
+    total <- nrow(habitat.samples.without.metadata())
+    col <- "red"
+    
+  } else {
+    total = 0
+    col <- "green"
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "Sample(s) in habitat file(s) missing metadata", 
+           icon = icon("exclamation-circle"), color = col
+  )
+})
+
+## ► Samples without metadata - onclick ----
+onclick('click.habitat.samples.without.metadata', 
+        showModal(modalDialog(
+          title = "Samples in habitat without metadata", 
+          easyClose = TRUE,
+          renderDataTable(habitat.samples.without.metadata(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+        ))
+
+## ► Habitat number of annotations - dataframe ----
+habitat.annotations.per.sample <- reactive({
+ 
+  points.samples <- hab.points() %>%
+    ungroup() %>%
+    dplyr::group_by(campaignid, sample, direction) %>%
+    dplyr::summarise(number.of.annotations = n()) %>%
+    glimpse()
+  
+})
+
+## ► Habitat number of annotations - valueBox ----
+output$habitat.annotations.per.sample <- renderValueBox({
+  
+  if (dim(habitat.annotations.per.sample())[1] > 0) {
+    total <- mean(habitat.annotations.per.sample()$number.of.annotations)
+    col <- "blue"
+    
+  } else {
+    total = 0
+    col <- "red"
+  }
+  
+  valueBox(width = 2, 
+           total, 
+           "Average number of annotations per sample", 
+           icon = icon("exclamation-circle"), color = col
+  )
+})
+
+## ► Habitat number of annotations - onclick ----
+onclick('click.habitat.annotations.per.sample', 
+        showModal(modalDialog(
+          title = "Number of annotation sby sample", 
+          easyClose = TRUE,
+          renderDataTable(habitat.annotations.per.sample(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+        ))
+
 
 ## _______________________________________________________ ----
 ##                         DOWNLOADS                       ----
@@ -3984,5 +4250,8 @@ output$world.regions.leaflet <- renderLeaflet({
   return(leaflet1)
   
 })
+
+
+
 
 }

@@ -1,0 +1,13 @@
+name: isEMgood
+title: isEMgood
+username:
+account: matt-navarro
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6640355
+bundleId: 6097199
+url: https://marine-ecology.shinyapps.io/isEMgood/
+when: 1657779991.92906
+lastSyncTime: 1657779991.92906
+asMultiple: FALSE
+asStatic: FALSE
