@@ -24,6 +24,7 @@ library(fst)
 # Plotting
 library(ggplot2)
 library(grid)
+library(ggbeeswarm) # NEW 15/07/2022
 
 # Maps
 library(rgdal)

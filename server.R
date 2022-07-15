@@ -3806,7 +3806,7 @@ hab.points <- reactive({
     points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       dplyr::select(-c(Spare)) %>%
       ga.clean.names() %>%
-      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
       mutate(sample=as.character(sample)) %>% 
       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
                                                           "_Forwards" = "",
@@ -3814,8 +3814,8 @@ hab.points <- reactive({
                                                           "_forwards" = "",
                                                           ".forwards" = ""
                                                           ))) %>%
-      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-      mutate(direction = "forwards") # BG Broad, morph and type????
+      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) #%>%
+      #mutate(direction = "forwards") # BG Broad, morph and type????
     
     if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints)){
       
@@ -3825,7 +3825,7 @@ hab.points <- reactive({
       relief <- rbindlist(relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
         dplyr::select(-c(Spare)) %>%
         ga.clean.names() %>%
-        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
         mutate(sample=as.character(sample)) %>% 
         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
                                                             "_Forwards" = "",
@@ -3837,8 +3837,8 @@ hab.points <- reactive({
                                                             ".relief" = "",
                                                             ".Relief" = ""
         ))) %>%
-        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-        mutate(direction = "forwards")
+        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) #%>%
+        #mutate(direction = "forwards")
       
       points <- bind_rows(points, relief)
     }
@@ -3853,7 +3853,7 @@ hab.points <- reactive({
     f.points <- rbindlist(f.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       dplyr::select(-c(Spare)) %>%
       ga.clean.names() %>%
-      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
       mutate(sample=as.character(sample)) %>% 
       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
                                                           "_Forwards" = "",
@@ -3861,8 +3861,8 @@ hab.points <- reactive({
                                                           "_forwards" = "",
                                                           ".forwards" = ""
       ))) %>%
-      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-      mutate(direction = "forwards") # BG Broad, morph and type????
+      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) #%>%
+      #mutate(direction = "forwards") # BG Broad, morph and type????
     
     b.points <- lapply(input$upload.b.dotpoints$datapath, fread)
     names(b.points) <- input$upload.b.dotpoints$name 
@@ -3870,7 +3870,7 @@ hab.points <- reactive({
     b.points <- rbindlist(b.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
       dplyr::select(-c(Spare)) %>%
       ga.clean.names() %>%
-      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
       mutate(sample=as.character(sample)) %>% 
       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
                                                           "_Backwards" = "",
@@ -3878,8 +3878,8 @@ hab.points <- reactive({
                                                           "_backwards" = "",
                                                           ".backwards" = ""
       ))) %>%
-      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-      mutate(direction = "backwards") # BG Broad, morph and type????
+      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) #%>%
+      #mutate(direction = "backwards") # BG Broad, morph and type????
     
     points <- rbind(f.points, b.points)
     
@@ -3891,7 +3891,7 @@ hab.points <- reactive({
       f.relief <- rbindlist(f.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
         dplyr::select(-c(Spare)) %>%
         ga.clean.names() %>%
-        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
         mutate(sample=as.character(sample)) %>% 
         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
                                                             "_Forwards" = "",
@@ -3903,8 +3903,8 @@ hab.points <- reactive({
                                                             ".relief" = "",
                                                             ".Relief" = ""
         ))) %>%
-        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-        mutate(direction = "forwards")
+        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) #%>%
+        #mutate(direction = "forwards")
       
       b.relief <- lapply(input$upload.r.b.dotpoints$datapath, fread)
       names(b.relief) <- input$upload.r.b.dotpoints$name 
@@ -3912,7 +3912,7 @@ hab.points <- reactive({
       b.relief <- rbindlist(b.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
         dplyr::select(-c(Spare)) %>%
         ga.clean.names() %>%
-        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = " ", ".PNG" = ""))) %>% 
+        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
         mutate(sample=as.character(sample)) %>% 
         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
                                                             "_Backwards" = "",
@@ -3924,8 +3924,8 @@ hab.points <- reactive({
                                                             ".relief" = "",
                                                             ".Relief" = ""
         ))) %>%
-        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-        mutate(direction = "backwards")
+        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) #%>%
+        #mutate(direction = "backwards")
       
       relief <- rbind(f.relief, b.relief)
       
@@ -3933,7 +3933,10 @@ hab.points <- reactive({
     }
   }
   
-  points <- points %>% glimpse()
+  points <- points %>% 
+    mutate(campaignid = as.character(campaignid)) %>%
+    mutate(sample = as.character(sample)) %>%
+    ungroup()
 })  
 
 
@@ -3946,8 +3949,8 @@ output$table.habitat <- renderTable({
 metadata.samples.without.hab <- reactive({
   
   metadata.samples <- metadata() %>%
-    distinct(campaignid, sample, successful.count, successful.length) %>%
-    mutate(sample = as.factor(sample))
+    distinct(campaignid, sample, successful.count, successful.length) #%>%
+    #mutate(sample = as.factor(sample))
   
   points.samples <- hab.points() %>%
     distinct(campaignid, sample)
@@ -3957,19 +3960,19 @@ metadata.samples.without.hab <- reactive({
 
 ## ► Samples without habitat - valueBox ----
 output$metadata.samples.without.hab <- renderValueBox({
-  
+
   if (dim(metadata.samples.without.hab())[1] > 0) {
     total <- nrow(metadata.samples.without.hab())
-    col <- "red"
+    col <- "yellow"
   }
   else{
     total = 0
     col <- "green"
   }
-  
-  valueBox(width = 3, 
-           total, 
-           "Sample(s) without habitat", 
+
+  valueBox(width = 3,
+           total,
+           "Sample(s) without habitat",
            icon = icon("question"), color = col
   )
 })
@@ -3987,10 +3990,12 @@ onclick('click.metadata.samples.without.hab',
 habitat.samples.without.metadata <- reactive({
   metadata.samples <- metadata() %>%
     distinct(campaignid, sample) %>%
-    mutate(sample = as.factor(sample))
+    mutate(sample = as.factor(sample)) %>%
+    ungroup()
   
   points.samples <- hab.points() %>%
-    distinct(campaignid, sample)
+    distinct(campaignid, sample) %>%
+    ungroup()
   
   missing.metadata <- anti_join(points.samples, metadata.samples)
 })
@@ -4027,38 +4032,145 @@ habitat.annotations.per.sample <- reactive({
  
   points.samples <- hab.points() %>%
     ungroup() %>%
-    dplyr::group_by(campaignid, sample, direction) %>%
-    dplyr::summarise(number.of.annotations = n()) %>%
-    glimpse()
+    dplyr::group_by(campaignid, sample) %>%
+    dplyr::summarise(number.of.annotations = n())
   
 })
 
-## ► Habitat number of annotations - valueBox ----
-output$habitat.annotations.per.sample <- renderValueBox({
+## ► Habitat wrong number of annotations - dataframe ----
+habitat.wrong.annotations <- reactive({
   
-  if (dim(habitat.annotations.per.sample())[1] > 0) {
-    total <- mean(habitat.annotations.per.sample()$number.of.annotations)
-    col <- "blue"
-    
-  } else {
-    total = 0
+  wrong <- habitat.annotations.per.sample() %>%
+    distinct(campaignid, sample, number.of.annotations) %>%
+    filter(!number.of.annotations %in% c(input$number.of.annotations))
+})
+
+## ► Habitat wrong number of annotations - valueBox ----
+output$habitat.wrong.annotations <- renderValueBox({
+  
+  if (dim(habitat.wrong.annotations())[1] > 0) {
+    total <- nrow(habitat.wrong.annotations())
     col <- "red"
   }
+  else{
+    total = 0
+    col <- "green"
+  }
   
-  valueBox(width = 2, 
+  valueBox(width = 4, 
            total, 
-           "Average number of annotations per sample", 
-           icon = icon("exclamation-circle"), color = col
+           paste("Samples without", input$number.of.annotations, "annotatons", sep = " "), 
+           icon = icon("question"), color = col
   )
 })
 
-## ► Habitat number of annotations - onclick ----
-onclick('click.habitat.annotations.per.sample', 
+## ► Habitat wrong number of annotations - onclick----
+onclick('click.habitat.wrong.annotations', 
         showModal(modalDialog(
-          title = "Number of annotation sby sample", 
+          title = "Number of annotations per sample", 
           easyClose = TRUE,
-          renderDataTable(habitat.annotations.per.sample(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          renderDataTable(habitat.wrong.annotations(), rownames = FALSE, 
+                          options = list(paging = FALSE, searching = TRUE)))
         ))
+
+
+## ► Relief - dataframe ----
+habitat.relief <- reactive({
+
+  relief.grid <- hab.points() %>%
+    filter(!broad %in% c("Unknown", "Open.Water", "Open Water")) %>%
+    filter(!relief%in% c("", NA)) %>%
+    dplyr::select(-c(broad,morphology,type,image.row,image.col)) %>%
+    mutate(relief.rank=ifelse(relief==".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.",0, # Create numerical relief ranks
+                              ifelse(relief==".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.",1,
+                                     ifelse(relief==".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.",2,
+                                            ifelse(relief==".3. Good relief structure with some overhangs. >45 substrate slope.",3,
+                                                   ifelse(relief==".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.",4,
+                                                          ifelse(relief==".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.",5,relief)))))))%>%
+    dplyr::select(-c(relief))%>%
+    mutate(relief.rank=as.numeric(relief.rank)) %>%
+    group_by(campaignid, sample) %>%
+    summarise(mean.relief= mean (relief.rank), sd.relief= sd (relief.rank))%>%
+    ungroup()
+})
+
+## ► Habitat broad points - dataframe ----
+habitat.broad.points <- reactive({
+
+  broad.points <- hab.points() %>%
+    glimpse() %>%
+    dplyr::select(-c(morphology, type, relief)) %>%
+    filter(!broad %in% c("", NA, "Unknown", "Open.Water", "Open Water")) %>%
+    mutate(broad = paste("broad", broad, sep = ".")) %>%
+    mutate(count = 1) %>%
+    group_by(campaignid, sample) %>%
+    spread(key = broad, value = count, fill = 0) %>%
+    dplyr::select(-c(image.row, image.col)) %>%
+    group_by(campaignid, sample) %>%
+    summarise_all(list(sum)) %>%
+    glimpse() %>%
+    mutate(total.points.annotated = rowSums(.[,3:(ncol(.))], na.rm = TRUE )) %>% # CHANGE TO 3 FOR CAMPAIGNID AND SAMPLE
+    ga.clean.names() %>%
+    ungroup() %>%
+    glimpse()
+    #left_join(metadata.regions()) %>%
+    #left_join(habitat.relief())
+})
+
+## ► Habitat broad percent cover - dataframe ----
+habitat.broad.percent.cover <- reactive({
+
+  broad.percent.cover <- habitat.broad.points() %>%
+    group_by(campaignid, sample) %>%
+    mutate_at(vars(starts_with("broad")), list(~./total.points.annotated*100)) %>%
+    dplyr::select(-c(total.points.annotated)) %>%
+    ungroup() %>%
+    #left_join(metadata.regions()) %>%
+    #left_join(habitat.relief()) %>%
+    glimpse()
+})
+
+## ► habitat plot - broad  ----
+output$habitat.broad.plot <- renderPlot({
+
+  hab <- habitat.broad.points() %>%
+    pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points") %>%
+    glimpse()
+
+  ggplot(hab) +
+    geom_quasirandom(data = hab,
+                     aes(x = num.points, y = biota), groupOnX = F, method = "quasirandom",
+                     alpha = 0.25, size = 1.8, width = 0.2) +
+    labs(x = "Number of points", y = "") +
+    theme_classic()
+})
+
+## ► habitat plot - relief  ----
+output$habitat.relief.plot <- renderPlot({
+  
+  hab <- hab.points() %>%
+    filter(!relief%in% c("", NA)) %>%
+    dplyr::select(-c(broad,morphology,type,image.row,image.col)) %>%
+    mutate(relief.rank = ifelse(relief==".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.",0, # Create numerical relief ranks
+                              ifelse(relief==".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.",1,
+                                     ifelse(relief==".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.",2,
+                                            ifelse(relief==".3. Good relief structure with some overhangs. >45 substrate slope.",3,
+                                                   ifelse(relief==".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.",4,
+                                                          ifelse(relief==".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.",5,relief)))))))%>%
+    dplyr::select(-c(relief))%>%
+    dplyr::filter(!relief.rank%in%"") %>% # Removes blank annotations (e.g. 'Open water')
+    mutate(relief.rank = as.numeric(relief.rank))%>% 
+    dplyr::group_by(campaignid, sample, relief.rank) %>%
+    dplyr::summarise(num.points = n()) %>% # Sums the relief scores by sample and relief rank
+    glimpse()
+  
+  ggplot(hab) +
+    geom_quasirandom(data = hab, 
+                     aes(x = num.points, y = relief.rank), groupOnX = F, method = "quasirandom",
+                     alpha = 0.25, size = 1.8, width = 0.2) +
+    labs(x = "Number of points", y = "Relief (0-5)") + 
+    theme_classic()
+})
 
 
 ## _______________________________________________________ ----

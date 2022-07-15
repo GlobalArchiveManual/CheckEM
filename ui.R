@@ -392,8 +392,20 @@ tagList(
                            valueBoxOutput("metadata.samples.without.hab")),
                        div(id="click.habitat.samples.without.metadata",
                            valueBoxOutput("habitat.samples.without.metadata")),
-                       div(id="click.habitat.annotations.per.sample",
-                           valueBoxOutput("habitat.annotations.per.sample"))
+                       # div(id="click.habitat.annotations.per.sample",
+                       #     valueBoxOutput("habitat.annotations.per.sample"))
+                       box(width = 4, title = "Enter your correct number of annotations per sample:", status = "primary", solidHeader = TRUE,
+                           numericInput("number.of.annotations", NULL, 20, min = 1, max = 1000)),
+                       
+                       
+                       div(id="click.habitat.wrong.annotations",
+                           valueBoxOutput("habitat.wrong.annotations")),
+                       
+                       box(width = 12, title = "Broad habitat", status = "primary", 
+                           plotOutput("habitat.broad.plot", height = 250)),
+                       
+                       box(width = 12, title = "Relief", status = "primary", 
+                           plotOutput("habitat.relief.plot", height = 250)),
                        
                        )
       ),
