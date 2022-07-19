@@ -407,6 +407,11 @@ tagList(
                        box(width = 12, title = "Relief", status = "primary", 
                            plotOutput("habitat.relief.plot", height = 250)),
                        
+                       box(width = 12, title = "Habitat pue chart", status = "primary",
+                           leafletOutput("hab.pies", height = 800)),
+                       
+                       
+                       
                        )
       ),
       

@@ -25,6 +25,7 @@ library(fst)
 library(ggplot2)
 library(grid)
 library(ggbeeswarm) # NEW 15/07/2022
+library(RColorBrewer)# NEW 15/07/2022
 
 # Maps
 library(rgdal)
