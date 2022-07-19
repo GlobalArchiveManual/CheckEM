@@ -456,7 +456,8 @@ periods <- reactive({
     }
   } 
    
-  periods <- periods
+  periods <- periods %>%
+    semi_join(metadata())
   
 })
 
@@ -4181,10 +4182,14 @@ output$habitat.relief.plot <- renderPlot({
 ## ► Leaflet pies ----
 output$hab.pies <- renderLeaflet({
   
-  hab <- habitat.broad.points()
+  hab <- habitat.broad.points() %>%
+    glimpse()
   
   # Create a color palette to plot the scatterpies with using the 'RColorbrewer' palettes
-  cols <- colorRampPalette(brewer.pal(12, "Paired"))(length(hab[grep("broad", names(hab))])) 
+  # cols <- colorRampPalette(brewer.pal(12, "Paired"))(length(hab[grep("broad", names(hab))]))
+  cols <- colorRampPalette(brewer.pal(12, "Paired"))(ncol(hab) - 3)
+  
+  hab <- left_join(hab, metadata())
   
   # Create the plot
   leaflet() %>% 
@@ -4194,7 +4199,7 @@ output$hab.pies <- renderLeaflet({
                      options = layersControlOptions(collapsed = FALSE)) %>% 
     addMinicharts(hab$longitude, hab$latitude, 
                   type = "pie", 
-                  colorPalette = cols, 
+                  colorPalette = cols,
                   chartdata = hab[grep("broad", names(hab))], 
                   width = 20, transitionTime = 0)
 })
