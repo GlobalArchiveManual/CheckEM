@@ -4,6 +4,7 @@ library(shinythemes)
 library(shinydashboard)
 library(shinyBS)
 library(shinyjs)
+library(shinyWidgets)
 library(DT)
 library(profvis)
 

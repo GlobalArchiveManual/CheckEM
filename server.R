@@ -88,7 +88,8 @@ metadata <- reactive({
   } 
   
   metadata <- metadata %>%
-    dplyr::filter(successful.count %in% c("Yes", "Y", "y", "yes"))
+    dplyr::filter(successful.count %in% c("Yes", "Y", "y", "yes")) %>%
+    dplyr::mutate(sample = as.factor(sample))
 })  
 
 ## ► Find nearest marine regions add commonwealth and state zoning ----
@@ -457,6 +458,7 @@ periods <- reactive({
   } 
    
   periods <- periods %>%
+    dplyr::mutate(sample = as.factor(sample)) %>%
     semi_join(metadata())
   
 })
@@ -592,7 +594,8 @@ points.outside.periods <- reactive({
   
   points <- points() %>%
     dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number)
+    dplyr::select(campaignid, sample, period, family, genus, species, number, frame, em.comment
+)
 })
 
 ## ► Points without periods - valueBox ----
@@ -742,7 +745,7 @@ points.outside.periods.t <- reactive({
   
   points <- points() %>%
     dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number)
+    dplyr::select(campaignid, sample, period, family, genus, species, number, frame, em.comment)
 })
 
 ## ► Points without periods - valueBox ----
@@ -893,7 +896,8 @@ points <- reactive({
     points <- read.delim("data/example_Points.txt", na.strings = "") %>%
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs")
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      dplyr::mutate(sample = as.factor(sample))
     
     # If no points file and method = transect. dataset = Ningaloo DOVs
   } else if(is.null(input$upload.metadata) & is.null(input$upload.points) & input$method == "transect") {
@@ -901,8 +905,8 @@ points <- reactive({
     points <- read.delim("data/2014-08_small subset_stereoDOVs_Points.txt", na.strings = "") %>%
       ga.clean.names() %>%
       dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
+      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
+      dplyr::mutate(sample = as.factor(sample))
     
     # IF points file uploaded AND method = single point AND sample = opcode
   } else if(!is.null(input$upload.points) & input$method == "point" & input$sample == "opcode"){
@@ -915,7 +919,8 @@ points <- reactive({
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", ""))%>%
-      dplyr::select(-c(.id))
+      dplyr::select(-c(.id)) %>%
+      dplyr::mutate(sample = as.factor(sample))
     
     # IF points file uploaded AND method = single point AND sample = period
   } else if(!is.null(input$upload.points) & input$method == "point" & input$sample == "period") {
@@ -928,7 +933,8 @@ points <- reactive({
       dplyr::mutate(sample = period) %>%
       dplyr::mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", ""))%>%
-      dplyr::select(-c(.id))
+      dplyr::select(-c(.id)) %>%
+      dplyr::mutate(sample = as.factor(sample))
     
     # IF points file uploaded AND method = transect
   } else if(!is.null(input$upload.points) & input$method == "transect") {
@@ -944,12 +950,14 @@ points <- reactive({
     
     if (input$sample.t == "opcodeperiod") {
       points <- points %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))%>%
+        dplyr::mutate(sample = as.factor(sample))
       
     } else {
       
       points <- points %>%
-        dplyr::mutate(sample = period)
+        dplyr::mutate(sample = period) %>%
+        dplyr::mutate(sample = as.factor(sample))
     }
   } 
   
@@ -1038,7 +1046,7 @@ maxn.complete.download <- reactive({
       dplyr::summarise(maxn = sum(maxn)) %>%
       ungroup() %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::mutate(project = input$project.name) %>%
+      # dplyr::mutate(project = input$project.name) %>%
       # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
       dplyr::mutate(scientific = paste(genus, species, sep = " "))
   } 
@@ -1051,7 +1059,7 @@ maxn.complete.download <- reactive({
       dplyr::summarise(maxn = sum(maxn)) %>%
       ungroup() %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::mutate(project = input$project.name) %>%
+      # dplyr::mutate(project = input$project.name) %>%
       # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
       dplyr::mutate(scientific = paste(genus, species, sep = " "))
   }
@@ -1071,8 +1079,16 @@ maxn.complete.download <- reactive({
     maxn.area <- anti_join(maxn.complete, species.out.of.area)
   }
   
-  maxn.area <- maxn.area %>%
-    dplyr::mutate(project = input$project.name) 
+  if (input$error.zeros == TRUE) {
+    maxn.area <- maxn.complete
+  } 
+  else{ 
+    maxn.area <- maxn.area %>%
+      filter(!maxn %in% 0)
+  }
+  
+  
+  maxn.area <- maxn.area 
     
 })
 
@@ -1216,9 +1232,9 @@ maxn.species.not.observed <- reactive({
   maxn <- master.expanded %>%
     anti_join(maxn.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(maxn > 0) %>%
-    distinct(family, genus, species, marine.region) %>% # use this line to show specific drops OR
+    distinct(campaignid, sample, family, genus, species, marine.region) %>%
     dplyr::rename('marine region not observed in' = marine.region) %>%
-    filter(!species%in%c("spp"))# %>% # Ignore spp in the report 
+    filter(!species %in% c("spp"))
   
 })
 
@@ -1247,6 +1263,7 @@ onclick('click.maxn.species.not.observed', showModal(modalDialog(
 ## ►  Species not observed - valuebox ----
 output$maxn.species.not.observed <- renderValueBox({
   maxn.species.not.observed <- maxn.species.not.observed() %>%
+    distinct(family, genus, species) %>%
     mutate(scientific = paste(family, genus, species, sep = " "))
   
   if (dim(maxn.species.not.observed)[1] > 0) {
@@ -1522,7 +1539,8 @@ threedpoints <- reactive({
     threedpoints <- read.delim("data/example_3DPoints.txt", na.strings = "") %>%
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs")
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      dplyr::mutate(sample = as.factor(sample))
     
     # If no 3dpoints file and method = transect. dataset = Ningaloo DOVs
   } else if(is.null(input$upload.metadata) & is.null(input$upload.3dpoints) & input$method == "transect") {
@@ -1544,7 +1562,8 @@ threedpoints <- reactive({
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", ""))%>%
-      dplyr::select(-c(.id))
+      dplyr::select(-c(.id)) %>%
+      dplyr::mutate(sample = as.factor(sample))
     
     # IF 3dpoints file uploaded AND method = single point AND sample = period
   } else if(!is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "period") {
@@ -1557,7 +1576,8 @@ threedpoints <- reactive({
       dplyr::mutate(sample = period) %>%
       dplyr::mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", ""))%>%
-      dplyr::select(-c(.id))
+      dplyr::select(-c(.id)) %>%
+      dplyr::mutate(sample = as.factor(sample))
     
     # IF 3dpoints file uploaded AND method = transect
   } else if(!is.null(input$upload.3dpoints) & input$method == "transect") {
@@ -1573,12 +1593,14 @@ threedpoints <- reactive({
     
     if (input$sample.t == "opcodeperiod") {
       threedpoints <- threedpoints %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))%>%
+        dplyr::mutate(sample = as.factor(sample))
       
     } else {
       
       threedpoints <- threedpoints %>%
-        dplyr::mutate(sample = period)
+        dplyr::mutate(sample = period)%>%
+        dplyr::mutate(sample = as.factor(sample))
     }
   } 
   
@@ -1672,7 +1694,7 @@ length.complete.download <- reactive({
   }
   
   length.complete <- length.complete %>%
-    dplyr::mutate(project = input$project.name) %>%
+    # dplyr::mutate(project = input$project.name) %>%
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
@@ -1718,17 +1740,28 @@ length.complete.download <- reactive({
   else{
     length.big <- length.small
   }
+
+  
   length.big <- length.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+    replace_na(list(number = 0)) %>% 
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
-    dplyr::mutate(project = input$project.name) %>%
-    # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
+    # dplyr::mutate(project = input$project.name) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
+  
+  if (input$error.zeros == TRUE) {
+    length.big <- length.big
+  } 
+  else{ 
+    length.big <- length.big %>%
+      filter(!number %in% 0)
+  }
+  
+  length.big <- length.big
   
 })
 
@@ -1941,7 +1974,7 @@ length.species.not.observed <- reactive({
   length <- master.expanded %>%
     anti_join(length3dpoints.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(number > 0) %>%
-    distinct(family, genus, species, marine.region) %>% # use this line to show specific drops OR
+    distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
     dplyr::rename('marine region not observed in' = marine.region) %>%
     filter(!species%in%c("spp"))%>% # %>% # Ignore spp in the report 
     mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
@@ -1962,7 +1995,8 @@ onclick('click.length.species.not.observed', showModal(modalDialog(
 ## ► Species not observed - valuebox ----
 output$length.species.not.observed <- renderValueBox({
   length.species.not.observed <- length.species.not.observed() %>%
-    mutate(scientific = paste(family, genus, species, sep = " "))
+    mutate(scientific = paste(family, genus, species, sep = " ")) %>%
+    distinct(family, genus, species, scientific)
   
   if (dim(length.species.not.observed)[1] > 0) {
     total <- base::length(unique(length.species.not.observed$scientific))
@@ -1985,7 +2019,7 @@ length.wrong <- reactive({
   length.wrong <- left_join(length3dpoints.clean(), master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>max.length) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big")) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, em.comment) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, em.comment, frameleft) %>%
     mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
     dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))
   
@@ -2331,7 +2365,7 @@ length.complete.download.t <- reactive({
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
@@ -2344,7 +2378,7 @@ length.complete.download.t <- reactive({
     
     length.complete <- dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
@@ -2355,7 +2389,7 @@ length.complete.download.t <- reactive({
   }
   
   length.complete <- length.complete %>%
-    dplyr::mutate(project = input$project.name.t) %>%
+    # dplyr::mutate(project = input$project.name.t) %>%
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
@@ -2371,8 +2405,14 @@ length.complete.download.t <- reactive({
     length.area <- anti_join(length.complete, species.out.of.area)
   }
   
+  transect.limit <- (input$error.transect.limit.t*1000)
+  
+  out.of.transect <- length.area %>%
+    dplyr::filter(c(midx > transect.limit | midx < -transect.limit | midy > transect.limit | midy < -transect.limit | x > transect.limit | x < -transect.limit | y > transect.limit | y < -transect.limit))
+  
   length.area <- length.area %>%
-    dplyr::filter(range < (input$error.range.limit.t * 1000))
+    dplyr::filter(range < (input$error.range.limit.t * 1000)) %>%
+    anti_join(., out.of.transect)
   
   length.wrong <- left_join(length.area, master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > fb.length_max) %>%
@@ -2412,9 +2452,17 @@ length.complete.download.t <- reactive({
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
-    dplyr::mutate(project = input$project.name) %>%
-    # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
+    # dplyr::mutate(project = input$project.name) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
+  
+  if (input$error.zeros.t == TRUE) {
+    length.big <- length.big
+  } 
+  else{ 
+    length.big <- length.big %>%
+      filter(!number %in% 0)
+  }
+  
   
 })
 
@@ -2651,7 +2699,8 @@ onclick('click.length.species.not.observed.t', showModal(modalDialog(
 ## ► Species not observed - valuebox ----
 output$length.species.not.observed.t <- renderValueBox({
   length.species.not.observed <- length.species.not.observed.t() %>%
-    mutate(scientific = paste(family, genus, species, sep = " "))
+    mutate(scientific = paste(family, genus, species, sep = " ")) %>%
+    distinct(family, genus, species, scientific)
   
   if (dim(length.species.not.observed)[1] > 0) {
     total <- base::length(unique(length.species.not.observed$scientific))
@@ -2674,7 +2723,7 @@ length.wrong.t <- reactive({
   length.wrong <- left_join(length3dpoints.clean.t(), master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > max.length) %>%
     mutate(reason = ifelse(length < min.length, "too small", "too big")) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, frameleft) %>%
     mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
     dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))
   
@@ -3156,7 +3205,7 @@ mass.complete.download <- reactive({
       dplyr::left_join(metadata.regions()) %>%
       dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
-      dplyr::mutate(project = input$project.name) %>%
+      # dplyr::mutate(project = input$project.name) %>%
       # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
       dplyr::mutate(scientific = paste(genus, species, sep = " "))
   }
@@ -3212,9 +3261,18 @@ mass.complete.download <- reactive({
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
-    dplyr::mutate(project = input$project.name) %>%
+    # dplyr::mutate(project = input$project.name) %>%
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
+  
+  if (input$error.zeros == TRUE) {
+    mass.big <- mass.big
+  } 
+  else{ 
+    mass.big <- mass.big %>%
+      filter(!number %in% 0)
+  }
+  
   
 })
 
@@ -3500,7 +3558,7 @@ mass.complete.download.t <- reactive({
       dplyr::left_join(metadata.regions()) %>%
       dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
-      dplyr::mutate(project = input$project.name) %>%
+      # dplyr::mutate(project = input$project.name) %>%
       # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
       dplyr::mutate(scientific = paste(genus, species, sep = " "))
   }
@@ -3556,9 +3614,17 @@ mass.complete.download.t <- reactive({
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
-    dplyr::mutate(project = input$project.name) %>%
+    # dplyr::mutate(project = input$project.name) %>%
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
+  
+  if (input$error.zeros.t == TRUE) {
+    mass.big <- mass.big
+  } 
+  else{ 
+    mass.big <- mass.big %>%
+      filter(!number %in% 0)
+  }
   
 })
 
@@ -3614,7 +3680,7 @@ output$mass.status.plot.t <- renderPlot({
   req(input$mass.species.dropdown.t)
   mass <- mass.t() %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-    dplyr::filter(scientific%in%c(input$mass.species.dropdown.t)) %>%
+    dplyr::filter(scientific %in% c(input$mass.species.dropdown.t)) %>%
     dplyr::group_by(campaignid, sample, scientific, status) %>%
     dplyr::summarise(mass.g = sum(mass.g))
   
@@ -4118,9 +4184,9 @@ habitat.broad.points <- reactive({
     mutate(total.points.annotated = rowSums(.[,3:(ncol(.))], na.rm = TRUE )) %>% # CHANGE TO 3 FOR CAMPAIGNID AND SAMPLE
     ga.clean.names() %>%
     ungroup() %>%
-    glimpse()
-    #left_join(metadata.regions()) %>%
-    #left_join(habitat.relief())
+    glimpse() %>%
+    left_join(metadata.regions()) %>%
+    left_join(habitat.relief())
 })
 
 ## ► Habitat broad percent cover - dataframe ----
@@ -4204,6 +4270,59 @@ output$hab.pies <- renderLeaflet({
                   width = 20, transitionTime = 0)
 })
 
+## ► Species dropdown ----
+output$hab.dropdown <- renderUI({
+  df <- habitat.broad.points() %>%
+    pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points")
+    
+  
+  options <- df %>%
+    dplyr::arrange(biota) %>%
+    distinct(biota) %>%
+    pull("biota")
+  
+  create_dropdown("hab.dropdown", options, NULL)
+})
+
+## ► Leaflet bubble ----
+output$hab.bubble <- renderLeaflet({
+  
+  hab <- habitat.broad.points() %>%
+    pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points")
+  
+  hab <- left_join(hab, metadata())
+  
+  
+  # Filter the data for plotting
+  overzero <-  hab %>% # Any sample with a value greater than zero
+    filter(biota %in% input$hab.dropdown & num.points > 0) 
+  
+  equalzero <- hab %>% # Any sample with a value equal to zero
+    filter(biota %in% input$hab.dropdown & num.points == 0)
+  
+  
+  bubble.plot <- leaflet(data = hab) %>% 
+    addTiles() %>% 
+    addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
+    addLayersControl(baseGroups = c("Open Street Map", "World Imagery"), 
+                     options = layersControlOptions(collapsed = FALSE))
+  
+  if (nrow(overzero)) { 
+    bubble.plot <- bubble.plot %>%
+      addCircleMarkers(data = overzero, lat = ~ latitude, lng = ~ longitude,
+                       radius = ~(num.points/4) + 3,
+                       fillOpacity = 0.5, stroke = FALSE, label = ~as.character(sample))
+  }
+  if (nrow(equalzero)) {
+    bubble.plot <- bubble.plot %>%
+      addCircleMarkers(data = equalzero, lat = ~ latitude, lng = ~ longitude,
+                       radius = 2, 
+                       fillOpacity = 0.5, color = "white",stroke = FALSE, label = ~as.character(sample)) 
+  }
+  
+  bubble.plot
+})
+
 ## _______________________________________________________ ----
 ##                         DOWNLOADS                       ----
 ## _______________________________________________________ ----
@@ -4214,147 +4333,141 @@ output$hab.pies <- renderLeaflet({
 ## _______________________________________________________ ----
 
 ## ► Download MaxN ----
-output$info.download.maxn <- renderInfoBox({
-  infoBox(
-    "Download", HTML(paste("MaxN", br(), "")), icon = icon("download"), 
-    color = "green"
-  )
-})
-
 output$download.maxn <- downloadHandler(
   filename = function() {
     req(input$project.name)
-    paste(input$project.name, "_maxn.summary_", Sys.Date(), ".csv", sep = "")
+    paste(input$project.name, "_maxn_", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
     write.csv(maxn.complete.download(), file, row.names = FALSE)
   }
 )
 
-output$download.maxn.fst <- downloadHandler(
-  filename = function() {
-    req(input$project.name)
-    paste(input$project.name, "_maxn.summary_", Sys.Date(), ".fst", sep = "")
-  }, 
-  content = function(file) {
-    write.fst(maxn.complete.download(), file)
-  }
-)
-
-onclick('click.download.maxn', showModal(modalDialog(
-  title = "Summarised maxn: adds zeros where a species is not present", size = "l", easyClose = TRUE, 
-  downloadButton("download.maxn", "Download as csv"), 
-  downloadButton("download.maxn.fst", "Download as FST"))))
-
 ## ► Download length complete ----
-output$info.download.length <- renderInfoBox({
-  infoBox(
-    "Download", HTML(paste("Length", br(), "")), icon = icon("download"), 
-    color = "green"
-  )
-})
-
 output$download.length <- downloadHandler(
   filename = function() {
     req(input$project.name)
-    paste(input$project.name, "_length.summary_", Sys.Date(), ".csv", sep = "")
+    paste(input$project.name, "_length_", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
     write.csv(length.complete.download(), file, row.names = FALSE)
   }
 )
 
-output$download.length.fst <- downloadHandler(
-  filename = function() {
-    paste(input$project.name, "_length.summary_", Sys.Date(), ".fst", sep = "")
-  }, 
-  content = function(file) {
-    write.fst(length.complete.download(), file)
-  }
-)
-
-onclick('click.download.length', showModal(modalDialog(
-  title = "Summarised length: adds zeros where a species is not present", size = "l", easyClose = TRUE, 
-  downloadButton("download.length", "Download as csv"), 
-  downloadButton("download.length.fst", "Download as FST"))))
-
 ## ► Download mass complete ----
-output$info.download.mass <- renderInfoBox({
-  infoBox(
-    "Download", HTML(paste("Mass", br(), "")), icon = icon("download"), 
-    color = "green"
-  )
-})
-
 output$download.mass <- downloadHandler(
   filename = function() {
-    paste(input$project.name, "_mass.summary_", Sys.Date(), ".csv", sep = "")
+    paste(input$project.name, "_mass_", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
     write.csv(mass.complete.download(), file, row.names = FALSE)
   }
 )
 
-output$download.mass.fst <- downloadHandler(
+## ► Habitat ----
+output$download.broad.habitat <- downloadHandler(
   filename = function() {
-    paste(input$project.name, "_mass.summary_", Sys.Date(), ".fst", sep = "")
+    paste(input$project.name, "_broad.habitat_", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
-    write.fst(mass.complete.download(), file)
+    write.csv(habitat.broad.points(), file, row.names = FALSE)
   }
 )
 
-onclick('click.download.mass', showModal(modalDialog(
-  title = "Summarised mass: adds zeros where a species is not present", size = "l", easyClose = TRUE, 
-  downloadButton("download.mass", "Download as csv"), 
-  downloadButton("download.mass.fst", "Download as FST"))))
+## ► All errors ----
+all.errors <- reactive({
+  
+  points.samples.without.metadata <- points.samples.without.metadata() %>%
+    mutate(error = "sample.in.points.without.metadata")
+  
+  samples.without.periods <- samples.without.periods()%>%
+    mutate(error = "sample.without.period")
+  
+  periods.no.end <- periods.no.end() %>%
+    mutate(error = "period.with.no.end")
+  
+  periods.wrong <- periods.wrong() %>%
+    mutate(error = "period.wrong.length")
+  
+  points.outside.periods <- points.outside.periods() %>%
+    mutate(error = "point.outside.period")
+  
+  lengths.outside.periods <- lengths.outside.periods() %>%
+    mutate(error = "length.or.3D.point.outside.period")
+  
+  points.no.number <- points.no.number() %>%
+    mutate(error = "point.without.a.number")
+  
+  lengths.no.number <- lengths.no.number() %>%
+    mutate(error = "length.or.3D.point.without.a.number")
+  
+  maxn.species.not.observed <- maxn.species.not.observed() %>%
+    mutate(error = "species.not.observed.in.region.before")
+  
+  length.species.not.observed <- length.species.not.observed() %>%
+    mutate(error = "species.not.observed.in.region.before")
+  
+  length.out.of.range <- length.out.of.range() %>%
+    mutate(error = "out.of.range")
+  
+  length.wrong.small <- length.wrong() %>%
+    dplyr::filter(reason%in%c("too small")) %>%
+    mutate(error = reason)
+  
+  length.wrong.big <- length.wrong() %>%
+    dplyr::filter(reason%in%c("too big")) %>%
+    mutate(error = reason)
+  
+  all.errors <- bind_rows(points.samples.without.metadata, samples.without.periods, periods.no.end, periods.wrong, points.outside.periods, lengths.outside.periods, points.no.number, lengths.no.number, maxn.species.not.observed, length.species.not.observed, length.out.of.range, length.wrong.small, length.wrong.big) %>%
+    dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment) %>%
+    distinct() %>%
+    arrange(campaignid, sample)
+  
+  # Remember to make this distinct!
+  # For transect version need to include those outside of transect
+})
 
+output$download.all.errors <- downloadHandler(
+  filename = function() {
+    paste(input$project.name, "_all.errors_", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(all.errors(), file, row.names = FALSE, na = "")
+  }
+)
 
 ## _______________________________________________________ ----
 ##                  Transect based campaigns                 ----
 ## _______________________________________________________ ----
 ## ► Download length complete ----
-output$info.download.length.t <- renderInfoBox({
-  infoBox(
-    "Download", HTML(paste("Length", br(), "")), icon = icon("download"), 
-    color = "green"
-  )
-})
-
 output$download.length.t <- downloadHandler(
   filename = function() {
     req(input$project.name.t)
-    paste(input$project.name.t, "_length.summary_", Sys.Date(), ".csv", sep = "")
+    paste(input$project.name.t, "_length_", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
     write.csv(length.complete.download.t(), file, row.names = FALSE)
   }
 )
 
-onclick('click.download.length.t', showModal(modalDialog(
-  title = "Summarised length: adds zeros where a species is not present", size = "l", easyClose = TRUE, 
-  downloadButton("download.length.t", "Download as csv"))))
-
-## ► Download mass complete ----
-output$info.download.mass.t <- renderInfoBox({
-  infoBox(
-    "Download", HTML(paste("Mass", br(), "")), icon = icon("download"), 
-    color = "green"
-  )
-})
-
 output$download.mass.t <- downloadHandler(
   filename = function() {
-    paste(input$project.name.t, "_mass.summary_", Sys.Date(), ".csv", sep = "")
+    paste(input$project.name.t, "_mass_", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
     write.csv(mass.complete.download.t(), file, row.names = FALSE)
   }
 )
 
-onclick('click.download.mass.t', showModal(modalDialog(
-  title = "Summarised mass: adds zeros where a species is not present", size = "l", easyClose = TRUE, 
-  downloadButton("download.mass.t", "Download as csv"))))
+## ► Habitat ----
+output$download.broad.habitat.t <- downloadHandler(
+  filename = function() {
+    paste(input$project.name, "_broad.habitat_", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(habitat.broad.points(), file, row.names = FALSE)
+  }
+)
 
 ## _______________________________________________________ ----
 ##                    MAPPING FOR GUIDE                    ----

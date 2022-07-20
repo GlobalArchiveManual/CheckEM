@@ -42,7 +42,8 @@ tagList(
     tags$head(tags$style('.selectize-dropdown {z-index: 10000}')),
     tags$style(
       type = 'text/css',
-      '.modal-dialog { width: fit-content !important; }'
+      '.modal-dialog { width: fit-content !important; }
+      .bttn-unite { width: 300px;}'
     ),
     
     tabItems(
@@ -407,10 +408,14 @@ tagList(
                        box(width = 12, title = "Relief", status = "primary", 
                            plotOutput("habitat.relief.plot", height = 250)),
                        
-                       box(width = 12, title = "Habitat pue chart", status = "primary",
+                       box(width = 12, title = "Habitat pie chart", status = "primary",
                            leafletOutput("hab.pies", height = 800)),
                        
+                       box(width = 12,title = "Choose habitat type to plot below:", status = "primary", solidHeader = TRUE,
+                           htmlOutput("hab.dropdown",multiple=TRUE)),
                        
+                       box(width = 12, title = "Habitat bubble plot", status = "primary",
+                           leafletOutput("hab.bubble", height = 800)),
                        
                        )
       ),
@@ -422,26 +427,38 @@ tagList(
                 box(width=6,title = "Select 'errors' to filter out of downloaded data",
                     status="primary",solidHeader = TRUE,
                     
-                    h4("Add project and campaign information"),
+                    h4("Add project information"),
                     textInput("project.name", label = "Project name:", value = ""),
                     
                     h4("Filters for MaxN, Length and Mass"),
                     checkboxInput("error.synonyms", label = "Keep species names that have been updated", value = TRUE), 
-                    checkboxInput("error.area", label = "Remove species not observed in the area before", value = FALSE), 
+                    checkboxInput("error.area", label = "Remove species not observed in the area before (this will also remove sp1, sp2 etc.)", value = FALSE), 
+                    checkboxInput("error.zeros", label = "Add in zeros where species aren't present", value = TRUE), 
                     br(),
                     h4("Filters for Length and Mass"),
                     numericInput("error.range.limit", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
                     checkboxInput("error.length.small", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
                     checkboxInput("error.length.big", label = "Filter out length measurements larger than fishbase maximum", value = FALSE)),
                 
-                       div(id="click.download.maxn",
-                       infoBoxOutput("info.download.maxn",width=6)),
-                       
-                       div(id="click.download.length",
-                       infoBoxOutput("info.download.length",width=6)),
                 
-                       div(id="click.download.mass",
-                       infoBoxOutput("info.download.mass",width=6))
+                box(width = 6, title = "Downloads",
+                    status = "primary", solidHeader = TRUE,
+                    
+                    downloadBttn("download.maxn", style = "unite", color = "primary", label = "MaxN"), br(), br(),
+                    downloadBttn("download.length", style = "unite", color = "primary", label = "Length"), br(), br(),
+                    downloadBttn("download.mass", style = "unite", color = "primary", label = "Mass"), br(), br(),
+                    downloadBttn("download.broad.habitat", style = "unite", color = "primary", label = "Habitat"), br(), br(),
+                    downloadBttn("download.all.errors", style = "unite", color = "danger", label = "All errors in EMobs")
+                    ),
+                       # 
+                       # div(id="click.download.maxn",
+                       # infoBoxOutput("info.download.maxn",width=6)),
+                       # 
+                       # div(id="click.download.length",
+                       # infoBoxOutput("info.download.length",width=6)),
+                       # 
+                       # div(id="click.download.mass",
+                       # infoBoxOutput("info.download.mass",width=6))
               )
       ),
       
@@ -454,21 +471,31 @@ tagList(
                     h4("Add project and campaign information"),
                     textInput("project.name.t", label = "Project name:", value = ""),
                     
-                    h4("Filters for MaxN, Length and Mass"),
+                    h4("Filters"),
                     checkboxInput("error.synonyms.t", label = "Keep species names that have been updated", value = TRUE), 
                     checkboxInput("error.area.t", label = "Remove species not observed in the area before", value = FALSE), 
-                    br(),
-                    h4("Filters for Length and Mass"),
+                    checkboxInput("error.zeros.t", label = "Add in zeros where species aren't present", value = TRUE), 
+                    # br(),
+                    # h4("Filters for Length and Mass"),
                     numericInput("error.range.limit.t", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
+                    numericInput("error.transect.limit.t", "Remove 3D measurements outside transect bounds (meters):", 2.5, min = 0, max = 20),
                     checkboxInput("error.length.small.t", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
                     checkboxInput("error.length.big.t", label = "Filter out length measurements larger than fishbase maximum", value = FALSE)),
                 
-                div(id="click.download.length.t",
-                    infoBoxOutput("info.download.length.t",width=6)),
+                # div(id="click.download.length.t",
+                #     infoBoxOutput("info.download.length.t",width=6)),
+                # 
+                # div(id="click.download.mass.t",
+                #     infoBoxOutput("info.download.mass.t",width=6))
                 
-                div(id="click.download.mass.t",
-                    infoBoxOutput("info.download.mass.t",width=6))
-              )
+                box(width = 6, title = "Downloads",
+                    status = "primary", solidHeader = TRUE,
+                # downloadBttn("download.maxn", style = "unite", color = "primary", label = "MaxN"), br(), br(),
+                downloadBttn("download.length.t", style = "unite", color = "primary", label = "Length"), br(), br(),
+                downloadBttn("download.mass.t", style = "unite", color = "primary", label = "Mass"), br(), br(),
+                downloadBttn("download.broad.habitat.t", style = "unite", color = "primary", label = "Habitat"), br(), br(),
+                downloadBttn("download.all.errors.t", style = "unite", color = "danger", label = "All errors in EMobs")
+              ))
       ),
       
       tabItem(tabName = "acknowledgements",
