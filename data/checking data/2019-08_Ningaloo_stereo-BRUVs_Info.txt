@@ -1,0 +1,132 @@
+OpCode	TapeReader	Depth	Comment	Info5Name	Info5Value	Info6Name	Info6Value	Info7Name	Info7Value	Info8Name	Info8Value	Info9Name	Info9Value	Info10Name	Info10Value	Info11Name	Info11Value	Info12Name	Info12Value
+10.09	Brooke Gibbons	160		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+1.01	Brooke Gibbons	NA		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+3.01	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+1.02	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+1.03	Charlotte Aston			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+12.02	Charlotte Aston			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+30.06	Charlotte Aston	66																	
+9.07	Todd Bond																		
+9.02	Todd Bond																		
+31.02	Charlotte Aston	71																	
+9.08	Todd Bond																		
+31.05	Charlotte Aston	67																	
+18.04	Charlotte Aston	134																	
+9.06	Todd Bond																		
+1.04	Charlotte Aston																		
+1.05	Charlotte Aston																		
+4.08	Todd Bond																		
+2.03	Charlotte Aston																		
+4.03	Todd Bond																		
+4.02	Todd Bond																		
+4.01	Todd Bond																		
+2.04	Charlotte Aston 																		
+3.06	Todd Bond																		
+3.05	Todd Bond																		
+2.05	Charlotte Aston																		
+4.11	Todd Bond																		
+2.06	Charlotte Aston																		
+4.12	Todd Bond																		
+2.07	Charlotte Aston			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+3.02	Charlotte Aston																		
+5.02	Charlotte Aston																		
+5.03	Charlotte Aston																		
+5.07	Charlotte Aston																		
+2.02	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+3.03	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+3.04	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+6.02	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+6.04	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+6.05	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+5.08	Charlotte Aston																		
+5.11	Charlotte Aston																		
+5.13	Charlotte Aston																		
+6.01	Charlotte Aston																		
+6.03	Charlotte Aston																		
+6.12	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+7.01	Charlotte Aston																		
+7.02	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+7.04	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+7.05	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+7.03	Charlotte Aston																		
+10.11	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+10.12	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+7.08	Charlotte Aston	72																	
+8.01	Charlotte Aston	87																	
+10.13	Brooke Gibbons			CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+8.02	Charlotte Aston	76																	
+8.05	Charlotte Aston	61																	
+8.06	Charlotte Aston	61																	
+8.07	Charlotte Aston	63																	
+8.12	Charlotte Aston	95																	
+9.01	Charlotte Aston																		
+9.05	Charlotte Aston																		
+10.01	Charlotte Aston	95																	
+10.04	Charlotte Aston	110																	
+10.03	Charlotte Aston	88																	
+10.07	Charlotte Aston	138																	
+10.08	Charlotte Aston	157																	
+1.06	Charlotte Aston																		
+10.14	Charlotte Aston	74																	
+10.15	Charlotte Aston	84																	
+11.02	Charlotte Aston	81																	
+11.03	Charlotte Aston	79																	
+11.04	Charlotte Aston	91																	
+11.05	Charlotte Aston	91																	
+11.06	Charlotte Aston	77																	
+12.03	Charlotte Aston	65																	
+12.05	Charlotte Aston	86																	
+12.04	Charlotte Aston	70																	
+12.06	Charlotte Aston	94																	
+13.02	Charlotte Aston	69																	
+12.11	Charlotte Aston	100																	
+13.04	Charlotte Aston	92																	
+13.05	Charlotte Aston	96																	
+13.06	Charlotte Aston	94.5																	
+13.08	Charlotte Aston	85																	
+14.01	Charlotte Aston	96																	
+14.06	Charlotte Aston	100																	
+14.11	Charlotte Aston	75																	
+14.12	Charlotte Aston	82																	
+14.13	Charlotte Aston	101																	
+15.01	Charlotte Aston	100																	
+15.05	Charlotte Aston	122																	
+15.07	Charlotte Aston	116																	
+15.12	Charlotte Aston	110																	
+16.01	Charlotte Aston	101																	
+16.02	Charlotte Aston	145																	
+16.03	Charlotte Aston	190																	
+16.04	Charlotte Aston	100																	
+17.08	Charlotte Aston	90																	
+18.01	Charlotte Aston	91																	
+18.02	Charlotte Aston	91																	
+18.03	Charlotte Aston	117																	
+18.07	Charlotte Aston	109																	
+18.08	Charlotte Aston	96																	
+19.01	Charlotte Aston	107																	
+19.02	Charlotte Aston	122																	
+19.03	Charlotte Aston	99																	
+19.04	Charlotte Aston	109																	
+19.05	Charlotte Aston	101																	
+19.08	Charlotte Aston	130																	
+15.02	Charlotte Aston	100																	
+16.05	Charlotte Aston	85																	
+23.01	Charlotte Aston	102		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+23.02	Charlotte Aston	106		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+23.03	Charlotte Aston	109		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+23.04	Charlotte Aston	110		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+23.06	Charlotte Aston	107		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+23.09	Charlotte Aston	67		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+30.01	Charlotte Aston	69		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+11.01	Charlotte Aston	84																	
+13.03	Charlotte Aston	83																	
+14.02	Charlotte Aston	101																	
+14.03	Charlotte Aston	109																	
+230.02	Charlotte Aston	69																	
+30.04	Charlotte Aston	69																	
+30.03	Charlotte Aston	67																	
+30.05	Charlotte Aston	68																	
+31.06	Charlotte Aston	66																	
+31.03	Charlotte Aston	66		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+31.01	Charlotte Aston	77		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	
+31.04	Charlotte Aston	64		CampaignID		Latitude		Longitude		Location		Status		Site		Visibility		DateTimeIn	

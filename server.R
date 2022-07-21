@@ -1,4 +1,4 @@
-function(input, output) {
+function(input, output, session) {
   
 # Increase size of files that can be uploaded
   options(shiny.maxRequestSize = 50*1024^2)
@@ -18,7 +18,10 @@ function(input, output) {
       selected = selected
     )
   }
-
+  
+  
+  
+  
 ## _______________________________________________________ ----
 ##                        METADATA                         ----
 ## _______________________________________________________ ----
@@ -34,16 +37,16 @@ metadata <- reactive({
       dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
       as.data.frame()
     
-    # If no metadata file and method = transect. dataset = Ningaloo DOVs
-  } else if(is.null(input$upload.metadata) & input$method == "transect") {
-  
-    ## ONLY ONE EXAMPLE METADATA FOR DOVs BG 13/07/2022
-    
-    metadata <-  read.csv("data/2014-08_small subset_stereoDOVs_Metadata.csv") %>%
-      ga.clean.names() %>%
-      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
-      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) 
+  #   # If no metadata file and method = transect. dataset = Ningaloo DOVs
+  # } else if(is.null(input$upload.metadata) & input$method == "transect") {
+  # 
+  #   ## ONLY ONE EXAMPLE METADATA FOR DOVs BG 13/07/2022
+  #   
+  #   metadata <-  read.csv("data/2014-08_small subset_stereoDOVs_Metadata.csv") %>%
+  #     ga.clean.names() %>%
+  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
+  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+  #     dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) 
     
     # IF metadata file uploaded AND method = single point
   } else if(!is.null(input$upload.metadata) & input$method == "point") {
@@ -403,16 +406,16 @@ periods <- reactive({
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       as.data.frame()
     
-    # If no period file and method = transect. dataset = Ningaloo DOVs
-  } else if(is.null(input$upload.metadata) & is.null(input$upload.period) & input$method == "transect") {
-    
-    periods <- read.delim("data/2014-08_small subset_stereoDOVs_Period.txt", na.strings = "") %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
-      dplyr::select(campaignid, sample, everything())
-    
+  #   # If no period file and method = transect. dataset = Ningaloo DOVs
+  # } else if(is.null(input$upload.metadata) & is.null(input$upload.period) & input$method == "transect") {
+  #   
+  #   periods <- read.delim("data/2014-08_small subset_stereoDOVs_Period.txt", na.strings = "") %>%
+  #     ga.clean.names() %>%
+  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+  #     mutate(sample = as.factor(sample)) %>%
+  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
+  #     dplyr::select(campaignid, sample, everything())
+  #   
     # IF period file uploaded AND method = single point AND sample = OpCode
   } else if(!is.null(input$upload.period) & input$method == "point" & input$sample == "opcode") {
     periods <- lapply(input$upload.period$datapath, fread)
@@ -899,15 +902,15 @@ points <- reactive({
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       dplyr::mutate(sample = as.factor(sample))
     
-    # If no points file and method = transect. dataset = Ningaloo DOVs
-  } else if(is.null(input$upload.metadata) & is.null(input$upload.points) & input$method == "transect") {
-    
-    points <- read.delim("data/2014-08_small subset_stereoDOVs_Points.txt", na.strings = "") %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
-      dplyr::mutate(sample = as.factor(sample))
-    
+  #   # If no points file and method = transect. dataset = Ningaloo DOVs
+  # } else if(is.null(input$upload.metadata) & is.null(input$upload.points) & input$method == "transect") {
+  #   
+  #   points <- read.delim("data/2014-08_small subset_stereoDOVs_Points.txt", na.strings = "") %>%
+  #     ga.clean.names() %>%
+  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
+  #     dplyr::mutate(sample = as.factor(sample))
+  #   
     # IF points file uploaded AND method = single point AND sample = opcode
   } else if(!is.null(input$upload.points) & input$method == "point" & input$sample == "opcode"){
     
@@ -967,10 +970,11 @@ points <- reactive({
     mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
     dplyr::filter(!is.na(family)) %>%
-    dplyr::mutate(species = tolower(species)) %>%
-    dplyr::mutate(genus = ga.capitalise(genus)) %>%
-    dplyr::mutate(family = ga.capitalise(family)) %>%
-    dplyr::rename(em.comment = comment)
+    dplyr::mutate(species = as.character(tolower(species))) %>%
+    dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
+    dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+    dplyr::rename(em.comment = comment) %>%
+    dplyr::mutate(em.comment = as.character(em.comment))
 })
 
 # ► Preview points ----
@@ -1456,15 +1460,15 @@ length <- reactive({
       dplyr::rename(sample = opcode) %>%
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs")
 
-    # If no lengths file and method = transect. dataset = Ningaloo DOVs
-  } else if(is.null(input$upload.metadata) & is.null(input$upload.length) & input$method == "transect") {
-    
-    length <- read.delim("data/2014-08_small subset_stereoDOVs_Lengths.txt", na.strings = "") %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
-    
+  #   # If no lengths file and method = transect. dataset = Ningaloo DOVs
+  # } else if(is.null(input$upload.metadata) & is.null(input$upload.length) & input$method == "transect") {
+  #   
+  #   length <- read.delim("data/2014-08_small subset_stereoDOVs_Lengths.txt", na.strings = "") %>%
+  #     ga.clean.names() %>%
+  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+  #     mutate(sample = as.factor(sample)) %>%
+  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
+  #   
     # IF length file uploaded AND method = single point AND sample = opcode
   } else if(!is.null(input$upload.length) & input$method == "point" & input$sample == "opcode"){
     
@@ -1519,10 +1523,11 @@ length <- reactive({
     mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
     mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-    dplyr::mutate(species = tolower(species)) %>%
-    dplyr::mutate(genus = ga.capitalise(genus)) %>%
-    dplyr::mutate(family = ga.capitalise(family)) %>%
-    dplyr::rename(em.comment = comment)
+    dplyr::mutate(species = as.character(tolower(species))) %>%
+    dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
+    dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+    dplyr::rename(em.comment = comment) %>%
+    dplyr::mutate(em.comment = as.character(em.comment))
   
 })
 
@@ -1542,15 +1547,15 @@ threedpoints <- reactive({
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       dplyr::mutate(sample = as.factor(sample))
     
-    # If no 3dpoints file and method = transect. dataset = Ningaloo DOVs
-  } else if(is.null(input$upload.metadata) & is.null(input$upload.3dpoints) & input$method == "transect") {
-    
-    threedpoints <- read.delim("data/2014-08_small subset_stereoDOVs_3DPoints.txt", na.strings = "") %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
-    
+  #   # If no 3dpoints file and method = transect. dataset = Ningaloo DOVs
+  # } else if(is.null(input$upload.metadata) & is.null(input$upload.3dpoints) & input$method == "transect") {
+  #   
+  #   threedpoints <- read.delim("data/2014-08_small subset_stereoDOVs_3DPoints.txt", na.strings = "") %>%
+  #     ga.clean.names() %>%
+  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
+  #     mutate(sample = as.factor(sample)) %>%
+  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
+  #   
     # IF 3dpoints file uploaded AND method = single point AND sample = opcode
   } else if(!is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "opcode"){
     
@@ -1610,10 +1615,11 @@ threedpoints <- reactive({
     mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
     dplyr::mutate(number = as.numeric(number)) %>%
-    dplyr::mutate(species = tolower(species)) %>%
-    dplyr::mutate(genus = ga.capitalise(genus)) %>%
-    dplyr::mutate(family = ga.capitalise(family)) %>%
-    dplyr::rename(em.comment = comment)
+    dplyr::mutate(species = as.character(tolower(species))) %>%
+    dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
+    dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+    dplyr::rename(em.comment = comment) %>%
+    dplyr::mutate(em.comment = as.character(em.comment))
   
 })
 
@@ -1649,7 +1655,8 @@ length3dpoints.clean <- reactive({
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::filter(range < (input$range.limit * 1000)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
+    # dplyr::mutate(precision.percent = (precision/length) *100) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
@@ -1671,7 +1678,7 @@ length.complete.download <- reactive({
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
@@ -1683,7 +1690,7 @@ length.complete.download <- reactive({
   else{ 
     length.complete <- dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
@@ -1712,8 +1719,14 @@ length.complete.download <- reactive({
     length.area <- anti_join(length.complete, species.out.of.area)
   }
   
+  precision.limit <- input$error.precision.limit
+  
   length.area <- length.area %>%
-    dplyr::filter(range<(input$error.range.limit*1000))
+    dplyr::filter(range < (input$error.range.limit*1000)) %>%
+    dplyr::filter(rms < input$error.rms.limit) %>%
+    dplyr::mutate(precision.percent = (precision/length)*100) %>%
+    dplyr::filter(precision.percent > precision.limit) %>%
+    dplyr::select(-c(precision.percent))
   
   length.wrong <- left_join(length.area, master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>fb.length_max) %>%
@@ -1744,7 +1757,7 @@ length.complete.download <- reactive({
   
   length.big <- length.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% 
     dplyr::mutate(length = as.numeric(length)) %>%
@@ -1844,7 +1857,7 @@ onclick('click.threedpoints.abundance', showModal(modalDialog(
 lengths.no.number <- reactive({
   lengths.no.number <- length() %>%
     filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment)
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment, rms, precision)
 })
 
 ## ►  Lengths without a number - value box ----
@@ -1882,7 +1895,8 @@ onclick('click.lengths.no.number',
 threedpoints.no.number <- reactive({
   threedpoints.no.number <- threedpoints() %>%
     filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frameleft, em.comment)
+    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frameleft, em.comment) %>%
+    glimpse()
 })
 
 ## ►  3d points without a number - value box ----
@@ -2151,8 +2165,8 @@ length.out.of.range <- reactive({
   range.limit <- (input$range.limit*1000)
   
   length.out.of.range <- length3dpoints() %>%
-    dplyr::filter(range>range.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright, em.comment)
+    dplyr::filter(range > range.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright, em.comment, rms, precision)
 })
 
 ## ► Out of range - valuebox ----
@@ -2181,6 +2195,79 @@ onclick('click.length.out.of.range', showModal(modalDialog(
   title = "Length measurement out of range", size = "l", easyClose = TRUE, 
   #downloadButton("download.maxn.synonyms", "Download as csv"), 
   renderDataTable(length.out.of.range(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## ► Over RMS - dataframe ----
+length.wrong.rms <- reactive({
+  rms.limit <- (input$rms.limit)
+  
+  length.wrong.rms <- length3dpoints() %>%
+    dplyr::filter(rms > rms.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)
+})
+
+## ► Over RMS - valuebox ----
+output$length.wrong.rms <- renderValueBox({
+  length.wrong.rms <- length.wrong.rms() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.rms)[1] > 0) {
+    total <- sum(length.wrong.rms$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Measurements over RMS limit", 
+           icon = icon("greater-than"), color = col
+  )
+})
+
+## ► Over RMS - onclick ----
+onclick('click.length.wrong.rms', showModal(modalDialog(
+  title = "Length measurement over RMS limit", size = "l", easyClose = TRUE, 
+  renderDataTable(length.wrong.rms(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## ► Over precision - dataframe ----
+length.wrong.precision <- reactive({
+  precision.limit <- (input$precision.limit)
+  
+  length.wrong.precision <- length3dpoints() %>%
+    dplyr::mutate(precision.percent = (precision/length)*100) %>%
+    dplyr::filter(precision.percent > precision.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)
+})
+
+## ► Over precision - valuebox ----
+output$length.wrong.precision <- renderValueBox({
+  length.wrong.precision <- length.wrong.precision() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.precision)[1] > 0) {
+    total <- sum(length.wrong.precision$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Measurements over Precision limit", 
+           icon = icon("greater-than"), color = col
+  )
+})
+
+## ► Over precision - onclick ----
+onclick('click.length.wrong.precision', showModal(modalDialog(
+  title = "Length measurement over precision limit", size = "l", easyClose = TRUE, 
+  renderDataTable(length.wrong.precision(),  rownames = FALSE, 
                   options = list(paging = FALSE, searching = TRUE)))))
 
 ## ► Histogram ----
@@ -2343,7 +2430,7 @@ length3dpoints.clean.t <- reactive({
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::filter(range < (input$range.limit.t * 1000)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, precision, rms, x, y, z, midx, midy, midz, em.comment) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, rms, x, y, z, midx, midy, midz, em.comment, rms, precision) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>%
     dplyr::ungroup() %>%
@@ -2365,7 +2452,7 @@ length.complete.download.t <- reactive({
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
@@ -2378,7 +2465,7 @@ length.complete.download.t <- reactive({
     
     length.complete <- dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
@@ -2412,7 +2499,11 @@ length.complete.download.t <- reactive({
   
   length.area <- length.area %>%
     dplyr::filter(range < (input$error.range.limit.t * 1000)) %>%
-    anti_join(., out.of.transect)
+    anti_join(., out.of.transect) %>%
+    dplyr::filter(rms < input$error.rms.limit.t) %>%
+    dplyr::mutate(precision.percent = (precision/length)*100) %>%
+    dplyr::filter(precision.percent > input$error.precision.limit.t) %>%
+    dplyr::select(-c(precision.percent))
   
   length.wrong <- left_join(length.area, master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > fb.length_max) %>%
@@ -2446,7 +2537,7 @@ length.complete.download.t <- reactive({
   
   length.big <- length.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% 
     dplyr::mutate(length = as.numeric(length)) %>%
@@ -2548,7 +2639,7 @@ onclick('click.threedpoints.abundance.t', showModal(modalDialog(
 lengths.no.number.t <- reactive({
   lengths.no.number.t <- length() %>%
     filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment)
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment, rms, precision)
 })
 
 ## ►  Lengths without a number - value box ----
@@ -2723,7 +2814,7 @@ length.wrong.t <- reactive({
   length.wrong <- left_join(length3dpoints.clean.t(), master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > max.length) %>%
     mutate(reason = ifelse(length < min.length, "too small", "too big")) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, frameleft) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, frameleft, rms, precision) %>%
     mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
     dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))
   
@@ -2859,7 +2950,7 @@ length.out.of.range.t <- reactive({
   
   length.out.of.range <- length3dpoints.t() %>%
     dplyr::filter(range > range.limit) %>% 
-    dplyr::select(campaignid, sample, family, genus, species, range, length,  frameleft, frameright, em.comment)
+    dplyr::select(campaignid, sample, family, genus, species, range, length,  frameleft, frameright, em.comment, rms, precision)
 })
 
 ## ► Out of range - valuebox ----
@@ -2898,7 +2989,7 @@ length.out.of.transect.t <- reactive({
   
   length.out.of.transect <- length3dpoints.t() %>%
     dplyr::filter(c(midx > transect.limit | midx < -transect.limit | midy > transect.limit | midy < -transect.limit | x > transect.limit | x < -transect.limit | y > transect.limit | y < -transect.limit)) %>% 
-    dplyr::select(campaignid, sample, family, genus, species, range, length, frameleft, frameright, midx, midy, x, y, em.comment)
+    dplyr::select(campaignid, sample, family, genus, species, range, length, frameleft, frameright, midx, midy, x, y, em.comment, rms, precision)
 })
 
 ## ► Out of transect - valuebox ----
@@ -2918,7 +3009,7 @@ output$length.out.of.transect.t <- renderValueBox({
   valueBox(width = 3, 
            total, 
            "Out of transect", 
-           icon = icon("greater-than"), color = "red"
+           icon = icon("greater-than"), color = col
   )
 })
 
@@ -2928,6 +3019,80 @@ onclick('click.length.out.of.transect.t',
           title = "Length measurement(s) and 3D point(s) out of transect", size = "l", easyClose = TRUE, 
           renderDataTable(length.out.of.transect.t(),  rownames = FALSE, 
                           options = list(paging = FALSE, searching = TRUE)))))
+
+## ► Over RMS - dataframe ----
+length.wrong.rms.t <- reactive({
+  rms.limit <- (input$rms.limit.t)
+  
+  length.wrong.rms.t <- length3dpoints.t() %>%
+    dplyr::filter(rms > rms.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)
+})
+
+## ► Over RMS - valuebox ----
+output$length.wrong.rms.t <- renderValueBox({
+  length.wrong.rms.t <- length.wrong.rms.t() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.rms.t)[1] > 0) {
+    total <- sum(length.wrong.rms.t$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Measurements over RMS limit", 
+           icon = icon("greater-than"), color = col
+  )
+})
+
+## ► Over RMS - onclick ----
+onclick('click.length.wrong.rms.t', showModal(modalDialog(
+  title = "Length measurement over RMS limit", size = "l", easyClose = TRUE, 
+  renderDataTable(length.wrong.rms.t(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
+## ► Over precision - dataframe ----
+length.wrong.precision.t <- reactive({
+  precision.limit <- (input$precision.limit.t)
+  
+  length.wrong.precision.t <- length3dpoints() %>%
+    dplyr::mutate(precision.percent = (precision/length)*100) %>%
+    dplyr::filter(precision.percent > precision.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)
+})
+
+## ► Over precision - valuebox ----
+output$length.wrong.precision.t <- renderValueBox({
+  length.wrong.precision.t <- length.wrong.precision.t() %>%
+    dplyr::mutate(count = 1)
+  
+  if (dim(length.wrong.precision.t)[1] > 0) {
+    total <- sum(length.wrong.precision.t$count)
+    col = "red"
+  }
+  else{
+    total = 0
+    col = "green"
+  }
+  
+  valueBox(width = 3, 
+           total, 
+           "Measurements over Precision limit", 
+           icon = icon("greater-than"), color = col
+  )
+})
+
+## ► Over precision - onclick ----
+onclick('click.length.wrong.precision.t', showModal(modalDialog(
+  title = "Length measurement over precision limit", size = "l", easyClose = TRUE, 
+  renderDataTable(length.wrong.precision.t(),  rownames = FALSE, 
+                  options = list(paging = FALSE, searching = TRUE)))))
+
 
 ## ► Histogram ----
 output$length.histogram.t <- renderPlot({
@@ -4153,12 +4318,13 @@ habitat.relief <- reactive({
     filter(!broad %in% c("Unknown", "Open.Water", "Open Water")) %>%
     filter(!relief%in% c("", NA)) %>%
     dplyr::select(-c(broad,morphology,type,image.row,image.col, direction)) %>%
-    mutate(relief.rank=ifelse(relief==".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.",0, # Create numerical relief ranks
-                              ifelse(relief==".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.",1,
-                                     ifelse(relief==".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.",2,
-                                            ifelse(relief==".3. Good relief structure with some overhangs. >45 substrate slope.",3,
-                                                   ifelse(relief==".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.",4,
-                                                          ifelse(relief==".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.",5,relief)))))))%>%
+    mutate(relief.rank=ifelse(relief %in% c(".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.", 
+                                            "0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."),0, # Create numerical relief ranks
+                              ifelse(relief %in% c(".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.", "1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope."), 1,
+                                     ifelse(relief %in% c(".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.", "2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope."), 2,
+                                            ifelse(relief %in% c(".3. Good relief structure with some overhangs. >45 substrate slope.", "3. Good relief structure with some overhangs. >45 substrate slope."), 3,
+                                                   ifelse(relief %in% c(".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.", "4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."), 4,
+                                                          ifelse(relief %in% c(".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.", "5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope."), 5, relief)))))))%>%
     dplyr::select(-c(relief))%>%
     mutate(relief.rank=as.numeric(relief.rank)) %>%
     group_by(campaignid, sample) %>%
@@ -4186,7 +4352,9 @@ habitat.broad.points <- reactive({
     ungroup() %>%
     glimpse() %>%
     left_join(metadata.regions()) %>%
-    left_join(habitat.relief())
+    left_join(habitat.relief()) %>%
+    dplyr::filter(successful.count %in% c("Yes", "y", "yes", "y"))
+  
 })
 
 ## ► Habitat broad percent cover - dataframe ----
@@ -4223,12 +4391,13 @@ output$habitat.relief.plot <- renderPlot({
   hab <- hab.points() %>%
     filter(!relief%in% c("", NA)) %>%
     dplyr::select(-c(broad,morphology,type,image.row,image.col)) %>%
-    mutate(relief.rank = ifelse(relief==".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.",0, # Create numerical relief ranks
-                              ifelse(relief==".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.",1,
-                                     ifelse(relief==".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.",2,
-                                            ifelse(relief==".3. Good relief structure with some overhangs. >45 substrate slope.",3,
-                                                   ifelse(relief==".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.",4,
-                                                          ifelse(relief==".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.",5,relief)))))))%>%
+    mutate(relief.rank=ifelse(relief %in% c(".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.", 
+                                            "0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."),0, # Create numerical relief ranks
+                              ifelse(relief %in% c(".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.", "1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope."), 1,
+                                     ifelse(relief %in% c(".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.", "2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope."), 2,
+                                            ifelse(relief %in% c(".3. Good relief structure with some overhangs. >45 substrate slope.", "3. Good relief structure with some overhangs. >45 substrate slope."), 3,
+                                                   ifelse(relief %in% c(".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.", "4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."), 4,
+                                                          ifelse(relief %in% c(".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.", "5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope."), 5, relief)))))))%>%
     dplyr::select(-c(relief))%>%
     dplyr::filter(!relief.rank%in%"") %>% # Removes blank annotations (e.g. 'Open water')
     mutate(relief.rank = as.numeric(relief.rank))%>% 
@@ -4386,7 +4555,10 @@ all.errors <- reactive({
   periods.no.end <- periods.no.end() %>%
     mutate(error = "period.with.no.end")
   
-  periods.wrong <- periods.wrong() %>%
+  periods.wrong <- periods() %>%
+    distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
+    mutate(period.time = round(timeend - timestart)) %>%
+    filter(!period.time %in% c(input$error.period.length)) %>%
     mutate(error = "period.wrong.length")
   
   points.outside.periods <- points.outside.periods() %>%
@@ -4407,7 +4579,11 @@ all.errors <- reactive({
   length.species.not.observed <- length.species.not.observed() %>%
     mutate(error = "species.not.observed.in.region.before")
   
-  length.out.of.range <- length.out.of.range() %>%
+  range.limit <- (input$error.report.range*1000)
+  
+  length.out.of.range <- length3dpoints() %>%
+    dplyr::filter(range>range.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright, em.comment) %>%
     mutate(error = "out.of.range")
   
   length.wrong.small <- length.wrong() %>%
@@ -4418,8 +4594,23 @@ all.errors <- reactive({
     dplyr::filter(reason%in%c("too big")) %>%
     mutate(error = reason)
   
-  all.errors <- bind_rows(points.samples.without.metadata, samples.without.periods, periods.no.end, periods.wrong, points.outside.periods, lengths.outside.periods, points.no.number, lengths.no.number, maxn.species.not.observed, length.species.not.observed, length.out.of.range, length.wrong.small, length.wrong.big) %>%
-    dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment) %>%
+  rms.limit <- (input$error.report.rms)
+  
+  length.wrong.rms <- length3dpoints() %>%
+    dplyr::filter(rms > rms.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)%>%
+    mutate(error = "over.RMS")
+
+  precision.limit <- (input$error.report.precision)
+  
+  length.wrong.precision <- length3dpoints() %>%
+    dplyr::mutate(precision.percent = (precision/length)*100) %>%
+    dplyr::filter(precision.percent > precision.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)%>%
+    mutate(error = "over.Precision")
+  
+  all.errors <- bind_rows(points.samples.without.metadata, samples.without.periods, periods.no.end, periods.wrong, points.outside.periods, lengths.outside.periods, points.no.number, lengths.no.number, maxn.species.not.observed, length.species.not.observed, length.out.of.range, length.wrong.small, length.wrong.big, length.wrong.rms) %>%
+    dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment, rms, precision) %>%
     distinct() %>%
     arrange(campaignid, sample)
   
@@ -4462,10 +4653,89 @@ output$download.mass.t <- downloadHandler(
 ## ► Habitat ----
 output$download.broad.habitat.t <- downloadHandler(
   filename = function() {
-    paste(input$project.name, "_broad.habitat_", Sys.Date(), ".csv", sep = "")
+    paste(input$project.name.t, "_broad.habitat_", Sys.Date(), ".csv", sep = "")
   }, 
   content = function(file) {
     write.csv(habitat.broad.points(), file, row.names = FALSE)
+  }
+)
+
+## ► All errors ----
+all.errors.t <- reactive({
+  
+  points.samples.without.metadata.t <- points.samples.without.metadata.t() %>%
+    mutate(error = "sample.in.points.without.metadata")
+  
+  samples.without.periods.t <- samples.without.periods.t()%>%
+    mutate(error = "sample.without.period")
+  
+  periods.no.end.t <- periods.no.end.t() %>%
+    mutate(error = "period.with.no.end")
+  
+  points.outside.periods.t <- points.outside.periods.t() %>%
+    mutate(error = "point.outside.period")
+  
+  lengths.outside.periods.t <- lengths.outside.periods.t() %>%
+    mutate(error = "length.or.3D.point.outside.period")
+  
+  lengths.no.number.t <- lengths.no.number.t() %>%
+    mutate(error = "length.or.3D.point.without.a.number")
+  
+  length.species.not.observed.t <- length.species.not.observed.t() %>%
+    mutate(error = "species.not.observed.in.region.before")
+  
+  range.limit <- (input$error.report.range.t*1000)
+  
+  length.out.of.range.t <- length3dpoints.t() %>%
+    dplyr::filter(range>range.limit) %>%
+    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright, em.comment) %>%
+    mutate(error = "out.of.range")
+  
+  length.wrong.small.t <- length.wrong.t() %>%
+    dplyr::filter(reason%in%c("too small")) %>%
+    mutate(error = reason)
+  
+  length.wrong.big.t <- length.wrong.t() %>%
+    dplyr::filter(reason%in%c("too big")) %>%
+    mutate(error = reason)
+  
+  transect.limit <- (input$error.report.transect.t*1000)
+  
+  length.out.of.transect.t <- length3dpoints.t() %>%
+    dplyr::filter(c(midx > transect.limit | midx < transect.limit | midy > transect.limit | midy < -transect.limit | x > transect.limit | x < -transect.limit | y > transect.limit | y < -transect.limit)) %>% 
+    dplyr::select(campaignid, sample, family, genus, species, range, length, frameleft, frameright, midx, midy, x, y, em.comment)
+    dplyr::mutate(error = "out.of.transect")
+    
+    rms.limit <- (input$error.report.rms.t)
+    
+    length.wrong.rms <- length3dpoints.t() %>%
+      dplyr::filter(rms > rms.limit) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)%>%
+      mutate(error = "over.RMS")
+    
+    precision.limit <- (input$error.report.precision.t)
+    
+    length.wrong.precision <- length3dpoints.t() %>%
+      dplyr::mutate(precision.percent = (precision/length)*100) %>%
+      dplyr::filter(precision.percent > precision.limit) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)%>%
+      mutate(error = "over.Precision")
+  
+  all.errors <- bind_rows(points.samples.without.metadata.t, samples.without.periods.t, periods.no.end.t, points.outside.periods.t, lengths.outside.periods.t, lengths.no.number.t, length.species.not.observed.t, length.out.of.range.t, length.out.of.transect.t, length.wrong.small.t, length.wrong.big.t, length.wrong.rms, length.wrong.precision) %>%
+    dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment, rms, precision) %>%
+    distinct() %>%
+    arrange(campaignid, sample)
+  
+  # Remember to make this distinct!
+  # For transect version need to include those outside of transect
+})
+
+output$download.all.errors.t <- downloadHandler(
+  filename = function() {
+    paste(input$project.name.t, "_all.errors_", Sys.Date(), ".csv", sep = "")
+  }, 
+  content = function(file) {
+    write.csv(all.errors.t(), file, row.names = FALSE, na = "")
   }
 )
 
@@ -4507,7 +4777,67 @@ output$world.regions.leaflet <- renderLeaflet({
   
 })
 
+observeEvent(input$period.limit, {
+  updateNumericInput(session, "error.period.length", value = input$period.limit)
+})
 
+observeEvent(input$rms.limit, {
+  updateNumericInput(session, "error.report.rms", value = input$rms.limit)
+})
+
+observeEvent(input$rms.limit, {
+  updateNumericInput(session, "error.rms.limit", value = input$rms.limit)
+})
+
+observeEvent(input$precision.limit, {
+  updateNumericInput(session, "error.report.precision", value = input$precision.limit)
+})
+
+observeEvent(input$precision.limit, {
+  updateNumericInput(session, "error.precision.limit", value = input$precision.limit)
+})
+
+observeEvent(input$range.limit, {
+  updateNumericInput(session, "error.report.range", value = input$range.limit)
+})
+
+observeEvent(input$range.limit, {
+  updateNumericInput(session, "error.range.limit", value = input$range.limit)
+})
+
+
+## Transect based
+observeEvent(input$rms.limit.t, {
+  updateNumericInput(session, "error.report.rms.t", value = input$rms.limit.t)
+})
+
+observeEvent(input$rms.limit.t, {
+  updateNumericInput(session, "error.rms.limit.t", value = input$rms.limit.t)
+})
+
+observeEvent(input$precision.limit.t, {
+  updateNumericInput(session, "error.report.precision.t", value = input$precision.limit.t)
+})
+
+observeEvent(input$precision.limit.t, {
+  updateNumericInput(session, "error.precision.limit.t", value = input$precision.limit.t)
+})
+
+observeEvent(input$range.limit.t, {
+  updateNumericInput(session, "error.report.range.t", value = input$range.limit.t)
+})
+
+observeEvent(input$range.limit.t, {
+  updateNumericInput(session, "error.range.limit.t", value = input$range.limit.t)
+})
+
+observeEvent(input$transect.limit.t, {
+  updateNumericInput(session, "error.report.transect.t", value = input$transect.limit.t)
+})
+
+observeEvent(input$transect.limit.t, {
+  updateNumericInput(session, "error.transect.limit.t", value = input$transect.limit.t)
+})
 
 
 }

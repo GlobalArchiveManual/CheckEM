@@ -260,6 +260,7 @@ tagList(
                        
                        div(width = 3, id = "click.lengths.no.number",
                            valueBoxOutput("lengths.no.number")),
+                       
                        div(width = 3, id = "click.threedpoints.no.number",
                            valueBoxOutput("threedpoints.no.number")),
                        
@@ -272,6 +273,16 @@ tagList(
                            valueBoxOutput("length.wrong.big")),
                        div(width = 3, id = "click.length.wrong.big.100",
                            valueBoxOutput("length.wrong.big.100")),
+                       
+                       box(width = 2, title = "RMS limit (mm)?", status = "primary", solidHeader = TRUE, 
+                           numericInput("rms.limit", NULL, 20, min = 1, max = 100)),
+                       div(width = 3, id = "click.length.wrong.rms",
+                           valueBoxOutput("length.wrong.rms")),
+                       
+                       box(width = 2, title = "Precision to length ratio (%)?", status = "primary", solidHeader = TRUE, 
+                           numericInput("precision.limit", NULL, 10, min = 1, max = 100)),
+                       div(width = 3, id = "click.length.wrong.precision",
+                           valueBoxOutput("length.wrong.precision")),
                        
                        box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("length.species.dropdown", multiple=TRUE)),
@@ -316,17 +327,31 @@ tagList(
                        div(width = 3, id = "click.length.wrong.big.100.t",
                            valueBoxOutput("length.wrong.big.100.t")),
                        
-                       box(width = 2, title = "Range limit (m)?", status = "primary", solidHeader = TRUE, 
+                       box(width = 6,
+                       box(title = "Range limit (m)?", status = "primary", solidHeader = TRUE, 
                            numericInput("range.limit.t", NULL, 10, min = 0.5, max = 10)),
+                       div(id="click.length.out.of.range.t",
+                           valueBoxOutput("length.out.of.range.t"))),
                        
-                       div(width = 2,id="click.length.out.of.range.t",
-                           valueBoxOutput("length.out.of.range.t")),
-                       
-                       box(width = 2, title = "Transect bounds (m)?", status = "primary", solidHeader = TRUE, 
+                       box(width = 6,
+                       box(title = "Transect bounds (m)?", status = "primary", solidHeader = TRUE, 
                            numericInput("transect.limit.t", NULL, 2.5, min = 0.5, max = 5)),
+                       div(id="click.length.out.of.transect.t",
+                           valueBoxOutput("length.out.of.transect.t"))),
                        
-                       div(width = 2,id="click.length.out.of.transect.t",
-                           valueBoxOutput("length.out.of.transect.t")),
+                       box(width = 6, #background = "#ecf0f5",
+                       box(title = "RMS limit (mm)?", status = "primary", solidHeader = TRUE, 
+                           numericInput("rms.limit.t", NULL, 20, min = 1, max = 100)),
+                       div(id = "click.length.wrong.rms.t",
+                           valueBoxOutput("length.wrong.rms.t"))#,
+                       ),
+                       
+                       box(width = 6,
+                       box(title = "Precision to length ratio (%)?", status = "primary", solidHeader = TRUE, 
+                           numericInput("precision.limit.t", NULL, 10, min = 1, max = 100)),
+                       div(id = "click.length.wrong.precision.t",
+                           valueBoxOutput("length.wrong.precision.t"))),
+                       
                        
                        box(width = 12, title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("length.species.dropdown.t",multiple=TRUE)),
@@ -424,77 +449,100 @@ tagList(
       # Create downloads - point based data -----
       tabItem(tabName = "downloads",
               fluidRow(
-                box(width=6,title = "Select 'errors' to filter out of downloaded data",
-                    status="primary",solidHeader = TRUE,
+                
+                column(width = 4,
+                box(width = NULL, title = "1. Add project information",
+                    status = "primary", solidHeader = TRUE,
                     
-                    h4("Add project information"),
-                    textInput("project.name", label = "Project name:", value = ""),
+                    textInput("project.name", label = "Project name (this will be the prefix for all files)", value = "")),
+                
+                box(width = NULL, title = "2. Download all errors",
+                    status = "primary", solidHeader = TRUE,
+                    
+                    numericInput("error.period.length", "Enter correct period time (minutes):", 60, min = 0, max = 120), 
+                    numericInput("error.report.range", "Enter range limit (meters):", 10, min = 0.5, max = 20),
+                    numericInput("error.report.rms", "Enter RMS limit (mm):", 20, min = 0, max = 100),
+                    numericInput("error.report.precision", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100),
+                    
+                    # br(),
+                    div(style="display:inline-block;width:100%;text-align: center;", 
+                    downloadBttn("download.all.errors", style = "unite", color = "danger", label = "All errors in EMobs"))
+                    )),
+                
+                
+                
+                box(width = 4, title = "3. Select 'errors' to filter out of downloaded data",
+                    status="primary",solidHeader = TRUE,
                     
                     h4("Filters for MaxN, Length and Mass"),
                     checkboxInput("error.synonyms", label = "Keep species names that have been updated", value = TRUE), 
                     checkboxInput("error.area", label = "Remove species not observed in the area before (this will also remove sp1, sp2 etc.)", value = FALSE), 
                     checkboxInput("error.zeros", label = "Add in zeros where species aren't present", value = TRUE), 
+                    
                     br(),
                     h4("Filters for Length and Mass"),
-                    numericInput("error.range.limit", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
                     checkboxInput("error.length.small", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
-                    checkboxInput("error.length.big", label = "Filter out length measurements larger than fishbase maximum", value = FALSE)),
+                    checkboxInput("error.length.big", label = "Filter out length measurements larger than fishbase maximum", value = FALSE),
+                    numericInput("error.range.limit", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
+                    numericInput("error.rms.limit", "Enter RMS limit (mm):", 20, min = 0, max = 100),
+                    numericInput("error.precision.limit", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100)),
                 
                 
-                box(width = 6, title = "Downloads",
+                box(width = 4, title = "4. Download final files",
                     status = "primary", solidHeader = TRUE,
-                    
+                    div(style="display:inline-block;width:100%;text-align: center;", 
                     downloadBttn("download.maxn", style = "unite", color = "primary", label = "MaxN"), br(), br(),
                     downloadBttn("download.length", style = "unite", color = "primary", label = "Length"), br(), br(),
                     downloadBttn("download.mass", style = "unite", color = "primary", label = "Mass"), br(), br(),
-                    downloadBttn("download.broad.habitat", style = "unite", color = "primary", label = "Habitat"), br(), br(),
-                    downloadBttn("download.all.errors", style = "unite", color = "danger", label = "All errors in EMobs")
+                    downloadBttn("download.broad.habitat", style = "unite", color = "primary", label = "Habitat"), br(), br())
                     ),
-                       # 
-                       # div(id="click.download.maxn",
-                       # infoBoxOutput("info.download.maxn",width=6)),
-                       # 
-                       # div(id="click.download.length",
-                       # infoBoxOutput("info.download.length",width=6)),
-                       # 
-                       # div(id="click.download.mass",
-                       # infoBoxOutput("info.download.mass",width=6))
               )
       ),
       
       # Create downloads - transect based data -----
       tabItem(tabName = "downloadst",
               fluidRow(
-                box(width=6,title = "Select 'errors' to filter out of downloaded data",
+                column(width = 4,
+                       box(width = NULL, title = "1. Add project information",
+                           status = "primary", solidHeader = TRUE,
+                           
+                           textInput("project.name.t", label = "Project name (this will be the prefix for all files)", value = "")),
+                       
+                       box(width = NULL, title = "2. Download all errors",
+                           status = "primary", solidHeader = TRUE,
+                           
+                           numericInput("error.report.range.t", "Enter range limit (meters):", 10, min = 0.5, max = 20),
+                           numericInput("error.report.transect.t", "Enter transect limit (meters):", 10, min = 0.5, max = 20),
+                           numericInput("error.report.rms.t", "Enter RMS limit (mm):", 20, min = 0, max = 100),
+                           numericInput("error.report.precision.t", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100),
+                           
+                           
+                           div(style="display:inline-block;width:100%;text-align: center;", 
+                               downloadBttn("download.all.errors.t", style = "unite", color = "danger", label = "All errors in EMobs"))
+                       )),
+                
+                box(width = 4, title = "3. Select 'errors' to filter out of downloaded data",
                     status="primary",solidHeader = TRUE,
                     
-                    h4("Add project and campaign information"),
-                    textInput("project.name.t", label = "Project name:", value = ""),
-                    
-                    h4("Filters"),
                     checkboxInput("error.synonyms.t", label = "Keep species names that have been updated", value = TRUE), 
                     checkboxInput("error.area.t", label = "Remove species not observed in the area before", value = FALSE), 
                     checkboxInput("error.zeros.t", label = "Add in zeros where species aren't present", value = TRUE), 
-                    # br(),
-                    # h4("Filters for Length and Mass"),
+                    
+                    checkboxInput("error.length.small.t", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
+                    checkboxInput("error.length.big.t", label = "Filter out length measurements larger than fishbase maximum", value = FALSE),
+                    
                     numericInput("error.range.limit.t", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
                     numericInput("error.transect.limit.t", "Remove 3D measurements outside transect bounds (meters):", 2.5, min = 0, max = 20),
-                    checkboxInput("error.length.small.t", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
-                    checkboxInput("error.length.big.t", label = "Filter out length measurements larger than fishbase maximum", value = FALSE)),
+                    numericInput("error.rms.limit.t", "Enter RMS limit (mm):", 20, min = 0, max = 100),
+                    numericInput("error.precision.limit.t", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100)),
                 
-                # div(id="click.download.length.t",
-                #     infoBoxOutput("info.download.length.t",width=6)),
-                # 
-                # div(id="click.download.mass.t",
-                #     infoBoxOutput("info.download.mass.t",width=6))
-                
-                box(width = 6, title = "Downloads",
+                box(width = 4, title = "4. Download final files",
                     status = "primary", solidHeader = TRUE,
-                # downloadBttn("download.maxn", style = "unite", color = "primary", label = "MaxN"), br(), br(),
+                    div(style="display:inline-block;width:100%;text-align: center;", 
+                        
                 downloadBttn("download.length.t", style = "unite", color = "primary", label = "Length"), br(), br(),
                 downloadBttn("download.mass.t", style = "unite", color = "primary", label = "Mass"), br(), br(),
-                downloadBttn("download.broad.habitat.t", style = "unite", color = "primary", label = "Habitat"), br(), br(),
-                downloadBttn("download.all.errors.t", style = "unite", color = "danger", label = "All errors in EMobs")
+                downloadBttn("download.broad.habitat.t", style = "unite", color = "primary", label = "Habitat"))
               ))
       ),
       
