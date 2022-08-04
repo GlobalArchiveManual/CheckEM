@@ -989,11 +989,12 @@ maxn.raw <- reactive({
     replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
     dplyr::group_by(campaignid, sample, filename, period, periodtime, frame, family, genus, species, em.comment) %>% # removed comment 21/10/21
     dplyr::summarise(maxn = sum(number)) %>%
-    dplyr::group_by(campaignid, sample, family, genus, species, em.comment) %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(campaignid, sample, family, genus, species) %>%
     dplyr::slice(which.max(maxn)) %>%
     dplyr::ungroup() %>%
     dplyr::filter(!is.na(maxn)) %>%
-    dplyr::select(-frame) %>%
+    # dplyr::select(-frame) %>%
     tidyr::replace_na(list(maxn = 0)) %>%
     dplyr::mutate(maxn = as.numeric(maxn)) %>%
     dplyr::filter(maxn > 0) %>%
@@ -1011,7 +1012,7 @@ maxn.clean <- dplyr::left_join(maxn.raw(), synonyms, by = c("family", "genus", "
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-    dplyr::group_by(campaignid, sample, family, genus, species, em.comment) %>%
+    dplyr::group_by(campaignid, sample, family, genus, species) %>%
     dplyr::slice(which.max(maxn)) %>%
     dplyr::ungroup()
 })
@@ -1024,7 +1025,7 @@ maxn.complete <- maxn.clean() %>%
   dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment)) %>%
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
   replace_na(list(maxn = 0)) %>%
-  dplyr::group_by(campaignid, sample, family, genus, species, em.comment) %>%
+  dplyr::group_by(campaignid, sample, family, genus, species) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
   ungroup()
 })
@@ -1635,13 +1636,12 @@ output$table.3dpoints <- renderTable({
 # ► Combine lengths and 3d points ----
 length3dpoints <- reactive({
   length3dpoints <- length() %>%
-    plyr::rbind.fill(threedpoints()) %>%
+    dplyr::bind_rows(threedpoints()) %>% # changed to bind_rows
     mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
     mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::mutate(number = as.numeric(number)) %>%
-    tidyr::replace_na(list(species = "spp")) %>%
     dplyr::select(-c(time)) %>%
     dplyr::mutate(sample = as.character(sample)) %>%
     dplyr::left_join(metadata.regions())
@@ -1653,12 +1653,12 @@ length3dpoints.clean <- reactive({
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-    dplyr::filter(range < (input$range.limit * 1000)) %>%
+    # dplyr::filter(range < (input$range.limit * 1000)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
     # dplyr::mutate(precision.percent = (precision/length) *100) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-    replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
+    replace_na(list(number = 0)) %>% # we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
@@ -1725,7 +1725,7 @@ length.complete.download <- reactive({
     dplyr::filter(range < (input$error.range.limit*1000)) %>%
     dplyr::filter(rms < input$error.rms.limit) %>%
     dplyr::mutate(precision.percent = (precision/length)*100) %>%
-    dplyr::filter(precision.percent > precision.limit) %>%
+    dplyr::filter(precision.percent < precision.limit) %>%
     dplyr::select(-c(precision.percent))
   
   length.wrong <- left_join(length.area, master.min.max, by = c("family", "genus", "species")) %>%
@@ -2502,7 +2502,7 @@ length.complete.download.t <- reactive({
     anti_join(., out.of.transect) %>%
     dplyr::filter(rms < input$error.rms.limit.t) %>%
     dplyr::mutate(precision.percent = (precision/length)*100) %>%
-    dplyr::filter(precision.percent > input$error.precision.limit.t) %>%
+    dplyr::filter(precision.percent < input$error.precision.limit.t) %>%
     dplyr::select(-c(precision.percent))
   
   length.wrong <- left_join(length.area, master.min.max, by = c("family", "genus", "species")) %>%
@@ -3931,10 +3931,10 @@ output$mass.spatial.plot.t <- renderLeaflet({
 ## _______________________________________________________ ----
 
 
-## ► Length vs maxn use 2.2 as check ----
+## ► Length vs MaxN use 2.2 as check ----
 length.vs.maxn <- reactive({
 length.sample <- metadata.regions() %>%
-  dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes")) %>%
+  dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) %>%
   distinct(sample)
 
 length <- length3dpoints.clean()
@@ -3945,7 +3945,7 @@ length.vs.maxn <- length3dpoints.clean() %>%
   dplyr::group_by(campaignid, sample, family, genus, species) %>%
   dplyr::summarise(length.maxn = sum(number)) %>%
   dplyr::ungroup() %>%
-  dplyr::full_join(maxn.complete()) %>%
+  dplyr::left_join(maxn.complete()) %>%
   replace_na(list(maxn = 0)) %>%
   dplyr::filter(!length.maxn == maxn) %>%
   dplyr::mutate(percent.difference = (maxn-length.maxn)/maxn*100) %>%

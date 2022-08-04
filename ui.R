@@ -14,7 +14,7 @@ tagList(
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
                               menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
-                              menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
+                              # menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
                               menuItem("Create & check mass", tabName = "createmass", icon = icon("check")),
                               menuItem("Download data", tabName = "downloads", icon = icon("download")))
                             ),
@@ -25,7 +25,7 @@ tagList(
                             sidebarMenu(
                               menuItem("Check metadata & periods", tabName = "checkmetadatat", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlengtht", icon = icon("check")),
-                              menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
+                              # menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
                               menuItem("Create & check mass", tabName = "createmasst", icon = icon("check")),
                               menuItem("Download data", tabName = "downloadst", icon = icon("download")))
                             ),
@@ -73,19 +73,19 @@ tagList(
                                                                        c("OpCode and Period" = "opcodeperiod",
                                                                          "Period only" = "period"),
                                                                        selected = "opcodeperiod",
-                                                                       inline = TRUE)),
-                                  
-                                  radioButtons("habdirection", "If checking habitat, which directions were annotated?",
-                                               c("Forwards only" = "forwards",
-                                                 "Forwards and backwards" = "both"),
-                                               selected = "forwards",
-                                               inline = TRUE),
-                                  
-                                  radioButtons("habreliefsep", "If checking habitat, was relief annotated separately?",
-                                               c("No" = "no",
-                                                 "Yes" = "yes"),
-                                               selected = "no",
-                                               inline = TRUE)
+                                                                       inline = TRUE))
+                                  # ,
+                                  # radioButtons("habdirection", "If checking habitat, which directions were annotated?",
+                                  #              c("Forwards only" = "forwards",
+                                  #                "Forwards and backwards" = "both"),
+                                  #              selected = "forwards",
+                                  #              inline = TRUE),
+                                  # 
+                                  # radioButtons("habreliefsep", "If checking habitat, was relief annotated separately?",
+                                  #              c("No" = "no",
+                                  #                "Yes" = "yes"),
+                                  #              selected = "no",
+                                  #              inline = TRUE)
                                   ),
                               
                               box(width = NULL, height = 700, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE,
@@ -115,36 +115,36 @@ tagList(
                                           accept = c("image/vnd.txt",".txt")))
                            ),
                        
-                       box(width = 6, title = "Upload TransectMeasure exports (txt files)", status = "primary", solidHeader = FALSE,
-                           
-                           box(width = 6, height = 110, title = "Forward facing Dot Point Measurements", 
-                               status = "primary", solidHeader = TRUE,
-                               
-                               fileInput("upload.f.dotpoints", NULL, multiple = TRUE,
-                                         accept = c("image/vnd.txt",".txt"))),
-                           
-                           shiny::conditionalPanel("input.habdirection == 'both'",
-                                                   box(width = 6, height = 110, title = "Backward facing Dot Point Measurements", 
-                                                       status = "primary", solidHeader = TRUE,
-                                                       fileInput("upload.b.dotpoints", NULL, multiple = TRUE,
-                                                                 accept = c("image/vnd.txt",".txt")))
-                                                   ),
-                           
-                           shiny::conditionalPanel("input.habreliefsep == 'yes'",
-                                                   
-                                                   box(width = 6, height = 110, title = "Forwards Relief Dot Point Measurements", 
-                                                       status = "primary", solidHeader = TRUE,
-                                                       fileInput("upload.r.f.dotpoints", NULL, multiple = TRUE,
-                                                                 accept = c("image/vnd.txt",".txt"))),
-                                                   
-                                                   shiny::conditionalPanel("input.habdirection == 'both'",
-                                                                           box(width = 6, height = 110, title = "Backwards Relief Dot Point Measurements", 
-                                                                               status = "primary", solidHeader = TRUE,
-                                                                               fileInput("upload.r.b.dotpoints", NULL, multiple = TRUE,
-                                                                                         accept = c("image/vnd.txt",".txt")))
-                                                   )
-                           )
-                           ),
+                       # box(width = 6, title = "Upload TransectMeasure exports (txt files)", status = "primary", solidHeader = FALSE,
+                       #     
+                       #     box(width = 6, height = 110, title = "Forward facing Dot Point Measurements", 
+                       #         status = "primary", solidHeader = TRUE,
+                       #         
+                       #         fileInput("upload.f.dotpoints", NULL, multiple = TRUE,
+                       #                   accept = c("image/vnd.txt",".txt"))),
+                       #     
+                       #     shiny::conditionalPanel("input.habdirection == 'both'",
+                       #                             box(width = 6, height = 110, title = "Backward facing Dot Point Measurements", 
+                       #                                 status = "primary", solidHeader = TRUE,
+                       #                                 fileInput("upload.b.dotpoints", NULL, multiple = TRUE,
+                       #                                           accept = c("image/vnd.txt",".txt")))
+                       #                             ),
+                       #     
+                       #     shiny::conditionalPanel("input.habreliefsep == 'yes'",
+                       #                             
+                       #                             box(width = 6, height = 110, title = "Forwards Relief Dot Point Measurements", 
+                       #                                 status = "primary", solidHeader = TRUE,
+                       #                                 fileInput("upload.r.f.dotpoints", NULL, multiple = TRUE,
+                       #                                           accept = c("image/vnd.txt",".txt"))),
+                       #                             
+                       #                             shiny::conditionalPanel("input.habdirection == 'both'",
+                       #                                                     box(width = 6, height = 110, title = "Backwards Relief Dot Point Measurements", 
+                       #                                                         status = "primary", solidHeader = TRUE,
+                       #                                                         fileInput("upload.r.b.dotpoints", NULL, multiple = TRUE,
+                       #                                                                   accept = c("image/vnd.txt",".txt")))
+                       #                             )
+                       #     )
+                       #     ),
               
                   tabBox(width = 12, height = 800,
                          
@@ -156,8 +156,9 @@ tagList(
                     tabPanel("Points", tableOutput("table.points")),
                     tabPanel("Lengths", tableOutput("table.length")),
                     tabPanel("3D Points", tableOutput("table.3dpoints")),
-                    tabPanel("Periods", tableOutput("table.periods")),
-                    tabPanel("Habitat", tableOutput("table.habitat"))
+                    tabPanel("Periods", tableOutput("table.periods"))
+                    #,
+                    # tabPanel("Habitat", tableOutput("table.habitat"))
                   
                   )
       )),
@@ -412,38 +413,38 @@ tagList(
               )),
       
       
-      # Check habitat - point based data -----
-      tabItem(tabName = "checkhab",
-              fluidRow(div(id="click.metadata.samples.without.hab",
-                           valueBoxOutput("metadata.samples.without.hab")),
-                       div(id="click.habitat.samples.without.metadata",
-                           valueBoxOutput("habitat.samples.without.metadata")),
-                       # div(id="click.habitat.annotations.per.sample",
-                       #     valueBoxOutput("habitat.annotations.per.sample"))
-                       box(width = 4, title = "Enter your correct number of annotations per sample:", status = "primary", solidHeader = TRUE,
-                           numericInput("number.of.annotations", NULL, 20, min = 1, max = 1000)),
-                       
-                       
-                       div(id="click.habitat.wrong.annotations",
-                           valueBoxOutput("habitat.wrong.annotations")),
-                       
-                       box(width = 12, title = "Broad habitat", status = "primary", 
-                           plotOutput("habitat.broad.plot", height = 250)),
-                       
-                       box(width = 12, title = "Relief", status = "primary", 
-                           plotOutput("habitat.relief.plot", height = 250)),
-                       
-                       box(width = 12, title = "Habitat pie chart", status = "primary",
-                           leafletOutput("hab.pies", height = 800)),
-                       
-                       box(width = 12,title = "Choose habitat type to plot below:", status = "primary", solidHeader = TRUE,
-                           htmlOutput("hab.dropdown",multiple=TRUE)),
-                       
-                       box(width = 12, title = "Habitat bubble plot", status = "primary",
-                           leafletOutput("hab.bubble", height = 800)),
-                       
-                       )
-      ),
+      # # Check habitat - point based data -----
+      # tabItem(tabName = "checkhab",
+      #         fluidRow(div(id="click.metadata.samples.without.hab",
+      #                      valueBoxOutput("metadata.samples.without.hab")),
+      #                  div(id="click.habitat.samples.without.metadata",
+      #                      valueBoxOutput("habitat.samples.without.metadata")),
+      #                  # div(id="click.habitat.annotations.per.sample",
+      #                  #     valueBoxOutput("habitat.annotations.per.sample"))
+      #                  box(width = 4, title = "Enter your correct number of annotations per sample:", status = "primary", solidHeader = TRUE,
+      #                      numericInput("number.of.annotations", NULL, 20, min = 1, max = 1000)),
+      #                  
+      #                  
+      #                  div(id="click.habitat.wrong.annotations",
+      #                      valueBoxOutput("habitat.wrong.annotations")),
+      #                  
+      #                  box(width = 12, title = "Broad habitat", status = "primary", 
+      #                      plotOutput("habitat.broad.plot", height = 250)),
+      #                  
+      #                  box(width = 12, title = "Relief", status = "primary", 
+      #                      plotOutput("habitat.relief.plot", height = 250)),
+      #                  
+      #                  box(width = 12, title = "Habitat pie chart", status = "primary",
+      #                      leafletOutput("hab.pies", height = 800)),
+      #                  
+      #                  box(width = 12,title = "Choose habitat type to plot below:", status = "primary", solidHeader = TRUE,
+      #                      htmlOutput("hab.dropdown",multiple=TRUE)),
+      #                  
+      #                  box(width = 12, title = "Habitat bubble plot", status = "primary",
+      #                      leafletOutput("hab.bubble", height = 800)),
+      #                  
+      #                  )
+      # ),
       
       
       # Create downloads - point based data -----
@@ -493,8 +494,10 @@ tagList(
                     div(style="display:inline-block;width:100%;text-align: center;", 
                     downloadBttn("download.maxn", style = "unite", color = "primary", label = "MaxN"), br(), br(),
                     downloadBttn("download.length", style = "unite", color = "primary", label = "Length"), br(), br(),
-                    downloadBttn("download.mass", style = "unite", color = "primary", label = "Mass"), br(), br(),
-                    downloadBttn("download.broad.habitat", style = "unite", color = "primary", label = "Habitat"), br(), br())
+                    downloadBttn("download.mass", style = "unite", color = "primary", label = "Mass"), br(), br()
+                    # ,
+                    # downloadBttn("download.broad.habitat", style = "unite", color = "primary", label = "Habitat"), br(), br()
+                    )
                     ),
               )
       ),
@@ -542,7 +545,8 @@ tagList(
                         
                 downloadBttn("download.length.t", style = "unite", color = "primary", label = "Length"), br(), br(),
                 downloadBttn("download.mass.t", style = "unite", color = "primary", label = "Mass"), br(), br(),
-                downloadBttn("download.broad.habitat.t", style = "unite", color = "primary", label = "Habitat"))
+                # downloadBttn("download.broad.habitat.t", style = "unite", color = "primary", label = "Habitat")
+                )
               ))
       ),
       
