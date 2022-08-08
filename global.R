@@ -75,7 +75,7 @@ dbHeader <- dashboardHeader(title = "CheckEM",
                                     class = "dropdown"))
 
 # Read in life history sheet ----
-master <- read_csv("data/australia.life.history_220714.csv") %>%
+master <- read_csv("data/australia.life.history.csv") %>%
   ga.clean.names()%>%
   filter(grepl('Australia', global.region)) %>%
   dplyr::mutate(all=as.numeric(all)) %>%
@@ -95,7 +95,7 @@ master <- read_csv("data/australia.life.history_220714.csv") %>%
                                                                 "Northor" = "North"))) %>%
   glimpse()
 
-classes <- read_csv("data/australia.life.history_220714.csv") %>%
+classes <- read_csv("data/australia.life.history.csv") %>%
   ga.clean.names() %>%
   distinct(class, order, family, genus, species)
   
@@ -131,7 +131,7 @@ master.min.max <- left_join(master, family.max.length, by = c("family")) %>% # a
   glimpse()
 
 # Synonyms ----
-synonyms <- read_csv("data/synonyms_220714.csv") %>%
+synonyms <- read_csv("data/synonyms.csv") %>%
   distinct() %>%
   ga.clean.names() %>%
   dplyr::select(-comment) %>%
