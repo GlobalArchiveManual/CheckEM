@@ -1,0 +1,133 @@
+Sample,Longitude,Latitude,Date,Time,Site,Location,Status,Depth,Observer.count,Successful.count,Successful.length,Observer.length
+1.01,113.5404917,-22.84786205,20190812,9:23:00,1,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+1.02,113.5252875,-22.85016136,20190812,9:35:00,1,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+1.03,113.51304,-22.84437,20190812,9:43:00,1,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+1.04,113.5183981,-22.8402743,20190812,9:51:00,1,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+1.05,113.51601,-22.83417,20190812,9:58:00,1,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,No,Charlotte Aston
+1.06,113.523387,-22.83153691,20190812,10:06:00,1,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+2.02,113.5625852,-22.83153691,20190812,11:47:00,2,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,No,
+2.03,113.5659111,-22.82900766,20190812,11:57:00,2,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+2.04,113.5815904,-22.82440903,20190812,12:05:00,2,Ningaloo Marine Park,NA,0,Charlote Aston,Yes,Yes,Charlotte Aston
+2.05,113.5770767,-22.82256957,20190812,12:12:00,2,Ningaloo Marine Park,NA,0,Charlotte Aston ,Yes,Yes,Charlotte Aston
+2.06,113.5716127,-22.82164985,20190812,12:18:00,2,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+2.07,113.5640106,-22.8191206,20190812,12:24:00,2,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+3.01,113.5207738,-22.81314238,20190812,14:12:00,3,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+3.02,113.5262378,-22.81015327,20190812,14:07:00,3,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,No,Charlotte Aston
+3.03,113.5338398,-22.80693423,20190812,14:00:00,3,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+3.04,113.51938,-22.80608,20190812,14:17:00,3,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,No,Charlotte Aston
+3.05,113.51626,-22.80532471,20190812,14:21:00,3,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+3.06,113.5105585,-22.80463491,20190812,14:25:00,3,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+4.01,113.49708,-22.80504,20190812,8:05:00,4,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+4.02,113.51077,-22.79001,20190812,8:15:00,4,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+4.03,113.5005807,-22.78991929,20190812,8:24:00,4,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+4.08,113.4984427,-22.78601045,20190812,8:29:00,4,Ningaloo Marine Park,NA,0,Todd Bond,No,Yes,Charlotte Aston
+4.11,113.496067,-22.78371114,20190812,8:33:00,4,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+4.12,113.4877522,-22.78578052,20190812,8:56:00,4,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+5.02,113.54762,-22.78253,20190812,15:37:00,5,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+5.03,113.56188,-22.78303,20190812,15:42:00,5,Ningaloo Marine Park,NA,0,Charlotte Aston ,Yes,Yes,Charlotte Aston
+5.07,113.57245,-22.7727833,20190812,15:49:00,5,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+5.08,113.5716127,-22.76807579,20190812,15:53:00,5,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+5.11,113.5723254,-22.76278737,20190812,16:05:00,5,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+5.13,113.58319,-22.76082,20190812,16:11:00,5,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,No,
+6.01,113.53596,-22.77091,20190812,13:41:00,6,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+6.02,113.55367,-22.75818,20190812,13:31:00,6,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+6.03,113.54189,-22.75754,20190812,13:25:00,6,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+6.04,113.5402541,-22.75175065,20190812,13:21:00,6,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+6.05,113.5412044,-22.7411738,20190812,13:15:00,6,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+6.12,113.541917,-22.73059695,20190812,13:11:00,6,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+7.01,113.5509445,-22.73427585,20190812,8:24:00,7,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+7.02,113.5533202,-22.7317466,20190812,8:21:00,7,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+7.03,113.5554582,-22.72507859,20190812,8:16:00,7,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+7.04,113.5630603,-22.72760784,20190812,8:13:00,7,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+7.05,113.5732756,-22.72875749,20190812,8:08:00,7,Ningaloo Marine Park,NA,0,Brooke Gibbons,Yes,Yes,Charlotte Aston
+7.08,113.5756513,-22.73059695,20190812,8:03:00,7,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+8.01,113.5497567,-22.71266228,20190812,10:00:00,8,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+8.02,113.5559334,-22.70277523,20190812,10:06:00,8,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+8.05,113.57994,-22.7017,20190812,10:31:00,8,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+8.06,113.58157,-22.69621,20190812,10:27:00,8,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+8.07,113.57783,-22.69542,20190812,10:23:00,8,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+8.12,113.547381,-22.69932625,20190812,10:11:00,8,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+9.01,113.5359779,-22.70139564,20190812,11:16:00,9,Ningaloo Marine Park,NA,0,Charlotte Aston,Yes,Yes,Charlotte Aston
+9.02,113.5214865,-22.7025453,20190812,11:00:00,9,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+9.05,113.5248124,-22.69150858,20190812,11:05:00,9,Ningaloo Marine Park,NA,0,Charlotte Aston,No ,No,Charlotte Aston
+9.06,113.5319393,-22.6931181,20190812,11:10:00,9,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+9.07,113.5255251,-22.71082283,20190812,10:52:00,9,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,Charlotte Aston
+9.08,113.5136468,-22.71220242,20190812,10:45:00,9,Ningaloo Marine Park,NA,0,Todd Bond,Yes,Yes,
+10.01,113.5564085,-22.67587323,20190812,12:13:00,10,Ningaloo Marine Park,NA,93,Charlotte Aston,Yes,No,Charlotte Aston
+10.02,113.5564085,-22.67334399,20190812,12:19:00,10,Ningaloo Marine Park,NA,95,Charlotte Aston,Yes,Yes,Charlotte Aston
+10.03,113.5628228,-22.66874535,20190812,12:24:00,10,Ningaloo Marine Park,NA,88,Charlotte Aston,Yes,Yes,Charlotte Aston
+10.04,113.5518948,-22.6669059,20190812,12:33:00,10,Ningaloo Marine Park,NA,110,Charlotte Aston,No ,No ,
+10.07,113.5400165,-22.67311405,20190812,12:40:00,10,Ningaloo Marine Park,NA,138,Charlotte Aston,No ,No ,
+10.08,113.5383536,-22.67035488,20190812,12:46:00,10,Ningaloo Marine Park,NA,157,Charlotte Aston,No ,No ,Charlotte Aston
+10.09,113.55942,-22.62918,20190812,14:34:00,10,Ningaloo Marine Park,NA,160,Brooke Gibbons,Yes,Yes,
+10.11,113.5636,-22.61773,20190812,14:41:00,10,Ningaloo Marine Park,NA,160,Brooke Gibbons,Yes,Yes,Charlotte Aston
+10.12,113.57775,-22.59615,20190812,15:20:00,10,Ningaloo Marine Park,NA,136,Brooke Gibbons,Yes,Yes,
+10.13,113.579,-22.638,20190812,14:53:00,10,Ningaloo Marine Park,NA,78,Brooke Gibbons,Yes,Yes,
+10.14,113.5916667,-22.624,20190812,15:02:00,10,Ningaloo Marine Park,NA,74,Charlotte Aston,Yes,Yes,
+10.15,113.594,-22.6058333,20190812,15:10:00,10,Ningaloo Marine Park,NA,84,Charlotte Aston,Yes,Yes,
+11.01,113.6215013,-22.54044354,20190812,8:06:00,11,Ningaloo Marine Park,NA,84,Charlotte Aston,Yes,Yes,
+11.02,113.6248272,-22.5365347,20190812,8:11:00,11,Ningaloo Marine Park,NA,81,Charlotte Aston,Yes,Yes,
+11.03,113.6274404,-22.53377552,20190812,8:15:00,11,Ningaloo Marine Park,NA,79,Charlotte Aston,No,No ,
+11.04,113.6243521,-22.52871703,20190812,8:19:00,11,Ningaloo Marine Park,NA,91,Charlotte Aston,Yes,Yes,
+11.05,113.6255399,-22.52618778,20190812,8:25:00,11,Ningaloo Marine Park,NA,91,Charlotte Aston,No ,No,
+11.06,113.6345674,-22.52388847,20190812,8:31:00,11,Ningaloo Marine Park,NA,77,Charlotte Aston,Yes,Yes,
+12.02,113.67504,-22.46724,20190812,10:37:00,12,Ningaloo Marine Park,NA,56,Charlotte Aston,Yes,Yes,Charlotte Aston
+12.03,113.6678265,-22.46824503,20190812,10:44:00,12,Ningaloo Marine Park,NA,65,Charlotte Aston,Yes,Yes,
+12.04,113.6687767,-22.46433619,20190812,10:48:00,12,Ningaloo Marine Park,NA,70,Charlotte Aston,Yes,Yes,
+12.05,113.6599868,-22.4673253,20190812,10:29:00,12,Ningaloo Marine Park,NA,86,Charlotte Aston,Yes,Yes,
+12.06,113.6573736,-22.46548585,20190812,10:25:00,12,Ningaloo Marine Park,NA,94,Charlotte Aston,No ,No,
+12.11,113.64333,-22.48475,20190812,10:14:00,12,Ningaloo Marine Park,NA,100,Charlotte Aston,Yes,Yes,
+13.02,113.7058369,-22.40386419,20190812,12:32:00,13,Ningaloo Marine Park,NA,69,Charlotte Aston,Yes,Yes,
+13.03,113.7013231,-22.39903562,20190812,12:52:00,13,Ningaloo Marine Park,NA,83,Charlotte Aston,Yes,Yes,
+13.04,113.6972845,-22.39765604,20190812,12:48:00,13,Ningaloo Marine Park,NA,92,Charlotte Aston,Yes,Yes,
+13.05,113.6932459,-22.40087508,20190812,12:43:00,13,Ningaloo Marine Park,NA,96,Charlotte Aston,Yes,Yes,
+13.06,113.6922957,-22.40478391,20190812,12:39:00,13,Ningaloo Marine Park,NA,94.5,Charlotte Aston,Yes,Yes,
+13.08,113.7039364,-22.39328734,20190812,12:56:00,13,Ningaloo Marine Park,NA,85,Charlotte Aston,Yes,Yes,
+14.01,113.72408,-22.32524,20190812,14:46:00,14,Ningaloo Marine Park,NA,96,Charlotte Aston,Yes,Yes,
+14.02,113.73251,-22.30284,20190812,15:12:00,14,Ningaloo Marine Park,NA,101,Charlotte Aston,Yes,Yes,
+14.03,113.74266,-22.27651,20190812,15:25:00,14,Ningaloo Marine Park,NA,109,Charlote Aston,No,No ,
+14.06,113.79046,-22.17832,20190812,8:12:00,14,Ningaloo Marine Park,NA,100,Charlotte Aston,Yes,Yes,
+14.11,113.7371667,-22.3266667,20190812,14:53:00,14,Ningaloo Marine Park,NA,75,Charlotte Aston,Yes,Yes,
+14.12,113.746,-22.3071667,20190812,15:05:00,14,Ningaloo Marine Park,NA,82,Charlotte Aston,Yes,Yes,
+14.13,113.7416667,-22.2866667,20190812,15:20:00,14,Ningaloo Marine Park,NA,101,Charlotte Aston,Yes,Yes,
+15.01,113.7915,-22.17344,20190812,8:16:00,15,Ningaloo Marine Park,NA,100,Charlotte Aston,Yes,Yes,
+15.02,113.7941,-22.16882,20190812,8:20:00,15,Ningaloo Marine Park,NA,100,Charlotte Aston,Yes,Yes,
+15.05,113.78335,-22.16173,20190812,8:27:00,15,Ningaloo Marine Park,NA,122,Charlotte Aston,No,No ,
+15.07,113.79163,-22.13639,20190812,8:43:00,15,Ningaloo Marine Park,NA,116,Charlotte Aston,Yes,Yes,
+15.12,113.7899349,-22.14381158,20190812,8:39:00,15,Ningaloo Marine Park,NA,110,Charlotte Aston,Yes,Yes,
+16.01,113.80074,-22.12155,20190812,10:22:00,18,Ningaloo Marine Park,NA,101,Charlotte Aston,Yes,Yes,
+16.02,113.79192,-22.11624,20190812,10:28:00,16,Ningaloo Marine Park,NA,145,Charlotte Aston,Yes,Yes,
+16.03,113.7967,-22.10669,20190812,10:39:00,16,Ningaloo Marine Park,NA,190,Charlotte Aston,Yes,Yes,
+16.04,113.8081,-22.09742,20190812,10:48:00,16,Ningaloo Marine Park,NA,100,Charlotte Aston,Yes,Yes,
+16.05,113.82563,-22.0856,20190812,11:00:00,16,Ningaloo Marine Park,NA,85,Charlotte Aston,Yes,Yes,
+17.08,113.8193929,-22.0943763,20190812,10:53:00,17,Ningaloo Marine Park,NA,90,Charlotte Aston,Yes,Yes,
+18.01,113.812266,-22.06954369,20190812,12:33:00,18,Ningaloo Marine Park,NA,91,Charlotte Aston,Yes,Yes,
+18.02,113.8120284,-22.06517499,20190812,12:38:00,18,Ningaloo Marine Park,NA,91,Charlotte Aston,Yes,Yes,
+18.03,113.8082274,-22.06563485,20190812,12:46:00,18,Ningaloo Marine Park,NA,117,Charlotte Aston,Yes,Yes,
+18.04,113.810603,-22.06172601,20190812,12:50:00,18,Ningaloo Marine Park,NA,134,Charlotte Aston,Yes,Yes,Charlotte Aston
+18.07,113.8281828,-22.06264574,20190812,12:54:00,18,Ningaloo Marine Park,NA,109,Charlotte Aston,Yes,Yes,
+18.08,113.823194,-22.0725328,20190812,12:58:00,18,Ningaloo Marine Park,NA,96,Charlotte Aston,Yes,Yes,
+19.01,113.82289,-22.01347,20190812,14:42:00,19,Ningaloo Marine Park,NA,107,Charlotte Aston,Yes,Yes,
+19.02,113.821531,-22.00792203,20190812,14:44:00,19,Ningaloo Marine Park,NA,122,Charlotte Aston,Yes,Yes,
+19.03,113.8305585,-22.00286353,20190812,14:55:00,19,Ningaloo Marine Park,NA,99,Charlotte Aston,Yes,Yes,
+19.04,113.8255696,-22.00056422,20190812,14:49:00,19,Ningaloo Marine Park,NA,109,Charlotte Aston,Yes,Yes,
+19.05,113.8291331,-21.99757511,20190812,14:59:00,19,Ningaloo Marine Park,NA,101,Charlotte Aston,Yes,Yes,
+19.08,113.8234315,-21.99412613,20190812,15:03:00,19,Ningaloo Marine Park,NA,130,Charlotte Aston,Yes,Yes,
+23.01,114.0835652,-21.68647769,20190812,13:22:00,23,Ningaloo Marine Park,NA,102,Charlotte Aston,Yes,Yes,
+23.02,114.0785763,-21.68555797,20190812,13:28:00,23,Ningaloo Marine Park,NA,106,Charlotte Aston,Yes,Yes,
+23.03,114.0811896,-21.68233893,20190812,13:31:00,23,Ningaloo Marine Park,NA,109,Charlotte Aston,Yes,Yes,
+23.04,114.0845155,-21.67980968,20190812,13:35:00,23,Ningaloo Marine Park,NA,110,Charlotte Aston,Yes,Yes,
+23.06,114.0944932,-21.67475118,20190812,13:46:00,23,Ningaloo Marine Park,NA,107,Charlotte Aston,Yes,Yes,
+23.09,114.0747,-21.706867,20190812,13:13:00,23,Ningaloo Marine Park,NA,67,Charlotte Aston,Yes,Yes,
+30.01,113.90413,-21.91122,20190812,10:04:00,30,Ningaloo Marine Park,NA,69,Charlotte Aston,No ,No ,
+30.02,113.90722,-21.90687,20190812,10:08:00,30,Ningaloo Marine Park,NA,69,Charlotte Aston,Yes,Yes,
+30.03,113.91082,-21.89999,20190812,10:13:00,30,Ningaloo Marine Park,NA,67,Charlotte Aston,Yes,Yes,
+30.04,113.91423,-21.89513,20190812,10:16:00,30,Ningaloo Marine Park,NA,69,Charlotte Aston,Yes,Yes,
+30.05,113.91801,-21.88983,20190812,10:20:00,30,Ningaloo Marine Park,NA,68,Charlotte Aston,Yes,Yes,
+30.06,113.9202,-21.8876,20190812,10:23:00,30,Ningaloo Marine Park,NA,66,Charlotte Aston,Yes,Yes,Charlotte Aston
+31.01,114.08985,-21.6873167,20190812,15:25:00,31,Ningaloo Marine Park,NA,77,Charlotte Aston,Yes,Yes,
+31.02,114.09,-21.6919667,20190812,15:29:00,31,Ningaloo Marine Park,NA,71,Charlotte Aston,Yes,Yes,Charlotte Aston
+31.03,114.0887667,-21.69445,20190812,15:31:00,31,Ningaloo Marine Park,NA,66,Charlotte Aston,Yes,Yes,
+31.04,114.0877667,-21.69635,20190812,15:34:00,31,Ningaloo Marine Park,NA,64,Charlotte Aston,Yes,Yes,
+31.05,114.0814333,-21.70045,20190812,15:39:00,31,Ningaloo Marine Park,NA,67,Charlotte Aston,Yes,Yes,Charlotte Aston
+31.06,114.0774833,-21.7025167,20190812,15:45:00,31,Ningaloo Marine Park,NA,66,Charlotte Aston,Yes,Yes,

@@ -38,6 +38,7 @@ tagList(
   
   dashboardBody(
     tags$head(includeHTML(("google-analytics.html"))),
+    HTML("<script type='text/javascript' src='getFolders.js'></script>"),
     tags$head(tags$link(rel = "shortcut icon", href = "favicon.ico")),
     tags$head(tags$style('.selectize-dropdown {z-index: 10000}')),
     tags$style(
@@ -93,6 +94,14 @@ tagList(
                               ),
                        
                        box(width = 6, height = 110, title = "Upload metadata (csv)", status = "primary", solidHeader = FALSE,
+                           
+                           tags$div(tags$label("Choose folder", class="btn btn-primary",
+                                               tags$input(id = "folderdir", webkitdirectory = TRUE, type = "file", style="display: none;", onchange="pressed()"))),
+                           tags$div(id="fileIn_progress", class="progress progress-striped active shiny-file-input-progress",
+                                    tags$div(class="progress-bar")),
+                           
+                           
+                           
                            fileInput("upload.metadata", NULL, multiple = TRUE,
                                      accept = c("image/vnd.csv",".csv"))),
                        
@@ -455,7 +464,7 @@ tagList(
                 box(width = NULL, title = "1. Add project information",
                     status = "primary", solidHeader = TRUE,
                     
-                    textInput("project.name", label = "Project name (this will be the prefix for all files)", value = "")),
+                    textInput("project.name", label = "Project name (this will be the prefix for all files)", value = "", placeholder = "add your own project name")),
                 
                 box(width = NULL, title = "2. Download all errors",
                     status = "primary", solidHeader = TRUE,
@@ -479,6 +488,7 @@ tagList(
                     checkboxInput("error.synonyms", label = "Keep species names that have been updated", value = TRUE), 
                     checkboxInput("error.area", label = "Remove species not observed in the area before (this will also remove sp1, sp2 etc.)", value = FALSE), 
                     checkboxInput("error.zeros", label = "Add in zeros where species aren't present", value = TRUE), 
+                    checkboxInput("error.extra.col", label = "Remove CheckEM generated columns e.g. Zone & Marine Region", value = TRUE), 
                     
                     br(),
                     h4("Filters for Length and Mass"),
@@ -492,9 +502,10 @@ tagList(
                 box(width = 4, title = "4. Download final files",
                     status = "primary", solidHeader = TRUE,
                     div(style="display:inline-block;width:100%;text-align: center;", 
-                    downloadBttn("download.maxn", style = "unite", color = "primary", label = "MaxN"), br(), br(),
-                    downloadBttn("download.length", style = "unite", color = "primary", label = "Length"), br(), br(),
-                    downloadBttn("download.mass", style = "unite", color = "primary", label = "Mass"), br(), br()
+
+                    downloadBttn("download.maxn", style = "unite", color = "primary", label = "Download all files"), br(), br()#,
+                    # downloadBttn("download.length", style = "unite", color = "primary", label = "Length"), br(), br(),
+                    # downloadBttn("download.mass", style = "unite", color = "primary", label = "Mass"), br(), br()
                     # ,
                     # downloadBttn("download.broad.habitat", style = "unite", color = "primary", label = "Habitat"), br(), br()
                     )
@@ -530,6 +541,7 @@ tagList(
                     checkboxInput("error.synonyms.t", label = "Keep species names that have been updated", value = TRUE), 
                     checkboxInput("error.area.t", label = "Remove species not observed in the area before", value = FALSE), 
                     checkboxInput("error.zeros.t", label = "Add in zeros where species aren't present", value = TRUE), 
+                    checkboxInput("error.extra.col.t", label = "Remove CheckEM generated columns e.g. Zone & Marine Region", value = TRUE), 
                     
                     checkboxInput("error.length.small.t", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
                     checkboxInput("error.length.big.t", label = "Filter out length measurements larger than fishbase maximum", value = FALSE),

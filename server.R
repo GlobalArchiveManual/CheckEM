@@ -19,80 +19,100 @@ function(input, output, session) {
     )
   }
   
-  
-  
-  
 ## _______________________________________________________ ----
 ##                        METADATA                         ----
 ## _______________________________________________________ ----
 
 ### ► Read in metadata ----
 metadata <- reactive({
-  # if no metadata file uploaded and method = single point. dataset = Ningloo BRUVs
-  if(is.null(input$upload.metadata) & input$method == "point" & input$sample == "opcode") {
+  # When metadata uploaded ----
+  if(!is.null(input$folderdir)) {
     
+    # Get all _Metadata files in the folder
+    files <- input$folderdir%>%
+      dplyr::filter(grepl("_Metadata", name)) %>%
+      glimpse() 
+    
+    metadata <- data.frame() 
+    
+    if (is.null(files))
+      
+      return(NULL)
+    
+    for (i in seq_along(files$datapath)) {
+      tmp <- read_csv(files$datapath[i], col_types = cols(.default = "c"))  %>%
+        dplyr::mutate(campaignid = files$name[i])
+      
+      metadata <- bind_rows(metadata, tmp) %>% 
+        glimpse()
+    }
+    
+    print("combined metadata")
+    
+    metadata <- metadata %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Metadata.csv" = "", "_metadata.csv" = ""))) %>%
+      dplyr::mutate(latitude = as.numeric(latitude)) %>%
+      dplyr::mutate(longitude = as.numeric(longitude)) %>%
+      glimpse()
+    
+    # If point method then make "opcode" or "period equal sample
+    if(input$method == "point") {
+      
+      lookup <- c(sample = "opcode", sample = "period") # Opcode or period name in the metadata change it to sample, sample will be ok too
+      
+      metadata <- metadata %>%
+        dplyr::rename(dplyr::any_of(lookup))
+    }
+    
+    # If transect method and sample = "opcode" + "period"
+    if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+      
+        metadata <- metadata %>%
+          dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+        
+    }
+    # If transect method and sample = "period"
+    if(input$method == "transect" & input$sample.t == "period") {
+      
+        lookup <- c(sample = "period") # If people have used period or sample then this will work
+        
+        metadata <- metadata %>%
+          dplyr::rename(dplyr::any_of(lookup)) 
+      }
+    }
+  
+  # if no metadata file uploaded and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
+
     metadata <-  read.csv("data/example_metadata.csv") %>%
       ga.clean.names() %>%
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) %>%
+      dplyr::select(campaignid, sample, latitude, longitude, date.time.utc, site, location, status, depth, successful.count, successful.length, observer.count, observer.length) %>%
       as.data.frame()
-    
+
+    # TODO add an example dataset for DOVs
   #   # If no metadata file and method = transect. dataset = Ningaloo DOVs
   # } else if(is.null(input$upload.metadata) & input$method == "transect") {
-  # 
+  #
   #   ## ONLY ONE EXAMPLE METADATA FOR DOVs BG 13/07/2022
-  #   
+  #
   #   metadata <-  read.csv("data/2014-08_small subset_stereoDOVs_Metadata.csv") %>%
   #     ga.clean.names() %>%
   #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
   #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-  #     dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length) 
-    
-    # IF metadata file uploaded AND method = single point
-  } else if(!is.null(input$upload.metadata) & input$method == "point") {
-    
-    metadata <- lapply(input$upload.metadata$datapath, fread)
-    names(metadata) <- input$upload.metadata$name 
-    
-    lookup <- c(sample = "opcode", sample = "period") # If people have used opcode or period name in the metadata change it to sample, if they have used sample will be ok too
+  #     dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
 
-    print("testing metadata")
-    
-    metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::rename(dplyr::any_of(lookup)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", "")) %>%
-      dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
-    
-    # IF metadata file uploaded AND method = transect
-  } else if(!is.null(input$upload.metadata) & input$method == "transect") {
-    
-    metadata <- lapply(input$upload.metadata$datapath, fread)
-    names(metadata) <- input$upload.metadata$name 
-    
-    # Need to make sample from either OpCode + Period or Period
-    metadata <- rbindlist(metadata, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Metadata.csv", ""))
-    
-    if (input$sample.t == "opcodeperiod") {
-      metadata <- metadata %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-        dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
-        
-    } else {
-      
-      lookup <- c(sample = "period") # If people have used period or sample then this will work
-      
-      metadata <- metadata %>%
-        dplyr::rename(dplyr::any_of(lookup)) %>%
-        dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length)
-    }
+    # IF metadata file uploaded AND method = single point
   } 
   
+  print("reactive metadata")
   metadata <- metadata %>%
     dplyr::filter(successful.count %in% c("Yes", "Y", "y", "yes")) %>%
-    dplyr::mutate(sample = as.factor(sample))
+    dplyr::mutate(sample = as.factor(sample)) %>%
+    dplyr::mutate(date.time.utc = as.character(date.time.utc)) %>%
+    dplyr::select(campaignid, sample, latitude, longitude, date.time.utc, site, location, status, depth, successful.count, successful.length, observer.count, observer.length)
+  
 })  
 
 ## ► Find nearest marine regions add commonwealth and state zoning ----
@@ -156,7 +176,7 @@ metadata.regions <- reactive({
                                       "No-take" = "Not Fished", 
                                       "No-take" = "No-Take", 
                                       "Fished" = "Special Purpose")) %>%
-    dplyr::select(campaignid, sample, latitude, longitude, date, time, site, location, status, depth, successful.count, successful.length, zone, marine.region)
+    dplyr::select(campaignid, sample, latitude, longitude, date.time.utc, site, location, status, depth, successful.count, successful.length, zone, marine.region, observer.count, observer.length)
 })
 
 ## ► Preview metadata in dashboard ----
@@ -269,8 +289,7 @@ output$map.metadata <- renderLeaflet({
                      "<b>Depth:</b>", depth, "m", "<br/>", 
                      "<b>Site:</b>", site, "<br/>", 
                      "<b>Location:</b>", location, "<br/>", 
-                     "<b>Date:</b>", date, "<br/>", 
-                     "<b>Time:</b>", time, "<br/>"
+                     "<b>Date/time (UTC):</b>", date.time.utc, "<br/>"
     ))
   
   leaflet(data = metadata) %>%
@@ -382,8 +401,7 @@ output$map.metadata.t <- renderLeaflet({
                            "<b>Depth:</b>", depth, "m", "<br/>", 
                            "<b>Site:</b>", site, "<br/>", 
                            "<b>Location:</b>", location, "<br/>", 
-                           "<b>Date:</b>", date, "<br/>", 
-                           "<b>Time:</b>", time, "<br/>"
+                           "<b>Date/time (UTC):</b>", date.time.utc, "<br/>"
     ))
   
   leaflet(data = metadata) %>%
@@ -1044,6 +1062,7 @@ maxn.complete.download <- reactive({
       dplyr::group_by(campaignid, sample, family, genus, species) %>%
       dplyr::slice(which.max(maxn)) %>%
       dplyr::ungroup() %>%
+      dplyr::full_join(metadata.regions()) %>%
       dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment)) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(maxn = 0)) %>%
@@ -1051,21 +1070,18 @@ maxn.complete.download <- reactive({
       dplyr::summarise(maxn = sum(maxn)) %>%
       ungroup() %>%
       dplyr::left_join(metadata.regions()) %>%
-      # dplyr::mutate(project = input$project.name) %>%
-      # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
-      dplyr::mutate(scientific = paste(genus, species, sep = " "))
+      dplyr::mutate(scientific = paste(genus, species, sep = " ")) 
   } 
   else{ 
     maxn.complete <- maxn %>%
       dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment)) %>%
+      dplyr::full_join(metadata.regions()) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(maxn = 0)) %>%
       dplyr::group_by(campaignid, sample, family, genus, species, em.comment) %>%
       dplyr::summarise(maxn = sum(maxn)) %>%
       ungroup() %>%
       dplyr::left_join(metadata.regions()) %>%
-      # dplyr::mutate(project = input$project.name) %>%
-      # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
       dplyr::mutate(scientific = paste(genus, species, sep = " "))
   }
   
@@ -1076,24 +1092,29 @@ maxn.complete.download <- reactive({
     distinct(family, genus, species, marine.region) %>%
     filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp"))
   
-  
+  # If "Remove species not observed in the area before" = FALSE, keep species, TRUE = remove
   if (input$error.area == FALSE) {
     maxn.area <- maxn.complete
-  } 
-  else{ 
-    maxn.area <- anti_join(maxn.complete, species.out.of.area)
-  }
+    } else { 
+    maxn.area <- anti_join(maxn.complete, species.out.of.area)}
+  
+  # If "Remove extra columns" = TRUE
+  if (input$error.extra.col == TRUE) {
+    maxn.area <- maxn.area %>%
+      dplyr::select(-c(zone, em.comment, marine.region, scientific))}
   
   if (input$error.zeros == TRUE) {
-    maxn.area <- maxn.complete
-  } 
-  else{ 
     maxn.area <- maxn.area %>%
-      filter(!maxn %in% 0)
-  }
+      dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+    
+    } else { 
+      
+    maxn.area <- maxn.area %>%
+      dplyr::filter(!maxn %in% 0) %>%
+      dplyr::select(campaignid, sample, family, genus, species, maxn)} # remove metadata columns
   
-  
-  maxn.area <- maxn.area 
+  maxn.area <- maxn.area %>%
+    dplyr::filter(!family %in% c("", NA, NULL))
     
 })
 
@@ -1692,7 +1713,7 @@ length.complete.download <- reactive({
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-      replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
+      replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
@@ -1754,7 +1775,6 @@ length.complete.download <- reactive({
     length.big <- length.small
   }
 
-  
   length.big <- length.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
@@ -1763,17 +1783,25 @@ length.complete.download <- reactive({
     dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
-    # dplyr::mutate(project = input$project.name) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
-  if (input$error.zeros == TRUE) {
-    length.big <- length.big
-  } 
-  else{ 
+  # If "Remove extra columns" = TRUE
+  if (input$error.extra.col == TRUE) {
     length.big <- length.big %>%
-      filter(!number %in% 0)
-  }
+      dplyr::select(-c(zone, em.comment, marine.region, scientific, frameleft, frameright))%>%
+      glimpse()
+  } 
   
+  if (input$error.zeros == TRUE) {
+    length.big <- length.big %>%
+      dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+    
+    } else { 
+    length.big <- length.big %>%
+      filter(!number %in% 0)%>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, rms, precision) # remove metadata columns
+  }
+
   length.big <- length.big
   
 })
@@ -2553,6 +2581,11 @@ length.complete.download.t <- reactive({
     length.big <- length.big %>%
       filter(!number %in% 0)
   }
+  
+  if (input$error.extra.col.t == TRUE) {
+    length.big <- length.big %>%
+      dplyr::select(-c(zone, em.comment, marine.region, scientific, frameleft, frameright))
+  } 
   
   
 })
@@ -3426,18 +3459,23 @@ mass.complete.download <- reactive({
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
-    # dplyr::mutate(project = input$project.name) %>%
-    # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
-  if (input$error.zeros == TRUE) {
-    mass.big <- mass.big
-  } 
-  else{ 
+  # If "Remove extra columns" = TRUE
+  if (input$error.extra.col == TRUE) {
     mass.big <- mass.big %>%
-      filter(!number %in% 0)
-  }
+      dplyr::select(-c(zone, em.comment, marine.region, scientific))
+  } 
   
+  if (input$error.zeros == TRUE) {
+    mass.big <- mass.big %>%
+      dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+    
+  } else{ 
+    mass.big <- mass.big %>%
+      filter(!number %in% 0) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg)
+  }
   
 })
 
@@ -3790,6 +3828,15 @@ mass.complete.download.t <- reactive({
     mass.big <- mass.big %>%
       filter(!number %in% 0)
   }
+  
+  if (input$error.extra.col.t == TRUE) {
+    # print("mass")
+    mass.big <- mass.big %>%
+      # glimpse()
+       dplyr::select(-c(zone, marine.region, scientific))
+  } 
+  
+  
   
 })
 
@@ -4501,47 +4548,126 @@ output$hab.bubble <- renderLeaflet({
 ##                  Single point campaigns                 ----
 ## _______________________________________________________ ----
 
-## ► Download MaxN ----
+## ► Download all files ----
+observeEvent(input$project.name, {
+  if (input$project.name %in% c(NA, NULL, "")){
+    shinyjs::disable("download.maxn")
+  } else {
+    shinyjs::enable("download.maxn")
+    # showElement("element")
+    }
+})
+
+
 output$download.maxn <- downloadHandler(
-  filename = function() {
-    req(input$project.name)
-    paste(input$project.name, "_maxn_", Sys.Date(), ".csv", sep = "")
-  }, 
-  content = function(file) {
-    write.csv(maxn.complete.download(), file, row.names = FALSE)
-  }
-)
+    
+    filename = function() {
+      #
+      paste0(input$project.name, "_all-files_", Sys.Date(),'.zip')
+    }, content = function(file) { 
+      
+      on.exit(removeModal())
+      
+      # TODO add some css to make modals pretty
+      
+      if (TRUE){
+        showModal(
+          modalDialog(
+            title = 'Downloading data...',
+            includeMarkdown("downloading.md"),
+            easyClose = FALSE,
+            footer = NULL
+            )
+          )
+      
+      temp_directory <- file.path(tempdir(), as.integer(Sys.time()))
+      dir.create(temp_directory)
+      
+      for(i in unique(maxn.complete.download()$campaignid)){
+        
+        dat <- maxn.complete.download() %>%
+          dplyr::rename(count = maxn) %>%
+          filter(campaignid == i)
+        
+        fileName <- paste(i, "_count.csv", sep = "")
+        
+        write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+      }
+      
+      for(i in unique(length.complete.download()$campaignid)){
 
-## ► Download length complete ----
-output$download.length <- downloadHandler(
-  filename = function() {
-    req(input$project.name)
-    paste(input$project.name, "_length_", Sys.Date(), ".csv", sep = "")
-  }, 
-  content = function(file) {
-    write.csv(length.complete.download(), file, row.names = FALSE)
-  }
-)
+        print("campaignid length")
+        print(i)
+        
+        dat <- length.complete.download() %>%
+          filter(campaignid == i) %>% 
+          glimpse()
 
-## ► Download mass complete ----
-output$download.mass <- downloadHandler(
-  filename = function() {
-    paste(input$project.name, "_mass_", Sys.Date(), ".csv", sep = "")
-  }, 
-  content = function(file) {
-    write.csv(mass.complete.download(), file, row.names = FALSE)
-  }
-)
+        fileName <- paste(i, "_length.csv", sep = "")
+
+        write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+      }
+      
+      for(i in unique(mass.complete.download()$campaignid)){
+        
+        print("campaignid mass")
+        print(i)
+
+        dat <- mass.complete.download() %>%
+          filter(campaignid == i) %>%
+          glimpse()
+
+        fileName <- paste(i, "_mass.csv", sep = "")
+
+        write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+      }
+      
+      if (input$error.zeros == FALSE) {
+        
+        if (input$error.extra.col == TRUE) {
+          metadata <- metadata.regions() %>%
+            dplyr::select(-c(zone, marine.region)) 
+        } else {
+            metadata <- metadata.regions()}
+        
+        metadata <- metadata %>%
+          dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+        
+        for(i in unique(metadata$campaignid)){
+          
+          print("campaignid metadata")
+          print(i)
+          
+          dat <- metadata %>%
+            filter(campaignid == i) %>%
+            glimpse()
+          
+          fileName <- paste(i, "_metadata.csv", sep = "")
+          
+          write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+        }
+      }
+      
+      
+      
+      
+      #create the zip file
+      zip::zip(zipfile = file, files = dir(temp_directory), root = temp_directory)
+      
+    }}, contentType = "application/zip"
+  )
 
 ## ► Habitat ----
-output$download.broad.habitat <- downloadHandler(
-  filename = function() {
-    paste(input$project.name, "_broad.habitat_", Sys.Date(), ".csv", sep = "")
-  }, 
-  content = function(file) {
-    write.csv(habitat.broad.points(), file, row.names = FALSE)
-  }
-)
+# TODO add habitat to all files
+
+# output$download.broad.habitat <- downloadHandler(
+#   filename = function() {
+#     paste(input$project.name, "_broad.habitat_", Sys.Date(), ".csv", sep = "")
+#   }, 
+#   content = function(file) {
+#     write.csv(habitat.broad.points(), file, row.names = FALSE)
+#   }
+# )
 
 ## ► All errors ----
 all.errors <- reactive({
@@ -4630,27 +4756,60 @@ output$download.all.errors <- downloadHandler(
 ## _______________________________________________________ ----
 ##                  Transect based campaigns                 ----
 ## _______________________________________________________ ----
-## ► Download length complete ----
+## ► Download all files ----
 output$download.length.t <- downloadHandler(
-  filename = function() {
-    req(input$project.name.t)
-    paste(input$project.name.t, "_length_", Sys.Date(), ".csv", sep = "")
-  }, 
-  content = function(file) {
-    write.csv(length.complete.download.t(), file, row.names = FALSE)
-  }
-)
-
-output$download.mass.t <- downloadHandler(
-  filename = function() {
-    paste(input$project.name.t, "_mass_", Sys.Date(), ".csv", sep = "")
-  }, 
-  content = function(file) {
-    write.csv(mass.complete.download.t(), file, row.names = FALSE)
-  }
-)
+    filename = function() {
+      req(input$project.name.t)
+      paste0(input$project.name.t, "_all-files_", Sys.Date(),'.zip')
+    }, content = function(file) { 
+      
+      on.exit(removeModal())
+      
+      # TODO add some css to make modals pretty
+      
+      if (TRUE){
+        showModal(
+          modalDialog(
+            title = 'Downloading data...',
+            includeMarkdown("downloading.md"),
+            easyClose = FALSE,
+            footer = NULL
+          )
+        )
+        
+        temp_directory <- file.path(tempdir(), as.integer(Sys.time()))
+        dir.create(temp_directory)
+        
+        for(i in unique(length.complete.download.t()$campaignid)){
+          
+          dat <- length.complete.download.t() %>%
+            filter(campaignid == i) %>% 
+            glimpse()
+          
+          fileName <- paste(i, "_length.csv", sep = "")
+          
+          write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+        }
+        
+        for(i in unique(mass.complete.download.t()$campaignid)){
+          
+          dat <- mass.complete.download.t() %>%
+            filter(campaignid == i) %>%
+            glimpse()
+          
+          fileName <- paste(i, "_mass.csv", sep = "")
+          
+          write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+        }
+        
+        #create the zip file
+        zip::zip(zipfile = file, files = dir(temp_directory), root = temp_directory)
+        
+      }}, contentType = "application/zip"
+  )
 
 ## ► Habitat ----
+# TODO add habitat to all files download
 output$download.broad.habitat.t <- downloadHandler(
   filename = function() {
     paste(input$project.name.t, "_broad.habitat_", Sys.Date(), ".csv", sep = "")

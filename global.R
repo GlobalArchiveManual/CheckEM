@@ -1,5 +1,6 @@
 # Load shiny packages
 library(shiny)
+library(shinyalert)
 library(shinythemes)
 library(shinydashboard)
 library(shinyBS)
@@ -46,6 +47,8 @@ library(googlesheets4)
 # R markdown
 library(rmarkdown)
 library(sf)
+
+library(reactlog) # reactlog::reactlog_enable()
 
 # https://geospatial.tnc.org/datasets/ed2be4cf8b7a425f84fd093c2e7660e3_0/explore?location=-1.040302%2C0.000000%2C1.57 # the MEOW
 # https://academic.oup.com/bioscience/article/57/7/573/238419
