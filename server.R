@@ -3,6 +3,27 @@ function(input, output, session) {
 # Increase size of files that can be uploaded
   options(shiny.maxRequestSize = 50*1024^2)
   
+  showModal(modalDialog(
+    # title = "CheckEM has changed", 
+    includeMarkdown("new.content.md"),
+    easyClose = TRUE,
+    footer = NULL,
+    div(
+      style = "display:inline-block;width:100%;text-align: center;",
+      actionBttn(
+        inputId = "okay",
+        label = "Ok",
+        style = "unite",
+        size = "lg",
+        color = "primary"
+      )
+    ))
+  )
+  
+  observeEvent(input$okay, {
+    removeModal()
+  })
+  
 ## FUNCTIONS -----
   create_dropdown <- function(input_name, choices, label) {
     if (!is.null(input[[input_name]]) && input[[input_name]] %in% choices) {
@@ -30,8 +51,8 @@ metadata <- reactive({
     
     # Get all _Metadata files in the folder
     files <- input$folderdir%>%
-      dplyr::filter(grepl("_Metadata", name)) %>%
-      glimpse() 
+      dplyr::filter(grepl("_Metadata", name)) #%>%
+      #glimpse() 
     
     metadata <- data.frame() 
     
@@ -43,8 +64,8 @@ metadata <- reactive({
       tmp <- read_csv(files$datapath[i], col_types = cols(.default = "c"))  %>%
         dplyr::mutate(campaignid = files$name[i])
       
-      metadata <- bind_rows(metadata, tmp) %>% 
-        glimpse()
+      metadata <- bind_rows(metadata, tmp) #%>% 
+        #glimpse()
     }
     
     print("combined metadata")
@@ -88,7 +109,7 @@ metadata <- reactive({
     metadata <-  read.csv("data/example_metadata.csv") %>%
       ga.clean.names() %>%
       dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      dplyr::select(campaignid, sample, latitude, longitude, date.time.utc, site, location, status, depth, successful.count, successful.length, observer.count, observer.length) %>%
+      dplyr::select(campaignid, sample, latitude, longitude, date.time, site, location, status, depth, successful.count, successful.length, observer.count, observer.length) %>%
       as.data.frame()
 
     # TODO add an example dataset for DOVs
@@ -106,12 +127,13 @@ metadata <- reactive({
     # IF metadata file uploaded AND method = single point
   } 
   
-  print("reactive metadata")
+  # print("reactive metadata")
   metadata <- metadata %>%
     dplyr::filter(successful.count %in% c("Yes", "Y", "y", "yes")) %>%
     dplyr::mutate(sample = as.factor(sample)) %>%
-    dplyr::mutate(date.time.utc = as.character(date.time.utc)) %>%
-    dplyr::select(campaignid, sample, latitude, longitude, date.time.utc, site, location, status, depth, successful.count, successful.length, observer.count, observer.length)
+    dplyr::mutate(date.time = as.character(date.time)) %>%
+    dplyr::select(campaignid, sample, latitude, longitude, date.time, site, location, status, depth, successful.count, successful.length, observer.count, observer.length) %>%
+    glimpse()
   
 })  
 
@@ -134,53 +156,23 @@ metadata.regions <- reactive({
   metadata.2 <- as.data.frame(nearest.region) %>%
     bind_cols(metadata()) %>%
     dplyr::rename(marine.region = nearest.region) %>%
-    dplyr::mutate(sample = as.character(sample))
+    dplyr::mutate(sample = as.character(sample)) %>%
+    dplyr::select(!status)
   
-  # add in commonwealth reserves
-  metadata.commonwealth.marineparks <- over(metadata, commonwealth.marineparks)
+  # add in marine parks
+  metadata.marineparks <- over(metadata, marineparks) %>%
+    glimpse()
   
-  metadata.3 <- metadata.2 %>%
-    bind_cols(metadata.commonwealth.marineparks) %>%
-    dplyr::rename(zone = ZoneName)
-  
-  # add in state reserves
-  metadata.wa.marineparks <- over(metadata, wa.marineparks) %>%
-    dplyr::select(ZONE_TYPE) %>%
-    mutate(ZONE_TYPE = as.character(ZONE_TYPE))
-  
-  print("metadata regions")
-  
-  metadata.regions <- metadata.3 %>%
-    bind_cols(metadata.wa.marineparks) %>%
-    dplyr::mutate(zone = ifelse(zone%in%c(NA), as.character(ZONE_TYPE), as.character(zone))) %>%
-    dplyr::mutate(zone = str_replace_all(.$zone, c(" Zone" = "", "Zone " = "", "(IUCN II)" = "", "(IUCN IV)" = "", "(IUCN IA)" = "", "[^[:alnum:] ]" = "", " Benthic Protection" = "", "Use " = "Use", "y " = "y"))) %>%
-    dplyr::mutate(status = stringr::str_replace_all(.$zone, c("General Use" = "Fished", 
-                                                              "Recreational Use" = "Fished", 
-                                                              "Multiple Use" = "Fished", 
-                                                              "National Park" = "No-take", 
-                                                              "Sanctuary" = "No-take",
-                                                              "Special Purpose Mining Exclusion" = "Fished",
-                                                              "Special Purpose " = "Fished",
-                                                              "Unassigned IUCN VI" = "Fished",
-                                                              "Habitat Protection" = "Fished"
-    ))) %>%
-    dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", 
-                                      "No-take" = "NoTake", 
-                                      "No-take" = "No Take", 
-                                      "Fished" = "FISHED", 
-                                      "Fished" = "Outside", 
-                                      "Fished" = "Fishes", 
-                                      "Fished" = "FALSE", 
-                                      "No-take" = "Reserve", 
-                                      "No-take" = "No take", 
-                                      "No-take" = "Not Fished", 
-                                      "No-take" = "No-Take", 
-                                      "Fished" = "Special Purpose")) %>%
-    dplyr::select(campaignid, sample, latitude, longitude, date.time.utc, site, location, status, depth, successful.count, successful.length, zone, marine.region, observer.count, observer.length)
+  metadata.regions <- metadata.2 %>%
+    bind_cols(metadata.marineparks) %>%
+    dplyr::rename(zone = ZONE_TYPE) %>%
+    tidyr::replace_na(list(status = "Fished")) %>%
+    dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
+    dplyr::select(campaignid, sample, latitude, longitude, date.time, site, location, status, depth, successful.count, successful.length, zone, marine.region, observer.count, observer.length)
 })
 
 ## ► Preview metadata in dashboard ----
-output$table.metadata <- renderTable({
+output$table.metadata <- renderDataTable({
   metadata.regions()
 })
 
@@ -289,12 +281,23 @@ output$map.metadata <- renderLeaflet({
                      "<b>Depth:</b>", depth, "m", "<br/>", 
                      "<b>Site:</b>", site, "<br/>", 
                      "<b>Location:</b>", location, "<br/>", 
-                     "<b>Date/time (UTC):</b>", date.time.utc, "<br/>"
+                     "<b>Date/time (UTC):</b>", date.time, "<br/>"
     ))
   
   leaflet(data = metadata) %>%
     addTiles() %>%
-    addMarkers(lng = ~longitude, lat = ~latitude, label = ~as.character(sample), popup = ~content)
+    
+    addAwesomeMarkers(icon = ~iconSet[status], label = ~as.character(sample), popup = ~content)# %>%
+    
+    # addAwesomeMarkers(icon = awesomeIcons(
+    #                     icon = 'surf',
+    #                     iconColor = 'white',
+    #                     library = 'fa',
+    #                     markerColor = 'blue'
+    #                   ),
+    #                   clusterOptions = markerClusterOptions())
+    
+    #addMarkers(lng = ~longitude, lat = ~latitude, label = ~as.character(sample), popup = ~content)
 })
 
 ## _______________________________________________________ ----
@@ -401,7 +404,7 @@ output$map.metadata.t <- renderLeaflet({
                            "<b>Depth:</b>", depth, "m", "<br/>", 
                            "<b>Site:</b>", site, "<br/>", 
                            "<b>Location:</b>", location, "<br/>", 
-                           "<b>Date/time (UTC):</b>", date.time.utc, "<br/>"
+                           "<b>Date/time (UTC):</b>", date.time, "<br/>"
     ))
   
   leaflet(data = metadata) %>%
@@ -414,78 +417,82 @@ output$map.metadata.t <- renderLeaflet({
 ## _______________________________________________________ ----
 ## ► Read in periods ----
 periods <- reactive({
-  # if no period file uploaded and method = single point. dataset = Ningloo BRUVs
-  if(is.null(input$upload.metadata) & is.null(input$upload.period) & input$method == "point" & input$sample == "opcode") {
+  # When folder chosen ----
+  if(!is.null(input$folderdir)) {
     
-    periods <- read.delim("data/example_Period.txt", na.strings = "") %>%
-      ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      as.data.frame()
+    # Get all _Period files in the folder
+    files <- input$folderdir%>%
+      dplyr::filter(grepl("_Period.txt", name)) #%>% glimpse() 
     
-  #   # If no period file and method = transect. dataset = Ningaloo DOVs
-  # } else if(is.null(input$upload.metadata) & is.null(input$upload.period) & input$method == "transect") {
-  #   
-  #   periods <- read.delim("data/2014-08_small subset_stereoDOVs_Period.txt", na.strings = "") %>%
-  #     ga.clean.names() %>%
-  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-  #     mutate(sample = as.factor(sample)) %>%
-  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
-  #     dplyr::select(campaignid, sample, everything())
-  #   
-    # IF period file uploaded AND method = single point AND sample = OpCode
-  } else if(!is.null(input$upload.period) & input$method == "point" & input$sample == "opcode") {
-    periods <- lapply(input$upload.period$datapath, fread)
-    names(periods) <- input$upload.period$name
+    periods <- data.frame() 
+    
+    if (is.null(files)) return(NULL)
+    
+    for (i in seq_along(files$datapath)) {
+      tmp <- read_tsv(files$datapath[i], col_types = cols(.default = "c"))  %>%
+        dplyr::mutate(campaignid = files$name[i])
       
-    periods <- rbindlist(periods, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+      periods <- bind_rows(periods, tmp) #%>% glimpse()
+    }
+  
+    periods <- periods %>%
       ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Period.txt", ""))
+      dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Period.txt" = ""))) #%>% glimpse()
     
-    # IF metadata file uploaded AND method = single point AND sample = period
-  } else if(!is.null(input$upload.period) & input$method == "point" & input$sample == "period") {
-    periods <- lapply(input$upload.period$datapath, fread)
-    names(periods) <- input$upload.period$name
-    
-    periods <- rbindlist(periods, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = period) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Period.txt", ""))
-    
-    # IF period file uploaded AND method = transect
-  } else if(!is.null(input$upload.period) & input$method == "transect") {
-    
-    periods <- lapply(input$upload.period$datapath, fread)
-    names(periods) <- input$upload.period$name
-    
-    # Need to make sample from either OpCode + Period or Period
-    periods <- rbindlist(periods, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Period.txt", ""))
-    
-    if (input$sample.t == "opcodeperiod") {
+    # If point method and opcode = sample e.g. BRUVs
+    if(input$method == "point" & input$sample == "opcode") {
+      
       periods <- periods %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
-      
-    } else {
+        dplyr::rename(sample = opcode)
+    }
+    
+    # If point method and opcode = period e.g. BOSS
+    if(input$method == "point" & input$sample == "period") {
       
       periods <- periods %>%
         dplyr::mutate(sample = period)
     }
+    
+    # If transect method and sample = "opcode" + "period"
+    if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+      
+      periods <- periods %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    }
+    # If transect method and sample = "period"
+    if(input$method == "transect" & input$sample.t == "period") {
+      
+      lookup <- c(sample = "period") # If people have used period or sample then this will work
+      
+      periods <- periods %>%
+        dplyr::rename(dplyr::any_of(lookup)) 
+    }
+  }
+  
+  # if no folder chosen and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
+    
+    periods <-  read.delim("data/example_Period.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::rename(sample = opcode) %>%
+      dplyr::mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      as.data.frame()
+    
+    # TODO add an example dataset for DOVs
   } 
-   
+  
   periods <- periods %>%
     dplyr::mutate(sample = as.factor(sample)) %>%
-    semi_join(metadata())
+    dplyr::semi_join(metadata()) %>%
+    dplyr::mutate(timestart	= as.numeric(timestart)) %>%
+    dplyr::mutate(timeend	= as.numeric(timeend))
   
 })
 
 # ► Preview periods ----
-output$table.periods <- renderTable({
+output$table.periods <- renderDataTable({
   
   periods()
   
@@ -908,95 +915,88 @@ onclick('click.samples.without.periods.t',
 ##                          MAXN                           ----
 ## _______________________________________________________ ----
 ## ► Read in points data ----
-
 points <- reactive({
-  
-  # if no points file uploaded and method = single point. dataset = Ningloo BRUVs
-  if(is.null(input$upload.metadata) & is.null(input$upload.points) & input$method == "point" & input$sample == "opcode") {
+  # When folder chosen ----
+  if(!is.null(input$folderdir)) {
     
-    points <- read.delim("data/example_Points.txt", na.strings = "") %>%
+    # Get all _Period files in the folder
+    files <- input$folderdir%>%
+      dplyr::filter(grepl("_Points.txt", name)) #%>% glimpse() 
+    
+    points <- data.frame() 
+    
+    if (is.null(files)) return(NULL)
+    
+    for (i in seq_along(files$datapath)) {
+      tmp <- read_tsv(files$datapath[i], col_types = cols(.default = "c"))  %>%
+        dplyr::mutate(campaignid = files$name[i])
+      
+      points <- bind_rows(points, tmp) # %>%glimpse()
+    }
+    
+    points <- points %>%
       ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      dplyr::mutate(sample = as.factor(sample))
+      dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Points.txt" = ""))) #%>% glimpse()
     
-  #   # If no points file and method = transect. dataset = Ningaloo DOVs
-  # } else if(is.null(input$upload.metadata) & is.null(input$upload.points) & input$method == "transect") {
-  #   
-  #   points <- read.delim("data/2014-08_small subset_stereoDOVs_Points.txt", na.strings = "") %>%
-  #     ga.clean.names() %>%
-  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
-  #     dplyr::mutate(sample = as.factor(sample))
-  #   
-    # IF points file uploaded AND method = single point AND sample = opcode
-  } else if(!is.null(input$upload.points) & input$method == "point" & input$sample == "opcode"){
+    # If point method and opcode = sample e.g. BRUVs
+    if(input$method == "point" & input$sample == "opcode") {
+      
+      points <- points %>%
+        dplyr::rename(sample = opcode)
+    }
     
-    points <- lapply(input$upload.points$datapath, fread)
-    names(points) <- input$upload.points$name
+    # If point method and opcode = period e.g. BOSS
+    if(input$method == "point" & input$sample == "period") {
+      
+      points <- points %>%
+        dplyr::mutate(sample = period)
+    }
     
-    points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+    # If transect method and sample = "opcode" + "period"
+    if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+      
+      points <- points %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    }
+    # If transect method and sample = "period"
+    if(input$method == "transect" & input$sample.t == "period") {
+      
+      lookup <- c(sample = "period") # If people have used period or sample then this will work
+      
+      points <- points %>%
+        dplyr::rename(dplyr::any_of(lookup)) 
+    }
+  }
+  
+  # if no folder chosen and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
+    
+    points <-  read.delim("data/example_Points.txt", na.strings = "") %>%
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", ""))%>%
-      dplyr::select(-c(.id)) %>%
-      dplyr::mutate(sample = as.factor(sample))
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      as.data.frame()
     
-    # IF points file uploaded AND method = single point AND sample = period
-  } else if(!is.null(input$upload.points) & input$method == "point" & input$sample == "period") {
-    
-    points <- lapply(input$upload.points$datapath, fread)
-    names(points) <- input$upload.points$name
-    
-    points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = period) %>%
-      dplyr::mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", ""))%>%
-      dplyr::select(-c(.id)) %>%
-      dplyr::mutate(sample = as.factor(sample))
-    
-    # IF points file uploaded AND method = transect
-  } else if(!is.null(input$upload.points) & input$method == "transect") {
-    
-    points <- lapply(input$upload.points$datapath, fread)
-    names(points) <- input$upload.points$name
-    
-    # Need to make sample from either OpCode + Period or Period
-    points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Points.txt", "")) %>%
-      dplyr::select(-c(.id))
-    
-    if (input$sample.t == "opcodeperiod") {
-      points <- points %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "_"))%>%
-        dplyr::mutate(sample = as.factor(sample))
-      
-    } else {
-      
-      points <- points %>%
-        dplyr::mutate(sample = period) %>%
-        dplyr::mutate(sample = as.factor(sample))
-    }
+    # TODO add an example dataset for DOVs
   } 
   
   points <- points %>%
     mutate(sample = as.factor(sample)) %>%
-    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-    mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-    mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+    mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
     dplyr::filter(!is.na(family)) %>%
     dplyr::mutate(species = as.character(tolower(species))) %>%
     dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
     dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
-    dplyr::rename(em.comment = comment) %>%
-    dplyr::mutate(em.comment = as.character(em.comment))
+    dplyr::rename(em.comment = comment)
+  
 })
 
 # ► Preview points ----
-output$table.points <- renderTable({
+output$table.points <- renderDataTable({
   points()
 })  
 
@@ -1104,8 +1104,8 @@ maxn.complete.download <- reactive({
       dplyr::select(-c(zone, em.comment, marine.region, scientific))}
   
   if (input$error.zeros == TRUE) {
-    maxn.area <- maxn.area %>%
-      dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+    maxn.area <- maxn.area #%>%
+      #dplyr::mutate(date.time = paste0(str_replace_all(as.character(.$date.time), " ", "T"), "Z"))
     
     } else { 
       
@@ -1474,161 +1474,161 @@ ggplot(maxn.sum, aes(x = reorder(scientific, maxn), y = maxn)) +
 
 ## ► Read in length data ----
 length <- reactive({
-  # if no lengths file uploaded and method = single point. dataset = Ningloo BRUVs
-  if(is.null(input$upload.metadata) & is.null(input$upload.length) & input$method == "point" & input$sample == "opcode") {
+  # When folder chosen ----
+  if(!is.null(input$folderdir)) {
     
-    length <- read.delim("data/example_Lengths.txt", na.strings = "") %>%
-      ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs")
-
-  #   # If no lengths file and method = transect. dataset = Ningaloo DOVs
-  # } else if(is.null(input$upload.metadata) & is.null(input$upload.length) & input$method == "transect") {
-  #   
-  #   length <- read.delim("data/2014-08_small subset_stereoDOVs_Lengths.txt", na.strings = "") %>%
-  #     ga.clean.names() %>%
-  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-  #     mutate(sample = as.factor(sample)) %>%
-  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
-  #   
-    # IF length file uploaded AND method = single point AND sample = opcode
-  } else if(!is.null(input$upload.length) & input$method == "point" & input$sample == "opcode"){
+    # Get all _Period files in the folder
+    files <- input$folderdir%>%
+      dplyr::filter(grepl("_Lengths.txt", name)) #%>% glimpse() 
     
-    length <- lapply(input$upload.length$datapath, fread)
-    names(length) <- input$upload.length$name
+    length <- data.frame() 
     
-    length <- rbindlist(length, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Lengths.txt", ""))%>%
-      dplyr::select(-c(.id))
+    if (is.null(files)) return(NULL)
     
-    # IF length file uploaded AND method = single point AND sample = period
-  } else if(!is.null(input$upload.length) & input$method == "point" & input$sample == "period") {
-    
-    length <- lapply(input$upload.length$datapath, fread)
-    names(length) <- input$upload.length$name
-    
-    length <- rbindlist(length, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = period) %>%
-      dplyr::mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Lengths.txt", ""))%>%
-      dplyr::select(-c(.id))
-    
-    # IF lengths file uploaded AND method = transect
-  } else if(!is.null(input$upload.length) & input$method == "transect") {
-    
-    length <- lapply(input$upload.length$datapath, fread)
-    names(length) <- input$upload.length$name
-    
-    # Need to make sample from either OpCode + Period or Period
-    length <- rbindlist(length, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_Lengths.txt", "")) %>%
-      dplyr::select(-c(.id))
-    
-    if (input$sample.t == "opcodeperiod") {
-      length <- length %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+    for (i in seq_along(files$datapath)) {
+      tmp <- read_tsv(files$datapath[i], col_types = cols(.default = "c"))  %>%
+        dplyr::mutate(campaignid = files$name[i])
       
-    } else {
+      length <- bind_rows(length, tmp) #%>% glimpse()
+    }
+    
+    length <- length %>%
+      ga.clean.names() %>%
+      dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Lengths.txt" = ""))) #%>% glimpse()
+    
+    # If point method and opcode = sample e.g. BRUVs
+    if(input$method == "point" & input$sample == "opcode") {
+      
+      length <- length %>%
+        dplyr::rename(sample = opcode)
+    }
+    
+    # If point method and opcode = period e.g. BOSS
+    if(input$method == "point" & input$sample == "period") {
       
       length <- length %>%
         dplyr::mutate(sample = period)
     }
+    
+    # If transect method and sample = "opcode" + "period"
+    if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+      
+      length <- length %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    }
+    # If transect method and sample = "period"
+    if(input$method == "transect" & input$sample.t == "period") {
+      
+      lookup <- c(sample = "period") # If people have used period or sample then this will work
+      
+      length <- length %>%
+        dplyr::rename(dplyr::any_of(lookup)) 
+    }
+  }
+  
+  # if no folder chosen and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
+    
+    length <-  read.delim("data/example_Lengths.txt", na.strings = "") %>%
+      ga.clean.names() %>%
+      dplyr::rename(sample = opcode) %>%
+      mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      as.data.frame()
+    
+    # TODO add an example dataset for DOVs
   } 
   
   length <- length %>%
     mutate(sample = as.factor(sample)) %>%
-    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-    mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-    mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+    mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    dplyr::filter(!is.na(family)) %>%
     dplyr::mutate(species = as.character(tolower(species))) %>%
     dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
     dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
     dplyr::rename(em.comment = comment) %>%
-    dplyr::mutate(em.comment = as.character(em.comment))
+    dplyr::mutate(length = as.numeric(length)) %>%
+    dplyr::mutate(rms = as.numeric(rms)) %>%
+    dplyr::mutate(precision = as.numeric(precision)) %>%
+    dplyr::mutate(range = as.numeric(range)) %>%
+    dplyr::mutate(number = as.numeric(number))
   
 })
 
 # ► Preview length ----
-output$table.length <- renderTable({
+output$table.length <- renderDataTable({
   length()
 })  
 
 ## ► Read in 3D points data ----
 threedpoints <- reactive({
-  # if no 3dpoints file uploaded and method = single point. dataset = Ningloo BRUVs
-  if(is.null(input$upload.metadata) & is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "opcode") {
+  # When folder chosen ----
+  if(!is.null(input$folderdir)) {
     
-    threedpoints <- read.delim("data/example_3DPoints.txt", na.strings = "") %>%
+    # Get all _Period files in the folder
+    files <- input$folderdir%>%
+      dplyr::filter(grepl("_3DPoints.txt", name)) #%>% glimpse()
+    
+    threedpoints <- data.frame() 
+    
+    if (is.null(files)) return(NULL)
+    
+    for (i in seq_along(files$datapath)) {
+      tmp <- read_tsv(files$datapath[i], col_types = cols(.default = "c"))  %>%
+        dplyr::mutate(campaignid = files$name[i])
+      
+      threedpoints <- bind_rows(threedpoints, tmp) #%>% glimpse()
+    }
+    
+    threedpoints <- threedpoints %>%
       ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
-      dplyr::mutate(sample = as.factor(sample))
+      dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_3DPoints.txt" = ""))) #%>% glimpse()
     
-  #   # If no 3dpoints file and method = transect. dataset = Ningaloo DOVs
-  # } else if(is.null(input$upload.metadata) & is.null(input$upload.3dpoints) & input$method == "transect") {
-  #   
-  #   threedpoints <- read.delim("data/2014-08_small subset_stereoDOVs_3DPoints.txt", na.strings = "") %>%
-  #     ga.clean.names() %>%
-  #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
-  #     mutate(sample = as.factor(sample)) %>%
-  #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs")
-  #   
-    # IF 3dpoints file uploaded AND method = single point AND sample = opcode
-  } else if(!is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "opcode"){
+    # If point method and opcode = sample e.g. BRUVs
+    if(input$method == "point" & input$sample == "opcode") {
+      
+      threedpoints <- threedpoints %>%
+        dplyr::rename(sample = opcode)
+    }
     
-    threedpoints <- lapply(input$upload.3dpoints$datapath, fread)
-    names(threedpoints) <- input$upload.3dpoints$name
+    # If point method and opcode = period e.g. BOSS
+    if(input$method == "point" & input$sample == "period") {
+      
+      threedpoints <- threedpoints %>%
+        dplyr::mutate(sample = period)
+    }
     
-    threedpoints <- rbindlist(threedpoints, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+    # If transect method and sample = "opcode" + "period"
+    if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+      
+      threedpoints <- threedpoints %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+      
+    }
+    # If transect method and sample = "period"
+    if(input$method == "transect" & input$sample.t == "period") {
+      
+      lookup <- c(sample = "period") # If people have used period or sample then this will work
+      
+      threedpoints <- threedpoints %>%
+        dplyr::rename(dplyr::any_of(lookup)) 
+    }
+  }
+  
+  # if no folder chosen and method = single point. dataset = Ningloo BRUVs
+  if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
+    
+    threedpoints <-  read.delim("data/example_3DPoints.txt", na.strings = "") %>%
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
       mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", ""))%>%
-      dplyr::select(-c(.id)) %>%
-      dplyr::mutate(sample = as.factor(sample))
+      dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+      as.data.frame()
     
-    # IF 3dpoints file uploaded AND method = single point AND sample = period
-  } else if(!is.null(input$upload.3dpoints) & input$method == "point" & input$sample == "period") {
-    
-    threedpoints <- lapply(input$upload.3dpoints$datapath, fread)
-    names(threedpoints) <- input$upload.3dpoints$name
-    
-    threedpoints <- rbindlist(threedpoints, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(sample = period) %>%
-      dplyr::mutate(sample = as.factor(sample)) %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", ""))%>%
-      dplyr::select(-c(.id)) %>%
-      dplyr::mutate(sample = as.factor(sample))
-    
-    # IF 3dpoints file uploaded AND method = transect
-  } else if(!is.null(input$upload.3dpoints) & input$method == "transect") {
-    
-    threedpoints <- lapply(input$upload.3dpoints$datapath, fread)
-    names(threedpoints) <- input$upload.3dpoints$name
-    
-    # Need to make sample from either OpCode + Period or Period
-    threedpoints <- rbindlist(threedpoints, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      ga.clean.names() %>%
-      dplyr::mutate(campaignid = str_replace_all(.$.id, "_3DPoints.txt", "")) %>%
-      dplyr::select(-c(.id))
-    
-    if (input$sample.t == "opcodeperiod") {
-      threedpoints <- threedpoints %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "_"))%>%
-        dplyr::mutate(sample = as.factor(sample))
-      
-    } else {
-      
-      threedpoints <- threedpoints %>%
-        dplyr::mutate(sample = period)%>%
-        dplyr::mutate(sample = as.factor(sample))
-    }
+    # TODO add an example dataset for DOVs
   } 
   
   threedpoints <- threedpoints %>%
@@ -1636,17 +1636,19 @@ threedpoints <- reactive({
     mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
     mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-    dplyr::mutate(number = as.numeric(number)) %>%
+    dplyr::filter(!is.na(family)) %>%
     dplyr::mutate(species = as.character(tolower(species))) %>%
     dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
     dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
     dplyr::rename(em.comment = comment) %>%
-    dplyr::mutate(em.comment = as.character(em.comment))
+    dplyr::mutate(rms = as.numeric(rms)) %>%
+    dplyr::mutate(range = as.numeric(range)) %>%
+    dplyr::mutate(number = as.numeric(number))
   
 })
 
 # ► Preview 3D points ----
-output$table.3dpoints <- renderTable({
+output$table.3dpoints <- renderDataTable({
   threedpoints()
 }) 
 
@@ -1661,8 +1663,8 @@ length3dpoints <- reactive({
     mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
     mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-    dplyr::mutate(length = as.numeric(length)) %>%
-    dplyr::mutate(number = as.numeric(number)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(number = as.numeric(number)) %>%
     dplyr::select(-c(time)) %>%
     dplyr::mutate(sample = as.character(sample)) %>%
     dplyr::left_join(metadata.regions())
@@ -1681,7 +1683,7 @@ length3dpoints.clean <- reactive({
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% # we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
-    dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
   
@@ -1690,7 +1692,10 @@ length3dpoints.clean <- reactive({
 ## ► Create filtered length download -----
 length.complete.download <- reactive({
   
-  length <- length3dpoints() # can't use clean as have already changed synonyms
+  print("preview data for downloading")
+  length <- length3dpoints() %>% # can't use clean as have already changed synonyms
+    glimpse()
+  
   
   if (input$error.synonyms == TRUE) {
     length.complete <- dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
@@ -1703,7 +1708,7 @@ length.complete.download <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
@@ -1715,7 +1720,7 @@ length.complete.download <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(marine.region = as.character(marine.region))
@@ -1780,7 +1785,7 @@ length.complete.download <- reactive({
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% 
-    dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
@@ -1788,13 +1793,12 @@ length.complete.download <- reactive({
   # If "Remove extra columns" = TRUE
   if (input$error.extra.col == TRUE) {
     length.big <- length.big %>%
-      dplyr::select(-c(zone, em.comment, marine.region, scientific, frameleft, frameright))%>%
-      glimpse()
+      dplyr::select(-c(zone, em.comment, marine.region, scientific, frameleft, frameright))#%>% glimpse()
   } 
   
   if (input$error.zeros == TRUE) {
-    length.big <- length.big %>%
-      dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+    length.big <- length.big #%>%
+      # dplyr::mutate(date.time = paste0(str_replace_all(as.character(.$date.time), " ", "T"), "Z"))
     
     } else { 
     length.big <- length.big %>%
@@ -1802,7 +1806,9 @@ length.complete.download <- reactive({
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, rms, precision) # remove metadata columns
   }
 
-  length.big <- length.big
+  print("final length data for downloading")
+  length.big <- length.big %>% 
+    glimpse()
   
 })
 
@@ -1923,8 +1929,7 @@ onclick('click.lengths.no.number',
 threedpoints.no.number <- reactive({
   threedpoints.no.number <- threedpoints() %>%
     filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frameleft, em.comment) %>%
-    glimpse()
+    dplyr::select(campaignid, sample, period, family, genus, species, number, periodtime, frameleft, em.comment) #%>% glimpse()
 })
 
 ## ►  3d points without a number - value box ----
@@ -2438,8 +2443,8 @@ length3dpoints.t <- reactive({
     mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
     mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-    dplyr::mutate(length = as.numeric(length)) %>%
-    dplyr::mutate(number = as.numeric(number)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(number = as.numeric(number)) %>%
     dplyr::filter(!is.na(number)) %>%
     tidyr::replace_na(list(species = "spp")) %>%
     dplyr::select(-c(time)) %>%
@@ -2449,7 +2454,7 @@ length3dpoints.t <- reactive({
 
 length3dpoints.clean.t <- reactive({
   
-  print("length 3D points joined to metadata")
+  # print("length 3D points joined to metadata")
   
   length3dpoints.clean <-  dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
     dplyr::mutate(genus = ifelse(!genus_correct %in% c(NA), genus_correct, genus)) %>%
@@ -2462,7 +2467,7 @@ length3dpoints.clean.t <- reactive({
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) 
     
@@ -2484,7 +2489,7 @@ length.complete.download.t <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
@@ -2497,7 +2502,7 @@ length.complete.download.t <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(marine.region = as.character(marine.region))
@@ -2568,7 +2573,7 @@ length.complete.download.t <- reactive({
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% 
-    dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
     # dplyr::mutate(project = input$project.name) %>%
@@ -2633,7 +2638,7 @@ onclick('click.length.abundance.t', showModal(modalDialog(
 
 ## ► Number of 3d points - dataframe ----
 threedpoints.abundance.t <- reactive({
-  print("3d point")
+  # print("3d point")
   
   threedpoints.abundance <- length3dpoints.clean.t() %>%
     dplyr::filter(length %in% c(NA)) %>%
@@ -3323,7 +3328,7 @@ mass.complete.download <- reactive({
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
-    dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
@@ -3387,7 +3392,7 @@ mass.complete.download <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
@@ -3399,7 +3404,7 @@ mass.complete.download <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
@@ -3468,8 +3473,8 @@ mass.complete.download <- reactive({
   } 
   
   if (input$error.zeros == TRUE) {
-    mass.big <- mass.big %>%
-      dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+    mass.big <- mass.big #%>%
+      #dplyr::mutate(date.time = paste0(str_replace_all(as.character(.$date.time), " ", "T"), "Z"))
     
   } else{ 
     mass.big <- mass.big %>%
@@ -3681,7 +3686,7 @@ mass.complete.download.t <- reactive({
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
-    dplyr::mutate(length = as.numeric(length)) %>%
+    # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes"))
@@ -3745,7 +3750,7 @@ mass.complete.download.t <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
@@ -3757,7 +3762,7 @@ mass.complete.download.t <- reactive({
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
-      dplyr::mutate(length = as.numeric(length)) %>%
+      # dplyr::mutate(length = as.numeric(length)) %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::filter(successful.length%in%c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(marine.region = as.character(marine.region)) %>%
@@ -4225,7 +4230,7 @@ hab.points <- reactive({
 
 
 ## ► Preview habitat in dashboard ----
-output$table.habitat <- renderTable({
+output$table.habitat <- renderDataTable({
   hab.points()
 })
 
@@ -4383,7 +4388,7 @@ habitat.relief <- reactive({
 habitat.broad.points <- reactive({
 
   broad.points <- hab.points() %>%
-    glimpse() %>%
+    # glimpse() %>%
     dplyr::select(-c(morphology, type, relief)) %>%
     filter(!broad %in% c("", NA, "Unknown", "Open.Water", "Open Water")) %>%
     mutate(broad = paste("broad", broad, sep = ".")) %>%
@@ -4393,11 +4398,11 @@ habitat.broad.points <- reactive({
     dplyr::select(-c(image.row, image.col, direction)) %>%
     group_by(campaignid, sample) %>%
     summarise_all(list(sum)) %>%
-    glimpse() %>%
+    # glimpse() %>%
     mutate(total.points.annotated = rowSums(.[,3:(ncol(.))], na.rm = TRUE )) %>% # CHANGE TO 3 FOR CAMPAIGNID AND SAMPLE
     ga.clean.names() %>%
     ungroup() %>%
-    glimpse() %>%
+    # glimpse() %>%
     left_join(metadata.regions()) %>%
     left_join(habitat.relief()) %>%
     dplyr::filter(successful.count %in% c("Yes", "y", "yes", "y"))
@@ -4413,16 +4418,14 @@ habitat.broad.percent.cover <- reactive({
     dplyr::select(-c(total.points.annotated)) %>%
     ungroup() %>%
     left_join(metadata.regions()) %>%
-    left_join(habitat.relief()) %>%
-    glimpse()
+    left_join(habitat.relief()) #%>% glimpse()
 })
 
 ## ► habitat plot - broad  ----
 output$habitat.broad.plot <- renderPlot({
 
   hab <- habitat.broad.points() %>%
-    pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points") %>%
-    glimpse()
+    pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points") #%>% glimpse()
 
   ggplot(hab) +
     geom_quasirandom(data = hab,
@@ -4449,8 +4452,8 @@ output$habitat.relief.plot <- renderPlot({
     dplyr::filter(!relief.rank%in%"") %>% # Removes blank annotations (e.g. 'Open water')
     mutate(relief.rank = as.numeric(relief.rank))%>% 
     dplyr::group_by(campaignid, sample, relief.rank) %>%
-    dplyr::summarise(num.points = n()) %>% # Sums the relief scores by sample and relief rank
-    glimpse()
+    dplyr::summarise(num.points = n()) #%>% # Sums the relief scores by sample and relief rank
+    # glimpse()
   
   ggplot(hab) +
     geom_quasirandom(data = hab, 
@@ -4464,8 +4467,7 @@ output$habitat.relief.plot <- renderPlot({
 ## ► Leaflet pies ----
 output$hab.pies <- renderLeaflet({
   
-  hab <- habitat.broad.points() %>%
-    glimpse()
+  hab <- habitat.broad.points() #%>% glimpse()
   
   # Create a color palette to plot the scatterpies with using the 'RColorbrewer' palettes
   # cols <- colorRampPalette(brewer.pal(12, "Paired"))(length(hab[grep("broad", names(hab))]))
@@ -4600,8 +4602,7 @@ output$download.maxn <- downloadHandler(
         print(i)
         
         dat <- length.complete.download() %>%
-          filter(campaignid == i) %>% 
-          glimpse()
+          filter(campaignid == i) %>% glimpse()
 
         fileName <- paste(i, "_length.csv", sep = "")
 
@@ -4610,12 +4611,11 @@ output$download.maxn <- downloadHandler(
       
       for(i in unique(mass.complete.download()$campaignid)){
         
-        print("campaignid mass")
-        print(i)
+        # print("campaignid mass")
+        # print(i)
 
         dat <- mass.complete.download() %>%
-          filter(campaignid == i) %>%
-          glimpse()
+          filter(campaignid == i) #%>% glimpse()
 
         fileName <- paste(i, "_mass.csv", sep = "")
 
@@ -4630,17 +4630,16 @@ output$download.maxn <- downloadHandler(
         } else {
             metadata <- metadata.regions()}
         
-        metadata <- metadata %>%
-          dplyr::mutate(date.time.utc = paste0(str_replace_all(as.character(.$date.time.utc), " ", "T"), "Z"))
+        metadata <- metadata #%>%
+          #dplyr::mutate(date.time = paste0(str_replace_all(as.character(.$date.time), " ", "T"), "Z"))
         
         for(i in unique(metadata$campaignid)){
           
-          print("campaignid metadata")
-          print(i)
+          # print("campaignid metadata")
+          # print(i)
           
           dat <- metadata %>%
-            filter(campaignid == i) %>%
-            glimpse()
+            filter(campaignid == i) #%>% glimpse()
           
           fileName <- paste(i, "_metadata.csv", sep = "")
           
@@ -4783,8 +4782,7 @@ output$download.length.t <- downloadHandler(
         for(i in unique(length.complete.download.t()$campaignid)){
           
           dat <- length.complete.download.t() %>%
-            filter(campaignid == i) %>% 
-            glimpse()
+            filter(campaignid == i) #%>% glimpse()
           
           fileName <- paste(i, "_length.csv", sep = "")
           
@@ -4794,8 +4792,7 @@ output$download.length.t <- downloadHandler(
         for(i in unique(mass.complete.download.t()$campaignid)){
           
           dat <- mass.complete.download.t() %>%
-            filter(campaignid == i) %>%
-            glimpse()
+            filter(campaignid == i) #%>% glimpse()
           
           fileName <- paste(i, "_mass.csv", sep = "")
           
