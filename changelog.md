@@ -1,3 +1,11 @@
+2.0.1
+Changed
+- Added all Marine Parks from CAPAD 2020.
+- "Fished" & "No-take" are now detected from the Zone Type in CAPAD.
+- Metadata map now displays green markers for deployments inside No-take areas, and blue markers for Fished areas.
+
+
+
 2.0.0 (released 31/01/2023)
 Changed
 - Select a directory instead of manually choosing files (finds files named with "_Metadata.csv", "_Points.txt", etc.)
