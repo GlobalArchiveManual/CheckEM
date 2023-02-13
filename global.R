@@ -170,6 +170,8 @@ Scientific Research|Scientific Reference", string = marineparks$ZONE_TYPE),
                                           "No-take",
                                           "Fished")
 
+marineparks.single <- st_cast(st_as_sf(marineparks), "POLYGON")
+
 # marineparks <- marineparks[marineparks$status == "No-take",]
 
 # all.parks <- marineparks %>% as.data.frame()
