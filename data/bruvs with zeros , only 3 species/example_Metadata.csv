@@ -1,4 +1,4 @@
-Sample,Latitude,Longitude,Location,Status,Site,Depth,Observer.count,Successful.count,Successful.length,Observer.length,Date.time
+Sample,Latitude,Longitude,Location,Status,Site,Depth,Observer.count,Successful.count,Successful.length,Observer.length,Date.time.utc
 1.01,-22.84786205,113.5404917,Ningaloo Marine Park,NA,1,0,Brooke Gibbons,Yes,Yes,Charlotte Aston,2019-08-12T01:23:00Z
 1.02,-22.85016136,113.5252875,Ningaloo Marine Park,NA,1,0,Brooke Gibbons,Yes,Yes,Charlotte Aston,2019-08-12T01:35:00Z
 1.03,-22.84437,113.51304,Ningaloo Marine Park,NA,1,0,Charlotte Aston,Yes,Yes,Charlotte Aston,2019-08-12T01:43:00Z

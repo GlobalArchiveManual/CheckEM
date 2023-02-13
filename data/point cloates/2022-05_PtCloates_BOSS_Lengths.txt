@@ -1,0 +1,1 @@
+OpCode	ImagePtPair	FilenameLeft	FrameLeft	FilenameRight	FrameRight	Time	Period	PeriodTime	Length	Precision	RMS	Range	Direction	HorzDir	VertDir	MidX	MidY	MidZ	Family	Genus	Species	Code	Number	Stage	Activity	Comment	Attribute9	Attribute10
