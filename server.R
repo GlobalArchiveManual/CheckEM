@@ -287,17 +287,16 @@ output$map.metadata <- renderLeaflet({
   leaflet(data = metadata) %>%
     addTiles() %>%
     
-    addAwesomeMarkers(icon = ~iconSet[status], label = ~as.character(sample), popup = ~content)# %>%
+    addAwesomeMarkers(icon = ~iconSet[status], label = ~as.character(sample), popup = ~content) #%>%
+    # addGlPolygons(data =  marineparks.single,
+    #               color = ~ data$comm.pal(ZoneName),
+    #               popup =  marineparks.single$Name,
+    #               group = "Marine parks") %>%
+    # addLayersControl(
+    #   overlayGroups = c("Marine parks"),
+    #   options = layersControlOptions(collapsed = FALSE)) %>%
+    # hideGroup("Marine parks")
     
-    # addAwesomeMarkers(icon = awesomeIcons(
-    #                     icon = 'surf',
-    #                     iconColor = 'white',
-    #                     library = 'fa',
-    #                     markerColor = 'blue'
-    #                   ),
-    #                   clusterOptions = markerClusterOptions())
-    
-    #addMarkers(lng = ~longitude, lat = ~latitude, label = ~as.character(sample), popup = ~content)
 })
 
 ## _______________________________________________________ ----
