@@ -44,7 +44,19 @@ tagList(
     tags$style(
       type = 'text/css',
       '.modal-dialog { width: fit-content !important; }
-      .bttn-unite { width: 300px;}'
+      .bttn-unite { width: 300px;}
+      .modal-dialog {
+    border-radius: 20px;
+}
+
+.modal-body {
+    border-radius: 20px;
+}
+
+.modal-content {
+    border-radius: 20px;
+}
+      '
     ),
     
     tabItems(
@@ -54,75 +66,73 @@ tagList(
                        
                        column(width = 6,
                               
-                              box(width = NULL, title = "Format of data", status = "primary", solidHeader = TRUE,
-                                  
-                                  radioButtons("method", "Choose the type of method:",
-                                               c("Single point e.g. BRUV & BOSS" = "point",
-                                                 "Transect e.g. DOV & ROV" = "transect"),
-                                               selected = "point",
-                                               inline = TRUE),
-                                  
-                                  shiny::conditionalPanel("input.method == 'point'",
-                                                          radioButtons("sample", "How did you record the sample name in EventMeasure:",
-                                                                       c("OpCode" = "opcode",
-                                                                         "Period" = "period"),
-                                                                       selected = "opcode",
-                                                                       inline = TRUE)),
-                                  
-                                  shiny::conditionalPanel("input.method == 'transect'",
-                                                          radioButtons("sample.t", "How did you record the sample name in EventMeasure:",
-                                                                       c("OpCode and Period" = "opcodeperiod",
-                                                                         "Period only" = "period"),
-                                                                       selected = "opcodeperiod",
-                                                                       inline = TRUE))
-                                  # ,
-                                  # radioButtons("habdirection", "If checking habitat, which directions were annotated?",
-                                  #              c("Forwards only" = "forwards",
-                                  #                "Forwards and backwards" = "both"),
-                                  #              selected = "forwards",
-                                  #              inline = TRUE),
-                                  # 
-                                  # radioButtons("habreliefsep", "If checking habitat, was relief annotated separately?",
-                                  #              c("No" = "no",
-                                  #                "Yes" = "yes"),
-                                  #              selected = "no",
-                                  #              inline = TRUE)
-                                  ),
+
                               
                               box(width = NULL, height = 700, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE,
                                   includeMarkdown("aims.Rmd"))
                               ),
                        
-                       box(width = 6, height = 110, title = "Upload metadata (csv)", status = "primary", solidHeader = FALSE,
+                       box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
                            
-                           tags$div(tags$label("Choose folder", class="btn btn-primary",
-                                               tags$input(id = "folderdir", webkitdirectory = TRUE, type = "file", style="display: none;", onchange="pressed()"))),
-                           tags$div(id="fileIn_progress", class="progress progress-striped active shiny-file-input-progress",
-                                    tags$div(class="progress-bar")),
+                           radioButtons("method", "Choose the type of method:",
+                                        c("Single point e.g. BRUV & BOSS" = "point",
+                                          "Transect e.g. DOV & ROV" = "transect"),
+                                        selected = "point",
+                                        inline = TRUE),
                            
+                           shiny::conditionalPanel("input.method == 'point'",
+                                                   radioButtons("sample", "How did you record the sample name in EventMeasure:",
+                                                                c("OpCode" = "opcode",
+                                                                  "Period" = "period"),
+                                                                selected = "opcode",
+                                                                inline = TRUE)),
                            
-                           
-                           fileInput("upload.metadata", NULL, multiple = TRUE,
-                                     accept = c("image/vnd.csv",".csv"))),
+                           shiny::conditionalPanel("input.method == 'transect'",
+                                                   radioButtons("sample.t", "How did you record the sample name in EventMeasure:",
+                                                                c("OpCode and Period" = "opcodeperiod",
+                                                                  "Period only" = "period"),
+                                                                selected = "opcodeperiod",
+                                                                inline = TRUE)),
+                           br(),
+                           tags$div(tags$label("Select directory with metadata and EM exports", class="btn btn-primary",
+                                               tags$input(id = "folderdir", webkitdirectory = TRUE, type = "file", style="display: none;", onchange="pressed()")))#,
+                           # tags$div(id="fileIn_progress", class="progress progress-striped active shiny-file-input-progress", tags$div(class="progress-bar"))
+                           # ,
+                           # radioButtons("habdirection", "If checking habitat, which directions were annotated?",
+                           #              c("Forwards only" = "forwards",
+                           #                "Forwards and backwards" = "both"),
+                           #              selected = "forwards",
+                           #              inline = TRUE),
+                           # 
+                           # radioButtons("habreliefsep", "If checking habitat, was relief annotated separately?",
+                           #              c("No" = "no",
+                           #                "Yes" = "yes"),
+                           #              selected = "no",
+                           #              inline = TRUE)
+                       ),
+                       # box(width = 6, height = 110, title = "Upload metadata (csv)", status = "primary", solidHeader = FALSE,
+                       #     
+                       #     fileInput("upload.metadata", NULL, multiple = TRUE,
+                       #               accept = c("image/vnd.csv",".csv"))),
                        
-                       box(width = 6, title = "Upload EventMeasure exports  (txt files)", status = "primary", solidHeader = FALSE,
-                           
-                           box(width = 6, height = 110, title = "Points file", status = "primary", solidHeader = TRUE,
-                               fileInput("upload.points", NULL, multiple = TRUE,
-                                         accept = c("image/vnd.txt",".txt"))),
-                      
-                           box(width = 6, height = 110, title = "Period file", status = "primary", solidHeader = TRUE,
-                               fileInput("upload.period", NULL, multiple = TRUE,
-                                          accept = c("image/vnd.txt",".txt"))),
-                      
-                           box(width = 6, height = 110, title = "Length file", status = "primary", solidHeader = TRUE,
-                               fileInput("upload.length", NULL, multiple = TRUE,
-                                          accept = c("image/vnd.txt",".txt"))),
-                      
-                           box(width = 6, height = 110, title = "3D points file", status = "primary", solidHeader = TRUE,
-                               fileInput("upload.3dpoints", NULL, multiple = TRUE,
-                                          accept = c("image/vnd.txt",".txt")))
-                           ),
+                       # box(width = 6, title = "Upload EventMeasure exports  (txt files)", status = "primary", solidHeader = FALSE,
+                       #     
+                       #     box(width = 6, height = 110, title = "Points file", status = "primary", solidHeader = TRUE,
+                       #         fileInput("upload.points", NULL, multiple = TRUE,
+                       #                   accept = c("image/vnd.txt",".txt"))),
+                       # 
+                       #     box(width = 6, height = 110, title = "Period file", status = "primary", solidHeader = TRUE,
+                       #         fileInput("upload.period", NULL, multiple = TRUE,
+                       #                    accept = c("image/vnd.txt",".txt"))),
+                       # 
+                       #     box(width = 6, height = 110, title = "Length file", status = "primary", solidHeader = TRUE,
+                       #         fileInput("upload.length", NULL, multiple = TRUE,
+                       #                    accept = c("image/vnd.txt",".txt"))),
+                       # 
+                       #     box(width = 6, height = 110, title = "3D points file", status = "primary", solidHeader = TRUE,
+                       #         fileInput("upload.3dpoints", NULL, multiple = TRUE,
+                       #                    accept = c("image/vnd.txt",".txt")))
+                       #     ),
                        
                        # box(width = 6, title = "Upload TransectMeasure exports (txt files)", status = "primary", solidHeader = FALSE,
                        #     
@@ -155,17 +165,17 @@ tagList(
                        #     )
                        #     ),
               
-                  tabBox(width = 12, height = 800,
+                  tabBox(width = 12, #height = 800,
                          
                     title = tagList(shiny::icon("gear"), "Preview data"),
-                    tabPanel("Metadata", div(style = 'overflow-x: scroll', 
-                                             tableOutput("table.metadata")
-                                             )
+                    tabPanel("Metadata", #div(style = 'overflow-x: scroll', 
+                                             dataTableOutput("table.metadata")
+                                             # )
                              ),
-                    tabPanel("Points", tableOutput("table.points")),
-                    tabPanel("Lengths", tableOutput("table.length")),
-                    tabPanel("3D Points", tableOutput("table.3dpoints")),
-                    tabPanel("Periods", tableOutput("table.periods"))
+                    tabPanel("Points", dataTableOutput("table.points")),
+                    tabPanel("Lengths", dataTableOutput("table.length")),
+                    tabPanel("3D Points", dataTableOutput("table.3dpoints")),
+                    tabPanel("Periods", dataTableOutput("table.periods"))
                     #,
                     # tabPanel("Habitat", tableOutput("table.habitat"))
                   
