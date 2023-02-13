@@ -35,6 +35,7 @@ library(rgeos)
 library(raster)
 library(leaflet)
 library(leaflet.minicharts)
+library(leafgl)
 
 # Global archive functions
 library(devtools)
@@ -144,18 +145,37 @@ synonyms <- read_csv("data/synonyms.csv") %>%
 wgs.84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 
 marine.regions <- readOGR(dsn = "data/spatial/marine_regions.shp")
-proj4string(marine.regions)
 marine.regions$REGION <- as.character(marine.regions$REGION)
-
-commonwealth.marineparks <- readOGR(dsn="data/spatial/AustraliaNetworkMarineParks.shp")
-proj4string(commonwealth.marineparks)
-
-wa.marineparks <- readOGR(dsn = "data/spatial/WA_MPA_2018.shp")
-proj4string(wa.marineparks)
-
 proj4string(marine.regions) <- CRS(wgs.84)
-proj4string(commonwealth.marineparks) <- CRS(wgs.84)
-proj4string(wa.marineparks) <- CRS(wgs.84)
+
+# Old commonwealth parks ----
+# commonwealth.marineparks <- readOGR(dsn="data/spatial/AustraliaNetworkMarineParks.shp")
+# proj4string(commonwealth.marineparks)
+# plot(commonwealth.marineparks)
+# proj4string(commonwealth.marineparks) <- CRS(wgs.84)
+
+
+# New CAPAD 2020 ----
+marineparks <- readOGR(dsn = "data/spatial/CAPAD2020_marine.shp")
+proj4string(marineparks) <- CRS(wgs.84)
+
+# Buffer in QLD - has some fishing allowed (Trolling)
+
+# These allow fishing:
+# - Habitat Protection
+# - General Use
+
+marineparks$status <- if_else(str_detect(pattern = "No take|Sanctuary|Conservation Area|Marine National Park|Preservation|National Park|	
+Scientific Research|Scientific Reference", string = marineparks$ZONE_TYPE),
+                                          "No-take",
+                                          "Fished")
+
+# marineparks <- marineparks[marineparks$status == "No-take",]
+
+# all.parks <- marineparks %>% as.data.frame()
+# 
+# test <- marineparks %>% as.data.frame() %>%
+#   distinct(ZONE_TYPE, status)
 
 # Theme for plotting ----
 Theme1 <-    theme_bw() +
@@ -195,3 +215,15 @@ world.regions<-st_read(dsn = "data/spatial/MEOW.shp") %>%
   st_transform(crs="+init=epsg:4326") 
 
 # profvis(shiny::runApp())
+iconSet <- awesomeIconList(
+  Fished = makeAwesomeIcon(
+    icon = 'surf',
+    iconColor = 'white',
+    markerColor = 'blue'
+  ),
+  'No-take' = makeAwesomeIcon(
+    icon = 'surf',
+    iconColor = 'white',
+    markerColor = 'green'
+  )
+)
