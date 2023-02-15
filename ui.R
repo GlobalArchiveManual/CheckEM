@@ -31,6 +31,7 @@ tagList(
                             ),
     
     menuItem("User guide", tabName = "guide", icon = icon("info", lib="font-awesome")),
+    menuItem("Change log", tabName = "change", icon = icon("edit", lib="font-awesome")),
     menuItem("Feedback", tabName = "feedback", icon = icon("comment", lib="font-awesome")),
     menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome"))
   )
@@ -608,9 +609,17 @@ tagList(
               )
               
               
+      ),
+      
+      tabItem(tabName = "change",
+              column(width = 2),
+              box(width = 8, status = "primary", title = NULL,
+                  includeMarkdown("changelog.Rmd")
+                  )
+              )
       )
       
     )
   )
 )
-)
+# )
