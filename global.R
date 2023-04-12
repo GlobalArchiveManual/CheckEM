@@ -156,7 +156,7 @@ proj4string(marine.regions) <- CRS(wgs.84)
 
 
 # New CAPAD 2020 ----
-marineparks <- readOGR(dsn = "data/spatial/CAPAD2020_marine.shp")
+marineparks <- readOGR(dsn = "data/spatial/CAPAD2020_marine_single_fixed2.shp")
 proj4string(marineparks) <- CRS(wgs.84)
 
 # Buffer in QLD - has some fishing allowed (Trolling)
@@ -169,8 +169,9 @@ marineparks$status <- if_else(str_detect(pattern = "No take|Sanctuary|Conservati
 Scientific Research|Scientific Reference", string = marineparks$ZONE_TYPE),
                                           "No-take",
                                           "Fished")
+marineparks.single <- st_read("data/spatial/CAPAD2020_marine_single_fixed2.shp")
+marineparks.single <- st_as_sf(marineparks)
 
-marineparks.single <- st_cast(st_as_sf(marineparks), "POLYGON")
 
 # marineparks <- marineparks[marineparks$status == "No-take",]
 
@@ -229,3 +230,4 @@ iconSet <- awesomeIconList(
     markerColor = 'green'
   )
 )
+

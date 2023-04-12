@@ -284,18 +284,34 @@ output$map.metadata <- renderLeaflet({
                      "<b>Date/time (UTC):</b>", date.time, "<br/>"
     ))
   
+  
+  b <- metadata %>% 
+    st_as_sf(coords = c("longitude", "latitude"), crs = wgs.84) %>% 
+    st_bbox()
+  
+  # b <- st_bbox(c(xmin = (min(metadata$longitude)*1.5), 
+  #                xmax = (max(metadata$longitude)*1.5), 
+  #                ymax = (min(metadata$latitude)*1.5), 
+  #                ymin = (max(metadata$latitude)*1.5)), crs = st_crs(4326))
+  
+  bb <- st_as_sfc(b)
+  
+  marineparks.single_clipped <- st_cast(st_intersection(marineparks.single, bb), "POLYGON")
+  
+  # plot(marineparks.single_clipped)
+  
   leaflet(data = metadata) %>%
     addTiles() %>%
     
-    addAwesomeMarkers(icon = ~iconSet[status], label = ~as.character(sample), popup = ~content) #%>%
-    # addGlPolygons(data =  marineparks.single,
-    #               color = ~ data$comm.pal(ZoneName),
-    #               popup =  marineparks.single$Name,
-    #               group = "Marine parks") %>%
-    # addLayersControl(
-    #   overlayGroups = c("Marine parks"),
-    #   options = layersControlOptions(collapsed = FALSE)) %>%
-    # hideGroup("Marine parks")
+    addAwesomeMarkers(icon = ~iconSet[status], label = ~as.character(sample), popup = ~content) %>%
+    addGlPolygons(data =  marineparks.single_clipped,
+                  # color = ~ data$comm.pal(ZoneName),
+                  popup =  marineparks.single_clipped$Name,
+                  group = "Marine parks") %>%
+    addLayersControl(
+      overlayGroups = c("Marine parks"),
+      options = layersControlOptions(collapsed = FALSE)) %>%
+    hideGroup("Marine parks")
     
 })
 
@@ -1553,7 +1569,8 @@ length <- reactive({
     dplyr::mutate(rms = as.numeric(rms)) %>%
     dplyr::mutate(precision = as.numeric(precision)) %>%
     dplyr::mutate(range = as.numeric(range)) %>%
-    dplyr::mutate(number = as.numeric(number))
+    dplyr::mutate(number = as.numeric(number)) %>%
+    glimpse()
   
 })
 

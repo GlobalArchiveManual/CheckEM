@@ -1,275 +1,275 @@
-"Sample","Latitude","Longitude","Location","Status","Site","Depth","Observer.count","Successful.count","Successful.length","Observer.length","Date.time.utc"
-"IO15",-34.06118897,114.8663721,"South-west","No-take","C.IO.35","40.8","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T23:59:00Z"
-"FH24",-33.66868897,114.8438721,"South-west","Fished","C.FH.1","47.6","Brooke Gibbons","Yes","Yes","Ramesh/Claude","2020-10-11T23:55:00Z"
-"IO34",-34.06118897,114.8713721,"South-west","No-take","C.IO.35","41.3","Brooke Gibbons","Yes","Yes","Ramesh/Claude","2020-10-16T00:02:00Z"
-"IO92",-34.09868897,114.8863721,"South-west","No-take","C.IO.52","42.3","Brooke Gibbons","Yes","Yes","Claude","2020-10-16T02:16:00Z"
-"IO122",-34.11618897,114.8263721,"South-west","No-take","C.IO.59","57.4","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T04:35:00Z"
-"IO126",-34.11368897,114.8188721,"South-west","No-take","C.IO.59","58.2","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T04:31:00Z"
-"IO153",-34.04618897,114.8888721,"South-west","Fished","C.IO.65","42.6","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T23:36:00Z"
-"IO195",-34.09368897,114.8588721,"South-west","No-take","C.IO.6","43.4","Brooke Gibbons","Yes","Yes","Claude","2020-10-16T01:57:00Z"
-"IO220",-34.05618897,114.8438721,"South-west","No-take","C.IO.5","43.7","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T06:39:00Z"
-"IO226",-34.06368897,114.8438721,"South-west","No-take","C.IO.4","42.8","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T06:32:00Z"
-"IO310",-34.05868897,114.7738721,"South-west","No-take","C.IO.8","64.7","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T02:06:00Z"
-"IO311",-34.05618897,114.7688721,"South-west","No-take","C.IO.8","66.1","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T02:03:00Z"
-"FH14",-33.76618897,114.8713721,"South-west","Fished","C.FH.10","44.4","Daphne","Yes","No",NA,"2020-10-17T03:24:00Z"
-"FH32",-33.69618897,114.9463721,"South-west","No-take","C.FH.5","42.9","Daphne","Yes","No",NA,"2020-10-17T00:50:00Z"
-"FH36",-33.69868897,114.9338721,"South-west","No-take","C.FH.5","44.4",NA,"No","No",NA,"2020-10-17T00:59:00Z"
-"FH54",-33.76618897,114.9388721,"South-west","Fished","C.FH.9","43.2","Daphne","Yes","No",NA,"2020-10-17T01:20:00Z"
-"IO354",-34.06605,114.84,"South-west","No-take","C.IO.4","45","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T06:29:00Z"
-"IO363",-33.98618897,114.7513721,"South-west","Fished","C.IO.25","66.2","Brooke Gibbons","Yes","Yes","Claude","2020-10-14T23:26:00Z"
-"IO365",-34.02368897,114.7538721,"South-west","Fished","C.IO.23","73.7","Brooke Gibbons","Yes","Yes","Claude","2020-10-15T00:23:00Z"
-"IO37",-34.10868897,114.7188721,"South-west","No-take","C.IO.55","130","Brooke Gibbons","Yes","Yes","Claude","2020-10-22T02:12:00Z"
-"FH62",-33.75618897,114.8813721,"South-west","Fished","C.FH.8","45.1",NA,"No","No",NA,"2020-10-17T03:17:00Z"
-"IO40",-34.10368897,114.7138721,"South-west","No-take","C.IO.55","131","Brooke Gibbons","Yes","Yes","Claude","2020-10-22T02:17:00Z"
-"IO58",-34.13618897,114.7738721,"South-west","No-take","C.IO.69","92.7","Brooke Gibbons","Yes","Yes","Claude","2020-10-21T23:21:00Z"
-"IO110",-34.14118897,114.7288721,"South-west","No-take","C.IO.68","128","Brooke Gibbons","Yes","Yes","Claude","2020-10-22T00:00:00Z"
-"IO263",-34.00868897,114.8788721,"South-west","Fished","C.IO.19","42.4","Brooke Gibbons","Yes","Yes","Claude","2020-10-19T01:52:00Z"
-"IO264",-34.01868897,114.8738721,"South-west","Fished","C.IO.19","42","Brooke Gibbons","Yes","Yes","Claude","2020-10-19T01:31:00Z"
-"IO269",-33.98868897,114.8138721,"South-west","Fished","C.IO.22","47.6","Brooke Gibbons","Yes","Yes","Claude","2020-10-18T23:18:00Z"
-"IO62",-34.13368897,114.7663721,"South-west","No-take","C.IO.69","105","Brooke Gibbons","Yes","Yes","Claude","2020-10-21T23:45:00Z"
-"IO96",-34.13618897,114.7363721,"South-west","No-take","C.IO.68","127","Brooke Gibbons","Yes","Yes","Rachel","2020-10-22T00:06:00Z"
-"IO180",-33.99618897,114.7038721,"South-west","Fished","C.IO.41","122","Brooke Gibbons","Yes","Yes","Claude","2020-11-23T04:36:00Z"
-"IO253",-34.01368897,114.7038721,"South-west","Fished","C.IO.49","124","Brooke Gibbons","Yes","Yes","Claude","2020-11-23T04:15:00Z"
-"IO277",-34.10618897,114.6463721,"South-west","No-take","C.IO.15","139","Brooke Gibbons","Yes","Yes","Claude","2020-11-22T23:53:00Z"
-"IO278",-34.11118897,114.6388721,"South-west","No-take","C.IO.15","140","Brooke Gibbons","Yes","Yes","Claude","2020-11-22T23:45:00Z"
-"IO300",-34.08618897,114.6688721,"South-west","No-take","C.IO.14","138","Brooke Gibbons","Yes","Yes","Claude","2020-11-22T23:18:00Z"
-"IO16",-34.07368897,114.8688721,"South-west","No-take","C.IO.35","41.4","Daphne","Yes","No",NA,"2020-10-16T01:43:00Z"
-"IO17",-34.06368897,114.8763721,"South-west","No-take","C.IO.35","41.1","Daphne","No","No",NA,"2020-10-16T00:07:00Z"
-"IO350",-34.02618897,114.6038721,"South-west","Fished","C.IO.27","135","Brooke Gibbons","Yes","Yes","Claude","2020-11-23T01:56:00Z"
-"FH41",-33.67118897,114.8388721,"South-west","Fished","C.FH.1","44.1","Claude","Yes","Yes","Rachel","2020-10-12T00:01:00Z"
-"FH45",-33.69368897,114.7988721,"South-west","Fished","C.FH.4","47.6","Claude","Yes","Yes","Rachel","2020-10-12T02:39:00Z"
-"FH48",-33.79618897,114.8138721,"South-west","Fished","C.FH.12","48.5","Claude","Yes","No","Rachel","2020-10-12T05:23:00Z"
-"FH56",-33.83118897,114.8663721,"South-west","Fished","C.FH.14","43.5","Claude","Yes","Yes","Rachel","2020-10-12T07:31:00Z"
-"IO130",-33.98118897,114.8763721,"South-west","Fished","C.IO.37","41.1",NA,"No","No",NA,"2020-10-13T04:24:00Z"
-"FH57",-33.78868897,114.8113721,"South-west","Fished","C.FH.12","45.8","Claude","Yes","Yes","Rachel","2020-10-12T05:12:00Z"
-"FH59",-33.66868897,114.8188721,"South-west","Fished","C.FH.2","44.6","Claude","Yes","No","Rachel","2020-10-12T00:32:00Z"
-"FH60",-33.81618897,114.8213721,"South-west","Fished","C.FH.13","44.5","Claude","Yes","Yes","Rachel","2020-10-12T07:14:00Z"
-"FH61",-33.84118897,114.8638721,"South-west","Fished","C.FH.14","43.9","Claude","Yes","Yes","Brooke Gibbons","2020-10-12T07:43:00Z"
-"IO157",-33.97118897,114.8238721,"South-west","Fished","C.IO.33","45.6",NA,"No","No",NA,"2020-10-13T02:14:00Z"
-"FH63",-33.67868897,114.8163721,"South-west","Fished","C.FH.2","46.3","Claude","Yes","Yes","Brooke Gibbons","2020-10-12T00:20:00Z"
-"FHC03",-33.948622,114.819555,"South-west","Fished","C.FH.22","44.5","Claude","Yes","Yes","Brooke Gibbons","2020-10-13T01:56:00Z"
-"IO5",-34.08868897,114.7763721,"South-west","No-take","C.IO.43","66.7","Claude","Yes","Yes","Brooke Gibbons","2020-10-15T04:12:00Z"
-"IO134",-33.98368897,114.8613721,"South-west","Fished","C.IO.37","41.2","Claude","Yes","Yes","Brooke Gibbons","2020-10-13T04:14:00Z"
-"IO146",-33.97618897,114.8213721,"South-west","Fished","C.IO.33","45.7","Claude","Yes","Yes","Brooke Gibbons","2020-10-13T02:17:00Z"
-"IO147",-33.98118897,114.8313721,"South-west","Fished","C.IO.33","44","Claude","Yes","Yes","Brooke Gibbons","2020-10-13T02:28:00Z"
-"IO199",-34.08618897,114.8613721,"South-west","No-take","C.IO.6","42.1","Claude","Yes","Yes","Brooke Gibbons","2020-10-16T01:51:00Z"
-"IO217",-34.06618897,114.9188721,"South-west","No-take","C.IO.2","47.1","Claude","Yes","Yes","Brooke Gibbons","2020-10-16T04:43:00Z"
-"IO356",-34.06956667,114.9184667,"South-west","No-take","C.IO.2","46.8","Claude","Yes","Yes","Brooke Gibbons","2020-10-16T04:39:00Z"
-"IO293",-34.08868897,114.7588721,"South-west","No-take","C.IO.12","111","Claude","Yes","Yes","Brooke","2020-10-22T04:55:00Z"
-"FH5",-33.69368897,114.9413721,"South-west","No-take","C.FH.5","44.5","Daphne","Yes","Yes","Rachel","2020-10-17T00:46:00Z"
-"FH7",-33.78368897,114.8788721,"South-west","Fished","C.FH.11","45","Daphne","Yes","Yes","Rachel","2020-10-17T03:45:00Z"
-"FH20",-33.78618897,114.8738721,"South-west","Fished","C.FH.11","43.1","Daphne","Yes","Yes","Rachel","2020-10-17T03:40:00Z"
-"FH34",-33.78618897,114.8838721,"South-west","Fished","C.FH.11","44.8","Daphne","Yes","Yes","Rachel","2020-10-17T03:51:00Z"
-"IO235",-34.06618897,114.9138721,"South-west","No-take","C.IO.2","46.5",NA,"No","No",NA,"2020-10-16T04:49:00Z"
-"FH44",-33.77118897,114.8638721,"South-west","Fished","C.FH.10","43.3","Daphne","Yes","Yes","Rachel","2020-10-17T03:28:00Z"
-"FH95",-33.75868897,114.8913721,"South-west","Fished","C.FH.8","46.8","Daphne","Yes","Yes","Rachel","2020-10-17T03:07:00Z"
-"FH102",-33.68868897,114.9288721,"South-west","No-take","C.FH.3","44.1","Daphne","Yes","Yes","Rachel","2020-10-16T22:42:00Z"
-"FH108",-33.76118897,114.9238721,"South-west","Fished","C.FH.9","44.7","Daphne","Yes","Yes","Rachel","2020-10-17T01:32:00Z"
-"FHA",-33.683135,114.937827,"South-west","No-take","C.FH.3","44.6","Daphne","Yes","Yes","Rachel","2020-10-16T22:55:00Z"
-"FHB",-33.681655,114.957127,"South-west","No-take","C.FH.A","41.3","Daphne","Yes","Yes","Rachel","2020-10-16T23:02:00Z"
-"FHD",-33.686897,114.958507,"South-west","No-take","C.FH.A","39.5","Daphne","Yes","Yes","Rachel","2020-10-16T23:12:00Z"
-"FHE",-33.687267,114.951172,"South-west","No-take","C.FH.A","42.3","Daphne","Yes","Yes","Rachel","2020-10-16T23:16:00Z"
-"IO336",-34.0924,114.8663667,"South-west","No-take","C.IO.6","43.2",NA,"No","No",NA,"2020-10-16T02:03:00Z"
-"FH28",-33.76368897,114.9338721,"South-west","Fished","C.FH.9","44.7","Daphne","Yes","Yes","Brooke Gibbons","2020-10-17T01:24:00Z"
-"FH30",-33.75118897,114.8888721,"South-west","Fished","C.FH.8","46.2","Daphne","Yes","Yes","Brooke Gibbons","2020-10-17T03:12:00Z"
-"FH46",-33.76618897,114.9288721,"South-west","Fished","C.FH.9","44.9","Daphne","Yes","Yes","Brooke Gibbons","2020-10-17T01:28:00Z"
-"FH50",-33.68118897,114.9313721,"South-west","No-take","C.FH.3","44.6","Daphne","Yes","Yes","Brooke Gibbons","2020-10-16T22:51:00Z"
-"FH64",-33.70118897,114.9388721,"South-west","No-take","C.FH.5","44.2","Daphne","Yes","Yes","Claude","2020-10-17T00:56:00Z"
-"FH82",-33.68618897,114.9238721,"South-west","No-take","C.FH.3","44.8","Daphne","Yes","Yes","Claude","2020-10-16T22:46:00Z"
-"FH93",-33.77618897,114.8688721,"South-west","Fished","C.FH.10","43.3","Daphne","Yes","Yes","Claude","2020-10-17T03:33:00Z"
-"FHC",-33.680718,114.965092,"South-west","No-take","C.FH.A","36.2","Daphne","Yes","Yes","Claude","2020-10-16T23:07:00Z"
-"FH6",-33.70618897,114.8213721,"South-west","Fished","C.FH.6","46","Daphne","Yes","Yes","Rachel","2020-10-12T02:50:00Z"
-"FH18",-33.79118897,114.8213721,"South-west","Fished","C.FH.12","43.5","Daphne","Yes","Yes","Rachel","2020-10-12T05:19:00Z"
-"FH26",-33.81118897,114.8288721,"South-west","Fished","C.FH.13","44.1","Daphne","Yes","No","Rachel","2020-10-12T07:10:00Z"
-"FH27",-33.83618897,114.8713721,"South-west","Fished","C.FH.14","42.9","Daphne","Yes","Yes","Rachel","2020-10-12T07:39:00Z"
-"FH31",-33.67368897,114.8238721,"South-west","Fished","C.FH.2","45.4","Daphne","Yes","Yes","Rachel","2020-10-12T00:27:00Z"
-"FH37",-33.71118897,114.8138721,"South-west","Fished","C.FH.6","44.2","Daphne","Yes","Yes","Claude","2020-10-12T03:03:00Z"
-"FH58",-33.66368897,114.8413721,"South-west","Fished","C.FH.1","45.1","Daphne","Yes","Yes","Claude","2020-10-11T23:47:00Z"
-"FH65",-33.71368897,114.8188721,"South-west","Fished","C.FH.6","45.7","Daphne","Yes","Yes","Claude","2020-10-12T02:59:00Z"
-"FH70",-33.67368897,114.8463721,"South-west","Fished","C.FH.1","48.6","Daphne","Yes","Yes","Claude","2020-10-12T00:07:00Z"
-"FH74",-33.73118897,114.8063721,"South-west","Fished","C.FH.7","44.9","Daphne","Yes","Yes","Claude","2020-10-12T04:47:00Z"
-"FH89",-33.68618897,114.8013721,"South-west","Fished","C.FH.4","45.7","Daphne","Yes","Yes","Claude","2020-10-12T02:34:00Z"
-"FH96",-33.81868897,114.8338721,"South-west","Fished","C.FH.13","44.9","Daphne","Yes","Yes","Claude","2020-10-12T07:20:00Z"
-"FH8",-33.72368897,114.8013721,"South-west","Fished","C.FH.7","43.9","Daphne","Yes","Yes","Rachel","2020-10-12T04:34:00Z"
-"FH15",-33.68868897,114.8063721,"South-west","Fished","C.FH.4","48","Daphne","Yes","Yes","Rachel","2020-10-12T02:29:00Z"
-"FH17",-33.83368897,114.8763721,"South-west","Fished","C.FH.14","42.9","Daphne","Yes","Yes","Rachel","2020-10-12T07:35:00Z"
-"FH21",-33.79368897,114.8088721,"South-west","Fished","C.FH.12","45","Daphne","Yes","Yes","Rachel","2020-10-12T05:26:00Z"
-"FH23",-33.94618897,114.8288721,"South-west","Fished","C.FH.22","44.2","Daphne","Yes","Yes","Rachel","2020-10-13T01:51:00Z"
-"FH71",-33.88368897,114.8188721,"South-west","Fished","C.FH.16","45.3","Daphne","Yes","Yes","Brooke Gibbons","2020-10-12T23:30:00Z"
-"FH79",-33.88618897,114.8088721,"South-west","Fished","C.FH.16","44.9","Daphne","Yes","Yes","Brooke Gibbons","2020-10-12T23:43:00Z"
-"FH83",-33.91118897,114.8463721,"South-west","Fished","C.FH.19","40.9","Daphne","Yes","Yes","Rachel","2020-10-13T00:13:00Z"
-"FH77",-33.99618897,114.8763721,"South-west","Fished","C.FH.24","42",NA,"No","No",NA,"2020-10-13T04:42:00Z"
-"FH84",-33.73368897,114.7988721,"South-west","Fished","C.FH.7","45.6","Daphne","Yes","Yes","Rachel","2020-10-12T04:50:00Z"
-"FH92",-33.84368897,114.8713721,"South-west","Fished","C.FH.14","44.2","Daphne","Yes","Yes","Rachel","2020-10-12T07:47:00Z"
-"FH110",-33.80868897,114.8213721,"South-west","Fished","C.FH.13","44.7","Daphne","Yes","Yes","Rachel","2020-10-12T07:06:00Z"
-"FH111",-33.98618897,114.8788721,"South-west","Fished","C.FH.24","41.4","Daphne","Yes","Yes","Rachel","2020-10-13T04:28:00Z"
-"FH113",-33.72368897,114.7963721,"South-west","Fished","C.FH.7","45",NA,"No","No",NA,"2020-10-12T04:41:00Z"
-"IO133",-33.99118897,114.8663721,"South-west","Fished","C.IO.37","40.8","Daphne","Yes","Yes","Rachel","2020-10-13T04:50:00Z"
-"FHC01",-33.669869,114.809825,"South-west","Fished","C.FH.2","44.8","Daphne","Yes","Yes","Rachel","2020-10-12T00:38:00Z"
-"FHC02",-33.72358,114.813293,"South-west","Fished","C.FH.6","42","Daphne","Yes","Yes","Rachel","2020-10-12T03:13:00Z"
-"IO337",-34.00536667,114.8202333,"South-west","Fished","C.IO.21","43","Daphne","Yes","Yes","Claude","2020-10-18T23:02:00Z"
-"IO338",-33.97231667,114.92245,"South-west","Fished","C.IO.20","46","Daphne","Yes","Yes","Claude","2020-10-19T03:50:00Z"
-"IO339",-34.01461667,114.8785,"South-west","Fished","C.IO.19","41.1","Daphne","Yes","Yes","Claude","2020-10-19T01:41:00Z"
-"IO95",-34.12618897,114.7338721,"South-west","No-take","C.IO.68","124","Daphne","Yes","Yes","Claude","2020-10-22T00:21:00Z"
-"IO98",-34.13368897,114.7313721,"South-west","No-take","C.IO.68","128","Daphne","Yes","Yes","Claude","2020-10-22T00:13:00Z"
-"FH39",-33.90368897,114.9313721,"South-west","Fished","C.FH.18","44.8","Daphne","Yes","Yes","Rachel","2020-10-29T06:44:00Z"
-"FH33",-33.70868897,114.8263721,"South-west","Fished","C.FH.6","42.3",NA,"No","No",NA,"2020-10-12T02:54:00Z"
-"FH49",-33.92118897,114.9163721,"South-west","Fished","C.FH.20","43.9","Daphne","Yes","Yes","Rachel","2020-10-29T05:00:00Z"
-"FH66",-33.90618897,114.9363721,"South-west","Fished","C.FH.18","41.8","Daphne","Yes","Yes","Rachel","2020-10-29T06:40:00Z"
-"FH85",-33.92618897,114.9138721,"South-west","Fished","C.FH.20","44.7","Daphne","Yes","Yes","Rachel/Brooke","2020-10-29T04:55:00Z"
-"IO323",-34.03103333,114.6001,"South-west","Fished","C.IO.27","141","Daphne","Yes","Yes","Claude","2020-11-23T01:48:00Z"
-"IO351",-34.03118897,114.5963721,"South-west","Fished","C.IO.27","142","Daphne","Yes","Yes","Claude","2020-11-23T02:13:00Z"
-"IO364",-34.00868897,114.6888721,"South-west","Fished","C.IO.24","130","Daphne","Yes","Yes","Claude","2020-11-23T04:21:00Z"
-"IOCP11-1",-33.992845,114.696642,"South-west","Fished","C.IO.41","124","Daphne","Yes","Yes","Claude","2020-11-23T04:39:00Z"
-"IOCP11-2",-33.974332,114.692773,"South-west","Fished","C.IO.41","124","Daphne","Yes","Yes","Claude","2020-11-23T04:47:00Z"
-"IOCP2311",-34.01858,114.601465,"South-west","Fished","C.IO.46","142","Daphne","Yes","Yes","Claude","2020-11-23T02:19:00Z"
-"IOREDO344",-34.0844,114.6744,"South-west","No-take","C.IO.14","138","Daphne - finishes at 59:27","Yes","Yes","Claude","2020-11-22T23:12:00Z"
-"IO307",-34.11868897,114.7263721,"South-west","No-take","C.IO.9","128","Daphne - finishes at 59:36","Yes","Yes","Claude","2020-10-22T01:56:00Z"
-"IO1",-34.07868897,114.7788721,"South-west","No-take","C.IO.43","64.6","Hayley","Yes","Yes","Daphne","2020-10-15T04:07:00Z"
-"IO4",-34.09118897,114.7813721,"South-west","No-take","C.IO.43","65.6","Hayley","Yes","Yes","Claude","2020-10-15T04:17:00Z"
-"IO158",-33.98118897,114.8188721,"South-west","Fished","C.IO.33","44.6","Hayley","Yes","Yes","Claude","2020-10-13T02:21:00Z"
-"IO207",-34.06118897,114.7863721,"South-west","No-take","C.IO.7","60.4","Hayley","Yes","Yes","Ramesh/Claude","2020-10-15T02:23:00Z"
-"IO237",-34.08118897,114.9363721,"South-west","No-take","C.IO.1","43.2","Hayley","Yes","Yes","Claude","2020-10-16T04:15:00Z"
-"IO312",-34.05868897,114.7788721,"South-west","No-take","C.IO.8","61.2","Hayley","Yes","Yes","Claude","2020-10-15T02:17:00Z"
-"IO335",-34.06686667,114.7939833,"South-west","No-take","C.IO.7","58","Hayley","Yes","Yes","Claude","2020-10-15T02:31:00Z"
-"IO206",-34.06368897,114.7913721,"South-west","No-take","C.IO.7","58.2",NA,"No","No",NA,"2020-10-15T02:28:00Z"
-"IO357",-34.08496667,114.928,"South-west","No-take","C.IO.1","45.9","Hayley","Yes","Yes","Claude","2020-10-16T04:08:00Z"
-"IO361",-33.98868897,114.7413721,"South-west","Fished","C.IO.25","84.7","Hayley","Yes","Yes","Claude","2020-10-14T23:35:00Z"
-"IO374",-33.98618897,114.7463721,"South-west","Fished","C.IO.25","72.9","Hayley","Yes","Yes","Claude","2020-10-14T23:31:00Z"
-"FH9",-33.90118897,114.8513721,"South-west","Fished","C.FH.19","43.6","Hayley","Yes","Yes","Mystery","2020-10-12T23:58:00Z"
-"IO267",-34.02618897,114.7638721,"South-west","Fished","C.IO.23","62.5",NA,"No","No",NA,"2020-10-15T00:11:00Z"
-"FH10",-33.98618897,114.8863721,"South-west","Fished","C.FH.24","42.9","Hayley","Yes","Yes","Rachel","2020-10-13T04:32:00Z"
-"FH42",-33.88118897,114.8113721,"South-west","Fished","C.FH.16","45.7","Hayley","Yes","Yes","Claude","2020-10-12T23:38:00Z"
-"IO3",-34.07618897,114.7838721,"South-west","No-take","C.IO.43","62","Hayley","Yes","Yes","Claude","2020-10-15T04:03:00Z"
-"IO80",-34.09368897,114.8888721,"South-west","No-take","C.IO.52","41.6","Hayley","Yes","Yes","Claude","2020-10-16T02:30:00Z"
-"IO81",-34.09868897,114.8913721,"South-west","No-take","C.IO.52","42","Hayley","Yes","Yes","Claude","2020-10-16T02:20:00Z"
-"IO91",-34.09368897,114.8938721,"South-west","No-take","C.IO.52","43.5","Hayley","Yes","Yes","Claude","2020-10-16T02:25:00Z"
-"IO123",-34.10618897,114.8188721,"South-west","No-take","C.IO.59","49.1","Hayley","Yes","Yes","Daphne","2020-10-15T04:42:00Z"
-"IO125",-34.10868897,114.8263721,"South-west","No-take","C.IO.59","55.8","Hayley","Yes","Yes","Daphne","2020-10-15T04:38:00Z"
-"IO132",-33.99118897,114.8713721,"South-west","Fished","C.IO.37","42.6","Hayley","Yes","Yes","Daphne","2020-10-13T04:47:00Z"
-"IO145",-33.98618897,114.8238721,"South-west","Fished","C.IO.22","45.5","Hayley","Yes","Yes","Daphne","2020-10-13T02:24:00Z"
-"IO152",-33.98118897,114.8688721,"South-west","Fished","C.IO.37","41.2","Hayley","Yes","Yes","Daphne","2020-10-13T04:18:00Z"
-"IO155",-34.04368897,114.8838721,"South-west","Fished","C.IO.65","41.9","Hayley","Yes","Yes","Claude","2020-10-15T23:42:00Z"
-"IO164",-34.03368897,114.9038721,"South-west","Fished","C.IO.62","44.1","Hayley","Yes","Yes","Daphne","2020-10-15T23:14:00Z"
-"IO165",-34.04368897,114.8988721,"South-west","Fished","C.IO.62","42.6","Hayley","Yes","Yes","Ramesh/Claude","2020-10-15T23:23:00Z"
-"IO184",-34.04118897,114.9038721,"South-west","Fished","C.IO.62","45.9","Hayley","Yes","Yes","Ramesh/Brooke","2020-10-15T23:19:00Z"
-"IO201",-34.05618897,114.8338721,"South-west","No-take","C.IO.5","45.3","Hayley","Yes","Yes","Ramesh/Claude","2020-10-15T06:46:00Z"
-"IO204",-34.06618897,114.7863721,"South-west","No-take","C.IO.7","61.5","Hayley","Yes","Yes","Ramesh/Claude","2020-10-15T02:35:00Z"
-"IO210",-34.09118897,114.8738721,"South-west","No-take","C.IO.6","43.5","Hayley","Yes","Yes","Ramesh/Claude","2020-10-16T02:09:00Z"
-"IO215",-34.06868897,114.9263721,"South-west","No-take","C.IO.2","46.7","Hayley","Yes","Yes","Ramesh/Claude","2020-10-16T04:34:00Z"
-"IO218",-34.07368897,114.9213721,"South-west","No-take","C.IO.2","46.8","Hayley","Yes","Yes","Ramesh/Claude","2020-10-16T04:28:00Z"
-"IO222",-34.06618897,114.8313721,"South-west","No-take","C.IO.4","45","Hayley","Yes","Yes","Ramesh/Claude","2020-10-15T06:54:00Z"
-"IO223",-34.07118897,114.8463721,"South-west","No-take","C.IO.4","42.9","Hayley","Yes","Yes","Ramesh/Claude","2020-10-15T06:25:00Z"
-"IO224",-34.06118897,114.8388721,"South-west","No-take","C.IO.4","43.6","Hayley","Yes","Yes","Claude","2020-10-15T06:35:00Z"
-"IO225",-34.07118897,114.8338721,"South-west","No-take","C.IO.4","44.9","Hayley","Yes","Yes","Claude","2020-10-15T06:20:00Z"
-"IO239",-34.09118897,114.9313721,"South-west","No-take","C.IO.1","45.9","Hayley","Yes","Yes","Claude","2020-10-16T04:05:00Z"
-"IO73",-34.02868897,114.8588721,"South-west","Fished","C.IO.60","40.4","Ramesh","Yes","No",NA,"2020-10-19T01:22:00Z"
-"IO266",-34.02118897,114.7588721,"South-west","Fished","C.IO.23","67.3","Hayley","Yes","Yes","Claude","2020-10-15T00:06:00Z"
-"IO325",-33.991557,114.743378,"South-west","Fished","C.IO.25","85","Hayley","Yes","Yes","Claude","2020-10-14T23:44:00Z"
-"IO327",-34.02946667,114.7623833,"South-west","Fished","C.IO.23","65.4","Hayley","Yes","Yes","Claude","2020-10-15T00:17:00Z"
-"IO334",-34.06155,114.7753667,"South-west","No-take","C.IO.8","64","Hayley","Yes","Yes","Claude","2020-10-15T02:11:00Z"
-"IO353",-34.05436667,114.8390667,"South-west","No-take","C.IO.5","44.1","Hayley","Yes","Yes","Claude","2020-10-15T06:43:00Z"
-"FH16",-33.90118897,114.8563721,"South-west","Fished","C.FH.19","43.1","Hayley","Yes","No","Rachel","2020-10-13T00:02:00Z"
-"FH25",-33.87868897,114.8163721,"South-west","Fished","C.FH.16","45.4","Hayley","Yes","Yes","Claude","2020-10-12T23:34:00Z"
-"FH47",-33.90618897,114.8488721,"South-west","Fished","C.FH.19","43.5","Hayley","Yes","Yes","Claude","2020-10-13T00:09:00Z"
-"FH51",-33.90618897,114.8538721,"South-west","Fished","C.FH.19","43","Hayley","Yes","Yes","Claude","2020-10-13T00:06:00Z"
-"FH52",-33.99118897,114.8888721,"South-west","Fished","C.FH.24","42.1","Hayley","Yes","Yes","Claude","2020-10-13T04:36:00Z"
-"FH99",-33.95368897,114.8363721,"South-west","Fished","C.FH.22","43.5","Hayley","Yes","Yes","Claude","2020-10-13T02:04:00Z"
-"FH106",-33.78868897,114.8163721,"South-west","Fished","C.FH.12","47.1","Hayley","Yes","Yes","Claude","2020-10-12T05:16:00Z"
-"IO236",-34.08118897,114.9238721,"South-west","No-take","C.IO.1","46.8","Hayley","Yes","Yes","Brooke Gibbons","2020-10-16T04:22:00Z"
-"FH68",-33.95118897,114.8288721,"South-west","Fished","C.FH.22","44.5","Rachel","Yes","Yes","Claude","2020-10-13T02:01:00Z"
-"IO319",-34.09368897,114.7313721,"South-west","No-take","C.IO.10","124","Rachel","Yes","Yes","Claude","2020-10-22T02:37:00Z"
-"IO332",-34.09718333,114.7344833,"South-west","No-take","C.IO.10","124","Rachel","Yes","Yes","Claude","2020-10-22T02:33:00Z"
-"IO272",-34.00868897,114.8138721,"South-west","Fished","C.IO.21","49.2",NA,"Yes","No",NA,"2020-10-18T22:56:00Z"
-"IO333",-34.11301667,114.7251333,"South-west","No-take","C.IO.9","127","Rachel","Yes","Yes","Claude","2020-10-22T02:01:00Z"
-"IO262",-34.01368897,114.8738721,"South-west","Fished","C.IO.19","41.9","Rachel","Yes","Yes","Claude","2020-10-19T01:46:00Z"
-"IO36",-34.10368897,114.7188721,"South-west","No-take","C.IO.55","130","Rachel","Yes","Yes","Claude","2020-10-22T02:23:00Z"
-"IO59",-34.14118897,114.7663721,"South-west","No-take","C.IO.69","109","Rachel","Yes","Yes","Claude","2020-10-21T23:33:00Z"
-"IO66",-34.01618897,114.8813721,"South-west","Fished","C.IO.19","42.8","Rachel","Yes","Yes","Claude","2020-10-19T01:36:00Z"
-"IO74",-34.02868897,114.8513721,"South-west","Fished","C.IO.60","42.2","Rachel","Yes","Yes","Claude","2020-10-19T01:14:00Z"
-"IO75",-34.03368897,114.8538721,"South-west","Fished","C.IO.60","42.2","Rachel","Yes","Yes","Claude","2020-10-19T01:10:00Z"
-"IO228",-34.00368897,114.7938721,"South-west","Fished","C.IO.42","50.4","Rachel","Yes","Yes","Claude","2020-10-18T22:46:00Z"
-"FH2",-33.91868897,114.8913721,"South-west","Fished","C.FH.21","43.9","Daphne","Yes","No",NA,"2020-10-29T04:43:00Z"
-"IO259",-33.96868897,114.9213721,"South-west","Fished","C.IO.20","46.8","Rachel","Yes","Yes","Claude","2020-10-19T04:00:00Z"
-"IO260",-33.97118897,114.9163721,"South-west","Fished","C.IO.20","46.3","Rachel","Yes","Yes","Claude","2020-10-19T03:55:00Z"
-"IO273",-33.99868897,114.8213721,"South-west","Fished","C.IO.22","44.9","Rachel","Yes","Yes","Claude","2020-10-18T23:07:00Z"
-"FH40",-33.92368897,114.8888721,"South-west","Fished","C.FH.21","42.9","Daphne","Yes","No",NA,"2020-10-29T04:40:00Z"
-"IO308",-34.11118897,114.7288721,"South-west","No-take","C.IO.9","126","Rachel","Yes","Yes","Claude","2020-10-22T02:06:00Z"
-"IO328",-33.99356667,114.8213667,"South-west","Fished","C.IO.22","43.8","Rachel","Yes","Yes","Claude","2020-10-18T23:13:00Z"
-"IO377",-34.13868897,114.7588721,"South-west","No-take","C.IO.69","113","Rachel","Yes","Yes","Claude","2020-10-21T23:40:00Z"
-"FH11",-33.89868897,114.9388721,"South-west","Fished","C.FH.18","42.3","Rachel","Yes","Yes","Claude","2020-10-29T06:48:00Z"
-"FH12",-33.91868897,114.8963721,"South-west","Fished","C.FH.21","46.1","Rachel","Yes","Yes","Claude","2020-10-29T04:46:00Z"
-"FH35",-33.88368897,114.9313721,"South-west","Fished","C.FH.17","45.2","Rachel","Yes","Yes","Claude","2020-10-29T07:09:00Z"
-"IO46",-34.06868897,114.7113721,"South-west","No-take","C.IO.34","129","Rachel","Yes","Yes","Claude","2020-10-22T22:44:00Z"
-"IO47",-34.06368897,114.7113721,"South-west","No-take","C.IO.34","127","Rachel","Yes","Yes","Claude","2020-10-22T22:53:00Z"
-"FH67",-33.88868897,114.9238721,"South-west","Fished","C.FH.17","46.1","Rachel","Yes","Yes","Claude","2020-10-29T07:00:00Z"
-"FH72",-33.88868897,114.9288721,"South-west","Fished","C.FH.17","44.1","Rachel","Yes","Yes","Claude","2020-10-29T07:06:00Z"
-"FH78",-33.89118897,114.9163721,"South-west","Fished","C.FH.17","45.8","Rachel","Yes","Yes","Claude","2020-10-29T06:56:00Z"
-"FH87",-33.92868897,114.8938721,"South-west","Fished","C.FH.21","43.8","Rachel","Yes","Yes","Claude","2020-10-29T04:36:00Z"
-"FH94",-33.90868897,114.9413721,"South-west","Fished","C.FH.18","41.9","Rachel","Yes","Yes","Claude","2020-10-29T06:36:00Z"
-"IO101",-34.07868897,114.8963721,"South-west","No-take","C.IO.39","43.5","Rachel","Yes","Yes","Claude","2020-10-29T02:10:00Z"
-"IO102",-34.07118897,114.9113721,"South-west","No-take","C.IO.2","45.2","Rachel","Yes","Yes","Claude","2020-10-29T02:26:00Z"
-"IO105",-34.06368897,114.6688721,"South-west","No-take","C.IO.30","139","Rachel","Yes","Yes","Claude","2020-10-23T01:45:00Z"
-"IO189",-33.98868897,114.6638721,"South-west","Fished","C.IO.40","139","Daphne","Yes","No",NA,"2020-10-23T04:31:00Z"
-"IO107",-34.06368897,114.6763721,"South-west","No-take","C.IO.30","137","Rachel","Yes","Yes","Claude","2020-10-23T01:50:00Z"
-"IO108",-34.05118897,114.6688721,"South-west","No-take","C.IO.30","138","Rachel","Yes","Yes","Claude","2020-10-23T02:04:00Z"
-"FH109",-33.91618897,114.9088721,"South-west","Fished","C.FH.20","45.9","Rachel","Yes","Yes","Claude","2020-10-29T05:04:00Z"
-"IO113",-34.05868897,114.7388721,"South-west","No-take","C.IO.31","111","Rachel","Yes","Yes","Claude","2020-10-22T23:30:00Z"
-"IO115",-34.05368897,114.7363721,"South-west","No-take","C.IO.31","112","Rachel","Yes","Yes","Claude","2020-10-22T23:34:00Z"
-"IO192",-33.98618897,114.6688721,"South-west","Fished","C.IO.40","138","Rachel","Yes","Yes","Claude","2020-10-23T04:36:00Z"
-"IO211",-34.05618897,114.9063721,"South-west","No-take","C.IO.3","43.5","Rachel","Yes","Yes","Claude","2020-10-29T02:42:00Z"
-"IO216",-34.06118897,114.9163721,"South-west","No-take","C.IO.3","47.5","Rachel","Yes","Yes","Claude","2020-10-29T02:33:00Z"
-"IO280",-34.08868897,114.6738721,"South-west","No-take","C.IO.14","139","Rachel","Yes","Yes","Claude","2020-10-23T01:24:00Z"
-"IO290",-34.06868897,114.7188721,"South-west","No-take","C.IO.13","124","Rachel","Yes","Yes","Claude","2020-10-22T23:07:00Z"
-"IO291",-34.08368897,114.7488721,"South-west","No-take","C.IO.12","109","Rachel","Yes","Yes","Claude","2020-10-22T05:09:00Z"
-"IO344",-34.0844,114.6744,"South-west","No-take","C.IO.14","138",NA,"No","No",NA,"2020-10-23T01:28:00Z"
-"IO295",-34.10368897,114.7538721,"South-west","No-take","C.IO.11","109","Rachel","Yes","Yes","Claude","2020-10-22T04:25:00Z"
-"IO297",-34.10618897,114.7488721,"South-west","No-take","C.IO.11","114","Rachel","Yes","Yes","Claude","2020-10-22T04:21:00Z"
-"IO372",-34.00618897,114.6438721,"South-west","Fished","C.IO.26","140",NA,"No","No",NA,"2020-10-23T03:53:00Z"
-"IO302",-34.07118897,114.7238721,"South-west","No-take","C.IO.13","122","Rachel","Yes","Yes","Claude","2020-10-22T23:13:00Z"
-"IO330",-34.08833333,114.7545,"South-west","No-take","C.IO.12","116","Rachel","Yes","Yes","Claude","2020-10-22T05:00:00Z"
-"IO355",-34.05473333,114.9111,"South-west","No-take","C.IO.3","45","Rachel","Yes","Yes","Claude","2020-10-29T02:38:00Z"
-"IO370",-33.99618897,114.6463721,"South-west","Fished","C.IO.26","141","Rachel","Yes","Yes","Claude","2020-10-23T04:10:00Z"
-"IO378",-33.99368897,114.6388721,"South-west","Fished","C.IO.26","141","Rachel","Yes","Yes","Claude","2020-10-23T04:04:00Z"
-"IOC04",-34.08755,114.749265,"South-west","No-take","C.IO.12","109","Rachel","Yes","Yes","Claude","2020-10-22T05:16:00Z"
-"IOC05",-34.05394,114.899843,"South-west","No-take","C.IO.3","43.2","Rachel","Yes","Yes","Claude","2020-10-29T02:46:00Z"
-"IO49",-34.06118897,114.7063721,"South-west","No-take","C.IO.34","129","Rachel","Yes","Yes","Brooke Gibbons","2020-10-22T22:59:00Z"
-"IO100",-34.07618897,114.9088721,"South-west","No-take","C.IO.39","43.6","Rachel","Yes","Yes","Brooke Gibbons","2020-10-29T02:21:00Z"
-"IO109",-34.05618897,114.6738721,"South-west","No-take","C.IO.30","138","Rachel","Yes","Yes","Brooke Gibbons","2020-10-23T01:57:00Z"
-"IO117",-34.06368897,114.7388721,"South-west","No-take","C.IO.31","115","Rachel","Yes","Yes","Brooke Gibbons","2020-10-22T23:25:00Z"
-"IO119",-34.07618897,114.9038721,"South-west","No-take","C.IO.39","43.8","Rachel","Yes","Yes","Brooke Gibbons","2020-10-29T02:17:00Z"
-"IO191",-33.99868897,114.6713721,"South-west","Fished","C.IO.40","137","Rachel","Yes","Yes","Brooke Gibbons","2020-10-23T04:20:00Z"
-"IO194",-33.99618897,114.6638721,"South-west","Fished","C.IO.40","139","Rachel","Yes","Yes","Brooke Gibbons","2020-10-23T04:24:00Z"
-"IO294",-34.08368897,114.7538721,"South-west","No-take","C.IO.12","114","Rachel","Yes","Yes","Brooke Gibbons","2020-10-22T05:04:00Z"
-"IO282",-34.14618897,114.5438721,"South-west","No-take","C.IO.18","146",NA,"No","No",NA,"2020-10-28T23:20:00Z"
-"IO298",-34.07618897,114.6713721,"South-west","No-take","C.IO.14","138","Rachel","Yes","Yes","Brooke Gibbons","2020-10-23T01:39:00Z"
-"IO299",-34.08118897,114.6763721,"South-west","No-take","C.IO.14","139","Rachel","Yes","Yes","Brooke Gibbons","2020-10-23T01:32:00Z"
-"IO313",-34.09618897,114.7563721,"South-west","No-take","C.IO.11","108","Rachel","Yes","Yes","Brooke Gibbons","2020-10-22T04:47:00Z"
-"IO324",-34.00006,114.639778,"South-west","Fished","C.IO.26","141","Rachel","Yes","Yes","Brooke Gibbons","2020-10-23T03:59:00Z"
-"IO329",-34.06481667,114.7266333,"South-west","No-take","C.IO.13","121","Rachel","Yes","Yes","Brooke Gibbons","2020-10-22T23:18:00Z"
-"IO331",-34.0984,114.75005,"South-west","No-take","C.IO.11","112","Rachel","Yes","Yes","Brooke Gibbons","2020-10-22T04:30:00Z"
-"IO343",-34.10261667,114.6407167,"South-west","No-take","C.IO.15","140","Rachel","Yes","Yes","Claude","2020-11-22T23:38:00Z"
-"IO352",-34.03618897,114.5988721,"South-west","Fished","C.IO.27","133","Rachel","Yes","Yes","Claude","2020-11-23T01:43:00Z"
-"IO369",-34.02868897,114.5913721,"South-west","Fished","C.IO.27","133","Rachel","Yes","Yes","Claude","2020-11-23T02:08:00Z"
-"IO71",-34.00368897,114.6988721,"South-west","Fished","C.IO.41","121","Rachel","Yes","Yes","Claude","2020-11-23T04:31:00Z"
-"IO148",-34.01118897,114.5963721,"South-west","Fished","C.IO.46","140","Rachel","Yes","Yes","Claude","2020-11-23T02:31:00Z"
-"IO254",-34.01868897,114.6963721,"South-west","Fished","C.IO.49","119","Rachel","Yes","Yes","Claude","2020-11-23T04:10:00Z"
-"IO276",-34.10118897,114.6363721,"South-west","No-take","C.IO.15","140","Rachel","Yes","Yes","Claude","2020-11-22T23:34:00Z"
-"IO326",-34.00425,114.6892833,"South-west","Fished","C.IO.24","121",NA,"No","No",NA,"2020-11-23T04:26:00Z"
-"IO349",-34.02368897,114.5963721,"South-west","Fished","C.IO.27","133","Rachel","Yes","Yes","Claude","2020-11-23T02:03:00Z"
-"IO379",-34.08368897,114.6813721,"South-west","No-take","C.IO.14","138","Rachel","Yes","Yes","Claude","2020-11-22T22:58:00Z"
-"IO306",-34.10118897,114.7338721,"South-west","No-take","C.IO.10","124","Rachel","Yes","Yes","Claude","2020-10-22T02:29:00Z"
-"FH55",-33.92368897,114.9088721,"South-west","Fished","C.FH.20","44.9","Rachel","Yes","Yes","Claude","2020-10-29T04:52:00Z"
-"IOC06",-34.048689,114.876372,"South-west","Fished","C.IO.65","41.5","Ramesh","Yes","Yes","Claude","2020-10-15T23:48:00Z"
-"FH69",-33.69618897,114.8038721,"South-west","Fished","C.FH.4","46.9","Ramesh","Yes","Yes","Claude","2020-10-12T02:43:00Z"
-"IO64",-34.01368897,114.8963721,"South-west","Fished","C.IO.47","43.3","Ramesh","Yes","Yes","Claude","2020-10-19T03:26:00Z"
-"IO65",-34.01118897,114.8888721,"South-west","Fished","C.IO.53","43","Ramesh","Yes","Yes","Claude","2020-10-19T03:20:00Z"
-"IO72",-34.03618897,114.8463721,"South-west","Fished","C.IO.60","43.6","Ramesh","Yes","Yes","Claude","2020-10-19T01:05:00Z"
-"IO227",-33.99868897,114.7838721,"South-west","Fished","C.IO.42","52.9","Ramesh","Yes","Yes","Claude","2020-10-18T22:37:00Z"
-"IO275",-34.09868897,114.6463721,"South-west","No-take","C.IO.15","140",NA,"No","No",NA,"2020-11-23T06:38:00Z"
-"IO229",-33.99368897,114.7863721,"South-west","Fished","C.IO.42","53","Ramesh","Yes","Yes","Hayley","2020-10-18T22:31:00Z"
-"IO241",-33.99368897,114.7913721,"South-west","Fished","C.IO.42","50.6","Ramesh","Yes","Yes","Hayley","2020-10-18T22:26:00Z"
-"IO245",-34.00868897,114.9013721,"South-west","Fished","C.IO.47","42.3","Ramesh","Yes","Yes","Claude","2020-10-19T03:30:00Z"
-"IO258",-33.96618897,114.9138721,"South-west","Fished","C.IO.20","45.2","Ramesh","Yes","Yes","Claude","2020-10-19T04:05:00Z"
-"IO261",-33.97618897,114.9213721,"South-west","Fished","C.IO.20","46.9","Ramesh","Yes","Yes","Claude","2020-10-19T03:46:00Z"
-"IO244",-34.00368897,114.9063721,"South-west","Fished","C.IO.47","44.7","Ramesh","Yes","Yes","Claude","2020-10-19T03:35:00Z"
+Sample,Latitude,Longitude,Location,Status,Site,Depth,Observer.count,Successful.count,Successful.length,Observer.length,Date.time
+IO15,-34.06118897,114.8663721,South-west,No-take,C.IO.35,40.8,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T23:59:00Z
+FH24,-33.66868897,114.8438721,South-west,Fished,C.FH.1,47.6,Brooke Gibbons,Yes,Yes,Ramesh/Claude,2020-10-11T23:55:00Z
+IO34,-34.06118897,114.8713721,South-west,No-take,C.IO.35,41.3,Brooke Gibbons,Yes,Yes,Ramesh/Claude,2020-10-16T00:02:00Z
+IO92,-34.09868897,114.8863721,South-west,No-take,C.IO.52,42.3,Brooke Gibbons,Yes,Yes,Claude,2020-10-16T02:16:00Z
+IO122,-34.11618897,114.8263721,South-west,No-take,C.IO.59,57.4,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T04:35:00Z
+IO126,-34.11368897,114.8188721,South-west,No-take,C.IO.59,58.2,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T04:31:00Z
+IO153,-34.04618897,114.8888721,South-west,Fished,C.IO.65,42.6,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T23:36:00Z
+IO195,-34.09368897,114.8588721,South-west,No-take,C.IO.6,43.4,Brooke Gibbons,Yes,Yes,Claude,2020-10-16T01:57:00Z
+IO220,-34.05618897,114.8438721,South-west,No-take,C.IO.5,43.7,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T06:39:00Z
+IO226,-34.06368897,114.8438721,South-west,No-take,C.IO.4,42.8,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T06:32:00Z
+IO310,-34.05868897,114.7738721,South-west,No-take,C.IO.8,64.7,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T02:06:00Z
+IO311,-34.05618897,114.7688721,South-west,No-take,C.IO.8,66.1,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T02:03:00Z
+FH14,-33.76618897,114.8713721,South-west,Fished,C.FH.10,44.4,Daphne,Yes,No,NA,2020-10-17T03:24:00Z
+FH32,-33.69618897,114.9463721,South-west,No-take,C.FH.5,42.9,Daphne,Yes,No,NA,2020-10-17T00:50:00Z
+FH36,-33.69868897,114.9338721,South-west,No-take,C.FH.5,44.4,NA,No,No,NA,2020-10-17T00:59:00Z
+FH54,-33.76618897,114.9388721,South-west,Fished,C.FH.9,43.2,Daphne,Yes,No,NA,2020-10-17T01:20:00Z
+IO354,-34.06605,114.84,South-west,No-take,C.IO.4,45,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T06:29:00Z
+IO363,-33.98618897,114.7513721,South-west,Fished,C.IO.25,66.2,Brooke Gibbons,Yes,Yes,Claude,2020-10-14T23:26:00Z
+IO365,-34.02368897,114.7538721,South-west,Fished,C.IO.23,73.7,Brooke Gibbons,Yes,Yes,Claude,2020-10-15T00:23:00Z
+IO37,-34.10868897,114.7188721,South-west,No-take,C.IO.55,130,Brooke Gibbons,Yes,Yes,Claude,2020-10-22T02:12:00Z
+FH62,-33.75618897,114.8813721,South-west,Fished,C.FH.8,45.1,NA,No,No,NA,2020-10-17T03:17:00Z
+IO40,-34.10368897,114.7138721,South-west,No-take,C.IO.55,131,Brooke Gibbons,Yes,Yes,Claude,2020-10-22T02:17:00Z
+IO58,-34.13618897,114.7738721,South-west,No-take,C.IO.69,92.7,Brooke Gibbons,Yes,Yes,Claude,2020-10-21T23:21:00Z
+IO110,-34.14118897,114.7288721,South-west,No-take,C.IO.68,128,Brooke Gibbons,Yes,Yes,Claude,2020-10-22T00:00:00Z
+IO263,-34.00868897,114.8788721,South-west,Fished,C.IO.19,42.4,Brooke Gibbons,Yes,Yes,Claude,2020-10-19T01:52:00Z
+IO264,-34.01868897,114.8738721,South-west,Fished,C.IO.19,42,Brooke Gibbons,Yes,Yes,Claude,2020-10-19T01:31:00Z
+IO269,-33.98868897,114.8138721,South-west,Fished,C.IO.22,47.6,Brooke Gibbons,Yes,Yes,Claude,2020-10-18T23:18:00Z
+IO62,-34.13368897,114.7663721,South-west,No-take,C.IO.69,105,Brooke Gibbons,Yes,Yes,Claude,2020-10-21T23:45:00Z
+IO96,-34.13618897,114.7363721,South-west,No-take,C.IO.68,127,Brooke Gibbons,Yes,Yes,Rachel,2020-10-22T00:06:00Z
+IO180,-33.99618897,114.7038721,South-west,Fished,C.IO.41,122,Brooke Gibbons,Yes,Yes,Claude,2020-11-23T04:36:00Z
+IO253,-34.01368897,114.7038721,South-west,Fished,C.IO.49,124,Brooke Gibbons,Yes,Yes,Claude,2020-11-23T04:15:00Z
+IO277,-34.10618897,114.6463721,South-west,No-take,C.IO.15,139,Brooke Gibbons,Yes,Yes,Claude,2020-11-22T23:53:00Z
+IO278,-34.11118897,114.6388721,South-west,No-take,C.IO.15,140,Brooke Gibbons,Yes,Yes,Claude,2020-11-22T23:45:00Z
+IO300,-34.08618897,114.6688721,South-west,No-take,C.IO.14,138,Brooke Gibbons,Yes,Yes,Claude,2020-11-22T23:18:00Z
+IO16,-34.07368897,114.8688721,South-west,No-take,C.IO.35,41.4,Daphne,Yes,No,NA,2020-10-16T01:43:00Z
+IO17,-34.06368897,114.8763721,South-west,No-take,C.IO.35,41.1,Daphne,No,No,NA,2020-10-16T00:07:00Z
+IO350,-34.02618897,114.6038721,South-west,Fished,C.IO.27,135,Brooke Gibbons,Yes,Yes,Claude,2020-11-23T01:56:00Z
+FH41,-33.67118897,114.8388721,South-west,Fished,C.FH.1,44.1,Claude,Yes,Yes,Rachel,2020-10-12T00:01:00Z
+FH45,-33.69368897,114.7988721,South-west,Fished,C.FH.4,47.6,Claude,Yes,Yes,Rachel,2020-10-12T02:39:00Z
+FH48,-33.79618897,114.8138721,South-west,Fished,C.FH.12,48.5,Claude,Yes,No,Rachel,2020-10-12T05:23:00Z
+FH56,-33.83118897,114.8663721,South-west,Fished,C.FH.14,43.5,Claude,Yes,Yes,Rachel,2020-10-12T07:31:00Z
+IO130,-33.98118897,114.8763721,South-west,Fished,C.IO.37,41.1,NA,No,No,NA,2020-10-13T04:24:00Z
+FH57,-33.78868897,114.8113721,South-west,Fished,C.FH.12,45.8,Claude,Yes,Yes,Rachel,2020-10-12T05:12:00Z
+FH59,-33.66868897,114.8188721,South-west,Fished,C.FH.2,44.6,Claude,Yes,No,Rachel,2020-10-12T00:32:00Z
+FH60,-33.81618897,114.8213721,South-west,Fished,C.FH.13,44.5,Claude,Yes,Yes,Rachel,2020-10-12T07:14:00Z
+FH61,-33.84118897,114.8638721,South-west,Fished,C.FH.14,43.9,Claude,Yes,Yes,Brooke Gibbons,2020-10-12T07:43:00Z
+IO157,-33.97118897,114.8238721,South-west,Fished,C.IO.33,45.6,NA,No,No,NA,2020-10-13T02:14:00Z
+FH63,-33.67868897,114.8163721,South-west,Fished,C.FH.2,46.3,Claude,Yes,Yes,Brooke Gibbons,2020-10-12T00:20:00Z
+FHC03,-33.948622,114.819555,South-west,Fished,C.FH.22,44.5,Claude,Yes,Yes,Brooke Gibbons,2020-10-13T01:56:00Z
+IO5,-34.08868897,114.7763721,South-west,No-take,C.IO.43,66.7,Claude,Yes,Yes,Brooke Gibbons,2020-10-15T04:12:00Z
+IO134,-33.98368897,114.8613721,South-west,Fished,C.IO.37,41.2,Claude,Yes,Yes,Brooke Gibbons,2020-10-13T04:14:00Z
+IO146,-33.97618897,114.8213721,South-west,Fished,C.IO.33,45.7,Claude,Yes,Yes,Brooke Gibbons,2020-10-13T02:17:00Z
+IO147,-33.98118897,114.8313721,South-west,Fished,C.IO.33,44,Claude,Yes,Yes,Brooke Gibbons,2020-10-13T02:28:00Z
+IO199,-34.08618897,114.8613721,South-west,No-take,C.IO.6,42.1,Claude,Yes,Yes,Brooke Gibbons,2020-10-16T01:51:00Z
+IO217,-34.06618897,114.9188721,South-west,No-take,C.IO.2,47.1,Claude,Yes,Yes,Brooke Gibbons,2020-10-16T04:43:00Z
+IO356,-34.06956667,114.9184667,South-west,No-take,C.IO.2,46.8,Claude,Yes,Yes,Brooke Gibbons,2020-10-16T04:39:00Z
+IO293,-34.08868897,114.7588721,South-west,No-take,C.IO.12,111,Claude,Yes,Yes,Brooke,2020-10-22T04:55:00Z
+FH5,-33.69368897,114.9413721,South-west,No-take,C.FH.5,44.5,Daphne,Yes,Yes,Rachel,2020-10-17T00:46:00Z
+FH7,-33.78368897,114.8788721,South-west,Fished,C.FH.11,45,Daphne,Yes,Yes,Rachel,2020-10-17T03:45:00Z
+FH20,-33.78618897,114.8738721,South-west,Fished,C.FH.11,43.1,Daphne,Yes,Yes,Rachel,2020-10-17T03:40:00Z
+FH34,-33.78618897,114.8838721,South-west,Fished,C.FH.11,44.8,Daphne,Yes,Yes,Rachel,2020-10-17T03:51:00Z
+IO235,-34.06618897,114.9138721,South-west,No-take,C.IO.2,46.5,NA,No,No,NA,2020-10-16T04:49:00Z
+FH44,-33.77118897,114.8638721,South-west,Fished,C.FH.10,43.3,Daphne,Yes,Yes,Rachel,2020-10-17T03:28:00Z
+FH95,-33.75868897,114.8913721,South-west,Fished,C.FH.8,46.8,Daphne,Yes,Yes,Rachel,2020-10-17T03:07:00Z
+FH102,-33.68868897,114.9288721,South-west,No-take,C.FH.3,44.1,Daphne,Yes,Yes,Rachel,2020-10-16T22:42:00Z
+FH108,-33.76118897,114.9238721,South-west,Fished,C.FH.9,44.7,Daphne,Yes,Yes,Rachel,2020-10-17T01:32:00Z
+FHA,-33.683135,114.937827,South-west,No-take,C.FH.3,44.6,Daphne,Yes,Yes,Rachel,2020-10-16T22:55:00Z
+FHB,-33.681655,114.957127,South-west,No-take,C.FH.A,41.3,Daphne,Yes,Yes,Rachel,2020-10-16T23:02:00Z
+FHD,-33.686897,114.958507,South-west,No-take,C.FH.A,39.5,Daphne,Yes,Yes,Rachel,2020-10-16T23:12:00Z
+FHE,-33.687267,114.951172,South-west,No-take,C.FH.A,42.3,Daphne,Yes,Yes,Rachel,2020-10-16T23:16:00Z
+IO336,-34.0924,114.8663667,South-west,No-take,C.IO.6,43.2,NA,No,No,NA,2020-10-16T02:03:00Z
+FH28,-33.76368897,114.9338721,South-west,Fished,C.FH.9,44.7,Daphne,Yes,Yes,Brooke Gibbons,2020-10-17T01:24:00Z
+FH30,-33.75118897,114.8888721,South-west,Fished,C.FH.8,46.2,Daphne,Yes,Yes,Brooke Gibbons,2020-10-17T03:12:00Z
+FH46,-33.76618897,114.9288721,South-west,Fished,C.FH.9,44.9,Daphne,Yes,Yes,Brooke Gibbons,2020-10-17T01:28:00Z
+FH50,-33.68118897,114.9313721,South-west,No-take,C.FH.3,44.6,Daphne,Yes,Yes,Brooke Gibbons,2020-10-16T22:51:00Z
+FH64,-33.70118897,114.9388721,South-west,No-take,C.FH.5,44.2,Daphne,Yes,Yes,Claude,2020-10-17T00:56:00Z
+FH82,-33.68618897,114.9238721,South-west,No-take,C.FH.3,44.8,Daphne,Yes,Yes,Claude,2020-10-16T22:46:00Z
+FH93,-33.77618897,114.8688721,South-west,Fished,C.FH.10,43.3,Daphne,Yes,Yes,Claude,2020-10-17T03:33:00Z
+FHC,-33.680718,114.965092,South-west,No-take,C.FH.A,36.2,Daphne,Yes,Yes,Claude,2020-10-16T23:07:00Z
+FH6,-33.70618897,114.8213721,South-west,Fished,C.FH.6,46,Daphne,Yes,Yes,Rachel,2020-10-12T02:50:00Z
+FH18,-33.79118897,114.8213721,South-west,Fished,C.FH.12,43.5,Daphne,Yes,Yes,Rachel,2020-10-12T05:19:00Z
+FH26,-33.81118897,114.8288721,South-west,Fished,C.FH.13,44.1,Daphne,Yes,No,Rachel,2020-10-12T07:10:00Z
+FH27,-33.83618897,114.8713721,South-west,Fished,C.FH.14,42.9,Daphne,Yes,Yes,Rachel,2020-10-12T07:39:00Z
+FH31,-33.67368897,114.8238721,South-west,Fished,C.FH.2,45.4,Daphne,Yes,Yes,Rachel,2020-10-12T00:27:00Z
+FH37,-33.71118897,114.8138721,South-west,Fished,C.FH.6,44.2,Daphne,Yes,Yes,Claude,2020-10-12T03:03:00Z
+FH58,-33.66368897,114.8413721,South-west,Fished,C.FH.1,45.1,Daphne,Yes,Yes,Claude,2020-10-11T23:47:00Z
+FH65,-33.71368897,114.8188721,South-west,Fished,C.FH.6,45.7,Daphne,Yes,Yes,Claude,2020-10-12T02:59:00Z
+FH70,-33.67368897,114.8463721,South-west,Fished,C.FH.1,48.6,Daphne,Yes,Yes,Claude,2020-10-12T00:07:00Z
+FH74,-33.73118897,114.8063721,South-west,Fished,C.FH.7,44.9,Daphne,Yes,Yes,Claude,2020-10-12T04:47:00Z
+FH89,-33.68618897,114.8013721,South-west,Fished,C.FH.4,45.7,Daphne,Yes,Yes,Claude,2020-10-12T02:34:00Z
+FH96,-33.81868897,114.8338721,South-west,Fished,C.FH.13,44.9,Daphne,Yes,Yes,Claude,2020-10-12T07:20:00Z
+FH8,-33.72368897,114.8013721,South-west,Fished,C.FH.7,43.9,Daphne,Yes,Yes,Rachel,2020-10-12T04:34:00Z
+FH15,-33.68868897,114.8063721,South-west,Fished,C.FH.4,48,Daphne,Yes,Yes,Rachel,2020-10-12T02:29:00Z
+FH17,-33.83368897,114.8763721,South-west,Fished,C.FH.14,42.9,Daphne,Yes,Yes,Rachel,2020-10-12T07:35:00Z
+FH21,-33.79368897,114.8088721,South-west,Fished,C.FH.12,45,Daphne,Yes,Yes,Rachel,2020-10-12T05:26:00Z
+FH23,-33.94618897,114.8288721,South-west,Fished,C.FH.22,44.2,Daphne,Yes,Yes,Rachel,2020-10-13T01:51:00Z
+FH71,-33.88368897,114.8188721,South-west,Fished,C.FH.16,45.3,Daphne,Yes,Yes,Brooke Gibbons,2020-10-12T23:30:00Z
+FH79,-33.88618897,114.8088721,South-west,Fished,C.FH.16,44.9,Daphne,Yes,Yes,Brooke Gibbons,2020-10-12T23:43:00Z
+FH83,-33.91118897,114.8463721,South-west,Fished,C.FH.19,40.9,Daphne,Yes,Yes,Rachel,2020-10-13T00:13:00Z
+FH77,-33.99618897,114.8763721,South-west,Fished,C.FH.24,42,NA,No,No,NA,2020-10-13T04:42:00Z
+FH84,-33.73368897,114.7988721,South-west,Fished,C.FH.7,45.6,Daphne,Yes,Yes,Rachel,2020-10-12T04:50:00Z
+FH92,-33.84368897,114.8713721,South-west,Fished,C.FH.14,44.2,Daphne,Yes,Yes,Rachel,2020-10-12T07:47:00Z
+FH110,-33.80868897,114.8213721,South-west,Fished,C.FH.13,44.7,Daphne,Yes,Yes,Rachel,2020-10-12T07:06:00Z
+FH111,-33.98618897,114.8788721,South-west,Fished,C.FH.24,41.4,Daphne,Yes,Yes,Rachel,2020-10-13T04:28:00Z
+FH113,-33.72368897,114.7963721,South-west,Fished,C.FH.7,45,NA,No,No,NA,2020-10-12T04:41:00Z
+IO133,-33.99118897,114.8663721,South-west,Fished,C.IO.37,40.8,Daphne,Yes,Yes,Rachel,2020-10-13T04:50:00Z
+FHC01,-33.669869,114.809825,South-west,Fished,C.FH.2,44.8,Daphne,Yes,Yes,Rachel,2020-10-12T00:38:00Z
+FHC02,-33.72358,114.813293,South-west,Fished,C.FH.6,42,Daphne,Yes,Yes,Rachel,2020-10-12T03:13:00Z
+IO337,-34.00536667,114.8202333,South-west,Fished,C.IO.21,43,Daphne,Yes,Yes,Claude,2020-10-18T23:02:00Z
+IO338,-33.97231667,114.92245,South-west,Fished,C.IO.20,46,Daphne,Yes,Yes,Claude,2020-10-19T03:50:00Z
+IO339,-34.01461667,114.8785,South-west,Fished,C.IO.19,41.1,Daphne,Yes,Yes,Claude,2020-10-19T01:41:00Z
+IO95,-34.12618897,114.7338721,South-west,No-take,C.IO.68,124,Daphne,Yes,Yes,Claude,2020-10-22T00:21:00Z
+IO98,-34.13368897,114.7313721,South-west,No-take,C.IO.68,128,Daphne,Yes,Yes,Claude,2020-10-22T00:13:00Z
+FH39,-33.90368897,114.9313721,South-west,Fished,C.FH.18,44.8,Daphne,Yes,Yes,Rachel,2020-10-29T06:44:00Z
+FH33,-33.70868897,114.8263721,South-west,Fished,C.FH.6,42.3,NA,No,No,NA,2020-10-12T02:54:00Z
+FH49,-33.92118897,114.9163721,South-west,Fished,C.FH.20,43.9,Daphne,Yes,Yes,Rachel,2020-10-29T05:00:00Z
+FH66,-33.90618897,114.9363721,South-west,Fished,C.FH.18,41.8,Daphne,Yes,Yes,Rachel,2020-10-29T06:40:00Z
+FH85,-33.92618897,114.9138721,South-west,Fished,C.FH.20,44.7,Daphne,Yes,Yes,Rachel/Brooke,2020-10-29T04:55:00Z
+IO323,-34.03103333,114.6001,South-west,Fished,C.IO.27,141,Daphne,Yes,Yes,Claude,2020-11-23T01:48:00Z
+IO351,-34.03118897,114.5963721,South-west,Fished,C.IO.27,142,Daphne,Yes,Yes,Claude,2020-11-23T02:13:00Z
+IO364,-34.00868897,114.6888721,South-west,Fished,C.IO.24,130,Daphne,Yes,Yes,Claude,2020-11-23T04:21:00Z
+IOCP11-1,-33.992845,114.696642,South-west,Fished,C.IO.41,124,Daphne,Yes,Yes,Claude,2020-11-23T04:39:00Z
+IOCP11-2,-33.974332,114.692773,South-west,Fished,C.IO.41,124,Daphne,Yes,Yes,Claude,2020-11-23T04:47:00Z
+IOCP2311,-34.01858,114.601465,South-west,Fished,C.IO.46,142,Daphne,Yes,Yes,Claude,2020-11-23T02:19:00Z
+IOREDO344,-34.0844,114.6744,South-west,No-take,C.IO.14,138,Daphne - finishes at 59:27,Yes,Yes,Claude,2020-11-22T23:12:00Z
+IO307,-34.11868897,114.7263721,South-west,No-take,C.IO.9,128,Daphne - finishes at 59:36,Yes,Yes,Claude,2020-10-22T01:56:00Z
+IO1,-34.07868897,114.7788721,South-west,No-take,C.IO.43,64.6,Hayley,Yes,Yes,Daphne,2020-10-15T04:07:00Z
+IO4,-34.09118897,114.7813721,South-west,No-take,C.IO.43,65.6,Hayley,Yes,Yes,Claude,2020-10-15T04:17:00Z
+IO158,-33.98118897,114.8188721,South-west,Fished,C.IO.33,44.6,Hayley,Yes,Yes,Claude,2020-10-13T02:21:00Z
+IO207,-34.06118897,114.7863721,South-west,No-take,C.IO.7,60.4,Hayley,Yes,Yes,Ramesh/Claude,2020-10-15T02:23:00Z
+IO237,-34.08118897,114.9363721,South-west,No-take,C.IO.1,43.2,Hayley,Yes,Yes,Claude,2020-10-16T04:15:00Z
+IO312,-34.05868897,114.7788721,South-west,No-take,C.IO.8,61.2,Hayley,Yes,Yes,Claude,2020-10-15T02:17:00Z
+IO335,-34.06686667,114.7939833,South-west,No-take,C.IO.7,58,Hayley,Yes,Yes,Claude,2020-10-15T02:31:00Z
+IO206,-34.06368897,114.7913721,South-west,No-take,C.IO.7,58.2,NA,No,No,NA,2020-10-15T02:28:00Z
+IO357,-34.08496667,114.928,South-west,No-take,C.IO.1,45.9,Hayley,Yes,Yes,Claude,2020-10-16T04:08:00Z
+IO361,-33.98868897,114.7413721,South-west,Fished,C.IO.25,84.7,Hayley,Yes,Yes,Claude,2020-10-14T23:35:00Z
+IO374,-33.98618897,114.7463721,South-west,Fished,C.IO.25,72.9,Hayley,Yes,Yes,Claude,2020-10-14T23:31:00Z
+FH9,-33.90118897,114.8513721,South-west,Fished,C.FH.19,43.6,Hayley,Yes,Yes,Mystery,2020-10-12T23:58:00Z
+IO267,-34.02618897,114.7638721,South-west,Fished,C.IO.23,62.5,NA,No,No,NA,2020-10-15T00:11:00Z
+FH10,-33.98618897,114.8863721,South-west,Fished,C.FH.24,42.9,Hayley,Yes,Yes,Rachel,2020-10-13T04:32:00Z
+FH42,-33.88118897,114.8113721,South-west,Fished,C.FH.16,45.7,Hayley,Yes,Yes,Claude,2020-10-12T23:38:00Z
+IO3,-34.07618897,114.7838721,South-west,No-take,C.IO.43,62,Hayley,Yes,Yes,Claude,2020-10-15T04:03:00Z
+IO80,-34.09368897,114.8888721,South-west,No-take,C.IO.52,41.6,Hayley,Yes,Yes,Claude,2020-10-16T02:30:00Z
+IO81,-34.09868897,114.8913721,South-west,No-take,C.IO.52,42,Hayley,Yes,Yes,Claude,2020-10-16T02:20:00Z
+IO91,-34.09368897,114.8938721,South-west,No-take,C.IO.52,43.5,Hayley,Yes,Yes,Claude,2020-10-16T02:25:00Z
+IO123,-34.10618897,114.8188721,South-west,No-take,C.IO.59,49.1,Hayley,Yes,Yes,Daphne,2020-10-15T04:42:00Z
+IO125,-34.10868897,114.8263721,South-west,No-take,C.IO.59,55.8,Hayley,Yes,Yes,Daphne,2020-10-15T04:38:00Z
+IO132,-33.99118897,114.8713721,South-west,Fished,C.IO.37,42.6,Hayley,Yes,Yes,Daphne,2020-10-13T04:47:00Z
+IO145,-33.98618897,114.8238721,South-west,Fished,C.IO.22,45.5,Hayley,Yes,Yes,Daphne,2020-10-13T02:24:00Z
+IO152,-33.98118897,114.8688721,South-west,Fished,C.IO.37,41.2,Hayley,Yes,Yes,Daphne,2020-10-13T04:18:00Z
+IO155,-34.04368897,114.8838721,South-west,Fished,C.IO.65,41.9,Hayley,Yes,Yes,Claude,2020-10-15T23:42:00Z
+IO164,-34.03368897,114.9038721,South-west,Fished,C.IO.62,44.1,Hayley,Yes,Yes,Daphne,2020-10-15T23:14:00Z
+IO165,-34.04368897,114.8988721,South-west,Fished,C.IO.62,42.6,Hayley,Yes,Yes,Ramesh/Claude,2020-10-15T23:23:00Z
+IO184,-34.04118897,114.9038721,South-west,Fished,C.IO.62,45.9,Hayley,Yes,Yes,Ramesh/Brooke,2020-10-15T23:19:00Z
+IO201,-34.05618897,114.8338721,South-west,No-take,C.IO.5,45.3,Hayley,Yes,Yes,Ramesh/Claude,2020-10-15T06:46:00Z
+IO204,-34.06618897,114.7863721,South-west,No-take,C.IO.7,61.5,Hayley,Yes,Yes,Ramesh/Claude,2020-10-15T02:35:00Z
+IO210,-34.09118897,114.8738721,South-west,No-take,C.IO.6,43.5,Hayley,Yes,Yes,Ramesh/Claude,2020-10-16T02:09:00Z
+IO215,-34.06868897,114.9263721,South-west,No-take,C.IO.2,46.7,Hayley,Yes,Yes,Ramesh/Claude,2020-10-16T04:34:00Z
+IO218,-34.07368897,114.9213721,South-west,No-take,C.IO.2,46.8,Hayley,Yes,Yes,Ramesh/Claude,2020-10-16T04:28:00Z
+IO222,-34.06618897,114.8313721,South-west,No-take,C.IO.4,45,Hayley,Yes,Yes,Ramesh/Claude,2020-10-15T06:54:00Z
+IO223,-34.07118897,114.8463721,South-west,No-take,C.IO.4,42.9,Hayley,Yes,Yes,Ramesh/Claude,2020-10-15T06:25:00Z
+IO224,-34.06118897,114.8388721,South-west,No-take,C.IO.4,43.6,Hayley,Yes,Yes,Claude,2020-10-15T06:35:00Z
+IO225,-34.07118897,114.8338721,South-west,No-take,C.IO.4,44.9,Hayley,Yes,Yes,Claude,2020-10-15T06:20:00Z
+IO239,-34.09118897,114.9313721,South-west,No-take,C.IO.1,45.9,Hayley,Yes,Yes,Claude,2020-10-16T04:05:00Z
+IO73,-34.02868897,114.8588721,South-west,Fished,C.IO.60,40.4,Ramesh,Yes,No,NA,2020-10-19T01:22:00Z
+IO266,-34.02118897,114.7588721,South-west,Fished,C.IO.23,67.3,Hayley,Yes,Yes,Claude,2020-10-15T00:06:00Z
+IO325,-33.991557,114.743378,South-west,Fished,C.IO.25,85,Hayley,Yes,Yes,Claude,2020-10-14T23:44:00Z
+IO327,-34.02946667,114.7623833,South-west,Fished,C.IO.23,65.4,Hayley,Yes,Yes,Claude,2020-10-15T00:17:00Z
+IO334,-34.06155,114.7753667,South-west,No-take,C.IO.8,64,Hayley,Yes,Yes,Claude,2020-10-15T02:11:00Z
+IO353,-34.05436667,114.8390667,South-west,No-take,C.IO.5,44.1,Hayley,Yes,Yes,Claude,2020-10-15T06:43:00Z
+FH16,-33.90118897,114.8563721,South-west,Fished,C.FH.19,43.1,Hayley,Yes,No,Rachel,2020-10-13T00:02:00Z
+FH25,-33.87868897,114.8163721,South-west,Fished,C.FH.16,45.4,Hayley,Yes,Yes,Claude,2020-10-12T23:34:00Z
+FH47,-33.90618897,114.8488721,South-west,Fished,C.FH.19,43.5,Hayley,Yes,Yes,Claude,2020-10-13T00:09:00Z
+FH51,-33.90618897,114.8538721,South-west,Fished,C.FH.19,43,Hayley,Yes,Yes,Claude,2020-10-13T00:06:00Z
+FH52,-33.99118897,114.8888721,South-west,Fished,C.FH.24,42.1,Hayley,Yes,Yes,Claude,2020-10-13T04:36:00Z
+FH99,-33.95368897,114.8363721,South-west,Fished,C.FH.22,43.5,Hayley,Yes,Yes,Claude,2020-10-13T02:04:00Z
+FH106,-33.78868897,114.8163721,South-west,Fished,C.FH.12,47.1,Hayley,Yes,Yes,Claude,2020-10-12T05:16:00Z
+IO236,-34.08118897,114.9238721,South-west,No-take,C.IO.1,46.8,Hayley,Yes,Yes,Brooke Gibbons,2020-10-16T04:22:00Z
+FH68,-33.95118897,114.8288721,South-west,Fished,C.FH.22,44.5,Rachel,Yes,Yes,Claude,2020-10-13T02:01:00Z
+IO319,-34.09368897,114.7313721,South-west,No-take,C.IO.10,124,Rachel,Yes,Yes,Claude,2020-10-22T02:37:00Z
+IO332,-34.09718333,114.7344833,South-west,No-take,C.IO.10,124,Rachel,Yes,Yes,Claude,2020-10-22T02:33:00Z
+IO272,-34.00868897,114.8138721,South-west,Fished,C.IO.21,49.2,NA,Yes,No,NA,2020-10-18T22:56:00Z
+IO333,-34.11301667,114.7251333,South-west,No-take,C.IO.9,127,Rachel,Yes,Yes,Claude,2020-10-22T02:01:00Z
+IO262,-34.01368897,114.8738721,South-west,Fished,C.IO.19,41.9,Rachel,Yes,Yes,Claude,2020-10-19T01:46:00Z
+IO36,-34.10368897,114.7188721,South-west,No-take,C.IO.55,130,Rachel,Yes,Yes,Claude,2020-10-22T02:23:00Z
+IO59,-34.14118897,114.7663721,South-west,No-take,C.IO.69,109,Rachel,Yes,Yes,Claude,2020-10-21T23:33:00Z
+IO66,-34.01618897,114.8813721,South-west,Fished,C.IO.19,42.8,Rachel,Yes,Yes,Claude,2020-10-19T01:36:00Z
+IO74,-34.02868897,114.8513721,South-west,Fished,C.IO.60,42.2,Rachel,Yes,Yes,Claude,2020-10-19T01:14:00Z
+IO75,-34.03368897,114.8538721,South-west,Fished,C.IO.60,42.2,Rachel,Yes,Yes,Claude,2020-10-19T01:10:00Z
+IO228,-34.00368897,114.7938721,South-west,Fished,C.IO.42,50.4,Rachel,Yes,Yes,Claude,2020-10-18T22:46:00Z
+FH2,-33.91868897,114.8913721,South-west,Fished,C.FH.21,43.9,Daphne,Yes,No,NA,2020-10-29T04:43:00Z
+IO259,-33.96868897,114.9213721,South-west,Fished,C.IO.20,46.8,Rachel,Yes,Yes,Claude,2020-10-19T04:00:00Z
+IO260,-33.97118897,114.9163721,South-west,Fished,C.IO.20,46.3,Rachel,Yes,Yes,Claude,2020-10-19T03:55:00Z
+IO273,-33.99868897,114.8213721,South-west,Fished,C.IO.22,44.9,Rachel,Yes,Yes,Claude,2020-10-18T23:07:00Z
+FH40,-33.92368897,114.8888721,South-west,Fished,C.FH.21,42.9,Daphne,Yes,No,NA,2020-10-29T04:40:00Z
+IO308,-34.11118897,114.7288721,South-west,No-take,C.IO.9,126,Rachel,Yes,Yes,Claude,2020-10-22T02:06:00Z
+IO328,-33.99356667,114.8213667,South-west,Fished,C.IO.22,43.8,Rachel,Yes,Yes,Claude,2020-10-18T23:13:00Z
+IO377,-34.13868897,114.7588721,South-west,No-take,C.IO.69,113,Rachel,Yes,Yes,Claude,2020-10-21T23:40:00Z
+FH11,-33.89868897,114.9388721,South-west,Fished,C.FH.18,42.3,Rachel,Yes,Yes,Claude,2020-10-29T06:48:00Z
+FH12,-33.91868897,114.8963721,South-west,Fished,C.FH.21,46.1,Rachel,Yes,Yes,Claude,2020-10-29T04:46:00Z
+FH35,-33.88368897,114.9313721,South-west,Fished,C.FH.17,45.2,Rachel,Yes,Yes,Claude,2020-10-29T07:09:00Z
+IO46,-34.06868897,114.7113721,South-west,No-take,C.IO.34,129,Rachel,Yes,Yes,Claude,2020-10-22T22:44:00Z
+IO47,-34.06368897,114.7113721,South-west,No-take,C.IO.34,127,Rachel,Yes,Yes,Claude,2020-10-22T22:53:00Z
+FH67,-33.88868897,114.9238721,South-west,Fished,C.FH.17,46.1,Rachel,Yes,Yes,Claude,2020-10-29T07:00:00Z
+FH72,-33.88868897,114.9288721,South-west,Fished,C.FH.17,44.1,Rachel,Yes,Yes,Claude,2020-10-29T07:06:00Z
+FH78,-33.89118897,114.9163721,South-west,Fished,C.FH.17,45.8,Rachel,Yes,Yes,Claude,2020-10-29T06:56:00Z
+FH87,-33.92868897,114.8938721,South-west,Fished,C.FH.21,43.8,Rachel,Yes,Yes,Claude,2020-10-29T04:36:00Z
+FH94,-33.90868897,114.9413721,South-west,Fished,C.FH.18,41.9,Rachel,Yes,Yes,Claude,2020-10-29T06:36:00Z
+IO101,-34.07868897,114.8963721,South-west,No-take,C.IO.39,43.5,Rachel,Yes,Yes,Claude,2020-10-29T02:10:00Z
+IO102,-34.07118897,114.9113721,South-west,No-take,C.IO.2,45.2,Rachel,Yes,Yes,Claude,2020-10-29T02:26:00Z
+IO105,-34.06368897,114.6688721,South-west,No-take,C.IO.30,139,Rachel,Yes,Yes,Claude,2020-10-23T01:45:00Z
+IO189,-33.98868897,114.6638721,South-west,Fished,C.IO.40,139,Daphne,Yes,No,NA,2020-10-23T04:31:00Z
+IO107,-34.06368897,114.6763721,South-west,No-take,C.IO.30,137,Rachel,Yes,Yes,Claude,2020-10-23T01:50:00Z
+IO108,-34.05118897,114.6688721,South-west,No-take,C.IO.30,138,Rachel,Yes,Yes,Claude,2020-10-23T02:04:00Z
+FH109,-33.91618897,114.9088721,South-west,Fished,C.FH.20,45.9,Rachel,Yes,Yes,Claude,2020-10-29T05:04:00Z
+IO113,-34.05868897,114.7388721,South-west,No-take,C.IO.31,111,Rachel,Yes,Yes,Claude,2020-10-22T23:30:00Z
+IO115,-34.05368897,114.7363721,South-west,No-take,C.IO.31,112,Rachel,Yes,Yes,Claude,2020-10-22T23:34:00Z
+IO192,-33.98618897,114.6688721,South-west,Fished,C.IO.40,138,Rachel,Yes,Yes,Claude,2020-10-23T04:36:00Z
+IO211,-34.05618897,114.9063721,South-west,No-take,C.IO.3,43.5,Rachel,Yes,Yes,Claude,2020-10-29T02:42:00Z
+IO216,-34.06118897,114.9163721,South-west,No-take,C.IO.3,47.5,Rachel,Yes,Yes,Claude,2020-10-29T02:33:00Z
+IO280,-34.08868897,114.6738721,South-west,No-take,C.IO.14,139,Rachel,Yes,Yes,Claude,2020-10-23T01:24:00Z
+IO290,-34.06868897,114.7188721,South-west,No-take,C.IO.13,124,Rachel,Yes,Yes,Claude,2020-10-22T23:07:00Z
+IO291,-34.08368897,114.7488721,South-west,No-take,C.IO.12,109,Rachel,Yes,Yes,Claude,2020-10-22T05:09:00Z
+IO344,-34.0844,114.6744,South-west,No-take,C.IO.14,138,NA,No,No,NA,2020-10-23T01:28:00Z
+IO295,-34.10368897,114.7538721,South-west,No-take,C.IO.11,109,Rachel,Yes,Yes,Claude,2020-10-22T04:25:00Z
+IO297,-34.10618897,114.7488721,South-west,No-take,C.IO.11,114,Rachel,Yes,Yes,Claude,2020-10-22T04:21:00Z
+IO372,-34.00618897,114.6438721,South-west,Fished,C.IO.26,140,NA,No,No,NA,2020-10-23T03:53:00Z
+IO302,-34.07118897,114.7238721,South-west,No-take,C.IO.13,122,Rachel,Yes,Yes,Claude,2020-10-22T23:13:00Z
+IO330,-34.08833333,114.7545,South-west,No-take,C.IO.12,116,Rachel,Yes,Yes,Claude,2020-10-22T05:00:00Z
+IO355,-34.05473333,114.9111,South-west,No-take,C.IO.3,45,Rachel,Yes,Yes,Claude,2020-10-29T02:38:00Z
+IO370,-33.99618897,114.6463721,South-west,Fished,C.IO.26,141,Rachel,Yes,Yes,Claude,2020-10-23T04:10:00Z
+IO378,-33.99368897,114.6388721,South-west,Fished,C.IO.26,141,Rachel,Yes,Yes,Claude,2020-10-23T04:04:00Z
+IOC04,-34.08755,114.749265,South-west,No-take,C.IO.12,109,Rachel,Yes,Yes,Claude,2020-10-22T05:16:00Z
+IOC05,-34.05394,114.899843,South-west,No-take,C.IO.3,43.2,Rachel,Yes,Yes,Claude,2020-10-29T02:46:00Z
+IO49,-34.06118897,114.7063721,South-west,No-take,C.IO.34,129,Rachel,Yes,Yes,Brooke Gibbons,2020-10-22T22:59:00Z
+IO100,-34.07618897,114.9088721,South-west,No-take,C.IO.39,43.6,Rachel,Yes,Yes,Brooke Gibbons,2020-10-29T02:21:00Z
+IO109,-34.05618897,114.6738721,South-west,No-take,C.IO.30,138,Rachel,Yes,Yes,Brooke Gibbons,2020-10-23T01:57:00Z
+IO117,-34.06368897,114.7388721,South-west,No-take,C.IO.31,115,Rachel,Yes,Yes,Brooke Gibbons,2020-10-22T23:25:00Z
+IO119,-34.07618897,114.9038721,South-west,No-take,C.IO.39,43.8,Rachel,Yes,Yes,Brooke Gibbons,2020-10-29T02:17:00Z
+IO191,-33.99868897,114.6713721,South-west,Fished,C.IO.40,137,Rachel,Yes,Yes,Brooke Gibbons,2020-10-23T04:20:00Z
+IO194,-33.99618897,114.6638721,South-west,Fished,C.IO.40,139,Rachel,Yes,Yes,Brooke Gibbons,2020-10-23T04:24:00Z
+IO294,-34.08368897,114.7538721,South-west,No-take,C.IO.12,114,Rachel,Yes,Yes,Brooke Gibbons,2020-10-22T05:04:00Z
+IO282,-34.14618897,114.5438721,South-west,No-take,C.IO.18,146,NA,No,No,NA,2020-10-28T23:20:00Z
+IO298,-34.07618897,114.6713721,South-west,No-take,C.IO.14,138,Rachel,Yes,Yes,Brooke Gibbons,2020-10-23T01:39:00Z
+IO299,-34.08118897,114.6763721,South-west,No-take,C.IO.14,139,Rachel,Yes,Yes,Brooke Gibbons,2020-10-23T01:32:00Z
+IO313,-34.09618897,114.7563721,South-west,No-take,C.IO.11,108,Rachel,Yes,Yes,Brooke Gibbons,2020-10-22T04:47:00Z
+IO324,-34.00006,114.639778,South-west,Fished,C.IO.26,141,Rachel,Yes,Yes,Brooke Gibbons,2020-10-23T03:59:00Z
+IO329,-34.06481667,114.7266333,South-west,No-take,C.IO.13,121,Rachel,Yes,Yes,Brooke Gibbons,2020-10-22T23:18:00Z
+IO331,-34.0984,114.75005,South-west,No-take,C.IO.11,112,Rachel,Yes,Yes,Brooke Gibbons,2020-10-22T04:30:00Z
+IO343,-34.10261667,114.6407167,South-west,No-take,C.IO.15,140,Rachel,Yes,Yes,Claude,2020-11-22T23:38:00Z
+IO352,-34.03618897,114.5988721,South-west,Fished,C.IO.27,133,Rachel,Yes,Yes,Claude,2020-11-23T01:43:00Z
+IO369,-34.02868897,114.5913721,South-west,Fished,C.IO.27,133,Rachel,Yes,Yes,Claude,2020-11-23T02:08:00Z
+IO71,-34.00368897,114.6988721,South-west,Fished,C.IO.41,121,Rachel,Yes,Yes,Claude,2020-11-23T04:31:00Z
+IO148,-34.01118897,114.5963721,South-west,Fished,C.IO.46,140,Rachel,Yes,Yes,Claude,2020-11-23T02:31:00Z
+IO254,-34.01868897,114.6963721,South-west,Fished,C.IO.49,119,Rachel,Yes,Yes,Claude,2020-11-23T04:10:00Z
+IO276,-34.10118897,114.6363721,South-west,No-take,C.IO.15,140,Rachel,Yes,Yes,Claude,2020-11-22T23:34:00Z
+IO326,-34.00425,114.6892833,South-west,Fished,C.IO.24,121,NA,No,No,NA,2020-11-23T04:26:00Z
+IO349,-34.02368897,114.5963721,South-west,Fished,C.IO.27,133,Rachel,Yes,Yes,Claude,2020-11-23T02:03:00Z
+IO379,-34.08368897,114.6813721,South-west,No-take,C.IO.14,138,Rachel,Yes,Yes,Claude,2020-11-22T22:58:00Z
+IO306,-34.10118897,114.7338721,South-west,No-take,C.IO.10,124,Rachel,Yes,Yes,Claude,2020-10-22T02:29:00Z
+FH55,-33.92368897,114.9088721,South-west,Fished,C.FH.20,44.9,Rachel,Yes,Yes,Claude,2020-10-29T04:52:00Z
+IOC06,-34.048689,114.876372,South-west,Fished,C.IO.65,41.5,Ramesh,Yes,Yes,Claude,2020-10-15T23:48:00Z
+FH69,-33.69618897,114.8038721,South-west,Fished,C.FH.4,46.9,Ramesh,Yes,Yes,Claude,2020-10-12T02:43:00Z
+IO64,-34.01368897,114.8963721,South-west,Fished,C.IO.47,43.3,Ramesh,Yes,Yes,Claude,2020-10-19T03:26:00Z
+IO65,-34.01118897,114.8888721,South-west,Fished,C.IO.53,43,Ramesh,Yes,Yes,Claude,2020-10-19T03:20:00Z
+IO72,-34.03618897,114.8463721,South-west,Fished,C.IO.60,43.6,Ramesh,Yes,Yes,Claude,2020-10-19T01:05:00Z
+IO227,-33.99868897,114.7838721,South-west,Fished,C.IO.42,52.9,Ramesh,Yes,Yes,Claude,2020-10-18T22:37:00Z
+IO275,-34.09868897,114.6463721,South-west,No-take,C.IO.15,140,NA,No,No,NA,2020-11-23T06:38:00Z
+IO229,-33.99368897,114.7863721,South-west,Fished,C.IO.42,53,Ramesh,Yes,Yes,Hayley,2020-10-18T22:31:00Z
+IO241,-33.99368897,114.7913721,South-west,Fished,C.IO.42,50.6,Ramesh,Yes,Yes,Hayley,2020-10-18T22:26:00Z
+IO245,-34.00868897,114.9013721,South-west,Fished,C.IO.47,42.3,Ramesh,Yes,Yes,Claude,2020-10-19T03:30:00Z
+IO258,-33.96618897,114.9138721,South-west,Fished,C.IO.20,45.2,Ramesh,Yes,Yes,Claude,2020-10-19T04:05:00Z
+IO261,-33.97618897,114.9213721,South-west,Fished,C.IO.20,46.9,Ramesh,Yes,Yes,Claude,2020-10-19T03:46:00Z
+IO244,-34.00368897,114.9063721,South-west,Fished,C.IO.47,44.7,Ramesh,Yes,Yes,Claude,2020-10-19T03:35:00Z
