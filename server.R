@@ -4687,68 +4687,107 @@ output$download.maxn <- downloadHandler(
 ## ► All errors ----
 all.errors <- reactive({
   
+  
+  # print("points.samples.without.metadata")
   points.samples.without.metadata <- points.samples.without.metadata() %>%
-    mutate(error = "sample.in.points.without.metadata")
+    mutate(error = "sample.in.points.without.metadata")#%>%
+    # glimpse()#%>%
   
+  # print("samples.without.periods")
   samples.without.periods <- samples.without.periods()%>%
-    mutate(error = "sample.without.period")
+    mutate(error = "sample.without.period")#%>%
+    # glimpse()#%>%
   
+  # print("periods.no.end")
   periods.no.end <- periods.no.end() %>%
-    mutate(error = "period.with.no.end")
+    mutate(error = "period.with.no.end")#%>%
+    # glimpse()#%>%
   
+  # print("periods.wrong")
   periods.wrong <- periods() %>%
     distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
     mutate(period.time = round(timeend - timestart)) %>%
     filter(!period.time %in% c(input$error.period.length)) %>%
-    mutate(error = "period.wrong.length")
+    mutate(error = "period.wrong.length")#%>%
+    # glimpse()#%>%
   
+  # print("points.outside.periods")
   points.outside.periods <- points.outside.periods() %>%
-    mutate(error = "point.outside.period")
+    mutate(error = "point.outside.period") %>%
+    # glimpse()%>%
+    dplyr::mutate(number = as.character(number))
   
+  print("lengths.outside.periods")
   lengths.outside.periods <- lengths.outside.periods() %>%
-    mutate(error = "length.or.3D.point.outside.period")
+    mutate(error = "length.or.3D.point.outside.period") %>%
+    dplyr::mutate(number = as.character(number))%>%
+    glimpse()#%>%
   
+  print("points.no.number")
   points.no.number <- points.no.number() %>%
-    mutate(error = "point.without.a.number")
+    mutate(error = "point.without.a.number") %>%
+    dplyr::mutate(number = as.character(number))%>%
+    glimpse()#%>%
   
+  print("lengths.no.number")
   lengths.no.number <- lengths.no.number() %>%
-    mutate(error = "length.or.3D.point.without.a.number")
+    mutate(error = "length.or.3D.point.without.a.number") %>%
+    dplyr::mutate(number = as.character(number))%>%
+    glimpse()#%>%
   
+  print("maxn.species.not.observed")
   maxn.species.not.observed <- maxn.species.not.observed() %>%
-    mutate(error = "species.not.observed.in.region.before")
+    mutate(error = "species.not.observed.in.region.before") %>%
+    # dplyr::mutate(number = as.character(number))%>%
+    glimpse()#%>%
   
+  print("length.species.not.observed")
   length.species.not.observed <- length.species.not.observed() %>%
-    mutate(error = "species.not.observed.in.region.before")
+    mutate(error = "species.not.observed.in.region.before") %>%
+    # dplyr::mutate(number = as.character(number))%>%
+    glimpse()#%>%
   
   range.limit <- (input$error.report.range*1000)
   
+  print("length.out.of.range")
   length.out.of.range <- length3dpoints() %>%
     dplyr::filter(range>range.limit) %>%
     dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright, em.comment) %>%
-    mutate(error = "out.of.range")
+    mutate(error = "out.of.range") %>%
+    glimpse()#%>%
   
+  print("length.wrong.small")
   length.wrong.small <- length.wrong() %>%
     dplyr::filter(reason%in%c("too small")) %>%
-    mutate(error = reason)
+    mutate(error = reason) %>%
+    # dplyr::mutate(number = as.character(number))%>%
+    glimpse()#%>%
   
+  print("length.wrong.big")
   length.wrong.big <- length.wrong() %>%
     dplyr::filter(reason%in%c("too big")) %>%
-    mutate(error = reason)
+    mutate(error = reason) %>%
+    # dplyr::mutate(number = as.character(number))%>%
+    glimpse()#%>%
   
   rms.limit <- (input$error.report.rms)
   
+  print("length.wrong.rms")
   length.wrong.rms <- length3dpoints() %>%
     dplyr::filter(rms > rms.limit) %>%
     dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)%>%
-    mutate(error = "over.RMS")
+    mutate(error = "over.RMS")%>%
+    glimpse()#%>%
 
   precision.limit <- (input$error.report.precision)
   
+  print("length.wrong.precision")
   length.wrong.precision <- length3dpoints() %>%
     dplyr::mutate(precision.percent = (precision/length)*100) %>%
     dplyr::filter(precision.percent > precision.limit) %>%
     dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)%>%
-    mutate(error = "over.Precision")
+    mutate(error = "over.Precision")%>%
+    glimpse()#%>%
   
   all.errors <- bind_rows(points.samples.without.metadata, samples.without.periods, periods.no.end, periods.wrong, points.outside.periods, lengths.outside.periods, points.no.number, lengths.no.number, maxn.species.not.observed, length.species.not.observed, length.out.of.range, length.wrong.small, length.wrong.big, length.wrong.rms) %>%
     dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment, rms, precision) %>%
