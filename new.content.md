@@ -12,7 +12,7 @@ CheckEM will find files named with '_Metadata.csv', 'Points.txt', etc.
 
 </br>
 
-To see all the recent changes please visit the changelog (coming soon)
+To see all the recent changes please visit the changelog.
 
 
 </br>
