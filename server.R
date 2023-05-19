@@ -5,7 +5,7 @@ function(input, output, session) {
   
   showModal(modalDialog(
     # title = "CheckEM has changed", 
-    includeMarkdown("new.content.md"),
+    includeMarkdown("markdown/new.content.md"),
     easyClose = TRUE,
     footer = NULL,
     div(
@@ -1035,7 +1035,10 @@ maxn.raw <- reactive({
     mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
     mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
     mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
-    dplyr::filter(successful.count%in%c("Yes", "Y", "y", "yes"))
+    dplyr::filter(successful.count%in%c("Yes", "Y", "y", "yes")) %>%
+    dplyr::mutate(species = as.character(species)) %>%
+    dplyr::mutate(genus = as.character(genus)) %>%
+    dplyr::mutate(family = as.character(family))
   
 })
 
@@ -3475,7 +3478,7 @@ mass.complete.download <- reactive({
   }
   mass.big <- mass.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment, code) %>% # TODO Check this worked
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment, code) %>% 
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::left_join(metadata.regions()) %>%
@@ -4099,150 +4102,237 @@ output$length.vs.maxn.species.plot <- renderPlot({
 ##                        HABITAT                          ----
 ## _______________________________________________________ ----
 
-### ► Read in habitat points----
+# ### ► Read in habitat points----
+# hab.points <- reactive({
+#   
+#   # IF forwards habitat is uploaded and only forwards has been annotated
+#   if(!is.null(input$upload.f.dotpoints) & input$habdirection == "forwards") {
+#     
+#     points <- lapply(input$upload.f.dotpoints$datapath, fread)
+#     names(points) <- input$upload.f.dotpoints$name 
+#     
+#     points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+#       dplyr::select(-c(Spare)) %>%
+#       ga.clean.names() %>%
+#       mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
+#       mutate(sample=as.character(sample)) %>% 
+#       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+#                                                           "_Forwards" = "",
+#                                                           ".Forwards" = "",
+#                                                           "_forwards" = "",
+#                                                           ".forwards" = ""
+#                                                           ))) %>%
+#       dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+#       mutate(direction = "forwards") # BG Broad, morph and type????
+#     
+#     if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints)){
+#       
+#       relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
+#       names(relief) <- input$upload.r.f.dotpoints$name 
+#       
+#       relief <- rbindlist(relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+#         dplyr::select(-c(Spare)) %>%
+#         ga.clean.names() %>%
+#         mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
+#         mutate(sample=as.character(sample)) %>% 
+#         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+#                                                             "_Forwards" = "",
+#                                                             ".Forwards" = "",
+#                                                             "_forwards" = "",
+#                                                             ".forwards" = "",
+#                                                             "_Relief" = "",
+#                                                             "_relief" = "",
+#                                                             ".relief" = "",
+#                                                             ".Relief" = ""
+#         ))) %>%
+#         dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+#         mutate(direction = "forwards")
+#       
+#       points <- bind_rows(points, relief)
+#     }
+#     
+#     # IF forwards and backwards habitat uploaded and both directions annotated
+#   } else if(!is.null(input$upload.f.dotpoints) & !is.null(input$upload.b.dotpoints) &
+#             input$habdirection == "both") {
+#     
+#     f.points <- lapply(input$upload.f.dotpoints$datapath, fread)
+#     names(f.points) <- input$upload.f.dotpoints$name 
+#     
+#     f.points <- rbindlist(f.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+#       dplyr::select(-c(Spare)) %>%
+#       ga.clean.names() %>%
+#       mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
+#       mutate(sample=as.character(sample)) %>% 
+#       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+#                                                           "_Forwards" = "",
+#                                                           ".Forwards" = "",
+#                                                           "_forwards" = "",
+#                                                           ".forwards" = ""
+#       ))) %>%
+#       dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+#       mutate(direction = "forwards") # BG Broad, morph and type????
+#     
+#     b.points <- lapply(input$upload.b.dotpoints$datapath, fread)
+#     names(b.points) <- input$upload.b.dotpoints$name 
+#     
+#     b.points <- rbindlist(b.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+#       dplyr::select(-c(Spare)) %>%
+#       ga.clean.names() %>%
+#       mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
+#       mutate(sample=as.character(sample)) %>% 
+#       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+#                                                           "_Backwards" = "",
+#                                                           ".Backwards" = "",
+#                                                           "_backwards" = "",
+#                                                           ".backwards" = ""
+#       ))) %>%
+#       dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+#       mutate(direction = "backwards") # BG Broad, morph and type????
+#     
+#     points <- rbind(f.points, b.points)
+#     
+#     if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints) & !is.null(input$upload.r.b.dotpoints)){
+#       
+#       f.relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
+#       names(f.relief) <- input$upload.r.f.dotpoints$name 
+#       
+#       f.relief <- rbindlist(f.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+#         dplyr::select(-c(Spare)) %>%
+#         ga.clean.names() %>%
+#         mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
+#         mutate(sample=as.character(sample)) %>% 
+#         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+#                                                             "_Forwards" = "",
+#                                                             ".Forwards" = "",
+#                                                             "_forwards" = "",
+#                                                             ".forwards" = "",
+#                                                             "_Relief" = "",
+#                                                             "_relief" = "",
+#                                                             ".relief" = "",
+#                                                             ".Relief" = ""
+#         ))) %>%
+#         dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+#         mutate(direction = "forwards")
+#       
+#       b.relief <- lapply(input$upload.r.b.dotpoints$datapath, fread)
+#       names(b.relief) <- input$upload.r.b.dotpoints$name 
+#       
+#       b.relief <- rbindlist(b.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
+#         dplyr::select(-c(Spare)) %>%
+#         ga.clean.names() %>%
+#         mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
+#         mutate(sample=as.character(sample)) %>% 
+#         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
+#                                                             "_Backwards" = "",
+#                                                             ".Backwards" = "",
+#                                                             "_backwards" = "",
+#                                                             ".backwards" = "",
+#                                                             "_Relief" = "",
+#                                                             "_relief" = "",
+#                                                             ".relief" = "",
+#                                                             ".Relief" = ""
+#         ))) %>%
+#         dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
+#         mutate(direction = "backwards")
+#       
+#       relief <- rbind(f.relief, b.relief)
+#       
+#       points <- bind_rows(points, relief)
+#     }
+#   }
+#   
+#   points <- points %>% 
+#     mutate(campaignid = as.character(campaignid)) %>%
+#     mutate(sample = as.character(sample)) %>%
+#     ungroup()
+# })  
+
 hab.points <- reactive({
   
-  # IF forwards habitat is uploaded and only forwards has been annotated
-  if(!is.null(input$upload.f.dotpoints) & input$habdirection == "forwards") {
+  if(input$hab == "Yes"){
     
-    points <- lapply(input$upload.f.dotpoints$datapath, fread)
-    names(points) <- input$upload.f.dotpoints$name 
+  # When folder chosen ----
+  if(!is.null(input$folderdir)) {
     
-    points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      dplyr::select(-c(Spare)) %>%
+    # Get all _Dot Point Measurements files in the folder
+    files <- input$folderdir%>%
+      dplyr::filter(grepl("_Dot Point Measurements.txt", name)) #%>% glimpse() 
+    
+    points <- data.frame() 
+    
+    if (is.null(files)) return(NULL)
+    
+    for (i in seq_along(files$datapath)) {
+      tmp <- read_tsv(files$datapath[i], col_types = cols(.default = "c"), skip = 3)  %>%
+        dplyr::mutate(campaignid = files$name[i])
+      
+      points <- bind_rows(points, tmp) #%>% glimpse()
+    }
+ 
+    print("habitat points")
+    
+    points <- points %>%
       ga.clean.names() %>%
-      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-      mutate(sample=as.character(sample)) %>% 
-      dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-                                                          "_Forwards" = "",
-                                                          ".Forwards" = "",
-                                                          "_forwards" = "",
-                                                          ".forwards" = ""
-                                                          ))) %>%
-      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-      mutate(direction = "forwards") # BG Broad, morph and type????
+      dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Dot Point Measurements.txt" = ""))) %>% 
+      tidyr::separate(campaignid, into = c("campaignid", "extra"), sep = "_(?!.*_)") %>%# the last _
+      dplyr::mutate(extra = tolower(extra)) %>% 
+      dplyr::mutate(relief.annotation = case_when(stringr::str_detect(extra, "relief") ~ "Relief")) %>%
+      
+      dplyr::mutate(direction = case_when(stringr::str_detect(extra, "forward") ~ "Forwards",
+                                     stringr::str_detect(extra, "backward") ~ "Backwards")) %>%
+      glimpse() 
     
-    if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints)){
-      
-      relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
-      names(relief) <- input$upload.r.f.dotpoints$name 
-      
-      relief <- rbindlist(relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-        dplyr::select(-c(Spare)) %>%
-        ga.clean.names() %>%
-        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-        mutate(sample=as.character(sample)) %>% 
-        dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-                                                            "_Forwards" = "",
-                                                            ".Forwards" = "",
-                                                            "_forwards" = "",
-                                                            ".forwards" = "",
-                                                            "_Relief" = "",
-                                                            "_relief" = "",
-                                                            ".relief" = "",
-                                                            ".Relief" = ""
-        ))) %>%
-        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-        mutate(direction = "forwards")
-      
-      points <- bind_rows(points, relief)
+    print("directions")
+    print(unique(points$direction))
+    
+    # If point method and opcode = sample e.g. BRUVs
+    if(input$method == "point" & input$sample == "opcode") {
+      points <- points %>%
+        dplyr::rename(sample = opcode)
     }
     
-    # IF forwards and backwards habitat uploaded and both directions annotated
-  } else if(!is.null(input$upload.f.dotpoints) & !is.null(input$upload.b.dotpoints) &
-            input$habdirection == "both") {
+    # If point method and opcode = period e.g. BOSS
+    if(input$method == "point" & input$sample == "period") {
+      points <- points %>%
+        dplyr::mutate(sample = period)
+    }
     
-    f.points <- lapply(input$upload.f.dotpoints$datapath, fread)
-    names(f.points) <- input$upload.f.dotpoints$name 
-    
-    f.points <- rbindlist(f.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      dplyr::select(-c(Spare)) %>%
-      ga.clean.names() %>%
-      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-      mutate(sample=as.character(sample)) %>% 
-      dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-                                                          "_Forwards" = "",
-                                                          ".Forwards" = "",
-                                                          "_forwards" = "",
-                                                          ".forwards" = ""
-      ))) %>%
-      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-      mutate(direction = "forwards") # BG Broad, morph and type????
-    
-    b.points <- lapply(input$upload.b.dotpoints$datapath, fread)
-    names(b.points) <- input$upload.b.dotpoints$name 
-    
-    b.points <- rbindlist(b.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-      dplyr::select(-c(Spare)) %>%
-      ga.clean.names() %>%
-      mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-      mutate(sample=as.character(sample)) %>% 
-      dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-                                                          "_Backwards" = "",
-                                                          ".Backwards" = "",
-                                                          "_backwards" = "",
-                                                          ".backwards" = ""
-      ))) %>%
-      dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-      mutate(direction = "backwards") # BG Broad, morph and type????
-    
-    points <- rbind(f.points, b.points)
-    
-    if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints) & !is.null(input$upload.r.b.dotpoints)){
-      
-      f.relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
-      names(f.relief) <- input$upload.r.f.dotpoints$name 
-      
-      f.relief <- rbindlist(f.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-        dplyr::select(-c(Spare)) %>%
-        ga.clean.names() %>%
-        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-        mutate(sample=as.character(sample)) %>% 
-        dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-                                                            "_Forwards" = "",
-                                                            ".Forwards" = "",
-                                                            "_forwards" = "",
-                                                            ".forwards" = "",
-                                                            "_Relief" = "",
-                                                            "_relief" = "",
-                                                            ".relief" = "",
-                                                            ".Relief" = ""
-        ))) %>%
-        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-        mutate(direction = "forwards")
-      
-      b.relief <- lapply(input$upload.r.b.dotpoints$datapath, fread)
-      names(b.relief) <- input$upload.r.b.dotpoints$name 
-      
-      b.relief <- rbindlist(b.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-        dplyr::select(-c(Spare)) %>%
-        ga.clean.names() %>%
-        mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-        mutate(sample=as.character(sample)) %>% 
-        dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-                                                            "_Backwards" = "",
-                                                            ".Backwards" = "",
-                                                            "_backwards" = "",
-                                                            ".backwards" = "",
-                                                            "_Relief" = "",
-                                                            "_relief" = "",
-                                                            ".relief" = "",
-                                                            ".Relief" = ""
-        ))) %>%
-        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-        mutate(direction = "backwards")
-      
-      relief <- rbind(f.relief, b.relief)
-      
-      points <- bind_rows(points, relief)
+    # If transect method and sample = "opcode" + "period"
+    if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+      points <- points %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+    }
+    # If transect method and sample = "period"
+    if(input$method == "transect" & input$sample.t == "period") {
+      lookup <- c(sample = "period") # If people have used period or sample then this will work
+      points <- points %>%
+        dplyr::rename(dplyr::any_of(lookup)) 
     }
   }
   
-  points <- points %>% 
-    mutate(campaignid = as.character(campaignid)) %>%
-    mutate(sample = as.character(sample)) %>%
-    ungroup()
-})  
+  # TODO change this to hab and add example data
+  # if no folder chosen and method = single point. dataset = Ningloo BRUVs
+  # if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
+  #   
+  #   periods <-  read.delim("data/example_Period.txt", na.strings = "") %>%
+  #     ga.clean.names() %>%
+  #     dplyr::rename(sample = opcode) %>%
+  #     dplyr::mutate(sample = as.factor(sample)) %>%
+  #     dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+  #     as.data.frame()
+  #   
+  #   
+  # } 
+  
+  # TODO add an example dataset for DOVs
+  
+  points <- points %>%
+    dplyr::mutate(sample = as.factor(sample)) %>%
+    dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief, relief.annotation, direction) %>%
+    dplyr::semi_join(metadata()) %>% 
+    glimpse()
+  }
+})
 
 
 ## ► Preview habitat in dashboard ----
@@ -4383,9 +4473,10 @@ onclick('click.habitat.wrong.annotations',
 habitat.relief <- reactive({
 
   relief.grid <- hab.points() %>%
+    filter(relief.annotation %in% "Relief") %>%
     filter(!broad %in% c("Unknown", "Open.Water", "Open Water")) %>%
     filter(!relief%in% c("", NA)) %>%
-    dplyr::select(-c(broad,morphology,type,image.row,image.col, direction)) %>%
+    dplyr::select(-c(broad,morphology,type,image.row,image.col, direction, relief.annotation)) %>%
     mutate(relief.rank=ifelse(relief %in% c(".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.", 
                                             "0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."),0, # Create numerical relief ranks
                               ifelse(relief %in% c(".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.", "1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope."), 1,
@@ -4394,9 +4485,9 @@ habitat.relief <- reactive({
                                                    ifelse(relief %in% c(".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.", "4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."), 4,
                                                           ifelse(relief %in% c(".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.", "5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope."), 5, relief)))))))%>%
     dplyr::select(-c(relief))%>%
-    mutate(relief.rank=as.numeric(relief.rank)) %>%
+    mutate(relief.rank = as.numeric(relief.rank)) %>%
     group_by(campaignid, sample) %>%
-    summarise(mean.relief= mean (relief.rank), sd.relief= sd (relief.rank))%>%
+    summarise(mean.relief = mean (relief.rank), sd.relief= sd (relief.rank))%>%
     ungroup()
 })
 
@@ -4405,7 +4496,7 @@ habitat.broad.points <- reactive({
 
   broad.points <- hab.points() %>%
     # glimpse() %>%
-    dplyr::select(-c(morphology, type, relief)) %>%
+    dplyr::select(-c(morphology, type, relief, relief.annotation)) %>%
     filter(!broad %in% c("", NA, "Unknown", "Open.Water", "Open Water")) %>%
     mutate(broad = paste("broad", broad, sep = ".")) %>%
     mutate(count = 1) %>%
@@ -4592,7 +4683,7 @@ output$download.maxn <- downloadHandler(
         showModal(
           modalDialog(
             title = 'Downloading data...',
-            includeMarkdown("downloading.md"),
+            includeMarkdown("markdown/downloading.md"),
             easyClose = FALSE,
             footer = NULL
             )
@@ -4955,36 +5046,43 @@ output$download.all.errors.t <- downloadHandler(
 ## _______________________________________________________ ----
 
 
-## ► Leaflet map - australia marine regions ----
-output$australia.regions <- renderLeaflet({
+## ► Leaflet map - World regions ----
+output$regions.leaflet <- renderLeaflet({
   
-  leaflet <- leaflet() %>% 
+  map <- leaflet() %>% 
     addTiles(group = "Open Street Map") %>%
-    addPolygons(data = all_data$marine.regions, weight = 1, label = all_data$marine.regions@data$REGION, 
-                fillColor = "white", 
-                color = "black", 
-                fillOpacity = 0.9)
-  
-  leaflet
-  
-  return(leaflet)
-  
-})
-
-## ► World regions ----
-output$world.regions.leaflet <- renderLeaflet({
-  
-  leaflet1 <- leaflet() %>% 
-    addTiles(group = "Open Street Map") %>%
-    addPolygons(data = world.regions, weight = 1, label = world.regions$ECOREGION, 
-                fillColor = "white", 
-                color = "black", 
-                fillOpacity = 0.9) %>% 
+    addPolygons(data = world.regions.display, 
+                  popup = world.regions.display$NAME_EN, 
+                  fillColor = "white", 
+                  color = "black", 
+                  fillOpacity = 0.9,
+                  group = "FAO major fishing areas") %>% 
+    
+    # addGlPolylines(data = world.regions.display, 
+    #               weight = 1, 
+    #               label = world.regions.display$NAME_EN, 
+    #               color = "black",
+    #               group = "FAO major fishing areas") %>% 
+    
+    addPolygons(data = all_data$marine.regions,
+                weight = 1,
+                label = all_data$marine.regions@data$REGION,
+                fillColor = "green",
+                color = "black",
+                fillOpacity = 0.9,
+                group = "Australian Marine Regions") %>%
+    
+    hideGroup("FAO major fishing areas") %>%
+    
+    addLayersControl(
+      overlayGroups = c("Australian Marine Regions",
+                        "FAO major fishing areas"),
+      options = layersControlOptions(collapsed = FALSE)
+    ) %>%
+    
     fitBounds(-180, -90, 180, 90)
   
-  leaflet1
-  
-  return(leaflet1)
+  return(map)
   
 })
 

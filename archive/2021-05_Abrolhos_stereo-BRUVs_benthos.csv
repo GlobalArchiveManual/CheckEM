@@ -1,0 +1,104 @@
+"campaignid","sample","caab_code","level_1","level_2","level_3","level_4","level_5","level_6","level_7","level_8","family","genus","species","count"
+"2021-05_Abrolhos_stereo-BRUVs","npz6.10","82001011","Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Gravel (2-10mm)",,,,,,,4
+"2021-05_Abrolhos_stereo-BRUVs","npz6.10","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,9
+"2021-05_Abrolhos_stereo-BRUVs","npz6.12","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,11
+"2021-05_Abrolhos_stereo-BRUVs","npz6.13","20000000","Biota","Bryozoa",,,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.13","11168902","Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)",,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.13","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.14","54079009","Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Lessoniaceae","Ecklonia","radiata",4
+"2021-05_Abrolhos_stereo-BRUVs","npz6.15","11001000","Biota","Cnidaria","Hydroids",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.15","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,15
+"2021-05_Abrolhos_stereo-BRUVs","npz6.17","20000000","Biota","Bryozoa",,,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.17","11168912","Biota","Cnidaria","Corals","Black & Octocorals","Fan (2D)",,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.17","10000912","Biota","Sponges","Erect forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.17","10000909","Biota","Sponges","Cup-likes",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.17","10000903","Biota","Sponges","Massive forms",,,,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz6.18","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,17
+"2021-05_Abrolhos_stereo-BRUVs","npz6.2","82001004","Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,11
+"2021-05_Abrolhos_stereo-BRUVs","npz6.2","80300909","Biota","Macroalgae","Erect fine branching","Green",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.20","82001004","Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,5
+"2021-05_Abrolhos_stereo-BRUVs","npz6.20","80300000","Biota","Macroalgae",,,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.20","10000903","Biota","Sponges","Massive forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.20","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.21","20000000","Biota","Bryozoa",,,,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.21","11168902","Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)",,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.21","10000912","Biota","Sponges","Erect forms",,,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.21","10000909","Biota","Sponges","Cup-likes",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.21","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.22","80300909","Biota","Macroalgae","Erect fine branching","Green",,,,,,,,5
+"2021-05_Abrolhos_stereo-BRUVs","npz6.22","54079009","Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Lessoniaceae","Ecklonia","radiata",4
+"2021-05_Abrolhos_stereo-BRUVs","npz6.22","80300000","Biota","Macroalgae",,,,,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz6.24","82001002","Physical","Substrate","Consolidated (hard)","Rock",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.24","80300906","Biota","Macroalgae","Erect coarse branching","Red",,,,,,,,4
+"2021-05_Abrolhos_stereo-BRUVs","npz6.24","80300909","Biota","Macroalgae","Erect fine branching","Green",,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.24","10000909","Biota","Sponges","Cup-likes",,,,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz6.24","10000903","Biota","Sponges","Massive forms",,,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.26","82001002","Physical","Substrate","Consolidated (hard)","Rock",,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.27","54079009","Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Lessoniaceae","Ecklonia","radiata",9
+"2021-05_Abrolhos_stereo-BRUVs","npz6.28","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,17
+"2021-05_Abrolhos_stereo-BRUVs","npz6.36","82001003","Physical","Substrate","Consolidated (hard)","Boulders",,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.36","82001004","Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.36","80300929","Biota","Macroalgae","Encrusting","Red",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.36","10000903","Biota","Sponges","Massive forms",,,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.36","82001007","Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Biologenic",,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.36","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,8
+"2021-05_Abrolhos_stereo-BRUVs","npz6.4","20000000","Biota","Bryozoa",,,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.5","82001002","Physical","Substrate","Consolidated (hard)","Rock",,,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz6.5","11001000","Biota","Cnidaria","Hydroids",,,,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz6.5","11168902","Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)",,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.5","10000909","Biota","Sponges","Cup-likes",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.5","82001011","Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Gravel (2-10mm)",,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.5","82001012","Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Pebble (10-64mm)",,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.5","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz6.6","80300906","Biota","Macroalgae","Erect coarse branching","Red",,,,,,,,10
+"2021-05_Abrolhos_stereo-BRUVs","npz6.8","11001000","Biota","Cnidaria","Hydroids",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.8","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,13
+"2021-05_Abrolhos_stereo-BRUVs","npz6.9","10000903","Biota","Sponges","Massive forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.BOSS41","20000000","Biota","Bryozoa",,,,,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz6.BOSS41","10000912","Biota","Sponges","Erect forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.BOSS41","10000909","Biota","Sponges","Cup-likes",,,,,,,,,5
+"2021-05_Abrolhos_stereo-BRUVs","npz6.BOSS41","10000903","Biota","Sponges","Massive forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz6.BOSS41","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,4
+"2021-05_Abrolhos_stereo-BRUVs","npz6.C01","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,11
+"2021-05_Abrolhos_stereo-BRUVs","npz6.C02","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,13
+"2021-05_Abrolhos_stereo-BRUVs","npz9.1","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,11
+"2021-05_Abrolhos_stereo-BRUVs","npz9.10","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,13
+"2021-05_Abrolhos_stereo-BRUVs","npz9.11","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz9.12","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,7
+"2021-05_Abrolhos_stereo-BRUVs","npz9.13","11168902","Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)",,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.13","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,12
+"2021-05_Abrolhos_stereo-BRUVs","npz9.14","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,19
+"2021-05_Abrolhos_stereo-BRUVs","npz9.16","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,17
+"2021-05_Abrolhos_stereo-BRUVs","npz9.17","10000912","Biota","Sponges","Erect forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.17","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,10
+"2021-05_Abrolhos_stereo-BRUVs","npz9.18","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,13
+"2021-05_Abrolhos_stereo-BRUVs","npz9.19","82001004","Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.19","82001011","Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Gravel (2-10mm)",,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz9.19","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,10
+"2021-05_Abrolhos_stereo-BRUVs","npz9.2","11001000","Biota","Cnidaria","Hydroids",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.2","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,8
+"2021-05_Abrolhos_stereo-BRUVs","npz9.21","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,14
+"2021-05_Abrolhos_stereo-BRUVs","npz9.22","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,4
+"2021-05_Abrolhos_stereo-BRUVs","npz9.24","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,12
+"2021-05_Abrolhos_stereo-BRUVs","npz9.25","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,16
+"2021-05_Abrolhos_stereo-BRUVs","npz9.26","10000912","Biota","Sponges","Erect forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.26","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,4
+"2021-05_Abrolhos_stereo-BRUVs","npz9.26","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,7
+"2021-05_Abrolhos_stereo-BRUVs","npz9.27","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,15
+"2021-05_Abrolhos_stereo-BRUVs","npz9.28","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,19
+"2021-05_Abrolhos_stereo-BRUVs","npz9.29","20000000","Biota","Bryozoa",,,,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz9.29","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,8
+"2021-05_Abrolhos_stereo-BRUVs","npz9.3","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,18
+"2021-05_Abrolhos_stereo-BRUVs","npz9.30","82001011","Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Gravel (2-10mm)",,,,,,,3
+"2021-05_Abrolhos_stereo-BRUVs","npz9.30","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,12
+"2021-05_Abrolhos_stereo-BRUVs","npz9.4","82001004","Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.4","82001011","Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Gravel (2-10mm)",,,,,,,4
+"2021-05_Abrolhos_stereo-BRUVs","npz9.4","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,10
+"2021-05_Abrolhos_stereo-BRUVs","npz9.5","10000912","Biota","Sponges","Erect forms",,,,,,,,,2
+"2021-05_Abrolhos_stereo-BRUVs","npz9.5","10000903","Biota","Sponges","Massive forms",,,,,,,,,4
+"2021-05_Abrolhos_stereo-BRUVs","npz9.7","82001015","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,18
+"2021-05_Abrolhos_stereo-BRUVs","npz9.8","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,17
+"2021-05_Abrolhos_stereo-BRUVs","npz9.9","82001004","Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.9","82001004","Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.9","10000912","Biota","Sponges","Erect forms",,,,,,,,,1
+"2021-05_Abrolhos_stereo-BRUVs","npz9.9","82001014","Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,8

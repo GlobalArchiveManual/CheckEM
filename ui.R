@@ -14,7 +14,10 @@ tagList(
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
                               menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
-                              # menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
+                              
+                              shiny::conditionalPanel("input.hab == 'Yes'",
+                                                      sidebarMenu(menuItem("Check habitat", tabName = "checkhab", icon = icon("check")))),
+                              
                               menuItem("Create & check mass", tabName = "createmass", icon = icon("check")),
                               menuItem("Download data", tabName = "downloads", icon = icon("download")))
                             ),
@@ -25,7 +28,9 @@ tagList(
                             sidebarMenu(
                               menuItem("Check metadata & periods", tabName = "checkmetadatat", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlengtht", icon = icon("check")),
-                              # menuItem("Check habitat", tabName = "checkhab", icon = icon("check")),
+                              
+                              shiny::conditionalPanel("input.hab == 'Yes'",
+                                                      sidebarMenu(menuItem("Check habitat", tabName = "checkhab", icon = icon("check")))),
                               menuItem("Create & check mass", tabName = "createmasst", icon = icon("check")),
                               menuItem("Download data", tabName = "downloadst", icon = icon("download")))
                             ),
@@ -70,7 +75,7 @@ tagList(
 
                               
                               box(width = NULL, height = 700, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE,
-                                  includeMarkdown("aims.Rmd"))
+                                  includeMarkdown("markdown/aims.Rmd"))
                               ),
                        
                        box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
@@ -95,45 +100,33 @@ tagList(
                                                                 selected = "opcodeperiod",
                                                                 inline = TRUE)),
                            br(),
+                           
+                           radioButtons("hab", "Are you uploading habitat and/or relief?",
+                                        c("Yes",
+                                          "No"),
+                                        selected = "No",
+                                        inline = TRUE),
+                           
+                           shiny::conditionalPanel("input.hab == 'Yes'",
+                           
+                                                   radioButtons("habdirection", "Which directions were annotated?",
+                                                                c("Forwards only" = "forwards",
+                                                                  "Forwards and backwards" = "both"),
+                                                                selected = "forwards",
+                                                                inline = TRUE),
+                           
+                                                   radioButtons("habreliefsep", "Was relief annotated separately?",
+                                                                c("No" = "no",
+                                                                  "Yes" = "yes"),
+                                                                selected = "no",
+                                                                inline = TRUE)
+                                                   ),
+                           
                            tags$div(tags$label("Select directory with metadata and EM exports", class="btn btn-primary",
                                                tags$input(id = "folderdir", webkitdirectory = TRUE, type = "file", style="display: none;", onchange="pressed()")))#,
                            # tags$div(id="fileIn_progress", class="progress progress-striped active shiny-file-input-progress", tags$div(class="progress-bar"))
-                           # ,
-                           # radioButtons("habdirection", "If checking habitat, which directions were annotated?",
-                           #              c("Forwards only" = "forwards",
-                           #                "Forwards and backwards" = "both"),
-                           #              selected = "forwards",
-                           #              inline = TRUE),
-                           # 
-                           # radioButtons("habreliefsep", "If checking habitat, was relief annotated separately?",
-                           #              c("No" = "no",
-                           #                "Yes" = "yes"),
-                           #              selected = "no",
-                           #              inline = TRUE)
+
                        ),
-                       # box(width = 6, height = 110, title = "Upload metadata (csv)", status = "primary", solidHeader = FALSE,
-                       #     
-                       #     fileInput("upload.metadata", NULL, multiple = TRUE,
-                       #               accept = c("image/vnd.csv",".csv"))),
-                       
-                       # box(width = 6, title = "Upload EventMeasure exports  (txt files)", status = "primary", solidHeader = FALSE,
-                       #     
-                       #     box(width = 6, height = 110, title = "Points file", status = "primary", solidHeader = TRUE,
-                       #         fileInput("upload.points", NULL, multiple = TRUE,
-                       #                   accept = c("image/vnd.txt",".txt"))),
-                       # 
-                       #     box(width = 6, height = 110, title = "Period file", status = "primary", solidHeader = TRUE,
-                       #         fileInput("upload.period", NULL, multiple = TRUE,
-                       #                    accept = c("image/vnd.txt",".txt"))),
-                       # 
-                       #     box(width = 6, height = 110, title = "Length file", status = "primary", solidHeader = TRUE,
-                       #         fileInput("upload.length", NULL, multiple = TRUE,
-                       #                    accept = c("image/vnd.txt",".txt"))),
-                       # 
-                       #     box(width = 6, height = 110, title = "3D points file", status = "primary", solidHeader = TRUE,
-                       #         fileInput("upload.3dpoints", NULL, multiple = TRUE,
-                       #                    accept = c("image/vnd.txt",".txt")))
-                       #     ),
                        
                        # box(width = 6, title = "Upload TransectMeasure exports (txt files)", status = "primary", solidHeader = FALSE,
                        #     
@@ -433,39 +426,38 @@ tagList(
               )),
       
       
-      # # Check habitat - point based data -----
-      # tabItem(tabName = "checkhab",
-      #         fluidRow(div(id="click.metadata.samples.without.hab",
-      #                      valueBoxOutput("metadata.samples.without.hab")),
-      #                  div(id="click.habitat.samples.without.metadata",
-      #                      valueBoxOutput("habitat.samples.without.metadata")),
-      #                  # div(id="click.habitat.annotations.per.sample",
-      #                  #     valueBoxOutput("habitat.annotations.per.sample"))
-      #                  box(width = 4, title = "Enter your correct number of annotations per sample:", status = "primary", solidHeader = TRUE,
-      #                      numericInput("number.of.annotations", NULL, 20, min = 1, max = 1000)),
-      #                  
-      #                  
-      #                  div(id="click.habitat.wrong.annotations",
-      #                      valueBoxOutput("habitat.wrong.annotations")),
-      #                  
-      #                  box(width = 12, title = "Broad habitat", status = "primary", 
-      #                      plotOutput("habitat.broad.plot", height = 250)),
-      #                  
-      #                  box(width = 12, title = "Relief", status = "primary", 
-      #                      plotOutput("habitat.relief.plot", height = 250)),
-      #                  
-      #                  box(width = 12, title = "Habitat pie chart", status = "primary",
-      #                      leafletOutput("hab.pies", height = 800)),
-      #                  
-      #                  box(width = 12,title = "Choose habitat type to plot below:", status = "primary", solidHeader = TRUE,
-      #                      htmlOutput("hab.dropdown",multiple=TRUE)),
-      #                  
-      #                  box(width = 12, title = "Habitat bubble plot", status = "primary",
-      #                      leafletOutput("hab.bubble", height = 800)),
-      #                  
-      #                  )
-      # ),
-      
+      # Check habitat - point based data -----
+      tabItem(tabName = "checkhab",
+              fluidRow(div(id="click.metadata.samples.without.hab",
+                           valueBoxOutput("metadata.samples.without.hab")),
+                       
+                       div(id="click.habitat.samples.without.metadata",
+                           valueBoxOutput("habitat.samples.without.metadata")),
+                       
+                       # div(id="click.habitat.annotations.per.sample",
+                       #     valueBoxOutput("habitat.annotations.per.sample"))
+                       box(width = 4, title = "Enter your correct number of annotations per sample:", status = "primary", solidHeader = TRUE,
+                           numericInput("number.of.annotations", NULL, 20, min = 1, max = 1000)),
+
+                       div(id="click.habitat.wrong.annotations",
+                           valueBoxOutput("habitat.wrong.annotations")),
+
+                       box(width = 12, title = "Broad habitat", status = "primary",
+                           plotOutput("habitat.broad.plot", height = 250)),
+
+                       box(width = 12, title = "Relief", status = "primary",
+                           plotOutput("habitat.relief.plot", height = 250)),
+
+                       box(width = 12, title = "Habitat pie chart", status = "primary",
+                           leafletOutput("hab.pies", height = 800)),
+
+                       box(width = 12,title = "Choose habitat type to plot below:", status = "primary", solidHeader = TRUE,
+                           htmlOutput("hab.dropdown",multiple=TRUE)),
+
+                       box(width = 12, title = "Habitat bubble plot", status = "primary",
+                           leafletOutput("hab.bubble", height = 800))
+                       )
+      ),
       
       # Create downloads - point based data -----
       tabItem(tabName = "downloads",
@@ -490,8 +482,6 @@ tagList(
                     downloadBttn("download.all.errors", style = "unite", color = "danger", label = "All errors in EMobs"))
                     )),
                 
-                
-                
                 box(width = 4, title = "3. Select 'errors' to filter out of downloaded data",
                     status="primary",solidHeader = TRUE,
                     
@@ -514,11 +504,7 @@ tagList(
                     status = "primary", solidHeader = TRUE,
                     div(style="display:inline-block;width:100%;text-align: center;", 
 
-                    downloadBttn("download.maxn", style = "unite", color = "primary", label = "Download all files"), br(), br()#,
-                    # downloadBttn("download.length", style = "unite", color = "primary", label = "Length"), br(), br(),
-                    # downloadBttn("download.mass", style = "unite", color = "primary", label = "Mass"), br(), br()
-                    # ,
-                    # downloadBttn("download.broad.habitat", style = "unite", color = "primary", label = "Habitat"), br(), br()
+                    downloadBttn("download.maxn", style = "unite", color = "primary", label = "Download all files"), br(), br()
                     )
                     ),
               )
@@ -594,11 +580,9 @@ tagList(
                  box(width = 6, status = "primary", collapsible = TRUE, title = "How to use CheckEM", solidHeader = TRUE, 
                      includeMarkdown("howto.Rmd")),
                  
-                 box(width = 6,height = 760, status = "primary", collapsible = TRUE, title = "Marine Ecoregions of the World", solidHeader = TRUE, 
-                     leafletOutput("world.regions.leaflet", height = 700)),
-                 
-                 box(width = 6, status = "primary", collapsible = TRUE, title = "Australia's Marine Regions", solidHeader = TRUE, 
-                     leafletOutput("australia.regions"))
+                 # TODO add a spinner
+                 box(width = 6,height = 760, status = "primary", collapsible = TRUE, title = "Regions used in CheckEM", solidHeader = TRUE, 
+                     leafletOutput("regions.leaflet", height = 700))
                )
       ),
       
@@ -614,7 +598,7 @@ tagList(
       tabItem(tabName = "change",
               column(width = 2),
               box(width = 8, status = "primary", title = NULL,
-                  includeMarkdown("changelog.Rmd")
+                  includeMarkdown("markdown/changelog.Rmd")
                   )
               )
       )
