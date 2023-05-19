@@ -1,4 +1,8 @@
 # Change log
+## 2.0.2 (released 19/05/2023) <br />
+### Changed <br />
+- CAAB codes from EventMeasure are included in the exports.
+
 ## 2.0.1 (released 14/02/2023) <br />
 ### Changed <br />
 - Added all Marine Parks from CAPAD 2020.
