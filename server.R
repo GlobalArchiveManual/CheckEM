@@ -142,7 +142,7 @@ metadata.regions <- reactive({
   metadata <- metadata()
   
   coordinates(metadata) <- c('longitude', 'latitude')
-  proj4string(metadata) <- CRS(wgs.84)
+  proj4string(metadata) <- CRS(all_data$wgs.84)
   
   n <- nrow(metadata())
   
@@ -150,7 +150,7 @@ metadata.regions <- reactive({
   
   ## For each point, find name of nearest polygon
   for (i in seq_along(nearest.region)) {
-    nearest.region[i] <- marine.regions$REGION[which.min(gDistance(metadata[i, ], marine.regions, byid = TRUE))]}
+    nearest.region[i] <- all_data$marine.regions$REGION[which.min(gDistance(metadata[i, ], all_data$marine.regions, byid = TRUE))]}
   
   ## Check that it worked
   metadata.2 <- as.data.frame(nearest.region) %>%
@@ -160,7 +160,7 @@ metadata.regions <- reactive({
     dplyr::select(!status)
   
   # add in marine parks
-  metadata.marineparks <- over(metadata, marineparks) %>%
+  metadata.marineparks <- over(metadata, all_data$marineparks) %>%
     glimpse()
   
   metadata.regions <- metadata.2 %>%
@@ -286,7 +286,7 @@ output$map.metadata <- renderLeaflet({
   
   
   b <- metadata %>% 
-    st_as_sf(coords = c("longitude", "latitude"), crs = wgs.84) %>% 
+    st_as_sf(coords = c("longitude", "latitude"), crs = all_data$wgs.84) %>% 
     st_bbox()
   
   # b <- st_bbox(c(xmin = (min(metadata$longitude)*1.5), 
@@ -296,7 +296,7 @@ output$map.metadata <- renderLeaflet({
   
   bb <- st_as_sfc(b)
   
-  marineparks.single_clipped <- st_cast(st_intersection(marineparks.single, bb), "POLYGON")
+  marineparks.single_clipped <- st_cast(st_intersection(all_data$marineparks.single, bb), "POLYGON")
   
   # plot(marineparks.single_clipped)
   
@@ -1040,7 +1040,7 @@ maxn.raw <- reactive({
 })
 
 maxn.clean <- reactive({
-maxn.clean <- dplyr::left_join(maxn.raw(), synonyms, by = c("family", "genus", "species")) %>%
+maxn.clean <- dplyr::left_join(maxn.raw(), all_data$synonyms, by = c("family", "genus", "species")) %>%
     dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -1069,7 +1069,7 @@ maxn.complete.download <- reactive({
   maxn <- maxn.raw()# can't use clean as have already changed synonyms
 
   if (input$error.synonyms == TRUE) {
-    maxn.complete <- dplyr::left_join(maxn, synonyms, by = c("family", "genus", "species")) %>%
+    maxn.complete <- dplyr::left_join(maxn, all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -1102,7 +1102,7 @@ maxn.complete.download <- reactive({
   
   maxn.complete <- maxn.complete
   
-  species.out.of.area <- master.expanded %>%
+  species.out.of.area <- all_data$master.expanded %>%
     anti_join(maxn.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
     filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp"))
@@ -1153,7 +1153,7 @@ output$maxn.species.dropdown <- renderUI({
 maxn.synonym <- reactive({
   maxn <- maxn.raw()
   
-  maxn.synonym <- dplyr::left_join(maxn, synonyms, by = c("family", "genus", "species")) %>% 
+  maxn.synonym <- dplyr::left_join(maxn, all_data$synonyms, by = c("family", "genus", "species")) %>% 
     dplyr::filter(!is.na(genus_correct)) %>%
     dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
     dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
@@ -1270,7 +1270,7 @@ onclick('click.points.no.number',
 
 ## ► Species not observed - dataframe ----
 maxn.species.not.observed <- reactive({
-  maxn <- master.expanded %>%
+  maxn <- all_data$master.expanded %>%
     anti_join(maxn.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(maxn > 0) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>%
@@ -1366,8 +1366,8 @@ output$maxn.status.plot <- renderPlot({
     left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(campaignid, sample, status) %>%
-    summarise(maxn = sum(maxn))
+    dplyr::group_by(campaignid, sample, status) %>%
+    dplyr::summarise(maxn = sum(maxn))
   
   scientific.name <- input$maxn.species.dropdown
   
@@ -1391,8 +1391,8 @@ output$maxn.zone.simple <- renderPlot({
     dplyr::left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(campaignid, sample, zone) %>%
-    summarise(maxn = sum(maxn)) %>%
+    dplyr::group_by(campaignid, sample, zone) %>%
+    dplyr::summarise(maxn = sum(maxn)) %>%
     ungroup()
   
   scientific.name <- input$maxn.species.dropdown
@@ -1417,8 +1417,8 @@ output$maxn.location.plot <- renderPlot({
     left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(campaignid, sample, location) %>%
-    summarise(maxn = sum(maxn))
+    dplyr::group_by(campaignid, sample, location) %>%
+    dplyr::summarise(maxn = sum(maxn))
   
   scientific.name <- input$maxn.species.dropdown
   grob.sci <- grobTree(textGrob(as.character(scientific.name), x = 0.01,  y = 0.97, hjust = 0, 
@@ -1443,8 +1443,8 @@ output$maxn.site.plot <- renderPlot({
     left_join(metadata.regions()) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
     dplyr::filter(scientific%in%c(input$maxn.species.dropdown)) %>%
-    group_by(campaignid, sample, site) %>%
-    summarise(maxn = sum(maxn))
+    dplyr::group_by(campaignid, sample, site) %>%
+    dplyr::summarise(maxn = sum(maxn))
   
   
   scientific.name <- input$maxn.species.dropdown
@@ -1466,9 +1466,9 @@ output$maxn.site.plot <- renderPlot({
 output$maxn.top.species <- renderPlot({
 maxn.sum <- maxn.complete() %>%
   mutate(scientific = paste(genus, species, sep = " ")) %>%
-  group_by(scientific) %>%
+  dplyr::group_by(scientific) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
-  ungroup() %>%
+  dplyr::ungroup() %>%
   top_n(input$species.limit)
 
 ## ►  Total frequency of occurrence ----
@@ -1687,7 +1687,7 @@ length3dpoints <- reactive({
 })
 
 length3dpoints.clean <- reactive({
-  length3dpoints.clean <-  dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints.clean <-  dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
     dplyr::mutate(genus = ifelse(!genus_correct %in% c(NA), genus_correct, genus)) %>%
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -1714,7 +1714,7 @@ length.complete.download <- reactive({
   
   
   if (input$error.synonyms == TRUE) {
-    length.complete <- dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -1730,7 +1730,7 @@ length.complete.download <- reactive({
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
   } 
   else{ 
-    length.complete <- dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
@@ -1747,7 +1747,7 @@ length.complete.download <- reactive({
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
-  species.out.of.area <- master.expanded %>%
+  species.out.of.area <- all_data$master.expanded %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(length.complete, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -1770,7 +1770,7 @@ length.complete.download <- reactive({
     dplyr::filter(precision.percent < precision.limit) %>%
     dplyr::select(-c(precision.percent))
   
-  length.wrong <- left_join(length.area, master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>fb.length_max) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big"))
 
@@ -1984,7 +1984,7 @@ onclick('click.threedpoints.no.number',
 length.synonym <- reactive({
   length <- length3dpoints()
   
-  length.synonym <- dplyr::left_join(length, synonyms, by = c("family", "genus", "species")) %>% 
+  length.synonym <- dplyr::left_join(length, all_data$synonyms, by = c("family", "genus", "species")) %>% 
     dplyr::filter(!is.na(genus_correct)) %>%
     dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
     dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
@@ -2034,7 +2034,7 @@ onclick('click.length.synonym', showModal(modalDialog(
 
 ## ► Species not observed - dataframe ----
 length.species.not.observed <- reactive({
-  length <- master.expanded %>%
+  length <- all_data$master.expanded %>%
     anti_join(length3dpoints.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(number > 0) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
@@ -2079,7 +2079,7 @@ output$length.species.not.observed <- renderValueBox({
 
 ## ► Species wrong length - dataframe ----
 length.wrong <- reactive({
-  length.wrong <- left_join(length3dpoints.clean(), master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length3dpoints.clean(), all_data$master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>max.length) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big")) %>%
     dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, em.comment, frameleft) %>%
@@ -2328,7 +2328,7 @@ output$length.histogram <- renderPlot({
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- master.min.max %>%
+  sizes <- all_data$master.min.max %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -2367,7 +2367,7 @@ output$length.histogram.status <- renderPlot({
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- master.min.max %>%
+  sizes <- all_data$master.min.max %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -2472,7 +2472,7 @@ length3dpoints.clean.t <- reactive({
   
   # print("length 3D points joined to metadata")
   
-  length3dpoints.clean <-  dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints.clean <-  dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
     dplyr::mutate(genus = ifelse(!genus_correct %in% c(NA), genus_correct, genus)) %>%
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -2495,7 +2495,7 @@ length.complete.download.t <- reactive({
   length <- length3dpoints.t() # can't use clean as have already changed synonyms
   
   if (input$error.synonyms.t == TRUE) {
-    length.complete <- dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -2512,7 +2512,7 @@ length.complete.download.t <- reactive({
     
   } else { 
     
-    length.complete <- dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
@@ -2529,7 +2529,7 @@ length.complete.download.t <- reactive({
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
-  species.out.of.area <- master.expanded %>%
+  species.out.of.area <- all_data$master.expanded %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(length.complete, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -2554,7 +2554,7 @@ length.complete.download.t <- reactive({
     dplyr::filter(precision.percent < input$error.precision.limit.t) %>%
     dplyr::select(-c(precision.percent))
   
-  length.wrong <- left_join(length.area, master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > fb.length_max) %>%
     mutate(reason = ifelse(length < min.length, "too small", "too big"))
   
@@ -2769,7 +2769,7 @@ onclick('click.threedpoints.no.number.t',
 length.synonym.t <- reactive({
   length <- length3dpoints.t()
   
-  length.synonym <- dplyr::left_join(length, synonyms, by = c("family", "genus", "species")) %>% 
+  length.synonym <- dplyr::left_join(length, all_data$synonyms, by = c("family", "genus", "species")) %>% 
     dplyr::filter(!is.na(genus_correct)) %>%
     dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
     dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
@@ -2819,7 +2819,7 @@ onclick('click.length.synonym.t', showModal(modalDialog(
 
 ## ► Species not observed - dataframe ----
 length.species.not.observed.t <- reactive({
-  length <- master.expanded %>%
+  length <- all_data$master.expanded %>%
     anti_join(length3dpoints.clean.t(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(number > 0) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
@@ -2865,7 +2865,7 @@ output$length.species.not.observed.t <- renderValueBox({
 
 ## ► Species wrong length - dataframe ----
 length.wrong.t <- reactive({
-  length.wrong <- left_join(length3dpoints.clean.t(), master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length3dpoints.clean.t(), all_data$master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > max.length) %>%
     mutate(reason = ifelse(length < min.length, "too small", "too big")) %>%
     dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, frameleft, rms, precision) %>%
@@ -3157,7 +3157,7 @@ output$length.histogram.t <- renderPlot({
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- master.min.max %>%
+  sizes <- all_data$master.min.max %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -3195,7 +3195,7 @@ output$length.histogram.status.t <- renderPlot({
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- master.min.max %>%
+  sizes <- all_data$master.min.max %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -3286,15 +3286,15 @@ mass <- reactive({
   # 1. Check for missing length weight relationship
 taxa.missing.lw <- length3dpoints.clean() %>%
   dplyr::distinct(family, genus, species) %>%
-  dplyr::anti_join(filter(master, !is.na(a)), by = c("family", "genus", "species"))
+  dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
 
 #2. Fill length data with relevant a and b and if blank use family---
-length.species.ab <- master %>% # done this way around to avoid duplicating Family coloum
+length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
   dplyr::select(-family) %>%
   dplyr::inner_join(length3dpoints.clean(), ., by = c("genus", "species")) # only keeps row if has a and b
 
 # 3. Make family length.weight
-family.lw <- master %>%
+family.lw <- all_data$master %>%
   dplyr::group_by(family, length.measure) %>%
   dplyr::mutate(log.a = log10(a)) %>%     
   dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3312,7 +3312,7 @@ family.lw <- master %>%
   dplyr::filter(min.rank ==  0)
 
 length.family.ab <- length3dpoints.clean() %>%
-  dplyr::anti_join(master, by = c("genus", "species")) %>%
+  dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
   dplyr::left_join(family.lw, by = "family")
 
 # 5. Fill length data with relevant a and b and if blank use family---
@@ -3337,7 +3337,7 @@ complete.length.number.mass <- length.species.ab %>%
 ## ► Create filtered MASS download -----
 mass.complete.download <- reactive({
   
-  length3dpoints <-  dplyr::left_join(length3dpoints(), synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints <-  dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, em.comment) %>%
@@ -3352,15 +3352,15 @@ mass.complete.download <- reactive({
   # 1. Check for missing length weight relationship
   taxa.missing.lw <- length3dpoints %>%
     dplyr::distinct(family, genus, species) %>%
-    dplyr::anti_join(filter(master, !is.na(a)), by = c("family", "genus", "species"))
+    dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
   
   #2. Fill length data with relevant a and b and if blank use family---
-  length.species.ab <- master %>% # done this way around to avoid duplicating Family coloum
+  length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
     dplyr::select(-family) %>%
     dplyr::inner_join(length3dpoints, ., by = c("genus", "species")) # only keeps row if has a and b
   
   # 3. Make family length.weight
-  family.lw <- master %>%
+  family.lw <- all_data$master %>%
     dplyr::group_by(family, length.measure) %>%
     dplyr::mutate(log.a = log10(a)) %>%     
     dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3378,7 +3378,7 @@ mass.complete.download <- reactive({
     dplyr::filter(min.rank ==  0)
   
   length.family.ab <- length3dpoints %>%
-    dplyr::anti_join(master, by = c("genus", "species")) %>%
+    dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
     dplyr::left_join(family.lw, by = "family")
   
   # 5. Fill length data with relevant a and b and if blank use family---
@@ -3398,7 +3398,7 @@ mass.complete.download <- reactive({
     dplyr::mutate(mass.kg = mass.g/1000)
   
   if (input$error.synonyms == TRUE) {
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -3414,7 +3414,7 @@ mass.complete.download <- reactive({
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
   } 
   else{ 
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
@@ -3431,7 +3431,7 @@ mass.complete.download <- reactive({
   
   complete.length.number.mass <- complete.length.number.mass
   
-  species.out.of.area <- master.expanded %>%
+  species.out.of.area <- all_data$master.expanded %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(complete.length.number.mass, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -3448,7 +3448,7 @@ mass.complete.download <- reactive({
   mass.area <- mass.area %>%
     dplyr::filter(range<(input$error.range.limit*1000))
   
-  length.wrong <- left_join(mass.area, master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(mass.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>fb.length_max) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big"))
   
@@ -3520,7 +3520,7 @@ output$mass.species.dropdown <- renderUI({
 output$mass.top.species <- renderPlot({
   mass.sum <- mass() %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-    left_join(classes) %>%
+    left_join(all_data$classes) %>%
     dplyr::group_by(class, scientific) %>%
     dplyr::summarise(sum.mass.g = sum(mass.g)) %>%
     dplyr::ungroup() %>%
@@ -3644,15 +3644,15 @@ mass.t <- reactive({
   # 1. Check for missing length weight relationship
   taxa.missing.lw <- length3dpoints.clean.t() %>%
     dplyr::distinct(family, genus, species) %>%
-    dplyr::anti_join(filter(master, !is.na(a)), by = c("family", "genus", "species"))
+    dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
   
   #2. Fill length data with relevant a and b and if blank use family---
-  length.species.ab <- master %>% # done this way around to avoid duplicating Family coloum
+  length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
     dplyr::select(-family) %>%
     dplyr::inner_join(length3dpoints.clean.t(), ., by = c("genus", "species")) # only keeps row if has a and b
   
   # 3. Make family length.weight
-  family.lw <- master %>%
+  family.lw <- all_data$master %>%
     dplyr::group_by(family, length.measure) %>%
     dplyr::mutate(log.a = log10(a)) %>%     
     dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3670,7 +3670,7 @@ mass.t <- reactive({
     dplyr::filter(min.rank ==  0)
   
   length.family.ab <- length3dpoints.clean.t() %>%
-    dplyr::anti_join(master, by = c("genus", "species")) %>%
+    dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
     dplyr::left_join(family.lw, by = "family")
   
   # 5. Fill length data with relevant a and b and if blank use family---
@@ -3695,7 +3695,7 @@ mass.t <- reactive({
 ## ► Create filtered MASS download -----
 mass.complete.download.t <- reactive({
   
-  length3dpoints <-  dplyr::left_join(length3dpoints.t(), synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints <-  dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range) %>%
@@ -3710,15 +3710,15 @@ mass.complete.download.t <- reactive({
   # 1. Check for missing length weight relationship
   taxa.missing.lw <- length3dpoints %>%
     dplyr::distinct(family, genus, species) %>%
-    dplyr::anti_join(filter(master, !is.na(a)), by = c("family", "genus", "species"))
+    dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
   
   #2. Fill length data with relevant a and b and if blank use family---
-  length.species.ab <- master %>% # done this way around to avoid duplicating Family coloum
+  length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
     dplyr::select(-family) %>%
     dplyr::inner_join(length3dpoints, ., by = c("genus", "species")) # only keeps row if has a and b
   
   # 3. Make family length.weight
-  family.lw <- master %>%
+  family.lw <- all_data$master %>%
     dplyr::group_by(family, length.measure) %>%
     dplyr::mutate(log.a = log10(a)) %>%     
     dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3736,7 +3736,7 @@ mass.complete.download.t <- reactive({
     dplyr::filter(min.rank ==  0)
   
   length.family.ab <- length3dpoints %>%
-    dplyr::anti_join(master, by = c("genus", "species")) %>%
+    dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
     dplyr::left_join(family.lw, by = "family")
   
   # 5. Fill length data with relevant a and b and if blank use family---
@@ -3756,7 +3756,7 @@ mass.complete.download.t <- reactive({
     dplyr::mutate(mass.kg = mass.g/1000)
   
   if (input$error.synonyms == TRUE) {
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -3772,7 +3772,7 @@ mass.complete.download.t <- reactive({
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
   } 
   else{ 
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
@@ -3789,7 +3789,7 @@ mass.complete.download.t <- reactive({
   
   complete.length.number.mass <- complete.length.number.mass
   
-  species.out.of.area <- master.expanded %>%
+  species.out.of.area <- all_data$master.expanded %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(complete.length.number.mass, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -3806,7 +3806,7 @@ mass.complete.download.t <- reactive({
   mass.area <- mass.area %>%
     dplyr::filter(range < (input$error.range.limit.t*1000))
   
-  length.wrong <- left_join(mass.area, master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(mass.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>fb.length_max) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big"))
   
@@ -3881,7 +3881,7 @@ output$mass.species.dropdown.t <- renderUI({
 output$mass.top.species.t <- renderPlot({
   mass.sum <- mass.t() %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-    left_join(classes) %>%
+    left_join(all_data$classes) %>%
     dplyr::group_by(class, scientific) %>%
     dplyr::summarise(sum.mass.g = sum(mass.g)) %>%
     dplyr::ungroup() %>%
@@ -4960,7 +4960,7 @@ output$australia.regions <- renderLeaflet({
   
   leaflet <- leaflet() %>% 
     addTiles(group = "Open Street Map") %>%
-    addPolygons(data = marine.regions, weight = 1, label = marine.regions@data$REGION, 
+    addPolygons(data = all_data$marine.regions, weight = 1, label = all_data$marine.regions@data$REGION, 
                 fillColor = "white", 
                 color = "black", 
                 fillOpacity = 0.9)
