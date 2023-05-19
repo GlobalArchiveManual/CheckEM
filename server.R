@@ -637,7 +637,7 @@ points.outside.periods <- reactive({
   
   points <- points() %>%
     dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, frame, em.comment
+    dplyr::select(campaignid, sample, period, family, genus, species, number, frame, em.comment, code
 )
 })
 
@@ -1020,10 +1020,10 @@ maxn.raw <- reactive({
   maxn <- points() %>%
     dplyr::mutate(number = as.numeric(number)) %>%
     replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
-    dplyr::group_by(campaignid, sample, filename, period, periodtime, frame, family, genus, species, em.comment) %>% # removed comment 21/10/21
+    dplyr::group_by(campaignid, sample, filename, period, periodtime, frame, family, genus, species, em.comment, code) %>% # removed comment 21/10/21
     dplyr::summarise(maxn = sum(number)) %>%
     dplyr::ungroup() %>%
-    dplyr::group_by(campaignid, sample, family, genus, species) %>%
+    dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
     dplyr::slice(which.max(maxn)) %>%
     dplyr::ungroup() %>%
     dplyr::filter(!is.na(maxn)) %>%
@@ -1045,7 +1045,7 @@ maxn.clean <- dplyr::left_join(maxn.raw(), all_data$synonyms, by = c("family", "
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-    dplyr::group_by(campaignid, sample, family, genus, species) %>%
+    dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
     dplyr::slice(which.max(maxn)) %>%
     dplyr::ungroup()
 })
@@ -1055,10 +1055,10 @@ maxn.complete <- reactive({
 
 maxn.complete <- maxn.clean() %>%
   full_join(metadata.regions()) %>%
-  dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment)) %>%
-  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+  dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment, code)) %>%
+  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
   replace_na(list(maxn = 0)) %>%
-  dplyr::group_by(campaignid, sample, family, genus, species) %>%
+  dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
   ungroup()
 })
@@ -1074,14 +1074,14 @@ maxn.complete.download <- reactive({
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>%
+      dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
       dplyr::slice(which.max(maxn)) %>%
       dplyr::ungroup() %>%
       dplyr::full_join(metadata.regions()) %>%
-      dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment)) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment, code)) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(maxn = 0)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species, em.comment) %>%
+      dplyr::group_by(campaignid, sample, family, genus, species, em.comment, code) %>%
       dplyr::summarise(maxn = sum(maxn)) %>%
       ungroup() %>%
       dplyr::left_join(metadata.regions()) %>%
@@ -1089,11 +1089,11 @@ maxn.complete.download <- reactive({
   } 
   else{ 
     maxn.complete <- maxn %>%
-      dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment)) %>%
+      dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment, code)) %>%
       dplyr::full_join(metadata.regions()) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(maxn = 0)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species, em.comment) %>%
+      dplyr::group_by(campaignid, sample, family, genus, species, em.comment, code) %>%
       dplyr::summarise(maxn = sum(maxn)) %>%
       ungroup() %>%
       dplyr::left_join(metadata.regions()) %>%
@@ -1126,7 +1126,7 @@ maxn.complete.download <- reactive({
       
     maxn.area <- maxn.area %>%
       dplyr::filter(!maxn %in% 0) %>%
-      dplyr::select(campaignid, sample, family, genus, species, maxn)} # remove metadata columns
+      dplyr::select(campaignid, sample, family, genus, species, code, maxn)} # remove metadata columns
   
   maxn.area <- maxn.area %>%
     dplyr::filter(!family %in% c("", NA, NULL))
@@ -1694,9 +1694,9 @@ length3dpoints.clean <- reactive({
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     # dplyr::filter(range < (input$range.limit * 1000)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision, code) %>%
     # dplyr::mutate(precision.percent = (precision/length) *100) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% # we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
     # dplyr::mutate(length = as.numeric(length)) %>%
@@ -1720,8 +1720,8 @@ length.complete.download <- reactive({
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -1732,8 +1732,8 @@ length.complete.download <- reactive({
   else{ 
     length.complete <- dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -1798,8 +1798,8 @@ length.complete.download <- reactive({
 
   length.big <- length.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision, code) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% 
     # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
@@ -1819,7 +1819,7 @@ length.complete.download <- reactive({
     } else { 
     length.big <- length.big %>%
       filter(!number %in% 0)%>%
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, rms, precision) # remove metadata columns
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, rms, precision, code) # remove metadata columns
   }
 
   print("final length data for downloading")
@@ -1907,7 +1907,7 @@ onclick('click.threedpoints.abundance', showModal(modalDialog(
 lengths.no.number <- reactive({
   lengths.no.number <- length() %>%
     filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment, rms, precision)
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment, rms, precision, code)
 })
 
 ## ►  Lengths without a number - value box ----
@@ -2215,7 +2215,7 @@ length.out.of.range <- reactive({
   
   length.out.of.range <- length3dpoints() %>%
     dplyr::filter(range > range.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright, em.comment, rms, precision)
+    dplyr::select(campaignid, sample, family, genus, species, range, frameleft, frameright, em.comment, rms, precision, code)
 })
 
 ## ► Out of range - valuebox ----
@@ -2252,7 +2252,7 @@ length.wrong.rms <- reactive({
   
   length.wrong.rms <- length3dpoints() %>%
     dplyr::filter(rms > rms.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, code)
 })
 
 ## ► Over RMS - valuebox ----
@@ -2289,7 +2289,7 @@ length.wrong.precision <- reactive({
   length.wrong.precision <- length3dpoints() %>%
     dplyr::mutate(precision.percent = (precision/length)*100) %>%
     dplyr::filter(precision.percent > precision.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent, code)
 })
 
 ## ► Over precision - valuebox ----
@@ -2479,8 +2479,8 @@ length3dpoints.clean.t <- reactive({
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::filter(range < (input$range.limit.t * 1000)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, rms, x, y, z, midx, midy, midz, em.comment, rms, precision) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, rms, x, y, z, midx, midy, midz, em.comment, rms, precision, code) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>%
     dplyr::ungroup() %>%
     # dplyr::mutate(length = as.numeric(length)) %>%
@@ -2501,8 +2501,8 @@ length.complete.download.t <- reactive({
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -2514,8 +2514,8 @@ length.complete.download.t <- reactive({
     
     length.complete <- dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% 
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -2586,8 +2586,8 @@ length.complete.download.t <- reactive({
   
   length.big <- length.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision, code) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% 
     # dplyr::mutate(length = as.numeric(length)) %>%
     dplyr::left_join(metadata.regions()) %>%
@@ -2693,7 +2693,7 @@ onclick('click.threedpoints.abundance.t', showModal(modalDialog(
 lengths.no.number.t <- reactive({
   lengths.no.number.t <- length() %>%
     filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
-    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment, rms, precision)
+    dplyr::select(campaignid, sample, period, family, genus, species, number, length, periodtime,  frameleft, em.comment, rms, precision, code)
 })
 
 ## ►  Lengths without a number - value box ----
@@ -2868,7 +2868,7 @@ length.wrong.t <- reactive({
   length.wrong <- left_join(length3dpoints.clean.t(), all_data$master.min.max, by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > max.length) %>%
     mutate(reason = ifelse(length < min.length, "too small", "too big")) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, frameleft, rms, precision) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, frameleft, rms, precision, code) %>%
     mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
     dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))
   
@@ -3004,7 +3004,7 @@ length.out.of.range.t <- reactive({
   
   length.out.of.range <- length3dpoints.t() %>%
     dplyr::filter(range > range.limit) %>% 
-    dplyr::select(campaignid, sample, family, genus, species, range, length,  frameleft, frameright, em.comment, rms, precision)
+    dplyr::select(campaignid, sample, family, genus, species, range, length,  frameleft, frameright, em.comment, rms, precision, code)
 })
 
 ## ► Out of range - valuebox ----
@@ -3043,7 +3043,7 @@ length.out.of.transect.t <- reactive({
   
   length.out.of.transect <- length3dpoints.t() %>%
     dplyr::filter(c(midx > transect.limit | midx < -transect.limit | midy > transect.limit | midy < -transect.limit | x > transect.limit | x < -transect.limit | y > transect.limit | y < -transect.limit)) %>% 
-    dplyr::select(campaignid, sample, family, genus, species, range, length, frameleft, frameright, midx, midy, x, y, em.comment, rms, precision)
+    dplyr::select(campaignid, sample, family, genus, species, range, length, frameleft, frameright, midx, midy, x, y, em.comment, rms, precision, code)
 })
 
 ## ► Out of transect - valuebox ----
@@ -3080,7 +3080,7 @@ length.wrong.rms.t <- reactive({
   
   length.wrong.rms.t <- length3dpoints.t() %>%
     dplyr::filter(rms > rms.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, code)
 })
 
 ## ► Over RMS - valuebox ----
@@ -3117,7 +3117,7 @@ length.wrong.precision.t <- reactive({
   length.wrong.precision.t <- length3dpoints() %>%
     dplyr::mutate(precision.percent = (precision/length)*100) %>%
     dplyr::filter(precision.percent > precision.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent, code)
 })
 
 ## ► Over precision - valuebox ----
@@ -3326,8 +3326,8 @@ complete.length.number.mass <- length.species.ab %>%
   dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
   dplyr::filter(mass.g>0) %>%
   dplyr::full_join(metadata.regions()) %>%
-  dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm, em.comment)) %>%
-  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+  dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm, em.comment, rms, precision, code)) %>%
+  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
   tidyr::replace_na(list(mass.g = 0)) %>%
   dplyr::mutate(mass.kg = mass.g/1000) %>%
   dplyr::left_join(metadata.regions())
@@ -3340,8 +3340,8 @@ mass.complete.download <- reactive({
   length3dpoints <-  dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, em.comment) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, em.comment, rms, precision, code) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
     # dplyr::mutate(length = as.numeric(length)) %>%
@@ -3392,8 +3392,8 @@ mass.complete.download <- reactive({
     dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
     dplyr::filter(mass.g>0) %>%
     dplyr::full_join(metadata.regions()) %>%
-    dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm, em.comment)) %>%
-    tidyr::complete(campaignid, sample, nesting(family, genus, species)) %>%
+    dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm, em.comment, rms, precision, code)) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     tidyr::replace_na(list(mass.g = 0)) %>%
     dplyr::mutate(mass.kg = mass.g/1000)
   
@@ -3404,8 +3404,8 @@ mass.complete.download <- reactive({
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment, rms, precision, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -3416,8 +3416,8 @@ mass.complete.download <- reactive({
   else{ 
     complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment, rms, precision, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -3475,8 +3475,8 @@ mass.complete.download <- reactive({
   }
   mass.big <- mass.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment, code) %>% # TODO Check this worked
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
@@ -3495,7 +3495,7 @@ mass.complete.download <- reactive({
   } else{ 
     mass.big <- mass.big %>%
       filter(!number %in% 0) %>%
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg)
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, code)
   }
   
 })
@@ -3684,8 +3684,8 @@ mass.t <- reactive({
     dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
     dplyr::filter(mass.g>0) %>%
     dplyr::full_join(metadata.regions()) %>%
-    dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm)) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm, code)) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     tidyr::replace_na(list(mass.g = 0)) %>%
     dplyr::mutate(mass.kg = mass.g/1000) %>%
     dplyr::left_join(metadata.regions())
@@ -3698,8 +3698,8 @@ mass.complete.download.t <- reactive({
   length3dpoints <-  dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, code) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::ungroup() %>%
     # dplyr::mutate(length = as.numeric(length)) %>%
@@ -3750,8 +3750,8 @@ mass.complete.download.t <- reactive({
     dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
     dplyr::filter(mass.g>0) %>%
     dplyr::full_join(metadata.regions()) %>%
-    dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm)) %>%
-    tidyr::complete(campaignid, sample, nesting(family, genus, species)) %>%
+    dplyr::select(c(campaignid, sample, family, genus, species, length, range, number, mass.g, length.cm, code)) %>%
+    tidyr::complete(campaignid, sample, nesting(family, genus, species, code)) %>%
     tidyr::replace_na(list(mass.g = 0)) %>%
     dplyr::mutate(mass.kg = mass.g/1000)
   
@@ -3762,8 +3762,8 @@ mass.complete.download.t <- reactive({
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -3774,8 +3774,8 @@ mass.complete.download.t <- reactive({
   else{ 
     complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
       dplyr::right_join(metadata.regions()) %>% # add in all samples
-      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
-      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+      dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, code) %>%
+      tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
       replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
       dplyr::ungroup() %>%
       # dplyr::mutate(length = as.numeric(length)) %>%
@@ -3833,8 +3833,8 @@ mass.complete.download.t <- reactive({
   }
   mass.big <- mass.big %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
-    dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg) %>%
-    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, code) %>%
+    tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
     replace_na(list(number = 0)) %>% #we add in zeros - in case we want to calulate abundance of species based on a length rule (e.g. greater than legal size)
     dplyr::left_join(metadata.regions()) %>%
     filter(!is.na(family)) %>%
@@ -4775,7 +4775,7 @@ all.errors <- reactive({
   print("length.wrong.rms")
   length.wrong.rms <- length3dpoints() %>%
     dplyr::filter(rms > rms.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)%>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, code)%>%
     mutate(error = "over.RMS")%>%
     glimpse()#%>%
 
@@ -4785,12 +4785,12 @@ all.errors <- reactive({
   length.wrong.precision <- length3dpoints() %>%
     dplyr::mutate(precision.percent = (precision/length)*100) %>%
     dplyr::filter(precision.percent > precision.limit) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)%>%
+    dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent, code)%>%
     mutate(error = "over.Precision")%>%
     glimpse()#%>%
   
   all.errors <- bind_rows(points.samples.without.metadata, samples.without.periods, periods.no.end, periods.wrong, points.outside.periods, lengths.outside.periods, points.no.number, lengths.no.number, maxn.species.not.observed, length.species.not.observed, length.out.of.range, length.wrong.small, length.wrong.big, length.wrong.rms) %>%
-    dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment, rms, precision) %>%
+    dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment, rms, precision, code) %>%
     distinct() %>%
     arrange(campaignid, sample)
   
@@ -4921,7 +4921,7 @@ all.errors.t <- reactive({
     
     length.wrong.rms <- length3dpoints.t() %>%
       dplyr::filter(rms > rms.limit) %>%
-      dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision)%>%
+      dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, code)%>%
       mutate(error = "over.RMS")
     
     precision.limit <- (input$error.report.precision.t)
@@ -4929,7 +4929,7 @@ all.errors.t <- reactive({
     length.wrong.precision <- length3dpoints.t() %>%
       dplyr::mutate(precision.percent = (precision/length)*100) %>%
       dplyr::filter(precision.percent > precision.limit) %>%
-      dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent)%>%
+      dplyr::select(campaignid, sample, family, genus, species, length, range, frameleft, frameright, em.comment, rms, precision, precision.percent, code)%>%
       mutate(error = "over.Precision")
   
   all.errors <- bind_rows(points.samples.without.metadata.t, samples.without.periods.t, periods.no.end.t, points.outside.periods.t, lengths.outside.periods.t, lengths.no.number.t, length.species.not.observed.t, length.out.of.range.t, length.out.of.transect.t, length.wrong.small.t, length.wrong.big.t, length.wrong.rms, length.wrong.precision) %>%
@@ -4988,6 +4988,7 @@ output$world.regions.leaflet <- renderLeaflet({
   
 })
 
+# Link between inputs ----
 observeEvent(input$period.limit, {
   updateNumericInput(session, "error.period.length", value = input$period.limit)
 })
