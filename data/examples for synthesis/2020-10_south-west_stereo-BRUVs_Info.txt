@@ -1,0 +1,256 @@
+OpCode	TapeReader	Depth	Comment	Info5Name	Info5Value	Info6Name	Info6Value	Info7Name	Info7Value	Info8Name	Info8Value	Info9Name	Info9Value	Info10Name	Info10Value	Info11Name	Info11Value	Info12Name	Info12Value
+FH50	Daphne	44.6																	
+FHC	Daphne	36.2																	
+IO72	Ramesh																		
+FHA	Daphne	44.6																	
+IO65	Ramesh																		
+FH5	Daphne	44.5																	
+IO64	Ramesh																		
+IO73	Ramesh																		
+IO227	Ramesh																		
+FH7	Daphne	45																	
+FH20	Daphne	43.1																	
+IO229	Ramesh																		
+IO46	Rachel																		
+IO47	Rachel																		
+IO101	Rachel																		
+IO102	Rachel																		
+IO105	Rachel																		
+IO107	Rachel																		
+IO108	Rachel																		
+IO241	Ramesh																		
+IO113	Rachell																		
+IO115	Rachel																		
+IO192	Rachel																		
+IO211	Rachel																		
+FHB	Daphne	41.3																	
+FH108	Daphne	44.7																	
+FH102	Daphne	44.1																	
+IO216	Rachel																		
+FH95	Daphne	46.8																	
+IO280	Rachel																		
+FH34	Daphne	44.8																	
+FH44	Daphne	43.3																	
+FH82	Daphne	44.8																	
+IO37	Brooke Gibbons																		
+FH28	Daphne	44.7																	
+IO290	Rachel																		
+FH30	Daphne	46.2																	
+IO291	Rachel																		
+FH46	Daphne	44.9																	
+IO295	Rachel																		
+IO297	Rachel																		
+IO302	Rachel																		
+IO40	Brooke Gibbons																		
+IO58	Brooke Gibbons																		
+IO330	Rachel																		
+IO110	Brooke Gibbons																		
+IO245	Ramesh																		
+IO258	Ramesh																		
+IO355	Rachel 																		
+IO370	Rachel																		
+IO180	Brooke Gibbons																		
+FH64	Daphne	44.2																	
+IO253	Brooke Gibbons																		
+IO378	Rachel																		
+FH93	Daphne	43.3																	
+IO263	Brooke Gibbons																		
+IOC04	Rachel																		
+IO264	Brooke Gibbons																		
+IOC05	Rachel																		
+IO294	Rachel																		
+FH11	Rachel																		
+IO269	Brooke Gibbons																		
+IO261	Ramesh																		
+IO277	Brooke Gibbons																		
+IO1	Hayley																		
+IO278	Brooke Gibbons																		
+IO3	Hayley																		
+IO4	Hayley																		
+IO300	Brooke Gibbons																		
+FH12	Rachel																		
+IO319	Rachel																		
+FH35	Rachel																		
+IO123	Hayley																		
+IO125	Hayley																		
+IO201	Hayley 																		
+FH109	Rachel																		
+FHD	Daphne	39.5																	
+FHE	Daphne	42.3																	
+FH6	Daphne	46																	
+IO332	Rachel																		
+IO333	Rachel																		
+FH18	Daphne	43.5																	
+IO204	Hayley																		
+IO207	Hayley																		
+FH26	Daphne	44.1																	
+IO222	Hayley 																		
+FH55	Rachel																		
+FH27	Daphne	42.9																	
+FH31	Daphne	45.4																	
+IO337	Daphne	43																	
+IO223	Hayley																		
+IO338	Daphne	46																	
+IO339	Daphne	41.1																	
+IO307	Daphne	128																	
+IO224	Hayley																		
+IO225	Hayley																		
+IO312	Hayley																		
+IO325	Hayley 																		
+IO327	Hayley																		
+IO334	Hayley																		
+IOREDO344	Daphne	138																	
+IO335	Hayley																		
+IO323	Daphne	141																	
+IO352	Rachel																		
+IO361	Hayley																		
+IO374	Hayley																		
+IO353	Hayley																		
+IOCP11-2	Daphne	124																	
+IOCP11-1	Daphne	124																	
+FH67	Rachel																		
+IO364	Daphne	130																	
+IOCP2311	Daphne	142																	
+FH72	Rachel																		
+IO351	Daphne	142																	
+FH78	Rachel																		
+IO369	Rachel																		
+IO262	Rachel																		
+IO80	Hayley																		
+IO343	Rachel																		
+IO266	Hayley																		
+IO81	Hayley																		
+IO91	Hayley 																		
+IO155	Hayley																		
+IO164	Hayley																		
+IO165	Hayley 																		
+FH87	Rachel																		
+IO184	Hayley																		
+FH94	Rachel																		
+IO210	Hayley																		
+FH8	Daphne	43.9																	
+IO215	Hayley																		
+IO218	Hayley																		
+IO237	Hayley																		
+IO239	Hayley																		
+FH15	Daphne	48																	
+IO313	Rachel																		
+FH17	Daphne	42.9																	
+IO331	Rachel																		
+FH21	Daphne	45																	
+IO357	Hayley																		
+IO158	Hayley																		
+IO49	Rachel																		
+IO152	Hayley 																		
+IO145	Hayley																		
+IO132	Hayley																		
+IO109	Rachel																		
+FH84	Daphne	45.6																	
+FH92	Daphne	44.2																	
+IO117	Rachel																		
+IO191	Rachel																		
+IO194	Rachel																		
+FH110	Daphne	44.7																	
+IO298	Rachel																		
+FHC02	Daphne	42																	
+FH69	Ramesh																		
+IO299	Rachel																		
+FHC03	Claude																		
+IO324	Rachel																		
+IO329	Rachel																		
+FH23	Daphne	44.2																	
+IO100	Rachel																		
+FH99	Hayley																		
+FH71	Daphne	45.3																	
+FH68	Rachel																		
+IO119	Rachel																		
+FH79	Daphne	44.9																	
+FH52	Hayley 																		
+FH83	Daphne	40.9																	
+FH111	Daphne	41.4																	
+IO133	Daphne	40.8																	
+FH51	Hayley																		
+FH47	Hayley																		
+FH42	Hayley 																		
+FH25	Hayley																		
+FH16	Hayley																		
+FH10	Hayley																		
+FH9	Hayley 																		
+IO350	Brooke Gibbons																		
+IO311	Brooke Gibbons																		
+FH106	Hayley 																		
+IO379	Rachel																		
+IO354	Brooke Gibbons																		
+IO276	Rachel																		
+FH39	Daphne	44.8																	
+IO349	Rachel																		
+IO148	Rachel																		
+IO363	Brooke Gibbons																		
+FH49	Daphne	43.9																	
+IO254	Rachel																		
+IO365	Brooke Gibbons																		
+IO71	Rachel																		
+IO15	Brooke Gibbons																		
+FH66	Daphne	41.8																	
+FH85	Daphne	44.7																	
+IO36	Rachel																		
+IO306	Rachel																		
+IO34	Brooke Gibbons																		
+FH41	Claude																		
+IO308	Rachel																		
+IO92	Brooke Gibbons																		
+FH45	Claude																		
+IO66	Rachel																		
+IO153	Brooke Gibbons																		
+IO195	Brooke Gibbons																		
+FH48	Claude																		
+FH70	Daphne	48.6																	
+FH74	Daphne	44.9																	
+FH56	Claude																		
+FH89	Daphne	45.7																	
+IO74	Rachel																		
+FH57	Claude																		
+FH96	Daphne	44.9																	
+FH63	Claude																		
+IO310	Brooke Gibbons																		
+IO377	Rachel																		
+FH58	Daphne	45.1																	
+FH65	Daphne	45.7																	
+FH59	Claude																		
+IO126	Brooke Gibbons																		
+FH60	Claude																		
+FH61	Claude																		
+IO122	Brooke Gibbons																		
+IO146	Claude																		
+IO244	Ramesh																		
+IO134	Claude																		
+IO260	Rachel																		
+IO5	Claude																		
+IO96	Brooke Gibbons																		
+IO199	Claude																		
+IO259	Rachel																		
+IO220	Brooke Gibbons																		
+IO147	Claude																		
+IO236	Hayley																		
+IOC06	Ramesh																		
+IO75	Rachel																		
+IO356	Claude																		
+IO226	Brooke Gibbons																		
+IO217	Claude																		
+FH37	Daphne	44.2																	
+IO95	Daphne	124																	
+IO228	Rachel																		
+IO62	Brooke Gibbons																		
+IO293	Claude																		
+IO98	Daphne	128																	
+IO273	Rachel																		
+IO328	Rachel																		
+IO59	Rachel																		
+FH24	Brooke Gibbons																		
+FHC01	Daphne	44.8																	
+FH14	Daphne	44.4																	
+FH54	Daphne	43.2																	
+FH2	Daphne	43.9																	
+FH40	Daphne	42.9																	
+IO189	Daphne	139																	
+IO16	Daphne	41.4																	

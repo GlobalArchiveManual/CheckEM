@@ -1,0 +1,2 @@
+OpCode	ImagePtPair	FilenameLeft	FrameLeft	FilenameRight	FrameRight	Time	Period	PeriodTime	X	Y	Z	sX	sY	sZ	RMS	Range	Direction	Family	Genus	Species	Code	Number	Stage	Activity	Comment	Attribute9	Attribute10
+1.06	16	1.06_L378.avi	44138	1.06_R377.avi	44743	29.42533	1	18.36667	283.00824	622.83741	-2687.35491	1.1562	1.84954	7.4919	1.07512	2773.06626	14.82787	Carangidae	Carangoides	chrysophrys	37337011	1	AD	Passing			

@@ -1,7 +1,7 @@
-OpCode,Period,Latitude,Longitude,Date,Time,Location,Status,Site,Depth,Observer,Successful.count,Successful.length,OldDate,Visibility,Opcode-old,Boat,L.cam,R.cam,L.card,R.card,Raw.HD,Con.HD,Time.In,Time.Out,Waypoint,Field.staff,Habitat.Image.(Y/N),Habitat.classification.(Y/N),MaxN.complete.(dd/mm/yy),MaxN.Checker,Length.analyst,Length.completed.(dd/mm/yy),DOV.sites,DOV.Comments
-Fish_MB5,1,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Yes,Yes,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Fish_MB5,2,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Yes,Yes,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Fish_MB5,3,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Yes,Yes,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Fish_MB5,4,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Yes,Yes,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Fish_MB5,5,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Yes,Yes,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Fish_MB5,6,-21.95062,113.92059,20140801,0:00:00,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Yes,Yes,14-Aug,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+OpCode,Period,Latitude,Longitude,Date.time.utc,Location,Status,Site,Depth,Observer.count,Observer.length,Successful.count,Successful.length
+Fish_MB5,1,-21.95062,113.92059,2014-08-01T00:00:00Z,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Todd Bond,Yes,Yes
+Fish_MB5,2,-21.95062,113.92059,2014-08-01T00:00:00Z,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Todd Bond,Yes,Yes
+Fish_MB5,3,-21.95062,113.92059,2014-08-01T00:00:00Z,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Todd Bond,Yes,Yes
+Fish_MB5,4,-21.95062,113.92059,2014-08-01T00:00:00Z,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Todd Bond,Yes,Yes
+Fish_MB5,5,-21.95062,113.92059,2014-08-01T00:00:00Z,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Todd Bond,Yes,Yes
+Fish_MB5,6,-21.95062,113.92059,2014-08-01T00:00:00Z,Mangrove Sanctuary,No-take,MangroveSZ_2,2,Todd Bond,Todd Bond,Yes,Yes

@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 google-analytics.html
+rsconnect/
+data/spatial/CAPAD*
+.secrets

@@ -1,0 +1,5 @@
+OpCode	ImagePtPair	FilenameLeft	FrameLeft	FilenameRight	FrameRight	Time	Period	PeriodTime	X	Y	Z	sX	sY	sZ	RMS	Range	Direction	Family	Genus	Species	Code	Number	Stage	Activity	Comment	Attribute9	Attribute10
+20220525-3-NAKED	0	20220525_BOTTOM_3_0001_0001.mp4	7129	20220525_BOTTOM_3_0001_0001.mp4	7129	1.98226		-1.00000																	sync		
+20220526-1-SQUID	0	20220526_BOTTOM_1_0001_0001.mp4	6675	20220526_TOP_1_0001_0001.mp4	1738	1.85602		-1.00000																	sync		
+20220526-3-NAKED	0	20220526_BOTTOM_3_0001_0001.mp4	2009	20220526_TOP_3_0001_0001.mp4	8476	0.55861		-1.00000																	sync		
+20220527-1-NAKED	0	20220527_BOTTOM_1_0001_0001.mp4	1225	20220527_TOP_1_0001_0001.mp4	2691	0.34062		-1.00000																	sync		
