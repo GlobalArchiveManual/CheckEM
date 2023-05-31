@@ -34,7 +34,7 @@ tagList(
                               menuItem("Create & check mass", tabName = "createmasst", icon = icon("check")),
                               menuItem("Download data", tabName = "downloadst", icon = icon("download")))
                             ),
-    
+    menuItem("Schema downloads", tabName = "schema", icon = icon("download", lib="font-awesome")),
     menuItem("User guide", tabName = "guide", icon = icon("info", lib="font-awesome")),
     menuItem("Change log", tabName = "change", icon = icon("edit", lib="font-awesome")),
     menuItem("Feedback", tabName = "feedback", icon = icon("comment", lib="font-awesome")),
@@ -128,6 +128,21 @@ tagList(
 
                        ),
                        
+                       
+                       box(width = 6, title = "Life history Information & Marine Regions", status = "primary", solidHeader = TRUE,
+                           radioButtons("lifehistory", "Which life history list & regions would you like to check your annotations against?",
+                                        c("Australian List (Based off CAAB and Fishes of Australia) & Australian Marine Regions" = "aus",
+                                          "Global List (Based off FishBase and WORMS) & FAO Major Fishing Areas" = "global"),
+                                        selected = "aus",
+                                        inline = FALSE),
+                           
+                           radioButtons("region", "How would you like to retrieve the marine region for your data?",
+                                        c("One marine region per campaignID (uses the average lat/lon of a campaign)" = "campaignid",
+                                          "One marine region per sample (uses the lat/lon for each sample, takes much longer to run but recommended if your data crosses multiple marine regions)" = "sample"),
+                                        selected = "campaignid",
+                                        inline = FALSE)
+                           
+                           ),
                        # box(width = 6, title = "Upload TransectMeasure exports (txt files)", status = "primary", solidHeader = FALSE,
                        #     
                        #     box(width = 6, height = 110, title = "Forward facing Dot Point Measurements", 
@@ -169,9 +184,8 @@ tagList(
                     tabPanel("Points", dataTableOutput("table.points")),
                     tabPanel("Lengths", dataTableOutput("table.length")),
                     tabPanel("3D Points", dataTableOutput("table.3dpoints")),
-                    tabPanel("Periods", dataTableOutput("table.periods"))
-                    #,
-                    # tabPanel("Habitat", tableOutput("table.habitat"))
+                    tabPanel("Periods", dataTableOutput("table.periods")),
+                    tabPanel("Habitat", tableOutput("table.habitat"))
                   
                   )
       )),
@@ -600,7 +614,18 @@ tagList(
               box(width = 8, status = "primary", title = NULL,
                   includeMarkdown("markdown/changelog.Rmd")
                   )
+              ),
+      
+      tabItem(tabName = "schema",
+              box(width = 8, status = "primary", title = NULL,
+                  downloadBttn("schema.fish", style = "unite", color = "primary", label = "Download Australian fish schema"),
+                  downloadBttn("schema.habitat", style = "unite", color = "primary", label = "Download habitat schema"),
+                  downloadBttn("schema.relief", style = "unite", color = "primary", label = "Download relief schema")
               )
+      )
+      
+      
+      
       )
       
     )

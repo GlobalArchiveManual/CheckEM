@@ -1,0 +1,615 @@
+level_2	level_3	level_4	level_5	scientific	qualifiers	CAAB_code
+Ascidians	Stalked	Colonial				35000906
+Ascidians	Stalked	Solitary				35000905
+Ascidians	Stalked					35000904
+Ascidians	Unstalked	Colonial				35000903
+Ascidians	Unstalked	Solitary				35000902
+Ascidians	Unstalked					35000901
+Ascidians						35000000
+Bacterial mats	Cyanobacteria					70000901
+Bacterial mats	Other					72000902
+Bacterial mats						72000901
+Bedforms	2D	Ripples (<10cm height)				82002003
+Bedforms	2D	Waves (>10cm height)				82002004
+Bedforms	2D					82002002
+Bedforms	3D	Ripples (<10cm height)				82002007
+Bedforms	3D	Waves (>10cm height)				82002008
+Bedforms	3D					82002006
+Bedforms	Bioturbated					82002005
+Bedforms	None					82002001
+Bedforms						82002000
+Bioturbation	Crawling traces	Complex trail				81005003
+Bioturbation	Crawling traces	Crater row				81005006
+Bioturbation	Crawling traces	Disturbed trace				81005007
+Bioturbation	Crawling traces	Mounded trail				81005004
+Bioturbation	Crawling traces	Perforated trail				81005005
+Bioturbation	Crawling traces	Thick trail				81005002
+Bioturbation	Crawling traces	Thin trail				81005001
+Bioturbation	Crawling traces					81005000
+Bioturbation	Dwelling traces	Burrow cluster				81001004
+Bioturbation	Dwelling traces	Crater cone				81001012
+Bioturbation	Dwelling traces	Elongate depression				81001001
+Bioturbation	Dwelling traces	Fractured mound				81001013
+Bioturbation	Dwelling traces	Large mound				81001002
+Bioturbation	Dwelling traces	Oblique burrow				81001005
+Bioturbation	Dwelling traces	Paired burrow				81001007
+Bioturbation	Dwelling traces	Rounded crater ring				81001010
+Bioturbation	Dwelling traces	Single burrow				81001006
+Bioturbation	Dwelling traces	Small mound				81001003
+Bioturbation	Dwelling traces	Spiked crater ring				81001011
+Bioturbation	Dwelling traces	Spotted mound				81001014
+Bioturbation	Dwelling traces	Trapdoor burrow				81001009
+Bioturbation	Dwelling traces	Vertical burrow				81001008
+Bioturbation	Dwelling traces					81001000
+Bioturbation	Feeding traces	Large rosette				81004001
+Bioturbation	Feeding traces	Petal rosette				81004003
+Bioturbation	Feeding traces	Pincushion rosette				81004005
+Bioturbation	Feeding traces	Rayed mound				81004004
+Bioturbation	Feeding traces	Small rosette				81004002
+Bioturbation	Feeding traces					81004000
+Bioturbation	Organism tests	Globule xenophyophore				81006002
+Bioturbation	Organism tests	Lumpy xenophyophore				81006001
+Bioturbation	Organism tests					81006000
+Bioturbation	Resting traces	Large depression				81003003
+Bioturbation	Resting traces	Star impression				81003002
+Bioturbation	Resting traces	Urchin trace				81003001
+Bioturbation	Resting traces					81003000
+Bioturbation	Unknown origin	Fern				81007006
+Bioturbation	Unknown origin	Matchstick				81007005
+Bioturbation	Unknown origin	Mesh				81007003
+Bioturbation	Unknown origin	Ovoid pinnate				81007001
+Bioturbation	Unknown origin	Pogostick				81007007
+Bioturbation	Unknown origin	Round pinnate				81007002
+Bioturbation	Unknown origin	Spider				81007004
+Bioturbation	Unknown origin					81007000
+Bioturbation	Waste casts	Coiled casts				81002001
+Bioturbation	Waste casts	Curly casts				81002005
+Bioturbation	Waste casts	Mounded casts				81002004
+Bioturbation	Waste casts	Nest casts				81002006
+Bioturbation	Waste casts	Round casts				81002003
+Bioturbation	Waste casts	Spirals				81002007
+Bioturbation	Waste casts	Switchbacks				81002008
+Bioturbation	Waste casts	Wavy casts				81002002
+Bioturbation	Waste casts					81002000
+Bioturbation						81000000
+Brachiopods						19100000
+Bryozoa	Hard	Branching				20000908
+Bryozoa	Hard	Encrusting				20000902
+Bryozoa	Hard	Fenestrate				20000903
+Bryozoa	Hard	Massive				20000904
+Bryozoa	Hard					20000901
+Bryozoa	Soft	Dendroid				20000906
+Bryozoa	Soft	Foliaceous				20000907
+Bryozoa	Soft					20000905
+Bryozoa						20000000
+Cnidaria	Colonial anemones	Corallimorphs				11280000
+Cnidaria	Colonial anemones	Zoanthids				11284000
+Cnidaria	Colonial anemones					11500901
+Cnidaria	Corals	Black & Octocorals				11168901
+Cnidaria	Corals	Black & Octocorals			Alive	11168901
+Cnidaria	Corals	Black & Octocorals			Recruit	11168901
+Cnidaria	Corals	Black & Octocorals			Bleached	11168901
+Cnidaria	Corals	Black & Octocorals			Dead	11168901
+Cnidaria	Corals	Black & Octocorals			Recently dead	11168901
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)			11171000
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Alive	11171000
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Recruit	11171000
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Bleached	11171000
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Dead	11171000
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Recently dead	11171000
+Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Alive	11168902
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Recruit	11168902
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Bleached	11168902
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Dead	11168902
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Recently dead	11168902
+Cnidaria	Corals	Black & Octocorals	Encrusting			11168919
+Cnidaria	Corals	Black & Octocorals	Encrusting		Alive	11168919
+Cnidaria	Corals	Black & Octocorals	Encrusting		Recruit	11168919
+Cnidaria	Corals	Black & Octocorals	Encrusting		Bleached	11168919
+Cnidaria	Corals	Black & Octocorals	Encrusting		Dead	11168919
+Cnidaria	Corals	Black & Octocorals	Encrusting		Recently dead	11168919
+Cnidaria	Corals	Black & Octocorals	Fan (2D)			11168912
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Alive	11168912
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Recruit	11168912
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Bleached	11168912
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Dead	11168912
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Recently dead	11168912
+Cnidaria	Corals	Black & Octocorals	Massive soft corals			11168920
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Alive	11168920
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Recruit	11168920
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Bleached	11168920
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Dead	11168920
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Recently dead	11168920
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)			11201901
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Alive	11201901
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Recruit	11201901
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Bleached	11201901
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Dead	11201901
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Recently dead	11201901
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)			11168918
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Alive	11168918
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Recruit	11168918
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Bleached	11168918
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Dead	11168918
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Recently dead	11168918
+Cnidaria	Corals	Black & Octocorals	Whip			11168917
+Cnidaria	Corals	Black & Octocorals	Whip		Alive	11168917
+Cnidaria	Corals	Black & Octocorals	Whip		Recruit	11168917
+Cnidaria	Corals	Black & Octocorals	Whip		Bleached	11168917
+Cnidaria	Corals	Black & Octocorals	Whip		Dead	11168917
+Cnidaria	Corals	Black & Octocorals	Whip		Recently dead	11168917
+Cnidaria	Corals	Stony corals				11290000
+Cnidaria	Corals	Stony corals			Alive	11290000
+Cnidaria	Corals	Stony corals			Recruit	11290000
+Cnidaria	Corals	Stony corals			Bleached	11290000
+Cnidaria	Corals	Stony corals			Dead	11290000
+Cnidaria	Corals	Stony corals			Recently dead	11290000
+Cnidaria	Corals	Stony corals	Bottlebrush			11290904
+Cnidaria	Corals	Stony corals	Bottlebrush		Alive	11290904
+Cnidaria	Corals	Stony corals	Bottlebrush		Recruit	11290904
+Cnidaria	Corals	Stony corals	Bottlebrush		Bleached	11290904
+Cnidaria	Corals	Stony corals	Bottlebrush		Dead	11290904
+Cnidaria	Corals	Stony corals	Bottlebrush		Recently dead	11290904
+Cnidaria	Corals	Stony corals	Branching			11290912
+Cnidaria	Corals	Stony corals	Branching		Alive	11290912
+Cnidaria	Corals	Stony corals	Branching		Recruit	11290912
+Cnidaria	Corals	Stony corals	Branching		Bleached	11290912
+Cnidaria	Corals	Stony corals	Branching		Dead	11290912
+Cnidaria	Corals	Stony corals	Branching		Recently dead	11290912
+Cnidaria	Corals	Stony corals	Columnar			11290915
+Cnidaria	Corals	Stony corals	Columnar		Alive	11290915
+Cnidaria	Corals	Stony corals	Columnar		Recruit	11290915
+Cnidaria	Corals	Stony corals	Columnar		Bleached	11290915
+Cnidaria	Corals	Stony corals	Columnar		Dead	11290915
+Cnidaria	Corals	Stony corals	Columnar		Recently dead	11290915
+Cnidaria	Corals	Stony corals	Corymbose			11290910
+Cnidaria	Corals	Stony corals	Corymbose		Alive	11290910
+Cnidaria	Corals	Stony corals	Corymbose		Recruit	11290910
+Cnidaria	Corals	Stony corals	Corymbose		Bleached	11290910
+Cnidaria	Corals	Stony corals	Corymbose		Dead	11290910
+Cnidaria	Corals	Stony corals	Corymbose		Recently dead	11290910
+Cnidaria	Corals	Stony corals	Digitate			11290909
+Cnidaria	Corals	Stony corals	Digitate		Alive	11290909
+Cnidaria	Corals	Stony corals	Digitate		Recruit	11290909
+Cnidaria	Corals	Stony corals	Digitate		Bleached	11290909
+Cnidaria	Corals	Stony corals	Digitate		Dead	11290909
+Cnidaria	Corals	Stony corals	Digitate		Recently dead	11290909
+Cnidaria	Corals	Stony corals	Encrusting			11290908
+Cnidaria	Corals	Stony corals	Encrusting		Alive	11290908
+Cnidaria	Corals	Stony corals	Encrusting		Recruit	11290908
+Cnidaria	Corals	Stony corals	Encrusting		Bleached	11290908
+Cnidaria	Corals	Stony corals	Encrusting		Dead	11290908
+Cnidaria	Corals	Stony corals	Encrusting		Recently dead	11290908
+Cnidaria	Corals	Stony corals	Foliose / plate			11290907
+Cnidaria	Corals	Stony corals	Foliose / plate		Alive	11290907
+Cnidaria	Corals	Stony corals	Foliose / plate		Recruit	11290907
+Cnidaria	Corals	Stony corals	Foliose / plate		Bleached	11290907
+Cnidaria	Corals	Stony corals	Foliose / plate		Dead	11290907
+Cnidaria	Corals	Stony corals	Foliose / plate		Recently dead	11290907
+Cnidaria	Corals	Stony corals	Massive			11290906
+Cnidaria	Corals	Stony corals	Massive		Alive	11290906
+Cnidaria	Corals	Stony corals	Massive		Recruit	11290906
+Cnidaria	Corals	Stony corals	Massive		Bleached	11290906
+Cnidaria	Corals	Stony corals	Massive		Dead	11290906
+Cnidaria	Corals	Stony corals	Massive		Recently dead	11290906
+Cnidaria	Corals	Stony corals	Solitary			11290901
+Cnidaria	Corals	Stony corals	Solitary		Alive	11290901
+Cnidaria	Corals	Stony corals	Solitary		Recruit	11290901
+Cnidaria	Corals	Stony corals	Solitary		Bleached	11290901
+Cnidaria	Corals	Stony corals	Solitary		Dead	11290901
+Cnidaria	Corals	Stony corals	Solitary		Recently dead	11290901
+Cnidaria	Corals	Stony corals	Staghorn			11290913
+Cnidaria	Corals	Stony corals	Staghorn		Alive	11290913
+Cnidaria	Corals	Stony corals	Staghorn		Recruit	11290913
+Cnidaria	Corals	Stony corals	Staghorn		Bleached	11290913
+Cnidaria	Corals	Stony corals	Staghorn		Dead	11290913
+Cnidaria	Corals	Stony corals	Staghorn		Recently dead	11290913
+Cnidaria	Corals	Stony corals	Sub-massive			11290905
+Cnidaria	Corals	Stony corals	Sub-massive		Alive	11290905
+Cnidaria	Corals	Stony corals	Sub-massive		Recruit	11290905
+Cnidaria	Corals	Stony corals	Sub-massive		Bleached	11290905
+Cnidaria	Corals	Stony corals	Sub-massive		Dead	11290905
+Cnidaria	Corals	Stony corals	Sub-massive		Recently dead	11290905
+Cnidaria	Corals	Stony corals	Tabulate			11290911
+Cnidaria	Corals	Stony corals	Tabulate		Alive	11290911
+Cnidaria	Corals	Stony corals	Tabulate		Recruit	11290911
+Cnidaria	Corals	Stony corals	Tabulate		Bleached	11290911
+Cnidaria	Corals	Stony corals	Tabulate		Dead	11290911
+Cnidaria	Corals	Stony corals	Tabulate		Recently dead	11290911
+Cnidaria	Corals					11168000
+Cnidaria	Corals				Alive	11168000
+Cnidaria	Corals				Recruit	11168000
+Cnidaria	Corals				Bleached	11168000
+Cnidaria	Corals				Dead	11168000
+Cnidaria	Corals				Recently dead	11168000
+Cnidaria	Hydrocorals	Branching				11077906
+Cnidaria	Hydrocorals	Submassive / encrusting				11077907
+Cnidaria	Hydrocorals					11077000
+Cnidaria	Hydroids					11001000
+Cnidaria	True anemones	Flytrap				11229901
+Cnidaria	True anemones	Fourlobed				11229902
+Cnidaria	True anemones	Other anemones				11229903
+Cnidaria	True anemones					11229000
+Cnidaria	Tube anemones					11164000
+Cnidaria						11500000
+Crustacea	Barnacles	Acorn				27500902
+Crustacea	Barnacles	Stalked				27500901
+Crustacea	Barnacles					27500000
+Crustacea	Crabs	King crabs				28836000
+Crustacea	Crabs	Porcelain crabs				28843000
+Crustacea	Crabs	True crabs				28850000
+Crustacea	Crabs					28000903
+Crustacea	Hermit crabs	With anemones				28825903
+Crustacea	Hermit crabs	With shell or stone home 				28825902
+Crustacea	Hermit crabs					28825901
+Crustacea	Lobsters	Rock lobsters				28820000
+Crustacea	Lobsters	Slipper lobsters / bugs				28821000
+Crustacea	Lobsters	Squat lobsters				28825904
+Crustacea	Lobsters	True lobsters				28786000
+Crustacea	Lobsters					28000902
+Crustacea	Prawns / shrimps / mysids					28000901
+Crustacea						27000000
+Echinoderms	Feather stars	Stalked crinoids				25001901
+Echinoderms	Feather stars	Unstalked crinoids				25001902
+Echinoderms	Feather stars					25001000
+Echinoderms	Ophiuroids	Basket stars				25160902
+Echinoderms	Ophiuroids	Brittle / snake stars				25160901
+Echinoderms	Ophiuroids					25160000
+Echinoderms	Sea cucumbers	Benthic				25400901
+Echinoderms	Sea cucumbers	Pelagic / swimming				25400902
+Echinoderms	Sea cucumbers					25400000
+Echinoderms	Sea stars					25102000
+Echinoderms	Sea urchins	Irregular urchins				25200902
+Echinoderms	Sea urchins	Regular urchins				25200901
+Echinoderms	Sea urchins					25200000
+Echinoderms						25000000
+Fishes	Bony fishes					37990083
+Fishes	Eels					37990025
+Fishes	Elasmobranchs	Chimaeras				37990028
+Fishes	Elasmobranchs	Rays & skates				37990030
+Fishes	Elasmobranchs	Sharks				37990016
+Fishes	Elasmobranchs					37990082
+Fishes						37000000
+Jellies	Ctenophores					12000000
+Jellies	Cubozoa					11150000
+Jellies	Hydromedusae					11000901
+Jellies	Pyrosomes					35101000
+Jellies	Salps					35100000
+Jellies	Scyphozoa					11120000
+Jellies	Siphonophores					11090000
+Jellies						80600903
+Macroalgae	Articulated calcareous	Green				80300912
+Macroalgae	Articulated calcareous	Green			Drift	80300912
+Macroalgae	Articulated calcareous	Green			No epiphytes	80300912
+Macroalgae	Articulated calcareous	Green			Epiphytes algae	80300912
+Macroalgae	Articulated calcareous	Green			Epiphytes other	80300912
+Macroalgae	Articulated calcareous	Red				80300913
+Macroalgae	Articulated calcareous	Red			Drift	80300913
+Macroalgae	Articulated calcareous	Red			No epiphytes	80300913
+Macroalgae	Articulated calcareous	Red			Epiphytes algae	80300913
+Macroalgae	Articulated calcareous	Red			Epiphytes other	80300913
+Macroalgae	Articulated calcareous					80300911
+Macroalgae	Articulated calcareous				Drift	80300911
+Macroalgae	Articulated calcareous				No epiphytes	80300911
+Macroalgae	Articulated calcareous				Epiphytes algae	80300911
+Macroalgae	Articulated calcareous				Epiphytes other	80300911
+Macroalgae	Encrusting	Brown				80300927
+Macroalgae	Encrusting	Green				80300928
+Macroalgae	Encrusting	Red				80300929
+Macroalgae	Encrusting	Red	Calcareous			80300934
+Macroalgae	Encrusting	Red	Non-calcareous			80300935
+Macroalgae	Encrusting					80300926
+Macroalgae	Erect coarse branching	Brown				80300904
+Macroalgae	Erect coarse branching	Brown			Drift	80300904
+Macroalgae	Erect coarse branching	Brown			No epiphytes	80300904
+Macroalgae	Erect coarse branching	Brown			Epiphytes algae	80300904
+Macroalgae	Erect coarse branching	Brown			Epiphytes other	80300904
+Macroalgae	Erect coarse branching	Green				80300905
+Macroalgae	Erect coarse branching	Green			Drift	80300905
+Macroalgae	Erect coarse branching	Green			No epiphytes	80300905
+Macroalgae	Erect coarse branching	Green			Epiphytes algae	80300905
+Macroalgae	Erect coarse branching	Green			Epiphytes other	80300905
+Macroalgae	Erect coarse branching	Red				80300906
+Macroalgae	Erect coarse branching	Red			Drift	80300906
+Macroalgae	Erect coarse branching	Red			No epiphytes	80300906
+Macroalgae	Erect coarse branching	Red			Epiphytes algae	80300906
+Macroalgae	Erect coarse branching	Red			Epiphytes other	80300906
+Macroalgae	Erect coarse branching					80300903
+Macroalgae	Erect coarse branching				Drift	80300903
+Macroalgae	Erect coarse branching				No epiphytes	80300903
+Macroalgae	Erect coarse branching				Epiphytes algae	80300903
+Macroalgae	Erect coarse branching				Epiphytes other	80300903
+Macroalgae	Erect fine branching	Brown				80300908
+Macroalgae	Erect fine branching	Brown			Drift	80300908
+Macroalgae	Erect fine branching	Brown			No epiphytes	80300908
+Macroalgae	Erect fine branching	Brown			Epiphytes algae	80300908
+Macroalgae	Erect fine branching	Brown			Epiphytes other	80300908
+Macroalgae	Erect fine branching	Green				80300909
+Macroalgae	Erect fine branching	Green			Drift	80300909
+Macroalgae	Erect fine branching	Green			No epiphytes	80300909
+Macroalgae	Erect fine branching	Green			Epiphytes algae	80300909
+Macroalgae	Erect fine branching	Green			Epiphytes other	80300909
+Macroalgae	Erect fine branching	Red				80300910
+Macroalgae	Erect fine branching	Red			Drift	80300910
+Macroalgae	Erect fine branching	Red			No epiphytes	80300910
+Macroalgae	Erect fine branching	Red			Epiphytes algae	80300910
+Macroalgae	Erect fine branching	Red			Epiphytes other	80300910
+Macroalgae	Erect fine branching					80300907
+Macroalgae	Erect fine branching				Drift	80300907
+Macroalgae	Erect fine branching				No epiphytes	80300907
+Macroalgae	Erect fine branching				Epiphytes algae	80300907
+Macroalgae	Erect fine branching				Epiphytes other	80300907
+Macroalgae	Filamentous / filiform	Brown				80300931
+Macroalgae	Filamentous / filiform	Brown			Drift	80300931
+Macroalgae	Filamentous / filiform	Brown			No epiphytes	80300931
+Macroalgae	Filamentous / filiform	Brown			Epiphytes algae	80300931
+Macroalgae	Filamentous / filiform	Brown			Epiphytes other	80300931
+Macroalgae	Filamentous / filiform	Green				80300932
+Macroalgae	Filamentous / filiform	Green			Drift	80300932
+Macroalgae	Filamentous / filiform	Green			No epiphytes	80300932
+Macroalgae	Filamentous / filiform	Green			Epiphytes algae	80300932
+Macroalgae	Filamentous / filiform	Green			Epiphytes other	80300932
+Macroalgae	Filamentous / filiform	Red				80300933
+Macroalgae	Filamentous / filiform	Red			Drift	80300933
+Macroalgae	Filamentous / filiform	Red			No epiphytes	80300933
+Macroalgae	Filamentous / filiform	Red			Epiphytes algae	80300933
+Macroalgae	Filamentous / filiform	Red			Epiphytes other	80300933
+Macroalgae	Filamentous / filiform					80300930
+Macroalgae	Filamentous / filiform				Drift	80300930
+Macroalgae	Filamentous / filiform				No epiphytes	80300930
+Macroalgae	Filamentous / filiform				Epiphytes algae	80300930
+Macroalgae	Filamentous / filiform				Epiphytes other	80300930
+Macroalgae	Globose / saccate	Brown				80300915
+Macroalgae	Globose / saccate	Brown			Drift	80300915
+Macroalgae	Globose / saccate	Brown			No epiphytes	80300915
+Macroalgae	Globose / saccate	Brown			Epiphytes algae	80300915
+Macroalgae	Globose / saccate	Brown			Epiphytes other	80300915
+Macroalgae	Globose / saccate	Green				80300916
+Macroalgae	Globose / saccate	Green			Drift	80300916
+Macroalgae	Globose / saccate	Green			No epiphytes	80300916
+Macroalgae	Globose / saccate	Green			Epiphytes algae	80300916
+Macroalgae	Globose / saccate	Green			Epiphytes other	80300916
+Macroalgae	Globose / saccate	Red				80300917
+Macroalgae	Globose / saccate	Red			Drift	80300917
+Macroalgae	Globose / saccate	Red			No epiphytes	80300917
+Macroalgae	Globose / saccate	Red			Epiphytes algae	80300917
+Macroalgae	Globose / saccate	Red			Epiphytes other	80300917
+Macroalgae	Globose / saccate					80300914
+Macroalgae	Globose / saccate				Drift	80300914
+Macroalgae	Globose / saccate				No epiphytes	80300914
+Macroalgae	Globose / saccate				Epiphytes algae	80300914
+Macroalgae	Globose / saccate				Epiphytes other	80300914
+Macroalgae	Laminate	Brown				80300919
+Macroalgae	Laminate	Brown			Drift	80300919
+Macroalgae	Laminate	Brown			No epiphytes	80300919
+Macroalgae	Laminate	Brown			Epiphytes algae	80300919
+Macroalgae	Laminate	Brown			Epiphytes other	80300919
+Macroalgae	Laminate	Green				80300920
+Macroalgae	Laminate	Green			Drift	80300920
+Macroalgae	Laminate	Green			No epiphytes	80300920
+Macroalgae	Laminate	Green			Epiphytes algae	80300920
+Macroalgae	Laminate	Green			Epiphytes other	80300920
+Macroalgae	Laminate	Red				80300921
+Macroalgae	Laminate	Red			Drift	80300921
+Macroalgae	Laminate	Red			No epiphytes	80300921
+Macroalgae	Laminate	Red			Epiphytes algae	80300921
+Macroalgae	Laminate	Red			Epiphytes other	80300921
+Macroalgae	Laminate					80300918
+Macroalgae	Laminate				Drift	80300918
+Macroalgae	Laminate				No epiphytes	80300918
+Macroalgae	Laminate				Epiphytes algae	80300918
+Macroalgae	Laminate				Epiphytes other	80300918
+Macroalgae	Large canopy-forming	Brown				80300902
+Macroalgae	Large canopy-forming	Brown			Drift	80300902
+Macroalgae	Large canopy-forming	Brown			No epiphytes	80300902
+Macroalgae	Large canopy-forming	Brown			Epiphytes algae	80300902
+Macroalgae	Large canopy-forming	Brown			Epiphytes other	80300902
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Drift	54079009
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	No epiphytes	54079009
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Epiphytes algae	54079009
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Epiphytes other	54079009
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa		54102005
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Drift	54102005
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	No epiphytes	54102005
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Epiphytes algae	54102005
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Epiphytes other	54102005
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp		54102902
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Drift	54102902
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	No epiphytes	54102902
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Epiphytes algae	54102902
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Epiphytes other	54102902
+Macroalgae	Large canopy-forming	Brown		Sargassum spp		54105902
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Drift	54105902
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	No epiphytes	54105902
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes algae	54105902
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes other	54105902
+Macroalgae	Large canopy-forming					80300901
+Macroalgae	Large canopy-forming				Drift	80300901
+Macroalgae	Large canopy-forming				No epiphytes	80300901
+Macroalgae	Large canopy-forming				Epiphytes algae	80300901
+Macroalgae	Large canopy-forming				Epiphytes other	80300901
+Macroalgae	Sheet-like / membraneous	Brown				80300923
+Macroalgae	Sheet-like / membraneous	Brown			Drift	80300923
+Macroalgae	Sheet-like / membraneous	Brown			No epiphytes	80300923
+Macroalgae	Sheet-like / membraneous	Brown			Epiphytes algae	80300923
+Macroalgae	Sheet-like / membraneous	Brown			Epiphytes other	80300923
+Macroalgae	Sheet-like / membraneous	Green				80300924
+Macroalgae	Sheet-like / membraneous	Green			Drift	80300924
+Macroalgae	Sheet-like / membraneous	Green			No epiphytes	80300924
+Macroalgae	Sheet-like / membraneous	Green			Epiphytes algae	80300924
+Macroalgae	Sheet-like / membraneous	Green			Epiphytes other	80300924
+Macroalgae	Sheet-like / membraneous	Red				80300925
+Macroalgae	Sheet-like / membraneous	Red			Drift	80300925
+Macroalgae	Sheet-like / membraneous	Red			No epiphytes	80300925
+Macroalgae	Sheet-like / membraneous	Red			Epiphytes algae	80300925
+Macroalgae	Sheet-like / membraneous	Red			Epiphytes other	80300925
+Macroalgae	Sheet-like / membraneous					80300922
+Macroalgae	Sheet-like / membraneous				Drift	80300922
+Macroalgae	Sheet-like / membraneous				No epiphytes	80300922
+Macroalgae	Sheet-like / membraneous				Epiphytes algae	80300922
+Macroalgae	Sheet-like / membraneous				Epiphytes other	80300922
+Macroalgae						80300000
+Molluscs	Bivalves					23199000
+Molluscs	Cephalopods	Cuttlefish				23607000
+Molluscs	Cephalopods	Octopods				23650000
+Molluscs	Cephalopods	Squid				23615000
+Molluscs	Cephalopods					23590000
+Molluscs	Chitons					23100000
+Molluscs	Gastropods					24000000
+Molluscs						23000000
+Sea spiders						33000000
+Seagrasses	Elliptical leaves			Halophila spp		63605902
+Seagrasses	Elliptical leaves			Halophila spp	No epiphytes	63605902
+Seagrasses	Elliptical leaves			Halophila spp	Epiphytes algae	63605902
+Seagrasses	Elliptical leaves			Halophila spp	Epiphytes other	63605902
+Seagrasses	Elliptical leaves					63600902
+Seagrasses	Elliptical leaves				No epiphytes	63600902
+Seagrasses	Elliptical leaves				Epiphytes algae	63600902
+Seagrasses	Elliptical leaves				Epiphytes other	63600902
+Seagrasses	Strap-like leaves			Amphibolis spp		63618901
+Seagrasses	Strap-like leaves			Amphibolis spp	No epiphytes	63618901
+Seagrasses	Strap-like leaves			Amphibolis spp	Epiphytes algae	63618901
+Seagrasses	Strap-like leaves			Amphibolis spp	Epiphytes other	63618901
+Seagrasses	Strap-like leaves			Posidonia spp		63617901
+Seagrasses	Strap-like leaves			Posidonia spp	No epiphytes	63617901
+Seagrasses	Strap-like leaves			Posidonia spp	Epiphytes algae	63617901
+Seagrasses	Strap-like leaves			Posidonia spp	Epiphytes other	63617901
+Seagrasses	Strap-like leaves			Zostera spp		63619902
+Seagrasses	Strap-like leaves			Zostera spp	No epiphytes	63619902
+Seagrasses	Strap-like leaves			Zostera spp	Epiphytes algae	63619902
+Seagrasses	Strap-like leaves			Zostera spp	Epiphytes other	63619902
+Seagrasses	Strap-like leaves			Ruppia spp		63614901
+Seagrasses	Strap-like leaves			Ruppia spp	No epiphytes	63614901
+Seagrasses	Strap-like leaves			Ruppia spp	Epiphytes algae	63614901
+Seagrasses	Strap-like leaves			Ruppia spp	Epiphytes other	63614901
+Seagrasses	Strap-like leaves			Thalassodendron spp		63618905
+Seagrasses	Strap-like leaves			Thalassodendron spp	No epiphytes	63618905
+Seagrasses	Strap-like leaves			Thalassodendron spp	Epiphytes algae	63618905
+Seagrasses	Strap-like leaves			Thalassodendron spp	Epiphytes other	63618905
+Seagrasses	Strap-like leaves					63600903
+Seagrasses	Strap-like leaves				No epiphytes	63600903
+Seagrasses	Strap-like leaves				Epiphytes algae	63600903
+Seagrasses	Strap-like leaves				Epiphytes other	63600903
+Seagrasses						63600901
+Seagrasses					No epiphytes	63600901
+Seagrasses					Epiphytes algae	63600901
+Seagrasses					Epiphytes other	63600901
+Sessile invertebrates						00000002
+Sponges	Crusts	Creeping / ramose				10000917
+Sponges	Crusts	Encrusting				10000902
+Sponges	Crusts	Endolithic / bioeroding				10000921
+Sponges	Crusts					10000901
+Sponges	Cup-likes	Barrels				10000907
+Sponges	Cup-likes	Cups				10000910
+Sponges	Cup-likes	Cups	Cup / goblet			10000919
+Sponges	Cup-likes	Cups	Incomplete cup / curled fan			10000918
+Sponges	Cup-likes	Cups	Tables / discs			10000920
+Sponges	Cup-likes	Tubes and chimneys				10000911
+Sponges	Cup-likes					10000909
+Sponges	Erect forms	Branching				10000915
+Sponges	Erect forms	Laminar				10000913
+Sponges	Erect forms	Palmate				10000914
+Sponges	Erect forms	Simple				10000916
+Sponges	Erect forms	Stalked				10000906
+Sponges	Erect forms					10000912
+Sponges	Massive forms	Balls				10000905
+Sponges	Massive forms	Cryptic				10000908
+Sponges	Massive forms	Simple				10000904
+Sponges	Massive forms					10000903
+Sponges						10000000
+Unscorable						00000001
+Worms	Acorn worms					36110000
+Worms	Echiura					17020000
+Worms	Flatworms					13000000
+Worms	Penisworms					15400000
+Worms	Polychaetes	Other polychaetes				22000902
+Worms	Polychaetes	Tube worms				22000901
+Worms	Polychaetes					22000000
+Worms	Sipuncula					17000000
+Worms						80600901
+Substrate	Consolidated (hard)	Boulders				82001003
+Substrate	Consolidated (hard)	Boulders			Veneer	82001003
+Substrate	Consolidated (hard)	Boulders			Iceberg scour	82001003
+Substrate	Consolidated (hard)	Boulders			Storm damage	82001003
+Substrate	Consolidated (hard)	Boulders			Urchin barren	82001003
+Substrate	Consolidated (hard)	Boulders			Turf mat	82001003
+Substrate	Consolidated (hard)	Cobbles				82001004
+Substrate	Consolidated (hard)	Cobbles			Veneer	82001004
+Substrate	Consolidated (hard)	Cobbles			Iceberg scour	82001004
+Substrate	Consolidated (hard)	Cobbles			Storm damage	82001004
+Substrate	Consolidated (hard)	Cobbles			Urchin barren	82001004
+Substrate	Consolidated (hard)	Cobbles			Turf mat	82001004
+Substrate	Consolidated (hard)	Rock				82001002
+Substrate	Consolidated (hard)	Rock			Veneer	82001002
+Substrate	Consolidated (hard)	Rock			Iceberg scour	82001002
+Substrate	Consolidated (hard)	Rock			Storm damage	82001002
+Substrate	Consolidated (hard)	Rock			Urchin barren	82001002
+Substrate	Consolidated (hard)	Rock			Turf mat	82001002
+Substrate	Consolidated (hard)					82001001
+Substrate	Consolidated (hard)				Veneer	82001001
+Substrate	Consolidated (hard)				Iceberg scour	82001001
+Substrate	Consolidated (hard)				Storm damage	82001001
+Substrate	Consolidated (hard)				Urchin barren	82001001
+Substrate	Consolidated (hard)				Turf mat	82001001
+Substrate	Unconsolidated (soft)	Pebble / gravel				82001006
+Substrate	Unconsolidated (soft)	Pebble / gravel			Veneer	82001006
+Substrate	Unconsolidated (soft)	Pebble / gravel			Iceberg scour	82001006
+Substrate	Unconsolidated (soft)	Pebble / gravel			Storm damage	82001006
+Substrate	Unconsolidated (soft)	Pebble / gravel			Urchin barren	82001006
+Substrate	Unconsolidated (soft)	Pebble / gravel			Turf mat	82001006
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic			82001007
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Veneer	82001007
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Iceberg scour	82001007
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Storm damage	82001007
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Urchin barren	82001007
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Turf mat	82001007
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)			82001011
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Veneer	82001011
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Iceberg scour	82001011
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Storm damage	82001011
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Urchin barren	82001011
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Turf mat	82001011
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)			82001012
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Veneer	82001012
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Iceberg scour	82001012
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Storm damage	82001012
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Urchin barren	82001012
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Turf mat	82001012
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)				82001013
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Veneer	82001013
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Iceberg scour	82001013
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Storm damage	82001013
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Urchin barren	82001013
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Turf mat	82001013
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Veneer	82001014
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Iceberg scour	82001014
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Storm damage	82001014
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Urchin barren	82001014
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Turf mat	82001014
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)			82001015
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Veneer	82001015
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Iceberg scour	82001015
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Storm damage	82001015
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Urchin barren	82001015
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Turf mat	82001015
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)			82001016
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Veneer	82001016
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Iceberg scour	82001016
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Storm damage	82001016
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Urchin barren	82001016
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Turf mat	82001016
+Substrate	Unconsolidated (soft)					82001005
+Substrate	Unconsolidated (soft)				Veneer	82001005
+Substrate	Unconsolidated (soft)				Iceberg scour	82001005
+Substrate	Unconsolidated (soft)				Storm damage	82001005
+Substrate	Unconsolidated (soft)				Urchin barren	82001005
+Substrate	Unconsolidated (soft)				Turf mat	82001005
+Substrate						82001000
+Substrate					Veneer	82001000
+Substrate					Iceberg scour	82001000
+Substrate					Storm damage	82001000
+Substrate					Urchin barren	82001000
+Substrate					Turf mat	82001000

@@ -114,7 +114,7 @@ se <- function(x) sd(x) / sqrt(length(x))
 se.min <- function(x) (mean(x)) - se(x)
 se.max <- function(x) (mean(x)) + se(x)
 
-
+all_data$marine.regions
 
 iconSet <- awesomeIconList(
   Fished = makeAwesomeIcon(

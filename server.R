@@ -24,7 +24,7 @@ function(input, output, session) {
     removeModal()
   })
   
-## FUNCTIONS -----
+# FUNCTIONS -----
   create_dropdown <- function(input_name, choices, label) {
     if (!is.null(input[[input_name]]) && input[[input_name]] %in% choices) {
       selected <- input[[input_name]]
@@ -39,7 +39,77 @@ function(input, output, session) {
       selected = selected
     )
   }
+
+## _______________________________________________________ ----
+##                        CREATE LIFE HISTORY              ----
+## _______________________________________________________ ----
+
+  life.history <- reactive({
+    
+    if(input$lifehistory %in% "aus"){
+      lh <- all_data$lh.aus
+    } else {
+      lh <- all_data$lh.glo
+    }
+    
+    lh
+    
+  })
   
+  life.history.expanded <- reactive({
+    
+    if(input$lifehistory %in% "aus"){
+      lh <- all_data$lh.aus.expanded
+    } else {
+      lh <- all_data$lh.glo.expanded
+    }
+    
+    lh
+    
+  })
+  
+  life.history.min.max <- reactive({
+    
+    if(input$lifehistory %in% "aus"){
+      lh <- all_data$lh.aus.min.max
+    } else {
+      lh <- all_data$lh.glo.min.max
+    }
+    
+    lh
+    
+  })
+  
+## _______________________________________________________ ----
+##                     CREATE SYNONYMS                     ----
+## _______________________________________________________ ----
+  synonyms <- reactive({
+    
+    if(input$lifehistory %in% "aus"){
+      lh <- all_data$lh.aus.synonyms
+    } else {
+      lh <- all_data$lh.glo.synonyms
+    }
+    
+    lh
+    
+  })
+  
+## _______________________________________________________ ----
+##                     CREATE REGIONS                     ----
+## _______________________________________________________ ----
+  marine.regions <- reactive({
+    
+    if(input$lifehistory %in% "aus"){
+      marine.regions <- all_data$aus.regions
+    } else {
+      marine.regions <- all_data$world.regions
+    }
+    
+    marine.regions
+    
+  })
+
 ## _______________________________________________________ ----
 ##                        METADATA                         ----
 ## _______________________________________________________ ----
@@ -141,34 +211,72 @@ metadata <- reactive({
 metadata.regions <- reactive({
   metadata <- metadata()
   
+  if(input$region %in% "sample"){
+    coordinates(metadata) <- c('longitude', 'latitude')
+    proj4string(metadata) <- CRS(all_data$wgs.84)
+    n <- nrow(metadata)
+    nearest.region <- character(n)
+    
+    ## For each point, find name of nearest polygon
+    for (i in seq_along(nearest.region)) {
+      nearest.region[i] <- marine.regions()$REGION[which.min(gDistance(metadata[i, ], marine.regions(), byid = TRUE))]}
+    
+    ## Check that it worked
+    metadata.2 <- as.data.frame(nearest.region) %>%
+      bind_cols(metadata()) %>%
+      dplyr::rename(marine.region = nearest.region) %>%
+      dplyr::mutate(sample = as.character(sample)) %>%
+      dplyr::select(!status)
+    
+  } else {
+    
+    metadata.summed <- metadata %>%
+      dplyr::group_by(campaignid) %>%
+      dplyr::summarise(latitude = mean(latitude), longitude = mean(longitude))
+    
+    coordinates(metadata.summed) <- c('longitude', 'latitude')
+    proj4string(metadata.summed) <- CRS(all_data$wgs.84)
+    
+    n <- nrow(metadata.summed)
+    nearest.region <- character(n)
+    
+    ## For each point, find name of nearest polygon
+    for (i in seq_along(nearest.region)) {
+      nearest.region[i] <- marine.regions()$REGION[which.min(gDistance(metadata.summed[i, ], marine.regions(), byid = TRUE))]}
+    
+    print("new metadata")
+    
+    ## Check that it worked
+    metadata.2 <- metadata %>%
+      dplyr::group_by(campaignid) %>%
+      dplyr::summarise(latitude = mean(latitude), longitude = mean(longitude)) %>%
+      dplyr::ungroup() %>%
+      bind_cols(as.data.frame(nearest.region)) %>%
+      dplyr::rename(marine.region = nearest.region) %>%
+      dplyr::select(-c(latitude, longitude)) %>%
+      dplyr::full_join(metadata, .) %>%
+      dplyr::select(!status)
+  }
+  
+  # add in marine parks
   coordinates(metadata) <- c('longitude', 'latitude')
   proj4string(metadata) <- CRS(all_data$wgs.84)
   
-  n <- nrow(metadata())
-  
-  nearest.region <- character(n)
-  
-  ## For each point, find name of nearest polygon
-  for (i in seq_along(nearest.region)) {
-    nearest.region[i] <- all_data$marine.regions$REGION[which.min(gDistance(metadata[i, ], all_data$marine.regions, byid = TRUE))]}
-  
-  ## Check that it worked
-  metadata.2 <- as.data.frame(nearest.region) %>%
-    bind_cols(metadata()) %>%
-    dplyr::rename(marine.region = nearest.region) %>%
-    dplyr::mutate(sample = as.character(sample)) %>%
-    dplyr::select(!status)
-  
-  # add in marine parks
+  print("view metadata.marineparks")
   metadata.marineparks <- over(metadata, all_data$marineparks) %>%
     glimpse()
   
+  
+  print("view metadata.regions")
   metadata.regions <- metadata.2 %>%
     bind_cols(metadata.marineparks) %>%
     dplyr::rename(zone = ZONE_TYPE) %>%
     tidyr::replace_na(list(status = "Fished")) %>%
     dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
-    dplyr::select(campaignid, sample, latitude, longitude, date.time, site, location, status, depth, successful.count, successful.length, zone, marine.region, observer.count, observer.length)
+    dplyr::select(campaignid, sample, latitude, longitude, date.time, site, location, status, depth, successful.count, successful.length, zone, marine.region, observer.count, observer.length) %>%
+    as.data.frame() %>%
+    glimpse()
+  
 })
 
 ## ► Preview metadata in dashboard ----
@@ -516,7 +624,6 @@ output$table.periods <- renderDataTable({
 ## _______________________________________________________ ----
 ##        Period checking for single point campaigns       ----
 ## _______________________________________________________ ----
-
 ## ► Periods without end - dataframe ----
 periods.no.end <- reactive({
   
@@ -708,7 +815,6 @@ onclick('click.lengths.outside.periods',
 ## _______________________________________________________ ----
 ##      Period checking for transect based campaigns       ----
 ## _______________________________________________________ ----
-
 ## ► Periods without end - dataframe ----
 periods.no.end.t <- reactive({
   
@@ -1032,47 +1138,53 @@ maxn.raw <- reactive({
     dplyr::mutate(maxn = as.numeric(maxn)) %>%
     dplyr::filter(maxn > 0) %>%
     dplyr::inner_join(metadata.regions()) %>%
-    mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-    mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-    mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+    dplyr::mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+    dplyr::mutate(genus = ifelse(genus%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+    dplyr::mutate(species = ifelse(species%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
     dplyr::filter(successful.count%in%c("Yes", "Y", "y", "yes")) %>%
     dplyr::mutate(species = as.character(species)) %>%
     dplyr::mutate(genus = as.character(genus)) %>%
-    dplyr::mutate(family = as.character(family))
+    dplyr::mutate(family = as.character(family)) %>%
+    glimpse()
   
 })
 
 maxn.clean <- reactive({
-maxn.clean <- dplyr::left_join(maxn.raw(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+  
+  # print("maxn.clean")
+  
+  maxn.clean <- dplyr::full_join(maxn.raw(), metadata.regions()) %>%
+    dplyr::left_join(., synonyms()) %>% #by = c("family", "genus", "species"), 
     dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
     dplyr::slice(which.max(maxn)) %>%
-    dplyr::ungroup()
+    dplyr::ungroup() %>%
+    as_tibble() 
 })
 
 ## ►  Create MaxN (Complete) -----
 maxn.complete <- reactive({
 
 maxn.complete <- maxn.clean() %>%
-  full_join(metadata.regions()) %>%
+  dplyr::full_join(metadata.regions()) %>% 
   dplyr::select(c(campaignid, sample, family, genus, species, maxn, em.comment, code)) %>%
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
   replace_na(list(maxn = 0)) %>%
   dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
-  ungroup()
+  dplyr::ungroup()
 })
 
 ## ► Create filtered MaxN download -----
 maxn.complete.download <- reactive({
   
-  maxn <- maxn.raw()# can't use clean as have already changed synonyms
+  maxn <- full_join(maxn.raw(), metadata.regions()) # can't use clean as have already changed synonyms
 
   if (input$error.synonyms == TRUE) {
-    maxn.complete <- dplyr::left_join(maxn, all_data$synonyms, by = c("family", "genus", "species")) %>%
+    maxn.complete <- dplyr::left_join(maxn, synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -1105,7 +1217,7 @@ maxn.complete.download <- reactive({
   
   maxn.complete <- maxn.complete
   
-  species.out.of.area <- all_data$master.expanded %>%
+  species.out.of.area <- life.history.expanded() %>%
     anti_join(maxn.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
     filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp"))
@@ -1154,9 +1266,12 @@ output$maxn.species.dropdown <- renderUI({
 
 ## ►  Taxa replaced by synonym - dataframe -----
 maxn.synonym <- reactive({
-  maxn <- maxn.raw()
+  maxn <- full_join(maxn.raw(), metadata.regions())
   
-  maxn.synonym <- dplyr::left_join(maxn, all_data$synonyms, by = c("family", "genus", "species")) %>% 
+  # print("synonym check")
+  
+  maxn.synonym <- dplyr::left_join(maxn, synonyms()) %>%  #, by = c("family", "genus", "species")
+    # glimpse() %>%
     dplyr::filter(!is.na(genus_correct)) %>%
     dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
     dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
@@ -1273,7 +1388,7 @@ onclick('click.points.no.number',
 
 ## ► Species not observed - dataframe ----
 maxn.species.not.observed <- reactive({
-  maxn <- all_data$master.expanded %>%
+  maxn <- life.history.expanded() %>%
     anti_join(maxn.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(maxn > 0) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>%
@@ -1690,7 +1805,7 @@ length3dpoints <- reactive({
 })
 
 length3dpoints.clean <- reactive({
-  length3dpoints.clean <-  dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints.clean <-  dplyr::left_join(length3dpoints(), synonyms()) %>% #, by = c("family", "genus", "species")
     dplyr::mutate(genus = ifelse(!genus_correct %in% c(NA), genus_correct, genus)) %>%
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -1717,7 +1832,7 @@ length.complete.download <- reactive({
   
   
   if (input$error.synonyms == TRUE) {
-    length.complete <- dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints(), synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -1733,7 +1848,7 @@ length.complete.download <- reactive({
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
   } 
   else{ 
-    length.complete <- dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints(), synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, rms, precision, code) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
@@ -1750,7 +1865,7 @@ length.complete.download <- reactive({
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
-  species.out.of.area <- all_data$master.expanded %>%
+  species.out.of.area <- life.history.expanded() %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(length.complete, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -1773,7 +1888,7 @@ length.complete.download <- reactive({
     dplyr::filter(precision.percent < precision.limit) %>%
     dplyr::select(-c(precision.percent))
   
-  length.wrong <- left_join(length.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>fb.length_max) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big"))
 
@@ -1987,7 +2102,7 @@ onclick('click.threedpoints.no.number',
 length.synonym <- reactive({
   length <- length3dpoints()
   
-  length.synonym <- dplyr::left_join(length, all_data$synonyms, by = c("family", "genus", "species")) %>% 
+  length.synonym <- dplyr::left_join(length, synonyms()) %>% #, by = c("family", "genus", "species")
     dplyr::filter(!is.na(genus_correct)) %>%
     dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
     dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
@@ -2037,7 +2152,7 @@ onclick('click.length.synonym', showModal(modalDialog(
 
 ## ► Species not observed - dataframe ----
 length.species.not.observed <- reactive({
-  length <- all_data$master.expanded %>%
+  length <- life.history.expanded() %>%
     anti_join(length3dpoints.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(number > 0) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
@@ -2082,7 +2197,7 @@ output$length.species.not.observed <- renderValueBox({
 
 ## ► Species wrong length - dataframe ----
 length.wrong <- reactive({
-  length.wrong <- left_join(length3dpoints.clean(), all_data$master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length3dpoints.clean(), life.history.min.max(), by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>max.length) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big")) %>%
     dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, em.comment, frameleft) %>%
@@ -2331,7 +2446,7 @@ output$length.histogram <- renderPlot({
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- all_data$master.min.max %>%
+  sizes <- life.history.min.max() %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -2370,7 +2485,7 @@ output$length.histogram.status <- renderPlot({
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- all_data$master.min.max %>%
+  sizes <- life.history.min.max() %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific%in%c(input$length.species.dropdown)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -2475,7 +2590,7 @@ length3dpoints.clean.t <- reactive({
   
   # print("length 3D points joined to metadata")
   
-  length3dpoints.clean <-  dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints.clean <-  dplyr::left_join(length3dpoints.t()) %>% #, synonyms(), by = c("family", "genus", "species")
     dplyr::mutate(genus = ifelse(!genus_correct %in% c(NA), genus_correct, genus)) %>%
     dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
     dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -2498,7 +2613,7 @@ length.complete.download.t <- reactive({
   length <- length3dpoints.t() # can't use clean as have already changed synonyms
   
   if (input$error.synonyms.t == TRUE) {
-    length.complete <- dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints.t()) %>% #, synonyms(), by = c("family", "genus", "species")
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -2515,7 +2630,7 @@ length.complete.download.t <- reactive({
     
   } else { 
     
-    length.complete <- dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+    length.complete <- dplyr::left_join(length3dpoints.t(), synonyms()) %>% # , by = c("family", "genus", "species")
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, frameleft, frameright, em.comment, midx, midy, x, y, rms, precision, code) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
@@ -2532,7 +2647,7 @@ length.complete.download.t <- reactive({
     # dplyr::mutate(id = paste(project, campaignid, sep = ".")) %>%
     dplyr::mutate(scientific = paste(genus, species, sep = " "))
   
-  species.out.of.area <- all_data$master.expanded %>%
+  species.out.of.area <- life.history.expanded %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(length.complete, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -2557,7 +2672,7 @@ length.complete.download.t <- reactive({
     dplyr::filter(precision.percent < input$error.precision.limit.t) %>%
     dplyr::select(-c(precision.percent))
   
-  length.wrong <- left_join(length.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > fb.length_max) %>%
     mutate(reason = ifelse(length < min.length, "too small", "too big"))
   
@@ -2772,7 +2887,7 @@ onclick('click.threedpoints.no.number.t',
 length.synonym.t <- reactive({
   length <- length3dpoints.t()
   
-  length.synonym <- dplyr::left_join(length, all_data$synonyms, by = c("family", "genus", "species")) %>% 
+  length.synonym <- dplyr::left_join(length, synonyms()) %>%  #, by = c("family", "genus", "species")
     dplyr::filter(!is.na(genus_correct)) %>%
     dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
     dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
@@ -2822,7 +2937,7 @@ onclick('click.length.synonym.t', showModal(modalDialog(
 
 ## ► Species not observed - dataframe ----
 length.species.not.observed.t <- reactive({
-  length <- all_data$master.expanded %>%
+  length <- life.history.expanded() %>%
     anti_join(length3dpoints.clean.t(), ., by = c("family", "genus", "species", "marine.region")) %>%
     filter(number > 0) %>%
     distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
@@ -2868,7 +2983,7 @@ output$length.species.not.observed.t <- renderValueBox({
 
 ## ► Species wrong length - dataframe ----
 length.wrong.t <- reactive({
-  length.wrong <- left_join(length3dpoints.clean.t(), all_data$master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(length3dpoints.clean.t(), life.history.min.max(), by = c("family", "genus", "species")) %>%
     dplyr::filter(length < min.length | length > max.length) %>%
     mutate(reason = ifelse(length < min.length, "too small", "too big")) %>%
     dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason, frameleft, rms, precision, code) %>%
@@ -3160,7 +3275,7 @@ output$length.histogram.t <- renderPlot({
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- all_data$master.min.max %>%
+  sizes <- life.history.min.max() %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -3198,7 +3313,7 @@ output$length.histogram.status.t <- renderPlot({
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     replace_na(list(status = "Fished"))
   
-  sizes <- all_data$master.min.max %>%
+  sizes <- life.history.min.max() %>%
     mutate(scientific = paste(genus, species, sep  = " ")) %>%
     filter(scientific %in% c(input$length.species.dropdown.t)) %>%
     distinct(scientific, fb.length_max, min.length, max.length)
@@ -3289,15 +3404,15 @@ mass <- reactive({
   # 1. Check for missing length weight relationship
 taxa.missing.lw <- length3dpoints.clean() %>%
   dplyr::distinct(family, genus, species) %>%
-  dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
+  dplyr::anti_join(filter(life.history(), !is.na(a)), by = c("family", "genus", "species"))
 
 #2. Fill length data with relevant a and b and if blank use family---
-length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
+length.species.ab <- life.history() %>% # done this way around to avoid duplicating Family coloum
   dplyr::select(-family) %>%
   dplyr::inner_join(length3dpoints.clean(), ., by = c("genus", "species")) # only keeps row if has a and b
 
 # 3. Make family length.weight
-family.lw <- all_data$master %>%
+family.lw <- life.history() %>%
   dplyr::group_by(family, length.measure) %>%
   dplyr::mutate(log.a = log10(a)) %>%     
   dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3315,7 +3430,7 @@ family.lw <- all_data$master %>%
   dplyr::filter(min.rank ==  0)
 
 length.family.ab <- length3dpoints.clean() %>%
-  dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
+  dplyr::anti_join(life.history(), by = c("genus", "species")) %>%
   dplyr::left_join(family.lw, by = "family")
 
 # 5. Fill length data with relevant a and b and if blank use family---
@@ -3340,7 +3455,7 @@ complete.length.number.mass <- length.species.ab %>%
 ## ► Create filtered MASS download -----
 mass.complete.download <- reactive({
   
-  length3dpoints <-  dplyr::left_join(length3dpoints(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints <-  dplyr::left_join(length3dpoints(), synonyms()) %>% #, by = c("family", "genus", "species")
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, em.comment, rms, precision, code) %>%
@@ -3355,15 +3470,15 @@ mass.complete.download <- reactive({
   # 1. Check for missing length weight relationship
   taxa.missing.lw <- length3dpoints %>%
     dplyr::distinct(family, genus, species) %>%
-    dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
+    dplyr::anti_join(filter(life.history(), !is.na(a)), by = c("family", "genus", "species"))
   
   #2. Fill length data with relevant a and b and if blank use family---
-  length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
+  length.species.ab <- life.history() %>% # done this way around to avoid duplicating Family coloum
     dplyr::select(-family) %>%
     dplyr::inner_join(length3dpoints, ., by = c("genus", "species")) # only keeps row if has a and b
   
   # 3. Make family length.weight
-  family.lw <- all_data$master %>%
+  family.lw <- life.history() %>%
     dplyr::group_by(family, length.measure) %>%
     dplyr::mutate(log.a = log10(a)) %>%     
     dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3381,7 +3496,7 @@ mass.complete.download <- reactive({
     dplyr::filter(min.rank ==  0)
   
   length.family.ab <- length3dpoints %>%
-    dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
+    dplyr::anti_join(life.history(), by = c("genus", "species")) %>%
     dplyr::left_join(family.lw, by = "family")
   
   # 5. Fill length data with relevant a and b and if blank use family---
@@ -3401,7 +3516,7 @@ mass.complete.download <- reactive({
     dplyr::mutate(mass.kg = mass.g/1000)
   
   if (input$error.synonyms == TRUE) {
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -3417,7 +3532,7 @@ mass.complete.download <- reactive({
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
   } 
   else{ 
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, em.comment, rms, precision, code) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
@@ -3434,7 +3549,7 @@ mass.complete.download <- reactive({
   
   complete.length.number.mass <- complete.length.number.mass
   
-  species.out.of.area <- all_data$master.expanded %>%
+  species.out.of.area <- life.history.expanded() %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(complete.length.number.mass, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -3451,7 +3566,7 @@ mass.complete.download <- reactive({
   mass.area <- mass.area %>%
     dplyr::filter(range<(input$error.range.limit*1000))
   
-  length.wrong <- left_join(mass.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(mass.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>fb.length_max) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big"))
   
@@ -3647,15 +3762,15 @@ mass.t <- reactive({
   # 1. Check for missing length weight relationship
   taxa.missing.lw <- length3dpoints.clean.t() %>%
     dplyr::distinct(family, genus, species) %>%
-    dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
+    dplyr::anti_join(filter(life.history(), !is.na(a)), by = c("family", "genus", "species"))
   
   #2. Fill length data with relevant a and b and if blank use family---
-  length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
+  length.species.ab <- life.history() %>% # done this way around to avoid duplicating Family coloum
     dplyr::select(-family) %>%
     dplyr::inner_join(length3dpoints.clean.t(), ., by = c("genus", "species")) # only keeps row if has a and b
   
   # 3. Make family length.weight
-  family.lw <- all_data$master %>%
+  family.lw <- life.history() %>%
     dplyr::group_by(family, length.measure) %>%
     dplyr::mutate(log.a = log10(a)) %>%     
     dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3673,7 +3788,7 @@ mass.t <- reactive({
     dplyr::filter(min.rank ==  0)
   
   length.family.ab <- length3dpoints.clean.t() %>%
-    dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
+    dplyr::anti_join(life.history(), by = c("genus", "species")) %>%
     dplyr::left_join(family.lw, by = "family")
   
   # 5. Fill length data with relevant a and b and if blank use family---
@@ -3698,7 +3813,7 @@ mass.t <- reactive({
 ## ► Create filtered MASS download -----
 mass.complete.download.t <- reactive({
   
-  length3dpoints <-  dplyr::left_join(length3dpoints.t(), all_data$synonyms, by = c("family", "genus", "species")) %>%
+  length3dpoints <-  dplyr::left_join(length3dpoints.t(), synonyms()) %>% #, by = c("family", "genus", "species")
     dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
     dplyr::right_join(metadata.regions()) %>% # add in all samples
     dplyr::select(campaignid, sample, family, genus, species, length, number, range, code) %>%
@@ -3713,15 +3828,15 @@ mass.complete.download.t <- reactive({
   # 1. Check for missing length weight relationship
   taxa.missing.lw <- length3dpoints %>%
     dplyr::distinct(family, genus, species) %>%
-    dplyr::anti_join(filter(all_data$master, !is.na(a)), by = c("family", "genus", "species"))
+    dplyr::anti_join(filter(life.history(), !is.na(a)), by = c("family", "genus", "species"))
   
   #2. Fill length data with relevant a and b and if blank use family---
-  length.species.ab <- all_data$master %>% # done this way around to avoid duplicating Family coloum
+  length.species.ab <- life.history() %>% # done this way around to avoid duplicating Family coloum
     dplyr::select(-family) %>%
     dplyr::inner_join(length3dpoints, ., by = c("genus", "species")) # only keeps row if has a and b
   
   # 3. Make family length.weight
-  family.lw <- all_data$master %>%
+  family.lw <- life.history() %>%
     dplyr::group_by(family, length.measure) %>%
     dplyr::mutate(log.a = log10(a)) %>%     
     dplyr::summarise(a = 10^(mean(log.a, na.rm = T)), 
@@ -3739,7 +3854,7 @@ mass.complete.download.t <- reactive({
     dplyr::filter(min.rank ==  0)
   
   length.family.ab <- length3dpoints %>%
-    dplyr::anti_join(all_data$master, by = c("genus", "species")) %>%
+    dplyr::anti_join(life.history(), by = c("genus", "species")) %>%
     dplyr::left_join(family.lw, by = "family")
   
   # 5. Fill length data with relevant a and b and if blank use family---
@@ -3759,7 +3874,7 @@ mass.complete.download.t <- reactive({
     dplyr::mutate(mass.kg = mass.g/1000)
   
   if (input$error.synonyms == TRUE) {
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
@@ -3775,7 +3890,7 @@ mass.complete.download.t <- reactive({
       dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes"))
   } 
   else{ 
-    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, all_data$synonyms, by = c("family", "genus", "species")) %>%
+    complete.length.number.mass <- dplyr::left_join(complete.length.number.mass, synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::right_join(metadata.regions()) %>% # add in all samples
       dplyr::select(campaignid, sample, family, genus, species, length, number, range, mass.kg, code) %>%
       tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
@@ -3792,7 +3907,7 @@ mass.complete.download.t <- reactive({
   
   complete.length.number.mass <- complete.length.number.mass
   
-  species.out.of.area <- all_data$master.expanded %>%
+  species.out.of.area <- life.history.expanded() %>%
     dplyr::mutate(marine.region = as.character(marine.region)) %>%
     anti_join(complete.length.number.mass, ., by = c("family", "genus", "species", "marine.region")) %>%
     distinct(family, genus, species, marine.region) %>%
@@ -3809,7 +3924,7 @@ mass.complete.download.t <- reactive({
   mass.area <- mass.area %>%
     dplyr::filter(range < (input$error.range.limit.t*1000))
   
-  length.wrong <- left_join(mass.area, all_data$master.min.max, by = c("family", "genus", "species")) %>%
+  length.wrong <- left_join(mass.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
     dplyr::filter(length<min.length|length>fb.length_max) %>%
     mutate(reason = ifelse(length<min.length, "too small", "too big"))
   
@@ -4102,151 +4217,6 @@ output$length.vs.maxn.species.plot <- renderPlot({
 ##                        HABITAT                          ----
 ## _______________________________________________________ ----
 
-# ### ► Read in habitat points----
-# hab.points <- reactive({
-#   
-#   # IF forwards habitat is uploaded and only forwards has been annotated
-#   if(!is.null(input$upload.f.dotpoints) & input$habdirection == "forwards") {
-#     
-#     points <- lapply(input$upload.f.dotpoints$datapath, fread)
-#     names(points) <- input$upload.f.dotpoints$name 
-#     
-#     points <- rbindlist(points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-#       dplyr::select(-c(Spare)) %>%
-#       ga.clean.names() %>%
-#       mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-#       mutate(sample=as.character(sample)) %>% 
-#       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-#                                                           "_Forwards" = "",
-#                                                           ".Forwards" = "",
-#                                                           "_forwards" = "",
-#                                                           ".forwards" = ""
-#                                                           ))) %>%
-#       dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-#       mutate(direction = "forwards") # BG Broad, morph and type????
-#     
-#     if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints)){
-#       
-#       relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
-#       names(relief) <- input$upload.r.f.dotpoints$name 
-#       
-#       relief <- rbindlist(relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-#         dplyr::select(-c(Spare)) %>%
-#         ga.clean.names() %>%
-#         mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-#         mutate(sample=as.character(sample)) %>% 
-#         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-#                                                             "_Forwards" = "",
-#                                                             ".Forwards" = "",
-#                                                             "_forwards" = "",
-#                                                             ".forwards" = "",
-#                                                             "_Relief" = "",
-#                                                             "_relief" = "",
-#                                                             ".relief" = "",
-#                                                             ".Relief" = ""
-#         ))) %>%
-#         dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-#         mutate(direction = "forwards")
-#       
-#       points <- bind_rows(points, relief)
-#     }
-#     
-#     # IF forwards and backwards habitat uploaded and both directions annotated
-#   } else if(!is.null(input$upload.f.dotpoints) & !is.null(input$upload.b.dotpoints) &
-#             input$habdirection == "both") {
-#     
-#     f.points <- lapply(input$upload.f.dotpoints$datapath, fread)
-#     names(f.points) <- input$upload.f.dotpoints$name 
-#     
-#     f.points <- rbindlist(f.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-#       dplyr::select(-c(Spare)) %>%
-#       ga.clean.names() %>%
-#       mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-#       mutate(sample=as.character(sample)) %>% 
-#       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-#                                                           "_Forwards" = "",
-#                                                           ".Forwards" = "",
-#                                                           "_forwards" = "",
-#                                                           ".forwards" = ""
-#       ))) %>%
-#       dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-#       mutate(direction = "forwards") # BG Broad, morph and type????
-#     
-#     b.points <- lapply(input$upload.b.dotpoints$datapath, fread)
-#     names(b.points) <- input$upload.b.dotpoints$name 
-#     
-#     b.points <- rbindlist(b.points, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-#       dplyr::select(-c(Spare)) %>%
-#       ga.clean.names() %>%
-#       mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-#       mutate(sample=as.character(sample)) %>% 
-#       dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-#                                                           "_Backwards" = "",
-#                                                           ".Backwards" = "",
-#                                                           "_backwards" = "",
-#                                                           ".backwards" = ""
-#       ))) %>%
-#       dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-#       mutate(direction = "backwards") # BG Broad, morph and type????
-#     
-#     points <- rbind(f.points, b.points)
-#     
-#     if(input$habreliefsep == "yes" & !is.null(input$upload.r.f.dotpoints) & !is.null(input$upload.r.b.dotpoints)){
-#       
-#       f.relief <- lapply(input$upload.r.f.dotpoints$datapath, fread)
-#       names(f.relief) <- input$upload.r.f.dotpoints$name 
-#       
-#       f.relief <- rbindlist(f.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-#         dplyr::select(-c(Spare)) %>%
-#         ga.clean.names() %>%
-#         mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-#         mutate(sample=as.character(sample)) %>% 
-#         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-#                                                             "_Forwards" = "",
-#                                                             ".Forwards" = "",
-#                                                             "_forwards" = "",
-#                                                             ".forwards" = "",
-#                                                             "_Relief" = "",
-#                                                             "_relief" = "",
-#                                                             ".relief" = "",
-#                                                             ".Relief" = ""
-#         ))) %>%
-#         dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-#         mutate(direction = "forwards")
-#       
-#       b.relief <- lapply(input$upload.r.b.dotpoints$datapath, fread)
-#       names(b.relief) <- input$upload.r.b.dotpoints$name 
-#       
-#       b.relief <- rbindlist(b.relief, use.names = TRUE, fill = TRUE, idcol = TRUE) %>%
-#         dplyr::select(-c(Spare)) %>%
-#         ga.clean.names() %>%
-#         mutate(sample=str_replace_all(.$filename,c(".png" = "", ".jpg" = "", ".JPG" = "", ".PNG" = ""))) %>% 
-#         mutate(sample=as.character(sample)) %>% 
-#         dplyr::mutate(campaignid = str_replace_all(.$.id, c("_Dot Point Measurements.txt" = "",
-#                                                             "_Backwards" = "",
-#                                                             ".Backwards" = "",
-#                                                             "_backwards" = "",
-#                                                             ".backwards" = "",
-#                                                             "_Relief" = "",
-#                                                             "_relief" = "",
-#                                                             ".relief" = "",
-#                                                             ".Relief" = ""
-#         ))) %>%
-#         dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief) %>%
-#         mutate(direction = "backwards")
-#       
-#       relief <- rbind(f.relief, b.relief)
-#       
-#       points <- bind_rows(points, relief)
-#     }
-#   }
-#   
-#   points <- points %>% 
-#     mutate(campaignid = as.character(campaignid)) %>%
-#     mutate(sample = as.character(sample)) %>%
-#     ungroup()
-# })  
-
 hab.points <- reactive({
   
   if(input$hab == "Yes"){
@@ -4269,7 +4239,7 @@ hab.points <- reactive({
       points <- bind_rows(points, tmp) #%>% glimpse()
     }
  
-    print("habitat points")
+    # print("habitat points")
     
     points <- points %>%
       ga.clean.names() %>%
@@ -4279,11 +4249,10 @@ hab.points <- reactive({
       dplyr::mutate(relief.annotation = case_when(stringr::str_detect(extra, "relief") ~ "Relief")) %>%
       
       dplyr::mutate(direction = case_when(stringr::str_detect(extra, "forward") ~ "Forwards",
-                                     stringr::str_detect(extra, "backward") ~ "Backwards")) %>%
-      glimpse() 
+                                     stringr::str_detect(extra, "backward") ~ "Backwards"))
     
-    print("directions")
-    print(unique(points$direction))
+    # print("directions")
+    # print(unique(points$direction))
     
     # If point method and opcode = sample e.g. BRUVs
     if(input$method == "point" & input$sample == "opcode") {
@@ -4326,11 +4295,18 @@ hab.points <- reactive({
   
   # TODO add an example dataset for DOVs
   
+  # TODO figure out what happens if they aren't called broad, morphology, type HECK
+  # level_2	level_3	level_4	level_5	scientific	qualifiers	CAAB_code
+    
+    # NEED TO DO IT OFF TOTAL NUMBER OF COLUMNS TAKE 9 = LEVEL_2 ETC
+    
+  # TODO NEED some example data from TM using the new schema :(
+
+    
   points <- points %>%
     dplyr::mutate(sample = as.factor(sample)) %>%
     dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief, relief.annotation, direction) %>%
-    dplyr::semi_join(metadata()) %>% 
-    glimpse()
+    dplyr::semi_join(metadata()) 
   }
 })
 
@@ -5041,11 +5017,37 @@ output$download.all.errors.t <- downloadHandler(
   }
 )
 
+# Download schemas
+output$schema.fish <- downloadHandler(
+  filename = function() {
+    paste("fish.life.history_", Sys.Date(), ".txt", sep = "")
+  }, 
+  content = function(file) {
+    write.table(all_data$schema.fish, file, row.names = FALSE, na = "", sep = "\t")
+  }
+)
+
+output$schema.relief <- downloadHandler(
+  filename = function() {
+    paste("benthic.relief.annotation.schema.forward.facing_", Sys.Date(),".txt", sep = "")
+  }, 
+  content = function(file) {
+    write.table(all_data$schema.relief, file, row.names = FALSE, na = "", sep = "\t")
+  }
+)
+
+output$schema.habitat <- downloadHandler(
+  filename = function() {
+    paste("benthic.habitat.annotation.schema.forward.facing_", Sys.Date(),".txt", sep = "")
+  }, 
+  content = function(file) {
+    write.table(all_data$schema.habitat, file, row.names = FALSE, na = "", sep = "\t")
+  }
+)
+
 ## _______________________________________________________ ----
 ##                    MAPPING FOR GUIDE                    ----
 ## _______________________________________________________ ----
-
-
 ## ► Leaflet map - World regions ----
 output$regions.leaflet <- renderLeaflet({
   
