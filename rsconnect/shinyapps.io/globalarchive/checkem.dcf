@@ -5,10 +5,10 @@ account: globalarchive
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2019084
-bundleId: 6118317
+bundleId: 7343418
 url: https://globalarchive.shinyapps.io/checkem/
-when: 1658385181.69399
-lastSyncTime: 1658385181.69399
+when: 1686725432.06054
+lastSyncTime: 1686725432.06055
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: archive/ui - Copy.R|CheckEM logos.pptx|testing.R|to do|virtual.machine.libraries.R
+ignoredFiles: to do|virtual.machine.libraries.R

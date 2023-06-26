@@ -212,3 +212,7 @@ all_data <- structure(
 
 save(all_data, file = here::here("data/all_data.Rdata"))
 
+
+# FOR WORKSHOP
+# setwd("C:/GitHub/API-query/data/spatial")
+# saveRDS(marineparks, "marineparks.RDS")
