@@ -591,12 +591,16 @@ tagList(
       tabItem(tabName= "guide", 
                fluidRow(
                  
-                 box(width = 6, status = "primary", collapsible = TRUE, title = "How to use CheckEM", solidHeader = TRUE, 
-                     includeMarkdown("howto.Rmd")),
+                 box(width = 12, status = "primary", collapsible = TRUE, title = "How to use CheckEM", solidHeader = TRUE, 
+                     includeMarkdown("howto.Rmd")#,
+                     # includeHTML("howto.html")
+                     )
                  
-                 # TODO add a spinner
-                 box(width = 6,height = 760, status = "primary", collapsible = TRUE, title = "Regions used in CheckEM", solidHeader = TRUE, 
-                     leafletOutput("regions.leaflet", height = 700))
+                 #,
+                 
+                 # # TODO add a spinner
+                 # box(width = 4, height = 760, status = "primary", collapsible = TRUE, title = "Regions used in CheckEM", solidHeader = TRUE, 
+                 #     leafletOutput("regions.leaflet", height = 700))
                )
       ),
       
