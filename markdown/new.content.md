@@ -9,6 +9,8 @@ Choose the directory where your metadata and EM exports are saved.
 
 CheckEM will find files named with '_Metadata.csv', 'Points.txt', etc.
 
+The Metadata format has changed. Please visit the userguide for the new format.
+
 
 </br>
 
