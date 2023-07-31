@@ -14,10 +14,8 @@ tagList(
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
                               menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
                               menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
-                              
                               shiny::conditionalPanel("input.hab == 'Yes'",
                                                       sidebarMenu(menuItem("Check habitat", tabName = "checkhab", icon = icon("check")))),
-                              
                               menuItem("Create & check mass", tabName = "createmass", icon = icon("check")),
                               menuItem("Download data", tabName = "downloads", icon = icon("download")))
                             ),
@@ -79,6 +77,12 @@ tagList(
                               ),
                        
                        box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
+                           
+                           radioButtons("upload", "Choose the type of upload:",
+                                        c("EventMeasure" = "EM",
+                                          "Generic" = "G"),
+                                        selected = "EM",
+                                        inline = TRUE),
                            
                            radioButtons("method", "Choose the type of method:",
                                         c("Single point e.g. BRUV & BOSS" = "point",
@@ -199,6 +203,7 @@ tagList(
                        div(id="click.points.samples.without.metadata",
                            valueBoxOutput("points.samples.without.metadata")),
                        
+                       shiny::conditionalPanel("input.upload == 'EM'",
                        div(id="click.periods.no.end",
                            valueBoxOutput("periods.no.end")),
                        div(id="click.samples.without.periods",
@@ -212,7 +217,7 @@ tagList(
                        
                        
                        box(width = 4, title = "Enter your correct period time (mins):", status = "primary", solidHeader = TRUE,
-                           numericInput("period.limit", NULL, 60, min = 1, max = 300)),
+                           numericInput("period.limit", NULL, 60, min = 1, max = 300))),
                        
                        
                        div(id="click.periods.wrong",
@@ -231,20 +236,21 @@ tagList(
                        div(id="click.length.samples.without.metadata.t",
                            valueBoxOutput("length.samples.without.metadata.t")),
                        
-                       div(id="click.samples.without.periods.t",
-                           valueBoxOutput("samples.without.periods.t")),
-                       
-                       div(id="click.periods.no.end.t",
-                           valueBoxOutput("periods.no.end.t")),
-                       
-                       div(id="click.points.outside.periods.t",
-                           valueBoxOutput("points.outside.periods.t")),
-                       
-                       div(id="click.lengths.outside.periods.t",
-                           valueBoxOutput("lengths.outside.periods.t")),
-                       
-                       div(id="click.periods.avg.t",
-                           valueBoxOutput("periods.avg.t")),
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               div(id="click.samples.without.periods.t",
+                                                   valueBoxOutput("samples.without.periods.t")),
+                                               
+                                               div(id="click.periods.no.end.t",
+                                                   valueBoxOutput("periods.no.end.t")),
+                                               
+                                               div(id="click.points.outside.periods.t",
+                                                   valueBoxOutput("points.outside.periods.t")),
+                                               
+                                               div(id="click.lengths.outside.periods.t",
+                                                   valueBoxOutput("lengths.outside.periods.t")),
+                                               
+                                               div(id="click.periods.avg.t",
+                                                   valueBoxOutput("periods.avg.t"))),
                        
                        box(width=12, height = 825, leafletOutput("map.metadata.t", height = 800)))
       ),
@@ -253,9 +259,9 @@ tagList(
       tabItem(tabName = "createmaxn",
               fluidRow(div(id="click.maxn.total.number",
                            valueBoxOutput("maxn.total.number")),
-                       
-                       div(id="click.points.no.number",
-                           valueBoxOutput("points.no.number")),
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               div(id="click.points.no.number",
+                                                   valueBoxOutput("points.no.number"))),
                        
                        div(id="click.maxn.synonym",
                            valueBoxOutput("maxn.synonym")),
@@ -281,16 +287,20 @@ tagList(
       tabItem(tabName = "createlength",
               fluidRow(div(width = 3, id="click.length.abundance",
                            valueBoxOutput("length.abundance")),
-                       div(width = 3, id="click.threedpoints.abundance",
-                           valueBoxOutput("threedpoints.abundance")),
+                       
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               div(width = 3, id="click.threedpoints.abundance",
+                                                   valueBoxOutput("threedpoints.abundance"))),
+                       
                        div(width = 3, id="click.length.synonym",
                            valueBoxOutput("length.synonym")),
                        
-                       div(width = 3, id = "click.lengths.no.number",
-                           valueBoxOutput("lengths.no.number")),
-                       
-                       div(width = 3, id = "click.threedpoints.no.number",
-                           valueBoxOutput("threedpoints.no.number")),
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               div(width = 3, id = "click.lengths.no.number",
+                                                   valueBoxOutput("lengths.no.number")),
+                                               
+                                               div(width = 3, id = "click.threedpoints.no.number",
+                                                   valueBoxOutput("threedpoints.no.number"))),
                        
                        div(width = 3, id = "click.length.species.not.observed",
                            valueBoxOutput("length.species.not.observed")),
@@ -302,22 +312,25 @@ tagList(
                        div(width = 3, id = "click.length.wrong.big.100",
                            valueBoxOutput("length.wrong.big.100")),
                        
-                       box(width = 2, title = "RMS limit (mm)?", status = "primary", solidHeader = TRUE, 
-                           numericInput("rms.limit", NULL, 20, min = 1, max = 100)),
-                       div(width = 3, id = "click.length.wrong.rms",
-                           valueBoxOutput("length.wrong.rms")),
-                       
-                       box(width = 2, title = "Precision to length ratio (%)?", status = "primary", solidHeader = TRUE, 
-                           numericInput("precision.limit", NULL, 10, min = 1, max = 100)),
-                       div(width = 3, id = "click.length.wrong.precision",
-                           valueBoxOutput("length.wrong.precision")),
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               box(width = 2, title = "RMS limit (mm)?", status = "primary", solidHeader = TRUE, 
+                                                   numericInput("rms.limit", NULL, 20, min = 1, max = 100)),
+                                               div(width = 3, id = "click.length.wrong.rms",
+                                                   valueBoxOutput("length.wrong.rms")),
+                                               
+                                               box(width = 2, title = "Precision to length ratio (%)?", status = "primary", solidHeader = TRUE, 
+                                                   numericInput("precision.limit", NULL, 10, min = 1, max = 100)),
+                                               div(width = 3, id = "click.length.wrong.precision",
+                                                   valueBoxOutput("length.wrong.precision"))),
                        
                        box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
                            htmlOutput("length.species.dropdown", multiple=TRUE)),
-                       box(width = 2, title = "Range limit (m)?", status="primary", solidHeader = TRUE, 
-                           numericInput("range.limit", NULL, 10, min = 0.5, max = 10)),
-                       div(width = 3, id = "click.length.out.of.range",
-                           valueBoxOutput("length.out.of.range")),
+                       
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               box(width = 2, title = "Range limit (m)?", status="primary", solidHeader = TRUE, 
+                                                   numericInput("range.limit", NULL, 10, min = 0.5, max = 10)),
+                                               div(width = 3, id = "click.length.out.of.range",
+                                                   valueBoxOutput("length.out.of.range"))),
               box(width = 12, title = "Length histogram", status = "primary", plotOutput("length.histogram", height = 250)),
               box(width = 12, title = "Length histogram status", status = "primary", plotOutput("length.histogram.status", height = 600)),
               box(width = 12, title = "Zone", status = "primary", plotOutput("length.status.plot", height = 250)),

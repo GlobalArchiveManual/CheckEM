@@ -1,5 +1,10 @@
 # Change log
 
+## 2.05 (released 31/08/2023)  <br />
+### Changed <br />
+- Users can now upload metadata in the old format (e.g. separate "Date" and "Time" column) and CheckEM will turn into "Date.time" and add the timezone using the latitude and longitude columns.
+- If any metadata columns are missing CheckEM will create them, but they will remain empty.
+
 ## 2.04 (released 24/07/2023) <br />
 ### Changed <br />
 - Updated user guid for Upload, Metadata and MaxN.

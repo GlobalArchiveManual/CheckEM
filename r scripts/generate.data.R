@@ -23,7 +23,8 @@ lh.aus <- read_sheet(aus.url) %>%
   dplyr::mutate(bll=as.numeric(bll)) %>%
   dplyr::mutate(a=as.numeric(a)) %>%
   dplyr::mutate(b=as.numeric(b)) %>%
-  dplyr::select(family, genus, species, marine.region, length.measure, a, b, all, bll, fb.length_max, fb.ltypemaxm, australian.common.name) %>%
+  dplyr::rename(code = caab) %>%
+  dplyr::select(code, family, genus, species, marine.region, length.measure, a, b, all, bll, fb.length_max, fb.ltypemaxm, australian.common.name) %>%
   distinct() %>%
   dplyr::mutate(marine.region = str_replace_all(.$marine.region,c("N/" = "North/",
                                                                   "NW" = "North-west",
