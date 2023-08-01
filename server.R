@@ -2044,7 +2044,7 @@ function(input, output, session) {
   length.complete.download <- reactive({
     
     if(input$upload %in% "EM"){
-      print("preview length data for downloading")
+      # print("preview length data for downloading")
       length <- length3dpoints() # can't use clean as have already changed synonyms # glimpse()
       
       
@@ -2110,8 +2110,8 @@ function(input, output, session) {
         dplyr::select(-c(precision.percent)) %>%
         bind_rows(points)
       
-      print("test 2 (area) for 3D points") # they are gone here
-      test <- length.area %>% dplyr::filter(is.na(length)) %>% filter(number > 0) %>% glimpse()
+      # print("test 2 (area) for 3D points") # they are gone here
+      # test <- length.area %>% dplyr::filter(is.na(length)) %>% filter(number > 0) %>% glimpse()
       
       length.wrong <- left_join(length.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
         dplyr::filter(length<min.length|length>fb.length_max) %>%
@@ -2165,16 +2165,7 @@ function(input, output, session) {
           dplyr::select(campaignid, sample, family, genus, species, length, number, range, rms, precision, code) # remove metadata columns
       }
       
-      print("final length data for downloading")
-      
-      print("test 2 for 3D points")
-      
-      test <- length.big %>% dplyr::filter(is.na(length)) %>% filter(number > 0) %>% glimpse()
-      
       length.big <- length.big #%>% glimpse()
-      
-      
-      
       
     }
     
@@ -2315,18 +2306,48 @@ function(input, output, session) {
   ## ► Number of lengths vs. 3d points ACTUAL NUMBERS - Plot ----
   output$length.vs.3d.plot <- renderPlot({
     
+    maxn <- maxn.complete() %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(total.abundance = sum(maxn)) %>%
+      dplyr::ungroup()
+    
+    maxn.missing <- length.v.3d() %>%
+      full_join(maxn) %>% glimpse() %>%
+      dplyr::mutate(type = "MaxN not measured") %>%
+      dplyr::mutate(total.abundance = total.abundance - Total.Measurements)
+    
+    too.many.measurements <- maxn.missing %>%
+      dplyr::filter(total.abundance < 0) %>%
+      dplyr::mutate(extra = TRUE) %>%
+      dplyr::select(campaignid, sample, extra)
+    
+    maxn.missing <- maxn.missing %>%
+      dplyr::filter(total.abundance > 0)
+      
     threedpoints <- threedpoints.abundance() %>%
       dplyr::mutate(type = "3D points")
     
     lengths <- length.abundance() %>%
       dplyr::mutate(type = "Length Measurements")
     
-    dat <- bind_rows(threedpoints, lengths)
+    dat <- bind_rows(threedpoints, lengths, maxn.missing) 
     
+    totals <- dat %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(total.abundance = sum(total.abundance)) %>%
+      dplyr::ungroup() %>%
+      left_join(too.many.measurements) %>%
+      dplyr::filter(extra == TRUE) %>%
+      dplyr::mutate(type = "")
+  
     ggplot(dat, aes(fill = type, y = total.abundance, x = sample)) + 
       geom_bar(position = "stack", stat = "identity") +
+      geom_text(data = totals, aes(x = sample, y = total.abundance + 1, label = "*"), size = 12) +
       xlab("Sample") + ylab("Number of measurements") +
       Theme1 +
+      scale_fill_manual(values=c("MaxN not measured" = '#F8766D', 
+                                 "Length Measurements"= '#7CAE00', 
+                                 "3D points" = '#619CFF')) +
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
     
   })
@@ -2334,18 +2355,50 @@ function(input, output, session) {
   ## ► Number of lengths vs. 3d points PROPORTION - Plot ----
   output$length.vs.3d.plot.prop <- renderPlot({
     
+    maxn <- maxn.complete() %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(total.abundance = sum(maxn)) %>%
+      dplyr::ungroup()
+    
+    print("maxn vs 3ds")
+    
+    maxn.missing <- length.v.3d() %>%
+      full_join(maxn) %>% glimpse() %>%
+      dplyr::mutate(type = "MaxN not measured") %>%
+      dplyr::mutate(total.abundance = total.abundance - Total.Measurements)
+    
+    too.many.measurements <- maxn.missing %>%
+      dplyr::filter(total.abundance < 0) %>%
+      dplyr::mutate(extra = TRUE) %>%
+      dplyr::select(campaignid, sample, extra)
+    
+    maxn.missing <- maxn.missing %>%
+      dplyr::filter(total.abundance > 0)
+    
     threedpoints <- threedpoints.abundance() %>%
       dplyr::mutate(type = "3D points")
     
     lengths <- length.abundance() %>%
       dplyr::mutate(type = "Length Measurements")
     
-    dat <- bind_rows(threedpoints, lengths)
+    dat <- bind_rows(threedpoints, lengths, maxn.missing) 
+    
+    totals <- dat %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(total.abundance = sum(total.abundance)) %>%
+      dplyr::ungroup() %>%
+      left_join(too.many.measurements) %>%
+      dplyr::filter(extra == TRUE) %>%
+      dplyr::mutate(type = "")
     
     ggplot(dat, aes(fill = type, y = total.abundance, x = sample)) + 
       geom_bar(position = "fill", stat = "identity") +
-      xlab("Sample") + ylab("Proportion of measurements") +
+      geom_text(data = totals, aes(x = sample, y = 1, label = "*"), size = 12) +
+      xlab("Sample") + ylab("Number of measurements") +
       Theme1 +
+      scale_fill_manual(values=c("MaxN not measured" = '#F8766D', 
+                                 "Length Measurements"= '#7CAE00', 
+                                 "3D points" = '#619CFF')) +
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
     
   })
@@ -4628,22 +4681,23 @@ function(input, output, session) {
       dplyr::ungroup() %>%
       dplyr::left_join(maxn) %>%
       replace_na(list(maxn = 0)) %>%
-      dplyr::filter(!length.maxn == maxn) %>%
+      # dplyr::filter(!length.maxn == maxn) %>%
       dplyr::mutate(percent.difference = (maxn-length.maxn)/maxn*100) %>%
       dplyr::semi_join(length.sample) %>% # only keep ones where length was possible
       replace_na(list(percent.difference = 1)) %>%
-      dplyr::filter(!percent.difference%in%c(0)) %>% #only for those that have missing lengths
       dplyr::mutate(difference = (maxn-length.maxn)) %>%
       dplyr::mutate(difference = abs(difference)) %>%
       dplyr::mutate(percent.difference = abs(percent.difference)) %>%
       dplyr::select(campaignid, sample, family, genus, species, maxn, length.maxn, difference, percent.difference) %>%
-      arrange(-difference)
+      arrange(-difference) %>% glimpse()
   })
   
   ## ► Valuebox ----
   output$length.vs.maxn <- renderValueBox({
     length.vs.maxn <- length.vs.maxn() %>%
-      dplyr::mutate(count = 1)
+      dplyr::mutate(count = 1) %>%
+      dplyr::filter(!length.maxn == maxn) %>%
+      dplyr::filter(!percent.difference%in%c(0)) #only for those that have missing lengths
     
     if (dim(length.vs.maxn)[1] > 0) {
       total <- sum(length.vs.maxn$count)
@@ -4669,7 +4723,23 @@ function(input, output, session) {
   
   ## ► Plot ----
   output$length.vs.maxn.plot <- renderPlot({
+    
     ggplot(length.vs.maxn(), aes(x = maxn, y = length.maxn, label = paste(genus, species, sep = " ")))+
+      geom_abline(colour = "red", alpha = 0.5)+
+      geom_point()+
+      geom_text(alpha = 0.2)+ 
+      Theme1
+  })
+  
+  ## ► Plot - Particular species----
+  output$length.vs.maxn.plot.species <- renderPlot({
+    
+    dat <- length.vs.maxn() %>%
+      dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
+      dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+      dplyr::filter(scientific %in% input$length.vs.maxn.species.dropdown)
+    
+    ggplot(dat, aes(x = maxn, y = length.maxn, label = sample))+
       geom_abline(colour = "red", alpha = 0.5)+
       geom_point()+
       geom_text(alpha = 0.2)+ 
@@ -5090,7 +5160,6 @@ function(input, output, session) {
     
     hab <- left_join(hab, metadata())
     
-    
     # Filter the data for plotting
     overzero <-  hab %>% # Any sample with a value greater than zero
       filter(biota %in% input$hab.dropdown & num.points > 0) 
@@ -5256,59 +5325,60 @@ function(input, output, session) {
   ## ► All errors ----
   all.errors <- reactive({
     
-    
-    # print("points.samples.without.metadata")
+    if(input$upload %in% "EM"){
+    print("points.samples.without.metadata")
     points.samples.without.metadata <- points.samples.without.metadata() %>%
-      mutate(error = "sample.in.points.without.metadata")#%>%
-    # glimpse()#%>%
+      mutate(error = "sample.in.points.without.metadata")%>%
+    glimpse()#%>%
     
-    # print("samples.without.periods")
+    print("samples.without.periods")
     samples.without.periods <- samples.without.periods()%>%
-      mutate(error = "sample.without.period")#%>%
-    # glimpse()#%>%
+      mutate(error = "sample.without.period")%>%
+    glimpse()#%>%
     
-    # print("periods.no.end")
+    print("periods.no.end")
     periods.no.end <- periods.no.end() %>%
-      mutate(error = "period.with.no.end")#%>%
-    # glimpse()#%>%
+      mutate(error = "period.with.no.end")%>%
+    glimpse()#%>%
     
-    # print("periods.wrong")
+    print("periods.wrong")
     periods.wrong <- periods() %>%
       distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
       mutate(period.time = round(timeend - timestart)) %>%
       filter(!period.time %in% c(input$error.period.length)) %>%
-      mutate(error = "period.wrong.length")#%>%
-    # glimpse()#%>%
+      mutate(error = "period.wrong.length")%>%
+    glimpse()#%>%
     
-    # print("points.outside.periods")
+    print("points.outside.periods")
     points.outside.periods <- points.outside.periods() %>%
       mutate(error = "point.outside.period") %>%
-      # glimpse()%>%
+      glimpse()%>%
       dplyr::mutate(number = as.character(number))
     
     print("lengths.outside.periods")
     lengths.outside.periods <- lengths.outside.periods() %>%
       mutate(error = "length.or.3D.point.outside.period") %>%
-      dplyr::mutate(number = as.character(number))#%>% glimpse()#%>%
+      dplyr::mutate(number = as.character(number))%>% glimpse()#%>%
     
     print("points.no.number")
     points.no.number <- points.no.number() %>%
       mutate(error = "point.without.a.number") %>%
-      dplyr::mutate(number = as.character(number))#%>% glimpse()#%>%
+      dplyr::mutate(number = as.character(number))%>% glimpse()#%>%
     
     print("lengths.no.number")
     lengths.no.number <- lengths.no.number() %>%
       mutate(error = "length.or.3D.point.without.a.number") %>%
-      dplyr::mutate(number = as.character(number))#%>%glimpse()#%>%
+      dplyr::mutate(number = as.character(number))%>%glimpse()#%>%
     
     print("maxn.species.not.observed")
     maxn.species.not.observed <- maxn.species.not.observed() %>%
       mutate(error = "species.not.observed.in.region.before") %>%
-      # dplyr::mutate(number = as.character(number))%>% # glimpse()#%>%
+      glimpse() #%>%
+      #dplyr::mutate(number = as.character(maxn))#%>% # glimpse()#%>%
       
       print("length.species.not.observed")
     length.species.not.observed <- length.species.not.observed() %>%
-      mutate(error = "species.not.observed.in.region.before") %>%
+      mutate(error = "species.not.observed.in.region.before") #%>%
       # dplyr::mutate(number = as.character(number))%>% #glimpse()#%>%
       
       range.limit <- (input$error.report.range*1000)
@@ -5322,13 +5392,13 @@ function(input, output, session) {
     print("length.wrong.small")
     length.wrong.small <- length.wrong() %>%
       dplyr::filter(reason%in%c("too small")) %>%
-      mutate(error = reason) %>%
+      mutate(error = reason) #%>%
       # dplyr::mutate(number = as.character(number))%>% #glimpse()#%>%
       
       print("length.wrong.big")
     length.wrong.big <- length.wrong() %>%
       dplyr::filter(reason%in%c("too big")) %>%
-      mutate(error = reason) %>%
+      mutate(error = reason) #%>%
       # dplyr::mutate(number = as.character(number))%>% #glimpse()#%>%
       
       rms.limit <- (input$error.report.rms)
@@ -5352,7 +5422,7 @@ function(input, output, session) {
       dplyr::select(campaignid, sample, period, error, family, genus, species, number, length, frame, frameleft, range, min.length, max.length, fb.length_max, em.comment, rms, precision, code) %>%
       distinct() %>%
       arrange(campaignid, sample)
-    
+  }
     # Remember to make this distinct!
     # For transect version need to include those outside of transect
   })

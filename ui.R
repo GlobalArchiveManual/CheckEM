@@ -416,26 +416,32 @@ tagList(
                                                    valueBoxOutput("prop.lengths"))),
                        
                        box(width=12, title = "Length + 3D points vs. MaxN", status = "primary", 
-                           plotOutput("length.vs.maxn.plot", height = 300)),
+                           plotOutput("length.vs.maxn.plot", height = 500)),
                        
                        shiny::conditionalPanel("input.upload == 'EM'",
-                                               box(width = 12, title = "Lengths vs.3D points", status = "primary", 
-                                                   plotOutput("length.vs.3d.plot", height = 300)),
+                                               box(width = 12, title = "Lengths vs. 3D points", status = "primary", 
+                                                   "A * denotes a sample where the sum of length measurements and 3D points is greater than the MaxN",
+                                                   plotOutput("length.vs.3d.plot", height = 500)),
                                                
-                                               box(width = 12, title = "Lengths vs.3D points as proportion", status = "primary", 
-                                                   plotOutput("length.vs.3d.plot.prop", height = 300)),
-                                               
-                                               
-                                               
-                                               box(width = 12, title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
-                                                   htmlOutput("length.vs.maxn.species.dropdown", multiple = TRUE)),
-                                               
-                                               box(width = 12, title = "Lengths vs.3D points", status = "primary", 
+                                               box(width = 12, title = "Lengths vs. 3D points as proportion", status = "primary", 
+                                                   "A * denotes a sample where the sum of length measurements and 3D points is greater than the MaxN",
+                                                   plotOutput("length.vs.3d.plot.prop", height = 500))),
+                       
+                       
+                       
+                       box(width = 12, title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
+                           htmlOutput("length.vs.maxn.species.dropdown", multiple = TRUE)),
+                       
+                       box(width=12, title = "Length + 3D points vs. MaxN", status = "primary", 
+                           plotOutput("length.vs.maxn.plot.species", height = 500)),
+                       
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               box(width = 12, title = "Lengths vs. 3D points", status = "primary", 
                                                    plotOutput("length.vs.3d.species.plot.stack", height = 300)),
                                                
-                                               box(width = 12, title = "Lengths vs.3D points as proportion", status = "primary", 
+                                               box(width = 12, title = "Lengths vs. 3D points as proportion", status = "primary", 
                                                    plotOutput("length.vs.3d.species.plot.prop", height = 300))
-                                               )
+                       )
               )),
       
       

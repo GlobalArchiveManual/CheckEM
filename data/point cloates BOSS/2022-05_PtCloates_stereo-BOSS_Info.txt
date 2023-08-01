@@ -12,7 +12,6 @@ OpCode	TapeReader	Depth	Comment	Info5Name	Info5Value	Info6Name	Info6Value	Info7N
 20220523-3-SQUID	Claude		Squid BOSS																
 20220523-4-SQUID	Claude		Squid BOSS																
 20220523-5-SQUID	Claude		Squid BOSS																
-																			
 20220525-SQUID-1	Claude		Squid BOSS																
 20220525-2-SQUID	Claude		Squid BOSS																
 20220525-3-NAKED	Kaitlin		Naked BOSS																
