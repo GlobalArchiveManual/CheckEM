@@ -410,13 +410,33 @@ tagList(
       tabItem(tabName = "maxnlength",
               fluidRow(div(width=12,id="click.length.vs.maxn",
                            valueBoxOutput("length.vs.maxn")),
-                       box(width=12, title = "Length vs. MaxN", status = "primary", 
-                           plotOutput("length.vs.maxn.plot", height = 600)),
-                       box(title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
-                           htmlOutput("length.vs.maxn.species.dropdown",multiple=TRUE)),
-                       box(width=12, title = "Length vs. MaxN", status = "primary", 
-                           plotOutput("length.vs.maxn.species.plot", height = 600)))
-              ),
+                       
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               div(width=12,id="click.prop.lengths",
+                                                   valueBoxOutput("prop.lengths"))),
+                       
+                       box(width=12, title = "Length + 3D points vs. MaxN", status = "primary", 
+                           plotOutput("length.vs.maxn.plot", height = 300)),
+                       
+                       shiny::conditionalPanel("input.upload == 'EM'",
+                                               box(width = 12, title = "Lengths vs.3D points", status = "primary", 
+                                                   plotOutput("length.vs.3d.plot", height = 300)),
+                                               
+                                               box(width = 12, title = "Lengths vs.3D points as proportion", status = "primary", 
+                                                   plotOutput("length.vs.3d.plot.prop", height = 300)),
+                                               
+                                               
+                                               
+                                               box(width = 12, title = "Choose species to plot below:", status = "primary", solidHeader = TRUE,
+                                                   htmlOutput("length.vs.maxn.species.dropdown", multiple = TRUE)),
+                                               
+                                               box(width = 12, title = "Lengths vs.3D points", status = "primary", 
+                                                   plotOutput("length.vs.3d.species.plot.stack", height = 300)),
+                                               
+                                               box(width = 12, title = "Lengths vs.3D points as proportion", status = "primary", 
+                                                   plotOutput("length.vs.3d.species.plot.prop", height = 300))
+                                               )
+              )),
       
       
 
