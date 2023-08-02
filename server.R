@@ -1189,6 +1189,9 @@ function(input, output, session) {
         # TODO add an example dataset for DOVs
       } 
       
+      print("checking points 1")
+      print(unique(points$family))
+      
       points <- points %>%
         mutate(sample = as.factor(sample)) %>%
         mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
@@ -1210,13 +1213,17 @@ function(input, output, session) {
   
   ## ► Create MaxN (Raw) ----
   maxn.raw <- reactive({
+    
+    print("checking points")
+    print(unique(points()$family))
+    
     maxn <- points() %>%
       dplyr::mutate(number = as.numeric(number)) %>%
       replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
-      dplyr::group_by(campaignid, sample, filename, period, periodtime, frame, family, genus, species, code) %>% # removed comment 21/10/21
+      dplyr::group_by(campaignid, sample, filename, period, periodtime, frame, family, genus, species) %>% # removed comment 21/10/21 removed code 02/08/23
       dplyr::summarise(maxn = sum(number)) %>%
       dplyr::ungroup() %>%
-      dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+      dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code 02/08/23
       dplyr::slice(which.max(maxn)) %>%
       dplyr::ungroup() %>%
       dplyr::filter(!is.na(maxn)) %>%
@@ -1238,7 +1245,9 @@ function(input, output, session) {
   
   maxn.clean <- reactive({
     
-    # print("maxn.clean")
+    print("maxn.clean")
+    
+    print(unique(maxn.raw()$family))
     
     maxn.clean <- dplyr::full_join(maxn.raw(), metadata.regions()) %>%
       dplyr::left_join(., synonyms()) %>% #by = c("family", "genus", "species"), 
@@ -1246,7 +1255,7 @@ function(input, output, session) {
       dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
       dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
       dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+      dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
       dplyr::slice(which.max(maxn)) %>%
       dplyr::ungroup() %>%
       as_tibble() 
@@ -1257,10 +1266,10 @@ function(input, output, session) {
     if(input$upload %in% "EM"){
       maxn.complete <- maxn.clean() %>%
         dplyr::full_join(metadata.regions()) %>% 
-        dplyr::select(c(campaignid, sample, family, genus, species, maxn, code)) %>%
-        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
+        dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
+        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
         replace_na(list(maxn = 0)) %>%
-        dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
         dplyr::summarise(maxn = sum(maxn)) %>%
         dplyr::ungroup()
     }
@@ -1279,14 +1288,14 @@ function(input, output, session) {
           dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
           dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
           dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+          dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
           dplyr::slice(which.max(maxn)) %>%
           dplyr::ungroup() %>%
           dplyr::full_join(metadata.regions()) %>%
-          dplyr::select(c(campaignid, sample, family, genus, species, maxn, code)) %>%
-          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
+          dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
+          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
           replace_na(list(maxn = 0)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+          dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
           dplyr::summarise(maxn = sum(maxn)) %>%
           ungroup() %>%
           dplyr::left_join(metadata.regions()) %>%
@@ -1296,11 +1305,11 @@ function(input, output, session) {
       else{ 
         print("2")
         maxn.complete <- maxn %>%
-          dplyr::select(c(campaignid, sample, family, genus, species, maxn, code)) %>%
+          dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
           dplyr::full_join(metadata.regions()) %>%
-          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
+          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
           replace_na(list(maxn = 0)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+          dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
           dplyr::summarise(maxn = sum(maxn)) %>%
           ungroup() %>%
           dplyr::left_join(metadata.regions()) %>%
@@ -1334,7 +1343,7 @@ function(input, output, session) {
         
         maxn.area <- maxn.area %>%
           dplyr::filter(!maxn %in% 0) %>%
-          dplyr::select(campaignid, sample, family, genus, species, code, maxn)} # remove metadata columns
+          dplyr::select(campaignid, sample, family, genus, species, maxn)} # remove metadata columns # removed code
       
       print("final")
       
@@ -1510,12 +1519,15 @@ function(input, output, session) {
     
     if(input$upload %in% "EM"){
       
-      maxn <- life.history.expanded() %>%
-        anti_join(maxn.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
+      print("no match")
+      
+      print(unique(maxn.clean()$family))
+      
+      maxn <- dplyr::anti_join(maxn.clean(), life.history.expanded(), by = c("family", "genus", "species", "marine.region")) %>%
         filter(maxn > 0) %>%
         distinct(campaignid, sample, family, genus, species, marine.region) %>%
-        dplyr::rename('marine region not observed in' = marine.region) %>%
-        filter(!species %in% c("spp"))
+        dplyr::rename('marine region not observed in' = marine.region) #%>%
+        #filter(!species %in% c("spp")) %>% glimpse()
       
     } else {
       
@@ -1523,8 +1535,8 @@ function(input, output, session) {
         anti_join(count.clean(), ., by = c("family", "genus", "species", "marine.region")) %>%
         filter(maxn > 0) %>%
         distinct(campaignid, sample, family, genus, species, marine.region) %>%
-        dplyr::rename('marine region not observed in' = marine.region) %>%
-        filter(!species %in% c("spp"))
+        dplyr::rename('marine region not observed in' = marine.region) #%>%
+        #filter(!species %in% c("spp"))
       
     }
     
@@ -1545,9 +1557,14 @@ function(input, output, session) {
     title = "Species not previously observed in the marine region", size = "l", easyClose = TRUE, 
     downloadButton("download.maxn.species.not.observed", "Download as csv"), 
     checkboxInput("maxn.filter.spp", label = "Filter out sp1, sp2, spp etc.", value = FALSE), 
+    checkboxInput("maxn.observed.distinct", label = "Show unique species per campaign", value = FALSE), 
     renderDataTable(
-      if(input$maxn.filter.spp == TRUE)
-        maxn.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10"))
+      if(input$maxn.filter.spp == TRUE & input$maxn.observed.distinct == TRUE)
+        maxn.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp")) %>% distinct(campaignid, family, genus, species)
+      else if (input$maxn.filter.spp == TRUE & input$maxn.observed.distinct == FALSE)
+        maxn.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp")) 
+      else if (input$maxn.filter.spp == FALSE & input$maxn.observed.distinct == TRUE)
+        maxn.species.not.observed() %>% distinct(campaignid, family, genus, species)
       else
         maxn.species.not.observed(),  rownames = FALSE, 
       options = list(paging = FALSE, row.names = FALSE, searching = TRUE)))))
@@ -2322,7 +2339,9 @@ function(input, output, session) {
       dplyr::select(campaignid, sample, extra)
     
     maxn.missing <- maxn.missing %>%
-      dplyr::filter(total.abundance > 0)
+      dplyr::filter(total.abundance > 0) %>%
+      full_join(metadata.regions()) %>%
+      dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) 
       
     threedpoints <- threedpoints.abundance() %>%
       dplyr::mutate(type = "3D points")
@@ -2348,7 +2367,8 @@ function(input, output, session) {
       scale_fill_manual(values=c("MaxN not measured" = '#F8766D', 
                                  "Length Measurements"= '#7CAE00', 
                                  "3D points" = '#619CFF')) +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+      scale_y_continuous(expand = c(0, 0))
     
   })
   
@@ -2365,7 +2385,9 @@ function(input, output, session) {
     maxn.missing <- length.v.3d() %>%
       full_join(maxn) %>% glimpse() %>%
       dplyr::mutate(type = "MaxN not measured") %>%
-      dplyr::mutate(total.abundance = total.abundance - Total.Measurements)
+      dplyr::mutate(total.abundance = total.abundance - Total.Measurements) %>%
+      full_join(metadata.regions()) %>%
+      dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) 
     
     too.many.measurements <- maxn.missing %>%
       dplyr::filter(total.abundance < 0) %>%
@@ -2399,47 +2421,134 @@ function(input, output, session) {
       scale_fill_manual(values=c("MaxN not measured" = '#F8766D', 
                                  "Length Measurements"= '#7CAE00', 
                                  "3D points" = '#619CFF')) +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+      scale_y_continuous(expand = c(0, 0))
     
   })
   
   ## ► Number of lengths vs. 3d points Species Numbers - Plot ----
   output$length.vs.3d.species.plot.stack <- renderPlot({
+
+    # print("maxn species")
     
-    length <- length3dpoints.clean() %>%
-      dplyr::filter(!length %in% c(NA)) %>%
-      dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
-      dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-      dplyr::filter(scientific %in% input$length.vs.maxn.species.dropdown) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>%
-      dplyr::summarise(total.abundance = sum(number)) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(type = "Length Measurements")
+      maxn <- maxn.complete() %>%
+        dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
+        dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+        dplyr::filter(scientific %in% input$length.vs.maxn.species.dropdown) %>%
+        dplyr::mutate(total.abundance = maxn) %>%
+        dplyr::select(campaignid, sample, total.abundance) %>%
+        dplyr::mutate(sample = as.character(sample)) #%>% glimpse()
+      
+      #test <- maxn %>% filter(sample %in% "3.02") %>% glimpse()
+      
+      #print("lengthh")
+      lengths <- length3dpoints.clean() %>%
+        dplyr::filter(!length %in% c(NA)) %>%
+        dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
+        dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+        dplyr::filter(scientific %in% input$length.vs.maxn.species.dropdown) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>%
+        dplyr::summarise(total.abundance = sum(number)) %>%
+        dplyr::ungroup() %>%
+        full_join(metadata.regions()) %>%
+        replace_na(list(total.abundance = 0)) %>%
+        dplyr::mutate(type = "Length Measurements") %>%
+        dplyr::mutate(calc = "length.measurements") %>% 
+        dplyr::select(campaignid, sample, total.abundance, calc, type) # %>% glimpse()
+      
+      #test <- lengths %>% filter(sample %in% "3.02") %>% glimpse()
+      
+      #print("3D points")
+      
+      threedpoints <- length3dpoints.clean() %>%
+        dplyr::filter(length %in% c(NA)) %>%
+        dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
+        dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+        dplyr::filter(scientific %in% input$length.vs.maxn.species.dropdown) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>%
+        dplyr::summarise(total.abundance = sum(number)) %>%
+        dplyr::ungroup() %>%
+        full_join(metadata.regions()) %>%
+        replace_na(list(total.abundance = 0)) %>%
+        dplyr::mutate(type = "3D points") %>%
+        dplyr::mutate(calc = "points") %>%
+        dplyr::select(campaignid, sample, total.abundance, calc, type)  #%>% glimpse()
+      
+      test <- threedpoints %>% filter(sample %in% "3.02") #%>% glimpse()
+      
+      #print("maxn missing")
+      
+      maxn.missing <- bind_rows(threedpoints, lengths) %>%
+        dplyr::select(-c(type)) %>%
+        tidyr::pivot_wider(names_from = calc, values_from = total.abundance) %>%
+        glimpse() %>%
+        dplyr::mutate(measurements = points + length.measurements) %>%
+        dplyr::select(campaignid, sample, measurements) %>%
+        full_join(maxn) %>%
+        replace_na(list(total.abundance = 0, measurements = 0)) %>%
+        dplyr::mutate(type = "MaxN not measured") %>%
+        dplyr::mutate(total.abundance = total.abundance - measurements) %>%
+        distinct() %>% 
+        full_join(metadata.regions()) %>%
+        dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) #%>% glimpse()
+        
+      
+      #test <- maxn.missing %>% filter(sample %in% "3.02") %>% glimpse()
+      
+      #print("too many")
+      
+      too.many.measurements <- maxn.missing %>%
+        dplyr::filter(total.abundance < 0) %>%
+        dplyr::mutate(extra = TRUE) %>%
+        dplyr::select(campaignid, sample, extra) #%>% glimpse()
+      
+      #print("missing")
+      maxn.missing <- maxn.missing %>%
+        dplyr::filter(total.abundance > 0) #%>% glimpse()
+      
+      #test <- maxn.missing %>% filter(sample %in% "3.02") %>% glimpse()
     
-    threedpoints <- length3dpoints.clean() %>%
-      dplyr::filter(length %in% c(NA)) %>%
-      dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
-      dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-      dplyr::filter(scientific %in% input$length.vs.maxn.species.dropdown) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>%
-      dplyr::summarise(total.abundance = sum(number)) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(type = "3D points")
-    
-    dat <- bind_rows(threedpoints, length)
-    
-    ggplot(dat, aes(fill = type, y = total.abundance, x = sample)) + 
-      geom_bar(position = "stack", stat = "identity") +
-      xlab("Sample") + ylab("Proportion of measurements") +
-      Theme1 +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+      dat <- bind_rows(threedpoints, lengths, maxn.missing) %>% distinct() 
+      
+      totals <- dat %>%
+        dplyr::group_by(campaignid, sample) %>%
+        dplyr::summarise(total.abundance = sum(total.abundance)) %>%
+        dplyr::ungroup() %>%
+        left_join(too.many.measurements) %>%
+        dplyr::filter(extra == TRUE) %>%
+        dplyr::mutate(type = "") %>% distinct() 
+      
+      ggplot(dat, aes(fill = type, y = total.abundance, x = sample)) + 
+        geom_bar(position = "stack", stat = "identity") +
+        geom_text(data = totals, aes(x = sample, y = total.abundance + 1, label = "*"), size = 12) +
+        xlab("Sample") + ylab("Number of measurements") +
+        Theme1 +
+        scale_fill_manual(values=c("MaxN not measured" = '#F8766D', 
+                                   "Length Measurements"= '#7CAE00', 
+                                   "3D points" = '#619CFF')) +
+        theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+        scale_y_continuous(expand = c(0, 0))
     
   })
   
   ## ► Number of lengths vs. 3d points PROPORTION - Plot ----
   output$length.vs.3d.species.plot.prop <- renderPlot({
     
-    length <- length3dpoints.clean() %>%
+    
+    # print("maxn species")
+    
+    maxn <- maxn.complete() %>%
+      dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
+      dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+      dplyr::filter(scientific %in% input$length.vs.maxn.species.dropdown) %>%
+      dplyr::mutate(total.abundance = maxn) %>%
+      dplyr::select(campaignid, sample, total.abundance) %>%
+      dplyr::mutate(sample = as.character(sample)) #%>% glimpse()
+    
+    #test <- maxn %>% filter(sample %in% "3.02") %>% glimpse()
+    
+    #print("lengthh")
+    lengths <- length3dpoints.clean() %>%
       dplyr::filter(!length %in% c(NA)) %>%
       dplyr::mutate(genus = ifelse(genus %in% c("Unknown"), as.character(family), as.character(genus))) %>%
       dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
@@ -2447,7 +2556,15 @@ function(input, output, session) {
       dplyr::group_by(campaignid, sample, family, genus, species) %>%
       dplyr::summarise(total.abundance = sum(number)) %>%
       dplyr::ungroup() %>%
-      dplyr::mutate(type = "Length Measurements")
+      full_join(metadata.regions()) %>%
+      replace_na(list(total.abundance = 0)) %>%
+      dplyr::mutate(type = "Length Measurements") %>%
+      dplyr::mutate(calc = "length.measurements") %>% 
+      dplyr::select(campaignid, sample, total.abundance, calc, type) # %>% glimpse()
+    
+    #test <- lengths %>% filter(sample %in% "3.02") %>% glimpse()
+    
+    #print("3D points")
     
     threedpoints <- length3dpoints.clean() %>%
       dplyr::filter(length %in% c(NA)) %>%
@@ -2457,15 +2574,66 @@ function(input, output, session) {
       dplyr::group_by(campaignid, sample, family, genus, species) %>%
       dplyr::summarise(total.abundance = sum(number)) %>%
       dplyr::ungroup() %>%
-      dplyr::mutate(type = "3D points")
+      full_join(metadata.regions()) %>%
+      replace_na(list(total.abundance = 0)) %>%
+      dplyr::mutate(type = "3D points") %>%
+      dplyr::mutate(calc = "points") %>%
+      dplyr::select(campaignid, sample, total.abundance, calc, type)  #%>% glimpse()
     
-    dat <- bind_rows(threedpoints, length)
+    test <- threedpoints %>% filter(sample %in% "3.02") #%>% glimpse()
+    
+    #print("maxn missing")
+    
+    maxn.missing <- bind_rows(threedpoints, lengths) %>%
+      dplyr::select(-c(type)) %>%
+      tidyr::pivot_wider(names_from = calc, values_from = total.abundance) %>%
+      glimpse() %>%
+      dplyr::mutate(measurements = points + length.measurements) %>%
+      dplyr::select(campaignid, sample, measurements) %>%
+      full_join(maxn) %>%
+      replace_na(list(total.abundance = 0, measurements = 0)) %>%
+      dplyr::mutate(type = "MaxN not measured") %>%
+      dplyr::mutate(total.abundance = total.abundance - measurements) %>%
+      distinct() %>% 
+      full_join(metadata.regions()) %>%
+      dplyr::filter(successful.length %in% c("Yes", "Y", "y", "yes")) #%>% glimpse()
+    
+    
+    #test <- maxn.missing %>% filter(sample %in% "3.02") %>% glimpse()
+    
+    #print("too many")
+    
+    too.many.measurements <- maxn.missing %>%
+      dplyr::filter(total.abundance < 0) %>%
+      dplyr::mutate(extra = TRUE) %>%
+      dplyr::select(campaignid, sample, extra) #%>% glimpse()
+    
+    #print("missing")
+    maxn.missing <- maxn.missing %>%
+      dplyr::filter(total.abundance > 0) #%>% glimpse()
+    
+    #test <- maxn.missing %>% filter(sample %in% "3.02") %>% glimpse()
+    
+    dat <- bind_rows(threedpoints, lengths, maxn.missing) %>% distinct() 
+    
+    totals <- dat %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(total.abundance = sum(total.abundance)) %>%
+      dplyr::ungroup() %>%
+      left_join(too.many.measurements) %>%
+      dplyr::filter(extra == TRUE) %>%
+      dplyr::mutate(type = "") %>% distinct() 
     
     ggplot(dat, aes(fill = type, y = total.abundance, x = sample)) + 
       geom_bar(position = "fill", stat = "identity") +
-      xlab("Sample") + ylab("Proportion of measurements") +
+      geom_text(data = totals, aes(x = sample, y = 1, label = "*"), size = 12) +
+      xlab("Sample") + ylab("Number of measurements") +
       Theme1 +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+      scale_fill_manual(values=c("MaxN not measured" = '#F8766D', 
+                                 "Length Measurements"= '#7CAE00', 
+                                 "3D points" = '#619CFF')) +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))+
+      scale_y_continuous(expand = c(0, 0))
     
   })
   
@@ -2613,7 +2781,7 @@ function(input, output, session) {
         filter(number > 0) %>%
         distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
         dplyr::rename('marine region not observed in' = marine.region) %>%
-        filter(!species%in%c("spp"))%>% # %>% # Ignore spp in the report 
+        # filter(!species%in%c("spp"))%>% # %>% # Ignore spp in the report 
         mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
         filter(!family %in% c("Unknown"))
       
@@ -2624,7 +2792,7 @@ function(input, output, session) {
         filter(number > 0) %>%
         distinct(campaignid, sample, family, genus, species, marine.region) %>% # use this line to show specific drops OR
         dplyr::rename('marine region not observed in' = marine.region) %>%
-        filter(!species%in%c("spp"))%>% # %>% # Ignore spp in the report 
+        # filter(!species%in%c("spp"))%>% # %>% # Ignore spp in the report 
         mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
         filter(!family %in% c("Unknown"))
       
@@ -2635,9 +2803,14 @@ function(input, output, session) {
   onclick('click.length.species.not.observed', showModal(modalDialog(
     title = "Species not previously observed in the marine region", size = "l", easyClose = TRUE, 
     checkboxInput("length.filter.spp", label = "Filter out sp1, sp2, spp etc.", value = FALSE), 
+    checkboxInput("length.observed.distinct", label = "Show unique species per campaign", value = FALSE), 
     renderDataTable(
-      if(input$length.filter.spp == TRUE)
-        length.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10"))
+      if(input$length.filter.spp == TRUE & input$length.observed.distinct == TRUE)
+        length.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp")) %>% distinct(campaignid, family, genus, species)
+      else if (input$length.filter.spp == TRUE & input$length.observed.distinct == FALSE)
+        length.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp")) 
+      else if (input$length.filter.spp == FALSE & input$length.observed.distinct == TRUE)
+        length.species.not.observed() %>% distinct(campaignid, family, genus, species)
       else
         length.species.not.observed(),  rownames = FALSE, 
       options = list(paging = FALSE, searching = TRUE)))))
@@ -4680,12 +4853,12 @@ function(input, output, session) {
       dplyr::summarise(length.maxn = sum(number)) %>%
       dplyr::ungroup() %>%
       dplyr::left_join(maxn) %>%
-      replace_na(list(maxn = 0)) %>%
+      replace_na(list(maxn = 0, length.maxn = 0)) %>%
       # dplyr::filter(!length.maxn == maxn) %>%
       dplyr::mutate(percent.difference = (maxn-length.maxn)/maxn*100) %>%
       dplyr::semi_join(length.sample) %>% # only keep ones where length was possible
-      replace_na(list(percent.difference = 1)) %>%
-      dplyr::mutate(difference = (maxn-length.maxn)) %>%
+      replace_na(list(percent.difference = 0)) %>%
+      dplyr::mutate(difference = (maxn - length.maxn)) %>%
       dplyr::mutate(difference = abs(difference)) %>%
       dplyr::mutate(percent.difference = abs(percent.difference)) %>%
       dplyr::select(campaignid, sample, family, genus, species, maxn, length.maxn, difference, percent.difference) %>%
@@ -4718,7 +4891,7 @@ function(input, output, session) {
   ## ► Onclick ----
   onclick('click.length.vs.maxn', showModal(modalDialog(
     title = "Number of lengths/3D points does not match MaxN", size = "l", easyClose = TRUE, 
-    renderDataTable(length.vs.maxn(),  rownames = FALSE, 
+    renderDataTable(length.vs.maxn() %>% filter(!length.maxn == maxn),  rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
   ## ► Plot ----

@@ -15,10 +15,35 @@ googlesheets4::gs4_auth()
 # Read in sheet from googledrive ----
 aus.url <- "https://docs.google.com/spreadsheets/d/1SMLvR9t8_F-gXapR2EemQMEPSw_bUbPLcXd3lJ5g5Bo/edit?usp=sharing"
 
-# Read in life history sheet ----
-lh.aus <- read_sheet(aus.url) %>%
+
+
+# # Read in life history sheet ----
+# lh.aus <- read_sheet(aus.url) %>%
+#   ga.clean.names() %>%
+#   filter(grepl('Australia', global.region)) %>%
+#   dplyr::mutate(all=as.numeric(all)) %>%
+#   dplyr::mutate(bll=as.numeric(bll)) %>%
+#   dplyr::mutate(a=as.numeric(a)) %>%
+#   dplyr::mutate(b=as.numeric(b)) %>%
+#   dplyr::rename(code = caab) %>%
+#   dplyr::select(code, family, genus, species, marine.region, length.measure, a, b, all, bll, fb.length_max, fb.ltypemaxm, australian.common.name) %>%
+#   distinct() %>%
+#   dplyr::mutate(marine.region = str_replace_all(.$marine.region,c("N/" = "North/",
+#                                                                   "NW" = "North-west",
+#                                                                   "CS" = "Coral Sea",
+#                                                                   "TE" = "Temperate East",
+#                                                                   "SE" = "South-east",
+#                                                                   "SW" = "South-west",
+#                                                                   "N" = "North",
+#                                                                   "Northorth" = "North",
+#                                                                   "Northor" = "North")))
+# classes <- read_sheet(aus.url) %>%
+#   ga.clean.names() %>%
+#   filter(grepl('Australia', global.region)) %>%
+#   distinct(class, order, family, genus, species)
+
+lh.aus <- readRDS("data/simple.life.history.RDS") %>%
   ga.clean.names() %>%
-  filter(grepl('Australia', global.region)) %>%
   dplyr::mutate(all=as.numeric(all)) %>%
   dplyr::mutate(bll=as.numeric(bll)) %>%
   dplyr::mutate(a=as.numeric(a)) %>%
@@ -34,15 +59,25 @@ lh.aus <- read_sheet(aus.url) %>%
                                                                   "SW" = "South-west",
                                                                   "N" = "North",
                                                                   "Northorth" = "North",
-                                                                  "Northor" = "North")))
-classes <- read_sheet(aus.url) %>%
+                                                                  "Northor" = "North"))) %>%
+  dplyr::mutate(fb.length_max = fb.length_max * 10)
+
+spp.lengths <- lh.aus %>%
+  dplyr::filter(!is.na(fb.length_max)) %>%
+  dplyr::group_by(family, genus) %>%
+  dplyr::summarise(average.max = mean(fb.length_max)) %>%
+  ungroup()
+
+lh.aus <- left_join(lh.aus, spp.lengths) %>%
+  dplyr::mutate(fb.length_max = if_else(is.na(fb.length_max), average.max, fb.length_max))
+
+classes <- readRDS("data/simple.life.history.RDS") %>%
   ga.clean.names() %>%
-  filter(grepl('Australia', global.region)) %>%
   distinct(class, order, family, genus, species)
 
 # Expand life history for checking regions ----
 lh.aus.expanded <- lh.aus %>%
-  mutate(marine.region = strsplit(as.character(marine.region), split = "/"))%>%
+  mutate(marine.region = strsplit(as.character(marine.region), split = ", "))%>% # changed from "/" for old LH
   unnest(marine.region)
 
 # Create average max length for each family and each genus (used if species isn't in life history sheet e.g. Scarus spp) ---
@@ -217,3 +252,4 @@ save(all_data, file = here::here("data/all_data.Rdata"))
 # FOR WORKSHOP
 # setwd("C:/GitHub/API-query/data/spatial")
 # saveRDS(marineparks, "marineparks.RDS")
+
