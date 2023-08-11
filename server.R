@@ -1,5 +1,7 @@
 function(input, output, session) {
   
+  # TODO change the example dataset to 2022-05 Point cloates BRUVs
+  
   # Increase size of files that can be uploaded
   options(shiny.maxRequestSize = 50*1024^2)
   
@@ -181,9 +183,9 @@ function(input, output, session) {
     # if no metadata file uploaded and method = single point. dataset = Ningloo BRUVs
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
-      metadata <-  read.csv("data/example_metadata.csv") %>%
+      metadata <-  read.csv("data/2022-05_PtCloates_stereo-BRUVS_Metadata.csv") %>%
         ga.clean.names() %>%
-        dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+        dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
         dplyr::select(campaignid, sample, latitude, longitude, date.time, site, location, status, depth, successful.count, successful.length, observer.count, observer.length) %>% 
         as.data.frame()
       
@@ -206,12 +208,33 @@ function(input, output, session) {
     # - Turn into new format YYYY-MM-DDThh:mm:ss
     # - get timezone from lat/lon column
     
+    # latitude outside of -90 - 90
+    if(nrow(metadata %>% dplyr::mutate(latitude = as.numeric(latitude)) %>% 
+            dplyr::filter(latitude < -90 | latitude > 90)) > 0){
+      shinyalert("Error in Metadata", "The Latitude column has values that are not between -90 - 90 decimal degrees. Please fix the error before continuing", type = "error")
+    } 
+    
+    # Longitude outside of -180 - 180
+    if(nrow(metadata %>% dplyr::mutate(longitude = as.numeric(longitude)) %>% 
+            dplyr::filter(longitude < -180 | longitude > 180)) > 0){
+      shinyalert("Error in Metadata", "The Longitude column has values that are not between -180 - 180 decimal degrees. Please fix the error before continuing", type = "error")
+    } 
+    
     met.names <- c(names(metadata))
     print(met.names)
+    
+    if('observer' %in% met.names) {
+      shinyalert("Column updated", "<b>'Observer'</b> column renamed to <b>'Observer.count'</b>", type = "warning", html = TRUE)
+      metadata <- metadata %>%
+        dplyr::rename(observer.count = observer)
+    }
+    
+    
     
     if('date' %in% met.names) {
       
       print("changing metadata date time info")
+      shinyalert("Column updated", "<b>'Date'</b> and <b>'Time'</b> columns converted to <b>'Date.time'</b>", type = "warning", html = TRUE)
       
       metadata <- metadata %>%
         dplyr::mutate(date.time = paste0(str_sub(date, 1, 4), # Year
@@ -231,7 +254,7 @@ function(input, output, session) {
       
       for(tz in unique(timezones$tz_name)){
         
-        #TODO change this to be the actual date of the metadata
+        #TODO change this to be the actual date of the metadata (will mess up if there was daylight savings)
         dat <- lutz::tz_offset("2023-07-31", tz = tz) %>%
           dplyr::select(tz_name, utc_offset_h)
         
@@ -346,8 +369,185 @@ function(input, output, session) {
   
   ## ► Preview metadata in dashboard ----
   output$table.metadata <- renderDataTable({
-    metadata.regions()
+    
+    # Checks on metadata
+    
+    errors <- ""
+    
+    # NA in sample
+    if(nrow(metadata.regions() %>% dplyr::filter(is.na(sample))) > 0){
+      
+      errors <- paste0(errors, "<li>The <b>Sample</b> column is missing values</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Sample column is missing values", type = "error")
+    }
+    
+    # NA in longitude
+    if(nrow(metadata.regions() %>% dplyr::mutate(longitude = as.numeric(longitude)) %>% 
+            dplyr::filter(is.na(longitude))) > 0){
+      
+      errors <- paste0(errors, "<li>The <b>Longitude</b> column is missing values or is non-numeric</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Longitude column is missing values or is non-numeric", type = "error")
+    } 
+    
+    # NA in latitude
+    if(nrow(metadata.regions() %>% dplyr::mutate(latitude = as.numeric(latitude)) %>% 
+            dplyr::filter(is.na(latitude))) > 0){
+      errors <- paste0(errors, "<li>The <b>Latitude</b> column is missing values or is non-numeric</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Latitude column is missing values or is non-numeric", type = "error")
+    } 
+    
+  
+    # NA in date.time
+    if(nrow(metadata.regions() %>% dplyr::filter(is.na(date.time))) > 0){
+      errors <- paste0(errors, "<li>The <b>Date.time</b> column is missing values</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Date.time column is missing values", type = "error")
+    } 
+    
+    # NA in depth
+    if(nrow(metadata.regions() %>% dplyr::mutate(depth = as.numeric(depth)) %>% 
+            dplyr::filter(is.na(depth))) > 0){
+      errors <- paste0(errors, "<li>The <b>Depth</b> column is missing values or is non-numeric</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Depth column is missing values or is non-numeric", type = "error")
+    } 
+    
+    # NA in observer.count
+    if(nrow(metadata.regions() %>% dplyr::filter(is.na(observer.count))) > 0){
+      errors <- paste0(errors, "<li>The <b>Observer.count</b> column is missing values</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Observer.count column is missing values", type = "warning")
+    } 
+    
+    # NA in observer.length
+    if(nrow(metadata.regions() %>% dplyr::filter(is.na(observer.length))) > 0){
+      errors <- paste0(errors, "<li>The <b>Observer.length</b> column is missing values</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Observer.length column is missing values", type = "warning")
+    }
+    
+    # NA in successful.count
+    if(nrow(metadata.regions() %>% dplyr::filter(is.na(successful.count))) > 0){
+      errors <- paste0(errors, "<li>The <b>Successful.count column is missing values</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Successful.count column is missing values", type = "error")
+    }
+    
+    # NA in successful.length
+    if(nrow(metadata.regions() %>% dplyr::filter(is.na(successful.length))) > 0){
+      errors <- paste0(errors, "<li>The <b>Successful.length</b> column is missing values</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Successful.length column is missing values", type = "error")
+    }
+    
+    # Format of successful.count
+    if(nrow(metadata.regions() %>% dplyr::filter(!successful.count %in% c("Yes", "No"))) > 0){
+      errors <- paste0(errors, "<li>The <b>Successful.count</b> column has values that are not 'Yes' or 'No'</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Successful.count column has values that are not 'Yes' or 'No'", type = "error")
+    }
+    
+    # Format of successful.length
+    if(nrow(metadata.regions() %>% dplyr::filter(!successful.length %in% c("Yes", "No"))) > 0){
+      errors <- paste0(errors, "<li>The <b>Successful.length</b> column has values that are not 'Yes' or 'No'</li>", "<br>")
+      # shinyalert("Missing Metadata", "The Successful.length column has values that are not 'Yes' or 'No'", type = "error")
+    }
+    
+    if(!errors == ""){
+      beepr::beep("coin")
+      
+      shinyalert("Issues with Metadata", text = HTML(paste0("Please fix these before continuing<br><br>", errors)), type = "error", html = TRUE)
+    }
+    
+      # Show table
+      metadata.regions()%>% dplyr::mutate(depth = as.numeric(depth)) #%>% glimpse()
   })
+  
+  # Metadata score - dataframe ----
+  metadata.score <- reactive({
+    
+    score <- 0
+    
+    # NA in sample
+    if(!nrow(metadata.regions() %>% dplyr::filter(is.na(sample))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in sample")
+      print(score)
+    }
+    
+    # NA in longitude
+    if(!nrow(metadata.regions() %>% dplyr::mutate(longitude = as.numeric(longitude)) %>% 
+            dplyr::filter(is.na(longitude))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in longitude")
+      print(score)
+    }
+    
+    # NA in latitude
+    if(!nrow(metadata.regions() %>% dplyr::mutate(latitude = as.numeric(latitude)) %>% 
+            dplyr::filter(is.na(latitude))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in latitude")
+      print(score)
+    } 
+    
+    # NA in date.time
+    if(!nrow(metadata.regions() %>% dplyr::filter(is.na(date.time))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in date.time")
+      print(score)
+    } 
+    
+    # NA in depth
+    if(!nrow(metadata.regions() %>% dplyr::mutate(depth = as.numeric(depth)) %>% 
+            dplyr::filter(is.na(depth))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in depth")
+      print(score)
+    } 
+    
+    # NA in observer.count
+    if(!nrow(metadata.regions() %>% dplyr::filter(is.na(observer.count))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in observer.count")
+      print(score)
+    } 
+    
+    # NA in observer.length
+    if(!nrow(metadata.regions() %>% dplyr::filter(is.na(observer.length))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in observer.length")
+      print(score)
+    }
+    
+    # Format of successful.count
+    if(!nrow(metadata.regions() %>% dplyr::filter(!successful.count %in% c("Yes", "No"))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in successful.count")
+      print(score)
+    }
+    
+    # Format of successful.length
+    if(!nrow(metadata.regions() %>% dplyr::filter(!successful.length %in% c("Yes", "No"))) > 0){
+      score <- score + 5.5555555556
+      print("No NA in successful.length")
+      print(score)
+    }
+    
+    # If any samples are in points or count that don't have metadata
+    if (dim(points.samples.without.metadata())[1] > 0) {
+      score <- score + 0
+      
+    } else {
+      score <- score + 50
+    }
+    
+    score <- score
+    
+    })
+  
+  ## ► Metadata score - valueBox ----
+  output$metadata.score <- renderValueBox({
+    
+    valueBox(width = 3, round(metadata.score(), 2), "Metadata score", 
+             icon = icon("percent"), color = "blue"
+    )
+  })
+  
+  
   
   ## _______________________________________________________ ----
   ##        Metadata checking for single point campaigns     ----
@@ -671,11 +871,11 @@ function(input, output, session) {
     # if no folder chosen and method = single point. dataset = Ningloo BRUVs
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
-      periods <-  read.delim("data/example_Period.txt", na.strings = "") %>%
+      periods <-  read.delim("data/2022-05_PtCloates_stereo-BRUVS_Period.txt", na.strings = "") %>%
         ga.clean.names() %>%
         dplyr::rename(sample = opcode) %>%
         dplyr::mutate(sample = as.factor(sample)) %>%
-        dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+        dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
         as.data.frame()
       
       # TODO add an example dataset for DOVs
@@ -1179,11 +1379,11 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        points <-  read.delim("data/example_Points.txt", na.strings = "") %>%
+        points <-  read.delim("data/2022-05_PtCloates_stereo-BRUVS_Points.txt", na.strings = "") %>%
           ga.clean.names() %>%
           dplyr::rename(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
-          dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+          dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
           as.data.frame()
         
         # TODO add an example dataset for DOVs
@@ -1299,11 +1499,11 @@ function(input, output, session) {
           dplyr::summarise(maxn = sum(maxn)) %>%
           ungroup() %>%
           dplyr::left_join(metadata.regions()) %>%
-          dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-          glimpse()
+          dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
+          #glimpse()
       } 
       else{ 
-        print("2")
+       # print("2")
         maxn.complete <- maxn %>%
           dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
           dplyr::full_join(metadata.regions()) %>%
@@ -1313,8 +1513,8 @@ function(input, output, session) {
           dplyr::summarise(maxn = sum(maxn)) %>%
           ungroup() %>%
           dplyr::left_join(metadata.regions()) %>%
-          dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-          glimpse()
+          dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
+          #glimpse()
       }
       
       maxn.complete <- maxn.complete
@@ -1345,11 +1545,10 @@ function(input, output, session) {
           dplyr::filter(!maxn %in% 0) %>%
           dplyr::select(campaignid, sample, family, genus, species, maxn)} # remove metadata columns # removed code
       
-      print("final")
+      #print("final")
       
       maxn.area <- maxn.area %>%
-        dplyr::filter(!family %in% c("", NA, NULL)) %>%
-        glimpse()
+        dplyr::filter(!family %in% c("", NA, NULL)) #%>% glimpse()
     }
   })
   
@@ -1892,11 +2091,11 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        length <-  read.delim("data/example_Lengths.txt", na.strings = "") %>%
+        length <-  read.delim("data/2022-05_PtCloates_stereo-BRUVS_Lengths.txt", na.strings = "") %>%
           ga.clean.names() %>%
           dplyr::rename(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
-          dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+          dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
           as.data.frame()
         
         # TODO add an example dataset for DOVs
@@ -1984,11 +2183,11 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        threedpoints <-  read.delim("data/example_3DPoints.txt", na.strings = "") %>%
+        threedpoints <-  read.delim("data/2022-05_PtCloates_stereo-BRUVS_3DPoints.txt", na.strings = "") %>%
           ga.clean.names() %>%
           dplyr::rename(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
-          dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
+          dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
           as.data.frame()
         
         # TODO add an example dataset for DOVs
@@ -2022,7 +2221,7 @@ function(input, output, session) {
   # ► Combine lengths and 3d points ----
   length3dpoints <- reactive({
     
-    print("length og")
+    #print("length og")
     
     length3dpoints <- length() %>%
       dplyr::bind_rows(threedpoints()) %>% # changed to bind_rows
@@ -2034,8 +2233,7 @@ function(input, output, session) {
       dplyr::select(-c(time)) %>%
       dplyr::mutate(sample = as.character(sample)) %>%
       dplyr::left_join(metadata.regions()) %>%
-      filter(!family %in% c("Unknown")) %>%
-      glimpse()
+      filter(!family %in% c("Unknown")) #%>% glimpse()
   })
   
   length3dpoints.clean <- reactive({
@@ -2284,17 +2482,21 @@ function(input, output, session) {
   ## ► Number of lengths vs. 3d points - dataframe ----
   length.v.3d <- reactive({
     if(input$upload %in% "EM"){
+      #print("view 3D points")
       threedpoints <- threedpoints.abundance() %>%
-        dplyr::mutate(type = "Number.of.3D.points")
+        dplyr::mutate(type = "Number.of.3D.points") #%>% glimpse()
       
+      #print("XX Lengths")
       lengths <- length.abundance() %>%
-        dplyr::mutate(type = "Number.of.Length.Measurements")
+        dplyr::mutate(type = "Number.of.Length.Measurements") #%>% glimpse()
       
       total <- bind_rows(threedpoints, lengths) %>%
         tidyr::pivot_wider(names_from = type, values_from = total.abundance) %>%
+        tidyr::replace_na(list(Total.Measurements = 0, Number.of.3D.points = 0, Number.of.Length.Measurements = 0)) %>%
         dplyr::mutate(Total.Measurements = Number.of.3D.points + Number.of.Length.Measurements) %>%
         dplyr::mutate(Percent.Length = round((Number.of.Length.Measurements/Total.Measurements) * 100, 2)) %>%
-        glimpse()
+        dplyr::filter(!(Number.of.3D.points %in% 0 & Number.of.Length.Measurements %in% 0))
+        
     }
   })
   
@@ -2323,13 +2525,16 @@ function(input, output, session) {
   ## ► Number of lengths vs. 3d points ACTUAL NUMBERS - Plot ----
   output$length.vs.3d.plot <- renderPlot({
     
+    # TODO change to if statement for gen or EM
+    # only two cols for gen
+    
     maxn <- maxn.complete() %>%
       dplyr::group_by(campaignid, sample) %>%
       dplyr::summarise(total.abundance = sum(maxn)) %>%
       dplyr::ungroup()
     
     maxn.missing <- length.v.3d() %>%
-      full_join(maxn) %>% glimpse() %>%
+      full_join(maxn) #%>% glimpse() %>%
       dplyr::mutate(type = "MaxN not measured") %>%
       dplyr::mutate(total.abundance = total.abundance - Total.Measurements)
     
@@ -2383,7 +2588,7 @@ function(input, output, session) {
     print("maxn vs 3ds")
     
     maxn.missing <- length.v.3d() %>%
-      full_join(maxn) %>% glimpse() %>%
+      full_join(maxn) #%>% glimpse() %>%
       dplyr::mutate(type = "MaxN not measured") %>%
       dplyr::mutate(total.abundance = total.abundance - Total.Measurements) %>%
       full_join(metadata.regions()) %>%
@@ -2481,7 +2686,7 @@ function(input, output, session) {
       maxn.missing <- bind_rows(threedpoints, lengths) %>%
         dplyr::select(-c(type)) %>%
         tidyr::pivot_wider(names_from = calc, values_from = total.abundance) %>%
-        glimpse() %>%
+        #glimpse() %>%
         dplyr::mutate(measurements = points + length.measurements) %>%
         dplyr::select(campaignid, sample, measurements) %>%
         full_join(maxn) %>%
@@ -2587,7 +2792,7 @@ function(input, output, session) {
     maxn.missing <- bind_rows(threedpoints, lengths) %>%
       dplyr::select(-c(type)) %>%
       tidyr::pivot_wider(names_from = calc, values_from = total.abundance) %>%
-      glimpse() %>%
+      #glimpse() %>%
       dplyr::mutate(measurements = points + length.measurements) %>%
       dplyr::select(campaignid, sample, measurements) %>%
       full_join(maxn) %>%
@@ -2856,8 +3061,8 @@ function(input, output, session) {
         mutate(reason = ifelse(length<min.length, "too small", "too big")) %>%
         dplyr::select(campaignid, sample, family, genus, species, length, min.length, max.length, fb.length_max, reason) %>%
         mutate(difference = ifelse(reason%in%c("too small"), (min.length-length), (length-max.length))) %>%
-        dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100)) %>%
-        glimpse()
+        dplyr::mutate(percent.of.fb.max = (length/fb.length_max*100))# %>%
+        #glimpse()
       
     }
     
@@ -4862,8 +5067,10 @@ function(input, output, session) {
       dplyr::mutate(difference = abs(difference)) %>%
       dplyr::mutate(percent.difference = abs(percent.difference)) %>%
       dplyr::select(campaignid, sample, family, genus, species, maxn, length.maxn, difference, percent.difference) %>%
-      arrange(-difference) %>% glimpse()
+      arrange(-difference) #%>% glimpse()
   })
+  
+  
   
   ## ► Valuebox ----
   output$length.vs.maxn <- renderValueBox({
@@ -4904,6 +5111,27 @@ function(input, output, session) {
       Theme1
   })
   
+  ## ► Valuebox - Length Vs. MaxN score ----
+  output$length.vs.maxn.score <- renderValueBox({
+    
+    print("new length error score")
+    
+    length.vs.maxn <- length.vs.maxn() %>%
+      dplyr::mutate(difference = abs(difference)) %>%
+      dplyr::mutate(error = if_else(difference > 0, 1, 0)) %>% glimpse()
+    
+    total.rows <- nrow(length.vs.maxn) %>% glimpse()
+    total.errors <- sum(length.vs.maxn$error) %>% glimpse()
+    
+    percentage <- ((total.rows - total.errors)/ total.rows) * 100
+    
+    valueBox(width = 3, 
+             round(percentage, 2), 
+             "Number in count VS Number in length (+3D Point if EM) score", 
+             icon = icon("percent"), color = "blue"
+    )
+  })
+  
   ## ► Plot - Particular species----
   output$length.vs.maxn.plot.species <- renderPlot({
     
@@ -4921,7 +5149,17 @@ function(input, output, session) {
   
   ## ► Dropdown -----
   output$length.vs.maxn.species.dropdown <- renderUI({
-    df <- length3dpoints()
+    # TODO change to if statement for gen or EM
+    
+    if(input$upload %in% "EM"){
+      
+      df <- length3dpoints.clean()
+      
+    } else {
+      
+      df <- gen.length.clean()
+      
+    }
     
     options <- df %>%
       dplyr::mutate(genus = ifelse(genus %in% c(NA, "NA", "Unknown"), as.character(family), as.character(genus))) %>%
@@ -5466,7 +5704,7 @@ function(input, output, session) {
               print(i)
               
               dat <- metadata %>%
-                filter(campaignid == i) %>% glimpse()
+                filter(campaignid == i) #%>% glimpse()
               
               fileName <- paste(i, "_metadata.csv", sep = "")
               
@@ -5501,58 +5739,51 @@ function(input, output, session) {
     if(input$upload %in% "EM"){
     print("points.samples.without.metadata")
     points.samples.without.metadata <- points.samples.without.metadata() %>%
-      mutate(error = "sample.in.points.without.metadata")%>%
-    glimpse()#%>%
+      mutate(error = "sample.in.points.without.metadata")#%>%
+    #glimpse()#%>%
     
     print("samples.without.periods")
     samples.without.periods <- samples.without.periods()%>%
-      mutate(error = "sample.without.period")%>%
-    glimpse()#%>%
+      mutate(error = "sample.without.period")#%>% glimpse()#%>%
     
     print("periods.no.end")
     periods.no.end <- periods.no.end() %>%
-      mutate(error = "period.with.no.end")%>%
-    glimpse()#%>%
+      mutate(error = "period.with.no.end")
     
     print("periods.wrong")
     periods.wrong <- periods() %>%
       distinct(campaignid, sample, period, timestart, timeend, hasend) %>%
       mutate(period.time = round(timeend - timestart)) %>%
       filter(!period.time %in% c(input$error.period.length)) %>%
-      mutate(error = "period.wrong.length")%>%
-    glimpse()#%>%
+      mutate(error = "period.wrong.length")
     
     print("points.outside.periods")
     points.outside.periods <- points.outside.periods() %>%
       mutate(error = "point.outside.period") %>%
-      glimpse()%>%
       dplyr::mutate(number = as.character(number))
     
     print("lengths.outside.periods")
     lengths.outside.periods <- lengths.outside.periods() %>%
       mutate(error = "length.or.3D.point.outside.period") %>%
-      dplyr::mutate(number = as.character(number))%>% glimpse()#%>%
+      dplyr::mutate(number = as.character(number))
     
     print("points.no.number")
     points.no.number <- points.no.number() %>%
       mutate(error = "point.without.a.number") %>%
-      dplyr::mutate(number = as.character(number))%>% glimpse()#%>%
+      dplyr::mutate(number = as.character(number))
     
     print("lengths.no.number")
     lengths.no.number <- lengths.no.number() %>%
       mutate(error = "length.or.3D.point.without.a.number") %>%
-      dplyr::mutate(number = as.character(number))%>%glimpse()#%>%
+      dplyr::mutate(number = as.character(number))
     
     print("maxn.species.not.observed")
     maxn.species.not.observed <- maxn.species.not.observed() %>%
-      mutate(error = "species.not.observed.in.region.before") %>%
-      glimpse() #%>%
-      #dplyr::mutate(number = as.character(maxn))#%>% # glimpse()#%>%
+      mutate(error = "species.not.observed.in.region.before") 
       
       print("length.species.not.observed")
     length.species.not.observed <- length.species.not.observed() %>%
-      mutate(error = "species.not.observed.in.region.before") #%>%
-      # dplyr::mutate(number = as.character(number))%>% #glimpse()#%>%
+      mutate(error = "species.not.observed.in.region.before") 
       
       range.limit <- (input$error.report.range*1000)
     
@@ -5758,7 +5989,7 @@ function(input, output, session) {
       paste("fish.life.history_", Sys.Date(), ".txt", sep = "")
     }, 
     content = function(file) {
-      write.table(all_data$schema.fish, file, row.names = FALSE, na = "", sep = "\t")
+      write.table(all_data$schema.fish, file, row.names = FALSE, na = "", sep = "\t", quote = FALSE)
     }
   )
   
@@ -5767,7 +5998,7 @@ function(input, output, session) {
       paste("benthic.relief.annotation.schema.forward.facing_", Sys.Date(),".txt", sep = "")
     }, 
     content = function(file) {
-      write.table(all_data$schema.relief, file, row.names = FALSE, na = "", sep = "\t")
+      write.table(all_data$schema.relief, file, row.names = FALSE, na = "", sep = "\t", quote = FALSE)
     }
   )
   
@@ -5776,7 +6007,7 @@ function(input, output, session) {
       paste("benthic.habitat.annotation.schema.forward.facing_", Sys.Date(),".txt", sep = "")
     }, 
     content = function(file) {
-      write.table(all_data$schema.habitat, file, row.names = FALSE, na = "", sep = "\t")
+      write.table(all_data$schema.habitat, file, row.names = FALSE, na = "", sep = "\t", quote = FALSE)
     }
   )
   

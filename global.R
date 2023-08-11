@@ -51,6 +51,9 @@ library(sf)
 
 library(reactlog) # reactlog::reactlog_enable()
 
+library(beepr)
+
+
 # Load data
 load("data/all_data.Rdata")
 

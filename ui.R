@@ -196,7 +196,10 @@ tagList(
       
       # Check metadata - point based data -----
       tabItem(tabName = "checkmetadata",
-              fluidRow(div(id="click.metadata.no.samples",
+              fluidRow(valueBoxOutput("metadata.score"),
+                
+                
+                div(id="click.metadata.no.samples",
                            valueBoxOutput("metadata.no.samples")),
                        div(id="click.metadata.samples.without.fish",
                            valueBoxOutput("metadata.samples.without.fish")),
@@ -410,6 +413,8 @@ tagList(
       tabItem(tabName = "maxnlength",
               fluidRow(div(width=12,id="click.length.vs.maxn",
                            valueBoxOutput("length.vs.maxn")),
+                       
+                       valueBoxOutput("length.vs.maxn.score"),
                        
                        shiny::conditionalPanel("input.upload == 'EM'",
                                                div(width=12,id="click.prop.lengths",
