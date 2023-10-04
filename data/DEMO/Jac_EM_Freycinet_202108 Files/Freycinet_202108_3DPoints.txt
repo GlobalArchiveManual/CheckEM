@@ -1,0 +1,2 @@
+OpCode	ImagePtPair	FilenameLeft	FrameLeft	FilenameRight	FrameRight	Time	Period	PeriodTime	X	Y	Z	sX	sY	sZ	RMS	Range	Direction	Family	Genus	Species	Code	Number	Stage	Activity	Comment	Attribute9	Attribute10
+2_5	18	Frey_2_5_1280_1281_1280_5.MP4	13738	Frey_2_5_1280_1281_1281_5.MP4	12630	54.93710	bottom time	48.21261	-1057.44240	258.64321	-2306.34259	3.33251	1.48357	7.67933	96.98860	2550.35231	25.22905	Callanthiidae	Callanthias	australis	37311055	20		Passing	180		
