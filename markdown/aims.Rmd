@@ -7,30 +7,32 @@ output: html_document
 <img style="float: right; margin-left: 30px; margin-right: 30px;" width= "20%" src='checkem.png'>           
 
 
-#### A shiny app to check EventMeasure outputs against life history traits, synonyms and fishbase
-CheckEM’s aims to provide a web based application to upload database exports from EventMeasure to:
+#### CheckEM is a web based application to check annotations from stereo imagery.
 
-#### *Check metadata:*
-- Check samples in the points data that are missing metadata
-- Connect to shapefiles of marine regions and commonwealth and state marine parks to determine region and status (Currently this is for Australia only). 
-
-#### *Check MaxN:*
-- Create MaxN from points text file
-- Change synonyms (from curated list)
-- Check species that haven’t been observed in the area before (from life history list)
-- Plot distribution spatially
+#### *Checks sample metadata:*
+- Checks if any samples in the abundance data or length data are missing sample metadata.
+- Checks if any samples in the sample metadata are missing abundance or length data.
+- Overlays shapefiles of marine regions and marine spatial zoning to determine region and no-take status.
+ 
+#### *Creates and checks MaxN:*
+- Create MaxN from count data.
+- Change synonyms (from a curated list).
+- Check species that haven’t been observed in the area before (from a chosen life history list).
+- Plot distribution spatially.
 - Plot patterns in abundance (by status, location and site).
 
-#### *Check Length and 3D points:*
-- Limit range
-- Plot patterns in length distribution (by status)
-- Compare MaxN to number of individuals measured (Length)
+#### *Checks Length and 3D points:*
+- Checks lengths against the known maximum lengths.
+- Limits range, RMS and precision.
+- Plot patterns in length distribution (by status).
 
-#### *Create biomass:*
-- Plot top species by biomass
-- With option to exclude elasmobranchs
-- Plot individual species (by zone and status)
+#### *Creates biomass:*
+- Plot top species by biomass.
+- Plot individual species (by zone and status).
 
-#### *Download data*
-- Download “clean” data (MaxN, length and mass)
-- Adds in zeros where species aren't observed
+#### *Downloads data*
+- Download a list of all potential errors.
+- Download “clean” data (count, length and mass).
+- Option to add in zeros where species aren't observed.
+
+For a list of all quality control assessments please see the user guide.

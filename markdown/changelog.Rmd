@@ -1,5 +1,64 @@
 # Change log
 
+## 2.12 (released 26/09/2023)  <br />
+### Added  <br />
+- A count and a length score to the QC score plot.
+
+### Changed <br />
+- Changed the calculation for the metadata score
+- Changed the QC score plot to include five QC assessments.
+
+## 2.11 (released 22/09/2023)  <br />
+### Added <br />
+- A PDF version of a user guide, as a download and as a window on the user guide tab.
+
+## 2.10 (released 20/09/2023)  <br />
+### Changed <br />
+- Changed metadata requirements for depth, visibility, latitude and longitude to depth_m, visibility_m, latitude_dd and longitude_dd
+  - If a user uploads data in the old format it will change to the new format.
+- Changed generic length data column from length to length_mm
+  - If a user uploads data in the old format it will change to the new format.
+
+## 2.09 (released 18/09/2023)  <br />
+### Changed <br />
+- Changed from metadata having a Sample to Opcode or Period or Opcode + Period.
+- Changed metadata column requirements to separated by "_"
+
+## Added <br />
+- Downloads for generic uploads.
+
+## 2.08 (released 13/09/2023)  <br />
+### Fixed <br />
+- Downloads for transect based uploads.
+
+### Changed <br />
+- Only warn user if Observer.count and Observer.length are blank if Successful.count and Successful.length are not 'Yes'.
+- Wording on value boxes to distinguish between EventMeasure uploads and generic uploads.
+
+## 2.07 (released 12/09/2023)  <br />
+### Added <br />
+- Visibility and Inclusion Probability columns kept in the metadata.
+- Loading message when data is uploading.
+- Transect based methods: two different checks for samples without lengths and samples without 3D points.
+- Updated Australia's life history to include other animals and a newer synonyms list.
+- Updated the Global life history to include other animals and a newer synonyms list.
+- Google form to update maximum lengths.
+- Check for species not listed in the life history sheet.
+- Columns updated merged into one pop-up.
+- Percent of lengths and 3D points added to value boxes.
+- RMS value box is orange if it only contains 3D points or red if contains length measurements.
+- Option to keep the "Status" column uploaded in the metadata or generate one with shapefiles.
+- Added new base maps to the metadata mapping for both sampling method uploads.
+- Colour pallete for partially no-take areas on metadata map.
+- Add all new errors to error reports.
+
+### Fixed <br />
+- Wording around transect bounds for transect based methods.
+- Fixed layout of the boxes.
+- Fixed "traffic light" colouring of the boxes for transect based methods.
+- Fixed downloading all errors for Generic campaigns.
+- Fixed downloading all errors for Transect campaigns.
+
 ## 2.06 (released 01/08/2023)  <br />
 ### Added <br />
 - Users can now upload generic data to check, needs to be formatted in the GlobalArchive standard way
@@ -15,7 +74,7 @@
 
 ## 2.04 (released 24/07/2023) <br />
 ### Changed <br />
-- Updated user guid for Upload, Metadata and MaxN.
+- Updated user guide for Upload, Metadata and MaxN.
 - Added examples of Metadata to the user guide.
 
 ## 2.0.3 (released 14/06/2023) <br />
