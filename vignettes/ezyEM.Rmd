@@ -1,0 +1,14 @@
+---
+title: EventMeasure Workflow
+author: Todd Bond & Alex McLennan
+date: Updated October 2023
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{EventMeasure Workflow}
+  %\VignetteEncoding{UTF-8}
+---
+

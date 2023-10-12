@@ -9,3 +9,4 @@ data/spatial/CAPAD*
 data/all_data.Rdata
 .RDataTmp
 docs
+inst/doc

@@ -28,3 +28,7 @@ Imports:
     stringr (>= 1.5.0),
     tidyr (>= 1.3.0)
 URL: https://globalarchivemanual.github.io/CheckEM/
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

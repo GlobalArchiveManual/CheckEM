@@ -1,5 +1,14 @@
+# Load CheckEM
+devtools::load_all()
+
 # Install released version from CRAN
 # install.packages("pkgdown")
+library(pkgdown)
+
+# Create vignettes to turn into articles
+usethis::use_vignette("runCheckEM")
+pkgdown::build_articles()
+pkgdown::build_articles_index()
 
 # Run once to configure your package to use pkgdown
 # usethis::use_pkgdown()
