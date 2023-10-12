@@ -1,0 +1,1 @@
+OpCode	CameraIndex	Descriptor	CameraModel	ImageRows	ImageCols	XPixelSize	YPixelSize	XPPOffset	YPPOffset	FocalLength	RadialK3	RadialK5	RadialK7	DecentringP1	DecentringP2	Orthogonality	Affinity	CameraX	CameraY	CameraZ	Omega	Phi	Kappa	UnitName

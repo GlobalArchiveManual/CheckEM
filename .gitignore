@@ -6,3 +6,5 @@ google-analytics.html
 rsconnect/
 data/spatial/CAPAD*
 .secrets
+data/all_data.Rdata
+.RDataTmp

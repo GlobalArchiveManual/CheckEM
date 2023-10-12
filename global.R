@@ -8,6 +8,7 @@ library(shinyjs)
 library(shinyWidgets)
 library(DT)
 library(profvis)
+library(shinycssloaders)
 
 # Tables
 library(rpivotTable)
@@ -51,33 +52,73 @@ library(sf)
 
 library(reactlog) # reactlog::reactlog_enable()
 
+library(beepr)
+
+# remotes::install_github("AllanCameron/geomtextpath")
+library(geomtextpath)
+
+library(png)
+library(cowplot)
+
 # Load data
 load("data/all_data.Rdata")
 
+# New function
+checkem.clean.names <- function(dat){
+  old_names <- names(dat)
+  new_names <- old_names %>%
+    gsub("%", "percent", .) %>%
+    make.names(.) %>%
+    gsub("[.]+", "_", .) %>%
+    tolower(.) %>%
+    gsub("_$", "", .)
+  setNames(dat, new_names)
+}
+
+test <- data.frame("dat.1" = c("dat.1", "dat-2"),
+                   "dat_2" = c("dat.1", "dat-2")) %>%
+  dplyr::rename("dat-2" = "dat_2") %>%
+  checkem.clean.names()
+
 # https://academic.oup.com/bioscience/article/57/7/573/238419
 # https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-regions
+
+# logo <- readPNG("checkem.png")
+# logo <- as.raster(logo)
+
 
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
                                            tags$img(src='https://www.nespmarine.edu.au/sites/default/themes/nespmarine/logo.png',height='60',width='200'))
 
 dbHeader <- dashboardHeader(title = "CheckEM",
+                            
+                            ## DOWNLOAD
+                            tags$li(a(img(src = 'user-guide.png',
+                                          title = "Download User Guide", height = "60px"),
+                                      href = "CheckEM_user_guide.pdf", download = "CheckEM_user_guide.pdf",
+                                    style = "padding-top:10px; padding-bottom:10px;"),
+                            class = "dropdown"),
+                            
                             tags$li(a(href = 'https://marineecology.io/',
                                       img(src = 'https://github.com/UWAMEGFisheries/UWAMEGFisheries.github.io/blob/master/images/MEG-white.png?raw=true',
-                                          title = "Marine Ecology Group", height = "50px"),
-                                      style = "padding-top:10px; padding-bottom:10px;"),
+                                          title = "Marine Ecology Group", height = "60px"),
+                                     style = "padding-top:10px; padding-bottom:10px;"
+                                     ),
                                     class = "dropdown"),
                             
                             tags$li(a(href = 'https://ardc.edu.au/',
                                       img(src = 'ardc.png',
-                                          title = "ARDC", height = "50px"),
-                                      style = "padding-top:10px; padding-bottom:10px;"),
+                                          title = "ARDC", height = "60px"),
+                                      style = "padding-top:10px; padding-bottom:10px;"
+                                      ),
                                     class = "dropdown"),
                             
                             tags$li(a(href = 'https://www.nespmarine.edu.au/',
-                                      img(src = 'https://github.com/UWAMEGFisheries/UWAMEGFisheries.github.io/blob/master/images/mbh-logo-white-cropped.png?raw=true',
-                                          title = "Marine Biodiversity Hub", height = "50px"),
-                                      style = "padding-top:10px; padding-bottom:10px;"),
+                                      img(src = 'https://github.com/UWAMEGFisheries/UWAMEGFisheries.github.io/blob/master/images/mac-logo-white-cropped.png?raw=true',
+                                          title = "Marine and Coastal Hub", height = "60px"),
+                                      style = "padding-top:10px; padding-bottom:10px;"
+                                      ),
                                     class = "dropdown"))
 
 # Theme for plotting ----
@@ -109,12 +150,31 @@ theme_collapse<-theme(      ## the commented values are from theme_grey
   panel.grid.minor = element_line(colour = "white", size = 0.25), 
   plot.margin = grid::unit(c(0, 0, 0, 0), "in"))
 
+# Leaflet basemap
+
+leaflet_basemap <- function(data = NULL, l_width = NULL, l_height = NULL) {
+  leaflet::leaflet(data = data, width = l_width, height = l_height) %>%
+    leaflet::addProviderTiles("Esri.WorldImagery", group = "Basemap") %>%
+    leaflet::addProviderTiles(
+      "OpenStreetMap.Mapnik",
+      group = "Basemap",
+      options = leaflet::providerTileOptions(opacity = 0.35)
+    ) %>%
+    # leaflet.extras::addFullscreenControl(pseudoFullscreen = TRUE, position = "bottomright") %>%
+    leaflet::addScaleBar(
+      position = "bottomleft",
+      options = leaflet::scaleBarOptions(
+        imperial = FALSE,
+        maxWidth = 200
+      )
+    ) %>%
+    leaflet::addMiniMap(toggleDisplay = TRUE, minimized = TRUE)
+}
+
 # functions for summarising data on plots ----
 se <- function(x) sd(x) / sqrt(length(x))
 se.min <- function(x) (mean(x)) - se(x)
 se.max <- function(x) (mean(x)) + se(x)
-
-
 
 iconSet <- awesomeIconList(
   Fished = makeAwesomeIcon(
@@ -126,5 +186,12 @@ iconSet <- awesomeIconList(
     icon = 'surf',
     iconColor = 'white',
     markerColor = 'green'
+  ),
+  'Part No-take' = makeAwesomeIcon(
+    icon = 'surf',
+    iconColor = 'white',
+    markerColor = 'yellow'
   )
 )
+
+

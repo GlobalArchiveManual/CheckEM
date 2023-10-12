@@ -1,0 +1,290 @@
+Sample,Date,Time,Time.out,Depth,Location,Site,Status,Latitude,Longitude,Inc_prob,Exclude,Deployment.notes,Waypoint,Left.mem.card,Right.mem.card,Left.cam,Right.cam,Field.notes,Raw.hdd.number,Con.hdd.number,Observer,Maxn.complete.yyyymmdd,Maxn.checker,Successful.count,Length.analyst,Length.complete.date.yyyymmdd,Successful.length,Habitat.image.forward,Highlight Videos,FIsh images,Representative Videos,Analysis.notes,Area
+1_1,20210904,13:54:00,,97,Freycinet AMP,1,IV,-42.14846167,148.4930639,0.000885952,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN IV Shelf
+1_2,20210904,13:58:00,,99,Freycinet AMP,1,IV,-42.15046444,148.4914165,0.000885952,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No ,Yes,Yes,n.a,IUCN IV Shelf
+1_3,20210904,13:49:00,,106,Freycinet AMP,1,IV,-42.14732449,148.497394,0.000885952,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,Yes,Yes,Yes,nadda,IUCN IV Shelf
+1_4,20210904,13:04:00,,106,Freycinet AMP,1,IV,-42.14448128,148.4944225,0.000885952,,,,,,,,,,,Ashlee B,,,Yes,,,No,Yes,No ,Yes,Yes,"No right CAM, no measurements",IUCN IV Shelf
+1_5,20210904,13:45:00,,103,Freycinet AMP,1,IV,-42.14700222,148.4944818,0.000885952,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN IV Shelf
+1_6,20210904,14:02:00,,98,Freycinet AMP,1,IV,-42.15194614,148.4929743,0.000885952,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN IV Shelf
+2_1,20210824,15:57:00,,70,Freycinet AMP,2,VI,-41.90069655,148.451444,0.345633,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,na,Joes reef
+2_2,20210824,15:54:00,,76,Freycinet AMP,2,VI,-41.89979311,148.4516646,0.345633,,,,,,,,,,,Ashlee B/DS,,,Yes,,,Yes,Yes,No ,Yes,Yes,too many macropterus. -Confirmed. Ends almost a minute short,Joes reef
+3_1,20210905,09:23:00,,101,Freycinet AMP,3,IV,-42.19993751,148.4895235,0.0128306,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No ,Yes,Yes,acanthias (pregnant?),IUCN IV Shelf
+3_2,20210905,09:31:00,,101,Freycinet AMP,3,IV,-42.20502021,148.4864935,0.0128306,,,,,,,,,,,Ashlee B,,,Yes,,,No,Yes,No,Yes,Yes,right cam only,IUCN IV Shelf
+3_3,20210905,09:38:00,,105,Freycinet AMP,3,IV,-42.20188046,148.4924762,0.0128306,,,,,,,,,,,Ashlee B,,,Yes,,,No,Yes,No,Yes,Yes,left cam only,IUCN IV Shelf
+3_4,20210905,09:18:00,,97,Freycinet AMP,3,IV,-42.19909684,148.4849012,0.0128306,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,nadda,IUCN IV Shelf
+3_5,20210905,09:34:00,,102,Freycinet AMP,3,IV,-42.20388008,148.4910697,0.0128306,,,,,,,,,,,Ashlee B,,,Yes,,,No,Yes,No,Yes,Yes,right camera only,IUCN IV Shelf
+3_6,20210905,09:27:00,,99,Freycinet AMP,3,IV,-42.20198076,148.4869643,0.0128306,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN IV Shelf
+4_1,20210908,15:54:00,,96,Freycinet North,4,Fished,-41.72818383,148.4992272,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Catsharkk, megalops",North Reference
+4_2,20210908,15:41:00,,92,Freycinet North,4,Fished,-41.72615644,148.4929544,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"gummy shark, neosebastidae",North Reference
+4_3,20210908,15:50:00,,96,Freycinet North,4,Fished,-41.73112043,148.4990813,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"seal. gurnard mulhalli, gummy shark(cool video gurnard seal )",North Reference
+4_4,20210908,15:44:00,,90,Freycinet North,4,Fished,-41.72815606,148.491558,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"megalops, neosebastidae",North Reference
+4_5,20210908,15:37:00,,94,Freycinet North,4,Fished,-41.7251966,148.4975008,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"catshark, dogfishes, Gurnard Polyommata",North Reference
+4_6,20210908,15:47:00,,92,Freycinet North,4,Fished,-41.73009946,148.4944886,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,neosebastidaes,North Reference
+5_1,20210824,10:05:00,,113,Freycinet AMP,5,VI,-42.06305731,148.529588,0.000691922,,,,,,,,,,,NFH,,,Yes,,,No,Yes,Yes,Yes,Yes,"No right CAM, no measurements",IUCN VI Shelf
+5_2,20210824,10:23:00,,115,Freycinet AMP,5,VI,-42.05991549,148.5355553,0.000691922,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No,Yes,Yes,"No left CAM, no measurements - ID many flathead sp",IUCN VI Shelf
+5_3,20210824,10:09:00,,114,Freycinet AMP,5,VI,-42.06499612,148.532777,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,unknown fish ID - long juvenile fish - multi pelagic,IUCN VI Shelf
+5_4,20210824,10:17:00,,115,Freycinet AMP,5,VI,-42.06185414,148.5387444,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,many flatheads,IUCN VI Shelf
+5_5,20210824,10:13:00,,116,Freycinet AMP,5,VI,-42.06516524,148.5374218,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,school of mackerel or pilchards??,IUCN VI Shelf
+5_6,20210824,10:01:00,,115,Freycinet AMP,5,VI,-42.06106691,148.5302653,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,Draughtboard shark,IUCN VI Shelf
+6_2,20210828,08:07:00,,56,Freycinet North,6,Fished,-41.70036703,148.3950113,0.00160957,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No,Yes,Yes,"No right CAM, no measurements - macropterus and scaber galore",North Reference
+6_3,20210828,08:00:00,,58,Freycinet North,6,Fished,-41.70075853,148.4008841,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Smooth Stringray, School of mackerels",North Reference
+6_5,20210828,08:11:00,,56,Freycinet North,6,Fished,-41.70183398,148.3928798,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Melbourne Skate, Dogfishes",North Reference
+6_6,20210828,08:03:00,,58,Freycinet North,6,Fished,-41.69887958,148.3988249,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Macropterus galore, trumpeter, scaber, butterfly perch",North Reference
+7_1,20210905,07:34:00,,99,Freycinet AMP,7,IV,-42.18870344,148.4667348,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,n.a,IUCN IV Shelf
+7_2,20210905,07:48:00,,99,Freycinet AMP,7,IV,-42.19269898,148.4641628,0.0128306,,,,,,,,,,,NFH,,,Yes,,,No,Yes,Yes,Yes,Yes,"No right CAM, no measurements - gummy shark, catshark, dogfishes",IUCN IV Shelf
+7_3,20210905,07:56:00,,101,Freycinet AMP,7,IV,-42.19499654,148.4700679,0.0128306,,,,,,,,,,,NFH,,,No,,,No,No,No,No,No,MISSING VIDEO,IUCN IV Shelf
+7_4,20210905,07:38:00,,99,Freycinet AMP,7,IV,-42.19141685,148.4658287,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"toothbrush leatherjacket? catshark, laticeps, degens",IUCN IV Shelf
+7_5,20210905,07:52:00,,99,Freycinet AMP,7,IV,-42.19541092,148.4653979,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,Gummy shark,IUCN IV Shelf
+7_6,20210905,07:43:00,,98,Freycinet AMP,7,IV,-42.19301269,148.4678033,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,Octopus,IUCN IV Shelf
+8_1,20210824,12:04:00,,116,Freycinet AMP,8,VI,-41.96971366,148.5592133,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Shelf
+8_2,20210824,12:08:00,,114,Freycinet AMP,8,VI,-41.9666918,148.5562433,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Shelf
+8_3,20210824,12:02:00,,116,Freycinet AMP,8,VI,-41.96726725,148.5500805,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,n.a,IUCN VI Shelf
+8_4,20210824,12:03:00,,117,Freycinet AMP,8,VI,-41.96409623,148.5625029,0.000691922,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No,Yes,Yes,"No Left CAM, no measurements, camera keeps moving (WEIRD)",IUCN VI Shelf
+8_5,20210824,12:24:00,,116,Freycinet AMP,8,VI,-41.96274339,148.5551818,0.000691922,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No,Yes,Yes,"No right CAM, no measurements",IUCN VI Shelf
+8_6,20210824,12:14:00,,117,Freycinet AMP,8,VI,-41.9683451,148.5538698,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Shelf
+9_1,20210905,11:13:00,,125,Freycinet AMP,9,IV,-42.19413604,148.5467943,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"CRAB ID, calamari",IUCN IV Shelf
+9_2,20210905,11:25:00,,124,Freycinet AMP,9,IV,-42.1909932,148.5527729,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN IV Shelf
+9_3,20210905,11:01:00,,124,Freycinet AMP,9,IV,-42.1961363,148.5453897,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,flatheads galore (ID - richardsoni or aurimaculatus),IUCN IV Shelf
+9_4,20210905,11:17:00,,123,Freycinet AMP,9,IV,-42.19299353,148.5513686,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"catsharks, sevengill shark",IUCN IV Shelf
+9_5,20210905,11:03:00,,126,Freycinet AMP,9,IV,-42.18997502,148.5481461,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"catshark, draugtboards",IUCN IV Shelf
+9_6,20210905,11:22:00,,123,Freycinet AMP,9,IV,-42.19493486,148.5543228,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"catsharks,megalops",IUCN IV Shelf
+10_1,20210828,11:18:00,,80,Freycinet North,10,Fished,-41.65398732,148.4598217,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"school of mackerels,macropterus",North Reference
+10_2,20210828,11:07:00,,78,Freycinet North,10,Fished,-41.65888924,148.4568097,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,seal,North Reference
+10_3,20210828,11:22:00,,82,Freycinet North,10,Fished,-41.65593162,148.462748,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,macropterus galore,North Reference
+10_4,20210828,11:11:00,,79,Freycinet North,10,Fished,-41.65623333,148.4574667,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"macropterus, callathias, percoides galore (cool video)",North Reference
+10_5,20210828,11:15:00,,78,Freycinet North,10,Fished,-41.65495169,148.4547995,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,North Reference
+10_6,20210828,11:27:00,,81,Freycinet North,10,Fished,-41.65867973,148.4611633,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"melbourne skate, gummy shark",North Reference
+11_1,20210819,15:53:00,,76,Freycinet AMP,11,VI,-41.83265,148.45785,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"macropterus galore, seal",IUCN VI Patch reef
+11_2,20210819,16:00:00,,73,Freycinet AMP,11,VI,-41.83094175,148.4549246,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"cucumber fish, allporti galore",IUCN VI Patch reef
+11_3,20210819,15:46:00,,76,Freycinet AMP,11,VI,-41.83590757,148.4610588,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,cucumber fish ,IUCN VI Patch reef
+11_4,20210819,15:57:00,,74,Freycinet AMP,11,VI,-41.83294093,148.4535248,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Patch reef
+11_5,20210819,16:05:00,,75,Freycinet AMP,11,VI,-41.8299833,148.459479,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,allporti galore,IUCN VI Patch reef
+11_6,20210819,15:05:00,,75,Freycinet AMP,11,VI,-41.83488521,148.4564591,0.000691922,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No,Yes,Yes,"No left camera - percoides, alllporti,macropterus",IUCN VI Patch reef
+12_1,20210908,09:58:00,,128,Freycinet AMP,12,VI,-41.83684504,148.5909025,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Canyon
+12_2,20210908,09:52:00,,145,Freycinet AMP,12,VI,-41.83721682,148.5924161,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"percoides galore, l.puchella, trumpeters, pregnant draughty, edwardsii",IUCN VI Canyon
+12_3,20210908,09:55:00,,127,Freycinet AMP,12,VI,-41.83770021,148.5917153,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,some macropterus ,IUCN VI Canyon
+12_4,20210908,10:06:00,,155,Freycinet AMP,12,VI,-41.83531717,148.5919304,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Canyon
+12_6,20210908,09:48:00,,138,Freycinet AMP,12,VI,-41.83800053,148.5933582,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Canyon
+13_1,20210824,08:11:00,,87,Freycinet AMP,13,VI,-42.00698428,148.4787337,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,No,n.a,IUCN VI Shelf
+13_2,20210824,08:02:00,,87,Freycinet AMP,13,VI,-42.01206363,148.475953,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,cucumber fish,IUCN VI Shelf
+13_3,20210824,08:31:00,,88,Freycinet AMP,13,VI,-42.01171161,148.484763,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,cucumber fish,IUCN VI Shelf
+13_4,20210824,08:26:00,,88,Freycinet AMP,13,VI,-42.0136283,148.4803369,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,cucumber fishes,IUCN VI Shelf
+13_5,20210824,08:16:00,,85,Freycinet AMP,13,VI,-42.01007265,148.4798004,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,No,n.a,IUCN VI Shelf
+13_6,20210824,08:06:00,,85,Freycinet AMP,13,VI,-42.00764538,148.4833378,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Shelf
+14_1,20210904,08:18:00,,108,Freycinet AMP,14,IV,-42.12941821,148.5239245,0.0128306,,,,,,,,,,,SW,,,Yes,,,No,Yes,No ,Yes,No,"No left camera - not much, one grubfish",IUCN IV Shelf
+14_2,20210904,08:38:00,,102,Freycinet AMP,14,IV,-42.13298037,148.5260033,0.0128306,,,,,,,,,,,SW,,,Yes,,,Yes,Yes,No ,Yes,Yes,"school of pilchards, macropterus",IUCN IV Shelf
+14_3,20210904,08:33:00,,108,Freycinet AMP,14,IV,-42.13249837,148.5287844,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,Melbourne skate - cool video @ 9mins - 12 mins,IUCN IV Shelf
+14_4,20210904,08:24:00,,103,Freycinet AMP,14,IV,-42.13032977,148.5262127,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"many macropterussssssss, catshark, trumpeter",IUCN IV Shelf
+14_5,20210904,08:42:00,,104,Freycinet AMP,14,IV,-42.13376993,148.5240251,0.0128306,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No,Yes,Yes,No right camera - no measurements - some macropterus,IUCN IV Shelf
+14_6,20210904,08:28:00,,117,Freycinet AMP,14,IV,-42.12988436,148.5295012,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"allporti , school of pilchards ",IUCN IV Shelf
+15_1,20210828,13:07:00,,113,Freycinet North,15,Fished,-41.65726891,148.5396423,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"megalops, allporti, flathead",North Reference
+15_2,20210828,13:12:00,,117,Freycinet North,15,Fished,-41.65877833,148.5455245,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes ,"Gummy shark, huge anemone on hermit crab ",North Reference
+15_3,20210828,13:16:00,,117,Freycinet North,15,Fished,-41.66111529,148.5427416,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,cool hightligh video - angry dory and small octopus @ 44mins,North Reference
+15_4,20210828,13:20:00,,118,Freycinet North,15,Fished,-41.66202781,148.5474426,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,flatheads,North Reference
+15_5,20210828,13:03:00,,112,Freycinet North,15,Fished,-41.65909863,148.537524,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,"cuttlefish @ 40 mins, Calamari @ 51 mins - not much",North Reference
+15_6,20210828,12:25:00,,117,Freycinet North,15,Fished,-41.66406035,148.5436477,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes ,"small cucumber fish, flathead - boringgggg",North Reference
+16_6,20210819,08:12:00,,81,Freycinet AMP,16,VI,-41.89892317,148.4492339,0.345633,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Lots of macropterus and few Stripeys. About 4 min or so short bc pulled early but have marked as complete drops,Joes reef
+17_1,20210828,14:58:00,,100,Freycinet North,17,Fished,-41.6897698,148.5119854,0.00160957,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Frame rate in left video makes it so the cameras don't progress the same. Hermit crabs. Seal,North Reference
+17_2,20210828,15:01:00,,100,Freycinet North,17,Fished,-41.68793021,148.5096131,0.00160957,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,"Grubfish, shark",North Reference
+17_3,20210828,15:05:00,,100,Freycinet North,17,Fished,-41.68993002,148.5082179,0.00160957,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Not much. ,North Reference
+17_4,20210828,14:49:00,,101,Freycinet North,17,Fished,-41.68696975,148.5141565,0.00160957,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,One grubfish and some crabs,North Reference
+17_5,20210828,15:09:00,,100,Freycinet North,17,Fished,-41.69187303,148.5111472,0.00160957,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Not much,North Reference
+17_6,20210828,14:54:00,,101,Freycinet North,17,Fished,-41.6889126,148.5170859,0.00160957,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Not much. A few flathead,North Reference
+18_1,20210819,10:04:00,,92,Freycinet AMP,18,VI,-41.92938491,148.5037152,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,"Seal. Lots of macropterus, whitleyi",IUCN VI Shelf
+18_2,20210819,10:27:00,,91,Freycinet AMP,18,VI,-41.93716909,148.5007618,0.000691922,,,,,,,,,,,DS,,,Yes,,,No,Yes,No ,No,No,Left camera is actually 18_5 so no measurements/might show wrong camera ID. Some unknown fish and shark ID,IUCN VI Shelf
+18_3,20210819,10:18:00,,92,Freycinet AMP,18,VI,-41.93402887,148.5067191,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Not much. Dark sandy site.,IUCN VI Shelf
+18_4,20210819,10:09:00,,89,Freycinet AMP,18,VI,-41.93124557,148.4991756,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Not much. Dark sandy site.,IUCN VI Shelf
+18_5,20210819,10:22:00,,91,Freycinet AMP,18,VI,-41.93602866,148.5053187,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Seven-gill shark but not much else,IUCN VI Shelf
+18_6,20210819,10:13:00,,90,Freycinet AMP,18,VI,-41.93318539,148.502357,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Seal. ,IUCN VI Shelf
+19_1,20210904,15:31:00,,101,Freycinet AMP,19,IV,-42.19120836,148.4820521,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,"Seal, scorpaenoides, macropterus",IUCN IV Shelf
+19_2,20210904,15:42:00,,101,Freycinet AMP,19,IV,-42.19617184,148.4882239,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Several sharks,IUCN IV Shelf
+19_3,20210904,15:35:00,,100,Freycinet AMP,19,IV,-42.19314838,148.4852463,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Catshark and some macropterus. Brittlestar at beginning. ,IUCN IV Shelf
+19_4,20210904,15:05:00,,107,Freycinet AMP,19,IV,-42.19018876,148.4912323,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Sharks,IUCN IV Shelf
+19_5,20210904,15:39:00,,99,Freycinet AMP,19,IV,-42.19515105,148.4835976,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Lots of percoides. Some crabs,IUCN IV Shelf
+19_6,20210904,15:46:00,,102,Freycinet AMP,19,IV,-42.19219152,148.4895838,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,macropterus and morid cods,IUCN IV Shelf
+20_1,20210908,11:53:00,,111,Freycinet AMP,20,VI,-41.80795463,148.5326522,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Flathead and macropterus. Squid ink,IUCN VI Shelf
+20_2,20210908,11:58:00,,112,Freycinet AMP,20,VI,-41.80499299,148.5386003,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Flathead,IUCN VI Shelf
+20_3,20210908,11:41:00,,112,Freycinet AMP,20,VI,-41.81259477,148.5358929,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,"Octopus!, big hermit crab, scaber, flathead",IUCN VI Shelf
+20_5,20210908,11:37:00,,113,Freycinet AMP,20,VI,-41.81362248,148.5413682,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Catfish,IUCN VI Shelf
+21_1,20210904,10:23:00,,104,Freycinet AMP,21,IV,-42.13571728,148.5243175,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Giant melbourne skate,IUCN IV Shelf
+21_2,20210904,10:12:00,,112,Freycinet AMP,21,IV,-42.13257565,148.5302919,0.0128306,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No ,Yes,Yes ,nadda,IUCN IV Shelf
+21_3,20210904,10:28:00,,107,Freycinet AMP,21,IV,-42.13771728,148.5229135,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Cool Lepidotrigla mulhalli ,IUCN IV Shelf
+21_4,20210904,10:16:00,,109,Freycinet AMP,21,IV,-42.13457572,148.5288881,0.0128306,,,,,,,,,,,DS,,,Yes,,,No,Yes,Yes,Yes,Yes ,No left camera. cyttus australis.,IUCN IV Shelf
+21_5,20210904,10:07:00,,105,Freycinet AMP,21,IV,-42.13155327,148.5259116,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,macropterus. Not a whole lot else,IUCN IV Shelf
+21_6,20210904,10:35:00,,103,Freycinet AMP,21,IV,-42.13630243,148.5209435,0.0128306,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,BRUVs rocks at 26:53 and scares fish. BRUV getts dragged for the last minute or so,IUCN IV Shelf
+22_5,20210908,07:52:00,,126,Freycinet AMP,22,VI,-41.91818345,148.6121597,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,just macropterus - more in Extra,IUCN VI Canyon
+22_6,20210908,07:45:00,,146,Freycinet AMP,22,VI,-41.91996469,148.6140866,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"some macropterus (more in extra), percoides, puchella, striped trumpeters",IUCN VI Canyon
+23_1,20210908,13:59:00,,126,Freycinet North,23,Fished,-41.71300063,148.561166,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"flathead, 2 megalops- cool vid @ 52mins",North Reference
+23_2,20210908,13:51:00,,129,Freycinet North,23,Fished,-41.70985756,148.5670998,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"1 handfish (YIPPPEEE) ,flathead, sawtail shark",North Reference
+23_3,20210908,13:55:00,,128,Freycinet North,23,Fished,-41.71207084,148.5633071,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"ID two flatheads, huge sponge on hermit crab",North Reference
+23_4,20210908,14:08:00,,130,Freycinet North,23,Fished,-41.70904876,148.5603492,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"just a grubfish, flathead and hermits ",North Reference
+23_5,20210908,13:47:00,,125,Freycinet North,23,Fished,-41.71400911,148.5664794,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"grubfish, hermits, flathead, a macropterus",North Reference
+23_6,20210908,14:04:00,,128,Freycinet North,23,Fished,-41.71105243,148.5587148,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"megalops, flathead, gummy shark ",North Reference
+24_2,20210905,13:23:00,,158,Freycinet AMP,24,IV,-42.17142864,148.5743708,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,school of crested bellowfish,IUCN IV Canyon
+24_3,20210905,13:08:00,,156,Freycinet AMP,24,IV,-42.17395116,148.5753521,0.349444985,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN IV Canyon
+24_4,20210905,12:56:00,,127,Freycinet AMP,24,IV,-42.17581161,148.5739565,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,White-spotted Skate,IUCN IV Canyon
+24_5,20210905,13:19:00,,169,Freycinet AMP,24,IV,-42.17268121,148.5751704,0.349444985,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN IV Canyon
+24_6,20210905,13:13:00,,124,Freycinet AMP,24,IV,-42.17352796,148.5728441,0.000885952,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,catshark (pregnant?),IUCN IV Canyon
+25_1,20210824,14:16:00,,64,Freycinet AMP,25,VI,-41.89979921,148.4511825,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,CAM facing down - many fish species - hard to measure,Joes reef
+26_1,20210904,12:06:00,,106,Freycinet AMP,26,IV,-42.13508683,148.5175265,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,sevengill shark attacked the CAM BT 43mins at MaxN,IUCN IV Shelf
+26_2,20210904,11:54:00,,102,Freycinet AMP,26,IV,-42.13212562,148.5235054,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN IV Shelf
+26_3,20210904,12:17:00,,108,Freycinet AMP,26,IV,-42.13727001,148.5158846,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN IV Shelf
+26_4,20210904,12:02:00,,101,Freycinet AMP,26,IV,-42.13412881,148.5218595,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN IV Shelf
+26_5,20210904,12:12:00,,112,Freycinet AMP,26,IV,-42.13583907,148.5151244,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN IV Shelf
+26_6,20210904,11:58:00,,102,Freycinet AMP,26,IV,-42.13269792,148.5210993,0.0128306,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,Many diff species,IUCN IV Shelf
+27_4,20210828,09:42:00,,68,Freycinet North,27,Fished,-41.68114576,148.4200668,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,School of mackerels,North Reference
+27_6,20210828,09:31:00,,65,Freycinet North,27,Fished,-41.68032824,148.4133208,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not mcuch,North Reference
+28_1,20210819,13:59:00,,112,Freycinet AMP,28,VI,-41.86047508,148.5452686,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,"squalus acanthias?, gummy shark",IUCN VI Shelf
+28_2,20210819,13:48:00,,114,Freycinet AMP,28,VI,-41.86780516,148.543686,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,"squalus megalops, Sevengill shark",IUCN VI Shelf
+28_3,20210819,14:05:00,,115,Freycinet AMP,28,VI,-41.86192387,148.55129,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Squalus megalops, orange spotted catshark, ID flatheads",IUCN VI Shelf
+28_4,20210819,13:43:00,,116,Freycinet AMP,28,VI,-41.86952915,148.548341,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,"Calamari, Draughtboard shark, aurimaculatus",IUCN VI Shelf
+28_5,20210819,14:09:00,,113,Freycinet AMP,28,VI,-41.86656664,148.5542941,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"hermit partay, sevengill shark - some not measured, bad angel",IUCN VI Shelf
+28_6,20210819,13:54:00,,116,Freycinet AMP,28,VI,-41.86360626,148.5467522,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,No,just a megalops,IUCN VI Shelf
+29_1,20210819,12:14:00,,101,Freycinet AMP,29,VI,-41.89458862,148.5197747,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN VI Shelf
+29_2,20210819,11:59:00,,99,Freycinet AMP,29,VI,-41.89180609,148.5122353,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,"ID octopus, unknown fish ID (Gurnard sp maybe)",IUCN VI Shelf
+29_3,20210819,12:02:00,,103,Freycinet AMP,29,VI,-41.89658856,148.5183755,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,"ID octopus, Dory, Butterfly Gurnard, Gummy Shark",IUCN VI Shelf
+29_4,20210819,12:04:00,,98,Freycinet AMP,29,VI,-41.89374878,148.5151741,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN VI Shelf
+29_5,20210819,11:54:00,,94,Freycinet AMP,29,VI,-41.8957931,148.5104006,0.000691922,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,catshark calamari megalops,IUCN VI Shelf
+29_6,20210819,12:09:00,,99,Freycinet AMP,29,VI,-41.89174456,148.5174324,0.000691922,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No ,Yes,No,No left CAM - n.a boringgg,IUCN VI Shelf
+31_2,20210914,07:54:00,,147,Freycinet AMP,31,VI,-41.83800167,148.5946817,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,many macropterus,IUCN VI Canyon
+31_3,20210914,08:00:00,,150,Freycinet AMP,31,VI,-41.84038167,148.5960333,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"many macropterus, catshark, flathead",IUCN VI Canyon
+31_4,20210914,08:12:00,,145,Freycinet AMP,31,VI,-41.83520167,148.5914033,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN VI Canyon
+31_5,20210914,08:19:00,,147,Freycinet AMP,31,VI,-41.833415,148.5910617,0,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No ,No,No,Miss-labelled video clapper,IUCN VI Canyon
+31_6,20210914,08:25:00,,142,Freycinet AMP,31,VI,-41.832135,148.590885,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,Note: Video Board SIte is wrong???? School of Pilchards approx 2000 - no measurements (30_6),IUCN VI Canyon
+32_1,20210914,09:55:00,,137,Freycinet AMP,32,VI,-41.801785,148.5772367,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,latchet polyommata??,IUCN VI Canyon
+32_2,20210914,10:01:00,,146,Freycinet AMP,32,VI,-41.80201667,148.57986,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,Only Sawtail shark,IUCN VI Canyon
+32_3,20210914,10:08:00,,145,Freycinet AMP,32,VI,-41.80231667,148.5834117,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,Only Sawtail shark,IUCN VI Canyon
+32_4,20210914,10:16:00,,151,Freycinet AMP,32,VI,-41.80148333,148.5862117,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN VI Canyon
+32_5,20210914,10:23:00,,137,Freycinet AMP,32,VI,-41.80533333,148.5861433,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"caesioperca juvenile polyommatas, gummy shark",IUCN VI Canyon
+32_6,20210914,10:28:00,,137,Freycinet AMP,32,VI,-41.80736833,148.5863633,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN VI Canyon
+33_1,20210914,12:01:00,,149,Freycinet AMP,33,VI,-41.88156833,148.60285,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,Blue warehou,IUCN VI Canyon
+33_2,20210914,12:06:00,,149,Freycinet AMP,33,VI,-41.88284833,148.6022367,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,not much,IUCN VI Canyon
+33_3,20210914,12:11:00,,135,Freycinet AMP,33,VI,-41.8843,148.6014983,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,polyomaata ,IUCN VI Canyon
+33_6,20210914,12:27:00,,153,Freycinet AMP,33,VI,-41.88918333,148.60363,0,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No ,Yes,Yes,"No left CAM - no measurements, n.a",IUCN VI Canyon
+34_1,20210914,13:48:00,,151,Freycinet AMP,34,VI,-41.91724833,148.6133967,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"allportis,cucumber fish, many macropterus, some trumpeters, DIfferent allporti sp. - Red banded grubfish (must ID)",IUCN VI Canyon
+34_3,20210914,13:59:00,,157,Freycinet AMP,34,VI,-41.919465,148.6143533,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"many macropterus, some bachus and percoides, melbourne skate @35mins, 37 mins, 41mins and 52 mins",IUCN VI Canyon
+34_4,20210914,14:05:00,,161,Freycinet AMP,34,VI,-41.92070167,148.61494,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"so many macropterus, melbourne skate ",IUCN VI Canyon
+34_6,20210914,14:14:00,,150,Freycinet AMP,34,VI,-41.92353333,148.6150217,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"many macropterus, allporti and Gurnard sp in Extra ",IUCN VI Canyon
+35_1,20210914,15:39:00,,146,Freycinet AMP,35,VI,-41.94450167,148.618915,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,No,"Sawtail shark, maybe Lepidotrigla ",IUCN VI Canyon
+35_2,20210914,15:46:00,,161,Freycinet AMP,35,VI,-41.94585,148.61983,0,,,,,,,,,,,NFH,,,Yes,,,No,Yes,Yes,Yes,No,"No left CAM - sawtail shark, melbourne skate",IUCN VI Canyon
+35_3,20210914,15:51:00,,158,Freycinet AMP,35,VI,-41.94726833,148.6195167,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"sawtail shark, flatheads",IUCN VI Canyon
+35_4,20210914,15:55:00,,162,Freycinet AMP,35,VI,-41.949265,148.61942,0,,,,,,,,,,,NFH,,,Yes,,,Yes,No,No ,Yes,Yes,flathead,IUCN VI Canyon
+35_5,20210914,15:59:00,,162,Freycinet AMP,35,VI,-41.95078167,148.61856,0,,,,,,,,,,,NFH,,,Yes,,,No,Yes,Yes,Yes,No,"No right CAM - CUCUMBER FISH CLOSE UP, sawtail shark ",IUCN VI Canyon
+35_6,20210914,16:06:00,,158,Freycinet AMP,35,VI,-41.95291667,148.6172217,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,"Common Stingaree, ID flatheads ",IUCN VI Canyon
+38_1,20210915,11:48:00,,76,Freycinet AMP,38,VI,-41.83628333,148.4529833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,sick big octupus,IUCN VI Patch reef
+38_2,20210915,11:52:00,,77,Freycinet AMP,38,VI,-41.83806667,148.452505,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,n.a,IUCN VI Patch reef
+38_3,20210915,13:36:00,,77,Freycinet AMP,38,VI,-41.83771833,148.4547867,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+38_4,20210915,12:01:00,,74,Freycinet AMP,38,VI,-41.83488333,148.4547317,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No,Yes,Yes,"BT stereo stops at 43min, measurements for maxn up until this point",IUCN VI Patch reef
+38_5,20210915,12:12:00,,76,Freycinet AMP,38,VI,-41.83515,148.45637,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,BT only 59min,IUCN VI Patch reef
+38_6,20210915,12:17:00,,76,Freycinet AMP,38,VI,-41.83698333,148.4566717,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+39_1,20210915,13:36:00,,77,Freycinet AMP,39,VI,-41.83771833,148.4547867,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+39_2,20210915,13:41:00,,77,Freycinet AMP,39,VI,-41.83771833,148.45637,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+39_3,20210915,13:46:00,,77,Freycinet AMP,39,VI,-41.83884833,148.4563017,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+39_4,20210915,13:51:00,,77,Freycinet AMP,39,VI,-41.841035,148.459035,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+39_5,20210915,13:55:00,,78,Freycinet AMP,39,VI,-41.842615,148.4588833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+39_6,20210915,13:59:00,,79,Freycinet AMP,39,VI,-41.84295,148.4570533,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+40_1,20210915,15:12:00,,74,Freycinet AMP,40,VI,-41.834415,148.4522033,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,Na,IUCN VI Patch reef
+40_2,20210915,15:17:00,,74,Freycinet AMP,40,VI,-41.83398167,148.4540217,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No,Yes,Yes,LEFT CAM ONLY,IUCN VI Patch reef
+40_3,20210915,15:21:00,,72,Freycinet AMP,40,VI,-41.82916667,148.44928,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,nadda,IUCN VI Patch reef
+40_5,20210915,15:03:00,,75,Freycinet AMP,40,VI,-41.83118167,148.4577333,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,IUCN VI Patch reef
+41_1,20210916,07:02:00,,69,Freycinet Inshore,41,Fished,-41.89911833,148.4169467,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na ,Trawl Reference
+41_2,20210916,07:04:00,,69,Freycinet Inshore,41,Fished,-41.9014,148.4169333,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na excessively boring,Trawl Reference
+41_3,20210916,07:08:00,,69,Freycinet Inshore,41,Fished,-41.90366667,148.4169883,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na ,Trawl Reference
+41_4,20210916,07:12:00,,69,Freycinet Inshore,41,Fished,-41.90591833,148.41707,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,Trawl Reference
+41_5,20210916,07:14:00,,70,Freycinet Inshore,41,Fished,-41.90816833,148.4170833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,Trawl Reference
+41_6,20210916,07:18:00,,70,Freycinet Inshore,41,Fished,-41.91040167,148.4170833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,nadda,Trawl Reference
+42_1,20210916,08:45:00,,73,Freycinet Inshore,42,Fished,-41.95515,148.41692,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,nadda,Trawl Reference
+42_2,20210916,08:48:00,,73,Freycinet Inshore,42,Fished,-41.95741667,148.4167967,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,nadda,Trawl Reference
+42_3,20210916,08:51:00,,73,Freycinet Inshore,42,Fished,-41.95976667,148.41681,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No,Yes,Yes,nadda,Trawl Reference
+42_4,20210916,08:53:00,,73,Freycinet Inshore,42,Fished,-41.96205167,148.416755,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No,Yes,Yes,LEFT CAM ONLY,Trawl Reference
+42_5,20210916,08:56:00,,73,Freycinet Inshore,42,Fished,-41.96433333,148.4167683,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,nadda,Trawl Reference
+42_6,20210916,08:59:00,,72,Freycinet Inshore,42,Fished,-41.96658333,148.4167833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,degeni,Trawl Reference
+43_1,20210916,10:24:00,,74,Freycinet AMP,43,VI,-41.95516,148.4411383,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,antarcticus with parasite. ,Trawl AMP
+43_2,20210916,10:26:00,,73,Freycinet AMP,43,VI,-41.95748167,148.4411667,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"megalops with parasite, elephant fish",Trawl AMP
+43_3,20210916,10:28:00,,73,Freycinet AMP,43,VI,-41.95965,148.44118,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,noooooooooooooooooooothiiiiiiiiiiiiiiiiiiiiiiiiing,Trawl AMP
+43_4,20210916,10:30:00,,74,Freycinet AMP,43,VI,-41.96188333,148.4411933,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,Trawl AMP
+43_5,20210916,10:33:00,,75,Freycinet AMP,43,VI,-41.96411833,148.4411667,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,Trawl AMP
+43_6,20210916,10:36:00,,75,Freycinet AMP,43,VI,-41.96636833,148.4411667,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,nadda,Trawl AMP
+44_1,20210916,12:07:00,,76,Freycinet AMP,44,VI,-41.91040167,148.44088,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,nautilus video in highlight to be confirmed,Trawl AMP
+44_2,20210916,12:10:00,,76,Freycinet AMP,44,VI,-41.90813333,148.44092,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,Trawl AMP
+44_3,20210916,12:12:00,,77,Freycinet AMP,44,VI,-41.905815,148.440935,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,Trawl AMP
+44_4,20210916,12:15:00,,77,Freycinet AMP,44,VI,-41.9035,148.4408933,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,Trawl AMP
+44_5,20210916,12:18:00,,77,Freycinet AMP,44,VI,-41.90120167,148.4408933,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,Trawl AMP
+44_6,20210916,12:21:00,,77,Freycinet AMP,44,VI,-41.89891667,148.440935,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,Trawl AMP
+75_1,20211012,07:42:00,,141,Freycinet AMP,75,VI,-41.859,148.5969861,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No ,Yes,Yes,"measurements are way off, not sure why",IUCN VI Canyon
+75_2,20211012,09:30:00,,142,Freycinet AMP,75,VI,-41.85948611,148.5972278,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+76_1,20211012,09:34:00,,148,Freycinet AMP,76,VI,-41.86032778,148.5975722,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+77_1,20211012,08:00:00,,154,Freycinet AMP,77,VI,-41.86327778,148.59965,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,very hard to measure other fish because never in front of both cameras,IUCN VI Canyon
+77_3,20211012,09:53:00,,160,Freycinet AMP,77,VI,-41.86557778,148.6025694,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+79_1,20211012,11:27:00,,204,Freycinet AMP,79,VI,-41.86466389,148.6036167,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+79_2,20211012,09:45:00,,192,Freycinet AMP,79,VI,-41.86393889,148.6022083,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,nadda,IUCN VI Canyon
+79_3,20211012,11:33:00,,189,Freycinet AMP,79,VI,-41.86309444,148.6012833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+80_1,20211012,11:38:00,,159,Freycinet AMP,80,VI,-41.86221833,148.5993133,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,.,IUCN VI Canyon
+80_4,20211012,11:53:00,,149,Freycinet AMP,80,VI,-41.85853333,148.5975633,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,spottail perch,IUCN VI Canyon
+81_1,20211012,13:54:00,,146,Freycinet AMP,81,VI,-41.862485,148.59893,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+81_2,20211012,14:00:00,,156,Freycinet AMP,81,VI,-41.86366667,148.5999817,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,",,",IUCN VI Canyon
+81_3,20211012,14:05:00,,164,Freycinet AMP,81,VI,-41.86448167,148.60102,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,..,IUCN VI Canyon
+81_4,20211012,14:13:00,,159,Freycinet AMP,81,VI,-41.866015,148.603465,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,couldnt measure most species.,IUCN VI Canyon
+Exp_1,20210905,14:58:00,,105,Freycinet AMP,Exp,IV,-42.13395,148.5294,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No ,Yes,Yes,"left third video didnt load, Left cam only. BT 19min 19 sec",IUCN IV Shelf
+Exp_2,20210905,15:03:00,,113,Freycinet AMP,Exp,IV,-42.13065,148.5291667,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No ,Yes,Yes,"left second video didnt couldnt load, RIGHT SIDE SCORED ONLY. BT 23min",IUCN IV Shelf
+Exp_3,20210905,15:05:00,,115,Freycinet AMP,Exp,IV,-42.12868333,148.5278833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,BT 22.5min,IUCN IV Shelf
+Exp_4,20210905,15:01:00,,112,Freycinet AMP,Exp,IV,-42.12953333,148.5278833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,BT 20min. drift algae can be seen,IUCN IV Shelf
+2_3,20210824,16:00:00,,68,Freycinet AMP,2,VI,-41.90036076,148.4495075,0.345633,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,na,Joes reef
+2_4,20210824,15:05:00,,77,Freycinet AMP,2,VI,-41.89908194,148.4509252,0.345633,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,too many macropterus.,Joes reef
+2_5,20210824,16:06:00,,78,Freycinet AMP,2,VI,-41.89965565,148.448286,0.345633,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,"BT only 57.5min, nothing else exciting",Joes reef
+2_6,20210824,15:46:00,,79,Freycinet AMP,2,VI,-41.89888052,148.4526084,0.345633,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No,Yes,Yes,"BT 59min, just more macropterus",Joes reef
+6_1,20210828,07:50:00,,57,Freycinet North,6,Fished,-41.7033935,148.3979613,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,macropterus galore,North Reference
+6_4,20210828,07:55:00,,58,Freycinet North,6,Fished,-41.70153333,148.3980333,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Fish Frenzy - Cool video with different fish species, beautiful reef sponges",North Reference
+12_5,20210908,10:02:00,,161,Freycinet AMP,12,VI,-41.83632714,148.5921009,0.288902998,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"percodes galore, school of macropterus. puchella (COOL VID)",IUCN VI Canyon
+16_1,20210819,08:22:00,,72,Freycinet AMP,16,VI,-41.90072396,148.4492746,0.345633,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,Macropterus and percoides tornado,Joes reef
+16_2,20210424,14:04:00,,76,Freycinet AMP,16,VI,-41.899436,148.4514154,0.345633,,,,,,,,,,,DS,,,Yes,,,No,Yes,Yes,Yes,Yes ,No right camera. Lots of macropterus,Joes reef
+16_3,20210819,08:19:00,,74,Freycinet AMP,16,VI,-41.90019893,148.4480572,0.345633,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,"Lots of macropterus, percoides and splendid perch",Joes reef
+16_4,20210819,08:27:00,,72,Freycinet AMP,16,VI,-41.90034858,148.4504716,0.345633,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,Lots of macropterus and percoides,Joes reef
+16_5,20210819,08:38:00,,74,Freycinet AMP,16,VI,-41.89924068,148.4526165,0.345633,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,"Lots of percoides, macropterus, bachus. Reef",Joes reef
+20_4,20210908,11:46:00,,111,Freycinet AMP,20,VI,-41.80963295,148.5418414,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,No ,Yes,Yes ,"Reef ledge, Catshark, dogfish, flathead, scaber",IUCN VI Shelf
+20_6,20210908,11:49:00,,112,Freycinet AMP,20,VI,-41.80940953,148.5376136,0.000691922,,,,,,,,,,,DS,,,Yes,,,Yes,Yes,Yes,Yes,Yes ,"sharks, flathead, lots of hermit crabs with anenomes. Not great RMS",IUCN VI Shelf
+22_1,20210908,07:41:00,,170,Freycinet AMP,22,VI,-41.92012542,148.6151656,0.288902998,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No ,Yes,Yes,heaps of macropterus and lineata,IUCN VI Canyon
+22_2,20210908,07:57:00,,161,Freycinet AMP,22,VI,-41.9166071,148.6137115,0.288902998,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,Yes,Yes,Yes,hypoplectrodes sp (NSW),IUCN VI Canyon
+22_3,20210908,07:48:00,,170,Freycinet AMP,22,VI,-41.91869169,148.6146471,0.288902998,,,,,,,,,,,Ashlee B,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+22_4,20210908,07:36:00,,161,Freycinet AMP,22,VI,-41.92179732,148.6152932,0.288902998,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Check school of sandpaper fish? seal and other cool fish sp, half banded seaperch Hypoplectrodes SP NSW)? melbourne skate video is cool!!",IUCN VI Canyon
+24_1,20210905,13:03:00,,164,Freycinet AMP,24,IV,-42.17512247,148.5764613,0.349444985,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,percoides galore,IUCN IV Canyon
+25_2,20210824,14:27:00,,73,Freycinet AMP,25,VI,-41.90089795,148.4497607,0.345633,,,,,,,,,,,NFH,,,Yes,,,No,Yes,Yes,Yes,Yes,CAM tilted - Cool video with many diff fish sp.  - hard to measure,Joes reef
+25_3,20210824,14:24:00,,78,Freycinet AMP,25,VI,-41.89946645,148.449005,0.345633,,,,,,,,,,,NFH,,,Yes,,,No,Yes,Yes,Yes,Yes,RIGHT CAM ONLY- no measurements - melbourne skate,Joes reef
+25_4,20210824,14:02:00,,78,Freycinet AMP,25,VI,-41.89928028,148.449483,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,many difff fish species - cool vid,Joes reef
+25_5,20210824,14:31:00,,65,Freycinet AMP,25,VI,-41.90105671,148.4514521,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,CAM facing down - hard to measure - Scorpaena Papillosa,Joes reef
+25_6,20210824,14:12:00,,75,Freycinet AMP,25,VI,-41.89959779,148.4528657,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,many difff fish species - cod eating percoides BT 8-10 mins,Joes reef
+27_1,20210828,09:29:00,,64,Freycinet North,27,Fished,-41.68233579,148.4112021,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"silverbelly, Melbourne Skate, Grey Morwong in extra",North Reference
+27_2,20210828,09:39:00,,67,Freycinet North,27,Fished,-41.67920038,148.4171406,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"Goatfish, Trumpeter",North Reference
+27_3,20210828,09:26:00,,65,Freycinet North,27,Fished,-41.68428132,148.4141282,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"Silverbelly, scaber galore",North Reference
+27_5,20210828,09:36:00,,66,Freycinet North,27,Fished,-41.68133333,148.4152,0.00160957,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"Trumpeters, Melbourne Skate  BT 40-45mins, Gunns leatherjacket",North Reference
+30_1,20210916,13:51:00,,64,Freycinet AMP,30,VI,-41.89997624,148.4514277,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"SEAL@ 42s - beautiful reefs, lotella & many other sp",Joes reef
+30_2,20210916,13:54:00,,74,Freycinet AMP,30,VI,-41.89944819,148.4504513,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"Bluetail Leatherjacket (range extension) - Interesting colours, Maclaeyi, bachus galore",Joes reef
+30_3,20210916,13:58:00,,67,Freycinet AMP,30,VI,-41.90088577,148.4507249,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,Many different sp. ,Joes reef
+30_4,20210916,14:00:00,,81,Freycinet AMP,30,VI,-41.89887747,148.4528494,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"SEAL, scorpaena papillosa, many macropterus/percoides",Joes reef
+30_5,20210916,14:08:00,,68,Freycinet AMP,30,VI,-41.90036076,148.4495075,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,CAMERA FACING UP - Many different sp. (Seal in Extra),Joes reef
+30_6,20210916,14:16:00,,70,Freycinet AMP,30,VI,-41.89906975,148.4518893,0.345633,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,Papillosa? Many different sp. seal - beautiful sponges,Joes reef
+31_1,20210914,07:46:00,,142,Freycinet AMP,31,VI,-41.83729833,148.5923317,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,"many macropterus, pulchella ",IUCN VI Canyon
+33_4,20210914,12:15:00,,147,Freycinet AMP,33,VI,-41.884515,148.6020033,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"crayfishes, school of clupeidae (more macropterus in extra) ",IUCN VI Canyon
+33_5,20210914,12:02:00,,145,Freycinet AMP,33,VI,-41.88759833,148.602645,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No,Yes,Yes,"bachus galore, bastard trumpeter, many pulchellas  (many fishes in extra)",IUCN VI Canyon
+34_2,20210914,13:54:00,,145,Freycinet AMP,34,VI,-41.91858333,148.61356,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,so many fishes in this video!!! ,IUCN VI Canyon
+34_5,20210914,15:41:00,,164,Freycinet AMP,34,VI,-41.9222,148.6154317,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,Hard to measure - SOOOOOOOO many macropterus and other fish sp. melbourne skate - so hard to measure fishes in front of the CAM - COOL VIDEO OF SKATE,IUCN VI Canyon
+36_1,20210915,07:41:00,,64,Freycinet North,36,Fished,-41.68308333,148.411755,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,So many fishes in this video!!! - ,North Reference
+36_2,20210915,07:48:00,,64,Freycinet North,36,Fished,-41.682185,148.4125617,0,,,,,,,,,,,NFH,,,Yes,,,No,Yes,No ,Yes,Yes,"No left CAM - no measurements - many percoides, degeni",North Reference
+36_3,20210915,07:53:00,,65,Freycinet North,36,Fished,-41.68141667,148.4147617,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,No ,Yes,Yes,many macropterus and other fish species,North Reference
+36_4,20210915,07:56:00,,66,Freycinet North,36,Fished,-41.68260167,148.4151317,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"soooooo many fishes, grey morwong @ 9mins and @42mins (2 grey morwongs) ",North Reference
+36_5,20210915,08:00:00,,66,Freycinet North,36,Fished,-41.68118333,148.4175067,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,"CAM tilted soooooo many fishes - Bulleyes ID, seapike (ID)  hard to measure , some not measured or some just being multiplied ",North Reference
+36_6,20210915,08:04:00,,65,Freycinet North,36,Fished,-41.68011833,148.4151017,0,,,,,,,,,,,NFH,,,Yes,,,Yes,Yes,Yes,Yes,Yes,Freycineti leatherjacket - sooooo many fishes - cool video and beautiful spongesss!!! lotella phycis perocides bastard splendid perch,North Reference
+37_1,20210915,09:28:00,,56,Freycinet North,37,Fished,-41.7047,148.3968117,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,North Reference
+37_2,20210915,09:03:00,,56,Freycinet North,37,Fished,-41.702965,148.3971533,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,na,North Reference
+37_3,20210915,09:35:00,,58,Freycinet North,37,Fished,-41.70114833,148.3985183,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,"some bachus with big wounds, goatfish ",North Reference
+37_4,20210915,09:39:00,,58,Freycinet North,37,Fished,-41.70021667,148.3982867,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,redfish,North Reference
+37_5,20210915,09:42:00,,57,Freycinet North,37,Fished,-41.700985,148.3957733,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,grey/blue morwong,North Reference
+37_6,20210915,09:45:00,,56,Freycinet North,37,Fished,-41.70295167,148.3946117,0,,,,,,,,,,,Ashlee,,,Yes,,,No,Yes,No,Yes,Yes,"RIGHT CAM ONLY, grey/blue morwong",North Reference
+40_4,20210915,15:25:00,,73,Freycinet AMP,40,VI,-41.829265,148.4564517,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,really fat seal at maxn,IUCN VI Patch reef
+40_6,20210915,15:34:00,,76,Freycinet AMP,40,VI,-41.83331667,148.4581467,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No,Yes,Yes,ma just heap macropterus,IUCN VI Patch reef
+75_3,20211012,07:46:00,,143,Freycinet AMP,75,VI,-41.85996111,148.5974611,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+76_2,20211012,07:51:00,,143,Freycinet AMP,76,VI,-41.86085556,148.5977528,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+76_3,20211012,07:55:00,,147,Freycinet AMP,76,VI,-41.86208611,148.5984444,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,trawler rope debris can be seen closer towards end,IUCN VI Canyon
+77_2,20211012,08:04:00,,150,Freycinet AMP,77,VI,-41.864725,148.6008222,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+78_1,20211012,09:40:00,,160,Freycinet AMP,78,VI,-41.86416111,148.6006611,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,nadda,IUCN VI Canyon
+80_2,20211012,13:49:00,,158,Freycinet AMP,80,VI,-41.861085,148.5980833,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,Yes,Yes,Yes,nadda,IUCN VI Canyon
+80_3,20211012,13:44:00,,156,Freycinet AMP,80,VI,-41.85938333,148.5974683,0,,,,,,,,,,,Ashlee,,,Yes,,,Yes,Yes,No ,Yes,Yes,landed at the bottom of a decnt cliff,IUCN VI Canyon

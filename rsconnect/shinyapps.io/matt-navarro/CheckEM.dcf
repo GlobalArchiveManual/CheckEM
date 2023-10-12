@@ -1,13 +1,12 @@
 name: CheckEM
 title: CheckEM
-username:
+username: matt-navarro
 account: matt-navarro
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6672384
-bundleId: 7112693
+bundleId: 7789225
 url: https://marine-ecology.shinyapps.io/CheckEM/
-when: 1681972190.77893
-lastSyncTime: 1681972190.77893
+version: 1
 asMultiple: FALSE
 asStatic: FALSE

@@ -1,0 +1,262 @@
+
+
+
+<div id="set-up" class="section level4">
+<h4>Set Up</h4>
+<p><img style="float: right; margin-left: 30px; margin-right: 30px;" width="51%" src="screenshots/upload.png"></p>
+<ul>
+<li><p>On the <em>‘Upload data’</em> tab, choose the method which was
+used to collect the data you will be uploading:</p>
+<ul>
+<li>Single point: where the method was stationary for the duration of
+the sampling period and the measure of abundance is MaxN (e.g. BRUVs and
+BOSS).</li>
+<li>Transect: where the sampling unit is a transect and all individuals
+observed are included in the final abundance (e.g. DOVs).</li>
+</ul></li>
+<li><p>Choose how the sample name was recorded in EventMeasure.</p></li>
+<li><p>Choose if you are uploading any habitat data.</p>
+<ul>
+<li>If yes: choose which directions are being uploaded and if relief is
+annotated separately.</li>
+</ul></li>
+<li><p>Use the last button to select the folder or directory where your
+EventMeasure database outputs, TransectMeausure output (if uploading)
+AND metadata are saved.</p>
+<ul>
+<li>NOTE: Any sub-folders in the folder will also be searched and
+included.</li>
+<li>All files ending in *“_Metadata.csv”<em>, </em>”_3DPoints.txt”<em>,
+</em>”_Points.txt”* and *“_Lengths.txt”* will be included for fish.</li>
+<li>All files ending in *“_Dot Point Measurements.txt”* will be included
+for habitat.</li>
+</ul></li>
+<li><p>The table at the bottom will display a preview of your data if it
+has been successfully uploaded.</p></li>
+<li><p><strong>NOTE: Metadata will need to have the following
+columns</strong>: <br></p></li>
+</ul>
+<table>
+<colgroup>
+<col width="3%" />
+<col width="86%" />
+<col width="1%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column name</th>
+<th>Format</th>
+<th>Required</th>
+<th>Checks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OpCode</td>
+<td>String</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Period</td>
+<td>String</td>
+<td>FALSE</td>
+<td>Only required for transect uploads</td>
+</tr>
+<tr class="odd">
+<td>Latitude</td>
+<td>Decimal degrees</td>
+<td>TRUE</td>
+<td>Must be between -90 to 90</td>
+</tr>
+<tr class="even">
+<td>Longitude</td>
+<td>Decimal degrees</td>
+<td>TRUE</td>
+<td>Must be between -180 to 180</td>
+</tr>
+<tr class="odd">
+<td>Date.time</td>
+<td>YYYY-MM-DDThh:mm:ssTZD</td>
+<td>TRUE</td>
+<td>T being a required literal character. YYYY = four-digit year, MM =
+two-digit month (01=January, etc.), DD = two-digit day of month (01
+through 31), hh = two digits of hour (00 through 23) (am/pm NOT
+allowed), mm = two digits of minute (00 through 59), ss = two digits of
+second (00 through 59), TZD = time zone designator (Z or +hh:mm or
+-hh:mm)</td>
+</tr>
+<tr class="even">
+<td>Site</td>
+<td>String</td>
+<td>FALSE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Location</td>
+<td>String</td>
+<td>FALSE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Status</td>
+<td>MPA status (must be Fished, No-take, I, II, III, IV, V, VI)</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Depth</td>
+<td>Numeric (metres)</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Successful.count</td>
+<td>String (“Yes” or “No”)</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Successful.length</td>
+<td>String (“Yes” or “No”)</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Observer.count</td>
+<td>String (Full name of analyst)</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Observer.length</td>
+<td>String (Full name of analyst)</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Observer.habitat</td>
+<td>String (Full name of analyst)</td>
+<td>TRUE</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr>
+</div>
+<div id="check-metadata" class="section level4">
+<h4>Check Metadata</h4>
+<p><img style="float: right; margin-left: 30px; margin-right: 30px;" width="51%" src="screenshots/metadata.png"></p>
+<ul>
+<li>On the <em>‘Check metadata’</em> tab:</li>
+<li>The green box displays the number of metadata samples.</li>
+<li>The yellow box displays samples that do not have any points (either
+no fish were observed or there could be an error in the naming of the
+samples). Clicking the yellow box displays a pop-up with the names of
+any samples that do not have any points.</li>
+<li>The red box displays any sample name(s) in the points file that do
+not have a match in the metadata. Click the red box to view the names of
+the samples.</li>
+<li>The interactive map displays the points spatially. Clicking on the
+points displays the associated metadata with that point. <br> <br> <br>
+<hr></li>
+</ul>
+</div>
+<div id="check-maxn" class="section level4">
+<h4>Check MaxN</h4>
+<p><img style="float: right; margin-left: 30px; margin-right: 30px;" width="51%" src="screenshots/maxn.png"></p>
+<ul>
+<li>On the <em>‘Create &amp; check MaxN’</em> tab:</li>
+<li>First the app turns the points into MaxN using the functions in the
+GlobalArchive R package.</li>
+<li>The green box displays the total number of fish observed. Clicking
+this box displays the total abundance per sample.</li>
+<li>The yellow box displays the number of species that had their named
+changed by the synonyms list. Click the box to display the name updates.
+There is also a button to download the list as a report.</li>
+<li>The red box displays the number of species not previously observed
+in the area before. Click the box to see the report (also downloadable).
+Sp1, sp2, spp can be filtered out by clicking the check box (these are
+not included in the life history sheet so will come up as an
+error).</li>
+<li>The first plot displays the most abundant species, change the number
+of species plotted using the ‘Species to plot’ box on the right.</li>
+<li>The next group of plots will plot the most abundant species first,
+use the drop down to change the species to be plotted. The ‘Plot of
+abundance by Zone’ plot uses the ’Zone’s from Australia’s commonwealth
+marine park shapefiles.</li>
+</ul>
+<hr>
+</div>
+<div id="check-length" class="section level4">
+<h4>Check Length</h4>
+<p><img style="float: right; margin-left: 30px; margin-right: 30px;" width="51%" src="screenshots/length.png"></p>
+<ul>
+<li>On the <em>‘Check Length &amp; 3D points’</em> tab:</li>
+<li>The two green boxes display the number of lengths and 3D points.
+Clicking these boxes summarises the number of lengths and 3d points per
+sample, respectively.</li>
+<li>The yellow box displays the number of species that had their named
+changed by the synonyms list. Click the box to display the name updates.
+There is also a button to download the list as a report.</li>
+<li>The red boxes are potential errors, including species not observed
+in the area, fish that are smaller than 15% of the maximum length on
+FishBase or larger than 85% and fish that are ‘out of range’ (change the
+‘Limit range’ box to adjust this report). All errors are clickable.</li>
+<li>Change the species dropdown to plot the length distribution
+(automatically populated with the most abundant, and ordered by
+descending total abundance).</li>
+<li>The 15% of max, 85% of max and the fishbase maximum are displayed on
+the length distributions.</li>
+</ul>
+<hr>
+</div>
+<div id="compare-maxn-versus-number-of-individuals-measured" class="section level4">
+<h4>Compare MaxN versus number of individuals measured</h4>
+<p>&lt;img style=“float: right; margin-left: 30px; margin-right: 30px;”
+width= “51%” “51%” src=‘screenshots/lengthmaxn.png’&gt;</p>
+<ul>
+<li>On the <em>‘Compare MaxN and Length’</em> tab:</li>
+<li>The red box displays the number of errors (where MaxN does not equal
+the number measured).</li>
+<li>Clicking the box displays the sample name and the number in the MaxN
+and the number measured/3D points and the difference.</li>
+<li>Also displayed in a plot below. <br> <br> <br> <br> <br> <br> <br>
+<br>
+<hr></li>
+</ul>
+</div>
+<div id="create-biomass" class="section level4">
+<h4>Create biomass</h4>
+<p><img style="float: right; margin-left: 30px; margin-right: 30px;" width="51%" src="screenshots/mass.png"></p>
+<ul>
+<li>On the <em>‘Create Mass’</em> tab:</li>
+<li>The length-weight equations from the life history sheet are used to
+calculate biomass.</li>
+<li>The first plot shows the top species by biomass. Use the filters on
+the right to change the number of species displayed and to exclude
+elasmobranchs.</li>
+<li>Use the second drop down to change the species specific plots below.
+<br> <br> <br> <br> <br> <br> <br>
+<hr></li>
+</ul>
+</div>
+<div id="download-data" class="section level4">
+<h4>Download data</h4>
+<p><img style="float: right; margin-left: 30px; margin-right: 30px;" width="51%" src="screenshots/download.png"></p>
+<ul>
+<li>On the <em>‘Download data’</em> tab:</li>
+<li>Add your project and campaign names into the text inputs (following
+the naming convention outlined in the <a href="https://globalarchivemanual.github.io/definitions">GlobalArchive
+user manual</a>).</li>
+<li>Click the check boxes for any errors to remove (we recommend fixing
+these errors in your .EMObs and running through CheckEM again)</li>
+<li>Click on each of the download buttons to download that dataframe,
+you will then be given a choice to download as a .csv or as a .fst</li>
+<li>Zeros will be added where a species is not present. <br> <br> <br>
+<br>
+<hr></li>
+</ul>
+</div>
