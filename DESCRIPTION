@@ -1,9 +1,9 @@
 Package: CheckEM
-Title: What the Package Does (One Line, Title Case)
+Title: An R package and Shiny App for Formatting, Checking, Visualising and Analysing Stereo-Video Annotation Data
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Brooke", "Gibbons", , "brooke.gibbons@uwa.edu.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-0628-7781"))
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
@@ -27,3 +27,4 @@ Imports:
     shinyWidgets (>= 0.7.6),
     stringr (>= 1.5.0),
     tidyr (>= 1.3.0)
+URL: https://globalarchivemanual.github.io/CheckEM/
