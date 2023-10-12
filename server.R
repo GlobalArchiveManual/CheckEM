@@ -345,40 +345,87 @@ function(input, output, session) {
       metadata <- metadata %>%
         dplyr::rename(dplyr::any_of(lookup))
       
+      message("uploaded metadata")
+      
       metadata <- metadata %>%
         dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Metadata.csv" = "", "_metadata.csv" = ""))) %>%
         dplyr::mutate(latitude_dd = as.numeric(latitude_dd)) %>%
-        dplyr::mutate(longitude_dd = as.numeric(longitude_dd)) 
+        dplyr::mutate(longitude_dd = as.numeric(longitude_dd))%>%
+        glimpse()
       
-      # If point method and samples are opcodes
-      if(input$method == "point" & input$sample == "opcode") {
-  
-        metadata <- metadata %>%
-          dplyr::mutate(sample = opcode)
+      message("metadata names")
+      print(names(metadata))
+      
+      original_metadata_names <- c(names(metadata))
+      
+      if(!"sample" %in% original_metadata_names){
+        
+        message("metadata does not have sample as a column")
+        
+        # If point method and samples are opcodes
+        if(input$method == "point" & input$sample == "opcode") {
+          
+          metadata <- metadata %>%
+            dplyr::mutate(sample = opcode)
+        }
+        
+        # If point method and samples are periods
+        if(input$method == "point" & input$sample == "period") {
+          
+          metadata <- metadata %>%
+            dplyr::mutate(sample = period)
+        }
+        
+        # If transect method and sample = "opcode" + "period"
+        if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+          
+          metadata <- metadata %>%
+            dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+          
+        }
+        # If transect method and sample = "period"
+        if(input$method == "transect" & input$sample.t == "period") {
+          
+          lookup <- c(sample = "period") # If people have used period or sample then this will work
+          
+          metadata <- metadata %>%
+            dplyr::mutate(sample = period)
+        }
+      } else {
+        message("metadata DOES have sample as a column")
+        
+        if(input$method == "point" & input$sample == "opcode") {
+          
+          metadata <- metadata %>%
+            dplyr::mutate(opcode = sample)
+        }
+        
+        # If point method and samples are periods
+        if(input$method == "point" & input$sample == "period") {
+          
+          metadata <- metadata %>%
+            dplyr::mutate(period = sample)
+        }
+        
+        # TODO figure this out 
+        # # If transect method and sample = "opcode" + "period"
+        # if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+        #   
+        #   metadata <- metadata %>%
+        #     dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+        #   
+        # }
+        # If transect method and sample = "period"
+        if(input$method == "transect" & input$sample.t == "period") {
+          
+          lookup <- c(sample = "period") # If people have used period or sample then this will work
+          
+          metadata <- metadata %>%
+            dplyr::mutate(period = sample)
+        }
+        
       }
       
-      # If point method and samples are periods
-      if(input$method == "point" & input$sample == "period") {
-        
-        metadata <- metadata %>%
-          dplyr::mutate(sample = period)
-      }
-      
-      # If transect method and sample = "opcode" + "period"
-      if(input$method == "transect" & input$sample.t == "opcodeperiod") {
-        
-        metadata <- metadata %>%
-          dplyr::mutate(sample = paste(opcode, period, sep = "_"))
-        
-      }
-      # If transect method and sample = "period"
-      if(input$method == "transect" & input$sample.t == "period") {
-        
-        lookup <- c(sample = "period") # If people have used period or sample then this will work
-        
-        metadata <- metadata %>%
-          dplyr::mutate(sample = period)
-      }
     }
     
     # if no metadata file uploaded and method = single point. dataset = Ningloo BRUVs
@@ -393,6 +440,8 @@ function(input, output, session) {
         dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
         dplyr::select(campaignid, opcode, sample, latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, observer_count, observer_length) %>% 
         as.data.frame()
+      
+      original_metadata_names <- c("opcode")
       
       # TODO add an example dataset for DOVs
       #   # If no metadata file and method = transect. dataset = Ningaloo DOVs
@@ -464,9 +513,10 @@ function(input, output, session) {
         dplyr::filter(is.na(tz_name))# %>%
         #glimpse()
       
+      message("timezones")
       timezones <- metadata %>%
         distinct(tz_name) %>%
-        #glimpse() %>%
+        glimpse() %>%
         dplyr::filter(!is.na(tz_name))
       
       dat <- data.frame()
@@ -498,25 +548,29 @@ function(input, output, session) {
       
     }
     
-    # If point method and samples are opcodes
-    if(input$method == "point" & input$sample == "opcode") {
-      sample.cols <- c(opcode = NA_real_)
-    }
-    
-    # If point method and samples are periods
-    if(input$method == "point" & input$sample == "period") {
-      sample.cols <- c(period = NA_real_)
-    }
-    
-    # If transect method and sample = "opcode" + "period"
-    if(input$method == "transect" & input$sample.t == "opcodeperiod") {
-      sample.cols <- c(opcode = NA_real_,
-                       period = NA_real_)
-    }
-    
-    # If transect method and sample = "period"
-    if(input$method == "transect" & input$sample.t == "period") {
-      sample.cols <- c(period = NA_real_)
+    if(!"sample" %in% original_metadata_names){
+      # If point method and samples are opcodes
+      if(input$method == "point" & input$sample == "opcode") {
+        sample.cols <- c(opcode = NA_real_)
+      }
+      
+      # If point method and samples are periods
+      if(input$method == "point" & input$sample == "period") {
+        sample.cols <- c(period = NA_real_)
+      }
+      
+      # If transect method and sample = "opcode" + "period"
+      if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+        sample.cols <- c(opcode = NA_real_,
+                         period = NA_real_)
+      }
+      
+      # If transect method and sample = "period"
+      if(input$method == "transect" & input$sample.t == "period") {
+        sample.cols <- c(period = NA_real_)
+      }
+    } else {
+      sample.cols <- c(sample = NA_real_)
     }
     
     metadata.cols <- c(campaignid = NA_real_, 
@@ -538,13 +592,15 @@ function(input, output, session) {
     Sys.sleep(2)
     shinyjs::runjs("swal.close();")
     
+    message("viewing metadata")
     metadata <- metadata %>%
       tibble::add_column(!!!metadata.cols[!names(metadata.cols) %in% names(.)]) %>%
       dplyr::filter(successful_count %in% c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(date_time = as.character(date_time)) %>% 
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, observer_count, observer_length, inclusion_probability, visibility_m)  %>%
-      dplyr::distinct()
+      dplyr::distinct() %>%
+      glimpse()
   })  
   
   ## ► Find nearest marine regions add commonwealth and state zoning ----
@@ -562,11 +618,13 @@ function(input, output, session) {
         nearest.region[i] <- marine.regions()$REGION[which.min(gDistance(metadata[i, ], marine.regions(), byid = TRUE))]}
       
       ## Check that it worked
+      message("checking each sample nearest region")
       metadata.2 <- as.data.frame(nearest.region) %>%
         bind_cols(metadata()) %>%
         dplyr::rename(marine_region = nearest.region) %>%
         dplyr::mutate(sample = as.character(sample)) %>%
-        dplyr::select(!status)
+        #dplyr::select(!status)
+        glimpse()
       
     } else {
       
@@ -595,11 +653,14 @@ function(input, output, session) {
         dplyr::rename(marine_region = nearest.region) %>%
         dplyr::select(-c(latitude_dd, longitude_dd)) %>%
         dplyr::full_join(metadata, .) 
+      
+      # Changed here
+      coordinates(metadata) <- c('longitude_dd', 'latitude_dd')
+      proj4string(metadata) <- CRS(all_data$wgs.84)
     }
     
     # add in marine parks
-    coordinates(metadata) <- c('longitude_dd', 'latitude_dd')
-    proj4string(metadata) <- CRS(all_data$wgs.84)
+
     
     if(input$lifehistory %in% "aus"){
       print("view metadata.marineparks for Australia")
@@ -674,8 +735,8 @@ function(input, output, session) {
   output$table.metadata <- renderDataTable({
     
     # Checks on metadata
-    #print("checking metadata")
-    #glimpse(metadata.regions())
+    print("checking metadata")
+    glimpse(metadata.regions())
     
     errors <- ""
     

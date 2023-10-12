@@ -5,7 +5,7 @@ account: matt-navarro
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6672384
-bundleId: 7759503
+bundleId: 7789225
 url: https://marine-ecology.shinyapps.io/CheckEM/
 version: 1
 asMultiple: FALSE
