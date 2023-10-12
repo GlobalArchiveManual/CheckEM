@@ -1,4 +1,12 @@
+#' Run CheckEM shiny app locally
+#'
+#' @return Will launch a local version of CheckEM in the browser
 #' @export
+#'
+#' @examples 
+#' ## Not run:
+#' \dontrun{CheckEM::runCheckEM()}
+#' 
 runCheckEM <- function() {
   appDir <- system.file("shiny", "CheckEM", package = "CheckEM")
   if (appDir == "") {

@@ -1,33 +1,28 @@
-# Load CheckEM
-devtools::load_all()
-
 # Install released version from CRAN
 # install.packages("pkgdown")
 library(pkgdown)
 
-# Create vignettes to turn into articles
-usethis::use_vignette("runCheckEM")
+# Load CheckEM package
+devtools::load_all()
+
+# Add  Code > Insert Roxygen Skeleton for every function in the R folder
+# Fill out the details
+# The next line turns all the R function documentation into .Rd files for the man folder
+devtools::document()
+
+# This builds the website with every function.
+pkgdown::build_reference()
+
+# Create vignettes to turn into articles (these can either be based on a function or more documentation e.g. workflows)
+# usethis::use_vignette("runCheckEM")
 pkgdown::build_articles()
 pkgdown::build_articles_index()
 
 # Run once to configure your package to use pkgdown
 # usethis::use_pkgdown()
 
-# Build and create a preview
+# Build and create a preview of the website
 pkgdown::build_site()
 
-# Turn into a github page
+# Turn into a github page (need to commit and push changes for it to show up)
 usethis::use_pkgdown_github_pages()
-
-
-# Promoting
-# Once your finalized site is built and published on the web, you should publicize its URL in a few places:
-#   
-#   The URL field of your package DESCRIPTION, alongside a link to its source:
-#   
-#   URL: https://pkgdown.r-lib.org, https://github.com/r-lib/pkgdown
-# (usethis::use_pkgdown_github_pages() does this for you.)
-# 
-# Your repository description on GitHub.
-# 
-# On Twitter (make sure to include #rstats).
