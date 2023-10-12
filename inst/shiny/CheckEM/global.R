@@ -75,18 +75,6 @@ checkem.clean.names <- function(dat){
   setNames(dat, new_names)
 }
 
-test <- data.frame("dat.1" = c("dat.1", "dat-2"),
-                   "dat_2" = c("dat.1", "dat-2")) %>%
-  dplyr::rename("dat-2" = "dat_2") %>%
-  checkem.clean.names()
-
-# https://academic.oup.com/bioscience/article/57/7/573/238419
-# https://soe.environment.gov.au/theme/marine-environment/topic/2016/marine-regions
-
-# logo <- readPNG("checkem.png")
-# logo <- as.raster(logo)
-
-
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
                                            tags$img(src='https://www.nespmarine.edu.au/sites/default/themes/nespmarine/logo.png',height='60',width='200'))
@@ -193,5 +181,3 @@ iconSet <- awesomeIconList(
     markerColor = 'yellow'
   )
 )
-
-

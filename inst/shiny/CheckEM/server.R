@@ -3025,7 +3025,7 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        length <-  read.delim("data/examples/022-05_PtCloates_stereo-BRUVS_Lengths.txt", na.strings = "") %>%
+        length <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_Lengths.txt", na.strings = "") %>%
           checkem.clean.names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%

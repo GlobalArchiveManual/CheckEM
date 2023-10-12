@@ -1,4 +1,5 @@
-tagList(
+function(){
+  tagList(
   useShinyjs(),
   dashboardPage(
     dbHeader,
@@ -56,7 +57,7 @@ tagList(
     
     
     
-    tags$head(includeHTML("google-analytics.html")),
+    # tags$head(includeHTML("google-analytics.html")),
     HTML("<script type='text/javascript' src='getFolders.js'></script>"),
     tags$head(tags$link(rel = "shortcut icon", href = "favicon.ico")),
     tags$head(tags$style('.selectize-dropdown {z-index: 10000}')),
@@ -88,7 +89,8 @@ tagList(
 
                               
                               box(width = NULL, height = 730, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE,
-                                  includeMarkdown("markdown/aims.Rmd"))
+                                  includeMarkdown("markdown/aims.Rmd")
+                                  )
                               ),
                        
                        box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
@@ -789,4 +791,5 @@ tagList(
     )
   )
 )
+}
 # )
