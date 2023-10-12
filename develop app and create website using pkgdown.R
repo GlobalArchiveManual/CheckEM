@@ -1,3 +1,7 @@
+# For app development
+devtools::load_all()
+CheckEM::runCheckEM()
+
 # Install released version from CRAN
 # install.packages("pkgdown")
 library(pkgdown)
