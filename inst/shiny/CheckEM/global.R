@@ -63,18 +63,6 @@ library(cowplot)
 # Load data
 load("data/all_data.Rdata")
 
-# New function
-checkem.clean.names <- function(dat){
-  old_names <- names(dat)
-  new_names <- old_names %>%
-    gsub("%", "percent", .) %>%
-    make.names(.) %>%
-    gsub("[.]+", "_", .) %>%
-    tolower(.) %>%
-    gsub("_$", "", .)
-  setNames(dat, new_names)
-}
-
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
                                            tags$img(src='https://www.nespmarine.edu.au/sites/default/themes/nespmarine/logo.png',height='60',width='200'))

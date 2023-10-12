@@ -334,7 +334,7 @@ function(input, output, session) {
       }
       
       metadata <- metadata %>%
-        checkem.clean.names()
+        clean_names()
       
       # Rename any old names
       lookup <- c(depth_m = "depth",
@@ -432,7 +432,7 @@ function(input, output, session) {
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
       metadata <-  read.csv("data/examples/2022-05_PtCloates_stereo-BRUVS_Metadata.csv") %>%
-        checkem.clean.names() %>%
+        clean_names() %>%
         dplyr::rename(latitude_dd = latitude,
                       longitude_dd = longitude,
                       depth_m = depth) %>%
@@ -450,7 +450,7 @@ function(input, output, session) {
       #   ## ONLY ONE EXAMPLE METADATA FOR DOVs BG 13/07/2022
       #
       #   metadata <-  read.csv("data/2014-08_small subset_stereoDOVs_Metadata.csv") %>%
-      #     checkem.clean.names() %>%
+      #     clean_names() %>%
       #     dplyr::mutate(campaignid = "2014-08_small subset_stereoDOVs") %>%
       #     dplyr::mutate(sample = paste(opcode, period, sep = "_")) %>%
       #     dplyr::select(campaignid, sample, latitude_dd, longitude_dd, date, time, site, location, status, depth_m, successful_count, successful_length)
@@ -1613,7 +1613,7 @@ function(input, output, session) {
       }
       
       periods <- periods %>%
-        checkem.clean.names() %>%
+        clean_names() %>%
         dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Period.txt" = ""))) #%>% glimpse()
       
       # If point method and samples are opcodes
@@ -1680,7 +1680,7 @@ function(input, output, session) {
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
       periods <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_Period.txt", na.strings = "") %>%
-        checkem.clean.names() %>%
+        clean_names() %>%
         dplyr::mutate(sample = as.factor(opcode)) %>%
         dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
         as.data.frame()
@@ -2174,7 +2174,7 @@ function(input, output, session) {
         }
         
         points <- points %>%
-          checkem.clean.names() %>%
+          clean_names() %>%
           dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Points.txt" = ""))) #%>% glimpse()
         
         # If point method and samples are opcodes
@@ -2210,7 +2210,7 @@ function(input, output, session) {
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
         points <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_Points.txt", na.strings = "") %>%
-          checkem.clean.names() %>%
+          clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
           dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
@@ -2990,7 +2990,7 @@ function(input, output, session) {
         }
         
         length <- length %>%
-          checkem.clean.names() %>%
+          clean_names() %>%
           dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Lengths.txt" = ""))) #%>% glimpse()
         
         # If point method and samples are opcodes
@@ -3026,7 +3026,7 @@ function(input, output, session) {
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
         length <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_Lengths.txt", na.strings = "") %>%
-          checkem.clean.names() %>%
+          clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
           dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
@@ -3088,7 +3088,7 @@ function(input, output, session) {
         }
         
         threedpoints <- threedpoints %>%
-          checkem.clean.names() %>%
+          clean_names() %>%
           dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_3DPoints.txt" = ""))) #%>% glimpse()
         
         # If point method and samples are opcodes
@@ -3124,7 +3124,7 @@ function(input, output, session) {
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
         threedpoints <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_3DPoints.txt", na.strings = "") %>%
-          checkem.clean.names() %>%
+          clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
           dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
@@ -6726,7 +6726,7 @@ function(input, output, session) {
         # print("habitat points")
 
         points <- points %>%
-          checkem.clean.names() %>%
+          clean_names() %>%
           dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Dot Point Measurements.txt" = ""))) %>%
           tidyr::separate(campaignid, into = c("campaignid", "extra"), sep = "_(?!.*_)") %>%# the last _
           dplyr::mutate(extra = tolower(extra)) %>%
@@ -6768,7 +6768,7 @@ function(input, output, session) {
       # if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       #
       #   periods <-  read.delim("data/example_Period.txt", na.strings = "") %>%
-      #     checkem.clean.names() %>%
+      #     clean_names() %>%
       #     dplyr::rename(sample = opcode) %>%
       #     dplyr::mutate(sample = as.factor(sample)) %>%
       #     dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
@@ -6967,7 +6967,7 @@ function(input, output, session) {
       summarise_all(list(sum)) %>%
       # glimpse() %>%
       mutate(total.points.annotated = rowSums(.[,3:(ncol(.))], na.rm = TRUE )) %>% # CHANGE TO 3 FOR CAMPAIGNID AND SAMPLE
-      checkem.clean.names() %>%
+      clean_names() %>%
       ungroup() %>%
       # glimpse() %>%
       left_join(metadata.regions()) %>%
@@ -8053,7 +8053,7 @@ function(input, output, session) {
       }
 
       count <- count %>%
-        checkem.clean.names() %>%
+        clean_names() %>%
         dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Count.csv" = "")))
     }
     
@@ -8263,7 +8263,7 @@ function(input, output, session) {
       }
 
       gen.length <- gen.length %>%
-        checkem.clean.names() %>%
+        clean_names() %>%
         dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Length.csv" = "")))
     }
     
