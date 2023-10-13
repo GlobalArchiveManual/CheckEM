@@ -6,6 +6,9 @@ CheckEM::runCheckEM()
 # install.packages("pkgdown")
 library(pkgdown)
 
+# Run once to configure your package to use pkgdown
+# usethis::use_pkgdown()
+
 # Load CheckEM package
 devtools::load_all()
 
@@ -24,9 +27,6 @@ pkgdown::build_reference()
 # usethis::use_vignette("runCheckEM")
 pkgdown::build_articles()
 pkgdown::build_articles_index()
-
-# Run once to configure your package to use pkgdown
-# usethis::use_pkgdown()
 
 # Build and create a preview of the website
 pkgdown::build_site()
