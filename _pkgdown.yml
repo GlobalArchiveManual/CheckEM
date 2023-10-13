@@ -2,3 +2,12 @@ url: https://globalarchivemanual.github.io/CheckEM/
 template:
   bootstrap: 5
 
+reference:
+  - title: Functions for data formatting
+    desc:  Essential functionality for formatting stereo-video annotation
+    contents:
+      - clean_names
+  - title: Shiny App
+    desc: Functions for shiny app
+    contents:
+      - runCheckEM
