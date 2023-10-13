@@ -1,8 +1,8 @@
 Dot Point Measurements
 
-Generated: Friday 08 October 2021 13:30:50
+Generated: Friday 22 July 2022 11:50:50
 
-Filename	Frame	Time (mins)	Image row	Image col	Date	Location	Site #	Transect #	Latitude	Longitude	Rugosity	Depth	Collector	Fishing status	Spare	Spare	BROAD	MORPHOLOGY	TYPE	FieldOfView	Relief	CODE			Radius %
+Filename	Frame	Time (mins)	Image row	Image col	Date	Location	Site #	Transect #	Latitude	Longitude	Rugosity	Depth	Collector	Fishing status	Spare	Spare	Broad	Morphology	Type	Fine	FieldOfView	CAAB_CODE			Radius %
 npz6.10.jpg	      0		139	196																Open					100.0
 npz6.10.jpg	      0		406	196																Open					89.9
 npz6.10.jpg	      0		674	196																Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."				89.9
