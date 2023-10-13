@@ -91,9 +91,9 @@ function(input, output, session) {
   synonyms <- reactive({
     
     if(input$lifehistory %in% "aus"){
-      lh <- all_data$lh.aus.synonyms
+      lh <- all_data$lh.aus.synonyms %>% dplyr::distinct()
     } else {
-      lh <- all_data$lh.glo.synonyms
+      lh <- all_data$lh.glo.synonyms %>% dplyr::distinct()
     }
     
     lh

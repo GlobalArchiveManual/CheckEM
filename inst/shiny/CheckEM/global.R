@@ -60,6 +60,8 @@ library(geomtextpath)
 library(png)
 library(cowplot)
 
+library(CheckEM)
+
 # Load data
 load("data/all_data.Rdata")
 
