@@ -17,6 +17,9 @@ devtools::document()
 # This builds the website with every function.
 pkgdown::build_reference()
 
+# Run once to create a favicon
+# build_favicons()
+
 # Create vignettes to turn into articles (these can either be based on a function or more documentation e.g. workflows)
 # usethis::use_vignette("runCheckEM")
 pkgdown::build_articles()
