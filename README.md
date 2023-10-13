@@ -3,8 +3,8 @@ A shiny app for checking and visualizing exports from EventMeasure.
 
 
 
-# To install in r 
+'# To install in r 
 install.packages('devtools')
-library('devtools')
 
-devtools::install_github("GlobalArchiveManual/CheckEM")
+library('devtools')
+devtools::install_github("GlobalArchiveManual/CheckEM")'
