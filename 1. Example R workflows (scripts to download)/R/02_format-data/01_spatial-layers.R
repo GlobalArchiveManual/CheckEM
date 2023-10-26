@@ -16,10 +16,10 @@ library(stars)
 library(starsExtra)
 
 # Set the study name ----
-name <- '2021-2022_SwC_BOSS'
+name <- '2023-03_SwC_stereo-BRUVs'
 
 # Load bathymetry data ----
-bathy <- rast("data/spatial/rasters/swc_multibeam_UTM50.tif")                   # UTM zone 50
+bathy <- rast("1. Example R workflows (scripts to download)/data/spatial/rasters/swc_multibeam_UTM50.tif")                   # UTM zone 50
 
 # Create bathymetry derivatives ----
 preds <- terrain(bathy, neighbors = 8,
