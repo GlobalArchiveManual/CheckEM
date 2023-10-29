@@ -61,6 +61,9 @@ metadata <- list.files(path = "1. Example R workflows (scripts to download)/data
                 successful.habitat.forward, successful.habitat.backward) %>%
   glimpse()                                                                   # Preview the data
 
+write.csv(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                                  study, "_Metadata.csv"), row.names = F)
+
 # Read in the raw habitat data
 ga.read.files_tm.txt <- function(dir, sample) {
   if (sample %in% "opcode") {
@@ -92,21 +95,6 @@ ga.read.files_tm.txt <- function(dir, sample) {
   else {
     stop("Sample must be one of: c('opcode', 'period')")
   }}
-
-ga.read.files_tm.txt <- function(dir, sample) {
-    if (sample %in% "opcode") {
-      list.files(path = dir,    
-               recursive = F,
-               pattern = "_Dot Point Measurements.txt",
-               full.names = T) %>%
-      purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, colClasses = "character")) %>%
-      purrr::list_rbind() %>%
-      dplyr::mutate(id = 1:nrow(.)) %>%
-      ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      glimpse()
-    }
-}
 
 points <- ga.read.files_tm.txt("1. Example R workflows (scripts to download)/data/raw/",
                                sample = "opcode")
@@ -153,11 +141,12 @@ metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "s
 broad.points <- habitat %>%
   dplyr::mutate(count = 1) %>%                                                  # Add a count column to summarise the number of points
   dplyr::select(campaignid, sample, count, level_2, id) %>%
+  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
   group_by(campaignid, sample) %>%
   pivot_wider(names_from = level_2, values_from = count, 
               values_fill = 0, names_prefix = "broad.") %>%                     # Spread the data to wide format
   dplyr::select(-id) %>%
-  summarise_all(list(sum)) %>%                                                  # Add the points per sample across all broad habitat columns
+  summarise(across(starts_with("broad"), sum)) %>%                                                  # Add the points per sample across all broad habitat columns
   ungroup() %>%
   dplyr::mutate(total.points.annotated = rowSums(.[,3:(ncol(.))],na.rm = TRUE )) %>%   # Take row sums of all data columns
   ga.clean.names() %>%                                                          # Clean names using GlobalArchive function
@@ -237,20 +226,10 @@ gg.relief
 
 ### 6. Export tidy datasets to a .csv format suitable for use in modelling and statistical testing ----
 # Export point annotations
-# write.csv(habitat.broad.points,file =
-#             paste(tidy.dir, paste(study,"random-points_broad.habitat.csv",sep = "_"),
-#                   sep = "/"), row.names = FALSE)
-# write.csv(habitat.detailed.points,file =
-#             paste(tidy.dir,paste(study,"random-points_detailed.habitat.csv", sep = "_"),
-#                   sep = "/"), row.names=FALSE)
-
-# Export percent cover annotations
-# write.csv(habitat.broad.percent,file =
-#             paste(tidy.dir, paste(study,"random-points_percent-cover_broad.habitat.csv",sep = "_"),
-#                   sep = "/"), row.names = FALSE)
-# write.csv(habitat.detailed.percent,file =
-#             paste(tidy.dir,paste(study,"random-points_percent-cover_detailed.habitat.csv",sep = "_"),
-#                   sep = "/"), row.names = FALSE)
+write.csv(habitat.broad.points,file =
+            paste("1. Example R workflows (scripts to download)/data/tidy/", 
+                  paste(study,"random-points_broad.habitat.csv", sep = "_"),
+                  sep = "/"), row.names = FALSE)
 
 ### 7. Spatially visualise the data ----
 

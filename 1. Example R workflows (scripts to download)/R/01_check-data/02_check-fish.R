@@ -40,6 +40,10 @@ metadata <- list.files(path = "1. Example R workflows (scripts to download)/data
                 successful.habitat.forward, successful.habitat.backward) %>%
   glimpse()
 
+# Only need to run this if you don't have habitat data!
+# write.csv(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+#                                   study, "_Metadata.csv"), row.names = F)
+
 # 2. Extract fishing status ----
 marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/marine-parks-all.shp")  %>% 
   dplyr::select(geometry, ZoneName) %>%
@@ -140,8 +144,8 @@ length.families <- length3dpoints %>%
 
 complete.length.number <- length3dpoints %>% 
   dplyr::filter(!family %in% "Unknown")%>%
-  dplyr::right_join(metadata, by = c("campaignid", "sample")) %>%
-  dplyr::filter(!successful.length %in% "No") %>%
+  dplyr::right_join(metadata) %>%
+  dplyr::filter(successful.length %in% "Yes") %>%
   dplyr::select(campaignid, sample, family, genus, species, length, number, range) %>%
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
   dplyr::mutate(number = as.numeric(number)) %>%
@@ -154,24 +158,21 @@ complete.length.number <- length3dpoints %>%
 
 expanded.length <- complete.length.number %>%
   dplyr::filter(!is.na(length)) %>%
-  dplyr::uncount(number) %>%
+  tidyr::uncount(number) %>%
   glimpse()
 
 # 6. Save datasets ----
-setwd(tidy.dir)
-dir()
-
 write.csv(complete.maxn, 
-          file = paste("1. Example R workflows (scripts to download)/data/tidy/",
-                       study, "complete.maxn.csv", sep = "."), 
+          file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                       study, "_complete.maxn.csv"), 
           row.names = FALSE)
 
 write.csv(complete.length.number, 
-          file = paste("1. Example R workflows (scripts to download)/data/tidy/",
-                       study, "complete.length.csv", sep = "."), 
+          file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                       study, "_complete.length.csv"), 
           row.names = FALSE)
 
 write.csv(expanded.length, 
-          file = paste("1. Example R workflows (scripts to download)/data/tidy/",
-                       study, "expanded.length.csv", sep = "."), 
+          file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                       study, "_expanded.length.csv"), 
           row.names = FALSE)
