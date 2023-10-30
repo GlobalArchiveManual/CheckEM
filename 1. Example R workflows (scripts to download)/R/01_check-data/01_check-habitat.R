@@ -71,7 +71,8 @@ ga.read.files_tm.txt <- function(dir, sample) {
                recursive = F,
                pattern = "_Dot Point Measurements.txt",
                full.names = T) %>%
-      purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, colClasses = "character")) %>%
+      purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, 
+                             colClasses = "character", na.strings = "")) %>%
       purrr::list_rbind() %>%
       dplyr::mutate(id = 1:nrow(.)) %>%
       ga.clean.names() %>%
@@ -84,7 +85,8 @@ ga.read.files_tm.txt <- function(dir, sample) {
                recursive = F,
                pattern = "_Dot Point Measurements.txt",
                full.names = T) %>%
-      purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, colClasses = "character")) %>%
+      purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, 
+                             colClasses = "character", na.strings = "")) %>%
       purrr::list_rbind() %>%
       dplyr::mutate(id = 1:nrow(.)) %>%
       ga.clean.names() %>%
@@ -102,13 +104,13 @@ points <- ga.read.files_tm.txt("1. Example R workflows (scripts to download)/dat
 habitat <- points %>%
   dplyr::filter(relief_annotated %in% "no") %>%
   dplyr::select(campaignid, sample, id,                                         # Should I be keeping in relief_annotated?
-                starts_with("level"), scientific, qualifiers, caab_code) %>%
+                starts_with("level"), scientific, caab_code) %>%
   glimpse()
 
 relief <- points %>%
   dplyr::filter(relief_annotated %in% "yes") %>%
   dplyr::select(campaignid, sample, id,                                         # Should I be keeping in relief_annotated?
-                starts_with("level"), scientific, qualifiers, caab_code) %>%
+                starts_with("level"), scientific, caab_code) %>%
   glimpse()
 
 # Check to see if you have samples with points extra or missing points annotated
@@ -136,30 +138,30 @@ metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "s
 
 ### 3. Tidy data into broad and detailed point-level and percent cover dataframes ----
 # Create broad point annotations
+schema <- read_csv("1. Example R workflows (scripts to download)/data/raw/benthic.annotation.schema.forward.facing.20230714.135113.csv",
+                   col_types = "c", na = "") %>%
+  ga.clean.names() %>%
+  dplyr::select(-c(parent_caab, qualifiers)) %>%
+  glimpse()
 
-# Function to make broad classes??? Its a bit shit
-broad.points <- habitat %>%
-  dplyr::mutate(count = 1) %>%                                                  # Add a count column to summarise the number of points
-  dplyr::select(campaignid, sample, count, level_2, id) %>%
+tidy.habitat <- habitat %>%
+  dplyr::mutate(number = 1) %>%                                                 # Add a count column to summarise the number of points
+  left_join(schema) %>%
+  dplyr::select(campaignid, sample, number, starts_with("level"), family, genus, species) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
-  group_by(campaignid, sample) %>%
-  pivot_wider(names_from = level_2, values_from = count, 
-              values_fill = 0, names_prefix = "broad.") %>%                     # Spread the data to wide format
-  dplyr::select(-id) %>%
-  summarise(across(starts_with("broad"), sum)) %>%                                                  # Add the points per sample across all broad habitat columns
-  ungroup() %>%
-  dplyr::mutate(total.points.annotated = rowSums(.[,3:(ncol(.))],na.rm = TRUE )) %>%   # Take row sums of all data columns
-  ga.clean.names() %>%                                                          # Clean names using GlobalArchive function
+  group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
+  dplyr::tally(number, name = "number") %>%
   ungroup() %>%                                                                 # Ungroup
+  # ga.clean.names() %>%                                                          # Clean names using GlobalArchive function
+  dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()                                                                     # Preview the data                                                                    # Preview the data
 
 # Create relief
-relief.grid <- relief %>%
+tidy.relief <- relief %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%                       # Remove Open water and Unknown entries from broad
-  dplyr::mutate(relief.rank = as.numeric(level_5)) %>%
-  dplyr::select(campaignid, sample, relief.rank) %>%                            # Remove the original relief scores
-  group_by(campaignid, sample) %>%
-  summarise(mean.relief = mean (relief.rank), sd.relief = sd (relief.rank)) %>% # Create mean and standard deviation relief
+  dplyr::mutate(number = 1) %>%                   
+  group_by(campaignid, sample, across(starts_with("level")), caab_code) %>%
+  dplyr::tally(number, name = "number") %>%                                                    
   ungroup() %>%                                                                 # Ungroup
   glimpse()                                                                     # Preview the data
 

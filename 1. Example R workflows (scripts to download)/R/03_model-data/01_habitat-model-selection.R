@@ -26,7 +26,7 @@ preds <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/
 
 dat <- read.csv(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
                       name, "_Habitat.csv")) %>%
-  dplyr::mutate(broad.reef = broad.macroalgae + broad.sponges +                 # Set your reef columns here
+  dplyr::mutate(reef = broad.macroalgae + broad.sponges +                 # Set your reef columns here
                 broad.sessile.invertebrates + broad.cnidaria + 
                 broad.bryozoa) %>%    
   left_join(preds) %>%
