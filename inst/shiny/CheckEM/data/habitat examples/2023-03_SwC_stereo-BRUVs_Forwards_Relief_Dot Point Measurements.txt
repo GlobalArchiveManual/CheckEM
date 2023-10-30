@@ -1,0 +1,646 @@
+Dot Point Measurements
+
+Generated: Thursday 26 October 2023 09:18:05
+
+Filename	Frame	Time (mins)	Image row	Image col	Date	Location	Site #	Transect #	Latitude	Longitude	Rugosity	Depth	Collector	Fishing status	campaignid	relief_annotated	OpCode	Period	Frame info 3	Frame info 4	Frame info 5	Frame info 6	level_2	level_3	level_4	level_5	scientific	qualifiers	CAAB_code		Radius %
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		139	196											2023-03_SwC_stereo-BRUVs	yes	10	1													100.0
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		406	196											2023-03_SwC_stereo-BRUVs	yes	10	1													89.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		674	196											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		89.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		941	196											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		100.0
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		139	578											2023-03_SwC_stereo-BRUVs	yes	10	1													64.2
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		406	578											2023-03_SwC_stereo-BRUVs	yes	10	1													46.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		674	578											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		46.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		941	578											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		64.2
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		139	960											2023-03_SwC_stereo-BRUVs	yes	10	1													46.5
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		406	960											2023-03_SwC_stereo-BRUVs	yes	10	1													15.5
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		674	960											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		15.5
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		941	960											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		46.5
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		139	1342											2023-03_SwC_stereo-BRUVs	yes	10	1													64.2
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		406	1342											2023-03_SwC_stereo-BRUVs	yes	10	1													46.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		674	1342											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		46.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		941	1342											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		64.2
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		139	1724											2023-03_SwC_stereo-BRUVs	yes	10	1													100.0
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		406	1724											2023-03_SwC_stereo-BRUVs	yes	10	1													89.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		674	1724											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		89.9
+10_1_01_Left_MAH00355.MP4_0010310.jpg	      0		941	1724											2023-03_SwC_stereo-BRUVs	yes	10	1					Relief	High	Wall	4			82003007		100.0
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	12	1													100.0
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	12	1													89.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	High	High (>3m)	3			82003006		89.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	12	1													64.2
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	12	1													46.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	High	High (>3m)	3			82003006		46.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	12	1													46.5
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	12	1													15.5
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	High	High (>3m)	3			82003006		15.5
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	High	High (>3m)	3			82003006		46.5
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	12	1													64.2
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	12	1													46.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	High	High (>3m)	3			82003006		64.2
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	12	1													100.0
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	12	1													89.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+12_1_01_L031_MAH01383.MP4_0003746.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	12	1					Relief	High	High (>3m)	3			82003006		100.0
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	14	1													100.0
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	High	High (>3m)	3			82003006		89.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	High	High (>3m)	3			82003006		89.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	14	1													64.2
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	High	High (>3m)	3			82003006		46.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	14	1													46.5
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	High	High (>3m)	3			82003006		15.5
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		15.5
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.5
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	14	1													64.2
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	High	High (>3m)	3			82003006		46.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	High	High (>3m)	3			82003006		46.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	14	1													100.0
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	High	High (>3m)	3			82003006		89.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+14_1_01_L031_14_MAH01390.MP4_0024820.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	14	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	15	1													100.0
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	15	1													89.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	15	1													89.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	15	1					Relief	High	High (>3m)	3			82003006		100.0
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	15	1													64.2
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	15	1													46.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	15	1													46.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	15	1					Relief	High	High (>3m)	3			82003006		64.2
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	15	1													46.5
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	15	1													15.5
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	15	1													15.5
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	15	1					Relief	High	High (>3m)	3			82003006		46.5
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	15	1													64.2
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	15	1													46.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	15	1					Relief	High	High (>3m)	3			82003006		46.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	15	1					Relief	High	High (>3m)	3			82003006		64.2
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	15	1													100.0
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	15	1													89.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	15	1					Relief	High	High (>3m)	3			82003006		89.9
+15_1_01_Left_MAH00370.MP4_0076938.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	15	1					Relief	High	High (>3m)	3			82003006		100.0
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	16	1													100.0
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	16	1													89.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	16	1													89.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	16	1					Relief	High	Wall	4			82003007		100.0
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	16	1													64.2
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	16	1													46.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	16	1													46.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	16	1					Relief	High	Wall	4			82003007		64.2
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	16	1													46.5
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	16	1													15.5
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	16	1													15.5
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	16	1					Relief	High	Wall	4			82003007		46.5
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	16	1													64.2
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	16	1													46.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	16	1													46.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	16	1					Relief	High	Wall	4			82003007		64.2
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	16	1													100.0
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	16	1													89.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	16	1													89.9
+16_1_01_L039_MAH00356.MP4_0067518.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	16	1					Relief	High	Wall	4			82003007		100.0
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	17	1													100.0
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	17	1													89.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		89.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		100.0
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	17	1													64.2
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	17	1													46.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		46.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		64.2
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	17	1													46.5
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	17	1													15.5
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		15.5
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		46.5
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	17	1													64.2
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	17	1													46.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		46.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		64.2
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	17	1													100.0
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	17	1													89.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		89.9
+17_1_01_Left_MAH00375.MP4_0071918.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	17	1					Relief	High	Wall	4			82003007		100.0
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	19	1													100.0
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	19	1													89.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		89.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	19	1													64.2
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	19	1													46.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		46.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	19	1													46.5
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	19	1													15.5
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		15.5
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.5
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	19	1													64.2
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		46.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		46.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		64.2
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	19	1													100.0
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		89.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		89.9
+19_1_01_L031_19_MAH01394.MP4_0046607.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	19	1					Relief	High	High (>3m)	3			82003006		100.0
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	21	1													100.0
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	High	High (>3m)	3			82003006		89.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	High	High (>3m)	3			82003006		100.0
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	21	1													64.2
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	High	High (>3m)	3			82003006		46.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	21	1													46.5
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		15.5
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Low (<1m)	1			82003003		15.5
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.5
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	21	1													64.2
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	21	1													100.0
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Low (<1m)	1			82003003		89.9
+21_1_01_Left_MAH00438.MP4_0024118.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	21	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	22	1													100.0
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	22	1													89.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		89.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		100.0
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	22	1													64.2
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	22	1													46.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		46.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		64.2
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	22	1													46.5
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	22	1													15.5
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		15.5
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		46.5
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	22	1													64.2
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	22	1													46.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		46.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		64.2
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	22	1													100.0
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	22	1													89.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	High	High (>3m)	3			82003006		89.9
+22_1_01_L035_MAH00360.MP4_0027710.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	22	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	23	1													100.0
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	23	1													90.2
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	23	1													89.5
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	23	1					Relief	High	Wall	4			82003007		98.1
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	23	1													65.7
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	23	1													49.5
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	23	1													48.2
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	23	1					Relief	High	Wall	4			82003007		62.7
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	23	1													46.6
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	23	1													17.5
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	23	1													13.4
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	23	1					Relief	High	Wall	4			82003007		42.3
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	23	1													59.7
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	23	1													41.2
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	23	1													39.6
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	23	1					Relief	High	Wall	4			82003007		56.4
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	23	1													92.2
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	23	1													81.4
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	23	1													80.6
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	23	1					Relief	High	Wall	4			82003007		90.1
+23_1_01_Left_MAH00428.MP4_0055732.jpg	      0		949	1816											2023-03_SwC_stereo-BRUVs	yes	23	1													99.1
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	24	1													100.0
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	24	1													89.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		89.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		100.0
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	24	1													64.2
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	24	1													46.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		46.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		64.2
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	24	1													46.5
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	24	1													15.5
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		15.5
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		46.5
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	24	1													64.2
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	24	1													46.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		46.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		64.2
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	24	1													100.0
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	24	1													89.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		89.9
+24_1_01_L035_MAH00350.MP4_0043363.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	24	1					Relief	High	High (>3m)	3			82003006		100.0
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	26	1													100.0
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	26	1													89.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		89.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		100.0
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	26	1													64.2
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	26	1													46.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		46.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		64.2
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	26	1													46.5
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	26	1													15.5
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		15.5
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		46.5
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	26	1													64.2
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	26	1													46.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		46.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		64.2
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	26	1													100.0
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	26	1													89.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		89.9
+26_1_01_Left_MAH01378.MP4_0052382.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	26	1					Relief	High	Wall	4			82003007		100.0
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	29	1													100.0
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	29	1													89.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		89.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		100.0
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	29	1													64.2
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	29	1													46.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		46.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		64.2
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	29	1													46.5
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	29	1													15.5
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		15.5
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		46.5
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	29	1													64.2
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	29	1													46.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		46.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		64.2
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	29	1													100.0
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	29	1													89.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		89.9
+29_1_01_L035_MAH00345.MP4_0056429.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	29	1					Relief	High	Wall	4			82003007		100.0
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	2	1													100.0
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	2	1													89.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	High (>3m)	3			82003006		89.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	High (>3m)	3			82003006		100.0
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	2	1													64.2
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	2	1													46.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	High (>3m)	3			82003006		46.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	High (>3m)	3			82003006		64.2
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	2	1													46.5
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	2	1													15.5
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	Wall	4			82003007		15.5
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	High (>3m)	3			82003006		46.5
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	2	1													64.2
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	2	1													46.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	Wall	4			82003007		46.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	Wall	4			82003007		64.2
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	2	1													100.0
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	2	1													89.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	Wall	4			82003007		89.9
+2_1_01_Left_MAH00329.MP4_0051232.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	2	1					Relief	High	Wall	4			82003007		100.0
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	31	1													100.0
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	31	1													89.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	31	1													89.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	31	1					Relief	High	High (>3m)	3			82003006		100.0
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	31	1													64.2
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	31	1													46.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	31	1													46.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	31	1					Relief	High	High (>3m)	3			82003006		64.2
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	31	1													46.5
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	31	1													15.5
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	31	1													15.5
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	31	1					Relief	High	High (>3m)	3			82003006		46.5
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	31	1													64.2
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	31	1													46.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	31	1					Relief	High	High (>3m)	3			82003006		46.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	31	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	31	1													100.0
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	31	1													89.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	31	1					Relief	High	High (>3m)	3			82003006		89.9
+31_1_01_L029_MAH00339.MP4_0044121.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	31	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	32	1													100.0
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	32	1													89.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	32	1													89.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	32	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	32	1													64.2
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	32	1													46.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	32	1													46.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	32	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	32	1													46.5
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	32	1													15.5
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	32	1													15.5
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	32	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.5
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	32	1													64.2
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	32	1													46.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	32	1													46.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	32	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	32	1													100.0
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	32	1													89.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	32	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+32_1_01_L039_MAH00349.MP4_0060900.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	32	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	34	1													100.0
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	34	1													89.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	High	High (>3m)	3			82003006		89.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	High	High (>3m)	3			82003006		100.0
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	34	1													64.2
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	34	1													46.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	High	High (>3m)	3			82003006		46.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	34	1													46.5
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	34	1													15.5
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	High	High (>3m)	3			82003006		15.5
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.5
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	34	1													64.2
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	34	1													46.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	High	High (>3m)	3			82003006		46.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	34	1													100.0
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	34	1													89.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	High	High (>3m)	3			82003006		89.9
+34_1_01_L027_34_MAH00304.MP4_0071324.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	34	1					Relief	High	High (>3m)	3			82003006		100.0
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	35														100.0
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	35														89.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	35														89.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		100.0
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	35														64.2
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	35														46.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		46.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		64.2
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	35														46.5
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	35														15.5
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		15.5
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		46.5
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	35														64.2
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	35														46.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		46.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		64.2
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	35														100.0
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	35														89.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		89.9
+35__01_Left_MAH00294.MP4_0053819.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	35						Relief	High	Wall	4			82003007		100.0
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	36	1													100.0
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	36	1													89.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	Wall	4			82003007		89.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	High (>3m)	3			82003006		100.0
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	36	1													64.2
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	36	1													46.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	Wall	4			82003007		46.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	High (>3m)	3			82003006		64.2
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	36	1													46.5
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	36	1													15.5
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	Wall	4			82003007		15.5
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	High (>3m)	3			82003006		46.5
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	36	1													64.2
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	36	1													46.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	Wall	4			82003007		46.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	Wall	4			82003007		64.2
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	36	1													100.0
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	36	1													89.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	36	1													89.9
+36_1_01_L037_MAH00366.MP4_0003227.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	36	1					Relief	High	Wall	4			82003007		100.0
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	37	1													100.0
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	37	1													89.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		89.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	37	1													64.2
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	37	1													46.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	37	1													46.5
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	37	1													15.5
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		15.5
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.5
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	37	1													64.2
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	37	1													46.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	37	1													100.0
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	37	1													89.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		89.9
+37_1_01_Left_MAH00371.MP4_0006023.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	37	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	39	1													100.0
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	39	1													89.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	High	High (>3m)	3			82003006		89.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	39	1													64.2
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	39	1													46.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	High	High (>3m)	3			82003006		46.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	High	High (>3m)	3			82003006		64.2
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	39	1													46.5
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	39	1													15.5
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	High	High (>3m)	3			82003006		15.5
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.5
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	39	1													64.2
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	39	1													46.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	High	High (>3m)	3			82003006		46.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	39	1													100.0
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	39	1													89.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	High	High (>3m)	3			82003006		89.9
+39_1_01_L027_MAH00308.MP4_0028602.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	39	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+3_1_01_Left (2).MP4_0053513.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	3	1													100.0
+3_1_01_Left (2).MP4_0053513.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	3	1													89.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+3_1_01_Left (2).MP4_0053513.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	3	1													64.2
+3_1_01_Left (2).MP4_0053513.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	3	1													46.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+3_1_01_Left (2).MP4_0053513.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	3	1													46.5
+3_1_01_Left (2).MP4_0053513.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	3	1													15.5
+3_1_01_Left (2).MP4_0053513.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		15.5
+3_1_01_Left (2).MP4_0053513.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Low (<1m)	1			82003003		46.5
+3_1_01_Left (2).MP4_0053513.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	3	1													64.2
+3_1_01_Left (2).MP4_0053513.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	3	1													46.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Low (<1m)	1			82003003		64.2
+3_1_01_Left (2).MP4_0053513.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	3	1													100.0
+3_1_01_Left (2).MP4_0053513.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	3	1													89.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+3_1_01_Left (2).MP4_0053513.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	3	1					Relief	Low / moderate	Low (<1m)	1			82003003		100.0
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	40	1													100.0
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	40	1													89.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	High	High (>3m)	3			82003006		89.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	40	1													64.2
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	40	1													46.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	High	High (>3m)	3			82003006		46.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	40	1													46.5
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	40	1													15.5
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	High	High (>3m)	3			82003006		15.5
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.5
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	40	1													64.2
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	40	1													46.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	High	High (>3m)	3			82003006		46.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	40	1													100.0
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	40	1													89.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	High	High (>3m)	3			82003006		89.9
+40_1_01_Left_MAH00335.MP4_0006590.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	40	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	44	1													100.0
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	44	1													89.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		89.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		100.0
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	44	1													64.2
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	44	1													46.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		46.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		64.2
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	44	1													46.5
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	44	1													15.5
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		15.5
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		46.5
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	44	1													64.2
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	44	1													46.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		46.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		64.2
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	44	1													100.0
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	44	1													89.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		89.9
+44_1_01_Left_MAH00433.MP4_0013184.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	44	1					Relief	High	Wall	4			82003007		100.0
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	45	1													100.0
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	45	1													89.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	45	1													89.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	45	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	45	1													64.2
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	45	1													46.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	45	1													46.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	45	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	45	1													46.5
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	45	1													15.5
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	45	1													15.5
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	45	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.5
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	45	1													64.2
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	45	1													46.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	45	1													46.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	45	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	45	1													100.0
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	45	1													89.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	45	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+45_1_01_Left_MAH00385.MP4_0048117.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	45	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	46	1													100.0
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		89.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		89.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	High (>3m)	3			82003006		100.0
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	46	1													64.2
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		46.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		46.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	46	1													46.5
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		15.5
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		15.5
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		46.5
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	46	1													64.2
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		46.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		46.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		64.2
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	46	1													100.0
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		89.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		89.9
+46_1_01_L041_MAH00380.MP4_0058177.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	46	1					Relief	High	Wall	4			82003007		100.0
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	47	1													100.0
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	47	1													89.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		89.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		100.0
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	47	1													64.2
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	47	1													46.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		46.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		64.2
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	47	1													46.5
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	47	1													15.5
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		15.5
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		46.5
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	47	1													64.2
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	47	1													46.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		46.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		64.2
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	47	1													100.0
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	47	1													89.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		89.9
+47_1_01_L033_MAH00442.MP4_0030299.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	47	1					Relief	High	High (>3m)	3			82003006		100.0
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	4	1													100.0
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	4	1													89.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		89.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		100.0
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	4	1													64.2
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	4	1													46.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		46.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		64.2
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	4	1													46.5
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	4	1													15.5
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		15.5
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		46.5
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	4	1													64.2
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	4	1													46.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		46.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		64.2
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	4	1													100.0
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	4	1													89.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		89.9
+4_1_01_Left_MAH00360.MP4_0054172.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	4	1					Relief	High	Wall	4			82003007		100.0
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	5	1													100.0
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	5	1													89.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		89.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		100.0
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	5	1													64.2
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	5	1													46.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		46.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		64.2
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	5	1													46.5
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	5	1													15.5
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		15.5
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		46.5
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	5	1													64.2
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	5	1													46.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		46.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		64.2
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	5	1													100.0
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	5	1													89.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	High	Wall	4			82003007		89.9
+5_1_01_Left_MAH00324.MP4_0077182.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	5	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	6	1													100.0
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	6	1													89.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	High	High (>3m)	3			82003006		89.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	6	1													64.2
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	6	1													46.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	High	High (>3m)	3			82003006		46.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	6	1													46.5
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	6	1													15.5
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	High	High (>3m)	3			82003006		15.5
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.5
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	6	1													64.2
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	6	1													46.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		46.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		64.2
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	6	1													100.0
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	6	1													89.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		89.9
+6_1_01_Left_MAH00375.MP4_0038681.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	6	1					Relief	Low / moderate	Moderate (1-3m)	2			82003004		100.0
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	7	1													100.0
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	7	1													89.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		89.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		100.0
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	7	1													64.2
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	7	1													46.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		46.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		64.2
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	7	1													46.5
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	7	1													15.5
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		15.5
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		46.5
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	7	1													64.2
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	7	1													46.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		46.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		64.2
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	7	1													100.0
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	7	1													89.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		89.9
+7_1_01_L039_MAH00366.MP4_0048501.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	7	1					Relief	High	High (>3m)	3			82003006		100.0
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		135	192											2023-03_SwC_stereo-BRUVs	yes	8	1													100.0
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		404	192											2023-03_SwC_stereo-BRUVs	yes	8	1													89.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		673	192											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	Wall	4			82003007		89.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		942	192											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	High (>3m)	3			82003006		100.0
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		135	576											2023-03_SwC_stereo-BRUVs	yes	8	1													64.2
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		404	576											2023-03_SwC_stereo-BRUVs	yes	8	1													46.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		673	576											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	Wall	4			82003007		46.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		942	576											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	High (>3m)	3			82003006		64.2
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		135	959											2023-03_SwC_stereo-BRUVs	yes	8	1													46.5
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		404	959											2023-03_SwC_stereo-BRUVs	yes	8	1													15.5
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		673	959											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	Wall	4			82003007		15.5
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		942	959											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	Wall	4			82003007		46.5
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		135	1343											2023-03_SwC_stereo-BRUVs	yes	8	1													64.2
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		404	1343											2023-03_SwC_stereo-BRUVs	yes	8	1													46.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		673	1343											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	High (>3m)	3			82003006		46.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		942	1343											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	Wall	4			82003007		64.2
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		135	1727											2023-03_SwC_stereo-BRUVs	yes	8	1													100.0
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		404	1727											2023-03_SwC_stereo-BRUVs	yes	8	1													89.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		673	1727											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	High (>3m)	3			82003006		89.9
+8_1_01_L039_MAH00361.MP4_0076078.jpg	      0		942	1727											2023-03_SwC_stereo-BRUVs	yes	8	1					Relief	High	High (>3m)	3			82003006		100.0

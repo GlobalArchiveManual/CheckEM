@@ -311,7 +311,10 @@ function(input, output, session) {
       
       # Get all _Metadata files in the folder
       files <- input$folderdir%>%
-        dplyr::filter(grepl("_Metadata", name))
+        dplyr::filter(grepl("_Metadata|_metadata", name))
+      
+      print("metadata files")
+      glimpse(files)
       
       metadata <- data.frame() 
       
@@ -320,7 +323,16 @@ function(input, output, session) {
         return(NULL)
       
       for (i in seq_along(files$datapath)) {
-        tmp <- read_csv(files$datapath[i], col_types = cols(.default = "c"))  %>%
+        tmp <- read_csv(files$datapath[i], col_types = cols(.default = "c")) 
+        
+        if("campaignid" %in% colnames(metadata))
+        {
+          metadata <- metadata %>%
+            dplyr::select(-c(campaignid))
+        }
+        
+        
+        tmp <- tmp %>%
           dplyr::mutate(campaignid = files$name[i])
         
         metadata <- bind_rows(metadata, tmp)
@@ -331,10 +343,15 @@ function(input, output, session) {
             dplyr::select(-c(CampaignID))
         }
         
+
+        
       }
       
+      print("previewed semi tidied names")
+      
       metadata <- metadata %>%
-        clean_names()
+        clean_names() %>%
+        glimpse()
       
       # Rename any old names
       lookup <- c(depth_m = "depth",
