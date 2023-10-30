@@ -12,22 +12,26 @@ rm(list = ls())
 # Load libraries ----
 library(tidyverse)
 library(mgcv)
-library(MuMIn)
-library(car)
-library(doBy)
 library(gplots)
-library(doSNOW)
-library(gamm4)
-library(RCurl)
-library(reshape2)
 library(FSSgam)
 
 # Set the study name ----
-name <- '2021-2022_SwC_BOSS'
+name <- 'example-bruv-workflow'
 
 # Bring in and format the data ----
-dat <- readRDS(paste0("data/tidy/", name, "_habitat-bathymetry.rds")) %>%
-  dplyr::mutate(mbdepth = abs(mbdepth)) %>%                                     # Transform to positive otherwise sqrt(mbdepth) will error
+preds <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
+                        name, "_Metadata-bathymetry-derivatives.rds")) %>%
+  dplyr::mutate(mbdepth = abs(mbdepth)) %>%
+  glimpse()
+
+dat <- read.csv(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
+                      name, "_Habitat.csv")) %>%
+  dplyr::mutate(broad.reef = broad.macroalgae + broad.sponges +                 # Set your reef columns here
+                broad.sessile.invertebrates + broad.cnidaria + 
+                broad.bryozoa) %>%    
+  left_join(preds) %>%
+  pivot_longer(cols = starts_with("broad"), names_to = "habitat", 
+               values_to = "number") %>%
   glimpse()
 
 # Set predictor variables ----

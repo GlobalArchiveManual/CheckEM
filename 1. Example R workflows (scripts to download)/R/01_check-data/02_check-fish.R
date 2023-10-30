@@ -17,9 +17,9 @@ library(terra)
 # 5. Complete and tidy datasets, run data checks
 # 6. Save datasets
 
-# Set Study Name ----
-# Change this to suit your study name. This will also be the prefix on your final saved files.
-study <- "example-bruv-workflow"    
+# Set study name ----
+# Change this to suit your name name. This will also be the prefix on your final saved files.
+name <- "example-bruv-workflow"    
 
 # New version of 'ga.read.files_em.csv
 ga.read.files_em.csv <- function(flnm) {
@@ -42,7 +42,7 @@ metadata <- list.files(path = "1. Example R workflows (scripts to download)/data
 
 # Only need to run this if you don't have habitat data!
 # write.csv(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-#                                   study, "_Metadata.csv"), row.names = F)
+#                                   name, "_Metadata.csv"), row.names = F)
 
 # 2. Extract fishing status ----
 marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/marine-parks-all.shp")  %>% 
@@ -164,15 +164,15 @@ expanded.length <- complete.length.number %>%
 # 6. Save datasets ----
 write.csv(complete.maxn, 
           file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                       study, "_complete.maxn.csv"), 
+                       name, "_Complete-maxn.csv"), 
           row.names = FALSE)
 
 write.csv(complete.length.number, 
           file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                       study, "_complete.length.csv"), 
+                       name, "_Complete-length.csv"), 
           row.names = FALSE)
 
 write.csv(expanded.length, 
           file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                       study, "_expanded.length.csv"), 
+                       name, "_Expanded-length.csv"), 
           row.names = FALSE)

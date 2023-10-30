@@ -38,16 +38,11 @@ names(preds)[1] <- "mbdepth"
 # Save file for use later - too large so ignored from git
 saveRDS(preds, 
         file = paste0("1. Example R workflows (scripts to download)/data/spatial/rasters/", 
-                      name, "_bathymetry-derivatives.rds"))
+                      name, "_Bathymetry_derivatives.rds"))
 
 # Load metadata ----
 metadata <- read.csv(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
                             name, "_Metadata.csv")) %>%
-  glimpse()
-
-# Load habitat data and join with metadata ----
-metadata <- read.csv(paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                name, "_Metadata.csv")) %>%
   glimpse()
 
 # Transform the habitat to a SpatVector ----
@@ -57,7 +52,7 @@ plot(preds[[1]])
 plot(metadata.vect, add = T)
 
 # Run the extraction process ----
-tidy.metadata_t   <- as.data.frame(habitat.vect, geom = "XY") %>%                                                     # Lazy way of getting WGS84 lat longs back
+tidy.metadata_t   <- as.data.frame(metadata.vect, geom = "XY") %>%                                                     # Lazy way of getting WGS84 lat longs back
   left_join(metadata)
 metadata.bathy.derivatives   <- cbind(tidy.metadata_t, 
                                      terra::extract(preds, metadata.vect)) %>%   # Extract bathymetry derivatives for modelling
@@ -66,4 +61,4 @@ metadata.bathy.derivatives   <- cbind(tidy.metadata_t,
   glimpse()
 
 # Save the output ----
-saveRDS(metadata.bathy.derivatives, paste0("1. Example R workflows (scripts to download)/data/tidy/", name, "_habitat-bathymetry.rds"))
+saveRDS(metadata.bathy.derivatives, paste0("1. Example R workflows (scripts to download)/data/tidy/", name, "_Metadata-bathymetry-derivatives.rds"))

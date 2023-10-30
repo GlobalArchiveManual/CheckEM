@@ -37,8 +37,8 @@ library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
 
-# Study name 
-study <- "example-bruv-workflow"
+# Set study name 
+name <- "example-bruv-workflow"
 
 ### 1. Import data and run basic error reports ----
 # New version of 'ga.read.files_em.csv
@@ -62,7 +62,7 @@ metadata <- list.files(path = "1. Example R workflows (scripts to download)/data
   glimpse()                                                                   # Preview the data
 
 write.csv(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                  study, "_Metadata.csv"), row.names = F)
+                                  name, "_Metadata.csv"), row.names = F)
 
 # Read in the raw habitat data
 ga.read.files_tm.txt <- function(dir, sample) {
@@ -215,20 +215,20 @@ gg.relief
 # DIRECTORIES ARE ALL WRONG FOR SAVING OUT !!!!
 
 # Save the plots to refer to later
-# ggsave(paste(plot.dir, paste(study, "broad.habitat.png", sep = "."), sep = "/"),
+# ggsave(paste(plot.dir, paste(name, "broad.habitat.png", sep = "."), sep = "/"),
 #        gg.broad.hab,dpi = 600,width = 6.0, height = 3.0)
 # 
-# ggsave(paste(plot.dir, paste(study, "detailed.habitat.png", sep = "."), sep ="/"),
+# ggsave(paste(plot.dir, paste(name, "detailed.habitat.png", sep = "."), sep ="/"),
 #        gg.detailed.hab,dpi = 600,width=8.0, height = 6.0)
 # 
-# ggsave(paste(plot.dir, paste(study, "relief.png", sep = "."), sep = "/"),
+# ggsave(paste(plot.dir, paste(name, "relief.png", sep = "."), sep = "/"),
 #        gg.relief,dpi = 600,width = 6.0, height = 3.0)
 
 ### 6. Export tidy datasets to a .csv format suitable for use in modelling and statistical testing ----
 # Export point annotations
 write.csv(habitat.broad.points,file =
             paste("1. Example R workflows (scripts to download)/data/tidy/", 
-                  paste(study,"random-points_broad.habitat.csv", sep = "_"),
+                  paste(name,"Habitat.csv", sep = "_"),
                   sep = "/"), row.names = FALSE)
 
 ### 7. Spatially visualise the data ----
