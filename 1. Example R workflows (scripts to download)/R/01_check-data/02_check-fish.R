@@ -163,16 +163,16 @@ expanded.length <- complete.length.number %>%
 
 # 6. Save datasets ----
 write.csv(complete.maxn, 
-          file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+          file = paste0("1. Example R workflows (scripts to download)/data/staging/",
                        name, "_Complete-maxn.csv"), 
           row.names = FALSE)
 
 write.csv(complete.length.number, 
-          file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+          file = paste0("1. Example R workflows (scripts to download)/data/staging/",
                        name, "_Complete-length.csv"), 
           row.names = FALSE)
 
 write.csv(expanded.length, 
-          file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+          file = paste0("1. Example R workflows (scripts to download)/data/staging/",
                        name, "_Expanded-length.csv"), 
           row.names = FALSE)

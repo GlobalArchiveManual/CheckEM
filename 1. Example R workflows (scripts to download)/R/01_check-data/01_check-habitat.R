@@ -16,7 +16,7 @@
 # 6. Export tidy datasets to a .csv format suitable for use in modelling and statistical testing
 # 7. Visualise the data spatially
 
-# Please forward any updates and improvements to tim.langlois@uwa.edu.au & claude.spencer@uwa.edu.au or raise an issue in the "forward-facing-benthic-composition-annotation" GitHub repository
+# Please forward any feedback and improvements to claude.spencer@uwa.edu.au or raise an issue in the "forward-facing-benthic-composition-annotation" GitHub repository
 
 # Clear memory
 rm(list = ls())
@@ -65,7 +65,7 @@ write.csv(metadata, file = paste0("1. Example R workflows (scripts to download)/
                                   name, "_Metadata.csv"), row.names = F)
 
 # Read in the raw habitat data
-ga.read.files_tm.txt <- function(dir, sample) {
+read_tm <- function(dir, sample) {
   if (sample %in% "opcode") {
     list.files(path = dir,    
                recursive = F,
@@ -74,7 +74,7 @@ ga.read.files_tm.txt <- function(dir, sample) {
       purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, 
                              colClasses = "character", na.strings = "")) %>%
       purrr::list_rbind() %>%
-      dplyr::mutate(id = 1:nrow(.)) %>%
+      # dplyr::mutate(id = 1:nrow(.)) %>%
       ga.clean.names() %>%
       dplyr::rename(sample = opcode) %>%
       glimpse()
@@ -88,7 +88,7 @@ ga.read.files_tm.txt <- function(dir, sample) {
       purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, 
                              colClasses = "character", na.strings = "")) %>%
       purrr::list_rbind() %>%
-      dplyr::mutate(id = 1:nrow(.)) %>%
+      # dplyr::mutate(id = 1:nrow(.)) %>%
       ga.clean.names() %>%
       dplyr::rename(sample = period) %>%
       glimpse()
@@ -98,32 +98,57 @@ ga.read.files_tm.txt <- function(dir, sample) {
     stop("Sample must be one of: c('opcode', 'period')")
   }}
 
-points <- ga.read.files_tm.txt("1. Example R workflows (scripts to download)/data/raw/",
+points <- read_tm("1. Example R workflows (scripts to download)/data/raw/",
                                sample = "opcode")
 
 habitat <- points %>%
   dplyr::filter(relief_annotated %in% "no") %>%
-  dplyr::select(campaignid, sample, id,                                         # Should I be keeping in relief_annotated?
+  dplyr::select(campaignid, sample,                                         # Should I be keeping in relief_annotated?
                 starts_with("level"), scientific, caab_code) %>%
   glimpse()
 
 relief <- points %>%
   dplyr::filter(relief_annotated %in% "yes") %>%
-  dplyr::select(campaignid, sample, id,                                         # Should I be keeping in relief_annotated?
+  dplyr::select(campaignid, sample,                                         # Should I be keeping in relief_annotated?
                 starts_with("level"), scientific, caab_code) %>%
   glimpse()
 
 # Check to see if you have samples with points extra or missing points annotated
-num.annotations.habitat <- habitat %>%
-  group_by(campaignid, sample) %>%
-  summarise(points.annotated = n())                                             
+# Set the number of points per image
+num.points <- 20
 
-num.annotations.relief <- relief %>%
+wrong.points.habitat <- habitat %>%
   group_by(campaignid, sample) %>%
-  summarise(points.annotated = n()) 
+  summarise(points.annotated = n()) %>%
+  left_join(metadata) %>%
+  dplyr::mutate(expected = case_when(successful.habitat.forward %in% "Yes" &
+                                       successful.habitat.backward %in% "Yes" ~ num.points * 2,
+                                     successful.habitat.forward %in% "Yes" &
+                                       successful.habitat.backward %in% "No" ~ num.points * 1,
+                                     successful.habitat.forward %in% "No" &
+                                       successful.habitat.backward %in% "Yes" ~ num.points * 1,
+                                     successful.habitat.forward %in% "No" &
+                                       successful.habitat.backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::filter(!points.annotated == expected) %>%
+  glimpse()
+
+wrong.points.relief <- relief %>%
+  group_by(campaignid, sample) %>%
+  summarise(points.annotated = n()) %>%
+  left_join(metadata) %>%
+  dplyr::mutate(expected = case_when(successful.habitat.forward %in% "Yes" &
+                                       successful.habitat.backward %in% "Yes" ~ num.points * 2,
+                                     successful.habitat.forward %in% "Yes" &
+                                       successful.habitat.backward %in% "No" ~ num.points * 1,
+                                     successful.habitat.forward %in% "No" &
+                                       successful.habitat.backward %in% "Yes" ~ num.points * 1,
+                                     successful.habitat.forward %in% "No" &
+                                       successful.habitat.backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::filter(!points.annotated == expected) %>%
+  glimpse()
+
 
 # If you have samples with missing points, you need to rectify this in the original .TMObs file!
-
 habitat.missing.metadata <- anti_join(habitat, metadata, by = c("campaignid", "sample")) %>%
   glimpse()
 
@@ -136,14 +161,14 @@ metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "s
 # We strongly encourage you to fix these errors at the source (i.e. TMObs)
 # Now check through the files in your "Errors to check" folder and make corrections to .TMObs / generic files and then re-run this script
 
-### 3. Tidy data into broad and detailed point-level and percent cover dataframes ----
-# Create broad point annotations
+##### REPLACE THIS BIT WITH RDS STORED IN PACKAGE
 schema <- read_csv("1. Example R workflows (scripts to download)/data/raw/benthic.annotation.schema.forward.facing.20230714.135113.csv",
                    col_types = "c", na = "") %>%
   ga.clean.names() %>%
   dplyr::select(-c(parent_caab, qualifiers)) %>%
   glimpse()
 
+### 3. Tidy the final data into organised dataframes and save ----
 tidy.habitat <- habitat %>%
   dplyr::mutate(number = 1) %>%                                                 # Add a count column to summarise the number of points
   left_join(schema) %>%
@@ -154,7 +179,10 @@ tidy.habitat <- habitat %>%
   ungroup() %>%                                                                 # Ungroup
   # ga.clean.names() %>%                                                          # Clean names using GlobalArchive function
   dplyr::select(campaignid, sample, level_1, everything()) %>%
-  glimpse()                                                                     # Preview the data                                                                    # Preview the data
+  glimpse()                                                      # Preview the data
+
+write.csv(tidy.habitat, file = paste0("1. Example R workflows (scripts to download)/data/staging/",
+                                     name, "_Habitat.csv"), row.names = F)
 
 # Create relief
 tidy.relief <- relief %>%
@@ -165,133 +193,5 @@ tidy.relief <- relief %>%
   ungroup() %>%                                                                 # Ungroup
   glimpse()                                                                     # Preview the data
 
-### 4. Tidy the final data into organised dataframes ----
-
-habitat.broad.points <- metadata %>%
-  left_join(broad.points, by = c("campaignid", "sample")) %>% # Join metadata with habitat data
-  left_join(relief.grid) %>% # And relief
-  glimpse()
-
-### 5. Inspect for tidy data for any errors ----
-# Typical errors found could include samples where the wrong class has been assigned (ie. 20 point of octocoral instead of 20 points of sand)
-# Or high cover of uncommon or rare classes
-
-# Transform the data in a format suitable for use in ggplot 
-# Broad habitat
-broad.hab.plot <- habitat.broad.points %>%
-  pivot_longer(cols = starts_with("broad"), 
-               names_to = "biota", values_to = "num.points") %>%                # Pivots dataframes into long format to plot
-  dplyr::mutate(longitude = as.numeric(longitude),
-                latitude = as.numeric(latitude))
-
-# Broad relief
-broad.rel.plot <- relief %>%
-  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%                              # Remove Open water and Unknown entries from broad
-  dplyr::mutate(relief.rank = as.numeric(level_5)) %>%
-  dplyr::select(campaignid, sample, relief.rank) %>%
-  dplyr::group_by(campaignid, sample, relief.rank) %>%
-  dplyr::mutate(count = 1) %>%
-  summarise(num.points = sum(count)) %>%
-  ungroup() %>%
-  glimpse()
-  
-# Plot and visualise the broad habitat dataset
-gg.broad.hab <- ggplot() +
-  geom_quasirandom(data = broad.hab.plot,                                       # Create a dotplot - each point represents a sample
-                   aes(x = num.points, y = biota), groupOnX = F, method = "quasirandom",
-                   alpha = 0.25, size = 1.8, width = 0.2) +
-  labs(x = "Number of points", y = "") +
-  theme_classic()
-gg.broad.hab
-
-# Plot and visualise the relief dataset
-gg.relief <- ggplot() +
-  geom_quasirandom(data = broad.rel.plot,                                       # Create a dotplot - each point represents a sample
-                   aes(x = num.points, y = relief.rank), 
-                   groupOnX = F, method = "quasirandom",
-                   alpha = 0.25, size = 1.8, width = 0.2) +
-  labs(x = "Number of points", y = "Relief (0-5)") + 
-  theme_classic()
-gg.relief
-
-# DIRECTORIES ARE ALL WRONG FOR SAVING OUT !!!!
-
-# Save the plots to refer to later
-# ggsave(paste(plot.dir, paste(name, "broad.habitat.png", sep = "."), sep = "/"),
-#        gg.broad.hab,dpi = 600,width = 6.0, height = 3.0)
-# 
-# ggsave(paste(plot.dir, paste(name, "detailed.habitat.png", sep = "."), sep ="/"),
-#        gg.detailed.hab,dpi = 600,width=8.0, height = 6.0)
-# 
-# ggsave(paste(plot.dir, paste(name, "relief.png", sep = "."), sep = "/"),
-#        gg.relief,dpi = 600,width = 6.0, height = 3.0)
-
-### 6. Export tidy datasets to a .csv format suitable for use in modelling and statistical testing ----
-# Export point annotations
-write.csv(habitat.broad.points,file =
-            paste("1. Example R workflows (scripts to download)/data/tidy/", 
-                  paste(name,"Habitat.csv", sep = "_"),
-                  sep = "/"), row.names = FALSE)
-
-### 7. Spatially visualise the data ----
-
-# This plot uses spatial pie charts to visualise the proportion of habitat classes in each sample
-# The plot can be scrolled through and zoomed, and has 2 choices of base layer imagery
-
-# Create a color palette to plot the scatterpies with using the 'RColorbrewer' palettes
-cols <- colorRampPalette(brewer.pal(12, "Paired"))(length(habitat.broad.points[grep("broad", names(habitat.broad.points))])) # Expand the palette to the length of your unique habitat classes
-
-min.lon <- min(as.numeric(habitat.broad.points$longitude))
-min.lat <- min(as.numeric(habitat.broad.points$latitude))
-max.lon <- max(as.numeric(habitat.broad.points$longitude))
-max.lat <- max(as.numeric(habitat.broad.points$latitude))
-
-# Create the plot
-pie.chart <- leaflet() %>%                                                      # Create a leaflet plot
-  addTiles(group = "Open Street Map") %>%                                                                # Add the Open Street Map base layer
-  addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%            # Add ESRI satellite imagery as a base layer
-  addLayersControl(baseGroups = c("World Imagery", "Open Street Map"), 
-                   options = layersControlOptions(collapsed = FALSE)) %>%       # Add controls to switch between layers
-  addMinicharts(habitat.broad.points$longitude, habitat.broad.points$latitude,  # Add a spatial minichart using spatial information from the metadata
-                type = "pie",                                                   # Make it a spatial pie chart
-                colorPalette = cols,                                            # Color using the RColorbrewer palette
-                chartdata = habitat.broad.points[grep("broad", names(habitat.broad.points))], # Select only columns starting with 'broad'
-                width = 20, transitionTime = 0) %>%                                 # Set the size and transition time of the points
-  setView(mean(as.numeric(habitat.broad.points$longitude)), 
-          mean(as.numeric(habitat.broad.points$latitude)), zoom = 12)
-pie.chart                                                                       # Display the plot
-
-# This plot uses spatial bubble plots to frequency of occurrence of each habitat class
-# The plot can be scrolled through and zoomed, and has 2 choices of base layer imagery
-
-# Change the class below for each habitat class
-hab.name <- 'broad.substrate'
-
-# Filter the data for plotting
-overzero <-  broad.hab.plot %>%                                                 # Any sample with a value greater than zero
-  filter(biota %in% hab.name & num.points > 0) 
-
-equalzero <- broad.hab.plot %>%                                                 # Any sample with a value equal to zero
-  filter(biota %in% hab.name & num.points == 0)
-
-# Create the plot
-bubble.plot <- leaflet(data = broad.hab.plot) %>%                               # Create a leaflet plot
-  addTiles() %>%                                                                # Add the Open Street Map base layer
-  addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%            # Add ESRI satellite imagery as a base layer
-  addLayersControl(baseGroups = c("Open Street Map", "World Imagery"), 
-                   options = layersControlOptions(collapsed = FALSE))           # Add controls to switch between layers 
-
-if (nrow(overzero)) {                                                           # Add spatial bubble plots if the data is greater than zero
-  bubble.plot <- bubble.plot %>%
-    addCircleMarkers(data = overzero, lat = ~ latitude, lng = ~ longitude,      # Add the bubble plots
-      radius = ~ num.points + 3,                                                # Scale the size of the point by the data value
-      fillOpacity = 0.5, stroke = FALSE, label = ~ as.character(sample))        # Format the points and add labels for sample code
-}
-if (nrow(equalzero)) {                                                          # Add spatial bubble plots if the data is equal to zero
-  bubble.plot <- bubble.plot %>%
-    addCircleMarkers(data = equalzero, lat = ~ latitude, lng = ~ longitude,     # Add the bubble plots
-      radius = 2,                                                               # Scale the points at a constant size 
-      fillOpacity = 0.5, color = "white", stroke = FALSE, 
-      label = ~ as.character(sample))                                           # Format the points and add labels for sample code
-}
-bubble.plot                                                                     # Display the plot 
+write.csv(tidy.relief, file = paste0("1. Example R workflows (scripts to download)/data/staging/",
+                                      name, "_Relief.csv"), row.names = F)
