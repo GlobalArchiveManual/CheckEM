@@ -40,6 +40,9 @@ tidy.habitat <- metadata.bathy.derivatives %>%
                 latitude = as.numeric(latitude)) %>%
   glimpse()
 
+write.csv(tidy.habitat, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                                      name, "_Tidy-habitat.csv"), row.names = F)
+
 plot.relief <- read.csv(paste0("1. Example R workflows (scripts to download)/data/staging/",
                                name, "_Relief.csv")) %>%
   group_by(campaignid, sample, level_5) %>%
