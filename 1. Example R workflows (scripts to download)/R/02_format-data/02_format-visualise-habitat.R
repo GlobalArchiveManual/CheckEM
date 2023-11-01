@@ -1,14 +1,17 @@
 rm(list = ls())
 
 library(tidyverse)
+devtools::load_all("./")
 
 name <- "example-bruv-workflow"
 
 metadata.bathy.derivatives <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
-                                                       name, "_Metadata-bathymetry-derivatives.rds"))
+                                                       name, "_Metadata-bathymetry-derivatives.rds")) %>%
+  dplyr::mutate(sample = as.character(sample)) %>%
+  glimpse()
 
-habitat <- read.csv(paste0("1. Example R workflows (scripts to download)/data/staging/",
-                           name, "_Habitat.csv")) %>%
+habitat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/staging/",
+                           name, "_Habitat.rds")) %>%
   # USe your ecological brain pls when deciding habitat classes
   dplyr::mutate(habitat = case_when(level_2 %in% "Macroalgae" ~ level_2,
                                     level_2 %in% "Seagrasses" ~ level_2,
@@ -25,26 +28,27 @@ habitat <- read.csv(paste0("1. Example R workflows (scripts to download)/data/st
   ungroup() %>%
   glimpse()
 
-tidy.relief <- read.csv(paste0("1. Example R workflows (scripts to download)/data/staging/",
-                               name, "_Relief.csv")) %>%
+tidy.relief <- readRDS(paste0("1. Example R workflows (scripts to download)/data/staging/",
+                               name, "_Relief.rds")) %>%
+  uncount(number) %>%
   group_by(campaignid, sample) %>%
   dplyr::summarise(mean.relief = mean(as.numeric(level_5)),
-                   sd.relief = sd(as.numeric(level_5))) %>%
+                   sd.relief = sd(as.numeric(level_5), na.rm = T)) %>%
   ungroup() %>%
   glimpse()
 
 tidy.habitat <- metadata.bathy.derivatives %>%
   left_join(habitat) %>%
-  left_join(relief) %>%
+  left_join(tidy.relief) %>%
   dplyr::mutate(longitude = as.numeric(longitude),
                 latitude = as.numeric(latitude)) %>%
   glimpse()
 
-write.csv(tidy.habitat, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                      name, "_Tidy-habitat.csv"), row.names = F)
+saveRDS(tidy.habitat, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                                      name, "_Tidy-habitat.rds"))
 
-plot.relief <- read.csv(paste0("1. Example R workflows (scripts to download)/data/staging/",
-                               name, "_Relief.csv")) %>%
+plot.relief <- readRDS(paste0("1. Example R workflows (scripts to download)/data/staging/",
+                               name, "_Relief.rds")) %>%
   group_by(campaignid, sample, level_5) %>%
   dplyr::summarise(number = sum(number)) %>%
   ungroup() %>%
@@ -85,10 +89,10 @@ gg.relief
 
 ### 6. Export tidy datasets to a .csv format suitable for use in modelling and statistical testing ----
 # Export point annotations
-write.csv(tidy.habitat, file =
+saveRDS(tidy.habitat, file =
             paste("1. Example R workflows (scripts to download)/data/tidy/", 
-                  paste(name,"Habitat.csv", sep = "_"),
-                  sep = "/"), row.names = FALSE)
+                  paste(name,"Habitat.rds", sep = "_"),
+                  sep = "/"))
 
 ### 7. Spatially visualise the data ----
 

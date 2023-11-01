@@ -8,6 +8,7 @@ library(tidyverse)
 library(googlesheets4)
 library(sf)
 library(terra)
+devtools::load_all("./")
 
 # Table of contents
 # 1. Load and format metadata
@@ -162,17 +163,14 @@ expanded.length <- complete.length.number %>%
   glimpse()
 
 # 6. Save datasets ----
-write.csv(complete.maxn, 
+saveRDS(complete.maxn, 
           file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Complete-maxn.csv"), 
-          row.names = FALSE)
+                       name, "_Complete-maxn.rds"))
 
-write.csv(complete.length.number, 
+saveRDS(complete.length.number, 
           file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Complete-length.csv"), 
-          row.names = FALSE)
+                       name, "_Complete-length.rds"))
 
-write.csv(expanded.length, 
+saveRDS(expanded.length, 
           file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Expanded-length.csv"), 
-          row.names = FALSE)
+                       name, "_Expanded-length.rds"))

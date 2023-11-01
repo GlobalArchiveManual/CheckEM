@@ -26,6 +26,7 @@ rm(list = ls())
 library(devtools)
 # install_github("UWAMEGFisheries/GlobalArchive")                                 # Run this once to install the GlobalArchive package
 library(GlobalArchive)
+devtools::load_all("./")
 
 # To tidy data
 library(tidyverse)
@@ -61,8 +62,8 @@ metadata <- list.files(path = "1. Example R workflows (scripts to download)/data
                 successful.habitat.forward, successful.habitat.backward) %>%
   glimpse()                                                                   # Preview the data
 
-write.csv(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                  name, "_Metadata.csv"), row.names = F)
+saveRDS(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                                  name, "_Metadata.rds"))
 
 # Read in the raw habitat data
 read_tm <- function(dir, sample) {
@@ -181,8 +182,8 @@ tidy.habitat <- habitat %>%
   dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()                                                      # Preview the data
 
-write.csv(tidy.habitat, file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                                     name, "_Habitat.csv"), row.names = F)
+saveRDS(tidy.habitat, file = paste0("1. Example R workflows (scripts to download)/data/staging/",
+                                     name, "_Habitat.rds"))
 
 # Create relief
 tidy.relief <- relief %>%
@@ -193,5 +194,5 @@ tidy.relief <- relief %>%
   ungroup() %>%                                                                 # Ungroup
   glimpse()                                                                     # Preview the data
 
-write.csv(tidy.relief, file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                                      name, "_Relief.csv"), row.names = F)
+saveRDS(tidy.relief, file = paste0("1. Example R workflows (scripts to download)/data/staging/",
+                                      name, "_Relief.rds"))

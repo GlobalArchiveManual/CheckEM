@@ -41,8 +41,8 @@ saveRDS(preds,
                       name, "_Bathymetry_derivatives.rds"))
 
 # Load metadata ----
-metadata <- read.csv(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
-                            name, "_Metadata.csv")) %>%
+metadata <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
+                            name, "_Metadata.rds")) %>%
   glimpse()
 
 # Transform the habitat to a SpatVector ----
