@@ -313,8 +313,8 @@ function(input, output, session) {
       files <- input$folderdir%>%
         dplyr::filter(grepl("_Metadata|_metadata", name))
       
-      print("metadata files")
-      glimpse(files)
+      #print("metadata files")
+      #glimpse(files)
       
       metadata <- data.frame() 
       
@@ -347,11 +347,11 @@ function(input, output, session) {
         
       }
       
-      print("previewed semi tidied names")
+      # print("previewed semi tidied names")
       
       metadata <- metadata %>%
-        clean_names() %>%
-        glimpse()
+        clean_names() #%>%
+        #glimpse()
       
       # Rename any old names
       lookup <- c(depth_m = "depth",
@@ -362,13 +362,13 @@ function(input, output, session) {
       metadata <- metadata %>%
         dplyr::rename(dplyr::any_of(lookup))
       
-      message("uploaded metadata")
+      #message("uploaded metadata")
       
       metadata <- metadata %>%
         dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Metadata.csv" = "", "_metadata.csv" = ""))) %>%
         dplyr::mutate(latitude_dd = as.numeric(latitude_dd)) %>%
-        dplyr::mutate(longitude_dd = as.numeric(longitude_dd))%>%
-        glimpse()
+        dplyr::mutate(longitude_dd = as.numeric(longitude_dd)) #%>%
+        #glimpse()
       
       message("metadata names")
       print(names(metadata))
@@ -530,10 +530,10 @@ function(input, output, session) {
         dplyr::filter(is.na(tz_name))# %>%
         #glimpse()
       
-      message("timezones")
+      #message("timezones")
       timezones <- metadata %>%
         distinct(tz_name) %>%
-        glimpse() %>%
+        #glimpse() %>%
         dplyr::filter(!is.na(tz_name))
       
       dat <- data.frame()
@@ -615,7 +615,7 @@ function(input, output, session) {
       dplyr::filter(successful_count %in% c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(date_time = as.character(date_time)) %>% 
-      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, observer_count, observer_length, inclusion_probability, visibility_m)  %>%
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, observer_count, observer_length, inclusion_probability, visibility_m, dplyr::any_of(c("successful_habitat_forward", "successful_habitat_backward")))  %>%
       dplyr::distinct() %>%
       glimpse()
   })  
@@ -635,13 +635,13 @@ function(input, output, session) {
         nearest.region[i] <- marine.regions()$REGION[which.min(gDistance(metadata[i, ], marine.regions(), byid = TRUE))]}
       
       ## Check that it worked
-      message("checking each sample nearest region")
+      #message("checking each sample nearest region")
       metadata.2 <- as.data.frame(nearest.region) %>%
         bind_cols(metadata()) %>%
         dplyr::rename(marine_region = nearest.region) %>%
-        dplyr::mutate(sample = as.character(sample)) %>%
+        dplyr::mutate(sample = as.character(sample)) #%>%
         #dplyr::select(!status)
-        glimpse()
+        #glimpse()
       
     } else {
       
@@ -680,23 +680,22 @@ function(input, output, session) {
 
     
     if(input$lifehistory %in% "aus"){
-      print("view metadata.marineparks for Australia")
+      #print("view metadata.marineparks for Australia")
       
       metadata.marineparks <- over(metadata, all_data$marineparks)  %>%
         dplyr::rename(zone = ZONE_TYPE) %>%
         tidyr::replace_na(list(status = "Fished")) %>%
-        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>% glimpse()
+        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) #%>% glimpse()
       
     } else {
       
-      print("view metadata.marineparks for Global")
+      #print("view metadata.marineparks for Global")
       sf_use_s2(FALSE)
       
       metadata <- metadata %>% st_as_sf() %>% glimpse()
       
       metadata.marineparks <- st_intersection(metadata %>% dplyr::select(-c(status)), all_data$world_marineparks) %>%
-        st_set_geometry(NULL) %>%
-        glimpse()
+        st_set_geometry(NULL) #%>% glimpse()
       
       metadata.marineparks <- full_join(metadata %>% dplyr::select(-c(status)), metadata.marineparks) %>%
         dplyr::select(zone, status)
@@ -742,7 +741,7 @@ function(input, output, session) {
       
       
     }
-    print("final metadata")
+    message("final metadata")
     glimpse(metadata.regions)
     
     
@@ -752,8 +751,8 @@ function(input, output, session) {
   output$table.metadata <- renderDataTable({
     
     # Checks on metadata
-    print("checking metadata")
-    glimpse(metadata.regions())
+    #print("checking metadata")
+    #glimpse(metadata.regions())
     
     errors <- ""
     
@@ -1832,8 +1831,8 @@ function(input, output, session) {
         dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), time_start, time_end, has_end) %>%
         dplyr::distinct() %>%
         dplyr::mutate(period_time = round(time_end - time_start)) %>%
-        dplyr::filter(!period_time %in% c(input$period.limit)) %>%
-        glimpse()
+        dplyr::filter(!period_time %in% c(input$period.limit)) #%>%
+        #glimpse()
     }
   })
   
@@ -3196,11 +3195,11 @@ function(input, output, session) {
   
   length3dpoints.clean <- reactive({
     
-    print("view lengths")
-    glimpse(length3dpoints())
+    #print("view lengths")
+    #glimpse(length3dpoints())
     
-    print("view synonyms")
-    glimpse(synonyms())
+    #print("view synonyms")
+    #glimpse(synonyms())
     
     length3dpoints.clean <-  dplyr::left_join(length3dpoints() %>% dplyr::mutate(family = as.character(family), genus = as.character(genus), species = as.character(species)), synonyms()) %>% #, by = c("family", "genus", "species")
       dplyr::mutate(genus = ifelse(!genus_correct %in% c(NA), genus_correct, genus)) %>%
@@ -3534,31 +3533,31 @@ function(input, output, session) {
     maxn <- maxn.complete() %>%
       dplyr::group_by(campaignid, sample) %>%
       dplyr::summarise(total_abundance = sum(maxn)) %>%
-      dplyr::ungroup() %>%
-      dplyr::glimpse()
+      dplyr::ungroup() #%>%
+      #dplyr::glimpse()
     
     # looks fine
     
     # print("MAXN missing")
     maxn.missing <- length.v.3d() %>%
-      glimpse() %>%
+      #glimpse() %>%
       full_join(maxn) %>% 
       dplyr::mutate(type = "MaxN not measured") %>%
-      dplyr::mutate(total_abundance = total_abundance - total_measurements) %>%
-      dplyr::glimpse()
+      dplyr::mutate(total_abundance = total_abundance - total_measurements) #%>%
+      #dplyr::glimpse()
     
     # print("too many measurements")
     too.many.measurements <- maxn.missing %>%
       dplyr::filter(total_abundance < 0) %>%
       dplyr::mutate(extra = TRUE) %>%
-      dplyr::select(campaignid, sample, extra) %>%
-      dplyr::glimpse()
+      dplyr::select(campaignid, sample, extra) #%>%
+      #dplyr::glimpse()
     
     maxn.missing <- maxn.missing %>%
       dplyr::filter(total_abundance > 0) %>%
       full_join(metadata.regions()) %>%
-      dplyr::filter(successful_length %in% c("Yes", "Y", "y", "yes"))  %>%
-      dplyr::glimpse()
+      dplyr::filter(successful_length %in% c("Yes", "Y", "y", "yes"))  #%>%
+      #dplyr::glimpse()
       
     threedpoints <- threedpoints.abundance() %>%
       dplyr::mutate(type = "3D points")
@@ -6726,7 +6725,9 @@ function(input, output, session) {
       if(!is.null(input$folderdir)) {
 
         # Get all _Dot Point Measurements files in the folder
-        files <- input$folderdir%>%
+        message("habitat files detected")
+        
+        files <- input$folderdir %>%
           dplyr::filter(grepl("_Dot Point Measurements.txt", name)) #%>% glimpse()
 
         points <- data.frame()
@@ -6734,50 +6735,49 @@ function(input, output, session) {
         if (is.null(files)) return(NULL)
 
         for (i in seq_along(files$datapath)) {
-          tmp <- read_tsv(files$datapath[i], col_types = cols(.default = "c"), skip = 3)  %>%
-            dplyr::mutate(campaignid = files$name[i])
-
+          tmp <- read_tsv(files$datapath[i], col_types = cols(.default = "c"), skip = 3,
+                          na = "NA")
           points <- bind_rows(points, tmp) #%>% glimpse()
         }
 
-        # print("habitat points")
+        message("habitat points")
 
         points <- points %>%
           clean_names() %>%
-          dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Dot Point Measurements.txt" = ""))) %>%
-          tidyr::separate(campaignid, into = c("campaignid", "extra"), sep = "_(?!.*_)") %>%# the last _
-          dplyr::mutate(extra = tolower(extra)) %>%
-          dplyr::mutate(relief.annotation = case_when(stringr::str_detect(extra, "relief") ~ "Relief")) %>%
-
-          dplyr::mutate(direction = case_when(stringr::str_detect(extra, "forward") ~ "Forwards",
-                                              stringr::str_detect(extra, "backward") ~ "Backwards"))
-
-        # print("directions")
-        # print(unique(points$direction))
-
-        # If point method and opcode = sample e.g. BRUVs
+          glimpse()
+        
+        # If point method and samples are opcodes
         if(input$method == "point" & input$sample == "opcode") {
+          
           points <- points %>%
-            dplyr::rename(sample = opcode)
+            dplyr::mutate(sample = opcode)
         }
-
-        # If point method and opcode = period e.g. BOSS
+        
+        # If point method and samples are periods
         if(input$method == "point" & input$sample == "period") {
+          
           points <- points %>%
             dplyr::mutate(sample = period)
         }
-
+        
         # If transect method and sample = "opcode" + "period"
         if(input$method == "transect" & input$sample.t == "opcodeperiod") {
+          
           points <- points %>%
             dplyr::mutate(sample = paste(opcode, period, sep = "_"))
+          
         }
         # If transect method and sample = "period"
         if(input$method == "transect" & input$sample.t == "period") {
+          
           lookup <- c(sample = "period") # If people have used period or sample then this will work
+          
           points <- points %>%
-            dplyr::rename(dplyr::any_of(lookup))
+            dplyr::mutate(sample = period)
         }
+        
+        points[points == ''] <- NA # Make all empty cells NA
+        
       }
 
       # TODO change this to hab and add example data
@@ -6790,44 +6790,67 @@ function(input, output, session) {
       #     dplyr::mutate(sample = as.factor(sample)) %>%
       #     dplyr::mutate(campaignid = "2022-01_example-campaign_stereo-BRUVs") %>%
       #     as.data.frame()
-      #
-      #
       # }
 
       # TODO add an example dataset for DOVs
-
-      # TODO figure out what happens if they aren't called broad, morphology, type HECK
-      # level_2	level_3	level_4	level_5	scientific	qualifiers	CAAB_code
-
-      # NEED TO DO IT OFF TOTAL NUMBER OF COLUMNS TAKE 9 = LEVEL_2 ETC
-
-      # TODO NEED some example data from TM using the new schema :(
-
-
+      
       points <- points %>%
-        dplyr::mutate(sample = as.factor(sample)) %>%
-        dplyr::select(campaignid, sample, image.row, image.col, broad, morphology, type, relief, relief.annotation, direction) %>%
-        dplyr::semi_join(metadata())
+        dplyr::select(campaignid, sample, opcode, period, image_row, image_col, 
+                      level_2, level_3, level_4, level_5, scientific, qualifiers, caab_code,
+                      relief_annotated) %>%
+        dplyr::mutate(id = 1:nrow(.)) %>%
+        dplyr::glimpse()
     }
   })
 
 
   ## ► Preview habitat in dashboard ----
   output$table.habitat <- renderDataTable({
-    hab.points()
+    hab.points() %>% dplyr::select(-c(id, sample))
   })
-
+  
+  hab.annotations <- reactive({
+    hab.points() %>%
+      dplyr::filter(relief_annotated %in% "no") %>%
+      dplyr::select(campaignid, sample, id, starts_with("level"), scientific, caab_code)
+  })
+  
+  relief.annotations <- reactive({
+    hab.points() %>%
+      dplyr::filter(relief_annotated %in% "yes") %>%
+      dplyr::select(campaignid, sample, id, starts_with("level"), scientific, caab_code)
+  })
+  
   ## ► Samples without habitat - dataframe ----
   metadata.samples.without.hab <- reactive({
 
     metadata.samples <- metadata() %>%
-      distinct(campaignid, sample, successful_count, successful_length) #%>%
-    #mutate(sample = as.factor(sample))
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), 
+                    successful_count, successful_length, 
+                    successful_habitat_forward, successful_habitat_backward) %>%
+      dplyr::distinct()
 
-    points.samples <- hab.points() %>%
-      distinct(campaignid, sample)
+    points.samples <- hab.annotations() %>%
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), sample) %>%
+      dplyr::distinct()
 
-    missing.fish <- anti_join(metadata.samples, points.samples)
+    missing.hab <- anti_join(metadata.samples, points.samples)
+  })
+  
+  ## ► Samples without relief - dataframe ----
+  metadata.samples.without.relief <- reactive({
+    
+    metadata.samples <- metadata() %>%
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), 
+                    successful_count, successful_length, 
+                    successful_habitat_forward, successful_habitat_backward) %>%
+      dplyr::distinct()
+    
+    points.samples <- relief.annotations() %>%
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), sample) %>%
+      dplyr::distinct()
+    
+    missing.hab <- anti_join(metadata.samples, points.samples)
   })
 
   ## ► Samples without habitat - valueBox ----
@@ -6842,9 +6865,28 @@ function(input, output, session) {
       col <- "green"
     }
 
-    valueBox(width = 3,
+    valueBox(width = 2,
              total,
-             "Sample(s) without habitat",
+             "Sample(s) in metadata without biota annotations",
+             icon = icon("question"), color = col
+    )
+  })
+  
+  ## ► Samples without relief - valueBox ----
+  output$metadata.samples.without.relief <- renderValueBox({
+    
+    if (dim(metadata.samples.without.relief())[1] > 0) {
+      total <- nrow(metadata.samples.without.relief())
+      col <- "yellow"
+    }
+    else{
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2,
+             total,
+             "Sample(s) in metadata without relief annotations",
              icon = icon("question"), color = col
     )
   })
@@ -6857,6 +6899,15 @@ function(input, output, session) {
             renderDataTable(metadata.samples.without.hab(), rownames = FALSE,
                             options = list(paging = FALSE, searching = TRUE)))
           ))
+  
+  ## ► Samples without relief - onclick----
+  onclick('click.metadata.samples.without.relief',
+          showModal(modalDialog(
+            title = "Sample(s) without relief",
+            easyClose = TRUE,
+            renderDataTable(metadata.samples.without.relief(), rownames = FALSE,
+                            options = list(paging = FALSE, searching = TRUE)))
+          ))
 
   ## ► Habitat samples without metadata - dataframe ----
   habitat.samples.without.metadata <- reactive({
@@ -6865,7 +6916,7 @@ function(input, output, session) {
       mutate(sample = as.factor(sample)) %>%
       ungroup()
 
-    points.samples <- hab.points() %>%
+    points.samples <- hab.annotations() %>%
       distinct(campaignid, sample) %>%
       ungroup()
 
@@ -6886,7 +6937,7 @@ function(input, output, session) {
 
     valueBox(width = 2,
              total,
-             "Sample(s) in habitat file(s) missing metadata",
+             "Sample(s) in biota annotation file(s) missing metadata",
              icon = icon("exclamation-circle"), color = col
     )
   })
@@ -6898,11 +6949,53 @@ function(input, output, session) {
             easyClose = TRUE,
             renderDataTable(habitat.samples.without.metadata(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
           ))
+  
+  
+  ## ► Relief samples without metadata - dataframe ----
+  relief.samples.without.metadata <- reactive({
+    metadata.samples <- metadata() %>%
+      distinct(campaignid, sample) %>%
+      mutate(sample = as.factor(sample)) %>%
+      ungroup()
+    
+    points.samples <- relief.annotations() %>%
+      distinct(campaignid, sample) %>%
+      ungroup()
+    
+    missing.metadata <- anti_join(points.samples, metadata.samples)
+  })
+  
+  ## ► Relief samples without metadata - valueBox ----
+  output$relief.samples.without.metadata <- renderValueBox({
+    
+    if (dim(relief.samples.without.metadata())[1] > 0) {
+      total <- nrow(relief.samples.without.metadata())
+      col <- "red"
+      
+    } else {
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2,
+             total,
+             "Sample(s) in relief annotation file(s) missing metadata",
+             icon = icon("exclamation-circle"), color = col
+    )
+  })
+  
+  ## ► Samples without metadata - onclick ----
+  onclick('click.relief.samples.without.metadata',
+          showModal(modalDialog(
+            title = "Sample(s) in relief annotation file(s) missing metadata",
+            easyClose = TRUE,
+            renderDataTable(relief.samples.without.metadata(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          ))
 
   ## ► Habitat number of annotations - dataframe ----
   habitat.annotations.per.sample <- reactive({
 
-    points.samples <- hab.points() %>%
+    points.samples <- hab.annotations() %>%
       ungroup() %>%
       dplyr::group_by(campaignid, sample) %>%
       dplyr::summarise(number.of.annotations = n())
@@ -6913,8 +7006,14 @@ function(input, output, session) {
   habitat.wrong.annotations <- reactive({
 
     wrong <- habitat.annotations.per.sample() %>%
-      distinct(campaignid, sample, number.of.annotations) %>%
-      filter(!number.of.annotations %in% c(input$number.of.annotations))
+      dplyr::distinct(campaignid, sample, number.of.annotations) %>%
+      dplyr::left_join(metadata()) %>%
+      dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 2,
+                                         successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ input$number.of.annotations * 1,
+                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 1,
+                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
+      dplyr::filter(!number.of.annotations == expected) %>%
+      dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
   })
 
   ## ► Habitat wrong number of annotations - valueBox ----
@@ -6931,7 +7030,7 @@ function(input, output, session) {
 
     valueBox(width = 4,
              total,
-             paste("Samples without", input$number.of.annotations, "annotatons", sep = " "),
+             paste("Samples with incorrect number of biota annotations", sep = " "),
              icon = icon("question"), color = col
     )
   })
@@ -6944,144 +7043,247 @@ function(input, output, session) {
             renderDataTable(habitat.wrong.annotations(), rownames = FALSE,
                             options = list(paging = FALSE, searching = TRUE)))
           ))
+  
+  
+  ## ► Relief number of annotations - dataframe ----
+  relief.annotations.per.sample <- reactive({
+    
+    points.samples <- relief.annotations() %>%
+      ungroup() %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(number.of.annotations = n())
+    
+  })
+  
+  ## ► Habitat wrong number of annotations - dataframe ----
+  relief.wrong.annotations <- reactive({
+    
+    wrong <- relief.annotations.per.sample() %>%
+      dplyr::distinct(campaignid, sample, number.of.annotations) %>%
+      dplyr::left_join(metadata()) %>%
+      dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 2,
+                                         successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ input$number.of.annotations * 1,
+                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 1,
+                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
+      dplyr::filter(!number.of.annotations == expected) %>%
+      dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+  })
+  
+  ## ► relief wrong number of annotations - valueBox ----
+  output$relief.wrong.annotations <- renderValueBox({
+    
+    if (dim(relief.wrong.annotations())[1] > 0) {
+      total <- nrow(relief.wrong.annotations())
+      col <- "red"
+    }
+    else{
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 4,
+             total,
+             paste("Samples with incorrect number of relief annotations", sep = " "),
+             icon = icon("question"), color = col
+    )
+  })
+  
+  ## ► Habitat wrong number of annotations - onclick----
+  onclick('click.relief.wrong.annotations',
+          showModal(modalDialog(
+            title = "Number of relief annotations per sample",
+            easyClose = TRUE,
+            renderDataTable(relief.wrong.annotations(), rownames = FALSE,
+                            options = list(paging = FALSE, searching = TRUE)))
+          ))
 
 
   ## ► Relief - dataframe ----
-  habitat.relief <- reactive({
-
-    relief.grid <- hab.points() %>%
-      filter(relief.annotation %in% "Relief") %>%
-      filter(!broad %in% c("Unknown", "Open.Water", "Open Water")) %>%
-      filter(!relief%in% c("", NA)) %>%
-      dplyr::select(-c(broad,morphology,type,image.row,image.col, direction, relief.annotation)) %>%
-      mutate(relief.rank=ifelse(relief %in% c(".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.",
-                                              "0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."),0, # Create numerical relief ranks
-                                ifelse(relief %in% c(".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.", "1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope."), 1,
-                                       ifelse(relief %in% c(".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.", "2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope."), 2,
-                                              ifelse(relief %in% c(".3. Good relief structure with some overhangs. >45 substrate slope.", "3. Good relief structure with some overhangs. >45 substrate slope."), 3,
-                                                     ifelse(relief %in% c(".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.", "4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."), 4,
-                                                            ifelse(relief %in% c(".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.", "5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope."), 5, relief)))))))%>%
-      dplyr::select(-c(relief))%>%
-      mutate(relief.rank = as.numeric(relief.rank)) %>%
-      group_by(campaignid, sample) %>%
-      summarise(mean.relief = mean (relief.rank), sd.relief= sd (relief.rank))%>%
-      ungroup()
+  tidy.relief <- reactive({
+    
+    message("view tidy relief")
+    relief.annotations() %>%
+      # dplyr::left_join(schema) %>%
+      dplyr::filter(!level_2 %in% c("", "Unscorable", NA)) %>% # Remove Open water and Unknown entries from broad
+      dplyr::mutate(number = 1) %>%                   
+      dplyr::group_by(campaignid, sample, across(starts_with("level")), caab_code) %>%
+      dplyr::tally(number, name = "number") %>%                                                    
+      dplyr::ungroup()  %>%
+      dplyr::select(campaignid, sample, everything()) %>% #level_1, 
+      dplyr::left_join(metadata.regions())
+    
   })
 
   ## ► Habitat broad points - dataframe ----
-  habitat.broad.points <- reactive({
-
-    broad.points <- hab.points() %>%
-      # glimpse() %>%
-      dplyr::select(-c(morphology, type, relief, relief.annotation)) %>%
-      filter(!broad %in% c("", NA, "Unknown", "Open.Water", "Open Water")) %>%
-      mutate(broad = paste("broad", broad, sep = ".")) %>%
-      mutate(count = 1) %>%
-      group_by(campaignid, sample) %>%
-      spread(key = broad, value = count, fill = 0) %>%
-      dplyr::select(-c(image.row, image.col, direction)) %>%
-      group_by(campaignid, sample) %>%
-      summarise_all(list(sum)) %>%
-      # glimpse() %>%
-      mutate(total.points.annotated = rowSums(.[,3:(ncol(.))], na.rm = TRUE )) %>% # CHANGE TO 3 FOR CAMPAIGNID AND SAMPLE
-      clean_names() %>%
-      ungroup() %>%
-      # glimpse() %>%
-      left_join(metadata.regions()) %>%
-      left_join(habitat.relief()) %>%
-      dplyr::filter(successful_count %in% c("Yes", "y", "yes", "y"))
+  tidy.habitat <- reactive({
+    
+    message("view tidy habitat")
+    tidy.habitat <- hab.annotations() %>%
+      dplyr::mutate(number = 1) %>% # Add a count column to summarise the number of points
+      # dplyr::left_join(schema) %>%
+      dplyr::select(campaignid, sample, number, starts_with("level"), caab_code) %>% # family, genus, species, 
+      dplyr::filter(!level_2 %in% c("", "Unscorable", NA)) %>%  
+      dplyr::group_by(campaignid, sample, across(starts_with("level")), caab_code) %>% #family, genus, species, 
+      dplyr::tally(number, name = "number") %>%
+      dplyr::ungroup() %>%
+      dplyr::select(campaignid, sample, everything()) %>% #level_1, 
+      dplyr::left_join(metadata.regions())
 
   })
+  
+  ## ► Habitat - does not match schema - dataframe ----
+  hab.not.in.schema <- reactive({
+    
+    dat <- bind_rows(tidy.relief(), tidy.habitat()) %>%
+      dplyr::select(starts_with("level"), caab_code) %>%
+      dplyr::distinct()
+    
+    missing.in.schema <- anti_join(dat, schema)
 
-  ## ► Habitat broad percent cover - dataframe ----
-  habitat.broad.percent.cover <- reactive({
-
-    broad.percent.cover <- habitat.broad.points() %>%
-      group_by(campaignid, sample) %>%
-      mutate_at(vars(starts_with("broad")), list(~./total.points.annotated*100)) %>%
-      dplyr::select(-c(total.points.annotated)) %>%
-      ungroup() %>%
-      left_join(metadata.regions()) %>%
-      left_join(habitat.relief()) #%>% glimpse()
   })
+  
+  ## ► Habitat wrong number of annotations - valueBox ----
+  output$hab.not.in.schema <- renderValueBox({
+    
+    if (dim(hab.not.in.schema())[1] > 0) {
+      total <- nrow(hab.not.in.schema())
+      col <- "yellow"
+    }
+    else{
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 4,
+             total,
+             paste("Habitat annotation not in CATAMI schema", sep = " "),
+             icon = icon("question"), color = col
+    )
+  })
+  
+  ## ► Habitat wrong number of annotations - onclick----
+  onclick('click.hab.not.in.schema',
+          showModal(modalDialog(
+            title = "Habitat annotation not in CATAMI schema",
+            easyClose = TRUE,
+            renderDataTable(hab.not.in.schema(), rownames = FALSE,
+                            options = list(paging = FALSE, searching = TRUE)))
+          ))
+  
+  ## ► Habitat level dropdowns ----
+  output$habitat.levels <- renderUI({
+    
+    options <- tidy.habitat() %>%
+      dplyr::select(starts_with("level_")) 
+    
+    create_dropdown("habitat.levels", names(options), NULL)
+  })
+  
 
-  ## ► habitat plot - broad  ----
+  ## ► habitat plot - choose levels ----
   output$habitat.broad.plot <- renderPlot({
+    
+    dat <- tidy.habitat() %>%
+      dplyr::group_by(campaignid, sample, level_2) %>%
+      dplyr::tally(number, name = "number")
 
-    hab <- habitat.broad.points() %>%
-      pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points") #%>% glimpse()
-
-    ggplot(hab) +
-      geom_quasirandom(data = hab,
-                       aes(x = num.points, y = biota), groupOnX = F, method = "quasirandom",
+    ggplot(dat) +
+      geom_quasirandom(data = dat,
+                       aes(x = number, y = level_2), groupOnX = F, method = "quasirandom",
                        alpha = 0.25, size = 1.8, width = 0.2) +
       labs(x = "Number of points", y = "") +
-      theme_classic()
+      theme_classic()+ 
+      Theme1
   })
 
   ## ► habitat plot - relief  ----
   output$habitat.relief.plot <- renderPlot({
-
-    hab <- hab.points() %>%
-      filter(!relief%in% c("", NA)) %>%
-      dplyr::select(-c(broad,morphology,type,image.row,image.col)) %>%
-      mutate(relief.rank=ifelse(relief %in% c(".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope.",
-                                              "0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."),0, # Create numerical relief ranks
-                                ifelse(relief %in% c(".1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.", "1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope."), 1,
-                                       ifelse(relief %in% c(".2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.", "2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope."), 2,
-                                              ifelse(relief %in% c(".3. Good relief structure with some overhangs. >45 substrate slope.", "3. Good relief structure with some overhangs. >45 substrate slope."), 3,
-                                                     ifelse(relief %in% c(".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope.", "4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."), 4,
-                                                            ifelse(relief %in% c(".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope.", "5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope."), 5, relief)))))))%>%
-      dplyr::select(-c(relief))%>%
-      dplyr::filter(!relief.rank%in%"") %>% # Removes blank annotations (e.g. 'Open water')
-      mutate(relief.rank = as.numeric(relief.rank))%>%
-      dplyr::group_by(campaignid, sample, relief.rank) %>%
-      dplyr::summarise(num.points = n()) #%>% # Sums the relief scores by sample and relief rank
-    # glimpse()
-
-    ggplot(hab) +
-      geom_quasirandom(data = hab,
-                       aes(x = num.points, y = relief.rank), groupOnX = F, method = "quasirandom",
+    
+    dat <- tidy.relief() %>%
+      dplyr::group_by(campaignid, sample, level_5) %>%
+      dplyr::tally(number, name = "number") %>% 
+      glimpse()
+    
+    ggplot(dat) +
+      geom_quasirandom(data = dat,
+                       aes(x = number, y = level_5), groupOnX = F, method = "quasirandom",
                        alpha = 0.25, size = 1.8, width = 0.2) +
       labs(x = "Number of points", y = "Relief (0-5)") +
-      theme_classic()
+      theme_classic()+ 
+      Theme1
+  })
+  
+  ## ► habitat plot - depth  ----
+  output$habitat.depth.plot <- renderPlot({
+    
+    dat <- tidy.habitat() %>%
+      dplyr::group_by(campaignid, sample, level_2) %>%
+      dplyr::tally(number, name = "number") %>% 
+      dplyr::left_join(metadata()) %>%
+      tidyr::uncount(number) %>%
+      dplyr::mutate(depth_m = as.numeric(depth_m)) %>%
+      dplyr::filter(!is.na(depth_m)) %>%
+      glimpse() 
+    
+    ggplot(dat, aes(x = depth_m)) +
+      geom_histogram(color = "black", fill = "#3C8DBC", binwidth = input$depth.bins)+
+      facet_grid(level_2 ~ ., scales = "free_y") +
+      labs(x = "Depth (m)", y = "Count") +
+      theme_classic()+ 
+      Theme1
   })
 
 
-  ## ► Leaflet pies ----
-  output$hab.pies <- renderLeaflet({
-
-    hab <- habitat.broad.points() #%>% glimpse()
-
-    # Create a color palette to plot the scatterpies with using the 'RColorbrewer' palettes
-    # cols <- colorRampPalette(brewer.pal(12, "Paired"))(length(hab[grep("broad", names(hab))]))
-    cols <- colorRampPalette(brewer.pal(12, "Paired"))(ncol(hab) - 3)
-
-    hab <- left_join(hab, metadata())
-
-    # Create the plot
-    leaflet() %>%
-      addTiles() %>%
-      addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
-      addLayersControl(baseGroups = c("Open Street Map", "World Imagery"),
-                       options = layersControlOptions(collapsed = FALSE)) %>%
-      addMinicharts(hab$longitude_dd, hab$latitude_dd,
-                    type = "pie",
-                    colorPalette = cols,
-                    chartdata = hab[grep("broad", names(hab))],
-                    width = 20, transitionTime = 0)
-  })
+  # # ► Leaflet pies ----
+  
+  ## FIXME work out why pie charts are breaking the list
+  # output$hab.pies <- renderLeaflet({
+  # 
+  #   dat <- tidy.habitat() %>%
+  #     dplyr::group_by(campaignid, sample, level_2) %>%
+  #     dplyr::tally(number, name = "number") %>%
+  #     dplyr::ungroup()
+  # 
+  #   level_2s <- dat %>%
+  #     dplyr::mutate(level_2 = tolower(str_replace_all(level_2, " ", "_")))
+  # 
+  #   number <- base::length(unique(level_2s$level_2))
+  # 
+  #   message("number of hab colours")
+  #   print(number)
+  # 
+  #   colours <- brewer.pal(n = number, "Set1")
+  # 
+  #   level_2s <- unique(level_2s$level_2)
+  # 
+  #   hab <- dat %>%
+  #     tidyr::pivot_wider(names_from = level_2, values_from = number) %>%
+  #     dplyr::left_join(metadata()) %>%
+  #     clean_names() %>%
+  #     glimpse()
+  # 
+  #   # Create the plot
+  #   leaflet() %>%
+  #     addTiles() %>%
+  #     addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
+  #     addLayersControl(baseGroups = c("Open Street Map", "World Imagery"),
+  #                      options = layersControlOptions(collapsed = FALSE)) %>%
+  #     leaflet.minicharts::addMinicharts(hab$longitude_dd, hab$latitude_dd,
+  #                   type = "pie",
+  #                   colorPalette = colours,
+  #                   chartdata = hab[level_2s],
+  #                   width = 20,
+  #                   legend = TRUE,
+  #                   legendPosition = "topright")
+  # })
 
   ## ► Species dropdown ----
   output$hab.dropdown <- renderUI({
-    df <- habitat.broad.points() %>%
-      pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points")
 
-
-    options <- df %>%
-      dplyr::arrange(biota) %>%
-      distinct(biota) %>%
-      pull("biota")
+    options <- tidy.habitat() %>%
+      dplyr::arrange(level_2) %>%
+      distinct(level_2) %>%
+      pull("level_2")
 
     create_dropdown("hab.dropdown", options, NULL)
   })
@@ -7089,18 +7291,17 @@ function(input, output, session) {
   ## ► Leaflet bubble ----
   output$hab.bubble <- renderLeaflet({
 
-    hab <- habitat.broad.points() %>%
-      pivot_longer(cols = starts_with("broad"), names_to = "biota", values_to = "num.points")
-
-    hab <- left_join(hab, metadata())
+    hab <- tidy.habitat() %>%
+      dplyr::group_by(campaignid, sample, level_2) %>%
+      dplyr::tally(number, name = "number") %>% 
+      dplyr::left_join(metadata())
 
     # Filter the data for plotting
     overzero <-  hab %>% # Any sample with a value greater than zero
-      filter(biota %in% input$hab.dropdown & num.points > 0)
+      filter(level_2 %in% input$hab.dropdown & number > 0)
 
     equalzero <- hab %>% # Any sample with a value equal to zero
-      filter(biota %in% input$hab.dropdown & num.points == 0)
-
+      filter(level_2  %in% input$hab.dropdown & number == 0)
 
     bubble.plot <- leaflet(data = hab) %>%
       addTiles() %>%
@@ -7111,7 +7312,7 @@ function(input, output, session) {
     if (nrow(overzero)) {
       bubble.plot <- bubble.plot %>%
         addCircleMarkers(data = overzero, lat = ~ latitude_dd, lng = ~ longitude_dd,
-                         radius = ~(num.points/4) + 3,
+                         radius = ~(number/4) + 3,
                          fillOpacity = 0.5, stroke = FALSE, label = ~as.character(sample))
     }
     if (nrow(equalzero)) {
@@ -7918,7 +8119,7 @@ function(input, output, session) {
 
   output$schema.relief <- downloadHandler(
     filename = function() {
-      paste("benthic.relief.annotation.schema.forward.facing_", Sys.Date(),".txt", sep = "")
+      paste("benthic.relief_annotation.schema.forward.facing_", Sys.Date(),".txt", sep = "")
     },
     content = function(file) {
       write.table(all_data$schema.relief, file, row.names = FALSE, na = "", sep = "\t", quote = FALSE)

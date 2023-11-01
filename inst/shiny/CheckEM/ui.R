@@ -132,25 +132,25 @@ function(){
                            br(),
                            
                            # TODO turn this back on when I'm ready for habitat
-                           # radioButtons("hab", "Are you uploading habitat and/or relief?",
-                           #              c("Yes",
-                           #                "No"),
-                           #              selected = "No",
-                           #              inline = TRUE),
-                           # 
+                           radioButtons("hab", "Are you uploading habitat and/or relief?",
+                                        c("Yes",
+                                          "No"),
+                                        selected = "No",
+                                        inline = TRUE),
+
                            # shiny::conditionalPanel("input.hab == 'Yes'",
                            # 
                            #                         radioButtons("habdirection", "Which directions were annotated?",
                            #                                      c("Forwards only" = "forwards",
                            #                                        "Forwards and backwards" = "both"),
                            #                                      selected = "forwards",
-                           #                                      inline = TRUE),
+                           #                                      inline = TRUE)#,
                            # 
-                           #                         radioButtons("habreliefsep", "Was relief annotated separately?",
-                           #                                      c("No" = "no",
-                           #                                        "Yes" = "yes"),
-                           #                                      selected = "no",
-                           #                                      inline = TRUE)
+                           #                         # radioButtons("habreliefsep", "Was relief annotated separately?",
+                           #                         #              c("No" = "no",
+                           #                         #                "Yes" = "yes"),
+                           #                         #              selected = "no",
+                           #                         #              inline = TRUE)
                            #                         ),
                            
                            tags$div(tags$label("Select directory with sample metadata and EM exports", class="btn btn-primary",
@@ -223,7 +223,7 @@ function(){
                     tabPanel("Lengths", dataTableOutput("table.length")),
                     tabPanel("3D Points", dataTableOutput("table.3dpoints")),
                     tabPanel("Periods", dataTableOutput("table.periods")),
-                    tabPanel("Habitat", tableOutput("table.habitat"))
+                    tabPanel("Habitat", dataTableOutput("table.habitat"))
                   
                   )
       )),
@@ -569,34 +569,52 @@ function(){
       
       # Check habitat - point based data -----
       tabItem(tabName = "checkhab",
-              fluidRow(div(id="click.metadata.samples.without.hab",
-                           valueBoxOutput("metadata.samples.without.hab")),
-                       
-                       div(id="click.habitat.samples.without.metadata",
-                           valueBoxOutput("habitat.samples.without.metadata")),
-                       
-                       # div(id="click.habitat.annotations.per.sample",
-                       #     valueBoxOutput("habitat.annotations.per.sample"))
-                       box(width = 4, title = "Enter your correct number of annotations per sample:", status = "primary", solidHeader = TRUE,
-                           numericInput("number.of.annotations", NULL, 20, min = 1, max = 1000)),
+              fluidRow(
+                div(width = 3, id="click.metadata.samples.without.hab",
+                    valueBoxOutput(width = 3, "metadata.samples.without.hab")),
+                
+                div(width = 3, id="click.metadata.samples.without.relief",
+                    valueBoxOutput(width = 3, "metadata.samples.without.relief")),
+                
+                div(width = 3, id="click.habitat.samples.without.metadata",
+                    valueBoxOutput(width = 3, "habitat.samples.without.metadata")),
+                
+                div(width = 3, id="click.relief.samples.without.metadata",
+                    valueBoxOutput(width = 3, "relief.samples.without.metadata")),
+                # div(id="click.habitat.annotations.per.sample",
+                #     valueBoxOutput("habitat.annotations.per.sample"))
+                box(width = 3, title = "Enter the correct number of annotations per image:", status = "primary", solidHeader = TRUE,
+                    numericInput("number.of.annotations", NULL, 20, min = 1, max = 1000)),
+                
+                div(width = 3, id="click.habitat.wrong.annotations",
+                    valueBoxOutput(width = 3, "habitat.wrong.annotations")),
+                
+                div(width = 3, id="click.relief.wrong.annotations",
+                    valueBoxOutput(width = 3, "relief.wrong.annotations")),
+                
+                div(width = 3, id="click.hab.not.in.schema",
+                    valueBoxOutput(width = 3, "hab.not.in.schema")),
+                
+                box(width = 12, title = "Broad habitat", status = "primary",
+                    htmlOutput("habitat.levels", multiple = FALSE),
+                    plotOutput("habitat.broad.plot", height = 250)),
+                
+                box(width = 12, title = "Relief", status = "primary",
+                    plotOutput("habitat.relief.plot", height = 250)),
+                
+                box(width = 12, title = "Depth distributions", status = "primary",
+                    numericInput("depth.bins", "Set bin width for histogram", 5, min = 1, max = 50),
+                    plotOutput("habitat.depth.plot", height = 750)),
 
-                       div(id="click.habitat.wrong.annotations",
-                           valueBoxOutput("habitat.wrong.annotations")),
+                # FIXME figure out why they are breaking
+                # box(width = 12, title = "Habitat pie chart", status = "primary",
+                #     leafletOutput("hab.pies", height = 800)),
+                
+                box(width = 12,title = "Choose habitat type to plot below:", status = "primary", solidHeader = TRUE,
+                    htmlOutput("hab.dropdown", multiple = FALSE)),
 
-                       box(width = 12, title = "Broad habitat", status = "primary",
-                           plotOutput("habitat.broad.plot", height = 250)),
-
-                       box(width = 12, title = "Relief", status = "primary",
-                           plotOutput("habitat.relief.plot", height = 250)),
-
-                       box(width = 12, title = "Habitat pie chart", status = "primary",
-                           leafletOutput("hab.pies", height = 800)),
-
-                       box(width = 12,title = "Choose habitat type to plot below:", status = "primary", solidHeader = TRUE,
-                           htmlOutput("hab.dropdown",multiple=TRUE)),
-
-                       box(width = 12, title = "Habitat bubble plot", status = "primary",
-                           leafletOutput("hab.bubble", height = 800))
+                box(width = 12, title = "Habitat bubble plot", status = "primary",
+                    leafletOutput("hab.bubble", height = 800))
                        )
       ),
       

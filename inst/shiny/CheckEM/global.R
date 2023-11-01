@@ -65,6 +65,12 @@ library(CheckEM)
 # Load data
 load("data/all_data.Rdata")
 
+# TODO update once I have moved the LH workflow into CHECKEM
+schema <- read_csv("data/benthic.annotation.schema.forward.facing.20230714.135113.csv",
+                   col_types = "c", na = "") %>%
+  ga.clean.names() %>%
+  dplyr::select(-c(parent_caab, qualifiers))
+
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
                                            tags$img(src='https://www.nespmarine.edu.au/sites/default/themes/nespmarine/logo.png',height='60',width='200'))
