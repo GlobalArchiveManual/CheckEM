@@ -37,6 +37,7 @@ library(ggbeeswarm)
 library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
+library(todor)
 
 # Set study name 
 name <- "example-bruv-workflow"
@@ -47,7 +48,7 @@ name <- "example-bruv-workflow"
 ga.read.files_em.csv <- function(flnm) {
   read_csv(flnm, col_types = cols(.default = "c"))%>%
     dplyr::mutate(campaignid = basename(flnm)) %>%
-    ga.clean.names() %>%
+    clean_names() %>%
     dplyr::mutate(campaignid = str_replace_all(campaignid, c("_Metadata.csv" = "")))
 }
 
@@ -57,9 +58,9 @@ metadata <- list.files(path = "1. Example R workflows (scripts to download)/data
                        pattern = "_Metadata.csv",
                        full.names = T) %>%
   purrr::map_df(~ga.read.files_em.csv(.)) %>% # combine into dataframe
-  dplyr::select(campaignid, sample, latitude, longitude, date.time, location,  # Review columns to align with GlobalArchive - plus make metadata match
-                site, depth, observer.count, observer.length, successful.count, successful.length, 
-                successful.habitat.forward, successful.habitat.backward) %>%
+  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location,  # Review columns to align with GlobalArchive - plus make metadata match
+                site, depth, successful_count, successful_length, 
+                successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()                                                                   # Preview the data
 
 saveRDS(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
@@ -122,14 +123,14 @@ wrong.points.habitat <- habitat %>%
   group_by(campaignid, sample) %>%
   summarise(points.annotated = n()) %>%
   left_join(metadata) %>%
-  dplyr::mutate(expected = case_when(successful.habitat.forward %in% "Yes" &
-                                       successful.habitat.backward %in% "Yes" ~ num.points * 2,
-                                     successful.habitat.forward %in% "Yes" &
-                                       successful.habitat.backward %in% "No" ~ num.points * 1,
-                                     successful.habitat.forward %in% "No" &
-                                       successful.habitat.backward %in% "Yes" ~ num.points * 1,
-                                     successful.habitat.forward %in% "No" &
-                                       successful.habitat.backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" &
+                                       successful_habitat_backward %in% "Yes" ~ num.points * 2,
+                                     successful_habitat_forward %in% "Yes" &
+                                       successful_habitat_backward %in% "No" ~ num.points * 1,
+                                     successful_habitat_forward %in% "No" &
+                                       successful_habitat_backward %in% "Yes" ~ num.points * 1,
+                                     successful_habitat_forward %in% "No" &
+                                       successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
   dplyr::filter(!points.annotated == expected) %>%
   glimpse()
 
@@ -137,14 +138,14 @@ wrong.points.relief <- relief %>%
   group_by(campaignid, sample) %>%
   summarise(points.annotated = n()) %>%
   left_join(metadata) %>%
-  dplyr::mutate(expected = case_when(successful.habitat.forward %in% "Yes" &
-                                       successful.habitat.backward %in% "Yes" ~ num.points * 2,
-                                     successful.habitat.forward %in% "Yes" &
-                                       successful.habitat.backward %in% "No" ~ num.points * 1,
-                                     successful.habitat.forward %in% "No" &
-                                       successful.habitat.backward %in% "Yes" ~ num.points * 1,
-                                     successful.habitat.forward %in% "No" &
-                                       successful.habitat.backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" &
+                                       successful_habitat_backward %in% "Yes" ~ num.points * 2,
+                                     successful_habitat_forward %in% "Yes" &
+                                       successful_habitat_backward %in% "No" ~ num.points * 1,
+                                     successful_habitat_forward %in% "No" &
+                                       successful_habitat_backward %in% "Yes" ~ num.points * 1,
+                                     successful_habitat_forward %in% "No" &
+                                       successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
   dplyr::filter(!points.annotated == expected) %>%
   glimpse()
 
@@ -162,7 +163,7 @@ metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "s
 # We strongly encourage you to fix these errors at the source (i.e. TMObs)
 # Now check through the files in your "Errors to check" folder and make corrections to .TMObs / generic files and then re-run this script
 
-##### REPLACE THIS BIT WITH RDS STORED IN PACKAGE
+# TODO replace schema with file loaded in package 
 schema <- read_csv("1. Example R workflows (scripts to download)/data/raw/benthic.annotation.schema.forward.facing.20230714.135113.csv",
                    col_types = "c", na = "") %>%
   ga.clean.names() %>%
