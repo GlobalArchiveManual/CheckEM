@@ -8,6 +8,7 @@ library(tidyverse)
 library(googlesheets4)
 library(sf)
 library(terra)
+devtools::load_all("./")
 
 # Table of contents
 # 1. Load and format metadata
@@ -21,28 +22,9 @@ library(terra)
 # Change this to suit your name name. This will also be the prefix on your final saved files.
 name <- "example-bruv-workflow"    
 
-# New version of 'ga.read.files_em.csv
-ga.read.files_em.csv <- function(flnm) {
-  read_csv(flnm, col_types = cols(.default = "c"))%>%
-    dplyr::mutate(campaignid = basename(flnm)) %>%
-    ga.clean.names() %>%
-    dplyr::mutate(campaignid = str_replace_all(campaignid, c("_Metadata.csv" = "")))
-}
-
-# 1. Load and format metadata ----
-metadata <- list.files(path = "1. Example R workflows (scripts to download)/data/raw/",      # This replaces ga.list.files
-                       recursive = T,
-                       pattern = "_Metadata.csv",
-                       full.names = T) %>%
-  purrr::map_df(~ga.read.files_em.csv(.)) %>% # combine into dataframe
-  dplyr::select(campaignid, sample, latitude, longitude, date.time, location,  # Review columns to align with GlobalArchive - plus make metadata match
-                site, depth, observer.count, observer.length, successful.count, successful.length, 
-                successful.habitat.forward, successful.habitat.backward) %>%
-  glimpse()
-
-# Only need to run this if you don't have habitat data!
-# write.csv(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-#                                   name, "_Metadata.csv"), row.names = F)
+# 1. Load metadata ----
+metadata <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                                name, "_Metadata.rds"))
 
 # 2. Extract fishing status ----
 marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/marine-parks-all.shp")  %>% 
@@ -50,7 +32,7 @@ marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spati
   st_transform(4326) %>%
   st_make_valid()
 
-metadata_sf <- st_as_sf(metadata, coords = c("longitude", "latitude"), 
+metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), 
                       crs = 4326)
 
 metadata <- metadata_sf %>%
@@ -58,9 +40,10 @@ metadata <- metadata_sf %>%
   bind_cols(st_coordinates(.)) %>%
   as.data.frame() %>%
   dplyr::select(-c(geometry)) %>%
-  dplyr::rename(longitude = X, latitude = Y) %>%
-  dplyr::mutate(status = if_else(ZoneName %in% c("National Park Zone", "Sanctuary Zone", "Marine National Park Zone"), 
+  dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+  dplyr::mutate(status = if_else(str_detect(ZoneName, "National|Sanctuary"), 
                                 "No-take", "Fished")) %>%
+  clean_names() %>%
   glimpse()
 
 # 3. Load MaxN data ----
@@ -162,17 +145,14 @@ expanded.length <- complete.length.number %>%
   glimpse()
 
 # 6. Save datasets ----
-write.csv(complete.maxn, 
+saveRDS(complete.maxn, 
           file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Complete-maxn.csv"), 
-          row.names = FALSE)
+                       name, "_Complete-maxn.rds"))
 
-write.csv(complete.length.number, 
+saveRDS(complete.length.number, 
           file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Complete-length.csv"), 
-          row.names = FALSE)
+                       name, "_Complete-length.rds"))
 
-write.csv(expanded.length, 
+saveRDS(expanded.length, 
           file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Expanded-length.csv"), 
-          row.names = FALSE)
+                       name, "_Expanded-length.rds"))
