@@ -595,9 +595,16 @@ function(){
                 div(width = 3, id="click.hab.not.in.schema",
                     valueBoxOutput(width = 3, "hab.not.in.schema")),
                 
-                box(width = 12, title = "Broad habitat", status = "primary",
-                    htmlOutput("habitat.levels", multiple = FALSE),
-                    plotOutput("habitat.broad.plot", height = 250)),
+                
+                
+                box(width = 12, title = "Choose levels to investigate habitat", status = "primary",
+                    htmlOutput("habitat.levels", multiple = FALSE)),
+                
+                uiOutput("broad.box"),
+                
+                # box(width = 12, title = "Broad habitat", status = "primary",
+                #     htmlOutput("habitat.levels", multiple = FALSE),
+                #     plotOutput("habitat.broad.plot")),
                 
                 box(width = 12, title = "Relief", status = "primary",
                     plotOutput("habitat.relief.plot", height = 250)),

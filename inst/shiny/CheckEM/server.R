@@ -7179,22 +7179,62 @@ function(input, output, session) {
     create_dropdown("habitat.levels", names(options), NULL)
   })
   
-
-  ## ► habitat plot - choose levels ----
-  output$habitat.broad.plot <- renderPlot({
+  # Habitat data for plot ----
+  habitat.plot.data <- reactive({
+    
+    req(input$habitat.levels)
+    
+    message("habitat level selected")
+    print(input$habitat.levels)
     
     dat <- tidy.habitat() %>%
-      dplyr::group_by(campaignid, sample, level_2) %>%
-      dplyr::tally(number, name = "number")
-
-    ggplot(dat) +
-      geom_quasirandom(data = dat,
-                       aes(x = number, y = level_2), groupOnX = F, method = "quasirandom",
-                       alpha = 0.25, size = 1.8, width = 0.2) +
-      labs(x = "Number of points", y = "") +
-      theme_classic()+ 
-      Theme1
+      dplyr::mutate(level_5 = paste(level_2, level_3, level_4, level_5, sep = ": ")) %>%
+      dplyr::mutate(level_4 = paste(level_2, level_3, level_4, sep = ": ")) %>%
+      dplyr::mutate(level_3 = paste(level_2, level_3, sep = ": ")) %>%
+      dplyr::select(campaignid, sample, starts_with(input$habitat.levels), number) %>%
+      dplyr::group_by(campaignid, sample, across(starts_with(input$habitat.levels))) %>%
+      dplyr::tally(number, name = "number") %>%
+      glimpse()
+    
+    names(dat)[3] = "levels"
+    
+    dat
+    
   })
+  
+  number.of.levels <- reactive({
+
+    base::length(base::unique(habitat.plot.data()$levels))
+    
+  })
+  
+  # ► habitat plot - choose levels ----
+  observe({
+    req(input$hab == "Yes" & !is.null(input$folderdir))
+
+    output$habitat.broad.plot <- renderPlot(
+      
+      # message("number of levels")
+      # print(number.of.levels())
+
+      ggplot(habitat.plot.data()) +
+        geom_quasirandom(data = habitat.plot.data(),
+                         aes(x = number, y = levels), groupOnX = F, method = "quasirandom",
+                         alpha = 0.25, size = 1.8, width = 0.2) +
+        labs(x = "Number of points", y = "") +
+        theme_classic()+
+        Theme1
+    , height = 25 * number.of.levels() + 10
+    )
+    
+    output$broad.box <- renderUI({
+      box(width = 12, title = "Broad habitat", status = "primary",
+          height = 25 * number.of.levels() + 70,
+          plotOutput("habitat.broad.plot"))
+    })
+    
+  })
+  
 
   ## ► habitat plot - relief  ----
   output$habitat.relief.plot <- renderPlot({
