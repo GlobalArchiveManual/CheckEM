@@ -1,0 +1,805 @@
+Dot Point Measurements
+
+Generated: Tuesday 16 November 2021 09:09:54
+
+Filename	Frame	Time (mins)	Image row	Image col	Date	Location	Site #	Transect #	Latitude	Longitude	Rugosity	Depth	Collector	Fishing status	Spare	Spare	BROAD	MORPHOLOGY	TYPE	FieldOfView	Relief	CODE			Radius %
+01.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+01.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+01.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+01.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+01.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+01.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.9
+01.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000903			46.9
+01.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+01.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+01.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+01.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000903			15.5
+01.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.5
+01.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+01.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.9
+01.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000903			46.9
+01.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+01.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+01.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			89.9
+01.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+01.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+02.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+02.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+02.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+02.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+02.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+02.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+02.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.9
+02.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+02.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+02.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+02.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+02.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.5
+02.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+02.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+02.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.9
+02.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+02.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+02.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+02.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+02.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+03.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+03.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+03.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			89.9
+03.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+03.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+03.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			46.9
+03.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			46.9
+03.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			64.2
+03.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+03.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	54080001			15.5
+03.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+03.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			46.5
+03.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+03.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			46.9
+03.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+03.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			64.2
+03.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+03.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			89.9
+03.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+03.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			100.0
+04.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+04.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			89.9
+04.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			89.9
+04.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			100.0
+04.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+04.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.9
+04.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			46.9
+04.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			64.2
+04.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+04.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			15.5
+04.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			15.5
+04.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			46.5
+04.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+04.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.9
+04.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			46.9
+04.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			64.2
+04.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+04.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+04.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			89.9
+04.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			100.0
+05.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+05.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300906			89.9
+05.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+05.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+05.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+05.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+05.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+05.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			64.2
+05.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+05.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+05.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	90300910			15.5
+05.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Boulder	Veneer	Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	82001003			46.5
+05.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+05.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+05.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+05.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			64.2
+05.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+05.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			89.9
+05.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+05.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+06.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+06.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+06.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+06.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+06.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+06.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+06.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+06.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			64.2
+06.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+06.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+06.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			15.5
+06.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			46.5
+06.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+06.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+06.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+06.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			64.2
+06.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+06.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+06.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+06.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			100.0
+07.jpg	      0		257	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+07.jpg	      0		762	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+07.jpg	      0		1266	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+07.jpg	      0		1771	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+07.jpg	      0		257	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+07.jpg	      0		762	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+07.jpg	      0		1266	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+07.jpg	      0		1771	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.5
+07.jpg	      0		257	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					57.5
+07.jpg	      0		762	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+07.jpg	      0		1266	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			19.2
+07.jpg	      0		1771	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			57.5
+07.jpg	      0		257	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+07.jpg	      0		762	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+07.jpg	      0		1266	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+07.jpg	      0		1771	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			70.5
+07.jpg	      0		257	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+07.jpg	      0		762	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					84.0
+07.jpg	      0		1266	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+07.jpg	      0		1771	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+08.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+08.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+08.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001002			89.9
+08.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+08.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+08.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+08.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+08.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001002			64.2
+08.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.5
+08.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			15.5
+08.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+08.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			46.5
+08.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001002			64.2
+08.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+08.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	54080001			46.9
+08.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001002			64.2
+08.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	54080001			100.0
+08.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	54080001			89.9
+08.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001002			89.9
+08.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001002			100.0
+09.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+09.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+09.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+09.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+09.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+09.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+09.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+09.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			64.2
+09.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.5
+09.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			15.5
+09.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			15.5
+09.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.5
+09.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			64.2
+09.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+09.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			46.9
+09.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			64.2
+09.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+09.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+09.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			89.9
+09.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			100.0
+10.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+10.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+10.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+10.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+10.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+10.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+10.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.9
+10.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			64.2
+10.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+10.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+10.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+10.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.5
+10.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+10.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.9
+10.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+10.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+10.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+10.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+10.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+10.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+11.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+11.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+11.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+11.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+11.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+11.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+11.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.9
+11.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			64.2
+11.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+11.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+11.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+11.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.5
+11.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+11.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+11.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+11.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			64.2
+11.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+11.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+11.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+11.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			100.0
+12.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+12.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+12.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			89.9
+12.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+12.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+12.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+12.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+12.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+12.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+12.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+12.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			15.5
+12.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.5
+12.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+12.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+12.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			46.9
+12.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+12.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+12.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+12.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			89.9
+12.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+13.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+13.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+13.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+13.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			100.0
+13.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			64.2
+13.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.9
+13.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.9
+13.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+13.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.5
+13.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+13.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			15.5
+13.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.5
+13.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			64.2
+13.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+13.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.9
+13.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			64.2
+13.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+13.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+13.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+13.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+14.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+14.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+14.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+14.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			100.0
+14.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+14.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+14.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+14.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+14.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+14.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+14.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+14.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.5
+14.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+14.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+14.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+14.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+14.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+14.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+14.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+14.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+15.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+15.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+15.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+15.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+15.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+15.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+15.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Erect forms		Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000912			46.9
+15.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+15.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.5
+15.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+15.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+15.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001002			46.5
+15.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+15.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+15.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+15.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+15.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+15.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+15.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+15.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+16.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+16.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+16.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+16.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+16.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+16.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+16.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.9
+16.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+16.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+16.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			15.5
+16.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+16.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.5
+16.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+16.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+16.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.9
+16.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+16.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+16.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+16.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+16.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+17.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+17.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+17.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+17.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+17.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+17.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+17.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+17.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			64.2
+17.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+17.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+17.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+17.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.5
+17.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+17.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+17.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+17.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			64.2
+17.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+17.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+17.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+17.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+18.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+18.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+18.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+18.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+18.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+18.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+18.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+18.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			64.2
+18.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+18.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+18.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+18.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			46.5
+18.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+18.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+18.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+18.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			64.2
+18.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+18.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+18.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+18.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+19.jpg	      0		257	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+19.jpg	      0		762	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					84.0
+19.jpg	      0		1266	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+19.jpg	      0		1771	274	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+19.jpg	      0		257	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+19.jpg	      0		762	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					45.2
+19.jpg	      0		1266	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+19.jpg	      0		1771	813	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.5
+19.jpg	      0		257	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					57.5
+19.jpg	      0		762	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			19.2
+19.jpg	      0		1266	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			19.2
+19.jpg	      0		1771	1352	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+19.jpg	      0		257	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+19.jpg	      0		762	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+19.jpg	      0		1266	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+19.jpg	      0		1771	1891	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.5
+19.jpg	      0		257	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+19.jpg	      0		762	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+19.jpg	      0		1266	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+19.jpg	      0		1771	2430	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+20.jpg	      0		184	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+20.jpg	      0		541	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.1
+20.jpg	      0		899	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.1
+20.jpg	      0		1256	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+20.jpg	      0		184	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+20.jpg	      0		541	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+20.jpg	      0		899	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+20.jpg	      0		1256	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.5
+20.jpg	      0		184	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					57.5
+20.jpg	      0		541	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			19.2
+20.jpg	      0		899	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			19.2
+20.jpg	      0		1256	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+20.jpg	      0		184	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+20.jpg	      0		541	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+20.jpg	      0		899	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+20.jpg	      0		1256	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.5
+20.jpg	      0		184	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+20.jpg	      0		541	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.1
+20.jpg	      0		899	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.1
+20.jpg	      0		1256	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+21.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+21.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+21.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			89.9
+21.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+21.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+21.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			46.9
+21.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			46.9
+21.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001002			64.2
+21.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+21.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+21.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+21.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.5
+21.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+21.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			46.9
+21.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			46.9
+21.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			64.2
+21.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+21.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			89.9
+21.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+21.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+22.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+22.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+22.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+22.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+22.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+22.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+22.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+22.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			64.2
+22.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+22.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+22.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+22.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			46.5
+22.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+22.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+22.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+22.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+22.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+22.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+22.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+22.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+23.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+23.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			89.9
+23.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+23.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+23.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+23.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+23.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.9
+23.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			64.2
+23.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+23.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+23.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			15.5
+23.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.5
+23.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+23.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+23.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+23.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			64.2
+23.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+23.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+23.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			89.9
+23.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+24.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+24.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+24.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+24.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+24.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+24.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+24.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+24.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+24.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+24.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+24.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+24.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.5
+24.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+24.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+24.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+24.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+24.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+24.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+24.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+24.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+25.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+25.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+25.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+25.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+25.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+25.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+25.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+25.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+25.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+25.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+25.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+25.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.5
+25.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+25.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+25.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+25.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Erect forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000912			64.2
+25.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+25.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+25.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+25.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Erect forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000912			100.0
+26.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+26.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+26.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+26.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+26.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+26.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+26.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.9
+26.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			64.2
+26.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+26.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+26.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+26.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			46.5
+26.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+26.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+26.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+26.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+26.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+26.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+26.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+26.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+27.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+27.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+27.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			89.9
+27.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+27.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+27.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			46.9
+27.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			46.9
+27.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			64.2
+27.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+27.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+27.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			15.5
+27.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			46.5
+27.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+27.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+27.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			46.9
+27.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			64.2
+27.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+27.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+27.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			89.9
+27.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+28.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+28.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+28.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+28.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+28.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+28.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54080001			46.9
+28.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+28.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+28.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+28.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+28.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+28.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.5
+28.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+28.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+28.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+28.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			64.2
+28.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+28.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+28.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+28.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+29.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+29.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+29.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+29.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			100.0
+29.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+29.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+29.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+29.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+29.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+29.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+29.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+29.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			46.5
+29.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+29.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+29.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+29.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			64.2
+29.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+29.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+29.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+29.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+30.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+30.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+30.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+30.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+30.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+30.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+30.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			46.9
+30.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300906			64.2
+30.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+30.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+30.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+30.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.5
+30.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+30.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+30.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+30.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+30.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+30.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+30.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	63600903			89.9
+30.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+31.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+31.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+31.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			89.9
+31.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+31.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+31.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Unknown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300903			46.9
+31.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.9
+31.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			64.2
+31.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+31.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Unknown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300903			15.5
+31.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			15.5
+31.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.5
+31.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+31.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+31.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+31.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			64.2
+31.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+31.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+31.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+31.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+32.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+32.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			89.9
+32.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+32.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+32.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+32.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300000			46.9
+32.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+32.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+32.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+32.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+32.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			15.5
+32.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.5
+32.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+32.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+32.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+32.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+32.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+32.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+32.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+32.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+33.jpg	      0		184	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+33.jpg	      0		541	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.1
+33.jpg	      0		899	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.1
+33.jpg	      0		1256	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			100.0
+33.jpg	      0		184	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+33.jpg	      0		541	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+33.jpg	      0		899	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+33.jpg	      0		1256	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			70.5
+33.jpg	      0		184	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					57.5
+33.jpg	      0		541	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+33.jpg	      0		899	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			19.2
+33.jpg	      0		1256	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			57.5
+33.jpg	      0		184	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+33.jpg	      0		541	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			45.2
+33.jpg	      0		899	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			45.2
+33.jpg	      0		1256	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.5
+33.jpg	      0		184	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+33.jpg	      0		541	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			84.1
+33.jpg	      0		899	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			84.1
+33.jpg	      0		1256	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			100.0
+34.jpg	      0		184	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+34.jpg	      0		541	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					84.1
+34.jpg	      0		899	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.1
+34.jpg	      0		1256	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+34.jpg	      0		184	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+34.jpg	      0		541	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					45.2
+34.jpg	      0		899	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+34.jpg	      0		1256	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			70.5
+34.jpg	      0		184	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					57.5
+34.jpg	      0		541	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+34.jpg	      0		899	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001002			19.2
+34.jpg	      0		1256	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001002			57.5
+34.jpg	      0		184	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					70.5
+34.jpg	      0		541	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+34.jpg	      0		899	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001002			45.2
+34.jpg	      0		1256	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001002			70.5
+34.jpg	      0		184	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+34.jpg	      0		541	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.1
+34.jpg	      0		899	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001002			84.1
+34.jpg	      0		1256	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Consolidated	Rock	No biota	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001002			100.0
+35.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+35.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			89.9
+35.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54080001			89.9
+35.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			100.0
+35.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			64.2
+35.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+35.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+35.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			64.2
+35.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.5
+35.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+35.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+35.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			46.5
+35.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+35.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+35.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			46.9
+35.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+35.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+35.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			89.9
+35.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+35.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+36.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+36.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Unknown	Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	80300903			89.9
+36.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			89.9
+36.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			100.0
+36.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+36.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.9
+36.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.9
+36.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			64.2
+36.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+36.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			15.5
+36.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			15.5
+36.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			46.5
+36.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+36.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			46.9
+36.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			46.9
+36.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Pebble / gravel (pebble 10-64mm)		Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001012			64.2
+36.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+36.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			89.9
+36.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			89.9
+36.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand / mud (coarse sand)		Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			100.0
+37.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+37.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+37.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			89.9
+37.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+37.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+37.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+37.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+37.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+37.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+37.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+37.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+37.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.5
+37.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+37.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+37.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			46.9
+37.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+37.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+37.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+37.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+37.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+38.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+38.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+38.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+38.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+38.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+38.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+38.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+38.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			64.2
+38.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+38.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+38.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+38.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.5
+38.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+38.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+38.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+38.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+38.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+38.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+38.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+38.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+39.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+39.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+39.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+39.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+39.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+39.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+39.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+39.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+39.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.5
+39.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					15.5
+39.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			15.5
+39.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			46.5
+39.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+39.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					46.9
+39.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+39.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			64.2
+39.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+39.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					89.9
+39.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+39.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+40.jpg	      0		139	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+40.jpg	      0		406	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+40.jpg	      0		674	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			89.9
+40.jpg	      0		941	196	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+40.jpg	      0		139	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			64.2
+40.jpg	      0		406	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+40.jpg	      0		674	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			46.9
+40.jpg	      0		941	578	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			64.2
+40.jpg	      0		139	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.5
+40.jpg	      0		406	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			15.5
+40.jpg	      0		674	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			15.5
+40.jpg	      0		941	960	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			46.5
+40.jpg	      0		139	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					64.2
+40.jpg	      0		406	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			46.9
+40.jpg	      0		674	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			46.9
+40.jpg	      0		941	1342	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			64.2
+40.jpg	      0		139	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Open Water			Open					100.0
+40.jpg	      0		406	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			89.9
+40.jpg	      0		674	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			89.9
+40.jpg	      0		941	1724	20200602	SouthWest							Kye Adams		ForwardFacingBRUV		Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0

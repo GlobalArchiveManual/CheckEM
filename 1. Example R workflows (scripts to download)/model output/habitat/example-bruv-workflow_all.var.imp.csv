@@ -1,0 +1,7 @@
+"","depth","roughness","detrended","TPI","aspect","TRI"
+"Macroalgae",0.999,0,0.999,0.999,0,0
+"Seagrasses",1,0.149,0.014,0,0.998,0.839
+"Sessile invertebrates",0.998,0.096,0.99,0.064,0.133,0.061
+"Consolidated (hard)",0.95,0.156,0.142,0.537,0.419,0.058
+"Unconsolidated (soft)",0,1,0,1,1,0
+"reef",0,1,0,1,1,0

@@ -19,44 +19,34 @@ library(viridis)
 library(patchwork)
 
 # Set the study name ----
-name <- '2021-2022_SwC_BOSS'
+name <- 'example-bruv-workflow'
 
 # Load the habitat predictions ----
 # UTM Zone 50
-preddf <- readRDS(paste0("model out/", name, "_habitat-prediction.RDS")) %>%
-  dplyr::mutate(dom_tag = recode(dom_tag,
-                                 "sand" = "Sand",
-                                 "inverts" = "Sessile invertebrates",
-                                 "rock" = "Rock",
-                                 "macro" = "Macroalgae")) %>%
+preddf <- readRDS(paste0("1. Example R workflows (scripts to download)/model output/habitat/", 
+                         name, "_Habitat-prediction.RDS")) %>%
+  dplyr::mutate(dom_tag = case_when(dom_tag %in% "sand" ~ "Sand",
+                                    dom_tag %in% "inverts" ~ "Sessile invertebrates",
+                                    dom_tag %in% "macro" ~ "Macroalgae",
+                                    dom_tag %in% "seagrass" ~ "Seagrasses")) %>%
   glimpse()
 
 # Load marine park data from CAPAD 2022 ----
-sf_use_s2(F)
-marine.parks <- st_read("data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp") %>%
+# sf_use_s2(F)
+marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp") %>%
+  st_make_valid() %>%
   dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE, 
                                             "\\s*\\([^\\)]+\\)", "")) %>%
-  dplyr::filter(ZONE_TYPE %in% c("National Park Zone", "Sanctuary Zone")) %>%
-  st_transform(32750) %>%
-  st_crop(xmin = min(preddf$x),
-          xmax = max(preddf$x),
-          ymin = min(preddf$y),
-          ymax = max(preddf$y))
-
-# Load coastal waters limit shapefile ----
-cwatr <- st_read("data/spatial/shapefiles/amb_coastal_waters_limit.shp") %>%
-  st_transform(32750) %>%
-  st_crop(xmin = min(preddf$x),
-          xmax = max(preddf$x),
-          ymin = min(preddf$y),
-          ymax = max(preddf$y))
+  dplyr::filter(ZONE_TYPE %in% c("National Park Zone", "Sanctuary Zone"),
+                STATE %in% "WA") %>%                                            # Change here to speed up plotting for your location
+  st_transform(32750) 
 
 # Set colours for habitat plotting ----
 unique(preddf$dom_tag)
 hab_fills <- scale_fill_manual(values = c(
   "Sand" = "wheat",
   "Sessile invertebrates" = "plum",
-  "Rock" = "grey40",
+  "Seagrasses" = "forestgreen",
   "Macroalgae" = "darkgoldenrod4"
 ), name = "Habitat")
 
@@ -70,12 +60,11 @@ p1 <- ggplot() +
   scale_colour_manual(values = c("National Park Zone" = "#7bbc63",
                                "Sanctuary Zone" = "#bfd054"),
                     name = "Marine Parks") +
-  geom_sf(data = cwatr, fill = NA, colour = "red", size = 0.3) +
   coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
            ylim = c(min(preddf$y), max(preddf$y))) +
   labs(x = NULL, y = NULL, colour = NULL) +
   theme_minimal()
-png(filename = paste0("plots/", name, "_dominant-habitat.png"),
+png(filename = paste0("1. Example R workflows (scripts to download)/plots/", name, "_dominant-habitat.png"),
     units = "in", res = 300, height = 4, width = 8)
 p1
 dev.off()
@@ -88,7 +77,8 @@ indclass <- preddf %>%
                                     habitat %in% "pmacro" ~ "Macroalgae",
                                     habitat %in% "prock" ~ "Rock",
                                     habitat %in% "psand" ~ "Sand",
-                                    habitat %in% "pseagrass" ~ "Seagrass")) %>%
+                                    habitat %in% "pseagrass" ~ "Seagrass",
+                                    habitat %in% "preef" ~ "Reef")) %>%
   glimpse()
 
 # Build plot elements for individual habitat probabilities ----
@@ -101,14 +91,13 @@ p2 <- ggplot() +
   scale_colour_manual(values = c("National Park Zone" = "#7bbc63",
                                  "Sanctuary Zone" = "#bfd054"),
                       name = "Marine Parks") +
-  geom_sf(data = cwatr, fill = NA, colour = "red", size = 0.3) +
   coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
            ylim = c(min(preddf$y), max(preddf$y))) +
   labs(x = NULL, y = NULL, fill = "Probability") +
   theme_minimal()+
   facet_wrap(~habitat) +
   theme(axis.text.x = element_text(size = 7))
-png(filename = paste0("plots/", name, "_individual-habitat.png"),
+png(filename = paste0("1. Example R workflows (scripts to download)/plots/", name, "_individual-habitat.png"),
     units = "in", res = 300, height = 4, width = 8)
 p2
 dev.off()

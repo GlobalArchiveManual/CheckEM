@@ -1,0 +1,3 @@
+"","modname","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","depth","roughness","detrended","tpi","tri","aspect","reef","cumsum.wi"
+"greater than Lm.detrended","detrended",119.731050015247,124.686094381913,0.42046,NA,2.65,0,0,0,0.535,0.581,0,0,1,0,0,0,0,0.535
+"greater than Lm.aspect+detrended","aspect+detrended",120.660700384734,125.995289207709,0.44406,NA,3.45,0,0.93,1.309,0.336,0.302,0,0,1,0,0,1,0,0.871
