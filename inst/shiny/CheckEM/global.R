@@ -62,6 +62,8 @@ library(cowplot)
 
 library(CheckEM)
 
+glimpse(schema)
+
 # Load data
 load("data/all_data.Rdata")
 

@@ -1,10 +1,6 @@
-# For app development
+# APP & PACKAGE DEVELOPMENT -----
 devtools::load_all()
 CheckEM::runCheckEM()
-
-# Install released version from CRAN
-# install.packages("pkgdown")
-library(pkgdown)
 
 # Run once to configure your package to use pkgdown
 # usethis::use_pkgdown()
@@ -16,6 +12,12 @@ devtools::load_all()
 # Fill out the details
 # The next line turns all the R function documentation into .Rd files for the man folder
 devtools::document()
+
+# PACKAGE DOWN WEBSITE ----
+
+# Install released version from CRAN
+# install.packages("pkgdown")
+library(pkgdown)
 
 # This builds the website with every function.
 pkgdown::build_reference()
