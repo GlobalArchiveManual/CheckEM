@@ -43,64 +43,18 @@ library(todor)
 name <- "example-bruv-workflow"
 
 ### 1. Import data and run basic error reports ----
-# New version of 'ga.read.files_em.csv
-# Reads in metadata
-ga.read.files_em.csv <- function(flnm) {
-  read_csv(flnm, col_types = cols(.default = "c"))%>%
-    dplyr::mutate(campaignid = basename(flnm)) %>%
-    clean_names() %>%
-    dplyr::mutate(campaignid = str_replace_all(campaignid, c("_Metadata.csv" = "")))
-}
-
 # 1. Load and format metadata ----
-metadata <- list.files(path = "1. Example R workflows (scripts to download)/data/raw/",      # This replaces ga.list.files
-                       recursive = F,
-                       pattern = "_Metadata.csv",
-                       full.names = T) %>%
-  purrr::map_df(~ga.read.files_em.csv(.)) %>% # combine into dataframe
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location,  # Review columns to align with GlobalArchive - plus make metadata match
-                site, depth, successful_count, successful_length, 
-                successful_habitat_forward, successful_habitat_backward) %>%
-  glimpse()                                                                   # Preview the data
+metadata <- read_metadata("1. Example R workflows (scripts to download)/data/raw/") %>%
+    dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location,  # Review columns to align with GlobalArchive - plus make metadata match
+                  site, depth, successful_count, successful_length,
+                  successful_habitat_forward, successful_habitat_backward) %>%
+    glimpse()
 
 saveRDS(metadata, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
                                   name, "_Metadata.rds"))
 
 # Read in the raw habitat data
-read_tm <- function(dir, sample) {
-  if (sample %in% "opcode") {
-    list.files(path = dir,    
-               recursive = F,
-               pattern = "_Dot Point Measurements.txt",
-               full.names = T) %>%
-      purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, 
-                             colClasses = "character", na.strings = "")) %>%
-      purrr::list_rbind() %>%
-      # dplyr::mutate(id = 1:nrow(.)) %>%
-      ga.clean.names() %>%
-      dplyr::rename(sample = opcode) %>%
-      glimpse()
-  }
-  
-  else if (sample %in% "period") {
-    list.files(path = dir,    
-               recursive = F,
-               pattern = "_Dot Point Measurements.txt",
-               full.names = T) %>%
-      purrr::map(~read.delim(., header = T, skip = 4, stringsAsFactors = FALSE, 
-                             colClasses = "character", na.strings = "")) %>%
-      purrr::list_rbind() %>%
-      # dplyr::mutate(id = 1:nrow(.)) %>%
-      ga.clean.names() %>%
-      dplyr::rename(sample = period) %>%
-      glimpse()
-  }
-  
-  else {
-    stop("Sample must be one of: c('opcode', 'period')")
-  }}
-
-points <- read_tm("1. Example R workflows (scripts to download)/data/raw/",
+points <- read_TM("1. Example R workflows (scripts to download)/data/raw/",
                                sample = "opcode")
 
 habitat <- points %>%
@@ -163,12 +117,12 @@ metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "s
 # We strongly encourage you to fix these errors at the source (i.e. TMObs)
 # Now check through the files in your "Errors to check" folder and make corrections to .TMObs / generic files and then re-run this script
 
-# TODO replace schema with file loaded in package 
-schema <- read_csv("1. Example R workflows (scripts to download)/data/raw/benthic.annotation.schema.forward.facing.20230714.135113.csv",
-                   col_types = "c", na = "") %>%
-  ga.clean.names() %>%
+# NOTE schema is loaded from package internal data
+schema <- schema %>%
   dplyr::select(-c(parent_caab, qualifiers)) %>%
   glimpse()
+
+# usethis::use_data(schema)
 
 ### 3. Tidy the final data into organised dataframes and save ----
 tidy.habitat <- habitat %>%

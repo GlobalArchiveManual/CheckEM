@@ -26,6 +26,11 @@ habitat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/sta
   dplyr::tally(number, name = "number") %>%
   dplyr::mutate(total.points.annotated = sum(number)) %>%
   ungroup() %>%
+  pivot_wider(names_from = "habitat", values_from = "number", values_fill = 0) %>%
+  dplyr::mutate(reef = Macroalgae + Seagrasses + `Sessile invertebrates` + `Consolidated (hard)`) %>%
+  pivot_longer(cols = c("Macroalgae", "Seagrasses", "Sessile invertebrates",
+                        "Consolidated (hard)", "Unconsolidated (soft)", "reef"), 
+               names_to = "habitat", values_to = "number") %>%
   glimpse()
 
 tidy.relief <- readRDS(paste0("1. Example R workflows (scripts to download)/data/staging/",

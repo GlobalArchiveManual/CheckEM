@@ -14,6 +14,7 @@ library(tidyverse)
 library(mgcv)
 library(gplots)
 library(FSSgam)
+devtools::load_all("./")
 
 # Set the study name ----
 name <- 'example-bruv-workflow'
@@ -24,11 +25,11 @@ preds <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/
   dplyr::mutate(mbdepth = abs(mbdepth)) %>%
   glimpse()
 
-dat <- read.csv(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
-                      name, "_Habitat.csv")) %>%
-  dplyr::mutate(reef = broad.macroalgae + broad.sponges +                 # Set your reef columns here
-                broad.sessile.invertebrates + broad.cnidaria + 
-                broad.bryozoa) %>%    
+dat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
+                      name, "_Tidy-habitat.rds")) %>%
+  # dplyr::mutate(reef = broad.macroalgae + broad.sponges +                 # Set your reef columns here
+  #               broad.sessile.invertebrates + broad.cnidaria + 
+  #               broad.bryozoa) %>%    
   left_join(preds) %>%
   pivot_longer(cols = starts_with("broad"), names_to = "habitat", 
                values_to = "number") %>%
