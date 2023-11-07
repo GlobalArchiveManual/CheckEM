@@ -6796,7 +6796,11 @@ function(input, output, session) {
       
       points <- points %>%
         dplyr::select(campaignid, sample, opcode, period, image_row, image_col, 
-                      level_2, level_3, level_4, level_5, scientific, qualifiers, caab_code,
+                      
+                      starts_with("level_"),
+                      # level_2, level_3, level_4, level_5, 
+                      
+                      scientific, qualifiers, caab_code,
                       relief_annotated) %>%
         dplyr::mutate(id = 1:nrow(.)) %>%
         dplyr::glimpse()
@@ -7098,36 +7102,45 @@ function(input, output, session) {
           ))
 
 
-  ## ► Relief - dataframe ----
+  ## ► TIDY Relief - dataframe ----
   tidy.relief <- reactive({
     
     message("view tidy relief")
     relief.annotations() %>%
-      # dplyr::left_join(schema) %>%
       dplyr::filter(!level_2 %in% c("", "Unscorable", NA)) %>% # Remove Open water and Unknown entries from broad
       dplyr::mutate(number = 1) %>%                   
-      dplyr::group_by(campaignid, sample, across(starts_with("level")), caab_code) %>%
+      dplyr::group_by(campaignid, sample, caab_code) %>%
       dplyr::tally(number, name = "number") %>%                                                    
       dplyr::ungroup()  %>%
       dplyr::select(campaignid, sample, everything()) %>% #level_1, 
-      dplyr::left_join(metadata.regions())
+      dplyr::full_join(metadata.regions())%>%
+      tidyr::complete(nesting(campaignid, sample), caab_code) %>%
+      replace_na(list(number = 0)) %>% # we add in zeros
+      dplyr::left_join(metadata.regions()) %>%
+      # filter(!is.na(level_2)) %>%
+      dplyr::left_join(schema) %>%
+      dplyr::glimpse()
     
   })
 
-  ## ► Habitat broad points - dataframe ----
+  ## ► TIDY HABITAT - dataframe ----
   tidy.habitat <- reactive({
     
     message("view tidy habitat")
     tidy.habitat <- hab.annotations() %>%
       dplyr::mutate(number = 1) %>% # Add a count column to summarise the number of points
-      # dplyr::left_join(schema) %>%
-      dplyr::select(campaignid, sample, number, starts_with("level"), caab_code) %>% # family, genus, species, 
       dplyr::filter(!level_2 %in% c("", "Unscorable", NA)) %>%  
-      dplyr::group_by(campaignid, sample, across(starts_with("level")), caab_code) %>% #family, genus, species, 
+      dplyr::select(campaignid, sample, number, caab_code) %>% # family, genus, species, 
+      dplyr::group_by(campaignid, sample, caab_code) %>% #family, genus, species, 
       dplyr::tally(number, name = "number") %>%
       dplyr::ungroup() %>%
-      dplyr::select(campaignid, sample, everything()) %>% #level_1, 
-      dplyr::left_join(metadata.regions())
+      dplyr::select(campaignid, sample, everything()) %>% 
+      dplyr::full_join(metadata.regions())%>%
+      tidyr::complete(nesting(campaignid, sample), caab_code) %>%
+      replace_na(list(number = 0)) %>% # we add in zeros
+      dplyr::left_join(metadata.regions()) %>%
+      dplyr::left_join(schema) %>%
+      dplyr::glimpse()
 
   })
   
@@ -7173,7 +7186,7 @@ function(input, output, session) {
   ## ► Habitat level dropdowns ----
   output$habitat.levels <- renderUI({
     
-    options <- tidy.habitat() %>%
+    options <- hab.points() %>%
       dplyr::select(starts_with("level_")) 
     
     create_dropdown("habitat.levels", names(options), NULL)
@@ -7188,6 +7201,9 @@ function(input, output, session) {
     print(input$habitat.levels)
     
     dat <- tidy.habitat() %>%
+      dplyr::mutate(level_8 = paste(level_2, level_3, level_4, level_5, level_6, level_7, level_8, sep = ": ")) %>%
+      dplyr::mutate(level_7 = paste(level_2, level_3, level_4, level_5, level_6, level_7, sep = ": ")) %>%
+      dplyr::mutate(level_6 = paste(level_2, level_3, level_4, level_5, level_6, sep = ": ")) %>%
       dplyr::mutate(level_5 = paste(level_2, level_3, level_4, level_5, sep = ": ")) %>%
       dplyr::mutate(level_4 = paste(level_2, level_3, level_4, sep = ": ")) %>%
       dplyr::mutate(level_3 = paste(level_2, level_3, sep = ": ")) %>%
@@ -7549,10 +7565,49 @@ function(input, output, session) {
               write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
             }
           }
+        }
+        
+        # IF habitat uploaded
+        if(input$hab %in% "YES"){
+          
+          for(i in unique(tidy.habitat()$campaignid)){
+
+            dat <- tidy.habitat() %>%
+              dplyr::filter(campaignid == i) #%>% glimpse()
+            # 
+            # if(input$error.zeros.hab %in% FALSE){
+            #   
+            #   dat <- dat %>%
+            #     dplyr::filter(number > 0)
+            #   
+            # }
+            
+            fileName <- paste(i, "_Habitat.csv", sep = "")
+            
+            write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+          }
+          
+          
+          for(i in unique(tidy.relief()$campaignid)){
+            
+            dat <- tidy.relief() %>%
+              dplyr::filter(campaignid == i) #%>% glimpse()
+            
+            # if(input$error.zeros.hab %in% FALSE){
+            #   
+            #   dat <- dat %>%
+            #     dplyr::filter(number > 0)
+            #   
+            # }
+            
+            fileName <- paste(i, "_Relief.csv", sep = "")
+            
+            write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+          }
+          
           
         }
-
-
+        
         #create the zip file
         zip::zip(zipfile = file, files = dir(temp_directory), root = temp_directory)
 

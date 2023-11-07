@@ -661,6 +661,11 @@ function(){
                     checkboxInput("error.zeros", label = "Add in zeros where species aren't present", value = TRUE), 
                     checkboxInput("error.extra.col", label = "Remove CheckEM generated columns e.g. Zone & Marine Region", value = TRUE), 
                     
+                    shiny::conditionalPanel("input.hab == 'Yes'",
+                                            h4("Filters for Habitat"),
+                                            checkboxInput("error.zeros.hab", label = "Add in zeros where habitat type is not present", value = TRUE)
+                                            ),
+
                     br(),
                     h4("Filters for Length and Mass"),
                     checkboxInput("error.length.small", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
