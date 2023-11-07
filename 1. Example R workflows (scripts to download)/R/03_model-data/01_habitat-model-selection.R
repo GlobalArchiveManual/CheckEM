@@ -19,32 +19,19 @@ devtools::load_all("./")
 # Set the study name ----
 name <- 'example-bruv-workflow'
 
-# Bring in and format the data ----
-preds <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
-                        name, "_Metadata-bathymetry-derivatives.rds")) %>%
-  dplyr::mutate(mbdepth = abs(mbdepth)) %>%
-  glimpse()
-
+# Bring in the habtiat data ----
 dat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
                       name, "_Tidy-habitat.rds")) %>%
-  # dplyr::mutate(reef = broad.macroalgae + broad.sponges +                 # Set your reef columns here
-  #               broad.sessile.invertebrates + broad.cnidaria + 
-  #               broad.bryozoa) %>%    
-  left_join(preds) %>%
-  pivot_longer(cols = starts_with("broad"), names_to = "habitat", 
-               values_to = "number") %>%
   glimpse()
 
 # Set predictor variables ----
 names(dat)
-pred.vars <- c("mbdepth","roughness", "detrended", 
+pred.vars <- c("depth","roughness", "detrended", 
                "slope", "TPI", "aspect", "TRI")                         
 
 # Check for correlation of predictor variables ----
 # Remove anything highly correlated (>0.95) 
 round(cor(dat[ , pred.vars]), 2)
-
-# Remove TRI and slope
 
 # Review of individual predictors for even distribution ----
 # Plot of likely transformations
@@ -60,6 +47,10 @@ for (i in pred.vars) {
   plot(log(x + 1))
 }                                                                               # All look pretty OK
 
+# Remove slope as it is highly correlated with roughness
+pred.vars <- c("depth","roughness", "detrended", 
+               "TPI", "aspect", "TRI")
+
 # Check to make sure response variables have less than 80% zeros ----
 unique.vars = unique(as.character(dat$habitat))
 unique.vars.use = character()
@@ -71,14 +62,11 @@ for(i in 1:length(unique.vars)){
 unique.vars.use                                                                 # All remain                                                                 # All good  
 
 # Set-up the environment to run model selection ----
-outdir    <- ("model out/")                                                     # Set the output directory
-use.dat   <- dat[dat$habitat %in% c(unique.vars.use), ]
+outdir    <- ("1. Example R workflows (scripts to download)/model output/habitat/") # Set the output directory
 out.all   <- list()
 var.imp   <- list()
 
 # Re-set predictor and response variables ----
-pred.vars <- c("mbdepth","roughness", "detrended", 
-               "TPI", "aspect")
 resp.vars <- unique.vars.use
 
 # Run the full subset model selection process ----
@@ -86,8 +74,8 @@ for(i in 1:length(resp.vars)){
   print(resp.vars[i])
   use.dat <- dat[dat$habitat == resp.vars[i],]
   use.dat   <- as.data.frame(use.dat)
-  Model1  <- gam(cbind(number, (total.points.annotated - number)) ~ 
-                   s(mbdepth, bs = 'cr'),
+  Model1  <- gam(cbind(number, (total_points_annotated - number)) ~ 
+                   s(depth, bs = 'cr'),
                  family = binomial("logit"),  data = use.dat)
   
   model.set <- generate.model.set(use.dat = use.dat,

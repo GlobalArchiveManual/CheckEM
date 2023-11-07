@@ -1,0 +1,785 @@
+Dot Point Measurements
+
+Generated: Tuesday 16 November 2021 09:09:54
+
+Filename	Frame	Time (mins)	Image row	Image col	Date	Location	Site #	Transect #	Latitude	Longitude	Rugosity	Depth	Collector	Fishing status	Spare	Spare	BROAD	MORPHOLOGY	TYPE	FieldOfView	Relief	CODE			Radius %
+1.1.JPG	      0		349	372													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+1.1.JPG	      0		1036	372													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+1.1.JPG	      0		1724	372													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+1.1.JPG	      0		2411	372													Open Water			Open					100.0
+1.1.JPG	      0		349	1106													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+1.1.JPG	      0		1036	1106													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+1.1.JPG	      0		1724	1106													Open Water			Open					45.2
+1.1.JPG	      0		2411	1106													Open Water			Open					70.6
+1.1.JPG	      0		349	1840													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			57.5
+1.1.JPG	      0		1036	1840													Sponges	Erect forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000912			19.2
+1.1.JPG	      0		1724	1840													Open Water			Open					19.2
+1.1.JPG	      0		2411	1840													Open Water			Open					57.5
+1.1.JPG	      0		349	2574													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+1.1.JPG	      0		1036	2574													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+1.1.JPG	      0		1724	2574													Open Water			Open					45.2
+1.1.JPG	      0		2411	2574													Open Water			Open					70.6
+1.1.JPG	      0		349	3308													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+1.1.JPG	      0		1036	3308													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+1.1.JPG	      0		1724	3308													Open Water			Open					84.0
+1.1.JPG	      0		2411	3308													Open Water			Open					100.0
+10.1.JPG	      0		349	372													Open Water			Open					100.0
+10.1.JPG	      0		1036	372													Open Water			Open					84.0
+10.1.JPG	      0		1724	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+10.1.JPG	      0		2411	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+10.1.JPG	      0		349	1106													Open Water			Open					70.6
+10.1.JPG	      0		1036	1106													Open Water			Open					45.2
+10.1.JPG	      0		1724	1106													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+10.1.JPG	      0		2411	1106													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+10.1.JPG	      0		349	1840													Open Water			Open					57.5
+10.1.JPG	      0		1036	1840													Open Water			Open					19.2
+10.1.JPG	      0		1724	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+10.1.JPG	      0		2411	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			57.5
+10.1.JPG	      0		349	2574													Open Water			Open					70.6
+10.1.JPG	      0		1036	2574													Open Water			Open					45.2
+10.1.JPG	      0		1724	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+10.1.JPG	      0		2411	2574													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			70.6
+10.1.JPG	      0		349	3308													Open Water			Open					100.0
+10.1.JPG	      0		1036	3308													Open Water			Open					84.0
+10.1.JPG	      0		1724	3308													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+10.1.JPG	      0		2411	3308													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+11.1.JPG	      0		379	404													Open Water			Open					100.0
+11.1.JPG	      0		1126	404													Macroalgae	Erect course branching	Unknown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300903			84.0
+11.1.JPG	      0		1874	404													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+11.1.JPG	      0		2621	404													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+11.1.JPG	      0		379	1202													Open Water			Open					70.6
+11.1.JPG	      0		1126	1202													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+11.1.JPG	      0		1874	1202													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+11.1.JPG	      0		2621	1202													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+11.1.JPG	      0		379	2000													Open Water			Open					57.5
+11.1.JPG	      0		1126	2000													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			19.2
+11.1.JPG	      0		1874	2000													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			19.2
+11.1.JPG	      0		2621	2000													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+11.1.JPG	      0		379	2798													Open Water			Open					70.6
+11.1.JPG	      0		1126	2798													Open Water			Open					45.2
+11.1.JPG	      0		1874	2798													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+11.1.JPG	      0		2621	2798													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+11.1.JPG	      0		379	3596													Open Water			Open					100.0
+11.1.JPG	      0		1126	3596													Open Water			Open					84.0
+11.1.JPG	      0		1874	3596													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+11.1.JPG	      0		2621	3596													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+12.1.JPG	      0		349	372													Open Water			Open					100.0
+12.1.JPG	      0		1036	372													Open Water			Open					84.0
+12.1.JPG	      0		1724	372													Open Water			Open					84.0
+12.1.JPG	      0		2411	372													Open Water			Limited					100.0
+12.1.JPG	      0		349	1106													Open Water			Open					70.6
+12.1.JPG	      0		1036	1106													Open Water			Open					45.2
+12.1.JPG	      0		1724	1106													Open Water			Open					45.2
+12.1.JPG	      0		2411	1106													Open Water			Limited					70.6
+12.1.JPG	      0		349	1840													Open Water			Open					57.5
+12.1.JPG	      0		1036	1840													Open Water			Open					19.2
+12.1.JPG	      0		1724	1840													Open Water			Open					19.2
+12.1.JPG	      0		2411	1840													Open Water			Limited					57.5
+12.1.JPG	      0		349	2574													Open Water			Open					70.6
+12.1.JPG	      0		1036	2574													Open Water			Open					45.2
+12.1.JPG	      0		1724	2574													Open Water			Open					45.2
+12.1.JPG	      0		2411	2574													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			70.6
+12.1.JPG	      0		349	3308													Open Water			Open					100.0
+12.1.JPG	      0		1036	3308													Open Water			Open					84.0
+12.1.JPG	      0		1724	3308													Open Water			Open					84.0
+12.1.JPG	      0		2411	3308													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			100.0
+13.1.JPG	      0		379	404													Open Water			Open					100.0
+13.1.JPG	      0		1126	404													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+13.1.JPG	      0		1874	404													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+13.1.JPG	      0		2621	404													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+13.1.JPG	      0		379	1202													Open Water			Open					70.6
+13.1.JPG	      0		1126	1202													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+13.1.JPG	      0		1874	1202													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+13.1.JPG	      0		2621	1202													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+13.1.JPG	      0		379	2000													Open Water			Open					57.5
+13.1.JPG	      0		1126	2000													Open Water			Open					19.2
+13.1.JPG	      0		1874	2000													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+13.1.JPG	      0		2621	2000													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+13.1.JPG	      0		379	2798													Open Water			Open					70.6
+13.1.JPG	      0		1126	2798													Open Water			Open					45.2
+13.1.JPG	      0		1874	2798													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+13.1.JPG	      0		2621	2798													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+13.1.JPG	      0		379	3596													Open Water			Open					100.0
+13.1.JPG	      0		1126	3596													Open Water			Open					84.0
+13.1.JPG	      0		1874	3596													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+13.1.JPG	      0		2621	3596													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+14.1.JPG	      0		349	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+14.1.JPG	      0		1036	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+14.1.JPG	      0		1724	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+14.1.JPG	      0		2411	372													Open Water			Open					100.0
+14.1.JPG	      0		349	1106													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			70.6
+14.1.JPG	      0		1036	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+14.1.JPG	      0		1724	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+14.1.JPG	      0		2411	1106													Open Water			Open					70.6
+14.1.JPG	      0		349	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			57.5
+14.1.JPG	      0		1036	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+14.1.JPG	      0		1724	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			19.2
+14.1.JPG	      0		2411	1840													Open Water			Open					57.5
+14.1.JPG	      0		349	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			70.6
+14.1.JPG	      0		1036	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+14.1.JPG	      0		1724	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+14.1.JPG	      0		2411	2574													Open Water			Open					70.6
+14.1.JPG	      0		349	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+14.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+14.1.JPG	      0		1724	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+14.1.JPG	      0		2411	3308													Open Water			Open					100.0
+15.1.JPG	      0		349	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+15.1.JPG	      0		1036	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+15.1.JPG	      0		1724	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+15.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+15.1.JPG	      0		349	1106													Macroalgae	Erect fine branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300908			70.6
+15.1.JPG	      0		1036	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+15.1.JPG	      0		1724	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+15.1.JPG	      0		2411	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+15.1.JPG	      0		349	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+15.1.JPG	      0		1036	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+15.1.JPG	      0		1724	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+15.1.JPG	      0		2411	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+15.1.JPG	      0		349	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			70.6
+15.1.JPG	      0		1036	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+15.1.JPG	      0		1724	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+15.1.JPG	      0		2411	2574													Open Water			Open					70.6
+15.1.JPG	      0		349	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+15.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54080001			84.0
+15.1.JPG	      0		1724	3308													Open Water			Open					84.0
+15.1.JPG	      0		2411	3308													Open Water			Open					100.0
+16.1.JPG	      0		349	372													Open Water			Open					100.0
+16.1.JPG	      0		1036	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54080001			84.0
+16.1.JPG	      0		1724	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+16.1.JPG	      0		2411	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+16.1.JPG	      0		349	1106													Open Water			Open					70.6
+16.1.JPG	      0		1036	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54080001			45.2
+16.1.JPG	      0		1724	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+16.1.JPG	      0		2411	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			70.6
+16.1.JPG	      0		349	1840													Open Water			Open					57.5
+16.1.JPG	      0		1036	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+16.1.JPG	      0		1724	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+16.1.JPG	      0		2411	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54080001			57.5
+16.1.JPG	      0		349	2574													Open Water			Open					70.6
+16.1.JPG	      0		1036	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+16.1.JPG	      0		1724	2574													Macroalgae	Erect fine branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300908			45.2
+16.1.JPG	      0		2411	2574													Macroalgae	Erect fine branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300908			70.6
+16.1.JPG	      0		349	3308													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+16.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+16.1.JPG	      0		1724	3308													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+16.1.JPG	      0		2411	3308													Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+17.1.JPG	      0		349	372													Open Water			Open					100.0
+17.1.JPG	      0		1036	372													Open Water			Open					84.0
+17.1.JPG	      0		1724	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+17.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+17.1.JPG	      0		349	1106													Open Water			Open					70.6
+17.1.JPG	      0		1036	1106													Open Water			Open					45.2
+17.1.JPG	      0		1724	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+17.1.JPG	      0		2411	1106													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			70.6
+17.1.JPG	      0		349	1840													Open Water			Open					57.5
+17.1.JPG	      0		1036	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54080001			19.2
+17.1.JPG	      0		1724	1840													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			19.2
+17.1.JPG	      0		2411	1840													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			57.5
+17.1.JPG	      0		349	2574													Open Water			Open					70.6
+17.1.JPG	      0		1036	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+17.1.JPG	      0		1724	2574													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			45.2
+17.1.JPG	      0		2411	2574													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			70.6
+17.1.JPG	      0		349	3308													Open Water			Open					100.0
+17.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			84.0
+17.1.JPG	      0		1724	3308													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			84.0
+17.1.JPG	      0		2411	3308													Macroalgae	Large canopy-forming	Scytothalia dorycarpa	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	54102005			100.0
+18.1.JPG	      0		349	372													Open Water			Open					100.0
+18.1.JPG	      0		1036	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+18.1.JPG	      0		1724	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+18.1.JPG	      0		2411	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+18.1.JPG	      0		349	1106													Open Water			Open					70.6
+18.1.JPG	      0		1036	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+18.1.JPG	      0		1724	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+18.1.JPG	      0		2411	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			70.6
+18.1.JPG	      0		349	1840													Open Water			Open					57.5
+18.1.JPG	      0		1036	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+18.1.JPG	      0		1724	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+18.1.JPG	      0		2411	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			57.5
+18.1.JPG	      0		349	2574													Open Water			Open					70.6
+18.1.JPG	      0		1036	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+18.1.JPG	      0		1724	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+18.1.JPG	      0		2411	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			70.6
+18.1.JPG	      0		349	3308													Open Water			Open					100.0
+18.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+18.1.JPG	      0		1724	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+18.1.JPG	      0		2411	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+19.1.JPG	      0		349	372													Open Water			Open					100.0
+19.1.JPG	      0		1036	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+19.1.JPG	      0		1724	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+19.1.JPG	      0		2411	372													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+19.1.JPG	      0		349	1106													Open Water			Open					70.6
+19.1.JPG	      0		1036	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+19.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300908			45.2
+19.1.JPG	      0		2411	1106													Macroalgae	Erect fine branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300908			70.6
+19.1.JPG	      0		349	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			57.5
+19.1.JPG	      0		1036	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+19.1.JPG	      0		1724	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+19.1.JPG	      0		2411	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			57.5
+19.1.JPG	      0		349	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			70.6
+19.1.JPG	      0		1036	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+19.1.JPG	      0		1724	2574													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			45.2
+19.1.JPG	      0		2411	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+19.1.JPG	      0		349	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+19.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+19.1.JPG	      0		1724	3308													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+19.1.JPG	      0		2411	3308													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+2.1.JPG	      0		379	404													Open Water			Open					100.0
+2.1.JPG	      0		1126	404													Open Water			Open					84.0
+2.1.JPG	      0		1874	404													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+2.1.JPG	      0		2621	404													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+2.1.JPG	      0		379	1202													Open Water			Open					70.6
+2.1.JPG	      0		1126	1202													Open Water			Open					45.2
+2.1.JPG	      0		1874	1202													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+2.1.JPG	      0		2621	1202													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+2.1.JPG	      0		379	2000													Open Water			Open					57.5
+2.1.JPG	      0		1126	2000													Open Water			Open					19.2
+2.1.JPG	      0		1874	2000													Sponges	Erect forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000912			19.2
+2.1.JPG	      0		2621	2000													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			57.5
+2.1.JPG	      0		379	2798													Open Water			Open					70.6
+2.1.JPG	      0		1126	2798													Open Water			Open					45.2
+2.1.JPG	      0		1874	2798													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+2.1.JPG	      0		2621	2798													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			70.6
+2.1.JPG	      0		379	3596													Open Water			Open					100.0
+2.1.JPG	      0		1126	3596													Open Water			Open					84.0
+2.1.JPG	      0		1874	3596													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+2.1.JPG	      0		2621	3596													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+20.1.JPG	      0		349	372													Open Water			Open					100.0
+20.1.JPG	      0		1036	372													Open Water			Open					84.0
+20.1.JPG	      0		1724	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+20.1.JPG	      0		2411	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+20.1.JPG	      0		349	1106													Open Water			Open					70.6
+20.1.JPG	      0		1036	1106													Open Water			Open					45.2
+20.1.JPG	      0		1724	1106													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			45.2
+20.1.JPG	      0		2411	1106													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			70.6
+20.1.JPG	      0		349	1840													Open Water			Open					57.5
+20.1.JPG	      0		1036	1840													Open Water			Open					19.2
+20.1.JPG	      0		1724	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			19.2
+20.1.JPG	      0		2411	1840													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			57.5
+20.1.JPG	      0		349	2574													Open Water			Open					70.6
+20.1.JPG	      0		1036	2574													Open Water			Open					45.2
+20.1.JPG	      0		1724	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+20.1.JPG	      0		2411	2574													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+20.1.JPG	      0		349	3308													Open Water			Open					100.0
+20.1.JPG	      0		1036	3308													Open Water			Open					84.0
+20.1.JPG	      0		1724	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+20.1.JPG	      0		2411	3308													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+21.1.JPG	      0		349	372													Open Water			Open					100.0
+21.1.JPG	      0		1036	372													Open Water			Open					84.0
+21.1.JPG	      0		1724	372													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+21.1.JPG	      0		2411	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+21.1.JPG	      0		349	1106													Open Water			Open					70.6
+21.1.JPG	      0		1036	1106													Open Water			Open					45.2
+21.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+21.1.JPG	      0		2411	1106													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+21.1.JPG	      0		349	1840													Open Water			Open					57.5
+21.1.JPG	      0		1036	1840													Open Water			Open					19.2
+21.1.JPG	      0		1724	1840													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+21.1.JPG	      0		2411	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+21.1.JPG	      0		349	2574													Open Water			Open					70.6
+21.1.JPG	      0		1036	2574													Open Water			Open					45.2
+21.1.JPG	      0		1724	2574													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+21.1.JPG	      0		2411	2574													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			70.6
+21.1.JPG	      0		349	3308													Open Water			Open					100.0
+21.1.JPG	      0		1036	3308													Open Water			Open					84.0
+21.1.JPG	      0		1724	3308													Open Water			Open					84.0
+21.1.JPG	      0		2411	3308													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+22.1.JPG	      0		349	372													Open Water			Open					100.0
+22.1.JPG	      0		1036	372													Open Water			Open					84.0
+22.1.JPG	      0		1724	372													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+22.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+22.1.JPG	      0		349	1106													Open Water			Open					70.6
+22.1.JPG	      0		1036	1106													Open Water			Open					45.2
+22.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+22.1.JPG	      0		2411	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+22.1.JPG	      0		349	1840													Open Water			Open					57.5
+22.1.JPG	      0		1036	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+22.1.JPG	      0		1724	1840													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+22.1.JPG	      0		2411	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+22.1.JPG	      0		349	2574													Open Water			Open					70.6
+22.1.JPG	      0		1036	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+22.1.JPG	      0		1724	2574													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+22.1.JPG	      0		2411	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+22.1.JPG	      0		349	3308													Open Water			Open					100.0
+22.1.JPG	      0		1036	3308													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			84.0
+22.1.JPG	      0		1724	3308													Macroalgae	Large canopy-forming	Scytothalia dorycarpa			54102005			84.0
+22.1.JPG	      0		2411	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+23.1.JPG	      0		349	372													Open Water			Open					100.0
+23.1.JPG	      0		1036	372													Open Water			Open					84.0
+23.1.JPG	      0		1724	372													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+23.1.JPG	      0		2411	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+23.1.JPG	      0		349	1106													Open Water			Open					70.6
+23.1.JPG	      0		1036	1106													Open Water			Open					45.2
+23.1.JPG	      0		1724	1106													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+23.1.JPG	      0		2411	1106													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+23.1.JPG	      0		349	1840													Open Water			Open					57.5
+23.1.JPG	      0		1036	1840													Open Water			Open					19.2
+23.1.JPG	      0		1724	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+23.1.JPG	      0		2411	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+23.1.JPG	      0		349	2574													Open Water			Open					70.6
+23.1.JPG	      0		1036	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+23.1.JPG	      0		1724	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+23.1.JPG	      0		2411	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+23.1.JPG	      0		349	3308													Open Water			Open					100.0
+23.1.JPG	      0		1036	3308													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			84.0
+23.1.JPG	      0		1724	3308													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+23.1.JPG	      0		2411	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+24.1.JPG	      0		349	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+24.1.JPG	      0		1036	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+24.1.JPG	      0		1724	372													Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			84.0
+24.1.JPG	      0		2411	372													Open Water			Open					100.0
+24.1.JPG	      0		349	1106													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+24.1.JPG	      0		1036	1106													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			45.2
+24.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+24.1.JPG	      0		2411	1106													Open Water			Open					70.6
+24.1.JPG	      0		349	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+24.1.JPG	      0		1036	1840													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			19.2
+24.1.JPG	      0		1724	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+24.1.JPG	      0		2411	1840													Open Water			Open					57.5
+24.1.JPG	      0		349	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+24.1.JPG	      0		1036	2574													Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			45.2
+24.1.JPG	      0		1724	2574													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+24.1.JPG	      0		2411	2574													Open Water			Open					70.6
+24.1.JPG	      0		349	3308													Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			100.0
+24.1.JPG	      0		1036	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+24.1.JPG	      0		1724	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+24.1.JPG	      0		2411	3308													Open Water			Open					100.0
+25.1.JPG	      0		379	404													Open Water			Open					100.0
+25.1.JPG	      0		1126	404													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+25.1.JPG	      0		1874	404													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+25.1.JPG	      0		2621	404													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+25.1.JPG	      0		379	1202													Open Water			Open					70.6
+25.1.JPG	      0		1126	1202													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+25.1.JPG	      0		1874	1202													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+25.1.JPG	      0		2621	1202													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+25.1.JPG	      0		379	2000													Open Water			Open					57.5
+25.1.JPG	      0		1126	2000													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+25.1.JPG	      0		1874	2000													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			19.2
+25.1.JPG	      0		2621	2000													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+25.1.JPG	      0		379	2798													Open Water			Open					70.6
+25.1.JPG	      0		1126	2798													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+25.1.JPG	      0		1874	2798													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+25.1.JPG	      0		2621	2798													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+25.1.JPG	      0		379	3596													Open Water			Open					100.0
+25.1.JPG	      0		1126	3596													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+25.1.JPG	      0		1874	3596													Macroalgae	Erect fine branching	Red	Limited	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+25.1.JPG	      0		2621	3596													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+26.1.JPG	      0		349	372													Open Water			Open					100.0
+26.1.JPG	      0		1036	372													Open Water			Open					84.0
+26.1.JPG	      0		1724	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+26.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+26.1.JPG	      0		349	1106													Open Water			Open					70.6
+26.1.JPG	      0		1036	1106													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+26.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+26.1.JPG	      0		2411	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+26.1.JPG	      0		349	1840													Open Water			Open					57.5
+26.1.JPG	      0		1036	1840													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+26.1.JPG	      0		1724	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+26.1.JPG	      0		2411	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+26.1.JPG	      0		349	2574													Open Water			Open					70.6
+26.1.JPG	      0		1036	2574													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+26.1.JPG	      0		1724	2574													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+26.1.JPG	      0		2411	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+26.1.JPG	      0		349	3308													Open Water			Open					100.0
+26.1.JPG	      0		1036	3308													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+26.1.JPG	      0		1724	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+26.1.JPG	      0		2411	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+27.1.JPG	      0		349	372													Open Water			Open					100.0
+27.1.JPG	      0		1036	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+27.1.JPG	      0		1724	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+27.1.JPG	      0		2411	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+27.1.JPG	      0		349	1106													Open Water			Open					70.6
+27.1.JPG	      0		1036	1106													Open Water			Open					45.2
+27.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+27.1.JPG	      0		2411	1106													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+27.1.JPG	      0		349	1840													Open Water			Open					57.5
+27.1.JPG	      0		1036	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			19.2
+27.1.JPG	      0		1724	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			19.2
+27.1.JPG	      0		2411	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+27.1.JPG	      0		349	2574													Open Water			Open					70.6
+27.1.JPG	      0		1036	2574													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+27.1.JPG	      0		1724	2574													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+27.1.JPG	      0		2411	2574													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+27.1.JPG	      0		349	3308													Open Water			Open					100.0
+27.1.JPG	      0		1036	3308													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+27.1.JPG	      0		1724	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+27.1.JPG	      0		2411	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+28.1.JPG	      0		379	404													Open Water			Open					100.0
+28.1.JPG	      0		1126	404													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+28.1.JPG	      0		1874	404													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+28.1.JPG	      0		2621	404													Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+28.1.JPG	      0		379	1202													Open Water			Open					70.6
+28.1.JPG	      0		1126	1202													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+28.1.JPG	      0		1874	1202													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+28.1.JPG	      0		2621	1202													Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+28.1.JPG	      0		379	2000													Open Water			Open					57.5
+28.1.JPG	      0		1126	2000													Open Water			Open					19.2
+28.1.JPG	      0		1874	2000													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+28.1.JPG	      0		2621	2000													Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+28.1.JPG	      0		379	2798													Open Water			Open					70.6
+28.1.JPG	      0		1126	2798													Open Water			Open					45.2
+28.1.JPG	      0		1874	2798													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+28.1.JPG	      0		2621	2798													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+28.1.JPG	      0		379	3596													Open Water			Open					100.0
+28.1.JPG	      0		1126	3596													Open Water			Open					84.0
+28.1.JPG	      0		1874	3596													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+28.1.JPG	      0		2621	3596													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+29.1.JPG	      0		349	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			100.0
+29.1.JPG	      0		1036	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+29.1.JPG	      0		1724	372													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+29.1.JPG	      0		2411	372													Open Water			Open					100.0
+29.1.JPG	      0		349	1106													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			70.6
+29.1.JPG	      0		1036	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+29.1.JPG	      0		1724	1106													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+29.1.JPG	      0		2411	1106													Open Water			Open					70.6
+29.1.JPG	      0		349	1840													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			57.5
+29.1.JPG	      0		1036	1840													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+29.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			19.2
+29.1.JPG	      0		2411	1840													Open Water			Open					57.5
+29.1.JPG	      0		349	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			70.6
+29.1.JPG	      0		1036	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+29.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+29.1.JPG	      0		2411	2574													Open Water			Open					70.6
+29.1.JPG	      0		349	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+29.1.JPG	      0		1036	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+29.1.JPG	      0		1724	3308													Open Water			Open					84.0
+29.1.JPG	      0		2411	3308													Open Water			Open					100.0
+30.1.JPG	      0		349	372													Open Water			Open					100.0
+30.1.JPG	      0		1036	372													Open Water			Open					84.0
+30.1.JPG	      0		1724	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+30.1.JPG	      0		2411	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+30.1.JPG	      0		349	1106													Open Water			Open					70.6
+30.1.JPG	      0		1036	1106													Open Water			Open					45.2
+30.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+30.1.JPG	      0		2411	1106													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			70.6
+30.1.JPG	      0		349	1840													Open Water			Open					57.5
+30.1.JPG	      0		1036	1840													Open Water			Open					19.2
+30.1.JPG	      0		1724	1840													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+30.1.JPG	      0		2411	1840													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			57.5
+30.1.JPG	      0		349	2574													Open Water			Open					70.6
+30.1.JPG	      0		1036	2574													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+30.1.JPG	      0		1724	2574													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			45.2
+30.1.JPG	      0		2411	2574													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			70.6
+30.1.JPG	      0		349	3308													Open Water			Open					100.0
+30.1.JPG	      0		1036	3308													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			84.0
+30.1.JPG	      0		1724	3308													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+30.1.JPG	      0		2411	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+31.1.JPG	      0		349	372													Open Water			Open					100.0
+31.1.JPG	      0		1036	372													Open Water			Open					84.0
+31.1.JPG	      0		1724	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+31.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+31.1.JPG	      0		349	1106													Open Water			Open					70.6
+31.1.JPG	      0		1036	1106													Open Water			Open					45.2
+31.1.JPG	      0		1724	1106													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+31.1.JPG	      0		2411	1106													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+31.1.JPG	      0		349	1840													Open Water			Open					57.5
+31.1.JPG	      0		1036	1840													Open Water			Open					19.2
+31.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			19.2
+31.1.JPG	      0		2411	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+31.1.JPG	      0		349	2574													Open Water			Open					70.6
+31.1.JPG	      0		1036	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+31.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+31.1.JPG	      0		2411	2574													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+31.1.JPG	      0		349	3308													Open Water			Open					100.0
+31.1.JPG	      0		1036	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+31.1.JPG	      0		1724	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+31.1.JPG	      0		2411	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+32.1.JPG	      0		349	372													Open Water			Open					100.0
+32.1.JPG	      0		1036	372													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+32.1.JPG	      0		1724	372													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+32.1.JPG	      0		2411	372													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+32.1.JPG	      0		349	1106													Open Water			Open					70.6
+32.1.JPG	      0		1036	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+32.1.JPG	      0		1724	1106													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+32.1.JPG	      0		2411	1106													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			70.6
+32.1.JPG	      0		349	1840													Open Water			Open					57.5
+32.1.JPG	      0		1036	1840													Open Water			Open					19.2
+32.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			19.2
+32.1.JPG	      0		2411	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			57.5
+32.1.JPG	      0		349	2574													Open Water			Open					70.6
+32.1.JPG	      0		1036	2574													Open Water			Open					45.2
+32.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+32.1.JPG	      0		2411	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			70.6
+32.1.JPG	      0		349	3308													Open Water			Open					100.0
+32.1.JPG	      0		1036	3308													Open Water			Open					84.0
+32.1.JPG	      0		1724	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+32.1.JPG	      0		2411	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+33.1.JPG	      0		349	372													Open Water			Open					100.0
+33.1.JPG	      0		1036	372													Open Water			Open					84.0
+33.1.JPG	      0		1724	372													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+33.1.JPG	      0		2411	372													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+33.1.JPG	      0		349	1106													Open Water			Open					70.6
+33.1.JPG	      0		1036	1106													Open Water			Open					45.2
+33.1.JPG	      0		1724	1106													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+33.1.JPG	      0		2411	1106													Consolidated	Boulder	Veneer	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	82001003			70.6
+33.1.JPG	      0		349	1840													Open Water			Open					57.5
+33.1.JPG	      0		1036	1840													Open Water			Open					19.2
+33.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			19.2
+33.1.JPG	      0		2411	1840													Consolidated	Rock	No biota	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+33.1.JPG	      0		349	2574													Open Water			Open					70.6
+33.1.JPG	      0		1036	2574													Open Water			Open					45.2
+33.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+33.1.JPG	      0		2411	2574													Consolidated	Rock	No biota	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+33.1.JPG	      0		349	3308													Open Water			Open					100.0
+33.1.JPG	      0		1036	3308													Open Water			Open					84.0
+33.1.JPG	      0		1724	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+33.1.JPG	      0		2411	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+34.1.JPG	      0		349	372													Open Water			Open					100.0
+34.1.JPG	      0		1036	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+34.1.JPG	      0		1724	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+34.1.JPG	      0		2411	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+34.1.JPG	      0		349	1106													Open Water			Open					70.6
+34.1.JPG	      0		1036	1106													Sponges	Small mixed		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+34.1.JPG	      0		1724	1106													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+34.1.JPG	      0		2411	1106													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+34.1.JPG	      0		349	1840													Open Water			Open					57.5
+34.1.JPG	      0		1036	1840													Open Water			Open					19.2
+34.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			19.2
+34.1.JPG	      0		2411	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			57.5
+34.1.JPG	      0		349	2574													Open Water			Open					70.6
+34.1.JPG	      0		1036	2574													Open Water			Open					45.2
+34.1.JPG	      0		1724	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+34.1.JPG	      0		2411	2574													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+34.1.JPG	      0		349	3308													Open Water			Open					100.0
+34.1.JPG	      0		1036	3308													Open Water			Open					84.0
+34.1.JPG	      0		1724	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+34.1.JPG	      0		2411	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+35.1.JPG	      0		349	372													Open Water			Open					100.0
+35.1.JPG	      0		1036	372													Open Water			Open					84.0
+35.1.JPG	      0		1724	372													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+35.1.JPG	      0		2411	372													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+35.1.JPG	      0		349	1106													Open Water			Open					70.6
+35.1.JPG	      0		1036	1106													Open Water			Open					45.2
+35.1.JPG	      0		1724	1106													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+35.1.JPG	      0		2411	1106													Consolidated	Rock	Veneer	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			70.6
+35.1.JPG	      0		349	1840													Open Water			Open					57.5
+35.1.JPG	      0		1036	1840													Open Water			Open					19.2
+35.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			19.2
+35.1.JPG	      0		2411	1840													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			57.5
+35.1.JPG	      0		349	2574													Open Water			Open					70.6
+35.1.JPG	      0		1036	2574													Open Water			Open					45.2
+35.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+35.1.JPG	      0		2411	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			70.6
+35.1.JPG	      0		349	3308													Open Water			Open					100.0
+35.1.JPG	      0		1036	3308													Open Water			Open					84.0
+35.1.JPG	      0		1724	3308													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+35.1.JPG	      0		2411	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+36.1.JPG	      0		349	372													Open Water			Open					100.0
+36.1.JPG	      0		1036	372													Open Water			Open					84.0
+36.1.JPG	      0		1724	372													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+36.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+36.1.JPG	      0		349	1106													Open Water			Open					70.6
+36.1.JPG	      0		1036	1106													Open Water			Open					45.2
+36.1.JPG	      0		1724	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+36.1.JPG	      0		2411	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+36.1.JPG	      0		349	1840													Open Water			Open					57.5
+36.1.JPG	      0		1036	1840													Open Water			Open					19.2
+36.1.JPG	      0		1724	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			19.2
+36.1.JPG	      0		2411	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+36.1.JPG	      0		349	2574													Open Water			Open					70.6
+36.1.JPG	      0		1036	2574													Open Water			Open					45.2
+36.1.JPG	      0		1724	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+36.1.JPG	      0		2411	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+36.1.JPG	      0		349	3308													Open Water			Open					100.0
+36.1.JPG	      0		1036	3308													Open Water			Open					84.0
+36.1.JPG	      0		1724	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+36.1.JPG	      0		2411	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+37.1.JPG	      0		349	372													Open Water			Open					100.0
+37.1.JPG	      0		1036	372													Open Water			Open					84.0
+37.1.JPG	      0		1724	372													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+37.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+37.1.JPG	      0		349	1106													Open Water			Open					70.6
+37.1.JPG	      0		1036	1106													Open Water			Open					45.2
+37.1.JPG	      0		1724	1106													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+37.1.JPG	      0		2411	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+37.1.JPG	      0		349	1840													Open Water			Open					57.5
+37.1.JPG	      0		1036	1840													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			19.2
+37.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			19.2
+37.1.JPG	      0		2411	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+37.1.JPG	      0		349	2574													Open Water			Open					70.6
+37.1.JPG	      0		1036	2574													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+37.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+37.1.JPG	      0		2411	2574													Seagrasses	Strap-like leaves	Thalassodendrum sp.	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	63600903			70.6
+37.1.JPG	      0		349	3308													Open Water			Open					100.0
+37.1.JPG	      0		1036	3308													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+37.1.JPG	      0		1724	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+37.1.JPG	      0		2411	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+38.1.JPG	      0		349	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+38.1.JPG	      0		1036	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+38.1.JPG	      0		1724	372													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			84.0
+38.1.JPG	      0		2411	372													Open Water			Open					100.0
+38.1.JPG	      0		349	1106													Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			70.6
+38.1.JPG	      0		1036	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+38.1.JPG	      0		1724	1106													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+38.1.JPG	      0		2411	1106													Open Water			Open					70.6
+38.1.JPG	      0		349	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+38.1.JPG	      0		1036	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			19.2
+38.1.JPG	      0		1724	1840													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			19.2
+38.1.JPG	      0		2411	1840													Open Water			Open					57.5
+38.1.JPG	      0		349	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+38.1.JPG	      0		1036	2574													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			45.2
+38.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+38.1.JPG	      0		2411	2574													Open Water			Open					70.6
+38.1.JPG	      0		349	3308													Consolidated	Rock	Turf mat	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+38.1.JPG	      0		1036	3308													Sponges	Massive forms		Open	.3. Good relief structure with some overhangs. >45 substrate slope.	10000903			84.0
+38.1.JPG	      0		1724	3308													Open Water			Open					84.0
+38.1.JPG	      0		2411	3308													Open Water			Open					100.0
+39.1.JPG	      0		379	404													Open Water			Open					100.0
+39.1.JPG	      0		1126	404													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+39.1.JPG	      0		1874	404													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+39.1.JPG	      0		2621	404													Consolidated	Rock	No biota	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	82001002			100.0
+39.1.JPG	      0		379	1202													Open Water			Open					70.6
+39.1.JPG	      0		1126	1202													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+39.1.JPG	      0		1874	1202													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+39.1.JPG	      0		2621	1202													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+39.1.JPG	      0		379	2000													Open Water			Open					57.5
+39.1.JPG	      0		1126	2000													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			19.2
+39.1.JPG	      0		1874	2000													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			19.2
+39.1.JPG	      0		2621	2000													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+39.1.JPG	      0		379	2798													Open Water			Open					70.6
+39.1.JPG	      0		1126	2798													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+39.1.JPG	      0		1874	2798													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+39.1.JPG	      0		2621	2798													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+39.1.JPG	      0		379	3596													Open Water			Open					100.0
+39.1.JPG	      0		1126	3596													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+39.1.JPG	      0		1874	3596													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+39.1.JPG	      0		2621	3596													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+4.1.JPG	      0		349	372													Open Water			Open					100.0
+4.1.JPG	      0		1036	372													Open Water			Open					84.0
+4.1.JPG	      0		1724	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+4.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+4.1.JPG	      0		349	1106													Open Water			Open					70.6
+4.1.JPG	      0		1036	1106													Open Water			Open					45.2
+4.1.JPG	      0		1724	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+4.1.JPG	      0		2411	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+4.1.JPG	      0		349	1840													Open Water			Open					57.5
+4.1.JPG	      0		1036	1840													Open Water			Open					19.2
+4.1.JPG	      0		1724	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			19.2
+4.1.JPG	      0		2411	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+4.1.JPG	      0		349	2574													Open Water			Open					70.6
+4.1.JPG	      0		1036	2574													Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			45.2
+4.1.JPG	      0		1724	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+4.1.JPG	      0		2411	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+4.1.JPG	      0		349	3308													Open Water			Open					100.0
+4.1.JPG	      0		1036	3308													Unconsolidated	Sand	mud (coarse sand)	Open	".0. Flat substrate, sandy, rubble with few features. ~0 substrate slope."	82001014			84.0
+4.1.JPG	      0		1724	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+4.1.JPG	      0		2411	3308													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+40.1.JPG	      0		349	372													Open Water			Open					100.0
+40.1.JPG	      0		1036	372													Open Water			Open					84.0
+40.1.JPG	      0		1724	372													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+40.1.JPG	      0		2411	372													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+40.1.JPG	      0		349	1106													Open Water			Open					70.6
+40.1.JPG	      0		1036	1106													Open Water			Open					45.2
+40.1.JPG	      0		1724	1106													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+40.1.JPG	      0		2411	1106													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			70.6
+40.1.JPG	      0		349	1840													Open Water			Open					57.5
+40.1.JPG	      0		1036	1840													Open Water			Open					19.2
+40.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			19.2
+40.1.JPG	      0		2411	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			57.5
+40.1.JPG	      0		349	2574													Open Water			Open					70.6
+40.1.JPG	      0		1036	2574													Open Water			Open					45.2
+40.1.JPG	      0		1724	2574													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			45.2
+40.1.JPG	      0		2411	2574													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			70.6
+40.1.JPG	      0		349	3308													Open Water			Open					100.0
+40.1.JPG	      0		1036	3308													Open Water			Open					84.0
+40.1.JPG	      0		1724	3308													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+40.1.JPG	      0		2411	3308													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+5.1.JPG	      0		349	372													Open Water			Open					100.0
+5.1.JPG	      0		1036	372													Open Water			Open					84.0
+5.1.JPG	      0		1724	372													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+5.1.JPG	      0		2411	372													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			100.0
+5.1.JPG	      0		349	1106													Open Water			Open					70.6
+5.1.JPG	      0		1036	1106													Open Water			Open					45.2
+5.1.JPG	      0		1724	1106													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+5.1.JPG	      0		2411	1106													Sponges	Small mixed		Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	10000000			70.6
+5.1.JPG	      0		349	1840													Open Water			Open					57.5
+5.1.JPG	      0		1036	1840													Open Water			Open					19.2
+5.1.JPG	      0		1724	1840													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			19.2
+5.1.JPG	      0		2411	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			57.5
+5.1.JPG	      0		349	2574													Open Water			Open					70.6
+5.1.JPG	      0		1036	2574													Open Water			Open					45.2
+5.1.JPG	      0		1724	2574													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+5.1.JPG	      0		2411	2574													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			70.6
+5.1.JPG	      0		349	3308													Open Water			Open					100.0
+5.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+5.1.JPG	      0		1724	3308													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+5.1.JPG	      0		2411	3308													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			100.0
+6.1.JPG	      0		349	372													Open Water			Open					100.0
+6.1.JPG	      0		1036	372													Seagrasses	Strap-like leaves	Other sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			84.0
+6.1.JPG	      0		1724	372													Seagrasses	Strap-like leaves	Other sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			84.0
+6.1.JPG	      0		2411	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+6.1.JPG	      0		349	1106													Open Water			Open					70.6
+6.1.JPG	      0		1036	1106													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+6.1.JPG	      0		1724	1106													Seagrasses	Strap-like leaves	Other sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			45.2
+6.1.JPG	      0		2411	1106													Seagrasses	Strap-like leaves	Other sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			70.6
+6.1.JPG	      0		349	1840													Open Water			Open					57.5
+6.1.JPG	      0		1036	1840													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			19.2
+6.1.JPG	      0		1724	1840													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			19.2
+6.1.JPG	      0		2411	1840													Seagrasses	Strap-like leaves	Other sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			57.5
+6.1.JPG	      0		349	2574													Open Water			Open					70.6
+6.1.JPG	      0		1036	2574													Open Water			Open					45.2
+6.1.JPG	      0		1724	2574													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+6.1.JPG	      0		2411	2574													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+6.1.JPG	      0		349	3308													Open Water			Open					100.0
+6.1.JPG	      0		1036	3308													Open Water			Open					84.0
+6.1.JPG	      0		1724	3308													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			84.0
+6.1.JPG	      0		2411	3308													Seagrasses	Strap-like leaves	Other sp.	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	63600903			100.0
+7.1.JPG	      0		349	372													Open Water			Open					100.0
+7.1.JPG	      0		1036	372													Open Water			Open					84.0
+7.1.JPG	      0		1724	372													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+7.1.JPG	      0		2411	372													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			100.0
+7.1.JPG	      0		349	1106													Open Water			Open					70.6
+7.1.JPG	      0		1036	1106													Open Water			Open					45.2
+7.1.JPG	      0		1724	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			45.2
+7.1.JPG	      0		2411	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			70.6
+7.1.JPG	      0		349	1840													Open Water			Open					57.5
+7.1.JPG	      0		1036	1840													Open Water			Open					19.2
+7.1.JPG	      0		1724	1840													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			19.2
+7.1.JPG	      0		2411	1840													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			57.5
+7.1.JPG	      0		349	2574													Open Water			Open					70.6
+7.1.JPG	      0		1036	2574													Open Water			Open					45.2
+7.1.JPG	      0		1724	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+7.1.JPG	      0		2411	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+7.1.JPG	      0		349	3308													Open Water			Open					100.0
+7.1.JPG	      0		1036	3308													Macroalgae	Large canopy-forming	Ecklonia radiata	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			84.0
+7.1.JPG	      0		1724	3308													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			84.0
+7.1.JPG	      0		2411	3308													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+8.1.JPG	      0		349	372													Open Water			Open					100.0
+8.1.JPG	      0		1036	372													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+8.1.JPG	      0		1724	372													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			84.0
+8.1.JPG	      0		2411	372													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0
+8.1.JPG	      0		349	1106													Open Water			Open					70.6
+8.1.JPG	      0		1036	1106													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			45.2
+8.1.JPG	      0		1724	1106													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			45.2
+8.1.JPG	      0		2411	1106													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			70.6
+8.1.JPG	      0		349	1840													Sponges	Massive forms		Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000903			57.5
+8.1.JPG	      0		1036	1840													Sponges	Massive forms		Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000903			19.2
+8.1.JPG	      0		1724	1840													Sponges	Massive forms		Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000903			19.2
+8.1.JPG	      0		2411	1840													Macroalgae	Large canopy-forming	Ecklonia radiata	Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	54080001			57.5
+8.1.JPG	      0		349	2574													Sponges	Massive forms		Open	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000903			70.6
+8.1.JPG	      0		1036	2574													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			45.2
+8.1.JPG	      0		1724	2574													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			45.2
+8.1.JPG	      0		2411	2574													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			70.6
+8.1.JPG	      0		349	3308													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			100.0
+8.1.JPG	      0		1036	3308													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			84.0
+8.1.JPG	      0		1724	3308													Sponges	Small mixed		Limited	".5. Exceptional structural complexity, numerous large holes and caves. Vertical wall. ~90 substrate slope."	10000000			84.0
+8.1.JPG	      0		2411	3308													Sponges	Small mixed		Limited	".4. High structural complexity, fissures and caves. Vertical wall. ~90 substrate slope."	10000000			100.0
+9.1.JPG	      0		349	372													Open Water			Open					100.0
+9.1.JPG	      0		1036	372													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			84.0
+9.1.JPG	      0		1724	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			84.0
+9.1.JPG	      0		2411	372													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			100.0
+9.1.JPG	      0		349	1106													Open Water			Open					70.6
+9.1.JPG	      0		1036	1106													Macroalgae	Erect course branching	Brown	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	80300904			45.2
+9.1.JPG	      0		1724	1106													Unconsolidated	Sand	mud (coarse sand)	Open	.1. Some relief features amongst mostly flat substrate/sand/rubble. <45 degree substrate slope.	82001014			45.2
+9.1.JPG	      0		2411	1106													Macroalgae	Erect fine branching	Red	Open	.2. Mostly relief features amongst some flat substrate or rubble. ~45 substrate slope.	90300910			70.6
+9.1.JPG	      0		349	1840													Open Water			Open					57.5
+9.1.JPG	      0		1036	1840													Open Water			Open					19.2
+9.1.JPG	      0		1724	1840													Macroalgae	Erect course branching	Brown	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	80300904			19.2
+9.1.JPG	      0		2411	1840													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			57.5
+9.1.JPG	      0		349	2574													Open Water			Open					70.6
+9.1.JPG	      0		1036	2574													Open Water			Open					45.2
+9.1.JPG	      0		1724	2574													Macroalgae	Erect fine branching	Red	Open	.3. Good relief structure with some overhangs. >45 substrate slope.	90300910			45.2
+9.1.JPG	      0		2411	2574													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			70.6
+9.1.JPG	      0		349	3308													Open Water			Open					100.0
+9.1.JPG	      0		1036	3308													Open Water			Open					84.0
+9.1.JPG	      0		1724	3308													Open Water			Open					84.0
+9.1.JPG	      0		2411	3308													Sponges	Small mixed		Limited	.3. Good relief structure with some overhangs. >45 substrate slope.	10000000			100.0

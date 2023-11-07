@@ -24,7 +24,7 @@ habitat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/sta
   dplyr::select(campaignid, sample, habitat, number) %>%
   group_by(campaignid, sample, habitat) %>%
   dplyr::tally(number, name = "number") %>%
-  dplyr::mutate(total.points.annotated = sum(number)) %>%
+  dplyr::mutate(total_points_annotated = sum(number)) %>%
   ungroup() %>%
   pivot_wider(names_from = "habitat", values_from = "number", values_fill = 0) %>%
   dplyr::mutate(reef = Macroalgae + Seagrasses + `Sessile invertebrates` + `Consolidated (hard)`) %>%
@@ -63,7 +63,7 @@ plot.relief <- readRDS(paste0("1. Example R workflows (scripts to download)/data
 # Plot and visualise the broad habitat dataset
 gg.broad.hab <- ggplot() +
   geom_quasirandom(data = tidy.habitat,                                       # Create a dotplot - each point represents a sample
-                   aes(x = total.points.annotated, y = habitat), 
+                   aes(x = total_points_annotated, y = habitat), 
                    groupOnX = F, method = "quasirandom",
                    alpha = 0.25, size = 1.8, width = 0.2) +
   labs(x = "Number of points", y = "") +

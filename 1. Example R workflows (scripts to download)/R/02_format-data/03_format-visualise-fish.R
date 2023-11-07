@@ -11,8 +11,8 @@ metadata.bathy.derivatives <- readRDS(paste0("1. Example R workflows (scripts to
 
 habitat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/",
                                       name, "_Tidy-habitat.rds")) %>%
-  dplyr::mutate(number = number / total.points.annotated) %>%
-  dplyr::select(campaignid, sample, longitude, latitude, mbdepth, slope, aspect, 
+  dplyr::mutate(number = number / total_points_annotated) %>%
+  dplyr::select(campaignid, sample, longitude, latitude, depth, mbdepth, slope, aspect, 
                 TPI, TRI, roughness, detrended, habitat, number, 
                 mean.relief, sd.relief) %>%
   pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>%
@@ -42,19 +42,20 @@ tidy.maxn <- readRDS(paste0("1. Example R workflows (scripts to download)/data/s
   dplyr::summarise(maxn = sum(maxn)) %>%
   pivot_wider(names_from = "scientific", values_from = maxn, values_fill = 0) %>%
   dplyr::ungroup() %>%
-  dplyr::mutate(total.abundance = rowSums(.[, 3:(ncol(.))], na.rm = TRUE ),
-                species.richness = rowSums(.[, 3:(ncol(.))] > 0)) %>% 
-  dplyr::select(campaignid, sample, total.abundance, species.richness) %>%
-  pivot_longer(cols = c("total.abundance", "species.richness"),
+  dplyr::mutate(total_abundance = rowSums(.[, 3:(ncol(.))], na.rm = TRUE ),
+                species_richness = rowSums(.[, 3:(ncol(.))] > 0)) %>% 
+  dplyr::select(campaignid, sample, total_abundance, species_richness) %>%
+  pivot_longer(cols = c("total_abundance", "species_richness"),
                names_to = "response", values_to = "number") %>%
   dplyr::left_join(habitat) %>%
   glimpse()
 
 saveRDS(tidy.maxn, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                   name, "_Tidy-maxn.rds"))
+                                   name, "_Tidy-count.rds"))
 
 lengths <- readRDS(paste0("1. Example R workflows (scripts to download)/data/staging/", name, 
                            "_Expanded-length.rds")) %>%
+  dplyr::mutate(depth = as.numeric(depth)) %>%                                  # To avoid breaking during left_join
   left_join(habitat) %>%
   left_join(maturity) %>%
   dplyr::mutate(number = 1) %>%
@@ -71,33 +72,36 @@ ggplot() +
   coord_sf()
 
 metadata.length <- lengths %>%
-  distinct(campaignid, sample, latitude, longitude, status, mbdepth, slope, aspect,
-           tpi, tri, roughness, detrended, mean_relief, reef) %>%
+  distinct(campaignid, sample, status) %>%
   glimpse()
 
 greater.mat <- indicator.species %>%
   dplyr::filter(length > l50) %>%
-  dplyr::group_by(sample) %>%
+  dplyr::group_by(campaignid, sample) %>%
   dplyr::summarise(number = sum(number)) %>%
+  ungroup() %>%
   right_join(metadata.length) %>%
   dplyr::mutate(number = ifelse(is.na(number), 0, number)) %>%
-  dplyr::mutate(scientific = ">Lm") %>%
+  dplyr::mutate(response = "greater than Lm") %>%
+  left_join(habitat) %>%
   dplyr::glimpse()
 
 smaller.mat <- indicator.species %>%
   dplyr::filter(length < l50) %>%
-  dplyr::group_by(sample) %>%
+  dplyr::group_by(campaignid, sample) %>%
   dplyr::summarise(number = sum(number)) %>%
+  ungroup() %>%
   right_join(metadata.length) %>%
   dplyr::mutate(number = ifelse(is.na(number), 0, number)) %>%
-  dplyr::mutate(scientific = "<Lm") %>%
+  dplyr::mutate(response = "smaller than Lm") %>%
+  left_join(habitat) %>%
   dplyr::glimpse()
 
-tidy.lengths <- bind_rows(greater.mat, smaller.mat) %>%
+tidy.length <- bind_rows(greater.mat, smaller.mat) %>%
   glimpse()
 
-saveRDS(tidy.lengths, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                     name, "_Tidy-lengths.rds"))
+saveRDS(tidy.length, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
+                                     name, "_Tidy-length.rds"))
 
 # Visualise
 sanctuaries <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/marine-parks-all.shp") %>%
