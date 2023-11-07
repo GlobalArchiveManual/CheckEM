@@ -10,6 +10,7 @@ install.packages('devtools')
 library('devtools')
 
 devtools::install_github("GlobalArchiveManual/CheckEM")
+library(CheckEM)
 ```
 
 ## CheckEM is available as a shiny app
