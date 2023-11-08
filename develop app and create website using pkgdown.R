@@ -35,4 +35,3 @@ pkgdown::build_site()
 
 # Turn into a github page (need to commit and push changes for it to show up)
 usethis::use_pkgdown_github_pages() # CHOOSE NO TO OVERWRITING THE YML FILE
-
