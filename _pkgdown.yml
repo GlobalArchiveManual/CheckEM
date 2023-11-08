@@ -8,6 +8,7 @@ reference:
   - clean_names
   - read_metadata
   - read_TM
+  - read_files_txt
 - title: Shiny App
   desc: Functions for shiny app
   contents: runCheckEM
@@ -20,11 +21,11 @@ navbar:
   - text: User Guides
     menu:
     - text: CheckEM shiny app
-      href: CheckEM_user_guide.pdf
+      href: manuals/CheckEM_user_guide.pdf
     - text: EventMeasure annotation guide
-      href: EventMeasure_annotation_guide.pdf
+      href: manuals/EventMeasure_annotation_guide.pdf
     - text: TransectMeasure annotation guide
-      href: TransectMeasure_annotation_guide.pdf
+      href: manuals/TransectMeasure_annotation_guide.pdf
   - text: R Workflows
     menu:
     - text: '-------'
