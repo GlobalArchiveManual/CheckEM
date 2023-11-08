@@ -2,7 +2,7 @@
 [![Hits](hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FGlobalArchiveManual%2FCheckEM&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=views&edge_flat=false)](https://hits.seeyoufarm.com)
 
 # CheckEM
-CheckEM is an R package and [shiny app](marine-ecology.shinyapps.io/CheckEM/) for checking, visualizing and analysing stereo-video annotation data.
+CheckEM is an R package and [shiny app](https://marine-ecology.shinyapps.io/CheckEM/) for checking, visualizing and analysing stereo-video annotation data.
 
 The idea behind CheckEM is to provide fish and benthic ecologists with a set of tools to quickly and effectively quality control, format and analyse their data collected using stereo-video methods. 
 
@@ -10,10 +10,10 @@ Here we have provided:
 
 * R workflows for fish and benthic annotation data sets using the functions in CheckEM.
 * A web based app hosted on shinyapps.io to enable users of stereo-video who aren't familiar with R to quality control and format their annotations
-* A [user guide for the CheckEM shiny app](manuals/CheckEM_user_guide.pdf)
-* Annotation guides for [EventMeasure](manuals/EventMeasure_annotation_guide.pdf) and [TransectMeasure](manuals/TransectMeasure_annotation_guide.pdf). 
+* A [user guide for the CheckEM shiny app](https://globalarchivemanual.github.io/CheckEM/articles/CheckEM_user_guide.pdf)
+* Annotation guides for [EventMeasure](https://globalarchivemanual.github.io/CheckEM/articles/EventMeasure_annotation_guide.pdf) and [TransectMeasure](https://globalarchivemanual.github.io/CheckEM/articles/TransectMeasure_annotation_guide.pdf). 
 
-We hope that our efforts to standardise the annotation and QC of stereo-video data will result in data which meet the [FAIR principles](ardc.edu.au/resource/fair-data/) of interoperability and reusability.
+We hope that our efforts to standardise the annotation and QC of stereo-video data will result in data which meet the [FAIR principles](https://ardc.edu.au/resource/fair-data/) of interoperability and reusability.
 
 ## To install in R
 ```
