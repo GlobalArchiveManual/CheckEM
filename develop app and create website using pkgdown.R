@@ -1,6 +1,6 @@
 # APP & PACKAGE DEVELOPMENT -----
 devtools::load_all()
-CheckEM::runCheckEM()
+# CheckEM::runCheckEM()
 
 # Run once to configure your package to use pkgdown
 # usethis::use_pkgdown()

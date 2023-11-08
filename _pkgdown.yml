@@ -1,13 +1,31 @@
 url: https://globalarchivemanual.github.io/CheckEM/
 template:
   bootstrap: 5
-
 reference:
-  - title: Functions for data formatting
-    desc:  Essential functionality for formatting stereo-video annotation
-    contents:
-      - clean_names
-  - title: Shiny App
-    desc: Functions for shiny app
-    contents:
-      - runCheckEM
+- title: Functions for data formatting
+  desc: Essential functionality for formatting stereo-video annotation
+  contents:
+  - clean_names
+  - read_metadata
+  - read_TM
+- title: Shiny App
+  desc: Functions for shiny app
+  contents: runCheckEM
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: Introduction to CheckEM
+      href: articles/runCheckEM.html
+    - text: '-------'
+    - text: Annotation guides
+    - text: EventMeasure
+      href: articles/ezyEM.html
+    - text: TransectMeasure
+      href: articles/ezyTM.html
+    - text: '-------'
+
