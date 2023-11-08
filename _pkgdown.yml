@@ -14,18 +14,23 @@ reference:
 navbar:
   title: ~
   type: default
+  structure:
+    right: github
   left:
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
+  - text: User Guides
     menu:
-    - text: Introduction to CheckEM
-      href: articles/runCheckEM.html
-    - text: '-------'
-    - text: Annotation guides
+    - text: CheckEM shiny app
+      href: articles/CheckEM.html
     - text: EventMeasure
       href: articles/ezyEM.html
     - text: TransectMeasure
       href: articles/ezyTM.html
-    - text: '-------'
+  - text: R Workflows
+    menu:
+    - text: Fish data from EventMeasure
+      href: articles/ezyEM.html
+    - text: Habitat data from TransectMeasure
+      href: articles/ezyTM.html
+  - text: Functions
+    href: reference/index.html
 
