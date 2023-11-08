@@ -22,7 +22,7 @@ navbar:
     - text: CheckEM shiny app
       href: CheckEM_user_guide.pdf
     - text: EventMeasure annotation guide
-      href: Eventmeasure_annotation_guide.pdf
+      href: EventMeasure_annotation_guide.pdf
     - text: TransectMeasure annotation guide
       href: TransectMeasure_annotation_guide.pdf
   - text: R Workflows
