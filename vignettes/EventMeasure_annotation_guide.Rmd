@@ -1,0 +1,13 @@
+---
+title: EventMeasure Annotation Guide
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{EventMeasure Workflow}
+  %\VignetteEncoding{UTF-8}
+---
+
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vT2GcWd3j8Wmh7EGLPTd1cVwp0raLuNwIi7uj4xhTHJREUTUmEixVs5wR9ld_zEcUV0tZehUUJH1pDY/pub?embedded=true" width = "100%" height = 1000>  </iframe>

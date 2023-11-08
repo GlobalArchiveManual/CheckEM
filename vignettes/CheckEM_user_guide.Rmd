@@ -1,0 +1,13 @@
+---
+title: CheckEM User Guide
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{EventMeasure Workflow}
+  %\VignetteEncoding{UTF-8}
+---
+
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vRRIOJQJHdD-c-q9HUNO5JRA4FHwUmeGVr6xKDZcC3P5N9DsQujING4tAzKNUh0lBq3L7FqHAKSsbh-/pub?embedded=true" width = "100%" height = 1000>  </iframe>

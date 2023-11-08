@@ -21,11 +21,11 @@ navbar:
   - text: User Guides
     menu:
     - text: CheckEM shiny app
-      href: articles/CheckEM_user_guide.pdf
+      href: articles/CheckEM_user_guide.html
     - text: EventMeasure annotation guide
-      href: articles/EventMeasure_annotation_guide.pdf
+      href: articles/EventMeasure_annotation_guide.html
     - text: TransectMeasure annotation guide
-      href: articles/TransectMeasure_annotation_guide.pdf
+      href: articles/TransectMeasure_annotation_guide.html
   - text: R Workflows
     menu:
     - text: '-------'
