@@ -2,8 +2,8 @@ url: https://globalarchivemanual.github.io/CheckEM/
 template:
   includes:
     in_header: |
-       <!-- Global site tag (gtag.js) - Google Analytics -->
-       <script src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script>
+       <!-- Global site tag (gtag.js) -->
+       <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script>
        <script>
          window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
