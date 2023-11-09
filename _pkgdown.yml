@@ -12,7 +12,7 @@ template:
          gtag('js', new Date());
 
          gtag('config', 'G-XRY4CFB9QS');
-       </script>'
+       </script>
   bootstrap: 5
 reference:
 - title: Functions for data formatting
