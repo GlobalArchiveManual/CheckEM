@@ -91,13 +91,13 @@ maturity <- maturity(validated) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
   dplyr::ungroup()
 
-# Get FB.Vulnerability, FB.Length_MAX and FB.LTypeMaxM, information from FishBase ----
+# Get fb_vulnerability, fb_length_max and fb_l_type_max, information from FishBase ----
 info <- species(validated) %>% 
   clean_names() %>%
-  dplyr::rename(FB.Length_MAX = length, 
-                FB.LTypeMaxM = ltypemaxm,
-                FB.Vulnerability = vulnerability) %>% # Length metrics are in cm
-  dplyr::select(species, speccode, fbname, FB.Length_MAX, FB.LTypeMaxM, FB.Vulnerability, subfamily) %>%
+  dplyr::rename(fb_length_max = length, 
+                fb_l_type_max = ltypemaxm,
+                fb_vulnerability = vulnerability) %>% # Length metrics are in cm
+  dplyr::select(species, speccode, fbname, fb_length_max, fb_l_type_max, fb_vulnerability, subfamily) %>%
   dplyr::rename(fishbase.scientific = species, 
                 fb.common.name = fbname) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
@@ -254,9 +254,9 @@ all.fishbase <- info %>%
   dplyr::full_join(complete.lw) %>%
   dplyr::select(fishbase.scientific, speccode, 
                 fb.length.at.maturity.cm, 
-                FB.Length_MAX, 
-                FB.LTypeMaxM, 
-                FB.Vulnerability, 
+                fb_length_max, 
+                fb_l_type_max, 
+                fb_vulnerability, 
                 FB.countries, 
                 FB.Status, 
                 Length.measure,

@@ -53,6 +53,7 @@ write.csv(catami, "annotation-schema/output/habitat/schema/benthic-annotation-sc
 saveRDS(catami, "annotation-schema/output/habitat/schema/benthic-annotation-schema-forward-facing.RDS")
 
 # Create TransectMeasure schema
+# First for the whole schema
 tm <- catami %>%
   dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
   dplyr::mutate(scientific = str_replace_all(scientific, c("NA NA" = ""))) %>%
@@ -65,6 +66,7 @@ tm <- catami %>%
   mutate_all(na_if, " ") %>%
   dplyr::filter(!caab_code %in% "82003000")
 
+# TODO remove the CAAB code from these
 # Split into a Biota/Substrate and Relief schema to have two caab codes.
 tm.hab <- tm %>%
   dplyr::filter(!level_2 %in% c("Relief"))

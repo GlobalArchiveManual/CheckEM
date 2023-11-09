@@ -1,0 +1,29 @@
+level_2	level_3	level_4	level_5	scientific	qualifiers	caab_code
+Ascidians						35000000
+Bacterial mats						72000901
+Bedforms						82002000
+Bioturbation						81000000
+Brachiopods						19100000
+Bryozoa						20000000
+Cnidaria						11500000
+Crustacea						27000000
+Echinoderms						25000000
+Fishes						37000000
+Jellies						80600903
+Macroalgae						80300000
+Molluscs						23000000
+Sea spiders						33000000
+Seagrasses						63600901
+Seagrasses					No epiphytes	63600901
+Seagrasses					Epiphytes algae	63600901
+Seagrasses					Epiphytes other	63600901
+Sessile invertebrates						00000002
+Sponges						10000000
+Unscorable						00000001
+Worms						80600901
+Substrate						82001000
+Substrate					Veneer	82001000
+Substrate					Iceberg scour	82001000
+Substrate					Storm damage	82001000
+Substrate					Urchin barren	82001000
+Substrate					Turf mat	82001000
