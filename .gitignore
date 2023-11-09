@@ -10,3 +10,6 @@ data/all_data.Rdata
 .RDataTmp
 docs
 inst/doc
+annotation-schema/data/raw/distributions
+annotation-schema/data/taxon.txt
+annotation-schema/data/spatial/
