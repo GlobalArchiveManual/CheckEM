@@ -1,12 +1,12 @@
 # APP & PACKAGE DEVELOPMENT -----
+# Load the package
 devtools::load_all()
+
+# Test the shiny app
 # CheckEM::runCheckEM()
 
 # Run once to configure your package to use pkgdown
 # usethis::use_pkgdown()
-
-# Load CheckEM package
-devtools::load_all()
 
 # Add  Code > Insert Roxygen Skeleton for every function in the R folder
 # Fill out the details
