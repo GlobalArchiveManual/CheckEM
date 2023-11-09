@@ -1,7 +1,7 @@
 url: https://globalarchivemanual.github.io/CheckEM/
 template:
   bootstrap: 5
-    includes:
+  includes:
     in_header: |
        <!-- Google tag (gtag.js) -->
        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script>
