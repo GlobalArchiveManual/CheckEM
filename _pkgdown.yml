@@ -1,7 +1,5 @@
 url: https://globalarchivemanual.github.io/CheckEM/
 template:
-
-template:
   includes:
     in_header: |
        <!-- Global site tag (gtag.js) - Google Analytics -->
