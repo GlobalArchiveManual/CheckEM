@@ -61,19 +61,19 @@ codes <- rfishbase::common_names(validated) %>%
 
 code_crosswalk_codes <- readRDS("annotation-schema/data/staging/code-crosswalk-codes.RDS")
 
-double.fb <- code.crosswalk.codes %>%
+double_fb <- code_crosswalk_codes %>%
   dplyr::group_by(speccode) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1) %>%
   ungroup() %>%
-  dplyr::left_join(code.crosswalk.codes) %>%
+  dplyr::left_join(code_crosswalk_codes) %>%
   dplyr::filter(!is.na(speccode))
 
-true.matches <- double.fb %>%
-  dplyr::filter(caab.scientific %in% fishbase.scientific) %>%
-  dplyr::select(caab_code, caab.scientific, speccode, fishbase.scientific)
+true_matches <- double_fb %>%
+  dplyr::filter(caab_scientific %in% fishbase_scientific) %>%
+  dplyr::select(caab_code, caab_scientific, speccode, fishbase_scientific)
 
-still.missing <- anti_join(double.fb %>% select(speccode), true.matches)
+still_missing <- anti_join(double_fb %>% select(speccode), true_matches)
 
 # Download maturity data ----
 # Filter to only Fork length measurements
@@ -82,18 +82,18 @@ still.missing <- anti_join(double.fb %>% select(speccode), true.matches)
 # Then change synonyms
 
 maturity <- maturity(validated) %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   # filter(type1 %in% "FL") %>% # Would be good to turn this on but it gets rid of a lot of species.
   filter(!is.na(lm)) %>%
   dplyr::group_by(species, speccode) %>%
-  dplyr::summarise(fb.length.at.maturity.cm = mean(lm)) %>%
-  dplyr::rename(fishbase.scientific = species) %>%
+  dplyr::summarise(fb_length_at_maturity_cm = mean(lm)) %>%
+  dplyr::rename(fishbase_scientific = species) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
   dplyr::ungroup()
 
 # Get FB.Vulnerability, FB.Length_MAX and FB.LTypeMaxM, information from FishBase ----
 info <- species(validated) %>% 
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::rename(FB.Length_MAX = length, 
                 FB.LTypeMaxM = ltypemaxm,
                 FB.Vulnerability = vulnerability) %>% # Length metrics are in cm
