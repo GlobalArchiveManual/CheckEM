@@ -34,6 +34,9 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/clean_names.html</loc>
   </url>
   <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/has_special_characters.html</loc>
+  </url>
+  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/index.html</loc>
   </url>
   <url>
@@ -47,5 +50,8 @@
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/runCheckEM.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/standardize_tibble.html</loc>
   </url>
 </urlset>
