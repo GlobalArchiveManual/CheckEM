@@ -1,0 +1,12 @@
+Rules for the repo
+
+# Dataframes
+- all lower case
+- words separated by _
+- colnames = clean_names()
+
+# RDS & CSVs
+- if campaign data
+  - CampaignID_all-lower-case.RDS
+- if not campaign data
+  - all-lower-case_underscores-seps-for-categories/ideas.RDS
