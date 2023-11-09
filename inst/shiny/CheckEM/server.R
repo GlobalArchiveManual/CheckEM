@@ -106,30 +106,40 @@ function(input, output, session) {
   
   output$score.plot <- renderPlot({
     
-    length.vs.maxn <- length.vs.maxn() %>%
-      dplyr::filter(!(maxn %in% 0 & length_maxn %in% 0))%>%
-      dplyr::mutate(difference = abs(difference)) %>%
-      dplyr::mutate(error = if_else(difference > 0, 1, 0)) #%>% glimpse()
-    
-    total.rows <- nrow(length.vs.maxn) #%>% glimpse()
-    total.errors <- sum(length.vs.maxn$error) #%>% glimpse()
-    
-    length.maxn.score <- round(((total.rows - total.errors)/ total.rows) * 100, 2)
-    
+    # All plots use the same metadata score
     metadata.score <- round(metadata.score(), 2)
+    
+
+    
+
     
     # TODO only include this if it is not a transect campaign
     count.score <- round(count.score(), 2)
-    length.score <- round(length.score(), 2)
     
-    length.v.3d <- length.v.3d()
-    
-    total.lengths <- sum(length.v.3d$number_of_length_measurements)
-    total <- sum(length.v.3d$total_measurements)
-    
-    length.percent.score <- round((total.lengths/total) * 100, 2)
     
     if(input$upload %in% "EM"){
+      
+      if(input$length %in% "Yes"){
+        
+        length.vs.maxn <- length.vs.maxn() %>%
+          dplyr::filter(!(maxn %in% 0 & length_maxn %in% 0))%>%
+          dplyr::mutate(difference = abs(difference)) %>%
+          dplyr::mutate(error = if_else(difference > 0, 1, 0)) #%>% glimpse()
+        
+        total.rows <- nrow(length.vs.maxn) #%>% glimpse()
+        total.errors <- sum(length.vs.maxn$error) #%>% glimpse()
+        
+        length.maxn.score <- round(((total.rows - total.errors)/ total.rows) * 100, 2)
+        
+        length.score <- round(length.score(), 2)
+        
+        length.v.3d <- length.v.3d()
+        
+        total.lengths <- sum(length.v.3d$number_of_length_measurements)
+        total <- sum(length.v.3d$total_measurements)
+        
+        length.percent.score <- round((total.lengths/total) * 100, 2)
+        
     
     dat <- data.frame(score = c("Sample Metadata", "% Length", "Count vs. Length", "Count", "Length"),
                       value = c(metadata.score, length.percent.score, length.maxn.score, count.score, length.score))
@@ -206,7 +216,76 @@ function(input, output, session) {
       geom_textpath(aes(y = value - 15, label = paste0(value, "%")), colour = "white", size = 5, fontface = "bold") +
       coord_polar() #start = 1.05
     
+      } else {
+        
+        dat <- data.frame(score = c("Sample Metadata", "Count"),
+                          value = c(metadata.score, count.score))
+        
+        dat$score <- fct_relevel(dat$score, "Count", "Sample Metadata")
+        
+        cols <- c("Sample Metadata" = "#99D199", 
+                  "Count" = "#ffe69c")
+        
+        p <- ggplot(dat, aes(score, value, fill = score)) +
+          scale_fill_manual(values = cols) +
+          xlab("") + ylab("") +
+          theme_classic() +
+          theme(legend.position = "none", 
+                axis.line = element_blank(), 
+                axis.text.y = element_blank() ,
+                axis.text.x = element_blank() ,
+                axis.ticks = element_blank()) +
+          
+          scale_y_continuous(limits = c(-50, 150)) + 
+          
+          geom_rect(xmin = 1.5, xmax = 2.5,
+                    ymin = 0,
+                    ymax = metadata.score, fill = "#99D199", color = "white", size = 2) +
+          
+          draw_line(x = c(1.51, 2.49), y = c(100, 100), color = "#008B00", size = 2) +
+          
+          geom_rect(xmin = 0.5, xmax = 1.5,
+                    ymin = 0,
+                    ymax = count.score, fill = "#ffe69c", color = "white", size = 2) +
+          
+          draw_line(x = c(0.51, 1.49), y = c(100, 100), color = "#FFD966", size = 2) +
+        
+          geom_rect(xmin = 1.5, xmax = 2.5,
+                    ymin = 110,
+                    ymax = 150, fill = "#008B00", color = "white", size = 2) +
+          geom_rect(xmin = 0.5, xmax = 1.5,
+                    ymin = 110,
+                    ymax = 150, fill = "#FFD966", color = "white", size = 2) +
+          
+          geom_textpath(y = 128, aes(x = score, label = score), colour = "white", size = 6.5, fontface = "bold") + 
+          
+          geom_textpath(aes(y = value - 15, label = paste0(value, "%")), colour = "white", size = 5, fontface = "bold") +
+          coord_polar() #start = 1.05
+        
+      }
+    
     } else {
+      
+      if(input$length %in% "Yes"){
+        
+        length.vs.maxn <- length.vs.maxn() %>%
+          dplyr::filter(!(maxn %in% 0 & length_maxn %in% 0))%>%
+          dplyr::mutate(difference = abs(difference)) %>%
+          dplyr::mutate(error = if_else(difference > 0, 1, 0)) #%>% glimpse()
+        
+        total.rows <- nrow(length.vs.maxn) #%>% glimpse()
+        total.errors <- sum(length.vs.maxn$error) #%>% glimpse()
+        
+        length.maxn.score <- round(((total.rows - total.errors)/ total.rows) * 100, 2)
+        
+        length.score <- round(length.score(), 2)
+        
+        length.v.3d <- length.v.3d()
+        
+        total.lengths <- sum(length.v.3d$number_of_length_measurements)
+        total <- sum(length.v.3d$total_measurements)
+        
+        length.percent.score <- round((total.lengths/total) * 100, 2)
       
       dat <- data.frame(score = c("Sample Metadata", "Count vs. Length", "Count", "Length"),
                         value = c(metadata.score, length.maxn.score, count.score, length.score))
@@ -272,6 +351,55 @@ function(input, output, session) {
         
         geom_textpath(aes(y = value - 15, label = paste0(value, "%")), colour = "white", size = 5, fontface = "bold") +
         coord_polar() #start = 1.05
+      
+      } else {
+        
+        # If they have no measured fish 
+        dat <- data.frame(score = c("Sample Metadata", "Count"),
+                          value = c(metadata.score, count.score))
+        
+        dat$score <- fct_relevel(dat$score, "Count", "Sample Metadata")
+        
+        cols <- c("Sample Metadata" = "#99D199", 
+                  "Count" = "#ffe69c")
+        
+        p <- ggplot(dat, aes(score, value, fill = score)) +
+          scale_fill_manual(values = cols) +
+          xlab("") + ylab("") +
+          theme_classic() +
+          theme(legend.position = "none", 
+                axis.line = element_blank(), 
+                axis.text.y = element_blank() ,
+                axis.text.x = element_blank() ,
+                axis.ticks = element_blank()) +
+          
+          scale_y_continuous(limits = c(-50, 150)) + 
+          
+          geom_rect(xmin = 1.5, xmax = 2.5,
+                    ymin = 0,
+                    ymax = metadata.score, fill = "#99D199", color = "white", size = 2) +
+          
+          draw_line(x = c(1.51, 2.49), y = c(100, 100), color = "#008B00", size = 2) +
+          
+          geom_rect(xmin = 0.5, xmax = 1.5,
+                    ymin = 0,
+                    ymax = count.score, fill = "#ffe69c", color = "white", size = 2) +
+          
+          draw_line(x = c(0.51, 1.49), y = c(100, 100), color = "#FFD966", size = 2) +
+          
+          geom_rect(xmin = 3.5, xmax = 4.5,
+                    ymin = 110,
+                    ymax = 150, fill = "#008B00", color = "white", size = 2) +
+          geom_rect(xmin = 0.5, xmax = 1.5,
+                    ymin = 110,
+                    ymax = 150, fill = "#FFD966", color = "white", size = 2) +
+          
+          geom_textpath(y = 128, aes(x = score, label = score), colour = "white", size = 6.5, fontface = "bold") + 
+          
+          geom_textpath(aes(y = value - 15, label = paste0(value, "%")), colour = "white", size = 5, fontface = "bold") +
+          coord_polar() #start = 1.05
+        
+      }
       
     }
       
@@ -7690,19 +7818,9 @@ function(input, output, session) {
         mutate(error = "sample.without.points") %>%
         mutate(across(everything(), as.character)) #%>% glimpse()
 
-      print("samples.without.length")
-      samples.without.length <- metadata.samples.without.length() %>%
-        mutate(error = "sample.without.length") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
-
       print("points.samples.without.metadata")
       points.samples.without.metadata <- points.samples.without.metadata() %>%
         mutate(error = "sample.in.points.without.metadata") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
-
-      print("length.samples.without.metadata")
-      length.samples.without.metadata <- length.samples.without.metadata() %>%
-        mutate(error = "sample.in.lengths.without.metadata") %>%
         mutate(across(everything(), as.character)) #%>% glimpse()
 
       print("samples.without.periods")
@@ -7728,16 +7846,27 @@ function(input, output, session) {
         mutate(error = "point.outside.period") %>%
         mutate(across(everything(), as.character)) #%>% glimpse()
 
-      print("lengths.outside.periods")
-      lengths.outside.periods <- lengths.outside.periods() %>%
-        mutate(error = "length.or.3D.point.outside.period") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
-
       print("points.no.number")
       points.no.number <- points.no.number() %>%
         mutate(error = "point.without.a.number") %>%
         mutate(across(everything(), as.character)) #%>% glimpse()
-
+      
+    if(input$length %in% "Yes"){
+      print("length.samples.without.metadata")
+      length.samples.without.metadata <- length.samples.without.metadata() %>%
+        mutate(error = "sample.in.lengths.without.metadata") %>%
+        mutate(across(everything(), as.character)) #%>% glimpse()
+      
+      print("lengths.outside.periods")
+      lengths.outside.periods <- lengths.outside.periods() %>%
+        mutate(error = "length.or.3D.point.outside.period") %>%
+        mutate(across(everything(), as.character)) #%>% glimpse()
+      
+      print("samples.without.length")
+      samples.without.length <- metadata.samples.without.length() %>%
+        mutate(error = "sample.without.length") %>%
+        mutate(across(everything(), as.character)) #%>% glimpse()
+ 
       print("lengths.no.number")
       lengths.no.number <- lengths.no.number() %>%
         mutate(error = "length.without.a.number") %>%
@@ -7815,6 +7944,7 @@ function(input, output, session) {
         dplyr::filter(!percent_difference%in%c(0)) %>%
         mutate(error = "stereo.maxn.does.not.equal.maxn") %>%
         mutate(across(everything(), as.character)) #%>% glimpse()
+    }
 
       # all errors
       print("all errors")
@@ -7822,20 +7952,176 @@ function(input, output, session) {
 
       if(input$periods %in% "yes") {
         
+        errors <- bind_rows(samples.without.points,
+                            points.samples.without.metadata,
+                            
+                            samples.without.periods,
+                            periods.no.end,
+                            periods.wrong,
+                            points.outside.periods,
+                            
+                            points.no.number,
+                            
+                            maxn.species.not.observed,
+                            maxn.species.not.in.lh)
+      
+        if(input$length %in% "Yes"){
+          
+          errors <- bind_rows(errors,
+                              samples.without.length,
+                              length.samples.without.metadata,
+                              lengths.outside.periods,
+                              lengths.no.number,
+                              threedpoints.no.number,
+                              
+                              length.species.not.observed,
+                              length.species.not.in.lh,
+                              
+                              length.out.of.range,
+                              length.wrong.rms,
+                              length.wrong.precision,
+                              
+                              length.wrong.small,
+                              length.wrong.big,
+                              
+                              stereo.maxn.does.not.equal.maxn) 
+          
+        }
+        
+        all.errors <- erorrs %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "number", "length_mm", "frame", "frame_left", "range", "min_length", "max_length", "fb_length_max", "em_comment", "rms", "precision", "code"))) %>%
+          distinct() %>%
+          tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
+          arrange(campaignid, opcode, period) %>%
+          dplyr::select(where(~ !(all(is.na(.)) | all(. == "")))) # only select columns that are no all NA
+        
+        
+      } else {
+      
+      errors <- bind_rows(samples.without.points,
+                              points.samples.without.metadata,
+
+                              points.no.number,
+
+                              maxn.species.not.observed,
+                              maxn.species.not.in.lh)
+      
+      if(input$length %in% "Yes"){
+        
+        errors <- bind_rows(errors,
+                            samples.without.length,
+                            length.samples.without.metadata,
+                            
+                            lengths.no.number,
+                            threedpoints.no.number,
+                            
+                            length.species.not.observed,
+                            length.species.not.in.lh,
+                            
+                            length.out.of.range,
+                            length.wrong.rms,
+                            length.wrong.precision,
+                            
+                            length.wrong.small,
+                            length.wrong.big,
+                            
+                            stereo.maxn.does.not.equal.maxn) 
+      }
+      
+      all.errors <- errors %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "number", "length_mm", "frame", "frame_left", "range", "min_length", "max_length", "fb_length_max", "em_comment", "rms", "precision", "code"))) %>%
+        distinct() %>%
+        tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
+        arrange(campaignid, opcode, period) %>%
+        dplyr::select(where(~ !(all(is.na(.)) | all(. == "")))) # only select columns that are no all NA
+      }
+
+    } else {
+      
+      # ERRORS FOR GENERIC ----
+      print("samples.without.points ")
+      samples.without.points <- metadata.samples.without.fish() %>%
+        mutate(error = "sample.without.points") %>%
+        mutate(across(everything(), as.character))#%>% glimpse()
+      
+      print("count.samples.without.metadata")
+      points.samples.without.metadata <- points.samples.without.metadata() %>%
+        mutate(error = "sample.in.count.without.metadata") %>%
+        mutate(across(everything(), as.character))#%>% glimpse()
+      
+      print("count.species.not.observed")
+      maxn.species.not.observed <- maxn.species.not.observed() %>%
+        mutate(error = "species.not.observed.in.region.before")  %>%
+        mutate(across(everything(), as.character))#%>% glimpse()
+      
+      print("maxn.species.not.in.list")
+      maxn.species.not.in.lh <- maxn.species.not.observed.lh() %>%
+        mutate(error = "species.not.in.life.history.sheet")  %>%
+        mutate(across(everything(), as.character))#%>% glimpse()
+      
+      # all errors
+      print("all errors")
+      all.errors <- bind_rows(samples.without.points,
+                              points.samples.without.metadata,
+                              
+                              maxn.species.not.observed,
+                              maxn.species.not.in.lh) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "fb_length_max"))) %>%
+        distinct() %>%
+        tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
+        arrange(campaignid, opcode, period) %>%
+        dplyr::select(where(~ !(all(is.na(.)) | all(. == "")))) # only select columns that are no all NA
+
+      # Length errors - only include if fish were measured
+      if(input$length %in% "Yes"){
+        print("samples.without.length")
+        samples.without.length <- metadata.samples.without.length() %>%
+          mutate(error = "sample.without.length") %>%
+          mutate(across(everything(), as.character))#%>% glimpse()
+        
+        print("length.samples.without.metadata")
+        length.samples.without.metadata <- length.samples.without.metadata() %>%
+          mutate(error = "sample.in.lengths.without.metadata") %>%
+          mutate(across(everything(), as.character))#%>% glimpse()
+        
+        print("length.species.not.observed")
+        length.species.not.observed <- length.species.not.observed() %>%
+          mutate(error = "species.not.observed.in.region.before")  %>%
+          mutate(across(everything(), as.character))#%>% glimpse()
+        
+        print("length.species.not.in.list")
+        length.species.not.in.lh <- length.species.not.observed.lh() %>%
+          mutate(error = "species.not.in.life.history.sheet")  %>%
+          mutate(across(everything(), as.character))#%>% glimpse()
+        
+        print("length.wrong.small")
+        length.wrong.small <- length.wrong() %>%
+          dplyr::filter(reason%in%c("too small")) %>%
+          mutate(error = reason) %>%
+          dplyr::mutate(error = as.character(error))%>%
+          mutate(across(everything(), as.character))
+        
+        print("length.wrong.big")
+        length.wrong.big <- length.wrong() %>%
+          dplyr::filter(reason%in%c("too big")) %>%
+          mutate(error = reason)%>%
+          dplyr::mutate(error = as.character(error))%>%
+          mutate(across(everything(), as.character))
+        
+        print("stereo.maxn.does.not.equal.maxn")
+        stereo.maxn.does.not.equal.maxn <- length.vs.maxn() %>%
+          dplyr::mutate(count = 1) %>%
+          dplyr::filter(!length_maxn == maxn) %>%
+          dplyr::filter(!percent_difference%in%c(0)) %>%
+          mutate(error = "stereo.maxn.does.not.equal.maxn") %>%
+          mutate(across(everything(), as.character))#%>% glimpse()
+        
+        # all errors
+        print("all errors")
         all.errors <- bind_rows(samples.without.points,
                                 samples.without.length,
                                 points.samples.without.metadata,
                                 length.samples.without.metadata,
-                                
-                                samples.without.periods,
-                                periods.no.end,
-                                periods.wrong,
-                                points.outside.periods,
-                                lengths.outside.periods,
-                                
-                                points.no.number,
-                                lengths.no.number,
-                                threedpoints.no.number,
                                 
                                 maxn.species.not.observed,
                                 maxn.species.not.in.lh,
@@ -7843,146 +8129,21 @@ function(input, output, session) {
                                 length.species.not.observed,
                                 length.species.not.in.lh,
                                 
-                                length.out.of.range,
-                                length.wrong.rms,
-                                length.wrong.precision,
-                                
                                 length.wrong.small,
                                 length.wrong.big,
                                 
                                 stereo.maxn.does.not.equal.maxn) %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), error, family, genus, species, number, length_mm, frame, frame_left, range, min_length, max_length, fb_length_max, em_comment, rms, precision, code) %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "fb_length_max"))) %>%
           distinct() %>%
           tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
           arrange(campaignid, opcode, period) %>%
           dplyr::select(where(~ !(all(is.na(.)) | all(. == "")))) # only select columns that are no all NA
         
-      } else {
-      
-      all.errors <- bind_rows(samples.without.points,
-                              samples.without.length,
-                              points.samples.without.metadata,
-                              length.samples.without.metadata,
-
-                              points.no.number,
-                              lengths.no.number,
-                              threedpoints.no.number,
-
-                              maxn.species.not.observed,
-                              maxn.species.not.in.lh,
-
-                              length.species.not.observed,
-                              length.species.not.in.lh,
-
-                              length.out.of.range,
-                              length.wrong.rms,
-                              length.wrong.precision,
-
-                              length.wrong.small,
-                              length.wrong.big,
-
-                              stereo.maxn.does.not.equal.maxn) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), error, family, genus, species, number, length_mm, frame, frame_left, range, min_length, max_length, fb_length_max, em_comment, rms, precision, code) %>%
-        distinct() %>%
-        tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
-        arrange(campaignid, opcode, period) %>%
-        dplyr::select(where(~ !(all(is.na(.)) | all(. == "")))) # only select columns that are no all NA
       }
 
-      
-      
-      
-
-    } else {
-      # ERRORS FOR GENERIC ----
-
-      print("samples.without.points ")
-      samples.without.points <- metadata.samples.without.fish() %>%
-        mutate(error = "sample.without.points") %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("samples.without.length")
-      samples.without.length <- metadata.samples.without.length() %>%
-        mutate(error = "sample.without.length") %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("count.samples.without.metadata")
-      points.samples.without.metadata <- points.samples.without.metadata() %>%
-        mutate(error = "sample.in.count.without.metadata") %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("length.samples.without.metadata")
-      length.samples.without.metadata <- length.samples.without.metadata() %>%
-        mutate(error = "sample.in.lengths.without.metadata") %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("count.species.not.observed")
-      maxn.species.not.observed <- maxn.species.not.observed() %>%
-        mutate(error = "species.not.observed.in.region.before")  %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("maxn.species.not.in.list")
-      maxn.species.not.in.lh <- maxn.species.not.observed.lh() %>%
-        mutate(error = "species.not.in.life.history.sheet")  %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("length.species.not.observed")
-      length.species.not.observed <- length.species.not.observed() %>%
-        mutate(error = "species.not.observed.in.region.before")  %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("length.species.not.in.list")
-      length.species.not.in.lh <- length.species.not.observed.lh() %>%
-        mutate(error = "species.not.in.life.history.sheet")  %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      print("length.wrong.small")
-      length.wrong.small <- length.wrong() %>%
-        dplyr::filter(reason%in%c("too small")) %>%
-        mutate(error = reason) %>%
-        dplyr::mutate(error = as.character(error))%>%
-        mutate(across(everything(), as.character))
-
-      print("length.wrong.big")
-      length.wrong.big <- length.wrong() %>%
-        dplyr::filter(reason%in%c("too big")) %>%
-        mutate(error = reason)%>%
-        dplyr::mutate(error = as.character(error))%>%
-        mutate(across(everything(), as.character))
-
-      print("stereo.maxn.does.not.equal.maxn")
-      stereo.maxn.does.not.equal.maxn <- length.vs.maxn() %>%
-        dplyr::mutate(count = 1) %>%
-        dplyr::filter(!length_maxn == maxn) %>%
-        dplyr::filter(!percent_difference%in%c(0)) %>%
-        mutate(error = "stereo.maxn.does.not.equal.maxn") %>%
-        mutate(across(everything(), as.character))#%>% glimpse()
-
-      # all errors
-      print("all errors")
-      all.errors <- bind_rows(samples.without.points,
-                              samples.without.length,
-                              points.samples.without.metadata,
-                              length.samples.without.metadata,
-
-                              maxn.species.not.observed,
-                              maxn.species.not.in.lh,
-
-                              length.species.not.observed,
-                              length.species.not.in.lh,
-
-                              length.wrong.small,
-                              length.wrong.big,
-
-                              stereo.maxn.does.not.equal.maxn) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), error, family, genus, species, length_mm, min_length, max_length, fb_length_max) %>%
-        distinct() %>%
-        tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
-        arrange(campaignid, opcode, period) %>%
-        dplyr::select(where(~ !(all(is.na(.)) | all(. == "")))) # only select columns that are no all NA
-
-
-  }
+    }
+    
+    return(all.errors)
     # Remember to make this distinct!
     # TODO For transect version need to include those outside of transect
   })
