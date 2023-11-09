@@ -1,0 +1,40 @@
+
+model {
+  # Values for each body shape group
+  for(iBS in 1:nBS){
+    abBS[iBS,1] ~ dnorm(-2,1) # using the overall prior for log10a, with mean = -2 and sd = 1 and tau = 1
+    abBS[iBS,2] ~ dnorm(3,4) # using the overall prior for b, with mean = 3 and sd = 0.5 and tau = 4
+  }
+
+  # Values for each species
+  TauGS[1] ~ dgamma(0.001,0.001)
+  TauGS[2] ~ dgamma(0.001,0.001)
+  sigmaGS[1] <- pow(TauGS[1],-1/2)
+  sigmaGS[2] <- pow(TauGS[2],-1/2)
+  roGS <- 0 # prior for correlation set to zero
+  for(iGS in 1:nGS){
+    abGS[iGS,1] ~ dnorm(abBS[GS2BS[iGS],1],TauGS[1]) 
+    abGS[iGS,2] ~ dnorm(abBS[GS2BS[iGS],2],TauGS[2]) 
+  }
+  # Predictive distribution for species-level parameters -- This is the 'prior' for future species given body-size information
+  for(iBS in 1:nBS){
+    PredGS[iBS,1] ~ dnorm(abBS[iBS,1],TauGS[1]) #  
+    PredGS[iBS,2] ~ dnorm(abBS[iBS,2],TauGS[2]) # 
+  }
+  
+  ##### Values for each observation
+  # Generate multivariate 'Precision Matrix' for each observation
+  sigmaObs[1] ~ dgamma(0.001,0.001)
+  sigmaObs[2] ~ dgamma(0.001,0.001)
+  roObs ~ dunif(-0.99,0.99) # uniform prior for correlation, 
+  CovObs[1,1] <- pow(sigmaObs[1],2) 
+  CovObs[2,2] <- pow(sigmaObs[2],2) 
+  CovObs[1,2] <- roObs * sigmaObs[1] * sigmaObs[2] 
+  CovObs[2,1] <- CovObs[1,2]
+  TauObs[1:2,1:2] <- inverse(CovObs[1:2,1:2])
+  # Likelihood of each observation
+  for(iObs in 1:nObs){
+    TauObsI[iObs,1:2,1:2] <- TauObs[1:2,1:2] * pow(Weights[iObs],2)
+    abObs[iObs,1:2] ~ dmnorm(abGS[GS[iObs],1:2],TauObsI[iObs,1:2,1:2])  
+  }
+}
