@@ -1,17 +1,18 @@
 url: https://globalarchivemanual.github.io/CheckEM/
 template:
   bootstrap: 5
+template:
   includes:
     in_header: |
-       <!-- Google tag (gtag.js) -->
-       <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script>
+       <!-- Global site tag (gtag.js) - Google Analytics -->
+       <script src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script>
        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-      
-          gtag('config', 'G-XRY4CFB9QS');
-      </script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-XRY4CFB9QS');
+       </script>
 reference:
 - title: Functions for data formatting
   desc: Essential functionality for formatting stereo-video annotation
