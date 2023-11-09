@@ -1,6 +1,6 @@
 url: https://globalarchivemanual.github.io/CheckEM/
 template:
-  bootstrap: 5
+
 template:
   includes:
     in_header: |
@@ -12,7 +12,8 @@ template:
          gtag('js', new Date());
 
          gtag('config', 'G-XRY4CFB9QS');
-       </script>
+       </script>'
+  bootstrap: 5
 reference:
 - title: Functions for data formatting
   desc: Essential functionality for formatting stereo-video annotation
