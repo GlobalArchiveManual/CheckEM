@@ -362,6 +362,58 @@ function(input, output, session) {
       metadata <- metadata %>%
         dplyr::rename(dplyr::any_of(lookup))
       
+      cols.missing <- ""
+      
+      # Check if any names for the standard metadata are missing
+      if(!"latitude_dd" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>latitude_dd</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"longitude_dd" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>longitude_dd</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"date_time" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>date_time</b> column is missing or spelt wrong (if date and time are present, CheckEM will create date_time)</li>", "<br>")
+      }
+      
+      if(!"site" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>site</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"location" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>location</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"status" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>status</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"depth_m" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>depth_m</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"successful_count" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>successful_count</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"successful_length" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>successful_length</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"observer_count" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>observer_count</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!"observer_length" %in% colnames(metadata)){
+        cols.missing <- paste0(cols.missing, "<li>The <b>observer_length</b> column is missing or spelt wrong</li>", "<br>")
+      }
+      
+      if(!cols.missing %in% ""){
+        shinyalert("Metadata columns", paste0(cols.missing, "<br> Please check the spelling before proceeding"), type = "warning", html = TRUE)
+      }
+      
+
       #message("uploaded metadata")
       
       metadata <- metadata %>%
