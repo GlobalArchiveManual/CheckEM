@@ -13,11 +13,13 @@ function(){
                             sidebarMenu(
                               menuItem("Check metadata & periods", tabName = "checkmetadata", icon = icon("check")),
                               menuItem("Create & check MaxN", tabName = "createmaxn", icon = icon("check")),
-                              menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check")),
-                              menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals")),
+                              shiny::conditionalPanel("input.length == 'Yes'",
+                                                      sidebarMenu(menuItem("Check length & 3D points", tabName = "createlength", icon = icon("check"))),
+                                                      sidebarMenu(menuItem("Compare MaxN & length", tabName = "maxnlength", icon = icon("equals"))),
+                                                      sidebarMenu(menuItem("Create & check mass", tabName = "createmass", icon = icon("check")))),
                               shiny::conditionalPanel("input.hab == 'Yes'",
                                                       sidebarMenu(menuItem("Check habitat", tabName = "checkhab", icon = icon("check")))),
-                              menuItem("Create & check mass", tabName = "createmass", icon = icon("check")),
+                              
                               menuItem("Download data and QC score", tabName = "downloads", icon = icon("download")))
                             ),
     
@@ -86,15 +88,13 @@ function(){
                        
                        column(width = 6,
                               
-
-                              
                               box(width = NULL, height = 730, status = "primary", collapsible = TRUE, title = "Aims", solidHeader = TRUE,
                                   includeMarkdown("markdown/aims.Rmd")
                                   )
                               ),
                        
                        box(width = 6, title = "Format of data", status = "primary", solidHeader = TRUE,
-                           
+                           h4("Fish annotation data:"),
                            radioButtons("upload", "Choose the type of upload:",
                                         c("EventMeasure" = "EM",
                                           "Generic (only single point methods)" = "G"),
@@ -105,6 +105,12 @@ function(){
                                         c("Single point e.g. BRUV & BOSS" = "point",
                                           "Transect e.g. DOV & ROV" = "transect"),
                                         selected = "point",
+                                        inline = TRUE),
+                           
+                           radioButtons("length", "Did you measure fish?",
+                                        c("Yes",
+                                          "No"),
+                                        selected = "Yes",
                                         inline = TRUE),
                            
                            
@@ -129,29 +135,23 @@ function(){
                                                                   "Period only" = "period"),
                                                                 selected = "opcodeperiod",
                                                                 inline = TRUE)),
-                           br(),
-                           
-                           # TODO turn this back on when I'm ready for habitat
+                           # br(),
+
+                           h4("Habitat annotation data:"),
                            radioButtons("hab", "Are you uploading habitat and/or relief?",
                                         c("Yes",
                                           "No"),
                                         selected = "No",
                                         inline = TRUE),
 
-                           # shiny::conditionalPanel("input.hab == 'Yes'",
-                           # 
-                           #                         radioButtons("habdirection", "Which directions were annotated?",
-                           #                                      c("Forwards only" = "forwards",
-                           #                                        "Forwards and backwards" = "both"),
-                           #                                      selected = "forwards",
-                           #                                      inline = TRUE)#,
-                           # 
-                           #                         # radioButtons("habreliefsep", "Was relief annotated separately?",
-                           #                         #              c("No" = "no",
-                           #                         #                "Yes" = "yes"),
-                           #                         #              selected = "no",
-                           #                         #              inline = TRUE)
-                           #                         ),
+                           shiny::conditionalPanel("input.hab == 'Yes'",
+
+                                                   radioButtons("habdirection", "Which directions were annotated?",
+                                                                c("Forwards and backwards" = "both",
+                                                                  "Forwards only" = "forwards"),
+                                                                selected = "both",
+                                                                inline = TRUE)
+                                                   ),
                            
                            tags$div(tags$label("Select directory with sample metadata and EM exports", class="btn btn-primary",
                                                tags$input(id = "folderdir", webkitdirectory = TRUE, type = "file", style="display: none;", onchange="pressed()")))#,
@@ -236,12 +236,18 @@ function(){
                            valueBoxOutput("metadata.no.samples")),
                        div(id="click.metadata.samples.without.fish",
                            valueBoxOutput("metadata.samples.without.fish")),
-                       div(id="click.metadata.samples.without.length",
-                           valueBoxOutput("metadata.samples.without.length")),
+                       
+                       shiny::conditionalPanel("input.length == 'Yes'",
+                       
+                                               div(id="click.metadata.samples.without.length",
+                                                   valueBoxOutput("metadata.samples.without.length"))),
+                       
                        div(id="click.points.samples.without.metadata",
                            valueBoxOutput("points.samples.without.metadata")),
-                       div(id="click.length.samples.without.metadata",
-                           valueBoxOutput("length.samples.without.metadata")),
+                       
+                       shiny::conditionalPanel("input.length == 'Yes'",
+                                               div(id="click.length.samples.without.metadata",
+                                                   valueBoxOutput("length.samples.without.metadata"))),
                        
                        shiny::conditionalPanel("input.periods == 'yes'",
                                                
