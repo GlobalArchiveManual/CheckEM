@@ -10,8 +10,8 @@ Here we have provided:
 
 * R workflows for fish and benthic annotation data sets using the functions in CheckEM.
 * A web based app hosted on shinyapps.io to enable users of stereo-video who aren't familiar with R to quality control and format their annotations
-* A [user guide for the CheckEM shiny app](https://globalarchivemanual.github.io/CheckEM/articles/CheckEM_user_guide.pdf)
-* Annotation guides for [EventMeasure](https://globalarchivemanual.github.io/CheckEM/articles/EventMeasure_annotation_guide.pdf) and [TransectMeasure](https://globalarchivemanual.github.io/CheckEM/articles/TransectMeasure_annotation_guide.pdf). 
+* A [user guide for the CheckEM shiny app](articles/CheckEM_user_guide.html)
+* Annotation guides for [EventMeasure](articles/EventMeasure_annotation_guide.html) and [TransectMeasure](articles/TransectMeasure_annotation_guide.html). 
 
 We hope that our efforts to standardise the annotation and QC of stereo-video data will result in data which meet the [FAIR principles](https://ardc.edu.au/resource/fair-data/) of interoperability and reusability.
 
