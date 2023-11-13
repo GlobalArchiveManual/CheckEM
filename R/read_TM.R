@@ -34,7 +34,7 @@ read_TM <- function(dir, sample) {
                              colClasses = "character", na.strings = "")) %>%
       purrr::list_rbind() %>%
       # dplyr::mutate(id = 1:nrow(.)) %>%
-      ga.clean.names() %>%
+      clean_names() %>%
       dplyr::rename(sample = period) %>%
       glimpse()
   }

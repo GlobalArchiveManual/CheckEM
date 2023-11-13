@@ -15,7 +15,7 @@ read_metadata <- function(dir) {
   read_dat <- function(flnm) {
     read_csv(flnm, col_types = cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
-      clean_names() %>%
+      CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = str_replace_all(campaignid, c("_Metadata.csv" = "")))
   }
   

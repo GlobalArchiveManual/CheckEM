@@ -2,9 +2,11 @@
 title: "Checking habitat data exported from TransectMeasure"
 author: "Claude Spencer & Brooke Gibbons"
 date: "2023-11-12"
-output: html_document
-knit: (function(inputFile, encoding) {
-  rmarkdown::render(inputFile, encoding = encoding, output_dir = "C:/Users/00104220/GL/CheckEM/vignettes") })
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Checking habitat data exported from TransectMeasure}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +29,6 @@ library(ggbeeswarm)
 library(leaflet.minicharts)
 library(RColorBrewer)
 library(todor)
-
 ```
 Set the study name
 ```{r}
@@ -89,13 +90,13 @@ schema <- schema %>%
   glimpse()
 
 tidy.habitat <- habitat %>%
-  dplyr::mutate(number = 1) %>%                                        
+  dplyr::mutate(number = 1) %>%
   left_join(schema) %>%
   dplyr::select(campaignid, sample, number, starts_with("level"), family, genus, species) %>%
-  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
+  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%
   group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
   dplyr::tally(number, name = "number") %>%
-  ungroup() %>%                                                        
+  ungroup() %>%
   dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()
 
@@ -104,12 +105,12 @@ saveRDS(tidy.habitat, file = paste0("1. Example R workflows (scripts to download
 Tidy and save the relief data by joining with the complete schema file that is loaded with the CheckEM package
 ```{r}
 tidy.relief <- relief %>% # TODO join this with schema
-  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%              
-  dplyr::mutate(number = 1) %>% 
+  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%
+  dplyr::mutate(number = 1) %>%
   left_join(schema) %>%
-  group_by(campaignid, sample, across(starts_with("level")), caab_code) %>% 
+  group_by(campaignid, sample, across(starts_with("level")), caab_code) %>%
   dplyr::tally(number, name = "number") %>%
-  ungroup() %>%                                                          glimpse()                                                            
+  ungroup() %>%                                                          glimpse()
 
 saveRDS(tidy.relief, file = paste0("1. Example R workflows (scripts to download)/data/staging/", name, "_Relief.rds"))
 ```
