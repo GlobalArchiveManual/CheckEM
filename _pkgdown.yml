@@ -28,8 +28,13 @@ reference:
 navbar:
   title: ~
   type: default
-  structure:
-    right: github
+  right:
+  - icon: fa-github
+    href: https://github.com/GlobalArchiveManual/CheckEM
+    aria-label: GitHub
+  - href: "https://www.nespmarinecoastal.edu.au/"
+    html: "<img src='man/figures/mac.svg' width='200' alt='National Environmental Science Program: Marine and Coastal'/>"
+    aria-label: ARDC
   left:
   - text: User Guides
     menu:
@@ -64,9 +69,12 @@ navbar:
   - text: Functions
     href: reference/index.html
 authors:
+  footer:
+    roles: [aut]
+    text: "<img src='https://ardc.edu.au/wp-content/uploads/2022/09/ardc-logo.svg' height='60' alt='ARDC'/> &nbsp; &nbsp;<img src='https://www.nespmarinecoastal.edu.au/wp-content/themes/MarineAndCoastalHubTheme/images/logo.svg' height='70' alt='National Environmental Science Program: Marine and Coastal'/>  &nbsp; &nbsp; Package developed by "
   ARDC:
     href: "https://ardc.edu.au/"
-    html: "<img src='man/figures/ardc.png' width='200' alt='ARDC'/>"
+    html: "<img src='https://ardc.edu.au/wp-content/uploads/2022/09/ardc-logo.svg' width='200' alt='ARDC'/>"
   NESP MAC:
     href: "https://www.nespmarinecoastal.edu.au/"
-    html: "<img src='man/figures/mac.svg' width='200' alt='National Environmental Science Program: Marine and Coastal'/>"
+    html: "<img src='https://www.nespmarinecoastal.edu.au/wp-content/themes/MarineAndCoastalHubTheme/images/logo.svg' width='200' alt='National Environmental Science Program: Marine and Coastal'/>"
