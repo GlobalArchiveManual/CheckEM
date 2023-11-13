@@ -10,3 +10,8 @@ Rules for the repo
   - CampaignID_all-lower-case.RDS
 - if not campaign data
   - all-lower-case_underscores-seps-for-categories/ideas.RDS
+
+# spaces
+- between commas and <- and %>% and =
+- { on same line as function
+- } on it's own line

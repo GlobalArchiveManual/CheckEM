@@ -6,7 +6,7 @@
 library(tidyverse)
 library(rfishbase)
 library(openssl)
-library(GlobalArchive)
+library(CheckEM)
 library(taxize) # For IUCN
 library(rredlist)
 
@@ -98,31 +98,31 @@ info <- species(validated) %>%
                 fb_l_type_max = ltypemaxm,
                 fb_vulnerability = vulnerability) %>% # Length metrics are in cm
   dplyr::select(species, speccode, fbname, fb_length_max, fb_l_type_max, fb_vulnerability, subfamily) %>%
-  dplyr::rename(fishbase.scientific = species, 
-                fb.common.name = fbname) %>%
+  dplyr::rename(fishbase_scientific = species, 
+                fb_common_name = fbname) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
-  dplyr::filter(!fishbase.scientific %in% ("Genus Species"))
+  dplyr::filter(!fishbase_scientific %in% ("Genus Species"))
 
 # FB.countries and FB.Status ----
-country.dat <- country(validated) %>%
-  ga.clean.names()%>%
+country_dat <- country(validated) %>%
+  clean_names()%>%
   dplyr::mutate(speccode = as.character(speccode))
 
-status <- country.dat %>%
+status <- country_dat %>%
   dplyr::filter(.$country %in% "Australia") %>%
   dplyr::select(species, speccode, status) %>%
-  dplyr::rename(fishbase.scientific = species, 
-                FB.Status = status) 
+  dplyr::rename(fishbase_scientific = species, 
+                fb_status = status) 
 
-countries <- country.dat %>%
+countries <- country_dat %>%
   dplyr::group_by(species, speccode) %>%
-  dplyr::summarise(FB.countries = toString(country)) %>%
-  dplyr::rename(fishbase.scientific = species) %>%
+  dplyr::summarise(fb_countries = toString(country)) %>%
+  dplyr::rename(fishbase_scientific = species) %>%
   dplyr::ungroup()
 
 # a and b values ----
 ll <- length_length(validated) %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::select(species, length1, length2, a, b)%>%
   dplyr::filter(length2 == "FL")%>%
   dplyr::rename(all = a)%>%
@@ -139,96 +139,103 @@ test <- ll %>%
   dplyr::summarise(n = n())
 
 lwr <- length_weight(validated) %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
   dplyr::select(species, speccode, lengthmin, lengthmax, type, number, sex, a, b, sea, seb, method, c_code, locality, coeffdetermination)
 
-tidy.lwr <- lwr %>%
-  mutate(country.rank = case_when(
+tidy_lwr <- lwr %>%
+  mutate(country_rank = case_when(
     c_code == "036" ~ 1,
     str_detect(locality, "New Zealand") ~ 2)
   ) %>%
   
-  mutate(number.rank = case_when(
+  mutate(number_rank = case_when(
     number >= 100 ~ 1,
     number >= 20 & number < 100 ~ 2,
     number >= 10 & number < 20 ~ 3,
     number >= 1 & number < 10 ~ 4)
   ) %>%
   
-  mutate(type.rank = case_when(
+  mutate(type_rank = case_when(
     type %in% "FL" ~ 1,
     type %in% "TL" ~ 2,
     type %in% c("SL","WD","OT","PC","NG","AF","LP") ~ 6)
   ) %>%
   
-  mutate(sex.rank = case_when(
+  mutate(sex_rank = case_when(
     sex %in% c("mixed","unsexed") ~ 1,
     sex %in% c(NA) ~ 2,
     type %in% c("juvenile") ~ 8)
   ) %>%
   
   dplyr::full_join(ll) %>%
-  dplyr::mutate(conv.rank = if_else(!is.na(all) & !is.na(bll), 1, 4)) %>%
-  replace_na(list(country.rank = 3, number.rank = 5, type.rank = 7, sex.rank = 2)) %>%
-  dplyr::mutate(final.rank = type.rank + sex.rank + country.rank * 0.5 + number.rank + conv.rank) %>%
-  arrange(species, final.rank) %>%
+  dplyr::mutate(conv_rank = if_else(!is.na(all) & !is.na(bll), 1, 4)) %>%
+  replace_na(list(country_rank = 3, number_rank = 5, type_rank = 7, sex_rank = 2)) %>%
+  dplyr::mutate(final_rank = type_rank + sex_rank + country_rank * 0.5 + number_rank + conv_rank) %>%
+  arrange(species, final_rank) %>%
   dplyr::group_by(species) %>%
-  dplyr::slice(which.min(final.rank)) %>%
+  dplyr::slice(which.min(final_rank)) %>%
   dplyr::ungroup() %>%
-  dplyr::mutate(source.level = "Species specific") %>%
-  dplyr::select(species, speccode, type, a, b, all, bll, source.level) %>%
+  dplyr::mutate(source_level = "Species specific") %>%
+  dplyr::select(species, speccode, type, a, b, all, bll, source_level) %>%
   dplyr::filter(!is.na(a)) %>%
   mutate(all = case_when(type %in% c("FL") ~ 0,
                          !type %in% c("FL") ~ all)) %>%
   mutate(bll = case_when(type %in% c("FL") ~ 1,
                          !type %in% c("FL") ~ bll)) %>%
-  dplyr::rename(fishbase.scientific = species)
+  dplyr::rename(fishbase_scientific = species)
 
-bay_lwrs <- read.csv("data/bayesian_length-weights.csv") %>% distinct() %>%
-  dplyr::mutate(source.level = str_replace_all(.$metric, 
+bay_lwrs <- read.csv("annotation-schema/data/staging/bayesian_length-weights.csv") %>% 
+  distinct() %>%
+  dplyr::mutate(source_level = str_replace_all(.$metric, 
                                                c("\\(Sub\\)" = "Sub-",
                                                  " \\s*\\([^\\)]+\\)" = ""))) %>%
-  tidyr::separate(source.level, into = c("delete", "keep"), sep = "ased on") %>%
-  dplyr::mutate(source.level = paste0("Based on", keep)) %>%
-  dplyr::rename(bayesian.a = lwa_m,
-                bayesian.b = lwb_m,
-                bayesian.source.level = source.level,
-                fishbase.scientific = scientific) %>%
-  dplyr::select(fishbase.scientific, bayesian.a, bayesian.b, bayesian.source.level)
+  tidyr::separate(source_level, into = c("delete", "keep"), sep = "ased on") %>%
+  dplyr::mutate(source_level = paste0("Based on", keep)) %>%
+  dplyr::rename(bayesian_a = lwa_m,
+                bayesian_b = lwb_m,
+                bayesian_source_level = source_level,
+                fishbase_scientific = scientific) %>%
+  dplyr::select(fishbase_scientific, bayesian_a, bayesian_b, bayesian_source_level)
 
-complete.lw <- info %>%
-  dplyr::select(fishbase.scientific) %>%
-  full_join(tidy.lwr) %>%
+complete_lw <- info %>%
+  dplyr::select(fishbase_scientific) %>%
+  full_join(tidy_lwr) %>%
   left_join(., bay_lwrs) %>%
-  dplyr::filter(!is.na(fishbase.scientific)) %>%
-  dplyr::mutate(a = if_else(is.na(a), bayesian.a, a)) %>%
-  dplyr::mutate(b = if_else(is.na(b), bayesian.b, b)) %>%
-  dplyr::mutate(source.level = if_else(is.na(source.level), bayesian.source.level, source.level)) %>%
-  dplyr::select(fishbase.scientific, type, a, b, all, bll, source.level) %>%
-  dplyr::rename(aLL = all, bLL = bll, Length.measure = type, Source_Level = source.level)
+  dplyr::filter(!is.na(fishbase_scientific)) %>%
+  dplyr::mutate(a = if_else(is.na(a), bayesian_a, a)) %>%
+  dplyr::mutate(b = if_else(is.na(b), bayesian_b, b)) %>%
+  dplyr::mutate(source_level = if_else(is.na(source_level), bayesian_source_level, source_level)) %>%
+  dplyr::select(fishbase_scientific, type, a, b, all, bll, source_level) %>%
+  dplyr::rename(length_measure = type)
 
-# # # Get IUCN status - takes roughly 40 minutes
+# # Get IUCN status - takes roughly 40 minutes
+# You will need an IUCN red list API key for this to work
+# Go to https://apiv3.iucnredlist.org/api/v3/token
+# After getting your key set it as IUCN_REDLIST_KEY in .Renviron.
+# For that, use usethis::edit_r_environ()
+# IUCN_REDLIST_KEY='youractualkeynotthisstring'
+# Remove the hashes from this section to run again
+
 # iucn <- data.frame()
 # 
 # for (species in validated) {
 #   message(paste("accessing IUCN data for:", species, "(species", nrow(iucn), "of", length(validated),")"))
-# 
+#   
 #   if(!species %in% c("NA", NA)){
-# 
-#   dat <- rl_search(species)
-#   temp.dat <- dat[[2]]
-# 
-#   if(!is.null(nrow(temp.dat))){
-#   iucn <- bind_rows(iucn, temp.dat)
-#   }
+#     
+#     dat <- rl_search(species)
+#     temp_dat <- dat[[2]]
+#     
+#     if(!is.null(nrow(temp_dat))){
+#       iucn <- bind_rows(iucn, temp_dat)
+#     }
 #   }
 # }
-# 
 # # Format IUCN data
-# final.iucn <- iucn %>%
-#   dplyr::rename(fishbase.scientific = scientific_name) %>%
-#   dplyr::mutate(IUCN.ranking = str_replace_all(.$category, c("EX" = "Extinct",
+# final_iucn <- iucn %>%
+#   dplyr::rename(fishbase_scientific = scientific_name) %>%
+#   dplyr::mutate(iucn_ranking = str_replace_all(.$category, c("EX" = "Extinct",
 #                                                              "EW" = "Extinct in the Wild",
 #                                                              "CR" = "Critically Endangered",
 #                                                              "EN" = "Endangered",
@@ -236,53 +243,52 @@ complete.lw <- info %>%
 #                                                              "NT" = "Near Threatened",
 #                                                              "LC" = "Least Concern",
 #                                                              "DD" = "Data Deficient"))) %>%
-# 
-#   dplyr::select(fishbase.scientific, IUCN.ranking) %>%
+#   dplyr::select(fishbase_scientific, iucn_ranking) %>%
 #   distinct()
-# # 
-# saveRDS(final.iucn, "data/final.iucn.RDS")
-final.iucn <- readRDS("data/final.iucn.RDS")
+# 
+# saveRDS(final_iucn, "annotation-schema/data/staging/australia_fish_iucn-categories.RDS")
+final_iucn <- readRDS("annotation-schema/data/staging/australia_fish_iucn-categories.RDS")
 
 # check which names don't match
-iucn.not.match <- anti_join(final.iucn, code.crosswalk.codes) # none - woo!
+iucn_not_match <- anti_join(final_iucn, code_crosswalk_codes) # none - woo!
 
 # Combine all data ----
-all.fishbase <- info %>%
+all_fishbase <- info %>%
   dplyr::full_join(countries) %>%
   dplyr::full_join(status) %>%
   dplyr::full_join(maturity) %>%
-  dplyr::full_join(complete.lw) %>%
-  dplyr::select(fishbase.scientific, speccode, 
-                fb.length.at.maturity.cm, 
+  dplyr::full_join(complete_lw) %>%
+  dplyr::select(fishbase_scientific, speccode, 
+                fb_length_at_maturity_cm, 
                 fb_length_max, 
                 fb_l_type_max, 
                 fb_vulnerability, 
-                FB.countries, 
-                FB.Status, 
-                Length.measure,
+                fb_countries, 
+                fb_status, 
+                length_measure,
                 a,
                 b,
-                aLL,
-                bLL,
-                Source_Level,
+                a_ll,
+                b_ll,
+                source_level,
                 subfamily) %>%
   dplyr::filter(!speccode %in% c("0", NA)) # to remove blank fishbase
 
-double.ups.fbcode <- all.fishbase %>%
+double_ups_fbcode <- all_fishbase %>%
   dplyr::group_by(speccode) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
-double.ups.fbname <- all.fishbase %>%
-  dplyr::group_by(fishbase.scientific) %>%
+double_ups_fbname <- all_fishbase %>%
+  dplyr::group_by(fishbase_scientific) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
 # Number of rows in all.fishbase does not match number of rows in info
-extra <- anti_join(info %>% dplyr::select(speccode, fishbase.scientific), all.fishbase)
+extra <- anti_join(info %>% dplyr::select(speccode, fishbase_scientific), all_fishbase)
 
 # Join in caab data
-final.data <- dplyr::full_join(code.crosswalk.codes, all.fishbase) %>%
-  dplyr::left_join(final.iucn) 
+final_data <- dplyr::full_join(code_crosswalk_codes, all_fishbase) %>%
+  dplyr::left_join(final_iucn) 
 
-saveRDS(final.data, "data/fishbase.and.iucn.RDS")
+saveRDS(final_data, "data/fishbase.and.iucn.RDS")

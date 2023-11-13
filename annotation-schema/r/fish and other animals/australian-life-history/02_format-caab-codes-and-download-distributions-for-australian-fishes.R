@@ -14,16 +14,16 @@ sf_use_s2(TRUE)
 # Spatial files ----
 wgs.84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 
-aus.regions <- st_read("annotation-schema/data/spatial/marine_regions.shp") %>%
+aus_regions <- st_read("annotation-schema/data/spatial/marine_regions.shp") %>%
   dplyr::select(-c(OBJECTID))
 
-aus.regions$region <- as.character(aus.regions$REGION)
-st_crs(aus.regions) <- wgs.84
+aus_regions$region <- as.character(aus_regions$REGION)
+st_crs(aus_regions) <- wgs.84
 
 # Read in the latest CAAB dump from CSIRO website ----
 # Download is available here: https://www.marine.csiro.au/datacentre/caab/caab_dump_latest.xlsx
 # We have manually edited some classes/phylums/kingdoms where missing
-caab.og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
+caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
   clean_names() %>%
   dplyr::mutate(class = if_else(family %in% "Trygonorrhinidae", "Elasmobranchii", class)) %>%
   dplyr::mutate(phylum = if_else(family %in% "Trygonorrhinidae", "Chordata", phylum)) %>%
@@ -37,7 +37,7 @@ caab.og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
   glimpse()
 
 # Format caab codes ----
-caab <- caab.og %>%
+caab <- caab_og %>%
   dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali")) %>%
   dplyr::filter(!is.na(display_name)) %>%
   dplyr::filter(!is.na(parent_id)) %>%
@@ -46,11 +46,11 @@ caab <- caab.og %>%
   dplyr::select(spcode, kingdom, phylum, class, family, genus, species, common_name, order_name) %>%
   dplyr::rename(order = order_name)
 
-list.to.download <- caab %>%
+list_to_download <- caab %>%
   filter(!species %in% "spp")
 
 ## Download distribution files from CSIRO - remove the hashes to run again
-# for (caab in unique(list.to.download$spcode)){
+# for (caab in unique(list_to_download$spcode)){
 #   print(caab)
 # 
 #   # Set the URL of the shapefile
@@ -79,7 +79,7 @@ list.to.download <- caab %>%
 # # Read the shapefile
 # polygons <- sf::read_sf(temp) %>% glimpse()
 # 
-# for (caab in unique(list.to.download$spcode)){
+# for (caab in unique(list_to_download$spcode)){
 #   # create a temp directory
 #   temp <- tempfile()
 # 
@@ -101,13 +101,13 @@ list.to.download <- caab %>%
 polygons <- readRDS("annotation-schema/data/staging/distributions-polygons.RDS")
 
 # Get Marine Regions based off CAAB distributions
-aus.regions <- st_as_sf(aus.regions)
-temp.with.regions <- data.frame()
+aus_regions <- st_as_sf(aus_regions)
+temp_with_regions <- data.frame()
 
 single <- st_cast(polygons, "POLYGON")
 
-test <- aus.regions %>%
-  dplyr::slice(st_nearest_feature(single, aus.regions)) %>%
+test <- aus_regions %>%
+  dplyr::slice(st_nearest_feature(single, aus_regions)) %>%
   st_set_geometry(NULL)
 
 # # Takes 30 minutes to run ----
@@ -117,18 +117,18 @@ for (CAAB in unique(polygons$SPCODE)) {
 
   single <- st_cast(polygons.to.test, "POLYGON")
   
-  dat <- aus.regions %>%
-    dplyr::slice(st_nearest_feature(single, aus.regions)) %>%
+  dat <- aus_regions %>%
+    dplyr::slice(st_nearest_feature(single, aus_regions)) %>%
     st_set_geometry(NULL)%>%
     dplyr::distinct(Label) %>%
     dplyr::summarise(marine.region = toString(Label)) %>%
     dplyr::mutate(spcode = CAAB)
 
-  temp.with.regions <- bind_rows(temp.with.regions, dat)
+  temp_with_regions <- bind_rows(temp_with_regions, dat)
   
 }
 
-caab <- caab.og %>%
+caab <- caab_og %>%
   dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali")) %>%
   dplyr::filter(!is.na(display_name)) %>%
   dplyr::filter(!is.na(parent_id)) %>%
@@ -137,15 +137,15 @@ caab <- caab.og %>%
   dplyr::select(spcode, kingdom, phylum, class, family, genus, species, common_name, order_name) %>%
   dplyr::rename(order = order_name)
 
-caab.with.regions <- full_join(temp.with.regions, caab)
+caab_with_regions <- full_join(temp_with_regions, caab)
 
 # none missing
-missing <- caab.with.regions %>%
+missing <- caab_with_regions %>%
   filter(is.na(marine.region))
 
-spp.regions <- caab %>%
+spp_regions <- caab %>%
   dplyr::rename(caab = spcode) %>%
-  dplyr::left_join(caab.with.regions) %>%
+  dplyr::left_join(caab_with_regions) %>%
   dplyr::distinct(family, genus, marine.region) %>%
   dplyr::filter(!is.na(marine.region)) %>%
   dplyr::mutate(marine.region = strsplit(as.character(marine.region), split = ", "))%>%
@@ -156,11 +156,11 @@ spp.regions <- caab %>%
   dplyr::summarise(marine.region = toString(marine.region)) %>%
   dplyr::left_join(caab)
 
-caab.combined <- dplyr::bind_rows(caab.with.regions, spp.regions) %>%
+caab_combined <- dplyr::bind_rows(caab_with_regions, spp_regions) %>%
   dplyr::rename(caab_code = spcode) %>%
   dplyr::filter(!caab_code %in% c(NA))
 
-missing <- caab.combined %>%
+missing <- caab_combined %>%
   filter(is.na(marine.region))
 
-saveRDS(caab.combined, "annotation-schema/data/staging/caab-with-regions.RDS")
+saveRDS(caab_combined, "annotation-schema/data/staging/caab-with-regions.RDS")
