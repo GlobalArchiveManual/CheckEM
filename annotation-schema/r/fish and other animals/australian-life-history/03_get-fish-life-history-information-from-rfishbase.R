@@ -205,8 +205,9 @@ complete_lw <- info %>%
   dplyr::filter(!is.na(fishbase_scientific)) %>%
   dplyr::mutate(a = if_else(is.na(a), bayesian_a, a)) %>%
   dplyr::mutate(b = if_else(is.na(b), bayesian_b, b)) %>%
+  dplyr::rename(a_ll = all, b_ll = bll) %>%
   dplyr::mutate(source_level = if_else(is.na(source_level), bayesian_source_level, source_level)) %>%
-  dplyr::select(fishbase_scientific, type, a, b, all, bll, source_level) %>%
+  dplyr::select(fishbase_scientific, type, a, b, a_ll, b_ll, source_level) %>%
   dplyr::rename(length_measure = type)
 
 # # Get IUCN status - takes roughly 40 minutes
@@ -291,4 +292,4 @@ extra <- anti_join(info %>% dplyr::select(speccode, fishbase_scientific), all_fi
 final_data <- dplyr::full_join(code_crosswalk_codes, all_fishbase) %>%
   dplyr::left_join(final_iucn) 
 
-saveRDS(final_data, "data/fishbase.and.iucn.RDS")
+saveRDS(final_data, "annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS")
