@@ -34,7 +34,7 @@ library(tidyverse)
 # To visualise data
 library(ggplot2)
 library(ggbeeswarm)
-library(leaflet)
+# library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
 library(todor)
