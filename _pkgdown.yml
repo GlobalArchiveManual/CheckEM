@@ -63,4 +63,10 @@ navbar:
       href: articles/habitat-gams.html
   - text: Functions
     href: reference/index.html
-
+authors:
+  ARDC:
+    href: "https://ardc.edu.au/"
+    html: "<img src='man/figures/ardc.png' width='200' alt='ARDC'/>"
+  NESP MAC:
+    href: "https://www.nespmarinecoastal.edu.au/"
+    html: "<img src='man/figures/mac.svg' width='200' alt='National Environmental Science Program: Marine and Coastal'/>"
