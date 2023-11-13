@@ -1,11 +1,15 @@
 ---
-title: "Checking habitat data exported from TransectMeasure"
-author: "Claude Spencer & Brooke Gibbons"
-date: "2023-11-12"
-output: rmarkdown::html_vignette
+title: Checking habitat data exported from TransectMeasure
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{Checking habitat data exported from TransectMeasure}
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r}
+htmltools::includeHTML("check-habitat.html")
+```
