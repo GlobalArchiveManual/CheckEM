@@ -18,7 +18,7 @@ read_files_txt <- function(dir) {
   
   list.files(path = dir,      
              recursive = F,
-             pattern = "_Metadata.csv",
+             pattern = "_Points.txt",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind()

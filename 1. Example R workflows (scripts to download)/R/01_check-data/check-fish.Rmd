@@ -65,8 +65,7 @@ metadata <- metadata_sf %>%
 ```
 
 ```{r}
-points <- purrr::map(~CheckEM::read_files_txt(here::here("1. Example R workflows (scripts to download)/data/raw/"))) %>% 
-  purrr::list_rbind() %>%
+points <- CheckEM::read_files_txt("1. Example R workflows (scripts to download)/data/raw/") %>%
   glimpse()
 
 maxn <- points %>% 

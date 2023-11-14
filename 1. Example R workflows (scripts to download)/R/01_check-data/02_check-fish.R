@@ -13,7 +13,7 @@ library(devtools)
 # TODO change this from GlobalArchive package to CheckEM
 #install_github("UWAMEGFisheries/GlobalArchive")
 library(GlobalArchive)
-library(CheckEM)
+# library(CheckEM)
 library(tidyverse)
 library(googlesheets4)
 library(sf)
@@ -43,8 +43,8 @@ metadata <- readRDS(paste0("1. Example R workflows (scripts to download)/data/ti
 # 2. Extract fishing status ----
 # Use this section if you need to work out which samples are inside areas closed to fishing
 # TODO change to CAPAD file
-marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/marine-parks-all.shp")  %>% 
-  dplyr::select(geometry, ZoneName) %>%
+marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")  %>% 
+  dplyr::select(geometry, ZONE_TYPE) %>%
   st_transform(4326) %>%
   st_make_valid()
 
@@ -57,18 +57,13 @@ metadata <- metadata_sf %>%
   as.data.frame() %>%
   dplyr::select(-c(geometry)) %>%
   dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-  dplyr::mutate(status = if_else(str_detect(ZoneName, "National|Sanctuary"), 
+  dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"), 
                                 "No-take", "Fished")) %>%
   clean_names() %>%
   glimpse()
 
 # 3. Load MaxN data ----
-points <- list.files(path = "1. Example R workflows (scripts to download)/data/raw/",      # This replaces ga.list.files
-                     recursive = T,
-                     pattern = "_Points.txt",
-                     full.names = T) %>% # list all files ending in "_Points.txt"
-  purrr::map(~CheckEM::read_files_txt(.)) %>% # This function reads in all text files identified above, combines them into one dataframe, and creates the campaignid column from the filename
-  purrr::list_rbind() %>%
+points <- CheckEM::read_files_txt("1. Example R workflows (scripts to download)/data/raw/") %>%
   glimpse()
 
 maxn <- points %>% 
