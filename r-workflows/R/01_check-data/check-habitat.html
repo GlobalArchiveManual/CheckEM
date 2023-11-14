@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Claude Spencer &amp; Brooke Gibbons" />
+
+<meta name="date" content="2023-11-13" />
+
+<title>Checking habitat data exported from TransectMeasure</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<style type="text/css">detaiks.chunk-details > summary.chunk-summary {
+text-align: right;
+}
+details.chunk-details[open] > summary.chunk-summary::after {
+content: "Hide";
+}
+details.chunk-details[open] > summary.chunk-summary > span.chunk-summary-text {
+display: none;
+}
+</style>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Checking habitat data exported from
+TransectMeasure</h1>
+<h4 class="author">Claude Spencer &amp; Brooke Gibbons</h4>
+<h4 class="date">2023-11-13</h4>
+
+
+
+<p>This guide documents the necessary steps to take raw data exported
+from TransectMeasure, and format it into</p>
+<p>Load the necessary libraries</p>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(CheckEM)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">library</span>(leaflet.minicharts)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">library</span>(todor)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div>
+</details>
+<p>Set the study name</p>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;example-bruv-workflow&quot;</span></span></code></pre></div>
+</details>
+<p>Load and format metadata using the CheckEM function
+‘read_metadata’</p>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_metadata</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;r-workflows/data/raw/&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## Rows: 32
+## Columns: 12
+## $ campaignid                  &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_s…
+## $ sample                      &lt;chr&gt; &quot;35&quot;, &quot;5&quot;, &quot;26&quot;, &quot;23&quot;, &quot;29&quot;, &quot;4&quot;, &quot;32&quot;, &quot;3…
+## $ longitude_dd                &lt;chr&gt; &quot;114.923645&quot;, &quot;114.9292367&quot;, &quot;114.92843&quot;, …
+## $ latitude_dd                 &lt;chr&gt; &quot;-34.13155&quot;, &quot;-34.12952667&quot;, &quot;-34.12729&quot;, …
+## $ date_time                   &lt;chr&gt; &quot;14/03/2023 23:36&quot;, &quot;14/03/2023 23:49&quot;, &quot;1…
+## $ location                    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ site                        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ depth                       &lt;chr&gt; &quot;39.6&quot;, &quot;42.7&quot;, &quot;36&quot;, &quot;41&quot;, &quot;42.6&quot;, &quot;45&quot;, …
+## $ successful_count            &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, …
+## $ successful_length           &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, …
+## $ successful_habitat_forward  &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, …
+## $ successful_habitat_backward &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, …</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">saveRDS</span>(metadata, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/tidy/&quot;</span>, name, <span class="st">&quot;_Metadata.rds&quot;</span>)))</span></code></pre></div>
+</details>
+<p>Read in the points data exported from Transect Measure, and then
+filter this into 2 dataframes for relief and habitat annotations</p>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">read_TM</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;r-workflows/data/raw/&quot;</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>                               <span class="at">sample =</span> <span class="st">&quot;opcode&quot;</span>)</span></code></pre></div>
+</details>
+<pre><code>## Rows: 2,483
+## Columns: 32
+## $ filename         &lt;chr&gt; &quot;10_1_DSC06511.JPG&quot;, &quot;10_1_DSC06511.JPG&quot;, &quot;10_1_DSC06…
+## $ frame            &lt;chr&gt; &quot;      0&quot;, &quot;      0&quot;, &quot;      0&quot;, &quot;      0&quot;, &quot;      0&quot;…
+## $ time_mins        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ image_row        &lt;chr&gt; &quot;790&quot;, &quot;986&quot;, &quot;683&quot;, &quot;778&quot;, &quot;976&quot;, &quot;1009&quot;, &quot;807&quot;, &quot;88…
+## $ image_col        &lt;chr&gt; &quot;83&quot;, &quot;591&quot;, &quot;930&quot;, &quot;1829&quot;, &quot;1654&quot;, &quot;485&quot;, &quot;525&quot;, &quot;83…
+## $ date             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ location         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ site             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ transect         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ latitude         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ longitude        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ rugosity         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ depth            &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ collector        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ fishing_status   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ campaignid       &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs…
+## $ relief_annotated &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;,…
+## $ sample           &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;,…
+## $ period           &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;…
+## $ frame_info_3     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ frame_info_4     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ frame_info_5     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ frame_info_6     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ level_2          &lt;chr&gt; &quot;Macroalgae&quot;, &quot;Seagrasses&quot;, &quot;Substrate&quot;, &quot;Macroalgae&quot;…
+## $ level_3          &lt;chr&gt; &quot;Filamentous / filiform&quot;, &quot;Strap-like leaves&quot;, &quot;Uncon…
+## $ level_4          &lt;chr&gt; &quot;Red&quot;, NA, &quot;Sand / mud (&lt;2mm)&quot;, &quot;Red&quot;, &quot;Red&quot;, NA, NA,…
+## $ level_5          &lt;chr&gt; NA, NA, &quot;Coarse sand (with shell fragments)&quot;, NA, NA,…
+## $ scientific       &lt;chr&gt; NA, &quot;Thalassodendron spp&quot;, NA, NA, NA, &quot;Thalassodendr…
+## $ qualifiers       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ caab_code        &lt;chr&gt; &quot;80300933&quot;, &quot;63618905&quot;, &quot;82001014&quot;, &quot;80300906&quot;, &quot;8030…
+## $ x                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ radius           &lt;chr&gt; &quot;67.0&quot;, &quot;24.7&quot;, &quot;18.2&quot;, &quot;97.8&quot;, &quot;82.6&quot;, &quot;34.1&quot;, &quot;25.2…</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>habitat <span class="ot">&lt;-</span> points <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(relief_annotated <span class="sc">%in%</span> <span class="st">&quot;no&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), scientific, caab_code) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## Rows: 1,241
+## Columns: 8
+## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
+## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;,…
+## $ level_2    &lt;chr&gt; &quot;Macroalgae&quot;, &quot;Seagrasses&quot;, &quot;Substrate&quot;, &quot;Macroalgae&quot;, &quot;Mac…
+## $ level_3    &lt;chr&gt; &quot;Filamentous / filiform&quot;, &quot;Strap-like leaves&quot;, &quot;Unconsolida…
+## $ level_4    &lt;chr&gt; &quot;Red&quot;, NA, &quot;Sand / mud (&lt;2mm)&quot;, &quot;Red&quot;, &quot;Red&quot;, NA, NA, &quot;Brow…
+## $ level_5    &lt;chr&gt; NA, NA, &quot;Coarse sand (with shell fragments)&quot;, NA, NA, NA, N…
+## $ scientific &lt;chr&gt; NA, &quot;Thalassodendron spp&quot;, NA, NA, NA, &quot;Thalassodendron spp…
+## $ caab_code  &lt;chr&gt; &quot;80300933&quot;, &quot;63618905&quot;, &quot;82001014&quot;, &quot;80300906&quot;, &quot;80300906&quot;,…</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>relief <span class="ot">&lt;-</span> points <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(relief_annotated <span class="sc">%in%</span> <span class="st">&quot;yes&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), scientific, caab_code) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## Rows: 1,242
+## Columns: 8
+## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
+## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;,…
+## $ level_2    &lt;chr&gt; NA, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, NA, &quot;Relief&quot;, &quot;Relief&quot;, &quot;…
+## $ level_3    &lt;chr&gt; NA, &quot;High&quot;, &quot;High&quot;, &quot;High&quot;, NA, &quot;High&quot;, &quot;Low / moderate&quot;, &quot;…
+## $ level_4    &lt;chr&gt; NA, &quot;High (&gt;3m)&quot;, &quot;High (&gt;3m)&quot;, &quot;High (&gt;3m)&quot;, NA, &quot;High (&gt;3…
+## $ level_5    &lt;chr&gt; NA, &quot;3&quot;, &quot;3&quot;, &quot;3&quot;, NA, &quot;3&quot;, &quot;2&quot;, &quot;3&quot;, NA, &quot;3&quot;, &quot;2&quot;, &quot;2&quot;, NA…
+## $ scientific &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ caab_code  &lt;chr&gt; NA, &quot;82003006&quot;, &quot;82003006&quot;, &quot;82003006&quot;, NA, &quot;82003006&quot;, &quot;82…</code></pre>
+<p>Carry out some basic checks on the number of annotations per
+image</p>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>num.points <span class="ot">&lt;-</span> <span class="dv">20</span></span></code></pre></div>
+</details>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>wrong.points.habitat <span class="ot">&lt;-</span> habitat <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">points.annotated =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="fu">left_join</span>(metadata) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">expected =</span> <span class="fu">case_when</span>(successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">2</span>, successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">1</span>, successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">1</span>, successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>points.annotated <span class="sc">==</span> expected) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## `summarise()` has grouped output by &#39;campaignid&#39;. You can override using the
+## `.groups` argument.
+## Joining with `by = join_by(campaignid, sample)`</code></pre>
+<pre><code>## Rows: 5
+## Columns: 14
+## Groups: campaignid [1]
+## $ campaignid                  &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_s…
+## $ sample                      &lt;chr&gt; &quot;21&quot;, &quot;3&quot;, &quot;37&quot;, &quot;45&quot;, &quot;47&quot;
+## $ points.annotated            &lt;int&gt; 20, 41, 20, 20, 20
+## $ longitude_dd                &lt;chr&gt; &quot;114.857485&quot;, &quot;114.9156417&quot;, &quot;114.9235817&quot;…
+## $ latitude_dd                 &lt;chr&gt; &quot;-34.06438333&quot;, &quot;-34.10734167&quot;, &quot;-34.10853…
+## $ date_time                   &lt;chr&gt; &quot;18/03/2023 2:34&quot;, &quot;15/03/2023 1:54&quot;, &quot;15/…
+## $ location                    &lt;chr&gt; NA, NA, NA, NA, NA
+## $ site                        &lt;chr&gt; NA, NA, NA, NA, NA
+## $ depth                       &lt;chr&gt; &quot;42.3&quot;, &quot;46.7&quot;, &quot;46.1&quot;, &quot;61.9&quot;, &quot;73&quot;
+## $ successful_count            &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ successful_length           &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ successful_habitat_forward  &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ successful_habitat_backward &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ expected                    &lt;dbl&gt; 40, 40, 40, 40, 40</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>wrong.points.relief <span class="ot">&lt;-</span> relief <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">points.annotated =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>  <span class="fu">left_join</span>(metadata) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">expected =</span> <span class="fu">case_when</span>(successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">2</span>, successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">1</span>, successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;Yes&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">1</span>, successful_habitat_forward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">&amp;</span> successful_habitat_backward <span class="sc">%in%</span> <span class="st">&quot;No&quot;</span> <span class="sc">~</span> num.points <span class="sc">*</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>points.annotated <span class="sc">==</span> expected) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## `summarise()` has grouped output by &#39;campaignid&#39;. You can override using the
+## `.groups` argument.
+## Joining with `by = join_by(campaignid, sample)`</code></pre>
+<pre><code>## Rows: 4
+## Columns: 14
+## Groups: campaignid [1]
+## $ campaignid                  &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_s…
+## $ sample                      &lt;chr&gt; &quot;17&quot;, &quot;21&quot;, &quot;23&quot;, &quot;47&quot;
+## $ points.annotated            &lt;int&gt; 41, 20, 41, 20
+## $ longitude_dd                &lt;chr&gt; &quot;114.85758&quot;, &quot;114.857485&quot;, &quot;114.9189517&quot;, …
+## $ latitude_dd                 &lt;chr&gt; &quot;-34.09634667&quot;, &quot;-34.06438333&quot;, &quot;-34.12832…
+## $ date_time                   &lt;chr&gt; &quot;15/03/2023 3:00&quot;, &quot;18/03/2023 2:34&quot;, &quot;15/…
+## $ location                    &lt;chr&gt; NA, NA, NA, NA
+## $ site                        &lt;chr&gt; NA, NA, NA, NA
+## $ depth                       &lt;chr&gt; &quot;43.3&quot;, &quot;42.3&quot;, &quot;41&quot;, &quot;73&quot;
+## $ successful_count            &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ successful_length           &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ successful_habitat_forward  &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ successful_habitat_backward &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
+## $ expected                    &lt;dbl&gt; 40, 40, 40, 40</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>habitat.missing.metadata <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(habitat, metadata, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;campaignid&quot;</span>, <span class="st">&quot;sample&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## Rows: 40
+## Columns: 8
+## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
+## $ sample     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ level_2    &lt;chr&gt; &quot;Substrate&quot;, &quot;Substrate&quot;, &quot;Substrate&quot;, &quot;Substrate&quot;, &quot;Substr…
+## $ level_3    &lt;chr&gt; &quot;Unconsolidated (soft)&quot;, &quot;Unconsolidated (soft)&quot;, &quot;Unconsol…
+## $ level_4    &lt;chr&gt; &quot;Sand / mud (&lt;2mm)&quot;, &quot;Sand / mud (&lt;2mm)&quot;, &quot;Sand / mud (&lt;2mm…
+## $ level_5    &lt;chr&gt; &quot;Coarse sand (with shell fragments)&quot;, &quot;Coarse sand (with sh…
+## $ scientific &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, &quot;Thalassodendron spp&quot;, NA, …
+## $ caab_code  &lt;chr&gt; &quot;82001014&quot;, &quot;82001014&quot;, &quot;82001014&quot;, &quot;82001014&quot;, &quot;82001014&quot;,…</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>metadata.missing.habitat <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(metadata, habitat, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;campaignid&quot;</span>, <span class="st">&quot;sample&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## Rows: 0
+## Columns: 12
+## $ campaignid                  &lt;chr&gt; 
+## $ sample                      &lt;chr&gt; 
+## $ longitude_dd                &lt;chr&gt; 
+## $ latitude_dd                 &lt;chr&gt; 
+## $ date_time                   &lt;chr&gt; 
+## $ location                    &lt;chr&gt; 
+## $ site                        &lt;chr&gt; 
+## $ depth                       &lt;chr&gt; 
+## $ successful_count            &lt;chr&gt; 
+## $ successful_length           &lt;chr&gt; 
+## $ successful_habitat_forward  &lt;chr&gt; 
+## $ successful_habitat_backward &lt;chr&gt;</code></pre>
+<p>Tidy and save the habitat data by joining with the complete schema
+file that is loaded with the CheckEM package</p>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>tidy.habitat <span class="ot">&lt;-</span> habitat <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span>                                        </span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">left_join</span>(schema <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(parent_caab, qualifiers))) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, number, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), family, genus, species) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>level_2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;Unscorable&quot;</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample, <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>)), family, genus, species) <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">tally</span>(number, <span class="at">name =</span> <span class="st">&quot;number&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>                                                        </span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, level_1, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</details>
+<pre><code>## Joining with `by = join_by(level_2, level_3, level_4, level_5, caab_code)`</code></pre>
+<pre><code>## Rows: 233
+## Columns: 14
+## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
+## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;12&quot;, &quot;12&quot;,…
+## $ level_1    &lt;chr&gt; &quot;Biota&quot;, &quot;Biota&quot;, &quot;Biota&quot;, &quot;Biota&quot;, &quot;Biota&quot;, &quot;Biota&quot;, &quot;Biot…
+## $ level_2    &lt;chr&gt; &quot;Macroalgae&quot;, &quot;Macroalgae&quot;, &quot;Macroalgae&quot;, &quot;Macroalgae&quot;, &quot;Se…
+## $ level_3    &lt;chr&gt; &quot;Erect coarse branching&quot;, &quot;Erect coarse branching&quot;, &quot;Erect …
+## $ level_4    &lt;chr&gt; &quot;Brown&quot;, &quot;Red&quot;, &quot;Red&quot;, &quot;Red&quot;, NA, &quot;Laminar&quot;, &quot;Simple&quot;, &quot;San…
+## $ level_5    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, &quot;Coarse sand (with shell fragme…
+## $ level_6    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ level_7    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ level_8    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ family     &lt;chr&gt; NA, NA, NA, NA, &quot;Cymodoceaceae&quot;, NA, NA, NA, NA, NA, NA, NA…
+## $ genus      &lt;chr&gt; NA, NA, NA, NA, &quot;Thalassodendron&quot;, NA, NA, NA, NA, NA, NA, …
+## $ species    &lt;chr&gt; NA, NA, NA, NA, &quot;spp&quot;, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+## $ number     &lt;dbl&gt; 2, 3, 2, 1, 14, 1, 1, 3, 5, 8, 1, 2, 3, 3, 7, 2, 1, 1, 3, 1…</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">saveRDS</span>(tidy.habitat, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/staging/&quot;</span>, name, <span class="st">&quot;_habitat.rds&quot;</span>)))</span></code></pre></div>
+</details>
+<p>Tidy and save the relief data by joining with the complete schema
+file that is loaded with the CheckEM package</p>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>tidy.relief <span class="ot">&lt;-</span> relief <span class="sc">%&gt;%</span> <span class="co"># </span><span class="al">TODO</span><span class="co"> join this with schema</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>level_2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;Unscorable&quot;</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>  <span class="fu">left_join</span>(schema) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample, <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>)), caab_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">tally</span>(number, <span class="at">name =</span> <span class="st">&quot;number&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>                                                          </span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>  <span class="fu">glimpse</span>()                                    </span></code></pre></div>
+</details>
+<pre><code>## Joining with `by = join_by(level_2, level_3, level_4, level_5, caab_code)`</code></pre>
+<pre><code>## Rows: 73
+## Columns: 12
+## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
+## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;12&quot;, &quot;12&quot;, &quot;14&quot;, &quot;14&quot;, &quot;14&quot;, &quot;15&quot;, &quot;15&quot;,…
+## $ level_2    &lt;chr&gt; &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;,…
+## $ level_3    &lt;chr&gt; &quot;High&quot;, &quot;High&quot;, &quot;Low / moderate&quot;, &quot;High&quot;, &quot;Low / moderate&quot;,…
+## $ level_4    &lt;chr&gt; &quot;High (&gt;3m)&quot;, &quot;Wall&quot;, &quot;Moderate (1-3m)&quot;, &quot;High (&gt;3m)&quot;, &quot;Mod…
+## $ level_5    &lt;chr&gt; &quot;3&quot;, &quot;4&quot;, &quot;2&quot;, &quot;3&quot;, &quot;2&quot;, &quot;3&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;1&quot;, &quot;2&quot;,…
+## $ level_1    &lt;chr&gt; &quot;Physical&quot;, &quot;Physical&quot;, &quot;Physical&quot;, &quot;Physical&quot;, &quot;Physical&quot;,…
+## $ level_6    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ level_7    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ level_8    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ caab_code  &lt;chr&gt; &quot;82003006&quot;, &quot;82003007&quot;, &quot;82003004&quot;, &quot;82003006&quot;, &quot;82003004&quot;,…
+## $ number     &lt;dbl&gt; 8, 10, 5, 17, 4, 14, 3, 8, 16, 1, 4, 6, 20, 2, 13, 6, 14, 1…</code></pre>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">saveRDS</span>(tidy.relief, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/staging/&quot;</span>, name, <span class="st">&quot;_relief.rds&quot;</span>)))</span></code></pre></div>
+</details>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

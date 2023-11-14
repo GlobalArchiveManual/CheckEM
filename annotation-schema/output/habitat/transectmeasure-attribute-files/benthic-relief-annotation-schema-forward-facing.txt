@@ -1,9 +1,10 @@
-level_2	level_3	level_4	level_5	scientific	qualifiers	caab_code
-Relief	Flat		0			82003001
-Relief	High	Caves	5			82003008
-Relief	High	High (>3m)	3			82003006
-Relief	High	Wall	4			82003007
-Relief	High					82003005
-Relief	Low / moderate	Low (<1m)	1			82003003
-Relief	Low / moderate	Moderate (1-3m)	2			82003004
-Relief	Low / moderate					82003002
+level_2	level_3	level_4	level_5	scientific	qualifiers
+Relief	Flat		0		
+Relief	High	Caves	5		
+Relief	High	High (>3m)	3		
+Relief	High	Wall	4		
+Relief	High				
+Relief	Low / moderate	Low (<1m)	1		
+Relief	Low / moderate	Moderate (1-3m)	2		
+Relief	Low / moderate				
+Relief					
