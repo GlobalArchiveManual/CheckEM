@@ -10,22 +10,22 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/CheckEM_user_guide.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/EventMeasure_annotation_guide.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/TransectMeasure_annotation_guide.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/check-fish.html</loc>
-  </url>
-  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/runCheckEM.html</loc>
+    <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-habitat.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/authors.html</loc>
