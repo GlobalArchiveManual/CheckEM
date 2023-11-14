@@ -40,7 +40,7 @@ saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_Met
 ```
 Read in the points data exported from Transect Measure, and then filter this into 2 dataframes for relief and habitat annotations
 ```{r points}
-points <- read_TM(here::here("r-workflows/data/raw/"),
+points <- CheckEM::read_TM(here::here("r-workflows/data/raw/"),
                                sample = "opcode")
 
 habitat <- points %>%
