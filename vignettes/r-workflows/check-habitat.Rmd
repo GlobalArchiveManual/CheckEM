@@ -24,7 +24,6 @@ library(ggbeeswarm)
 library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
-library(todor)
 library(here)
 
 ```
