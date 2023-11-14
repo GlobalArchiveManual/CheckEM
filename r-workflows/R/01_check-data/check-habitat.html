@@ -395,6 +395,7 @@ from TransectMeasure, and format it into</p>
 ## $ successful_length           &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, …
 ## $ successful_habitat_forward  &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, …
 ## $ successful_habitat_backward &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, …</code></pre>
+<p>Save the metadata as an R data file</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">saveRDS</span>(metadata, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/tidy/&quot;</span>, name, <span class="st">&quot;_Metadata.rds&quot;</span>)))</span></code></pre></div>
 </details>
@@ -438,43 +439,44 @@ filter this into 2 dataframes for relief and habitat annotations</p>
 ## $ caab_code        &lt;chr&gt; &quot;80300933&quot;, &quot;63618905&quot;, &quot;82001014&quot;, &quot;80300906&quot;, &quot;8030…
 ## $ x                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
 ## $ radius           &lt;chr&gt; &quot;67.0&quot;, &quot;24.7&quot;, &quot;18.2&quot;, &quot;97.8&quot;, &quot;82.6&quot;, &quot;34.1&quot;, &quot;25.2…</code></pre>
+<p>Filter the data to only include habitat annotations</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>habitat <span class="ot">&lt;-</span> points <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(relief_annotated <span class="sc">%in%</span> <span class="st">&quot;no&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), scientific, caab_code) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), scientific) <span class="sc">%&gt;%</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 </details>
 <pre><code>## Rows: 1,241
-## Columns: 8
+## Columns: 7
 ## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
 ## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;,…
 ## $ level_2    &lt;chr&gt; &quot;Macroalgae&quot;, &quot;Seagrasses&quot;, &quot;Substrate&quot;, &quot;Macroalgae&quot;, &quot;Mac…
 ## $ level_3    &lt;chr&gt; &quot;Filamentous / filiform&quot;, &quot;Strap-like leaves&quot;, &quot;Unconsolida…
 ## $ level_4    &lt;chr&gt; &quot;Red&quot;, NA, &quot;Sand / mud (&lt;2mm)&quot;, &quot;Red&quot;, &quot;Red&quot;, NA, NA, &quot;Brow…
 ## $ level_5    &lt;chr&gt; NA, NA, &quot;Coarse sand (with shell fragments)&quot;, NA, NA, NA, N…
-## $ scientific &lt;chr&gt; NA, &quot;Thalassodendron spp&quot;, NA, NA, NA, &quot;Thalassodendron spp…
-## $ caab_code  &lt;chr&gt; &quot;80300933&quot;, &quot;63618905&quot;, &quot;82001014&quot;, &quot;80300906&quot;, &quot;80300906&quot;,…</code></pre>
+## $ scientific &lt;chr&gt; NA, &quot;Thalassodendron spp&quot;, NA, NA, NA, &quot;Thalassodendron spp…</code></pre>
+<p>Filter the data to only include relief annotations</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>relief <span class="ot">&lt;-</span> points <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(relief_annotated <span class="sc">%in%</span> <span class="st">&quot;yes&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), scientific, caab_code) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), scientific) <span class="sc">%&gt;%</span></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 </details>
 <pre><code>## Rows: 1,242
-## Columns: 8
+## Columns: 7
 ## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
 ## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;,…
 ## $ level_2    &lt;chr&gt; NA, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, NA, &quot;Relief&quot;, &quot;Relief&quot;, &quot;…
 ## $ level_3    &lt;chr&gt; NA, &quot;High&quot;, &quot;High&quot;, &quot;High&quot;, NA, &quot;High&quot;, &quot;Low / moderate&quot;, &quot;…
 ## $ level_4    &lt;chr&gt; NA, &quot;High (&gt;3m)&quot;, &quot;High (&gt;3m)&quot;, &quot;High (&gt;3m)&quot;, NA, &quot;High (&gt;3…
 ## $ level_5    &lt;chr&gt; NA, &quot;3&quot;, &quot;3&quot;, &quot;3&quot;, NA, &quot;3&quot;, &quot;2&quot;, &quot;3&quot;, NA, &quot;3&quot;, &quot;2&quot;, &quot;2&quot;, NA…
-## $ scientific &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ caab_code  &lt;chr&gt; NA, &quot;82003006&quot;, &quot;82003006&quot;, &quot;82003006&quot;, NA, &quot;82003006&quot;, &quot;82…</code></pre>
-<p>Carry out some basic checks on the number of annotations per
-image</p>
+## $ scientific &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</code></pre>
+<p>Set the number of expected annotations to check against</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>num.points <span class="ot">&lt;-</span> <span class="dv">20</span></span></code></pre></div>
 </details>
+<p>Check if there are habitat annotations with an unexpected number of
+annotation points</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>wrong.points.habitat <span class="ot">&lt;-</span> habitat <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample) <span class="sc">%&gt;%</span></span>
@@ -504,6 +506,8 @@ image</p>
 ## $ successful_habitat_forward  &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
 ## $ successful_habitat_backward &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
 ## $ expected                    &lt;dbl&gt; 40, 40, 40, 40, 40</code></pre>
+<p>Check if there are habitat annotations with an unexpected number of
+annotation points</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>wrong.points.relief <span class="ot">&lt;-</span> relief <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample) <span class="sc">%&gt;%</span></span>
@@ -533,20 +537,23 @@ image</p>
 ## $ successful_habitat_forward  &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
 ## $ successful_habitat_backward &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;
 ## $ expected                    &lt;dbl&gt; 40, 40, 40, 40</code></pre>
+<p>Check to see if there are any samples in habitat that don’t have a
+match in the metadata</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>habitat.missing.metadata <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(habitat, metadata, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;campaignid&quot;</span>, <span class="st">&quot;sample&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 </details>
 <pre><code>## Rows: 40
-## Columns: 8
+## Columns: 7
 ## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
 ## $ sample     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 ## $ level_2    &lt;chr&gt; &quot;Substrate&quot;, &quot;Substrate&quot;, &quot;Substrate&quot;, &quot;Substrate&quot;, &quot;Substr…
 ## $ level_3    &lt;chr&gt; &quot;Unconsolidated (soft)&quot;, &quot;Unconsolidated (soft)&quot;, &quot;Unconsol…
 ## $ level_4    &lt;chr&gt; &quot;Sand / mud (&lt;2mm)&quot;, &quot;Sand / mud (&lt;2mm)&quot;, &quot;Sand / mud (&lt;2mm…
 ## $ level_5    &lt;chr&gt; &quot;Coarse sand (with shell fragments)&quot;, &quot;Coarse sand (with sh…
-## $ scientific &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, &quot;Thalassodendron spp&quot;, NA, …
-## $ caab_code  &lt;chr&gt; &quot;82001014&quot;, &quot;82001014&quot;, &quot;82001014&quot;, &quot;82001014&quot;, &quot;82001014&quot;,…</code></pre>
+## $ scientific &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, &quot;Thalassodendron spp&quot;, NA, …</code></pre>
+<p>Check to see if there are any samples in the metadata that don’t have
+matching habitat</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>metadata.missing.habitat <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(metadata, habitat, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;campaignid&quot;</span>, <span class="st">&quot;sample&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
@@ -565,12 +572,12 @@ image</p>
 ## $ successful_length           &lt;chr&gt; 
 ## $ successful_habitat_forward  &lt;chr&gt; 
 ## $ successful_habitat_backward &lt;chr&gt;</code></pre>
-<p>Tidy and save the habitat data by joining with the complete schema
-file that is loaded with the CheckEM package</p>
+<p>Tidy the habitat data by joining with the complete schema file that
+is loaded with the CheckEM package</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>tidy.habitat <span class="ot">&lt;-</span> habitat <span class="sc">%&gt;%</span></span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span>                                        </span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">left_join</span>(schema <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(parent_caab, qualifiers))) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">left_join</span>(catami) <span class="sc">%&gt;%</span></span>
 <span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, number, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), family, genus, species) <span class="sc">%&gt;%</span></span>
 <span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>level_2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;Unscorable&quot;</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span>  </span>
 <span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample, <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>)), family, genus, species) <span class="sc">%&gt;%</span></span>
@@ -579,8 +586,13 @@ file that is loaded with the CheckEM package</p>
 <span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, level_1, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 </details>
-<pre><code>## Joining with `by = join_by(level_2, level_3, level_4, level_5, caab_code)`</code></pre>
-<pre><code>## Rows: 233
+<pre><code>## Joining with `by = join_by(level_2, level_3, level_4, level_5)`</code></pre>
+<pre><code>## Warning in left_join(., catami): Detected an unexpected many-to-many relationship between `x` and `y`.
+## ℹ Row 23 of `x` matches multiple rows in `y`.
+## ℹ Row 193 of `y` matches multiple rows in `x`.
+## ℹ If a many-to-many relationship is expected, set `relationship =
+##   &quot;many-to-many&quot;` to silence this warning.</code></pre>
+<pre><code>## Rows: 369
 ## Columns: 14
 ## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
 ## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;12&quot;, &quot;12&quot;,…
@@ -592,28 +604,30 @@ file that is loaded with the CheckEM package</p>
 ## $ level_6    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 ## $ level_7    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 ## $ level_8    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ family     &lt;chr&gt; NA, NA, NA, NA, &quot;Cymodoceaceae&quot;, NA, NA, NA, NA, NA, NA, NA…
-## $ genus      &lt;chr&gt; NA, NA, NA, NA, &quot;Thalassodendron&quot;, NA, NA, NA, NA, NA, NA, …
-## $ species    &lt;chr&gt; NA, NA, NA, NA, &quot;spp&quot;, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
-## $ number     &lt;dbl&gt; 2, 3, 2, 1, 14, 1, 1, 3, 5, 8, 1, 2, 3, 3, 7, 2, 1, 1, 3, 1…</code></pre>
+## $ family     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Le…
+## $ genus      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Ec…
+## $ species    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;ra…
+## $ number     &lt;dbl&gt; 2, 3, 2, 1, 14, 1, 1, 3, 5, 8, 1, 2, 3, 3, 7, 7, 7, 7, 7, 2…</code></pre>
+<p>Save the tidy habitat data as an R data file</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">saveRDS</span>(tidy.habitat, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/staging/&quot;</span>, name, <span class="st">&quot;_habitat.rds&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="fu">saveRDS</span>(tidy.habitat, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/staging/&quot;</span>, name, <span class="st">&quot;_habitat.rds&quot;</span>)))</span></code></pre></div>
 </details>
-<p>Tidy and save the relief data by joining with the complete schema
-file that is loaded with the CheckEM package</p>
+<p>Tidy the relief data by joining with the complete schema file that is
+loaded with the CheckEM package</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>tidy.relief <span class="ot">&lt;-</span> relief <span class="sc">%&gt;%</span> <span class="co"># </span><span class="al">TODO</span><span class="co"> join this with schema</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>level_2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;Unscorable&quot;</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span>              </span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>  <span class="fu">left_join</span>(schema) <span class="sc">%&gt;%</span></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample, <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>)), caab_code) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">tally</span>(number, <span class="at">name =</span> <span class="st">&quot;number&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>                                                          </span>
-<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>  <span class="fu">glimpse</span>()                                    </span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>tidy.relief <span class="ot">&lt;-</span> relief <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(campaignid, sample, <span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>), scientific) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>level_2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;Unscorable&quot;</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>  <span class="fu">left_join</span>(catami) <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>  <span class="fu">group_by</span>(campaignid, sample, <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;level&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">tally</span>(number, <span class="at">name =</span> <span class="st">&quot;number&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>                                                          </span>
+<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>  <span class="fu">glimpse</span>()                                    </span></code></pre></div>
 </details>
-<pre><code>## Joining with `by = join_by(level_2, level_3, level_4, level_5, caab_code)`</code></pre>
+<pre><code>## Joining with `by = join_by(level_2, level_3, level_4, level_5)`</code></pre>
 <pre><code>## Rows: 73
-## Columns: 12
+## Columns: 11
 ## $ campaignid &lt;chr&gt; &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;2023-03_SwC_stereo-BRUVs&quot;, &quot;20…
 ## $ sample     &lt;chr&gt; &quot;10&quot;, &quot;10&quot;, &quot;10&quot;, &quot;12&quot;, &quot;12&quot;, &quot;14&quot;, &quot;14&quot;, &quot;14&quot;, &quot;15&quot;, &quot;15&quot;,…
 ## $ level_2    &lt;chr&gt; &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;, &quot;Relief&quot;,…
@@ -624,10 +638,10 @@ file that is loaded with the CheckEM package</p>
 ## $ level_6    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 ## $ level_7    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 ## $ level_8    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ caab_code  &lt;chr&gt; &quot;82003006&quot;, &quot;82003007&quot;, &quot;82003004&quot;, &quot;82003006&quot;, &quot;82003004&quot;,…
 ## $ number     &lt;dbl&gt; 8, 10, 5, 17, 4, 14, 3, 8, 16, 1, 4, 6, 20, 2, 13, 6, 14, 1…</code></pre>
+<p>Save the tidy relief data as an R data file</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">saveRDS</span>(tidy.relief, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/staging/&quot;</span>, name, <span class="st">&quot;_relief.rds&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">saveRDS</span>(tidy.relief, <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="fu">paste0</span>(<span class="st">&quot;r-workflows/data/staging/&quot;</span>, name, <span class="st">&quot;_relief.rds&quot;</span>)))</span></code></pre></div>
 </details>
 
 

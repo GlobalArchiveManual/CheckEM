@@ -12,19 +12,21 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This guide documents the necessary steps to take raw data exported from TransectMeasure, and format it into tidy files
+This guide documents the necessary steps to take raw data exported from TransectMeasure, and format it into 
 
 Load the necessary libraries
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(devtools)
 library(CheckEM)
-# devtools::load_all("./")
 library(tidyverse)
 library(ggplot2)
 library(ggbeeswarm)
-# library(leaflet) # This is erroring due to some conflict with checkem
+library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
+library(todor)
+library(here)
+
 ```
 Set the study name
 ```{r name}
@@ -35,28 +37,36 @@ Load and format metadata using the CheckEM function 'read_metadata'
 metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
     dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
-
+```
+Save the metadata as an R data file
+```{r save-metadata}
 saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_Metadata.rds")))
 ```
 Read in the points data exported from Transect Measure, and then filter this into 2 dataframes for relief and habitat annotations
 ```{r points}
-points <- CheckEM::read_TM(here::here("r-workflows/data/raw/"),
+points <- read_TM(here::here("r-workflows/data/raw/"),
                                sample = "opcode")
-
+```
+Filter the data to only include habitat annotations
+```{r habitat}
 habitat <- points %>%
   dplyr::filter(relief_annotated %in% "no") %>%
-  dplyr::select(campaignid, sample, starts_with("level"), scientific, caab_code) %>%
-  glimpse()
-
-relief <- points %>%
-  dplyr::filter(relief_annotated %in% "yes") %>%
-  dplyr::select(campaignid, sample, starts_with("level"), scientific, caab_code) %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
   glimpse()
 ```
-Carry out some basic checks on the number of annotations per image
-```{r errors}
+Filter the data to only include relief annotations
+```{r relief}
+relief <- points %>%
+  dplyr::filter(relief_annotated %in% "yes") %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
+  glimpse()
+```
+Set the number of expected annotations to check against
+```{r set-points}
 num.points <- 20
-
+```
+Check if there are habitat annotations with an unexpected number of annotation points
+```{r wrong-habitat}
 wrong.points.habitat <- habitat %>%
   group_by(campaignid, sample) %>%
   summarise(points.annotated = n()) %>%
@@ -64,7 +74,9 @@ wrong.points.habitat <- habitat %>%
   dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ num.points * 2, successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
   dplyr::filter(!points.annotated == expected) %>%
   glimpse()
-
+```
+Check if there are habitat annotations with an unexpected number of annotation points
+```{r wrong-relief}
 wrong.points.relief <- relief %>%
   group_by(campaignid, sample) %>%
   summarise(points.annotated = n()) %>%
@@ -72,22 +84,22 @@ wrong.points.relief <- relief %>%
   dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ num.points * 2, successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
   dplyr::filter(!points.annotated == expected) %>%
   glimpse()
-
+```
+Check to see if there are any samples in habitat that don't have a match in the metadata
+```{r missing-metadata}
 habitat.missing.metadata <- anti_join(habitat, metadata, by = c("campaignid", "sample")) %>%
   glimpse()
-
+```
+Check to see if there are any samples in the metadata that don't have matching habitat
+```{r missing-habitat}
 metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "sample")) %>%
   glimpse()
 ```
-Tidy and save the habitat data by joining with the complete schema file that is loaded with the CheckEM package
-```{r tidy}
-schema <- schema %>%
-  dplyr::select(-c(parent_caab, qualifiers)) %>%
-  glimpse()
-
+Tidy the habitat data by joining with the complete schema file that is loaded with the CheckEM package
+```{r tidy-habitat}
 tidy.habitat <- habitat %>%
   dplyr::mutate(number = 1) %>%                                        
-  left_join(schema) %>%
+  left_join(catami) %>%
   dplyr::select(campaignid, sample, number, starts_with("level"), family, genus, species) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
   group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
@@ -95,18 +107,24 @@ tidy.habitat <- habitat %>%
   ungroup() %>%                                                        
   dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()
-
-saveRDS(tidy.habitat, file = here::here(paste0("r-workflows/data/staging/", name, "_Habitat.rds")))
 ```
-Tidy and save the relief data by joining with the complete schema file that is loaded with the CheckEM package
-```{r save}
-tidy.relief <- relief %>% # TODO join this with schema
+Save the tidy habitat data as an R data file
+```{r save-tidy-habitat}
+saveRDS(tidy.habitat, file = here::here(paste0("r-workflows/data/staging/", name, "_habitat.rds")))
+```
+Tidy the relief data by joining with the complete schema file that is loaded with the CheckEM package
+```{r tidy-relef}
+tidy.relief <- relief %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%              
   dplyr::mutate(number = 1) %>% 
-  left_join(schema) %>%
-  group_by(campaignid, sample, across(starts_with("level")), caab_code) %>% 
+  left_join(catami) %>%
+  group_by(campaignid, sample, across(starts_with("level"))) %>% 
   dplyr::tally(number, name = "number") %>%
-  ungroup() %>%                                                          glimpse()                                                            
-
-saveRDS(tidy.relief, file = here::here(paste0("r-workflows/data/staging/", name, "_Relief.rds")))
+  ungroup() %>%                                                          
+  glimpse()                                    
+```                        
+Save the tidy relief data as an R data file
+```{r save-tidy-relief}
+saveRDS(tidy.relief, file = here::here(paste0("r-workflows/data/staging/", name, "_relief.rds")))
 ```
