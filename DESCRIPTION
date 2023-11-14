@@ -38,6 +38,7 @@ RoxygenNote: 7.2.3
 Depends: 
     R (>= 4.1)
 Imports: 
+    devtools,
     ggplot2 (>= 3.4.2),
     googledrive,
     googlesheets4,
