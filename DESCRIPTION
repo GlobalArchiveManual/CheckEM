@@ -54,7 +54,8 @@ Imports:
     shinyWidgets (>= 0.7.6),
     stringr (>= 1.5.0),
     terra,
-    tidyr (>= 1.3.0)
+    tidyr (>= 1.3.0),
+    tidyverse
 URL: https://globalarchivemanual.github.io/CheckEM/
 Suggests: 
     knitr,
