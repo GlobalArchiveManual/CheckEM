@@ -5,9 +5,9 @@ articles:
   CheckEM_user_guide: CheckEM_user_guide.html
   EventMeasure_annotation_guide: EventMeasure_annotation_guide.html
   TransectMeasure_annotation_guide: TransectMeasure_annotation_guide.html
-  check-habitat: check-habitat.html
+  check-fish: check-fish.html
   runCheckEM: runCheckEM.html
-last_built: 2023-11-13T07:33Z
+last_built: 2023-11-14T00:36Z
 urls:
   reference: https://globalarchivemanual.github.io/CheckEM/reference
   article: https://globalarchivemanual.github.io/CheckEM/articles
