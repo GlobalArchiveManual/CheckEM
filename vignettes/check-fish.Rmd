@@ -1,8 +1,15 @@
 ---
-title: "Checking fish data exported from TransectMeasure"
+title: "Checking fish data exported from EventMeasure"
 author: "Claude Spencer & Brooke Gibbons"
 date: "2023-11-13"
-output: html_document
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Checking fish data exported from EventMeasure}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -10,12 +17,12 @@ output: html_document
 # knitr::opts_knit$set(root.dir = "..")
 ```
 
-```{r}
+```{r working-dir}
 # getwd()
 ```
 
 
-```{r, results='hide', warning=FALSE, message=FALSE}
+```{r libraries, results='hide', warning=FALSE, message=FALSE}
 # Load Libraries ----
 library(devtools)
 library(CheckEM)
@@ -25,11 +32,11 @@ library(sf)
 library(terra)
 ```
 
-```{r}
+```{r name}
 name <- "example-bruv-workflow"
 ```
 
-```{r}
+```{r metadata}
 metadata <- read_metadata(here::here("1. Example R workflows (scripts to download)/data/raw/")) %>%
   dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location,  # Review columns to align with GlobalArchive - plus make metadata match
                 site, depth, successful_count, successful_length,
@@ -40,12 +47,12 @@ saveRDS(metadata, file = here::here(paste0("1. Example R workflows (scripts to d
                                 name, "_Metadata.rds")))
 ```
 
-```{r}
+```{r metadata-rds}
 metadata <- readRDS(here::here(paste0("1. Example R workflows (scripts to download)/data/tidy/",
                                 name, "_Metadata.rds")))
 ```
 
-```{r}
+```{r marine-parks}
 # marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/")  %>% 
 #   dplyr::select(geometry, ZoneName) %>%
 #   st_transform(4326) %>%

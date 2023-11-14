@@ -6,7 +6,7 @@ output:
     code_folding: hide
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{EventMeasure Workflow}
+  %\VignetteIndexEntry{TransectMeasure Annotation Guide}
   %\VignetteEncoding{UTF-8}
 ---
 
