@@ -4,7 +4,7 @@
 \alias{read_files_txt}
 \title{Title}
 \usage{
-read_files_txt(flnm)
+read_files_txt(dir)
 }
 \arguments{
 \item{flnm}{}
