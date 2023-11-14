@@ -1,8 +1,15 @@
 ---
-title: "Checking fish data exported from TransectMeasure"
+title: "Checking fish data exported from EventMeasure"
 author: "Claude Spencer & Brooke Gibbons"
 date: "2023-11-13"
-output: html_document
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Checking fish data exported from EventMeasure}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
