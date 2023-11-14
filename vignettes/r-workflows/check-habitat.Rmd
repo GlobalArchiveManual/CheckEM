@@ -1,5 +1,5 @@
 ---
-title: "Checking habitat"
+title: "Checking habitat data exported from TransectMeasure"
 author: "Claude Spencer & Brooke Gibbons"
 date: "2023-11-13"
 output:
@@ -8,7 +8,7 @@ output:
     code_folding: hide
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Checking habitat}
+  %\VignetteIndexEntry{Checking habitat data exported from TransectMeasure}
   %\VignetteEncoding{UTF-8}
 ---
 
