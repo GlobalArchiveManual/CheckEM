@@ -21,7 +21,6 @@ vignette: >
 # getwd()
 ```
 
-
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 # Load Libraries ----
 library(devtools)

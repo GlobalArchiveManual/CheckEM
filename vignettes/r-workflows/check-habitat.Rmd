@@ -12,164 +12,101 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-# knitr::opts_chunk$set(echo = TRUE)
-# knitr::opts_knit$set(root.dir = "..")
-```
+This guide documents the necessary steps to take raw data exported from TransectMeasure, and format it into tidy files
 
-```{r working-dir}
-# getwd()
-```
-
-
+Load the necessary libraries
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
-# Load Libraries ----
 library(devtools)
 library(CheckEM)
+# devtools::load_all("./")
 library(tidyverse)
-library(googlesheets4)
-library(sf)
-library(terra)
+library(ggplot2)
+library(ggbeeswarm)
+# library(leaflet) # This is erroring due to some conflict with checkem
+library(leaflet.minicharts)
+library(RColorBrewer)
 ```
-
+Set the study name
 ```{r name}
 name <- "example-bruv-workflow"
 ```
-
+Load and format metadata using the CheckEM function 'read_metadata'
 ```{r metadata}
-metadata <- read_metadata(here::here("1. Example R workflows (scripts to download)/data/raw/")) %>%
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location,  # Review columns to align with GlobalArchive - plus make metadata match
-                site, depth, successful_count, successful_length,
-                successful_habitat_forward, successful_habitat_backward) %>%
+metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
+    dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
 
-saveRDS(metadata, file = here::here(paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                name, "_Metadata.rds")))
+saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_Metadata.rds")))
 ```
+Read in the points data exported from Transect Measure, and then filter this into 2 dataframes for relief and habitat annotations
+```{r points}
+points <- read_TM(here::here("r-workflows/data/raw/"),
+                               sample = "opcode")
 
-```{r metadata-rds}
-metadata <- readRDS(here::here(paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                name, "_Metadata.rds")))
+habitat <- points %>%
+  dplyr::filter(relief_annotated %in% "no") %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific, caab_code) %>%
+  glimpse()
+
+relief <- points %>%
+  dplyr::filter(relief_annotated %in% "yes") %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific, caab_code) %>%
+  glimpse()
 ```
+Carry out some basic checks on the number of annotations per image
+```{r errors}
+num.points <- 20
 
-```{r marine-parks}
-# marine.parks <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/")  %>% 
-#   dplyr::select(geometry, ZoneName) %>%
-#   st_transform(4326) %>%
-#   st_make_valid()
-# 
-# metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), 
-#                       crs = 4326)
-# 
-# metadata <- metadata_sf %>%
-#   st_intersection(marine.parks) %>%
-#   bind_cols(st_coordinates(.)) %>%
-#   as.data.frame() %>%
-#   dplyr::select(-c(geometry)) %>%
-#   dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-#   dplyr::mutate(status = if_else(str_detect(ZoneName, "National|Sanctuary"), 
-#                                 "No-take", "Fished")) %>%
-#   clean_names() %>%
-#   glimpse()
+wrong.points.habitat <- habitat %>%
+  group_by(campaignid, sample) %>%
+  summarise(points.annotated = n()) %>%
+  left_join(metadata) %>%
+  dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ num.points * 2, successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::filter(!points.annotated == expected) %>%
+  glimpse()
+
+wrong.points.relief <- relief %>%
+  group_by(campaignid, sample) %>%
+  summarise(points.annotated = n()) %>%
+  left_join(metadata) %>%
+  dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ num.points * 2, successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::filter(!points.annotated == expected) %>%
+  glimpse()
+
+habitat.missing.metadata <- anti_join(habitat, metadata, by = c("campaignid", "sample")) %>%
+  glimpse()
+
+metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "sample")) %>%
+  glimpse()
 ```
-
-
-# 2. Extract fishing status ----
-# Use this section if you need to work out which samples are inside areas closed to fishing
-# TODO change to CAPAD file
-
-
-# 3. Load MaxN data ----
-points <- list.files(path = "1. Example R workflows (scripts to download)/data/raw/",      # This replaces ga.list.files
-                     recursive = T,
-                     pattern = "_Points.txt",
-                     full.names = T) %>% # list all files ending in "_Points.txt"
-  purrr::map(~CheckEM::read_files_txt(.)) %>% # This function reads in all text files identified above, combines them into one dataframe, and creates the campaignid column from the filename
-  purrr::list_rbind() %>%
+Tidy and save the habitat data by joining with the complete schema file that is loaded with the CheckEM package
+```{r tidy}
+schema <- schema %>%
+  dplyr::select(-c(parent_caab, qualifiers)) %>%
   glimpse()
 
-maxn <- points %>% 
-  dplyr::group_by(campaignid, sample, filename, periodtime, frame, family, genus, species) %>% # Add stage here if you would like to create MaxN by stage
-  dplyr::mutate(number = as.numeric(number)) %>%
-  dplyr::summarise(maxn = sum(number)) %>%
-  dplyr::group_by(campaignid, sample, family, genus, species) %>%
-  dplyr::slice(which.max(maxn)) %>%
-  dplyr::ungroup() %>%
-  dplyr::filter(!is.na(maxn)) %>%
-  dplyr::select(-frame) %>%
-  tidyr::replace_na(list(maxn = 0)) %>%
-  dplyr::mutate(maxn = as.numeric(maxn)) %>%
-  dplyr::filter(maxn > 0) %>%
-  dplyr::inner_join(metadata) %>%
-  dplyr::filter(successful_count %in% c("Yes")) %>% # Remove any samples that were not marked in the metadata as successful for count
-  dplyr::filter(maxn > 0) %>%
+tidy.habitat <- habitat %>%
+  dplyr::mutate(number = 1) %>%                                        
+  left_join(schema) %>%
+  dplyr::select(campaignid, sample, number, starts_with("level"), family, genus, species) %>%
+  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
+  group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
+  dplyr::tally(number, name = "number") %>%
+  ungroup() %>%                                                        
+  dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()
 
-# 4. Load length & 3D point data ----
-length3dpoints <- list.files(path = "1. Example R workflows (scripts to download)/data/raw/",
-                             recursive = T,
-                             pattern = "_3DPoints.txt|_Lengths.txt",
-                             full.names = T) %>%
-  purrr::map(~CheckEM::read_files_txt(.)) %>%
-  purrr::list_rbind() %>%
-  dplyr::select(-c(comment))%>% # take comment out as there is also a comment column in the metadata
-  dplyr::inner_join(metadata)%>%
-  dplyr::filter(successful_length %in% "Yes") %>% # Remove any samples that were not marked in the metadata as successful for length measurements
-  glimpse()
+saveRDS(tidy.habitat, file = here::here(paste0("r-workflows/data/staging/", name, "_Habitat.rds")))
+```
+Tidy and save the relief data by joining with the complete schema file that is loaded with the CheckEM package
+```{r save}
+tidy.relief <- relief %>% # TODO join this with schema
+  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%              
+  dplyr::mutate(number = 1) %>% 
+  left_join(schema) %>%
+  group_by(campaignid, sample, across(starts_with("level")), caab_code) %>% 
+  dplyr::tally(number, name = "number") %>%
+  ungroup() %>%                                                          glimpse()                                                            
 
-# 5. Complete and tidy datasets, run data checks
-dat <- maxn %>%
-  dplyr::select(campaignid, sample, family, genus, species, maxn) %>%
-  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-  replace_na(list(maxn = 0)) %>%
-  group_by(sample, family, genus, species) %>%
-  dplyr::summarise(maxn = sum(maxn)) %>%
-  ungroup() %>% 
-  mutate(scientific = paste(family, genus, species, sep = " "))%>%
-  dplyr::select(sample, scientific, maxn)%>%
-  spread(scientific, maxn, fill = 0)%>%
-  glimpse()
-
-maxn.families <- maxn %>%
-  dplyr::mutate(scientific = paste(family, genus, species, sep = " ")) %>%
-  filter(!(family %in% "Unknown")) %>%
-  dplyr::select(c(family, genus, species, scientific)) %>%
-  distinct() %>%
-  glimpse()
-
-complete.maxn <- dat %>%
-  pivot_longer(names_to = "scientific", values_to = "maxn",
-               cols = 2:ncol(.)) %>%
-  inner_join(maxn.families, by = c("scientific")) %>%
-  full_join(metadata)%>%
-  glimpse()
-
-length.families <- length3dpoints %>%
-  dplyr::filter(!(family %in% "Unknown")) %>%
-  dplyr::select(family, genus, species)%>%
-  distinct() %>%
-  glimpse()
-
-complete.length.number <- length3dpoints %>% 
-  dplyr::filter(!family %in% "Unknown")%>%
-  dplyr::right_join(metadata) %>%
-  dplyr::filter(successful_length %in% "Yes") %>%
-  dplyr::select(campaignid, sample, family, genus, species, length, number, range) %>%
-  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-  dplyr::mutate(number = as.numeric(number)) %>%
-  replace_na(list(number = 0)) %>% # We add in zeros - in case we want to calculate abundance of species based on a length rule (e.g. greater than legal size)
-  ungroup() %>%
-  dplyr::filter(!is.na(number)) %>% # this should not do anything
-  dplyr::mutate(length = as.numeric(length)) %>%
-  left_join(.,metadata) %>%
-  tidyr::uncount(number) %>%
-  glimpse()
-
-# 6. Save datasets ----
-saveRDS(complete.maxn, 
-          file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Complete-maxn.rds"))
-
-saveRDS(complete.length.number, 
-          file = paste0("1. Example R workflows (scripts to download)/data/staging/",
-                       name, "_Complete-length.rds"))
+saveRDS(tidy.relief, file = here::here(paste0("r-workflows/data/staging/", name, "_Relief.rds")))
+```

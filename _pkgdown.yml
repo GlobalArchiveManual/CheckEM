@@ -39,35 +39,35 @@ navbar:
   - text: User Guides
     menu:
     - text: CheckEM shiny app
-      href: articles/CheckEM_user_guide.html
+      href: articles/manuals/CheckEM_user_guide.html
     - text: Fish annotation guide (EventMeasure)
-      href: articles/EventMeasure_annotation_guide.html
+      href: articles/manuals/EventMeasure_annotation_guide.html
     - text: Benthos annotation guide (TransectMeasure)
-      href: articles/TransectMeasure_annotation_guide.html
+      href: articles/manuals/TransectMeasure_annotation_guide.html
   - text: R Workflows
     menu:
     - text: '-------'
     - text: Check Data
     - text: Check fish data from EventMeasure
-      href: articles/check-fish.html
+      href: articles/r-workflows/check-fish.html
     - text: Check habitat data from TransectMeasure
-      href: articles/check-habitat.html
+      href: articles/r-workflows/check-habitat.html
     - text: '-------'
     - text: Format Data
     - text: Generate spatial layers for modelling
-      href: articles/spatial-layers.html
+      href: articles/r-workflows/spatial-layers.html
     - text: Format & visualise fish data
-      href: articles/format-visualise-fish.html
+      href: articles/r-workflows/format-visualise-fish.html
     - text: Format & visualise habitat data
-      href: articles/format-visualise-habitat.html
+      href: articles/r-workflows/format-visualise-habitat.html
     - text: '-------'
     - text: Modelling
     - text: FSSgams of fish abundance and richness
-      href: articles/fish-gams.html
+      href: articles/r-workflows/fish-gams.html
     - text: FSSgams of habitat classes
-      href: articles/habitat-gams.html
+      href: articles/r-workflows/habitat-gams.html
   - text: Functions
-    href: reference/index.html
+    href: reference/r-workflows/index.html
 authors:
   footer:
     roles: [aut]
