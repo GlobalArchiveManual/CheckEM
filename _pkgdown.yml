@@ -48,23 +48,23 @@ navbar:
     menu:
     - text: '-------'
     - text: Check Data
-    - text: Check Fish data from EventMeasure
+    - text: Check fish data from EventMeasure
       href: articles/check-fish.html
-    - text: Check Habitat data from TransectMeasure
+    - text: Check habitat data from TransectMeasure
       href: articles/check-habitat.html
     - text: '-------'
     - text: Format Data
     - text: Generate spatial layers for modelling
       href: articles/spatial-layers.html
-    - text: Format & Visualise fish data
+    - text: Format & visualise fish data
       href: articles/format-visualise-fish.html
-    - text: Format & Visualise habitat data
+    - text: Format & visualise habitat data
       href: articles/format-visualise-habitat.html
     - text: '-------'
     - text: Modelling
-    - text: FSSgams of Fish abundance and richness
+    - text: FSSgams of fish abundance and richness
       href: articles/fish-gams.html
-    - text: FSSgams of Habitat classes
+    - text: FSSgams of habitat classes
       href: articles/habitat-gams.html
   - text: Functions
     href: reference/index.html
