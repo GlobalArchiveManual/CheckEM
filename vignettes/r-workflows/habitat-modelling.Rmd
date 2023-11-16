@@ -12,6 +12,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+# Load libraries, process and prepare data for model selection
+## Load libraries
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(CheckEM)
 library(tidyverse)
@@ -26,31 +28,31 @@ library(sf)
 library(patchwork)
 ```
 
-Set the study name
+## Set the study name
 ```{r name}
 name <- 'example-bruv-workflow'
 ```
 
-Load in the habitat point annotation data
+## Load in the habitat point annotation data
 ```{r raw-data}
 dat <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
                       name, "_Tidy-habitat.rds"))) %>%
   glimpse()
 ```
 
-Set the predictory variables
+## Set the predictory variables
 ```{r predictors}
 names(dat)
 pred.vars <- c("depth","roughness", "detrended", 
                "slope", "TPI", "aspect", "TRI")  
 ```
 
-Check for correlation of predictor variables and remove anything highly correlated (>0.95)
+## Check for correlation of predictor variables and remove anything highly correlated (>0.95)
 ```{r correlations}
 round(cor(dat[ , pred.vars]), 2)
 ```
 
-Plot the individual predictors to assess if any transformations are necessary
+## Plot the individual predictors to assess if any transformations are necessary
 ```{r transformations, warning = FALSE, fig.width = 7, fig.height = 6}
 par(mfrow = c(3, 2))
 for (i in pred.vars) {
@@ -65,13 +67,13 @@ for (i in pred.vars) {
 }
 ```
 
-Remove any highly correlated predictor variables
+## Remove any highly correlated predictor variables
 ```{r reset-predictors}
 pred.vars <- c("depth","roughness", "detrended", 
                "TPI", "aspect", "TRI")
 ```
 
-Check to make sure response variables have less than 80% zeros
+## Check to make sure response variables have less than 80% zeros
 ```{r check-responses}
 resp.vars.all = unique(as.character(dat$habitat))
 resp.vars = character()
@@ -83,14 +85,15 @@ for(i in 1:length(resp.vars.all)){
 resp.vars 
 ```
 
-Add the output directory for model outputs, and set up the R environment for model selection
+## Add the output directory for model outputs, and set up the R environment for model selection
 ```{r environment-setup}
 outdir    <- ("r-workflows/model output/habitat/")
 out.all   <- list()
 var.imp   <- list()
 ```
 
-Run the full subset model selection process. This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134
+# Run the full subset model selection process
+## This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134
 ```{r FSSgam, results='hide', warning=FALSE, message=FALSE}
 for(i in 1:length(resp.vars)){
   print(resp.vars[i])
@@ -134,7 +137,7 @@ for(i in 1:length(resp.vars)){
 }
 ```
 
-Save model fits and importance scores
+## Save model fits and importance scores
 ```{r save-gam-data}
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
@@ -144,7 +147,8 @@ write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.
 write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
 ```
 
-Transform the habitat data into wide format for prediction
+# Spatially predict the top model from the model selection process
+## Transform the habitat data into wide format for prediction
 ```{r transform-habitat}
 widedat <- dat %>%
   pivot_wider(values_from = "number", names_from = "habitat", values_fill = 0) %>%
@@ -152,14 +156,14 @@ widedat <- dat %>%
   glimpse()
 ```
 
-Load the raster of bathymetry data and derivatives
+## Load the raster of bathymetry data and derivatives
 ```{r load-bathymetry, fig.width = 7, fig.height = 4}
 preds  <- readRDS(here::here(paste0("r-workflows/data/spatial/rasters/", 
                          name, "_bathymetry_derivatives.rds")))
 plot(preds)
 ```
 
-Transform the raster to a dataframe to predict onto
+## Transform the raster to a dataframe to predict onto
 ```{r bathymetry-dataframe}
 preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
   dplyr::mutate(depth = abs(mbdepth)) %>%                                       
@@ -167,7 +171,7 @@ preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
   glimpse()
 ```
 
-Manually set the top model from the full subset model selection
+## Manually set the top model from the full subset model selection
 ```{r set-models, fig.width = 7, fig.height = 6}
 # Sessile invertebrates
 m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~ 
@@ -221,7 +225,7 @@ summary(m_reef)
 plot(m_reef, pages = 1, residuals = T, cex = 5)
 ```
 
-Predict, rasterise and plot habitat predictions
+## Predict, rasterise and plot habitat predictions
 ```{r spatial-prediction}
 preddf <- cbind(preddf, 
                 "pmacro" = predict(m_macro, preddf, type = "response"),
@@ -233,7 +237,8 @@ preddf <- cbind(preddf,
   glimpse()
 ```
 
-Rasterise and aggregate the predictions to speed up plotting
+# Tidy and aggregate
+## Rasterise and aggregate the predictions to speed up plotting
 ```{r aggregate, fig.width = 7, fig.height = 4}
 prasts <- rast(preddf %>% dplyr::select(x, y, starts_with("p")),
                         crs = crs(preds)) %>%

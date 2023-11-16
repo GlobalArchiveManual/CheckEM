@@ -39,8 +39,10 @@ Depends:
     R (>= 4.1)
 Imports: 
     devtools,
-    ggplot2 (>= 3.4.2),
+    FSSgam,
     ggbeeswarm,
+    ggnewscale,
+    ggplot2 (>= 3.4.2),
     googledrive,
     googlesheets4,
     here (>= 1.0.1),
@@ -48,6 +50,8 @@ Imports:
     leaflegend,
     leaflet (>= 2.1.2),
     leaflet.minicharts,
+    mgcv,
+    patchwork,
     RColorBrewer,
     sf,
     shiny (>= 1.7.1),
@@ -58,7 +62,8 @@ Imports:
     stringr (>= 1.5.0),
     terra,
     tidyr (>= 1.3.0),
-    tidyverse
+    tidyverse,
+    viridis
 URL: https://globalarchivemanual.github.io/CheckEM/
 Suggests: 
     knitr,
