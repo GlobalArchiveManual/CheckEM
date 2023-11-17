@@ -19,7 +19,7 @@ library(starsExtra)
 name <- 'example-bruv-workflow'
 
 # Load bathymetry data ----
-bathy <- rast("1. Example R workflows (scripts to download)/data/spatial/rasters/swc_multibeam_UTM50.tif")                   # UTM zone 50
+bathy <- rast("r-workflows/data/spatial/rasters/swc_multibeam_UTM50.tif")                   # UTM zone 50
 
 # Create bathymetry derivatives ----
 preds <- terrain(bathy, neighbors = 8,
@@ -37,16 +37,18 @@ names(preds)[1] <- "mbdepth"
 
 # Save file for use later - too large so ignored from git
 saveRDS(preds, 
-        file = paste0("1. Example R workflows (scripts to download)/data/spatial/rasters/", 
-                      name, "_Bathymetry_derivatives.rds"))
+        file = paste0("r-workflows/data/spatial/rasters/", 
+                      name, "_bathymetry_derivatives.rds"))
 
 # Load metadata ----
-metadata <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
+metadata <- readRDS(paste0("r-workflows/data/tidy/", 
                             name, "_Metadata.rds")) %>%
+  dplyr::mutate(longitude_dd = as.numeric(longitude_dd),
+                latitude_dd = as.numeric(latitude_dd)) %>%
   glimpse()
 
 # Transform the habitat to a SpatVector ----
-metadata.vect <- vect(metadata, geom = c("longitude", "latitude"), crs = "epsg:4326") %>%
+metadata.vect <- vect(metadata, geom = c("longitude_dd", "latitude_dd"), crs = "epsg:4326") %>%
   project(preds)                                                                # Project points to match crs of multibeam
 plot(preds[[1]])
 plot(metadata.vect, add = T)
@@ -61,4 +63,4 @@ metadata.bathy.derivatives   <- cbind(tidy.metadata_t,
   glimpse()
 
 # Save the output ----
-saveRDS(metadata.bathy.derivatives, paste0("1. Example R workflows (scripts to download)/data/tidy/", name, "_Metadata-bathymetry-derivatives.rds"))
+saveRDS(metadata.bathy.derivatives, paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))

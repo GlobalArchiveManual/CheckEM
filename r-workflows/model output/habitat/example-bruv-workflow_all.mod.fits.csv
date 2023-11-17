@@ -1,11 +1,11 @@
-"","modname","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","depth","roughness","detrended","TPI","aspect","TRI","cumsum.wi"
-"Macroalgae","depth+detrended+TPI",212.488990769121,213.708508420843,0.41759,NA,11.97,0,0,0,0.999,1,1,0,1,1,0,0,0.999
-"Seagrasses","aspect+depth+TRI",148.409681575888,151.991568138774,0.17964,NA,10.52,0,0,0,0.837,0.725,1,0,0,0,1,1,0.837
-"Sessile invertebrates","depth+detrended",115.872813601948,121.449984183904,0.90833,NA,6.73,0,0,0,0.65,0.535,1,0,1,0,0,0,0.65
-"Consolidated (hard).aspect+depth+TPI","aspect+depth+TPI",67.7433029212058,72.2276763484032,0.3313,NA,5.14,1,0,0,0.195,0.17,1,0,0,1,1,0,0.195
-"Consolidated (hard).depth+TPI","depth+TPI",67.7433052458325,72.2276792595467,0.3313,NA,4.14,0,0,0,0.195,0.17,1,0,0,1,0,0,0.39
-"Consolidated (hard).depth","depth",68.4860366659157,72.2288740765683,0.30276,NA,3.22,0,0.743,0.001,0.135,0.17,1,0,0,0,0,0,0.525
-"Consolidated (hard).aspect+depth","aspect+depth",68.4860620060124,72.2289086484092,0.30276,NA,4.22,1,0.743,0.001,0.135,0.17,1,0,0,0,1,0,0.66
-"Consolidated (hard).depth+roughness+TPI","depth+roughness+TPI",69.6646015181418,73.2735905340897,0.02152,NA,10.5,0,1.921,1.046,0.075,0.101,1,1,0,1,0,0,0.735
-"Unconsolidated (soft)","aspect+roughness+TPI",141.985046723252,144.32973730775,0.26711,NA,11.36,0,0,0,1,1,0,1,0,1,1,0,1
-"reef","aspect+roughness+TPI",141.985046723255,144.329737307751,0.26711,NA,11.36,0,0,0,1,1,0,1,0,1,1,0,1
+"","response","formula","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","depth","roughness","detrended","TPI","aspect","TRI","cumsum.wi"
+"depth+detrended+TPI","Macroalgae","s(depth, k = 5, bs = ""cr"") + s(detrended, k = 5, bs = ""cr"") + s(TPI, k = 5, bs = ""cr"")",212.488990769121,213.708508420843,0.41759,NA,11.97,0,0,0,0.999,1,1,0,1,1,0,0,0.999
+"aspect+depth+TRI","Seagrasses","s(aspect, k = 5, bs = ""cc"") + s(depth, k = 5, bs = ""cr"") + s(TRI, k = 5, bs = ""cr"")",148.409681575888,151.991568138774,0.17964,NA,10.52,0,0,0,0.837,0.725,1,0,0,0,1,1,0.837
+"depth+detrended","Sessile invertebrates","s(depth, k = 5, bs = ""cr"") + s(detrended, k = 5, bs = ""cr"")",115.872813601948,121.449984183904,0.90833,NA,6.73,0,0,0,0.65,0.535,1,0,1,0,0,0,0.65
+"aspect+depth+TPI","Consolidated (hard)","s(aspect, k = 5, bs = ""cc"") + s(depth, k = 5, bs = ""cr"") + s(TPI, k = 5, bs = ""cr"")",67.7433029212058,72.2276763484032,0.3313,NA,5.14,1,0,0,0.195,0.17,1,0,0,1,1,0,0.195
+"depth+TPI","Consolidated (hard)","s(depth, k = 5, bs = ""cr"") + s(TPI, k = 5, bs = ""cr"")",67.7433052458325,72.2276792595467,0.3313,NA,4.14,0,0,0,0.195,0.17,1,0,0,1,0,0,0.39
+"depth","Consolidated (hard)","s(depth, k = 5, bs = ""cr"")",68.4860366659157,72.2288740765683,0.30276,NA,3.22,0,0.743,0.001,0.135,0.17,1,0,0,0,0,0,0.525
+"aspect+depth","Consolidated (hard)","s(aspect, k = 5, bs = ""cc"") + s(depth, k = 5, bs = ""cr"")",68.4860620060124,72.2289086484092,0.30276,NA,4.22,1,0.743,0.001,0.135,0.17,1,0,0,0,1,0,0.66
+"depth+roughness+TPI","Consolidated (hard)","s(depth, k = 5, bs = ""cr"") + s(roughness, k = 5, bs = ""cr"") + s(TPI, k = 5, bs = ""cr"")",69.6646015181418,73.2735905340897,0.02152,NA,10.5,0,1.921,1.046,0.075,0.101,1,1,0,1,0,0,0.735
+"aspect+roughness+TPI...9","Unconsolidated (soft)","s(aspect, k = 5, bs = ""cc"") + s(roughness, k = 5, bs = ""cr"") + s(TPI, k = 5, bs = ""cr"")",141.985046723252,144.32973730775,0.26711,NA,11.36,0,0,0,1,1,0,1,0,1,1,0,1
+"aspect+roughness+TPI...10","reef","s(aspect, k = 5, bs = ""cc"") + s(roughness, k = 5, bs = ""cr"") + s(TPI, k = 5, bs = ""cr"")",141.985046723255,144.329737307751,0.26711,NA,11.36,0,0,0,1,1,0,1,0,1,1,0,1

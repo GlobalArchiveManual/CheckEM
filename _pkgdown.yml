@@ -62,10 +62,10 @@ navbar:
       href: articles/r-workflows/format-visualise-habitat.html
     - text: '-------'
     - text: Modelling
-    - text: FSSgams of fish abundance and richness
-      href: articles/r-workflows/fish-gams.html
-    - text: FSSgams of habitat classes
-      href: articles/r-workflows/habitat-gams.html
+    - text: Generate spatial predictions of habitat using FSSgam
+      href: articles/r-workflows/habitat-modelling.html
+    - text: Generate spatial predictions of fish using FSSgam
+      href: articles/r-workflows/fish-modelling.html
   - text: Functions
     href: reference/r-workflows/index.html
 authors:

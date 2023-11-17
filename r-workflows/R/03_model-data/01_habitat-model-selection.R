@@ -14,14 +14,15 @@ library(tidyverse)
 library(mgcv)
 library(gplots)
 library(FSSgam)
-devtools::load_all("./")
+library(CheckEM)
+library(here)
 
 # Set the study name ----
 name <- 'example-bruv-workflow'
 
 # Bring in the habtiat data ----
-dat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
-                      name, "_Tidy-habitat.rds")) %>%
+dat <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
+                      name, "_Tidy-habitat.rds"))) %>%
   glimpse()
 
 # Set predictor variables ----
