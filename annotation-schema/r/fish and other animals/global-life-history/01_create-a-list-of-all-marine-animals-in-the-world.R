@@ -1,14 +1,21 @@
+# This script uses the taxon list from WORMS, to:
+# - Create a list of marine animals in the world
+# - Filter the list to species that are more commonly observed or annotated on stereo imagery
+# Find their distribution using the worms package
+# Map that distribution to the FAO major fishing areas
+
+# Load the required libraries
 library(tidyverse)
 library(worrms)
 library(mregions)
-library(GlobalArchive)
+library(CheckEM)
 library(sf)
 library(rfishbase)
 
 # Spatial files ----
 wgs.84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 
-fao <- st_read("data/spatial/FAO_major_areas.shp")
+fao <- st_read("annotation-schema/data/spatial/FAO_major_areas.shp")
 st_crs(fao) <- wgs.84
 fao <- st_as_sf(fao)
 
@@ -17,7 +24,7 @@ fao$NAME_EN <- str_replace_all(fao$NAME_EN, c(", " = "_", " " = "."))
 unique(fao$NAME_EN)
 
 # Read in species list 
-worms <- read_delim("data/taxon.txt") %>%
+worms <- read_delim("annotation-schema/data/raw/taxon.txt") %>%
   dplyr::filter(taxonomicStatus %in% "accepted") %>%
   dplyr::filter(!is.na(genus)) %>%
   dplyr::filter(!is.na(order)) %>%
@@ -67,7 +74,7 @@ animals <- worms %>%
                               "Scaphopoda",
                               "")) %>%
   dplyr::filter(!is.na(class)) %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::select(taxonid, scientificname, kingdom, phylum, class, order, family, genus) %>%
   dplyr::rename(scientific_name = scientificname) %>%
   dplyr::mutate(taxonid = str_replace_all(taxonid, "urn:lsid:marinespecies.org:taxname:", "")) %>%
@@ -79,19 +86,18 @@ unique(animals$class) %>% sort()
 
 ids <- unique(animals$taxonid)
 
+# TODO add more annotation on this part
 # takes ~ 14 hours to run
 # Unhash to run again to update
-distributions <- wm_distribution_(id = c(as.numeric(ids))) %>%
-  dplyr::mutate(mrgid = as.integer(str_replace_all(locationID, "http://marineregions.org/mrgid/", ""))) #%>%
-  # dplyr::filter(!is.na(higherGeographyID))
+# distributions <- wm_distribution_(id = c(as.numeric(ids))) %>%
+#   dplyr::mutate(mrgid = as.integer(str_replace_all(locationID, "http://marineregions.org/mrgid/", "")))
+# 
+# saveRDS(distributions, "annotation-schema/data/staging/global_animals_distributions-from-worms.RDS")
 
-saveRDS(distributions, "data/distributions_worms_animals_global.RDS")
-
-dist <- readRDS("data/distributions_worms_animals_global.RDS") %>%
+distributions <- readRDS("annotation-schema/data/staging/global_animals_distributions-from-worms.RDS") %>%
   distinct()
 
 # Get shapefiles for the marine regions using the mregion package ----
-
 realm <- mr_shp(key = "Ecoregions:realm") %>%
   dplyr::mutate(source = "realm") %>%
   dplyr::rename(name = realm) %>%
@@ -260,7 +266,7 @@ distributions_all <- full_join(distributions_lower, distributions_higher) %>%
 
 # get common names from sealife base
 common_names <- fb_tbl("species", "sealifebase") %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::filter(!is.na(fbname)) %>%
   dplyr::mutate(scientific_name = paste(genus, species, sep = " ")) %>%
   dplyr::rename(common_name = fbname) %>%
@@ -273,5 +279,4 @@ final <- left_join(animals, distributions_all) %>%
 number.with.distributions <- final %>% filter(!is.na(marine_region))
 39409/88271 # 44% with distribution info available from worms package
 
-write_rds(final, "data/animals_global_with_dist.RDS")
-final <- readRDS("data/animals_global_with_dist.RDS")
+write_rds(final, "annotation-schema/data/staging/global_animals_list-with-distributions-using-fao-major-fishing-regions.RDS")

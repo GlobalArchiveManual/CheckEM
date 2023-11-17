@@ -73,6 +73,9 @@ lwr <- length_weight(validated) %>%
 # bay_lwrs <- data.frame() # turned off for now So i don't loose the data we have already downloaded
 bay_lwrs <- read.csv("data/bayesian_length-weights.csv") %>% distinct()
 
+# TODO turn this into a file hosted in the app
+# TODO make this it's own script as it will need to be used by both the aus fish and global fish
+
 # Sys.time() 
 # 
 # temp.validated <- as.data.frame(validated) %>%
