@@ -11,7 +11,7 @@ library(taxize) # For IUCN
 library(rredlist)
 
 # Use the list of Australian species created in the second script
-caab <- readRDS("annotation-schema/data/staging/caab-with-regions.RDS") %>%
+caab <- readRDS("annotation-schema/data/staging/australia_fish_caab-with-regions.RDS") %>%
   dplyr::mutate(species = str_replace_all(.$species, c("[^[:alnum:]]" = "",
                                                        "cfizaspilotai" = "zaspilota",
                                                        "icfifilamentosa" = "filamentosa"))) %>%

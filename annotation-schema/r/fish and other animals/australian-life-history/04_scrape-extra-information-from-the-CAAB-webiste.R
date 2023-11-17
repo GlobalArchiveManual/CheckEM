@@ -385,5 +385,5 @@ final.synonyms <- anti_join(final.synonyms, test.multiple.matches)
 final.caab.codes <- clean.info %>%
   dplyr::select(-c(synonyms))
 
-saveRDS(final.synonyms, "annotation-schema/data/staging/caab_synonyms.RDS")
-saveRDS(final.caab.codes, "annotation-schema/data/staging/caab_scraped_codes_common-names.RDS")
+saveRDS(final.synonyms, "annotation-schema/data/staging/australia_fish_caab-synonyms.RDS")
+saveRDS(final.caab.codes, "annotation-schema/data/staging/australia_fish_caab-codes_common-names.RDS")

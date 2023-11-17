@@ -101,9 +101,9 @@ species <- unique(caab$scientific_name) %>% sort()
 # Get AphiaIDs using taxize package for every species ----
 # takes just under 3 hours to run - unhash to run again
 # system.time({ aphia_ids_list <- get_wormsid_(c(species), fuzzy = FALSE) })
-# write_rds(aphia_ids_list, "annotation-schema/data/staging/aphia-ids-list.RDS")
+# write_rds(aphia_ids_list, "annotation-schema/data/staging/australia_animals_aphia-ids-list.RDS")
 
-aphia_ids_list <- readRDS("annotation-schema/data/staging/aphia-ids-list.RDS")
+aphia_ids_list <- readRDS("annotation-schema/data/staging/australia_animals_aphia-ids-list.RDS")
 
 # remove tibbles that are null
 aphia_ids_list <- aphia_ids_list[!sapply(aphia_ids_list, is.null)]
@@ -151,9 +151,9 @@ species_with_id <- clean_caab %>%
 # system.time({distributions <- wm_distribution_(id = c(as.numeric(ids))) %>%
 #   dplyr::mutate(mrgid = as.integer(str_replace_all(locationID, "http://marineregions.org/mrgid/", "")))})
 # 
-# saveRDS(distributions, "annotation-schema/data/staging/distributions-worms-animals-australia.RDS")
+# saveRDS(distributions, "annotation-schema/data/staging/australia_animals_distributions-from-worms.RDS")
 
-distributions <- readRDS("annotation-schema/data/staging/distributions-worms-animals-australia.RDS") %>%
+distributions <- readRDS("annotation-schema/data/staging/australia_animals_distributions-from-worms.RDS") %>%
   distinct()
 
 # Get shapefiles for the marine regions using the mregion package ----
@@ -345,4 +345,4 @@ number.with.distributions <- final %>% filter(!is.na(marine_region))
 nrow(number.with.distributions)/nrow(final) * 100 
 # 34% with distribution info available from worms package
 
-write_rds(final, "annotation-schema/data/tidy/animals-australia-with-dist.RDS")
+write_rds(final, "annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS")

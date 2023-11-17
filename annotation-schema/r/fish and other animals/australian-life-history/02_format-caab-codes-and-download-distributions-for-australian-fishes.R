@@ -163,4 +163,4 @@ caab_combined <- dplyr::bind_rows(caab_with_regions, spp_regions) %>%
 missing <- caab_combined %>%
   filter(is.na(marine.region))
 
-saveRDS(caab_combined, "annotation-schema/data/staging/caab-with-regions.RDS")
+saveRDS(caab_combined, "annotation-schema/data/staging/australia_fish_caab-with-regions.RDS")
