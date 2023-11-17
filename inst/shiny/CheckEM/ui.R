@@ -497,7 +497,7 @@ function(){
       
       #Create length vs maxn ----
       tabItem(tabName = "maxnlength",
-              fluidRow(div(width=12,id="click.length.vs.maxn",
+              fluidRow(div(width = 12,id = "click.length.vs.maxn",
                            valueBoxOutput("length.vs.maxn")),
                        
                        valueBoxOutput("length.vs.maxn.score"),
@@ -505,6 +505,9 @@ function(){
                        shiny::conditionalPanel("input.upload == 'EM'",
                                                div(width=12,id="click.prop.lengths",
                                                    valueBoxOutput("prop.lengths"))),
+                       
+                       div(width = 12, id = "click.length.missing.maxn", valueBoxOutput("length.missing.maxn")),
+                       div(width = 12, id = "click.length.more.maxn", valueBoxOutput("length.more.maxn")),
                        
                        box(width=12, title = "Length + 3D points vs. MaxN", status = "primary", 
                            plotOutput("length.vs.maxn.plot", height = 500)),

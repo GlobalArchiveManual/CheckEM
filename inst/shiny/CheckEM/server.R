@@ -109,13 +109,8 @@ function(input, output, session) {
     # All plots use the same metadata score
     metadata.score <- round(metadata.score(), 2)
     
-
-    
-
-    
     # TODO only include this if it is not a transect campaign
     count.score <- round(count.score(), 2)
-    
     
     if(input$upload %in% "EM"){
       
@@ -140,15 +135,34 @@ function(input, output, session) {
         
         length.percent.score <- round((total.lengths/total) * 100, 2)
         
+        print("new length missing maxn error score")
+        
+        length.missing.or.greater.maxn <- length.missing.or.greater.maxn()
+        
+        additional.maxns <- sum(length.missing.or.greater.maxn$maxn_greater_length)
+        additional.lengths <- sum(length.missing.or.greater.maxn$maxn_smaller_length)
+        total.maxns <- sum(length.missing.or.greater.maxn$maxn)
+        
+        # If there are heaps of additional lenths then replace with 100 (very bad score)
+        if(additional.lengths > 100){
+          additional.lengths <- 100
+        }
+        
+        additional.maxns.score <- round(100 - (additional.maxns/total.maxns) * 100, 2)
+        additional.lengths.score <- round(100 - (additional.lengths/total.maxns) * 100, 2)
+        
+        print("view additional maxn score")
+        glimpse(additional.maxns.score)
     
-    dat <- data.frame(score = c("Sample Metadata", "% Length", "Count vs. Length", "Count", "Length"),
-                      value = c(metadata.score, length.percent.score, length.maxn.score, count.score, length.score))
+    dat <- data.frame(score = c("Metadata", "Length > Count", "Length < Count", "Count v Length", "Count", "Length"),
+                      value = c(metadata.score, additional.lengths.score, additional.maxns.score, length.maxn.score, count.score, length.score))
     
-    dat$score <- fct_relevel(dat$score, "Count", "Count vs. Length", "% Length", "Length",  "Sample Metadata")
+    dat$score <- fct_relevel(dat$score, "Count", "Count v Length", "Length > Count", "Length < Count", "Length",  "Metadata")
     
-    cols <- c("Sample Metadata" = "#99D199", 
-              "% Length" = "#99C3D1", 
-              "Count vs. Length" = "#F8BEB3",
+    cols <- c("Metadata" = "#99D199", 
+              "Length < Count" = "#99C3D1", 
+              "Length > Count" = "#d6b3f8",
+              "Count v Length" = "#F8BEB3",
               "Count" = "#ffe69c",
               "Length" = "#bad0e8")
         
@@ -164,11 +178,11 @@ function(input, output, session) {
       
       scale_y_continuous(limits = c(-50, 150)) + 
       
-      geom_rect(xmin = 4.5, xmax = 5.5,
+      geom_rect(xmin = 5.5, xmax = 6.5,
                 ymin = 0,
                 ymax = metadata.score, fill = "#99D199", color = "white", size = 2) +
       
-      draw_line(x = c(4.51, 5.49), y = c(100, 100), color = "#008B00", size = 2) +
+      draw_line(x = c(5.51, 6.49), y = c(100, 100), color = "#008B00", size = 2) +
       
       geom_rect(xmin = 0.5, xmax = 1.5,
                 ymin = 0,
@@ -184,18 +198,24 @@ function(input, output, session) {
       
       geom_rect(xmin = 2.5, xmax = 3.5,
                 ymin = 0,
-                ymax = length.percent.score, fill = "#99C3D1", color = "white", size = 2) +
+                ymax = additional.lengths.score, fill = "#99C3D1", color = "white", size = 2) +
       
-      draw_line(x = c(2.51, 3.49), y = c(70, 70), color = "#00688B", size = 2) +
+      draw_line(x = c(2.51, 3.49), y = c(100, 100), color = "#00688B", size = 2) +
       
       geom_rect(xmin = 3.5, xmax = 4.5,
                 ymin = 0,
-                ymax = length.score, fill = "#bad0e8", color = "white", size = 2) +
+                ymax = additional.maxns.score, fill = "#d6b3f8", color = "white", size = 2) +
       
-      draw_line(x = c(3.51, 4.49), y = c(100, 100), color = "#92bcea", size = 2) +
-      
+      draw_line(x = c(3.51, 4.49), y = c(70, 70), color = "#b778f5", size = 2) +
       
       geom_rect(xmin = 4.5, xmax = 5.5,
+                ymin = 0,
+                ymax = length.score, fill = "#bad0e8", color = "white", size = 2) +
+      
+      draw_line(x = c(4.51, 5.49), y = c(100, 100), color = "#92bcea", size = 2) +
+      
+      
+      geom_rect(xmin = 5.5, xmax = 6.5,
                 ymin = 110,
                 ymax = 150, fill = "#008B00", color = "white", size = 2) +
       geom_rect(xmin = 0.5, xmax = 1.5,
@@ -209,21 +229,24 @@ function(input, output, session) {
                 ymax = 150, fill = "#00688B", color = "white", size = 2) +
       geom_rect(xmin = 3.5, xmax = 4.5,
                 ymin = 110,
+                ymax = 150, fill = "#b778f5", color = "white", size = 2) +
+      geom_rect(xmin = 4.5, xmax = 5.5,
+                ymin = 110,
                 ymax = 150, fill = "#92bcea", color = "white", size = 2) +
       
-      geom_textpath(y = 128, aes(x = score, label = score), colour = "white", size = 6.5, fontface = "bold") + 
+      geom_textpath(y = 128, aes(x = score, label = score), colour = "white", size = 5.5, fontface = "bold") + 
 
       geom_textpath(aes(y = value - 15, label = paste0(value, "%")), colour = "white", size = 5, fontface = "bold") +
       coord_polar() #start = 1.05
     
       } else {
         
-        dat <- data.frame(score = c("Sample Metadata", "Count"),
+        dat <- data.frame(score = c("Metadata", "Count"),
                           value = c(metadata.score, count.score))
         
-        dat$score <- fct_relevel(dat$score, "Count", "Sample Metadata")
+        dat$score <- fct_relevel(dat$score, "Count", "Metadata")
         
-        cols <- c("Sample Metadata" = "#99D199", 
+        cols <- c("Metadata" = "#99D199", 
                   "Count" = "#ffe69c")
         
         p <- ggplot(dat, aes(score, value, fill = score)) +
@@ -287,14 +310,14 @@ function(input, output, session) {
         
         length.percent.score <- round((total.lengths/total) * 100, 2)
       
-      dat <- data.frame(score = c("Sample Metadata", "Count vs. Length", "Count", "Length"),
+      dat <- data.frame(score = c("Metadata", "Count v Length", "Count", "Length"),
                         value = c(metadata.score, length.maxn.score, count.score, length.score))
       
-      dat$score <- fct_relevel(dat$score, "Count", "Count vs. Length", "Length",  "Sample Metadata")
+      dat$score <- fct_relevel(dat$score, "Count", "Count v Length", "Length",  "Metadata")
       
-      cols <- c("Sample Metadata" = "#99D199", 
+      cols <- c("Metadata" = "#99D199", 
                 # "% Length" = "#99C3D1", 
-                "Count vs. Length" = "#F8BEB3",
+                "Count v Length" = "#F8BEB3",
                 "Count" = "#ffe69c",
                 "Length" = "#bad0e8")
       
@@ -355,12 +378,12 @@ function(input, output, session) {
       } else {
         
         # If they have no measured fish 
-        dat <- data.frame(score = c("Sample Metadata", "Count"),
+        dat <- data.frame(score = c("Metadata", "Count"),
                           value = c(metadata.score, count.score))
         
-        dat$score <- fct_relevel(dat$score, "Count", "Sample Metadata")
+        dat$score <- fct_relevel(dat$score, "Count", "Metadata")
         
-        cols <- c("Sample Metadata" = "#99D199", 
+        cols <- c("Metadata" = "#99D199", 
                   "Count" = "#ffe69c")
         
         p <- ggplot(dat, aes(score, value, fill = score)) +
@@ -1503,8 +1526,14 @@ function(input, output, session) {
                                "<b>site:</b>", site, "<br/>", 
                                "<b>location:</b>", location, "<br/>", 
                                "<b>date_time:</b>", date_time, "<br/>"
-        ))
+        )) 
     }
+    
+    metadata <- metadata %>%
+      dplyr::mutate(status = str_replace_all(status, c("No-Take" = "No-take")))
+    
+    message("view status")
+    print(unique(metadata$status))
     
     map <- leaflet_basemap(data = metadata) %>%
       
@@ -6838,6 +6867,99 @@ function(input, output, session) {
              icon = icon("percent"), color = "blue"
     )
   })
+  
+  
+  length.missing.or.greater.maxn <- reactive({
+    
+    length.sample <- metadata.regions() %>%
+      dplyr::filter(successful_length %in% c("Yes", "Y", "y", "yes")) %>%
+      distinct(sample)
+    
+    if(input$upload %in% "EM"){
+      
+      length <- length3dpoints.clean()
+      maxn <- maxn.clean()
+      
+    } else {
+      
+      length <- gen.length.clean()
+      maxn <- count.clean()
+      
+    }
+    
+    print("number of rows in length")
+    print(nrow(length))
+    
+    length <- length %>%
+      dplyr::filter(length_mm > 0)
+    
+    print("number of rows in length")
+    print(nrow(length))
+    
+    # summarise length and then compare to maxn
+    length.vs.maxn <- length %>%
+      dplyr::group_by(campaignid, sample, family, genus, species) %>%
+      dplyr::summarise(length_maxn = sum(number)) %>%
+      dplyr::ungroup() %>%
+      dplyr::full_join(maxn) %>% # Changed to full join 22/08/2023
+      replace_na(list(maxn = 0, length_maxn = 0)) %>%
+      dplyr::mutate(maxn_greater_length = if_else(maxn > length_maxn, maxn-length_maxn, 0)) %>%
+      dplyr::mutate(maxn_smaller_length = if_else(maxn < length_maxn, length_maxn-maxn, 0)) %>%
+      dplyr::semi_join(length.sample) %>% # only keep ones where length was possible
+      dplyr::left_join(metadata.regions()) %>%
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), family, genus, species, maxn, length_maxn, maxn_greater_length, maxn_smaller_length)
+    
+  })
+  
+  ## ► Valuebox - Lengths missing from MaxN score ----
+  output$length.missing.maxn <- renderValueBox({
+    
+    print("new length missing maxn error score")
+    
+    dat <- length.missing.or.greater.maxn()
+    
+    additional.maxns <- sum(dat$maxn_greater_length)
+    total.maxns <- sum(dat$maxn)
+    
+    percentage <- (additional.maxns/total.maxns) * 100
+    
+    valueBox(width = 3,
+             round(percentage, 2),
+             "% of lengths missing from MaxN",
+             icon = icon("percent"), color = "blue"
+    ) # TODO change the colours
+  })
+  
+  onclick('click.length.missing.maxn', showModal(modalDialog(
+    title = "Rows where lengths are missing (This does not include 3D points)", size = "l", easyClose = TRUE,
+    renderDataTable(length.missing.or.greater.maxn() %>% filter(maxn_greater_length > 0) %>% dplyr::select(!c(sample, maxn_smaller_length))
+                    ,  rownames = FALSE,
+                    options = list(paging = FALSE, searching = TRUE)))))
+  
+  ## ► Valuebox - Lengths missing from MaxN score ----
+  output$length.more.maxn <- renderValueBox({
+
+    dat <- length.missing.or.greater.maxn()
+    
+    additional.lengths <- sum(dat$maxn_smaller_length)
+    total.maxns <- sum(dat$maxn)
+    
+    percentage <- (additional.lengths/total.maxns) * 100
+    
+    valueBox(width = 3,
+             round(percentage, 2),
+             "% of lengths more than expected from MaxN",
+             icon = icon("percent"), color = "blue"
+    ) # TODO change the colours
+  })
+  
+  
+  onclick('length.more.maxn', showModal(modalDialog(
+    title = "Rows where there are more lengths than maxn (This does not include 3D points)", size = "l", easyClose = TRUE,
+    renderDataTable(length.missing.or.greater.maxn() %>% filter(maxn_smaller_length > 0) %>% dplyr::select(!c(sample, maxn_greater_length))
+                    ,  rownames = FALSE,
+                    options = list(paging = FALSE, searching = TRUE)))))
+  
 
   ## ► Plot - Particular species----
   output$length.vs.maxn.plot.species <- renderPlot({
@@ -8583,6 +8705,8 @@ function(input, output, session) {
         dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Count.csv" = "")))
     }
     
+    if(!"sample" %in% names(count)){
+    
     # If point method and samples are opcodes
     if(input$method == "point" & input$sample == "opcode") {
       
@@ -8610,6 +8734,7 @@ function(input, output, session) {
       
       count <- count %>%
         dplyr::mutate(sample = period)
+    }
     }
 
     count <- count %>%
@@ -8797,6 +8922,8 @@ function(input, output, session) {
     gen.length <- gen.length %>% dplyr::rename(dplyr::any_of(lookup))
     #print("gen length")
     
+    if(!"sample" %in% names(gen.length)){
+    
     # If point method and samples are opcodes
     if(input$method == "point" & input$sample == "opcode") {
       
@@ -8823,6 +8950,8 @@ function(input, output, session) {
       
       gen.length <- gen.length %>%
         dplyr::mutate(sample = period)
+    }
+      
     }
     
     gen.length <- gen.length %>%

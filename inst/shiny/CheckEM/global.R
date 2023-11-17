@@ -62,7 +62,6 @@ library(cowplot)
 
 library(CheckEM)
 
-glimpse(schema)
 
 # Load data
 load("data/all_data.Rdata")
@@ -163,7 +162,7 @@ se.min <- function(x) (mean(x)) - se(x)
 se.max <- function(x) (mean(x)) + se(x)
 
 iconSet <- awesomeIconList(
-  Fished = makeAwesomeIcon(
+  'Fished' = makeAwesomeIcon(
     icon = 'surf',
     iconColor = 'white',
     markerColor = 'blue'
