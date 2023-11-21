@@ -63,8 +63,8 @@ Imports:
     terra,
     tidyr (>= 1.3.0),
     tidyverse,
-    viridis,
-    Remotes: beckyfisher/FSSgam
+    viridis
+Remotes: beckyfisher/FSSgam
 URL: https://globalarchivemanual.github.io/CheckEM/
 Suggests: 
     knitr,
