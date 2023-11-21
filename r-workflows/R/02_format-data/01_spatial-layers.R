@@ -36,9 +36,13 @@ preds <- rast(list(bathy, preds, detre[[1]]))                                   
 names(preds)[1] <- "mbdepth"
 
 # Save file for use later - too large so ignored from git
-saveRDS(preds, 
-        file = paste0("r-workflows/data/spatial/rasters/", 
-                      name, "_bathymetry_derivatives.rds"))
+# saveRDS(preds, 
+#         file = paste0("r-workflows/data/spatial/rasters/", 
+#                       name, "_bathymetry_derivatives.rds"))
+write_rds(preds, 
+          file = paste0("r-workflows/data/spatial/rasters/", 
+                        name, "_bathymetry_derivatives.rds"),
+          compress = "gz")
 
 # Load metadata ----
 metadata <- readRDS(paste0("r-workflows/data/tidy/", 
