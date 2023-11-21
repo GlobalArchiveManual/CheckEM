@@ -40,7 +40,6 @@ Depends:
     R (>= 4.1)
 Imports: 
     devtools,
-    FSSgam,
     ggbeeswarm,
     ggnewscale,
     ggplot2 (>= 3.4.2),
