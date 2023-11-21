@@ -1,0 +1,13 @@
+---
+title: "Generate spatial predictions of fish using FSSgam"
+author: "Claude Spencer & Brooke Gibbons"
+date: "2023-11-13"
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Generate spatial predictions of fish using FSSgam}
+  %\VignetteEncoding{UTF-8}
+---

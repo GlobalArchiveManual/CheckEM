@@ -18,6 +18,8 @@ vignette: >
 library(CheckEM)
 library(tidyverse)
 library(mgcv)
+library(devtools)
+devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 library(FSSgam)
 library(here)
 library(ggplot2)
