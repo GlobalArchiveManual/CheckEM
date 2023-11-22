@@ -160,7 +160,7 @@ widedat <- dat %>%
 
 ## Load the raster of bathymetry data and derivatives
 ```{r load-bathymetry, fig.width = 7, fig.height = 4}
-preds  <- readRDS(here::here(paste0("r-workflows/data/spatial/rasters/", 
+preds  <- read_rds(here::here(paste0("r-workflows/data/spatial/rasters/", 
                          name, "_bathymetry_derivatives.rds")))
 plot(preds)
 ```
