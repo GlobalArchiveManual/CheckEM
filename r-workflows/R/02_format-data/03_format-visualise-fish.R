@@ -5,14 +5,14 @@ library(tidyverse)
 
 name <- "example-bruv-workflow"
 
-metadata.bathy.derivatives <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/", 
-                                             name, "_Metadata-bathymetry-derivatives.rds")) %>%
+metadata.bathy.derivatives <- readRDS(paste0("r-workflows/data/tidy/", 
+                                             name, "_metadata-bathymetry-derivatives.rds")) %>%
   glimpse()
 
-habitat <- readRDS(paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                      name, "_Tidy-habitat.rds")) %>%
+habitat <- readRDS(paste0("r-workflows/data/tidy/",
+                                      name, "_tidy-habitat.rds")) %>%
   dplyr::mutate(number = number / total_points_annotated) %>%
-  dplyr::select(campaignid, sample, longitude, latitude, depth, mbdepth, slope, aspect, 
+  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth, mbdepth, slope, aspect, 
                 TPI, TRI, roughness, detrended, habitat, number, 
                 mean.relief, sd.relief) %>%
   pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>%
@@ -36,8 +36,8 @@ maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
   ungroup() %>%
   glimpse()
 
-tidy.maxn <- readRDS(paste0("1. Example R workflows (scripts to download)/data/staging/", name, 
-                       "_Complete-maxn.rds")) %>%
+tidy.maxn <- readRDS(paste0("r-workflows/data/staging/", name, 
+                       "_complete-maxn.rds")) %>%
   dplyr::group_by(campaignid, sample, scientific) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
   pivot_wider(names_from = "scientific", values_from = maxn, values_fill = 0) %>%
@@ -50,11 +50,11 @@ tidy.maxn <- readRDS(paste0("1. Example R workflows (scripts to download)/data/s
   dplyr::left_join(habitat) %>%
   glimpse()
 
-saveRDS(tidy.maxn, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                   name, "_Tidy-count.rds"))
+saveRDS(tidy.maxn, file = paste0("r-workflows/data/tidy/",
+                                   name, "_tidy-count.rds"))
 
-lengths <- readRDS(paste0("1. Example R workflows (scripts to download)/data/staging/", name, 
-                           "_Expanded-length.rds")) %>%
+lengths <- readRDS(paste0("r-workflows/data/staging/", name, 
+                           "_expanded-length.rds")) %>%
   dplyr::mutate(depth = as.numeric(depth)) %>%                                  # To avoid breaking during left_join
   left_join(habitat) %>%
   left_join(maturity) %>%
@@ -68,7 +68,7 @@ indicator.species <- lengths %>%
   glimpse()
 
 ggplot() +
-  geom_point(data = indicator.species, aes(x = longitude, y = latitude), alpha = 0.5) +
+  geom_point(data = indicator.species, aes(x = longitude_dd, y = latitude_dd), alpha = 0.5) +
   coord_sf()
 
 metadata.length <- lengths %>%
@@ -100,11 +100,11 @@ smaller.mat <- indicator.species %>%
 tidy.length <- bind_rows(greater.mat, smaller.mat) %>%
   glimpse()
 
-saveRDS(tidy.length, file = paste0("1. Example R workflows (scripts to download)/data/tidy/",
-                                     name, "_Tidy-length.rds"))
+saveRDS(tidy.length, file = paste0("r-workflows/data/tidy/",
+                                     name, "_tidy-length.rds"))
 
 # Visualise
-sanctuaries <- st_read("1. Example R workflows (scripts to download)/data/spatial/shapefiles/marine-parks-all.shp") %>%
+sanctuaries <- st_read("r-workflows/data/spatial/shapefiles/marine-parks-all.shp") %>%
   st_transform(4326) %>%                                                        # Transform to match with your metadata CRS
   dplyr::filter(str_detect(ZoneName, "Sanctuary|National"))
 
@@ -114,10 +114,10 @@ ggplot() +
   scale_fill_manual(values = c("Marine National Park Zone" = "#7bbc63",
                                "National Park Zone" = "#7bbc63",
                                "Sanctuary Zone" = "#bfd054")) +
-  geom_point(data = tidy.lengths, aes(x = longitude, y = latitude, 
+  geom_point(data = tidy.lengths, aes(x = longitude_dd, y = latitude_dd, 
                                       size = number), shape = 1) +
-  coord_sf(xlim = c(min(tidy.lengths$longitude), max(tidy.lengths$longitude)),
-           ylim = c(min(tidy.lengths$latitude), max(tidy.lengths$latitude))) +
+  coord_sf(xlim = c(min(tidy.lengths$longitude_dd), max(tidy.lengths$longitude_dd)),
+           ylim = c(min(tidy.lengths$latitude_dd), max(tidy.lengths$latitude_dd))) +
   facet_wrap(~scientific)
 
 # Total abundance
@@ -127,9 +127,9 @@ ggplot() +
                                "National Park Zone" = "#7bbc63",
                                "Sanctuary Zone" = "#bfd054")) +
   geom_point(data = filter(tidy.maxn, response %in% "total.abundance"), 
-             aes(x = longitude, y = latitude, size = number), shape = 1) +
-  coord_sf(xlim = c(min(tidy.maxn$longitude), max(tidy.maxn$longitude)),
-           ylim = c(min(tidy.maxn$latitude), max(tidy.maxn$latitude))) +
+             aes(x = longitude_dd, y = latitude_dd, size = number), shape = 1) +
+  coord_sf(xlim = c(min(tidy.maxn$longitude_dd), max(tidy.maxn$longitude_dd)),
+           ylim = c(min(tidy.maxn$latitude_dd), max(tidy.maxn$latitude_dd))) +
   labs(x = "Longitude", y = "Latitude", size = "Total abundance")
 
 # Species richness
@@ -139,8 +139,8 @@ ggplot() +
                                "National Park Zone" = "#7bbc63",
                                "Sanctuary Zone" = "#bfd054")) +
   geom_point(data = filter(tidy.maxn, response %in% "species.richness"), 
-             aes(x = longitude, y = latitude, size = number), shape = 1) +
-  coord_sf(xlim = c(min(tidy.maxn$longitude), max(tidy.maxn$longitude)),
-           ylim = c(min(tidy.maxn$latitude), max(tidy.maxn$latitude))) +
+             aes(x = longitude_dd, y = latitude_dd, size = number), shape = 1) +
+  coord_sf(xlim = c(min(tidy.maxn$longitude_dd), max(tidy.maxn$longitude_dd)),
+           ylim = c(min(tidy.maxn$latitude_dd), max(tidy.maxn$latitude_dd))) +
   labs(x = "Longitude", y = "Latitude", size = "Species richness")
 

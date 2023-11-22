@@ -102,13 +102,13 @@ metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "s
 ## Tidy the habitat data by joining with the complete schema file that is loaded with the CheckEM package
 ```{r tidy-habitat}
 tidy.habitat <- habitat %>%
-  dplyr::mutate(number = 1) %>%                                        
+  dplyr::mutate(number = 1) %>%                                     
   left_join(catami) %>%
   dplyr::select(campaignid, sample, number, starts_with("level"), family, genus, species) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
   group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
   dplyr::tally(number, name = "number") %>%
-  ungroup() %>%                                                        
+  ungroup() %>%                                                     
   dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()
 ```
@@ -127,7 +127,7 @@ tidy.relief <- relief %>%
   left_join(catami) %>%
   group_by(campaignid, sample, across(starts_with("level"))) %>% 
   dplyr::tally(number, name = "number") %>%
-  ungroup() %>%                                                          
+  ungroup() %>%                                                     
   glimpse()                                    
 ```                        
 

@@ -89,7 +89,7 @@ maxn <- points %>%
 # 4. Load length & 3D point data ----
 
 ```{r}
-length3dpoints <- list.files(path = "1. Example R workflows (scripts to download)/data/raw/",
+length3dpoints <- list.files(path = "r-workflows/data/raw/",
                              recursive = T,
                              pattern = "_3DPoints.txt|_Lengths.txt",
                              full.names = T) %>%
@@ -150,11 +150,14 @@ complete.length.number <- length3dpoints %>%
   glimpse()
 ```
 
-
+```{r}
 saveRDS(complete.maxn, 
-          file = paste0("1. Example R workflows (scripts to download)/data/staging/",
+          file = paste0("r-workflows/data/staging/",
                        name, "_Complete-maxn.rds"))
 
 saveRDS(complete.length.number, 
-          file = paste0("1. Example R workflows (scripts to download)/data/staging/",
+          file = paste0("r-workflows/data/staging/",
                        name, "_Complete-length.rds"))
+```
+
+
