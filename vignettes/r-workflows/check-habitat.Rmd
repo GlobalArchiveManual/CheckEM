@@ -12,10 +12,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This script documents the necessary steps to take raw data exported from TransectMeasure, check for any errors in the annotation and format it into tidy data
+This script documents the necessary steps to take raw data exported from TransectMeasure, check for any errors in the annotation and format it into tidy data. You are required to also have a GlobalArchive format metadata file "*_Metadata.csv".
 
 # R set up
-
 ## Load the necessary libraries
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(devtools)
@@ -33,14 +32,14 @@ library(tidyverse)
 ```{r name}
 name <- "example-bruv-workflow"
 ```
-# Read in data
-## Load and format metadata using the CheckEM function 'read_metadata'
+# Read in the data
+## Load and format the metadata
 ```{r metadata}
 metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
     dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
 ```
-Save the metadata as an R data file
+## Save the metadata as an R data file (this creates a lighter file than saving as a .csv or similar)
 ```{r save-metadata}
 saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_Metadata.rds")))
 ```
@@ -49,25 +48,25 @@ saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_Met
 points <- read_TM(here::here("r-workflows/data/raw/"),
                                sample = "opcode")
 ```
-Filter the data to only include habitat annotations
+### Filter the data to only include habitat annotations
 ```{r habitat}
 habitat <- points %>%
   dplyr::filter(relief_annotated %in% "no") %>%
   dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
   glimpse()
 ```
-Filter the data to only include relief annotations
+### Filter the data to only include relief annotations
 ```{r relief}
 relief <- points %>%
   dplyr::filter(relief_annotated %in% "yes") %>%
   dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
   glimpse()
 ```
-Set the number of expected annotations to check against
+# Check the data for a variety of errors
+## Set the number of expected annotations to check against
 ```{r set-points}
 num.points <- 20
 ```
-# Check for errors
 ## Check if there are habitat annotations with an unexpected number of annotation points
 ```{r wrong-habitat}
 wrong.points.habitat <- habitat %>%
@@ -88,17 +87,17 @@ wrong.points.relief <- relief %>%
   dplyr::filter(!points.annotated == expected) %>%
   glimpse()
 ```
-Check to see if there are any samples in habitat that don't have a match in the metadata
+## Check to see if there are any samples in habitat that don't have a match in the metadata
 ```{r missing-metadata}
 habitat.missing.metadata <- anti_join(habitat, metadata, by = c("campaignid", "sample")) %>%
   glimpse()
 ```
-Check to see if there are any samples in the metadata that don't have matching habitat
+## Check to see if there are any samples in the metadata that don't have matching habitat
 ```{r missing-habitat}
 metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "sample")) %>%
   glimpse()
 ```
-# Format final data
+# Format and save the final tidy dataset
 ## Tidy the habitat data by joining with the complete schema file that is loaded with the CheckEM package
 ```{r tidy-habitat}
 tidy.habitat <- habitat %>%
@@ -112,13 +111,11 @@ tidy.habitat <- habitat %>%
   dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()
 ```
-
-## Save the final tidy relief and benthos data
-Save the tidy habitat data as an R data file
+## Save the tidy habitat data as an R data file
 ```{r save-tidy-habitat}
 saveRDS(tidy.habitat, file = here::here(paste0("r-workflows/data/staging/", name, "_habitat.rds")))
 ```
-Tidy the relief data by joining with the complete schema file that is loaded with the CheckEM package
+## Tidy the relief data by joining with the complete schema file that is loaded with the CheckEM package
 ```{r tidy-relef}
 tidy.relief <- relief %>%
   dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
@@ -130,9 +127,7 @@ tidy.relief <- relief %>%
   ungroup() %>%                                                     
   glimpse()                                    
 ```                        
-
-
-Save the tidy relief data as an R data file
+## Save the tidy relief data as an R data file
 ```{r save-tidy-relief}
 saveRDS(tidy.relief, file = here::here(paste0("r-workflows/data/staging/", name, "_relief.rds")))
 ```
