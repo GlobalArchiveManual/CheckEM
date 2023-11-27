@@ -4,6 +4,12 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/404.html</loc>
   </url>
   <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/LICENSE.html</loc>
+  </url>
+  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/articles/index.html</loc>
   </url>
   <url>
@@ -28,12 +34,6 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/index.html</loc>
   </url>
   <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/LICENSE.html</loc>
-  </url>
-  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/clean_names.html</loc>
   </url>
   <url>
@@ -43,13 +43,13 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_TM.html</loc>
+  </url>
+  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_files_txt.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_TM.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/runCheckEM.html</loc>
