@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-read_files_txt <- function(dir) {
+read_files_maxn <- function(dir) {
   
   read_dat <- function(flnm){
     read_tsv(flnm, col_types = cols(.default = "c")) %>%
