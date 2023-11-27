@@ -117,7 +117,7 @@
     
 <p>This script documents the necessary steps to take raw data exported
 from TransectMeasure, check for any errors in the annotation and format
-it into tidy data</p>
+it into tidy data.</p>
 <div class="section level2">
 <h2 id="r-set-up">R set up<a class="anchor" aria-label="anchor" href="#r-set-up"></a>
 </h2>
@@ -144,11 +144,10 @@ it into tidy data</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="read-in-data">Read in data<a class="anchor" aria-label="anchor" href="#read-in-data"></a>
+<h2 id="read-in-the-data">Read in the data<a class="anchor" aria-label="anchor" href="#read-in-the-data"></a>
 </h2>
 <div class="section level3">
-<h3 id="load-and-format-metadata-using-the-checkem-function-read_metadata">Load and format metadata using the CheckEM function
-‘read_metadata’<a class="anchor" aria-label="anchor" href="#load-and-format-metadata-using-the-checkem-function-read_metadata"></a>
+<h3 id="load-and-format-the-metadata">Load and format the metadata<a class="anchor" aria-label="anchor" href="#load-and-format-the-metadata"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_metadata.html">read_metadata</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -168,7 +167,11 @@ it into tidy data</p>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span></code></pre>
-<p>Save the metadata as an R data file</p>
+</div>
+<div class="section level3">
+<h3 id="save-the-metadata-as-an-r-data-file-this-creates-a-lighter-file-than-saving-as-a--csv-or-similar">Save the metadata as an R data file (this creates a lighter file
+than saving as a .csv or similar)<a class="anchor" aria-label="anchor" href="#save-the-metadata-as-an-r-data-file-this-creates-a-lighter-file-than-saving-as-a--csv-or-similar"></a>
+</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">metadata</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>, <span class="va">name</span>, <span class="st">"_Metadata.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -213,7 +216,9 @@ filter this into 2 dataframes for relief and habitat annotations<a class="anchor
 <span><span class="co">## $ caab_code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "80300933", "63618905", "82001014", "80300906", "8030…</span></span>
 <span><span class="co">## $ x                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</span></span>
 <span><span class="co">## $ radius           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "67.0", "24.7", "18.2", "97.8", "82.6", "34.1", "25.2…</span></span></code></pre>
-<p>Filter the data to only include habitat annotations</p>
+<div class="section level4">
+<h4 id="filter-the-data-to-only-include-habitat-annotations">Filter the data to only include habitat annotations<a class="anchor" aria-label="anchor" href="#filter-the-data-to-only-include-habitat-annotations"></a>
+</h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">habitat</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">relief_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="st">"no"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -228,7 +233,10 @@ filter this into 2 dataframes for relief and habitat annotations<a class="anchor
 <span><span class="co">## $ level_4    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Red", NA, "Sand / mud (&lt;2mm)", "Red", "Red", NA, NA, "Brow…</span></span>
 <span><span class="co">## $ level_5    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "Coarse sand (with shell fragments)", NA, NA, NA, N…</span></span>
 <span><span class="co">## $ scientific <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "Thalassodendron spp", NA, NA, NA, "Thalassodendron spp…</span></span></code></pre>
-<p>Filter the data to only include relief annotations</p>
+</div>
+<div class="section level4">
+<h4 id="filter-the-data-to-only-include-relief-annotations">Filter the data to only include relief annotations<a class="anchor" aria-label="anchor" href="#filter-the-data-to-only-include-relief-annotations"></a>
+</h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">relief</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">relief_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="st">"yes"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -243,14 +251,18 @@ filter this into 2 dataframes for relief and habitat annotations<a class="anchor
 <span><span class="co">## $ level_4    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "High (&gt;3m)", "High (&gt;3m)", "High (&gt;3m)", NA, "High (&gt;3…</span></span>
 <span><span class="co">## $ level_5    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "3", "3", "3", NA, "3", "2", "3", NA, "3", "2", "2", NA…</span></span>
 <span><span class="co">## $ scientific <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</span></span></code></pre>
-<p>Set the number of expected annotations to check against</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">num.points</span> <span class="op">&lt;-</span> <span class="fl">20</span></span></code></pre></div>
+</div>
 </div>
 </div>
 <div class="section level2">
-<h2 id="check-for-errors">Check for errors<a class="anchor" aria-label="anchor" href="#check-for-errors"></a>
+<h2 id="check-the-data-for-a-variety-of-errors">Check the data for a variety of errors<a class="anchor" aria-label="anchor" href="#check-the-data-for-a-variety-of-errors"></a>
 </h2>
+<div class="section level3">
+<h3 id="set-the-number-of-expected-annotations-to-check-against">Set the number of expected annotations to check against<a class="anchor" aria-label="anchor" href="#set-the-number-of-expected-annotations-to-check-against"></a>
+</h3>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">num.points</span> <span class="op">&lt;-</span> <span class="fl">20</span></span></code></pre></div>
+</div>
 <div class="section level3">
 <h3 id="check-if-there-are-habitat-annotations-with-an-unexpected-number-of-annotation-points">Check if there are habitat annotations with an unexpected number of
 annotation points<a class="anchor" aria-label="anchor" href="#check-if-there-are-habitat-annotations-with-an-unexpected-number-of-annotation-points"></a>
@@ -316,8 +328,11 @@ annotation points<a class="anchor" aria-label="anchor" href="#check-if-there-are
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes"</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes"</span></span>
 <span><span class="co">## $ expected                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 40, 40, 40, 40</span></span></code></pre>
-<p>Check to see if there are any samples in habitat that don’t have a
-match in the metadata</p>
+</div>
+<div class="section level3">
+<h3 id="check-to-see-if-there-are-any-samples-in-habitat-that-dont-have-a-match-in-the-metadata">Check to see if there are any samples in habitat that don’t have a
+match in the metadata<a class="anchor" aria-label="anchor" href="#check-to-see-if-there-are-any-samples-in-habitat-that-dont-have-a-match-in-the-metadata"></a>
+</h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">habitat.missing.metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">habitat</span>, <span class="va">metadata</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"campaignid"</span>, <span class="st">"sample"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -330,8 +345,11 @@ match in the metadata</p>
 <span><span class="co">## $ level_4    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Sand / mud (&lt;2mm)", "Sand / mud (&lt;2mm)", "Sand / mud (&lt;2mm…</span></span>
 <span><span class="co">## $ level_5    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Coarse sand (with shell fragments)", "Coarse sand (with sh…</span></span>
 <span><span class="co">## $ scientific <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, "Thalassodendron spp", NA, …</span></span></code></pre>
-<p>Check to see if there are any samples in the metadata that don’t have
-matching habitat</p>
+</div>
+<div class="section level3">
+<h3 id="check-to-see-if-there-are-any-samples-in-the-metadata-that-dont-have-matching-habitat">Check to see if there are any samples in the metadata that don’t
+have matching habitat<a class="anchor" aria-label="anchor" href="#check-to-see-if-there-are-any-samples-in-the-metadata-that-dont-have-matching-habitat"></a>
+</h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata.missing.habitat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">metadata</span>, <span class="va">habitat</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"campaignid"</span>, <span class="st">"sample"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -352,7 +370,7 @@ matching habitat</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="format-final-data">Format final data<a class="anchor" aria-label="anchor" href="#format-final-data"></a>
+<h2 id="format-and-save-the-final-tidy-dataset">Format and save the final tidy dataset<a class="anchor" aria-label="anchor" href="#format-and-save-the-final-tidy-dataset"></a>
 </h2>
 <div class="section level3">
 <h3 id="tidy-the-habitat-data-by-joining-with-the-complete-schema-file-that-is-loaded-with-the-checkem-package">Tidy the habitat data by joining with the complete schema file that
@@ -393,13 +411,15 @@ is loaded with the CheckEM package<a class="anchor" aria-label="anchor" href="#t
 <span><span class="co">## $ number     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2, 3, 2, 1, 14, 1, 1, 3, 5, 8, 1, 2, 3, 3, 7, 7, 7, 7, 7, 2…</span></span></code></pre>
 </div>
 <div class="section level3">
-<h3 id="save-the-final-tidy-relief-and-benthos-data">Save the final tidy relief and benthos data<a class="anchor" aria-label="anchor" href="#save-the-final-tidy-relief-and-benthos-data"></a>
+<h3 id="save-the-tidy-habitat-data-as-an-r-data-file">Save the tidy habitat data as an R data file<a class="anchor" aria-label="anchor" href="#save-the-tidy-habitat-data-as-an-r-data-file"></a>
 </h3>
-<p>Save the tidy habitat data as an R data file</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">tidy.habitat</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>, <span class="va">name</span>, <span class="st">"_habitat.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Tidy the relief data by joining with the complete schema file that is
-loaded with the CheckEM package</p>
+</div>
+<div class="section level3">
+<h3 id="tidy-the-relief-data-by-joining-with-the-complete-schema-file-that-is-loaded-with-the-checkem-package">Tidy the relief data by joining with the complete schema file that
+is loaded with the CheckEM package<a class="anchor" aria-label="anchor" href="#tidy-the-relief-data-by-joining-with-the-complete-schema-file-that-is-loaded-with-the-checkem-package"></a>
+</h3>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy.relief</span> <span class="op">&lt;-</span> <span class="va">relief</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"level"</span><span class="op">)</span>, <span class="va">scientific</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -424,7 +444,10 @@ loaded with the CheckEM package</p>
 <span><span class="co">## $ level_7    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</span></span>
 <span><span class="co">## $ level_8    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</span></span>
 <span><span class="co">## $ number     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8, 10, 5, 17, 4, 14, 3, 8, 16, 1, 4, 6, 20, 2, 13, 6, 14, 1…</span></span></code></pre>
-<p>Save the tidy relief data as an R data file</p>
+</div>
+<div class="section level3">
+<h3 id="save-the-tidy-relief-data-as-an-r-data-file">Save the tidy relief data as an R data file<a class="anchor" aria-label="anchor" href="#save-the-tidy-relief-data-as-an-r-data-file"></a>
+</h3>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">tidy.relief</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>, <span class="va">name</span>, <span class="st">"_relief.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
