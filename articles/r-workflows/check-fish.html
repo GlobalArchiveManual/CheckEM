@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
 <script src="../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><meta property="og:title" content="Checking fish data exported from EventMeasure">
 <meta property="og:description" content="CheckEM">
@@ -116,8 +116,6 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># getwd()</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load Libraries ----</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://globalarchivemanual.github.io/CheckEM/">CheckEM</a></span><span class="op">)</span></span>
@@ -125,13 +123,13 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org" class="external-link">googlesheets4</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"example-bruv-workflow"</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>Skip these next 2 chunks if you have already exported metadata in the
+‘check-habitat’ scripts</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_metadata.html">read_metadata</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>,  <span class="co"># Review columns to align with GlobalArchive - plus make metadata match</span></span>
-<span>                <span class="va">site</span>, <span class="va">depth</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span>,</span>
-<span>                <span class="va">successful_habitat_forward</span>, <span class="va">successful_habitat_backward</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>, <span class="va">site</span>, <span class="va">depth</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span>, <span class="va">successful_habitat_forward</span>, <span class="va">successful_habitat_backward</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 32</span></span>
 <span><span class="co">## Columns: 12</span></span>
@@ -147,122 +145,383 @@
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">metadata</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>,</span>
 <span>                                <span class="va">name</span>, <span class="st">"_Metadata.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>Load metadata if you have already exported in the ‘check-habitat’
+scripts</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>,</span>
 <span>                                <span class="va">name</span>, <span class="st">"_Metadata.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># marine.parks &lt;- st_read("r-workflows/data/spatial/shapefiles/")  %&gt;% </span></span>
-<span><span class="co">#   dplyr::select(geometry, ZoneName) %&gt;%</span></span>
-<span><span class="co">#   st_transform(4326) %&gt;%</span></span>
-<span><span class="co">#   st_make_valid()</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># metadata_sf &lt;- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), </span></span>
-<span><span class="co">#                       crs = 4326)</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># metadata &lt;- metadata_sf %&gt;%</span></span>
-<span><span class="co">#   st_intersection(marine.parks) %&gt;%</span></span>
-<span><span class="co">#   bind_cols(st_coordinates(.)) %&gt;%</span></span>
-<span><span class="co">#   as.data.frame() %&gt;%</span></span>
-<span><span class="co">#   dplyr::select(-c(geometry)) %&gt;%</span></span>
-<span><span class="co">#   dplyr::rename(longitude_dd = X, latitude_dd = Y) %&gt;%</span></span>
-<span><span class="co">#   dplyr::mutate(status = if_else(str_detect(ZoneName, "National|Sanctuary"), </span></span>
-<span><span class="co">#                                 "No-take", "Fished")) %&gt;%</span></span>
-<span><span class="co">#   clean_names() %&gt;%</span></span>
-<span><span class="co">#   glimpse()</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="extract-fishing-status--">2. Extract fishing status —-<a class="anchor" aria-label="anchor" href="#extract-fishing-status--"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="use-this-section-if-you-need-to-work-out-which-samples-are-inside-areas-closed-to-fishing">Use this section if you need to work out which samples are inside
-areas closed to fishing<a class="anchor" aria-label="anchor" href="#use-this-section-if-you-need-to-work-out-which-samples-are-inside-areas-closed-to-fishing"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="todo-change-to-capad-file">TODO change to CAPAD file<a class="anchor" aria-label="anchor" href="#todo-change-to-capad-file"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="load-maxn-data--">3. Load MaxN data —-<a class="anchor" aria-label="anchor" href="#load-maxn-data--"></a>
-</h2>
-<p>points &lt;- list.files(path = “r-workflows/data/raw/”, # This
-replaces ga.list.files recursive = T, pattern = “_Points.txt”,
-full.names = T) %&gt;% # list all files ending in “_Points.txt”
-purrr::map(~CheckEM::read_files_txt(.)) %&gt;% # This function reads in
-all text files identified above, combines them into one dataframe, and
-creates the campaignid column from the filename purrr::list_rbind()
-%&gt;% glimpse()</p>
-<p>maxn &lt;- points %&gt;% dplyr::group_by(campaignid, sample,
-filename, periodtime, frame, family, genus, species) %&gt;% # Add stage
-here if you would like to create MaxN by stage dplyr::mutate(number =
-as.numeric(number)) %&gt;% dplyr::summarise(maxn = sum(number)) %&gt;%
-dplyr::group_by(campaignid, sample, family, genus, species) %&gt;%
-dplyr::slice(which.max(maxn)) %&gt;% dplyr::ungroup() %&gt;%
-dplyr::filter(!is.na(maxn)) %&gt;% dplyr::select(-frame) %&gt;%
-tidyr::replace_na(list(maxn = 0)) %&gt;% dplyr::mutate(maxn =
-as.numeric(maxn)) %&gt;% dplyr::filter(maxn &gt; 0) %&gt;%
-dplyr::inner_join(metadata) %&gt;% dplyr::filter(successful_count %in%
-c(“Yes”)) %&gt;% # Remove any samples that were not marked in the
-metadata as successful for count dplyr::filter(maxn &gt; 0) %&gt;%
-glimpse()</p>
-</div>
-<div class="section level2">
-<h2 id="load-length-3d-point-data--">4. Load length &amp; 3D point data —-<a class="anchor" aria-label="anchor" href="#load-length-3d-point-data--"></a>
-</h2>
-<p>length3dpoints &lt;- list.files(path = “r-workflows/data/raw/”,
-recursive = T, pattern = “_3DPoints.txt|_Lengths.txt”, full.names = T)
-%&gt;% purrr::map(~CheckEM::read_files_txt(.)) %&gt;%
-purrr::list_rbind() %&gt;% dplyr::select(-c(comment))%&gt;% # take
-comment out as there is also a comment column in the metadata
-dplyr::inner_join(metadata)%&gt;% dplyr::filter(successful_length %in%
-“Yes”) %&gt;% # Remove any samples that were not marked in the metadata
-as successful for length measurements glimpse()</p>
-</div>
-<div class="section level2">
-<h2 id="complete-and-tidy-datasets-run-data-checks">5. Complete and tidy datasets, run data checks<a class="anchor" aria-label="anchor" href="#complete-and-tidy-datasets-run-data-checks"></a>
-</h2>
-<p>dat &lt;- maxn %&gt;% dplyr::select(campaignid, sample, family,
-genus, species, maxn) %&gt;% tidyr::complete(nesting(campaignid,
-sample), nesting(family, genus, species)) %&gt;% replace_na(list(maxn =
-0)) %&gt;% group_by(sample, family, genus, species) %&gt;%
-dplyr::summarise(maxn = sum(maxn)) %&gt;% ungroup() %&gt;%
-mutate(scientific = paste(family, genus, species, sep = ” “))%&gt;%
-dplyr::select(sample, scientific, maxn)%&gt;% spread(scientific, maxn,
-fill = 0)%&gt;% glimpse()</p>
-<p>maxn.families &lt;- maxn %&gt;% dplyr::mutate(scientific =
-paste(family, genus, species, sep = ” “)) %&gt;% filter(!(family
-%in%”Unknown”)) %&gt;% dplyr::select(c(family, genus, species,
-scientific)) %&gt;% distinct() %&gt;% glimpse()</p>
-<p>complete.maxn &lt;- dat %&gt;% pivot_longer(names_to = “scientific”,
-values_to = “maxn”, cols = 2:ncol(.)) %&gt;% inner_join(maxn.families,
-by = c(“scientific”)) %&gt;% full_join(metadata)%&gt;% glimpse()</p>
-<p>length.families &lt;- length3dpoints %&gt;% dplyr::filter(!(family
-%in% “Unknown”)) %&gt;% dplyr::select(family, genus, species)%&gt;%
-distinct() %&gt;% glimpse()</p>
-<p>complete.length.number &lt;- length3dpoints %&gt;%
-dplyr::filter(!family %in% “Unknown”)%&gt;% dplyr::right_join(metadata)
-%&gt;% dplyr::filter(successful_length %in% “Yes”) %&gt;%
-dplyr::select(campaignid, sample, family, genus, species, length,
-number, range) %&gt;% tidyr::complete(nesting(campaignid, sample),
-nesting(family, genus, species)) %&gt;% dplyr::mutate(number =
-as.numeric(number)) %&gt;% replace_na(list(number = 0)) %&gt;% # We add
-in zeros - in case we want to calculate abundance of species based on a
-length rule (e.g. greater than legal size) ungroup() %&gt;%
-dplyr::filter(!is.na(number)) %&gt;% # this should not do anything
-dplyr::mutate(length = as.numeric(length)) %&gt;% left_join(.,metadata)
-%&gt;% tidyr::uncount(number) %&gt;% glimpse()</p>
-</div>
-<div class="section level2">
-<h2 id="save-datasets--">6. Save datasets —-<a class="anchor" aria-label="anchor" href="#save-datasets--"></a>
-</h2>
-<p>saveRDS(complete.maxn, file = paste0(“r-workflows/data/staging/”,
-name, “_Complete-maxn.rds”))</p>
-<p>saveRDS(complete.length.number, file =
-paste0(“r-workflows/data/staging/”, name, “_Complete-length.rds”))</p>
-</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">marine.parks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">geometry</span>, <span class="va">ZONE_TYPE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_make_valid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Reading layer `Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine' from data source `/home/runner/work/CheckEM/CheckEM/r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp' </span></span>
+<span><span class="co">##   using driver `ESRI Shapefile'</span></span>
+<span><span class="co">## Simple feature collection with 3775 features and 26 fields</span></span>
+<span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">## Dimension:     XY</span></span>
+<span><span class="co">## Bounding box:  xmin: 70.71702 ymin: -58.44947 xmax: 170.3667 ymax: -8.473407</span></span>
+<span><span class="co">## Geodetic CRS:  WGS 84</span></span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">metadata_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">metadata</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"longitude_dd"</span>, <span class="st">"latitude_dd"</span><span class="op">)</span>,</span>
+<span>                      crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="va">metadata_sf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html" class="external-link">st_intersection</a></span><span class="op">(</span><span class="va">marine.parks</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html" class="external-link">st_coordinates</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>longitude_dd <span class="op">=</span> <span class="va">X</span>, latitude_dd <span class="op">=</span> <span class="va">Y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>status <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">ZONE_TYPE</span>, <span class="st">"National|Sanctuary"</span><span class="op">)</span>,</span>
+<span>                                <span class="st">"No-take"</span>, <span class="st">"Fished"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../../reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span><span class="co">## all geometries</span></span></code></pre>
+<pre><code><span><span class="co">## Rows: 32</span></span>
+<span><span class="co">## Columns: 14</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "35", "5", "26", "23", "29", "4", "32", "3…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14/03/2023 23:36", "14/03/2023 23:49", "1…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "39.6", "42.7", "36", "41", "42.6", "45", …</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236, 114.9292, 114.9284, 114.9190, 11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.12953, -34.12729, -34.12832…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu">CheckEM</span><span class="fu">::</span><span class="fu">read_files_maxn</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Rows: 17,425</span></span>
+<span><span class="co">## Columns: 22</span></span>
+<span><span class="co">## $ sample      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", "10", "10", "10"…</span></span>
+<span><span class="co">## $ pointindex  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1…</span></span>
+<span><span class="co">## $ filename    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Left_MAH00355.MP4", "Left_MAH00355.MP4", "Left_MAH00355.M…</span></span>
+<span><span class="co">## $ frame       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11347", "11403", "11403", "11473", "11473", "11473", "127…</span></span>
+<span><span class="co">## $ time        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "25.71152", "25.72709", "25.72709", "25.74655", "25.74655"…</span></span>
+<span><span class="co">## $ period      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"…</span></span>
+<span><span class="co">## $ periodtime  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0.33422", "0.34979", "0.34979", "0.36926", "0.36926", "0.…</span></span>
+<span><span class="co">## $ imagecol    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "463.20000", "474.00000", "1495.20000", "1562.40000", "157…</span></span>
+<span><span class="co">## $ imagerow    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "669.60000", "655.20000", "541.20000", "543.60000", "571.2…</span></span>
+<span><span class="co">## $ rectwidth   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0.00000", "0.00000", "0.00000", "0.00000", "0.00000", "0.…</span></span>
+<span><span class="co">## $ rectheight  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0.00000", "0.00000", "0.00000", "0.00000", "0.00000", "0.…</span></span>
+<span><span class="co">## $ family      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Labridae", "Labridae", "Labridae", "Labridae", "Labridae"…</span></span>
+<span><span class="co">## $ genus       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Ophthalmolepis", "Ophthalmolepis", "Ophthalmolepis", "Pse…</span></span>
+<span><span class="co">## $ species     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "lineolata", "lineolata", "lineolata", "biserialis", "bise…</span></span>
+<span><span class="co">## $ code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "37384040", "37384040", "37384040", "37384149", "37384149"…</span></span>
+<span><span class="co">## $ number      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"…</span></span>
+<span><span class="co">## $ stage       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "AD", "AD", "AD", "AD", "AD", "AD", "AD", "AD", "AD", "AD"…</span></span>
+<span><span class="co">## $ activity    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Passing", "Passing", "Passing", "Passing", "Passing", "Pa…</span></span>
+<span><span class="co">## $ comment     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ attribute9  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ attribute10 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ campaignid  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "2…</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">maxn</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">filename</span>, <span class="va">periodtime</span>, <span class="va">frame</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>maxn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html" class="external-link">which.max</a></span><span class="op">(</span><span class="va">maxn</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">maxn</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">frame</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>maxn <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>maxn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">maxn</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">maxn</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">successful_count</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yes"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">maxn</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## `summarise()` has grouped output by 'campaignid', 'sample', 'filename',</span></span>
+<span><span class="co">## 'periodtime', 'frame', 'family', 'genus'. You can override using the `.groups`</span></span>
+<span><span class="co">## argument.</span></span>
+<span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span></code></pre>
+<pre><code><span><span class="co">## Rows: 462</span></span>
+<span><span class="co">## Columns: 20</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", …</span></span>
+<span><span class="co">## $ filename                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Left_MAH00356.MP4", "Left_MAH00356.MP4", …</span></span>
+<span><span class="co">## $ periodtime                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "20.35283", "23.92279", "55.15232", "15.42…</span></span>
+<span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatidae", "Gerreidae", "Heterodontidae…</span></span>
+<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatis", "Parequula", "Heterodontus", "…</span></span>
+<span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "brevicaudata", "melbournensis", "portusja…</span></span>
+<span><span class="co">## $ maxn                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 71, 9, 8, 1, 5, 2, 9, 1, 1, 2,…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "44.3", "44.3", "4…</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8533, 114.8533, 11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08388, -34.08388, -34.08388, -34.08388…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">length3dpoints</span> <span class="op">&lt;-</span> <span class="fu">read_files_length</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                   </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">comment</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">successful_length</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<pre><code><span><span class="co">## Joining with `by = join_by(sample, campaignid)`</span></span></code></pre>
+<pre><code><span><span class="co">## Rows: 2,428</span></span>
+<span><span class="co">## Columns: 47</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "12", "12", …</span></span>
+<span><span class="co">## $ imageptpair                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "72", "73", "75", "81", "93", "0", "11", "…</span></span>
+<span><span class="co">## $ filenameleft                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Left_MAH00355.MP4", "Left_MAH00355.MP4", …</span></span>
+<span><span class="co">## $ frameleft                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "65608", "74525", "21436", "33446", "46833…</span></span>
+<span><span class="co">## $ filenameright               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Right_MAH00344.MP4", "Right_MAH00344.MP4"…</span></span>
+<span><span class="co">## $ frameright                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "64140", "73057", "20028", "32038", "45425…</span></span>
+<span><span class="co">## $ time                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "40.79909", "43.27851", "51.07269", "54.41…</span></span>
+<span><span class="co">## $ period                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1…</span></span>
+<span><span class="co">## $ periodtime                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "15.42180", "17.90122", "25.69539", "29.03…</span></span>
+<span><span class="co">## $ x                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "-430.67367", "-278.33750", "-997.34125", …</span></span>
+<span><span class="co">## $ y                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "-140.98709", "-257.03677", "-186.86483", …</span></span>
+<span><span class="co">## $ z                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "-868.53490", "-762.92425", "-1522.45323",…</span></span>
+<span><span class="co">## $ sx                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0.64880", "0.48001", "1.91708", "0.42177"…</span></span>
+<span><span class="co">## $ sy                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0.46100", "0.47613", "0.79836", "0.44960"…</span></span>
+<span><span class="co">## $ sz                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1.11439", "0.88751", "3.13793", "0.83996"…</span></span>
+<span><span class="co">## $ rms                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0.67020", "0.47105", "0.63932", "0.10770"…</span></span>
+<span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "979.64791", "851.81752", "1829.60976", "7…</span></span>
+<span><span class="co">## $ direction                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "27.65589", "26.62953", "33.74391", "22.82…</span></span>
+<span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Labridae", "Urolophidae", "Labridae", "Tr…</span></span>
+<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Austrolabrus", "Trygonoptera", "Ophthalmo…</span></span>
+<span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "maculatus", "ovalis", "lineolata", "dumer…</span></span>
+<span><span class="co">## $ code                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "37384025", "37038016", "37384040", "37027…</span></span>
+<span><span class="co">## $ number                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "40", "1", "1", "…</span></span>
+<span><span class="co">## $ stage                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "AD", "AD", "AD", "AD", "AD", "AD", "AD", …</span></span>
+<span><span class="co">## $ activity                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Passing", "Passing", "Passing", "Passing"…</span></span>
+<span><span class="co">## $ attribute9                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ attribute10                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
+<span><span class="co">## $ length                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ horzdir                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ vertdir                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ midx                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ midy                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ midz                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "44.3", "44.3", "4…</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8533, 114.8533, 11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08388, -34.08388, -34.08388, -34.08388…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">maxn</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">maxn</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html" class="external-link">complete</a></span><span class="op">(</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">nesting</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span>, <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">nesting</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>maxn <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>maxn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">maxn</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sample</span>, <span class="va">scientific</span>, <span class="va">maxn</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span><span class="va">scientific</span>, <span class="va">maxn</span>, fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## `summarise()` has grouped output by 'sample', 'family', 'genus'. You can</span></span>
+<span><span class="co">## override using the `.groups` argument.</span></span></code></pre>
+<pre><code><span><span class="co">## Rows: 32</span></span>
+<span><span class="co">## Columns: 93</span></span>
+<span><span class="co">## $ sample                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "12", "14", "15", …</span></span>
+<span><span class="co">## $ `Aplodactylidae Aplodactylus westralis`       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Arripidae Arripis georgianus`                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Aulopidae Latropiscis purpurissatus`         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 2, 0, …</span></span>
+<span><span class="co">## $ `Carangidae NA NA`                            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 3, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Carangidae Pseudocaranx sp`                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Carangidae Pseudocaranx spp`                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 2, 0, 0, 0, 0, 0, 39,…</span></span>
+<span><span class="co">## $ `Carangidae Seriola hippos`                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Carangidae Seriola lalandi`                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Carcharhinidae Carcharhinus brevipinna`      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">## $ `Carcharhinidae Carcharhinus spp`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Chaetodontidae Chelmonops curiosus`          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 1, 0, …</span></span>
+<span><span class="co">## $ `Cheilodactylidae Dactylophora nigricans`     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Cheilodactylidae Nemadactylus valenciennesi` <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 1, 2, 0, …</span></span>
+<span><span class="co">## $ `Dasyatidae Dasyatis brevicaudata`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Enoplosidae Enoplosus armatus`               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 1, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Gerreidae Parequula melbournensis`           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 2, 0, 1, 1, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Glaucosomatidae Glaucosoma hebraicum`        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">## $ `Gobiesocidae NA NA`                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 1, …</span></span>
+<span><span class="co">## $ `Gobiesocidae NA spp`                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Heterodontidae Heterodontus portusjacksoni`  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 0, 0, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">## $ `Kyphosidae Girella tephraeops`               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae Achoerodus gouldii`                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 1, …</span></span>
+<span><span class="co">## $ `Labridae Austrolabrus maculatus`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 0, 2, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae Bodianus frenchii`                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae Choerodon rubescens`                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae Coris auricularis`                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 71, 5, 155, 72, 30, 43, …</span></span>
+<span><span class="co">## $ `Labridae Eupetrichthys angustipes`           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae NA NA`                              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae NA sp1`                             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 3, 0, …</span></span>
+<span><span class="co">## $ `Labridae Notolabrus parilus`                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae Ophthalmolepis lineolata`           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 9, 12, 13, 16, 10, 11, 0…</span></span>
+<span><span class="co">## $ `Labridae Ophthalmolepis lineolatus`          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Labridae Pseudolabrus biserialis`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8, 3, 5, 8, 8, 12, 0, 15…</span></span>
+<span><span class="co">## $ `Labridae Suezichthys bifurcatus`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 3, 0, …</span></span>
+<span><span class="co">## $ `Labridae Suezichthys cyanolaemus`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 1, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Acanthaluteres vittiger`       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Meuschenia flavolineata`       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Meuschenia freycineti`         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Meuschenia galii`              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 0, 0, 1, 1, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Meuschenia hippocrepis`        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Meuschenia scaber`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Meuschenia spp`                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Meuschenia venusta`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 1, 0, 0, 0, 1, …</span></span>
+<span><span class="co">## $ `Monacanthidae NA spp`                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Monacanthidae Scobinichthys granulatus`      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 1, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Mullidae Parupeneus chrysopleuron`           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 1, 0, …</span></span>
+<span><span class="co">## $ `Mullidae Upeneichthys vlamingii`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 1, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">## $ `Muraenidae Gymnothorax prasinus`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 1, 1, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Muraenidae Gymnothorax woodwardi`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `NA NA spp`                                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Neosebastidae Neosebastes bougainvillii`     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Neosebastidae Neosebastes nigropunctatus`    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Neosebastidae Neosebastes pandus`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Odacidae Siphonognathus caninis`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 1, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Odacidae Siphonognathus spp`                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 1, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Odontaspididae Furgaleus macki`              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Oplegnathidae Oplegnathus woodwardi`         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Orectolobidae Orectolobus spp`               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Ostraciidae Anoplocapros lenticularis`       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 1, 1, 0, 1, 0, …</span></span>
+<span><span class="co">## $ `Parascylliidae Parascyllium variolatum`      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Pempherididae Parapriacanthus elongatus`     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 58,…</span></span>
+<span><span class="co">## $ `Pempherididae Pempheris klunzingeri`         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 6, 0, 0, 85,…</span></span>
+<span><span class="co">## $ `Platycephalidae Platycephalus speculator`    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Platycephalidae Platycephalus spp`           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Plesiopidae Trachinops noarlungae`           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 215, 0, 0…</span></span>
+<span><span class="co">## $ `Pomacentridae Chromis klunzingeri`           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 5, 15, 7, 24, 12, 1, 0, …</span></span>
+<span><span class="co">## $ `Pomacentridae Chromis westaustralis`         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2, 0, 0, 1, 0, 9, 0, 0, …</span></span>
+<span><span class="co">## $ `Pomacentridae Parma mccullochi`              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Pomacentridae Parma occidentalis`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Pomacentridae Parma spp`                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Scombridae Thunnus spp`                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 1, 0, 0, 2, …</span></span>
+<span><span class="co">## $ `Scorpididae Neatypus obliquus`               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 9, 8, 7, 13, 23, 9, 2, 1…</span></span>
+<span><span class="co">## $ `Scorpididae Scorpis aequipinnis`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Scorpididae Scorpis georgiana`               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Scorpididae Tilodon sexfasciatus`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 1, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Scyliorhinidae Aulohalaelurus labiosus`      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 1, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Serranidae Caesioperca rasor`                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Serranidae Caesioperca sp`                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Serranidae Caesioperca sp1`                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 2, 0, 0, 2, 0, …</span></span>
+<span><span class="co">## $ `Serranidae Epinephelides armatus`            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Serranidae Hypoplectrodes nigroruber`        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Serranidae Othos dentex`                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Sparidae Chrysophrys auratus`                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 1, 0, 0, 8, 0, …</span></span>
+<span><span class="co">## $ `Sphyraenidae Sphyraena novaehollandiae`      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `SUS SUS SUS`                                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 40, 0, 0, 0, 0, 11, 0…</span></span>
+<span><span class="co">## $ `Tetraodontidae Lagocephalus sceleratus`      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Triakidae Furgaleus macki`                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 1, 2, 1, 1, 1, 0, …</span></span>
+<span><span class="co">## $ `Triakidae Mustelus antarcticus`              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 1, …</span></span>
+<span><span class="co">## $ `Triglidae Chelidonichthys kumu`              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ `Trygonorrhinidae Trygonorrhina dumerilii`    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 0, 0, 0, 0, 1, 0, 1, …</span></span>
+<span><span class="co">## $ `Unknown Unknown Unknown`                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 1, 0, …</span></span>
+<span><span class="co">## $ `Urolophidae Trygonoptera ovalis`             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 0, 1, 1, 0, 0, 0, …</span></span></code></pre>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">maxn.families</span> <span class="op">&lt;-</span> <span class="va">maxn</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">family</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="st">"Unknown"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">scientific</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Rows: 91</span></span>
+<span><span class="co">## Columns: 4</span></span>
+<span><span class="co">## $ family     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatidae", "Gerreidae", "Heterodontidae", "Labridae", "L…</span></span>
+<span><span class="co">## $ genus      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatis", "Parequula", "Heterodontus", "Austrolabrus", "C…</span></span>
+<span><span class="co">## $ species    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "brevicaudata", "melbournensis", "portusjacksoni", "maculat…</span></span>
+<span><span class="co">## $ scientific <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatidae Dasyatis brevicaudata", "Gerreidae Parequula me…</span></span></code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">complete.maxn</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"scientific"</span>, values_to <span class="op">=</span> <span class="st">"maxn"</span>,</span>
+<span>               cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">maxn.families</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scientific"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Joining with `by = join_by(sample)`</span></span></code></pre>
+<pre><code><span><span class="co">## Rows: 2,912</span></span>
+<span><span class="co">## Columns: 19</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", …</span></span>
+<span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Aplodactylidae Aplodactylus westralis", "…</span></span>
+<span><span class="co">## $ maxn                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …</span></span>
+<span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Aplodactylidae", "Arripidae", "Aulopidae"…</span></span>
+<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Aplodactylus", "Arripis", "Latropiscis", …</span></span>
+<span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "westralis", "georgianus", "purpurissatus"…</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "44.3", "44.3", "4…</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8533, 114.8533, 11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08388, -34.08388, -34.08388, -34.08388…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span></code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">complete.length.number</span> <span class="op">&lt;-</span> <span class="va">length3dpoints</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">family</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="st">"Unknown"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">right_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">successful_length</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">length</span>, <span class="va">number</span>, <span class="va">range</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html" class="external-link">complete</a></span><span class="op">(</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">nesting</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span>, <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">nesting</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/uncount.html" class="external-link">uncount</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Joining with `by = join_by(sample, campaignid, date_time, location, site,</span></span>
+<span><span class="co">## depth, successful_count, successful_length, successful_habitat_forward,</span></span>
+<span><span class="co">## successful_habitat_backward, zone_type, longitude_dd, latitude_dd, status)`</span></span>
+<span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span></code></pre>
+<pre><code><span><span class="co">## Rows: 4,212</span></span>
+<span><span class="co">## Columns: 19</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", …</span></span>
+<span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatidae", "Gerreidae", "Heterodontidae…</span></span>
+<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatis", "Parequula", "Heterodontus", "…</span></span>
+<span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "brevicaudata", "melbournensis", "portusja…</span></span>
+<span><span class="co">## $ length                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1076.08643, 71.45003, NA, NA, 86.76808, 14…</span></span>
+<span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2463.40578", "594.55232", "952.35412", "9…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "44.3", "44.3", "4…</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8533, 114.8533, 11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08388, -34.08388, -34.08388, -34.08388…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span></code></pre>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">complete.maxn</span>, </span>
+<span>          file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>,</span>
+<span>                       <span class="va">name</span>, <span class="st">"_complete-maxn.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">complete.length.number</span>, </span>
+<span>          file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>,</span>
+<span>                       <span class="va">name</span>, <span class="st">"_complete-length.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
