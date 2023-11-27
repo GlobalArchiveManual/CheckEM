@@ -27,7 +27,7 @@ name <- 'example-bruv-workflow'
 # Load bathymetry data and create bathymetry derivatives
 ## The bathymetry data used in the example is a relatively low spatial resolution dataset downloaded from https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/148758. Feel free to replace with any suitable bathymetry in .tif format.
 ```{r bathy}
-bathy <- rast("r-workflows/data/spatial/rasters/swc_ga250m.tif") %>%
+bathy <- rast(here::here("r-workflows/data/spatial/rasters/swc_ga250m.tif")) %>%
   clamp(upper = 0, lower = -250, values = F) %>%
   trim()
 ```
@@ -53,14 +53,14 @@ names(preds)[1] <- "mbdepth"
 ```{r save-layers}
 preds_w <- wrap(preds)
 saveRDS(preds_w, 
-          file = paste0("r-workflows/data/spatial/rasters/", 
-                        name, "_bathymetry_derivatives.rds"))
+          file = here::here(paste0("r-workflows/data/spatial/rasters/", 
+                        name, "_bathymetry_derivatives.rds")))
 ```
 # Load metadata and extract site-specific derivatives
 ## Read in the metadata
 ```{r load-metadata}
-metadata <- readRDS(paste0("r-workflows/data/tidy/", 
-                            name, "_Metadata.rds")) %>%
+metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
+                            name, "_Metadata.rds"))) %>%
   dplyr::mutate(longitude_dd = as.numeric(longitude_dd),
                 latitude_dd = as.numeric(latitude_dd)) %>%
   glimpse()
@@ -89,5 +89,5 @@ metadata.bathy.derivatives   <- cbind(tidy.metadata_t,
 ```
 
 ```{r save-metadata-bathy-derivatives}
-saveRDS(metadata.bathy.derivatives, paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))
+saveRDS(metadata.bathy.derivatives, here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds")))
 ```
