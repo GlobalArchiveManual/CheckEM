@@ -27,7 +27,7 @@ library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
 library(here)
-
+library(tidyverse)
 ```
 ## Set the study name
 ```{r name}

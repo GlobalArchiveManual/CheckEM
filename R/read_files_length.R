@@ -12,13 +12,14 @@ read_files_txt <- function(dir) {
     read_tsv(flnm, col_types = cols(.default = "c")) %>%
     dplyr::mutate(campaignid = basename(flnm)) %>%
     clean_names() %>%
-    dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Points.txt"="","_3DPoints.txt"="","_Lengths.txt"=""))) %>%
+    dplyr::mutate(campaignid = str_replace_all(campaignid,c("_3DPoints.txt" = "",
+                                                            "_Lengths.txt" = ""))) %>%
     dplyr::rename(sample = opcode)
   }
   
   list.files(path = dir,      
              recursive = F,
-             pattern = "_Points.txt",
+             pattern = "_Lengths.txt|_3DPoints",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind()

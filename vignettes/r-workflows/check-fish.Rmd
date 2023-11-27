@@ -12,11 +12,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-# knitr::opts_chunk$set(echo = TRUE)
-# knitr::opts_knit$set(root.dir = "..")
-```
-
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 # Load Libraries ----
 library(devtools)
@@ -27,60 +22,55 @@ library(sf)
 library(terra)
 ```
 
-```{r name}
+```{r study-name}
 name <- "example-bruv-workflow"
 ```
 
-```{r metadata}
+Skip these next 2 chunks if you have already exported metadata in the 'check-habitat' scripts
+```{r load-metadata}
 metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location,  # Review columns to align with GlobalArchive - plus make metadata match
-                site, depth, successful_count, successful_length,
-                successful_habitat_forward, successful_habitat_backward) %>%
+  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
 ```
 
-```{r}
+```{r save-metadata}
 saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/",
-                                name, "_metadata.rds")))
+                                name, "_Metadata.rds")))
 ```
 
-```{r metadata-rds}
+Load metadata if you have already exported in the 'check-habitat' scripts
+```{r tidy-metadata}
 metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
-                                name, "_metadata.rds")))
+                                name, "_Metadata.rds")))
 ```
 
-```{r marine-parks}
-# marine.parks <- st_read("r-workflows/data/spatial/shapefiles/")  %>% 
-#   dplyr::select(geometry, ZoneName) %>%
-#   st_transform(4326) %>%
-#   st_make_valid()
-# 
-# metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), 
-#                       crs = 4326)
-# 
-# metadata <- metadata_sf %>%
-#   st_intersection(marine.parks) %>%
-#   bind_cols(st_coordinates(.)) %>%
-#   as.data.frame() %>%
-#   dplyr::select(-c(geometry)) %>%
-#   dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-#   dplyr::mutate(status = if_else(str_detect(ZoneName, "National|Sanctuary"), 
-#                                 "No-take", "Fished")) %>%
-#   clean_names() %>%
-#   glimpse()
-```
+```{r parks}
+marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
+  dplyr::select(geometry, ZONE_TYPE) %>%
+  st_transform(4326) %>%
+  st_make_valid()
 
-```{r}
-points <- list.files(path = "r-workflows/data/raw/",      # This replaces ga.list.files
-                     recursive = T,
-                     pattern = "_Points.txt",
-                     full.names = T) %>%
-  purrr::map(~CheckEM::read_files_txt(.)) %>% 
-  purrr::list_rbind() %>%
+metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"),
+                      crs = 4326)
+
+metadata <- metadata_sf %>%
+  st_intersection(marine.parks) %>%
+  bind_cols(st_coordinates(.)) %>%
+  as.data.frame() %>%
+  dplyr::select(-c(geometry)) %>%
+  dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+  dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),
+                                "No-take", "Fished")) %>%
+  clean_names() %>%
   glimpse()
 ```
 
-```{r}
+```{r load-points}
+points <- CheckEM::read_files_maxn(here::here("r-workflows/data/raw/")) %>%
+  glimpse()
+```
+
+```{r create-maxn}
 maxn <- points %>% 
   dplyr::group_by(campaignid, sample, filename, periodtime, frame, family, genus, species) %>% 
   dplyr::mutate(number = as.numeric(number)) %>%
@@ -99,20 +89,16 @@ maxn <- points %>%
   glimpse()
 ```
 
-```{r}
-length3dpoints <- list.files(path = "r-workflows/data/raw/",
-                             recursive = T,
-                             pattern = "_3DPoints.txt|_Lengths.txt",
-                             full.names = T) %>%
-  purrr::map(~CheckEM::read_files_txt(.)) %>%
-  purrr::list_rbind() %>%
-  dplyr::select(-c(comment))%>% 
+
+```{r load-lengths}
+length3dpoints <- read_files_length(here::here("r-workflows/data/raw/")) %>%                   
+  dplyr::select(-c(comment))%>%
   dplyr::inner_join(metadata)%>%
   dplyr::filter(successful_length %in% "Yes") %>%
-  glimpse()
+  glimpse() 
 ```
 
-```{r}
+```{r tidy-maxn}
 dat <- maxn %>%
   dplyr::select(campaignid, sample, family, genus, species, maxn) %>%
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
@@ -126,7 +112,7 @@ dat <- maxn %>%
   glimpse()
 ```
 
-```{r}
+```{r maxn-families}
 maxn.families <- maxn %>%
   dplyr::mutate(scientific = paste(family, genus, species, sep = " ")) %>%
   filter(!(family %in% "Unknown")) %>%
@@ -135,7 +121,7 @@ maxn.families <- maxn %>%
   glimpse()
 ```
 
-```{r}
+```{r complete-maxn}
 complete.maxn <- dat %>%
   pivot_longer(names_to = "scientific", values_to = "maxn",
                cols = 2:ncol(.)) %>%
@@ -144,15 +130,15 @@ complete.maxn <- dat %>%
   glimpse()
 ```
 
-```{r}
-length.families <- length3dpoints %>%
+```{r length-families}
+length.families <- length3dpoints %>%                                           # TODO check why we aren't using this?
   dplyr::filter(!(family %in% "Unknown")) %>%
   dplyr::select(family, genus, species)%>%
   distinct() %>%
   glimpse()
 ```
 
-```{r}
+```{r complete-length}
 complete.length.number <- length3dpoints %>% 
   dplyr::filter(!family %in% "Unknown")%>%
   dplyr::right_join(metadata) %>%
@@ -169,11 +155,13 @@ complete.length.number <- length3dpoints %>%
   glimpse()
 ```
 
-```{r}
+```{r save-maxn}
 saveRDS(complete.maxn, 
           file = paste0("r-workflows/data/staging/",
                        name, "_Complete-maxn.rds"))
+```
 
+```{r save-length}
 saveRDS(complete.length.number, 
           file = paste0("r-workflows/data/staging/",
                        name, "_Complete-length.rds"))
