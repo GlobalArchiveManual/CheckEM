@@ -130,14 +130,6 @@ complete.maxn <- dat %>%
   glimpse()
 ```
 
-```{r length-families}
-length.families <- length3dpoints %>%                                           # TODO check why we aren't using this?
-  dplyr::filter(!(family %in% "Unknown")) %>%
-  dplyr::select(family, genus, species)%>%
-  distinct() %>%
-  glimpse()
-```
-
 ```{r complete-length}
 complete.length.number <- length3dpoints %>% 
   dplyr::filter(!family %in% "Unknown")%>%
@@ -157,12 +149,12 @@ complete.length.number <- length3dpoints %>%
 
 ```{r save-maxn}
 saveRDS(complete.maxn, 
-          file = paste0("r-workflows/data/staging/",
-                       name, "_Complete-maxn.rds"))
+          file = here::here(paste0("r-workflows/data/staging/",
+                       name, "_complete-maxn.rds")))
 ```
 
 ```{r save-length}
 saveRDS(complete.length.number, 
-          file = paste0("r-workflows/data/staging/",
-                       name, "_Complete-length.rds"))
+          file = here::here(paste0("r-workflows/data/staging/",
+                       name, "_complete-length.rds")))
 ```
