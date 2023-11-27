@@ -59,6 +59,8 @@ Imports:
     shinydashboard (>= 0.7.2),
     shinydashboardPlus (>= 2.0.3),
     shinyWidgets (>= 0.7.6),
+    stars,
+    starsExtra,
     stringr (>= 1.5.0),
     terra,
     tidyr (>= 1.3.0),
