@@ -1,6 +1,6 @@
-#' Title
+#' A function to read EventMeasure format length data (_3DPoints.txt & _Lengths.txt)
 #'
-#' @param flnm 
+#' @param dir 
 #'
 #' @return
 #' @export

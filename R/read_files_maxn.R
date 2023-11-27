@@ -1,6 +1,6 @@
-#' Title
+#' A function to read EventMeasure format point data (_Points.txt)
 #'
-#' @param flnm 
+#' @param dir 
 #'
 #' @return
 #' @export
