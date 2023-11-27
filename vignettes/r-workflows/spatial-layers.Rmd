@@ -1,0 +1,93 @@
+---
+title: "Generate spatial layers for modelling"
+author: "Claude Spencer & Brooke Gibbons"
+date: "2023-11-13"
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Generate spatial layers for modelling}
+  %\VignetteEncoding{UTF-8}
+---
+# R set up
+## Load the necessary libraries
+```{r libraries, results='hide', warning=FALSE, message=FALSE}
+library(sf)
+library(terra)
+library(stars)
+library(starsExtra)
+library(tidyverse)
+```
+## Set the study name
+```{r study-name}
+name <- 'example-bruv-workflow'
+```
+# Load bathymetry data and create bathymetry derivatives
+## The bathymetry data used in the example is a relatively low spatial resolution dataset downloaded from https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/148758. Feel free to replace with any suitable bathymetry in .tif format.
+```{r bathy}
+bathy <- rast("r-workflows/data/spatial/rasters/swc_ga250m.tif") %>%
+  clamp(upper = 0, lower = -250, values = F) %>%
+  trim()
+```
+## Calculate terrain derivatives
+```{r derivatives}
+preds <- terrain(bathy, neighbors = 8,
+                 v = c("slope", "aspect", "TPI", "TRI", "roughness"),           # Remove here as necessary
+                 unit = "degrees")
+```
+## Calculate detrended bathymetry
+```{r detrend-bathy}
+zstar <- st_as_stars(bathy)                                                    
+detre <- detrend(zstar, parallel = 8)                                           
+detre <- as(object = detre, Class = "SpatRaster")                               
+names(detre) <- c("detrended", "lineartrend")
+```
+## Join bathymetry with terrain and detrended derivatives
+```{r join-rasters}
+preds <- rast(list(bathy, preds, detre[[1]]))                                   
+names(preds)[1] <- "mbdepth"
+```
+## Save spatial-layers
+```{r save-layers}
+preds_w <- wrap(preds)
+saveRDS(preds_w, 
+          file = paste0("r-workflows/data/spatial/rasters/", 
+                        name, "_bathymetry_derivatives.rds"))
+```
+# Load metadata and extract site-specific derivatives
+## Read in the metadata
+```{r load-metadata}
+metadata <- readRDS(paste0("r-workflows/data/tidy/", 
+                            name, "_Metadata.rds")) %>%
+  dplyr::mutate(longitude_dd = as.numeric(longitude_dd),
+                latitude_dd = as.numeric(latitude_dd)) %>%
+  glimpse()
+```
+## Convert the metadata to a spatial 
+```{r vectorise-metadata}
+metadata.vect <- vect(metadata, geom = c("longitude_dd", "latitude_dd"), crs = "epsg:4326")
+```
+
+```{r check-alignment}
+plot(preds[[1]])
+plot(metadata.vect, add = T)
+```
+
+```{r add-coords}
+tidy.metadata_t   <- as.data.frame(metadata.vect, geom = "XY") %>%
+  left_join(metadata)
+```
+
+```{r extract-derivatives}
+metadata.bathy.derivatives   <- cbind(tidy.metadata_t, 
+                                     terra::extract(preds, metadata.vect)) %>%
+  dplyr::filter(!is.na(depth),                                                  
+                !is.na(roughness)) %>%
+  glimpse()
+```
+
+```{r save-metadata-bathy-derivatives}
+saveRDS(metadata.bathy.derivatives, paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))
+```
