@@ -19,6 +19,7 @@ library(terra)
 library(stars)
 library(starsExtra)
 library(tidyverse)
+library(here)
 ```
 ## Set the study name
 ```{r study-name}

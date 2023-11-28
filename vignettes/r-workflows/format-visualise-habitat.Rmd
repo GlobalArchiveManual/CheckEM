@@ -19,6 +19,7 @@ library(ggbeeswarm)
 library(RColorBrewer)
 library(leaflet)
 library(leaflet.minicharts)
+library(here)
 ```
 
 ```{r study-name}
@@ -85,8 +86,7 @@ ggplot() +
 ```
 
 ```{r save-habitat}
-saveRDS(tidy.habitat, file =
-            paste("r-workflows/data/tidy/", paste(name,"tidy-habitat.rds", sep = "_"),sep = "/"))
+saveRDS(tidy.habitat, file = here::here(paste("r-workflows/data/tidy/", paste(name,"tidy-habitat.rds", sep = "_"),sep = "/")))
 ```
 
 ```{r colours}

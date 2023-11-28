@@ -23,6 +23,7 @@ library(tidyverse)
 library(googlesheets4)
 library(sf)
 library(terra)
+library(here)
 ```
 ## Set the study name
 ```{r study-name}
