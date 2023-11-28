@@ -1,0 +1,606 @@
+Dot Point Measurements
+
+Generated: Thursday 26 October 2023 09:18:19
+
+Filename	Frame	Time (mins)	Image row	Image col	Date	Location	Site #	Transect #	Latitude	Longitude	Rugosity	Depth	Collector	Fishing status	campaignid	relief_annotated	OpCode	Period	Frame info 3	Frame info 4	Frame info 5	Frame info 6	level_2	level_3	level_4	level_5	scientific	qualifiers	CAAB_code		Radius %
+10_1_DSC06511.JPG	      0		790	83											2023-03_SwC_stereo-BRUVs	no	10	1					Macroalgae	Filamentous / filiform	Red				80300933		67.0
+10_1_DSC06511.JPG	      0		986	591											2023-03_SwC_stereo-BRUVs	no	10	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		24.7
+10_1_DSC06511.JPG	      0		683	930											2023-03_SwC_stereo-BRUVs	no	10	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		18.2
+10_1_DSC06511.JPG	      0		778	1829											2023-03_SwC_stereo-BRUVs	no	10	1					Macroalgae	Erect coarse branching	Red				80300906		97.8
+10_1_DSC06511.JPG	      0		976	1654											2023-03_SwC_stereo-BRUVs	no	10	1					Macroalgae	Erect coarse branching	Red				80300906		82.6
+10_1_DSC06511.JPG	      0		1009	485											2023-03_SwC_stereo-BRUVs	no	10	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		34.1
+10_1_DSC06511.JPG	      0		807	525											2023-03_SwC_stereo-BRUVs	no	10	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		25.2
+10_1_DSC06511.JPG	      0		882	830											2023-03_SwC_stereo-BRUVs	no	10	1					Macroalgae	Erect coarse branching	Brown				80300904		6.9
+10_1_DSC06511.JPG	      0		703	38											2023-03_SwC_stereo-BRUVs	no	10	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		72.0
+10_1_DSC06511.JPG	      0		1068	769											2023-03_SwC_stereo-BRUVs	no	10	1					Macroalgae	Erect fine branching	Red				80300910		23.6
+10_1_DSC06511.JPG	      0		725	1849											2023-03_SwC_stereo-BRUVs	no	10	1					Macroalgae	Erect coarse branching	Red				80300906		100.0
+10_1_DSC06511.JPG	      0		596	399											2023-03_SwC_stereo-BRUVs	no	10	1					Unscorable						00000001		42.6
+10_1_DSC06511.JPG	      0		658	1838											2023-03_SwC_stereo-BRUVs	no	10	1					Sponges	Massive forms	Simple				10000904		99.7
+10_1_DSC06511.JPG	      0		897	172											2023-03_SwC_stereo-BRUVs	no	10	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		59.0
+10_1_DSC06511.JPG	      0		933	914											2023-03_SwC_stereo-BRUVs	no	10	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		15.7
+10_1_DSC06511.JPG	      0		693	953											2023-03_SwC_stereo-BRUVs	no	10	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		19.2
+10_1_DSC06511.JPG	      0		1037	269											2023-03_SwC_stereo-BRUVs	no	10	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		53.5
+10_1_DSC06511.JPG	      0		784	40											2023-03_SwC_stereo-BRUVs	no	10	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		71.0
+10_1_DSC06511.JPG	      0		582	512											2023-03_SwC_stereo-BRUVs	no	10	1					Unscorable						00000001		34.5
+10_1_DSC06511.JPG	      0		783	1170											2023-03_SwC_stereo-BRUVs	no	10	1					Macroalgae	Erect coarse branching	Brown				80300904		35.8
+12_1_DSC04997.JPG	      0		868	225											2023-03_SwC_stereo-BRUVs	no	12	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		65.5
+12_1_DSC04997.JPG	      0		921	3											2023-03_SwC_stereo-BRUVs	no	12	1					Unscorable						00000001		87.9
+12_1_DSC04997.JPG	      0		757	1871											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		100.0
+12_1_DSC04997.JPG	      0		710	1445											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		58.8
+12_1_DSC04997.JPG	      0		918	1430											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		55.5
+12_1_DSC04997.JPG	      0		1076	1543											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		69.8
+12_1_DSC04997.JPG	      0		1063	374											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect fine branching	Green				80300909		54.3
+12_1_DSC04997.JPG	      0		681	1825											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		96.7
+12_1_DSC04997.JPG	      0		994	991											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		17.1
+12_1_DSC04997.JPG	      0		621	306											2023-03_SwC_stereo-BRUVs	no	12	1					Unscorable						00000001		62.4
+12_1_DSC04997.JPG	      0		886	698											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		18.2
+12_1_DSC04997.JPG	      0		637	199											2023-03_SwC_stereo-BRUVs	no	12	1					Unscorable						00000001		71.9
+12_1_DSC04997.JPG	      0		826	19											2023-03_SwC_stereo-BRUVs	no	12	1					Unscorable						00000001		86.3
+12_1_DSC04997.JPG	      0		1042	1653											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		79.5
+12_1_DSC04997.JPG	      0		974	1511											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		64.2
+12_1_DSC04997.JPG	      0		1050	290											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect fine branching	Red				80300910		61.8
+12_1_DSC04997.JPG	      0		738	918											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect fine branching	Green				80300909		13.4
+12_1_DSC04997.JPG	      0		697	32											2023-03_SwC_stereo-BRUVs	no	12	1					Unscorable						00000001		86.5
+12_1_DSC04997.JPG	      0		1042	1502											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		64.9
+12_1_DSC04997.JPG	      0		817	742											2023-03_SwC_stereo-BRUVs	no	12	1					Macroalgae	Erect coarse branching	Red				80300906		14.5
+14_1_DSC05163.JPG	      0		1047	1068											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		30.5
+14_1_DSC05163.JPG	      0		705	760											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		21.3
+14_1_DSC05163.JPG	      0		963	1815											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		97.6
+14_1_DSC05163.JPG	      0		889	1681											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		82.0
+14_1_DSC05163.JPG	      0		714	176											2023-03_SwC_stereo-BRUVs	no	14	1					Unscorable						00000001		82.6
+14_1_DSC05163.JPG	      0		917	1791											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		94.3
+14_1_DSC05163.JPG	      0		662	1054											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		20.2
+14_1_DSC05163.JPG	      0		679	19											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		100.0
+14_1_DSC05163.JPG	      0		654	185											2023-03_SwC_stereo-BRUVs	no	14	1					Unscorable						00000001		82.7
+14_1_DSC05163.JPG	      0		542	639											2023-03_SwC_stereo-BRUVs	no	14	1					Unscorable						00000001		42.5
+14_1_DSC05163.JPG	      0		895	112											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Brown				80300904		89.6
+14_1_DSC05163.JPG	      0		747	337											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		64.8
+14_1_DSC05163.JPG	      0		901	1605											2023-03_SwC_stereo-BRUVs	no	14	1					Sponges	Massive forms	Balls				10000905		74.0
+14_1_DSC05163.JPG	      0		728	1547											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Brown				80300904		67.4
+14_1_DSC05163.JPG	      0		588	1491											2023-03_SwC_stereo-BRUVs	no	14	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		65.1
+14_1_DSC05163.JPG	      0		963	1084											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		24.1
+14_1_DSC05163.JPG	      0		818	74											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		93.1
+14_1_DSC05163.JPG	      0		1008	1807											2023-03_SwC_stereo-BRUVs	no	14	1					Macroalgae	Erect coarse branching	Red				80300906		97.8
+14_1_DSC05163.JPG	      0		989	1191											2023-03_SwC_stereo-BRUVs	no	14	1					Substrate	Consolidated (hard)	Rock				82001002		34.8
+14_1_DSC05163.JPG	      0		629	185											2023-03_SwC_stereo-BRUVs	no	14	1					Unscorable						00000001		83.3
+15_1_DSC05264.JPG	      0		711	411											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Red				80300906		53.9
+15_1_DSC05264.JPG	      0		936	1319											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		49.4
+15_1_DSC05264.JPG	      0		978	11											2023-03_SwC_stereo-BRUVs	no	15	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		100.0
+15_1_DSC05264.JPG	      0		552	888											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Brown				80300904		23.2
+15_1_DSC05264.JPG	      0		557	242											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Red				80300906		75.6
+15_1_DSC05264.JPG	      0		986	894											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		24.2
+15_1_DSC05264.JPG	      0		816	1668											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Consolidated (hard)	Rock				82001002		84.0
+15_1_DSC05264.JPG	      0		606	602											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Filamentous / filiform	Brown				80300931		37.1
+15_1_DSC05264.JPG	      0		674	698											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Brown				80300904		24.3
+15_1_DSC05264.JPG	      0		544	793											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Filamentous / filiform	Brown				80300931		26.9
+15_1_DSC05264.JPG	      0		831	1574											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Brown				80300904		73.9
+15_1_DSC05264.JPG	      0		856	1056											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		19.6
+15_1_DSC05264.JPG	      0		581	107											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Red				80300906		89.0
+15_1_DSC05264.JPG	      0		557	1421											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Red				80300906		61.2
+15_1_DSC05264.JPG	      0		980	770											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		27.5
+15_1_DSC05264.JPG	      0		879	1449											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		61.1
+15_1_DSC05264.JPG	      0		887	1334											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		49.2
+15_1_DSC05264.JPG	      0		588	436											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Red				80300906		54.4
+15_1_DSC05264.JPG	      0		752	931											2023-03_SwC_stereo-BRUVs	no	15	1					Macroalgae	Erect coarse branching	Red				80300906		3.5
+15_1_DSC05264.JPG	      0		1021	1422											2023-03_SwC_stereo-BRUVs	no	15	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		63.4
+16_1_DSC05177.JPG	      0		661	203											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		75.4
+16_1_DSC05177.JPG	      0		1058	1582											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		93.5
+16_1_DSC05177.JPG	      0		1025	1529											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		86.3
+16_1_DSC05177.JPG	      0		771	436											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		46.6
+16_1_DSC05177.JPG	      0		540	981											2023-03_SwC_stereo-BRUVs	no	16	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		33.6
+16_1_DSC05177.JPG	      0		973	781											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		22.9
+16_1_DSC05177.JPG	      0		863	1070											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		29.2
+16_1_DSC05177.JPG	      0		696	1223											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		46.9
+16_1_DSC05177.JPG	      0		773	1452											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		72.5
+16_1_DSC05177.JPG	      0		842	1193											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		42.7
+16_1_DSC05177.JPG	      0		588	483											2023-03_SwC_stereo-BRUVs	no	16	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		47.1
+16_1_DSC05177.JPG	      0		948	64											2023-03_SwC_stereo-BRUVs	no	16	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		92.1
+16_1_DSC05177.JPG	      0		685	1209											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		45.6
+16_1_DSC05177.JPG	      0		871	1003											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		22.3
+16_1_DSC05177.JPG	      0		640	299											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Erect coarse branching	Red				80300906		64.9
+16_1_DSC05177.JPG	      0		633	620											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Erect coarse branching	Brown				80300904		30.7
+16_1_DSC05177.JPG	      0		737	969											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		16.9
+16_1_DSC05177.JPG	      0		542	373											2023-03_SwC_stereo-BRUVs	no	16	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		61.0
+16_1_DSC05177.JPG	      0		795	1166											2023-03_SwC_stereo-BRUVs	no	16	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		39.0
+16_1_DSC05177.JPG	      0		1064	27											2023-03_SwC_stereo-BRUVs	no	16	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		100.0
+17_1_DSC03897.JPG	      0		905	1708											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		89.6
+17_1_DSC03897.JPG	      0		672	792											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Red				80300906		12.6
+17_1_DSC03897.JPG	      0		630	292											2023-03_SwC_stereo-BRUVs	no	17	1					Sessile invertebrates						00000002		60.6
+17_1_DSC03897.JPG	      0		834	1096											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		25.7
+17_1_DSC03897.JPG	      0		876	1812											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		100.0
+17_1_DSC03897.JPG	      0		902	1758											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		94.8
+17_1_DSC03897.JPG	      0		635	262											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Red				80300906		63.5
+17_1_DSC03897.JPG	      0		715	751											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Red				80300906		12.6
+17_1_DSC03897.JPG	      0		600	1037											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		26.0
+17_1_DSC03897.JPG	      0		960	833											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		19.5
+17_1_DSC03897.JPG	      0		609	90											2023-03_SwC_stereo-BRUVs	no	17	1					Substrate	Consolidated (hard)	Rock				82001002		81.6
+17_1_DSC03897.JPG	      0		765	670											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Red				80300906		19.5
+17_1_DSC03897.JPG	      0		765	255											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Red				80300906		62.7
+17_1_DSC03897.JPG	      0		899	379											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Red				80300906		51.4
+17_1_DSC03897.JPG	      0		721	347											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Brown				80300904		53.3
+17_1_DSC03897.JPG	      0		738	1697											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		87.5
+17_1_DSC03897.JPG	      0		1067	956											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		32.2
+17_1_DSC03897.JPG	      0		597	1136											2023-03_SwC_stereo-BRUVs	no	17	1					Unscorable						00000001		34.4
+17_1_DSC03897.JPG	      0		754	863											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Red				80300906		2.1
+17_1_DSC03897.JPG	      0		828	401											2023-03_SwC_stereo-BRUVs	no	17	1					Macroalgae	Erect coarse branching	Brown				80300904		47.7
+19_1_DSC05320.JPG	      0		968	1156											2023-03_SwC_stereo-BRUVs	no	19	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		22.9
+19_1_DSC05320.JPG	      0		663	1773											2023-03_SwC_stereo-BRUVs	no	19	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		75.3
+19_1_DSC05320.JPG	      0		765	585											2023-03_SwC_stereo-BRUVs	no	19	1					Bryozoa	Soft	Foliaceous				20000907		43.4
+19_1_DSC05320.JPG	      0		588	1217											2023-03_SwC_stereo-BRUVs	no	19	1					Sessile invertebrates						00000002		27.1
+19_1_DSC05320.JPG	      0		797	1118											2023-03_SwC_stereo-BRUVs	no	19	1					Bryozoa	Soft	Foliaceous				20000907		9.6
+19_1_DSC05320.JPG	      0		996	607											2023-03_SwC_stereo-BRUVs	no	19	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		46.4
+19_1_DSC05320.JPG	      0		1001	1507											2023-03_SwC_stereo-BRUVs	no	19	1					Bryozoa	Soft	Foliaceous				20000907		52.8
+19_1_DSC05320.JPG	      0		894	66											2023-03_SwC_stereo-BRUVs	no	19	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		95.5
+19_1_DSC05320.JPG	      0		1020	1657											2023-03_SwC_stereo-BRUVs	no	19	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		67.2
+19_1_DSC05320.JPG	      0		748	1388											2023-03_SwC_stereo-BRUVs	no	19	1					Bryozoa	Soft	Foliaceous				20000907		36.4
+19_1_DSC05320.JPG	      0		541	1342											2023-03_SwC_stereo-BRUVs	no	19	1					Sessile invertebrates						00000002		39.6
+19_1_DSC05320.JPG	      0		837	809											2023-03_SwC_stereo-BRUVs	no	19	1					Bryozoa	Soft	Foliaceous				20000907		21.9
+19_1_DSC05320.JPG	      0		787	760											2023-03_SwC_stereo-BRUVs	no	19	1					Sessile invertebrates						00000002		26.0
+19_1_DSC05320.JPG	      0		793	161											2023-03_SwC_stereo-BRUVs	no	19	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		85.3
+19_1_DSC05320.JPG	      0		576	1763											2023-03_SwC_stereo-BRUVs	no	19	1					Sessile invertebrates						00000002		76.1
+19_1_DSC05320.JPG	      0		904	1268											2023-03_SwC_stereo-BRUVs	no	19	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		27.2
+19_1_DSC05320.JPG	      0		569	36											2023-03_SwC_stereo-BRUVs	no	19	1					Unscorable						00000001		100.0
+19_1_DSC05320.JPG	      0		587	1116											2023-03_SwC_stereo-BRUVs	no	19	1					Sponges	Massive forms	Simple				10000904		21.3
+19_1_DSC05320.JPG	      0		1034	1552											2023-03_SwC_stereo-BRUVs	no	19	1					Bryozoa	Soft	Foliaceous				20000907		58.2
+19_1_DSC05320.JPG	      0		544	569											2023-03_SwC_stereo-BRUVs	no	19	1					Unscorable						00000001		50.7
+22_1_DSC06657.JPG	      0		837	1816											2023-03_SwC_stereo-BRUVs	no	22	1					Bryozoa	Soft	Foliaceous				20000907		92.0
+22_1_DSC06657.JPG	      0		772	91											2023-03_SwC_stereo-BRUVs	no	22	1					Sponges	Erect forms	Laminar				10000913		95.3
+22_1_DSC06657.JPG	      0		759	1492											2023-03_SwC_stereo-BRUVs	no	22	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		56.7
+22_1_DSC06657.JPG	      0		941	977											2023-03_SwC_stereo-BRUVs	no	22	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		16.9
+22_1_DSC06657.JPG	      0		1064	746											2023-03_SwC_stereo-BRUVs	no	22	1					Substrate	Consolidated (hard)	Rock				82001002		38.7
+22_1_DSC06657.JPG	      0		712	905											2023-03_SwC_stereo-BRUVs	no	22	1					Sponges	Cup-likes	Barrels				10000907		10.6
+22_1_DSC06657.JPG	      0		734	1827											2023-03_SwC_stereo-BRUVs	no	22	1					Sessile invertebrates						00000002		93.1
+22_1_DSC06657.JPG	      0		561	386											2023-03_SwC_stereo-BRUVs	no	22	1					Unscorable						00000001		67.7
+22_1_DSC06657.JPG	      0		691	536											2023-03_SwC_stereo-BRUVs	no	22	1					Sessile invertebrates						00000002		48.1
+22_1_DSC06657.JPG	      0		691	1258											2023-03_SwC_stereo-BRUVs	no	22	1					Cnidaria	Hydroids					11001000		32.9
+22_1_DSC06657.JPG	      0		632	1879											2023-03_SwC_stereo-BRUVs	no	22	1					Sponges	Erect forms	Laminar				10000913		100.0
+22_1_DSC06657.JPG	      0		755	386											2023-03_SwC_stereo-BRUVs	no	22	1					Sessile invertebrates						00000002		63.4
+22_1_DSC06657.JPG	      0		966	279											2023-03_SwC_stereo-BRUVs	no	22	1					Sessile invertebrates						00000002		77.4
+22_1_DSC06657.JPG	      0		666	1875											2023-03_SwC_stereo-BRUVs	no	22	1					Bryozoa	Soft	Foliaceous				20000907		99.0
+22_1_DSC06657.JPG	      0		551	1825											2023-03_SwC_stereo-BRUVs	no	22	1					Sessile invertebrates						00000002		96.2
+22_1_DSC06657.JPG	      0		903	1142											2023-03_SwC_stereo-BRUVs	no	22	1					Bryozoa	Soft	Foliaceous				20000907		22.7
+22_1_DSC06657.JPG	      0		647	182											2023-03_SwC_stereo-BRUVs	no	22	1					Sessile invertebrates						00000002		86.7
+22_1_DSC06657.JPG	      0		974	549											2023-03_SwC_stereo-BRUVs	no	22	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		50.0
+22_1_DSC06657.JPG	      0		930	877											2023-03_SwC_stereo-BRUVs	no	22	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		18.7
+22_1_DSC06657.JPG	      0		911	363											2023-03_SwC_stereo-BRUVs	no	22	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		67.2
+23_1_DSC06546.JPG	      0		673	1778											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		89.9
+23_1_DSC06546.JPG	      0		688	1766											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		88.5
+23_1_DSC06546.JPG	      0		652	1450											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		58.7
+23_1_DSC06546.JPG	      0		813	158											2023-03_SwC_stereo-BRUVs	no	23	1					Sponges	Massive forms	Simple				10000904		71.9
+23_1_DSC06546.JPG	      0		545	722											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		32.0
+23_1_DSC06546.JPG	      0		615	1648											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		78.6
+23_1_DSC06546.JPG	      0		866	157											2023-03_SwC_stereo-BRUVs	no	23	1					Sponges	Massive forms	Simple				10000904		72.1
+23_1_DSC06546.JPG	      0		699	732											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		19.5
+23_1_DSC06546.JPG	      0		968	902											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Erect coarse branching	Brown				80300904		14.3
+23_1_DSC06546.JPG	      0		703	1885											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		100.0
+23_1_DSC06546.JPG	      0		1067	127											2023-03_SwC_stereo-BRUVs	no	23	1					Sponges	Massive forms	Simple				10000904		78.7
+23_1_DSC06546.JPG	      0		991	60											2023-03_SwC_stereo-BRUVs	no	23	1					Sponges	Massive forms	Simple				10000904		83.3
+23_1_DSC06546.JPG	      0		912	36											2023-03_SwC_stereo-BRUVs	no	23	1					Sponges	Massive forms	Simple				10000904		84.4
+23_1_DSC06546.JPG	      0		1024	909											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Erect coarse branching	Brown				80300904		19.9
+23_1_DSC06546.JPG	      0		897	556											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Erect coarse branching	Brown				80300904		33.3
+23_1_DSC06546.JPG	      0		895	1471											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Erect coarse branching	Brown				80300904		58.7
+23_1_DSC06546.JPG	      0		927	441											2023-03_SwC_stereo-BRUVs	no	23	1					Sponges	Massive forms	Simple				10000904		44.9
+23_1_DSC06546.JPG	      0		928	638											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		26.4
+23_1_DSC06546.JPG	      0		675	1839											2023-03_SwC_stereo-BRUVs	no	23	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		95.9
+23_1_DSC06546.JPG	      0		962	393											2023-03_SwC_stereo-BRUVs	no	23	1					Sponges	Massive forms	Simple				10000904		50.5
+24_1_DSC06409.JPG	      0		874	856											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		2.6
+24_1_DSC06409.JPG	      0		701	48											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		77.7
+24_1_DSC06409.JPG	      0		635	1355											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		51.6
+24_1_DSC06409.JPG	      0		597	76											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect coarse branching	Brown				80300904		77.5
+24_1_DSC06409.JPG	      0		684	18											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect coarse branching	Brown				80300904		80.8
+24_1_DSC06409.JPG	      0		859	478											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		35.7
+24_1_DSC06409.JPG	      0		1049	989											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect coarse branching	Red				80300906		23.1
+24_1_DSC06409.JPG	      0		760	735											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		13.9
+24_1_DSC06409.JPG	      0		917	469											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		37.1
+24_1_DSC06409.JPG	      0		697	1596											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect coarse branching	Brown				80300904		71.8
+24_1_DSC06409.JPG	      0		1069	1481											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect coarse branching	Brown				80300904		63.1
+24_1_DSC06409.JPG	      0		1066	423											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		45.9
+24_1_DSC06409.JPG	      0		962	1112											2023-03_SwC_stereo-BRUVs	no	24	1					Unscorable						00000001		26.8
+24_1_DSC06409.JPG	      0		959	1436											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect coarse branching	Brown				80300904		56.3
+24_1_DSC06409.JPG	      0		592	848											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect fine branching	Red				80300910		24.2
+24_1_DSC06409.JPG	      0		1001	1897											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		100.0
+24_1_DSC06409.JPG	      0		803	1495											2023-03_SwC_stereo-BRUVs	no	24	1					Macroalgae	Erect coarse branching	Brown				80300904		60.9
+24_1_DSC06409.JPG	      0		904	509											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		33.2
+24_1_DSC06409.JPG	      0		860	704											2023-03_SwC_stereo-BRUVs	no	24	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		14.2
+24_1_DSC06409.JPG	      0		937	555											2023-03_SwC_stereo-BRUVs	no	24	1					Unscorable						00000001		29.6
+26_1_DSC04856.JPG	      0		979	595											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		35.0
+26_1_DSC04856.JPG	      0		568	401											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		49.4
+26_1_DSC04856.JPG	      0		1071	1336											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		54.2
+26_1_DSC04856.JPG	      0		785	1368											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		47.8
+26_1_DSC04856.JPG	      0		708	1587											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		69.0
+26_1_DSC04856.JPG	      0		663	700											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		19.1
+26_1_DSC04856.JPG	      0		723	834											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		5.0
+26_1_DSC04856.JPG	      0		604	1543											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		66.2
+26_1_DSC04856.JPG	      0		675	1515											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		62.3
+26_1_DSC04856.JPG	      0		663	1904											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		100.0
+26_1_DSC04856.JPG	      0		681	223											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		63.8
+26_1_DSC04856.JPG	      0		1006	267											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		64.1
+26_1_DSC04856.JPG	      0		757	379											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		48.3
+26_1_DSC04856.JPG	      0		990	909											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		23.3
+26_1_DSC04856.JPG	      0		797	1166											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		28.4
+26_1_DSC04856.JPG	      0		668	1017											2023-03_SwC_stereo-BRUVs	no	26	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		15.8
+26_1_DSC04856.JPG	      0		781	870											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		2.9
+26_1_DSC04856.JPG	      0		696	148											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		70.9
+26_1_DSC04856.JPG	      0		576	71											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		80.0
+26_1_DSC04856.JPG	      0		644	702											2023-03_SwC_stereo-BRUVs	no	26	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		20.0
+29_1_DSC06256.JPG	      0		547	682											2023-03_SwC_stereo-BRUVs	no	29	1					Macroalgae	Erect coarse branching	Red				80300906		43.0
+29_1_DSC06256.JPG	      0		866	1642											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		51.3
+29_1_DSC06256.JPG	      0		709	1602											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		47.1
+29_1_DSC06256.JPG	      0		929	115											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		91.5
+29_1_DSC06256.JPG	      0		723	395											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		64.5
+29_1_DSC06256.JPG	      0		814	1286											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		18.2
+29_1_DSC06256.JPG	      0		630	1771											2023-03_SwC_stereo-BRUVs	no	29	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		63.6
+29_1_DSC06256.JPG	      0		601	1222											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		19.2
+29_1_DSC06256.JPG	      0		838	101											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		91.7
+29_1_DSC06256.JPG	      0		542	626											2023-03_SwC_stereo-BRUVs	no	29	1					Macroalgae	Erect coarse branching	Red				80300906		47.8
+29_1_DSC06256.JPG	      0		727	9											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		100.0
+29_1_DSC06256.JPG	      0		986	846											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		30.6
+29_1_DSC06256.JPG	      0		855	94											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		92.5
+29_1_DSC06256.JPG	      0		847	1625											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		49.5
+29_1_DSC06256.JPG	      0		576	1904											2023-03_SwC_stereo-BRUVs	no	29	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		76.7
+29_1_DSC06256.JPG	      0		541	1847											2023-03_SwC_stereo-BRUVs	no	29	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		72.4
+29_1_DSC06256.JPG	      0		918	1814											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		67.8
+29_1_DSC06256.JPG	      0		1065	1671											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		59.9
+29_1_DSC06256.JPG	      0		743	1086											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		2.2
+29_1_DSC06256.JPG	      0		851	1541											2023-03_SwC_stereo-BRUVs	no	29	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		41.9
+2_1_DSC05703.JPG	      0		901	1350											2023-03_SwC_stereo-BRUVs	no	2	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		48.9
+2_1_DSC05703.JPG	      0		921	320											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		49.8
+2_1_DSC05703.JPG	      0		617	1608											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Erect coarse branching	Brown				80300904		74.8
+2_1_DSC05703.JPG	      0		569	1435											2023-03_SwC_stereo-BRUVs	no	2	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		60.7
+2_1_DSC05703.JPG	      0		830	439											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		37.6
+2_1_DSC05703.JPG	      0		573	534											2023-03_SwC_stereo-BRUVs	no	2	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		36.3
+2_1_DSC05703.JPG	      0		883	313											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		49.8
+2_1_DSC05703.JPG	      0		1011	1882											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Erect coarse branching	Brown				80300904		100.0
+2_1_DSC05703.JPG	      0		567	458											2023-03_SwC_stereo-BRUVs	no	2	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		42.5
+2_1_DSC05703.JPG	      0		979	572											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Erect coarse branching	Red				80300906		29.6
+2_1_DSC05703.JPG	      0		952	108											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		69.9
+2_1_DSC05703.JPG	      0		764	792											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Erect coarse branching	Red				80300906		6.2
+2_1_DSC05703.JPG	      0		903	479											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		34.8
+2_1_DSC05703.JPG	      0		833	1452											2023-03_SwC_stereo-BRUVs	no	2	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		57.9
+2_1_DSC05703.JPG	      0		1033	479											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		39.6
+2_1_DSC05703.JPG	      0		881	266											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		54.2
+2_1_DSC05703.JPG	      0		684	1325											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Erect coarse branching	Brown				80300904		47.4
+2_1_DSC05703.JPG	      0		850	1244											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		38.4
+2_1_DSC05703.JPG	      0		768	1662											2023-03_SwC_stereo-BRUVs	no	2	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		77.7
+2_1_DSC05703.JPG	      0		702	39											2023-03_SwC_stereo-BRUVs	no	2	1					Macroalgae	Filamentous / filiform	Red				80300933		75.9
+31_1_DSC05970.JPG	      0		736	273											2023-03_SwC_stereo-BRUVs	no	31	1					Substrate	Consolidated (hard)	Rock				82001002		61.3
+31_1_DSC05970.JPG	      0		835	1089											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Red				80300910		20.4
+31_1_DSC05970.JPG	      0		907	1384											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Green				80300909		50.4
+31_1_DSC05970.JPG	      0		1026	754											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Green				80300909		24.1
+31_1_DSC05970.JPG	      0		581	1333											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Filamentous / filiform	Brown				80300931		50.6
+31_1_DSC05970.JPG	      0		861	1891											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Green				80300909		100.0
+31_1_DSC05970.JPG	      0		998	1430											2023-03_SwC_stereo-BRUVs	no	31	1					Sponges	Erect forms	Laminar				10000913		57.0
+31_1_DSC05970.JPG	      0		606	1726											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect coarse branching	Brown				80300904		86.2
+31_1_DSC05970.JPG	      0		885	857											2023-03_SwC_stereo-BRUVs	no	31	1					Substrate	Consolidated (hard)	Rock				82001002		6.9
+31_1_DSC05970.JPG	      0		637	1233											2023-03_SwC_stereo-BRUVs	no	31	1					Sessile invertebrates						00000002		39.1
+31_1_DSC05970.JPG	      0		654	1034											2023-03_SwC_stereo-BRUVs	no	31	1					Cnidaria	Hydroids					11001000		22.2
+31_1_DSC05970.JPG	      0		1074	854											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Green				80300909		25.3
+31_1_DSC05970.JPG	      0		846	204											2023-03_SwC_stereo-BRUVs	no	31	1					Cnidaria	Corals	Stony corals	Solitary			11290901		67.6
+31_1_DSC05970.JPG	      0		819	126											2023-03_SwC_stereo-BRUVs	no	31	1					Cnidaria	Corals	Black & Octocorals	Branching (3D)			11168902		75.3
+31_1_DSC05970.JPG	      0		619	86											2023-03_SwC_stereo-BRUVs	no	31	1					Sessile invertebrates						00000002		81.8
+31_1_DSC05970.JPG	      0		874	533											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Green				80300909		35.3
+31_1_DSC05970.JPG	      0		775	1416											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Green				80300909		52.9
+31_1_DSC05970.JPG	      0		892	410											2023-03_SwC_stereo-BRUVs	no	31	1					Cnidaria	Hydroids					11001000		47.6
+31_1_DSC05970.JPG	      0		928	672											2023-03_SwC_stereo-BRUVs	no	31	1					Macroalgae	Erect fine branching	Green				80300909		23.7
+31_1_DSC05970.JPG	      0		860	382											2023-03_SwC_stereo-BRUVs	no	31	1					Cnidaria	Hydroids					11001000		50.0
+32_1_DSC05031.JPG	      0		700	1196											2023-03_SwC_stereo-BRUVs	no	32	1					Sponges	Massive forms	Simple				10000904		47.5
+32_1_DSC05031.JPG	      0		621	482											2023-03_SwC_stereo-BRUVs	no	32	1					Macroalgae	Filamentous / filiform	Brown				80300931		39.5
+32_1_DSC05031.JPG	      0		1033	1179											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		45.8
+32_1_DSC05031.JPG	      0		1063	1713											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		100.0
+32_1_DSC05031.JPG	      0		924	479											2023-03_SwC_stereo-BRUVs	no	32	1					Macroalgae	Erect fine branching	Green				80300909		30.9
+32_1_DSC05031.JPG	      0		759	838											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Consolidated (hard)	Rock				82001002		13.3
+32_1_DSC05031.JPG	      0		793	229											2023-03_SwC_stereo-BRUVs	no	32	1					Macroalgae	Erect fine branching	Green				80300909		56.9
+32_1_DSC05031.JPG	      0		1032	745											2023-03_SwC_stereo-BRUVs	no	32	1					Sponges	Massive forms	Simple				10000904		17.2
+32_1_DSC05031.JPG	      0		761	805											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Consolidated (hard)	Rock				82001002		11.7
+32_1_DSC05031.JPG	      0		860	281											2023-03_SwC_stereo-BRUVs	no	32	1					Macroalgae	Erect fine branching	Green				80300909		50.9
+32_1_DSC05031.JPG	      0		736	841											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Consolidated (hard)	Rock				82001002		15.5
+32_1_DSC05031.JPG	      0		1043	1211											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		49.2
+32_1_DSC05031.JPG	      0		850	951											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		18.8
+32_1_DSC05031.JPG	      0		664	31											2023-03_SwC_stereo-BRUVs	no	32	1					Macroalgae	Erect coarse branching	Red				80300906		79.7
+32_1_DSC05031.JPG	      0		1029	1435											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		71.0
+32_1_DSC05031.JPG	      0		964	389											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		40.9
+32_1_DSC05031.JPG	      0		949	1457											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		71.8
+32_1_DSC05031.JPG	      0		737	409											2023-03_SwC_stereo-BRUVs	no	32	1					Macroalgae	Erect fine branching	Red				80300910		40.0
+32_1_DSC05031.JPG	      0		787	473											2023-03_SwC_stereo-BRUVs	no	32	1					Macroalgae	Erect fine branching	Green				80300909		32.1
+32_1_DSC05031.JPG	      0		1058	274											2023-03_SwC_stereo-BRUVs	no	32	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		55.3
+34_1_DSC04607.JPG	      0		761	1728											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Filamentous / filiform	Brown				80300931		87.9
+34_1_DSC04607.JPG	      0		754	1591											2023-03_SwC_stereo-BRUVs	no	34	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		72.4
+34_1_DSC04607.JPG	      0		964	1353											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Filamentous / filiform	Brown				80300931		48.7
+34_1_DSC04607.JPG	      0		978	1747											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Filamentous / filiform	Red				80300933		92.1
+34_1_DSC04607.JPG	      0		561	1212											2023-03_SwC_stereo-BRUVs	no	34	1					Unscorable						00000001		40.1
+34_1_DSC04607.JPG	      0		821	772											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Erect coarse branching	Brown				80300904		20.8
+34_1_DSC04607.JPG	      0		554	285											2023-03_SwC_stereo-BRUVs	no	34	1					Unscorable						00000001		81.0
+34_1_DSC04607.JPG	      0		715	902											2023-03_SwC_stereo-BRUVs	no	34	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)			82001011		11.7
+34_1_DSC04607.JPG	      0		541	812											2023-03_SwC_stereo-BRUVs	no	34	1					Unscorable						00000001		33.9
+34_1_DSC04607.JPG	      0		963	1066											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Erect coarse branching	Brown				80300904		22.0
+34_1_DSC04607.JPG	      0		698	1242											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Erect coarse branching	Brown				80300904		34.8
+34_1_DSC04607.JPG	      0		796	938											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Filamentous / filiform	Brown				80300931		2.0
+34_1_DSC04607.JPG	      0		1030	709											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Filamentous / filiform	Brown				80300931		37.8
+34_1_DSC04607.JPG	      0		963	1484											2023-03_SwC_stereo-BRUVs	no	34	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		62.7
+34_1_DSC04607.JPG	      0		1021	489											2023-03_SwC_stereo-BRUVs	no	34	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		58.2
+34_1_DSC04607.JPG	      0		675	1298											2023-03_SwC_stereo-BRUVs	no	34	1					Unscorable						00000001		41.7
+34_1_DSC04607.JPG	      0		897	340											2023-03_SwC_stereo-BRUVs	no	34	1					Macroalgae	Erect fine branching	Brown				80300908		70.4
+34_1_DSC04607.JPG	      0		1074	565											2023-03_SwC_stereo-BRUVs	no	34	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		53.8
+34_1_DSC04607.JPG	      0		632	89											2023-03_SwC_stereo-BRUVs	no	34	1					Unscorable						00000001		100.0
+34_1_DSC04607.JPG	      0		683	462											2023-03_SwC_stereo-BRUVs	no	34	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)			82001011		57.4
+35_1_DSC04359.JPG	      0		600	530											2023-03_SwC_stereo-BRUVs	no	35	1					Macroalgae	Erect coarse branching	Brown				80300904		34.5
+35_1_DSC04359.JPG	      0		903	242											2023-03_SwC_stereo-BRUVs	no	35	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		59.0
+35_1_DSC04359.JPG	      0		1076	583											2023-03_SwC_stereo-BRUVs	no	35	1					Macroalgae	Filamentous / filiform	Brown				80300931		37.0
+35_1_DSC04359.JPG	      0		556	894											2023-03_SwC_stereo-BRUVs	no	35	1					Macroalgae	Erect coarse branching	Brown				80300904		26.6
+35_1_DSC04359.JPG	      0		728	118											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)			82001012		71.1
+35_1_DSC04359.JPG	      0		797	375											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		44.1
+35_1_DSC04359.JPG	      0		994	1556											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Consolidated (hard)	Rock				82001002		81.2
+35_1_DSC04359.JPG	      0		978	816											2023-03_SwC_stereo-BRUVs	no	35	1					Macroalgae	Erect fine branching	Red				80300910		19.1
+35_1_DSC04359.JPG	      0		866	483											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		33.7
+35_1_DSC04359.JPG	      0		870	1182											2023-03_SwC_stereo-BRUVs	no	35	1					Macroalgae	Erect coarse branching	Red				80300906		40.4
+35_1_DSC04359.JPG	      0		822	548											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		26.4
+35_1_DSC04359.JPG	      0		624	1552											2023-03_SwC_stereo-BRUVs	no	35	1					Sponges	Erect forms	Laminar				10000913		80.0
+35_1_DSC04359.JPG	      0		970	734											2023-03_SwC_stereo-BRUVs	no	35	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		19.5
+35_1_DSC04359.JPG	      0		904	160											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		67.4
+35_1_DSC04359.JPG	      0		830	1763											2023-03_SwC_stereo-BRUVs	no	35	1					Sponges	Erect forms	Laminar				10000913		100.0
+35_1_DSC04359.JPG	      0		540	1694											2023-03_SwC_stereo-BRUVs	no	35	1					Sponges	Erect forms	Laminar				10000913		96.4
+35_1_DSC04359.JPG	      0		909	798											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)			82001012		11.9
+35_1_DSC04359.JPG	      0		582	749											2023-03_SwC_stereo-BRUVs	no	35	1					Macroalgae	Erect coarse branching	Brown				80300904		22.6
+35_1_DSC04359.JPG	      0		558	128											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		73.9
+35_1_DSC04359.JPG	      0		777	1095											2023-03_SwC_stereo-BRUVs	no	35	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)			82001011		30.7
+36_1_DSC05165.JPG	      0		889	922											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Brown				80300904		43.8
+36_1_DSC05165.JPG	      0		608	153											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		49.3
+36_1_DSC05165.JPG	      0		766	67											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		54.6
+36_1_DSC05165.JPG	      0		595	1264											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Brown				80300904		84.1
+36_1_DSC05165.JPG	      0		598	1410											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		100.0
+36_1_DSC05165.JPG	      0		920	393											2023-03_SwC_stereo-BRUVs	no	36	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		22.9
+36_1_DSC05165.JPG	      0		850	31											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		59.0
+36_1_DSC05165.JPG	      0		619	255											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		38.5
+36_1_DSC05165.JPG	      0		840	680											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Brown				80300904		16.0
+36_1_DSC05165.JPG	      0		862	443											2023-03_SwC_stereo-BRUVs	no	36	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		14.4
+36_1_DSC05165.JPG	      0		921	260											2023-03_SwC_stereo-BRUVs	no	36	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		35.8
+36_1_DSC05165.JPG	      0		1025	1204											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Brown				80300904		78.9
+36_1_DSC05165.JPG	      0		659	1239											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Brown				80300904		79.6
+36_1_DSC05165.JPG	      0		768	98											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		51.0
+36_1_DSC05165.JPG	      0		980	1206											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Brown				80300904		77.5
+36_1_DSC05165.JPG	      0		597	36											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		62.0
+36_1_DSC05165.JPG	      0		723	547											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		7.7
+36_1_DSC05165.JPG	      0		653	254											2023-03_SwC_stereo-BRUVs	no	36	1					Unscorable						00000001		36.8
+36_1_DSC05165.JPG	      0		971	271											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Red				80300906		37.4
+36_1_DSC05165.JPG	      0		976	229											2023-03_SwC_stereo-BRUVs	no	36	1					Macroalgae	Erect coarse branching	Red				80300906		41.8
+37_1_DSC03743.JPG	      0		585	1305											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		47.6
+37_1_DSC03743.JPG	      0		851	1503											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		62.9
+37_1_DSC03743.JPG	      0		632	295											2023-03_SwC_stereo-BRUVs	no	37	1					Unscorable						00000001		52.4
+37_1_DSC03743.JPG	      0		999	998											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		25.8
+37_1_DSC03743.JPG	      0		585	886											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		18.6
+37_1_DSC03743.JPG	      0		842	1060											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		21.9
+37_1_DSC03743.JPG	      0		759	1026											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		17.9
+37_1_DSC03743.JPG	      0		543	1042											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		29.2
+37_1_DSC03743.JPG	      0		860	178											2023-03_SwC_stereo-BRUVs	no	37	1					Unscorable						00000001		62.0
+37_1_DSC03743.JPG	      0		567	1425											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		58.6
+37_1_DSC03743.JPG	      0		1036	413											2023-03_SwC_stereo-BRUVs	no	37	1					Unscorable						00000001		46.4
+37_1_DSC03743.JPG	      0		935	620											2023-03_SwC_stereo-BRUVs	no	37	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		25.0
+37_1_DSC03743.JPG	      0		689	1167											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		32.1
+37_1_DSC03743.JPG	      0		1001	116											2023-03_SwC_stereo-BRUVs	no	37	1					Unscorable						00000001		70.6
+37_1_DSC03743.JPG	      0		897	1895											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		100.0
+37_1_DSC03743.JPG	      0		838	31											2023-03_SwC_stereo-BRUVs	no	37	1					Unscorable						00000001		75.6
+37_1_DSC03743.JPG	      0		869	921											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		11.9
+37_1_DSC03743.JPG	      0		754	730											2023-03_SwC_stereo-BRUVs	no	37	1					Macroalgae	Erect fine branching	Brown				80300908		10.1
+37_1_DSC03743.JPG	      0		724	842											2023-03_SwC_stereo-BRUVs	no	37	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		5.0
+37_1_DSC03743.JPG	      0		568	248											2023-03_SwC_stereo-BRUVs	no	37	1					Unscorable						00000001		58.4
+39_1_DSC04755.JPG	      0		1042	1159											2023-03_SwC_stereo-BRUVs	no	39	1					Substrate	Consolidated (hard)	Rock				82001002		30.0
+39_1_DSC04755.JPG	      0		553	1239											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Cup-likes	Tubes and chimneys				10000911		35.9
+39_1_DSC04755.JPG	      0		684	1898											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		95.8
+39_1_DSC04755.JPG	      0		819	1881											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		93.2
+39_1_DSC04755.JPG	      0		584	793											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		33.9
+39_1_DSC04755.JPG	      0		1057	1695											2023-03_SwC_stereo-BRUVs	no	39	1					Cnidaria	Corals	Black & Octocorals	Fan (2D)			11168912		78.1
+39_1_DSC04755.JPG	      0		987	154											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Massive forms	Balls				10000905		95.7
+39_1_DSC04755.JPG	      0		638	541											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		54.6
+39_1_DSC04755.JPG	      0		923	222											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		87.2
+39_1_DSC04755.JPG	      0		1000	673											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Erect forms	Laminar				10000913		43.1
+39_1_DSC04755.JPG	      0		861	892											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		15.2
+39_1_DSC04755.JPG	      0		598	1611											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Cup-likes	Cups	Incomplete cup / curled fan			10000918		67.6
+39_1_DSC04755.JPG	      0		630	110											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		100.0
+39_1_DSC04755.JPG	      0		1075	1539											2023-03_SwC_stereo-BRUVs	no	39	1					Macroalgae	Filamentous / filiform	Green				80300932		63.5
+39_1_DSC04755.JPG	      0		554	1232											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Cup-likes	Tubes and chimneys				10000911		35.4
+39_1_DSC04755.JPG	      0		913	757											2023-03_SwC_stereo-BRUVs	no	39	1					Bryozoa	Soft	Foliaceous				20000907		30.8
+39_1_DSC04755.JPG	      0		568	409											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Erect forms	Palmate				10000914		70.6
+39_1_DSC04755.JPG	      0		596	1705											2023-03_SwC_stereo-BRUVs	no	39	1					Sessile invertebrates						00000002		77.4
+39_1_DSC04755.JPG	      0		988	776											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Erect forms	Laminar				10000913		33.1
+39_1_DSC04755.JPG	      0		965	1098											2023-03_SwC_stereo-BRUVs	no	39	1					Sponges	Massive forms	Simple				10000904		19.6
+3_1_DSC04500.JPG	      0		738	1528											2023-03_SwC_stereo-BRUVs	no	3	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		55.0
+3_1_DSC04500.JPG	      0		971	1289											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		32.2
+3_1_DSC04500.JPG	      0		1045	978											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Filamentous / filiform	Brown				80300931		19.7
+3_1_DSC04500.JPG	      0		794	1863											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Filamentous / filiform	Brown				80300931		87.5
+3_1_DSC04500.JPG	      0		702	6											2023-03_SwC_stereo-BRUVs	no	3	1					Unscorable						00000001		100.0
+3_1_DSC04500.JPG	      0		888	525											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		47.0
+3_1_DSC04500.JPG	      0		588	938											2023-03_SwC_stereo-BRUVs	no	3	1					Unscorable						00000001		26.8
+3_1_DSC04500.JPG	      0		760	700											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Filamentous / filiform	Brown				80300931		30.6
+3_1_DSC04500.JPG	      0		886	1659											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		67.0
+3_1_DSC04500.JPG	      0		996	1227											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Erect fine branching	Brown				80300908		27.8
+3_1_DSC04500.JPG	      0		576	1086											2023-03_SwC_stereo-BRUVs	no	3	1					Unscorable						00000001		29.0
+3_1_DSC04500.JPG	      0		1005	69											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		93.9
+3_1_DSC04500.JPG	      0		980	478											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Filamentous / filiform	Green				80300932		53.2
+3_1_DSC04500.JPG	      0		848	846											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		14.6
+3_1_DSC04500.JPG	      0		832	1368											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Erect coarse branching	Brown				80300904		37.7
+3_1_DSC04500.JPG	      0		716	445											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Filamentous / filiform	Brown				80300931		56.5
+3_1_DSC04500.JPG	      0		831	1847											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		85.8
+3_1_DSC04500.JPG	      0		1019	170											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		84.2
+3_1_DSC04500.JPG	      0		830	1578											2023-03_SwC_stereo-BRUVs	no	3	1					Macroalgae	Erect coarse branching	Brown				80300904		58.8
+3_1_DSC04500.JPG	      0		957	1440											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		46.2
+3_1_DSC04500.JPG	      0		881	791											2023-03_SwC_stereo-BRUVs	no	3	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		20.4
+40_1_DSC05817.JPG	      0		602	1915											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Erect fine branching	Green				80300909		100.0
+40_1_DSC05817.JPG	      0		719	1683											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		78.2
+40_1_DSC05817.JPG	      0		832	23											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		68.4
+40_1_DSC05817.JPG	      0		830	1236											2023-03_SwC_stereo-BRUVs	no	40	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)			82001012		38.5
+40_1_DSC05817.JPG	      0		716	1707											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		80.4
+40_1_DSC05817.JPG	      0		592	502											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		32.7
+40_1_DSC05817.JPG	      0		657	84											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		64.5
+40_1_DSC05817.JPG	      0		981	98											2023-03_SwC_stereo-BRUVs	no	40	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		63.4
+40_1_DSC05817.JPG	      0		1072	397											2023-03_SwC_stereo-BRUVs	no	40	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		42.0
+40_1_DSC05817.JPG	      0		1000	466											2023-03_SwC_stereo-BRUVs	no	40	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		33.5
+40_1_DSC05817.JPG	      0		945	1692											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		79.4
+40_1_DSC05817.JPG	      0		971	294											2023-03_SwC_stereo-BRUVs	no	40	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)			82001012		46.5
+40_1_DSC05817.JPG	      0		593	315											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Erect coarse branching	Brown				80300904		46.9
+40_1_DSC05817.JPG	      0		641	1710											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Erect fine branching	Green				80300909		81.6
+40_1_DSC05817.JPG	      0		991	705											2023-03_SwC_stereo-BRUVs	no	40	1					Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)			82001014		17.6
+40_1_DSC05817.JPG	      0		767	499											2023-03_SwC_stereo-BRUVs	no	40	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		26.7
+40_1_DSC05817.JPG	      0		877	694											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		10.7
+40_1_DSC05817.JPG	      0		900	1907											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Brown				80300931		97.8
+40_1_DSC05817.JPG	      0		680	27											2023-03_SwC_stereo-BRUVs	no	40	1					Macroalgae	Filamentous / filiform	Red				80300933		69.0
+40_1_DSC05817.JPG	      0		942	27											2023-03_SwC_stereo-BRUVs	no	40	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)			82001012		68.9
+44_1_DSC06675.JPG	      0		1036	1245											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Erect coarse branching	Red				80300906		39.9
+44_1_DSC06675.JPG	      0		831	1573											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		69.2
+44_1_DSC06675.JPG	      0		610	1798											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		96.5
+44_1_DSC06675.JPG	      0		1061	1383											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Erect coarse branching	Red				80300906		54.1
+44_1_DSC06675.JPG	      0		942	213											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Filamentous / filiform	Red				80300933		76.6
+44_1_DSC06675.JPG	      0		559	31											2023-03_SwC_stereo-BRUVs	no	44	1					Unscorable						00000001		100.0
+44_1_DSC06675.JPG	      0		927	1743											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		87.7
+44_1_DSC06675.JPG	      0		555	1557											2023-03_SwC_stereo-BRUVs	no	44	1					Unscorable						00000001		74.2
+44_1_DSC06675.JPG	      0		1048	348											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Filamentous / filiform	Red				80300933		65.3
+44_1_DSC06675.JPG	      0		714	1200											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Erect coarse branching	Brown				80300904		32.5
+44_1_DSC06675.JPG	      0		1048	1005											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Erect coarse branching	Red				80300906		23.5
+44_1_DSC06675.JPG	      0		1025	805											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Erect coarse branching	Brown				80300904		23.2
+44_1_DSC06675.JPG	      0		924	1693											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		82.4
+44_1_DSC06675.JPG	      0		576	456											2023-03_SwC_stereo-BRUVs	no	44	1					Unscorable						00000001		57.5
+44_1_DSC06675.JPG	      0		785	977											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Erect coarse branching	Brown				80300904		8.3
+44_1_DSC06675.JPG	      0		772	172											2023-03_SwC_stereo-BRUVs	no	44	1					Unscorable						00000001		80.6
+44_1_DSC06675.JPG	      0		825	365											2023-03_SwC_stereo-BRUVs	no	44	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		59.7
+44_1_DSC06675.JPG	      0		877	477											2023-03_SwC_stereo-BRUVs	no	44	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		47.9
+44_1_DSC06675.JPG	      0		739	281											2023-03_SwC_stereo-BRUVs	no	44	1					Unscorable						00000001		69.5
+44_1_DSC06675.JPG	      0		1010	1167											2023-03_SwC_stereo-BRUVs	no	44	1					Macroalgae	Erect coarse branching	Red				80300906		31.4
+45_1_DSC04140.JPG	      0		902	990											2023-03_SwC_stereo-BRUVs	no	45	1					Cnidaria	Hydroids					11001000		12.4
+45_1_DSC04140.JPG	      0		1002	507											2023-03_SwC_stereo-BRUVs	no	45	1					Cnidaria	Hydroids					11001000		65.9
+45_1_DSC04140.JPG	      0		868	1576											2023-03_SwC_stereo-BRUVs	no	45	1					Bryozoa	Soft	Foliaceous				20000907		51.7
+45_1_DSC04140.JPG	      0		1076	1852											2023-03_SwC_stereo-BRUVs	no	45	1					Sessile invertebrates						00000002		84.9
+45_1_DSC04140.JPG	      0		746	630											2023-03_SwC_stereo-BRUVs	no	45	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)			82001011		52.5
+45_1_DSC04140.JPG	      0		850	1178											2023-03_SwC_stereo-BRUVs	no	45	1					Substrate	Consolidated (hard)	Rock				82001002		8.7
+45_1_DSC04140.JPG	      0		1010	1349											2023-03_SwC_stereo-BRUVs	no	45	1					Cnidaria	Hydroids					11001000		31.4
+45_1_DSC04140.JPG	      0		999	830											2023-03_SwC_stereo-BRUVs	no	45	1					Substrate	Consolidated (hard)	Rock				82001002		32.6
+45_1_DSC04140.JPG	      0		897	1692											2023-03_SwC_stereo-BRUVs	no	45	1					Bryozoa	Soft	Foliaceous				20000907		64.5
+45_1_DSC04140.JPG	      0		863	1916											2023-03_SwC_stereo-BRUVs	no	45	1					Bryozoa	Soft	Foliaceous				20000907		88.6
+45_1_DSC04140.JPG	      0		671	1039											2023-03_SwC_stereo-BRUVs	no	45	1					Bryozoa	Soft	Foliaceous				20000907		21.9
+45_1_DSC04140.JPG	      0		620	1474											2023-03_SwC_stereo-BRUVs	no	45	1					Cnidaria	Hydroids					11001000		48.6
+45_1_DSC04140.JPG	      0		899	177											2023-03_SwC_stereo-BRUVs	no	45	1					Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)			82001011		100.0
+45_1_DSC04140.JPG	      0		789	499											2023-03_SwC_stereo-BRUVs	no	45	1					Substrate	Consolidated (hard)	Rock				82001002		65.5
+45_1_DSC04140.JPG	      0		759	1142											2023-03_SwC_stereo-BRUVs	no	45	1					Substrate	Consolidated (hard)	Rock				82001002		12.4
+45_1_DSC04140.JPG	      0		678	1066											2023-03_SwC_stereo-BRUVs	no	45	1					Bryozoa	Soft	Foliaceous				20000907		20.5
+45_1_DSC04140.JPG	      0		946	980											2023-03_SwC_stereo-BRUVs	no	45	1					Sponges	Crusts	Encrusting				10000902		15.6
+45_1_DSC04140.JPG	      0		926	520											2023-03_SwC_stereo-BRUVs	no	45	1					Substrate	Consolidated (hard)	Rock				82001002		63.1
+45_1_DSC04140.JPG	      0		804	1305											2023-03_SwC_stereo-BRUVs	no	45	1					Bryozoa	Soft	Foliaceous				20000907		23.3
+45_1_DSC04140.JPG	      0		988	1253											2023-03_SwC_stereo-BRUVs	no	45	1					Cnidaria	Hydroids					11001000		21.4
+46_1_DSC03990.JPG	      0		612	864											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Erect coarse branching	Red				80300906		25.9
+46_1_DSC03990.JPG	      0		1012	1842											2023-03_SwC_stereo-BRUVs	no	46	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		100.0
+46_1_DSC03990.JPG	      0		834	669											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		27.0
+46_1_DSC03990.JPG	      0		581	1501											2023-03_SwC_stereo-BRUVs	no	46	1					Unscorable						00000001		68.2
+46_1_DSC03990.JPG	      0		628	412											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		59.3
+46_1_DSC03990.JPG	      0		1072	874											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		24.6
+46_1_DSC03990.JPG	      0		890	360											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Filamentous / filiform	Red				80300933		60.3
+46_1_DSC03990.JPG	      0		871	444											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		51.1
+46_1_DSC03990.JPG	      0		674	894											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		18.8
+46_1_DSC03990.JPG	      0		980	673											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		30.1
+46_1_DSC03990.JPG	      0		870	467											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		48.7
+46_1_DSC03990.JPG	      0		1078	1317											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		49.0
+46_1_DSC03990.JPG	      0		748	1368											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		48.9
+46_1_DSC03990.JPG	      0		899	199											2023-03_SwC_stereo-BRUVs	no	46	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		77.5
+46_1_DSC03990.JPG	      0		723	1105											2023-03_SwC_stereo-BRUVs	no	46	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		23.7
+46_1_DSC03990.JPG	      0		988	372											2023-03_SwC_stereo-BRUVs	no	46	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		60.7
+46_1_DSC03990.JPG	      0		711	1772											2023-03_SwC_stereo-BRUVs	no	46	1					Unscorable						00000001		92.1
+46_1_DSC03990.JPG	      0		983	1059											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		20.6
+46_1_DSC03990.JPG	      0		968	1791											2023-03_SwC_stereo-BRUVs	no	46	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		93.8
+46_1_DSC03990.JPG	      0		825	449											2023-03_SwC_stereo-BRUVs	no	46	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		50.6
+4_1_DSC05030.JPG	      0		710	504											2023-03_SwC_stereo-BRUVs	no	4	1					Unscorable						00000001		58.8
+4_1_DSC05030.JPG	      0		870	1079											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Filamentous / filiform	Red				80300933		9.4
+4_1_DSC05030.JPG	      0		865	1058											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Filamentous / filiform	Red				80300933		8.9
+4_1_DSC05030.JPG	      0		916	1796											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		76.1
+4_1_DSC05030.JPG	      0		864	1829											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		78.7
+4_1_DSC05030.JPG	      0		595	1528											2023-03_SwC_stereo-BRUVs	no	4	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		50.9
+4_1_DSC05030.JPG	      0		687	153											2023-03_SwC_stereo-BRUVs	no	4	1					Unscorable						00000001		95.0
+4_1_DSC05030.JPG	      0		609	782											2023-03_SwC_stereo-BRUVs	no	4	1					Unscorable						00000001		34.5
+4_1_DSC05030.JPG	      0		740	524											2023-03_SwC_stereo-BRUVs	no	4	1					Unscorable						00000001		56.4
+4_1_DSC05030.JPG	      0		763	1164											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		9.8
+4_1_DSC05030.JPG	      0		562	1211											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		26.7
+4_1_DSC05030.JPG	      0		777	360											2023-03_SwC_stereo-BRUVs	no	4	1					Unscorable						00000001		73.2
+4_1_DSC05030.JPG	      0		788	1259											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		19.5
+4_1_DSC05030.JPG	      0		895	106											2023-03_SwC_stereo-BRUVs	no	4	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		100.0
+4_1_DSC05030.JPG	      0		728	1848											2023-03_SwC_stereo-BRUVs	no	4	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		80.3
+4_1_DSC05030.JPG	      0		713	1598											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		54.8
+4_1_DSC05030.JPG	      0		876	1805											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		76.4
+4_1_DSC05030.JPG	      0		816	112											2023-03_SwC_stereo-BRUVs	no	4	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		98.8
+4_1_DSC05030.JPG	      0		1046	1483											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		50.6
+4_1_DSC05030.JPG	      0		767	1202											2023-03_SwC_stereo-BRUVs	no	4	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		13.7
+5_1_DSC05570.JPG	      0		786	1397											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Erect coarse branching	Brown				80300904		29.0
+5_1_DSC05570.JPG	      0		757	1259											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		17.9
+5_1_DSC05570.JPG	      0		848	239											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		80.9
+5_1_DSC05570.JPG	      0		991	776											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		32.9
+5_1_DSC05570.JPG	      0		1034	1670											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Erect fine branching	Red				80300910		56.5
+5_1_DSC05570.JPG	      0		716	788											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		32.0
+5_1_DSC05570.JPG	      0		747	1916											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Erect fine branching	Red				80300910		77.9
+5_1_DSC05570.JPG	      0		681	991											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		19.4
+5_1_DSC05570.JPG	      0		807	167											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		87.9
+5_1_DSC05570.JPG	      0		697	1761											2023-03_SwC_stereo-BRUVs	no	5	1					Unscorable						00000001		64.4
+5_1_DSC05570.JPG	      0		1001	1869											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Erect fine branching	Red				80300910		74.1
+5_1_DSC05570.JPG	      0		929	1741											2023-03_SwC_stereo-BRUVs	no	5	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		61.0
+5_1_DSC05570.JPG	      0		1077	1339											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		30.9
+5_1_DSC05570.JPG	      0		745	883											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		22.8
+5_1_DSC05570.JPG	      0		756	42											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		100.0
+5_1_DSC05570.JPG	      0		1062	622											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		48.9
+5_1_DSC05570.JPG	      0		1051	948											2023-03_SwC_stereo-BRUVs	no	5	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		23.1
+5_1_DSC05570.JPG	      0		780	1474											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Erect coarse branching	Brown				80300904		36.2
+5_1_DSC05570.JPG	      0		867	826											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		25.6
+5_1_DSC05570.JPG	      0		794	1239											2023-03_SwC_stereo-BRUVs	no	5	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		14.6
+6_1_DSC05418.JPG	      0		882	1378											2023-03_SwC_stereo-BRUVs	no	6	1					Cnidaria	Corals	Black & Octocorals	Fan (2D)			11168912		58.8
+6_1_DSC05418.JPG	      0		769	1772											2023-03_SwC_stereo-BRUVs	no	6	1					Sessile invertebrates						00000002		100.0
+6_1_DSC05418.JPG	      0		575	1659											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		91.7
+6_1_DSC05418.JPG	      0		570	663											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		31.2
+6_1_DSC05418.JPG	      0		953	354											2023-03_SwC_stereo-BRUVs	no	6	1					Sessile invertebrates						00000002		51.3
+6_1_DSC05418.JPG	      0		691	714											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		17.8
+6_1_DSC05418.JPG	      0		1001	1026											2023-03_SwC_stereo-BRUVs	no	6	1					Cnidaria	Hydroids					11001000		28.6
+6_1_DSC05418.JPG	      0		623	128											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		76.1
+6_1_DSC05418.JPG	      0		945	980											2023-03_SwC_stereo-BRUVs	no	6	1					Cnidaria	Hydroids					11001000		21.1
+6_1_DSC05418.JPG	      0		846	134											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		72.6
+6_1_DSC05418.JPG	      0		884	952											2023-03_SwC_stereo-BRUVs	no	6	1					Sessile invertebrates						00000002		15.1
+6_1_DSC05418.JPG	      0		905	638											2023-03_SwC_stereo-BRUVs	no	6	1					Sponges	Erect forms	Simple				10000916		21.5
+6_1_DSC05418.JPG	      0		874	934											2023-03_SwC_stereo-BRUVs	no	6	1					Sessile invertebrates						00000002		12.9
+6_1_DSC05418.JPG	      0		876	1445											2023-03_SwC_stereo-BRUVs	no	6	1					Cnidaria	Hydroids					11001000		65.8
+6_1_DSC05418.JPG	      0		742	157											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		70.7
+6_1_DSC05418.JPG	      0		827	732											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		9.7
+6_1_DSC05418.JPG	      0		834	1075											2023-03_SwC_stereo-BRUVs	no	6	1					Cnidaria	Corals	Black & Octocorals	Fan (2D)			11168912		26.5
+6_1_DSC05418.JPG	      0		749	647											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		20.0
+6_1_DSC05418.JPG	      0		909	854											2023-03_SwC_stereo-BRUVs	no	6	1					Cnidaria	Corals	Black & Octocorals	Fan (2D)			11168912		9.9
+6_1_DSC05418.JPG	      0		940	226											2023-03_SwC_stereo-BRUVs	no	6	1					Unscorable						00000001		64.1
+7_1_DSC05428.JPG	      0		548	865											2023-03_SwC_stereo-BRUVs	no	7	1					Unscorable						00000001		27.6
+7_1_DSC05428.JPG	      0		995	818											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Erect fine branching	Green				80300909		27.2
+7_1_DSC05428.JPG	      0		975	465											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Erect fine branching	Green				80300909		56.1
+7_1_DSC05428.JPG	      0		646	381											2023-03_SwC_stereo-BRUVs	no	7	1					Unscorable						00000001		63.1
+7_1_DSC05428.JPG	      0		870	1702											2023-03_SwC_stereo-BRUVs	no	7	1					Sponges	Cup-likes	Cups	Incomplete cup / curled fan			10000918		68.8
+7_1_DSC05428.JPG	      0		582	1854											2023-03_SwC_stereo-BRUVs	no	7	1					Unscorable						00000001		85.8
+7_1_DSC05428.JPG	      0		650	825											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Erect fine branching	Green				80300909		22.6
+7_1_DSC05428.JPG	      0		564	456											2023-03_SwC_stereo-BRUVs	no	7	1					Unscorable						00000001		58.5
+7_1_DSC05428.JPG	      0		768	907											2023-03_SwC_stereo-BRUVs	no	7	1					Sponges	Cup-likes	Cups	Incomplete cup / curled fan			10000918		10.0
+7_1_DSC05428.JPG	      0		1068	27											2023-03_SwC_stereo-BRUVs	no	7	1					Substrate	Consolidated (hard)	Rock				82001002		100.0
+7_1_DSC05428.JPG	      0		963	367											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Erect fine branching	Green				80300909		65.0
+7_1_DSC05428.JPG	      0		907	270											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Erect fine branching	Green				80300909		73.2
+7_1_DSC05428.JPG	      0		580	1286											2023-03_SwC_stereo-BRUVs	no	7	1					Unscorable						00000001		34.4
+7_1_DSC05428.JPG	      0		837	1194											2023-03_SwC_stereo-BRUVs	no	7	1					Cnidaria	Hydroids					11001000		18.9
+7_1_DSC05428.JPG	      0		944	1890											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Erect fine branching	Green				80300909		88.1
+7_1_DSC05428.JPG	      0		750	1073											2023-03_SwC_stereo-BRUVs	no	7	1					Sessile invertebrates						00000002		7.7
+7_1_DSC05428.JPG	      0		755	1762											2023-03_SwC_stereo-BRUVs	no	7	1					Sponges	Massive forms	Simple				10000904		74.3
+7_1_DSC05428.JPG	      0		1001	1676											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Erect fine branching	Green				80300909		69.0
+7_1_DSC05428.JPG	      0		575	1395											2023-03_SwC_stereo-BRUVs	no	7	1					Unscorable						00000001		43.8
+7_1_DSC05428.JPG	      0		858	912											2023-03_SwC_stereo-BRUVs	no	7	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		11.3
+8_1_DSC05278.JPG	      0		921	1667											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Filamentous / filiform	Red				80300933		54.8
+8_1_DSC05278.JPG	      0		850	31											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		100.0
+8_1_DSC05278.JPG	      0		842	164											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Filamentous / filiform	Brown				80300931		87.5
+8_1_DSC05278.JPG	      0		927	1736											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Filamentous / filiform	Red				80300933		61.3
+8_1_DSC05278.JPG	      0		924	1440											2023-03_SwC_stereo-BRUVs	no	8	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		33.8
+8_1_DSC05278.JPG	      0		655	1400											2023-03_SwC_stereo-BRUVs	no	8	1					Unscorable						00000001		33.2
+8_1_DSC05278.JPG	      0		889	1735											2023-03_SwC_stereo-BRUVs	no	8	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		60.7
+8_1_DSC05278.JPG	      0		933	1411											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		31.5
+8_1_DSC05278.JPG	      0		570	1639											2023-03_SwC_stereo-BRUVs	no	8	1					Unscorable						00000001		56.8
+8_1_DSC05278.JPG	      0		1026	1022											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Filamentous / filiform	Red				80300933		19.8
+8_1_DSC05278.JPG	      0		905	1469											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		36.1
+8_1_DSC05278.JPG	      0		663	1300											2023-03_SwC_stereo-BRUVs	no	8	1					Unscorable						00000001		24.9
+8_1_DSC05278.JPG	      0		795	291											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Filamentous / filiform	Brown				80300931		75.6
+8_1_DSC05278.JPG	      0		994	554											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Filamentous / filiform	Red				80300933		53.0
+8_1_DSC05278.JPG	      0		1025	1251											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Erect fine branching	Green				80300909		23.8
+8_1_DSC05278.JPG	      0		660	671											2023-03_SwC_stereo-BRUVs	no	8	1					Unscorable						00000001		42.8
+8_1_DSC05278.JPG	      0		848	54											2023-03_SwC_stereo-BRUVs	no	8	1					Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		54079009		97.8
+8_1_DSC05278.JPG	      0		744	1647											2023-03_SwC_stereo-BRUVs	no	8	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		52.8
+8_1_DSC05278.JPG	      0		580	1449											2023-03_SwC_stereo-BRUVs	no	8	1					Unscorable						00000001		40.8
+8_1_DSC05278.JPG	      0		812	928											2023-03_SwC_stereo-BRUVs	no	8	1					Seagrasses	Strap-like leaves			Thalassodendron spp		63618905		15.6
