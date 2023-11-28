@@ -12,38 +12,48 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r}
-
-```
-
+# R set up
+Load the necessary libraries.
+```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(CheckEM)
 library(tidyverse)
-
+library(googlesheets4)
+library(ggplot2)
+library(sf)
+library(here)
+```
+Set the study name.
+```{r study-name}
 name <- "example-bruv-workflow"
-
-metadata.bathy.derivatives <- readRDS(paste0("r-workflows/data/tidy/", 
-                                             name, "_metadata-bathymetry-derivatives.rds")) %>%
+```
+# Read in the data
+Load and format the metadata.
+```{r load-metadata}
+metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))) %>%
   glimpse()
-
-habitat <- readRDS(paste0("r-workflows/data/tidy/",
-                                      name, "_tidy-habitat.rds")) %>%
+```
+Load and format the habitat data. Here we create a 'reef' column that consists of reef-forming habitat found in the study area, which will be used in subsequent fish modelling scripts.
+```{r load-habitat}
+habitat <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_tidy-habitat.rds"))) %>%
   dplyr::mutate(number = number / total_points_annotated) %>%
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth, mbdepth, slope, aspect, 
-                TPI, TRI, roughness, detrended, habitat, number, 
-                mean.relief, sd.relief) %>%
+  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth, mbdepth, slope, aspect, TPI, TRI, roughness, detrended, habitat, number, mean.relief, sd.relief) %>%
   pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>%
   CheckEM::clean_names() %>%
-  dplyr::mutate(reef = consolidated_hard + macroalgae + 
-                  seagrasses + sessile_invertebrates) %>%                       # Only Thalassodendron seagrass which grows on reef
-  dplyr::select(-c(consolidated_hard, macroalgae, seagrasses, 
-                   sessile_invertebrates, unconsolidated_soft)) %>%
+  dplyr::mutate(reef = consolidated_hard + macroalgae + seagrasses + sessile_invertebrates) %>%           
+  dplyr::select(-c(consolidated_hard, macroalgae, seagrasses, sessile_invertebrates, unconsolidated_soft)) %>%
   glimpse()
-
-# Load species specific metrics
+```
+Load sanctuary zones shapefiles
+```{r sanctuaries}
+sanctuaries <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
+  st_transform(4326) %>%                                            
+  dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National"))
+```
+Load length of maturity data.
+```{r load-maturity}
 url <- 'https://docs.google.com/spreadsheets/d/176genWqd_pc3NDVQtP2CmfMh66Ui6uwWrLoJU1Ny_qw/edit?usp=sharing'
 
 maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
-  # dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
   dplyr::group_by(family, genus, species, sex) %>%
   dplyr::slice(which.min(l50.mm)) %>%
   ungroup() %>%
@@ -51,46 +61,46 @@ maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
   dplyr::summarise(l50 = mean(l50.mm)) %>%
   ungroup() %>%
   glimpse()
-
-tidy.maxn <- readRDS(paste0("r-workflows/data/staging/", name, 
-                       "_complete-maxn.rds")) %>%
+1
+```
+Load and format maxn data, and transform this into total abundance and species richness. These two response variables will be used in subsequent fish modelling scripts.
+```{r tidy-maxn}
+tidy.maxn <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-maxn.rds"))) %>%
   dplyr::group_by(campaignid, sample, scientific) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
   pivot_wider(names_from = "scientific", values_from = maxn, values_fill = 0) %>%
   dplyr::ungroup() %>%
-  dplyr::mutate(total_abundance = rowSums(.[, 3:(ncol(.))], na.rm = TRUE ),
-                species_richness = rowSums(.[, 3:(ncol(.))] > 0)) %>% 
+  dplyr::mutate(total_abundance = rowSums(.[, 3:(ncol(.))], na.rm = TRUE), species_richness = rowSums(.[, 3:(ncol(.))] > 0)) %>% 
   dplyr::select(campaignid, sample, total_abundance, species_richness) %>%
-  pivot_longer(cols = c("total_abundance", "species_richness"),
-               names_to = "response", values_to = "number") %>%
+  pivot_longer(cols = c("total_abundance", "species_richness"), names_to = "response", values_to = "number") %>%
   dplyr::left_join(habitat) %>%
   glimpse()
-
-saveRDS(tidy.maxn, file = paste0("r-workflows/data/tidy/",
-                                   name, "_tidy-count.rds"))
-
-lengths <- readRDS(paste0("r-workflows/data/staging/", name, 
-                           "_expanded-length.rds")) %>%
-  dplyr::mutate(depth = as.numeric(depth)) %>%                                  # To avoid breaking during left_join
+```
+Load and format length data.
+```{r load-lengths}
+lengths <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-length.rds"))) %>%
+  dplyr::mutate(depth = as.numeric(depth)) %>%                      
   left_join(habitat) %>%
   left_join(maturity) %>%
   dplyr::mutate(number = 1) %>%
   glimpse()
-
+```
+# Format data for visualisation and modelling
+Filter length data to only include 'indicator species'. In our case study, these are three species that have been defined as bioregional-scale demersal fish indicators by the West Australian Department of Primary Industries and Regional Development. If there is no equivalent in your study area, we suggest using ecologically-relevant and highly-targeted species.
+```{r indicator species}
 indicator.species <- lengths %>%
   dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-  dplyr::filter(scientific %in% c("Choerodon rubescens", "Chrysophrys auratus",
-                                  "Glaucosoma hebraicum")) %>%
+  dplyr::filter(scientific %in% c("Choerodon rubescens", "Chrysophrys auratus", "Glaucosoma hebraicum")) %>%
   glimpse()
-
-ggplot() +
-  geom_point(data = indicator.species, aes(x = longitude_dd, y = latitude_dd), alpha = 0.5) +
-  coord_sf()
-
+```
+Create a unique list of the samples per campaign, to fill the zeroes back into processed length data.
+```{r metadata-length}
 metadata.length <- lengths %>%
   distinct(campaignid, sample, status) %>%
   glimpse()
-
+```
+Create a dataframe of the indicator species greater than length of maturity.
+```{r greater-than-maturity}
 greater.mat <- indicator.species %>%
   dplyr::filter(length > l50) %>%
   dplyr::group_by(campaignid, sample) %>%
@@ -101,7 +111,9 @@ greater.mat <- indicator.species %>%
   dplyr::mutate(response = "greater than Lm") %>%
   left_join(habitat) %>%
   dplyr::glimpse()
-
+```
+Create a dataframe of the indicator species smaller than length of maturity.
+```{r smaller-than-maturity}
 smaller.mat <- indicator.species %>%
   dplyr::filter(length < l50) %>%
   dplyr::group_by(campaignid, sample) %>%
@@ -112,51 +124,46 @@ smaller.mat <- indicator.species %>%
   dplyr::mutate(response = "smaller than Lm") %>%
   left_join(habitat) %>%
   dplyr::glimpse()
-
+```
+Join the two datasets.
+```{r tidy-length}
 tidy.length <- bind_rows(greater.mat, smaller.mat) %>%
   glimpse()
-
-saveRDS(tidy.length, file = paste0("r-workflows/data/tidy/",
-                                     name, "_tidy-length.rds"))
-
-# Visualise
-sanctuaries <- st_read("r-workflows/data/spatial/shapefiles/marine-parks-all.shp") %>%
-  st_transform(4326) %>%                                                        # Transform to match with your metadata CRS
-  dplyr::filter(str_detect(ZoneName, "Sanctuary|National"))
-
-# > Lm & < Lm
+```
+# Visualise the fish data
+Plot the abundance of indicators greater than and less than size of maturity.
+```{r visualise-maturity}
 ggplot() +
   geom_sf(data = sanctuaries, aes(fill = ZoneName), alpha = 0.5) +
-  scale_fill_manual(values = c("Marine National Park Zone" = "#7bbc63",
-                               "National Park Zone" = "#7bbc63",
-                               "Sanctuary Zone" = "#bfd054")) +
-  geom_point(data = tidy.lengths, aes(x = longitude_dd, y = latitude_dd, 
-                                      size = number), shape = 1) +
-  coord_sf(xlim = c(min(tidy.lengths$longitude_dd), max(tidy.lengths$longitude_dd)),
-           ylim = c(min(tidy.lengths$latitude_dd), max(tidy.lengths$latitude_dd))) +
+  scale_fill_manual(values = c("Marine National Park Zone" = "#7bbc63", "National Park Zone" = "#7bbc63", "Sanctuary Zone" = "#bfd054")) +
+  geom_point(data = tidy.lengths, aes(x = longitude_dd, y = latitude_dd, size = number), shape = 1) +
+  coord_sf(xlim = c(min(tidy.lengths$longitude_dd), max(tidy.lengths$longitude_dd)), ylim = c(min(tidy.lengths$latitude_dd), max(tidy.lengths$latitude_dd))) +
   facet_wrap(~scientific)
-
-# Total abundance
+```
+Plot total abundance.
+```{r visualise-total-abundance}
 ggplot() +
   geom_sf(data = sanctuaries, aes(fill = ZoneName), alpha = 0.5) +
-  scale_fill_manual(values = c("Marine National Park Zone" = "#7bbc63",
-                               "National Park Zone" = "#7bbc63",
-                               "Sanctuary Zone" = "#bfd054")) +
-  geom_point(data = filter(tidy.maxn, response %in% "total.abundance"), 
-             aes(x = longitude_dd, y = latitude_dd, size = number), shape = 1) +
-  coord_sf(xlim = c(min(tidy.maxn$longitude_dd), max(tidy.maxn$longitude_dd)),
-           ylim = c(min(tidy.maxn$latitude_dd), max(tidy.maxn$latitude_dd))) +
+  scale_fill_manual(values = c("Marine National Park Zone" = "#7bbc63", "National Park Zone" = "#7bbc63", "Sanctuary Zone" = "#bfd054")) +
+  geom_point(data = filter(tidy.maxn, response %in% "total.abundance"), aes(x = longitude_dd, y = latitude_dd, size = number), shape = 1) +
+  coord_sf(xlim = c(min(tidy.maxn$longitude_dd), max(tidy.maxn$longitude_dd)), ylim = c(min(tidy.maxn$latitude_dd), max(tidy.maxn$latitude_dd))) +
   labs(x = "Longitude", y = "Latitude", size = "Total abundance")
-
-# Species richness
+```
+Plot species richness.
+```{r visualise-richness}
 ggplot() +
   geom_sf(data = sanctuaries, aes(fill = ZoneName), alpha = 0.5) +
-  scale_fill_manual(values = c("Marine National Park Zone" = "#7bbc63",
-                               "National Park Zone" = "#7bbc63",
-                               "Sanctuary Zone" = "#bfd054")) +
-  geom_point(data = filter(tidy.maxn, response %in% "species.richness"), 
-             aes(x = longitude_dd, y = latitude_dd, size = number), shape = 1) +
-  coord_sf(xlim = c(min(tidy.maxn$longitude_dd), max(tidy.maxn$longitude_dd)),
-           ylim = c(min(tidy.maxn$latitude_dd), max(tidy.maxn$latitude_dd))) +
+  scale_fill_manual(values = c("Marine National Park Zone" = "#7bbc63", "National Park Zone" = "#7bbc63", "Sanctuary Zone" = "#bfd054")) +
+  geom_point(data = filter(tidy.maxn, response %in% "species.richness"), aes(x = longitude_dd, y = latitude_dd, size = number), shape = 1) +
+  coord_sf(xlim = c(min(tidy.maxn$longitude_dd), max(tidy.maxn$longitude_dd)), ylim = c(min(tidy.maxn$latitude_dd), max(tidy.maxn$latitude_dd))) +
   labs(x = "Longitude", y = "Latitude", size = "Species richness")
-
+```
+# Save tidy datasets for modelling
+Save count response data (total abundance and species richness).
+```{r save-maxn}
+saveRDS(tidy.maxn, file = paste0("r-workflows/data/tidy/", name, "_tidy-count.rds"))
+```
+Save length response data (indicator species greater than and smaller than the length of maturity).
+```{r save-length}
+saveRDS(tidy.length, file = paste0("r-workflows/data/tidy/", name, "_tidy-length.rds"))
+```

@@ -12,7 +12,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # R set up
-## Load the necessary libraries
+Load the necessary libraries.
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(sf)
 library(terra)
@@ -21,36 +21,36 @@ library(starsExtra)
 library(tidyverse)
 library(here)
 ```
-## Set the study name
+Set the study name.
 ```{r study-name}
 name <- 'example-bruv-workflow'
 ```
 # Load bathymetry data and create bathymetry derivatives
-## The bathymetry data used in the example is a relatively low spatial resolution dataset downloaded from https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/148758. Feel free to replace with any suitable bathymetry in .tif format.
+The bathymetry data used in the example is a relatively low spatial resolution dataset downloaded from https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/148758. Feel free to replace with any suitable bathymetry in .tif format.
 ```{r bathy}
 bathy <- rast(here::here("r-workflows/data/spatial/rasters/swc_ga250m.tif")) %>%
   clamp(upper = 0, lower = -250, values = F) %>%
   trim()
 ```
-## Calculate terrain derivatives
+Calculate terrain derivatives.
 ```{r derivatives}
 preds <- terrain(bathy, neighbors = 8,
                  v = c("slope", "aspect", "TPI", "TRI", "roughness"),           # Remove here as necessary
                  unit = "degrees")
 ```
-## Calculate detrended bathymetry
+Calculate detrended bathymetry.
 ```{r detrend-bathy}
 zstar <- st_as_stars(bathy)                                                    
 detre <- detrend(zstar, parallel = 8)                                           
 detre <- as(object = detre, Class = "SpatRaster")                               
 names(detre) <- c("detrended", "lineartrend")
 ```
-## Join bathymetry with terrain and detrended derivatives
+Join bathymetry with terrain and detrended derivatives.
 ```{r join-rasters}
 preds <- rast(list(bathy, preds, detre[[1]]))                                   
 names(preds)[1] <- "mbdepth"
 ```
-## Save spatial-layers
+Save spatial-layers.
 ```{r save-layers}
 preds_w <- wrap(preds)
 saveRDS(preds_w, 
@@ -58,7 +58,7 @@ saveRDS(preds_w,
                         name, "_bathymetry_derivatives.rds")))
 ```
 # Load metadata and extract site-specific derivatives
-## Read in the metadata
+Read in the metadata.
 ```{r load-metadata}
 metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
                             name, "_Metadata.rds"))) %>%
@@ -66,21 +66,21 @@ metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
                 latitude_dd = as.numeric(latitude_dd)) %>%
   glimpse()
 ```
-## Convert the metadata to a spatial 
+Convert the metadata to a spatial file.
 ```{r vectorise-metadata}
 metadata.vect <- vect(metadata, geom = c("longitude_dd", "latitude_dd"), crs = "epsg:4326")
 ```
-
+Check to see if the metadata and bathymetry align correctly.
 ```{r check-alignment}
 plot(preds[[1]])
 plot(metadata.vect, add = T)
 ```
-
+Add the latitude and longitude coordinates back into the metadata.
 ```{r add-coords}
 tidy.metadata_t   <- as.data.frame(metadata.vect, geom = "XY") %>%
   left_join(metadata)
 ```
-
+Extract the bathymetry derivatives at each sampling location.
 ```{r extract-derivatives}
 metadata.bathy.derivatives   <- cbind(tidy.metadata_t, 
                                      terra::extract(preds, metadata.vect)) %>%
@@ -88,7 +88,7 @@ metadata.bathy.derivatives   <- cbind(tidy.metadata_t,
                 !is.na(roughness)) %>%
   glimpse()
 ```
-
+# Save the joined metadata and bathymetry derivatives
 ```{r save-metadata-bathy-derivatives}
 saveRDS(metadata.bathy.derivatives, here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds")))
 ```
