@@ -15,7 +15,7 @@ vignette: >
 This script documents the necessary steps to take raw data exported from EventMeasure, check for any errors in the annotation and format it into tidy data. You are required to also have a GlobalArchive format metadata file "*_Metadata.csv".
 
 # R set up
-## Load the necessary libraries
+Load the necessary libraries
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(devtools)
 library(CheckEM)
@@ -25,28 +25,28 @@ library(sf)
 library(terra)
 library(here)
 ```
-## Set the study name
+Set the study name
 ```{r study-name}
 name <- "example-bruv-workflow"
 ```
 # Read in and format the metadata
-## Load and tidy the metadata. If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
+Load and tidy the metadata. If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
 ```{r load-metadata}
 metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
   dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
 ```
-## Save the metadata as an R data file (this creates a lighter file than saving as a .csv or similar)
+Save the metadata as an R data file (this creates a lighter file than saving as a .csv or similar)
 ```{r save-metadata}
 saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/",
                                 name, "_Metadata.rds")))
 ```
-## Load metadata if you have already exported in the 'check-habitat' scripts. If you have just loaded and saved the metadata, then you can skip this chunk of code.
+Load metadata if you have already exported in the 'check-habitat' scripts. If you have just loaded and saved the metadata, then you can skip this chunk of code.
 ```{r tidy-metadata}
 metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
                                 name, "_Metadata.rds")))
 ```
-## Load marine park shapefiles, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling
+Load marine park shapefiles, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling
 ```{r parks}
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
   dplyr::select(geometry, ZONE_TYPE) %>%
@@ -68,12 +68,12 @@ metadata <- metadata_sf %>%
   glimpse()
 ```
 # Read in the raw data
-## Load the count data (MaxN from _Points.txt file)
+Load the count data (MaxN from _Points.txt file)
 ```{r load-points}
 points <- CheckEM::read_files_maxn(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
-## Create and tidy the MaxN file
+Create and tidy the MaxN file
 ```{r create-maxn}
 maxn <- points %>% 
   dplyr::group_by(campaignid, sample, filename, periodtime, frame, family, genus, species) %>% 
@@ -92,7 +92,7 @@ maxn <- points %>%
   dplyr::filter(maxn > 0) %>%
   glimpse()
 ```
-## Load the length data (from '_Lengths.txt' and '_3DPoints.txt')
+Load the length data (from '_Lengths.txt' and '_3DPoints.txt')
 ```{r load-lengths}
 length3dpoints <- read_files_length(here::here("r-workflows/data/raw/")) %>%                   
   dplyr::select(-c(comment))%>%
@@ -100,7 +100,7 @@ length3dpoints <- read_files_length(here::here("r-workflows/data/raw/")) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
   glimpse() 
 ```
-## Tidy and complete MaxN data (e.g. complete zeroes in the data)
+Tidy and complete MaxN data (e.g. complete zeroes in the data)
 ```{r tidy-maxn}
 dat <- maxn %>%
   dplyr::select(campaignid, sample, family, genus, species, maxn) %>%
@@ -128,7 +128,7 @@ complete.maxn <- dat %>%
   full_join(metadata)%>%
   glimpse()
 ```
-## Tidy and complete length data (e.g. complete zeroes in the data)
+Tidy and complete length data (e.g. complete zeroes in the data)
 ```{r complete-length}
 complete.length.number <- length3dpoints %>% 
   dplyr::filter(!family %in% "Unknown")%>%
@@ -146,13 +146,13 @@ complete.length.number <- length3dpoints %>%
   glimpse()
 ```
 # Save the checked data
-## Save MaxN as an R data file
+Save MaxN as an R data file
 ```{r save-maxn}
 saveRDS(complete.maxn, 
           file = here::here(paste0("r-workflows/data/staging/",
                        name, "_complete-maxn.rds")))
 ```
-## Save lengths as an R data file
+Save lengths as an R data file
 ```{r save-length}
 saveRDS(complete.length.number, 
           file = here::here(paste0("r-workflows/data/staging/",
