@@ -27,7 +27,7 @@ name <- "example-bruv-workflow"
 ```
 
 ```{r load-metadata}
-metadata.bathy.derivatives <- readRDS(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds")) %>%
+metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))) %>%
   dplyr::mutate(sample = as.character(sample)) %>%
   glimpse()
 ```
