@@ -7,7 +7,10 @@ articles:
   TransectMeasure_annotation_guide: manuals/TransectMeasure_annotation_guide.html
   check-fish: r-workflows/check-fish.html
   check-habitat: r-workflows/check-habitat.html
-last_built: 2023-11-27T03:23Z
+  format-visualise-fish: r-workflows/format-visualise-fish.html
+  format-visualise-habitat: r-workflows/format-visualise-habitat.html
+  spatial-layers: r-workflows/spatial-layers.html
+last_built: 2023-11-28T01:10Z
 urls:
   reference: https://globalarchivemanual.github.io/CheckEM/reference
   article: https://globalarchivemanual.github.io/CheckEM/articles
