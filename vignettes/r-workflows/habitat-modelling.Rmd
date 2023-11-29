@@ -12,8 +12,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# Load libraries, process and prepare data for model selection
-## Load libraries
+# R setup
+Load libraries.
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(CheckEM)
 library(tidyverse)
@@ -29,43 +29,38 @@ library(terra)
 library(sf)
 library(patchwork)
 ```
-
-## Set the study name
+Set the study name.
 ```{r name}
 name <- 'example-bruv-workflow'
 ```
-
-## Load in the habitat point annotation data
+# Load data
+Load the habitat point annotation data.
 ```{r raw-data}
 dat <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
                       name, "_tidy-habitat.rds"))) %>%
   glimpse()
 ```
-
-## Set the predictory variables
+# Set up data for modelling
+Set the predictor variables.
 ```{r predictors}
 names(dat)
 pred.vars <- c("mbdepth","roughness", "detrended", 
                "slope", "TPI", "aspect", "TRI")  
 ```
-
-## Check for correlation of predictor variables and remove anything highly correlated (>0.95)
+Check for correlation of predictor variables and remove anything highly correlated (>0.95).
 ```{r correlations}
 round(cor(dat[ , pred.vars]), 2)
 ```
-
-## Plot the individual predictors to assess if any transformations are necessary
+Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example dataset, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed.
 ```{r transformations, warning = FALSE, message = FALSE, fig.width = 7, fig.height = 6}
 plot_transformations(pred.vars)
 ```
-
-## Remove any highly correlated predictor variables
+Reset the predictor variables to remove any highly correlated variables and include any transformed variables.
 ```{r reset-predictors}
 pred.vars <- c("depth","roughness", "detrended", 
                "TPI", "aspect", "TRI")
 ```
-
-## Check to make sure response variables have less than 80% zeros
+Check to make sure response variables have less than 80% zeroes. Full-subset GAM modelling will produce unreliable results if your data is too zero inflated.
 ```{r check-responses}
 resp.vars.all = unique(as.character(dat$habitat))
 resp.vars = character()
@@ -76,16 +71,14 @@ for(i in 1:length(resp.vars.all)){
 }
 resp.vars 
 ```
-
-## Add the output directory for model outputs, and set up the R environment for model selection
+Add the output directory for model outputs, and set up the R environment for model selection.
 ```{r environment-setup}
 outdir    <- ("r-workflows/model output/habitat/")
 out.all   <- list()
 var.imp   <- list()
 ```
-
 # Run the full subset model selection process
-## This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134
+This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134
 ```{r FSSgam, results='hide', warning=FALSE, message=FALSE}
 for(i in 1:length(resp.vars)){
   print(resp.vars[i])
@@ -128,8 +121,7 @@ for(i in 1:length(resp.vars)){
   }
 }
 ```
-
-## Save model fits and importance scores
+Save the model fits and importance scores.
 ```{r save-gam-data}
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
@@ -138,32 +130,28 @@ all.var.imp  <- do.call("rbind",var.imp)
 write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv")))
 write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
 ```
-
 # Spatially predict the top model from the model selection process
-## Transform the habitat data into wide format for prediction
+Transform the habitat data into wide format for easy prediction.
 ```{r transform-habitat}
 widedat <- dat %>%
   pivot_wider(values_from = "number", names_from = "habitat", values_fill = 0) %>%
   clean_names() %>%
   glimpse()
 ```
-
-## Load the raster of bathymetry data and derivatives
+Load the raster of bathymetry data and derivatives.
 ```{r load-bathymetry, fig.width = 7, fig.height = 4}
 preds  <- rast(here::here(paste0("r-workflows/data/spatial/rasters/", 
                          name, "_bathymetry_derivatives.rds")))
 plot(preds)
 ```
-
-## Transform the raster to a dataframe to predict onto
+Transform the raster to a dataframe to predict onto.
 ```{r bathymetry-dataframe}
 preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
   dplyr::mutate(depth = abs(mbdepth)) %>%                                       
   clean_names() %>%
   glimpse()
 ```
-
-## Manually set the top model from the full subset model selection
+Manually set the top model from the full subset model selection.
 ```{r set-models, fig.width = 7, fig.height = 6}
 # Sessile invertebrates
 m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~ 
@@ -216,8 +204,7 @@ m_reef <- gam(cbind(reef, total_points_annotated - reef) ~
 summary(m_reef)
 plot(m_reef, pages = 1, residuals = T, cex = 5)
 ```
-
-## Predict, rasterise and plot habitat predictions
+# Predict, rasterise and plot habitat predictions
 ```{r spatial-prediction}
 preddf <- cbind(preddf, 
                 "pmacro" = predict(m_macro, preddf, type = "response"),
@@ -228,37 +215,20 @@ preddf <- cbind(preddf,
                 "preef" = predict(m_reef, preddf, type = "response")) %>%
   glimpse()
 ```
-
-# Tidy and aggregate
-## Rasterise and aggregate the predictions to speed up plotting
-```{r aggregate, fig.width = 7, fig.height = 4}
-prasts <- rast(preddf %>% dplyr::select(x, y, starts_with("p")),
-                        crs = crs(preds)) %>%
-  aggregate(fact = 5, fun = "mean")                                           
-plot(prasts)
-summary(prasts)
-```
-
-# Transform back to a dataframe for tidy plotting
-```{r habitat-dataframe}
-preddf_a <- as.data.frame(prasts, xy = T, na.rm = T) %>%
-  glimpse()
-```
-
-# Create a column for the 'dominant' habitat and tidy the names for plotting
+# Tidy and save the final dataset
+Create a column for the 'dominant' habitat
 ```{r dominant-tag}
-preddf_a$dom_tag <- apply(preddf_a %>% dplyr::select(pmacro, prock, psand, pseagrass, pinverts), 1,
+preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, prock, psand, pseagrass, pinverts), 1,
                          FUN = function(x){names(which.max(x))})
-glimpse(preddf_a)
+glimpse(preddf)
 ```
-
 Save final predictions
 ```{r save-final}
-saveRDS(preddf_a, file = here::here(paste0("r-workflows/model output/habitat/", 
+saveRDS(preddf, file = here::here(paste0("r-workflows/model output/habitat/", 
                               name, "_habitat-prediction.RDS")))
 ```
-
-# Load marine park data from CAPAD 2022 and transform to match the CRS of the habitat predictions
+# Set up for plotting
+Load marine park data from CAPAD 2022 and transform to match the CRS of the habitat predictions.
 ```{r marine-parks}
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
   st_make_valid() %>%
@@ -266,10 +236,9 @@ marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collabor
   dplyr::filter(ZONE_TYPE %in% c("National Park Zone", "Sanctuary Zone"), STATE %in% "WA") %>%                        
   st_transform(32750) 
 ```
-
-Set colours for habitat plotting
+Set colours for habitat plotting. 
 ```{r habitat-colours}
-unique(preddf_a$dom_tag)
+unique(preddf$dom_tag)
 hab_fills <- scale_fill_manual(values = c(
   "psand" = "wheat",
   "pinverts" = "plum",
@@ -277,11 +246,11 @@ hab_fills <- scale_fill_manual(values = c(
   "pmacro" = "darkgoldenrod4"
 ), name = "Habitat")
 ```
-
-Build plot elements for dominant habitat
+# Plot the dominant habitats
+Build plot elements and display.
 ```{r plot-dominant, fig.width = 7, fig.height = 4}
 ggplot() +
-  geom_tile(data = preddf_a, aes(x, y, fill = dom_tag)) +
+  geom_tile(data = preddf, aes(x, y, fill = dom_tag)) +
   hab_fills + 
   new_scale_fill() +
   geom_sf(data = marine.parks, fill = NA, aes(colour = ZONE_TYPE), 
@@ -289,15 +258,15 @@ ggplot() +
   scale_colour_manual(values = c("National Park Zone" = "#7bbc63",
                                "Sanctuary Zone" = "#bfd054"),
                     name = "Marine Parks") +
-  coord_sf(xlim = c(min(preddf_a$x), max(preddf_a$x)),
-           ylim = c(min(preddf_a$y), max(preddf_a$y))) +
+  coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
+           ylim = c(min(preddf$y), max(preddf$y))) +
   labs(x = NULL, y = NULL, colour = NULL) +
   theme_minimal()
 ```
-
-Transform habitat predictions for easy plotting with ggplot::facet_wrap
+# Plot the individual habitat probabilities
+Transform habitat predictions into long format for easy plotting with ggplot::facet_wrap.
 ```{r wide-habitat}
-indclass <- preddf_a %>%
+indclass <- preddf %>%
   pivot_longer(cols = starts_with("p"), names_to = "habitat", 
                values_to = "Probability") %>%
   dplyr::mutate(habitat = case_when(habitat %in% "pinverts" ~ "Sessile invertebrates",
@@ -308,8 +277,7 @@ indclass <- preddf_a %>%
                                     habitat %in% "preef" ~ "Reef")) %>%
   glimpse()
 ```
-
-Build plot elements for individual habitat probabilities
+Build plot elements for individual habitat probabilities.
 ```{r plot-individual, fig.width = 7, fig.height = 4}
 ggplot() +
   geom_tile(data = indclass, aes(x, y, fill = Probability)) +
@@ -320,8 +288,8 @@ ggplot() +
   scale_colour_manual(values = c("National Park Zone" = "#7bbc63",
                                  "Sanctuary Zone" = "#bfd054"),
                       name = "Marine Parks") +
-  coord_sf(xlim = c(min(preddf_a$x), max(preddf_a$x)),
-           ylim = c(min(preddf_a$y), max(preddf_a$y))) +
+  coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
+           ylim = c(min(preddf$y), max(preddf$y))) +
   labs(x = NULL, y = NULL, fill = "Probability") +
   theme_minimal() +
   facet_wrap(~habitat) +
