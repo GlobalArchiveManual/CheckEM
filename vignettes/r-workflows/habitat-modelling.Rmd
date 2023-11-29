@@ -11,6 +11,9 @@ vignette: >
   %\VignetteIndexEntry{Generate spatial predictions of habitat using FSSgam}
   %\VignetteEncoding{UTF-8}
 ---
+```{r install-fssgam, include=FALSE}
+devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
+```
 # R setup
 Load libraries.
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
@@ -26,10 +29,6 @@ library(viridis)
 library(terra)
 library(sf)
 library(patchwork)
-```
-
-```{r install-fssgam, include=FALSE}
-devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 ```
 Set the study name.
 ```{r name}
