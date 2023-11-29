@@ -12,7 +12,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 ```{r install-fssgam, include=FALSE}
-devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
+# devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 ```
 # R setup
 Load libraries.
@@ -55,7 +55,7 @@ plot_transformations(pred.vars = pred.vars, dat = tidy.count)
 ```
 
 ```{r reset-pred-vars}
-pred.vars <- c("depth", "roughness", "detrended",
+pred.vars <- c("mbdepth", "roughness", "detrended",
                "tpi", "tri", "aspect", "reef") 
 ```
 
@@ -73,17 +73,16 @@ resp.vars
 
 ```{r environment-setup}
 outdir    <- ("r-workflows/model output/fish/") 
-use.dat <- as.data.frame(tidy.count)
 out.all = list()
 var.imp = list()
 ```
 
-```{r}
+```{r FSSgam, results='hide', warning=FALSE, message=FALSE}
 for(i in 1:length(resp.vars)){
-  use.dat = as.data.frame(dat[which(dat$response == resp.vars[i]),])
+  use.dat = as.data.frame(tidy.count[which(tidy.count$response == resp.vars[i]),])
   print(resp.vars[i])
 
-  Model1  <- gam(number ~ s(depth, k = 3, bs = 'cr'),
+  Model1  <- gam(number ~ s(mbdepth, k = 3, bs = 'cr'),
                  family = gaussian(link = "identity"),  data = use.dat)
   
   model.set <- generate.model.set(use.dat = use.dat,
@@ -117,45 +116,25 @@ for(i in 1:length(resp.vars)){
 }
 ```
 
-```{r}
+```{r save-gam-data}
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
 all.mod.fits <- list_rbind(out.all, names_to = "response")
-all.var.imp  <- do.call("rbind",var.imp)
-write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv")))
-write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
+all.var.imp  <- as.data.frame(do.call("rbind", var.imp))
 ```
 
 ```{r}
-dat <- readRDS(paste0('1. Example R workflows (scripts to download)/data/tidy/', 
-                      name,'_Tidy-length.rds')) %>%
+tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
+                      name,'_tidy-length.rds'))) %>%
   glimpse()
 ```
 
 ```{r}
-pred.vars <- c("depth", "roughness", "slope", "detrended",
-               "tpi", "tri", "aspect", "reef") 
-```
-
-```{r}
-round(cor(dat[ , pred.vars]), 2)
-```
-
-```{r transformations, warning = FALSE, message = FALSE}
-plot_transformations(pred.vars)
-```
-
-```{r}
-pred.vars <- c("depth", "roughness", "detrended",
-               "tpi", "tri", "aspect", "reef") 
-```
-
-```{r}
-unique.vars <- unique(as.character(dat$response))
+unique.vars <- unique(as.character(tidy.length$response))
 
 resp.vars <- character()
 for(i in 1:length(unique.vars)){
-  temp.dat <- dat[which(dat$response == unique.vars[i]), ]
+  temp.dat <- tidy.length[which(tidy.length$response == unique.vars[i]), ]
   if(length(which(temp.dat$number == 0)) / nrow(temp.dat) < 0.8){
     resp.vars <- c(resp.vars, unique.vars[i])}
 }
@@ -163,18 +142,16 @@ resp.vars
 ```
 
 ```{r}
-outdir    <- ("r-workflows/model output/fish")
-use.dat <- as.data.frame(dat)
 out.all = list()
 var.imp = list()
 ```
 
 ```{r}
 for(i in 1:length(resp.vars)){
-  use.dat = as.data.frame(dat[which(dat$response == resp.vars[i]),])
+  use.dat = as.data.frame(tidy.length[which(tidy.length$response == resp.vars[i]),])
   print(resp.vars[i])
 
-  Model1  <- gam(number ~ s(depth, k = 3, bs = 'cr'),
+  Model1  <- gam(number ~ s(mbdepth, k = 3, bs = 'cr'),
                  family = tw(),  data = use.dat)
   
   model.set <- generate.model.set(use.dat = use.dat,
@@ -212,36 +189,20 @@ for(i in 1:length(resp.vars)){
 ```{r}
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
-all.mod.fits <- list_rbind(out.all, names_to = "response")
-all.var.imp  <- do.call("rbind",var.imp)
+all.mod.fits <- bind_rows(all.mod.fits, list_rbind(out.all, names_to = "response"))
+all.var.imp  <- bind_rows(all.var.imp, as.data.frame(do.call("rbind",var.imp)))
 write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv")))
 write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
 ```
 
-
 ```{r}
-count <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
-                      name, "_tidy-count.rds"))) %>%
-  clean_names() %>%
+dat <- bind_rows(tidy.count, tidy.length) %>%
   glimpse()
 ```
 
 ```{r}
-length <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
-                        name, "_tidy-length.rds"))) %>%
-  clean_names() %>%
-  dplyr::select(-status) %>%
-  glimpse()
-```
-
-```{r}
-dat <- bind_rows(count, length) %>%
-  glimpse()
-```
-
-```{r}
-preds  <- readRDS(paste0("1. Example R workflows (scripts to download)/data/spatial/rasters/", 
-                         name, "_Bathymetry_derivatives.rds"))
+preds  <- readRDS(paste0("r-workflows/data/spatial/rasters/", 
+                         name, "_bathymetry_derivatives.rds"))
 plot(preds)
 ```
 
