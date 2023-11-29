@@ -1,13 +1,14 @@
 #' A function to test basic transformations on predictor variables for GAM modelling
 #'
-#' @param pred.vars 
+#' @param pred.vars
+#' @param dat  
 #'
 #' @return
 #' @export
 #'
 #' @examples
 
-plot_transformations <- function(pred.vars) {
+plot_transformations <- function(pred.vars, dat) {
   for (i in pred.vars) {
     # raw data
     point <- ggplot(data = dat) + 

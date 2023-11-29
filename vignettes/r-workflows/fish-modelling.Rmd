@@ -11,3 +11,332 @@ vignette: >
   %\VignetteIndexEntry{Generate spatial predictions of fish using FSSgam}
   %\VignetteEncoding{UTF-8}
 ---
+```{r install-fssgam, include=FALSE}
+devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
+```
+# R setup
+Load libraries.
+```{r libraries, results='hide', warning=FALSE, message=FALSE}
+library(CheckEM)
+library(tidyverse)
+library(mgcv)
+library(devtools)
+library(FSSgam)
+library(here)
+library(ggplot2)
+library(ggnewscale)
+library(viridis)
+library(terra)
+library(sf)
+library(patchwork)
+```
+
+```{r study-name}
+name <- 'example-bruv-workflow'
+```
+
+```{r load-count}
+tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
+                      name,'_tidy-count.rds'))) %>%
+  glimpse()
+```
+
+```{r pred-vars}
+pred.vars <- c("mbdepth", "roughness", "slope", "detrended",
+               "tpi", "tri", "aspect", "reef") 
+```
+
+```{r correlations}
+round(cor(tidy.count[ , pred.vars]), 2)
+```
+
+```{r transformations, warning = FALSE, message = FALSE}
+plot_transformations(pred.vars = pred.vars, dat = tidy.count)
+```
+
+```{r reset-pred-vars}
+pred.vars <- c("depth", "roughness", "detrended",
+               "tpi", "tri", "aspect", "reef") 
+```
+
+```{r check-responses}
+unique.vars <- unique(as.character(tidy.count$response))
+
+resp.vars <- character()
+for(i in 1:length(unique.vars)){
+  temp.dat <- tidy.count[which(tidy.count$response == unique.vars[i]), ]
+  if(length(which(temp.dat$number == 0)) / nrow(temp.dat) < 0.8){
+    resp.vars <- c(resp.vars, unique.vars[i])}
+}
+resp.vars  
+```
+
+```{r environment-setup}
+outdir    <- ("r-workflows/model output/fish/") 
+use.dat <- as.data.frame(tidy.count)
+out.all = list()
+var.imp = list()
+```
+
+```{r}
+for(i in 1:length(resp.vars)){
+  use.dat = as.data.frame(dat[which(dat$response == resp.vars[i]),])
+  print(resp.vars[i])
+
+  Model1  <- gam(number ~ s(depth, k = 3, bs = 'cr'),
+                 family = gaussian(link = "identity"),  data = use.dat)
+  
+  model.set <- generate.model.set(use.dat = use.dat,
+                               test.fit = Model1,
+                               pred.vars.cont = pred.vars,
+                               factor.smooth.interactions = NA,
+                               k = 3)
+  out.list <- fit.model.set(model.set,
+                         max.models = 600,
+                         parallel = T)
+  names(out.list)
+  
+  out.list$failed.models 
+  mod.table = out.list$mod.data.out 
+  mod.table = mod.table[order(mod.table$AICc),]
+  mod.table$cumsum.wi = cumsum(mod.table$wi.AICc)
+  out.i = mod.table[which(mod.table$delta.AICc <= 2),]
+  out.all = c(out.all,list(out.i))
+  var.imp = c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw))
+  
+  for(m in 1:nrow(out.i)){
+    best.model.name = as.character(out.i$modname[m])
+    png(file = here::here(paste(outdir, paste(name, m, resp.vars[i], "mod_fits.png", sep = "_"), sep = "/")))
+    if(best.model.name != "null"){
+      par(mfrow = c(3,1), mar = c(9, 4, 3, 1))
+      best.model = out.list$success.models[[best.model.name]]
+      plot(best.model, all.terms = T,pages = 1,residuals = T,pch = 16)
+      mtext(side = 2, text = resp.vars[i], outer = F)}  
+    dev.off()
+  }
+}
+```
+
+```{r}
+names(out.all) <- resp.vars
+names(var.imp) <- resp.vars
+all.mod.fits <- list_rbind(out.all, names_to = "response")
+all.var.imp  <- do.call("rbind",var.imp)
+write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv")))
+write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
+```
+
+```{r}
+dat <- readRDS(paste0('1. Example R workflows (scripts to download)/data/tidy/', 
+                      name,'_Tidy-length.rds')) %>%
+  glimpse()
+```
+
+```{r}
+pred.vars <- c("depth", "roughness", "slope", "detrended",
+               "tpi", "tri", "aspect", "reef") 
+```
+
+```{r}
+round(cor(dat[ , pred.vars]), 2)
+```
+
+```{r transformations, warning = FALSE, message = FALSE}
+plot_transformations(pred.vars)
+```
+
+```{r}
+pred.vars <- c("depth", "roughness", "detrended",
+               "tpi", "tri", "aspect", "reef") 
+```
+
+```{r}
+unique.vars <- unique(as.character(dat$response))
+
+resp.vars <- character()
+for(i in 1:length(unique.vars)){
+  temp.dat <- dat[which(dat$response == unique.vars[i]), ]
+  if(length(which(temp.dat$number == 0)) / nrow(temp.dat) < 0.8){
+    resp.vars <- c(resp.vars, unique.vars[i])}
+}
+resp.vars 
+```
+
+```{r}
+outdir    <- ("r-workflows/model output/fish")
+use.dat <- as.data.frame(dat)
+out.all = list()
+var.imp = list()
+```
+
+```{r}
+for(i in 1:length(resp.vars)){
+  use.dat = as.data.frame(dat[which(dat$response == resp.vars[i]),])
+  print(resp.vars[i])
+
+  Model1  <- gam(number ~ s(depth, k = 3, bs = 'cr'),
+                 family = tw(),  data = use.dat)
+  
+  model.set <- generate.model.set(use.dat = use.dat,
+                               test.fit = Model1,
+                               pred.vars.cont = pred.vars,
+                               factor.smooth.interactions = NA,
+                               k = 3
+                               )
+  out.list <- fit.model.set(model.set,
+                         max.models = 600,
+                         parallel = T)
+  names(out.list)
+  
+  out.list$failed.models
+  mod.table = out.list$mod.data.out
+  mod.table = mod.table[order(mod.table$AICc),]
+  mod.table$cumsum.wi = cumsum(mod.table$wi.AICc)
+  out.i = mod.table[which(mod.table$delta.AICc<=2),]
+  out.all = c(out.all, list(out.i))
+  var.imp = c(var.imp, list(out.list$variable.importance$aic$variable.weights.raw))
+  
+  for(m in 1:nrow(out.i)){
+    best.model.name = as.character(out.i$modname[m])
+    png(file = here::here(paste(outdir, paste(name, m, resp.vars[i], "mod_fits.png", sep = "_"), sep = "/")))
+    if(best.model.name != "null"){
+      par(mfrow = c(3,1), mar = c(9, 4, 3, 1))
+      best.model = out.list$success.models[[best.model.name]]
+      plot(best.model, all.terms = T, pages = 1, residuals = T, pch = 16)
+      mtext(side = 2, text = resp.vars[i], outer = F)}  
+    dev.off()
+  }
+}
+```
+
+```{r}
+names(out.all) <- resp.vars
+names(var.imp) <- resp.vars
+all.mod.fits <- list_rbind(out.all, names_to = "response")
+all.var.imp  <- do.call("rbind",var.imp)
+write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv")))
+write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
+```
+
+
+```{r}
+count <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
+                      name, "_tidy-count.rds"))) %>%
+  clean_names() %>%
+  glimpse()
+```
+
+```{r}
+length <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
+                        name, "_tidy-length.rds"))) %>%
+  clean_names() %>%
+  dplyr::select(-status) %>%
+  glimpse()
+```
+
+```{r}
+dat <- bind_rows(count, length) %>%
+  glimpse()
+```
+
+```{r}
+preds  <- readRDS(paste0("1. Example R workflows (scripts to download)/data/spatial/rasters/", 
+                         name, "_Bathymetry_derivatives.rds"))
+plot(preds)
+```
+
+```{r}
+preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
+  dplyr::mutate(depth = abs(mbdepth)) %>%                                       
+  clean_names() %>%
+  glimpse()
+```
+
+```{r}
+# Indicator species greater than size of maturity
+m_mature <- gam(number ~ 
+                 s(detrended, k = 3, bs = "cr"), 
+               data = dplyr::filter(dat, response %in% "greater than Lm"), 
+               family = tw())
+summary(m_mature)
+plot(m_mature, pages = 1, residuals = T, cex = 5)
+
+# Total abundance
+m_totabund <- gam(number ~ 
+                  s(depth, k = 3, bs = "cr"), 
+                data = dplyr::filter(dat, response %in% "total_abundance"), 
+                family = gaussian(link = "identity"))
+summary(m_totabund)
+plot(m_totabund, pages = 1, residuals = T, cex = 5)
+
+# Species richness
+m_specrich <- gam(number ~ 
+                    s(depth, k = 3, bs = "cr"), 
+                  data = dplyr::filter(dat, response %in% "species_richness"), 
+                  family = gaussian(link = "identity"))
+summary(m_specrich)
+plot(m_specrich, pages = 1, residuals = T, cex = 5)
+```
+
+```{r}
+preddf <- cbind(preddf, 
+                "pmature" = predict(m_mature, preddf, type = "response"),
+                "ptotabund" = predict(m_totabund, preddf, type = "response"),
+                "pspecrich" = predict(m_specrich, preddf, type = "response")) %>%
+  glimpse()
+```
+
+```{r}
+saveRDS(preddf, file = here::here(paste0("r-workflows/model output/fish/", 
+                              name, "_fish-prediction.RDS")))
+```
+
+```{r}
+dat <- preddf %>%
+  pivot_longer(names_to = "response", values_to = "value",
+               cols = !c(x, y)) %>%
+  glimpse()
+```
+
+```{r}
+marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
+  st_make_valid() %>%
+  dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE, 
+                                            "\\s*\\([^\\)]+\\)", "")) %>%
+  dplyr::filter(ZONE_TYPE %in% c("National Park Zone", "Sanctuary Zone"),
+                STATE %in% "WA")
+```
+
+```{r}
+resp.vars <- unique(dat$response)
+```
+
+```{r}
+for (i in 1:length(resp.vars)) {
+  use.dat <- dat %>%
+    dplyr::filter(response %in% resp.vars[i])
+  
+  p <- ggplot() +
+    geom_tile(data = use.dat, aes(x, y, fill = value)) +
+    scale_fill_gradientn(colours = c("#fde725", "#21918c", "#440154"), na.value = "transparent") +
+    labs(fill = resp.vars[i], x = NULL, y = NULL) +
+    new_scale_fill() +                     
+    geom_sf(data = marine.parks, fill = NA, aes(colour = ZONE_TYPE), 
+            size = 0.2, show.legend = F) +
+    coord_sf(xlim = c(min(dat$x), max(dat$x)),
+             ylim = c(min(dat$y), max(dat$y))) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(size = 7))
+  assign(paste0("gg_", resp.vars[i]), p)
+}
+```
+
+```{r}
+gg_pmature + gg_ptotabund + gg_pspecrich +
+  theme(legend.justification = "left") +
+  plot_layout(ncol = 1, nrow = 3)
+```
+
+
+
+

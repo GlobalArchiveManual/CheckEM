@@ -54,7 +54,7 @@ round(cor(dat[ , pred.vars]), 2)
 ```
 Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example dataset, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed.
 ```{r transformations, warning = FALSE, message = FALSE}
-plot_transformations(pred.vars)
+plot_transformations(pred.vars = pred.vars, dat = dat)
 ```
 
 Reset the predictor variables to remove any highly correlated variables and include any transformed variables.
