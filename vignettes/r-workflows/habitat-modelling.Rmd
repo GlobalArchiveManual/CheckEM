@@ -38,14 +38,14 @@ name <- 'example-bruv-workflow'
 ## Load in the habitat point annotation data
 ```{r raw-data}
 dat <- readRDS(here::here(paste0("r-workflows/data/tidy/", 
-                      name, "_Tidy-habitat.rds"))) %>%
+                      name, "_tidy-habitat.rds"))) %>%
   glimpse()
 ```
 
 ## Set the predictory variables
 ```{r predictors}
 names(dat)
-pred.vars <- c("depth","roughness", "detrended", 
+pred.vars <- c("mbdepth","roughness", "detrended", 
                "slope", "TPI", "aspect", "TRI")  
 ```
 
@@ -56,17 +56,7 @@ round(cor(dat[ , pred.vars]), 2)
 
 ## Plot the individual predictors to assess if any transformations are necessary
 ```{r transformations, warning = FALSE, fig.width = 7, fig.height = 6}
-par(mfrow = c(3, 2))
-for (i in pred.vars) {
-  x <-dat[ , i]
-  x = as.numeric(unlist(x))
-  hist((x), main = paste(i))
-  plot((x), main = paste(i))
-  hist(sqrt(x), main = paste0("sqrt(",i, ")"))
-  plot(sqrt(x), main = paste0("sqrt(",i, ")"))
-  hist(log(x + 1), main = paste0("log(",i, "+ 1)"))
-  plot(log(x + 1), main = paste0("log(",i, "+ 1)"))
-}
+plot_transformations(pred.vars)
 ```
 
 ## Remove any highly correlated predictor variables
@@ -160,7 +150,7 @@ widedat <- dat %>%
 
 ## Load the raster of bathymetry data and derivatives
 ```{r load-bathymetry, fig.width = 7, fig.height = 4}
-preds  <- read_rds(here::here(paste0("r-workflows/data/spatial/rasters/", 
+preds  <- rast(here::here(paste0("r-workflows/data/spatial/rasters/", 
                          name, "_bathymetry_derivatives.rds")))
 plot(preds)
 ```
@@ -265,7 +255,7 @@ glimpse(preddf_a)
 Save final predictions
 ```{r save-final}
 saveRDS(preddf_a, file = here::here(paste0("r-workflows/model output/habitat/", 
-                              name, "_Habitat-prediction.RDS")))
+                              name, "_habitat-prediction.RDS")))
 ```
 
 # Load marine park data from CAPAD 2022 and transform to match the CRS of the habitat predictions

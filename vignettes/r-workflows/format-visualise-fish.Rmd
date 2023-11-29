@@ -12,6 +12,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+This script takes the checked fish data from the previous workflow steps, visualises the data and exports it into a format suitable for modelling. The exploratory visualisation of the data allows for trends and patterns in the raw data to be investigated.
+
 # R set up
 Load the necessary libraries.
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
@@ -43,13 +45,7 @@ habitat <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_tidy-habi
   dplyr::select(-c(consolidated_hard, macroalgae, seagrasses, sessile_invertebrates, unconsolidated_soft)) %>%
   glimpse()
 ```
-Load sanctuary zones shapefiles
-```{r sanctuaries}
-sanctuaries <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
-  st_transform(4326) %>%                                            
-  dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National"))
-```
-Load length of maturity data.
+Load length of maturity data. The maturity dataset is loaded when the package is installed.
 ```{r load-maturity}
 maturity.mean <- maturity %>%
   dplyr::group_by(family, genus, species, sex) %>%
