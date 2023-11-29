@@ -11,7 +11,9 @@ vignette: >
   %\VignetteIndexEntry{Generate spatial predictions of habitat using FSSgam}
   %\VignetteEncoding{UTF-8}
 ---
-
+```{r install-fssgam include=FALSE}
+devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
+```
 # R setup
 Load libraries.
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
@@ -19,7 +21,6 @@ library(CheckEM)
 library(tidyverse)
 library(mgcv)
 library(devtools)
-devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 library(FSSgam)
 library(here)
 library(ggplot2)
@@ -52,9 +53,10 @@ Check for correlation of predictor variables and remove anything highly correlat
 round(cor(dat[ , pred.vars]), 2)
 ```
 Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example dataset, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed.
-```{r transformations, warning = FALSE, message = FALSE, fig.width = 7, fig.height = 6}
+```{r transformations, warning = FALSE, message = FALSE}
 plot_transformations(pred.vars)
 ```
+
 Reset the predictor variables to remove any highly correlated variables and include any transformed variables.
 ```{r reset-predictors}
 pred.vars <- c("depth","roughness", "detrended", 
@@ -144,6 +146,7 @@ preds  <- rast(here::here(paste0("r-workflows/data/spatial/rasters/",
                          name, "_bathymetry_derivatives.rds")))
 plot(preds)
 ```
+
 Transform the raster to a dataframe to predict onto.
 ```{r bathymetry-dataframe}
 preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
@@ -204,6 +207,7 @@ m_reef <- gam(cbind(reef, total_points_annotated - reef) ~
 summary(m_reef)
 plot(m_reef, pages = 1, residuals = T, cex = 5)
 ```
+
 # Predict, rasterise and plot habitat predictions
 ```{r spatial-prediction}
 preddf <- cbind(preddf, 
@@ -215,6 +219,7 @@ preddf <- cbind(preddf,
                 "preef" = predict(m_reef, preddf, type = "response")) %>%
   glimpse()
 ```
+
 # Tidy and save the final dataset
 Create a column for the 'dominant' habitat
 ```{r dominant-tag}
@@ -263,6 +268,7 @@ ggplot() +
   labs(x = NULL, y = NULL, colour = NULL) +
   theme_minimal()
 ```
+
 # Plot the individual habitat probabilities
 Transform habitat predictions into long format for easy plotting with ggplot::facet_wrap.
 ```{r wide-habitat}

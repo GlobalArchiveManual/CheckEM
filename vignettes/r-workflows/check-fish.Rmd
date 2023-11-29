@@ -46,7 +46,7 @@ Load metadata if you have already exported in the 'check-habitat' scripts. If yo
 metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
                                 name, "_Metadata.rds")))
 ```
-Load marine park shapefiles, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling.
+Load marine park shapefiles, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling. The dataset used here is the 2022 Collaborative Australian Protected Areas Database, which is available for free download from https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore. Feel free to replace this shapefile with any suitable dataset that is available for your study area. 
 ```{r parks}
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
   dplyr::select(geometry, ZONE_TYPE) %>%
