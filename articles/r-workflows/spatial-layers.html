@@ -118,9 +118,7 @@
 <div class="section level2">
 <h2 id="r-set-up">R set up<a class="anchor" aria-label="anchor" href="#r-set-up"></a>
 </h2>
-<div class="section level3">
-<h3 id="load-the-necessary-libraries">Load the necessary libraries<a class="anchor" aria-label="anchor" href="#load-the-necessary-libraries"></a>
-</h3>
+<p>Load the necessary libraries.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
@@ -128,67 +126,46 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://michaeldorman.github.io/starsExtra/" class="external-link">starsExtra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="set-the-study-name">Set the study name<a class="anchor" aria-label="anchor" href="#set-the-study-name"></a>
-</h3>
+<p>Set the study name.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">'example-bruv-workflow'</span></span></code></pre></div>
-</div>
 </div>
 <div class="section level2">
 <h2 id="load-bathymetry-data-and-create-bathymetry-derivatives">Load bathymetry data and create bathymetry derivatives<a class="anchor" aria-label="anchor" href="#load-bathymetry-data-and-create-bathymetry-derivatives"></a>
 </h2>
-<div class="section level3">
-<h3 id="the-bathymetry-data-used-in-the-example-is-a-relatively-low-spatial-resolution-dataset-downloaded-from-httpsecat-ga-gov-augeonetworksrvengcatalog-searchmetadata148758--feel-free-to-replace-with-any-suitable-bathymetry-in--tif-format-">The bathymetry data used in the example is a relatively low spatial
+<p>The bathymetry data used in the example is a relatively low spatial
 resolution dataset downloaded from <a href="https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/148758" class="external-link uri">https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/148758</a>.
-Feel free to replace with any suitable bathymetry in .tif format.<a class="anchor" aria-label="anchor" href="#the-bathymetry-data-used-in-the-example-is-a-relatively-low-spatial-resolution-dataset-downloaded-from-httpsecat-ga-gov-augeonetworksrvengcatalog-searchmetadata148758--feel-free-to-replace-with-any-suitable-bathymetry-in--tif-format-"></a>
-</h3>
+Feel free to replace with any suitable bathymetry in .tif format.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bathy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/rasters/swc_ga250m.tif"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/clamp.html" class="external-link">clamp</a></span><span class="op">(</span>upper <span class="op">=</span> <span class="fl">0</span>, lower <span class="op">=</span> <span class="op">-</span><span class="fl">250</span>, values <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/trim.html" class="external-link">trim</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="calculate-terrain-derivatives">Calculate terrain derivatives<a class="anchor" aria-label="anchor" href="#calculate-terrain-derivatives"></a>
-</h3>
+<p>Calculate terrain derivatives.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/terrain.html" class="external-link">terrain</a></span><span class="op">(</span><span class="va">bathy</span>, neighbors <span class="op">=</span> <span class="fl">8</span>,</span>
 <span>                 v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"slope"</span>, <span class="st">"aspect"</span>, <span class="st">"TPI"</span>, <span class="st">"TRI"</span>, <span class="st">"roughness"</span><span class="op">)</span>,           <span class="co"># Remove here as necessary</span></span>
 <span>                 unit <span class="op">=</span> <span class="st">"degrees"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="calculate-detrended-bathymetry">Calculate detrended bathymetry<a class="anchor" aria-label="anchor" href="#calculate-detrended-bathymetry"></a>
-</h3>
+<p>Calculate detrended bathymetry.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">zstar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_as_stars.html" class="external-link">st_as_stars</a></span><span class="op">(</span><span class="va">bathy</span><span class="op">)</span>                                                    </span>
 <span><span class="va">detre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://michaeldorman.github.io/starsExtra/reference/detrend.html" class="external-link">detrend</a></span><span class="op">(</span><span class="va">zstar</span>, parallel <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>                                           </span>
 <span><span class="va">detre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">detre</span>, Class <span class="op">=</span> <span class="st">"SpatRaster"</span><span class="op">)</span>                               </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">detre</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"detrended"</span>, <span class="st">"lineartrend"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="join-bathymetry-with-terrain-and-detrended-derivatives">Join bathymetry with terrain and detrended derivatives<a class="anchor" aria-label="anchor" href="#join-bathymetry-with-terrain-and-detrended-derivatives"></a>
-</h3>
+<p>Join bathymetry with terrain and detrended derivatives.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">bathy</span>, <span class="va">preds</span>, <span class="va">detre</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>                                   </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">preds</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"mbdepth"</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="save-spatial-layers">Save spatial-layers<a class="anchor" aria-label="anchor" href="#save-spatial-layers"></a>
-</h3>
+<p>Save spatial-layers.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">preds_w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/wrap.html" class="external-link">wrap</a></span><span class="op">(</span><span class="va">preds</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">preds_w</span>, </span>
 <span>          file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/rasters/"</span>, </span>
 <span>                        <span class="va">name</span>, <span class="st">"_bathymetry_derivatives.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-</div>
 <div class="section level2">
 <h2 id="load-metadata-and-extract-site-specific-derivatives">Load metadata and extract site-specific derivatives<a class="anchor" aria-label="anchor" href="#load-metadata-and-extract-site-specific-derivatives"></a>
 </h2>
-<div class="section level3">
-<h3 id="read-in-the-metadata">Read in the metadata<a class="anchor" aria-label="anchor" href="#read-in-the-metadata"></a>
-</h3>
+<p>Read in the metadata.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>, </span>
 <span>                            <span class="va">name</span>, <span class="st">"_Metadata.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -209,22 +186,22 @@ Feel free to replace with any suitable bathymetry in .tif format.<a class="ancho
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="convert-the-metadata-to-a-spatial">Convert the metadata to a spatial<a class="anchor" aria-label="anchor" href="#convert-the-metadata-to-a-spatial"></a>
-</h3>
+<p>Convert the metadata to a spatial file.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata.vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">metadata</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"longitude_dd"</span>, <span class="st">"latitude_dd"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"epsg:4326"</span><span class="op">)</span></span></code></pre></div>
+<p>Check to see if the metadata and bathymetry align correctly.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">preds</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">metadata.vect</span>, add <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p><img src="spatial-layers_files/figure-html/check-alignment-1.png" width="700"></p>
+<p><img src="spatial-layers_files/figure-html/check-alignment-1.png" width="700">
+Add the latitude and longitude coordinates back into the metadata.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy.metadata_t</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">metadata.vect</span>, geom <span class="op">=</span> <span class="st">"XY"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, date_time, location, site,</span></span>
 <span><span class="co">## depth, successful_count, successful_length, successful_habitat_forward,</span></span>
 <span><span class="co">## successful_habitat_backward)`</span></span></code></pre>
+<p>Extract the bathymetry derivatives at each sampling location.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata.bathy.derivatives</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">tidy.metadata_t</span>, </span>
 <span>                                     <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html" class="external-link">extract</a></span><span class="op">(</span><span class="va">preds</span>, <span class="va">metadata.vect</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -255,9 +232,12 @@ Feel free to replace with any suitable bathymetry in .tif format.<a class="ancho
 <span><span class="co">## $ TRI                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.75557327, 3.29823494, 2.39221191, 1.8367…</span></span>
 <span><span class="co">## $ roughness                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.21119308, 8.36493301, 8.36493301, 5.3012…</span></span>
 <span><span class="co">## $ detrended                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -5.6631737, -7.0394716, -11.2637815, -8.69…</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="save-the-joined-metadata-and-bathymetry-derivatives">Save the joined metadata and bathymetry derivatives<a class="anchor" aria-label="anchor" href="#save-the-joined-metadata-and-bathymetry-derivatives"></a>
+</h2>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">metadata.bathy.derivatives</span>, <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>, <span class="va">name</span>, <span class="st">"_metadata-bathymetry-derivatives.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
