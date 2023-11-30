@@ -158,15 +158,18 @@ Manually set the top model from the full subset model selection.
 ```{r set-models, fig.width = 7, fig.height = 6}
 # Sessile invertebrates
 m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~ 
-                 s(mbdepth,     k = 5, bs = "cr")  + 
-                 s(detrended, k = 5, bs = "cr"), 
+                 s(detrended,     k = 5, bs = "cr")  + 
+                 s(roughness, k = 5, bs = "cr") +
+                 s(TPI, k = 5, bs = "cr"), 
                data = widedat, method = "REML", family = binomial("logit"))
 summary(m_inverts)
 plot(m_inverts, pages = 1, residuals = T, cex = 5)
 
 # Rock
 m_rock <- gam(cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~ 
-                   s(mbdepth,     k = 5, bs = "cr"), 
+                   s(aspect,     k = 5, bs = "cr") +
+                   s(detrended, k = 5, bs = "cr") +
+                   s(TPI, k = 5, bs = "cr"), 
                  data = widedat, method = "REML", family = binomial("logit"))
 summary(m_rock)
 plot(m_rock, pages = 1, residuals = T, cex = 5)
@@ -174,8 +177,8 @@ plot(m_rock, pages = 1, residuals = T, cex = 5)
 # Sand
 m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~ 
                 s(aspect,     k = 5, bs = "cr")  + 
-                s(roughness, k = 5, bs = "cr") +
-                s(tpi, k = 5, bs = "cr"), 
+                s(detrended, k = 5, bs = "cr") +
+                s(roughness, k = 5, bs = "cr"), 
               data = widedat, method = "REML", family = binomial("logit"))
 summary(m_sand)
 plot(m_sand, pages = 1, residuals = T, cex = 5)
@@ -183,8 +186,8 @@ plot(m_sand, pages = 1, residuals = T, cex = 5)
 # Seagrasses
 m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~ 
                 s(aspect,     k = 5, bs = "cr")  + 
-                s(mbdepth, k = 5, bs = "cr") + 
-                s(tri, k = 5, bs = "cr"), 
+                s(detrended, k = 5, bs = "cr") + 
+                s(roughness, k = 5, bs = "cr"), 
               data = widedat, method = "REML", family = binomial("logit"))
 summary(m_seagrass)
 plot(m_seagrass, pages = 1, residuals = T, cex = 5)
@@ -193,7 +196,7 @@ plot(m_seagrass, pages = 1, residuals = T, cex = 5)
 m_macro <- gam(cbind(macroalgae, total_points_annotated - macroalgae) ~ 
                  s(mbdepth,     k = 5, bs = "cr")  + 
                  s(detrended, k = 5, bs = "cr") +
-                 s(tpi, k = 5, bs = "cr"), 
+                 s(TPI, k = 5, bs = "cr"), 
                data = widedat, method = "REML", family = binomial("logit"))
 summary(m_macro)
 plot(m_macro, pages = 1, residuals = T, cex = 5)
@@ -201,8 +204,8 @@ plot(m_macro, pages = 1, residuals = T, cex = 5)
 # Reef
 m_reef <- gam(cbind(reef, total_points_annotated - reef) ~ 
                  s(aspect,     k = 5, bs = "cr")  + 
-                 s(roughness, k = 5, bs = "cr") +
-                 s(tpi, k = 5, bs = "cr"), 
+                 s(detrended, k = 5, bs = "cr") +
+                 s(roughness, k = 5, bs = "cr"), 
                data = widedat, method = "REML", family = binomial("logit"))
 summary(m_reef)
 plot(m_reef, pages = 1, residuals = T, cex = 5)
