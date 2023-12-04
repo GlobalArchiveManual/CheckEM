@@ -160,19 +160,19 @@
 <span><span class="co">## $ y                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.13155, -34.13155, -34.13155…</span></span>
 <span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236, 114.9236, 114.9236, 114.9236, 11…</span></span>
 <span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.13155, -34.13155, -34.13155…</span></span>
-<span><span class="co">## $ ID                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, …</span></span>
+<span><span class="co">## $ id                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, …</span></span>
 <span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.97151, -34.97151, -34.97151, -34.97151…</span></span>
 <span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1468434, 0.1468434, 0.1468434, 0.1468434…</span></span>
 <span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 209.89577, 209.89577, 209.89577, 209.89577…</span></span>
-<span><span class="co">## $ TPI                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.4215345, 0.4215345, 0.4215345, 0.4215345…</span></span>
-<span><span class="co">## $ TRI                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7555733, 0.7555733, 0.7555733, 0.7555733…</span></span>
+<span><span class="co">## $ tpi                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.4215345, 0.4215345, 0.4215345, 0.4215345…</span></span>
+<span><span class="co">## $ tri                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7555733, 0.7555733, 0.7555733, 0.7555733…</span></span>
 <span><span class="co">## $ roughness                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.211193, 2.211193, 2.211193, 2.211193, 2.…</span></span>
 <span><span class="co">## $ detrended                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -5.663174, -5.663174, -5.663174, -5.663174…</span></span>
 <span><span class="co">## $ total_points_annotated      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114, 114, 114, 114, 114, 114, 146, 146, 14…</span></span>
 <span><span class="co">## $ habitat                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Macroalgae", "Seagrasses", "Sessile inver…</span></span>
 <span><span class="co">## $ number                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 96, 6, 3, 1, 8, 106, 110, 36, 0, 0, 0, 146…</span></span>
-<span><span class="co">## $ mean.relief                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.034483, 3.034483, 3.034483, 3.034483, 3.…</span></span>
-<span><span class="co">## $ sd.relief                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.1174831, 1.1174831, 1.1174831, 1.1174831…</span></span></code></pre>
+<span><span class="co">## $ mean_relief                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.034483, 3.034483, 3.034483, 3.034483, 3.…</span></span>
+<span><span class="co">## $ sd_relief                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.1174831, 1.1174831, 1.1174831, 1.1174831…</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="set-up-data-for-modelling">Set up data for modelling<a class="anchor" aria-label="anchor" href="#set-up-data-for-modelling"></a>
@@ -187,41 +187,41 @@
 <span><span class="co">##  [9] "successful_habitat_forward"  "successful_habitat_backward"</span></span>
 <span><span class="co">## [11] "x"                           "y"                          </span></span>
 <span><span class="co">## [13] "longitude_dd"                "latitude_dd"                </span></span>
-<span><span class="co">## [15] "ID"                          "mbdepth"                    </span></span>
+<span><span class="co">## [15] "id"                          "mbdepth"                    </span></span>
 <span><span class="co">## [17] "slope"                       "aspect"                     </span></span>
-<span><span class="co">## [19] "TPI"                         "TRI"                        </span></span>
+<span><span class="co">## [19] "tpi"                         "tri"                        </span></span>
 <span><span class="co">## [21] "roughness"                   "detrended"                  </span></span>
 <span><span class="co">## [23] "total_points_annotated"      "habitat"                    </span></span>
-<span><span class="co">## [25] "number"                      "mean.relief"                </span></span>
-<span><span class="co">## [27] "sd.relief"</span></span></code></pre>
+<span><span class="co">## [25] "number"                      "mean_relief"                </span></span>
+<span><span class="co">## [27] "sd_relief"</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mbdepth"</span>,<span class="st">"roughness"</span>, <span class="st">"detrended"</span>, </span>
-<span>               <span class="st">"slope"</span>, <span class="st">"TPI"</span>, <span class="st">"aspect"</span>, <span class="st">"TRI"</span><span class="op">)</span>  </span></code></pre></div>
+<span>               <span class="st">"slope"</span>, <span class="st">"tpi"</span>, <span class="st">"aspect"</span>, <span class="st">"tri"</span><span class="op">)</span>  </span></code></pre></div>
 <p>Check for correlation of predictor variables and remove anything
 highly correlated (&gt;0.95).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span> , <span class="va">pred.vars</span><span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##           mbdepth roughness detrended slope   TPI aspect   TRI</span></span>
+<pre><code><span><span class="co">##           mbdepth roughness detrended slope   tpi aspect   tri</span></span>
 <span><span class="co">## mbdepth      1.00     -0.66     -0.89 -0.65  0.03  -0.32 -0.59</span></span>
 <span><span class="co">## roughness   -0.66      1.00      0.48  0.99  0.29   0.06  0.99</span></span>
 <span><span class="co">## detrended   -0.89      0.48      1.00  0.47  0.00   0.39  0.42</span></span>
 <span><span class="co">## slope       -0.65      0.99      0.47  1.00  0.29   0.06  0.99</span></span>
-<span><span class="co">## TPI          0.03      0.29      0.00  0.29  1.00  -0.02  0.35</span></span>
+<span><span class="co">## tpi          0.03      0.29      0.00  0.29  1.00  -0.02  0.35</span></span>
 <span><span class="co">## aspect      -0.32      0.06      0.39  0.06 -0.02   1.00  0.04</span></span>
-<span><span class="co">## TRI         -0.59      0.99      0.42  0.99  0.35   0.04  1.00</span></span></code></pre>
+<span><span class="co">## tri         -0.59      0.99      0.42  0.99  0.35   0.04  1.00</span></span></code></pre>
 <p>Plot the individual predictors to assess if any transformations are
 necessary. We suggest to only use transformations when absolutely
 necessary. In the example dataset, most of the response variables have
 relatively balanced distributions, and therefor we have left them
 untransformed.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">plot_transformations</span><span class="op">(</span><span class="va">pred.vars</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">plot_transformations</span><span class="op">(</span>pred.vars <span class="op">=</span> <span class="va">pred.vars</span>, dat <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="habitat-modelling_files/figure-html/transformations-1.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-2.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-3.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-4.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-5.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-6.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-7.png" width="700"></p>
 <p>Reset the predictor variables to remove any highly correlated
 variables and include any transformed variables.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"depth"</span>,<span class="st">"roughness"</span>, <span class="st">"detrended"</span>, </span>
-<span>               <span class="st">"TPI"</span>, <span class="st">"aspect"</span>, <span class="st">"TRI"</span><span class="op">)</span></span></code></pre></div>
+<span>               <span class="st">"tpi"</span>, <span class="st">"aspect"</span>, <span class="st">"tri"</span><span class="op">)</span></span></code></pre></div>
 <p>Check to make sure response variables have less than 80% zeroes.
 Full-subset GAM modelling will produce unreliable results if your data
 is too zero inflated.</p>
@@ -371,8 +371,9 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sessile invertebrates</span></span>
 <span><span class="va">m_inverts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">sessile_invertebrates</span>, <span class="va">total_points_annotated</span> <span class="op">-</span> <span class="va">sessile_invertebrates</span><span class="op">)</span> <span class="op">~</span> </span>
-<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">mbdepth</span>,     k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>  <span class="op">+</span> </span>
-<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
+<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>,     k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>  <span class="op">+</span> </span>
+<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">roughness</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">tpi</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
 <span>               data <span class="op">=</span> <span class="va">widedat</span>, method <span class="op">=</span> <span class="st">"REML"</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_inverts</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -381,30 +382,34 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## </span></span>
 <span><span class="co">## Formula:</span></span>
 <span><span class="co">## cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~ </span></span>
-<span><span class="co">##     s(mbdepth, k = 5, bs = "cr") + s(detrended, k = 5, bs = "cr")</span></span>
+<span><span class="co">##     s(detrended, k = 5, bs = "cr") + s(roughness, k = 5, bs = "cr") + </span></span>
+<span><span class="co">##         s(tpi, k = 5, bs = "cr")</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">## (Intercept)  -3.0037     0.1683  -17.85   &lt;2e-16 ***</span></span>
+<span><span class="co">## (Intercept)  -3.0800     0.1913   -16.1   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##                edf Ref.df Chi.sq p-value    </span></span>
-<span><span class="co">## s(mbdepth)   2.604  2.943 96.742  &lt;2e-16 ***</span></span>
-<span><span class="co">## s(detrended) 1.883  2.162  2.913   0.298    </span></span>
+<span><span class="co">##                edf Ref.df Chi.sq  p-value    </span></span>
+<span><span class="co">## s(detrended) 3.640  3.900 304.73  &lt; 2e-16 ***</span></span>
+<span><span class="co">## s(roughness) 2.814  3.054  45.07  &lt; 2e-16 ***</span></span>
+<span><span class="co">## s(tpi)       3.495  3.853  28.32 6.79e-06 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.944   Deviance explained = 93.2%</span></span>
-<span><span class="co">## -REML = 83.915  Scale est. = 1         n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  0.973   Deviance explained = 95.8%</span></span>
+<span><span class="co">## -REML = 74.944  Scale est. = 1         n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_inverts</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="habitat-modelling_files/figure-html/set-models-1.png" width="672"></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Rock</span></span>
 <span><span class="va">m_rock</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">consolidated_hard</span>, <span class="va">total_points_annotated</span> <span class="op">-</span> <span class="va">consolidated_hard</span><span class="op">)</span> <span class="op">~</span> </span>
-<span>                   <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">mbdepth</span>,     k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
+<span>                   <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">aspect</span>,     k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                   <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                   <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">tpi</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
 <span>                 data <span class="op">=</span> <span class="va">widedat</span>, method <span class="op">=</span> <span class="st">"REML"</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_rock</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -413,22 +418,25 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## </span></span>
 <span><span class="co">## Formula:</span></span>
 <span><span class="co">## cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~ </span></span>
-<span><span class="co">##     s(mbdepth, k = 5, bs = "cr")</span></span>
+<span><span class="co">##     s(aspect, k = 5, bs = "cr") + s(detrended, k = 5, bs = "cr") + </span></span>
+<span><span class="co">##         s(tpi, k = 5, bs = "cr")</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">## (Intercept)  -5.1476     0.2882  -17.86   &lt;2e-16 ***</span></span>
+<span><span class="co">## (Intercept)   -6.552      0.638  -10.27   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##              edf Ref.df Chi.sq p-value    </span></span>
-<span><span class="co">## s(mbdepth) 2.993  3.333  41.77  &lt;2e-16 ***</span></span>
+<span><span class="co">##                edf Ref.df Chi.sq  p-value    </span></span>
+<span><span class="co">## s(aspect)    3.651  3.905 18.024  0.00133 ** </span></span>
+<span><span class="co">## s(detrended) 3.211  3.591 24.691 3.45e-05 ***</span></span>
+<span><span class="co">## s(tpi)       1.000  1.000  5.016  0.02512 *  </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.339   Deviance explained =   45%</span></span>
-<span><span class="co">## -REML = 39.778  Scale est. = 1         n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  0.886   Deviance explained = 84.5%</span></span>
+<span><span class="co">## -REML = 28.343  Scale est. = 1         n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_rock</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="habitat-modelling_files/figure-html/set-models-2.png" width="672"></p>
@@ -436,8 +444,8 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <code class="sourceCode R"><span><span class="co"># Sand</span></span>
 <span><span class="va">m_sand</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">unconsolidated_soft</span>, <span class="va">total_points_annotated</span> <span class="op">-</span> <span class="va">unconsolidated_soft</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">aspect</span>,     k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>  <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">roughness</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">tpi</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">roughness</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
 <span>              data <span class="op">=</span> <span class="va">widedat</span>, method <span class="op">=</span> <span class="st">"REML"</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_sand</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -446,25 +454,25 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## </span></span>
 <span><span class="co">## Formula:</span></span>
 <span><span class="co">## cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~ </span></span>
-<span><span class="co">##     s(aspect, k = 5, bs = "cr") + s(roughness, k = 5, bs = "cr") + </span></span>
-<span><span class="co">##         s(tpi, k = 5, bs = "cr")</span></span>
+<span><span class="co">##     s(aspect, k = 5, bs = "cr") + s(detrended, k = 5, bs = "cr") + </span></span>
+<span><span class="co">##         s(roughness, k = 5, bs = "cr")</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">## (Intercept)  -6.3296     0.9278  -6.822 8.96e-12 ***</span></span>
+<span><span class="co">## (Intercept)  -17.238      3.503  -4.921 8.62e-07 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##                edf Ref.df Chi.sq  p-value    </span></span>
-<span><span class="co">## s(aspect)    3.839  3.972 25.950 1.99e-05 ***</span></span>
-<span><span class="co">## s(roughness) 2.461  2.796  8.386 0.106147    </span></span>
-<span><span class="co">## s(tpi)       3.140  3.592 25.030 0.000131 ***</span></span>
+<span><span class="co">##                edf Ref.df  Chi.sq p-value    </span></span>
+<span><span class="co">## s(aspect)    3.854  3.978  69.703  &lt;2e-16 ***</span></span>
+<span><span class="co">## s(detrended) 3.729  3.948 100.173  &lt;2e-16 ***</span></span>
+<span><span class="co">## s(roughness) 1.860  2.096   8.829  0.0165 *  </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.0191   Deviance explained = 50.8%</span></span>
-<span><span class="co">## -REML = 117.48  Scale est. = 1         n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  0.915   Deviance explained = 86.7%</span></span>
+<span><span class="co">## -REML = 64.978  Scale est. = 1         n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_sand</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="habitat-modelling_files/figure-html/set-models-3.png" width="672"></p>
@@ -472,8 +480,8 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <code class="sourceCode R"><span><span class="co"># Seagrasses</span></span>
 <span><span class="va">m_seagrass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">seagrasses</span>, <span class="va">total_points_annotated</span> <span class="op">-</span> <span class="va">seagrasses</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">aspect</span>,     k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>  <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">mbdepth</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">tri</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">roughness</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
 <span>              data <span class="op">=</span> <span class="va">widedat</span>, method <span class="op">=</span> <span class="st">"REML"</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_seagrass</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -482,23 +490,25 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## </span></span>
 <span><span class="co">## Formula:</span></span>
 <span><span class="co">## cbind(seagrasses, total_points_annotated - seagrasses) ~ s(aspect, </span></span>
-<span><span class="co">##     k = 5, bs = "cr") + s(mbdepth, k = 5, bs = "cr") + s(tri, </span></span>
+<span><span class="co">##     k = 5, bs = "cr") + s(detrended, k = 5, bs = "cr") + s(roughness, </span></span>
 <span><span class="co">##     k = 5, bs = "cr")</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
-<span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)   -3.732      4.634  -0.806    0.421</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##              edf Ref.df Chi.sq p-value    </span></span>
-<span><span class="co">## s(aspect)  3.419  3.786  26.46 1.7e-05 ***</span></span>
-<span><span class="co">## s(mbdepth) 3.512  3.842  72.20 &lt; 2e-16 ***</span></span>
-<span><span class="co">## s(tri)     3.813  3.959  52.94 &lt; 2e-16 ***</span></span>
+<span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span><span class="co">## (Intercept)  -59.548      6.444  -9.241   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.556   Deviance explained = 73.4%</span></span>
-<span><span class="co">## -REML =  208.1  Scale est. = 1         n = 32</span></span></code></pre>
+<span><span class="co">## Approximate significance of smooth terms:</span></span>
+<span><span class="co">##                edf Ref.df Chi.sq p-value    </span></span>
+<span><span class="co">## s(aspect)    3.899  3.991  122.4  &lt;2e-16 ***</span></span>
+<span><span class="co">## s(detrended) 3.966  3.998  186.7  &lt;2e-16 ***</span></span>
+<span><span class="co">## s(roughness) 3.675  3.916  161.9  &lt;2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## R-sq.(adj) =  0.794   Deviance explained = 85.7%</span></span>
+<span><span class="co">## -REML = 156.76  Scale est. = 1         n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_seagrass</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="habitat-modelling_files/figure-html/set-models-4.png" width="672"></p>
@@ -542,8 +552,8 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <code class="sourceCode R"><span><span class="co"># Reef</span></span>
 <span><span class="va">m_reef</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">reef</span>, <span class="va">total_points_annotated</span> <span class="op">-</span> <span class="va">reef</span><span class="op">)</span> <span class="op">~</span> </span>
 <span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">aspect</span>,     k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>  <span class="op">+</span> </span>
-<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">roughness</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">tpi</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
+<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">roughness</span>, k <span class="op">=</span> <span class="fl">5</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
 <span>               data <span class="op">=</span> <span class="va">widedat</span>, method <span class="op">=</span> <span class="st">"REML"</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_reef</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -552,25 +562,25 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## </span></span>
 <span><span class="co">## Formula:</span></span>
 <span><span class="co">## cbind(reef, total_points_annotated - reef) ~ s(aspect, k = 5, </span></span>
-<span><span class="co">##     bs = "cr") + s(roughness, k = 5, bs = "cr") + s(tpi, k = 5, </span></span>
-<span><span class="co">##     bs = "cr")</span></span>
+<span><span class="co">##     bs = "cr") + s(detrended, k = 5, bs = "cr") + s(roughness, </span></span>
+<span><span class="co">##     k = 5, bs = "cr")</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">## (Intercept)   6.3296     0.9278   6.822 8.96e-12 ***</span></span>
+<span><span class="co">## (Intercept)   17.238      3.503   4.921 8.62e-07 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##                edf Ref.df Chi.sq  p-value    </span></span>
-<span><span class="co">## s(aspect)    3.839  3.972 25.950 1.99e-05 ***</span></span>
-<span><span class="co">## s(roughness) 2.461  2.796  8.386 0.106147    </span></span>
-<span><span class="co">## s(tpi)       3.140  3.592 25.030 0.000131 ***</span></span>
+<span><span class="co">##                edf Ref.df  Chi.sq p-value    </span></span>
+<span><span class="co">## s(aspect)    3.854  3.978  69.703  &lt;2e-16 ***</span></span>
+<span><span class="co">## s(detrended) 3.729  3.948 100.173  &lt;2e-16 ***</span></span>
+<span><span class="co">## s(roughness) 1.860  2.096   8.829  0.0165 *  </span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.0191   Deviance explained = 50.8%</span></span>
-<span><span class="co">## -REML = 117.48  Scale est. = 1         n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  0.915   Deviance explained = 86.7%</span></span>
+<span><span class="co">## -REML = 64.978  Scale est. = 1         n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_reef</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="habitat-modelling_files/figure-html/set-models-6.png" width="672"></p>
@@ -600,11 +610,11 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.871674, -2.161609, -2.683798, -3.207528, -3.417629, -3.56…</span></span>
 <span><span class="co">## $ depth     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 14.83014, 13.89184, 14.18757, 14.48647, 14.47323, 14.39490, …</span></span>
 <span><span class="co">## $ pmacro    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …</span></span>
-<span><span class="co">## $ prock     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.004609083, 0.004696284, 0.004668624, 0.004640833, 0.004642…</span></span>
-<span><span class="co">## $ psand     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.220446e-16, 2.220446e-16, 3.000783e-03, 8.328435e-04, 2.22…</span></span>
-<span><span class="co">## $ pseagrass <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.046259901, 0.033119616, 0.007671424, 0.007378813, 0.042947…</span></span>
-<span><span class="co">## $ pinverts  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1647383, 0.1796898, 0.1747609, 0.1701599, 0.1704906, 0.171…</span></span>
-<span><span class="co">## $ preef     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.0000000, 1.0000000, 0.9969992, 0.9991672, 1.0000000, 1.000…</span></span></code></pre>
+<span><span class="co">## $ prock     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.003615863, 0.001094975, 0.016496455, 0.070776192, 0.002887…</span></span>
+<span><span class="co">## $ psand     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.220446e-16, 2.220446e-16, 8.055590e-05, 5.453682e-05, 2.22…</span></span>
+<span><span class="co">## $ pseagrass <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8902369, 0.9195383, 0.7179510, 0.5948303, 0.9359649, 0.930…</span></span>
+<span><span class="co">## $ pinverts  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.002299087, 0.002142416, 0.002216036, 0.002736343, 0.002876…</span></span>
+<span><span class="co">## $ preef     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.0000000, 1.0000000, 0.9999194, 0.9999455, 1.0000000, 1.000…</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tidy-and-save-the-final-dataset">Tidy and save the final dataset<a class="anchor" aria-label="anchor" href="#tidy-and-save-the-final-dataset"></a>
@@ -627,11 +637,11 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.871674, -2.161609, -2.683798, -3.207528, -3.417629, -3.56…</span></span>
 <span><span class="co">## $ depth     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 14.83014, 13.89184, 14.18757, 14.48647, 14.47323, 14.39490, …</span></span>
 <span><span class="co">## $ pmacro    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …</span></span>
-<span><span class="co">## $ prock     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.004609083, 0.004696284, 0.004668624, 0.004640833, 0.004642…</span></span>
-<span><span class="co">## $ psand     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.220446e-16, 2.220446e-16, 3.000783e-03, 8.328435e-04, 2.22…</span></span>
-<span><span class="co">## $ pseagrass <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.046259901, 0.033119616, 0.007671424, 0.007378813, 0.042947…</span></span>
-<span><span class="co">## $ pinverts  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1647383, 0.1796898, 0.1747609, 0.1701599, 0.1704906, 0.171…</span></span>
-<span><span class="co">## $ preef     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.0000000, 1.0000000, 0.9969992, 0.9991672, 1.0000000, 1.000…</span></span>
+<span><span class="co">## $ prock     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.003615863, 0.001094975, 0.016496455, 0.070776192, 0.002887…</span></span>
+<span><span class="co">## $ psand     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.220446e-16, 2.220446e-16, 8.055590e-05, 5.453682e-05, 2.22…</span></span>
+<span><span class="co">## $ pseagrass <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8902369, 0.9195383, 0.7179510, 0.5948303, 0.9359649, 0.930…</span></span>
+<span><span class="co">## $ pinverts  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.002299087, 0.002142416, 0.002216036, 0.002736343, 0.002876…</span></span>
+<span><span class="co">## $ preef     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.0000000, 1.0000000, 0.9999194, 0.9999455, 1.0000000, 1.000…</span></span>
 <span><span class="co">## $ dom_tag   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "pmacro", "pmacro", "pmacro", "pmacro", "pmacro", "pmacro", …</span></span></code></pre>
 <p>Save final predictions</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
@@ -659,7 +669,7 @@ of the habitat predictions.</p>
 <p>Set colours for habitat plotting.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">preddf</span><span class="op">$</span><span class="va">dom_tag</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "pmacro"    "pseagrass" "pinverts"  "psand"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "pmacro"    "psand"     "pinverts"  "pseagrass" "prock"</span></span></code></pre>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hab_fills</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"psand"</span> <span class="op">=</span> <span class="st">"wheat"</span>,</span>
@@ -718,7 +728,7 @@ ggplot::facet_wrap.</p>
 <span><span class="co">## $ depth       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 14.83014, 14.83014, 14.83014, 14.83014, 14.83014, 14.83014…</span></span>
 <span><span class="co">## $ dom_tag     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "pmacro", "pmacro", "pmacro", "pmacro", "pmacro", "pmacro"…</span></span>
 <span><span class="co">## $ habitat     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Macroalgae", "Rock", "Sand", "Seagrass", "Sessile inverte…</span></span>
-<span><span class="co">## $ Probability <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.000000e+00, 4.609083e-03, 2.220446e-16, 4.625990e-02, 1.…</span></span></code></pre>
+<span><span class="co">## $ Probability <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.000000e+00, 3.615863e-03, 2.220446e-16, 8.902369e-01, 2.…</span></span></code></pre>
 <p>Build plot elements for individual habitat probabilities.</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
