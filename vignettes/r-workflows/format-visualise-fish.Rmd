@@ -38,7 +38,7 @@ Load and format the habitat data. Here we create a 'reef' column that consists o
 ```{r load-habitat}
 habitat <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_tidy-habitat.rds"))) %>%
   dplyr::mutate(number = number / total_points_annotated) %>%
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth, mbdepth, slope, aspect, TPI, TRI, roughness, detrended, habitat, number, mean.relief, sd.relief) %>%
+  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth, mbdepth, slope, aspect, tpi, tri, roughness, detrended, habitat, number, mean_relief, sd_relief) %>%
   pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>%
   CheckEM::clean_names() %>%
   dplyr::mutate(reef = consolidated_hard + macroalgae + seagrasses + sessile_invertebrates) %>%           

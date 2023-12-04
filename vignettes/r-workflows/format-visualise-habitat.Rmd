@@ -66,6 +66,7 @@ tidy.habitat <- metadata.bathy.derivatives %>%
   left_join(tidy.relief) %>%
   dplyr::mutate(longitude_dd = as.numeric(longitude_dd),
                 latitude_dd = as.numeric(latitude_dd)) %>%
+  clean_names() %>%
   glimpse()
 ```
 Format the relief into a format suitable for exploratory plotting.
