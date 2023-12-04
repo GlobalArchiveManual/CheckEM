@@ -77,7 +77,7 @@ out.all = list()
 var.imp = list()
 ```
 
-```{r FSSgam, results='hide', warning=FALSE, message=FALSE}
+```{r FSSgam-count, results='hide', warning=FALSE, message=FALSE}
 for(i in 1:length(resp.vars)){
   use.dat = as.data.frame(tidy.count[which(tidy.count$response == resp.vars[i]),])
   print(resp.vars[i])
@@ -123,13 +123,13 @@ all.mod.fits <- list_rbind(out.all, names_to = "response")
 all.var.imp  <- as.data.frame(do.call("rbind", var.imp))
 ```
 
-```{r}
+```{r read-length}
 tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
                       name,'_tidy-length.rds'))) %>%
   glimpse()
 ```
 
-```{r}
+```{r length-responses}
 unique.vars <- unique(as.character(tidy.length$response))
 
 resp.vars <- character()
@@ -141,12 +141,12 @@ for(i in 1:length(unique.vars)){
 resp.vars 
 ```
 
-```{r}
+```{r set-up}
 out.all = list()
 var.imp = list()
 ```
 
-```{r}
+```{r FSSgam-length, results='hide', warning=FALSE, message=FALSE}
 for(i in 1:length(resp.vars)){
   use.dat = as.data.frame(tidy.length[which(tidy.length$response == resp.vars[i]),])
   print(resp.vars[i])
@@ -186,7 +186,7 @@ for(i in 1:length(resp.vars)){
 }
 ```
 
-```{r}
+```{r save-outputs}
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
 all.mod.fits <- bind_rows(all.mod.fits, list_rbind(out.all, names_to = "response"))
@@ -195,28 +195,28 @@ write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.
 write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
 ```
 
-```{r}
+```{r combine-data}
 dat <- bind_rows(tidy.count, tidy.length) %>%
   glimpse()
 ```
 
-```{r}
-preds  <- readRDS(paste0("r-workflows/data/spatial/rasters/", 
-                         name, "_bathymetry_derivatives.rds"))
+```{r read-derivatives}
+preds  <- readRDS(here::here(paste0("r-workflows/data/spatial/rasters/", 
+                         name, "_bathymetry_derivatives.rds")))
 plot(preds)
 ```
 
-```{r}
+```{r derivative-dataframe}
 preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
-  dplyr::mutate(depth = abs(mbdepth)) %>%                                       
   clean_names() %>%
   glimpse()
 ```
 
-```{r}
+```{r set-models}
 # Indicator species greater than size of maturity
 m_mature <- gam(number ~ 
-                 s(detrended, k = 3, bs = "cr"), 
+                 s(aspect, k = 3, bs = "cr") +
+                  s(tpi, k = 3, bs = "cr"), 
                data = dplyr::filter(dat, response %in% "greater than Lm"), 
                family = tw())
 summary(m_mature)
@@ -224,7 +224,7 @@ plot(m_mature, pages = 1, residuals = T, cex = 5)
 
 # Total abundance
 m_totabund <- gam(number ~ 
-                  s(depth, k = 3, bs = "cr"), 
+                  s(detrended, k = 3, bs = "cr"), 
                 data = dplyr::filter(dat, response %in% "total_abundance"), 
                 family = gaussian(link = "identity"))
 summary(m_totabund)
@@ -232,14 +232,14 @@ plot(m_totabund, pages = 1, residuals = T, cex = 5)
 
 # Species richness
 m_specrich <- gam(number ~ 
-                    s(depth, k = 3, bs = "cr"), 
+                    s(mbdepth, k = 3, bs = "cr"), 
                   data = dplyr::filter(dat, response %in% "species_richness"), 
                   family = gaussian(link = "identity"))
 summary(m_specrich)
 plot(m_specrich, pages = 1, residuals = T, cex = 5)
 ```
 
-```{r}
+```{r predict-gam}
 preddf <- cbind(preddf, 
                 "pmature" = predict(m_mature, preddf, type = "response"),
                 "ptotabund" = predict(m_totabund, preddf, type = "response"),
@@ -247,19 +247,20 @@ preddf <- cbind(preddf,
   glimpse()
 ```
 
-```{r}
+```{r save-predictions}
 saveRDS(preddf, file = here::here(paste0("r-workflows/model output/fish/", 
                               name, "_fish-prediction.RDS")))
 ```
 
-```{r}
+```{r data-long}
 dat <- preddf %>%
+  dplyr::select(x, y, starts_with("p")) %>%
   pivot_longer(names_to = "response", values_to = "value",
                cols = !c(x, y)) %>%
   glimpse()
 ```
 
-```{r}
+```{r marine-parks}
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
   st_make_valid() %>%
   dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE, 
@@ -268,11 +269,11 @@ marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collabor
                 STATE %in% "WA")
 ```
 
-```{r}
+```{r plot-resp-vars}
 resp.vars <- unique(dat$response)
 ```
 
-```{r}
+```{r plot-fish}
 for (i in 1:length(resp.vars)) {
   use.dat <- dat %>%
     dplyr::filter(response %in% resp.vars[i])
@@ -292,12 +293,8 @@ for (i in 1:length(resp.vars)) {
 }
 ```
 
-```{r}
+```{r combine-fish-plots}
 gg_pmature + gg_ptotabund + gg_pspecrich +
   theme(legend.justification = "left") +
-  plot_layout(ncol = 1, nrow = 3)
+  plot_layout(ncol = 2, nrow = 2)
 ```
-
-
-
-
