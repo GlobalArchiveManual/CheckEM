@@ -11,11 +11,16 @@ vignette: >
   %\VignetteIndexEntry{Generate spatial predictions of fish using FSSgam}
   %\VignetteEncoding{UTF-8}
 ---
+
+This script takes the tidy datasets created in the previous steps, and runs model selection, spatial prediction and tidy spatial plotting. The model selection process utilises the 'FSSgam' package created by Becky Fisher, to investigate relationships between predictors and response variables, and create sensible models. Once an appropriate model has been chosen by the user, we then provide R script to spatially predict the response variables and plot these in a tidy format.
+
 ```{r install-fssgam, include=FALSE}
 devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 ```
+
 # R setup
-Load libraries.
+Load libraries. All packages are available through CRAN, aside from 'FSSgam', which can be installed following the instructions provided in the GitHub repository https://github.com/beckyfisher/FSSgam. 
+
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(CheckEM)
 library(tidyverse)
@@ -31,9 +36,13 @@ library(sf)
 library(patchwork)
 ```
 
+Set the study name. Study names are used throughout to make for reproducible code that can be easily shifted between different campaigns and projects while still providing meaningful filenames.
+
 ```{r study-name}
 name <- 'example-bruv-workflow'
 ```
+
+Load the fish count data. This data is created in the previous workflow, 'Format & visualise fish data'.
 
 ```{r load-count}
 tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
@@ -41,23 +50,34 @@ tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/',
   glimpse()
 ```
 
+# Set up data for modelling
+Set the potential predictor variables that may be used to explain the patterns found in the response variables. It is important here to select ecologically meaningful variables that could influence the chosen response variable. 
+
 ```{r pred-vars}
 pred.vars <- c("mbdepth", "roughness", "slope", "detrended",
                "tpi", "tri", "aspect", "reef") 
 ```
 
+Create a correlation matrix to assess correlations between predictor variables. If any variables have a correlation greater than 0.95, then only one of these variables should be included in the model selection. In this example dataset, 'roughness', 'slope' and 'tri' are all highly correlated, so we will only include roughness as a final predictor variable. 
+
 ```{r correlations}
 round(cor(tidy.count[ , pred.vars]), 2)
 ```
 
+Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example dataset, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed. It is important to note that in this example dataset, the spread of most predictor variables across their full range is not ideal, with gaps in key predictors such as depth and detrended bathymetry. When working with GAMs, gaps and outliers like this may create spurious relationships, and therefor we suggest running these scripts with more complete data than the small example dataset provided here.
+
 ```{r transformations, warning = FALSE, message = FALSE}
-plot_transformations(pred.vars = pred.vars, dat = tidy.count)
+CheckEM::plot_transformations(pred.vars = pred.vars, dat = tidy.count)
 ```
+
+Reset the predictor variables to remove any highly correlated variables and include any transformed variables.
 
 ```{r reset-pred-vars}
 pred.vars <- c("mbdepth", "roughness", "detrended",
-               "tpi", "tri", "aspect", "reef") 
+               "tpi", "aspect", "reef") 
 ```
+
+Check to make sure response variables have less than 80% zeroes. Full-subset GAM modelling will produce unreliable results if your data is too zero inflated.
 
 ```{r check-responses}
 unique.vars <- unique(as.character(tidy.count$response))
@@ -71,11 +91,16 @@ for(i in 1:length(unique.vars)){
 resp.vars  
 ```
 
+Add the directory to save model outputs, and set up the R environment for model selection.
+
 ```{r environment-setup}
-outdir    <- ("r-workflows/model output/fish/") 
-out.all = list()
-var.imp = list()
+outdir <- ("r-workflows/model output/fish/") 
+out.all <- list()
+var.imp <- list()
 ```
+
+# Run the full subset model selection process for count metrics
+This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134.
 
 ```{r FSSgam-count, results='hide', warning=FALSE, message=FALSE}
 for(i in 1:length(resp.vars)){
@@ -116,6 +141,8 @@ for(i in 1:length(resp.vars)){
 }
 ```
 
+Tidy the model fits and importance scores. These will be combined with the models fits and importance scores from the model selection for lenght metrics.
+
 ```{r save-gam-data}
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
@@ -123,11 +150,15 @@ all.mod.fits <- list_rbind(out.all, names_to = "response")
 all.var.imp  <- as.data.frame(do.call("rbind", var.imp))
 ```
 
+Load the fish length data. This data is created in the previous workflow, 'Format & visualise fish data'.
+
 ```{r read-length}
 tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
                       name,'_tidy-length.rds'))) %>%
   glimpse()
 ```
+
+Check to make sure response variables have less than 80% zeroes. Full-subset GAM modelling will produce unreliable results if your data is too zero inflated.
 
 ```{r length-responses}
 unique.vars <- unique(as.character(tidy.length$response))
@@ -141,10 +172,15 @@ for(i in 1:length(unique.vars)){
 resp.vars 
 ```
 
+Set up the R environment for model selection.
+
 ```{r set-up}
 out.all = list()
 var.imp = list()
 ```
+
+# Run the full subset model selection process for length metrics
+This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134.
 
 ```{r FSSgam-length, results='hide', warning=FALSE, message=FALSE}
 for(i in 1:length(resp.vars)){
@@ -186,6 +222,8 @@ for(i in 1:length(resp.vars)){
 }
 ```
 
+Combine the model fits and importance scores with those previously created in full subsets modelling of count metrics, and save out these files.
+
 ```{r save-outputs}
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
@@ -195,10 +233,14 @@ write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.
 write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
 ```
 
+Combine the count and length data for easy spatial prediction.
+
 ```{r combine-data}
 dat <- bind_rows(tidy.count, tidy.length) %>%
   glimpse()
 ```
+
+Read in the bathymetry derivatives.
 
 ```{r read-derivatives}
 preds  <- readRDS(here::here(paste0("r-workflows/data/spatial/rasters/", 
@@ -206,11 +248,15 @@ preds  <- readRDS(here::here(paste0("r-workflows/data/spatial/rasters/",
 plot(preds)
 ```
 
+Transform the spatial bathymetry derivatives into a dataframe to predict onto.
+
 ```{r derivative-dataframe}
 preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
   clean_names() %>%
   glimpse()
 ```
+
+Manually set the best model from the full subsets model selection process. We select the 'best' model as the most parsimonious model within 2 AICc of the lowest AICc. We suggest you select your models using statistically rigorous criteria that best suits your analysis or project.
 
 ```{r set-models}
 # Indicator species greater than size of maturity
@@ -239,6 +285,8 @@ summary(m_specrich)
 plot(m_specrich, pages = 1, residuals = T, cex = 5)
 ```
 
+Predict each of the response variables across the extent of the bathymetry derivatives.
+
 ```{r predict-gam}
 preddf <- cbind(preddf, 
                 "pmature" = predict(m_mature, preddf, type = "response"),
@@ -247,10 +295,14 @@ preddf <- cbind(preddf,
   glimpse()
 ```
 
+Save out the spatial predictions. If your computer crashes this way you don't need to run the whole script again.
+
 ```{r save-predictions}
 saveRDS(preddf, file = here::here(paste0("r-workflows/model output/fish/", 
                               name, "_fish-prediction.RDS")))
 ```
+
+Pivot the data to long format for easy plotting.
 
 ```{r data-long}
 dat <- preddf %>%
@@ -260,18 +312,19 @@ dat <- preddf %>%
   glimpse()
 ```
 
+Load marine park data from CAPAD 2022 and transform to match the CRS of the habitat predictions.
+
 ```{r marine-parks}
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
   st_make_valid() %>%
   dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE, 
                                             "\\s*\\([^\\)]+\\)", "")) %>%
-  dplyr::filter(ZONE_TYPE %in% c("National Park Zone", "Sanctuary Zone"),
-                STATE %in% "WA")
+  dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National Park"),
+                STATE %in% "WA") %>%                        
+  st_transform(4326)
 ```
 
-```{r plot-resp-vars}
-resp.vars <- unique(dat$response)
-```
+Loop through each response variable and create a ggplot figure for each. 
 
 ```{r plot-fish}
 for (i in 1:length(resp.vars)) {
@@ -283,7 +336,7 @@ for (i in 1:length(resp.vars)) {
     scale_fill_gradientn(colours = c("#fde725", "#21918c", "#440154"), na.value = "transparent") +
     labs(fill = resp.vars[i], x = NULL, y = NULL) +
     new_scale_fill() +                     
-    geom_sf(data = marine.parks, fill = NA, aes(colour = ZONE_TYPE), 
+    geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63", 
             size = 0.2, show.legend = F) +
     coord_sf(xlim = c(min(dat$x), max(dat$x)),
              ylim = c(min(dat$y), max(dat$y))) +
@@ -292,6 +345,8 @@ for (i in 1:length(resp.vars)) {
   assign(paste0("gg_", resp.vars[i]), p)
 }
 ```
+
+Combine the plots using patchwork.
 
 ```{r combine-fish-plots}
 gg_pmature + gg_ptotabund + gg_pspecrich +

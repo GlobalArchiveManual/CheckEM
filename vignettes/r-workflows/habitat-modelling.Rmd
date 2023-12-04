@@ -11,6 +11,9 @@ vignette: >
   %\VignetteIndexEntry{Generate spatial predictions of habitat using FSSgam}
   %\VignetteEncoding{UTF-8}
 ---
+
+This script takes the checked habitat data from the previous workflow steps, visualises the data and exports it into a format suitable for modelling. The exploratory visualisation of the data allows for trends and patterns in the raw data to be investigated.
+
 ```{r install-fssgam, include=FALSE}
 devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 ```
@@ -62,7 +65,9 @@ Reset the predictor variables to remove any highly correlated variables and incl
 pred.vars <- c("depth","roughness", "detrended", 
                "tpi", "aspect", "tri")
 ```
+
 Check to make sure response variables have less than 80% zeroes. Full-subset GAM modelling will produce unreliable results if your data is too zero inflated.
+
 ```{r check-responses}
 resp.vars.all = unique(as.character(dat$habitat))
 resp.vars = character()
@@ -73,7 +78,9 @@ for(i in 1:length(resp.vars.all)){
 }
 resp.vars 
 ```
-Add the output directory for model outputs, and set up the R environment for model selection.
+
+Add the directory to save model outputs, and set up the R environment for model selection.
+
 ```{r environment-setup}
 outdir    <- ("r-workflows/model output/habitat/")
 out.all   <- list()
@@ -241,8 +248,8 @@ Load marine park data from CAPAD 2022 and transform to match the CRS of the habi
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
   st_make_valid() %>%
   dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE,"\\s*\\([^\\)]+\\)", "")) %>%
-  dplyr::filter(ZONE_TYPE %in% c("National Park Zone", "Sanctuary Zone"), STATE %in% "WA") %>%                        
-  st_transform(32750) 
+  dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National Park"), STATE %in% "WA") %>%                        
+  st_transform(4326) 
 ```
 Set colours for habitat plotting. 
 ```{r habitat-colours}
@@ -261,11 +268,8 @@ ggplot() +
   geom_tile(data = preddf, aes(x, y, fill = dom_tag)) +
   hab_fills + 
   new_scale_fill() +
-  geom_sf(data = marine.parks, fill = NA, aes(colour = ZONE_TYPE), 
+  geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63", 
           size = 0.2, show.legend = F) +
-  scale_colour_manual(values = c("National Park Zone" = "#7bbc63",
-                               "Sanctuary Zone" = "#bfd054"),
-                    name = "Marine Parks") +
   coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
            ylim = c(min(preddf$y), max(preddf$y))) +
   labs(x = NULL, y = NULL, colour = NULL) +
@@ -292,11 +296,8 @@ ggplot() +
   geom_tile(data = indclass, aes(x, y, fill = Probability)) +
   scale_fill_viridis(option = "D", direction = -1) +
   new_scale_fill() +                     
-  geom_sf(data = marine.parks, fill = NA, aes(colour = ZONE_TYPE), 
+  geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63", 
           size = 0.2, show.legend = F) +
-  scale_colour_manual(values = c("National Park Zone" = "#7bbc63",
-                                 "Sanctuary Zone" = "#bfd054"),
-                      name = "Marine Parks") +
   coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
            ylim = c(min(preddf$y), max(preddf$y))) +
   labs(x = NULL, y = NULL, fill = "Probability") +
