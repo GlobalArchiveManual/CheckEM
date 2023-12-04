@@ -312,6 +312,12 @@ dat <- preddf %>%
   glimpse()
 ```
 
+Reset the response variables to loop through when plotting. 
+
+```{r reset-resp-vars}
+resp.vars <- unique(dat$response)
+```
+
 Load marine park data from CAPAD 2022 and transform to match the CRS of the habitat predictions.
 
 ```{r marine-parks}
