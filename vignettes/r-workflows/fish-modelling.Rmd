@@ -12,7 +12,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 ```{r install-fssgam, include=FALSE}
-# devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
+devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 ```
 # R setup
 Load libraries.
