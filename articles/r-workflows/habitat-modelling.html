@@ -60,13 +60,13 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-r-workflows">R Workflows</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-r-workflows">
     <h6 class="dropdown-header" data-toc-skip>Check Data</h6>
-    <a class="dropdown-item" href="../../articles/r-workflows/check-fish.html">Check fish data from EventMeasure</a>
     <a class="dropdown-item" href="../../articles/r-workflows/check-habitat.html">Check habitat data from TransectMeasure</a>
+    <a class="dropdown-item" href="../../articles/r-workflows/check-fish.html">Check fish data from EventMeasure</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Format Data</h6>
     <a class="dropdown-item" href="../../articles/r-workflows/spatial-layers.html">Generate spatial layers for modelling</a>
-    <a class="dropdown-item" href="../../articles/r-workflows/format-visualise-fish.html">Format &amp; visualise fish data</a>
     <a class="dropdown-item" href="../../articles/r-workflows/format-visualise-habitat.html">Format &amp; visualise habitat data</a>
+    <a class="dropdown-item" href="../../articles/r-workflows/format-visualise-fish.html">Format &amp; visualise fish data</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Modelling</h6>
     <a class="dropdown-item" href="../../articles/r-workflows/habitat-modelling.html">Generate spatial predictions of habitat using FSSgam</a>
@@ -655,8 +655,11 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <div class="section level2">
 <h2 id="set-up-for-plotting">Set up for plotting<a class="anchor" aria-label="anchor" href="#set-up-for-plotting"></a>
 </h2>
-<p>Load marine park data from CAPAD 2022 and transform to match the CRS
-of the habitat predictions.</p>
+<p>Load marine park data. The dataset used here is the 2022
+Collaborative Australian Protected Areas Database, which is available
+for free download from <a href="https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore" class="external-link uri">https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore</a>.
+Feel free to replace this shapefile with any suitable dataset that is
+available for your study area.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marine.parks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_make_valid</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
