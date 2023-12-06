@@ -243,7 +243,7 @@ saveRDS(preddf, file = here::here(paste0("r-workflows/model output/habitat/",
                               name, "_habitat-prediction.RDS")))
 ```
 # Set up for plotting
-Load marine park data from CAPAD 2022 and transform to match the CRS of the habitat predictions.
+Load marine park data. The dataset used here is the 2022 Collaborative Australian Protected Areas Database, which is available for free download from https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore. Feel free to replace this shapefile with any suitable dataset that is available for your study area.
 ```{r marine-parks}
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
   st_make_valid() %>%

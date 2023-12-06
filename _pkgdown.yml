@@ -48,18 +48,18 @@ navbar:
     menu:
     - text: '-------'
     - text: Check Data
-    - text: Check fish data from EventMeasure
-      href: articles/r-workflows/check-fish.html
     - text: Check habitat data from TransectMeasure
       href: articles/r-workflows/check-habitat.html
+    - text: Check fish data from EventMeasure
+      href: articles/r-workflows/check-fish.html
     - text: '-------'
     - text: Format Data
     - text: Generate spatial layers for modelling
       href: articles/r-workflows/spatial-layers.html
-    - text: Format & visualise fish data
-      href: articles/r-workflows/format-visualise-fish.html
     - text: Format & visualise habitat data
       href: articles/r-workflows/format-visualise-habitat.html
+    - text: Format & visualise fish data
+      href: articles/r-workflows/format-visualise-fish.html
     - text: '-------'
     - text: Modelling
     - text: Generate spatial predictions of habitat using FSSgam
