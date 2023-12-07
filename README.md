@@ -39,7 +39,7 @@ The R workflows are available here:
 [GlobalArchive](https://globalarchive.org/) is designed to be a centralised repository of ecological survey data and associated information. The overarching design principles for GlobalArchive have included ease of use, secure user access, flexible data import, and the collection of any sampling and image analysis information. GlobalArchive provides a secure archive of metadata and associated annotation or other data or files, with a focus on stereo techniques. Following the data format required by GlobalArchive ensures that researchers are formating theire data in a consistent way and allows multiple researchers to easily combine their data together. We encourage users of stereo-video to upload and store their stereo-video data in GlobalArchive to enable future colloborations to answer broad-scale ecological questions.
 
 # Our aim
-We We hope that our efforts to standardise the collection, annotation, quality control procedures and data storage of stereo-video data will result in data which meet the [FAIR principles](https://ardc.edu.au/resource/fair-data/) and increase colloboration between stereo-video users.
+We have curated exisiting standard operating procedures and developed new tools to improve consistency in all aspects of the stereo-video workflow. We encourage the use of these tools and are open to [feedback](#feedback). We hope that our efforts to standardise the stereo-video workflow will streamline data collection, annotation and quality control and will result in data which meet the [FAIR principles](https://ardc.edu.au/resource/fair-data/) and increase colloboration between stereo-video users.
 
 # CheckEM R Package
 ## To install in R
