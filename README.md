@@ -36,10 +36,10 @@ The R workflows are available here:
 * [Generate spatial predictions of fish using FSSgam](articles/r-workflows/fish-modelling.html)
 
 ## 4. Data Storage
-[GlobalArchive](https://globalarchive.org/) is designed to be a centralised repository of ecological survey data and associated information. The overarching design principles for GlobalArchive have included ease of use, secure user access, flexible data import, and the collection of any sampling and image analysis information. GlobalArchive provides a secure archive of metadata and associated annotation or other data or files, with a focus on stereo techniques. Following the data format required by GlobalArchive allows multiple researchers to easily combine their data together. We encourage users of stereo-video to upload and store their stereo-video data in GlobalArchive to enable future colloborations to answer broad-scale ecological questions.
+[GlobalArchive](https://globalarchive.org/) is designed to be a centralised repository of ecological survey data and associated information. The overarching design principles for GlobalArchive have included ease of use, secure user access, flexible data import, and the collection of any sampling and image analysis information. GlobalArchive provides a secure archive of metadata and associated annotation or other data or files, with a focus on stereo techniques. Following the data format required by GlobalArchive ensures that researchers are formating theire data in a consistent way and allows multiple researchers to easily combine their data together. We encourage users of stereo-video to upload and store their stereo-video data in GlobalArchive to enable future colloborations to answer broad-scale ecological questions.
 
 # Our aim
-We hope that our efforts to standardise the collection, annotation, quality control procedures and data storage of stereo-video data will result in data which meet the [FAIR principles](https://ardc.edu.au/resource/fair-data/) and increase colloboration between stereo-video users.
+We We hope that our efforts to standardise the collection, annotation, quality control procedures and data storage of stereo-video data will result in data which meet the [FAIR principles](https://ardc.edu.au/resource/fair-data/) and increase colloboration between stereo-video users.
 
 # CheckEM R Package
 ## To install in R
