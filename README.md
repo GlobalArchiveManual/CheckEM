@@ -4,7 +4,7 @@
 # Stereo-video workflows
 Stereo imagery is widely used by research institutions and management bodies around the world as a cost-effective and non-destructive method to research and monitor fish and habitats (Whitmarsh, Fairweather and Huveneers, 2017). Stereo-video can provide accurate and precise size and range measurements and can be used to study spatial and temporal patterns in fish assemblages (McLean et al., 2016), habitat composition and complexity (Collins et al., 2017), behaviour (Goetze et al., 2017), responses to anthropogenic pressures (Bosch et al., 2022) and the recovery and growth of benthic fauna (Langlois et al. 2020). It is important that users of stereo-video collect, annotate, quality control and store their data in a consistent manner, to ensure data produced is of the highest quality possible and to enable large scale collaborations. Here we collate existing best practice and propose new tools to equip ecologists to ensure that all aspects of the stereo-video workflow are performed in a consistent way.
 
-![workflows](man/figures/checkem_workflow.png)
+![](man/figures/checkem_workflow.png)
 
 ## Data collection
 Standardised protocols reduce variation in methodologies among researchers, and encourage the use of Findable, Accessible, Interoperable and Reusable (FAIR, Wilkinson et al., 2016) protocols, this increases collaborations and allows researchers to answer broadscale ecological questions. Two standard operating procedures for field data collection have been published:
