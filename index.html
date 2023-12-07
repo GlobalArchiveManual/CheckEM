@@ -108,12 +108,12 @@
   <main id="main" class="col-md-9">
 <div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="stereo-video">Stereo-video<a class="anchor" aria-label="anchor" href="#stereo-video"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="stereo-video-workflows">Stereo-video workflows<a class="anchor" aria-label="anchor" href="#stereo-video-workflows"></a>
 </h1>
 </div>
 <p>Stereo imagery is widely used by research institutions and management bodies around the world as a cost-effective and non-destructive method to research and monitor fish and habitats (Whitmarsh, Fairweather and Huveneers, 2017). Stereo-video can provide accurate and precise size and range measurements and can be used to study spatial and temporal patterns in fish assemblages (McLean et al., 2016), habitat composition and complexity (Collins et al., 2017), behaviour (Goetze et al., 2017), responses to anthropogenic pressures (Bosch et al., 2022) and the recovery and growth of benthic fauna (Langlois et al. 2020). It is important that users of stereo-video collect, annotate, quality control and store their data in a consistent manner, to ensure data produced is of the highest quality possible and to enable large scale collaborations. Here we collate existing best practice and propose new tools to equip ecologists to ensure that all aspects of the stereo-video workflow are performed in a consistent way.</p>
 <div class="figure">
-<img src="images/infographics/checkem_workflow.png" alt=""><p class="caption">workflows</p>
+<img src="reference/figures/checkem_workflow.png" alt=""><p class="caption">workflows</p>
 </div>
 <div class="section level2">
 <h2 id="data-collection">Data collection<a class="anchor" aria-label="anchor" href="#data-collection"></a>
@@ -127,14 +127,27 @@
 <div class="section level2">
 <h2 id="video-annotation">Video annotation<a class="anchor" aria-label="anchor" href="#video-annotation"></a>
 </h2>
-<p>The two field manuals mentioned above outline the standard protocols for video annotation. We have further developed these by creating annotation guides for fish and habitat using two common software developed by <a href="https://www.seagis.com.au/" class="external-link">SeaGIS</a>, <a href="https://www.seagis.com.au/event.html" class="external-link">EventMeasure</a> and <a href="https://www.seagis.com.au/transect.html" class="external-link">TransectMeasure</a>: * The annotation guide for <a href="articles/manuals/EventMeasure_annotation_guide.html">EventMeasure</a> outlines how to obtain count data and length measurements from stereo-BRUV imagery. * The annotation guide for <a href="articles/manuals/TransectMeasure_annotation_guide.html">TransectMeasure</a> outlines a rapid approach to characterise benthic composition and complexity from horizontally facing imagery (including stereo-BRUVs and panoramic drop cameras), adapting existing standardised schema for benthic composition (CATAMI classification scheme) and benthic complexity as per Wilson et al. (2006).</p>
+<p>The two field manuals mentioned above outline the standard protocols for video annotation. We have further developed these by creating annotation guides for fish and habitat using two common software developed by <a href="https://www.seagis.com.au/" class="external-link">SeaGIS</a>, <a href="https://www.seagis.com.au/event.html" class="external-link">EventMeasure</a> and <a href="https://www.seagis.com.au/transect.html" class="external-link">TransectMeasure</a>:</p>
+<ul>
+<li><p>The annotation guide for <a href="articles/manuals/EventMeasure_annotation_guide.html">EventMeasure</a> outlines how to obtain count data and length measurements from stereo-BRUV imagery.</p></li>
+<li><p>The annotation guide for <a href="articles/manuals/TransectMeasure_annotation_guide.html">TransectMeasure</a> outlines a rapid approach to characterise benthic composition and complexity from horizontally facing imagery (including stereo-BRUVs and panoramic drop cameras), adapting existing standardised schema for benthic composition (CATAMI classification scheme) and benthic complexity as per Wilson et al. (2006).</p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="quality-control">Quality Control<a class="anchor" aria-label="anchor" href="#quality-control"></a>
 </h2>
 <p>Robust and automated quality control procedures are essential to consistently identify errors in stereo-video data and provide immediate feedback before datasets are contributed for environmental reporting (Campbell et al., 2013). We have developed an interactive web-based application, called CheckEM, to allow users to compare annotations against life-history information, create interactive plots and tables in a graphical interface, and provide summarised data and error reports to download, and in addition the ability to compile multiple discrete annotation data sets into a single synthesis ready for databasing or analysis. A free online version of the app can be accessed via <a href="https://marine-ecology.shinyapps.io/CheckEM/" class="external-link">this link</a> or you can run a local version of the CheckEM application (without the internet) using R (see instructions below). A <a href="articles/manuals/CheckEM_user_guide.html">user guide for the CheckEM shiny app is available here</a></p>
 <p>We have also developed an R-package, containing functions and workflows, to allow R-savvy ecologists to perform quality control checks, format and model their data. Instructions for installing the R-package can be found below.</p>
-<p>The R workflows are available here: * <a href="articles/r-workflows/check-habitat.html">Check habitat data exported from TransectMeasure</a> * <a href="articles/r-workflows/check-fish.html">Check fish data exported from EventMeasure</a> * <a href="articles/r-workflows/spatial-layers.html">Generate sptaila layers for modelling</a> * <a href="articles/r-workflows/format-visualise-fish.html">Format &amp; visualise habitat data</a> * <a href="articles/r-workflows/format-visualise-fish.html">Format &amp; visualise fish data</a> * <a href="articles/r-workflows/habitat-modelling.html">Generate spatial predictions of habitat using FSSgam</a> * <a href="articles/r-workflows/fish-modelling.html">Generate spatial predictions of fish using FSSgam</a></p>
+<p>The R workflows are available here:</p>
+<ul>
+<li><a href="articles/r-workflows/check-habitat.html">Check habitat data exported from TransectMeasure</a></li>
+<li><a href="articles/r-workflows/check-fish.html">Check fish data exported from EventMeasure</a></li>
+<li><a href="articles/r-workflows/spatial-layers.html">Generate sptaila layers for modelling</a></li>
+<li><a href="articles/r-workflows/format-visualise-fish.html">Format &amp; visualise habitat data</a></li>
+<li><a href="articles/r-workflows/format-visualise-fish.html">Format &amp; visualise fish data</a></li>
+<li><a href="articles/r-workflows/habitat-modelling.html">Generate spatial predictions of habitat using FSSgam</a></li>
+<li><a href="articles/r-workflows/fish-modelling.html">Generate spatial predictions of fish using FSSgam</a></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="data-storage">Data Storage<a class="anchor" aria-label="anchor" href="#data-storage"></a>
