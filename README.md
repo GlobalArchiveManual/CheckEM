@@ -64,6 +64,6 @@ Please submit and feedback on the R package, web based application, workflows or
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeMIO3UIrkciATxmRA96xs36XejdO6GV-G6yHGXjxZOrzRBVA/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
 # Funding
-The Australian Data Paternership: Fish and Shark Data project received investment (https://doi.org/10.47486/DP761) from the Australian Research Data Commons (ARDC) and The University of Western Australia. The ARDC is funded by the National Collaborative Research Infrastructure Strategy (NCRIS).
+The Australian Data Partnership: Fish and Shark Data project received investment (https://doi.org/10.47486/DP761) from the Australian Research Data Commons (ARDC) and The University of Western Australia. The ARDC is funded by the National Collaborative Research Infrastructure Strategy (NCRIS).
 
 </div>
