@@ -114,10 +114,10 @@
 </div>
 <p align="justify">
 </p>
-<p>Stereo imagery is widely used by research institutions and management bodies around the world as a cost-effective and non-destructive method to research and monitor fish and habitats (Whitmarsh, Fairweather and Huveneers, 2017). Stereo-video can provide accurate and precise size and range measurements and can be used to study spatial and temporal patterns in fish assemblages (McLean et al., 2016), habitat composition and complexity (Collins et al., 2017), behaviour (Goetze et al., 2017), responses to anthropogenic pressures (Bosch et al., 2022) and the recovery and growth of benthic fauna (Langlois et al. 2020). It is important that users of stereo-video collect, annotate, quality control and store their data in a consistent manner, to ensure data produced is of the highest quality possible and to enable large scale collaborations. Here we collate existing best practice and propose new tools to equip ecologists to ensure that all aspects of the stereo-video workflow are performed in a consistent way.</p>
+<p>Stereo imagery is widely used by research institutions and management bodies around the world as a cost-effective and non-destructive method to research and monitor fish and habitats (Whitmarsh, Fairweather and Huveneers, 2017). Stereo-video can provide accurate and precise size and range measurements and can be used to study spatial and temporal patterns in fish assemblages (McLean et al., 2016), habitat composition and complexity (Collins et al., 2017), behaviour (Goetze et al., 2017), responses to anthropogenic pressures (Bosch et al., 2022) and the recovery and growth of benthic fauna (Langlois et al. 2020). It is important that users of stereo-video collect, annotate, quality control and store their data in a consistent manner, to ensure data produced is of the highest quality possible and to enable large scale collaborations. Here we collate existing best practices and propose new tools to equip ecologists to ensure that all aspects of the stereo-video workflow are performed in a consistent way.</p>
 <p><img src="reference/figures/checkem_workflow.png"></p>
 <div class="section level2">
-<h2 id="data-collection">Data collection<a class="anchor" aria-label="anchor" href="#data-collection"></a>
+<h2 id="id_1-data-collection">1. Data Collection<a class="anchor" aria-label="anchor" href="#id_1-data-collection"></a>
 </h2>
 <p>Standardised protocols reduce variation in methodologies among researchers, and encourage the use of Findable, Accessible, Interoperable and Reusable (FAIR, Wilkinson et al., 2016) protocols, this increases collaborations and allows researchers to answer broadscale ecological questions. Two standard operating procedures for field data collection have been published:</p>
 <ul>
@@ -126,16 +126,16 @@
 </ul>
 </div>
 <div class="section level2">
-<h2 id="video-annotation">Video annotation<a class="anchor" aria-label="anchor" href="#video-annotation"></a>
+<h2 id="id_2-video-annotation">2. Video Annotation<a class="anchor" aria-label="anchor" href="#id_2-video-annotation"></a>
 </h2>
-<p>The two field manuals mentioned above outline the standard protocols for video annotation. We have further developed these by creating annotation guides for fish and habitat using two common software developed by <a href="https://www.seagis.com.au/" class="external-link">SeaGIS</a>, <a href="https://www.seagis.com.au/event.html" class="external-link">EventMeasure</a> and <a href="https://www.seagis.com.au/transect.html" class="external-link">TransectMeasure</a>:</p>
+<p>The two field manuals mentioned above outline the standard protocols for video annotation. We have further developed these by creating step-by-step annotation guides for fish and habitat using two common software developed by <a href="https://www.seagis.com.au/" class="external-link">SeaGIS</a>, <a href="https://www.seagis.com.au/event.html" class="external-link">EventMeasure</a> and <a href="https://www.seagis.com.au/transect.html" class="external-link">TransectMeasure</a>:</p>
 <ul>
 <li><p>The annotation guide for <a href="articles/manuals/EventMeasure_annotation_guide.html">EventMeasure</a> outlines how to obtain count data and length measurements from stereo-BRUV imagery.</p></li>
 <li><p>The annotation guide for <a href="articles/manuals/TransectMeasure_annotation_guide.html">TransectMeasure</a> outlines a rapid approach to characterise benthic composition and complexity from horizontally facing imagery (including stereo-BRUVs and panoramic drop cameras), adapting existing standardised schema for benthic composition (CATAMI classification scheme) and benthic complexity as per Wilson et al. (2006).</p></li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="quality-control">Quality Control<a class="anchor" aria-label="anchor" href="#quality-control"></a>
+<h2 id="id_3-quality-control">3. Quality Control<a class="anchor" aria-label="anchor" href="#id_3-quality-control"></a>
 </h2>
 <p>Robust and automated quality control procedures are essential to consistently identify errors in stereo-video data and provide immediate feedback before datasets are contributed for environmental reporting (Campbell et al., 2013). We have developed an interactive web-based application, called CheckEM, to allow users to compare annotations against life-history information, create interactive plots and tables in a graphical interface, and provide summarised data and error reports to download, and in addition the ability to compile multiple discrete annotation data sets into a single synthesis ready for databasing or analysis. A free online version of the app can be accessed via <a href="https://marine-ecology.shinyapps.io/CheckEM/" class="external-link">this link</a> or you can run a local version of the CheckEM application (without the internet) using R (see <a href="#shiny-app">instructions below</a>). A <a href="articles/manuals/CheckEM_user_guide.html">user guide for the CheckEM shiny app is available here</a></p>
 <p>We have also developed an R-package, containing functions and workflows, to allow R-savvy ecologists to perform quality control checks, format and model their data. Instructions for installing the R-package can be found <a href="#to-install-in-r">below</a>.</p>
@@ -151,11 +151,15 @@
 </ul>
 </div>
 <div class="section level2">
-<h2 id="data-storage">Data Storage<a class="anchor" aria-label="anchor" href="#data-storage"></a>
+<h2 id="id_4-data-storage">4. Data Storage<a class="anchor" aria-label="anchor" href="#id_4-data-storage"></a>
 </h2>
-<p><a href="https://globalarchive.org/" class="external-link">GlobalArchive</a> is designed to be a centralised repository of ecological survey data and associated information. The overarching design principles for GlobalArchive have included ease of use, secure user access, flexible data import, and the collection of any sampling and image analysis information. GlobalArchive provides a secure archive of metadata and associated annotation or other data or files, with a focus on stereo techniques. Following the data format required by GlobalArchive allows multiple researchers to easily combine their data together.We encourage users of stereo-video to upload and store their stereo-video data in GlobalArchive to enable future colloborations to answer broad-scale ecological questions.</p>
-<p>We hope that our efforts to standardise the collection, annotation, quality control procedures and data storage of stereo-video data will result in data which meet the <a href="https://ardc.edu.au/resource/fair-data/" class="external-link">FAIR principles</a> and increase colloboration between stereo-video users.</p>
+<p><a href="https://globalarchive.org/" class="external-link">GlobalArchive</a> is designed to be a centralised repository of ecological survey data and associated information. The overarching design principles for GlobalArchive have included ease of use, secure user access, flexible data import, and the collection of any sampling and image analysis information. GlobalArchive provides a secure archive of metadata and associated annotation or other data or files, with a focus on stereo techniques. Following the data format required by GlobalArchive allows multiple researchers to easily combine their data together. We encourage users of stereo-video to upload and store their stereo-video data in GlobalArchive to enable future colloborations to answer broad-scale ecological questions.</p>
 </div>
+</div>
+<div class="section level1">
+<h1 id="our-aim">Our aim<a class="anchor" aria-label="anchor" href="#our-aim"></a>
+</h1>
+<p>We hope that our efforts to standardise the collection, annotation, quality control procedures and data storage of stereo-video data will result in data which meet the <a href="https://ardc.edu.au/resource/fair-data/" class="external-link">FAIR principles</a> and increase colloboration between stereo-video users.</p>
 </div>
 <div class="section level1">
 <h1 id="checkem-r-package">CheckEM R Package<a class="anchor" aria-label="anchor" href="#checkem-r-package"></a>
