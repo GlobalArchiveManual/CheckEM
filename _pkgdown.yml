@@ -38,12 +38,22 @@ navbar:
   left:
   - text: User Guides
     menu:
-    - text: CheckEM shiny app
-      href: articles/manuals/CheckEM_user_guide.html
+    - text: '-------'
+    - text: Field Manuals
+    - text: Baited Remote Underwater Stereo-video (stereo-BRUVs)
+      href: https://benthic-bruvs-field-manual.github.io/
+    - text: Diver Operated Stereo-video (stereo-DOVs)
+      href: https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189
+    - text: '-------'
+    - text: Annotation Guides
     - text: Fish annotation guide (EventMeasure)
       href: articles/manuals/EventMeasure_annotation_guide.html
     - text: Benthos annotation guide (TransectMeasure)
       href: articles/manuals/TransectMeasure_annotation_guide.html
+    - text: '-------'
+    - text: User Guides
+    - text: CheckEM - web based application
+      href: articles/manuals/CheckEM_user_guide.html
   - text: R Workflows
     menu:
     - text: '-------'
