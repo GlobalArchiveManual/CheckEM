@@ -51,9 +51,11 @@ navbar:
     - text: Benthos annotation guide (TransectMeasure)
       href: articles/manuals/TransectMeasure_annotation_guide.html
     - text: '-------'
-    - text: User Guides
-    - text: CheckEM - web based application
+    - text: CheckEM Guides
+    - text: CheckEM PDF user manual
       href: articles/manuals/CheckEM_user_guide.html
+    - text: CheckEM instructional video
+      href: articles/manuals/CheckEM_video.html
   - text: R Workflows
     menu:
     - text: '-------'
