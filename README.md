@@ -1,10 +1,10 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FGlobalArchiveManual%2FCheckEM&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=views&edge_flat=false)](https://hits.seeyoufarm.com)
 
-# Stereo-video
+# Stereo-video workflows
 Stereo imagery is widely used by research institutions and management bodies around the world as a cost-effective and non-destructive method to research and monitor fish and habitats (Whitmarsh, Fairweather and Huveneers, 2017). Stereo-video can provide accurate and precise size and range measurements and can be used to study spatial and temporal patterns in fish assemblages (McLean et al., 2016), habitat composition and complexity (Collins et al., 2017), behaviour (Goetze et al., 2017), responses to anthropogenic pressures (Bosch et al., 2022) and the recovery and growth of benthic fauna (Langlois et al. 2020). It is important that users of stereo-video collect, annotate, quality control and store their data in a consistent manner, to ensure data produced is of the highest quality possible and to enable large scale collaborations. Here we collate existing best practice and propose new tools to equip ecologists to ensure that all aspects of the stereo-video workflow are performed in a consistent way.
 
-![workflows](images/infographics/checkem_workflow.png)
+![workflows](man/figures/checkem_workflow.png)
 
 ## Data collection
 Standardised protocols reduce variation in methodologies among researchers, and encourage the use of Findable, Accessible, Interoperable and Reusable (FAIR, Wilkinson et al., 2016) protocols, this increases collaborations and allows researchers to answer broadscale ecological questions. Two standard operating procedures for field data collection have been published:
@@ -15,7 +15,9 @@ Standardised protocols reduce variation in methodologies among researchers, and 
 
 ## Video annotation
 The two field manuals mentioned above outline the standard protocols for video annotation. We have further developed these by creating annotation guides for fish and habitat using two common software developed by [SeaGIS](https://www.seagis.com.au/), [EventMeasure](https://www.seagis.com.au/event.html) and [TransectMeasure](https://www.seagis.com.au/transect.html):
+
 * The annotation guide for [EventMeasure](articles/manuals/EventMeasure_annotation_guide.html) outlines how to obtain count data and length measurements from stereo-BRUV imagery.
+
 * The annotation guide for [TransectMeasure](articles/manuals/TransectMeasure_annotation_guide.html) outlines a rapid approach to characterise benthic composition and complexity from horizontally facing imagery (including stereo-BRUVs and panoramic drop cameras), adapting existing standardised schema for benthic composition (CATAMI classification scheme) and benthic complexity as per Wilson et al. (2006).
 
 ## Quality Control
@@ -24,6 +26,7 @@ Robust and automated quality control procedures are essential to consistently id
 We have also developed an R-package, containing functions and workflows, to allow R-savvy ecologists to perform quality control checks, format and model their data. Instructions for installing the R-package can be found below.
 
 The R workflows are available here:
+
 * [Check habitat data exported from TransectMeasure](articles/r-workflows/check-habitat.html)
 * [Check fish data exported from EventMeasure](articles/r-workflows/check-fish.html)
 * [Generate sptaila layers for modelling](articles/r-workflows/spatial-layers.html)
