@@ -41,6 +41,8 @@ The R workflows are available here:
 # Our aim
 We have curated exisiting standard operating procedures and developed new tools to improve consistency in all aspects of the stereo-video workflow. We encourage the use of these tools and are open to [feedback](#feedback). We hope that our efforts to standardise the stereo-video workflow will streamline data collection, annotation and quality control and will result in data which meet the [FAIR principles](https://ardc.edu.au/resource/fair-data/) and increase colloboration between stereo-video users.
 
+![](man/figures/stereo-video_workflow.png)
+
 # CheckEM R Package
 ## To install in R
 ```
