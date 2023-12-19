@@ -838,13 +838,13 @@ function(input, output, session) {
         nearest.region[i] <- marine.regions()$REGION[which.min(gDistance(metadata[i, ], marine.regions(), byid = TRUE))]}
       
       ## Check that it worked
-      #message("checking each sample nearest region")
+      message("checking each sample nearest region")
       metadata.2 <- as.data.frame(nearest.region) %>%
         bind_cols(metadata()) %>%
         dplyr::rename(marine_region = nearest.region) %>%
-        dplyr::mutate(sample = as.character(sample)) #%>%
+        dplyr::mutate(sample = as.character(sample)) %>%
         #dplyr::select(!status)
-        #glimpse()
+        glimpse()
       
     } else {
       
@@ -883,7 +883,7 @@ function(input, output, session) {
 
     
     if(input$lifehistory %in% "aus"){
-      #print("view metadata.marineparks for Australia")
+      print("view metadata.marineparks for Australia")
       
       metadata.marineparks <- over(metadata, all_data$marineparks)  %>%
         dplyr::rename(zone = ZONE_TYPE) %>%
@@ -892,13 +892,13 @@ function(input, output, session) {
       
     } else {
       
-      #print("view metadata.marineparks for Global")
+      print("view metadata.marineparks for Global")
       sf_use_s2(FALSE)
       
       metadata <- metadata %>% st_as_sf() %>% glimpse()
       
       metadata.marineparks <- st_intersection(metadata %>% dplyr::select(-c(status)), all_data$world_marineparks) %>%
-        st_set_geometry(NULL) #%>% glimpse()
+        st_set_geometry(NULL) %>% glimpse()
       
       metadata.marineparks <- full_join(metadata %>% dplyr::select(-c(status)), metadata.marineparks) %>%
         dplyr::select(zone, status)
@@ -920,11 +920,11 @@ function(input, output, session) {
     # Only bind in new columns if there is data
     if(nrow(metadata.marineparks) > 0) {
     
-    # print("view metadata.regions")
+    print("view metadata.regions")
     metadata.regions <- metadata.2 %>%
       bind_cols(metadata.marineparks) %>%
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, zone, marine_region, observer_count, observer_length, inclusion_probability, visibility_m) %>% 
-      as.data.frame() #%>% glimpse()
+      as.data.frame() %>% glimpse()
     
     } else {
       
@@ -947,6 +947,8 @@ function(input, output, session) {
     message("final metadata")
     glimpse(metadata.regions)
     
+    metadata.regions
+    
     
   })
   
@@ -966,6 +968,13 @@ function(input, output, session) {
     #   errors <- paste0(errors, "<li>The <b>Sample</b> column is missing values</li>", "<br>")
     #   # shinyalert("Missing Metadata", "The Sample column is missing values", type = "error")
     # }
+    
+    message("testing longitude")
+    test <- metadata.regions() %>% 
+      dplyr::mutate(longitude_dd = as.numeric(longitude_dd)) %>% 
+      dplyr::filter(is.na(longitude_dd))
+    
+    print(nrow(test))
     
     # NA in longitude_dd
     if(nrow(metadata.regions() %>% dplyr::mutate(longitude_dd = as.numeric(longitude_dd)) %>% 
