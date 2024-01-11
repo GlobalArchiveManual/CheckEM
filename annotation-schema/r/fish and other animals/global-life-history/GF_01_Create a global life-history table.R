@@ -71,7 +71,7 @@ lwr <- length_weight(validated) %>%
   dplyr::mutate(speccode = as.character(speccode))
 
 # bay_lwrs <- data.frame() # turned off for now So i don't loose the data we have already downloaded
-bay_lwrs <- read.csv("data/bayesian_length-weights.csv") %>% distinct()
+bay_lwrs <- read.csv("annotation-schema/data/staging/bayesian_length-weights.csv") %>% distinct()
 
 # TODO turn this into a file hosted in the app
 # TODO make this it's own script as it will need to be used by both the aus fish and global fish
@@ -111,9 +111,9 @@ synonyms <- synonyms(all.species$scientific) %>%
 
 unique(synonyms$status)
 
-## Get worms code ----
-## The wm_records_names function can only handle 170 names at a time (have chopped in 150 chunks as it is an easier number)
-## 150 names takes around ~ 6 seconds to run
+# ## Get worms code ----
+# ## The wm_records_names function can only handle 170 names at a time (have chopped in 150 chunks as it is an easier number)
+# ## 150 names takes around ~ 6 seconds to run
 # 
 # # Create a list of all species
 # species.to.use <- unique(all.species$scientific)
@@ -122,17 +122,17 @@ unique(synonyms$status)
 # species.lists <- split(species.to.use, ceiling(seq_along(species.to.use)/150)) # 234 lists
 # 
 # worms <- data.frame()
-
+# 
 # # Time to run = 35 (Have written as a csv to re-read back in to save time, but left the original code to be re-run if needed)
 # for(id in seq(1:length(species.lists))){
-#   
+# 
 #   dat <- species.lists[id][[1]] #%>% glimpse()
 #   temp <- wm_records_names(c(dat), marine_only = FALSE)
-#   
+# 
 #   temp.worms <- do.call("rbind", temp)
-#   
+# 
 #   worms <- bind_rows(worms, temp.worms)
-#   
+# 
 # }
 # 
 # worms.final <- worms %>%
@@ -140,9 +140,9 @@ unique(synonyms$status)
 #   ga.clean.names() %>%
 #   dplyr::select(aphiaid, scientificname, status, kingdom, phylum, class, order, family, genus, ismarine, isbrackish, isfreshwater) %>%
 #   dplyr::rename(scientific = scientificname)
-# write.csv(worms.final, "data/worms.list.csv", row.names = FALSE)
+# write.csv(worms.final, "annotation-schema/data/staging/worms.list.csv", row.names = FALSE)
 # 
-# worms.final <- read.csv("data/worms.list.csv")%>%
+# worms.final <- read.csv("annotation-schema/data/staging/worms.list.csv")%>%
 #   filter(!is.na(scientific)) %>%
 #   filter(status == "accepted")
 # 
@@ -169,20 +169,22 @@ unique(synonyms$status)
 #   dplyr::select(aphiaid, scientificname, status, kingdom, phylum, class, order, family, genus, ismarine, isbrackish, isfreshwater) %>%
 #   dplyr::rename(scientific = scientificname) %>%
 #   filter(status == "accepted") %>%
-#   filter(!is.na(family)) 
+#   filter(!is.na(family))
 # 
 # all.worms <- worms.final %>%
 #   filter(!is.na(family)) %>%
-#   bind_rows(new.worms) %>%
+#   # bind_rows(new.worms) %>%
 #   filter(status == "accepted")
-
+# 
 # simple.worms <- all.worms %>%
 #   dplyr::select(-c(ismarine, isbrackish, isfreshwater))
 # 
 # test.for.nas <- (simple.worms[!complete.cases(simple.worms), ])
+# 
+# write.csv(all.worms, "annotation-schema/data/staging/worms.list.csv", row.names = FALSE)
+# 
 
-# write.csv(all.worms, "data/worms.list.csv", row.names = FALSE)
-all.worms <- read.csv("data/worms.list.csv") %>%
+all.worms <- read.csv("annotation-schema/data/staging/worms.list.csv") %>%
   group_by(scientific) %>% 
   slice(1) %>% # WORMS has duplicate rows but different AphiaIDs for some species e.g. Anabarilius liui (1007204 & 1012093)
   ungroup()
@@ -204,7 +206,7 @@ all.worms <- read.csv("data/worms.list.csv") %>%
 #   dat <- id.lists[id][[1]] #%>% glimpse()
 #   temp <- wm_synonyms_(c(dat)) %>%
 #     glimpse()
-#   
+# 
 #   syns <- bind_rows(syns, temp)
 # }
 # 
@@ -213,14 +215,15 @@ all.worms <- read.csv("data/worms.list.csv") %>%
 #   ga.clean.names() %>%
 #   dplyr::select(scientificname, unacceptreason, valid_aphiaid, valid_name) %>%
 #   dplyr::filter(!scientificname == valid_name) %>% # a check to make sure the valid name isn't the same as the synonym
-#   dplyr::rename(scientific = valid_name, 
+#   dplyr::rename(scientific = valid_name,
 #                 aphiaid = valid_aphiaid,
 #                 synonym = scientificname)
 # 
-# write.csv(syn.tidy, "data/worms.synonyms.list.csv", row.names = FALSE)
-worms.synonyms <- read.csv("data/worms.synonyms.list.csv") %>%
+# write.csv(syn.tidy, "annotation-schema/data/staging/worms.synonyms.list.csv", row.names = FALSE)
+
+
+worms.synonyms <- read.csv("annotation-schema/data/staging/worms.synonyms.list.csv") %>%
   left_join(., all.worms) %>%
-  dplyr::select(-c(match_type)) %>% #TODO remove this if i have to run the above code again
   tidyr::separate(scientific, into = c("genus_correct", "species_correct"), sep = " ", extra = "merge", remove = FALSE) %>%
   tidyr::separate(synonym, into = c("genus", "species"), sep = " ", extra = "merge", remove = FALSE) %>%
   dplyr::select(-c(aphiaid, status, kingdom, phylum, class, order, ismarine, isbrackish, isfreshwater)) %>%
@@ -241,7 +244,7 @@ species.also.a.synonym <- worms.synonyms %>%
   dplyr::rename(valid.name.too.but.also.a.synonym.for.correct.name = scientific)
 
 # Get IUCN ranking ----
-iucn.all <- readRDS("data/iucn.RDS") %>%
+iucn.all <- readRDS("annotation-schema/data/staging/iucn.RDS") %>%
   dplyr::rename(iucn_ranking = category) %>%
   dplyr::mutate(iucn_ranking = case_when(
     iucn_ranking %in% "DD" ~ "Data Deficient",
@@ -335,7 +338,7 @@ test <- fblh %>%
   unnest(marine.region) %>%
   distinct(marine.region)
 
-animals <- readRDS("data/animals_global_with_dist.RDS") %>%
+animals <- readRDS("annotation-schema/data/staging/global_animals_distributions.RDS") %>%
   dplyr::rename(aphia_id = taxonid) %>%
   tidyr::separate(scientific_name, into = c("genus", "species"), remove = FALSE, extra = "merge") 
 
@@ -350,17 +353,18 @@ names(life_history)
 missing <- life_history %>%
   filter(is.na(phylum))
 
-write.csv(life_history, "output/fish/global_fish.life.history.csv")
-write.csv(worms.synonyms, "output/fish/global_fish.synonyms.csv")
+write.csv(life_history, "annotation-schema/output/fish/schema/global_fish.life.history.csv")
+write.csv(worms.synonyms, "annotation-schema/output/fish/schema/global_fish.synonyms.csv")
 
 
 # Write files for CheckEM
-write.csv(life_history, "output/CheckEM/global_fish.life.history.csv")
-write.csv(worms.synonyms, "output/CheckEM/global_fish.synonyms.csv")
-write.csv(species.also.a.synonym, "output/CheckEM/global_fish.ambiguous.synonyms.csv")
+# write.csv(life_history, "output/CheckEM/global_fish.life.history.csv")
+# write.csv(worms.synonyms, "output/CheckEM/global_fish.synonyms.csv")
+# write.csv(species.also.a.synonym, "output/CheckEM/global_fish.ambiguous.synonyms.csv")
 
-saveRDS(life_history, "C:/GitHub/CheckEMV2/data/global_fish.life.history.RDS")
-saveRDS(worms.synonyms, "C:/GitHub/CheckEMV2/data/global_fish.synonyms.RDS")
+saveRDS(life_history, "annotation-schema/data/tidy/global_fish.life.history.RDS")
+saveRDS(worms.synonyms, "annotation-schema/data/tidy/global_fish.synonyms.RDS")
+
 saveRDS(species.also.a.synonym, "C:/GitHub/CheckEMV2/data/global_fish.ambiguous.synonyms.RDS")
 
 
