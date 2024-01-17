@@ -21,7 +21,8 @@ all <- lh %>%
                 SPECIES = species) %>%
   dplyr::select(FAMILY, GENUS, SPECIES, "CAAB CODE") %>%
   dplyr::filter(!SPECIES %in% "spp") %>% # EventMeasure creates spp, sp1 etc automatically
-  dplyr::bind_rows(., extras)
+  dplyr::bind_rows(., extras) %>%
+  distinct()
 
 date <- str_sub(str_remove_all(Sys.time(), "[^[:alnum:] ]"), 1, 8)
 
