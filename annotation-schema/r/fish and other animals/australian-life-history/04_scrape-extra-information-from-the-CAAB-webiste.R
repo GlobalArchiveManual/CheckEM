@@ -8,43 +8,49 @@ library(dplyr)
 library(tidyr)
 library(CheckEM)
 library(stringr)
+library(GlobalArchive)
 
 # Read in the caab code list created in the first script
-caab <- readRDS("annotation-schema/data/staging/caab-with-regions.RDS") %>%
+caab <- readRDS("annotation-schema/data/staging/australia_fish_caab-with-regions.RDS") %>%
   dplyr::mutate(scientific.name = paste(genus, species, sep = " ")) %>%
-  dplyr::filter(!species == "spp")
+  dplyr::filter(!species == "spp") 
 
-## Scrape information from the website by looping through all CAAB codes (this takes roughly an hour with ~5100 codes)
-## Remove the hashes in this section to run again
+# # Scrape information from the website by looping through all CAAB codes (this takes roughly an hour with ~5100 codes)
+# # Remove the hashes in this section to run again
 # temp.info <- data.frame()
 # 
 # for (caab.code in unique(caab$caab_code)) {
 # 
+# 
 #   url <- paste0("https://www.cmar.csiro.au/caab/taxon_report.cfm?caab_code=", caab.code)
 # 
 #   # Read the webpage content as lines
+#   try(
 #   webpage <- readLines(url)
+#   )
 # 
 #   # Send a GET request to the webpage and parse the HTML content
+#   try(
 #   page <- read_html(url)
+#   )
 # 
 #   # Find the second table on the webpage
-#   table <- page %>% html_nodes("table")
+#   try(table <- page %>% html_nodes("table"))
 # 
 #   # Convert the table to a data frame
-#   table_df <- html_table(table, fill = TRUE)
+#   try(table_df <- html_table(table, fill = TRUE))
 # 
 #   # # Print the table
 #   # print(table_df)
 # 
-#   caab.info <- table_df[[1]] %>%
+#   try(caab.info <- table_df[[1]] %>%
 #     pivot_wider(names_from = X1, values_from = X2) %>%
-#     ga.clean.names()
+#     ga.clean.names())
 # 
-#   names(caab.info) <- (sub("[.]$", "", names(caab.info))) # Remove full stops from end of names
+#   try(names(caab.info) <- (sub("[.]$", "", names(caab.info)))) # Remove full stops from end of names
 #   names(caab.info)
 # 
-#   species.info <- table_df[[2]] %>%
+#   try(species.info <- table_df[[2]] %>%
 #     dplyr::select(X1, X2) %>%
 #     dplyr::filter(X1 %in% c("Family:",
 #                             "Standard Name (AS5300):",
@@ -52,56 +58,58 @@ caab <- readRDS("annotation-schema/data/staging/caab-with-regions.RDS") %>%
 #                             "Synonyms:",
 #                             "WoRMS")) %>%
 #     pivot_wider(names_from = X1, values_from = X2) %>%
-#     ga.clean.names()
+#     ga.clean.names())
 # 
-#   names(species.info) <- (sub("[.]$", "", names(species.info))) # Remove full stops from end of names
+#   try(names(species.info) <- (sub("[.]$", "", names(species.info)))) # Remove full stops from end of names
 #   names(species.info)
 # 
-#   info <- bind_cols(caab.info, species.info)
+#   try(info <- bind_cols(caab.info, species.info))
 # 
-#   temp.info <- bind_rows(temp.info, info)
+#   try(temp.info <- bind_rows(temp.info, info))
 # 
 #   message(paste("up to ", nrow(temp.info), "of ", nrow(caab)))
 # 
 # }
-# 
 # saveRDS(temp.info, "annotation-schema/data/staging/scraped-caab.RDS")
+# Sys.time() # started at 8:30
 
-info <- readRDS("annotation-schema/data/staging/scraped-caab.RDS")
+info <- readRDS("annotation-schema/data/staging/scraped-caab.RDS") %>%
+  clean_names()
 
 # Remove spaces from CAAB
-info$caab.code <- gsub(" \nshow as JSON", "", info$caab.code)
-info$caab.code <- gsub("[^[:alnum:]]", "", info$caab.code)
+info$caab_code <- gsub(" \nshow as JSON", "", info$caab_code)
+info$caab_code <- gsub("[^[:alnum:]]", "", info$caab_code)
+info$caab_code <- gsub("showasJSON", "", info$caab_code)
 
 # Need to split name into scientific and authority
-clean.info <- info %>%
-  tidyr::separate(scientific.nameand.authority, into = c("scientific.name"), sep = " \n", remove = FALSE) %>%
-  dplyr::mutate(scientific.name = trimws(scientific.name)) %>%
-  dplyr::mutate(scientific.name = str_replace_all(.$scientific.name, c("^(\\S+\\s+\\S+)\\s+" = "\\1"))) %>%
-  tidyr::separate(scientific.name, into = c("genus", "species"), sep = " ", remove = FALSE) %>%
-  dplyr::mutate(family = str_replace_all(.$family, c('[[:digit:]]+' = "", "  " = "", "Rock Whitings" = "Labridae", "\\(|\\)" = ""))) %>%
+clean_info <- info %>%
+  tidyr::separate(scientific_nameand_authority, into = c("scientific_name"), sep = " \n", remove = FALSE) %>%
+  dplyr::mutate(scientific_name = trimws(scientific_name)) %>%
+  dplyr::mutate(scientific_name = str_replace_all(scientific_name, c("^(\\S+\\s+\\S+)\\s+" = "\\1"))) %>%
+  tidyr::separate(scientific_name, into = c("genus", "species"), sep = " ", remove = FALSE) %>%
+  dplyr::mutate(family = str_replace_all(family, c('[[:digit:]]+' = "", "  " = "", "Rock Whitings" = "Labridae", "\\(|\\)" = ""))) %>%
   tidyr::separate(family, into = c("family"), sep = " ") %>%
-  dplyr::filter(is.na(attention.non.current.taxon.this.record.represents.an.old.code.which.has.been.superseded.by.a.new.active.caab.code.see.taxon.notes.for.more.details.if.available)) %>%
-  dplyr::filter(is.na(attention.non.current.taxon.this.record.represents.an.obsolete.code.that.currently.has.no.corresponding.active.code.in.caab.see.taxon.notes.for.more.details.if.available)) %>%
-  dplyr::mutate(common.name = if_else(is.na(standard.name.as5300), standard.name, standard.name.as5300)) %>%
-  dplyr::mutate(worms = str_replace_all(.$worms, c("urn:lsid:marinespecies.org:taxname:" = ""))) %>%
-  tidyr::separate(worms, into = c("worms.id", "worms.valid"), sep = "\n") %>%
-  dplyr::select(caab.code, family, genus, species, scientific.name, common.name, worms.id, worms.valid, synonyms) %>%
+  dplyr::filter(is.na(attention_non_current_taxon_this_record_represents_an_old_code_which_has_been_superseded_by_a_new_active_caab_code_see_taxon_notes_for_more_details_if_available)) %>%
+  dplyr::filter(is.na(attention_non_current_taxon_this_record_represents_an_obsolete_code_that_currently_has_no_corresponding_active_code_in_caab_see_taxon_notes_for_more_details_if_available)) %>%
+  dplyr::mutate(common_name = if_else(is.na(standard_name_as5300), standard_name, standard_name_as5300)) %>%
+  dplyr::mutate(worms = str_replace_all(worms, c("urn:lsid:marinespecies.org:taxname:" = ""))) %>%
+  tidyr::separate(worms, into = c("worms_id", "worms_valid"), sep = "\n") %>%
+  dplyr::select(caab_code, family, genus, species, scientific_name, common_name, worms_id, worms_valid, synonyms) %>%
   glimpse()
   
-unique(clean.info$scientific.name)
-unique(clean.info$synonyms) # a mess - will need to do separately
-unique(clean.info$family)# looks mostly ok
-unique(clean.info$genus)# looks mostly ok
-unique(clean.info$species)# looks mostly ok
-unique(clean.info$worms.id)# looks mostly ok
-unique(clean.info$worms.valid)
+unique(clean_info$scientific_name)
+unique(clean_info$synonyms) # a mess - will need to do separately
+unique(clean_info$family)# looks mostly ok
+unique(clean_info$genus)# looks mostly ok
+unique(clean_info$species)# looks mostly ok
+unique(clean_info$worms_id)# looks mostly ok
+unique(clean_info$worms_valid)
 
 # The synonyms are very messy, this is a very manual way of removing inconsistencies
-synonyms <- clean.info %>%
-  dplyr::select(caab.code, family, genus, species, scientific.name, synonyms) %>%
+synonyms <- clean_info %>%
+  dplyr::select(caab_code, family, genus, species, scientific_name, synonyms) %>%
   # dplyr::filter(!is.na(synonyms)) %>%
-  dplyr::mutate(synonyms = str_replace_all(.$synonyms, c("\\[misidentification\\]" = "misidentified, ",
+  dplyr::mutate(synonyms = str_replace_all(synonyms, c("\\[misidentification\\]" = "misidentified, ",
                                                          "\\(misidentification\\)" = "misidentified, ",
                                                          " \\[Russell et al 1983: 20; Checklist of Fishes GBR Capricornia section - misidentification\\]" = "misidentified",
                                                          " \\(Steindachner 1892 \\[Thomson 1997:515 - misidentification\\] " = "misidentified, ",
@@ -356,34 +364,35 @@ synonyms <- clean.info %>%
   dplyr::mutate(synonyms = trimws(synonyms)) %>%
   dplyr::filter(!str_detect(synonyms, "sp.|sp |Trimma DFH 8|sp$|misidentified")) %>%
   
-  dplyr::mutate(synonyms = str_replace_all(.$synonyms, c("[.]$" = "",
+  dplyr::mutate(synonyms = str_replace_all(synonyms, c("[.]$" = "",
                                                          "[,]$" = ""))) %>%
   
   dplyr::mutate(synonyms = trimws(synonyms)) %>%
   dplyr::mutate(family = str_replace_all(.$family, c("[^[:alnum:]]" = "", "[[:punct:]]" = "", "[:]$" = ""))) %>%
-  dplyr::mutate(synonym.family = family) %>%
-  tidyr::separate(synonyms, into = c("synonym.genus", "synonym.species"), sep = " ") %>%
-  dplyr::filter(!scientific.name == paste(synonym.genus, synonym.species))
+  dplyr::mutate(synonym_family = family) %>%
+  tidyr::separate(synonyms, into = c("synonym_genus", "synonym_species"), sep = " ") %>%
+  dplyr::filter(!scientific_name == paste(synonym_genus, synonym_species)) %>%
+  dplyr::filter(!is.na(synonym_species))
 
 unique(synonyms$family) %>% sort()
 
 # Test for actual species that are "synoynms"
-test.dat <- synonyms %>% dplyr::mutate(scientific.name = paste(synonym.genus, synonym.species)) %>% distinct(scientific.name)
+test_dat <- synonyms %>% dplyr::mutate(scientific_name = paste(synonym_genus, synonym_species)) %>% distinct(scientific_name)
 
-synonym.is.actual.species <- semi_join(test.dat, clean.info) %>%
-  tidyr::separate(scientific.name, into = c("synonym.genus", "synonym.species")) # 74 species where the synonym is also a species, need to remove these from final data
+synonym_is_actual_species <- semi_join(test_dat, clean_info) %>%
+  tidyr::separate(scientific_name, into = c("synonym_genus", "synonym_species")) # 74 species where the synonym is also a species, need to remove these from final data
 
-final.synonyms <- anti_join(synonyms, synonym.is.actual.species) # remove any synonyms that are also a valid species name
+final_synonyms <- anti_join(synonyms, synonym_is_actual_species) # remove any synonyms that are also a valid species name
 
-test.multiple.matches <- final.synonyms %>%
-  dplyr::group_by(synonym.family, synonym.genus, synonym.species) %>%
+test_multiple_matches <- final_synonyms %>%
+  dplyr::group_by(synonym_family, synonym_genus, synonym_species) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
-final.synonyms <- anti_join(final.synonyms, test.multiple.matches) 
+final_synonyms <- anti_join(final_synonyms, test_multiple_matches) 
 
-final.caab.codes <- clean.info %>%
+final_caab_codes <- clean_info %>%
   dplyr::select(-c(synonyms))
 
-saveRDS(final.synonyms, "annotation-schema/data/staging/australia_fish_caab-synonyms.RDS")
-saveRDS(final.caab.codes, "annotation-schema/data/staging/australia_fish_caab-codes_common-names.RDS")
+saveRDS(final_synonyms, "annotation-schema/data/staging/australia_fish_caab-synonyms.RDS")
+saveRDS(final_caab_codes, "annotation-schema/data/staging/australia_fish_caab-codes_common-names.RDS")

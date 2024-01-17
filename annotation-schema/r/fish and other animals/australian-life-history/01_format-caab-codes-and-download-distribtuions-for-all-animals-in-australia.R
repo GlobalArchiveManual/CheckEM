@@ -20,15 +20,15 @@ sf_use_s2(FALSE)
 
 # Spatial files ----
 # set the projection
-wgs.84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+wgs_84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 
 # Read in Australia's marine regions ----
-aus.regions <- st_read("annotation-schema/data/spatial/marine_regions.shp") %>%
+aus_regions <- st_read("annotation-schema/data/spatial/marine_regions.shp") %>%
   dplyr::select(-c(OBJECTID))
 
-aus.regions$region <- as.character(aus.regions$REGION)
-st_crs(aus.regions) <- wgs.84
-aus.regions <- st_as_sf(aus.regions)
+aus_regions$region <- as.character(aus_regions$REGION)
+st_crs(aus_regions) <- wgs_84
+aus_regions <- st_as_sf(aus_regions)
 
 # Read in the latest CAAB dump from CSIRO website ----
 # Download is available here: https://www.marine.csiro.au/datacentre/caab/caab_dump_latest.xlsx
@@ -290,8 +290,8 @@ for (i in 1:nrow(all_polygons)) {
   mrgid <- unique(polygon_to_test$mrgid)
   name <- unique(polygon_to_test$name)
   
-  try(dat <- aus.regions %>%
-        dplyr::slice(st_intersects(polygon_to_test, aus.regions)[[1]]) %>%
+  try(dat <- aus_regions %>%
+        dplyr::slice(st_intersects(polygon_to_test, aus_regions)[[1]]) %>%
         st_set_geometry(NULL) %>%
         dplyr::distinct(Label) %>%
         dplyr::summarise(marine_region = toString(Label)) %>%

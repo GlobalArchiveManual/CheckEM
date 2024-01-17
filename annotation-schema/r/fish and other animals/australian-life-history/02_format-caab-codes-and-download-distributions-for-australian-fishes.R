@@ -12,13 +12,19 @@ library(sf)
 sf_use_s2(TRUE)
 
 # Spatial files ----
-wgs.84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+wgs_84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 
 aus_regions <- st_read("annotation-schema/data/spatial/marine_regions.shp") %>%
   dplyr::select(-c(OBJECTID))
 
 aus_regions$region <- as.character(aus_regions$REGION)
-st_crs(aus_regions) <- wgs.84
+st_crs(aus_regions) <- wgs_84
+
+# Read in extra ones that are not included in CAAB dump that I have made by hand ----
+caab_extra <- read_csv("annotation-schema/data/raw/caab_not_included_in_dump.csv") %>%
+  dplyr::rename(display_name = scientific_name, order_name = order) %>%
+  dplyr::mutate(scientific_name = display_name) %>%
+  dplyr::rename(spcode = caab)
 
 # Read in the latest CAAB dump from CSIRO website ----
 # Download is available here: https://www.marine.csiro.au/datacentre/caab/caab_dump_latest.xlsx
@@ -34,11 +40,12 @@ caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
   dplyr::mutate(phylum = if_else(family %in% "Myliobatidae", "Chordata", phylum)) %>%
   dplyr::mutate(order_name = if_else(family %in% "Myliobatidae", "Rajiformes", order_name)) %>%
   dplyr::mutate(kingdom = if_else(family %in% "Myliobatidae", "Animalia", kingdom)) %>%
+  dplyr::bind_rows(caab_extra) %>%
   glimpse()
 
 # Format caab codes ----
 caab <- caab_og %>%
-  dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali")) %>%
+  dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali", "Myxini")) %>%
   dplyr::filter(!is.na(display_name)) %>%
   dplyr::filter(!is.na(parent_id)) %>%
   dplyr::filter(!stringr::str_detect(scientific_name, "non-current code")) %>%
@@ -49,7 +56,7 @@ caab <- caab_og %>%
 list_to_download <- caab %>%
   filter(!species %in% "spp")
 
-## Download distribution files from CSIRO - remove the hashes to run again
+# # Download distribution files from CSIRO - remove the hashes to run again
 # for (caab in unique(list_to_download$spcode)){
 #   print(caab)
 # 
@@ -58,14 +65,14 @@ list_to_download <- caab %>%
 # 
 #   # Set the destination file path where the shapefile will be saved
 #   destination_file <- paste0("annotation-schema/data/raw/distributions/", caab, "_shapefile.zip")
-#   
+# 
 #   # Check if the download was successful
 #   if (file.exists(destination_file)) {
 #     message("Shapefile downloaded successfully.")
 #   } else {
 #     # Download the shapefile
 #     download.file(url, destfile = destination_file, mode = "wb")
-#     
+# 
 #     # message("Failed to download the shapefile.")
 #   }
 # }
@@ -129,7 +136,7 @@ for (CAAB in unique(polygons$SPCODE)) {
 }
 
 caab <- caab_og %>%
-  dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali")) %>%
+  dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali", "Myxini")) %>%
   dplyr::filter(!is.na(display_name)) %>%
   dplyr::filter(!is.na(parent_id)) %>%
   dplyr::filter(!stringr::str_detect(scientific_name, "non-current code")) %>%

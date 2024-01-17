@@ -29,7 +29,7 @@ codes <- rfishbase::common_names(validated) %>%
   dplyr::mutate(speccode = as.character(speccode))
 
 ## This is slow but essential for figuring out what fishbase name = CAAB
-## Remove the hashes to run again
+# # Remove the hashes to run again
 # code_crosswalk <- data.frame()
 # 
 # for (caab_name in unique(caab$scientific_name)) {
@@ -185,6 +185,32 @@ tidy_lwr <- lwr %>%
                          !type %in% c("FL") ~ bll)) %>%
   dplyr::rename(fishbase_scientific = species)
 
+# bay_lwrs <- data.frame() # turned off for now So i don't loose the data we have already downloaded
+bay_lwrs <- read.csv("annotation-schema/data/staging/bayesian_length-weights.csv") %>% 
+  distinct()
+
+# Sys.time()
+# 
+# temp.validated <- as.data.frame(validated) %>%
+#   filter(!validated %in% c(unique(bay_lwrs$scientific))) %>%
+#   pull(validated)
+# 
+# for(species in seq(1:length(unique(temp.validated)))){
+#   print(species)
+# 
+#   try(temp_lwr <- find_lw(temp.validated[species]))
+#   nrow(temp_lwr)
+# 
+#   if(!is.null(nrow(temp_lwr))){
+#   bay_lwrs <- bind_rows(bay_lwrs, temp_lwr)
+#   }
+# }
+# 
+# bay_lwrs <- bay_lwrs %>%
+#   distinct()
+# Sys.time()
+# write.csv(bay_lwrs, "annotation-schema/data/staging/bayesian_length-weights.csv", row.names = FALSE)
+
 bay_lwrs <- read.csv("annotation-schema/data/staging/bayesian_length-weights.csv") %>% 
   distinct() %>%
   dplyr::mutate(source_level = str_replace_all(.$metric, 
@@ -222,12 +248,12 @@ complete_lw <- info %>%
 # 
 # for (species in validated) {
 #   message(paste("accessing IUCN data for:", species, "(species", nrow(iucn), "of", length(validated),")"))
-#   
+# 
 #   if(!species %in% c("NA", NA)){
-#     
+# 
 #     dat <- rl_search(species)
 #     temp_dat <- dat[[2]]
-#     
+# 
 #     if(!is.null(nrow(temp_dat))){
 #       iucn <- bind_rows(iucn, temp_dat)
 #     }
@@ -273,7 +299,8 @@ all_fishbase <- info %>%
                 b_ll,
                 source_level,
                 subfamily) %>%
-  dplyr::filter(!speccode %in% c("0", NA)) # to remove blank fishbase
+  dplyr::filter(!speccode %in% c("0", NA)) %>% # to remove blank fishbase
+  distinct()
 
 double_ups_fbcode <- all_fishbase %>%
   dplyr::group_by(speccode) %>%

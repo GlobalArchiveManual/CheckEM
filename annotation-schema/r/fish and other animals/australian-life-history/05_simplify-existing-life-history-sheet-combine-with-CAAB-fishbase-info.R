@@ -92,24 +92,37 @@ keep <- lh %>%
                 min_legal_tas = minlegal_tas,
                 max_legal_tas = maxlegal_tas)
 
-# Other data to read in from script 1 & 
+# Other data to read in from script 2, 3 & 4
 caab_regions <- readRDS("annotation-schema/data/staging/australia_fish_caab-with-regions.RDS") %>%
   dplyr::filter(!is.na(caab_code)) %>%
-  dplyr::mutate(caab_code = as.character(caab_code))
+  dplyr::mutate(caab_code = as.character(caab_code))%>%
+  distinct()
 
 fishbase <- readRDS("annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS") %>%
   dplyr::filter(!(caab_scientific %in% "Epigonus macrops" & speccode %in% "14365"))%>%
-  dplyr::mutate(caab_code = as.character(caab_code)) 
+  dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
+  # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
+  # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & caab_code %in% "37361005"))%>%
+  dplyr::mutate(caab_code = as.character(caab_code)) %>%
+  distinct()
+
+test <- fishbase %>%
+  dplyr::group_by(caab_scientific) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
 
 caab_scraped <- readRDS("annotation-schema/data/staging/australia_fish_caab-codes_common-names.RDS") %>%
   dplyr::mutate(family = str_replace_all(.$family, "[^[:alnum:]]", "")) %>%
   dplyr::mutate(species = str_replace_all(.$species, "cffilamentosa", "filamentosa")) %>%
   
   dplyr::mutate(scraped_name = paste(family, genus, species)) %>%
-  dplyr::rename(scraped_family = family,
+  dplyr::rename(scraped_common_name = common_name,
+                scraped_family = family,
                 scraped_genus = genus, 
                 scraped_species = species) %>%
-  dplyr::select(caab_code, scraped_name, scraped_family, scraped_genus, scraped_species, common_name) 
+  dplyr::select(caab_code, scraped_name, scraped_family, scraped_genus, scraped_species, scraped_common_name) %>%
+  # dplyr::select(!common_name) %>%
+  distinct()
 
 caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(name = paste(family, genus, species)) %>%
@@ -119,30 +132,36 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(scraped_genus = if_else(is.na(scraped_genus), genus, scraped_genus)) %>%
   dplyr::mutate(scraped_species = if_else(is.na(scraped_species), species, scraped_species)) %>%
   
+  dplyr::mutate(common_name = if_else(is.na(common_name), scraped_common_name, common_name)) %>%
+  
   dplyr::mutate(family = if_else(name %in% c(scraped_name), family, scraped_family)) %>%
   dplyr::mutate(genus = if_else(name %in% scraped_name, genus, scraped_genus)) %>%
   dplyr::mutate(species = if_else(name %in% scraped_name, species, scraped_species)) %>%
-  dplyr::select(-c(scraped_name, scraped_family, scraped_genus, scraped_species, name)) %>%
+  dplyr::select(-c(scraped_name, scraped_family, scraped_genus, scraped_species, name, scraped_common_name)) %>%
   dplyr::mutate(common_name = str_replace_all(.$common_name, "\\[|\\]", "")) %>%
-  dplyr::filter(!is.na(species))
+  dplyr::filter(!is.na(species)) %>%
+  clean_names() %>%
+  distinct()
 
-iucn_all <- readRDS("annotation-schema/data/staging/australia_fish_iucn-categories.RDS") %>%
-  dplyr::rename(iucn_ranking = category) %>%
+iucn_animals <- readRDS("annotation-schema/data/staging/iucn.RDS") %>%
   dplyr::mutate(iucn_ranking = case_when(
-    iucn_ranking %in% "DD" ~ "Data Deficient",
-    iucn_ranking %in% "LC" ~ "Least Concern",
-    iucn_ranking %in% "NT" ~ "Near Threatened",
-    iucn_ranking %in% "VU" ~ "Vulnerable",
-    iucn_ranking %in% "EN" ~ "Endangered",
-    iucn_ranking %in% "CR" ~ "Critically Endangered",
-    iucn_ranking %in% "EW" ~ "Extinct in the Wild",
-    iucn_ranking %in% "EX" ~ "Extinct"
+    category %in% "DD" ~ "Data Deficient",
+    category %in% "LC" ~ "Least Concern",
+    category %in% "NT" ~ "Near Threatened",
+    category %in% "VU" ~ "Vulnerable",
+    category %in% "EN" ~ "Endangered",
+    category %in% "CR" ~ "Critically Endangered",
+    category %in% "EW" ~ "Extinct in the Wild",
+    category %in% "EX" ~ "Extinct"
   )) %>%
+  dplyr::select(-c(category)) %>%
   glimpse()
 
 animals <- readRDS("annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS") %>%
   dplyr::mutate(caab = as.character(caab)) %>%
-  left_join(iucn_all) %>%
+  left_join(iucn_animals) %>%
+  dplyr::mutate(australian_source = "CAAB") %>%
+  dplyr::mutate(australian_common_name = str_replace_all(.$australian_common_name, "\\[|\\]", "")) %>%
   glimpse()
 
 # Make it simpler
@@ -154,9 +173,11 @@ australia_life_history <- caab_combined %>%
                 fb_length_weight_measure = length_measure, #TODO make this happen in fishbase script
                 fb_a = a, # TODO also rename allthese in fishbase script
                 fb_b = b,
-                fb_a_ll = aLL,
-                fb_b_ll = bLL,
-                fb_length_weight_source = Source_Level) %>%
+                fb_a_ll = a_ll,
+                fb_b_ll = b_ll,
+                fb_length_max_type = fb_l_type_max,
+                fb_length_weight_source = source_level,
+                fb_length_weight_measure = length_measure)%>%
   
   dplyr::left_join(keep) %>%
   
@@ -224,10 +245,12 @@ australia_life_history <- caab_combined %>%
                 min_legal_tas,
                 max_legal_tas
                 )) %>%
+  dplyr::filter(!caab %in% "37246020Taxasupercededby37246019") %>%
   bind_rows(animals)
 
 saveRDS(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.RDS") # To share with people
+write.csv(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.csv", row.names = FALSE) # To share with people
 saveRDS(australia_life_history, "inst/shiny/CheckEM/data/australia_life-history.RDS") # to update shiny app
 
 # For CheckEM package - Save as an rda to use as package data
-usethis::use_data(australia_life_history)
+usethis::use_data(australia_life_history, overwrite = TRUE)
