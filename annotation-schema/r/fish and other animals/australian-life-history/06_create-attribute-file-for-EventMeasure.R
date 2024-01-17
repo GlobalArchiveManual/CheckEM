@@ -26,4 +26,4 @@ all <- lh %>%
 
 date <- str_sub(str_remove_all(Sys.time(), "[^[:alnum:] ]"), 1, 8)
 
-write_tsv(all, paste0("annotation-schema/output/fish/EventMeasure attribute files/CAAB_", date, ".txt"))
+write_tsv(all, paste0("annotation-schema/output/fish/eventMeasure-attribute-files/CAAB_", date, ".txt"))
