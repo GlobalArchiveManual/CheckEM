@@ -19,6 +19,7 @@ Load the necessary libraries.
 
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
 library(devtools)
+# devtools::install_github("GlobalArchiveManual/CheckEM") # Use this to install the CheckEM package if you have not already done so
 library(CheckEM)
 library(tidyverse)
 library(googlesheets4)
@@ -80,10 +81,15 @@ metadata <- metadata_sf %>%
 ```
 
 # Read in the raw data
-Load the count data (MaxN from _Points.txt file).
+Load the count data (from _Points.txt files and from _Count.csv files).
 
 ```{r load-points}
-points <- CheckEM::read_files_maxn(here::here("r-workflows/data/raw/")) %>%
+points <- CheckEM::read_points(here::here("r-workflows/data/raw/")) %>%
+  glimpse()
+```
+
+```{r load-counts}
+counts <- CheckEM::read_counts(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
 
@@ -91,7 +97,7 @@ Create and tidy the MaxN file.
 
 ```{r create-maxn}
 maxn <- points %>% 
-  dplyr::group_by(campaignid, sample, filename, periodtime, frame, family, genus, species) %>% 
+  dplyr::group_by(campaignid, sample, filename, periodtime, frame, family, genus, species) %>%# If you have MaxN'd by stag add stage here
   dplyr::mutate(number = as.numeric(number)) %>%
   dplyr::summarise(maxn = sum(number)) %>%
   dplyr::group_by(campaignid, sample, family, genus, species) %>%
