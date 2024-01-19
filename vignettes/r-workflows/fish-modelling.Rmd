@@ -47,6 +47,7 @@ Load the fish count data. This data is created in the previous workflow, 'Format
 ```{r load-count}
 tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
                       name,'_tidy-count.rds'))) %>%
+  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers
   glimpse()
 ```
 
@@ -58,13 +59,13 @@ pred.vars <- c("mbdepth", "roughness", "slope", "detrended",
                "tpi", "tri", "aspect", "reef") 
 ```
 
-Create a correlation matrix to assess correlations between predictor variables. If any variables have a correlation greater than 0.95, then only one of these variables should be included in the model selection. In this example dataset, 'roughness', 'slope' and 'tri' are all highly correlated, so we will only include roughness as a final predictor variable. 
+Create a correlation matrix to assess correlations between predictor variables. If any variables have a correlation greater than 0.95, then only one of these variables should be included in the model selection. In this example data set, 'roughness', 'slope' and 'tri' are all highly correlated, so we will only include roughness as a final predictor variable. 
 
 ```{r correlations}
 round(cor(tidy.count[ , pred.vars]), 2)
 ```
 
-Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example dataset, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed. It is important to note that in this example dataset, the spread of most predictor variables across their full range is not ideal, with gaps in key predictors such as depth and detrended bathymetry. When working with GAMs, gaps and outliers like this may create spurious relationships, and therefor we suggest running these scripts with more complete data than the small example dataset provided here.
+Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example data set, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed. It is important to note that in this example dataset, the spread of most predictor variables across their full range is not ideal, with gaps in key predictors such as depth and detrended bathymetry. When working with GAMs, gaps and outliers like this may create spurious relationships, and therefor we suggest running these scripts with more complete data than the small example data set provided here.
 
 ```{r transformations, warning = FALSE, message = FALSE}
 CheckEM::plot_transformations(pred.vars = pred.vars, dat = tidy.count)
