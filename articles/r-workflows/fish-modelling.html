@@ -179,7 +179,7 @@ workflow, ‘Format &amp; visualise fish data’.</p>
 <span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883, -2.8542883, -5.8822656, -5.8822656, -6.646017…</span></span>
 <span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391, 3.217391, 2.809524, 2.809524, 2.440000, 2.44000…</span></span>
 <span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428, 0.7952428, 0.4023739, 0.4023739, 0.7118052, 0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8888889, 0.8888889, 1.0000000, 1.0000000, 0.9322034, 0.…</span></span></code></pre>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9690722, 0.9690722, 1.0000000, 1.0000000, 0.9420290, 0.…</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="set-up-data-for-modelling">Set up data for modelling<a class="anchor" aria-label="anchor" href="#set-up-data-for-modelling"></a>
@@ -200,14 +200,14 @@ variable.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">tidy.count</span><span class="op">[</span> , <span class="va">pred.vars</span><span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##           mbdepth roughness slope detrended   tpi   tri aspect  reef</span></span>
-<span><span class="co">## mbdepth      1.00     -0.66 -0.65     -0.89  0.03 -0.59  -0.32 -0.20</span></span>
-<span><span class="co">## roughness   -0.66      1.00  0.99      0.48  0.29  0.99   0.06  0.23</span></span>
-<span><span class="co">## slope       -0.65      0.99  1.00      0.47  0.29  0.99   0.06  0.22</span></span>
-<span><span class="co">## detrended   -0.89      0.48  0.47      1.00  0.00  0.42   0.39  0.36</span></span>
-<span><span class="co">## tpi          0.03      0.29  0.29      0.00  1.00  0.35  -0.02  0.04</span></span>
-<span><span class="co">## tri         -0.59      0.99  0.99      0.42  0.35  1.00   0.04  0.24</span></span>
-<span><span class="co">## aspect      -0.32      0.06  0.06      0.39 -0.02  0.04   1.00  0.01</span></span>
-<span><span class="co">## reef        -0.20      0.23  0.22      0.36  0.04  0.24   0.01  1.00</span></span></code></pre>
+<span><span class="co">## mbdepth      1.00     -0.66 -0.65     -0.89  0.03 -0.59  -0.32 -0.17</span></span>
+<span><span class="co">## roughness   -0.66      1.00  0.99      0.48  0.29  0.99   0.06  0.19</span></span>
+<span><span class="co">## slope       -0.65      0.99  1.00      0.47  0.29  0.99   0.06  0.18</span></span>
+<span><span class="co">## detrended   -0.89      0.48  0.47      1.00  0.00  0.42   0.39  0.34</span></span>
+<span><span class="co">## tpi          0.03      0.29  0.29      0.00  1.00  0.35  -0.02  0.01</span></span>
+<span><span class="co">## tri         -0.59      0.99  0.99      0.42  0.35  1.00   0.04  0.19</span></span>
+<span><span class="co">## aspect      -0.32      0.06  0.06      0.39 -0.02  0.04   1.00 -0.05</span></span>
+<span><span class="co">## reef        -0.17      0.19  0.18      0.34  0.01  0.19  -0.05  1.00</span></span></code></pre>
 <p>Plot the individual predictors to assess if any transformations are
 necessary. We suggest to only use transformations when absolutely
 necessary. In the example data set, most of the response variables have
@@ -304,6 +304,7 @@ workflow, ‘Format &amp; visualise fish data’.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy.length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>, </span>
 <span>                      <span class="va">name</span>,<span class="st">'_tidy-length.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and create your spatial layers</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 64</span></span>
 <span><span class="co">## Columns: 18</span></span>
@@ -324,7 +325,7 @@ workflow, ‘Format &amp; visualise fish data’.</p>
 <span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.2281526, -3.1375041, 17.9911461, -8.6934719, 2.9724391…</span></span>
 <span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.518519, 3.333333, 2.583333, 3.555556, 3.360000, 4.00000…</span></span>
 <span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8024180, 0.9128709, 0.5036102, 0.8555853, 0.4898979, 0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7741935, 1.0000000, 0.9493671, 1.0000000, 1.0000000, 1.…</span></span></code></pre>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8292683, 1.0000000, 0.9493671, 1.0000000, 1.0000000, 1.…</span></span></code></pre>
 <p>Check to make sure response variables have less than 80% zeroes.
 Full-subset GAM modelling will produce unreliable results if your data
 is too zero inflated.</p>
@@ -421,7 +422,7 @@ files.</p>
 <span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883, -2.8542883, -5.8822656, -5.8822656, -6.646017…</span></span>
 <span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391, 3.217391, 2.809524, 2.809524, 2.440000, 2.44000…</span></span>
 <span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428, 0.7952428, 0.4023739, 0.4023739, 0.7118052, 0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8888889, 0.8888889, 1.0000000, 1.0000000, 0.9322034, 0.…</span></span>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9690722, 0.9690722, 1.0000000, 1.0000000, 0.9420290, 0.…</span></span>
 <span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</span></span></code></pre>
 <p>Read in the bathymetry derivatives.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
