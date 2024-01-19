@@ -298,13 +298,13 @@ samples <- maxn %>%
 
 missing_count <- anti_join(metadata_samples, samples, by = join_by(campaignid, sample))
 
-message(paste(nrow(missing_count), "samples missing count data"))
+print(paste(nrow(missing_count), "samples missing count data"))
 ```
 ## Samples in the count data missing metadata
 ```{r count-missing-metadata}
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
 
-message(paste(nrow(missing_metadata), "samples in count data missing metadata"))
+print(paste(nrow(missing_metadata), "samples in count data missing metadata"))
 ```
 
 ## Number of sample(s) without length or 3D point data
@@ -322,13 +322,13 @@ samples <- length %>%
 
 missing_length <- anti_join(metadata_samples, samples, by = join_by(campaignid, sample))
 
-message(paste(nrow(missing_length), "samples missing length data"))
+print(paste(nrow(missing_length), "samples missing length data"))
 ```
 ## Samples in the length data missing metadata
 ```{r length-missing-metadata}
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
 
-message(paste(nrow(missing_metadata), "samples in length data missing metadata"))
+print(paste(nrow(missing_metadata), "samples in length data missing metadata"))
 ```
 
 ## Periods without an end (EM only)
