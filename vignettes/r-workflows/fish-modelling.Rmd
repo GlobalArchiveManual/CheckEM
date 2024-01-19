@@ -156,6 +156,7 @@ Load the fish length data. This data is created in the previous workflow, 'Forma
 ```{r read-length}
 tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
                       name,'_tidy-length.rds'))) %>%
+  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers
   glimpse()
 ```
 

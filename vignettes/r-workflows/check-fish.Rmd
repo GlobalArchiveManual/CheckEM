@@ -258,6 +258,143 @@ complete_length <- length %>%
   tidyr::uncount(number) %>%
   glimpse()
 ```
+# Quality Control Checks
+Now we have some-what tidy data we can begin to run some checks.
+
+## Number of unique samples in the metadata
+This is the total number of unique samples in the sample metadata (it should also be the number of rows in the metadata data frame)
+
+```{r number-metadata-samples}
+number_of_samples <- metadata %>%
+  dplyr::distinct(campaignid, sample)
+
+message(paste(nrow(number_of_samples), "unique samples in the metadata"))
+
+```
+
+## Check for duplicate sample names
+If you have any duplicate samples within a campaign they will be displayed here
+```{r number-metadata-samples}
+duplicate_samples <- metadata %>%
+  dplyr::group_by(campaignid, sample) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+message(paste(nrow(duplicate_samples), "samples duplicated in the metadata"))
+```
+
+## Number of sample(s) without points or count data
+This could be due to samples not observing fish (not an error) or a sample that should be marked as successful_count = No. 
+It could also be due to a sample name spelt incorrectly in the count/points or sample metadata file.
+
+```{r samples-missing-count}
+metadata_samples <- metadata %>%
+  dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), 
+                successful_count, successful_length) %>%
+  distinct()
+
+samples <- maxn %>%
+  distinct(campaignid, sample)
+
+missing_count <- anti_join(metadata_samples, samples, by = join_by(campaignid, sample))
+
+message(paste(nrow(missing_count), "samples missing count data"))
+```
+## Samples in the count data missing metadata
+```{r count-missing-metadata}
+missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
+
+message(paste(nrow(missing_metadata), "samples in count data missing metadata"))
+```
+
+## Number of sample(s) without length or 3D point data
+This could be due to samples not observing fish (not an error) or a sample that should be marked as successful_length = No. 
+It could also be due to a sample name spelt incorrectly in the EMObs or Length file or the sample metadata file.
+
+```{r samples-missing-length}
+metadata_samples <- metadata %>%
+  dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), 
+                successful_count, successful_length) %>%
+  distinct()
+
+samples <- length %>%
+  distinct(campaignid, sample)
+
+missing_length <- anti_join(metadata_samples, samples, by = join_by(campaignid, sample))
+
+message(paste(nrow(missing_length), "samples missing length data"))
+```
+## Samples in the length data missing metadata
+```{r length-missing-metadata}
+missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
+
+message(paste(nrow(missing_metadata), "samples in length data missing metadata"))
+```
+
+## Periods without an end (EM only)
+
+
+## Samples without periods (EM only)
+
+
+## Points outside Periods (EM only)
+
+
+## Length measurement(s) or 3D point(s) outside periods (EM only)
+
+
+## Number of period(s) not XX minutes long (EM only)
+
+
+## Total Number of individuals observed
+
+
+## Points without a number
+
+## Length measurements without a number
+
+
+## Species names that have been updated (Count)
+
+
+## Species names that have been updated (Length)
+
+
+## Species not observed in the area before (Count)
+
+
+## Species not observed in the area before (Length)
+
+
+## Species not listed in the life history list (Count)
+
+
+## Species not listed in the life history list (Length)
+
+
+## Length Measurements smaller than 15% of the fishbase maximum
+
+
+## Length Measurements bigger than 85% of the fishbase maximum
+
+
+## Length Measurements bigger than the fishbase maximum
+
+
+## Number of 3D points and length measurements over the RMS limit (EM only)
+
+
+## Number of length measurements over the precision limit (EM only)
+
+
+## Number of 3D points and length measurements over the range limit (EM only)
+
+
+## Samples where the MaxN does not equal the number of length measurements
+
+
+## Percent of MaxN Measured
+
 
 # Save the checked data
 Save MaxN as an R data file.
