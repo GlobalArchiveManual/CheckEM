@@ -56,7 +56,7 @@ saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/",
                                 name, "_Metadata.rds")))
 ```
 
-If you have already exported in the 'check-habitat' scripts then load the metadata.
+If you have already exported in the 'check-habitat' script then load the metadata.
 If you have just loaded and saved the metadata, then you can skip this chunk of code.
 
 ```{r tidy-metadata}
@@ -66,12 +66,12 @@ metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
 
 # Marine Parks
 Load marine park shape files, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling. 
-The data set used here is the 2022 Collaborative Australian Protected Areas Database, which you can download for free (here)[https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore].
+The data set used here is the 2022 Collaborative Australian Protected Areas Database, which you can download for free [here](https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore).
 
 You may change this shape file to any suitable data set that is available for your study area. 
 
 ```{r parks}
-marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
+marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
   dplyr::select(geometry, ZONE_TYPE) %>%
   st_transform(4326) %>%
   st_make_valid()
@@ -80,7 +80,7 @@ metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"),
                       crs = 4326)
 
 metadata <- metadata_sf %>%
-  st_intersection(marine.parks) %>%
+  st_intersection(marine_parks) %>%
   bind_cols(st_coordinates(.)) %>%
   as.data.frame() %>%
   dplyr::select(-c(geometry)) %>%
@@ -99,13 +99,14 @@ For EventMeasure data you will need to export the database outputs using EventMe
 
 For more information on the format of these files please see the [CheckEM user guide](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)
 
-We recommend using the EventMeasure database exports if they are available and up to date. There are more checks possible with EventMeasure data than “Generic” data. **Note:** If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as “Generic” annotation files (e.g. count and length).
+We recommend using the EventMeasure database exports if they are available and up to date. There are more checks possible with EventMeasure data than “Generic” data. 
+**Note:** If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as “Generic” annotation files (e.g. count and length).
 
 ## Read in the fish annotation data
-Load the count data (from '_Points.txt' files and/or from the '_Count.csv' files).
+Load the count data (from 'Points.txt' files and/or from the 'Count.csv' files).
 
 ### Load any EventMeasure _Points.txt files
-This section of code will read in any '_Points.txt' files that you have saved in the directory you set.
+This section of code will read in any 'Points.txt' files that you have saved in the directory you set.
 It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
@@ -115,8 +116,9 @@ points <- read_points(here::here("r-workflows/data/raw/")) %>%
 ```
 
 ### Load any "Generic" count files
-This section of code will read in any _Count.csv files that you have saved in the directory you set.
+This section of code will read in any 'Count.csv' files that you have saved in the directory you set.
 It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
+
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
 ```{r load-counts}
@@ -196,7 +198,7 @@ It is important that you consistently name your files with the same campaignid (
 
 ```{r load-gen-lengths}
 gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%                   
-  dplyr::inner_join(metadata, by = join_by(sample, campaignid))%>%
+  dplyr::full_join(metadata, by = join_by(campaignid, sample)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
   glimpse() 
 ```
@@ -217,10 +219,10 @@ The final data set will have a row for each species in every sample (deployment)
 count <- maxn %>%
   dplyr::select(campaignid, sample, family, genus, species, maxn) %>%
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-  replace_na(list(maxn = 0)) %>%
+  tidyr::replace_na(list(maxn = 0)) %>%
   group_by(sample, family, genus, species) %>%
   dplyr::summarise(maxn = sum(maxn)) %>%
-  ungroup() %>% 
+  ungroup() %>%
   mutate(scientific = paste(family, genus, species, sep = " "))%>%
   dplyr::select(sample, scientific, maxn)%>%
   spread(scientific, maxn, fill = 0)
@@ -231,7 +233,7 @@ count_families <- maxn %>%
   dplyr::select(c(family, genus, species, scientific)) %>%
   distinct()
 
-complete_count <- dat %>%
+complete_count <- count %>%
   pivot_longer(names_to = "scientific", values_to = "maxn",
                cols = 2:ncol(.)) %>%
   inner_join(count_families, by = c("scientific")) %>%
@@ -243,7 +245,7 @@ complete_count <- dat %>%
 Tidy and complete length data (e.g. complete zeroes in the data).
 
 ```{r complete-length}
-complete_length <- length %>% 
+complete_length <- length %>%
   dplyr::filter(!family %in% "Unknown")%>%
   dplyr::right_join(metadata) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
@@ -263,7 +265,7 @@ complete_length <- length %>%
 Save MaxN as an R data file.
 
 ```{r save-maxn}
-saveRDS(complete_count, 
+saveRDS(complete_count,
           file = here::here(paste0("r-workflows/data/staging/",
                        name, "_complete-maxn.rds")))
 ```
@@ -271,7 +273,7 @@ saveRDS(complete_count,
 Save lengths as an R data file.
 
 ```{r save-length}
-saveRDS(complete_length, 
+saveRDS(complete_length,
           file = here::here(paste0("r-workflows/data/staging/",
                        name, "_complete-length.rds")))
 ```
