@@ -1,0 +1,63 @@
+"campaignid","sample","opcode","latitude_dd","longitude_dd","date_time","site","location","status","depth_m","successful_count","successful_length","observer_count","observer_length","inclusion_probability","visibility_m"
+"2022-05_PtCloates_stereo-BRUVS","1",1,-22.7221,113.5447,"2022-05-22T10:03:24+08:00",NA,NA,"No-take",93.9,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","2",2,-22.6957,113.5628,"2022-05-22T14:16:25+08:00",NA,NA,"No-take",77.3,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","3",3,-22.7379,113.5515,"2022-05-20T14:34:36+08:00",NA,NA,"No-take",78.3,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","4",4,-22.7337,113.5555,"2022-05-20T14:40:43+08:00",NA,NA,"No-take",73.9,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","5",5,-22.7218,113.5506,"2022-05-22T08:50:54+08:00",NA,NA,"No-take",81.9,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","6",6,-22.7459,113.5531,"2022-05-20T12:30:12+08:00",NA,NA,"No-take",74.3,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","7",7,-22.7574,113.5382,"2022-05-20T09:36:32+08:00",NA,NA,"No-take",89.3,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","8",8,-22.7298,113.5538,"2022-05-22T08:12:35+08:00",NA,NA,"No-take",76.4,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","9",9,-22.6934,113.5571,"2022-05-22T14:27:15+08:00",NA,NA,"No-take",84.9,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","11",11,-22.7274,113.5498,"2022-05-22T08:18:17+08:00",NA,NA,"No-take",81,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","12",12,-22.7505,113.5476,"2022-05-20T12:11:27+08:00",NA,NA,"No-take",80.5,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","13",13,-22.6872,113.5606,"2022-05-26T08:42:37+08:00",NA,NA,"No-take",82.1,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","14",14,-22.6876,113.5568,"2022-05-26T08:48:10+08:00",NA,NA,"No-take",90.5,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","15",15,-22.6977,113.5561,"2022-05-22T12:55:29+08:00",NA,NA,"No-take",83.9,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","16",16,-22.7406,113.5395,"2022-05-20T14:06:11+08:00",NA,NA,"No-take",93.2,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","17",17,-22.7011,113.5532,"2022-05-22T12:45:32+08:00",NA,NA,"No-take",86.5,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","18",18,-22.7101,113.5492,"2022-05-22T10:29:53+08:00",NA,NA,"No-take",91.5,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","19",19,-22.6847,113.5669,"2022-05-26T08:33:41+08:00",NA,NA,"No-take",76.4,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","20",20,-22.7212,113.5561,"2022-05-22T08:44:53+08:00",NA,NA,"No-take",76,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","21",21,-22.6893,113.5652,"2022-05-22T14:43:14+08:00",NA,NA,"No-take",77.3,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","22",22,-22.7072,113.5554,"2022-05-22T10:42:04+08:00",NA,NA,"No-take",81.3,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","23",23,-22.734,113.542,"2022-05-20T14:15:28+08:00",NA,NA,"No-take",91.4,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","24",24,-22.7426,113.5507,"2022-05-20T12:42:58+08:00",NA,NA,"No-take",79.3,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","25",25,-22.7053,113.5466,"2022-05-22T12:34:21+08:00",NA,NA,"No-take",99.5,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","26",26,-22.7615,113.5484,"2022-05-20T09:08:31+08:00",NA,NA,"No-take",77.2,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","27",27,-22.7254,113.5459,"2022-05-22T08:31:16+08:00",NA,NA,"No-take",90.4,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","28",28,-22.6987,113.5625,"2022-05-22T13:05:17+08:00",NA,NA,"No-take",76.3,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","29",29,-22.691,113.5564,"2022-05-22T14:54:59+08:00",NA,NA,"No-take",87.9,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","30",30,-22.7058,113.5588,"2022-05-22T10:47:54+08:00",NA,NA,"No-take",78.5,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","31",31,-22.7542,113.5424,"2022-05-20T10:27:48+08:00",NA,NA,"No-take",82.3,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","32",32,-22.7239,113.5552,"2022-05-22T08:39:35+08:00",NA,NA,"No-take",78.3,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","33",33,-22.719,113.549,"2022-05-22T10:09:30+08:00",NA,NA,"No-take",85.4,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","34",34,-22.6928,113.5645,"2022-05-22T14:38:27+08:00",NA,NA,"No-take",76.4,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","35",35,-22.6987,113.551,"2022-05-22T12:46:10+08:00",NA,NA,"No-take",94.6,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","36",36,-22.7318,113.5477,"2022-05-20T14:25:23+08:00",NA,NA,"No-take",83.2,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","37",37,-22.7475,113.5445,"2022-05-20T12:23:05+08:00",NA,NA,"No-take",81.3,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","38",38,-22.6868,113.5642,"2022-05-26T08:38:39+08:00",NA,NA,"No-take",78.6,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","39",39,-22.7105,113.5539,"2022-05-22T10:35:24+08:00",NA,NA,"No-take",78.9,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","40",40,-22.7522,113.5444,"2022-05-20T11:58:07+08:00",NA,NA,"No-take",84.1,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","41",41,-22.7154,113.5479,"2022-05-22T10:21:59+08:00",NA,NA,"No-take",89.7,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","42",42,-22.6952,113.5537,"2022-05-22T12:51:14+08:00",NA,NA,"No-take",92.3,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","43",43,-22.7328,113.5589,"2022-05-22T08:03:30+08:00",NA,NA,"No-take",70.6,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","44",44,-22.7482,113.549,"2022-05-20T12:17:32+08:00",NA,NA,"No-take",79.4,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","45",45,-22.7602,113.5432,"2022-05-20T09:23:19+08:00",NA,NA,"No-take",81.8,"Yes","Yes","test video","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","46",46,-22.693,113.5605,"2022-05-22T14:30:54+08:00",NA,NA,"No-take",79.5,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","47",47,-22.6999,113.5592,"2022-05-22T12:59:50+08:00",NA,NA,"No-take",80.8,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","48",48,-22.696,113.5596,"2022-05-22T14:21:46+08:00",NA,NA,"No-take",80.2,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","50",50,-22.7173,113.5528,"2022-05-22T10:14:30+08:00",NA,NA,"No-take",81.9,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","51",51,-22.69,113.5609,"2022-05-22T14:49:13+08:00",NA,NA,"No-take",79.4,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","52",52,-22.7635,113.5348,"2022-05-20T08:50:37+08:00",NA,NA,"No-take",91,"Yes","Yes","Molly Gerrans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","53",53,-22.6839,113.5636,"2022-05-26T08:29:10+08:00",NA,NA,"No-take",78.2,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","54",54,-22.7654,113.5392,"2022-05-20T08:32:36+08:00",NA,NA,"No-take",83.1,"Yes","Yes","Molly Gerrans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","55",55,-22.7564,113.529,"2022-05-20T09:48:49+08:00",NA,NA,"No-take",89.1,"Yes","Yes","test video","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","56",56,-22.7534,113.5302,"2022-05-20T10:09:08+08:00",NA,NA,"No-take",99.8,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","57",57,-22.6751,113.561,"2022-05-26T08:11:51+08:00",NA,NA,"No-take",88.2,"Yes","Yes","Kaitlin McCloghry","Molly Gerrans/Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","58",58,-22.7056,113.5502,"2022-05-22T12:28:44+08:00",NA,NA,"No-take",90.9,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","59",59,-22.7437,113.5452,"2022-05-20T12:37:35+08:00",NA,NA,"No-take",83.5,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","60",60,-22.7516,113.5386,"2022-05-20T12:05:02+08:00",NA,NA,"No-take",91,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","61",61,-22.6779,113.5654,"2022-05-26T08:23:34+08:00",NA,NA,"No-take",79.8,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","62",62,-22.7375,113.542,"2022-05-20T14:11:26+08:00",NA,NA,"No-take",90.1,"Yes","Yes","Henry Evans","Kaitlin McCloghry",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","63",63,-22.6744,113.5666,"2022-05-26T08:17:59+08:00",NA,NA,"No-take",81.1,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA
+"2022-05_PtCloates_stereo-BRUVS","64",64,-22.7343,113.5508,"2022-05-20T14:30:16+08:00",NA,NA,"No-take",79.2,"Yes","Yes","Kaitlin McCloghry","Henry Evans",NA,NA

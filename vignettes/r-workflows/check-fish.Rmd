@@ -80,38 +80,90 @@ metadata <- metadata_sf %>%
   glimpse()
 ```
 
-# Read in the raw data
+# Fish annotation data
+There are two types of fish annotation data formats that you can check and format using this script: EventMeasure database outputs or “Generic” files. 
+
+For EventMeasure data you will need to export the database outputs using EventMeasure and the .EMObs files. This will give you the _Points.txt, _Lengths.txt and _3DPoints.txt files.
+“Generic” data is a much simpler format and allows users who haven’t used EventMeasure to format QC their annotation data. You will need a _Count.csv file and a _Length.csv file.
+
+For more information on the format of these files please see the CheckEM user guide here:
+https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html
+
+We recommend using the EventMeasure database exports if they are available and up to date. There are more checks possible with EventMeasure data than “Generic” data. 
+
+If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as “Generic” annotation files (e.g. count and length).
+
+## Read in the fish annotation data
 Load the count data (from _Points.txt files and from _Count.csv files).
+
+### Load EventMeasure _Points.txt files
+This section of code will read in any _Points.txt files that you have saved in the directory you set.
+It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
+Therefore, it is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
 ```{r load-points}
 points <- CheckEM::read_points(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
 
+### Load any Generic count files
+This section of code will read in any _Count.csv files that you have saved in the directory you set.
+It will combine all of the files into one dataframe, and get the campaignid name from the name of the file.
+Therefore, it is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
+
 ```{r load-counts}
 counts <- CheckEM::read_counts(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
-
+## Combine EventMeasure and Generic count together
 Create and tidy the MaxN file.
 
 ```{r create-maxn}
-maxn <- points %>% 
-  dplyr::group_by(campaignid, sample, filename, periodtime, frame, family, genus, species) %>%# If you have MaxN'd by stag add stage here
-  dplyr::mutate(number = as.numeric(number)) %>%
-  dplyr::summarise(maxn = sum(number)) %>%
-  dplyr::group_by(campaignid, sample, family, genus, species) %>%
-  dplyr::slice(which.max(maxn)) %>%
-  dplyr::ungroup() %>%
-  dplyr::filter(!is.na(maxn)) %>%
-  dplyr::select(-frame) %>%
-  tidyr::replace_na(list(maxn = 0)) %>%
-  dplyr::mutate(maxn = as.numeric(maxn)) %>%
-  dplyr::filter(maxn > 0) %>%
-  dplyr::inner_join(metadata) %>%
-  dplyr::filter(successful_count %in% c("Yes")) %>% 
-  dplyr::filter(maxn > 0) %>%
-  glimpse()
+
+# Only run this if there is data in the counts data frame
+if(nrow(points) > 1){
+  maxn_points <- points %>% 
+    dplyr::group_by(campaignid, sample, filename, periodtime, frame, family, genus, species) %>% # If you have MaxN'd by stage (e.g. Adult, Juvenile) add stage here
+    dplyr::mutate(number = as.numeric(number)) %>%
+    dplyr::summarise(maxn = sum(number)) %>%
+    dplyr::group_by(campaignid, sample, family, genus, species) %>%
+    dplyr::slice(which.max(maxn)) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(maxn)) %>%
+    dplyr::select(-frame) %>%
+    tidyr::replace_na(list(maxn = 0)) %>%
+    dplyr::mutate(maxn = as.numeric(maxn)) %>%
+    dplyr::filter(maxn > 0) %>%
+    dplyr::inner_join(metadata) %>%
+    dplyr::filter(successful_count %in% c("Yes")) %>% 
+    dplyr::filter(maxn > 0) %>%
+    glimpse()
+}
+
+# Only run this if there is data in the counts data frame
+if(nrow(counts) > 1){
+  maxn_counts <- counts %>%
+    dplyr::group_by(campaignid, sample, family, genus, species) %>%
+    dplyr::mutate(number = as.numeric(count)) %>%
+    dplyr::summarise(maxn = sum(number)) %>%
+    dplyr::group_by(campaignid, sample, family, genus, species) %>%
+    dplyr::slice(which.max(maxn)) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(maxn)) %>%
+    tidyr::replace_na(list(maxn = 0)) %>%
+    dplyr::mutate(maxn = as.numeric(maxn)) %>%
+    dplyr::filter(maxn > 0) %>%
+    dplyr::inner_join(metadata) %>%
+    dplyr::filter(successful_count %in% c("Yes")) %>%
+    dplyr::filter(maxn > 0) %>%
+    glimpse()
+}
+
+# If only EventMeasure data then MaxN only includes Points data
+# If only Generic data then MaxN only includes Count data
+# If both exist, then MaxN includes both Points and Count data
+maxn <- bind_rows(get0("maxn_points"), get0("maxn_counts")) # this works even if you only have one type of data
+
 ```
 
 Load the length data (from '_Lengths.txt' and '_3DPoints.txt').

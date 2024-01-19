@@ -37,8 +37,6 @@ pkgdown::build_site()
 usethis::use_pkgdown_github_pages() # CHOOSE NO TO OVERWRITING THE YML FILE
 
 
-
-
 # PACKAGE VERSIONS
 #> What should the new version be? 
 #> 

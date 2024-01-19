@@ -12,13 +12,13 @@ read_counts <- function(dir) {
     read_csv(flnm, col_types = cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       clean_names() %>%
-      dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Count.csv" = ""))) %>%
+      dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Count.csv" = "", "_count.csv" = ""))) %>%
       dplyr::rename(sample = opcode)
   }
   
   list.files(path = dir,      
              recursive = F,
-             pattern = "_Count.csv",
+             pattern = "ount.csv",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind()

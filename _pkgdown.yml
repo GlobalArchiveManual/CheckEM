@@ -2,15 +2,15 @@ url: https://globalarchivemanual.github.io/CheckEM/
 template:
   includes:
     in_header: |
-       <!-- Global site tag (gtag.js) -->
-       <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script>
-       <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
+      <!-- Global site tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-         gtag('config', 'G-XRY4CFB9QS');
-       </script>
+        gtag('config', 'G-XRY4CFB9QS');
+      </script>
   bootstrap: 5
 reference:
 - title: Functions for data formatting
@@ -20,8 +20,12 @@ reference:
   - standardize_tibble
   - has_special_characters
   - read_metadata
+  - read_points
+  - read_counts
   - read_TM
-  - read_files_txt
+  - find_lw
+  - plot_transformations
+  - read_files_length
 - title: Shiny App
   desc: Functions for shiny app
   contents: runCheckEM
@@ -32,8 +36,9 @@ navbar:
   - icon: fa-github
     href: https://github.com/GlobalArchiveManual/CheckEM
     aria-label: GitHub
-  - href: "https://www.nespmarinecoastal.edu.au/"
-    html: "<img src='man/figures/mac.svg' width='200' alt='National Environmental Science Program: Marine and Coastal'/>"
+  - href: https://www.nespmarinecoastal.edu.au/
+    html: '<img src=''man/figures/mac.svg'' width=''200'' alt=''National Environmental
+      Science Program: Marine and Coastal''/>'
     aria-label: ARDC
   left:
   - text: User Guides
@@ -82,11 +87,17 @@ navbar:
     href: reference/r-workflows/index.html
 authors:
   footer:
-    roles: [aut]
-    text: "<img src='https://ardc.edu.au/wp-content/uploads/2022/09/ardc-logo.svg' height='60' alt='ARDC'/> &nbsp; &nbsp;<img src='https://www.nespmarinecoastal.edu.au/wp-content/themes/MarineAndCoastalHubTheme/images/logo.svg' height='70' alt='National Environmental Science Program: Marine and Coastal'/>  &nbsp; &nbsp; Package developed by "
+    roles: aut
+    text: '<img src=''https://ardc.edu.au/wp-content/uploads/2022/09/ardc-logo.svg''
+      height=''60'' alt=''ARDC''/> &nbsp; &nbsp;<img src=''https://www.nespmarinecoastal.edu.au/wp-content/themes/MarineAndCoastalHubTheme/images/logo.svg''
+      height=''70'' alt=''National Environmental Science Program: Marine and Coastal''/>  &nbsp;
+      &nbsp; Package developed by '
   ARDC:
-    href: "https://ardc.edu.au/"
-    html: "<img src='https://ardc.edu.au/wp-content/uploads/2022/09/ardc-logo.svg' width='200' alt='ARDC'/>"
+    href: https://ardc.edu.au/
+    html: <img src='https://ardc.edu.au/wp-content/uploads/2022/09/ardc-logo.svg'
+      width='200' alt='ARDC'/>
   NESP MAC:
-    href: "https://www.nespmarinecoastal.edu.au/"
-    html: "<img src='https://www.nespmarinecoastal.edu.au/wp-content/themes/MarineAndCoastalHubTheme/images/logo.svg' width='200' alt='National Environmental Science Program: Marine and Coastal'/>"
+    href: https://www.nespmarinecoastal.edu.au/
+    html: '<img src=''https://www.nespmarinecoastal.edu.au/wp-content/themes/MarineAndCoastalHubTheme/images/logo.svg''
+      width=''200'' alt=''National Environmental Science Program: Marine and Coastal''/>'
+
