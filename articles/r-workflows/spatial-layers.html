@@ -180,20 +180,20 @@ Feel free to replace with any suitable bathymetry in .tif format.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>longitude_dd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">longitude_dd</span><span class="op">)</span>,</span>
 <span>                latitude_dd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude_dd</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 32</span></span>
+<pre><code><span><span class="co">## Rows: 94</span></span>
 <span><span class="co">## Columns: 12</span></span>
-<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
-<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "35", "5", "26", "23", "29", "4", "32", "3…</span></span>
-<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236, 114.9292, 114.9284, 114.9190, 11…</span></span>
-<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.12953, -34.12729, -34.12832…</span></span>
-<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14/03/2023 23:36", "14/03/2023 23:49", "1…</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6", "7", "8", "9…</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 113.5447, 113.5628, 113.5515, 113.5555, 11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -22.7221, -22.6957, -22.7379, -22.7337, -2…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "39.6", "42.7", "36", "41", "42.6", "45", …</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
-<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
-<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span></code></pre>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span></code></pre>
 <p>Convert the metadata to a spatial file.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata.vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">metadata</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"longitude_dd"</span>, <span class="st">"latitude_dd"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"epsg:4326"</span><span class="op">)</span></span></code></pre></div>
@@ -232,7 +232,7 @@ Add the latitude and longitude coordinates back into the metadata.</p>
 <span><span class="co">## $ y                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.12953, -34.12729, -34.12832…</span></span>
 <span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236, 114.9292, 114.9284, 114.9190, 11…</span></span>
 <span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.12953, -34.12729, -34.12832…</span></span>
-<span><span class="co">## $ ID                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…</span></span>
+<span><span class="co">## $ ID                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73…</span></span>
 <span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.97151, -36.35807, -40.68553, -38.25594…</span></span>
 <span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.146843375, 0.812689749, 0.694289634, 0.4…</span></span>
 <span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 209.89577, 62.41434, 40.87387, 294.10675, …</span></span>

@@ -159,13 +159,14 @@ workflow, ‘Format &amp; visualise fish data’.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy.count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>, </span>
 <span>                      <span class="va">name</span>,<span class="st">'_tidy-count.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and create your spatial layers</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 64</span></span>
 <span><span class="co">## Columns: 17</span></span>
 <span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "…</span></span>
 <span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "12", "12", "14", "14", "15", "15", "16", "16…</span></span>
 <span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance", "species_richness", "total_abundance",…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 94, 15, 191, 9, 146, 16, 99, 14, 312, 18, 41, 14…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 121, 28, 198, 15, 191, 29, 137, 26, 373, 31, 60,…</span></span>
 <span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8816, 114.8816, 114.8686, 114.868…</span></span>
 <span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.08387, -34.13249, -34.13249, -34.07530, -3…</span></span>
 <span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "42.6", "42.6", "42.7", "42.7", "45.3", "…</span></span>
@@ -193,7 +194,7 @@ response variable.</p>
 <p>Create a correlation matrix to assess correlations between predictor
 variables. If any variables have a correlation greater than 0.95, then
 only one of these variables should be included in the model selection.
-In this example dataset, ‘roughness’, ‘slope’ and ‘tri’ are all highly
+In this example data set, ‘roughness’, ‘slope’ and ‘tri’ are all highly
 correlated, so we will only include roughness as a final predictor
 variable.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -209,16 +210,16 @@ variable.</p>
 <span><span class="co">## reef        -0.20      0.23  0.22      0.36  0.04  0.24   0.01  1.00</span></span></code></pre>
 <p>Plot the individual predictors to assess if any transformations are
 necessary. We suggest to only use transformations when absolutely
-necessary. In the example dataset, most of the response variables have
+necessary. In the example data set, most of the response variables have
 relatively balanced distributions, and therefor we have left them
 untransformed. It is important to note that in this example dataset, the
 spread of most predictor variables across their full range is not ideal,
 with gaps in key predictors such as depth and detrended bathymetry. When
 working with GAMs, gaps and outliers like this may create spurious
 relationships, and therefor we suggest running these scripts with more
-complete data than the small example dataset provided here.</p>
+complete data than the small example data set provided here.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">CheckEM</span><span class="fu">::</span><span class="fu">plot_transformations</span><span class="op">(</span>pred.vars <span class="op">=</span> <span class="va">pred.vars</span>, dat <span class="op">=</span> <span class="va">tidy.count</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">CheckEM</span><span class="fu">::</span><span class="fu"><a href="../../reference/plot_transformations.html">plot_transformations</a></span><span class="op">(</span>pred.vars <span class="op">=</span> <span class="va">pred.vars</span>, dat <span class="op">=</span> <span class="va">tidy.count</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fish-modelling_files/figure-html/transformations-1.png" width="700"><img src="fish-modelling_files/figure-html/transformations-2.png" width="700"><img src="fish-modelling_files/figure-html/transformations-3.png" width="700"><img src="fish-modelling_files/figure-html/transformations-4.png" width="700"><img src="fish-modelling_files/figure-html/transformations-5.png" width="700"><img src="fish-modelling_files/figure-html/transformations-6.png" width="700"><img src="fish-modelling_files/figure-html/transformations-7.png" width="700"><img src="fish-modelling_files/figure-html/transformations-8.png" width="700"></p>
 <p>Reset the predictor variables to remove any highly correlated
 variables and include any transformed variables.</p>
@@ -407,7 +408,7 @@ files.</p>
 <span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "…</span></span>
 <span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "12", "12", "14", "14", "15", "15", "16", "16…</span></span>
 <span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance", "species_richness", "total_abundance",…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 94, 15, 191, 9, 146, 16, 99, 14, 312, 18, 41, 14…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 121, 28, 198, 15, 191, 29, 137, 26, 373, 31, 60,…</span></span>
 <span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8816, 114.8816, 114.8686, 114.868…</span></span>
 <span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.08387, -34.13249, -34.13249, -34.07530, -3…</span></span>
 <span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "42.6", "42.6", "42.7", "42.7", "45.3", "…</span></span>
@@ -499,18 +500,18 @@ project.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)   131.59      13.24   9.942 5.24e-11 ***</span></span>
+<span><span class="co">## (Intercept)   165.41      14.58   11.35 2.23e-12 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##              edf Ref.df     F p-value   </span></span>
-<span><span class="co">## s(detrended)   1      1 8.448 0.00681 **</span></span>
+<span><span class="co">##              edf Ref.df    F p-value  </span></span>
+<span><span class="co">## s(detrended)   1      1 4.89  0.0348 *</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.194   Deviance explained =   22%</span></span>
-<span><span class="co">## GCV = 5980.1  Scale est. = 5606.4    n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  0.111   Deviance explained =   14%</span></span>
+<span><span class="co">## GCV = 7252.5  Scale est. = 6799.2    n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_totabund</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fish-modelling_files/figure-html/set-models-2.png" width="700"></p>
@@ -530,16 +531,16 @@ project.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)  14.2500     0.6553   21.75   &lt;2e-16 ***</span></span>
+<span><span class="co">## (Intercept)   27.281      1.049      26   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
 <span><span class="co">##            edf Ref.df     F p-value</span></span>
-<span><span class="co">## s(mbdepth)   1      1 2.458   0.127</span></span>
+<span><span class="co">## s(mbdepth)   1      1 0.096   0.759</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.0449   Deviance explained = 7.57%</span></span>
-<span><span class="co">## GCV = 14.657  Scale est. = 13.741    n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  -0.03   Deviance explained = 0.318%</span></span>
+<span><span class="co">## GCV = 37.586  Scale est. = 35.236    n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_specrich</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fish-modelling_files/figure-html/set-models-3.png" width="700"></p>
@@ -563,8 +564,8 @@ bathymetry derivatives.</p>
 <span><span class="co">## $ roughness <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.807414, 2.421717, 2.196986, 2.156502, 2.581898, 2.606502, …</span></span>
 <span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.871674, -2.161609, -2.683798, -3.207528, -3.417629, -3.56…</span></span>
 <span><span class="co">## $ pmature   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.6062374, 3.5770040, 0.6489945, 0.6475193, 4.1814433, 4.152…</span></span>
-<span><span class="co">## $ ptotabund <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 141.0566, 138.7161, 140.4373, 142.1637, 142.8562, 143.3297, …</span></span>
-<span><span class="co">## $ pspecrich <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 17.35890, 17.44649, 17.41888, 17.39098, 17.39222, 17.39953, …</span></span></code></pre>
+<span><span class="co">## $ ptotabund <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 173.3344, 171.3735, 172.8156, 174.2620, 174.8422, 175.2389, …</span></span>
+<span><span class="co">## $ pspecrich <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 26.29861, 26.27093, 26.27965, 26.28847, 26.28808, 26.28577, …</span></span></code></pre>
 <p>Save out the spatial predictions. If your computer crashes this way
 you don’t need to run the whole script again.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
@@ -582,7 +583,7 @@ you don’t need to run the whole script again.</p>
 <span><span class="co">## $ x        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 115.1714, 115.1714, 115.1714, 115.1739, 115.1739, 115.1739, 1…</span></span>
 <span><span class="co">## $ y        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -33.60361, -33.60361, -33.60361, -33.60361, -33.60361, -33.60…</span></span>
 <span><span class="co">## $ response <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "pmature", "ptotabund", "pspecrich", "pmature", "ptotabund", …</span></span>
-<span><span class="co">## $ value    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.6062374, 141.0566210, 17.3588980, 3.5770040, 138.7160753, 1…</span></span></code></pre>
+<span><span class="co">## $ value    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.6062374, 173.3344495, 26.2986135, 3.5770040, 171.3734893, 2…</span></span></code></pre>
 <p>Reset the response variables to loop through when plotting.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">response</span><span class="op">)</span></span></code></pre></div>

@@ -64,19 +64,34 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/clean_names.html</loc>
   </url>
   <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/find_lw.html</loc>
+  </url>
+  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/has_special_characters.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/plot_transformations.html</loc>
+  </url>
+  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_TM.html</loc>
   </url>
   <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_files_txt.html</loc>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_em_length.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_gen_length.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_metadata.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_points.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/runCheckEM.html</loc>

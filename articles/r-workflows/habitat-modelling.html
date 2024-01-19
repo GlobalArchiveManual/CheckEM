@@ -172,7 +172,7 @@ and patterns in the raw data to be investigated.</p>
 <span><span class="co">## $ y                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.13155, -34.13155, -34.13155…</span></span>
 <span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236, 114.9236, 114.9236, 114.9236, 11…</span></span>
 <span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.13155, -34.13155, -34.13155…</span></span>
-<span><span class="co">## $ id                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, …</span></span>
+<span><span class="co">## $ id                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 63, 63, 63, 63, 63, 63, 64, 64, 64, 64, 64…</span></span>
 <span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.97151, -34.97151, -34.97151, -34.97151…</span></span>
 <span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1468434, 0.1468434, 0.1468434, 0.1468434…</span></span>
 <span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 209.89577, 209.89577, 209.89577, 209.89577…</span></span>
@@ -227,7 +227,7 @@ necessary. In the example dataset, most of the response variables have
 relatively balanced distributions, and therefor we have left them
 untransformed.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">plot_transformations</span><span class="op">(</span>pred.vars <span class="op">=</span> <span class="va">pred.vars</span>, dat <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/plot_transformations.html">plot_transformations</a></span><span class="op">(</span>pred.vars <span class="op">=</span> <span class="va">pred.vars</span>, dat <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <p><img src="habitat-modelling_files/figure-html/transformations-1.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-2.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-3.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-4.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-5.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-6.png" width="700"><img src="habitat-modelling_files/figure-html/transformations-7.png" width="700"></p>
 <p>Reset the predictor variables to remove any highly correlated
 variables and include any transformed variables.</p>
@@ -338,7 +338,7 @@ process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-mo
 <span><span class="co">## $ y                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.12953, -34.12729, -34.12832…</span></span>
 <span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236, 114.9292, 114.9284, 114.9190, 11…</span></span>
 <span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155, -34.12953, -34.12729, -34.12832…</span></span>
-<span><span class="co">## $ id                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…</span></span>
+<span><span class="co">## $ id                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73…</span></span>
 <span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.97151, -36.35807, -40.68553, -38.25594…</span></span>
 <span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.146843375, 0.812689749, 0.694289634, 0.4…</span></span>
 <span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 209.89577, 62.41434, 40.87387, 294.10675, …</span></span>
