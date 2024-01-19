@@ -274,7 +274,7 @@ message(paste(nrow(number_of_samples), "unique samples in the metadata"))
 
 ## Check for duplicate sample names
 If you have any duplicate samples within a campaign they will be displayed here
-```{r number-metadata-samples}
+```{r duplicate-metadata-samples}
 duplicate_samples <- metadata %>%
   dplyr::group_by(campaignid, sample) %>%
   dplyr::summarise(n = n()) %>%
