@@ -102,10 +102,7 @@ For more information on the format of these files please see the [CheckEM user g
 We recommend using the EventMeasure database exports if they are available and up to date. There are more checks possible with EventMeasure data than “Generic” data. 
 **Note:** If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as “Generic” annotation files (e.g. count and length).
 
-## Read in the fish annotation data
-Load the count data (from 'Points.txt' files and/or from the 'Count.csv' files).
-
-### Load any EventMeasure _Points.txt files
+## Load any EventMeasure _Points.txt files
 This section of code will read in any 'Points.txt' files that you have saved in the directory you set.
 It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
@@ -115,7 +112,7 @@ points <- read_points(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
 
-### Load any "Generic" count files
+## Load any "Generic" count files
 This section of code will read in any 'Count.csv' files that you have saved in the directory you set.
 It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
 
@@ -178,7 +175,7 @@ if(nrow(counts) > 1){
 maxn <- bind_rows(get0("maxn_points"), get0("maxn_counts")) # this works even if you only have one type of data
 ```
 
-### Load any EventMeasure '_Lengths.txt' and/or '_3DPoints.txt' files
+## Load any EventMeasure '_Lengths.txt' and/or '_3DPoints.txt' files
 This section of code will read in any '_Lengths.txt' and/or '_3DPoints.txt' files that you have saved in the directory you set.
 It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
@@ -191,7 +188,7 @@ em_length3dpoints <- read_em_length(here::here("r-workflows/data/raw/")) %>%
   glimpse() 
 ```
 
-### Load any "Generic" length files
+## Load any "Generic" length files
 This section of code will read in any _Length.csv files that you have saved in the directory you set.
 It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
@@ -203,7 +200,7 @@ gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%
   glimpse() 
 ```
 
-# Combine EventMeasure and "Generic" length data
+## Combine EventMeasure and "Generic" length data
 ```{r combine-length}
 # If only EventMeasure data then length only includes Length and 3D points data
 # If only Generic data then length only includes generic length data
@@ -211,7 +208,8 @@ gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%
 length <- bind_rows(get0("em_length3dpoints"), get0("gen_length")) # this works even if you only have one type of data
 ```
 
-# Format and add zeros where a species isn't present in the count data
+# Format and add zeros where a species isn't present
+## In the count data
 Tidy and "complete" MaxN data (e.g. add zeros in the data where a species wasn't observed).
 The final data set will have a row for each species in every sample (deployment).
 
@@ -241,7 +239,7 @@ complete_count <- count %>%
   glimpse()
 ```
 
-# Format and add zeros where a species isn't present in the length data
+## In the length data
 Tidy and complete length data (e.g. complete zeroes in the data).
 
 ```{r complete-length}
