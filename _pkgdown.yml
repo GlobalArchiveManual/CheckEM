@@ -25,7 +25,8 @@ reference:
   - read_TM
   - find_lw
   - plot_transformations
-  - read_files_length
+  - read_em_length
+  - read_gen_length
 - title: Shiny App
   desc: Functions for shiny app
   contents: runCheckEM

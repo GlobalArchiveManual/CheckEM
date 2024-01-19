@@ -1,6 +1,6 @@
 #' A function to read GlobalArchive format metadata
 #'
-#' @param dir The directory where the .txt files are saved
+#' @param dir The directory where the .csv files are saved
 #'
 #' @return A dataframe with all a column for campaignID and sample
 #' @export

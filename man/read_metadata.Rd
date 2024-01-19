@@ -7,7 +7,7 @@
 read_metadata(dir)
 }
 \arguments{
-\item{dir}{The directory where the .txt files are saved}
+\item{dir}{The directory where the .csv files are saved}
 }
 \value{
 A dataframe with all a column for campaignID and sample

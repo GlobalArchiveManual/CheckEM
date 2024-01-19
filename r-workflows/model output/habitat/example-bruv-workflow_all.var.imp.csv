@@ -1,7 +1,7 @@
-"","depth","roughness","detrended","TPI","aspect","TRI"
-"Macroalgae",NA,0.991,0.991,0.991,0.002,0.006
-"Seagrasses",NA,0.912,0.912,0.049,0.912,0.049
-"Sessile invertebrates",NA,0.584,0.584,0.584,0.005,0.41
-"Consolidated (hard)",NA,0.283,0.504,0.504,0.504,0.113
-"Unconsolidated (soft)",NA,0.992,0.992,0,0.992,0.008
-"reef",NA,0.992,0.992,0,0.992,0.008
+"","depth","roughness","detrended","tpi","aspect","tri"
+"Macroalgae",NA,0.757,0.757,0.757,0,0.243
+"Seagrasses",NA,0.452,0.548,0.548,0.452,0.548
+"Sessile invertebrates",NA,0.608,0.608,0.608,0.031,0.36
+"Consolidated (hard)",NA,0.234,0.608,0.608,0.608,0.093
+"Unconsolidated (soft)",NA,0.979,0.979,0,0.979,0.021
+"reef",NA,0.979,0.979,0,0.979,0.021

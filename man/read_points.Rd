@@ -7,7 +7,10 @@
 read_points(dir)
 }
 \arguments{
-\item{dir}{}
+\item{dir}{The directory where the .txt files are saved}
+}
+\value{
+A data frame which contains all Point annotations, with a column for campaignID and sample
 }
 \description{
 A function to read EventMeasure format point data (_Points.txt)

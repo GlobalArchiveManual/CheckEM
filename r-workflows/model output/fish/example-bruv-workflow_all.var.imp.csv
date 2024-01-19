@@ -1,4 +1,4 @@
-"","mbdepth","roughness","detrended","tpi","tri","aspect","reef"
-"total_abundance",0.344,0.022,0.357,0.157,0.036,0.063,0.231
-"species_richness",0.27,0.097,0.072,0.079,0.106,0.061,0.248
-"greater than Lm",0,0.278,0,0,0.722,0.997,0.281
+"","mbdepth","roughness","detrended","tpi","aspect","reef"
+"total_abundance",0.361,0.023,0.374,0.164,0.052,0.242
+"species_richness",0.313,0.113,0.083,0.091,0.07,0.287
+"greater than Lm",0,1,0,0,1,1
