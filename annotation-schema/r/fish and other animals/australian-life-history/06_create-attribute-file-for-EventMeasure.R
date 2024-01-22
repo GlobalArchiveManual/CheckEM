@@ -11,7 +11,7 @@ extras <- data.frame(FAMILY = c("Unknown", "Larval", "SUS", "Baitfish", "Sparida
                      'CAAB CODE' = c("0", "1", "2", "3", "4")) %>%
   dplyr::rename("CAAB CODE" = CAAB.CODE)
 
-lh <- readRDS("annotation-schema/data/tidy/simple-life-history.RDS") %>%
+lh <- readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS") %>%
   glimpse()
   
 all <- lh %>%  

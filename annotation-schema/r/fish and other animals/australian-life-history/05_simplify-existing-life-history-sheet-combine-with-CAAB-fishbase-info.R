@@ -98,16 +98,39 @@ caab_regions <- readRDS("annotation-schema/data/staging/australia_fish_caab-with
   dplyr::mutate(caab_code = as.character(caab_code))%>%
   distinct()
 
+test <- caab_regions %>%
+  dplyr::group_by(caab_code, family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- caab_regions %>%
+  dplyr::group_by(caab_code) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- caab_regions %>%
+  dplyr::group_by(genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+
 fishbase <- readRDS("annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS") %>%
   dplyr::filter(!(caab_scientific %in% "Epigonus macrops" & speccode %in% "14365"))%>%
   dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
   # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
   # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & caab_code %in% "37361005"))%>%
   dplyr::mutate(caab_code = as.character(caab_code)) %>%
-  distinct()
+  dplyr::mutate(caab_scientific = if_else((caab_code %in% "37361005"), "Microcanthus joyceae", caab_scientific)) %>%
+  distinct() %>%
+  dplyr::filter(!caab_scientific %in% "Rhina ancylostoma")
 
 test <- fishbase %>%
   dplyr::group_by(caab_scientific) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- fishbase %>%
+  dplyr::group_by(caab_code) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
@@ -123,6 +146,16 @@ caab_scraped <- readRDS("annotation-schema/data/staging/australia_fish_caab-code
   dplyr::select(caab_code, scraped_name, scraped_family, scraped_genus, scraped_species, scraped_common_name) %>%
   # dplyr::select(!common_name) %>%
   distinct()
+
+test <- caab_scraped %>%
+  dplyr::group_by(caab_code) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- caab_scraped %>%
+  dplyr::group_by(scraped_family, scraped_genus, scraped_species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
 
 caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(name = paste(family, genus, species)) %>%
@@ -141,7 +174,18 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(common_name = str_replace_all(.$common_name, "\\[|\\]", "")) %>%
   dplyr::filter(!is.na(species)) %>%
   clean_names() %>%
+  dplyr::filter(!caab_code %in% "37246020Taxasupercededby37246019") %>%
   distinct()
+
+test <- caab_combined %>%
+  dplyr::group_by(caab_code) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- caab_combined %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
 
 iucn_animals <- readRDS("annotation-schema/data/staging/iucn.RDS") %>%
   dplyr::mutate(iucn_ranking = case_when(
@@ -160,9 +204,24 @@ iucn_animals <- readRDS("annotation-schema/data/staging/iucn.RDS") %>%
 animals <- readRDS("annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS") %>%
   dplyr::mutate(caab = as.character(caab)) %>%
   left_join(iucn_animals) %>%
-  dplyr::mutate(australian_source = "CAAB") %>%
+  
+  dplyr::mutate(australian_source = "CAAB",
+                global_source = "WoRMS",
+                local_source = "Not Available") %>%
+  
   dplyr::mutate(australian_common_name = str_replace_all(.$australian_common_name, "\\[|\\]", "")) %>%
   glimpse()
+
+test <- animals %>%
+  dplyr::group_by(caab) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- animals %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
 
 # Make it simpler
 australia_life_history <- caab_combined %>%
@@ -245,8 +304,18 @@ australia_life_history <- caab_combined %>%
                 min_legal_tas,
                 max_legal_tas
                 )) %>%
-  dplyr::filter(!caab %in% "37246020Taxasupercededby37246019") %>%
   bind_rows(animals)
+
+test <- australia_life_history %>%
+  dplyr::group_by(caab) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- australia_life_history %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
 
 saveRDS(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.RDS") # To share with people
 write.csv(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.csv", row.names = FALSE) # To share with people

@@ -118,24 +118,27 @@ test <- aus_regions %>%
   st_set_geometry(NULL)
 
 # # Takes 30 minutes to run ----
-for (CAAB in unique(polygons$SPCODE)) {
+# for (CAAB in unique(polygons$SPCODE)) {
+# 
+#   polygons.to.test <- polygons %>% filter(SPCODE == CAAB)
+# 
+#   single <- st_cast(polygons.to.test, "POLYGON")
+#   
+#   dat <- aus_regions %>%
+#     dplyr::slice(st_nearest_feature(single, aus_regions)) %>%
+#     st_set_geometry(NULL)%>%
+#     dplyr::distinct(Label) %>%
+#     dplyr::summarise(marine.region = toString(Label)) %>%
+#     dplyr::mutate(spcode = CAAB)
+# 
+#   temp_with_regions <- bind_rows(temp_with_regions, dat)
+#   
+# }
+# saveRDS(temp_with_regions, "annotation-schema/data/staging/distributions-regions-polygons.RDS")
 
-  polygons.to.test <- polygons %>% filter(SPCODE == CAAB)
+temp_with_regions <- readRDS("annotation-schema/data/staging/distributions-regions-polygons.RDS")
 
-  single <- st_cast(polygons.to.test, "POLYGON")
-  
-  dat <- aus_regions %>%
-    dplyr::slice(st_nearest_feature(single, aus_regions)) %>%
-    st_set_geometry(NULL)%>%
-    dplyr::distinct(Label) %>%
-    dplyr::summarise(marine.region = toString(Label)) %>%
-    dplyr::mutate(spcode = CAAB)
-
-  temp_with_regions <- bind_rows(temp_with_regions, dat)
-  
-}
-
-caab <- caab_og %>%
+caab_format <- caab_og %>%
   dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali", "Myxini")) %>%
   dplyr::filter(!is.na(display_name)) %>%
   dplyr::filter(!is.na(parent_id)) %>%
@@ -144,14 +147,19 @@ caab <- caab_og %>%
   dplyr::select(spcode, kingdom, phylum, class, family, genus, species, common_name, order_name) %>%
   dplyr::rename(order = order_name)
 
-caab_with_regions <- full_join(temp_with_regions, caab)
+caab_with_regions <- full_join(temp_with_regions, caab_format) %>%
+  dplyr::rename(caab_code = spcode)
 
 # none missing
 missing <- caab_with_regions %>%
   filter(is.na(marine.region))
 
-spp_regions <- caab %>%
-  dplyr::rename(caab = spcode) %>%
+spps <- caab_with_regions %>%
+  dplyr::filter(species %in% "spp") %>%
+  dplyr::select(!marine.region) 
+
+spp_regions <- caab_format %>%
+  dplyr::rename(caab_code = spcode) %>%
   dplyr::left_join(caab_with_regions) %>%
   dplyr::distinct(family, genus, marine.region) %>%
   dplyr::filter(!is.na(marine.region)) %>%
@@ -161,11 +169,40 @@ spp_regions <- caab %>%
   dplyr::mutate(species = "spp") %>%
   dplyr::group_by(family, genus, species) %>%
   dplyr::summarise(marine.region = toString(marine.region)) %>%
-  dplyr::left_join(caab)
+  dplyr::full_join(spps)
 
-caab_combined <- dplyr::bind_rows(caab_with_regions, spp_regions) %>%
-  dplyr::rename(caab_code = spcode) %>%
-  dplyr::filter(!caab_code %in% c(NA))
+caab_combined <- dplyr::bind_rows(caab_with_regions %>% filter(!species %in% "spp"), spp_regions %>% filter(!is.na(caab_code))) %>%
+  dplyr::filter(!caab_code %in% c(NA)) %>%
+  
+  # temporary fixes to remove duplicate caabs
+  dplyr::filter(!(caab_code %in% "37004001" & is.na(common_name))) %>%
+  dplyr::filter(!(caab_code %in% "37004002" & is.na(common_name))) %>%
+  dplyr::filter(!(caab_code %in% "37026002" & species %in% "ancylostoma")) %>%
+  dplyr::mutate(common_name = if_else(caab_code %in% "37026002", "Shark Ray", common_name)) %>%
+  dplyr::mutate(family = if_else(family %in% "Scaridae", "Labridae", family)) %>%
+  dplyr::filter(!(caab_code %in% "37386905" & is.na(marine.region))) %>%
+  dplyr::filter(!(caab_code %in% "37386907" & is.na(marine.region))) %>%
+  dplyr::mutate(family = if_else((family %in% "Scorpididae" & genus %in% "Microcanthus"), "Microcanthidae", family)) %>%
+  dplyr::mutate(species = if_else((caab_code %in% "37361005"), "joyceae", species)) %>%
+  dplyr::mutate(family = if_else(caab_code %in% "37386000", "Labridae: Scarinae", family))
+  
+
+37361028
+
+test <- caab_combined %>%
+  group_by(genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- caab_combined %>%
+  group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- caab_combined %>%
+  group_by(caab_code) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
 
 missing <- caab_combined %>%
   filter(is.na(marine.region))
