@@ -316,6 +316,19 @@ test <- australia_life_history %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
+test <- australia_life_history %>%
+  dplyr::filter(is.na(caab))
+
+test <- australia_life_history %>%
+  dplyr::filter(is.na(global_region))
+
+names(australia_life_history)
+unique(australia_life_history$caab)
+unique(australia_life_history$class)
+unique(australia_life_history$order)
+unique(australia_life_history$family)
+unique(australia_life_history$genus)
+unique(australia_life_history$species)
 
 saveRDS(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.RDS") # To share with people
 write.csv(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.csv", row.names = FALSE) # To share with people
