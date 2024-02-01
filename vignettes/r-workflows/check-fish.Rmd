@@ -30,6 +30,7 @@ library(googlesheets4)
 library(sf)
 library(terra)
 library(here)
+library(rgeos)
 ```
 
 Next set the study name.
@@ -88,6 +89,29 @@ metadata <- metadata_sf %>%
   dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),
                                 "No-take", "Fished")) %>%
   clean_names() %>%
+  glimpse()
+```
+# Find nearest Marine Region
+We need to find the nearest marine region for each sample. Then we can use the life history lists to find species that have not been observed in that marine region before.
+
+```{r marine region, warning=FALSE}
+temp_metadata <- metadata
+
+coordinates(temp_metadata) <- c('longitude_dd', 'latitude_dd')
+proj4string(temp_metadata) <- CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
+n <- nrow(temp_metadata)
+nearest.region <- character(n)
+
+## For each point, find name of nearest polygon
+for (i in seq_along(nearest.region)) {
+  nearest.region[i] <- CheckEM::aus_regions$REGION[which.min(gDistance(temp_metadata[i, ], CheckEM::aus_regions, byid = TRUE))]
+  }
+
+## Check that it worked
+metadata <- as.data.frame(nearest.region) %>%
+  bind_cols(metadata,.) %>%
+  dplyr::rename(marine_region = nearest.region) %>%
+  dplyr::mutate(sample = as.character(sample)) %>%
   glimpse()
 ```
 
@@ -185,6 +209,7 @@ em_length3dpoints <- read_em_length(here::here("r-workflows/data/raw/")) %>%
   dplyr::select(-c(comment))%>% # there is a comment column in metadata, so you will need to remove this column from EM data
   dplyr::inner_join(metadata, by = join_by(sample, campaignid)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
+  dplyr::rename(length_mm = length) %>%
   glimpse() 
 ```
 
@@ -215,15 +240,18 @@ The final data set will have a row for each species in every sample (deployment)
 
 ```{r tidy-maxn}
 count <- maxn %>%
+  dplyr::mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+  dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+  dplyr::mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
   dplyr::select(campaignid, sample, family, genus, species, maxn) %>%
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
   tidyr::replace_na(list(maxn = 0)) %>%
-  group_by(sample, family, genus, species) %>%
-  dplyr::summarise(maxn = sum(maxn)) %>%
+  group_by(campaignid, sample, family, genus, species) %>%
+  dplyr::summarise(count = sum(maxn)) %>%
   ungroup() %>%
   mutate(scientific = paste(family, genus, species, sep = " "))%>%
-  dplyr::select(sample, scientific, maxn)%>%
-  spread(scientific, maxn, fill = 0)
+  dplyr::select(campaignid, sample, scientific, count)%>%
+  spread(scientific, count, fill = 0)
 
 count_families <- maxn %>%
   dplyr::mutate(scientific = paste(family, genus, species, sep = " ")) %>%
@@ -232,8 +260,8 @@ count_families <- maxn %>%
   distinct()
 
 complete_count <- count %>%
-  pivot_longer(names_to = "scientific", values_to = "maxn",
-               cols = 2:ncol(.)) %>%
+  pivot_longer(names_to = "scientific", values_to = "count",
+               cols = 3:ncol(.)) %>%
   inner_join(count_families, by = c("scientific")) %>%
   full_join(metadata)%>%
   glimpse()
@@ -244,18 +272,22 @@ Tidy and complete length data (e.g. complete zeroes in the data).
 
 ```{r complete-length}
 complete_length <- length %>%
+  dplyr::mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+  dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+  dplyr::mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
   dplyr::filter(!family %in% "Unknown")%>%
   dplyr::right_join(metadata) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
-  dplyr::select(campaignid, sample, family, genus, species, length, number, range) %>%
+  dplyr::select(campaignid, sample, family, genus, species, length_mm, number, any_of(c("range", "rms", "precision"))) %>% # this will keep EM only columns
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
   dplyr::mutate(number = as.numeric(number)) %>%
   replace_na(list(number = 0)) %>%
   ungroup() %>%
   dplyr::filter(!is.na(number)) %>%
-  dplyr::mutate(length = as.numeric(length)) %>%
+  dplyr::mutate(length_mm = as.numeric(length_mm)) %>%
   left_join(., metadata) %>%
   tidyr::uncount(number) %>%
+  dplyr::mutate(count = 1) %>%
   glimpse()
 ```
 # Quality Control Checks
@@ -269,15 +301,14 @@ number_of_samples <- metadata %>%
   dplyr::distinct(campaignid, sample)
 
 message(paste(nrow(number_of_samples), "unique samples in the metadata"))
-
 ```
-
 ## Check for duplicate sample names
 If you have any duplicate samples within a campaign they will be displayed here
 ```{r duplicate-metadata-samples}
 duplicate_samples <- metadata %>%
   dplyr::group_by(campaignid, sample) %>%
   dplyr::summarise(n = n()) %>%
+  dplyr::ungroup() %>%
   dplyr::filter(n > 1)
 
 message(paste(nrow(duplicate_samples), "samples duplicated in the metadata"))
@@ -298,13 +329,13 @@ samples <- maxn %>%
 
 missing_count <- anti_join(metadata_samples, samples, by = join_by(campaignid, sample))
 
-print(paste(nrow(missing_count), "samples missing count data"))
+message(paste(nrow(missing_count), "samples in the metadata missing count data"))
 ```
+
 ## Samples in the count data missing metadata
 ```{r count-missing-metadata}
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
-
-print(paste(nrow(missing_metadata), "samples in count data missing metadata"))
+message(paste(nrow(missing_metadata), "samples in count data missing metadata"))
 ```
 
 ## Number of sample(s) without length or 3D point data
@@ -322,20 +353,45 @@ samples <- length %>%
 
 missing_length <- anti_join(metadata_samples, samples, by = join_by(campaignid, sample))
 
-print(paste(nrow(missing_length), "samples missing length data"))
+message(paste(nrow(missing_length), "samples in metadata missing length data"))
 ```
+
 ## Samples in the length data missing metadata
 ```{r length-missing-metadata}
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
 
-print(paste(nrow(missing_metadata), "samples in length data missing metadata"))
+message(paste(nrow(missing_metadata), "samples in length data missing metadata"))
 ```
 
 ## Periods without an end (EM only)
+This check is only important if you have used periods to define your sampling duration.
 
+```{r load-periods}
+periods <- read_points(here::here("r-workflows/data/raw/")) %>%
+  glimpse()
+
+periods_without_end <- periods %>%
+  dplyr::filter(has_end == 0)
+
+message(paste(nrow(periods_without_end), "periods without an end"))
+```
 
 ## Samples without periods (EM only)
+This check is only important if you have used periods to define your sampling duration.
 
+```{r missing-periods}
+metadata_samples <- metadata %>%
+  dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), successful_count, successful_length) %>%
+  dplyr::distinct() %>%
+  dplyr::mutate(sample = as.factor(sample))
+
+periods_samples <- periods %>%
+  dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
+  distinct()
+
+missing_periods <- anti_join(metadata_samples, periods_samples) %>%
+  dplyr::select(!sample)
+```
 
 ## Points outside Periods (EM only)
 
@@ -343,52 +399,216 @@ print(paste(nrow(missing_metadata), "samples in length data missing metadata"))
 ## Length measurement(s) or 3D point(s) outside periods (EM only)
 
 
-## Number of period(s) not XX minutes long (EM only)
+## Period(s) that are not the correct duration (EM only)
+```{r periods-wrong-length}
+period_length <- 60 # in minutes
 
+periods_wrong <- periods %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), time_start, time_end, has_end) %>%
+        dplyr::distinct() %>%
+        dplyr::mutate(period_time = round(time_end - time_start)) %>%
+        dplyr::filter(!period_time %in% period_length)
+```
 
 ## Total Number of individuals observed
+This is the total number of individuals observed in the count data:
+```{r total-in-maxn}
+total_count <- sum(complete_count$count)
+message(paste(total_count, "fish counted in the count data"))
+```
+This is the total number of individuals observed in the length data:
+```{r total-in-lengths}
+total_length <- sum(complete_length$count)
+message(paste(total_length, "fish counted in the length data"))
+```
 
+## Points without a number (EM only)
+This is a check for EventMeasure data.
 
-## Points without a number
+```{r points-without-a-number}
+# TODO add some more comments about why these are important to fix
+points_without_number <- points %>%
+  filter(number %in% c("NA", NA, 0, NULL, "", " "))
 
-## Length measurements without a number
+message(paste(nrow(points_without_number), "points in the _Points.txt file that do not have a number"))
+glimpse(points_without_number)
+```
 
+## Length measurements without a number (EM only)
+```{r lengths-without-a-number}
+# TODO add some more comments about why these are important to fix
+points_without_number <- points %>%
+  filter(number %in% c("NA", NA, 0, NULL, "", " "))
+
+message(paste(nrow(points_without_number), "points in the _Points.txt file that do not have a number"))
+glimpse(points_without_number)
+```
 
 ## Species names that have been updated (Count)
+```{r count-synonyms}
+synonyms_in_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
+      dplyr::filter(!is.na(genus_correct)) %>%
+      dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
+      dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
+      dplyr::select('old name', 'new name') %>%
+      dplyr::distinct()
 
+message(paste(nrow(synonyms_in_count), "synonyms used in the count data"))
+glimpse(synonyms_in_count)
+```
 
 ## Species names that have been updated (Length)
+```{r length-synonyms}
+synonyms_in_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %>%
+      dplyr::filter(!is.na(genus_correct)) %>%
+      dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
+      dplyr::mutate('new name' = paste(family_correct, genus_correct, species_correct, sep = " ")) %>%
+      dplyr::select('old name', 'new name') %>%
+      dplyr::distinct()
 
+message(paste(nrow(synonyms_in_length), "synonyms used in the length data"))
+glimpse(synonyms_in_length)
+```
+# Change synonyms names here
+add warning about skipping this section if wanted
 
+```{r change-count-synonyms}
+complete_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
+  dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+  dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+  dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+  dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+  dplyr::mutate(scientific = paste(family, genus, species))
+```
+
+```{r change-length-synonyms}
+complete_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %>%
+  dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+  dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+  dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+  dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+  dplyr::mutate(scientific = paste(family, genus, species))
+```
 ## Species not observed in the area before (Count)
+```{r count-species-not-in-area}
+count_species_not_observed_region <- complete_count %>%
+  dplyr::distinct(campaignid, sample, family, genus, species, marine_region, count) %>%
+  dplyr::anti_join(., expand_life_history(CheckEM::australia_life_history), by = c("family", "genus", "species", "marine_region")) %>%
+  dplyr::filter(count > 0) %>%
+  dplyr::left_join(metadata) %>%
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, marine_region) %>%
+  dplyr::distinct() %>%
+  dplyr::rename('marine region not observed in' = marine_region) %>%
+  dplyr::semi_join(., CheckEM::australia_life_history, by = c("family", "genus", "species"))
 
+message(paste(nrow(count_species_not_observed_region), "species not observed in the region before"))
+glimpse(count_species_not_observed_region)
+```
 
 ## Species not observed in the area before (Length)
+```{r length-species-not-in-area}
+length_species_not_observed_region <- complete_length %>%
+  dplyr::distinct(campaignid, sample, family, genus, species, marine_region, count) %>%
+  dplyr::anti_join(., expand_life_history(CheckEM::australia_life_history), by = c("family", "genus", "species", "marine_region")) %>%
+  dplyr::filter(count > 0) %>%
+  dplyr::left_join(metadata) %>%
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, marine_region) %>%
+  dplyr::distinct() %>%
+  dplyr::rename('marine region not observed in' = marine_region) %>%
+  dplyr::semi_join(., CheckEM::australia_life_history, by = c("family", "genus", "species"))
 
+message(paste(nrow(length_species_not_observed_region), "species not observed in the region before"))
+glimpse(length_species_not_observed_region)
+```
 
 ## Species not listed in the life history list (Count)
+If you chose to update the names that have changed (synonyms) then these check won't include those names.
 
+```{r count-species-not-in-list}
+count_species_not_in_list <- complete_count %>%
+  dplyr::anti_join(., CheckEM::australia_life_history, by = c("family", "genus", "species")) %>%
+  dplyr::filter(count > 0) %>%
+  dplyr::left_join(metadata) %>%
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species) %>%
+  dplyr::distinct() 
+
+message(paste(nrow(count_species_not_in_list), "species not in chosen life history list"))
+glimpse(count_species_not_in_list)
+```
 
 ## Species not listed in the life history list (Length)
+```{r length-species-not-in-list}
+length_species_not_in_list <- complete_length %>%
+  dplyr::anti_join(., CheckEM::australia_life_history, by = c("family", "genus", "species")) %>%
+  dplyr::filter(count > 0) %>%
+  dplyr::left_join(metadata) %>%
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species) %>%
+  dplyr::distinct() 
 
+message(paste(nrow(length_species_not_in_list), "species not in chosen life history list"))
+glimpse(length_species_not_in_list)
+```
 
-## Length Measurements smaller than 15% of the fishbase maximum
+## Length Measurements smaller or bigger than the fishbase minimum and maximums
 
+```{r incorrect-lengths}
+incorrect_lengths <- left_join(complete_length, create_min_max(CheckEM::australia_life_history, minimum = 0.15, maximum = 0.85)) %>%
+  dplyr::filter(length_mm < min_length_mm | length_mm > max_length_mm) %>%
+  mutate(reason = ifelse(length_mm < min_length_mm, "too small", "too big")) %>%
+  dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length_mm, max_length_mm, fb_length_max, reason, any_of(c("em_comment", "frame_left")), fb_length_max) %>%
+  mutate(difference = ifelse(reason %in% c("too small"), (min_length_mm - length_mm), (length_mm - max_length_mm))) %>%
+  dplyr::mutate(percent_of_fb_max = (length_mm/fb_length_max)*100) %>%
+  dplyr::left_join(metadata) %>%
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length_mm, max_length_mm, fb_length_max, reason, any_of(c("em_comment", "frame_left")), difference, percent_of_fb_max)
 
-## Length Measurements bigger than 85% of the fishbase maximum
+too_small <- incorrect_lengths %>%
+  dplyr::filter(reason %in% "too small")
 
+too_big <- incorrect_lengths %>%
+  dplyr::filter(reason %in% "too big")
 
-## Length Measurements bigger than the fishbase maximum
+message(paste(nrow(too_small), "lengths are too small"))
+glimpse(too_small)
 
-
+message(paste(nrow(too_big), "lengths are too big"))
+glimpse(too_big)
+```
 ## Number of 3D points and length measurements over the RMS limit (EM only)
 
 
+```{r length-over-rms}
+rms_limit <- 20 # in mm
+
+over_rms <- complete_length %>%
+  dplyr::filter(as.numeric(rms) > rms_limit)
+
+message(paste(nrow(over_rms), "lengths over RMS limit"))
+glimpse(over_rms)
+```
 ## Number of length measurements over the precision limit (EM only)
 
 
+```{r length-over-precision}
+precision_limit <- 10 # in %
+
+over_precision <- complete_length %>%
+  dplyr::filter(as.numeric(precision) > precision_limit)
+
+message(paste(nrow(over_precision), "lengths over precision limit"))
+glimpse(over_precision)
+```
+
 ## Number of 3D points and length measurements over the range limit (EM only)
 
+```{r over_range_limit}
+range_limit <- 10 # in metres
+
+over_range <- complete_length %>%
+  dplyr::filter(as.numeric(range) > (range_limit* 1000))
+
+message(paste(nrow(over_range), "lengths over range limit"))
+glimpse(over_range)
+```
 
 ## Samples where the MaxN does not equal the number of length measurements
 
@@ -402,7 +622,7 @@ Save MaxN as an R data file.
 ```{r save-maxn}
 saveRDS(complete_count,
           file = here::here(paste0("r-workflows/data/staging/",
-                       name, "_complete-maxn.rds")))
+                       name, "_complete-count.rds")))
 ```
 
 Save lengths as an R data file.

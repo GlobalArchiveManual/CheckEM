@@ -66,13 +66,13 @@ maturity.mean <- maturity %>%
   glimpse()
 ```
 
-Load and format maxn data, and transform this into total abundance and species richness. These two response variables will be used in subsequent fish modelling scripts.
+Load and format count data, and transform this into total abundance and species richness. These two response variables will be used in subsequent fish modelling scripts.
 
-```{r tidy-maxn}
-tidy.maxn <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-maxn.rds"))) %>%
+```{r tidy-count}
+tidy.count <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-count.rds"))) %>%
   dplyr::group_by(campaignid, sample, scientific) %>%
-  dplyr::summarise(maxn = sum(maxn)) %>%
-  pivot_wider(names_from = "scientific", values_from = maxn, values_fill = 0) %>%
+  dplyr::summarise(count = sum(count)) %>%
+  pivot_wider(names_from = "scientific", values_from = count, values_fill = 0) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(total_abundance = rowSums(.[, 3:(ncol(.))], na.rm = TRUE), species_richness = rowSums(.[, 3:(ncol(.))] > 0)) %>% 
   dplyr::select(campaignid, sample, total_abundance, species_richness) %>%
@@ -114,7 +114,7 @@ Create a dataframe of the indicator species greater than length of maturity.
 
 ```{r greater-than-maturity}
 greater.mat <- indicator.species %>%
-  dplyr::filter(length > l50) %>%
+  dplyr::filter(length_mm > l50) %>%
   dplyr::group_by(campaignid, sample) %>%
   dplyr::summarise(number = sum(number)) %>%
   ungroup() %>%
@@ -129,7 +129,7 @@ Create a dataframe of the indicator species smaller than length of maturity.
 
 ```{r smaller-than-maturity}
 smaller.mat <- indicator.species %>%
-  dplyr::filter(length < l50) %>%
+  dplyr::filter(length_mm < l50) %>%
   dplyr::group_by(campaignid, sample) %>%
   dplyr::summarise(number = sum(number)) %>%
   ungroup() %>%
@@ -153,17 +153,17 @@ Filter the count (maxn) data to only include one response. In this example the c
 ```{r count-plotdata}
 response.name <- 'total_abundance'
 
-overzero <-  tidy.maxn %>% 
+overzero <-  tidy.count %>% 
   filter(response %in% response.name & number > 0) 
 
-equalzero <- tidy.maxn %>% 
+equalzero <- tidy.count %>% 
   filter(response %in% response.name & number == 0)
 ```
 
 Visualise the count data as a bubble plot. White bubbles represent zeroes and the size of blue bubbles represents abundance.
 
 ```{r visualise-count}
-bubble.plot <- leaflet(data = tidy.maxn) %>%                     
+bubble.plot <- leaflet(data = tidy.count) %>%                     
   addTiles() %>%                                                    
   addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
   addLayersControl(baseGroups = c("Open Street Map", "World Imagery"), options = layersControlOptions(collapsed = FALSE))
@@ -212,8 +212,8 @@ bubble.plot
 # Save tidy datasets for modelling
 Save count response data (total abundance and species richness).
 
-```{r save-maxn}
-saveRDS(tidy.maxn, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-count.rds")))
+```{r save-count}
+saveRDS(tidy.count, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-count.rds")))
 ```
 
 Save length response data (indicator species greater than and smaller than the length of maturity).
