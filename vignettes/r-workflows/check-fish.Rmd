@@ -12,6 +12,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{TODO list eval=FALSE, include=FALSE}
+# TODO
+# Add a error report
+# Turn every check into a function
+# In the function, if the user says "Yes" or TRUE to error_report add the check to the error report
+# 
+
+
+```
+
 This script will take raw fish data (either exported from EventMeasure or "Generic" format, see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)) and check for any errors in the annotation.
 The script will then format the annotation data into a tidy format.
 

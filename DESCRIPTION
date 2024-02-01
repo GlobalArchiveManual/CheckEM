@@ -53,6 +53,7 @@ Imports:
     mgcv,
     patchwork,
     RColorBrewer,
+    rgeos,
     sf,
     shiny (>= 1.7.1),
     shinycssloaders (>= 1.0.0),
