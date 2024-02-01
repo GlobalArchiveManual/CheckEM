@@ -374,6 +374,7 @@ periods_without_end <- periods %>%
   dplyr::filter(has_end == 0)
 
 message(paste(nrow(periods_without_end), "periods without an end"))
+glimpse(periods_without_end)
 ```
 
 ## Samples without periods (EM only)
@@ -391,13 +392,30 @@ periods_samples <- periods %>%
 
 missing_periods <- anti_join(metadata_samples, periods_samples) %>%
   dplyr::select(!sample)
+
+message(paste(nrow(missing_periods), "samples missing period"))
+glimpse(missing_periods)
 ```
 
 ## Points outside Periods (EM only)
+```{r points-outside-periods}
+points_outside_periods <- points %>%
+  dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, number, frame)
 
+message(paste(nrow(points_outside_periods), "points outside a period"))
+glimpse(points_outside_periods)
+```
 
 ## Length measurement(s) or 3D point(s) outside periods (EM only)
+```{r lengths-outside-periods}
+lengths_outside_periods <- em_length3dpoints %>%
+  dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, number)
 
+message(paste(nrow(lengths_outside_periods), "lengths/3D points outside period"))
+glimpse(lengths_outside_periods)
+```
 
 ## Period(s) that are not the correct duration (EM only)
 ```{r periods-wrong-length}
@@ -408,9 +426,12 @@ periods_wrong <- periods %>%
         dplyr::distinct() %>%
         dplyr::mutate(period_time = round(time_end - time_start)) %>%
         dplyr::filter(!period_time %in% period_length)
+
+message(paste(nrow(periods_wrong), "periods not", period_length, "minutes long"))
+glimpse(periods_wrong)
 ```
 
-## Total Number of individuals observed
+## Total number of individuals observed
 This is the total number of individuals observed in the count data:
 ```{r total-in-maxn}
 total_count <- sum(complete_count$count)
@@ -549,7 +570,7 @@ message(paste(nrow(length_species_not_in_list), "species not in chosen life hist
 glimpse(length_species_not_in_list)
 ```
 
-## Length Measurements smaller or bigger than the fishbase minimum and maximums
+## Length measurements smaller or bigger than the fishbase minimum and maximums
 
 ```{r incorrect-lengths}
 incorrect_lengths <- left_join(complete_length, create_min_max(CheckEM::australia_life_history, minimum = 0.15, maximum = 0.85)) %>%
