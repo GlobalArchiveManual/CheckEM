@@ -367,7 +367,7 @@ message(paste(nrow(missing_metadata), "samples in length data missing metadata")
 This check is only important if you have used periods to define your sampling duration.
 
 ```{r load-periods}
-periods <- read_points(here::here("r-workflows/data/raw/")) %>%
+periods <- read_periods(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 
 periods_without_end <- periods %>%

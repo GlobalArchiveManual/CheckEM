@@ -25,5 +25,10 @@ read_periods <- function(dir) {
              pattern = "_Period.txt",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
-    purrr::list_rbind()
+    purrr::list_rbind() %>%
+    dplyr::rename(time_start = timestart,
+                  time_end = timeend,
+                  has_end = hasend) %>%
+    dplyr::mutate(time_start	= as.numeric(time_start)) %>%
+    dplyr::mutate(time_end	= as.numeric(time_end))
 }
