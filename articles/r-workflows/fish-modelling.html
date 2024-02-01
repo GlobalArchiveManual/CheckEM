@@ -166,7 +166,7 @@ workflow, ‘Format &amp; visualise fish data’.</p>
 <span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "…</span></span>
 <span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "12", "12", "14", "14", "15", "15", "16", "16…</span></span>
 <span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance", "species_richness", "total_abundance",…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 121, 28, 198, 15, 191, 29, 137, 26, 373, 31, 60,…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 94, 15, 191, 9, 146, 16, 99, 14, 312, 18, 38, 13…</span></span>
 <span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8816, 114.8816, 114.8686, 114.868…</span></span>
 <span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.08387, -34.13249, -34.13249, -34.07530, -3…</span></span>
 <span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "42.6", "42.6", "42.7", "42.7", "45.3", "…</span></span>
@@ -409,7 +409,7 @@ files.</p>
 <span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "…</span></span>
 <span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "12", "12", "14", "14", "15", "15", "16", "16…</span></span>
 <span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance", "species_richness", "total_abundance",…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 121, 28, 198, 15, 191, 29, 137, 26, 373, 31, 60,…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111, 13, 94, 15, 191, 9, 146, 16, 99, 14, 312, 18, 38, 13…</span></span>
 <span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8816, 114.8816, 114.8686, 114.868…</span></span>
 <span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.08387, -34.13249, -34.13249, -34.07530, -3…</span></span>
 <span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "42.6", "42.6", "42.7", "42.7", "45.3", "…</span></span>
@@ -501,18 +501,18 @@ project.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)   165.41      14.58   11.35 2.23e-12 ***</span></span>
+<span><span class="co">## (Intercept)   131.22      13.24   9.913 5.61e-11 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##              edf Ref.df    F p-value  </span></span>
-<span><span class="co">## s(detrended)   1      1 4.89  0.0348 *</span></span>
+<span><span class="co">##              edf Ref.df     F p-value   </span></span>
+<span><span class="co">## s(detrended)   1      1 8.602 0.00638 **</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.111   Deviance explained =   14%</span></span>
-<span><span class="co">## GCV = 7252.5  Scale est. = 6799.2    n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  0.197   Deviance explained = 22.3%</span></span>
+<span><span class="co">## GCV = 5981.2  Scale est. = 5607.4    n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_totabund</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fish-modelling_files/figure-html/set-models-2.png" width="700"></p>
@@ -532,16 +532,18 @@ project.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Parametric coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)   27.281      1.049      26   &lt;2e-16 ***</span></span>
+<span><span class="co">## (Intercept)  13.9688     0.6462   21.62   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##            edf Ref.df     F p-value</span></span>
-<span><span class="co">## s(mbdepth)   1      1 0.096   0.759</span></span>
+<span><span class="co">##            edf Ref.df     F p-value  </span></span>
+<span><span class="co">## s(mbdepth)   1      1 3.904  0.0574 .</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  -0.03   Deviance explained = 0.318%</span></span>
-<span><span class="co">## GCV = 37.586  Scale est. = 35.236    n = 32</span></span></code></pre>
+<span><span class="co">## R-sq.(adj) =  0.0856   Deviance explained = 11.5%</span></span>
+<span><span class="co">## GCV = 14.251  Scale est. = 13.36     n = 32</span></span></code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_specrich</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fish-modelling_files/figure-html/set-models-3.png" width="700"></p>
@@ -565,8 +567,8 @@ bathymetry derivatives.</p>
 <span><span class="co">## $ roughness <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.807414, 2.421717, 2.196986, 2.156502, 2.581898, 2.606502, …</span></span>
 <span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.871674, -2.161609, -2.683798, -3.207528, -3.417629, -3.56…</span></span>
 <span><span class="co">## $ pmature   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.6062374, 3.5770040, 0.6489945, 0.6475193, 4.1814433, 4.152…</span></span>
-<span><span class="co">## $ ptotabund <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 173.3344, 171.3735, 172.8156, 174.2620, 174.8422, 175.2389, …</span></span>
-<span><span class="co">## $ pspecrich <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 26.29861, 26.27093, 26.27965, 26.28847, 26.28808, 26.28577, …</span></span></code></pre>
+<span><span class="co">## $ ptotabund <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 140.7683, 138.4064, 140.1434, 141.8855, 142.5844, 143.0622, …</span></span>
+<span><span class="co">## $ pspecrich <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 17.83208, 17.94093, 17.90662, 17.87195, 17.87349, 17.88257, …</span></span></code></pre>
 <p>Save out the spatial predictions. If your computer crashes this way
 you don’t need to run the whole script again.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
@@ -584,7 +586,7 @@ you don’t need to run the whole script again.</p>
 <span><span class="co">## $ x        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 115.1714, 115.1714, 115.1714, 115.1739, 115.1739, 115.1739, 1…</span></span>
 <span><span class="co">## $ y        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -33.60361, -33.60361, -33.60361, -33.60361, -33.60361, -33.60…</span></span>
 <span><span class="co">## $ response <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "pmature", "ptotabund", "pspecrich", "pmature", "ptotabund", …</span></span>
-<span><span class="co">## $ value    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.6062374, 173.3344495, 26.2986135, 3.5770040, 171.3734893, 2…</span></span></code></pre>
+<span><span class="co">## $ value    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.6062374, 140.7683476, 17.8320846, 3.5770040, 138.4063509, 1…</span></span></code></pre>
 <p>Reset the response variables to loop through when plotting.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">response</span><span class="op">)</span></span></code></pre></div>

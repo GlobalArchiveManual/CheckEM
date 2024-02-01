@@ -64,6 +64,12 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/clean_names.html</loc>
   </url>
   <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/create_min_max.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/expand_life_history.html</loc>
+  </url>
+  <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/find_lw.html</loc>
   </url>
   <url>
@@ -89,6 +95,9 @@
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_metadata.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_periods.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_points.html</loc>
