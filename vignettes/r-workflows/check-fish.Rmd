@@ -41,7 +41,7 @@ library(googlesheets4)
 library(sf)
 library(terra)
 library(here)
-library(rgeos)
+# library(rgeos)
 ```
 
 Next set the study name.
@@ -88,8 +88,7 @@ marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collabor
   st_transform(4326) %>%
   st_make_valid()
 
-metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"),
-                      crs = 4326)
+metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
 
 metadata <- metadata_sf %>%
   st_intersection(marine_parks) %>%
@@ -106,23 +105,16 @@ metadata <- metadata_sf %>%
 We need to find the nearest marine region for each sample. Then we can use the life history lists to find species that have not been observed in that marine region before.
 
 ```{r marine region, warning=FALSE}
-temp_metadata <- metadata
+metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
+regions <- st_as_sf(CheckEM::aus_regions, crs = st_crs(4326))
+regions <- st_transform(regions, 4326) %>%
+  dplyr::select(REGION)
 
-coordinates(temp_metadata) <- c('longitude_dd', 'latitude_dd')
-proj4string(temp_metadata) <- CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
-n <- nrow(temp_metadata)
-nearest.region <- character(n)
-
-## For each point, find name of nearest polygon
-for (i in seq_along(nearest.region)) {
-  nearest.region[i] <- CheckEM::aus_regions$REGION[which.min(gDistance(temp_metadata[i, ], CheckEM::aus_regions, byid = TRUE))]
-  }
-
-## Check that it worked
-metadata <- as.data.frame(nearest.region) %>%
-  bind_cols(metadata,.) %>%
-  dplyr::rename(marine_region = nearest.region) %>%
+metadata <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
+  dplyr::rename(marine_region = REGION) %>%
   dplyr::mutate(sample = as.character(sample)) %>%
+  as.data.frame() %>%
+  dplyr::select(-c(geometry)) %>%
   glimpse()
 ```
 
