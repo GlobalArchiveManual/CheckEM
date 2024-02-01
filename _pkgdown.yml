@@ -27,6 +27,9 @@ reference:
   - plot_transformations
   - read_em_length
   - read_gen_length
+  - read_periods
+  - expand_life_history
+  - create_min_max
 - title: Shiny App
   desc: Functions for shiny app
   contents: runCheckEM

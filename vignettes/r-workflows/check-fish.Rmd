@@ -12,12 +12,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{TODO list eval=FALSE, include=FALSE}
+```{r TODO-list, eval=FALSE, include=FALSE}
 # TODO
 # Add a error report
 # Turn every check into a function
 # In the function, if the user says "Yes" or TRUE to error_report add the check to the error report
-# 
+# Add last two maxn vs. length checks
+# Add metadata formatting checks
 
 
 ```
