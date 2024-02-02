@@ -19,14 +19,17 @@ vignette: >
 # In the function, if the user says "Yes" or TRUE to error_report add the check to the error report
 # Add last two maxn vs. length checks
 # Add metadata formatting checks
-
-
+# rename REGION in the data
+# set the crs in the spatial.R script for the marine regions
+# Fix heading levels
+# add annotation throughout
 ```
 
-This script will take raw fish data (either exported from EventMeasure or "Generic" format, see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)) and check for any errors in the annotation.
+# Introduction
+This script will take fish annotation data (either exported from EventMeasure or "Generic" format, see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)) and check for any errors in the annotation.
 The script will then format the annotation data into a tidy format.
 
-You will require to also have a formatted sample metadata file "*_Metadata.csv" (see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html))
+You also need a formatted sample metadata file "*_Metadata.csv" (see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html))
 
 # R set up
 First you will need to load the necessary libraries.
@@ -41,11 +44,11 @@ library(googlesheets4)
 library(sf)
 library(terra)
 library(here)
-# library(rgeos)
 ```
 
 Next set the study name.
 This can be any name you like, all files saved using this script will be prefixed with this name.
+Avoid having a name that is too long. We recommend using a short project name that includes the method e.g. "2020_ningaloo_stereo-BRUVs".
 
 ```{r study-name}
 name <- "example-bruv-workflow"
@@ -76,7 +79,7 @@ metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
                                 name, "_Metadata.rds")))
 ```
 
-# Marine Parks
+## Marine Parks
 Load marine park shape files, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling. 
 The data set used here is the 2022 Collaborative Australian Protected Areas Database, which you can download for free [here](https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore).
 
@@ -101,8 +104,9 @@ metadata <- metadata_sf %>%
   clean_names() %>%
   glimpse()
 ```
-# Find nearest Marine Region
-We need to find the nearest marine region for each sample. Then we can use the life history lists to find species that have not been observed in that marine region before.
+## Find nearest Marine Region
+Now we need to find the nearest marine region for each sample in the metadata. 
+Then we can use the life history lists to find species that have not been observed in that marine region before.
 
 ```{r marine region, warning=FALSE}
 metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
@@ -119,18 +123,19 @@ metadata <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
 ```
 
 # Fish annotation data
-There are two types of fish annotation data formats that you can check and format using this script: EventMeasure database outputs or “Generic” files. 
+There are two types of fish annotation data formats that you can check and format using this script: *EventMeasure database outputs* or *Generic* files. 
 
-For EventMeasure data you will need to export the database outputs using EventMeasure and the .EMObs files. This will give you the '_Points.txt', '_Lengths.txt' and '_3DPoints.txt' files.
-“Generic” data is a much simpler format and allows users who haven’t used EventMeasure to format QC their annotation data. You will need a _Count.csv file and a _Length.csv file.
+- For *EventMeasure database outputs* you will need to export the database outputs using the EventMeasure software and the .EMObs files. This will give you the '_Points.txt', '_Lengths.txt' and '_3DPoints.txt' files.
+
+- *Generic* data is a much simpler format and allows users who haven’t used EventMeasure to format QC their annotation data. You will need a _Count.csv file and a _Length.csv file.
 
 For more information on the format of these files please see the [CheckEM user guide](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)
 
-We recommend using the EventMeasure database exports if they are available and up to date. There are more checks possible with EventMeasure data than “Generic” data. 
-**Note:** If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as “Generic” annotation files (e.g. count and length).
+We recommend using the *EventMeasure database outputs* if they are available and up to date. There are more checks possible with EventMeasure data than *Generic* data. 
+**Note:** If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as *Generic* annotation files (e.g. count and length).
 
-## Load any EventMeasure _Points.txt files
-This section of code will read in any 'Points.txt' files that you have saved in the directory you set.
+## Load any EventMeasure Points.txt files
+This section of code will read in any Points.txt files that you have saved in the directory you set.
 It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
@@ -139,8 +144,8 @@ points <- read_points(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
 
-## Load any "Generic" count files
-This section of code will read in any 'Count.csv' files that you have saved in the directory you set.
+## Load any *Generic* count files
+This section of code will read in any Count.csv files that you have saved in the directory you set.
 It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
 
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
@@ -149,7 +154,7 @@ It is important that you consistently name your files with the same campaignid (
 counts <- read_counts(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
-## Combine EventMeasure and "Generic" count together
+## Combine EventMeasure and *Generic* count together
 Create and tidy the MaxN file.
 
 ```{r create-maxn}
@@ -202,8 +207,8 @@ if(nrow(counts) > 1){
 maxn <- bind_rows(get0("maxn_points"), get0("maxn_counts")) # this works even if you only have one type of data
 ```
 
-## Load any EventMeasure '_Lengths.txt' and/or '_3DPoints.txt' files
-This section of code will read in any '_Lengths.txt' and/or '_3DPoints.txt' files that you have saved in the directory you set.
+## Load any EventMeasure _Lengths.txt and/or 3DPoints.txt files
+This section of code will read in any Lengths.txt and/or 3DPoints.txt files that you have saved in the directory you set.
 It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
@@ -216,7 +221,7 @@ em_length3dpoints <- read_em_length(here::here("r-workflows/data/raw/")) %>%
   glimpse() 
 ```
 
-## Load any "Generic" length files
+## Load any *Generic* length files
 This section of code will read in any _Length.csv files that you have saved in the directory you set.
 It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
@@ -236,8 +241,8 @@ gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%
 length <- bind_rows(get0("em_length3dpoints"), get0("gen_length")) # this works even if you only have one type of data
 ```
 
-# Format and add zeros where a species isn't present
-## In the count data
+## Format and add zeros where a species isn't present
+### In the count data
 Tidy and "complete" MaxN data (e.g. add zeros in the data where a species wasn't observed).
 The final data set will have a row for each species in every sample (deployment).
 
@@ -270,8 +275,9 @@ complete_count <- count %>%
   glimpse()
 ```
 
-## In the length data
+### In the length data
 Tidy and complete length data (e.g. complete zeroes in the data).
+The final data set will have a row for each species in every sample (deployment).
 
 ```{r complete-length}
 complete_length <- length %>%
@@ -336,6 +342,8 @@ message(paste(nrow(missing_count), "samples in the metadata missing count data")
 ```
 
 ## Samples in the count data missing metadata
+This next chunk checks for any samples that are in the count data but do not have a match in the sample metadata.
+
 ```{r count-missing-metadata}
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
 message(paste(nrow(missing_metadata), "samples in count data missing metadata"))
@@ -360,6 +368,8 @@ message(paste(nrow(missing_length), "samples in metadata missing length data"))
 ```
 
 ## Samples in the length data missing metadata
+This next chunk checks for any samples that are in the length data but do not have a match in the sample metadata.
+
 ```{r length-missing-metadata}
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
 
@@ -368,6 +378,7 @@ message(paste(nrow(missing_metadata), "samples in length data missing metadata")
 
 ## Periods without an end (EM only)
 This check is only important if you have used periods to define your sampling duration.
+It looks for any periods in the EMObs that do not have an end time. This is important if you want to check the duration of each period.
 
 ```{r load-periods}
 periods <- read_periods(here::here("r-workflows/data/raw/")) %>%
@@ -382,6 +393,7 @@ glimpse(periods_without_end)
 
 ## Samples without periods (EM only)
 This check is only important if you have used periods to define your sampling duration.
+You can use it to find any samples that are missing periods.
 
 ```{r missing-periods}
 metadata_samples <- metadata %>%
@@ -401,6 +413,8 @@ glimpse(missing_periods)
 ```
 
 ## Points outside Periods (EM only)
+This check identifies any points that have been annotated outside of a period.
+
 ```{r points-outside-periods}
 points_outside_periods <- points %>%
   dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
@@ -411,6 +425,8 @@ glimpse(points_outside_periods)
 ```
 
 ## Length measurement(s) or 3D point(s) outside periods (EM only)
+This check identifies any length measurements or 3D points that have been annotated outside of a period.
+
 ```{r lengths-outside-periods}
 lengths_outside_periods <- em_length3dpoints %>%
   dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
@@ -421,6 +437,8 @@ glimpse(lengths_outside_periods)
 ```
 
 ## Period(s) that are not the correct duration (EM only)
+In this check you define the correct sampling duration (e.g. 60 minutes for stereo-BRUVs) and then identify any periods that are not that length. 
+
 ```{r periods-wrong-length}
 period_length <- 60 # in minutes
 
@@ -440,6 +458,7 @@ This is the total number of individuals observed in the count data:
 total_count <- sum(complete_count$count)
 message(paste(total_count, "fish counted in the count data"))
 ```
+
 This is the total number of individuals observed in the length data:
 ```{r total-in-lengths}
 total_length <- sum(complete_length$count)
@@ -447,10 +466,9 @@ message(paste(total_length, "fish counted in the length data"))
 ```
 
 ## Points without a number (EM only)
-This is a check for EventMeasure data.
+This is a check for EventMeasure data. Sometimes analysts will add points of interest that are not fish/sharks and remove the number so they are not summed in total abundance metrics. You should check to make sure no fish species accidentally had their number deleted.
 
 ```{r points-without-a-number}
-# TODO add some more comments about why these are important to fix
 points_without_number <- points %>%
   filter(number %in% c("NA", NA, 0, NULL, "", " "))
 
@@ -458,17 +476,24 @@ message(paste(nrow(points_without_number), "points in the _Points.txt file that 
 glimpse(points_without_number)
 ```
 
-## Length measurements without a number (EM only)
+## Length measurements or 3D points without a number (EM only)
+This is a check for EventMeasure data. Sometimes analysts will add 3D points to record the sync point. These can remain in the data but you should double check that no fish are accidentally missing a number.
+
 ```{r lengths-without-a-number}
-# TODO add some more comments about why these are important to fix
-points_without_number <- points %>%
+lengths_without_number <- em_length3dpoints %>%
   filter(number %in% c("NA", NA, 0, NULL, "", " "))
 
-message(paste(nrow(points_without_number), "points in the _Points.txt file that do not have a number"))
-glimpse(points_without_number)
+message(paste(nrow(lengths_without_number), "lengths or 3D points in the EMObs that do not have a number"))
+glimpse(lengths_without_number)
+
 ```
 
-## Species names that have been updated (Count)
+## Species names that have been updated
+Taxanomic advances means that species names are updated all the time, and analysts sometimes spell species names incorrectly. This check uses a data-frame saved inside the CheckEM package to identifies species names that have been updated or spelt incorrectly. 
+
+You can choose if you would like to find the synonyms using an Australia specific list (*CheckEM::aus_synonyms*) or a Global list (*TO ADD*).
+
+### Synonyms in the count data
 ```{r count-synonyms}
 synonyms_in_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
       dplyr::filter(!is.na(genus_correct)) %>%
@@ -481,7 +506,7 @@ message(paste(nrow(synonyms_in_count), "synonyms used in the count data"))
 glimpse(synonyms_in_count)
 ```
 
-## Species names that have been updated (Length)
+### Synonyms in the length data
 ```{r length-synonyms}
 synonyms_in_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %>%
       dplyr::filter(!is.na(genus_correct)) %>%
@@ -493,8 +518,11 @@ synonyms_in_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %
 message(paste(nrow(synonyms_in_length), "synonyms used in the length data"))
 glimpse(synonyms_in_length)
 ```
-# Change synonyms names here
-add warning about skipping this section if wanted
+
+### Change synonyms names in data
+Now that we have identified species names that have been updated or spelt wrong you need to decide if you want to change the names in your data or continue using the old names. If you want to update the names use the next two chunks. If you would like to retain the old names skip the next two chunks.
+
+**NOTE:** this does not change your original annotation files, only the data you save at the end of the script.
 
 ```{r change-count-synonyms}
 complete_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
@@ -513,7 +541,17 @@ complete_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %>%
   dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
   dplyr::mutate(scientific = paste(family, genus, species))
 ```
-## Species not observed in the area before (Count)
+
+## Species not observed in the region before
+In this check you use a list of species and their known geographical ranges to check your data against to identify any species that are outside of that range. There are two life history data sets to choose from to check any species that are outside of their known geographical range. They are the Australia and Global lists.
+
+To use the Australia life history list use *CheckEM::australia_life_history* to use the Global life history list use *CheckEM::global_life_history*.
+
+We run the check on both the count and length data, as sometimes a species will be in the count and not the length.
+All species identified in these checks are present in your chosen life-history list. Sometimes range data is limited, so it is possible that a species flagged in this check is actually present in that area. You need to critically think about the species flagged by this check.
+
+### Species out of range in the count data
+Check for any species that are out of range in the count data.
 ```{r count-species-not-in-area}
 count_species_not_observed_region <- complete_count %>%
   dplyr::distinct(campaignid, sample, family, genus, species, marine_region, count) %>%
@@ -529,7 +567,8 @@ message(paste(nrow(count_species_not_observed_region), "species not observed in 
 glimpse(count_species_not_observed_region)
 ```
 
-## Species not observed in the area before (Length)
+### Species out of range in the length data
+Check for any species that are out of range in the length data.
 ```{r length-species-not-in-area}
 length_species_not_observed_region <- complete_length %>%
   dplyr::distinct(campaignid, sample, family, genus, species, marine_region, count) %>%
@@ -545,9 +584,16 @@ message(paste(nrow(length_species_not_observed_region), "species not observed in
 glimpse(length_species_not_observed_region)
 ```
 
-## Species not listed in the life history list (Count)
-If you chose to update the names that have changed (synonyms) then these check won't include those names.
+## Species not listed in the life history list
+This next check identifies any species that are not listed in your chosen life history list.
+It could be that you have misspelt the family/genus/species name, the species name is invalid, the name has been updated or that the species name should be included in the life history list but is missing. Again you will need to critically think about the species that are flagged to determine if this is an error or not.
 
+To use the Australia life history list use *CheckEM::australia_life_history* to use the Global life history list use *CheckEM::global_life_history*.
+
+*NOTE.* If you believe that a species flagged by this check should be included in the life history list please email brooke.gibbons@uwa.edu.au with the full species name and which list it should be added to (Global or Australia).
+
+### Species in the count data that are not listed
+If you chose to update the names that have changed (synonyms) then this check won't include the previously used names.
 ```{r count-species-not-in-list}
 count_species_not_in_list <- complete_count %>%
   dplyr::anti_join(., CheckEM::australia_life_history, by = c("family", "genus", "species")) %>%
@@ -560,7 +606,7 @@ message(paste(nrow(count_species_not_in_list), "species not in chosen life histo
 glimpse(count_species_not_in_list)
 ```
 
-## Species not listed in the life history list (Length)
+### Species in the length data that are not listed
 ```{r length-species-not-in-list}
 length_species_not_in_list <- complete_length %>%
   dplyr::anti_join(., CheckEM::australia_life_history, by = c("family", "genus", "species")) %>%
@@ -574,6 +620,13 @@ glimpse(length_species_not_in_list)
 ```
 
 ## Length measurements smaller or bigger than the fishbase minimum and maximums
+Length data is extremely valuable so it is important that fish are precisely and accurately measured.
+You can use this check to identify any measurements that are bigger than the maximum size listed on fishbase.
+However, we think it is important that you check any species that are nearing their maximum size (e.g 85% of maximum).
+We also think it is important that you check for any species that are very small. Fishbase does not list a minimum size, so we recommend checking the length measurements against 15% of the maximum size.
+
+In the function below you can edit these cut offs (15% and 85%) as you see fit.
+If you believe the size limits for a particular species is incorrect you fill out the feedback form on the [CheckEM](https://marine-ecology.shinyapps.io/CheckEM/) web based app (see tab *Edit maximum lengths*) to supply a new maximum size limit.
 
 ```{r incorrect-lengths}
 incorrect_lengths <- left_join(complete_length, create_min_max(CheckEM::australia_life_history, minimum = 0.15, maximum = 0.85)) %>%
@@ -597,8 +650,9 @@ glimpse(too_small)
 message(paste(nrow(too_big), "lengths are too big"))
 glimpse(too_big)
 ```
-## Number of 3D points and length measurements over the RMS limit (EM only)
 
+## Number of 3D points and length measurements over the RMS limit (EM only)
+In this check you can set the RMS limit, and then identify any measurements that have a larger RMS.
 
 ```{r length-over-rms}
 rms_limit <- 20 # in mm
