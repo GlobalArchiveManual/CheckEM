@@ -436,7 +436,7 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <span><span class="va">maxn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">get0</a></span><span class="op">(</span><span class="st">"maxn_points"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">get0</a></span><span class="op">(</span><span class="st">"maxn_counts"</span><span class="op">)</span><span class="op">)</span> <span class="co"># this works even if you only have one type of data</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="load-any-eventmeasure-_lengths-txt-andor-3dpoints-txt-files">Load any EventMeasure _Lengths.txt and/or 3DPoints.txt files<a class="anchor" aria-label="anchor" href="#load-any-eventmeasure-_lengths-txt-andor-3dpoints-txt-files"></a>
+<h3 id="load-any-eventmeasure-lengths-txt-andor-3dpoints-txt-files">Load any EventMeasure Lengths.txt and/or 3DPoints.txt files<a class="anchor" aria-label="anchor" href="#load-any-eventmeasure-lengths-txt-andor-3dpoints-txt-files"></a>
 </h3>
 <p>This section of code will read in any Lengths.txt and/or 3DPoints.txt
 files that you have saved in the directory you set. It will combine all
@@ -540,7 +540,7 @@ same campaignid (look out for different separators e.g. ‘-’, ’</em>’, o
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-west", …</span></span></code></pre>
 </div>
 <div class="section level3">
-<h3 id="combine-eventmeasure-and-generic-length-data">Combine EventMeasure and “Generic” length data<a class="anchor" aria-label="anchor" href="#combine-eventmeasure-and-generic-length-data"></a>
+<h3 id="combine-eventmeasure-and-generic-length-data">Combine EventMeasure and <em>Generic</em> length data<a class="anchor" aria-label="anchor" href="#combine-eventmeasure-and-generic-length-data"></a>
 </h3>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If only EventMeasure data then length only includes Length and 3D points data</span></span>
@@ -1368,6 +1368,8 @@ measurements that have a larger RMS.</p>
 <h3 id="number-of-length-measurements-over-the-precision-limit-em-only">Number of length measurements over the precision limit (EM
 only)<a class="anchor" aria-label="anchor" href="#number-of-length-measurements-over-the-precision-limit-em-only"></a>
 </h3>
+<p>In this check you can set the precision limit, and then identify any
+measurements that have a larger precision.</p>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">precision_limit</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># in %</span></span>
 <span></span>
@@ -1407,6 +1409,8 @@ only)<a class="anchor" aria-label="anchor" href="#number-of-length-measurements-
 <h3 id="number-of-3d-points-and-length-measurements-over-the-range-limit-em-only">Number of 3D points and length measurements over the range limit (EM
 only)<a class="anchor" aria-label="anchor" href="#number-of-3d-points-and-length-measurements-over-the-range-limit-em-only"></a>
 </h3>
+<p>In this check you can set the range limit, and then identify any
+measurements that have a larger range.</p>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">range_limit</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># in metres</span></span>
 <span></span>
