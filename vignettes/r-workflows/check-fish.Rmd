@@ -207,7 +207,7 @@ if(nrow(counts) > 1){
 maxn <- bind_rows(get0("maxn_points"), get0("maxn_counts")) # this works even if you only have one type of data
 ```
 
-## Load any EventMeasure _Lengths.txt and/or 3DPoints.txt files
+## Load any EventMeasure Lengths.txt and/or 3DPoints.txt files
 This section of code will read in any Lengths.txt and/or 3DPoints.txt files that you have saved in the directory you set.
 It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
@@ -233,7 +233,7 @@ gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%
   glimpse() 
 ```
 
-## Combine EventMeasure and "Generic" length data
+## Combine EventMeasure and *Generic* length data
 ```{r combine-length}
 # If only EventMeasure data then length only includes Length and 3D points data
 # If only Generic data then length only includes generic length data
@@ -664,7 +664,7 @@ message(paste(nrow(over_rms), "lengths over RMS limit"))
 glimpse(over_rms)
 ```
 ## Number of length measurements over the precision limit (EM only)
-
+In this check you can set the precision limit, and then identify any measurements that have a larger precision.
 
 ```{r length-over-precision}
 precision_limit <- 10 # in %
@@ -677,6 +677,7 @@ glimpse(over_precision)
 ```
 
 ## Number of 3D points and length measurements over the range limit (EM only)
+In this check you can set the range limit, and then identify any measurements that have a larger range.
 
 ```{r over_range_limit}
 range_limit <- 10 # in metres
