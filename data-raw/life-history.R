@@ -56,8 +56,5 @@ test <- aus_synonyms %>%
   group_by(family, genus, species) %>%
   summarise(n = n())
 
-
 usethis::use_data(aus_synonyms, overwrite = TRUE)
-
-
 
