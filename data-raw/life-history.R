@@ -54,7 +54,8 @@ aus_synonyms <- bind_rows(lh_aus_synonyms, caab_aus_synonyms) %>%
 
 test <- aus_synonyms %>%
   group_by(family, genus, species) %>%
-  summarise(n = n())
+  summarise(n = n()) %>%
+  dplyr::filter(n > 1)
 
 usethis::use_data(aus_synonyms, overwrite = TRUE)
 
