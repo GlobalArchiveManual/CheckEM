@@ -4,9 +4,10 @@ library(tidyverse)
 library(CheckEM)
 library(googlesheets4)
 
-australia_life_history <- readRDS("annotation-schema/data/tidy/simple-life-history.RDS")
+# THIS IS NOT UPDATED IN THE ANNOTATION SCHEMA SCRIPT 5
+# australia_life_history <- readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS")
 
-usethis::use_data(australia_life_history, overwrite = TRUE)
+# usethis::use_data(australia_life_history, overwrite = TRUE)
 
 global_life_history <- readRDS("annotation-schema/data/tidy/global_fish.life.history.RDS")
 
