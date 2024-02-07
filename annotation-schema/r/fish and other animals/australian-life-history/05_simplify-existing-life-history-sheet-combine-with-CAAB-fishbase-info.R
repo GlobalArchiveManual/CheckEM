@@ -304,7 +304,13 @@ australia_life_history <- caab_combined %>%
                 min_legal_tas,
                 max_legal_tas
                 )) %>%
-  bind_rows(animals)
+  bind_rows(animals) %>%
+  dplyr::mutate(family = if_else(genus %in% "Heteroscarus", "Labridae", family)) %>%
+  dplyr::mutate(family = if_else(genus %in% "Olisthops", "Labridae", family)) %>%
+  dplyr::mutate(family = if_else(genus %in% "Siphonognathus", "Labridae", family)) %>%
+  dplyr::mutate(family = if_else(genus %in% "Neoodax", "Labridae", family)) %>%
+  dplyr::mutate(family = if_else(genus %in% "Haletta", "Labridae", family))
+
 
 test <- australia_life_history %>%
   dplyr::group_by(caab) %>%
