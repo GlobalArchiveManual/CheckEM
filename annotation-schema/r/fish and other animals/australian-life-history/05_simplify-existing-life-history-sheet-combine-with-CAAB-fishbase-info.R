@@ -26,6 +26,13 @@ saveRDS(lh, "annotation-schema/data/raw/australia_original-life-history.RDS")
 synonyms <- read_sheet(url, sheet = "synonyms_updated") %>% distinct()
 saveRDS(synonyms, "annotation-schema/data/raw/australia_fish_original-synonyms.RDS")
 
+# Extra maximum sizes
+max_url <- "https://docs.google.com/spreadsheets/d/1H7EXoTlpeg48LrNVszIa8irwIAh_SqYBNqMYI1WVce8/edit?resourcekey#gid=1554913827"
+
+new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
+  clean_names() %>%
+  dplyr::select(family, genus, species, new_maximum_length_in_cm)
+
 # Get columns to keep from original life history
 names(lh)
 
@@ -338,8 +345,11 @@ australia_life_history <- caab_combined %>%
   dplyr::mutate(family = if_else(genus %in% "Haletta", "Labridae", family)) %>%
   
   
-  dplyr::mutate(order = if_else(family %in% "Siphonariidae", "Siphonariida", order))
-
+  dplyr::mutate(order = if_else(family %in% "Siphonariidae", "Siphonariida", order)) %>%
+  
+  dplyr::left_join(new_max_sizes) %>%
+  dplyr::mutate(fb_length_max = if_else(!is.na(new_maximum_length_in_cm), new_maximum_length_in_cm, fb_length_max)) %>%
+  dplyr::select(-new_maximum_length_in_cm)
 
 test <- australia_life_history %>%
   dplyr::group_by(caab) %>%
