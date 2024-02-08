@@ -1,0 +1,224 @@
+CAAB	ScientificName	Authority	CommonName
+40001001	Aptenodytes forsteri	Gray, 1844	emperor penguin
+40001002	Aptenodytes patagonicus	Miller, 1778	king penguin
+40001003	Eudyptes chrysocome	(Forster, 1781)	rockhopper penguin
+40001004	Eudyptes chrysolophus	(Brandt, 1837)	macaroni penguin
+40001005	Eudyptes pachyrhynchus	Gray, 1845	fiordland penguin
+40001006	Eudyptes robustus	Oliver, 1953	snares penguin
+40001007	Eudyptes sclateri	Buller, 1888	erect-crested penguin
+40001008	Eudyptula minor	(Forster, 1781)	little penguin
+40001009	Pygoscelis adeliae	(Hombron & Jacquinot, 1841)	Adelie penguin
+40001010	Pygoscelis antarctica	(Forster, 1781)	chinstrap penguin
+40001011	Pygoscelis papua	(Forster, 1781)	gentoo penguin
+40001012	Spheniscus magellanicus	(Forster, 1781)	magellanic penguin
+40001901	Aptenodytes spp.	-	
+40001902	Eudyptes spp.	-	
+40001903	Eudyptula spp.	-	
+40001904	Pygoscelis spp.	-	
+40001905	Spheniscus spp.	-	
+40001000	Spheniscidae	-	penguins
+40040018	Diomedea amsterdamensis	Roux, Jouventin, Mougin, Stahl & Weimerskitch, 1983	Amsterdam albatross
+40040011	Diomedea antipodensis	Robertson & Warham, 1992	antipodean albatross
+40040019	Diomedea dabbenena	Mathews, 1929	Tristan albatross
+40040005	Diomedea epomophora	Lesson, 1825	southern royal albatross
+40040006	Diomedea exulans	Linnaeus, 1758	wandering albatross
+40040010	Diomedea gibsoni	Robertson & Warham, 1992	Gibson's albatross
+40040012	Diomedea sanfordi	Murphy, 1917	northern royal albatross
+40040008	Phoebetria fusca	(Hilsenberg, 1822)	sooty albatross
+40040009	Phoebetria palpebrata	(J.R. Forster, 1785)	light-mantled sooty albatross
+40040001	Thalassarche bulleri	(Rothschild, 1893)	Buller's albatross
+40040014	Thalassarche carteri	(Rothschild, 1903)	Indian yellow-nosed albatross
+40040002	Thalassarche cauta	(Gould, 1841)	shy albatross
+40040003	Thalassarche chlororhynchos	(Gmelin, 1786)	yellow-nosed albatross
+40040004	Thalassarche chrysostoma	(Forster, 1785)	grey-headed albatross
+40040017	Thalassarche eremita	(Murphy, 1930)	Chatham albatross
+40040013	Thalassarche impavida	(Mathews, 1912)	Campbell albatross
+40040007	Thalassarche melanophrys	(Temminck, 1828)	black-browed albatross
+40040015	Thalassarche platei	(Reichenow, 1898)	Pacific albatross
+40040016	Thalassarche salvini	(Rothschild, 1893)	Salvin's albatross
+40040901	Diomedea spp.	-	
+40040902	Phoebetria spp.	-	
+40040903	Thalassarche spp.	-	
+40040000	Diomedeidae	-	albatrosses
+40041001	Bulweria bulwerii	(Jardine and Selby, 1828)	Bulwer's petrel
+40041002	Calonectris leucomelas	(Temminck, 1835)	streaked shearwater
+40041003	Daption capense	(Linnaeus, 1758)	Cape petrel
+40041004	Fulmarus glacialoides	(Smith, 1840)	southern fulmar
+40041005	Halobaena caerulea	(Gmelin, 1789)	blue petrel
+40041006	Lugensa brevirostris	(Lesson, 1831)	Kerguelen petrel
+40041007	Macronectes giganteus	(Gmelin, 1789)	southern giant-petrel
+40041008	Macronectes halli	Mathews, 1912	northern giant-petrel
+40041009	Pachyptila belcheri	(Mathews, 1912)	slender-billed prion
+40041010	Pachyptila crassirostris	(Mathews, 1912)	fulmar prion
+40041011	Pachyptila desolata	(Gmelin, 1789)	Antarctic prion
+40041012	Pachyptila salvini	(Mathews, 1912)	Salvin's prion
+40041013	Pachyptila turtur	(Kuhl, 1820)	fairy prion
+40041014	Pachyptila vittata	(Forster, 1777)	broad-billed prion
+40041015	Pagodroma nivea	(Forster, 1777)	snow petrel
+40041016	Pelecanoides georgicus	Murphy & Harper, 1916	South Georgian diving-petrel
+40041017	Pelecanoides urinatrix	(Gmelin, 1789)	common diving-petrel
+40041018	Procellaria aequinoctialis	Linnaeus, 1758	white-chinned petrel
+40041019	Procellaria cinerea	Gmelin, 1789	grey petrel
+40041020	Procellaria parkinsoni	Gray, 1862	black petrel
+40041021	Procellaria westlandica	Falla, 1946	westland petrel
+40041022	Pseudobulweria rostrata	(Peale, 1848)	Tahiti petrel
+40041023	Pterodroma arminjoniana	(Giglioli and Salvadori, 1869)	herald petrel
+40041024	Pterodroma baraui	(Jouanin, 1964)	Barau's petrel
+40041025	Pterodroma cervicalis	(Salvin, 1891)	white-necked petrel
+40041026	Pterodroma cookii	(Gray, 1843)	Cook's petrel
+40041027	Pterodroma externa	(Salvin, 1875)	Juan Fernandez petrel
+40041028	Pterodroma inexpectata	(Forster, 1844)	mottled petrel
+40041029	Pterodroma lessonii	(Garnot, 1826)	white-headed petrel
+40041030	Pterodroma leucoptera	(Gould, 1844)	Gould's petrel
+40041031	Pterodroma macroptera	(Smith, 1840)	great-winged petrel
+40041032	Pterodroma mollis	(Gould, 1844)	soft-plumaged petrel
+40041033	Pterodroma neglecta	(Schlegel, 1863)	Kermadec petrel
+40041034	Pterodroma nigripennis	(Rothschild, 1893)	black-winged petrel
+40041035	Pterodroma solandri	(Gould, 1844)	providence petrel
+40041036	Puffinus assimilis	Gould, 1838	little shearwater
+40041037	Puffinus bulleri	Salvin, 1888	Buller's shearwater
+40041038	Puffinus carneipes	Gould, 1844	flesh-footed shearwater
+40041039	Puffinus creatopus	Coues, 1864	pink-footed shearwater
+40041040	Puffinus gavia	(Forster, 1844)	fluttering shearwater
+40041041	Puffinus gravis	(O'Reilly, 1818)	great shearwater
+40041042	Puffinus griseus	(Gmelin, 1789)	sooty shearwater
+40041043	Puffinus huttoni	Mathews, 1912	Hutton's shearwater
+40041044	Puffinus lherminieri	Lesson, 1839	Audubon's shearwater
+40041045	Puffinus pacificus	(Gmelin, 1789)	wedge-tailed shearwater
+40041046	Puffinus puffinus	(Brunnich, 1764)	Manx shearwater
+40041047	Puffinus tenuirostris	(Temminck, 1835)	short-tailed shearwater
+40041048	Thalassoica antarctica	(Gmelin, 1789)	Antarctic petrel
+40041901	Bulweria spp.	-	
+40041902	Calonectris spp.	-	
+40041903	Daption spp.	-	
+40041904	Fulmarus spp.	-	
+40041905	Halobaena spp.	-	
+40041906	Lugensa spp.	-	
+40041907	Macronectes spp.	-	
+40041051	Pachyptila spp.	-	prions
+40041908	Pagodroma spp.	-	
+40041049	Pelecanoides spp.	-	diving-petrels
+40041909	Procellaria spp.	-	
+40041910	Pseudobulweria spp.	-	
+40041911	Pterodroma spp.	-	
+40041050	Puffinus spp.	-	shearwaters
+40041912	Thalassoica spp.	-	
+40041000	Procellariidae	-	petrels, prions and shearwaters
+40042001	Fregetta grallaria	(Vieillot, 1818)	white-bellied storm-petrel
+40042002	Fregetta tropica	(Gould, 1844)	black-bellied storm-petrel
+40042003	Garrodia nereis	(Gould, 1841)	grey-backed storm-petrel
+40042004	Oceanites oceanicus	(Kuhl, 1820)	Wilson's storm-petrel
+40042005	Oceanodroma leucorhoa	(Vieillot, 1818)	Leach's storm-petrel
+40042006	Oceanodroma matsudairae	Kuroda, 1922	Matsudaira's storm-petrel
+40042007	Pelagodroma marina	(Latham, 1790)	white-faced storm-petrel
+40042901	Fregetta spp.	-	
+40042902	Garrodia spp.	-	
+40042903	Oceanites spp.	-	
+40042904	Oceanodroma spp.	-	
+40042905	Pelagodroma spp.	-	
+40042000	Hydrobatidae	-	storm-petrels
+40045001	Phaethon lepturus	Daudin, 1802	white-tailed tropicbird
+40045002	Phaethon rubricauda	Boddaert, 1783	red-tailed tropicbird
+40045901	Phaethon spp.	-	
+40045000	Phaethontidae	-	tropicbirds
+40046001	Pelecanus conspicillatus	Temminck, 1824	Australian pelican
+40046901	Pelecanus spp.	-	
+40046000	Pelecanidae	-	pelecans
+40047001	Morus capensis	(Lichtenstein, 1823)	Cape gannet
+40047002	Morus serrator	(Gray, 1843)	Australasian gannet
+40047003	Papasula abbotti	(Ridgway, 1893)	Abbott's booby
+40047004	Sula dactylatra	Lesson, 1831	masked booby
+40047005	Sula leucogaster	(Boddaert, 1783)	brown booby
+40047006	Sula sula	(Linnaeus, 1766)	red-footed booby
+40047901	Morus spp.	-	
+40047902	Papasula spp.	-	
+40047903	Sula spp.	-	
+40047000	Sulidae	-	gannets and boobies
+40048001	Leucocarbo atriceps	(King, 1828)	imperial shag
+40048002	Phalacrocorax carbo	(Linnaeus, 1758)	great cormorant
+40048003	Phalacrocorax fuscescens	(Vieillot, 1817)	black-faced cormorant
+40048004	Phalacrocorax melanoleucos	(Vieillot, 1817)	little pied cormorant
+40048005	Phalacrocorax sulcirostris	(Brandt, 1837)	little black cormorant
+40048006	Phalacrocorax varius	(Gmelin, 1789)	pied cormorant
+40048901	Leucocarbo spp.	-	
+40048902	Phalacrocorax spp.	-	
+40048000	Phalacrocoracidae	-	cormorants
+40050001	Fregata andrewsi	Mathews, 1914	Christmas frigatebird
+40050002	Fregata ariel	(Gray, 1845)	lesser frigatebird
+40050003	Fregata minor	(Gmelin, 1789)	great frigatebird
+40050901	Fregata spp.	-	
+40050000	Fregatidae	-	frigatebirds
+40055001	Butorides striatus	(Linnaeus, 1758)	striated heron
+40055002	Egretta sacra	(Gmelin, 1789)	eastern reef egret
+40055901	Butorides spp.	-	
+40055902	Egretta spp.	-	
+40055000	Ardeidae	-	herons and egrets
+40071001	Cereopsis novaehollandiae	Latham, 1802	Cape Barren goose
+40071002	Cygnus atratus	(Latham, 1790)	black swan
+40071901	Cereopsis spp.	-	
+40071902	Cygnus spp.	-	
+40071000	Anatidae	-	ducks, geese and swans
+40077001	Haliaeetus leucogaster	(Gmelin, 1788)	white-bellied sea-eagle
+40077002	Haliastur indus	(Boddaert, 1783)	brahminy kite
+40077003	Pandion haliaetus	(Linnaeus, 1758)	osprey
+40077901	Haliaeetus spp.	-	
+40077902	Haliastur spp.	-	
+40077903	Pandion spp.	-	
+40077000	Accipitridae	-	eagles, hawks, kites and sea-eagles
+40117001	Haematopus fuliginosus	Gould, 1845	sooty oystercatcher
+40117002	Haematopus longirostris	Vieillot, 1817	pied oystercatcher
+40117901	Haematopus spp.	-	
+40117000	Haematopodidae	-	oystercatchers
+40119001	Steganopus tricolor	Vieillot, 1819	Wilson's phalarope
+40119901	Steganopus spp.	-	
+40119000	Scolopacidae	-	snipes
+40123001	Esacus neglectus	Matthews, 1912	beach stone-curlew
+40123901	Esacus spp.	-	
+40123000	Burhinidae	-	thick-knees
+40126001	Chionis minor	Hartlaub, 1841	black-faced sheathbill
+40126901	Chionis spp.	-	
+40126000	Chionididae	-	sheathbills
+40128001	Anous minutus	Boie, 1844	black noddy
+40128002	Anous stolidus	(Linnaeus, 1758)	common noddy
+40128003	Anous tenuirostris	(Temminck, 1823)	lesser noddy
+40128004	Catharacta maccormicki	(Saunders, 1893)	south polar skua
+40128005	Catharacta skua	Brunnich, 1764	great skua
+40128006	Chlidonias hybridus	(Pallas, 1811)	whiskered tern
+40128007	Chlidonias leucopterus	(Temminck, 1815)	white-winged black tern
+40128008	Chlidonias niger	(Linnaeus, 1758)	black tern
+40128009	Gygis alba	(Sparrman, 1786)	white tern
+40128010	Larus atricilla	Linnaeus, 1758	laughing gull
+40128011	Larus crassirostris	Vieillot, 1818	black-tailed gull
+40128012	Larus dominicanus	Lichtenstein, 1823	kelp gull
+40128013	Larus novaehollandiae	Stephens, 1826	silver gull
+40128014	Larus pacificus	Latham, 1802	Pacific gull
+40128015	Larus pipixcan	Wagler, 1831	Franklin's gull
+40128016	Larus ridibundus	Linnaeus, 1766	black-headed gull
+40128017	Larus sabini	Sabine, 1819	Sabine's gull
+40128018	Procelsterna cerulea	(Bennett, 1840)	grey ternlet
+40128019	Stercorarius longicaudus	Vieillot, 1819	long-tailed jaeger
+40128020	Stercorarius parasiticus	(Linnaeus, 1758)	Arctic jaeger
+40128021	Stercorarius pomarinus	(Temminck, 1815)	pomarine jaeger
+40128022	Sterna albifrons	Pallas, 1764	little tern
+40128023	Sterna anaethetus	Scopoli, 1786	bridled tern
+40128024	Sterna bengalensis	Lesson, 1831	lesser crested tern
+40128025	Sterna bergii	Lichtenstein, 1823	crested tern
+40128026	Sterna caspia	Pallas, 1770	Caspian tern
+40128027	Sterna dougallii	Montagu, 1813	roseate tern
+40128028	Sterna fuscata	Linnaeus, 1766	sooty tern
+40128029	Sterna hirundo	Linnaeus, 1758	common tern
+40128030	Sterna nereis	(Gould, 1843)	fairy tern
+40128031	Sterna nilotica	Gmelin, 1789	gull-billed tern
+40128032	Sterna paradisaea	Pontoppidan, 1763	Arctic tern
+40128033	Sterna striata	Gmelin, 1789	white-fronted tern
+40128034	Sterna sumatrana	Raffles, 1822	black-naped tern
+40128035	Sterna vittata	Gmelin, 1789	Antarctic tern
+40128902	Anous spp.	-	
+40128903	Catharacta spp.	-	
+40128904	Chlidonias spp.	-	
+40128905	Gygis spp.	-	
+40128906	Larus spp.	-	
+40128907	Procelsterna spp.	-	
+40128908	Stercorarius spp.	-	
+40128901	Sterna spp.	-	terns
+40128000	Laridae	-	gulls, skuas, noddys and terns

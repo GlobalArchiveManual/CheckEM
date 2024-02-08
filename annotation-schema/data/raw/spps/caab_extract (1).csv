@@ -1,0 +1,108 @@
+CAAB	ScientificName	Authority	CommonName
+39001001	Testudines (except fam. Testunididae)	-	turtles
+39001000	Testudines - all families except Testudinidae	-	turtles
+39006004	Chelodina burrungandjii	Thomson, Kennett & Georges, 2000	sandstone snake-necked turtle
+39006001	Chelodina canni	McCord & Thomson, 2002	Cann's long-necked turtle
+39006007	Chelodina colliei	J.E. Gray, 1856	oblong turtle
+39006005	Chelodina expansa	J.E. Gray, 1857	broad-shelled turtle
+39006002	Chelodina longicollis	(Shaw, 1794)	eastern long-necked turtle
+39006006	Chelodina rugosa	Ogilby, 1890	northern snake-necked turtle
+39006003	Chelodina steindachneri	Siebenrock, 1914	Steindachner's long-necked turtle
+39006008	Elseya albagula	Thomson, Georges & Limbus, 2006	white-throated snapping turtle
+39006009	Elseya dentata	(J.E. Gray, 1863)	northern snapping turtle
+39006010	Elseya irwini	Cann, 1997	Irwin's snapping turtle
+39006011	Elseya lavarackorum	(White & Archer, 1994)	Gulf snapping turtle
+39006012	Elusor macrurus	Cann & Legler, 1994	Mary River turtle
+39006013	Emydura macquarii macquarii	(J.E. Gray, 1830)	Macquarie River turtle
+39006023	Emydura macquarii emmotti	Cann, McCord & Joseph-Ouni, 2003	Cooper Creek turtle
+39006024	Emydura macquarii krefftii	(J.E. Gray, 1871)	Krefft's river turtle
+39006025	Emydura macquarii nigra	McCord, Cann & Joseph-Ouni, 2003	Fraser Island short-necked turtle
+39006026	Emydura subglobosa worrelli	(Wells & Wellington, 1985)	Worrell's turtle
+39006014	Emydura subglobosa subglobosa	(Krefft, 1876)	New Guinea painted turtle
+39006015	Emydura tanybaraga	Cann, 1977	northern yellow-faced turtle
+39006016	Emydura victoriae	J.E. Gray, 1842	northern red-faced turtle
+39006017	Myuchelys bellii	(J.E. Gray, 1844)	western sawshelled turtle
+39006018	Myuchelys georgesi	(Cann, 1997)	Georges' helmeted turtle
+39006019	Myuchelys latisternum	(J.E. Gray, 1867)	common sawshell turtle
+39006020	Myuchelys purvisi	(Wells & Wellington, 1985)	Manning River helmeted turtle
+39006021	Pseudemydura umbrina	Siebenrock, 1901	western swamp turtle
+39006022	Rheodytes leukops	Legler & Cann, 1980	Fitzroy River turtle
+39006901	Chelodina spp.	-	
+39006902	Elseya spp.	-	
+39006903	Elusor spp.	-	
+39006904	Emydura spp.	-	
+39006905	Myuchelys spp.	-	
+39006906	Pseudemydura spp.	-	
+39006907	Rheodytes spp.	-	
+39006000	Chelidae	-	chelid turtles
+39012001	Carettochelys insculpta	Ramsay, 1886	pig-nosed turtle
+39012901	Carettochelys spp.	-	
+39012000	Carettochelyidae	-	pignose turtles
+39020001	Caretta caretta	(Linnaeus, 1758)	loggerhead turtle
+39020002	Chelonia mydas	(Linnaeus, 1758)	green turtle
+39020003	Eretmochelys imbricata	(Linnaeus, 1766)	hawksbill turtle
+39020004	Lepidochelys olivacea	(Eschscholtz, 1829)	Olive ridley turtle
+39020005	Natator depressus	(Garman, 1880)	flatback turtle
+39020901	Caretta spp.	-	
+39020902	Chelonia spp.	-	
+39020903	Eretmochelys spp.	-	
+39020904	Lepidochelys spp.	-	
+39020905	Natator spp.	-	
+39020000	Cheloniidae	-	sea turtles
+39021001	Dermochelys coriacea	(Vandelli, 1761)	leatherback turtle
+39021901	Dermochelys spp.	-	
+39021000	Dermochelyidae	-	turtles
+39120001	Acrochordus arafurae	McDowell, 1979	Arafura filesnake
+39120002	Acrochordus granulatus	(Schneider, 1799)	little filesnake
+39120901	Acrochordus spp.	-	
+39120000	Acrochordidae	-	file snakes
+39124001	Laticauda colubrina	(Schneider, 1799)	wide-faced sea krait
+39124002	Laticauda laticaudata	(Linnaeus, 1758)	large-scaled sea krait
+39124901	Laticauda spp.	-	[a sea krait]
+39124000	Elapidae: Laticaudinae	-	sea kraits
+39125002	Aipysurus apraefrontalis	Smith, 1926	short-nosed seasnake
+39125003	Aipysurus duboisii	Bavay, 1869	reef shallows seasnake
+39125005	Aipysurus foliosquama	Smith, 1926	leaf-scaled seasnake
+39125006	Aipysurus fuscus	(Tschudi, 1837)	dusky seasnake
+39125007	Aipysurus laevis	Lacépède, 1804	golden seasnake
+39125004	Aipysurus mosaicus	Sanders, Rasmussen, Elmberg, Mumpuni, Guinea, Blias, Lee & Fry, 2012	stagger-banded seasnake
+39125034	Aipysurus pooleorum	Smith, 1974	Shark Bay sea snake
+39125008	Aipysurus tenuis	Lönnberg and Andersson, 1913	brown-lined seasnake
+39125012	Emydocephalus annulatus	Krefft, 1869	turtle-headed seasnake
+39125014	Ephalophis greyae	Smith, 1931	north-western mangrove seasnake
+39125015	Hydrelaps darwiniensis	Boulenger, 1896	black-ringed mangrove seasnake
+39125016	Hydrophis atriceps	Günther, 1864	black-headed seasnake
+39125017	Hydrophis belcheri	(Gray, 1849)	[a seasnake]
+39125018	Hydrophis caerulescens	(Shaw, 1802)	dwarf seasnake
+39125019	Hydrophis coggeri	(Kharin, 1984)	slender-necked seasnake
+39125031	Hydrophis curtus	(Shaw, 1802)	spine-bellied seasnake
+39125020	Hydrophis czeblukovi	(Kharin, 1984)	fine-spined seasnake
+39125035	Hydrophis donaldi	Ukuwela, Sanders & Fry, 2012	rough-scaled seasnake
+39125021	Hydrophis elegans	(Gray, 1842)	elegant seasnake
+39125024	Hydrophis inornatus	(Gray, 1849)	plain seasnake
+39125010	Hydrophis kingii	Boulenger, 1896	spectacled seasnake
+39125025	Hydrophis macdowelli	Kharin, 1983	small-headed seasnake
+39125011	Hydrophis major	(Shaw, 1802)	olive-headed seasnake
+39125026	Hydrophis melanocephalus	Gray, 1849	[a seasnake]
+39125027	Hydrophis melanosoma	Günther, 1864	black-banded robust seasnake
+39125028	Hydrophis ocellatus	Gray, 1849	[a seasnake]
+39125029	Hydrophis pacificus	Boulenger, 1896	large-headed seasnake
+39125001	Hydrophis peronii	(Duméril, 1853)	horned seasnake
+39125033	Hydrophis platurus	(Linnaeus, 1766)	yellow-bellied seasnake
+39125009	Hydrophis stokesii	(Gray in Stokes, 1846)	Stokes' seasnake
+39125030	Hydrophis vorisi	Kharin, 1984	[a seasnake]
+39125013	Hydrophis zweifeli	(Kharin, 1985)	beaked seasnake
+39125023	Microcephalophis gracilis	(Shaw, 1802)	slender sea snake
+39125032	Parahydrophis mertoni	(Roux, 1910)	northern mangrove seasnake
+39125902	Aipysurus spp.	-	[a sea snake]
+39125905	Emydocephalus spp.	-	[a sea snake]
+39125907	Ephalophis spp.	-	[a sea snake]
+39125908	Hydrelaps spp.	-	[a sea snake]
+39125909	Hydrophis spp.	-	[a sea snake]
+39125913	Microcephalophis spp.	-	[a sea snake]
+39125911	Parahydrophis spp.	-	[a sea snake]
+39125000	Elapidae: Hydrophiinae	-	seasnakes
+39140001	Crocodylus johnstoni	(Krefft, 1873)	freshwater crocodile
+39140002	Crocodylus porosus	Schneider, 1801	saltwater crocodile
+39140901	Crocodylus spp.	-	
+39140000	Crocodylidae	-	crocodiles

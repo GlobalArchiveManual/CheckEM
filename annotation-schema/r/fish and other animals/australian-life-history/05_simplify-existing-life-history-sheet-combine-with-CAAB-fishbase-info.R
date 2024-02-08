@@ -113,7 +113,6 @@ test <- caab_regions %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
-
 fishbase <- readRDS("annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS") %>%
   dplyr::filter(!(caab_scientific %in% "Epigonus macrops" & speccode %in% "14365"))%>%
   dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
@@ -212,12 +211,38 @@ animals <- readRDS("annotation-schema/data/staging/australia_animals_caab-code-a
   dplyr::mutate(australian_common_name = str_replace_all(.$australian_common_name, "\\[|\\]", "")) %>%
   glimpse()
 
+taxonomy <- bind_rows(animals, caab_combined) %>%
+  distinct(class, order, family)
+
+test <- taxonomy %>%
+  distinct(class, order, family) %>%
+  filter(is.na(order))
+
+spps <- readRDS("annotation-schema/data/staging/australia_fish_caab-codes_spps.RDS") %>%
+  dplyr::filter(!caab %in% c(unique(animals$caab))) %>%
+  dplyr::filter(!caab %in% c(unique(caab_combined$caab))) %>%
+  dplyr::filter(!caab %in% c(unique(fishbase$caab))) 
+
+blank_class <- spps %>%
+  filter(is.na(class)) %>%
+  distinct(family)
+
 test <- animals %>%
   dplyr::group_by(caab) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
 test <- animals %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- spps %>%
+  dplyr::group_by(caab) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- spps %>%
   dplyr::group_by(family, genus, species) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
@@ -305,11 +330,15 @@ australia_life_history <- caab_combined %>%
                 max_legal_tas
                 )) %>%
   bind_rows(animals) %>%
+  bind_rows(spps) %>%
   dplyr::mutate(family = if_else(genus %in% "Heteroscarus", "Labridae", family)) %>%
   dplyr::mutate(family = if_else(genus %in% "Olisthops", "Labridae", family)) %>%
   dplyr::mutate(family = if_else(genus %in% "Siphonognathus", "Labridae", family)) %>%
   dplyr::mutate(family = if_else(genus %in% "Neoodax", "Labridae", family)) %>%
-  dplyr::mutate(family = if_else(genus %in% "Haletta", "Labridae", family))
+  dplyr::mutate(family = if_else(genus %in% "Haletta", "Labridae", family)) %>%
+  
+  
+  dplyr::mutate(order = if_else(family %in% "Siphonariidae", "Siphonariida", order))
 
 
 test <- australia_life_history %>%
@@ -327,6 +356,16 @@ test <- australia_life_history %>%
 
 test <- australia_life_history %>%
   dplyr::filter(is.na(global_region))
+
+test <- australia_life_history %>%
+  dplyr::filter(is.na(family))
+
+test <- australia_life_history %>%
+  dplyr::filter(is.na(genus))
+
+test <- australia_life_history %>%
+  dplyr::filter(is.na(species))
+
 
 names(australia_life_history)
 unique(australia_life_history$caab)

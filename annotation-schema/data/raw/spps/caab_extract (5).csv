@@ -1,0 +1,783 @@
+CAAB	ScientificName	Authority	CommonName
+23003901	Chaetoderma spp.	-	
+23003902	Falcidens spp.	-	
+23003903	Lepoderma spp.	-	
+23004901	Claviderma spp.	-	
+23012901	Tegulaherpia spp.	-	
+23013901	Neomenia spp.	-	[a neomenioid aplacophoran]
+23015901	Eleutheromenia spp.	-	
+23016901	Dorymenia spp.	-	[a neomenioid aplacophoran]
+23017901	Epimenia spp.	-	
+23018901	Notomenia spp.	-	
+23019901	Alexandromenia spp.	-	[a neomenioid aplacophoran]
+23055903	Micropilina spp.	-	[a monoplacophoran]
+23055901	Veleropilina spp.	-	[a monoplacophoran]
+23055902	Vema spp.	-	
+23101901	Leptochiton spp.	-	[a chiton]
+23101902	Parachiton spp.	-	[a chiton]
+23101903	Terenochiton spp.	-	[a chiton]
+23103901	Ferreiraella spp.	-	[a chiton]
+23110901	Choriplax spp.	-	[a chiton]
+23114901	Particulazona spp.	-	[a chiton]
+23115906	Callistochiton spp.	-	[a chiton]
+23115907	Callochiton spp.	-	[a chiton]
+23115908	Eudoxochiton spp.	-	[a chiton]
+23115909	Ischnochiton spp.	-	[a chiton]
+23115910	Lepidozona spp.	-	[a chiton]
+23115913	Stenochiton spp.	-	[a chiton]
+23115915	Stenosemus spp.	-	[a chiton]
+23115914	Subterenochiton spp.	-	[a chiton]
+23116901	Lorica spp.	-	[a chiton]
+23116902	Loricella spp.	-	[a chiton]
+23117903	Nuttallochiton spp.	-	[a chiton]
+23117902	Placiphorella spp.	-	[a chiton]
+23117901	Plaxiphora spp.	-	[a chiton]
+23118901	Acanthopleura spp.	-	[a chiton]
+23118902	Chiton spp.	-	[a chiton]
+23118909	Liolophura spp.	-	[a chiton]
+23118908	Lucilina spp.	-	[a chiton]
+23118903	Mucrosquama spp.	-	[a chiton]
+23118904	Onithochiton spp.	-	[a chiton]
+23118905	Rhyssoplax spp.	-	[a chiton]
+23118910	Squamopleura spp.	-	[a chiton]
+23118906	Sypharochiton spp.	-	[a chiton]
+23118907	Tegulaplax spp.	-	[a chiton]
+23119901	Schizochiton spp.	-	[a chiton]
+23120902	Acanthochitona spp.	-	[a chiton]
+23120903	Bassethullia spp.	-	[a chiton]
+23120904	Craspedochiton spp.	-	[a chiton]
+23120906	Craspedoplax spp.	-	[a chiton]
+23120907	Cryptoconchus spp.	-	[a chiton]
+23120905	Leptoplax spp.	-	[a chiton]
+23120901	Notoplax spp.	-	[a chiton]
+23120908	Pseudotonicia spp.	-	[a chiton]
+23121901	Cryptoplax spp.	-	[a chiton]
+23122901	Hemiarthrum spp.	-	[a chiton]
+23201906	Austronucula spp.	-	[a nut cockle]
+23201908	Brevinucula spp.	-	[a nut cockle]
+23201901	Ennucula spp.	-	[a nut cockle]
+23201905	Linucula spp.	-	[a nut cockle]
+23201902	Nucula spp.	-	[a nut cockle]
+23201903	Pronucula spp.	-	[a nut cockle]
+23201907	Varinucula spp.	-	[a nut cockle]
+23203901	Bathyspinula spp.	-	[a bivalve]
+23204901	Yoldia spp.	-	[a bivalve]
+23204902	Yoldiella spp.	-	[a bivalve]
+23205904	Katadesmia spp.	-	[a cockle]
+23205905	Malletia spp.	-	[a cockle]
+23205902	Neilo spp.	-	[a cockle]
+23205903	Protonucula spp.	-	[a cockle]
+23205901	Pseudoglomus spp.	-	
+23206903	Neilonella spp.	-	[a bivalve]
+23207908	Exocholeda spp.	-	[a beaked cockle]
+23207901	Jupiteria spp.	-	[a beaked cockle]
+23207909	Lamellileda spp.	-	[a beaked cockle]
+23207902	Ledella spp.	-	[a beaked cockle]
+23207903	Nuculana spp.	-	
+23207910	Parayoldiella spp.	-	[a bivalve]
+23207904	Poroleda spp.	-	[a beaked cockle]
+23207905	Propeleda spp.	-	
+23207907	Saccella spp.	-	[a beaked cockle]
+23208901	Sarepta spp.	-	
+23209901	Silicula spp.	-	[a beaked cockle]
+23210901	Prelametila spp.	-	[a bivalve]
+23211901	Tindaria spp.	-	[a bivalve]
+23216902	Acharax spp.	-	[a date shell]
+23216901	Solemya spp.	-	[a date shell]
+23220901	Adipicola spp.	-	[a mussel]
+23220902	Amygdalum spp.	-	
+23220903	Arcuatula spp.	-	[a mussel]
+23220904	Arenifodiens spp.	-	
+23220905	Aulacomya spp.	-	
+23220931	Bathymodiolus spp.	-	[a mussel]
+23220932	Benthomodiolus spp.	-	[a mussel]
+23220906	Botula spp.	-	
+23220907	Brachidontes spp.	-	
+23220908	Ciboticola spp.	-	
+23220909	Dacrydium spp.	-	[a mussel]
+23220910	Exosiperna spp.	-	
+23220930	Gibbomodiola spp.	-	[a mussel]
+23220933	Gigantidas spp.	-	[a mussel]
+23220911	Gregariella spp.	-	[a mussel]
+23220912	Idas spp.	-	[a mussel]
+23220928	Jolya spp.	-	[a mussel]
+23220926	Leiosolenus spp.	-	[a mussel]
+23220914	Lithophaga spp.	-	
+23220929	Modiolatus spp.	-	[a mussel]
+23220915	Modiolus spp.	-	[a mussel]
+23220917	Musculus spp.	-	[a mussel]
+23220918	Mytilus spp.	-	[a mussel]
+23220919	Perna spp.	-	[a mussel]
+23220920	Rhomboidella spp.	-	[a mussel]
+23220921	Septifer spp.	-	[a mussel]
+23220922	Solamen spp.	-	
+23220923	Stavelia spp.	-	
+23220925	Trichomya spp.	-	
+23220913	Xenostrobus spp.	-	[a mussel]
+23220927	Zelithophaga spp.	-	[a mussel]
+23226907	Acar spp.	-	[an ark shell]
+23226901	Anadara spp.	-	COCKLES
+23226902	Arca spp.	-	[an ark shell]
+23226903	Barbatia spp.	-	[an ark shell]
+23226904	Bathyarca spp.	-	[an ark shell]
+23226916	Bentharca spp.	-	[an ark shell]
+23226909	Calloarca spp.	-	[an ark shell]
+23226908	Destacar spp.	-	[an ark shell]
+23226915	Hawaiarca spp.	-	[an ark shell]
+23226914	Mabellarca spp.	-	[an ark shell]
+23226910	Mesocibota spp.	-	[an ark shell]
+23226912	Mimarcaria spp.	-	[an ark shell]
+23226911	Miratacar spp.	-	[an ark shell]
+23226905	Samacar spp.	-	
+23226913	Tegillarca spp.	-	[an ark shell]
+23226906	Trisidos spp.	-	
+23227901	Cucullaea spp.	-	
+23228901	Arcopsis spp.	-	[a cockle]
+23228906	Didimacar spp.	-	[a cockle]
+23228905	Estellacar spp.	-	[a cockle]
+23228907	Mulinarca spp.	-	[a cockle]
+23228902	Sheldonella spp.	-	
+23228903	Striarca spp.	-	
+23228904	Verilarca spp.	-	[a cockle]
+23230901	Limopsis spp.	-	[a dog cockle]
+23231901	Glycymeris spp.	-	
+23231902	Melaxinaea spp.	-	
+23231903	Tucetona spp.	-	
+23232901	Adacnarca spp.	-	
+23232908	Aupouria spp.	-	[a bivalve]
+23232902	Cosa spp.	-	
+23232903	Cratis spp.	-	
+23232904	Lissarca spp.	-	
+23232907	Philobrya spp.	-	[a bivalve]
+23232909	Verticipronus spp.	-	[a bivalve]
+23233901	Huxleyia spp.	-	[a bivalve]
+23233902	Nucinella spp.	-	[a bivalve]
+23236905	Crenatula spp.	-	[a pearl oyster]
+23236903	Electroma spp.	-	
+23236906	Isognomon spp.	-	[a pearl oyster]
+23236901	Pinctada spp.	-	PEARL OYSTERS
+23236904	Pinctada spp. (except for Pinctada maxima)	-	pearl oysters
+23236902	Pteria spp.	-	WING PEARL OYSTERS
+23236907	Vulsella spp.	-	[a pearl oyster]
+23237901	Malleus spp.	-	
+23239901	Pulvinites spp.	-	[a bivalve]
+23245901	Atrina spp.	-	[a razor clam]
+23245902	Pinna spp.	-	[a razor clam]
+23250901	Acesta spp.	-	[a file clam]
+23250902	Ctenoides spp.	-	
+23250903	Divarilima spp.	-	[a file clam]
+23250908	Escalima spp.	-	[a file clam]
+23250904	Lima spp.	-	[a file clam]
+23250905	Limaria spp.	-	[a file clam]
+23250906	Limatula spp.	-	[a file clam]
+23250907	Limea spp.	-	
+23256901	Hyotissa spp.	-	
+23256902	Parahyotissa spp.	-	
+23257901	Alectryonella spp.	-	
+23257902	Booneostrea spp.	-	
+23257904	Dendostrea spp.	-	
+23257905	Lopha spp.	-	
+23257903	Magallana spp.	-	[an oyster]
+23257912	Nanostrea spp.	-	[an oyster]
+23257913	Nicaisolopha spp.	-	[an oyster]
+23257906	Ostrea spp.	-	[an oyster]
+23257907	Planostrea spp.	-	
+23257908	Pustulostrea spp.	-	
+23257909	Saccostrea spp.	-	[an oyster]
+23257910	Striostrea spp.	-	[an oyster]
+23260901	Plicatula spp.	-	
+23265901	Dimya spp.	-	
+23270905	Adamussium spp.	-	[a scallop]
+23270945	Amusium spp.	-	saucer scallops
+23270939	Anguipecten spp.	-	[a scallop]
+23270906	Annachlamys spp.	-	[a scallop]
+23270907	Argopecten spp.	-	[a scallop]
+23270908	Austrochlamys spp.	-	[a scallop]
+23270940	Bractechlamys spp.	-	[a scallop]
+23270903	Chlamys spp.	-	[a scallop]
+23270909	Ciclopecten spp.	-	[a scallop]
+23270910	Complicachlamys spp.	-	[a scallop]
+23270911	Coralichlamys spp.	-	[a scallop]
+23270912	Cryptopecten spp.	-	[a scallop]
+23270913	Decatopecten spp.	-	[a scallop]
+23270914	Delectopecten spp.	-	[a scallop]
+23270915	Equichlamys spp.	-	[a scallop]
+23270916	Excellichlamys spp.	-	[a scallop]
+23270941	Glorichlamys spp.	-	[a scallop]
+23270917	Gloripallium spp.	-	[a scallop]
+23270938	Haumea spp.	-	[a scallop]
+23270937	Hemipecten spp.	-	[a scallop]
+23270918	Hyalopecten spp.	-	[a scallop]
+23270919	Juxtamusium spp.	-	[a scallop]
+23270920	Laevichlamys spp.	-	[a scallop]
+23270921	Mesopeplum spp.	-	[a scallop]
+23270904	Mimachlamys spp.	-	[a scallop]
+23270922	Minnivola spp.	-	[a scallop]
+23270923	Mirapecten spp.	-	[a scallop]
+23270927	Mizuhopecten spp.	-	[a scallop]
+23270924	Notochlamys spp.	-	[a scallop]
+23270925	Palliolum spp.	-	[a scallop]
+23270926	Pascahinnites spp.	-	[a scallop]
+23270902	Pecten spp.	-	[a scallop]
+23270928	Pedum spp.	-	[a scallop]
+23270929	Pseudamussium spp.	-	[a scallop]
+23270943	Pseudohinnites spp.	-	[a scallop]
+23270930	Scaeochlamys spp.	-	[a scallop]
+23270931	Semipallium spp.	-	[a scallop]
+23270932	Serratovola spp.	-	[a scallop]
+23270946	Sinepecten spp.	-	[a scallop]
+23270933	Talochlamys spp.	-	[a scallop]
+23270934	Veprichlamys spp.	-	[a scallop]
+23270935	Volachlamys spp.	-	[a scallop]
+23270944	Ylistrum spp.	-	saucer scallops
+23270936	Zygochlamys spp.	-	[a scallop]
+23271901	Catillopecten spp.	-	[a deepwater scallop]
+23271909	Chlamydella spp.	-	[a deepwater scallop]
+23271902	Cyclochlamys spp.	-	[a deepwater scallop]
+23271903	Cyclopecten spp.	-	[a deepwater scallop]
+23271904	Parvamussium spp.	-	[a deepwater scallop]
+23271905	Propeamussium spp.	-	[a deepwater scallop]
+23271910	Similipecten spp.	-	[a deepwater scallop]
+23272901	Spondylus spp.	-	[a thorny oyster]
+23273901	Pectinella spp.	-	[a deepwater scallop]
+23275901	Anomia spp.	-	[a jingle shell]
+23275902	Enigmonia spp.	-	
+23275903	Monia spp.	-	[a jingle shell]
+23275904	Patro spp.	-	
+23275905	Pododesmus spp.	-	[a jingle shell]
+23276901	Placuna spp.	-	
+23280901	Neotrigonia spp.	-	
+23288901	Alathyria spp.	-	[a freshwater mussel]
+23288902	Cucumerunio spp.	-	[a freshwater mussel]
+23288907	Echyridella spp.	-	[a freshwater mussel]
+23288903	Hyridella spp.	-	[a freshwater mussel]
+23288904	Lortiella spp.	-	[a freshwater mussel]
+23288905	Velesunio spp.	-	[a freshwater mussel]
+23288906	Westralunio spp.	-	[a freshwater mussel]
+23301901	Chama spp.	-	
+23305901	Anodontia spp.	-	[a cockle]
+23305902	Austriella spp.	-	[a cockle]
+23305903	Bathyaustriella spp.	-	[a cockle]
+23305904	Callucina spp.	-	
+23305905	Cardiolucina spp.	-	[a cockle]
+23305906	Chavania spp.	-	[a cockle]
+23305907	Codakia spp.	-	[a cockle]
+23305908	Ctena spp.	-	[a cockle]
+23305909	Divalucina spp.	-	[a cockle]
+23305910	Divaricella spp.	-	
+23305911	Epicodakia spp.	-	[a cockle]
+23305912	Fimbria spp.	-	[a cockle]
+23305913	Funafutia spp.	-	[a cockle]
+23305925	Gonimyrtea spp.	-	[a cockle]
+23305914	Indoaustriella spp.	-	
+23305915	Lamellolucina spp.	-	
+23305928	Lepidolucina spp.	-	[a bivalve]
+23305929	Liralucina spp.	-	[a bivalve]
+23305926	Lucinoma spp.	-	[a bivalve]
+23305916	Monitilora spp.	-	
+23305917	Myrtea spp.	-	
+23305918	Nevenulora spp.	-	
+23305927	Notomyrtea spp.	-	[a bivalve]
+23305919	Pillucina spp.	-	[a cockle]
+23305920	Prophetilora spp.	-	
+23305921	Pseudolucinisca spp.	-	
+23305922	Saltocuna spp.	-	
+23305924	Scabrilucina spp.	-	[a cockle]
+23305923	Wallucina spp.	-	[a cockle]
+23307901	Axinulus spp.	-	[a bivalve]
+23307905	Maorithyas spp.	-	[a bivalve]
+23307903	Mendicula spp.	-	[a bivalve]
+23307902	Parathyasira spp.	-	[a bivalve]
+23307904	Thyasira spp.	-	[a bivalve]
+23308901	Cycladicama spp.	-	[a bivalve]
+23308902	Diplodonta spp.	-	[a bivalve]
+23308903	Felaniella spp.	-	[a bivalve]
+23308904	Numella spp.	-	[a bivalve]
+23309901	Bathycorbis spp.	-	
+23315942	Altenaeum spp.	-	[a bivalve]
+23315901	Ambuscintilla spp.	-	[a bivalve]
+23315935	Amphilepida spp.	-	[a bivalve]
+23315902	Arthritica spp.	-	[a bivalve]
+23315903	Austrodevonia spp.	-	[a bivalve]
+23315941	Axinodon spp.	-	[a bivalve]
+23315904	Barrimysia spp.	-	[a bivalve]
+23315905	Borniola spp.	-	[a bivalve]
+23315936	Byssobornia spp.	-	[a bivalve]
+23315906	Cicatellia spp.	-	[a bivalve]
+23315907	Curvemysella spp.	-	[a bivalve]
+23315939	Divariscintilla spp.	-	[a bivalve]
+23315908	Duoconclavis spp.	-	[a bivalve]
+23315909	Ephippodonta spp.	-	[a bivalve]
+23315911	Ephippodontomorpha spp.	-	[a bivalve]
+23315912	Fastimysia spp.	-	[a bivalve]
+23315913	Fronsella spp.	-	[a bivalve]
+23315914	Galeomma spp.	-	[a bivalve]
+23315915	Halcampicola spp.	-	[a bivalve]
+23315916	Kellia spp.	-	[a bivalve]
+23315917	Lasaea spp.	-	[a bivalve]
+23315934	Lepirodes spp.	-	[a bivalve]
+23315918	Lepton spp.	-	[a bivalve]
+23315919	Marikellia spp.	-	[a bivalve]
+23315920	Melliteryx spp.	-	[a bivalve]
+23315921	Montacuta spp.	-	[a bivalve]
+23315922	Montacutona spp.	-	[a bivalve]
+23315923	Myllita spp.	-	[a bivalve]
+23315937	Myllitella spp.	-	[a bivalve]
+23315924	Mysella spp.	-	[a bivalve]
+23315925	Parvikellia spp.	-	[a bivalve]
+23315926	Pileatona spp.	-	[a bivalve]
+23315927	Pseudokellya spp.	-	[a bivalve]
+23315928	Scintilla spp.	-	[a bivalve]
+23315929	Scintillona spp.	-	[a bivalve]
+23315930	Tellimya spp.	-	[a bivalve]
+23315931	Troglodytoconcha spp.	-	[a bivalve]
+23315932	Vermitexta spp.	-	[a bivalve]
+23315938	Waldo spp.	-	[a bivalve]
+23320907	Cyamiocardium spp.	-	[a bivalve]
+23320901	Cyamiomactra spp.	-	[a bivalve]
+23320905	Cyamium spp.	-	[a bivalve]
+23320904	Eugaimardia spp.	-	[a bivalve]
+23320903	Gaimardia spp.	-	[a bivalve]
+23320906	Kidderia spp.	-	[a bivalve]
+23320902	Perrierina spp.	-	[a bivalve]
+23320909	Ptychocardia spp.	-	[a bivalve]
+23320908	Reloncavia spp.	-	[a bivalve]
+23321903	Micropolia spp.	-	[a bivalve]
+23321901	Neolepton spp.	-	[a bivalve]
+23321904	Pachykellya spp.	-	[a bivalve]
+23321902	Puyseguria spp.	-	[a bivalve]
+23322901	Anisodonta spp.	-	[a bivalve]
+23322904	Basterotia spp.	-	[a bivalve]
+23322902	Benthoquetia spp.	-	[a bivalve]
+23322903	Sportella spp.	-	[a bivalve]
+23325902	Bathycardita spp.	-	[a cockle]
+23325901	Beguina spp.	-	
+23325903	Cardita spp.	-	[a cockle]
+23325911	Centrocardita spp.	-	[a cockle]
+23325906	Cyclocardia spp.	-	
+23325913	Glans spp.	-	[a cockle]
+23325912	Megacardita spp.	-	[a cockle]
+23325910	Pleuromeris spp.	-	[a cockle]
+23325909	Powellina spp.	-	[a cockle]
+23325908	Purpurocardia spp.	-	[a cockle]
+23326901	Austrocardiella spp.	-	
+23326902	Benthocardiella spp.	-	[a bivalve]
+23326914	Carditella spp.	-	[a bivalve]
+23326915	Carditellona spp.	-	[a bivalve]
+23326916	Carditellopsis spp.	-	[a bivalve]
+23326903	Condylocardia spp.	-	[a bivalve]
+23326904	Condylocuna spp.	-	[a bivalve]
+23326905	Crassacuna spp.	-	
+23326906	Cuna spp.	-	[a bivalve]
+23326907	Cunanax spp.	-	
+23326917	Hamacuna spp.	-	[a bivalve]
+23326908	Isodontocardia spp.	-	
+23326909	Mimicuna spp.	-	
+23326910	Ovacuna spp.	-	
+23326911	Propecuna spp.	-	
+23326912	Warrana spp.	-	
+23326913	Westaustrocuna spp.	-	
+23330904	Bathytormus spp.	-	[a cockle]
+23330907	Chattina spp.	-	[a cockle]
+23330908	Crassinella spp.	-	[a cockle]
+23330905	Crenocrassatella spp.	-	[a cockle]
+23330902	Eucrassatella spp.	-	
+23330906	Fluctiger spp.	-	[a cockle]
+23330903	Salaputium spp.	-	
+23330901	Talabrica spp.	-	[a cockle]
+23331901	Astarte spp.	-	
+23335901	Acrosterigma spp.	-	[a heart cockle]
+23335902	Afrocardium spp.	-	[a heart cockle]
+23335903	Corculum spp.	-	[a heart cockle]
+23335904	Ctenocardia spp.	-	[a heart cockle]
+23335905	Fragum spp.	-	[a heart cockle]
+23335915	Freneixicardia spp.	-	[a heart cockle]
+23335906	Frigidocardium spp.	-	[a heart cockle]
+23335907	Fulvia spp.	-	[a heart cockle]
+23335908	Laevicardium spp.	-	[a heart cockle]
+23335909	Lunulicardia spp.	-	
+23335916	Lyrocardium spp.	-	[a heart cockle]
+23335910	Maoricardium spp.	-	
+23335918	Microcardium spp.	-	[a heart cockle]
+23335911	Microfragum spp.	-	[a heart cockle]
+23335912	Nemocardium spp.	-	[a heart cockle]
+23335919	Pratulum spp.	-	[a heart cockle]
+23335917	Trifaricardium spp.	-	[a heart cockle]
+23335913	Vasticardium spp.	-	[a heart cockle]
+23335914	Vepricardium spp.	-	
+23336901	Hemidonax spp.	-	
+23340902	Hippopus spp.	-	
+23340901	Tridacna spp.	-	[a giant clam]
+23345910	Austromactra spp.	-	[a clam]
+23345911	Crassula spp.	-	[a clam]
+23345913	Cyclomactra spp.	-	[a clam]
+23345901	Diaphoromactra spp.	-	
+23345902	Heterocardia spp.	-	
+23345903	Lutraria spp.	-	[a trough clam]
+23345904	Mactra spp.	-	[a clam]
+23345905	Mactrinula spp.	-	
+23345906	Meropesta spp.	-	
+23345915	Oxyperas spp.	-	[a clam]
+23345907	Raeta spp.	-	
+23345916	Resania spp.	-	[a clam]
+23345914	Scalpomactra spp.	-	[a clam]
+23345908	Spisula spp.	-	[a clam]
+23345912	Standella spp.	-	[a clam]
+23345917	Zenatia spp.	-	[a clam]
+23345909	Zenatina spp.	-	
+23346901	Anapella spp.	-	
+23346904	Atactodea spp.	-	[a surf clam]
+23346902	Davila spp.	-	
+23346903	Paphies spp.	-	[a surf clam]
+23347901	Cardilia spp.	-	
+23350901	Solen spp.	-	
+23351901	Cultellus spp.	-	
+23351902	Ensiculus spp.	-	
+23351903	Siliqua spp.	-	
+23355901	Abranda spp.	-	[a clam]
+23355904	Arcopagia spp.	-	[a clam]
+23355905	Cadella spp.	-	[a clam]
+23355907	Cyclotellina spp.	-	[a clam]
+23355912	Leporimetis spp.	-	[a clam]
+23355937	Loxoglypta spp.	-	[a bivalve]
+23355913	Macalia spp.	-	[a clam]
+23355914	Macoma spp.	-	[a clam]
+23355917	Moerella spp.	-	[a clam]
+23355936	Pristipagia spp.	-	[a bivalve]
+23355923	Psammotreta spp.	-	[a clam]
+23355935	Scissulina spp.	-	[a bivalve]
+23355929	Semelangulus spp.	-	[a clam]
+23355931	Strigilla spp.	-	[a clam]
+23355932	Tellina spp.	-	[a clam]
+23355934	Tellinides spp.	-	[a clam]
+23356901	Abra spp.	-	[a bivalve]
+23356905	Ervilia spp.	-	[a bivalve]
+23356902	Leptomya spp.	-	[a bivalve]
+23356906	Rochefortina spp.	-	[a bivalve]
+23356903	Semele spp.	-	[a bivalve]
+23356904	Theora spp.	-	[a bivalve]
+23357901	Asaphis spp.	-	
+23357902	Gari spp.	-	[a bivalve]
+23357903	Heteroglypta spp.	-	[a bivalve]
+23357904	Hiatula spp.	-	[a bivalve]
+23358901	Azorinus spp.	-	
+23358902	Solecurtus spp.	-	
+23359901	Donax spp.	-	PIPIS
+23365901	Coralliophaga spp.	-	
+23365902	Fluviolanatus spp.	-	
+23365904	Glossocardia spp.	-	[a bivalve]
+23365905	Neotrapezium spp.	-	[a bivalve]
+23365903	Trapezium spp.	-	
+23366901	Kelliella spp.	-	[a bivalve]
+23369901	Vesicomya spp.	-	[a bivalve]
+23370901	Meiocardia spp.	-	[a heart cockle]
+23375901	Batissa spp.	-	
+23375902	Corbicula spp.	-	
+23375903	Polymesoda spp.	-	
+23375904	Potamocorbula spp.	-	
+23376901	Musculium spp.	-	[a freshwater cockle]
+23376902	Pisidium spp.	-	[a freshwater cockle]
+23378901	Mytilopsis spp.	-	[a bivalve]
+23380905	Anomalodiscus spp.	-	[a venus shell]
+23380904	Antigona spp.	-	[a cockle]
+23380936	Aphrodora spp.	-	[a cockle]
+23380932	Austrovenus spp.	-	[a cockle]
+23380906	Bassina spp.	-	
+23380907	Callista spp.	-	
+23380908	Callocardia spp.	-	
+23380931	Chioneryx spp.	-	[a cockle]
+23380909	Circe spp.	-	
+23380910	Circomphalus spp.	-	[a venus shell]
+23380911	Clementia spp.	-	
+23380940	Costacallista spp.	-	[a cockle]
+23380937	Costellipitar spp.	-	[a cockle]
+23380934	Dorisca spp.	-	[a cockle]
+23380930	Dosina spp.	-	[a cockle]
+23380901	Dosinia spp.	-	SURF CLAMS
+23380912	Eumarcia spp.	-	
+23380913	Gafrarium spp.	-	
+23380914	Globivenus spp.	-	[a venus shell]
+23380915	Gomphinella spp.	-	[a venus shell]
+23380916	Gouldiopa spp.	-	[a venus shell]
+23380917	Granicorium spp.	-	
+23380938	Hyphantosoma spp.	-	[a cockle]
+23380918	Irus spp.	-	[a venus shell]
+23380902	Katelysia spp.	-	VONGOLES
+23380942	Kyrina spp.	-	[a cockle]
+23380933	Leukoma spp.	-	[a cockle]
+23380919	Lioconcha spp.	-	
+23380920	Marcia spp.	-	
+23380903	Meretrix spp.	-	BABY CLAMS
+23380939	Notocallista spp.	-	[a cockle]
+23380944	Notopaphia spp.	-	[a cockle]
+23380921	Paphia spp.	-	
+23380941	Pelecyora spp.	-	[a cockle]
+23380922	Pitar spp.	-	
+23380923	Placamen spp.	-	
+23380943	Protapes spp.	-	[a cockle]
+23380935	Redicirce spp.	-	[a cockle]
+23380945	Ruditapes spp.	-	[a venus cockle]
+23380924	Samarangia spp.	-	
+23380925	Sunetta spp.	-	
+23380926	Tapes spp.	-	
+23380927	Tawera spp.	-	[a venus shell]
+23380928	Timoclea spp.	-	
+23380929	Venerupis spp.	-	VENUS CLAMS
+23380946	Venerupis spp. (except for Venerupis largillierti)	-	AUSTRALIAN VENUS CLAMS
+23381902	Mysia spp.	-	[a cockle]
+23381901	Petricola spp.	-	
+23382901	Glauconome spp.	-	
+23386901	Cryptomya spp.	-	
+23386904	Mya spp.	-	[a bivalve]
+23386903	Sphenia spp.	-	[a bivalve]
+23386902	Tugonia spp.	-	
+23387901	Corbula spp.	-	[a cockle]
+23387902	Lentidium spp.	-	[a cockle]
+23390901	Cucurbitula spp.	-	[a flask cockle]
+23390904	Dufoichaena spp.	-	[a flask cockle]
+23390902	Eufistulana spp.	-	[a flask cockle]
+23390903	Gastrochaena spp.	-	[a flask cockle]
+23390905	Spengleria spp.	-	[a flask cockle]
+23390906	Spenglerichaena spp.	-	[a flask cockle]
+23395901	Hiatella spp.	-	[a saxicave]
+23395902	Panopea spp.	-	[a saxicave]
+23401901	Aspidopholas spp.	-	[a piddock]
+23401902	Barnea spp.	-	[a piddock]
+23401903	Jouannetia spp.	-	[a piddock]
+23401904	Martesia spp.	-	[a piddock]
+23401906	Parapholas spp.	-	[a piddock]
+23401907	Pholadidea spp.	-	[a piddock]
+23401905	Pholas spp.	-	[a piddock]
+23402901	Bactronophorus spp.	-	[a shipworm]
+23402902	Bankia spp.	-	[a shipworm]
+23402903	Dicyathifer spp.	-	[a shipworm]
+23402904	Lyrodus spp.	-	[a shipworm]
+23402905	Nausitora spp.	-	[a shipworm]
+23402906	Nototeredo spp.	-	[a shipworm]
+23402907	Teredo spp.	-	[a shipworm]
+23402909	Teredothyra spp.	-	[a shipworm]
+23402908	Uperotus spp.	-	[a shipworm]
+23403901	Xylophaga spp.	-	[a wood piddock]
+23403902	Xyloredo spp.	-	[a wood piddock]
+23407902	Panacca spp.	-	[a bivalve]
+23407901	Parilimya spp.	-	
+23410905	Asthenothaerus spp.	-	[a bivalve]
+23410906	Barythaerus spp.	-	[a bivalve]
+23410909	Cyathodonta spp.	-	[a bivalve]
+23410907	Parvithracia spp.	-	[a bivalve]
+23410901	Phragmorisma spp.	-	
+23410902	Thracia spp.	-	
+23410910	Thracidentula spp.	-	[a bivalve]
+23410903	Thracidora spp.	-	
+23410904	Thraciopsis spp.	-	
+23410908	Trigonothracia spp.	-	[a bivalve]
+23411901	Offadesma spp.	-	[a bivalve]
+23411902	Pendaloma spp.	-	[a bivalve]
+23412901	Laternula spp.	-	
+23415901	Brechites spp.	-	[a watering pot shell]
+23415902	Dacosta spp.	-	[a watering pot shell]
+23415903	Dianadema spp.	-	
+23415904	Foegia spp.	-	[a watering pot shell]
+23415906	Humphreyia spp.	-	[a watering pot shell]
+23415907	Kendrickiana spp.	-	[a watering pot shell]
+23415905	Verpa spp.	-	[a watering pot shell]
+23420902	Entodesma spp.	-	[a bivalve]
+23420901	Lyonsia spp.	-	[a bivalve]
+23421902	Frenamya spp.	-	[a bivalve]
+23421901	Pandora spp.	-	
+23422904	Hunkydora spp.	-	[a bivalve]
+23422901	Myadora spp.	-	[a bivalve]
+23422903	Myadoropsis spp.	-	[a bivalve]
+23422902	Myochama spp.	-	
+23423901	Cleidothaerus spp.	-	[a rock shell]
+23425905	Halicardia spp.	-	[a bivalve]
+23425901	Haliris spp.	-	
+23425902	Spinosipella spp.	-	[a bivalve]
+23425903	Vertambitus spp.	-	
+23425904	Verticordia spp.	-	
+23425906	Vertisphaera spp.	-	[a bivalve]
+23426903	Allogramma spp.	-	[a bivalve]
+23426902	Lyonsiella spp.	-	
+23426904	Policordia spp.	-	[a bivalve]
+23427901	Euciroa spp.	-	
+23430904	Cetomya spp.	-	[a bivalve]
+23430902	Dilemma spp.	-	[a bivalve]
+23430903	Poromya spp.	-	
+23431901	Cetoconcha spp.	-	[a bivalve]
+23434901	Multitentacula spp.	-	[a bivalve]
+23435909	Austroneaera spp.	-	[a bivalve]
+23435912	Bathyneaera spp.	-	[a bivalve]
+23435901	Cardiomya spp.	-	[a bivalve]
+23435902	Cuspidaria spp.	-	[a bivalve]
+23435904	Myonera spp.	-	[a bivalve]
+23435911	Octoporia spp.	-	[a bivalve]
+23435907	Plectodon spp.	-	[a bivalve]
+23435906	Pseudogrippina spp.	-	[a bivalve]
+23435905	Pseudoneaera spp.	-	[a bivalve]
+23435910	Rengea spp.	-	[a bivalve]
+23435908	Rhinoclama spp.	-	[a bivalve]
+23436901	Grippina spp.	-	[a bivalve]
+23437901	Halonympha spp.	-	[a bivalve]
+23501907	Antalis spp.	-	[a tusk shell]
+23501909	Compressidentalium spp.	-	[a tusk shell]
+23501901	Dentalium spp.	-	
+23501906	Eudentalium spp.	-	[a tusk shell]
+23501902	Fissidentalium spp.	-	[a tusk shell]
+23501903	Graptacme spp.	-	
+23501905	Paradentalium spp.	-	[a tusk shell]
+23501910	Pictodentalium spp.	-	[a tusk shell]
+23501908	Striodentalium spp.	-	[a tusk shell]
+23501904	Tesseracme spp.	-	
+23502901	Fustiaria spp.	-	
+23504901	Laevidentalium spp.	-	
+23505901	Episiphon spp.	-	
+23505902	Gadilina spp.	-	[a tusk shell]
+23506901	Omniglypta spp.	-	
+23507901	Calliodentalium spp.	-	
+23511901	Bathoxiphus spp.	-	
+23511902	Entalina spp.	-	
+23511903	Pertusiconcha spp.	-	[a tusk shell]
+23511904	Rhomboxiphus spp.	-	[a tusk shell]
+23511905	Solenoxiphus spp.	-	[a tusk shell]
+23515901	Compressidens spp.	-	[a tusk shell]
+23515902	Pulsellum spp.	-	
+23515903	Striopulsellum spp.	-	[a tusk shell]
+23516902	Chistikovia spp.	-	[a tusk shell]
+23516901	Wemersoniella spp.	-	[a tusk shell]
+23517901	Cadulus spp.	-	[a tusk shell]
+23517902	Dischides spp.	-	
+23517903	Gadila spp.	-	
+23517904	Polyschides spp.	-	[a tusk shell]
+23517905	Siphonodentalium spp.	-	[a tusk shell]
+23600902	Allonautilus spp.	-	[a chambered nautilus]
+23600901	Nautilus spp.	-	[a chambered nautilus]
+23606901	Spirula spp.	-	[a rams-horn squid]
+23607902	Metasepia spp.	-	[a cuttlefish]
+23607901	Sepia spp.	-	CUTTLEFISHES
+23607903	Sepiella spp.	-	[a cuttlefish]
+23608901	Sepiadarium spp.	-	[a bottletail squid]
+23608902	Sepioloidea spp.	-	[a bottletail squid]
+23609901	Austrorossia spp.	-	[a dumpling squid]
+23609905	Euprymna spp.	-	[a dumpling squid]
+23609902	Heteroteuthis spp.	-	[a dumpling squid]
+23609909	Inioteuthis spp.	-	[a dumpling squid]
+23609906	Iridoteuthis spp.	-	[a dumpling squid]
+23609907	Neorossia spp.	-	[a dumpling squid]
+23609904	Rondeletiola spp.	-	[a dumpling squid]
+23609910	Sepiola spp.	-	[a dumpling squid]
+23609903	Sepiolina spp.	-	[a dumpling squid]
+23609908	Stoloteuthis spp.	-	[a dumpling squid]
+23610901	Idiosepius spp.	-	[a pygmy squid]
+23610902	Xipholeptos spp.	-	[a pygmy squid]
+23617905	Doryteuthis spp.	-	[a squid]
+23617906	Heterololigo spp.	-	[a squid]
+23617907	Loligo spp.	-	[a squid]
+23617908	Loliolus spp.	-	[a squid]
+23617909	Sepioteuthis spp.	-	[a squid]
+23617910	Uroteuthis spp.	-	[a squid]
+23618901	Australiteuthis spp.	-	[a squid]
+23620901	Lampadioteuthis spp.	-	[a squid]
+23620902	Lycoteuthis spp.	-	[a squid]
+23620903	Nematolampas spp.	-	[a squid]
+23621905	Abralia spp.	-	[an armed squid or enope squid]
+23621906	Abraliopsis spp.	-	[an armed squid or enope squid]
+23621907	Ancistrocheirus spp.	-	[a squid]
+23621904	Enoploteuthis spp.	-	[a squid]
+23621908	Pterygioteuthis spp.	-	[a fire squid]
+23621909	Pyroteuthis spp.	-	[a fire squid]
+23622901	Octopoteuthis spp.	-	[an octopod squid]
+23622902	Taningia spp.	-	[an octopod squid]
+23623901	Ancistroteuthis spp.	-	[a hooked squid]
+23623902	Filippovia spp.	-	[a hooked squid]
+23623903	Moroteuthopsis spp.	-	[a hooked squid]
+23623904	Notonykia spp.	-	[a hooked squid]
+23623905	Onychoteuthis spp.	-	[a hooked squid]
+23623906	Onykia spp.	-	[a hooked squid]
+23623907	Walvisteuthis spp.	-	[a hooked squid]
+23625901	Cycloteuthis spp.	-	[a disc-fin squid]
+23625902	Discoteuthis spp.	-	[a disc-fin squid]
+23626901	Gonatus spp.	-	[a gonate squid]
+23627901	Psychroteuthis spp.	-	[a glacial squid]
+23628901	Lepidoteuthis spp.	-	[a scaled squid]
+23629901	Architeuthis spp.	-	[a giant squid]
+23630901	Histioteuthis spp.	-	[a jewel squid]
+23630902	Stigmatoteuthis spp.	-	[a jewel squid]
+23631901	Alluroteuthis spp.	-	[a neosquid]
+23632901	Bathyteuthis spp.	-	[a deepsea squid]
+23633901	Chtenopteryx spp.	-	[a comb-finned squid]
+23634901	Brachioteuthis spp.	-	[an armed squid]
+23634902	Slosarczykovia spp.	-	[an armed squid]
+23635901	Batoteuthis spp.	-	[a squid]
+23636902	Dosidicus spp.	-	[a flying squid]
+23636903	Eucleoteuthis spp.	-	[a flying squid]
+23636904	Hyaloteuthis spp.	-	[a flying squid]
+23636901	Illex spp.	-	ILLEX SQUIDS
+23636905	Martialia spp.	-	[a flying squid]
+23636906	Nototodarus spp.	-	[a flying squid]
+23636907	Ommastrephes spp.	-	[a flying squid]
+23636908	Ornithoteuthis spp.	-	[a flying squid]
+23636909	Sthenoteuthis spp.	-	[a flying squid]
+23636910	Todarodes spp.	-	[a flying squid]
+23636911	Todaropsis spp.	-	[a flying squid]
+23637901	Thysanoteuthis spp.	-	[a rhomboid squid]
+23638902	Asperoteuthis spp.	-	[a squid]
+23638901	Chiroteuthis spp.	-	[a squid]
+23638903	Grimalditeuthis spp.	-	[a squid]
+23638904	Planctoteuthis spp.	-	[a squid]
+23639905	Echinoteuthis spp.	-	[a whip-lash squid]
+23639902	Idioteuthis spp.	-	[a whip-lash squid]
+23639904	Magnoteuthis spp.	-	[a whip-lash squid]
+23639903	Mastigopsis spp.	-	[a whip-lash squid]
+23639901	Mastigoteuthis spp.	-	[a whip-lash squid]
+23642901	Joubiniteuthis spp.	-	[a squid]
+23643901	Bathothauma spp.	-	[a bathyscaphoid squid]
+23643902	Cranchia spp.	-	[a bathyscaphoid squid]
+23643903	Egea spp.	-	[a bathyscaphoid squid]
+23643904	Galiteuthis spp.	-	[a bathyscaphoid squid]
+23643905	Helicocranchia spp.	-	[a bathyscaphoid squid]
+23643906	Leachia spp.	-	[a bathyscaphoid squid]
+23643907	Liguriella spp.	-	[a bathyscaphoid squid]
+23643908	Liocranchia spp.	-	[a bathyscaphoid squid]
+23643909	Megalocranchia spp.	-	[a bathyscaphoid squid]
+23643910	Mesonychoteuthis spp.	-	[a bathyscaphoid squid]
+23643911	Sandalops spp.	-	[a bathyscaphoid squid]
+23643912	Taonius spp.	-	[a bathyscaphoid squid]
+23643913	Teuthowenia spp.	-	[a bathyscaphoid squid]
+23644901	Pholidoteuthis spp.	-	[a squid]
+23645901	Vampyroteuthis spp.	-	[a vampire squid]
+23653905	Grimpoteuthis spp.	-	[an octopod]
+23653906	Luteuthis spp.	-	[an octopod]
+23653904	Opisthoteuthis spp.	-	[an octopod]
+23655905	Amphitretus spp.	-	[a pelagic octopod]
+23655901	Bolitaena spp.	-	[a pelagic octopod]
+23655903	Japetella spp.	-	[a pelagic octopod]
+23655904	Vitreledonella spp.	-	[a pelagic octopod]
+23659917	Abdopus spp.	-	[an octopus]
+23659927	Adelieledone spp.	-	[an octopus]
+23659904	Ameloctopus spp.	-	[an octopus]
+23659903	Amphioctopus spp.	-	BABY OCTOPUSES
+23659902	Bathypolypus spp.	-	[octopus]
+23659920	Callistoctopus spp.	-	[an octopus]
+23659905	Eledone spp.	-	[an octopus]
+23659906	Enteroctopus spp.	-	[an octopus]
+23659928	Galeoctopus spp.	-	[an octopus]
+23659907	Graneledone spp.	-	[an octopus]
+23659908	Grimpella spp.	-	[an octopus]
+23659909	Hapalochlaena spp.	-	blue-ringed octopuses
+23659929	Histoctopus spp.	-	[an octopus]
+23659919	Macroctopus spp.	-	[an octopus]
+23659910	Megaleledone spp.	-	[an octopus]
+23659911	Microeledone spp.	-	[an octopus]
+23659916	Muusoctopus spp.	-	[an octopus]
+23659901	Octopus spp.	-	OCTOPUSES
+23659912	Pareledone spp.	-	[an octopus]
+23659913	Pinnoctopus spp.	-	[an octopus]
+23659915	Scaeurgus spp.	-	[an octopus]
+23659926	Thaumeledone spp.	-	[an octopus]
+23659930	Thaumoctopus spp.	-	[an octopus]
+23659914	Wunderpus spp.	-	[an octopus]
+23660901	Tremoctopus spp.	-	[a blanket octopod]
+23661901	Ocythoe spp.	-	[an argonautoid octopod]
+23662901	Argonauta spp.	-	[an argonaut]
+23663901	Haliphron spp.	-	[an argonautoid octopod]
+23664901	Cirroctopus spp.	-	[a finned octopod]

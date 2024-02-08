@@ -1,0 +1,108 @@
+CAAB	ScientificName	Authority	CommonName
+41000003	Mysticeti (suborder Mysticeti)	-	baleen whales
+41000002	Toothed whales (suborder Odontoceti, in part)	-	toothed whales
+41000001	Whales (order Cetacea, in part)	-	whales
+41110002	Caperea marginata	(Gray, 1846)	pygmy right whale
+41110001	Eubalaena australis	(Desmoulins, 1822)	southern right whale
+41110901	Caperea spp.	-	
+41110902	Eubalaena spp.	-	
+41110000	Balaenidae	-	right whales
+41112001	Balaenoptera acutorostrata	Lacépède, 1804	minke whale
+41112007	Balaenoptera bonaerensis	Burmeister, 1867	Antarctic minke whale
+41112002	Balaenoptera borealis	Lesson, 1828	sei whale
+41112003	Balaenoptera edeni	Anderson, 1871	Bryde's whale
+41112004	Balaenoptera musculus	(Linnaeus, 1758)	blue whale
+41112005	Balaenoptera physalus	(Linnaeus, 1758)	fin whale
+41112006	Megaptera novaeangliae	(Borowski, 1781)	humpback whale
+41112901	Balaenoptera spp.	-	
+41112902	Megaptera spp.	-	
+41112000	Balaenopteridae	-	rorquals
+41116001	Delphinus delphis	Linnaeus, 1758	common dolphin
+41116002	Feresa attenuata	Gray, 1875	pygmy killer whale
+41116003	Globicephala macrorhynchus	Gray, 1846	short-finned pilot whale
+41116004	Globicephala melas	(Traill, 1809)	long-finned pilot whale
+41116005	Grampus griseus	(Cuvier, 1812)	Risso's dolphin
+41116006	Lagenodelphis hosei	Fraser, 1956	Fraser's dolphin
+41116007	Lagenorhynchus cruciger	(Quoy and Gaimard, 1824)	hourglass dolphin
+41116008	Lagenorhynchus obscurus	(Gray, 1828)	dusky dolphin
+41116009	Lissodelphis peronii	(Lacépède, 1804)	southern right whale dolphin
+41116010	Orcaella heinsohni	Beasley, Robertson & Arnold, 2005	Australian snubfin dolphin
+41116011	Orcinus orca	(Linnaeus, 1758)	killer whale
+41116012	Peponocephala electra	(Gray, 1846)	melon-headed whale
+41116013	Pseudorca crassidens	(Owen, 1846)	false killer whale
+41116014	Sousa sahulensis	Jefferson & Rosenbaum, 2014	Australian Humpback dolphin
+41116015	Stenella attenuata	(Gray, 1846)	spotted dolphin
+41116016	Stenella coeruleoalba	(Meyen, 1833)	striped dolphin
+41116017	Stenella longirostris	(Gray, 1828)	spinner dolphin
+41116018	Steno bredanensis	(Lesson, 1828)	rough-toothed dolphin
+41116020	Tursiops aduncus	(Ehrenberg, 1833)	Indo-Pacific bottlenose dolphin
+41116022	Tursiops australis	Charlton-Robb, Gershwin, Thompson, Austin, Owen & McKechnie, 2011	burrunan dolphin
+41116019	Tursiops truncatus	(Montagu, 1821)	bottlenose dolphin
+41116901	Delphinus spp.	-	
+41116902	Feresa spp.	-	
+41116903	Globicephala spp.	-	
+41116904	Grampus spp.	-	
+41116905	Lagenodelphis spp.	-	
+41116906	Lagenorhynchus spp.	-	
+41116907	Lissodelphis spp.	-	
+41116908	Orcaella spp.	-	
+41116909	Orcinus spp.	-	
+41116910	Peponocephala spp.	-	
+41116911	Pseudorca spp.	-	
+41116912	Sousa spp.	-	[a dolphin]
+41116913	Stenella spp.	-	
+41116914	Steno spp.	-	
+41116915	Tursiops spp.	-	
+41116000	Delphinidae	-	dolphins
+41117001	Australophocoena dioptrica	(Lahille, 1912)	spectacled porpoise
+41117901	Australophocoena spp.	-	
+41117000	Phocoenidae	-	porpoises
+41119001	Kogia breviceps	(Blainville, 1838)	pygmy sperm whale
+41119002	Kogia simus	(Owen, 1866)	dwarf sperm whale
+41119003	Physeter catodon	Linnaeus, 1758	sperm whale
+41119901	Kogia spp.	-	
+41119902	Physeter spp.	-	
+41119000	Physeteridae	-	sperm whales
+41120001	Berardius arnuxii	Duvernoy, 1851	Arnoux's beaked whale
+41120002	Hyperoodon planifrons	Flower, 1882	southern bottlenose whale
+41120003	Indopacetus pacificus	(Longman, 1926)	Longman's beaked whale
+41120004	Mesoplodon bowdoini	Andrews, 1908	Andrews' beaked whale
+41120005	Mesoplodon densirostris	(Blainville, 1817)	Blainville's beaked whale
+41120006	Mesoplodon gingkodens	Nishikawi and Kamiya, 1958	gingko-toothed beaked whale
+41120007	Mesoplodon grayi	von Haast, 1876	Gray's beaked whale
+41120008	Mesoplodon hectori	(Gray, 1871)	Hector's beaked whale
+41120009	Mesoplodon layardii	(Gray, 1865)	strap-toothed beaked whale
+41120010	Mesoplodon mirus	True, 1913	True's beaked whale
+41120011	Tasmacetus shepherdi	Oliver, 1937	Tasman beaked whale
+41120012	Ziphius cavirostris	Cuvier, 1823	Cuvier's beaked whale
+41120901	Berardius spp.	-	
+41120902	Hyperoodon spp.	-	
+41120903	Indopacetus spp.	-	
+41120900	Mesoplodon spp.	-	beaked whales
+41120904	Tasmacetus spp.	-	
+41120905	Ziphius spp.	-	
+41120000	Ziphiidae	-	beaked whales
+41131001	Arctocephalus forsteri	(Lesson, 1828)	New Zealand fur-seal
+41131002	Arctocephalus gazella	(Peters, 1875)	Antarctic fur-seal
+41131003	Arctocephalus pusillus doriferus	(Schreber, 1776)	Australian fur-seal
+41131004	Arctocephalus tropicalis	(Gray, 1872)	subantarctic fur-seal
+41131005	Neophoca cinerea	(Péron, 1816)	Australian sea-lion
+41131006	Phocarctos hookeri	(Gray, 1844)	Hooker's sea-lion
+41131901	Arctocephalus spp.	-	
+41131902	Neophoca spp.	-	
+41131903	Phocarctos spp.	-	
+41131000	Otariidae	-	eared seals
+41136001	Hydrurga leptonyx	(Blainville, 1820)	leopard seal
+41136002	Leptonychotes weddelli	(Lesson, 1826)	Weddell seal
+41136003	Lobodon carcinophagus	(Hombron and Jacquinot, 1842)	crab-eater seal
+41136004	Mirounga leonina	(Linnaeus, 1758)	southern elephant seal
+41136005	Ommatophoca rossii	(Gray, 1844)	Ross seal
+41136901	Hydrurga spp.	-	
+41136902	Leptonychotes spp.	-	
+41136903	Lobodon spp.	-	
+41136904	Mirounga spp.	-	
+41136905	Ommatophoca spp.	-	
+41136000	Phocidae	-	haired seals
+41206001	Dugong dugon	(P.L.S. Müller, 1776)	dugong
+41206901	Dugong spp.	-	
+41206000	Dugongidae	-	dugongs

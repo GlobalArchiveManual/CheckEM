@@ -33,6 +33,9 @@ aus_regions <- st_as_sf(aus_regions)
 # Read in the latest CAAB dump from CSIRO website ----
 # Download is available here: https://www.marine.csiro.au/datacentre/caab/caab_dump_latest.xlsx
 # We have removed some phylums and classes
+caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx")
+
+
 caab <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
   clean_names() %>%
   dplyr::filter(kingdom %in% "Animalia") %>%
@@ -340,6 +343,11 @@ final <- left_join(clean_caab, distributions_aus) %>%
   dplyr::mutate(scientific_name = paste(genus, species, sep = " ")) %>%
   dplyr::select(caab, class, order, family, genus, species, scientific_name, australian_common_name, marine_region) %>%
   dplyr::mutate(australian_common_name = str_to_sentence(australian_common_name))
+
+# family_distributions <- final %>%
+#   select()
+
+
 
 number.with.distributions <- final %>% filter(!is.na(marine_region))
 nrow(number.with.distributions)/nrow(final) * 100 
