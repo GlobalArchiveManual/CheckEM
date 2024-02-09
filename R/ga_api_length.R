@@ -12,7 +12,7 @@ ga_api_length <- function(username, password, synthesis_id) {
   url <- paste0("https://dev.globalarchive.org/api/data/SynthesisLengthEntry/?sample__synthesis=", synthesis_id, "&format=feather")
   
   # Send GET request with basic authentication
-  response <- GET(url, authenticate(un, pw))
+  response <- GET(url, authenticate(username, password))
   
   # Check if the request was successful
   if (status_code(response) == 200) {
