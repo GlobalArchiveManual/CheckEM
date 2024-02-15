@@ -33,6 +33,25 @@ new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
   clean_names() %>%
   dplyr::select(family, genus, species, new_maximum_length_in_cm)
 
+# Extra marine regions ----
+extra_marine_regions <- "https://docs.google.com/spreadsheets/d/10D3s-pB-GZJ6xcp93wOx2taJCa5HXqmljcVscaJQmYA/edit?resourcekey#gid=2055010068"
+
+add_regions <- read_sheet(extra_marine_regions, sheet = "Form responses 1") %>% 
+  distinct() %>%
+  clean_names() %>%
+  dplyr::rename(family = family_please_double_check_spelling) %>%
+  dplyr::rename(genus = genus_please_double_check_spelling) %>%
+  dplyr::rename(species = species_please_double_check_spelling) %>%
+  dplyr::mutate(marine_region = strsplit(as.character(marine_regions_the_species_occurs_in_see_regions_here), split = ", ")) %>% # changed from "/" for old LH
+  tidyr::unnest(marine_region) %>%
+  dplyr::select(family, genus, species, marine_region) %>%
+  dplyr::mutate(marine_region = case_when(marine_region %in% "North-west" ~ "NW",
+                                          marine_region %in% "North" ~ "N",
+                                          marine_region %in% "Coral Sea" ~ "CS",
+                                          marine_region %in% "Temperate East" ~ "TE",
+                                          marine_region %in% "South-east" ~ "SE",
+                                          marine_region %in% "South-west" ~ "SW"))
+
 # Get columns to keep from original life history
 names(lh)
 
@@ -349,7 +368,21 @@ australia_life_history <- caab_combined %>%
   
   dplyr::left_join(new_max_sizes) %>%
   dplyr::mutate(fb_length_max = if_else(!is.na(new_maximum_length_in_cm), new_maximum_length_in_cm, fb_length_max)) %>%
-  dplyr::select(-new_maximum_length_in_cm)
+  dplyr::select(-new_maximum_length_in_cm) 
+
+
+expanded <- australia_life_history %>%
+  dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) %>% 
+  tidyr::unnest(marine_region)
+
+missing_regions <- anti_join(add_regions, expanded) %>%
+  rename(region_to_add = marine_region) %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(region_to_add = toString(region_to_add))
+  
+australia_life_history1 <- dplyr::left_join(australia_life_history, missing_regions) %>%
+  mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", ")))
+
 
 test <- australia_life_history %>%
   dplyr::group_by(caab) %>%
