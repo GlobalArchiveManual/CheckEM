@@ -259,6 +259,7 @@ complete_lw <- info %>%
 #     }
 #   }
 # }
+# 
 # # Format IUCN data
 # final_iucn <- iucn %>%
 #   dplyr::rename(fishbase_scientific = scientific_name) %>%
@@ -274,6 +275,7 @@ complete_lw <- info %>%
 #   distinct()
 # 
 # saveRDS(final_iucn, "annotation-schema/data/staging/australia_fish_iucn-categories.RDS")
+
 final_iucn <- readRDS("annotation-schema/data/staging/australia_fish_iucn-categories.RDS")
 
 # check which names don't match

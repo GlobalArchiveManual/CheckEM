@@ -31,7 +31,16 @@ max_url <- "https://docs.google.com/spreadsheets/d/1H7EXoTlpeg48LrNVszIa8irwIAh_
 
 new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
   clean_names() %>%
-  dplyr::select(family, genus, species, new_maximum_length_in_cm)
+  dplyr::select(family, genus, species, new_maximum_length_in_cm, type_of_length_measure) %>%
+  dplyr::group_by(family, genus, species) %>%
+  slice(which.max(new_maximum_length_in_cm)) %>%
+  ungroup()
+
+# TODO add fishes of australia max sizes and depth limits
+foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_maximum-sizes.RDS") %>%
+  clean_names() %>%
+  dplyr::rename(foa_min_depth = min_depth, foa_max_depth = max_depth) %>%
+  dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth)
 
 # Extra marine regions ----
 extra_marine_regions <- "https://docs.google.com/spreadsheets/d/10D3s-pB-GZJ6xcp93wOx2taJCa5HXqmljcVscaJQmYA/edit?resourcekey#gid=2055010068"
@@ -142,6 +151,10 @@ test <- caab_regions %>%
 fishbase <- readRDS("annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS") %>%
   dplyr::filter(!(caab_scientific %in% "Epigonus macrops" & speccode %in% "14365"))%>%
   dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
+  
+  dplyr::filter(!(caab_code %in% "37311059" & is.na(speccode)))%>%
+  dplyr::filter(!(caab_code %in% "37361005" & is.na(speccode)))%>%
+  
   # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
   # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & caab_code %in% "37361005"))%>%
   dplyr::mutate(caab_code = as.character(caab_code)) %>%
@@ -199,7 +212,7 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(common_name = str_replace_all(.$common_name, "\\[|\\]", "")) %>%
   dplyr::filter(!is.na(species)) %>%
   clean_names() %>%
-  dplyr::filter(!caab_code %in% "37246020Taxasupercededby37246019") %>%
+  dplyr::filter(!caab_code %in% c("37246020Taxasupercededby37246019", "37118006", "37441924", "37311954", "37287949", "37096000", "37018915", "37337902")) %>%
   distinct()
 
 test <- caab_combined %>%
@@ -368,7 +381,15 @@ australia_life_history <- caab_combined %>%
   
   dplyr::left_join(new_max_sizes) %>%
   dplyr::mutate(fb_length_max = if_else(!is.na(new_maximum_length_in_cm), new_maximum_length_in_cm, fb_length_max)) %>%
-  dplyr::select(-new_maximum_length_in_cm) 
+  dplyr::mutate(length_max_source = if_else(!is.na(new_maximum_length_in_cm), "BRUV Expert", "Fishbase")) %>%
+  dplyr::select(-new_maximum_length_in_cm) %>%
+  
+  dplyr::left_join(foa_max_sizes) %>%
+  dplyr::mutate(length_max_source = if_else(fb_length_max > fb_length_max, "Fishes of Australia", length_max_source)) %>%
+  dplyr::mutate(fb_length_max = if_else(new_maximum_length_in_cm > fb_length_max, new_maximum_length_in_cm, fb_length_max)) %>%
+  dplyr::select(-new_maximum_length_in_cm) %>%
+  filter(!grepl("cf", species)) %>%
+  filter(!grepl("sp\\.", species))
 
 
 expanded <- australia_life_history %>%
@@ -380,8 +401,9 @@ missing_regions <- anti_join(add_regions, expanded) %>%
   dplyr::group_by(family, genus, species) %>%
   dplyr::summarise(region_to_add = toString(region_to_add))
   
-australia_life_history1 <- dplyr::left_join(australia_life_history, missing_regions) %>%
-  mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", ")))
+australia_life_history <- dplyr::left_join(australia_life_history, missing_regions) %>%
+  mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", "))) %>%
+  dplyr::select(-region_to_add)
 
 
 test <- australia_life_history %>%
@@ -409,6 +431,13 @@ test <- australia_life_history %>%
 test <- australia_life_history %>%
   dplyr::filter(is.na(species))
 
+test <- australia_life_history %>%
+  dplyr::filter(is.na(class))
+
+unique(test$family)
+
+test <- australia_life_history %>%
+  dplyr::filter(is.na(order))
 
 names(australia_life_history)
 unique(australia_life_history$caab)

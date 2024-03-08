@@ -35,7 +35,6 @@ aus_regions <- st_as_sf(aus_regions)
 # We have removed some phylums and classes
 caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx")
 
-
 caab <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
   clean_names() %>%
   dplyr::filter(kingdom %in% "Animalia") %>%
@@ -43,7 +42,8 @@ caab <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
                               "Chordata",
                               "Arthropoda",
                               "Echinodermata")) %>%
-  dplyr::filter(rank %in% "Species") %>%
+  dplyr::filter(rank %in% c("Family", "Genus", "Species")) %>%
+  replace_na(list(genus = "Unknown", species = "spp")) %>%
   dplyr::filter(!non_current_flag %in% c("Y", "T")) %>%
   dplyr::filter(!class %in% c("Teleostei", # remove fish as have other list
                               "Chondrostei", # remove fish
@@ -81,12 +81,23 @@ caab <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
                               "Sarcopterygii", # fish
                               "", NA)) %>%
   dplyr::rename(caab = spcode, order = order_name) %>%
-  dplyr::select(caab, kingdom, phylum, class, order, family, scientific_name, common_name)
+  dplyr::select(caab, kingdom, phylum, class, order, family, genus, species, scientific_name, common_name) %>%
+  filter(!grepl("[^A-Za-z]", order)) %>%
+  tidyr::separate(family, into = c("family", sep = ":")) %>%
+  filter(!grepl("[^A-Za-z]", family)) %>%
+  filter(!grepl("[^A-Za-z]", genus)) %>%
+  filter(!grepl("[^A-Za-z]", species))
+
+
+unique(caab$rank)
 
 # Look at the unique values
 unique(caab$kingdom)
 unique(caab$phylum)
 unique(caab$class)
+unique(caab$order)
+unique(caab$family)
+unique(caab$genus)
 
 # Check for any duplicates for the same caab code ----
 duplicates <- caab %>%
@@ -98,8 +109,16 @@ duplicates <- caab %>%
 caab <- caab %>%
   filter(!scientific_name %in% duplicates$scientific_name)
 
+# Check for any duplicates for the same caab code ----
+duplicates <- caab %>%
+  dplyr::group_by(caab) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n >1)
+
 # Create a list of unique species to get AphiaIDs ----
 species <- unique(caab$scientific_name) %>% sort()
+
+get_wormsid(c("Octopodidae"))
 
 # Get AphiaIDs using taxize package for every species ----
 # takes just under 3 hours to run - unhash to run again
@@ -342,15 +361,46 @@ final <- left_join(clean_caab, distributions_aus) %>%
   dplyr::rename(australian_common_name = common_name) %>%
   dplyr::mutate(scientific_name = paste(genus, species, sep = " ")) %>%
   dplyr::select(caab, class, order, family, genus, species, scientific_name, australian_common_name, marine_region) %>%
-  dplyr::mutate(australian_common_name = str_to_sentence(australian_common_name))
+  dplyr::mutate(australian_common_name = str_to_sentence(australian_common_name)) %>%
+  dplyr::mutate(australian_common_name = gsub("\\[", "", australian_common_name))%>%
+  dplyr::mutate(australian_common_name = gsub("\\]", "", australian_common_name))
+
+spps <- final %>%
+  dplyr::filter(species %in% "spp")
+
+non_spps <- final %>%
+  dplyr::filter(!species %in% "spp")
+
+genus_distributions <- non_spps %>%
+  dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", "))%>%
+  unnest(marine_region) %>%
+  dplyr::filter(!is.na(marine_region)) %>%
+  dplyr::distinct(family, genus, marine_region) %>%
+  dplyr::group_by(family, genus) %>%
+  dplyr::summarise(new_marine_region = toString(marine_region)) %>%
+  dplyr::mutate(species = "spp")
+
+family_distributions <- non_spps %>%
+  dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", "))%>%
+  unnest(marine_region) %>%
+  dplyr::filter(!is.na(marine_region)) %>%
+  dplyr::distinct(family, marine_region) %>%
+  dplyr::group_by(family) %>%
+  dplyr::summarise(new_marine_region = toString(marine_region)) %>%
+  dplyr::mutate(genus = "Unknown", species = "spp")
+
+extras <- bind_rows(genus_distributions, family_distributions)
+
+new_final <- final %>%
+  left_join(extras) %>%
+  dplyr::mutate(marine_region = if_else(is.na(marine_region), new_marine_region, marine_region)) %>%
+  dplyr::select(-c(new_marine_region))
 
 # family_distributions <- final %>%
 #   select()
 
+number.with.distributions <- new_final %>% filter(!is.na(marine_region))
+nrow(number.with.distributions)/nrow(new_final) * 100 
+# 39% with distribution info available from worms package
 
-
-number.with.distributions <- final %>% filter(!is.na(marine_region))
-nrow(number.with.distributions)/nrow(final) * 100 
-# 34% with distribution info available from worms package
-
-write_rds(final, "annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS")
+write_rds(new_final, "annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS")

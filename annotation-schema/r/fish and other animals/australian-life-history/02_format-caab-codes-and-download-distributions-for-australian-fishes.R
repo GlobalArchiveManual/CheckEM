@@ -20,11 +20,15 @@ aus_regions <- st_read("annotation-schema/data/spatial/marine_regions.shp") %>%
 aus_regions$region <- as.character(aus_regions$REGION)
 st_crs(aus_regions) <- wgs_84
 
+caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
+  clean_names()
+
 # Read in extra ones that are not included in CAAB dump that I have made by hand ----
 caab_extra <- read_csv("annotation-schema/data/raw/caab_not_included_in_dump.csv") %>%
   dplyr::rename(display_name = scientific_name, order_name = order) %>%
   dplyr::mutate(scientific_name = display_name) %>%
-  dplyr::rename(spcode = caab)
+  dplyr::rename(spcode = caab) %>%
+  dplyr::filter(!spcode %in% unique(caab_og$spcode))
 
 # Read in the latest CAAB dump from CSIRO website ----
 # Download is available here: https://www.marine.csiro.au/datacentre/caab/caab_dump_latest.xlsx
@@ -40,21 +44,28 @@ caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
   dplyr::mutate(phylum = if_else(family %in% "Myliobatidae", "Chordata", phylum)) %>%
   dplyr::mutate(order_name = if_else(family %in% "Myliobatidae", "Rajiformes", order_name)) %>%
   dplyr::mutate(kingdom = if_else(family %in% "Myliobatidae", "Animalia", kingdom)) %>%
-  dplyr::bind_rows(caab_extra) %>%
+  # dplyr::bind_rows(caab_extra) %>%
   glimpse()
 
 # Format caab codes ----
 caab <- caab_og %>%
-  dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali", "Myxini")) %>%
+  dplyr::filter(class %in% c("Actinopterygii", 
+                             "Elasmobranchii", 
+                             "Holocephali", 
+                             "Myxini"#,
+                             # "Cephalaspidomorphi", # there are none of these in the list so I am leaving them out for now
+                             # "Chondrichthyes",
+                             # "Sarcopterygii"
+                             )) %>%
   dplyr::filter(!is.na(display_name)) %>%
-  dplyr::filter(!is.na(parent_id)) %>%
+  # dplyr::filter(!is.na(parent_id)) %>%
   dplyr::filter(!stringr::str_detect(scientific_name, "non-current code")) %>%
   replace_na(list(genus = "Unknown", species = "spp")) %>%
   dplyr::select(spcode, kingdom, phylum, class, family, genus, species, common_name, order_name) %>%
   dplyr::rename(order = order_name)
 
-list_to_download <- caab %>%
-  filter(!species %in% "spp")
+list_to_download <- caab #%>%
+  # filter(!species %in% "spp")
 
 # # Download distribution files from CSIRO - remove the hashes to run again
 # for (caab in unique(list_to_download$spcode)){
@@ -123,7 +134,7 @@ test <- aus_regions %>%
 #   polygons.to.test <- polygons %>% filter(SPCODE == CAAB)
 # 
 #   single <- st_cast(polygons.to.test, "POLYGON")
-#   
+# 
 #   dat <- aus_regions %>%
 #     dplyr::slice(st_nearest_feature(single, aus_regions)) %>%
 #     st_set_geometry(NULL)%>%
@@ -132,7 +143,7 @@ test <- aus_regions %>%
 #     dplyr::mutate(spcode = CAAB)
 # 
 #   temp_with_regions <- bind_rows(temp_with_regions, dat)
-#   
+# 
 # }
 # saveRDS(temp_with_regions, "annotation-schema/data/staging/distributions-regions-polygons.RDS")
 
@@ -141,7 +152,7 @@ temp_with_regions <- readRDS("annotation-schema/data/staging/distributions-regio
 caab_format <- caab_og %>%
   dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali", "Myxini")) %>%
   dplyr::filter(!is.na(display_name)) %>%
-  dplyr::filter(!is.na(parent_id)) %>%
+  # dplyr::filter(!is.na(parent_id)) %>%
   dplyr::filter(!stringr::str_detect(scientific_name, "non-current code")) %>%
   replace_na(list(genus = "Unknown", species = "spp")) %>%
   dplyr::select(spcode, kingdom, phylum, class, family, genus, species, common_name, order_name) %>%
@@ -158,7 +169,7 @@ spps <- caab_with_regions %>%
   dplyr::filter(species %in% "spp") %>%
   dplyr::select(!marine.region) 
 
-spp_regions <- caab_format %>%
+spp_regions_genus <- caab_format %>%
   dplyr::rename(caab_code = spcode) %>%
   dplyr::left_join(caab_with_regions) %>%
   dplyr::distinct(family, genus, marine.region) %>%
@@ -168,10 +179,26 @@ spp_regions <- caab_format %>%
   dplyr::distinct() %>%
   dplyr::mutate(species = "spp") %>%
   dplyr::group_by(family, genus, species) %>%
-  dplyr::summarise(marine.region = toString(marine.region)) %>%
-  dplyr::full_join(spps)
+  dplyr::summarise(new_marine_region = toString(marine.region))
 
-caab_combined <- dplyr::bind_rows(caab_with_regions %>% filter(!species %in% "spp"), spp_regions %>% filter(!is.na(caab_code))) %>%
+spp_regions_family <- caab_format %>%
+  dplyr::rename(caab_code = spcode) %>%
+  dplyr::left_join(caab_with_regions) %>%
+  dplyr::distinct(family, marine.region) %>%
+  dplyr::filter(!is.na(marine.region)) %>%
+  dplyr::mutate(marine.region = strsplit(as.character(marine.region), split = ", "))%>%
+  tidyr::unnest(marine.region) %>%
+  dplyr::distinct() %>%
+  dplyr::mutate(genus = "Unknown", species = "spp") %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(new_marine_region = toString(marine.region))
+
+extras <- bind_rows(spp_regions_genus, spp_regions_family)
+
+caab_combined <- caab_with_regions %>%
+  left_join(extras) %>%
+  dplyr::mutate(marine.region = if_else(is.na(marine.region), new_marine_region, marine.region)) %>%
+  dplyr::select(-c(new_marine_region)) %>%
   dplyr::filter(!caab_code %in% c(NA)) %>%
   
   # temporary fixes to remove duplicate caabs
@@ -179,15 +206,48 @@ caab_combined <- dplyr::bind_rows(caab_with_regions %>% filter(!species %in% "sp
   dplyr::filter(!(caab_code %in% "37004002" & is.na(common_name))) %>%
   dplyr::filter(!(caab_code %in% "37026002" & species %in% "ancylostoma")) %>%
   dplyr::mutate(common_name = if_else(caab_code %in% "37026002", "Shark Ray", common_name)) %>%
+  dplyr::mutate(family = if_else(family %in% "Labridae: Scarinae", "Labridae", family)) %>%
+  dplyr::mutate(family = if_else(family %in% "Labridae: Odacinae", "Labridae", family)) %>%
+  dplyr::mutate(family = if_else(family %in% "Labridae: Labrinae", "Labridae", family)) %>%
+  dplyr::mutate(family = if_else(family %in% "Centriscidae: Centriscinae", "Centriscidae", family)) %>%
+  dplyr::mutate(family = if_else(family %in% "Centriscidae: Macroramphosinae", "Centriscidae", family)) %>%
   dplyr::mutate(family = if_else(family %in% "Scaridae", "Labridae", family)) %>%
   dplyr::filter(!(caab_code %in% "37386905" & is.na(marine.region))) %>%
   dplyr::filter(!(caab_code %in% "37386907" & is.na(marine.region))) %>%
   dplyr::mutate(family = if_else((family %in% "Scorpididae" & genus %in% "Microcanthus"), "Microcanthidae", family)) %>%
   dplyr::mutate(species = if_else((caab_code %in% "37361005"), "joyceae", species)) %>%
-  dplyr::mutate(family = if_else(caab_code %in% "37386000", "Labridae: Scarinae", family))
+  dplyr::mutate(family = if_else(caab_code %in% "37386000", "Labridae: Scarinae", family)) %>%
+  dplyr::mutate(common_name = gsub("[\\[\\]]", "", common_name)) %>%
+  dplyr::mutate(common_name = gsub("\\[", "", common_name)) %>%
+  dplyr::mutate(common_name = gsub("\\]", "", common_name)) %>%
+  filter(!grepl("[^A-Za-z]", family)) %>%
+  filter(!grepl("[^A-Za-z]", genus)) %>%
+  filter(!grepl("[^A-Za-z]", species)) 
+
+test <- caab_with_regions %>%
+  filter(grepl("[^A-Za-z]", family)) %>%
+  distinct(family)
+
+test <- caab_with_regions %>%
+  filter(grepl("[^A-Za-z]", genus)) %>%
+  distinct(genus)
+
+test <- caab_with_regions %>%
+  filter(grepl("[^A-Za-z]", species)) %>%
+  distinct(species)
   
 
+unique(caab_combined$kingdom)
+unique(caab_combined$phylum)
+unique(caab_combined$class)
+unique(caab_combined$family)
+unique(caab_combined$genus)
+unique(caab_combined$species)
+
 37361028
+
+test <- caab_combined %>%
+  filter(is.na(species))
 
 test <- caab_combined %>%
   group_by(genus, species) %>%
