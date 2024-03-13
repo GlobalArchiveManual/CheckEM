@@ -31,7 +31,7 @@ max_url <- "https://docs.google.com/spreadsheets/d/1H7EXoTlpeg48LrNVszIa8irwIAh_
 
 new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
   clean_names() %>%
-  dplyr::select(family, genus, species, new_maximum_length_in_cm, type_of_length_measure) %>%
+  dplyr::select(family, genus, species, new_maximum_length_in_cm, type_of_length_measure) %>% 
   dplyr::group_by(family, genus, species) %>%
   slice(which.max(new_maximum_length_in_cm)) %>%
   ungroup()
@@ -39,8 +39,8 @@ new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
 # TODO add fishes of australia max sizes and depth limits
 foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_maximum-sizes.RDS") %>%
   clean_names() %>%
-  dplyr::rename(foa_min_depth = min_depth, foa_max_depth = max_depth) %>%
-  dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth)
+  dplyr::rename(foa_min_depth = min_depth, foa_max_depth = max_depth, type_of_length_measure = length_type) %>%
+  dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth, type_of_length_measure)
 
 # Extra marine regions ----
 extra_marine_regions <- "https://docs.google.com/spreadsheets/d/10D3s-pB-GZJ6xcp93wOx2taJCa5HXqmljcVscaJQmYA/edit?resourcekey#gid=2055010068"
@@ -382,14 +382,93 @@ australia_life_history <- caab_combined %>%
   dplyr::left_join(new_max_sizes) %>%
   dplyr::mutate(fb_length_max = if_else(!is.na(new_maximum_length_in_cm), new_maximum_length_in_cm, fb_length_max)) %>%
   dplyr::mutate(length_max_source = if_else(!is.na(new_maximum_length_in_cm), "BRUV Expert", "Fishbase")) %>%
-  dplyr::select(-new_maximum_length_in_cm) %>%
+  dplyr::mutate(fb_length_max_type = if_else(!is.na(new_maximum_length_in_cm), type_of_length_measure, fb_length_max_type)) %>%
+  dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
   
+
   dplyr::left_join(foa_max_sizes) %>%
-  dplyr::mutate(length_max_source = if_else(fb_length_max > fb_length_max, "Fishes of Australia", length_max_source)) %>%
+  dplyr::mutate(length_max_source = if_else(new_maximum_length_in_cm > fb_length_max, "Fishes of Australia", length_max_source)) %>%
   dplyr::mutate(fb_length_max = if_else(new_maximum_length_in_cm > fb_length_max, new_maximum_length_in_cm, fb_length_max)) %>%
-  dplyr::select(-new_maximum_length_in_cm) %>%
+  dplyr::mutate(fb_length_max_type = if_else(!is.na(new_maximum_length_in_cm > fb_length_max), type_of_length_measure, fb_length_max_type)) %>%
+  
+  dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
   filter(!grepl("cf", species)) %>%
-  filter(!grepl("sp\\.", species))
+  filter(!grepl("sp\\.", species)) %>%
+  
+  dplyr::select(# CAAB info
+                australian_source,
+                caab,
+                
+                # Taxanomic ranks
+                # kingdom,
+                # phylum,
+                class,
+                order,
+                family,
+                subfamily,
+                genus,
+                species,
+                scientific_name,
+                australian_common_name,
+                
+                # Regions
+                global_region,
+                marine_region,
+                
+                # Fishbase info
+                global_source,
+                
+                fb_code,
+                fb_length_at_maturity_cm,
+                fb_length_weight_measure,
+                fb_a,
+                fb_b,
+                fb_a_ll,
+                fb_b_ll,
+                fb_length_weight_source,
+                fb_vulnerability,
+                fb_countries,
+                fb_status,
+                
+                # Maximum lenghs
+                fb_length_max, # NEED TO RENAME
+                fb_length_max_type,# NEED TO RENAME
+                length_max_source,
+                
+                foa_min_depth,
+                foa_max_depth,
+                
+                rls_trophic_group,
+                rls_water_column,
+                rls_substrate_type,
+                rls_thermal_niche,
+                
+                local_source,
+                epbc_threat_status,
+                iucn_ranking,
+                
+                fishing_mortality,
+                fishing_type,
+                min_legal_nt,
+                max_legal_nt,
+                min_legal_wa,
+                max_legal_wa,
+                min_legal_qld,
+                max_legal_qld,
+                min_legal_nsw,
+                max_legal_nsw,
+                min_legal_vic,
+                max_legal_vic,
+                min_legal_sa,
+                max_legal_sa,
+                min_legal_tas,
+                max_legal_tas
+                
+                ) %>%
+  dplyr::rename(length_max_cm = fb_length_max, length_max_type = fb_length_max_type)
+
+names(australia_life_history)
+
 
 
 expanded <- australia_life_history %>%
@@ -435,6 +514,10 @@ test <- australia_life_history %>%
   dplyr::filter(is.na(class))
 
 unique(test$family)
+
+australia_life_history <- australia_life_history %>%
+  dplyr::filter(!is.na(class))
+
 
 test <- australia_life_history %>%
   dplyr::filter(is.na(order))
