@@ -16,8 +16,9 @@ googlesheets4::gs4_auth()
 
 # Read in sheet from googledrive ----
 url <- "https://docs.google.com/spreadsheets/d/1SMLvR9t8_F-gXapR2EemQMEPSw_bUbPLcXd3lJ5g5Bo/edit?usp=sharing"
-lh <- read_sheet(url) %>%
-  clean_names()
+lh <- read_sheet(url, sheet = "australia.life.history") %>%
+  clean_names() %>%
+  dplyr::mutate(maxlegal_vic = str_replace_all(maxlegal_vic, "TRUE", "550"))
 
 # Save a copy locally ----
 saveRDS(lh, "annotation-schema/data/raw/australia_original-life-history.RDS")
@@ -244,8 +245,9 @@ animals <- readRDS("annotation-schema/data/staging/australia_animals_caab-code-a
   left_join(iucn_animals) %>%
   
   dplyr::mutate(australian_source = "CAAB",
-                global_source = "WoRMS",
-                local_source = "Not Available") %>%
+                global_source = "WoRMS"#,
+                #local_source = "Not Available"
+                ) %>%
   
   dplyr::mutate(australian_common_name = str_replace_all(.$australian_common_name, "\\[|\\]", "")) %>%
   glimpse()
@@ -260,7 +262,11 @@ test <- taxonomy %>%
 spps <- readRDS("annotation-schema/data/staging/australia_fish_caab-codes_spps.RDS") %>%
   dplyr::filter(!caab %in% c(unique(animals$caab))) %>%
   dplyr::filter(!caab %in% c(unique(caab_combined$caab))) %>%
-  dplyr::filter(!caab %in% c(unique(fishbase$caab))) 
+  dplyr::filter(!caab %in% c(unique(fishbase$caab))) %>%
+  dplyr::mutate(australian_source = "CAAB",
+                global_source = "WoRMS"#,
+                #local_source = "Not Available"
+  )
 
 blank_class <- spps %>%
   filter(is.na(class)) %>%
@@ -395,6 +401,8 @@ australia_life_history <- caab_combined %>%
   filter(!grepl("cf", species)) %>%
   filter(!grepl("sp\\.", species)) %>%
   
+  dplyr::mutate(australian_source = "CAAB") %>%
+  
   dplyr::select(# CAAB info
                 australian_source,
                 caab,
@@ -475,6 +483,8 @@ expanded <- australia_life_history %>%
   dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) %>% 
   tidyr::unnest(marine_region)
 
+unique(expanded$marine_region)
+
 missing_regions <- anti_join(add_regions, expanded) %>%
   rename(region_to_add = marine_region) %>%
   dplyr::group_by(family, genus, species) %>%
@@ -482,9 +492,11 @@ missing_regions <- anti_join(add_regions, expanded) %>%
   
 australia_life_history <- dplyr::left_join(australia_life_history, missing_regions) %>%
   mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", "))) %>%
-  dplyr::select(-region_to_add)
+  dplyr::select(-region_to_add) %>%
+  dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", "")) %>%
+  dplyr::filter(!caab %in% c("37280000", "37384000", "37385000"))
 
-
+unique(australia_life_history$marine_region)
 test <- australia_life_history %>%
   dplyr::group_by(caab) %>%
   dplyr::summarise(n = n()) %>%
@@ -523,6 +535,15 @@ test <- australia_life_history %>%
   dplyr::filter(is.na(order))
 
 names(australia_life_history)
+unique(australia_life_history$australian_source) # ok
+
+unique(australia_life_history$global_source) # ok
+
+unique(australia_life_history$local_source)
+
+test <- australia_life_history %>%
+  filter(!is.na(global_source))
+
 unique(australia_life_history$caab)
 unique(australia_life_history$class)
 unique(australia_life_history$order)
