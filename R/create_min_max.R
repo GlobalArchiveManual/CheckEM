@@ -14,26 +14,26 @@
 create_min_max <- function(life_history, minimum, maximum) {
   
   family_max <- life_history %>%
-    filter(!is.na(fb_length_max)) %>%
+    filter(!is.na(length_max_cm)) %>%
     dplyr::group_by(family) %>%
-    dplyr::summarise(famlength_max = mean(fb_length_max)) %>%
+    dplyr::summarise(famlength_max = mean(length_max_cm)) %>%
     ungroup()
   
   genus_max <- life_history %>%
-    filter(!is.na(fb_length_max)) %>%
+    filter(!is.na(length_max_cm)) %>%
     dplyr::group_by(genus) %>%
-    dplyr::summarise(genuslength_max = mean(fb_length_max)) %>%
+    dplyr::summarise(genuslength_max = mean(length_max_cm)) %>%
     ungroup()
   
   left_join(life_history, family_max, by = c("family")) %>% # add in family values
     left_join(., genus_max) %>% # add in genus values
-    dplyr::mutate(fb_length_max = ifelse((is.na(fb_length_max)), genuslength_max, fb_length_max)) %>%
-    dplyr::mutate(fb_length_max = ifelse((is.na(fb_length_max)), famlength_max, fb_length_max)) %>%
+    dplyr::mutate(length_max_cm = ifelse((is.na(length_max_cm)), genuslength_max, length_max_cm)) %>%
+    dplyr::mutate(length_max_cm = ifelse((is.na(length_max_cm)), famlength_max, length_max_cm)) %>%
     dplyr::select(-c(famlength_max, genuslength_max)) %>%
-    dplyr::mutate(fb_length_max = fb_length_max * 10) %>%
-    mutate(min_length_mm = minimum * fb_length_max) %>%
-    mutate(max_length_mm = maximum * fb_length_max) %>% 
-    dplyr::select(family, genus, species, min_length_mm, max_length_mm, fb_length_max) %>%
+    dplyr::mutate(length_max_cm = length_max_cm * 10) %>%
+    mutate(min_length_mm = minimum * length_max_cm) %>%
+    mutate(max_length_mm = maximum * length_max_cm) %>% 
+    dplyr::select(family, genus, species, min_length_mm, max_length_mm, length_max_cm) %>%
     dplyr::filter(!is.na(min_length_mm)) %>%
     distinct()
 }
