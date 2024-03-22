@@ -19,8 +19,8 @@ extra <- read.csv("annotation-schema/data/raw/extra-habitat-classes.csv") %>%
 # Have not included codium or calerpa because they can differ in levels with the same CAAB code
 catami <- read.csv("annotation-schema/data/raw/catami-caab-codes_1.4.csv") %>%
   CheckEM::clean_names() %>%
-  # dplyr::rename(caab_code = species_code, parent_caab = catami_parent_id) %>%
-  dplyr::select(catami_display_name) %>% 
+  dplyr::rename(caab_code = species_code, parent_caab = catami_parent_id) %>%
+  dplyr::select(caab_code, catami_display_name) %>% 
   tidyr::separate(catami_display_name, into = c("level_2", "level_3", "level_4", "level_5", "level_6", "level_7", "level_8"), sep = ": ") %>%
   dplyr::mutate(level_1 = if_else(level_2 %in% c("Substrate", "Relief"), "Physical", "Biota")) %>%
   bind_rows(extra) %>%
@@ -29,7 +29,7 @@ catami <- read.csv("annotation-schema/data/raw/catami-caab-codes_1.4.csv") %>%
   dplyr::mutate(qualifiers = if_else(level_2 %in% c("Seagrasses"), "No epiphytes/Epiphytes algae/Epiphytes other", as.character(qualifiers))) %>%
   dplyr::mutate(qualifiers = if_else(level_3 %in% c("Corals"), "Alive/Recruit/Bleached/Dead/Recently dead", as.character(qualifiers))) %>%
   dplyr::mutate(qualifiers = if_else(level_2 %in% c("Substrate"), "Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat", as.character(qualifiers))) %>%
-  dplyr::select(level_1, everything()) %>% 
+  dplyr::select(caab_code, level_1, everything()) %>% 
   dplyr::filter(!level_2 %in% c("Biota", "Physical")) %>%
   dplyr::arrange(level_1, level_2, level_3, level_4) %>%
   # Fix for relief score
@@ -45,7 +45,7 @@ catami <- read.csv("annotation-schema/data/raw/catami-caab-codes_1.4.csv") %>%
   glimpse()
 
 # Save as an rda to use as package data
-usethis::use_data(catami)  
+usethis::use_data(catami, overwrite = TRUE)  
 
 # Save a csv version ----
 write.csv(catami, "annotation-schema/output/habitat/schema/benthic-annotation-schema-forward-facing.csv", row.names = FALSE, na = "")
