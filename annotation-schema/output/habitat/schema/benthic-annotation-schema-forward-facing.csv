@@ -210,10 +210,10 @@
 80300921,"Biota","Macroalgae","Laminate","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
 80300918,"Biota","Macroalgae","Laminate",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
 80300902,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Lessoniaceae","Ecklonia","radiata","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Seirococcaceae","Scytothalia","dorycarpa","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Seirococcaceae","Phyllospora","spp","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Sargassaceae","Sargassum","spp","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54079009,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Lessoniaceae","Ecklonia","radiata","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54102005,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Seirococcaceae","Scytothalia","dorycarpa","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54102902,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Seirococcaceae","Phyllospora","spp","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54105902,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Sargassaceae","Sargassum","spp","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
 80300901,"Biota","Macroalgae","Large canopy-forming",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
 80300923,"Biota","Macroalgae","Sheet-like / membraneous","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
 80300924,"Biota","Macroalgae","Sheet-like / membraneous","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
@@ -229,16 +229,16 @@
 24000000,"Biota","Molluscs","Gastropods",,,,,,,,,
 23000000,"Biota","Molluscs",,,,,,,,,,
 33000000,"Biota","Sea spiders",,,,,,,,,,
-,"Biota","Seagrasses","Elliptical leaves","",,,,,"Hydrocharitaceae","Halophila","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63605902,"Biota","Seagrasses","Elliptical leaves","",,,,,"Hydrocharitaceae","Halophila","spp","No epiphytes/Epiphytes algae/Epiphytes other"
 63600902,"Biota","Seagrasses","Elliptical leaves",,,,,,,,,"No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Seagrasses","Strap-like leaves","",,,,,"Cymodoceaceae","Amphibolis","spp","No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Seagrasses","Strap-like leaves","",,,,,"Posidoniaceae","Posidonia","spp","No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Seagrasses","Strap-like leaves","",,,,,"Zosteraceae","Zostera","spp","No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Seagrasses","Strap-like leaves","",,,,,"Ruppiaceae","Ruppia","spp","No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Seagrasses","Strap-like leaves","",,,,,"Cymodoceaceae","Thalassodendron","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63618901,"Biota","Seagrasses","Strap-like leaves","",,,,,"Cymodoceaceae","Amphibolis","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63617901,"Biota","Seagrasses","Strap-like leaves","",,,,,"Posidoniaceae","Posidonia","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63619902,"Biota","Seagrasses","Strap-like leaves","",,,,,"Zosteraceae","Zostera","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63614901,"Biota","Seagrasses","Strap-like leaves","",,,,,"Ruppiaceae","Ruppia","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63618905,"Biota","Seagrasses","Strap-like leaves","",,,,,"Cymodoceaceae","Thalassodendron","spp","No epiphytes/Epiphytes algae/Epiphytes other"
 63600903,"Biota","Seagrasses","Strap-like leaves",,,,,,,,,"No epiphytes/Epiphytes algae/Epiphytes other"
 63600901,"Biota","Seagrasses",,,,,,,,,,"No epiphytes/Epiphytes algae/Epiphytes other"
-,"Biota","Sessile invertebrates","","",,,,,"","","",
+2,"Biota","Sessile invertebrates","","",,,,,"","","",
 10000917,"Biota","Sponges","Crusts","Creeping / ramose",,,,,,,,
 10000902,"Biota","Sponges","Crusts","Encrusting",,,,,,,,
 10000921,"Biota","Sponges","Crusts","Endolithic / bioeroding",,,,,,,,
@@ -261,7 +261,7 @@
 10000904,"Biota","Sponges","Massive forms","Simple",,,,,,,,
 10000903,"Biota","Sponges","Massive forms",,,,,,,,,
 10000000,"Biota","Sponges",,,,,,,,,,
-,"Biota","Unscorable","","",,,,,"","","",
+1,"Biota","Unscorable","","",,,,,"","","",
 36110000,"Biota","Worms","Acorn worms",,,,,,,,,
 17020000,"Biota","Worms","Echiura",,,,,,,,,
 13000000,"Biota","Worms","Flatworms",,,,,,,,,
@@ -272,7 +272,7 @@
 17000000,"Biota","Worms","Sipuncula",,,,,,,,,
 80600901,"Biota","Worms",,,,,,,,,,
 82003001,"Physical","Relief","Flat",,"0",,,,,,,
-,"Physical","Relief","High","Caves","5",,,,"","","",
+82003008,"Physical","Relief","High","Caves","5",,,,"","","",
 82003006,"Physical","Relief","High","High (>3m)","3",,,,,,,
 82003007,"Physical","Relief","High","Wall","4",,,,,,,
 82003005,"Physical","Relief","High",,,,,,,,,
