@@ -5,10 +5,10 @@
 library(tidyverse)
 
 # Create a dataframe of some extra fish that are missing from the life history information
-extras <- data.frame(FAMILY = c("Unknown", "Larval", "SUS", "Baitfish", "Sparidae"),
-                     GENUS = c("Unknown", "Larval", "SUS", "Baitfish", "Dentex"),
-                     SPECIES = c("Unknown", "Larval", "SUS", "Baitfish", "carpenteri"),
-                     'CAAB CODE' = c("0", "1", "2", "3", "4")) %>%
+extras <- data.frame(FAMILY = c("Unknown", "Larval", "SUS", "Baitfish", "Sparidae", "Labridae"),
+                     GENUS = c("Unknown", "Larval", "SUS", "Baitfish", "Dentex", "Iniistius"),
+                     SPECIES = c("Unknown", "Larval", "SUS", "Baitfish", "carpenteri", "opalus"),
+                     'CAAB CODE' = c("0", "1", "2", "3", "4", "5")) %>%
   dplyr::rename("CAAB CODE" = CAAB.CODE)
 
 lh <- readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS") %>%

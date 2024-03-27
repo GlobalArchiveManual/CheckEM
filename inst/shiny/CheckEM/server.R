@@ -8,7 +8,7 @@ function(input, output, session) {
   observeEvent(input$new_user, {
     req(input$new_user)
     showModal(modalDialog(
-      # title = "CheckEM has changed", 
+      # title = "CheckEM has changed",
       includeMarkdown("markdown/new.content.md"),
       easyClose = TRUE,
       footer = NULL,
@@ -827,81 +827,89 @@ function(input, output, session) {
   metadata.regions <- reactive({
     metadata <- metadata()
     
-    if(input$region %in% "sample"){
-      coordinates(metadata) <- c('longitude_dd', 'latitude_dd')
-      proj4string(metadata) <- CRS(all_data$wgs.84)
-      n <- nrow(metadata)
-      nearest.region <- character(n)
-      
-      ## For each point, find name of nearest polygon
-      for (i in seq_along(nearest.region)) {
-        nearest.region[i] <- marine.regions()$REGION[which.min(gDistance(metadata[i, ], marine.regions(), byid = TRUE))]}
-      
-      ## Check that it worked
-      message("checking each sample nearest region")
-      metadata.2 <- as.data.frame(nearest.region) %>%
-        bind_cols(metadata()) %>%
-        dplyr::rename(marine_region = nearest.region) %>%
-        dplyr::mutate(sample = as.character(sample)) %>%
-        #dplyr::select(!status)
-        glimpse()
-      
-    } else {
-      
-      metadata.summed <- metadata %>%
-        dplyr::group_by(campaignid) %>%
-        dplyr::summarise(latitude_dd = mean(latitude_dd), longitude_dd = mean(longitude_dd))
-      
-      coordinates(metadata.summed) <- c('longitude_dd', 'latitude_dd')
-      proj4string(metadata.summed) <- CRS(all_data$wgs.84)
-      
-      n <- nrow(metadata.summed)
-      nearest.region <- character(n)
-      
-      ## For each point, find name of nearest polygon
-      for (i in seq_along(nearest.region)) {
-        nearest.region[i] <- marine.regions()$REGION[which.min(gDistance(metadata.summed[i, ], marine.regions(), byid = TRUE))]}
-      
-      #print("new metadata")
-      
-      ## Check that it worked
-      metadata.2 <- metadata %>%
-        dplyr::group_by(campaignid) %>%
-        dplyr::summarise(latitude_dd = mean(latitude_dd), longitude_dd = mean(longitude_dd)) %>%
-        dplyr::ungroup() %>%
-        bind_cols(as.data.frame(nearest.region)) %>%
-        dplyr::rename(marine_region = nearest.region) %>%
-        dplyr::select(-c(latitude_dd, longitude_dd)) %>%
-        dplyr::full_join(metadata, .) 
-      
-      # Changed here
-      coordinates(metadata) <- c('longitude_dd', 'latitude_dd')
-      proj4string(metadata) <- CRS(all_data$wgs.84)
-    }
+    metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
     
-    # add in marine parks
+    regions <- marine.regions()
+    regions <- st_as_sf(regions, crs = st_crs(4326))
+    regions <- st_transform(regions, 4326) %>%
+      dplyr::select(REGION)
+    
+    message("view nearest marine regions")
+    
+    metadata.2 <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
+      dplyr::rename(marine_region = REGION) %>%
+      dplyr::mutate(sample = as.character(sample)) %>%
+      bind_cols(st_coordinates(.)) %>%
+      as.data.frame() %>%
+      dplyr::select(-c(geometry)) %>%
+      dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+      glimpse()
 
     
+    # add in marine parks
     if(input$lifehistory %in% "aus"){
+      
       print("view metadata.marineparks for Australia")
       
-      metadata.marineparks <- over(metadata, all_data$marineparks)  %>%
-        dplyr::rename(zone = ZONE_TYPE) %>%
+      metadata.marineparks <- metadata_sf %>%
+        dplyr::select(-status) %>%
+        st_intersection(all_data$marineparks) %>%
+        bind_cols(st_coordinates(.)) %>%
+        as.data.frame() %>%
+        dplyr::select(-c(geometry)) %>%
+        dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
         tidyr::replace_na(list(status = "Fished")) %>%
-        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) #%>% glimpse()
+        dplyr::rename(zone = ZONE_TYPE) %>%
+        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
+        dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), 
+                      latitude_dd, longitude_dd, 
+                      zone, status, IUCN) %>%
+        distinct() %>%
+        
+        # dplyr::mutate(IUCN = as.character(IUCN)) %>%
+        
+        # # # glimpse() %>%
+        # # # tidyr::replace_na(list = c(IUCN = "VI")) %>%
+        arrange(campaignid, sample, IUCN) %>%
+        dplyr::group_by(campaignid, sample) %>%
+        slice(1) %>%
+        ungroup() %>%
+        full_join(metadata %>% dplyr::select(campaignid, sample), .) %>%
+        glimpse()
+      
+      message("test data - for duplicates")
+      
+      test  <- metadata.marineparks %>%
+        group_by(campaignid, sample) %>%
+        dplyr::summarise(n = n()) %>%
+        dplyr::filter(n>1) %>%
+        glimpse()
+      
+      print("test 2")
+      test <- metadata.marineparks %>%
+        # semi_join(test) %>%
+        dplyr::filter(sample %in% "CABOO11") %>%
+        glimpse()
+      
+      message("unique")
+      print(unique(metadata.marineparks$IUCN))
+
       
     } else {
       
       print("view metadata.marineparks for Global")
-      sf_use_s2(FALSE)
       
-      metadata <- metadata %>% st_as_sf() %>% glimpse()
-      
-      metadata.marineparks <- st_intersection(metadata %>% dplyr::select(-c(status)), all_data$world_marineparks) %>%
-        st_set_geometry(NULL) %>% glimpse()
-      
-      metadata.marineparks <- full_join(metadata %>% dplyr::select(-c(status)), metadata.marineparks) %>%
-        dplyr::select(zone, status)
+      metadata.marineparks <- metadata_sf %>%
+        dplyr::select(-status) %>%
+        st_intersection(all_data$world_marineparks) %>%
+        bind_cols(st_coordinates(.)) %>%
+        as.data.frame() %>%
+        dplyr::select(-c(geometry)) %>%
+        dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+        tidyr::replace_na(list(status = "Fished")) %>%
+        # dplyr::rename(zone = ZONE_TYPE) %>%
+        # dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
+        glimpse()
       
     }
     
@@ -913,7 +921,10 @@ function(input, output, session) {
     } else {
       
       metadata.2 <- metadata.2 %>%
-        dplyr::select(!status)
+        dplyr::select(-c(status))
+      
+      metadata.marineparks <- metadata.marineparks %>%
+        dplyr::select(zone, status)
       
     }
 
@@ -921,9 +932,19 @@ function(input, output, session) {
     if(nrow(metadata.marineparks) > 0) {
     
     print("view metadata.regions")
+      
+      message("TEST 1")
+      glimpse(metadata.2)
+      
+      message("TEST 2")
+      glimpse(metadata.marineparks)
+      
+      message("TEST 3")
     metadata.regions <- metadata.2 %>%
       bind_cols(metadata.marineparks) %>%
+      glimpse() %>%
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, zone, marine_region, observer_count, observer_length, inclusion_probability, visibility_m) %>% 
+      tidyr::replace_na(list(status = "Fished")) %>%
       as.data.frame() %>% glimpse()
     
     } else {
@@ -3511,7 +3532,7 @@ function(input, output, session) {
       # test <- length.area %>% dplyr::filter(is.na(length)) %>% filter(number > 0) %>% glimpse()
       
       length.wrong <- left_join(length.area %>% dplyr::mutate(family = as.character(family), genus = as.character(genus), species = as.character(species)), life.history.min.max(), by = c("family", "genus", "species")) %>%
-        dplyr::filter(length_mm<min_length|length_mm>fb_length_max) %>%
+        dplyr::filter(length_mm<min_length|length_mm>length_max_mm) %>%
         mutate(reason = ifelse(length_mm<min_length, "too small", "too big"))
       
       length.too.small <- length.wrong %>%
@@ -4619,22 +4640,22 @@ function(input, output, session) {
       length.wrong <- left_join(length3dpoints.clean(), life.history.min.max(), by = c("family", "genus", "species")) %>%
         dplyr::filter(length_mm<min_length|length_mm>max_length) %>%
         mutate(reason = ifelse(length_mm<min_length, "too small", "too big")) %>%
-        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, fb_length_max, reason, em_comment, frame_left) %>%
+        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, em_comment, frame_left) %>%
         mutate(difference = ifelse(reason%in%c("too small"), (min_length-length_mm), (length_mm-max_length))) %>%
-        dplyr::mutate(percent.of.fb.max = (length_mm/fb_length_max*100)) %>%
+        dplyr::mutate(percent.of.fb.max = (length_mm/length_max_mm*100)) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, fb_length_max, reason, em_comment, frame_left)
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, em_comment, frame_left)
       
     } else {
       
       length.wrong <- left_join(gen.length.clean(), life.history.min.max(), by = c("family", "genus", "species")) %>%
         dplyr::filter(length_mm<min_length|length_mm>max_length) %>%
         mutate(reason = ifelse(length_mm<min_length, "too small", "too big")) %>%
-        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, fb_length_max, reason) %>%
+        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, length_max_mm, reason) %>%
         mutate(difference = ifelse(reason%in%c("too small"), (min_length-length_mm), (length_mm-max_length))) %>%
-        dplyr::mutate(percent.of.fb.max = (length_mm/fb_length_max*100)) %>%
+        dplyr::mutate(percent.of.fb.max = (length_mm/length_max_mm*100)) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, fb_length_max, reason)
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, length_max_mm, reason)
         #glimpse()
       
     }
@@ -4679,7 +4700,7 @@ function(input, output, session) {
     downloadButton("download.length.wrong.small", "Download as csv"), 
     renderDataTable(filter(length.wrong()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
                                                            '85%_fb_maximum_length' = max_length,
-                                                           'fb_maximum_length' = fb_length_max), reason == "too small"), rownames = FALSE, 
+                                                           'fb_maximum_length' = length_max_mm), reason == "too small"), rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
   ## ► Species wrong length big - valuebox ----
@@ -4720,14 +4741,14 @@ function(input, output, session) {
     downloadButton("download.length.wrong.big", "Download as csv"), 
     renderDataTable(filter(length.wrong()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
                                                            '85%_fb_maximum_length' = max_length,
-                                                           'fb_maximum_length' = fb_length_max), reason == "too big"), rownames = FALSE, 
+                                                           'fb_maximum_length' = length_max_mm), reason == "too big"), rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
   ## ► Species wrong length bigger than 100% - valuebox ----
   output$length.wrong.big.100 <- renderValueBox({
     length.wrong.big <- length.wrong() %>%
       dplyr::filter(reason %in% c("too big")) %>%
-      dplyr::filter(fb_length_max < length_mm) %>%
+      dplyr::filter(length_max_mm < length_mm) %>%
       dplyr::mutate(count = 1)
     
     if (dim(length.wrong.big)[1] > 0) {
@@ -4752,7 +4773,7 @@ function(input, output, session) {
       paste("length.100.percent.of.max", Sys.Date(), ".csv", sep = "")
     }, 
     content = function(file) {
-      write.csv(dplyr::filter(length.wrong(), fb_length_max < length_mm), file, row.names = FALSE)
+      write.csv(dplyr::filter(length.wrong(), length_max_mm < length_mm), file, row.names = FALSE)
     }
   )
   
@@ -4762,7 +4783,7 @@ function(input, output, session) {
     downloadButton("download.length.wrong.big.100", "Download as csv"), 
     renderDataTable(filter(length.wrong()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
                                                            '85%_fb_maximum_length' = max_length,
-                                                           'fb_maximum_length' = fb_length_max), fb_maximum_length < length_mm), rownames = FALSE, 
+                                                           'fb_maximum_length' = length_max_mm), fb_maximum_length < length_mm), rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
   
@@ -4914,9 +4935,9 @@ function(input, output, session) {
     sizes <- life.history.min.max() %>%
       dplyr::mutate(scientific = paste(genus, species, sep  = " ")) %>%
       dplyr::filter(scientific %in% c(input$length.species.dropdown)) %>%
-      dplyr::distinct(scientific, fb_length_max, min_length, max_length)
+      dplyr::distinct(scientific, length_max_mm, min_length, max_length)
     
-    fishbase.max <- sum(sizes$fb_length_max)
+    fishbase.max <- sum(sizes$length_max_mm)
     min.15 <- sum(sizes$min_length)
     max.85 <- sum(sizes$max_length)
     
@@ -4964,9 +4985,9 @@ function(input, output, session) {
     sizes <- life.history.min.max() %>%
       mutate(scientific = paste(genus, species, sep  = " ")) %>%
       filter(scientific %in% c(input$length.species.dropdown)) %>%
-      distinct(scientific, fb_length_max, min_length, max_length)
+      distinct(scientific, length_max_mm, min_length, max_length)
     
-    fishbase.max <- sum(sizes$fb_length_max)
+    fishbase.max <- sum(sizes$length_max_mm)
     min.15 <- sum(sizes$min_length)
     max.85 <- sum(sizes$max_length)
     
@@ -5178,7 +5199,7 @@ function(input, output, session) {
     print("length wrong")
 
     length.wrong <- left_join(length.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
-      dplyr::filter(length_mm < min_length | length_mm > fb_length_max) %>%
+      dplyr::filter(length_mm < min_length | length_mm > length_max_mm) %>%
       mutate(reason = ifelse(length_mm < min_length, "too small", "too big"))
 
     length.too.small <- length.wrong %>%
@@ -5592,11 +5613,11 @@ function(input, output, session) {
     length.wrong <- left_join(length3dpoints.clean.t(), life.history.min.max(), by = c("family", "genus", "species")) %>%
       dplyr::filter(length_mm < min_length | length_mm > max_length) %>%
       mutate(reason = ifelse(length_mm < min_length, "too small", "too big")) %>%
-      dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, fb_length_max, reason, frame_left, rms, precision) %>% # , code
+      dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, frame_left, rms, precision) %>% # , code
       mutate(difference = ifelse(reason%in%c("too small"), (min_length-length_mm), (length_mm-max_length))) %>%
-      dplyr::mutate(percent.of.fb.max = (length_mm/fb_length_max*100)) %>%
+      dplyr::mutate(percent.of.fb.max = (length_mm/length_max_mm*100)) %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, fb_length_max, reason, frame_left, rms, precision)
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, frame_left, rms, precision)
 
   })
 
@@ -5638,7 +5659,7 @@ function(input, output, session) {
     downloadButton("download.length.wrong.small.t", "Download as csv"),
     renderDataTable(filter(length.wrong.t() %>% dplyr::rename('15%_fb_maximum_length' = min_length,
                                                               '85%_fb_maximum_length' = max_length,
-                                                              'fb_maximum_length' = fb_length_max), 
+                                                              'fb_maximum_length' = length_max_mm), 
                            reason == "too small"), rownames = FALSE,
                     options = list(paging = FALSE, searching = TRUE)))))
 
@@ -5682,14 +5703,14 @@ function(input, output, session) {
             downloadButton("download.length.wrong.big.t", "Download as csv"),
             renderDataTable(filter(length.wrong.t()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
                                                                      '85%_fb_maximum_length' = max_length,
-                                                                     'fb_maximum_length' = fb_length_max), reason == "too big"), rownames = FALSE,
+                                                                     'fb_maximum_length' = length_max_mm), reason == "too big"), rownames = FALSE,
                             options = list(paging = FALSE, searching = TRUE)))))
 
   ## ► Species wrong length 100% too big - valuebox ----
   output$length.wrong.big.100.t <- renderValueBox({
     length.wrong.big <- length.wrong.t() %>%
       dplyr::filter(reason %in% c("too big")) %>%
-      dplyr::filter(fb_length_max < length_mm) %>%
+      dplyr::filter(length_max_mm < length_mm) %>%
       dplyr::mutate(count = 1)
 
     if (dim(length.wrong.big)[1] > 0) {
@@ -5714,7 +5735,7 @@ function(input, output, session) {
       paste("length.100.percent.of.max", Sys.Date(), ".csv", sep = "")
     },
     content = function(file) {
-      write.csv(dplyr::filter(length.wrong.t(), fb_length_max < length_mm), file, row.names = FALSE)
+      write.csv(dplyr::filter(length.wrong.t(), length_max_mm < length_mm), file, row.names = FALSE)
     }
   )
 
@@ -5726,7 +5747,7 @@ function(input, output, session) {
             downloadButton("download.length.wrong.big.100.t", "Download as csv"),
             renderDataTable(filter(length.wrong.t()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
                                                                      '85%_fb_maximum_length' = max_length,
-                                                                     'fb_maximum_length' = fb_length_max), fb_maximum_length < length_mm), rownames = FALSE,
+                                                                     'fb_maximum_length' = length_max_mm), fb_maximum_length < length_mm), rownames = FALSE,
                             options = list(paging = FALSE, searching = TRUE)))))
 
   ## ► Out of range - dataframe ----
@@ -5913,9 +5934,9 @@ function(input, output, session) {
     sizes <- life.history.min.max() %>%
       mutate(scientific = paste(genus, species, sep  = " ")) %>%
       filter(scientific %in% c(input$length.species.dropdown.t)) %>%
-      distinct(scientific, fb_length_max, min_length, max_length)
+      distinct(scientific, length_max_mm, min_length, max_length)
 
-    fishbase.max <- sum(sizes$fb_length_max)
+    fishbase.max <- sum(sizes$length_max_mm)
     min.15 <- sum(sizes$min_length)
     max.85 <- sum(sizes$max_length)
 
@@ -5951,9 +5972,9 @@ function(input, output, session) {
     sizes <- life.history.min.max() %>%
       mutate(scientific = paste(genus, species, sep  = " ")) %>%
       filter(scientific %in% c(input$length.species.dropdown.t)) %>%
-      distinct(scientific, fb_length_max, min_length, max_length)
+      distinct(scientific, length_max_mm, min_length, max_length)
 
-    fishbase.max <- sum(sizes$fb_length_max)
+    fishbase.max <- sum(sizes$length_max_mm)
     min.15 <- sum(sizes$min_length)
     max.85 <- sum(sizes$max_length)
 
@@ -6055,7 +6076,7 @@ function(input, output, session) {
 
     # 3. Make family length.weight
     family.lw <- life.history() %>%
-      dplyr::group_by(family, length.measure) %>%
+      dplyr::group_by(family, length_max_type) %>%
       dplyr::mutate(log.a = log10(a)) %>%
       dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),
                        b = mean(b, na.rm = T),
@@ -6067,7 +6088,7 @@ function(input, output, session) {
       dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
       dplyr::mutate(all = as.numeric(all)) %>%
       dplyr::mutate(bll = as.numeric(bll)) %>%
-      dplyr::mutate(rank = ifelse(length.measure == "FL", 1, ifelse(length.measure == "TL", 2, 3))) %>%
+      dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %>%
       dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
       dplyr::filter(min.rank ==  0)
 
@@ -6080,8 +6101,8 @@ function(input, output, session) {
       bind_rows(length.family.ab) %>%
       dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
       dplyr::mutate(length.cm = length_mm/10) %>%
-      dplyr::mutate(all = ifelse(is.na(all)&length.measure%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
-      dplyr::mutate(bll = ifelse(is.na(bll)&length.measure%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+      dplyr::mutate(all = ifelse(is.na(all)&length_max_type%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+      dplyr::mutate(bll = ifelse(is.na(bll)&length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
       dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>%
       dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
       dplyr::filter(mass.g>0) %>%
@@ -6127,7 +6148,7 @@ function(input, output, session) {
 
     # 3. Make family length.weight
     family.lw <- life.history() %>%
-      dplyr::group_by(family, length.measure) %>%
+      dplyr::group_by(family, length_max_type) %>%
       dplyr::mutate(log.a = log10(a)) %>%
       dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),
                        b = mean(b, na.rm = T),
@@ -6139,7 +6160,7 @@ function(input, output, session) {
       dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
       dplyr::mutate(all = as.numeric(all)) %>%
       dplyr::mutate(bll = as.numeric(bll)) %>%
-      dplyr::mutate(rank = ifelse(length.measure == "FL", 1, ifelse(length.measure == "TL", 2, 3))) %>%
+      dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %>%
       dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
       dplyr::filter(min.rank ==  0)
 
@@ -6152,8 +6173,8 @@ function(input, output, session) {
       bind_rows(length.family.ab) %>%
       dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
       dplyr::mutate(length.cm = length_mm/10) %>%
-      dplyr::mutate(all = ifelse(is.na(all)&length.measure%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
-      dplyr::mutate(bll = ifelse(is.na(bll)&length.measure%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+      dplyr::mutate(all = ifelse(is.na(all)&length_max_type%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+      dplyr::mutate(bll = ifelse(is.na(bll)&length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
       dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>%
       dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
       dplyr::filter(mass.g>0) %>%
@@ -6217,7 +6238,7 @@ function(input, output, session) {
     }
 
     length.wrong <- left_join(mass.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
-      dplyr::filter(length_mm<min_length|length_mm>fb_length_max) %>%
+      dplyr::filter(length_mm<min_length|length_mm>length_max_mm) %>%
       mutate(reason = ifelse(length_mm<min_length, "too small", "too big"))
 
     length.too.small <- length.wrong %>%
@@ -6422,7 +6443,7 @@ function(input, output, session) {
 
     # 3. Make family length.weight
     family.lw <- life.history() %>%
-      dplyr::group_by(family, length.measure) %>%
+      dplyr::group_by(family, length_max_type) %>%
       dplyr::mutate(log.a = log10(a)) %>%
       dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),
                        b = mean(b, na.rm = T),
@@ -6434,7 +6455,7 @@ function(input, output, session) {
       dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
       dplyr::mutate(all = as.numeric(all)) %>%
       dplyr::mutate(bll = as.numeric(bll)) %>%
-      dplyr::mutate(rank = ifelse(length.measure == "FL", 1, ifelse(length.measure == "TL", 2, 3))) %>%
+      dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %>%
       dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
       dplyr::filter(min.rank ==  0)
 
@@ -6447,8 +6468,8 @@ function(input, output, session) {
       bind_rows(length.family.ab) %>%
       dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
       dplyr::mutate(length.cm = length_mm/10) %>%
-      dplyr::mutate(all = ifelse(is.na(all)&length.measure%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
-      dplyr::mutate(bll = ifelse(is.na(bll)&length.measure%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+      dplyr::mutate(all = ifelse(is.na(all)&length_max_type%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+      dplyr::mutate(bll = ifelse(is.na(bll)&length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
       dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>%
       dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
       dplyr::filter(mass.g>0) %>%
@@ -6488,7 +6509,7 @@ function(input, output, session) {
 
     # 3. Make family length.weight
     family.lw <- life.history() %>%
-      dplyr::group_by(family, length.measure) %>%
+      dplyr::group_by(family, length_max_type) %>%
       dplyr::mutate(log.a = log10(a)) %>%
       dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),
                        b = mean(b, na.rm = T),
@@ -6500,7 +6521,7 @@ function(input, output, session) {
       dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
       dplyr::mutate(all = as.numeric(all)) %>%
       dplyr::mutate(bll = as.numeric(bll)) %>%
-      dplyr::mutate(rank = ifelse(length.measure == "FL", 1, ifelse(length.measure == "TL", 2, 3))) %>%
+      dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %>%
       dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
       dplyr::filter(min.rank ==  0)
 
@@ -6513,8 +6534,8 @@ function(input, output, session) {
       bind_rows(length.family.ab) %>%
       dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
       dplyr::mutate(length.cm = length_mm/10) %>%
-      dplyr::mutate(all = ifelse(is.na(all)&length.measure%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
-      dplyr::mutate(bll = ifelse(is.na(bll)&length.measure%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+      dplyr::mutate(all = ifelse(is.na(all)&length_max_type%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+      dplyr::mutate(bll = ifelse(is.na(bll)&length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
       dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>%
       dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
       dplyr::filter(mass.g>0) %>%
@@ -6576,7 +6597,7 @@ function(input, output, session) {
       dplyr::filter(range < (input$error.range.limit.t*1000))
 
     length.wrong <- left_join(mass.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
-      dplyr::filter(length_mm<min_length|length_mm>fb_length_max) %>%
+      dplyr::filter(length_mm<min_length|length_mm>length_max_mm) %>%
       mutate(reason = ifelse(length_mm<min_length, "too small", "too big"))
 
     length.too.small <- length.wrong %>%
@@ -8119,8 +8140,8 @@ function(input, output, session) {
           
         }
         
-        all.errors <- erorrs %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "number", "length_mm", "frame", "frame_left", "range", "min_length", "max_length", "fb_length_max", "em_comment", "rms", "precision", "code"))) %>%
+        all.errors <- errors %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "number", "length_mm", "frame", "frame_left", "range", "min_length", "max_length", "length_max_mm", "em_comment", "rms", "precision", "code"))) %>%
           distinct() %>%
           tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
           arrange(campaignid, opcode, period) %>%
@@ -8160,7 +8181,7 @@ function(input, output, session) {
       }
       
       all.errors <- errors %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "number", "length_mm", "frame", "frame_left", "range", "min_length", "max_length", "fb_length_max", "em_comment", "rms", "precision", "code"))) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "number", "length_mm", "frame", "frame_left", "range", "min_length", "max_length", "length_max_mm", "em_comment", "rms", "precision", "code"))) %>%
         distinct() %>%
         tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
         arrange(campaignid, opcode, period) %>%
@@ -8197,7 +8218,7 @@ function(input, output, session) {
                               
                               maxn.species.not.observed,
                               maxn.species.not.in.lh) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "fb_length_max"))) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "length_max_mm"))) %>%
         distinct() %>%
         tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
         arrange(campaignid, opcode, period) %>%
@@ -8264,7 +8285,7 @@ function(input, output, session) {
                                 length.wrong.big,
                                 
                                 stereo.maxn.does.not.equal.maxn) %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "fb_length_max"))) %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "length_max_mm"))) %>%
           distinct() %>%
           tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
           arrange(campaignid, opcode, period) %>%
@@ -8527,7 +8548,7 @@ function(input, output, session) {
                             length.wrong.rms,
                             length.wrong.precision) %>%
       
-      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), error, family, genus, species, number, length_mm, frame, frame_left, range, min_length, max_length, fb_length_max, em_comment, rms, precision) %>%
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), error, family, genus, species, number, length_mm, frame, frame_left, range, min_length, max_length, length_max_mm, em_comment, rms, precision) %>%
       distinct() %>%
       tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
       arrange(campaignid, opcode, period) %>%
@@ -9057,7 +9078,7 @@ function(input, output, session) {
       }
 
       length.wrong <- left_join(length.area, life.history.min.max(), by = c("family", "genus", "species")) %>%
-        dplyr::filter(length_mm<min_length|length_mm>fb_length_max) %>%
+        dplyr::filter(length_mm<min_length|length_mm>length_max_mm) %>%
         mutate(reason = ifelse(length_mm<min_length, "too small", "too big"))
 
       length.too.small <- length.wrong %>%

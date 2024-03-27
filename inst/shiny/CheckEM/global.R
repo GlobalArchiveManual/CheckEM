@@ -32,7 +32,7 @@ library(RColorBrewer)# NEW 15/07/2022
 
 # Maps
 library(rgdal)
-library(rgeos)
+# library(rgeos)
 library(raster)
 library(leaflet)
 library(leaflet.minicharts)
@@ -48,6 +48,7 @@ library(googlesheets4)
 
 # R markdown
 library(rmarkdown)
+library(markdown)
 library(sf)
 
 library(reactlog) # reactlog::reactlog_enable()
