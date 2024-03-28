@@ -6,6 +6,7 @@ library(sf)
 library(RCurl)
 require(rgdal)
 library(mregions)
+devtools::install_github("GlobalArchiveManual/CheckEM")
 
 # designate project-specific cache
 options(gargle_oauth_cache = ".secrets")

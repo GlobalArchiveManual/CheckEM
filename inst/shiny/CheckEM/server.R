@@ -865,11 +865,6 @@ function(input, output, session) {
                       latitude_dd, longitude_dd, 
                       zone, status, IUCN) %>%
         distinct() %>%
-        
-        # dplyr::mutate(IUCN = as.character(IUCN)) %>%
-        
-        # # # glimpse() %>%
-        # # # tidyr::replace_na(list = c(IUCN = "VI")) %>%
         arrange(campaignid, sample, IUCN) %>%
         dplyr::group_by(campaignid, sample) %>%
         slice(1) %>%

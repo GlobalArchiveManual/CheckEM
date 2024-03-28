@@ -486,7 +486,7 @@ expanded <- australia_life_history %>%
 unique(expanded$marine_region)
 
 missing_regions <- anti_join(add_regions, expanded) %>%
-  rename(region_to_add = marine_region) %>%
+  dplyr::rename(region_to_add = marine_region) %>%
   dplyr::group_by(family, genus, species) %>%
   dplyr::summarise(region_to_add = toString(region_to_add))
   
@@ -557,3 +557,4 @@ saveRDS(australia_life_history, "inst/shiny/CheckEM/data/australia_life-history.
 
 # For CheckEM package - Save as an rda to use as package data
 usethis::use_data(australia_life_history, overwrite = TRUE)
+
