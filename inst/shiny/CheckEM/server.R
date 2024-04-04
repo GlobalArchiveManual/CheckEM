@@ -849,7 +849,8 @@ function(input, output, session) {
     # add in marine parks
     if(input$lifehistory %in% "aus"){
       
-      print("view metadata.marineparks for Australia")
+      message("view metadata.marineparks for Australia")
+      message("two glimpses on one dataframe")
       
       metadata.marineparks <- metadata_sf %>%
         dplyr::select(-status) %>%
@@ -857,19 +858,28 @@ function(input, output, session) {
         bind_cols(st_coordinates(.)) %>%
         as.data.frame() %>%
         dplyr::select(-c(geometry)) %>%
-        dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-        tidyr::replace_na(list(status = "Fished")) %>%
+        dplyr::select(!dplyr::any_of(c("latitude_dd", "longitude_dd", "X", "Y"))) %>%
+        dplyr::glimpse() 
+      
+      # if ("X" %in% colnames(metadata.marineparks) & "Y" %in% colnames(metadata.marineparks)) {
+      #   metadata.marineparks <- metadata.marineparks %>%
+      #     dplyr::rename(longitude_dd = X, latitude_dd = Y)
+      # } else {
+      #   message("Columns X and/or Y do not exist in the data frame.")
+      # }
+      
+      metadata.marineparks <- metadata.marineparks %>%
         dplyr::rename(zone = ZONE_TYPE) %>%
-        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
-        dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), 
-                      latitude_dd, longitude_dd, 
+        dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")),  #"latitude_dd", "longitude_dd"
                       zone, status, IUCN) %>%
         distinct() %>%
         arrange(campaignid, sample, IUCN) %>%
         dplyr::group_by(campaignid, sample) %>%
         slice(1) %>%
         ungroup() %>%
-        full_join(metadata %>% dplyr::select(campaignid, sample), .) %>%
+        full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) %>%
+        tidyr::replace_na(list(status = "Fished")) %>%
+        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
         glimpse()
       
       message("test data - for duplicates")
