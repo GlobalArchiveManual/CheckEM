@@ -391,8 +391,11 @@ australia_life_history <- caab_combined %>%
   dplyr::mutate(fb_length_max_type = if_else(!is.na(new_maximum_length_in_cm), type_of_length_measure, fb_length_max_type)) %>%
   dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
   
+  # dplyr::filter(species %in% "maculatus") %>%
+  # dplyr::filter(genus %in% "Prionurus") %>%
 
   dplyr::left_join(foa_max_sizes) %>%
+  tidyr::replace_na(list(new_maximum_length_in_cm = 0)) %>%
   dplyr::mutate(length_max_source = if_else(new_maximum_length_in_cm > fb_length_max, "Fishes of Australia", length_max_source)) %>%
   dplyr::mutate(fb_length_max = if_else(new_maximum_length_in_cm > fb_length_max, new_maximum_length_in_cm, fb_length_max)) %>%
   dplyr::mutate(fb_length_max_type = if_else(!is.na(new_maximum_length_in_cm > fb_length_max), type_of_length_measure, fb_length_max_type)) %>%
@@ -477,7 +480,7 @@ australia_life_history <- caab_combined %>%
 
 names(australia_life_history)
 
-
+unique(australia_life_history$length_max_cm) %>% sort()
 
 expanded <- australia_life_history %>%
   dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) %>% 
