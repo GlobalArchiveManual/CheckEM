@@ -154,14 +154,33 @@ duplicates_caab <- caab_worms %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n >1) # all good
 
-clean_caab <- caab_worms %>%
+test <- caab_worms %>%
+  filter(caab %in% "25154911") %>%
   clean_names() %>%
   dplyr::filter(!class %in% c("Tentaculata", "Nuda")) %>%
   dplyr::filter(!family %in% c("", NA, NULL)) %>%
   tidyr::separate(scientific_name, into = c("genus", "species"), extra = "merge") %>%
   dplyr::mutate(species = str_replace_all(species, "spp.", "spp")) %>%
+  dplyr::mutate(genus = if_else(family %in% genus, "Unknown", genus)) %>%
+  dplyr::mutate(species = if_else(genus %in% "Unknown", "spp", species)) %>%
+  dplyr::select(-x) %>%
   distinct() %>%
-  filter(!apply(across(c(caab, kingdom, phylum, class, family, genus, species), as.character), 1, has_special_characters)) # Remove all rows containing special characters
+  filter(!apply(across(c(caab, kingdom, phylum, class, family, genus, species), as.character), 1, has_special_characters)) %>%
+  glimpse()
+
+clean_caab <- caab_worms %>%
+  clean_names() %>%
+  dplyr::filter(!class %in% c("Tentaculata", "Nuda")) %>%
+  dplyr::filter(!family %in% c("", NA, NULL)) %>%
+  dplyr::mutate(scientific_name = str_replace_all(scientific_name, "Arctocephalus pusillus doriferus", "Arctocephalus pusillusdoriferus")) %>%
+  tidyr::separate(scientific_name, into = c("genus", "species"), extra = "merge") %>%
+  dplyr::mutate(species = str_replace_all(species, "spp.", "spp")) %>%
+  dplyr::mutate(genus = if_else(family == genus, "Unknown", genus)) %>%
+  dplyr::mutate(species = if_else(genus == "Unknown", "spp", species)) %>%
+  dplyr::select(-x) %>%
+  distinct() %>%
+  filter(!apply(across(c(caab, kingdom, phylum, class, family, genus, species), as.character), 1, has_special_characters)) %>% # Remove all rows containing special characters
+  dplyr::mutate(species = str_replace_all(species, "pusillusdoriferus", "pusillus doriferus"))
 
 species_with_id <- clean_caab %>%
   filter(!aphiaid %in% c(NULL, "", NA)) 
@@ -401,6 +420,33 @@ new_final <- final %>%
 
 number.with.distributions <- new_final %>% filter(!is.na(marine_region))
 nrow(number.with.distributions)/nrow(new_final) * 100 
-# 39% with distribution info available from worms package
+# 40.5% with distribution info available from worms package
 
-write_rds(new_final, "annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS")
+
+duplicates <- new_final %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+new_final_without_duplicates <- new_final %>%
+  dplyr::group_by(class, order, family, genus, species, scientific_name, australian_common_name, marine_region) %>%
+  slice(1) %>%
+  ungroup()
+
+duplicates <- new_final_without_duplicates %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+new_final_without_duplicates_1 <- new_final_without_duplicates%>%
+  dplyr::group_by(class, order, family, genus, species, scientific_name) %>%
+  slice(1) %>%
+  ungroup() %>%
+  dplyr::filter(!caab %in% "23115000")
+
+duplicates <- new_final_without_duplicates_1 %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1) 
+
+write_rds(new_final_without_duplicates_1, "annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS")
