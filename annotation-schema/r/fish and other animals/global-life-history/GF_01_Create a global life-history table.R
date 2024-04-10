@@ -18,14 +18,21 @@ all.species <- load_taxa() %>%
 info <- species(all.species$scientific) %>% 
   ga.clean.names() %>%
   dplyr::rename(length.max = length, length.max.type = ltypemaxm) %>% # Length metrics are in cm
+  dplyr::mutate(max_published_weight_kg = weight/1000) %>%
   dplyr::select(species, speccode, fbname, length.max, length.max.type, importance,
-                depthrangecomdeep, depthrangecomshallow, depthrangedeep,depthrangeshallow) %>%
+                depthrangecomdeep, depthrangecomshallow, depthrangedeep,depthrangeshallow, max_published_weight_kg) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
   dplyr::rename(scientific = species, 
                 common.name = fbname) %>%
-  dplyr::mutate(speccode = as.character(speccode)) 
+  dplyr::mutate(speccode = as.character(speccode))
+
 
 names(info) %>% sort()
+
+weights <- info %>%
+  filter(!is.na(max_published_weight_kg))
+nrow(weights)/nrow(info)
+# only 8.3% have weight info
 
 # Validate species names ----
 validated <- validate_names(all.species$scientific)
@@ -321,7 +328,7 @@ fblh <- all.species %>% # has 35,024 species
   dplyr::mutate(marine_region = paste(fb_fao_fishing_area_endemic, fb_fao_fishing_area_introduced, fb_fao_fishing_area_native, sep = ", ")) %>%
   dplyr::mutate(marine_region = str_replace_all(marine_region, c("NA, NA, " = "", ", NA, NA" = ""))) %>%
   dplyr::select(aphia_id, scientific_name, kingdom, phylum, class, order, family, genus, species, common_name,
-                fb_length_at_maturity_cm, fb_length_max, fb_length_max_type,
+                fb_length_at_maturity_cm, fb_length_max, fb_length_max_type, max_published_weight_kg,
                 fb_a, fb_a_sd, fb_b, fb_b_sd, fb_metric, fb_body_shape, 
                 fb_commerical_importance,
                 fb_depth_range_shallow, fb_depth_range_deep,
