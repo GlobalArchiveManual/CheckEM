@@ -30,10 +30,10 @@ create_min_max <- function(life_history, minimum, maximum) {
     dplyr::mutate(length_max_cm = ifelse((is.na(length_max_cm)), genuslength_max, length_max_cm)) %>%
     dplyr::mutate(length_max_cm = ifelse((is.na(length_max_cm)), famlength_max, length_max_cm)) %>%
     dplyr::select(-c(famlength_max, genuslength_max)) %>%
-    dplyr::mutate(length_max_cm = length_max_cm * 10) %>%
-    mutate(min_length_mm = minimum * length_max_cm) %>%
-    mutate(max_length_mm = maximum * length_max_cm) %>% 
-    dplyr::select(family, genus, species, min_length_mm, max_length_mm, length_max_cm) %>%
+    dplyr::mutate(length_max_mm = length_max_cm * 10) %>%
+    mutate(min_length_mm = minimum * length_max_mm) %>%
+    mutate(max_length_mm = maximum * length_max_mm) %>% 
+    dplyr::select(family, genus, species, min_length_mm, max_length_mm, length_max_mm) %>%
     dplyr::filter(!is.na(min_length_mm)) %>%
     distinct()
 }
