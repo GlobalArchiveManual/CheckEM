@@ -33,6 +33,13 @@ reference:
 - title: Shiny App
   desc: Functions for shiny app
   contents: runCheckEM
+- title: GlobalArchive API
+  desc: Essential functionality for accessing data through the GlobalArchive API
+  contents:
+  - ga_api_coint
+  - ga_api_habitat
+  - ga_api_length
+  - ga_api_metadata
 navbar:
   title: ~
   type: default
