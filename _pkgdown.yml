@@ -40,6 +40,8 @@ reference:
   - ga_api_habitat
   - ga_api_length
   - ga_api_metadata
+  - ga_api_species_list
+  - ga_api_benthic_list
 navbar:
   title: ~
   type: default
