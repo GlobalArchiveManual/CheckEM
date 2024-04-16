@@ -571,9 +571,9 @@ glimpse(count_species_not_observed_region)
 Check for any species that are out of range in the length data.
 ```{r length-species-not-in-area}
 length_species_not_observed_region <- complete_length %>%
-  dplyr::distinct(campaignid, sample, family, genus, species, marine_region, count) %>%
+  dplyr::distinct(campaignid, sample, family, genus, species, marine_region, number) %>%
   dplyr::anti_join(., expand_life_history(CheckEM::australia_life_history), by = c("family", "genus", "species", "marine_region")) %>%
-  dplyr::filter(count > 0) %>%
+  dplyr::filter(number > 0) %>%
   dplyr::left_join(metadata) %>%
   dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, marine_region) %>%
   dplyr::distinct() %>%
@@ -610,7 +610,7 @@ glimpse(count_species_not_in_list)
 ```{r length-species-not-in-list}
 length_species_not_in_list <- complete_length %>%
   dplyr::anti_join(., CheckEM::australia_life_history, by = c("family", "genus", "species")) %>%
-  dplyr::filter(count > 0) %>%
+  dplyr::filter(number > 0) %>%
   dplyr::left_join(metadata) %>%
   dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species) %>%
   dplyr::distinct() 
@@ -632,11 +632,11 @@ If you believe the size limits for a particular species is incorrect you fill ou
 incorrect_lengths <- left_join(complete_length, create_min_max(CheckEM::australia_life_history, minimum = 0.15, maximum = 0.85)) %>%
   dplyr::filter(length_mm < min_length_mm | length_mm > max_length_mm) %>%
   mutate(reason = ifelse(length_mm < min_length_mm, "too small", "too big")) %>%
-  dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length_mm, max_length_mm, fb_length_max, reason, any_of(c("em_comment", "frame_left")), fb_length_max) %>%
+  dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length_mm, max_length_mm, length_max_mm, reason, any_of(c("em_comment", "frame_left")), length_max_mm) %>%
   mutate(difference = ifelse(reason %in% c("too small"), (min_length_mm - length_mm), (length_mm - max_length_mm))) %>%
-  dplyr::mutate(percent_of_fb_max = (length_mm/fb_length_max)*100) %>%
+  dplyr::mutate(percent_of_fb_max = (length_mm/length_max_mm)*100) %>%
   dplyr::left_join(metadata) %>%
-  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length_mm, max_length_mm, fb_length_max, reason, any_of(c("em_comment", "frame_left")), difference, percent_of_fb_max)
+  dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length_mm, max_length_mm, length_max_mm, reason, any_of(c("em_comment", "frame_left")), difference, percent_of_fb_max)
 
 too_small <- incorrect_lengths %>%
   dplyr::filter(reason %in% "too small")
