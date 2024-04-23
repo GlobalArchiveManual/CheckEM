@@ -115,7 +115,6 @@ for(i in 1:length(resp.vars)){
                                test.fit = Model1,
                                pred.vars.cont = pred.vars,
                                factor.smooth.interactions = NA,
-                               cyclic.vars = "aspect",
                                k = 3)
   out.list <- fit.model.set(model.set,
                          max.models = 600,
@@ -197,7 +196,6 @@ for(i in 1:length(resp.vars)){
                                test.fit = Model1,
                                pred.vars.cont = pred.vars,
                                factor.smooth.interactions = NA,
-                               cyclic.vars = "aspect", 
                                k = 3
                                )
   out.list <- fit.model.set(model.set,

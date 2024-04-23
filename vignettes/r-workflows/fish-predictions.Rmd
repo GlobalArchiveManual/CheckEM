@@ -1,0 +1,157 @@
+---
+title: "Plot predictions of fish using models selected in FSSgam"
+author: "Claude Spencer & Brooke Gibbons"
+date: "2023-11-13"
+output:
+  html_vignette:
+    toc: true
+    code_folding: hide
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Generate predictions of fish using models selected in FSSgam}
+  %\VignetteEncoding{UTF-8}
+---
+This script takes the tidy datasets created in previous steps, along with the top models selection using FSSgam, and creates GAM regression plots. These plots are useful to correctly interpret the relationships between response and predictor variables, and allow for ecological investigation of top models.
+
+```{r install-fssgam, include=FALSE}
+devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
+```
+
+```{r libraries, results='hide', warning=FALSE, message=FALSE}
+library(CheckEM)
+library(tidyverse)
+library(mgcv)
+library(devtools)
+library(FSSgam)
+library(here)
+library(ggplot2)
+library(ggnewscale)
+library(viridis)
+library(terra)
+library(sf)
+library(patchwork)
+```
+
+Set the study name. Study names are used throughout to make for reproducible code that can be easily shifted between different campaigns and projects while still providing meaningful filenames.
+
+```{r study-name}
+name <- 'example-bruv-workflow'
+```
+
+```{r load-count}
+tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
+                      name,'_tidy-count.rds'))) %>%
+  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers
+  glimpse()
+```
+
+Load the fish length data. This data is created in the previous workflow, 'Format & visualise fish data'.
+
+```{r read-length}
+tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
+                      name,'_tidy-length.rds'))) %>%
+  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers
+  glimpse()
+```
+
+Combine the count and length datasets to make for 
+
+```{r combine-data}
+dat <- bind_rows(tidy.count, tidy.length)
+```
+
+
+```{r}
+# MODEL Total abundance (depth + mean relief) ----
+dat_total <- dat %>% 
+  dplyr::filter(response %in% "total_abundance")
+
+dat_mature <- dat %>% 
+  dplyr::filter(response %in% "greater than Lm") %>%
+  dplyr::mutate(status = rep(c("Fished", "No-take"), times = 16))
+```
+
+```{r}
+mod = gam(number ~ s(detrended, k = 3, bs = 'cr'), family = tw(), data = dat.total)
+```
+
+testing code
+```{r}
+
+mod = gam(number ~ s(detrended, k = 3, bs = 'cr'), family = tw(), data = dat_total)
+mod2 = gam(number ~ s(detrended, k = 3, bs = 'cr') + s(roughness, k = 3, bs = 'cr'), family = tw(), data = dat_total)
+mod3 = gam(number ~ s(detrended, k = 3, bs = 'cr') + status, family = tw(), data = dat_mature)
+names(mod2$var.summary)
+names(mod$var.summary)
+
+  
+fss_predict <- function(model, data) {
+  
+  if (length(names(model$var.summary)) == 1) {
+  
+  testdata <- expand.grid(var1 = seq(min(data[,names(model$var.summary)[1]]), max(data[,names(model$var.summary)[1]]), 
+                                     length.out = 20)) %>%
+    distinct() %>%
+    dplyr::rename(!!names(model$var.summary)[1] := var1) %>%
+    glimpse()
+    
+
+  fits <- predict.gam(model, newdata = testdata, type = 'response', se.fit = T)
+
+  predicted <- testdata %>% 
+    data.frame(fits) %>%
+    group_by(across(!!names(model$var.summary)[1])) %>% # Only change here
+    summarise(number = mean(fit), se.fit = mean(se.fit)) %>%
+    ungroup()
+  }
+  
+  testdata <- expand.grid(detrended = seq(min(dat$detrended), max(dat$detrended), length.out = 20)) %>%
+  distinct() %>%
+  glimpse()
+
+  fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T)
+
+  predicts.total.detrended = testdata %>% 
+  data.frame(fits) %>%
+  group_by(detrended) %>% #only change here
+  summarise(maxn = mean(fit), se.fit = mean(se.fit)) %>%
+  ungroup()
+}
+
+fss_predict(model = mod)
+
+```
+
+```{r}
+testdata <- expand.grid(detrended = seq(min(dat$detrended), max(dat$detrended), length.out = 20)) %>%
+  distinct() %>%
+  glimpse()
+```
+
+```{r}
+fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T)
+```
+
+```{r}
+predicts.total.detrended = testdata %>% 
+  data.frame(fits) %>%
+  group_by(detrended) %>% #only change here
+  summarise(maxn = mean(fit), se.fit = mean(se.fit))%>%
+  ungroup()
+```
+
+```{r}
+ggmod.total.detrended <- ggplot() +
+  ylab("") +
+  xlab("Detrended") +
+  geom_point(data = dat.total,aes(x = detrended, y = maxn),  alpha = 0.2, size = 1, show.legend = F) +
+  geom_line(data = predicts.total.detrended, aes(x = detrended, y = maxn),alpha=0.5)+
+  geom_line(data = predicts.total.detrended, aes(x = detrended, y = maxn - se.fit), linetype = "dashed", alpha = 0.5)+
+  geom_line(data = predicts.total.detrended, aes(x = detrended, y = maxn + se.fit),linetype = "dashed", alpha = 0.5)+
+  theme_classic() +
+  ggtitle("Total abundance") +
+  theme(plot.title = element_text(hjust = 0))
+ggmod.total.detrended
+```
+
+
