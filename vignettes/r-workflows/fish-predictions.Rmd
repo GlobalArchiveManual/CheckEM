@@ -56,7 +56,7 @@ Load the fish length data. This data is created in the previous workflow, 'Forma
 ```{r read-length}
 tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
                       name,'_tidy-length.rds'))) %>%
-  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers
+  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and check your spatial layers
   glimpse()
 ```
 
@@ -66,7 +66,7 @@ Combine the count and length datasets to make for more simple code.
 dat <- bind_rows(tidy.count, tidy.length)
 ```
 
-Filter the data to only include 1 response variable. The example included here models fish total abundance, and uses a dummy model not selected in FSSgam, in order to provide all the necessary code to produce fish predictions for all types of response variable.
+Filter the data to only include 1 response variable. The example included here models fish total abundance, and uses a dummy model not selected in FSSgam, in order to provide all the necessary code to produce fish predictions for all types of response variable. As all example data here are in a Commonwealth National Park Zone (status = "No-take"), we have overwritten the status column to include both "Fished" and "No-take".  
 
 ```{r filter-data}
 dat_total <- dat %>% 
