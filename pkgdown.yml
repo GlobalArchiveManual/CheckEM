@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.8
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   check-fish: r-workflows/check-fish.html
@@ -8,12 +8,14 @@ articles:
   CheckEM_video: manuals/CheckEM_video.html
   EventMeasure_annotation_guide: manuals/EventMeasure_annotation_guide.html
   fish-modelling: r-workflows/fish-modelling.html
+  fish-predictions: r-workflows/fish-predictions.html
+  fish-spatial-prediction: r-workflows/fish-spatial-prediction.html
   format-visualise-fish: r-workflows/format-visualise-fish.html
   format-visualise-habitat: r-workflows/format-visualise-habitat.html
   habitat-modelling: r-workflows/habitat-modelling.html
   spatial-layers: r-workflows/spatial-layers.html
   TransectMeasure_annotation_guide: manuals/TransectMeasure_annotation_guide.html
-last_built: 2024-04-19T02:44Z
+last_built: 2024-04-24T01:00Z
 urls:
   reference: https://globalarchivemanual.github.io/CheckEM/reference
   article: https://globalarchivemanual.github.io/CheckEM/articles
