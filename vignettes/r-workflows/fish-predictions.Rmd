@@ -41,6 +41,7 @@ Set the study name. Study names are used throughout to make for reproducible cod
 name <- 'example-bruv-workflow'
 ```
 
+# Set up data for prediction
 Load the count data (MaxN). This data is crated in the previous workflow, 'Format and visualise fish data'.
 
 ```{r load-count}
@@ -68,7 +69,6 @@ dat <- bind_rows(tidy.count, tidy.length)
 Filter the data to only include 1 response variable. The example included here models fish total abundance, and uses a dummy model not selected in FSSgam, in order to provide all the necessary code to produce fish predictions for all types of response variable.
 
 ```{r filter-data}
-# MODEL Total abundance (depth + status) ----
 dat_total <- dat %>% 
   dplyr::filter(response %in% "total_abundance") %>%
   dplyr::mutate(status = rep(c("Fished", "No-take"), times = 16))

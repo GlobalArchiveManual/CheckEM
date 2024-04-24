@@ -11,7 +11,7 @@ vignette: >
   %\VignetteIndexEntry{Generate predictions of fish using models selected in FSSgam}
   %\VignetteEncoding{UTF-8}
 ---
-This script takes the tidy datasets created in previous steps, along with the top models selection using FSSgam, and creates GAM regression plots. These plots are useful to correctly interpret the relationships between response and predictor variables, and allow for ecological investigation of top models.
+This script takes the tidy datasets created in previous steps, along with the top models selection using FSSgam, and creates GAM regression plots. These plots are useful to correctly interpret the relationships between response and predictor variables, and allow for ecological investigation of top models..
 
 ```{r install-fssgam, include=FALSE}
 devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")

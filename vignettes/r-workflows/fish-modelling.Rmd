@@ -12,7 +12,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This script takes the tidy datasets created in the previous steps, and runs model selection, spatial prediction and tidy spatial plotting. The model selection process utilises the 'FSSgam' package created by Becky Fisher, to investigate relationships between predictors and response variables, and create sensible models. Once an appropriate model has been chosen by the user, we then provide R script to spatially predict the response variables and plot these in a tidy format.
+This script takes the tidy datasets created in the previous steps and runs model selection. The model selection process utilises the 'FSSgam' package created by Becky Fisher, to investigate relationships between predictors and response variables, and create sensible models. Once an appropriate model has been chosen by the user, we then provide R script to spatially predict the response variables and plot these in a tidy format.
 
 ```{r install-fssgam, include=FALSE}
 devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
