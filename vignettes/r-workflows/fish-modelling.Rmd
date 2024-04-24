@@ -1,5 +1,5 @@
 ---
-title: "Select fish models using FSSgam"
+title: "Select top models for fish using FSSgam"
 author: "Claude Spencer & Brooke Gibbons"
 date: "2023-11-13"
 output:
@@ -8,7 +8,7 @@ output:
     code_folding: hide
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Select fish models using FSSgam}
+  %\VignetteIndexEntry{Select top models for fish using FSSgam}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -235,131 +235,4 @@ all.mod.fits <- bind_rows(all.mod.fits, list_rbind(out.all, names_to = "response
 all.var.imp  <- bind_rows(all.var.imp, as.data.frame(do.call("rbind",var.imp)))
 write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv")))
 write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv")))
-```
-
-Combine the count and length data for easy spatial prediction.
-
-```{r combine-data}
-dat <- bind_rows(tidy.count, tidy.length) %>%
-  glimpse()
-```
-
-Read in the bathymetry derivatives.
-
-```{r read-derivatives}
-preds  <- readRDS(here::here(paste0("r-workflows/data/spatial/rasters/", 
-                         name, "_bathymetry_derivatives.rds")))
-plot(preds)
-```
-
-Transform the spatial bathymetry derivatives into a dataframe to predict onto.
-
-```{r derivative-dataframe}
-preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
-  clean_names() %>%
-  glimpse()
-```
-
-Manually set the best model from the full subsets model selection process. We select the 'best' model as the most parsimonious model within 2 AICc of the lowest AICc. We suggest you select your models using statistically rigorous criteria that best suits your analysis or project.
-
-```{r set-models}
-# Indicator species greater than size of maturity
-m_mature <- gam(number ~ 
-                 s(aspect, k = 3, bs = "cr") +
-                  s(tpi, k = 3, bs = "cr"), 
-               data = dplyr::filter(dat, response %in% "greater than Lm"), 
-               family = tw())
-summary(m_mature)
-plot(m_mature, pages = 1, residuals = T, cex = 5)
-
-# Total abundance
-m_totabund <- gam(number ~ 
-                  s(detrended, k = 3, bs = "cr"), 
-                data = dplyr::filter(dat, response %in% "total_abundance"), 
-                family = gaussian(link = "identity"))
-summary(m_totabund)
-plot(m_totabund, pages = 1, residuals = T, cex = 5)
-
-# Species richness
-m_specrich <- gam(number ~ 
-                    s(mbdepth, k = 3, bs = "cr"), 
-                  data = dplyr::filter(dat, response %in% "species_richness"), 
-                  family = gaussian(link = "identity"))
-summary(m_specrich)
-plot(m_specrich, pages = 1, residuals = T, cex = 5)
-```
-
-Predict each of the response variables across the extent of the bathymetry derivatives.
-
-```{r predict-gam}
-preddf <- cbind(preddf, 
-                "pmature" = predict(m_mature, preddf, type = "response"),
-                "ptotabund" = predict(m_totabund, preddf, type = "response"),
-                "pspecrich" = predict(m_specrich, preddf, type = "response")) %>%
-  glimpse()
-```
-
-Save out the spatial predictions. If your computer crashes this way you don't need to run the whole script again.
-
-```{r save-predictions}
-saveRDS(preddf, file = here::here(paste0("r-workflows/model output/fish/", 
-                              name, "_fish-prediction.RDS")))
-```
-
-Pivot the data to long format for easy plotting.
-
-```{r data-long}
-dat <- preddf %>%
-  dplyr::select(x, y, starts_with("p")) %>%
-  pivot_longer(names_to = "response", values_to = "value",
-               cols = !c(x, y)) %>%
-  glimpse()
-```
-
-Reset the response variables to loop through when plotting. 
-
-```{r reset-resp-vars}
-resp.vars <- unique(dat$response)
-```
-
-Load marine park data. The dataset used here is the 2022 Collaborative Australian Protected Areas Database, which is available for free download from https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore. Feel free to replace this shapefile with any suitable dataset that is available for your study area.
-
-```{r marine-parks}
-marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
-  st_make_valid() %>%
-  dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE, 
-                                            "\\s*\\([^\\)]+\\)", "")) %>%
-  dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National Park"),
-                STATE %in% "WA") %>%                        
-  st_transform(4326)
-```
-
-Loop through each response variable and create a ggplot figure for each. 
-
-```{r plot-fish}
-for (i in 1:length(resp.vars)) {
-  use.dat <- dat %>%
-    dplyr::filter(response %in% resp.vars[i])
-  
-  p <- ggplot() +
-    geom_tile(data = use.dat, aes(x, y, fill = value)) +
-    scale_fill_gradientn(colours = c("#fde725", "#21918c", "#440154"), na.value = "transparent") +
-    labs(fill = resp.vars[i], x = NULL, y = NULL) +
-    new_scale_fill() +                     
-    geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63", 
-            size = 0.2, show.legend = F) +
-    coord_sf(xlim = c(min(dat$x), max(dat$x)),
-             ylim = c(min(dat$y), max(dat$y))) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(size = 7))
-  assign(paste0("gg_", resp.vars[i]), p)
-}
-```
-
-Combine the plots using patchwork.
-
-```{r combine-fish-plots}
-gg_pmature + gg_ptotabund + gg_pspecrich +
-  theme(legend.justification = "left") +
-  plot_layout(ncol = 2, nrow = 2)
 ```

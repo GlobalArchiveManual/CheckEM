@@ -94,8 +94,12 @@ navbar:
     - text: Modelling
     - text: Generate spatial predictions of habitat using FSSgam
       href: articles/r-workflows/habitat-modelling.html
-    - text: Generate spatial predictions of fish using FSSgam
+    - text: Select top models for fish using FSSgam
       href: articles/r-workflows/fish-modelling.html
+    - text: Generate Generalized Additive Model predictions of fish
+      href: articles/r-workflows/fish-predictions.html
+    - text: Spatially predict fish distributions
+      href: articles/r-workflows/fish-spatial-prediction.html
   - text: Functions
     href: reference/r-workflows/index.html
 authors:
