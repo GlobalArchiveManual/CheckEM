@@ -7905,7 +7905,7 @@ function(input, output, session) {
         }
         
         # IF habitat uploaded
-        if(input$hab %in% "YES"){
+        if(input$hab %in% c("YES", "Yes")){
           
           for(i in unique(tidy.habitat()$campaignid)){
 
