@@ -7919,7 +7919,7 @@ function(input, output, session) {
             #   
             # }
             
-            fileName <- paste(i, "_Habitat.csv", sep = "")
+            fileName <- paste(i, "_benthos.csv", sep = "")
             
             write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
           }
@@ -7937,7 +7937,7 @@ function(input, output, session) {
             #   
             # }
             
-            fileName <- paste(i, "_Relief.csv", sep = "")
+            fileName <- paste(i, "_relief.csv", sep = "")
             
             write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
           }
