@@ -43,3 +43,6 @@ usethis::use_pkgdown_github_pages() # CHOOSE NO TO OVERWRITING THE YML FILE
 #> 2: minor --> 0.2
 #> 3: patch --> 0.1.1
 #> 4:   dev --> 0.1.0.9000
+
+# CHECK logs
+rsconnect::showLogs(account = "marine-ecology", appName = "CheckEM")

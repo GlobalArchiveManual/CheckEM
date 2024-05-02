@@ -31,7 +31,7 @@ library(ggbeeswarm) # NEW 15/07/2022
 library(RColorBrewer)# NEW 15/07/2022
 
 # Maps
-library(rgdal)
+# library(rgdal)
 # library(rgeos)
 library(raster)
 library(leaflet)
