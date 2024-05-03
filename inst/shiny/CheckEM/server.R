@@ -7452,6 +7452,7 @@ function(input, output, session) {
       dplyr::select(campaignid, sample, everything()) %>% #level_1, 
       dplyr::full_join(metadata.regions())%>%
       tidyr::complete(nesting(campaignid, sample), caab_code) %>%
+      dplyr::select(campaignid, sample, caab_code, number) %>%
       replace_na(list(number = 0)) %>% # we add in zeros
       dplyr::left_join(metadata.regions()) %>%
       # filter(!is.na(level_2)) %>%
@@ -7464,6 +7465,7 @@ function(input, output, session) {
   tidy.habitat <- reactive({
     
     message("view tidy habitat")
+    message("glimpse 3 times")
     tidy.habitat <- hab.annotations() %>%
       dplyr::mutate(number = 1) %>% # Add a count column to summarise the number of points
       dplyr::filter(!level_2 %in% c("", "Unscorable", NA)) %>%  
@@ -7472,12 +7474,19 @@ function(input, output, session) {
       dplyr::tally(number, name = "number") %>%
       dplyr::ungroup() %>%
       dplyr::select(campaignid, sample, everything()) %>% 
+      dplyr::glimpse() %>%
       dplyr::full_join(metadata.regions())%>%
       tidyr::complete(nesting(campaignid, sample), caab_code) %>%
+      dplyr::select(campaignid, sample, caab_code, number) %>%
       replace_na(list(number = 0)) %>% # we add in zeros
+      dplyr::glimpse() %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::left_join(schema) %>%
+      dplyr::filter(!is.na(caab_code)) %>%
       dplyr::glimpse()
+    
+    message("end of tidy habitat")
+    tidy.habitat
 
   })
   
@@ -7910,7 +7919,8 @@ function(input, output, session) {
           for(i in unique(tidy.habitat()$campaignid)){
 
             dat <- tidy.habitat() %>%
-              dplyr::filter(campaignid == i) #%>% glimpse()
+              dplyr::filter(campaignid == i) %>%
+              dplyr::select(!sample)#%>% glimpse()
             # 
             # if(input$error.zeros.hab %in% FALSE){
             #   
@@ -7919,7 +7929,7 @@ function(input, output, session) {
             #   
             # }
             
-            fileName <- paste(i, "_Habitat.csv", sep = "")
+            fileName <- paste(i, "_benthos.csv", sep = "")
             
             write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
           }
@@ -7928,7 +7938,8 @@ function(input, output, session) {
           for(i in unique(tidy.relief()$campaignid)){
             
             dat <- tidy.relief() %>%
-              dplyr::filter(campaignid == i) #%>% glimpse()
+              dplyr::filter(campaignid == i)%>%
+              dplyr::select(!sample) #%>% glimpse()
             
             # if(input$error.zeros.hab %in% FALSE){
             #   
@@ -7937,7 +7948,7 @@ function(input, output, session) {
             #   
             # }
             
-            fileName <- paste(i, "_Relief.csv", sep = "")
+            fileName <- paste(i, "_relief.csv", sep = "")
             
             write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
           }
