@@ -13,8 +13,10 @@ plot_transformations <- function(pred.vars, dat) {
   
   for (i in pred.vars) {
     # raw data
+    vars <- c("sample", "opcode")
+    
     point <- ggplot(data = dat) + 
-      geom_point(aes(x = any_of(sample, opcode), y = get(i)), fill = NA, colour = "black", shape = 1) +
+      geom_point(aes(x = any_of(vars), y = get(i)), fill = NA, colour = "black", shape = 1) +
       labs(x = "", y = i) +
       theme_classic() +
       theme(axis.text.x = element_blank())
@@ -24,7 +26,7 @@ plot_transformations <- function(pred.vars, dat) {
       theme_classic()
     # square root
     point.sqrt <- ggplot(data = dat) + 
-      geom_point(aes(x = any_of(sample, opcode), y = sqrt(get(i))), fill = NA, colour = "black", shape = 1) +
+      geom_point(aes(x = any_of(vars), y = sqrt(get(i))), fill = NA, colour = "black", shape = 1) +
       labs(x = "", y = paste0("sqrt(", i, ")")) +
       theme_classic() +
       theme(axis.text.x = element_blank())
@@ -34,7 +36,7 @@ plot_transformations <- function(pred.vars, dat) {
       theme_classic()
     # log (x + 1)
     point.log <- ggplot(data = dat) + 
-      geom_point(aes(x = any_of(sample, opcode), y = log(get(i) + 1)), fill = NA, colour = "black", shape = 1) +
+      geom_point(aes(x = any_of(vars), y = log(get(i) + 1)), fill = NA, colour = "black", shape = 1) +
       labs(x = "", y = paste0("log(", i, ")")) +
       theme_classic()+
       theme(axis.text.x = element_blank())
