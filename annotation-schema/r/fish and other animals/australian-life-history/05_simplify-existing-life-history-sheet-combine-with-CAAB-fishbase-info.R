@@ -554,6 +554,17 @@ unique(australia_life_history$family)
 unique(australia_life_history$genus)
 unique(australia_life_history$species)
 
+test <- australia_life_history %>%
+  dplyr::group_by(family, genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- australia_life_history %>%
+  dplyr::group_by(genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+
 saveRDS(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.RDS") # To share with people
 write.csv(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.csv", row.names = FALSE) # To share with people
 saveRDS(australia_life_history, "inst/shiny/CheckEM/data/australia_life-history.RDS") # to update shiny app

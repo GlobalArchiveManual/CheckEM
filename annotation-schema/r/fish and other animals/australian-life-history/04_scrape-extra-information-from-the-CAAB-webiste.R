@@ -89,14 +89,15 @@ clean_info <- info %>%
   tidyr::separate(scientific_name, into = c("genus", "species"), sep = " ", remove = FALSE) %>%
   dplyr::mutate(family = str_replace_all(family, c('[[:digit:]]+' = "", "  " = "", "Rock Whitings" = "Labridae", "\\(|\\)" = ""))) %>%
   tidyr::separate(family, into = c("family"), sep = " ") %>%
-  dplyr::filter(is.na(attention_non_current_taxon_this_record_represents_an_old_code_which_has_been_superseded_by_a_new_active_caab_code_see_taxon_notes_for_more_details_if_available)) %>%
-  dplyr::filter(is.na(attention_non_current_taxon_this_record_represents_an_obsolete_code_that_currently_has_no_corresponding_active_code_in_caab_see_taxon_notes_for_more_details_if_available)) %>%
+  dplyr::filter(is.na(attention_non_current_taxon_this_record_has_been_temporarily_suspended_because_some_details_may_be_incorrect_or_incomplete_and_are_awaiting_verification_see_taxon_notes_for_more_details_if_available)) %>%
+  dplyr::filter(is.na(attention_non_current_taxon_this_record_has_been_temporarily_suspended_because_some_details_may_be_incorrect_or_incomplete_and_are_awaiting_verification_see_taxon_notes_for_more_details_if_available)) %>%
   dplyr::mutate(common_name = if_else(is.na(standard_name_as5300), standard_name, standard_name_as5300)) %>%
   dplyr::mutate(worms = str_replace_all(worms, c("urn:lsid:marinespecies.org:taxname:" = ""))) %>%
   tidyr::separate(worms, into = c("worms_id", "worms_valid"), sep = "\n") %>%
   dplyr::select(caab_code, family, genus, species, scientific_name, common_name, worms_id, worms_valid, synonyms) %>%
   glimpse()
   
+names(clean_info)
 unique(clean_info$scientific_name)
 unique(clean_info$synonyms) # a mess - will need to do separately
 unique(clean_info$family)# looks mostly ok

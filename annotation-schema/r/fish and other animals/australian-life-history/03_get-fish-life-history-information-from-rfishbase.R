@@ -322,3 +322,4 @@ final_data <- dplyr::full_join(code_crosswalk_codes, all_fishbase) %>%
   dplyr::left_join(final_iucn) 
 
 saveRDS(final_data, "annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS")
+

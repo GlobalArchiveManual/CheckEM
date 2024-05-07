@@ -7464,6 +7464,10 @@ function(input, output, session) {
   ## ► TIDY HABITAT - dataframe ----
   tidy.habitat <- reactive({
     
+    message("test sample 4")
+    
+    hab.annotations() %>% filter(sample %in% "4") %>% glimpse()
+    
     message("view tidy habitat")
     message("glimpse 3 times")
     tidy.habitat <- hab.annotations() %>%
