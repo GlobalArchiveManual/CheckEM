@@ -849,8 +849,8 @@ function(input, output, session) {
     # add in marine parks
     if(input$lifehistory %in% "aus"){
       
-      message("view metadata.marineparks for Australia")
-      message("two glimpses on one dataframe")
+      # message("view metadata.marineparks for Australia")
+      # message("two glimpses on one dataframe")
       
       metadata.marineparks <- metadata_sf %>%
         dplyr::select(-status) %>%
@@ -858,15 +858,8 @@ function(input, output, session) {
         bind_cols(st_coordinates(.)) %>%
         as.data.frame() %>%
         dplyr::select(-c(geometry)) %>%
-        dplyr::select(!dplyr::any_of(c("latitude_dd", "longitude_dd", "X", "Y"))) %>%
-        dplyr::glimpse() 
-      
-      # if ("X" %in% colnames(metadata.marineparks) & "Y" %in% colnames(metadata.marineparks)) {
-      #   metadata.marineparks <- metadata.marineparks %>%
-      #     dplyr::rename(longitude_dd = X, latitude_dd = Y)
-      # } else {
-      #   message("Columns X and/or Y do not exist in the data frame.")
-      # }
+        dplyr::select(!dplyr::any_of(c("latitude_dd", "longitude_dd", "X", "Y"))) #%>%
+        # dplyr::glimpse() 
       
       metadata.marineparks <- metadata.marineparks %>%
         dplyr::rename(zone = ZONE_TYPE) %>%
@@ -879,22 +872,22 @@ function(input, output, session) {
         ungroup() %>%
         full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) %>%
         tidyr::replace_na(list(status = "Fished")) %>%
-        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
-        glimpse()
+        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) #%>%
+        # glimpse()
       
-      message("test data - for duplicates")
+      #message("test data - for duplicates")
       
-      test  <- metadata.marineparks %>%
-        group_by(campaignid, sample) %>%
-        dplyr::summarise(n = n()) %>%
-        dplyr::filter(n>1) %>%
-        glimpse()
-      
-      print("test 2")
-      test <- metadata.marineparks %>%
-        # semi_join(test) %>%
-        dplyr::filter(sample %in% "CABOO11") %>%
-        glimpse()
+      # test  <- metadata.marineparks %>%
+      #   group_by(campaignid, sample) %>%
+      #   dplyr::summarise(n = n()) %>%
+      #   dplyr::filter(n>1) #%>%
+      #   #glimpse()
+      # 
+      # print("test 2")
+      # test <- metadata.marineparks %>%
+      #   # semi_join(test) %>%
+      #   dplyr::filter(sample %in% "CABOO11") %>%
+      #   glimpse()
       
       message("unique")
       print(unique(metadata.marineparks$IUCN))
@@ -902,19 +895,25 @@ function(input, output, session) {
       
     } else {
       
-      print("view metadata.marineparks for Global")
+      message("view metadata.marineparks for Global")
       
       metadata.marineparks <- metadata_sf %>%
         dplyr::select(-status) %>%
         st_intersection(all_data$world_marineparks) %>%
-        bind_cols(st_coordinates(.)) %>%
-        as.data.frame() %>%
-        dplyr::select(-c(geometry)) %>%
-        dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-        tidyr::replace_na(list(status = "Fished")) %>%
-        # dplyr::rename(zone = ZONE_TYPE) %>%
-        # dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
         glimpse()
+        
+        # bind_cols(st_coordinates(.)) %>%
+        # as.data.frame() %>%
+        # dplyr::select(-c(geometry)) %>%
+        # glimpse()
+        
+        
+        
+        # dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+        # tidyr::replace_na(list(status = "Fished")) %>%
+        # # dplyr::rename(zone = ZONE_TYPE) %>%
+        # # dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
+        # glimpse()
       
     }
     

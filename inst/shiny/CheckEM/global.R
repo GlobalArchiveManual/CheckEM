@@ -62,7 +62,7 @@ library(png)
 library(cowplot)
 
 library(CheckEM)
-
+sf_use_s2(FALSE)
 
 # Load data
 load("data/all_data.Rdata")
