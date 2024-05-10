@@ -103,6 +103,7 @@ info <- species(validated) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
   dplyr::filter(!fishbase_scientific %in% ("Genus Species"))
 
+
 # FB.countries and FB.Status ----
 country_dat <- country(validated) %>%
   clean_names()%>%
@@ -236,7 +237,51 @@ complete_lw <- info %>%
   dplyr::select(fishbase_scientific, type, a, b, a_ll, b_ll, source_level) %>%
   dplyr::rename(length_measure = type)
 
-# # Get IUCN status - takes roughly 40 minutes
+# Scrape trophic level ----
+# trophic_levels <- data.frame() # only use this if you want to run all fish again
+trophic_levels <- read_rds("annotation-schema/data/staging/trophic_levels.RDS")
+
+test <- as.data.frame(validated) %>%
+  filter(!validated %in% c(unique(trophic_levels$species))) %>%
+  dplyr::filter(!validated %in% c("Genus Species", NA))
+
+temp.validated <- as.data.frame(validated) %>%
+  filter(!validated %in% c(unique(trophic_levels$species))) %>%
+  dplyr::filter(!validated %in% c("Genus Species", NA)) %>%
+  pull(validated)
+
+for(species in seq(1:length(unique(temp.validated)))){
+  message(paste("getting trophic level info for:", temp.validated[species]))
+
+  try(temp_tl <- find_tl(temp.validated[species]))
+  nrow(temp_tl)
+
+  if(!is.null(nrow(temp_tl))){
+    trophic_levels <- bind_rows(trophic_levels, temp_tl) %>%
+      glimpse()
+  }
+}
+
+trophic_levels <- trophic_levels %>%
+  distinct()
+
+# Sys.time()
+# write_rds(trophic_levels, "annotation-schema/data/staging/trophic_levels.RDS")
+
+unique(trophic_levels$trophic_level)
+unique(trophic_levels$se)
+unique(trophic_levels$metric)
+
+hist(as.numeric(trophic_levels$trophic_level))
+
+tidy_trophic_levels <- trophic_levels %>%
+  dplyr::rename(fb_trophic_level = trophic_level,
+                fb_trophic_level_se = se,
+                fb_trophic_level_source = metric,
+                fishbase_scientific = species)
+
+
+# # Get IUCN status - takes roughly 40 minutes -----
 # You will need an IUCN red list API key for this to work
 # Go to https://apiv3.iucnredlist.org/api/v3/token
 # After getting your key set it as IUCN_REDLIST_KEY in .Renviron.
@@ -287,6 +332,7 @@ all_fishbase <- info %>%
   dplyr::full_join(status) %>%
   dplyr::full_join(maturity) %>%
   dplyr::full_join(complete_lw) %>%
+  dplyr::full_join(tidy_trophic_levels) %>%
   dplyr::select(fishbase_scientific, speccode, 
                 fb_length_at_maturity_cm, 
                 fb_length_max, 
@@ -299,6 +345,9 @@ all_fishbase <- info %>%
                 b,
                 a_ll,
                 b_ll,
+                fb_trophic_level,
+                fb_trophic_level_se,
+                fb_trophic_level_source,
                 source_level,
                 subfamily) %>%
   dplyr::filter(!speccode %in% c("0", NA)) %>% # to remove blank fishbase
@@ -320,6 +369,12 @@ extra <- anti_join(info %>% dplyr::select(speccode, fishbase_scientific), all_fi
 # Join in caab data
 final_data <- dplyr::full_join(code_crosswalk_codes, all_fishbase) %>%
   dplyr::left_join(final_iucn) 
+
+missing_trophic_level <- final_data %>%
+  dplyr::filter(is.na(fb_trophic_level)) %>%
+  dplyr::select(caab_code, caab_scientific, fb_trophic_level)
+
+write.csv(missing_trophic_level, "annotation-schema/data/staging/missing-trophic-level.csv", row.names = F)
 
 saveRDS(final_data, "annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS")
 

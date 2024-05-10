@@ -343,6 +343,10 @@ australia_life_history <- caab_combined %>%
                 fb_b_ll,
                 fb_length_weight_source,
                 
+                fb_trophic_level,
+                fb_trophic_level_se,
+                fb_trophic_level_source,
+                
                 fb_vulnerability,
                 fb_countries,
                 fb_status,
@@ -445,6 +449,10 @@ australia_life_history <- caab_combined %>%
                 fb_length_max, # NEED TO RENAME
                 fb_length_max_type,# NEED TO RENAME
                 length_max_source,
+                
+                fb_trophic_level,
+                fb_trophic_level_se,
+                fb_trophic_level_source,
                 
                 foa_min_depth,
                 foa_max_depth,
