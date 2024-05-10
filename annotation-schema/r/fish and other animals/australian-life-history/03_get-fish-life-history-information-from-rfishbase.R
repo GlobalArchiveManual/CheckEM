@@ -253,7 +253,7 @@ temp.validated <- as.data.frame(validated) %>%
 for(species in seq(1:length(unique(temp.validated)))){
   message(paste("getting trophic level info for:", temp.validated[species]))
 
-  try(temp_tl <- find_tl(temp.validated[species]))
+  try(temp_tl <- find_tl(temp.validated[species], "de"))
   nrow(temp_tl)
 
   if(!is.null(nrow(temp_tl))){
