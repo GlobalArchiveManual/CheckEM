@@ -75,5 +75,16 @@ tm.relief <- tm %>%
   dplyr::filter(level_2 %in% c("Relief"))
 
 # Save the text files
-write_tsv(tm.hab, "annotation-schema/output/habitat/transectmeasure-attribute-files/benthic-habitat-annotation-schema-forward-facing.txt", na = "")
+write_tsv(tm.hab, "annotation-schema/output/habitat/transectmeasure-attribute-files/benthic-habitat-annotation-schema-forward-facing_all-levels.txt", na = "")
+
 write_tsv(tm.relief, "annotation-schema/output/habitat/transectmeasure-attribute-files/benthic-relief-annotation-schema-forward-facing.txt", na = "")
+
+# Create a level 3 list ----
+names(tm.hab)
+
+tm.hab_l3 <- tm.hab %>%
+  dplyr::distinct(level_2, level_3, scientific)
+
+
+# Save the text file
+write_tsv(tm.hab_l3, "annotation-schema/output/habitat/transectmeasure-attribute-files/benthic-habitat-annotation-schema-forward-facing_level-3.txt", na = "")

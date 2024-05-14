@@ -1,0 +1,101 @@
+level_2	level_3	scientific
+Ascidians	Stalked	
+Ascidians	Unstalked	
+Ascidians		
+Bacterial mats	Cyanobacteria	
+Bacterial mats	Other	
+Bacterial mats		
+Bedforms	2D	
+Bedforms	3D	
+Bedforms	Bioturbated	
+Bedforms	None	
+Bedforms		
+Bioturbation	Crawling traces	
+Bioturbation	Dwelling traces	
+Bioturbation	Feeding traces	
+Bioturbation	Organism tests	
+Bioturbation	Resting traces	
+Bioturbation	Unknown origin	
+Bioturbation	Waste casts	
+Bioturbation		
+Brachiopods		
+Bryozoa	Hard	
+Bryozoa	Soft	
+Bryozoa		
+Cnidaria	Colonial anemones	
+Cnidaria	Corals	
+Cnidaria	Hydrocorals	
+Cnidaria	Hydroids	
+Cnidaria	True anemones	
+Cnidaria	Tube anemones	
+Cnidaria		
+Crustacea	Barnacles	
+Crustacea	Crabs	
+Crustacea	Hermit crabs	
+Crustacea	Lobsters	
+Crustacea	Prawns / shrimps / mysids	
+Crustacea		
+Echinoderms	Feather stars	
+Echinoderms	Ophiuroids	
+Echinoderms	Sea cucumbers	
+Echinoderms	Sea stars	
+Echinoderms	Sea urchins	
+Echinoderms		
+Fishes	Bony fishes	
+Fishes	Eels	
+Fishes	Elasmobranchs	
+Fishes		
+Jellies	Ctenophores	
+Jellies	Cubozoa	
+Jellies	Hydromedusae	
+Jellies	Pyrosomes	
+Jellies	Salps	
+Jellies	Scyphozoa	
+Jellies	Siphonophores	
+Jellies		
+Macroalgae	Articulated calcareous	
+Macroalgae	Encrusting	
+Macroalgae	Erect coarse branching	
+Macroalgae	Erect fine branching	
+Macroalgae	Filamentous / filiform	
+Macroalgae	Globose / saccate	
+Macroalgae	Laminate	
+Macroalgae	Large canopy-forming	
+Macroalgae	Large canopy-forming	Ecklonia radiata
+Macroalgae	Large canopy-forming	Scytothalia dorycarpa
+Macroalgae	Large canopy-forming	Phyllospora spp
+Macroalgae	Large canopy-forming	Sargassum spp
+Macroalgae	Sheet-like / membraneous	
+Macroalgae		
+Molluscs	Bivalves	
+Molluscs	Cephalopods	
+Molluscs	Chitons	
+Molluscs	Gastropods	
+Molluscs		
+Sea spiders		
+Seagrasses	Elliptical leaves	Halophila spp
+Seagrasses	Elliptical leaves	
+Seagrasses	Strap-like leaves	Amphibolis spp
+Seagrasses	Strap-like leaves	Posidonia spp
+Seagrasses	Strap-like leaves	Zostera spp
+Seagrasses	Strap-like leaves	Ruppia spp
+Seagrasses	Strap-like leaves	Thalassodendron spp
+Seagrasses	Strap-like leaves	
+Seagrasses		
+Sessile invertebrates		
+Sponges	Crusts	
+Sponges	Cup-likes	
+Sponges	Erect forms	
+Sponges	Massive forms	
+Sponges		
+Unscorable		
+Worms	Acorn worms	
+Worms	Echiura	
+Worms	Flatworms	
+Worms	Penisworms	
+Worms	Polychaetes	
+Worms	Sipuncula	
+Worms		
+Substrate	Consolidated (hard)	
+Substrate	Unconsolidated (soft)	
+Substrate		
