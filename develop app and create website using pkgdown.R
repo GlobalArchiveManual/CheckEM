@@ -19,6 +19,8 @@ devtools::document()
 # install.packages("pkgdown")
 library(pkgdown)
 
+pkgdown::init_site()
+
 # This builds the website with every function.
 pkgdown::build_reference()
 
