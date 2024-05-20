@@ -9,7 +9,7 @@
 ga_api_species_list <- function(username, password) {
   
   # URL
-  url <- paste0("https://dev.globalarchive.org/api/data/GlobalArchiveAustralianFishList/?format=feather")
+  url <- paste0("https://dev.globalarchive.org/api/data/AustralianAquaticFaunaSubject/?format=feather")
   
   # Send GET request with basic authentication
   response <- GET(url, authenticate(username, password))

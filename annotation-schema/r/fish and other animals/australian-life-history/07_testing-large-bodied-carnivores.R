@@ -10,6 +10,12 @@ large_bodied_carnivores <- CheckEM::australia_life_history %>%
                               "Osteoglossiformes", "Lophiiformes", "Lampriformes", "Beloniformes", "Zeiformes")) %>%
   filter(!is.na(fb_length_at_maturity_cm))
 
+names(CheckEM::australia_life_history)
+
+test <- CheckEM::australia_life_history %>%
+  filter(genus %in% "Pristipomoides")%>%
+  dplyr::select(family, genus, species, australian_common_name, fb_length_at_maturity_cm, fb_trophic_level, fb_trophic_level_source)
+
 unique(CheckEM::australia_life_history$class)
 unique(CheckEM::australia_life_history$order)
 
