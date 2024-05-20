@@ -24,7 +24,7 @@ ga_api_length <- function(username, password, synthesis_id) {
     
     # Read the Feather file from the input stream
     length <- arrow::read_feather(raw_connection)%>%
-      mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "GlobalArchiveAustralianFishList")) %>%
+      mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
       left_join(., species_list, by = "subject")
     
   } else {

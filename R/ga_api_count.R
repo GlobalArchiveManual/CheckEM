@@ -24,7 +24,7 @@ ga_api_count <- function(username, password, synthesis_id) {
     
     # Read the Feather file from the input stream
     count <- arrow::read_feather(raw_connection) %>%
-      mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "GlobalArchiveAustralianFishList")) %>%
+      mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
       left_join(., species_list, by = "subject")
     
   } else {
