@@ -35,7 +35,8 @@ License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-Remotes: beckyfisher/FSSgam_package
+Remotes: beckyfisher/FSSgam_package,
+         UWAMEGFisheries/GlobalArchive
 Depends: 
     R (>= 4.1)
 Imports: 
