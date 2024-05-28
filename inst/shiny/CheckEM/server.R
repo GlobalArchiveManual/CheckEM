@@ -2478,28 +2478,83 @@ function(input, output, session) {
         # TODO add an example dataset for DOVs
       } 
       
-      message("checking points 1")
+      #message("checking points 1")
       # print(unique(points$family))
       
+    
       points <- points %>%
-        glimpse() %>%
+        #glimpse() %>%
         mutate(sample = as.factor(sample)) %>%
         mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
         mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
         mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
         dplyr::filter(!is.na(family)) %>%
-        dplyr::mutate(species = as.character(tolower(species))) %>%
-        dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
-        dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
-        dplyr::rename(em_comment = comment, period_time = periodtime) %>%
+        dplyr::rename(em_comment = comment, period_time = periodtime) #%>%
+        #glimpse()
+      
+      message("accents")
+      
+      # print(unique(points$genus))
+      
+      family_accents <- points %>%
+        distinct(family) %>%
+        dplyr::mutate(fail = str_detect(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
         glimpse()
+      
+      if(nrow(family_accents > 0)){
+        errors <- paste0("<li>In the <b>Family</b> column.", "</li>", "<br>")
+      } else {
+        errors = ""
+      }
+      
+      genus_accents <- points %>%
+        distinct(genus) %>%
+        dplyr::mutate(fail = str_detect(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(genus_accents > 0)){
+        errors <- paste0(errors, "<li>In the <b>Genus</b> column.", "</li>", "<br>")
+      }
+      
+      species_accents <- points %>%
+        distinct(species) %>%
+        dplyr::mutate(fail = str_detect(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(species_accents > 0)){
+        errors <- paste0(errors, "<li>In the <b>Species</b> column.", "</li>", "<br>")
+      }
+
+      accents <- bind_rows(family_accents, genus_accents, species_accents)
+      
+      if(nrow(accents > 0)){
+        shinyalert("Points Data Contains Special Characters:", 
+                   paste0(errors, "<br> Please check the spelling before proceeding. The special characters will be removed, and the species names may not match your chosen vocabulary (life history information)"), 
+                   type = "warning", html = TRUE)
+      }
+
+      
+      return(points)
+      
+      
     }
   })
   
   # ► Preview points ----
   #TODO change this to be points/count
   output$table.points <- renderDataTable({
+    
+
+    
+    
+
+    
     points()
+    
+    
   })  
   
   ## ► Create MaxN (Raw) ----
@@ -2509,6 +2564,12 @@ function(input, output, session) {
     # print(unique(points()$family))
     
     maxn <- points() %>%
+      dplyr::mutate(species = str_remove_all(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(species = as.character(tolower(species))) %>%
+      dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
+      dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
       dplyr::mutate(number = as.numeric(number)) %>%
       replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
       dplyr::group_by(campaignid, sample, filename, period_time, frame, family, genus, species) %>% # removed comment 21/10/21 removed code 02/08/23
@@ -3296,7 +3357,55 @@ function(input, output, session) {
         # TODO add an example dataset for DOVs
       } 
       
+      
+      family_accents <- length %>%
+        distinct(family) %>%
+        dplyr::mutate(fail = str_detect(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(family_accents > 0)){
+        errors <- paste0("<li>In the <b>Family</b> column.", "</li>", "<br>")
+      } else {
+        errors = ""
+      }
+      
+      genus_accents <- length %>%
+        distinct(genus) %>%
+        dplyr::mutate(fail = str_detect(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(genus_accents > 0)){
+        errors <- paste0(errors, "<li>In the <b>Genus</b> column.", "</li>", "<br>")
+      }
+      
+      species_accents <- length %>%
+        distinct(species) %>%
+        dplyr::mutate(fail = str_detect(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(species_accents > 0)){
+        errors <- paste0(errors, "<li>In the <b>Species</b> column.", "</li>", "<br>")
+      }
+      
+      accents <- bind_rows(family_accents, genus_accents, species_accents)
+      
+      if(nrow(accents > 0)){
+        shinyalert("Length Data Contains Special Characters:", 
+                   paste0(errors, "<br> Please check the spelling before proceeding. The special characters will be removed, and the species names may not match your chosen vocabulary (life history information)"), 
+                   type = "warning", html = TRUE)
+      }
+      
+      
+      # return(length)
+      
+      
       length <- length %>%
+        dplyr::mutate(species = str_remove_all(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
         mutate(sample = as.factor(sample)) %>%
         mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
         mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
@@ -3315,6 +3424,12 @@ function(input, output, session) {
                       frame_left = frameleft,
                       frame_right = frameright, 
                       period_time = periodtime)#%>% glimpse()
+      
+      
+      
+      
+      
+      
     }
   })
   
@@ -3394,7 +3509,54 @@ function(input, output, session) {
         # TODO add an example dataset for DOVs
       } 
       
+      
+      
+      family_accents <- threedpoints %>%
+        distinct(family) %>%
+        dplyr::mutate(fail = str_detect(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(family_accents > 0)){
+        errors <- paste0("<li>In the <b>Family</b> column.", "</li>", "<br>")
+      } else {
+        errors = ""
+      }
+      
+      genus_accents <- threedpoints %>%
+        distinct(genus) %>%
+        dplyr::mutate(fail = str_detect(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(genus_accents > 0)){
+        errors <- paste0(errors, "<li>In the <b>Genus</b> column.", "</li>", "<br>")
+      }
+      
+      species_accents <- threedpoints %>%
+        distinct(species) %>%
+        dplyr::mutate(fail = str_detect(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::filter(!fail %in% FALSE) %>%
+        glimpse()
+      
+      if(nrow(species_accents > 0)){
+        errors <- paste0(errors, "<li>In the <b>Species</b> column.", "</li>", "<br>")
+      }
+      
+      accents <- bind_rows(family_accents, genus_accents, species_accents)
+      
+      if(nrow(accents > 0)){
+        shinyalert("3D point Data Contains Special Characters:", 
+                   paste0(errors, "<br> Please check the spelling before proceeding. The special characters will be removed, and the species names may not match your chosen vocabulary (life history information)"), 
+                   type = "warning", html = TRUE)
+      }
+      
+      
+      
       threedpoints <- threedpoints %>%
+        dplyr::mutate(species = str_remove_all(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+        dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
         mutate(sample = as.factor(sample)) %>%
         mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
         mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
@@ -8792,8 +8954,54 @@ function(input, output, session) {
         dplyr::mutate(sample = period)
     }
     }
+    
+    
+    
+    family_accents <- count %>%
+      distinct(family) %>%
+      dplyr::mutate(fail = str_detect(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::filter(!fail %in% FALSE) %>%
+      glimpse()
+    
+    if(nrow(family_accents > 0)){
+      errors <- paste0("<li>In the <b>Family</b> column.", "</li>", "<br>")
+    } else {
+      errors = ""
+    }
+    
+    genus_accents <- count %>%
+      distinct(genus) %>%
+      dplyr::mutate(fail = str_detect(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::filter(!fail %in% FALSE) %>%
+      glimpse()
+    
+    if(nrow(genus_accents > 0)){
+      errors <- paste0(errors, "<li>In the <b>Genus</b> column.", "</li>", "<br>")
+    }
+    
+    species_accents <- count %>%
+      distinct(species) %>%
+      dplyr::mutate(fail = str_detect(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::filter(!fail %in% FALSE) %>%
+      glimpse()
+    
+    if(nrow(species_accents > 0)){
+      errors <- paste0(errors, "<li>In the <b>Species</b> column.", "</li>", "<br>")
+    }
+    
+    accents <- bind_rows(family_accents, genus_accents, species_accents)
+    
+    if(nrow(accents > 0)){
+      shinyalert("Count Data Contains Special Characters:", 
+                 paste0(errors, "<br> Please check the spelling before proceeding. The special characters will be removed, and the species names may not match your chosen vocabulary (life history information)"), 
+                 type = "warning", html = TRUE)
+    }
+    
 
     count <- count %>%
+      dplyr::mutate(species = str_remove_all(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
       mutate(sample = as.factor(sample)) %>%
       mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
       mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
@@ -9010,7 +9218,51 @@ function(input, output, session) {
       
     }
     
+    family_accents <- gen.length %>%
+      distinct(family) %>%
+      dplyr::mutate(fail = str_detect(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::filter(!fail %in% FALSE) %>%
+      glimpse()
+    
+    if(nrow(family_accents > 0)){
+      errors <- paste0("<li>In the <b>Family</b> column.", "</li>", "<br>")
+    } else {
+      errors = ""
+    }
+    
+    genus_accents <- gen.length %>%
+      distinct(genus) %>%
+      dplyr::mutate(fail = str_detect(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::filter(!fail %in% FALSE) %>%
+      glimpse()
+    
+    if(nrow(genus_accents > 0)){
+      errors <- paste0(errors, "<li>In the <b>Genus</b> column.", "</li>", "<br>")
+    }
+    
+    species_accents <- gen.length %>%
+      distinct(species) %>%
+      dplyr::mutate(fail = str_detect(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::filter(!fail %in% FALSE) %>%
+      glimpse()
+    
+    if(nrow(species_accents > 0)){
+      errors <- paste0(errors, "<li>In the <b>Species</b> column.", "</li>", "<br>")
+    }
+    
+    accents <- bind_rows(family_accents, genus_accents, species_accents)
+    
+    if(nrow(accents > 0)){
+      shinyalert("Length Data Contains Special Characters:", 
+                 paste0(errors, "<br> Please check the spelling before proceeding. The special characters will be removed, and the species names may not match your chosen vocabulary (life history information)"), 
+                 type = "warning", html = TRUE)
+    }
+    
+    
     gen.length <- gen.length %>%
+      dplyr::mutate(species = str_remove_all(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
       mutate(sample = as.factor(sample)) %>%
       mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
       mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
