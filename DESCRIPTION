@@ -43,6 +43,7 @@ Imports:
     ggbeeswarm,
     ggnewscale,
     ggplot2 (>= 3.4.2),
+    GlobalArchive,
     googledrive,
     googlesheets4,
     here (>= 1.0.1),
