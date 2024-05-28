@@ -2478,10 +2478,11 @@ function(input, output, session) {
         # TODO add an example dataset for DOVs
       } 
       
-      # print("checking points 1")
+      message("checking points 1")
       # print(unique(points$family))
       
       points <- points %>%
+        glimpse() %>%
         mutate(sample = as.factor(sample)) %>%
         mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
         mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
@@ -2490,7 +2491,8 @@ function(input, output, session) {
         dplyr::mutate(species = as.character(tolower(species))) %>%
         dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
         dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
-        dplyr::rename(em_comment = comment, period_time = periodtime)
+        dplyr::rename(em_comment = comment, period_time = periodtime) %>%
+        glimpse()
     }
   })
   
@@ -2503,7 +2505,7 @@ function(input, output, session) {
   ## ► Create MaxN (Raw) ----
   maxn.raw <- reactive({
     
-    # print("checking points")
+    message("checking maxn raw")
     # print(unique(points()$family))
     
     maxn <- points() %>%
@@ -2528,7 +2530,7 @@ function(input, output, session) {
       dplyr::mutate(species = as.character(species)) %>%
       dplyr::mutate(genus = as.character(genus)) %>%
       dplyr::mutate(family = as.character(family)) %>%
-      filter(!family %in% c("Unknown")) #%>% glimpse() # Added 2023-08-01
+      filter(!family %in% c("Unknown")) %>% glimpse() # Added 2023-08-01
     
     
     
@@ -7791,6 +7793,8 @@ function(input, output, session) {
 
             write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
           }
+          
+          if(input$length %in% "Yes"){
 
           for(i in unique(length.complete.download()$campaignid)){
 
@@ -7816,6 +7820,7 @@ function(input, output, session) {
             fileName <- paste(i, "_mass.csv", sep = "")
 
             write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+          }
           }
 
           if (input$error.zeros == FALSE) {
@@ -8022,6 +8027,17 @@ function(input, output, session) {
         mutate(error = "point.without.a.number") %>%
         mutate(across(everything(), as.character)) #%>% glimpse()
       
+      
+      print("maxn.species.not.observed")
+      maxn.species.not.observed <- maxn.species.not.observed() %>%
+        mutate(error = "species.not.observed.in.region.before") %>%
+        mutate(across(everything(), as.character))  #%>% glimpse()
+      
+      print("maxn.species.not.in.list")
+      maxn.species.not.in.lh <- maxn.species.not.observed.lh() %>%
+        mutate(error = "species.not.in.life.history.sheet") %>%
+        mutate(across(everything(), as.character))  #%>% glimpse()
+      
     if(input$length %in% "Yes"){
       print("length.samples.without.metadata")
       length.samples.without.metadata <- length.samples.without.metadata() %>%
@@ -8048,15 +8064,6 @@ function(input, output, session) {
         mutate(error = "3D.point.without.a.number") %>%
         mutate(across(everything(), as.character)) #%>% glimpse()
 
-      print("maxn.species.not.observed")
-      maxn.species.not.observed <- maxn.species.not.observed() %>%
-        mutate(error = "species.not.observed.in.region.before") %>%
-        mutate(across(everything(), as.character))  #%>% glimpse()
-
-      print("maxn.species.not.in.list")
-      maxn.species.not.in.lh <- maxn.species.not.observed.lh() %>%
-        mutate(error = "species.not.in.life.history.sheet") %>%
-        mutate(across(everything(), as.character))  #%>% glimpse()
 
       print("length.species.not.observed")
       length.species.not.observed <- length.species.not.observed() %>%
