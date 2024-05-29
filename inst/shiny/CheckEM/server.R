@@ -2547,11 +2547,6 @@ function(input, output, session) {
   #TODO change this to be points/count
   output$table.points <- renderDataTable({
     
-
-    
-    
-
-    
     points()
     
     
@@ -2571,15 +2566,33 @@ function(input, output, session) {
       dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
       dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
       dplyr::mutate(number = as.numeric(number)) %>%
-      replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
-      dplyr::group_by(campaignid, sample, filename, period_time, frame, family, genus, species) %>% # removed comment 21/10/21 removed code 02/08/23
-      dplyr::summarise(maxn = sum(number)) %>%
-      dplyr::ungroup() %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code 02/08/23
-      dplyr::slice(which.max(maxn)) %>%
-      dplyr::ungroup() %>%
+      replace_na(list(family = "Unknown", genus = "Unknown", species = "spp"))
+    
+    
+    if(input$stage %in% "No"){
+      maxn <- maxn %>%
+        dplyr::group_by(campaignid, sample, filename, period_time, frame, family, genus, species) %>% # removed comment 21/10/21 removed code 02/08/23
+        dplyr::summarise(maxn = sum(number)) %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code 02/08/23
+        dplyr::slice(which.max(maxn)) %>%
+        dplyr::ungroup()
+    } else {
+      
+      message("maxn stage")
+      
+      maxn <- maxn %>%
+        dplyr::group_by(campaignid, sample, filename, period_time, frame, family, genus, species, stage) %>% # removed comment 21/10/21 removed code 02/08/23
+        dplyr::summarise(maxn = sum(number)) %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, stage) %>% # removed code 02/08/23
+        dplyr::slice(which.max(maxn)) %>%
+        dplyr::ungroup() %>% glimpse()
+    }
+    
+    
+    maxn <- maxn %>%
       dplyr::filter(!is.na(maxn)) %>%
-      # dplyr::select(-frame) %>%
       tidyr::replace_na(list(maxn = 0)) %>%
       dplyr::mutate(maxn = as.numeric(maxn)) %>%
       dplyr::filter(maxn > 0) %>%
@@ -2599,33 +2612,59 @@ function(input, output, session) {
   
   maxn.clean <- reactive({
     
-    # print("unique genus")
-    
-    # print(unique(maxn.raw()$genus)) %>% sort()
-    
-    maxn.clean <- dplyr::full_join(maxn.raw(), metadata.regions()) %>%
-      dplyr::left_join(., synonyms()) %>% #by = c("family", "genus", "species"), 
-      dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
-      dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
-      dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
-      dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
-      dplyr::slice(which.max(maxn)) %>%
-      dplyr::ungroup() %>%
-      as_tibble() 
+    if(input$stage %in% "No"){
+      
+      maxn.clean <- dplyr::full_join(maxn.raw(), metadata.regions()) %>%
+        dplyr::left_join(., synonyms()) %>% #by = c("family", "genus", "species"), 
+        dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+        dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+        dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+        dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
+        dplyr::slice(which.max(maxn)) %>%
+        dplyr::ungroup() %>%
+        as_tibble() 
+      
+    } else {
+      
+      maxn.clean <- dplyr::full_join(maxn.raw(), metadata.regions()) %>%
+        dplyr::left_join(., synonyms()) %>% #by = c("family", "genus", "species"), 
+        dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+        dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+        dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+        dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, stage) %>% # removed code
+        dplyr::slice(which.max(maxn)) %>%
+        dplyr::ungroup() %>%
+        as_tibble() 
+      
+    }
   })
   
   ## ►  Create MaxN (Complete) -----
   maxn.complete <- reactive({
     if(input$upload %in% "EM"){
-      maxn.complete <- maxn.clean() %>%
-        dplyr::full_join(metadata.regions()) %>% 
-        dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
-        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
-        replace_na(list(maxn = 0)) %>%
-        dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
-        dplyr::summarise(maxn = sum(maxn)) %>%
-        dplyr::ungroup()
+      
+      if(input$stage %in% "No"){
+        
+        maxn.complete <- maxn.clean() %>%
+          dplyr::full_join(metadata.regions()) %>% 
+          dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
+          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
+          replace_na(list(maxn = 0)) %>%
+          dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
+          dplyr::summarise(maxn = sum(maxn)) %>%
+          dplyr::ungroup()
+      } else {
+        maxn.complete <- maxn.clean() %>%
+          dplyr::full_join(metadata.regions()) %>% 
+          dplyr::select(c(campaignid, sample, family, genus, species, maxn, stage)) %>% # removed code
+          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, stage)) %>% # removed code
+          replace_na(list(maxn = 0)) %>%
+          dplyr::group_by(campaignid, sample, family, genus, species, stage) %>% # removed code
+          dplyr::summarise(maxn = sum(maxn)) %>%
+          dplyr::ungroup()
+      }
     }
   })
   
@@ -2636,39 +2675,76 @@ function(input, output, session) {
       
       if (input$error.synonyms == TRUE) {
         
-        #print("1")
-        maxn.complete <- dplyr::left_join(maxn, synonyms()) %>% #, by = c("family", "genus", "species")
-          dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
-          dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
-          dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
-          dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
-          dplyr::slice(which.max(maxn)) %>%
-          dplyr::ungroup() %>%
-          dplyr::full_join(metadata.regions()) %>%
-          dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
-          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
-          replace_na(list(maxn = 0)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
-          dplyr::summarise(maxn = sum(maxn)) %>%
-          ungroup() %>%
-          dplyr::left_join(metadata.regions()) %>%
-          dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
+        if(input$stage %in% "No"){
+          maxn.complete <- dplyr::left_join(maxn, synonyms()) %>% #, by = c("family", "genus", "species")
+            dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+            dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+            dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+            dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
+            dplyr::slice(which.max(maxn)) %>%
+            dplyr::ungroup() %>%
+            dplyr::full_join(metadata.regions()) %>%
+            dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
+            tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
+            replace_na(list(maxn = 0)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
+            dplyr::summarise(maxn = sum(maxn)) %>%
+            ungroup() %>%
+            dplyr::left_join(metadata.regions()) %>%
+            dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
           #glimpse()
+        } else {
+          maxn.complete <- dplyr::left_join(maxn, synonyms()) %>% #, by = c("family", "genus", "species")
+            dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+            dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+            dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+            dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, stage) %>% # removed code
+            dplyr::slice(which.max(maxn)) %>%
+            dplyr::ungroup() %>%
+            dplyr::full_join(metadata.regions()) %>%
+            dplyr::select(c(campaignid, sample, family, genus, species, maxn, stage)) %>% # removed code
+            tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, stage)) %>% # removed code
+            replace_na(list(maxn = 0)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, stage) %>% # removed code
+            dplyr::summarise(maxn = sum(maxn)) %>%
+            ungroup() %>%
+            dplyr::left_join(metadata.regions()) %>%
+            dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
+        }
+
       } 
       else{ 
-       #print("2")
-        maxn.complete <- maxn %>%
-          dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
-          dplyr::full_join(metadata.regions()) %>%
-          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
-          replace_na(list(maxn = 0)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
-          dplyr::summarise(maxn = sum(maxn)) %>%
-          ungroup() %>%
-          dplyr::left_join(metadata.regions()) %>%
-          dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
+        
+        if(input$stage %in% "No"){
+
+          maxn.complete <- maxn %>%
+            dplyr::select(c(campaignid, sample, family, genus, species, maxn)) %>% # removed code
+            dplyr::full_join(metadata.regions()) %>%
+            tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% # removed code
+            replace_na(list(maxn = 0)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species) %>% # removed code
+            dplyr::summarise(maxn = sum(maxn)) %>%
+            ungroup() %>%
+            dplyr::left_join(metadata.regions()) %>%
+            dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
           #glimpse()
+        } else {
+          
+          maxn.complete <- maxn %>%
+            dplyr::select(c(campaignid, sample, family, genus, species, maxn, stage)) %>% # removed code
+            dplyr::full_join(metadata.regions()) %>%
+            tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, stage)) %>% # removed code
+            replace_na(list(maxn = 0)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, stage) %>% # removed code
+            dplyr::summarise(maxn = sum(maxn)) %>%
+            ungroup() %>%
+            dplyr::left_join(metadata.regions()) %>%
+            dplyr::mutate(scientific = paste(genus, species, sep = " ")) #%>%
+          #glimpse()
+          
+        }
       }
       
       maxn.complete <- maxn.complete
@@ -2692,13 +2768,13 @@ function(input, output, session) {
       if (input$error.zeros == TRUE) {
         maxn.area <- maxn.area %>%
           dplyr::select(!sample)%>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), everything())
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "family", "genus", "species", "stage")), everything())
         
       } else { 
         
         maxn.area <- maxn.area %>%
           dplyr::filter(!maxn %in% 0) %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, maxn)
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "family", "genus", "species", "stage")), maxn)
         } # remove metadata columns # removed code
       
       print("final")
@@ -2901,7 +2977,7 @@ function(input, output, session) {
       maxn <- dplyr::anti_join(maxn.clean(), life.history.expanded(), by = c("family", "genus", "species", "marine_region")) %>%
         dplyr::filter(maxn > 0) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, marine_region) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), family, genus, species, marine_region) %>%
         dplyr::distinct() %>%
         dplyr::rename('marine region not observed in' = marine_region) %>%
         dplyr::semi_join(., life.history.expanded(), by = c("family", "genus", "species"))
@@ -2912,7 +2988,7 @@ function(input, output, session) {
         dplyr::anti_join(count.clean(), ., by = c("family", "genus", "species", "marine_region")) %>%
         dplyr::filter(maxn > 0) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, marine_region) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), family, genus, species, marine_region) %>%
         dplyr::distinct() %>%
         dplyr::rename('marine region not observed in' = marine_region) %>%
         dplyr::semi_join(., life.history.expanded(), by = c("family", "genus", "species"))
@@ -8028,30 +8104,32 @@ function(input, output, session) {
             write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
           }
           
-          for(i in unique(gen.length.complete.download()$campaignid)){
+          if(input$length %in% "Yes"){
+            for(i in unique(gen.length.complete.download()$campaignid)){
+              
+              print("campaignid length")
+              print(i)
+              
+              dat <- gen.length.complete.download() %>%
+                dplyr::filter(campaignid == i)# %>% glimpse()
+              
+              fileName <- paste(i, "_length.csv", sep = "")
+              
+              write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+            }
             
-            print("campaignid length")
-            print(i)
-            
-            dat <- gen.length.complete.download() %>%
-              dplyr::filter(campaignid == i)# %>% glimpse()
-            
-            fileName <- paste(i, "_length.csv", sep = "")
-            
-            write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
-          }
-          
-          for(i in unique(mass.complete.download()$campaignid)){
-
-            # print("campaignid mass")
-            # print(i)
-
-            dat <- mass.complete.download() %>%
-              dplyr::filter(campaignid == i) #%>% glimpse()
-
-            fileName <- paste(i, "_mass.csv", sep = "")
-
-            write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+            for(i in unique(mass.complete.download()$campaignid)){
+              
+              # print("campaignid mass")
+              # print(i)
+              
+              dat <- mass.complete.download() %>%
+                dplyr::filter(campaignid == i) #%>% glimpse()
+              
+              fileName <- paste(i, "_mass.csv", sep = "")
+              
+              write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+            }
           }
           
           if (input$error.zeros == FALSE) {
@@ -9019,13 +9097,31 @@ function(input, output, session) {
     #TODO add code column with lifehistory sheet
     maxn <- count() %>%
       dplyr::mutate(count = as.numeric(count)) %>%
-      replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) %>% # remove any NAs in taxa name
-      dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
-      dplyr::summarise(maxn = sum(count)) %>%
-      dplyr::ungroup() %>%
-      dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
-      dplyr::slice(which.max(maxn)) %>%
-      dplyr::ungroup() %>%
+      replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) #%>% # remove any NAs in taxa name
+    
+    if(input$stage %in% "No"){
+      
+      maxn <- maxn %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+        dplyr::summarise(maxn = sum(count)) %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+        dplyr::slice(which.max(maxn)) %>%
+        dplyr::ungroup()
+      
+    } else {
+      
+      maxn <- maxn %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, code, stage) %>%
+        dplyr::summarise(maxn = sum(count)) %>%
+        dplyr::ungroup() %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, code, stage) %>%
+        dplyr::slice(which.max(maxn)) %>%
+        dplyr::ungroup()
+      
+    }
+    
+    maxn <- maxn %>%
       dplyr::filter(!is.na(maxn)) %>%
       tidyr::replace_na(list(maxn = 0)) %>%
       dplyr::mutate(maxn = as.numeric(maxn)) %>%
@@ -9039,10 +9135,12 @@ function(input, output, session) {
       dplyr::mutate(genus = as.character(genus)) %>%
       dplyr::mutate(family = as.character(family)) %>%
       filter(!family %in% c("Unknown"))#%>% glimpse()
-
+    
   })
 
   count.clean <- reactive({
+    
+    if(input$stage %in% "No"){
 
     count.clean <- dplyr::full_join(count.raw(), metadata.regions()) %>%
       dplyr::left_join(., synonyms()) %>%
@@ -9054,13 +9152,31 @@ function(input, output, session) {
       dplyr::slice(which.max(maxn)) %>%
       dplyr::ungroup() %>%
       as_tibble()
+    
+    } else {
+      
+      count.clean <- dplyr::full_join(count.raw(), metadata.regions()) %>%
+        dplyr::left_join(., synonyms()) %>%
+        dplyr::mutate(genus = ifelse(!genus_correct %in% c(NA), genus_correct, genus)) %>%
+        dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+        dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+        dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, code, stage) %>%
+        dplyr::slice(which.max(maxn)) %>%
+        dplyr::ungroup() %>%
+        as_tibble()
+      
+    }
+    
   })
 
   ## ►  Create MaxN (Complete) -----
   count.complete <- reactive({
 
     print("count.complete")
-
+    
+    if(input$stage %in% "No"){
+      
     count.complete <- count.clean() %>%
       dplyr::full_join(metadata.regions()) %>%
       dplyr::select(c(campaignid, sample, family, genus, species, maxn, code)) %>%
@@ -9069,6 +9185,19 @@ function(input, output, session) {
       dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
       dplyr::summarise(maxn = sum(maxn)) %>%
       dplyr::ungroup() #%>% glimpse()
+    
+    } else {
+      
+      count.complete <- count.clean() %>%
+        dplyr::full_join(metadata.regions()) %>%
+        dplyr::select(c(campaignid, sample, family, genus, species, maxn, code, stage)) %>%
+        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code, stage)) %>%
+        replace_na(list(maxn = 0)) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species, code, stage) %>%
+        dplyr::summarise(maxn = sum(maxn)) %>%
+        dplyr::ungroup() #%>% glimpse()
+      
+    }
 
   })
 
@@ -9080,25 +9209,56 @@ function(input, output, session) {
       count <- full_join(count.raw(), metadata.regions()) # can't use clean as have already changed synonyms
 
       if (input$error.synonyms == TRUE) {
-        count.complete <- dplyr::left_join(count, synonyms()) %>% #, by = c("family", "genus", "species")
-          dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
-          dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
-          dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
-          dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
-          dplyr::slice(which.max(maxn)) %>%
-          dplyr::ungroup() %>%
-          dplyr::full_join(metadata.regions()) %>%
-          dplyr::select(c(campaignid, sample, family, genus, species, maxn, code)) %>%
-          tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
-          replace_na(list(maxn = 0)) %>%
-          dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
-          dplyr::summarise(maxn = sum(maxn)) %>%
-          ungroup() %>%
-          dplyr::left_join(metadata.regions()) %>%
-          dplyr::mutate(scientific = paste(genus, species, sep = " "))
+        
+        if(input$stage %in% "No"){
+          
+          count.complete <- dplyr::left_join(count, synonyms()) %>% #, by = c("family", "genus", "species")
+            dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+            dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+            dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+            dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+            dplyr::slice(which.max(maxn)) %>%
+            dplyr::ungroup() %>%
+            dplyr::full_join(metadata.regions()) %>%
+            dplyr::select(c(campaignid, sample, family, genus, species, maxn, code)) %>%
+            tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
+            replace_na(list(maxn = 0)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, code) %>%
+            dplyr::summarise(maxn = sum(maxn)) %>%
+            ungroup() %>%
+            dplyr::left_join(metadata.regions()) %>%
+            dplyr::mutate(scientific = paste(genus, species, sep = " "))
+          
+        } else {
+          
+          message("count complete with stage")
+          
+          count.complete <- dplyr::left_join(count, synonyms()) %>% #, by = c("family", "genus", "species")
+            dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
+            dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
+            dplyr::mutate(family = ifelse(!is.na(family_correct), family_correct, family)) %>%
+            dplyr::select(-c(family_correct, genus_correct, species_correct)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, code, stage) %>%
+            dplyr::slice(which.max(maxn)) %>%
+            dplyr::ungroup() %>%
+            dplyr::full_join(metadata.regions()) %>%
+            dplyr::select(c(campaignid, sample, family, genus, species, maxn, code, stage)) %>%
+            tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code, stage)) %>%
+            replace_na(list(maxn = 0)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, code, stage) %>%
+            dplyr::summarise(maxn = sum(maxn)) %>%
+            ungroup() %>%
+            dplyr::left_join(metadata.regions()) %>%
+            dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
+            glimpse()
+          
+        }
+        
 
       } else {
+        
+        if(input$stage %in% "No"){
 
         count.complete <- count %>%
           dplyr::select(c(campaignid, sample, family, genus, species, maxn, code)) %>%
@@ -9110,9 +9270,28 @@ function(input, output, session) {
           ungroup() %>%
           dplyr::left_join(metadata.regions()) %>%
           dplyr::mutate(scientific = paste(genus, species, sep = " "))
+        
+        } else {
+          
+          count.complete <- count %>%
+            dplyr::select(c(campaignid, sample, family, genus, species, maxn, code, stage)) %>%
+            dplyr::full_join(metadata.regions()) %>%
+            tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code, stage)) %>%
+            replace_na(list(maxn = 0)) %>%
+            dplyr::group_by(campaignid, sample, family, genus, species, code, stage) %>%
+            dplyr::summarise(maxn = sum(maxn)) %>%
+            ungroup() %>%
+            dplyr::left_join(metadata.regions()) %>%
+            dplyr::mutate(scientific = paste(genus, species, sep = " "))
+          
+        }
       }
+      
+      message(
+        "last coint complete"
+      )
 
-      count.complete <- count.complete
+      count.complete <- count.complete %>% glimpse()
 
       species.out.of.area <- life.history.expanded() %>%
         anti_join(count.clean(), ., by = c("family", "genus", "species", "marine_region")) %>%
@@ -9132,17 +9311,19 @@ function(input, output, session) {
 
       if (input$error.zeros == TRUE) {
         count.area <- count.area %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), everything()) %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), everything()) %>%
           dplyr::select(!sample)
 
       } else {
 
         count.area <- count.area %>%
           dplyr::filter(!maxn %in% 0) %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, code, maxn)} # remove metadata columns
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), family, genus, species, code, maxn)} # remove metadata columns
 
+      message("count area")
       count.area <- count.area %>%
-        dplyr::filter(!family %in% c("", NA, NULL))
+        dplyr::filter(!family %in% c("", NA, NULL)) %>%
+        glimpse()
 
     }
 
@@ -9304,6 +9485,7 @@ function(input, output, session) {
   gen.length.complete.download <- reactive({
 
     if(!input$upload %in% "EM"){
+      if(input$length %in% "Yes"){
       print("preview length data for downloading")
       length <- gen.length() %>% 
         dplyr::select(campaignid, sample, family, genus, species, length_mm, number, code) %>% glimpse() # can't use clean as have already changed synonyms
@@ -9412,6 +9594,7 @@ function(input, output, session) {
 
       print("final length data for downloading")
       length.big <- length.big %>%  glimpse()
+      }
     }
   })
 }

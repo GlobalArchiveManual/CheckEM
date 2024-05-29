@@ -7,7 +7,7 @@ library(shinyBS)
 library(shinyjs)
 library(shinyWidgets)
 library(DT)
-library(profvis)
+# library(profvis)
 library(shinycssloaders)
 
 # Tables

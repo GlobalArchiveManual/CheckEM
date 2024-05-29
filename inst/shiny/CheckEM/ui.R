@@ -107,6 +107,13 @@ function(){
                                         selected = "point",
                                         inline = TRUE),
                            
+                           shiny::conditionalPanel("input.method == 'point'",
+                                                   radioButtons("stage", "Did you MaxN by stage?",
+                                                                c("Yes",
+                                                                  "No"),
+                                                                selected = "No",
+                                                                inline = TRUE)),
+                           
                            radioButtons("length", "Did you measure fish?",
                                         c("Yes",
                                           "No"),
