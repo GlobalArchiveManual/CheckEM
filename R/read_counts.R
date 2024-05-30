@@ -19,7 +19,36 @@ read_counts <- function(dir) {
   list.files(path = dir,      
              recursive = F,
              pattern = "ount.csv",
-             full.names = T) %>%
-    purrr::map(~read_dat(.)) %>%
-    purrr::list_rbind()
+             full.names = T)
+  
+  dat <- data.frame()
+  
+  for(file in unique(files)){
+    
+    message(paste("reading count file:", file))
+    
+    temp_dat <- read_dat(file) %>%
+      clean_names() %>%
+      dplyr::glimpse()
+    
+    # TODO add BRUVs
+    
+    if(method %in% c("DOVs")){
+      
+      if("opcode" %in% names(temp_dat)){
+        
+        temp_dat <- temp_dat %>%
+          dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
+          dplyr::select(-c(opcode, period))
+        
+      }
+      
+    }
+  
+    dat <- bind_rows(dat, temp_dat)
+    
+  }
+  
+  return(dat)
+  
 }
