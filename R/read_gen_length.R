@@ -6,18 +6,18 @@
 #' @export
 #'
 #' @examples
-read_gen_length <- function(dir) {
+read_gen_length <- function(dir, method = "BRUVs") {
   
   read_dat <- function(flnm){
     read_csv(flnm, col_types = cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       clean_names() %>%
       dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Length.csv" = "",
-                                                              "_length.csv" = ""))) %>%
-      dplyr::rename(sample = opcode)
+                                                              "_length.csv" = ""))) #%>%
+      #dplyr::rename(sample = opcode)
   }
   
-  list.files(path = dir,      
+  files <- list.files(path = dir,      
              recursive = F,
              pattern = "ength.csv",
              full.names = T) 

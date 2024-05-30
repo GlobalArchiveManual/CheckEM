@@ -6,17 +6,17 @@
 #' @export
 #'
 #' @examples
-read_counts <- function(dir) {
+read_counts <- function(dir, method = "BRUVs") {
   
   read_dat <- function(flnm){
     read_csv(flnm, col_types = cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       clean_names() %>%
-      dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Count.csv" = "", "_count.csv" = ""))) %>%
-      dplyr::rename(sample = opcode)
+      dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Count.csv" = "", "_count.csv" = ""))) #%>%
+      # dplyr::rename(sample = opcode)
   }
   
-  list.files(path = dir,      
+  files <- list.files(path = dir,      
              recursive = F,
              pattern = "ount.csv",
              full.names = T)
