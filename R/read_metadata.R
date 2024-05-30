@@ -56,7 +56,8 @@ read_metadata <- function(dir, method = "BRUVs") {
     
     temp_dat <- read_dat(file) %>%
       clean_names() %>%
-      dplyr::rename(any_of(lookup))
+      dplyr::rename(any_of(lookup)) %>%
+      dplyr::glimpse()
     
     # TODO add BRUVs
     
