@@ -6,21 +6,37 @@
 #' @export
 #'
 #' @examples
-read_em_length <- function(dir) {
+read_em_length <- function(dir, method = "BRUVs") {
   
   read_dat <- function(flnm){
     read_tsv(flnm, col_types = cols(.default = "c")) %>%
     dplyr::mutate(campaignid = basename(flnm)) %>%
     clean_names() %>%
     dplyr::mutate(campaignid = str_replace_all(campaignid,c("_3DPoints.txt" = "",
-                                                            "_Lengths.txt" = ""))) %>%
-    dplyr::rename(sample = opcode)
+                                                            "_Lengths.txt" = "")))
   }
   
-  list.files(path = dir,      
+  dat <- list.files(path = dir,      
              recursive = F,
              pattern = "_Lengths.txt|_3DPoints",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind()
+  
+  if(method %in% "DOVs"){
+    
+    dat <- dat %>%
+      dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
+      dplyr::select(-c(opcode, period))
+    
+  } else {
+    
+    dat <- dat %>%
+      dplyr::rename(sample = opcode)
+    
+  }
+  
+  
+  return(dat)
+  
 }

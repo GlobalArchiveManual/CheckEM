@@ -24,12 +24,15 @@ read_gen_length <- function(dir, method = "BRUVs") {
 
   dat <- data.frame()
   
+  lookup <- c(length_mm = "length")
+  
   for(file in unique(files)){
     
     message(paste("reading length file:", file))
     
     temp_dat <- read_dat(file) %>%
       clean_names() %>%
+      dplyr::rename(any_of(lookup)) %>%
       dplyr::glimpse()
     
     # TODO add BRUVs
