@@ -10,7 +10,7 @@
 #' 
 #' 
 
-read_metadata <- function(dir, method) {
+read_metadata <- function(dir, method = "BRUVs") {
   
   # dir <- here::here("r-workflows/data/raw/")
   
@@ -30,7 +30,7 @@ read_metadata <- function(dir, method) {
   
   for(file in unique(files)){
     
-    # print(file)
+    message(paste("reading metdata file:", file))
     
     # If Sample exists keep sample, if opcode and period exist make sample = opcode-period
     
@@ -57,6 +57,8 @@ read_metadata <- function(dir, method) {
     temp_dat <- read_dat(file) %>%
       clean_names() %>%
       dplyr::rename(any_of(lookup))
+    
+    # TODO add BRUVs
     
     if(method %in% c("DOVs")){
       
