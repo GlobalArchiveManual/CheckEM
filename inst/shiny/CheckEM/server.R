@@ -7370,16 +7370,33 @@ function(input, output, session) {
 
       # TODO add an example dataset for DOVs
       
+      
+      # add columns that don't exist
+      schema_cols <- c(
+        # level_1 = NA_real_,
+        level_2 = NA_real_,
+        level_3 = NA_real_,
+        level_4 = NA_real_,
+        level_5 = NA_real_,
+        level_6 = NA_real_,
+        level_7 = NA_real_,
+        level_8 = NA_real_,
+        scientific = NA_real_
+      )
+      
       points <- points %>%
-        dplyr::select(campaignid, sample, opcode, period, image_row, image_col, 
-                      
+        tibble::add_column(!!!schema_cols[!names(schema_cols) %in% names(.)]) %>%
+        dplyr::mutate(across(everything(), as.character)) %>%
+        dplyr::select(campaignid, sample, opcode, period, 
+                      image_row, image_col, 
                       starts_with("level_"),
-                      # level_2, level_3, level_4, level_5, 
-                      
-                      scientific, qualifiers, caab_code,
+                      scientific, any_of(c("qualifiers", "caab_code")),
                       relief_annotated) %>%
         dplyr::mutate(id = 1:nrow(.)) %>%
+        dplyr::left_join(schema) %>%
         dplyr::glimpse()
+      
+      
     }
   })
 
@@ -7392,13 +7409,13 @@ function(input, output, session) {
   hab.annotations <- reactive({
     hab.points() %>%
       dplyr::filter(relief_annotated %in% "no") %>%
-      dplyr::select(campaignid, sample, id, starts_with("level"), scientific, caab_code)
+      dplyr::select(campaignid, sample, id, starts_with("level"), scientific, any_of(c("caab_code")))
   })
   
   relief.annotations <- reactive({
     hab.points() %>%
       dplyr::filter(relief_annotated %in% "yes") %>%
-      dplyr::select(campaignid, sample, id, starts_with("level"), scientific, caab_code)
+      dplyr::select(campaignid, sample, id, starts_with("level"), scientific, any_of(c("caab_code")))
   })
   
   ## ► Samples without habitat - dataframe ----

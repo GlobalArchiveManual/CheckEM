@@ -68,10 +68,13 @@ sf_use_s2(FALSE)
 load("data/all_data.Rdata")
 
 # TODO update once I have moved the LH workflow into CHECKEM
-schema <- read_csv("data/benthic.annotation.schema.forward.facing.20230714.135113.csv",
+schema <- read_csv("data/benthic-annotation-schema-forward-facing.csv",
                    col_types = "c", na = "") %>%
   ga.clean.names() %>%
-  dplyr::select(-c(parent_caab, qualifiers))
+  dplyr::select(-c(qualifiers)) %>% #parent_caab, 
+  dplyr::mutate(scientific = dplyr::case_when(
+    !is.na(genus) ~ paste(genus, species)
+  ))
 
 dbHeader <- dashboardHeader()
 dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',

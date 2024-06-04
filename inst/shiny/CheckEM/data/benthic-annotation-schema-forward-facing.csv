@@ -1,0 +1,301 @@
+"caab_code","level_1","level_2","level_3","level_4","level_5","level_6","level_7","level_8","family","genus","species","qualifiers"
+35000906,"Biota","Ascidians","Stalked","Colonial",,,,,,,,
+35000905,"Biota","Ascidians","Stalked","Solitary",,,,,,,,
+35000904,"Biota","Ascidians","Stalked",,,,,,,,,
+35000903,"Biota","Ascidians","Unstalked","Colonial",,,,,,,,
+35000902,"Biota","Ascidians","Unstalked","Solitary",,,,,,,,
+35000901,"Biota","Ascidians","Unstalked",,,,,,,,,
+35000000,"Biota","Ascidians",,,,,,,,,,
+70000901,"Biota","Bacterial mats","Cyanobacteria",,,,,,,,,
+72000902,"Biota","Bacterial mats","Other",,,,,,,,,
+72000901,"Biota","Bacterial mats",,,,,,,,,,
+82002003,"Biota","Bedforms","2D","Ripples (<10cm height)",,,,,,,,
+82002004,"Biota","Bedforms","2D","Waves (>10cm height)",,,,,,,,
+82002002,"Biota","Bedforms","2D",,,,,,,,,
+82002007,"Biota","Bedforms","3D","Ripples (<10cm height)",,,,,,,,
+82002008,"Biota","Bedforms","3D","Waves (>10cm height)",,,,,,,,
+82002006,"Biota","Bedforms","3D",,,,,,,,,
+82002005,"Biota","Bedforms","Bioturbated",,,,,,,,,
+82002001,"Biota","Bedforms","None",,,,,,,,,
+82002000,"Biota","Bedforms",,,,,,,,,,
+81005003,"Biota","Bioturbation","Crawling traces","Complex trail",,,,,,,,
+81005006,"Biota","Bioturbation","Crawling traces","Crater row",,,,,,,,
+81005007,"Biota","Bioturbation","Crawling traces","Disturbed trace",,,,,,,,
+81005004,"Biota","Bioturbation","Crawling traces","Mounded trail",,,,,,,,
+81005005,"Biota","Bioturbation","Crawling traces","Perforated trail",,,,,,,,
+81005002,"Biota","Bioturbation","Crawling traces","Thick trail",,,,,,,,
+81005001,"Biota","Bioturbation","Crawling traces","Thin trail",,,,,,,,
+81005000,"Biota","Bioturbation","Crawling traces",,,,,,,,,
+81001004,"Biota","Bioturbation","Dwelling traces","Burrow cluster",,,,,,,,
+81001012,"Biota","Bioturbation","Dwelling traces","Crater cone",,,,,,,,
+81001001,"Biota","Bioturbation","Dwelling traces","Elongate depression",,,,,,,,
+81001013,"Biota","Bioturbation","Dwelling traces","Fractured mound",,,,,,,,
+81001002,"Biota","Bioturbation","Dwelling traces","Large mound",,,,,,,,
+81001005,"Biota","Bioturbation","Dwelling traces","Oblique burrow",,,,,,,,
+81001007,"Biota","Bioturbation","Dwelling traces","Paired burrow",,,,,,,,
+81001010,"Biota","Bioturbation","Dwelling traces","Rounded crater ring",,,,,,,,
+81001006,"Biota","Bioturbation","Dwelling traces","Single burrow",,,,,,,,
+81001003,"Biota","Bioturbation","Dwelling traces","Small mound",,,,,,,,
+81001011,"Biota","Bioturbation","Dwelling traces","Spiked crater ring",,,,,,,,
+81001014,"Biota","Bioturbation","Dwelling traces","Spotted mound",,,,,,,,
+81001009,"Biota","Bioturbation","Dwelling traces","Trapdoor burrow",,,,,,,,
+81001008,"Biota","Bioturbation","Dwelling traces","Vertical burrow",,,,,,,,
+81001000,"Biota","Bioturbation","Dwelling traces",,,,,,,,,
+81004001,"Biota","Bioturbation","Feeding traces","Large rosette",,,,,,,,
+81004003,"Biota","Bioturbation","Feeding traces","Petal rosette",,,,,,,,
+81004005,"Biota","Bioturbation","Feeding traces","Pincushion rosette",,,,,,,,
+81004004,"Biota","Bioturbation","Feeding traces","Rayed mound",,,,,,,,
+81004002,"Biota","Bioturbation","Feeding traces","Small rosette",,,,,,,,
+81004000,"Biota","Bioturbation","Feeding traces",,,,,,,,,
+81006002,"Biota","Bioturbation","Organism tests","Globule xenophyophore",,,,,,,,
+81006001,"Biota","Bioturbation","Organism tests","Lumpy xenophyophore",,,,,,,,
+81006000,"Biota","Bioturbation","Organism tests",,,,,,,,,
+81003003,"Biota","Bioturbation","Resting traces","Large depression",,,,,,,,
+81003002,"Biota","Bioturbation","Resting traces","Star impression",,,,,,,,
+81003001,"Biota","Bioturbation","Resting traces","Urchin trace",,,,,,,,
+81003000,"Biota","Bioturbation","Resting traces",,,,,,,,,
+81007006,"Biota","Bioturbation","Unknown origin","Fern",,,,,,,,
+81007005,"Biota","Bioturbation","Unknown origin","Matchstick",,,,,,,,
+81007003,"Biota","Bioturbation","Unknown origin","Mesh",,,,,,,,
+81007001,"Biota","Bioturbation","Unknown origin","Ovoid pinnate",,,,,,,,
+81007007,"Biota","Bioturbation","Unknown origin","Pogostick",,,,,,,,
+81007002,"Biota","Bioturbation","Unknown origin","Round pinnate",,,,,,,,
+81007004,"Biota","Bioturbation","Unknown origin","Spider",,,,,,,,
+81007000,"Biota","Bioturbation","Unknown origin",,,,,,,,,
+81002001,"Biota","Bioturbation","Waste casts","Coiled casts",,,,,,,,
+81002005,"Biota","Bioturbation","Waste casts","Curly casts",,,,,,,,
+81002004,"Biota","Bioturbation","Waste casts","Mounded casts",,,,,,,,
+81002006,"Biota","Bioturbation","Waste casts","Nest casts",,,,,,,,
+81002003,"Biota","Bioturbation","Waste casts","Round casts",,,,,,,,
+81002007,"Biota","Bioturbation","Waste casts","Spirals",,,,,,,,
+81002008,"Biota","Bioturbation","Waste casts","Switchbacks",,,,,,,,
+81002002,"Biota","Bioturbation","Waste casts","Wavy casts",,,,,,,,
+81002000,"Biota","Bioturbation","Waste casts",,,,,,,,,
+81000000,"Biota","Bioturbation",,,,,,,,,,
+19100000,"Biota","Brachiopods",,,,,,,,,,
+20000908,"Biota","Bryozoa","Hard","Branching",,,,,,,,
+20000902,"Biota","Bryozoa","Hard","Encrusting",,,,,,,,
+20000903,"Biota","Bryozoa","Hard","Fenestrate",,,,,,,,
+20000904,"Biota","Bryozoa","Hard","Massive",,,,,,,,
+20000901,"Biota","Bryozoa","Hard",,,,,,,,,
+20000906,"Biota","Bryozoa","Soft","Dendroid",,,,,,,,
+20000907,"Biota","Bryozoa","Soft","Foliaceous",,,,,,,,
+20000905,"Biota","Bryozoa","Soft",,,,,,,,,
+20000000,"Biota","Bryozoa",,,,,,,,,,
+11280000,"Biota","Cnidaria","Colonial anemones","Corallimorphs",,,,,,,,
+11284000,"Biota","Cnidaria","Colonial anemones","Zoanthids",,,,,,,,
+11500901,"Biota","Cnidaria","Colonial anemones",,,,,,,,,
+11168901,"Biota","Cnidaria","Corals","Black & Octocorals",,,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11171000,"Biota","Cnidaria","Corals","Black & Octocorals","Blue coral (Heliopora)",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168902,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168909,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Fleshy",,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168911,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Fleshy","Arborescent",,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168910,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Fleshy","Mushroom",,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168903,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Non-fleshy",,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168904,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Non-fleshy","Arborescent",,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168905,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Non-fleshy","Bottle-brush",,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168907,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Non-fleshy","Bottle-brush","Complex",,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168906,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Non-fleshy","Bottle-brush","Simple",,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168908,"Biota","Cnidaria","Corals","Black & Octocorals","Branching (3D)","Non-fleshy","Bushy",,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168919,"Biota","Cnidaria","Corals","Black & Octocorals","Encrusting",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168912,"Biota","Cnidaria","Corals","Black & Octocorals","Fan (2D)",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168913,"Biota","Cnidaria","Corals","Black & Octocorals","Fan (2D)","Fern-frond",,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168915,"Biota","Cnidaria","Corals","Black & Octocorals","Fan (2D)","Fern-frond","Complex",,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168914,"Biota","Cnidaria","Corals","Black & Octocorals","Fan (2D)","Fern-frond","Simple",,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168916,"Biota","Cnidaria","Corals","Black & Octocorals","Fan (2D)","Rigid",,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168920,"Biota","Cnidaria","Corals","Black & Octocorals","Massive soft corals",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11201901,"Biota","Cnidaria","Corals","Black & Octocorals","Organ pipe coral (Tubipora)",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168918,"Biota","Cnidaria","Corals","Black & Octocorals","Quill (seapen)",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168917,"Biota","Cnidaria","Corals","Black & Octocorals","Whip",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290000,"Biota","Cnidaria","Corals","Stony corals",,,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290904,"Biota","Cnidaria","Corals","Stony corals","Bottlebrush",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290912,"Biota","Cnidaria","Corals","Stony corals","Branching",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290915,"Biota","Cnidaria","Corals","Stony corals","Columnar",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290910,"Biota","Cnidaria","Corals","Stony corals","Corymbose",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290909,"Biota","Cnidaria","Corals","Stony corals","Digitate",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290908,"Biota","Cnidaria","Corals","Stony corals","Encrusting",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290907,"Biota","Cnidaria","Corals","Stony corals","Foliose / plate",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290906,"Biota","Cnidaria","Corals","Stony corals","Massive",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290901,"Biota","Cnidaria","Corals","Stony corals","Solitary",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290903,"Biota","Cnidaria","Corals","Stony corals","Solitary","Attached",,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290902,"Biota","Cnidaria","Corals","Stony corals","Solitary","Free-living",,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11298000,"Biota","Cnidaria","Corals","Stony corals","Solitary","Mushroom (Fungiidae)",,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290913,"Biota","Cnidaria","Corals","Stony corals","Staghorn",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290905,"Biota","Cnidaria","Corals","Stony corals","Sub-massive",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11290911,"Biota","Cnidaria","Corals","Stony corals","Tabulate",,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11168000,"Biota","Cnidaria","Corals",,,,,,,,,"Alive/Recruit/Bleached/Dead/Recently dead"
+11077906,"Biota","Cnidaria","Hydrocorals","Branching",,,,,,,,
+11077907,"Biota","Cnidaria","Hydrocorals","Submassive / encrusting",,,,,,,,
+11077000,"Biota","Cnidaria","Hydrocorals",,,,,,,,,
+11001000,"Biota","Cnidaria","Hydroids",,,,,,,,,
+11229901,"Biota","Cnidaria","True anemones","Flytrap",,,,,,,,
+11229902,"Biota","Cnidaria","True anemones","Fourlobed",,,,,,,,
+11229903,"Biota","Cnidaria","True anemones","Other anemones",,,,,,,,
+11229000,"Biota","Cnidaria","True anemones",,,,,,,,,
+11164000,"Biota","Cnidaria","Tube anemones",,,,,,,,,
+11500000,"Biota","Cnidaria",,,,,,,,,,
+27500902,"Biota","Crustacea","Barnacles","Acorn",,,,,,,,
+27500901,"Biota","Crustacea","Barnacles","Stalked",,,,,,,,
+27500000,"Biota","Crustacea","Barnacles",,,,,,,,,
+28836000,"Biota","Crustacea","Crabs","King crabs",,,,,,,,
+28843000,"Biota","Crustacea","Crabs","Porcelain crabs",,,,,,,,
+28850000,"Biota","Crustacea","Crabs","True crabs",,,,,,,,
+28000903,"Biota","Crustacea","Crabs",,,,,,,,,
+28825903,"Biota","Crustacea","Hermit crabs","With anemones",,,,,,,,
+28825902,"Biota","Crustacea","Hermit crabs","With shell or stone home ",,,,,,,,
+28825901,"Biota","Crustacea","Hermit crabs",,,,,,,,,
+28820000,"Biota","Crustacea","Lobsters","Rock lobsters",,,,,,,,
+28821000,"Biota","Crustacea","Lobsters","Slipper lobsters / bugs",,,,,,,,
+28825904,"Biota","Crustacea","Lobsters","Squat lobsters",,,,,,,,
+28786000,"Biota","Crustacea","Lobsters","True lobsters",,,,,,,,
+28000902,"Biota","Crustacea","Lobsters",,,,,,,,,
+28000901,"Biota","Crustacea","Prawns / shrimps / mysids",,,,,,,,,
+27000000,"Biota","Crustacea",,,,,,,,,,
+25001901,"Biota","Echinoderms","Feather stars","Stalked crinoids",,,,,,,,
+25001902,"Biota","Echinoderms","Feather stars","Unstalked crinoids",,,,,,,,
+25001000,"Biota","Echinoderms","Feather stars",,,,,,,,,
+25160902,"Biota","Echinoderms","Ophiuroids","Basket stars",,,,,,,,
+25160901,"Biota","Echinoderms","Ophiuroids","Brittle / snake stars",,,,,,,,
+25160000,"Biota","Echinoderms","Ophiuroids",,,,,,,,,
+25400901,"Biota","Echinoderms","Sea cucumbers","Benthic",,,,,,,,
+25400902,"Biota","Echinoderms","Sea cucumbers","Pelagic / swimming",,,,,,,,
+25400000,"Biota","Echinoderms","Sea cucumbers",,,,,,,,,
+25102000,"Biota","Echinoderms","Sea stars",,,,,,,,,
+25200902,"Biota","Echinoderms","Sea urchins","Irregular urchins",,,,,,,,
+25200901,"Biota","Echinoderms","Sea urchins","Regular urchins",,,,,,,,
+25200000,"Biota","Echinoderms","Sea urchins",,,,,,,,,
+25000000,"Biota","Echinoderms",,,,,,,,,,
+37990083,"Biota","Fishes","Bony fishes",,,,,,,,,
+37990025,"Biota","Fishes","Eels",,,,,,,,,
+37990028,"Biota","Fishes","Elasmobranchs","Chimaeras",,,,,,,,
+37990030,"Biota","Fishes","Elasmobranchs","Rays & skates",,,,,,,,
+37990016,"Biota","Fishes","Elasmobranchs","Sharks",,,,,,,,
+37990082,"Biota","Fishes","Elasmobranchs",,,,,,,,,
+37000000,"Biota","Fishes",,,,,,,,,,
+12000000,"Biota","Jellies","Ctenophores",,,,,,,,,
+11150000,"Biota","Jellies","Cubozoa",,,,,,,,,
+11000901,"Biota","Jellies","Hydromedusae",,,,,,,,,
+35101000,"Biota","Jellies","Pyrosomes",,,,,,,,,
+35100000,"Biota","Jellies","Salps",,,,,,,,,
+11120000,"Biota","Jellies","Scyphozoa",,,,,,,,,
+11090000,"Biota","Jellies","Siphonophores",,,,,,,,,
+80600903,"Biota","Jellies",,,,,,,,,,
+80300912,"Biota","Macroalgae","Articulated calcareous","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300913,"Biota","Macroalgae","Articulated calcareous","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300911,"Biota","Macroalgae","Articulated calcareous",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300927,"Biota","Macroalgae","Encrusting","Brown",,,,,,,,
+80300928,"Biota","Macroalgae","Encrusting","Green",,,,,,,,
+80300929,"Biota","Macroalgae","Encrusting","Red",,,,,,,,
+80300934,"Biota","Macroalgae","Encrusting","Red","Calcareous",,,,,,,
+80300935,"Biota","Macroalgae","Encrusting","Red","Non-calcareous",,,,,,,
+80300926,"Biota","Macroalgae","Encrusting",,,,,,,,,
+80300904,"Biota","Macroalgae","Erect coarse branching","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300905,"Biota","Macroalgae","Erect coarse branching","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300906,"Biota","Macroalgae","Erect coarse branching","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300903,"Biota","Macroalgae","Erect coarse branching",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300908,"Biota","Macroalgae","Erect fine branching","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300909,"Biota","Macroalgae","Erect fine branching","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300910,"Biota","Macroalgae","Erect fine branching","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300907,"Biota","Macroalgae","Erect fine branching",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300931,"Biota","Macroalgae","Filamentous / filiform","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300932,"Biota","Macroalgae","Filamentous / filiform","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300933,"Biota","Macroalgae","Filamentous / filiform","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300930,"Biota","Macroalgae","Filamentous / filiform",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300915,"Biota","Macroalgae","Globose / saccate","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300916,"Biota","Macroalgae","Globose / saccate","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300917,"Biota","Macroalgae","Globose / saccate","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300914,"Biota","Macroalgae","Globose / saccate",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300919,"Biota","Macroalgae","Laminate","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300920,"Biota","Macroalgae","Laminate","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300921,"Biota","Macroalgae","Laminate","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300918,"Biota","Macroalgae","Laminate",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300902,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54079009,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Lessoniaceae","Ecklonia","radiata","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54102005,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Seirococcaceae","Scytothalia","dorycarpa","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54102902,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Seirococcaceae","Phyllospora","spp","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+54105902,"Biota","Macroalgae","Large canopy-forming","Brown",,,,,"Sargassaceae","Sargassum","spp","Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300901,"Biota","Macroalgae","Large canopy-forming",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300923,"Biota","Macroalgae","Sheet-like / membraneous","Brown",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300924,"Biota","Macroalgae","Sheet-like / membraneous","Green",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300925,"Biota","Macroalgae","Sheet-like / membraneous","Red",,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300922,"Biota","Macroalgae","Sheet-like / membraneous",,,,,,,,,"Drift/No epiphytes/Epiphytes algae/Epiphytes other"
+80300000,"Biota","Macroalgae",,,,,,,,,,
+23199000,"Biota","Molluscs","Bivalves",,,,,,,,,
+23607000,"Biota","Molluscs","Cephalopods","Cuttlefish",,,,,,,,
+23650000,"Biota","Molluscs","Cephalopods","Octopods",,,,,,,,
+23615000,"Biota","Molluscs","Cephalopods","Squid",,,,,,,,
+23590000,"Biota","Molluscs","Cephalopods",,,,,,,,,
+23100000,"Biota","Molluscs","Chitons",,,,,,,,,
+24000000,"Biota","Molluscs","Gastropods",,,,,,,,,
+23000000,"Biota","Molluscs",,,,,,,,,,
+33000000,"Biota","Sea spiders",,,,,,,,,,
+63605902,"Biota","Seagrasses","Elliptical leaves","",,,,,"Hydrocharitaceae","Halophila","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63600902,"Biota","Seagrasses","Elliptical leaves",,,,,,,,,"No epiphytes/Epiphytes algae/Epiphytes other"
+63618901,"Biota","Seagrasses","Strap-like leaves","",,,,,"Cymodoceaceae","Amphibolis","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63617901,"Biota","Seagrasses","Strap-like leaves","",,,,,"Posidoniaceae","Posidonia","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63619902,"Biota","Seagrasses","Strap-like leaves","",,,,,"Zosteraceae","Zostera","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63614901,"Biota","Seagrasses","Strap-like leaves","",,,,,"Ruppiaceae","Ruppia","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63618905,"Biota","Seagrasses","Strap-like leaves","",,,,,"Cymodoceaceae","Thalassodendron","spp","No epiphytes/Epiphytes algae/Epiphytes other"
+63600903,"Biota","Seagrasses","Strap-like leaves",,,,,,,,,"No epiphytes/Epiphytes algae/Epiphytes other"
+63600901,"Biota","Seagrasses",,,,,,,,,,"No epiphytes/Epiphytes algae/Epiphytes other"
+2,"Biota","Sessile invertebrates","","",,,,,"","","",
+10000917,"Biota","Sponges","Crusts","Creeping / ramose",,,,,,,,
+10000902,"Biota","Sponges","Crusts","Encrusting",,,,,,,,
+10000921,"Biota","Sponges","Crusts","Endolithic / bioeroding",,,,,,,,
+10000901,"Biota","Sponges","Crusts",,,,,,,,,
+10000907,"Biota","Sponges","Cup-likes","Barrels",,,,,,,,
+10000910,"Biota","Sponges","Cup-likes","Cups",,,,,,,,
+10000919,"Biota","Sponges","Cup-likes","Cups","Cup / goblet",,,,,,,
+10000918,"Biota","Sponges","Cup-likes","Cups","Incomplete cup / curled fan",,,,,,,
+10000920,"Biota","Sponges","Cup-likes","Cups","Tables / discs",,,,,,,
+10000911,"Biota","Sponges","Cup-likes","Tubes and chimneys",,,,,,,,
+10000909,"Biota","Sponges","Cup-likes",,,,,,,,,
+10000915,"Biota","Sponges","Erect forms","Branching",,,,,,,,
+10000913,"Biota","Sponges","Erect forms","Laminar",,,,,,,,
+10000914,"Biota","Sponges","Erect forms","Palmate",,,,,,,,
+10000916,"Biota","Sponges","Erect forms","Simple",,,,,,,,
+10000906,"Biota","Sponges","Erect forms","Stalked",,,,,,,,
+10000912,"Biota","Sponges","Erect forms",,,,,,,,,
+10000905,"Biota","Sponges","Massive forms","Balls",,,,,,,,
+10000908,"Biota","Sponges","Massive forms","Cryptic",,,,,,,,
+10000904,"Biota","Sponges","Massive forms","Simple",,,,,,,,
+10000903,"Biota","Sponges","Massive forms",,,,,,,,,
+10000000,"Biota","Sponges",,,,,,,,,,
+1,"Biota","Unscorable","","",,,,,"","","",
+36110000,"Biota","Worms","Acorn worms",,,,,,,,,
+17020000,"Biota","Worms","Echiura",,,,,,,,,
+13000000,"Biota","Worms","Flatworms",,,,,,,,,
+15400000,"Biota","Worms","Penisworms",,,,,,,,,
+22000902,"Biota","Worms","Polychaetes","Other polychaetes",,,,,,,,
+22000901,"Biota","Worms","Polychaetes","Tube worms",,,,,,,,
+22000000,"Biota","Worms","Polychaetes",,,,,,,,,
+17000000,"Biota","Worms","Sipuncula",,,,,,,,,
+80600901,"Biota","Worms",,,,,,,,,,
+82003001,"Physical","Relief","Flat",,"0",,,,,,,
+82003008,"Physical","Relief","High","Caves","5",,,,"","","",
+82003006,"Physical","Relief","High","High (>3m)","3",,,,,,,
+82003007,"Physical","Relief","High","Wall","4",,,,,,,
+82003005,"Physical","Relief","High",,,,,,,,,
+82003003,"Physical","Relief","Low / moderate","Low (<1m)","1",,,,,,,
+82003004,"Physical","Relief","Low / moderate","Moderate (1-3m)","2",,,,,,,
+82003002,"Physical","Relief","Low / moderate",,,,,,,,,
+82003000,"Physical","Relief",,,,,,,,,,
+82001003,"Physical","Substrate","Consolidated (hard)","Boulders",,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001004,"Physical","Substrate","Consolidated (hard)","Cobbles",,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001002,"Physical","Substrate","Consolidated (hard)","Rock",,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001001,"Physical","Substrate","Consolidated (hard)",,,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001006,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel",,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001007,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Biologenic",,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001010,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Biologenic","Barnacle plates",,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001008,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Biologenic","Coquina / shellhash",,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001009,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Biologenic","Coral rubble",,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001018,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Biologenic","Rhodoliths",,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001017,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Biologenic","Screwshells",,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001011,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Gravel (2-10mm)",,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001012,"Physical","Substrate","Unconsolidated (soft)","Pebble / gravel","Pebble (10-64mm)",,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001013,"Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)",,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001014,"Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Coarse sand (with shell fragments)",,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001015,"Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Fine sand (no shell fragments)",,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001016,"Physical","Substrate","Unconsolidated (soft)","Sand / mud (<2mm)","Mud / silt (<64um)",,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001005,"Physical","Substrate","Unconsolidated (soft)",,,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
+82001000,"Physical","Substrate",,,,,,,,,,"Veneer/Iceberg scour/Storm damage/Urchin barren/Turf mat"
