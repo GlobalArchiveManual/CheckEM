@@ -191,7 +191,7 @@ Feel free to replace with any suitable bathymetry in .tif format.</p>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "93.9", "77.3", "78.3", "73.9", "81.9", "7…</span></span>
 <span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
@@ -209,7 +209,7 @@ Add the latitude and longitude coordinates back into the metadata.</p>
 <code class="sourceCode R"><span><span class="va">tidy.metadata_t</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">metadata.vect</span>, geom <span class="op">=</span> <span class="st">"XY"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, date_time, location, site,</span></span>
-<span><span class="co">## depth, successful_count, successful_length, successful_habitat_forward,</span></span>
+<span><span class="co">## depth_m, successful_count, successful_length, successful_habitat_forward,</span></span>
 <span><span class="co">## successful_habitat_backward)`</span></span></code></pre>
 <p>Extract the bathymetry derivatives at each sampling location.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -218,6 +218,10 @@ Add the latitude and longitude coordinates back into the metadata.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">depth</span><span class="op">)</span>,                                                  </span>
 <span>                <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">roughness</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: There was 1 warning in `dplyr::filter()`.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> In argument: `!is.na(depth)`.</span></span>
+<span><span class="co">## Caused by warning in `is.na()`:</span></span>
+<span><span class="co">## <span style="color: #BBBB00;">!</span> is.na() applied to non-(list or vector) of type 'closure'</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 32</span></span>
 <span><span class="co">## Columns: 22</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
@@ -225,7 +229,7 @@ Add the latitude and longitude coordinates back into the metadata.</p>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14/03/2023 23:36", "14/03/2023 23:49", "1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "39.6", "42.7", "36", "41", "42.6", "45", …</span></span>
+<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "39.6", "42.7", "36", "41", "42.6", "45", …</span></span>
 <span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
@@ -246,7 +250,7 @@ Add the latitude and longitude coordinates back into the metadata.</p>
 <div class="section level2">
 <h2 id="save-the-joined-metadata-and-bathymetry-derivatives">Save the joined metadata and bathymetry derivatives<a class="anchor" aria-label="anchor" href="#save-the-joined-metadata-and-bathymetry-derivatives"></a>
 </h2>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">metadata.bathy.derivatives</span>, <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>, <span class="va">name</span>, <span class="st">"_metadata-bathymetry-derivatives.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

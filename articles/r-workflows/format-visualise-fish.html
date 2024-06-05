@@ -273,10 +273,10 @@ subsequent fish modelling scripts.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">maturity.mean</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, depth)`</span></span>
+<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span>
 <span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 9,867</span></span>
-<span><span class="co">## Columns: 35</span></span>
+<span><span class="co">## Columns: 36</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", …</span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Acanthuridae", "Acanthuridae", "Acanthuri…</span></span>
@@ -290,7 +290,7 @@ subsequent fish modelling scripts.</p>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "44.3", "44.3", "4…</span></span>
+<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "44.3", "44.3", "4…</span></span>
 <span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
@@ -301,6 +301,7 @@ subsequent fish modelling scripts.</p>
 <span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Acanthuridae Naso brachycentron", "Acanth…</span></span>
 <span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8533, 114.8533, 11…</span></span>
 <span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.08387, -34.08387, -34.08387…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "44.3", "44.3", "4…</span></span>
 <span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519, -42.77519, -42.77519, -42.77519…</span></span>
 <span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777, 0.005708777, 0.005708777, 0.0…</span></span>
 <span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942, 72.31942, 72.31942, 72.31942, 72…</span></span>
@@ -328,7 +329,7 @@ and highly-targeted species.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">scientific</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Choerodon rubescens"</span>, <span class="st">"Chrysophrys auratus"</span>, <span class="st">"Glaucosoma hebraicum"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 144</span></span>
-<span><span class="co">## Columns: 35</span></span>
+<span><span class="co">## Columns: 36</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "12", "12", "12", "14", …</span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Glaucosomatidae", "Labridae", "Sparidae",…</span></span>
@@ -342,7 +343,7 @@ and highly-targeted species.</p>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "42.6", "42.6", "4…</span></span>
+<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "42.6", "42.6", "4…</span></span>
 <span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
@@ -353,6 +354,7 @@ and highly-targeted species.</p>
 <span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Glaucosoma hebraicum", "Choerodon rubesce…</span></span>
 <span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8533, 114.8816, 11…</span></span>
 <span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.08387, -34.08387, -34.13249…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "42.6", "42.6", "4…</span></span>
 <span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519, -42.77519, -42.77519, -42.02835…</span></span>
 <span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777, 0.005708777, 0.005708777, 0.0…</span></span>
 <span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942, 72.31942, 72.31942, 110.35012, 1…</span></span>
