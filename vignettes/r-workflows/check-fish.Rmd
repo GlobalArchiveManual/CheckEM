@@ -60,7 +60,7 @@ If you have already completed this step while checking your habitat data, then y
 
 ```{r load-metadata}
 metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
+  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
 ```
 
