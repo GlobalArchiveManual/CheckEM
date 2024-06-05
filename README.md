@@ -16,46 +16,14 @@ table {
 }
 </style>
 
-<table><thead>
-  <tr>
-    <th>Field Manuals</th>
-    <th>Video Annotation Guides</th>
-    <th>CheckEM</th>
-    <th>GlobalArchive</th>
-  </tr></thead>
-<tbody>
-  <tr>
-    <td>
-    <a href="https://benthic-bruvs-field-manual.github.io/">stereo-BRUVs</a><br>
-    <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189">stereo-DOVs</a><br>
-    <a href="https://drop-camera-field-manual.github.io/">stereo-BOSS</a>
-    </td>
-    <td>
-    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html">EventMeasure</a><br>
-    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html">TransectMeasure</a>
-    </td>
-    <td>
-    <a href="https://marine-ecology.shinyapps.io/CheckEM/">Launch app</a><br>
-    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html">User guide</a><br>
-    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html">How to video</a>
-    </td>
-    <td>
-    <a href="https://globalarchive.org/">Website</a><br>
-    <a href="https://globalarchivemanual.github.io/">User guide</a>
-    </td>
-  </tr>
-</tbody>
-</table>
+
 
 <style type="text/css">
 .tg  {border:none;border-collapse:collapse;border-spacing:0;}
-.tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+.tg td{border-style:solid;border-width:0px;font-size:18px;overflow:hidden;
   padding:10px 5px;word-break:normal;}
-.tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+.tg th{border-style:solid;border-width:0px;font-size:18px;font-weight:normal;
   overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-5vzn{border-color:#000000;color:#263f6b;font-size:medium;text-align:left;vertical-align:top}
-.tg .tg-5thf{border-color:#000000;color:#263f6b;text-align:left;vertical-align:top}
-.tg .tg-73oq{border-color:#000000;text-align:left;vertical-align:top}
 </style>
 <table class="tg" style="undefined;table-layout: fixed; width: 807px"><colgroup>
 <col style="width: 25%">
@@ -65,17 +33,39 @@ table {
 </colgroup>
 <thead>
   <tr>
-    <th class="tg-5vzn"><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">Field Manuals</span></th>
-    <th class="tg-5vzn"><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">Video Annotation Guides</span></th>
-    <th class="tg-5vzn"><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">CheckEM</span></th>
-    <th class="tg-5vzn"><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">GlobalArchive</span></th>
+    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">Field Manuals</span></th>
+    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">Video Annotation Guides</span></th>
+    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">CheckEM</span></th>
+    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">GlobalArchive</span></th>
   </tr></thead>
 <tbody>
   <tr>
-    <td class="tg-5thf"><a href="https://benthic-bruvs-field-manual.github.io/" target="_blank" rel="noopener noreferrer">stereo-BRUVs</a><br><a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189" target="_blank" rel="noopener noreferrer">stereo-DOVs</a><br><a href="https://drop-camera-field-manual.github.io/" target="_blank" rel="noopener noreferrer">stereo-BOSS</a></td>
-    <td class="tg-5thf"><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html">EventMeasure</a><br><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html">TransectMeasure</a></td>
-    <td class="tg-5thf"><a href="https://marine-ecology.shinyapps.io/CheckEM/" target="_blank" rel="noopener noreferrer">Launch app</a><br><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html">User guide</a><br><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html">How to video</a></td>
-    <td class="tg-73oq"><a href="https://globalarchive.org/" target="_blank" rel="noopener noreferrer">Website</a><br><a href="https://globalarchivemanual.github.io/" target="_blank" rel="noopener noreferrer">User guide</a></td>
+    <td>
+    <ul>
+    <li><a href="https://benthic-bruvs-field-manual.github.io/" target="_blank" rel="noopener noreferrer">stereo-BRUVs</a></li>
+    <li><a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189" target="_blank" rel="noopener noreferrer">stereo-DOVs</a></li>
+    <li><a href="https://drop-camera-field-manual.github.io/" target="_blank" rel="noopener noreferrer">stereo-BOSS</a></li>
+    </ul>
+    </td>
+    <td>
+    <ul>
+    <li><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html">EventMeasure</a></li>
+    <li><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html">TransectMeasure</a></li>
+    </ul>
+    </td>
+    <td>
+    <ul>
+    <a href="https://marine-ecology.shinyapps.io/CheckEM/" target="_blank" rel="noopener noreferrer">Launch app</a></li>
+    <li><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html">User guide</a></li>
+    <li><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html">How to video</a></li>
+    </ul>
+    </td>
+    <td>
+    <ul>
+    <li><a href="https://globalarchive.org/" target="_blank" rel="noopener noreferrer">Website</a></li>
+    <li><a href="https://globalarchivemanual.github.io/" target="_blank" rel="noopener noreferrer">User guide</a></li>
+    </ul>
+    </td>
   </tr>
 </tbody></table>
 
