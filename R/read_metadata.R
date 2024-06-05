@@ -71,6 +71,16 @@ read_metadata <- function(dir, method = "BRUVs") {
         
       }
       
+    } 
+    
+    if(method %in% c("BRUVs")){
+      
+      if("opcode" %in% names(temp_dat)){
+        
+      temp_dat <- temp_dat %>%
+        dplyr::rename(sample = opcode)
+      }
+      
     }
     
     if(!"date_time" %in% names(temp_dat)){

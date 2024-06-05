@@ -59,7 +59,7 @@ Now we load and tidy the metadata.
 If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
 
 ```{r load-metadata}
-metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
+metadata <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs") %>% # Change here to "DOVs"
   dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
 ```
@@ -178,7 +178,7 @@ if(nrow(points) > 1){
     dplyr::filter(successful_count %in% c("Yes")) %>% 
     dplyr::filter(maxn > 0) %>%
     dplyr::select(campaignid, sample, family, genus, species, maxn) %>%
-    glimpse()
+    dplyr::glimpse()
 }
 
 # Only run this if there is data in the counts data frame
@@ -187,6 +187,7 @@ if(nrow(counts) > 1){
     dplyr::group_by(campaignid, sample, family, genus, species) %>%
     dplyr::mutate(number = as.numeric(count)) %>%
     dplyr::summarise(maxn = sum(number)) %>%
+    dplyr::ungroup() %>%
     dplyr::group_by(campaignid, sample, family, genus, species) %>%
     dplyr::slice(which.max(maxn)) %>%
     dplyr::ungroup() %>%
@@ -198,7 +199,7 @@ if(nrow(counts) > 1){
     dplyr::filter(successful_count %in% c("Yes")) %>%
     dplyr::filter(maxn > 0) %>%
     dplyr::select(campaignid, sample, family, genus, species, maxn) %>%
-    glimpse()
+    dplyr::glimpse()
 }
 
 # If only EventMeasure data then MaxN only includes Points data

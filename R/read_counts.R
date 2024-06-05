@@ -44,6 +44,18 @@ read_counts <- function(dir, method = "BRUVs") {
       }
       
     }
+    
+    
+    if(method %in% c("BRUVs")){
+      
+      if("opcode" %in% names(temp_dat)){
+        
+        temp_dat <- temp_dat %>%
+          dplyr::rename(sample = opcode)
+        
+      }
+      
+    }
   
     dat <- bind_rows(dat, temp_dat)
     
