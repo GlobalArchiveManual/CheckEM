@@ -18,7 +18,7 @@
 <tbody>
   <tr>
     <td>
-    <a href="https://benthic-bruvs-field-manual.github.io/">stereo-BRUVs</a>"<br>
+    <a href="https://benthic-bruvs-field-manual.github.io/">stereo-BRUVs</a><br>
     <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189">stereo-DOVs</a><br>
     <a href="https://drop-camera-field-manual.github.io/">stereo-BOSS</a>
     </td>
