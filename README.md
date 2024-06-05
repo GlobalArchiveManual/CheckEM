@@ -18,22 +18,22 @@
 <tbody>
   <tr>
     <td>
-    [stereo-BRUVs](https://benthic-bruvs-field-manual.github.io/)<br>
-    [stereo-DOVs](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189)<br>
-    [stereo-BOSS](https://drop-camera-field-manual.github.io/)
+    <a href="https://benthic-bruvs-field-manual.github.io/">stereo-BRUVs</a>"<br>
+    <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189">stereo-DOVs</a><br>
+    <a href="https://drop-camera-field-manual.github.io/">stereo-BOSS</a>
     </td>
     <td>
-    [EventMeasure](https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html)<br>
-    [TransectMeasure](https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html)
+    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html">EventMeasure</a><br>
+    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html">TransectMeasure</a>
     </td>
     <td>
-    [Launch app](https://marine-ecology.shinyapps.io/CheckEM/)<br>
-    [User guide](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)<br>
-    [How to video](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html)
+    <a href="https://marine-ecology.shinyapps.io/CheckEM/">Launch app</a><br>
+    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html">User guide</a><br>
+    <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html">How to video</a>
     </td>
     <td>
-    [Website](https://globalarchive.org/)<br>
-    [User guide](https://globalarchivemanual.github.io/)
+    <a href="https://globalarchive.org/">Website</a><br>
+    <a href="https://globalarchivemanual.github.io/">User guide</a>
     </td>
   </tr>
 </tbody>
