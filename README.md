@@ -8,6 +8,14 @@
 
 ## Quick Links
 
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+</style>
+
 <table><thead>
   <tr>
     <th>Field Manuals</th>
