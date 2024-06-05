@@ -6,6 +6,39 @@
 
 ![](man/figures/checkem_workflow.png)
 
+## Quick Links
+
+<table><thead>
+  <tr>
+    <th>Field Manuals</th>
+    <th>Video Annotation Guides</th>
+    <th>CheckEM</th>
+    <th>GlobalArchive</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td>
+    [stereo-BRUVs](https://benthic-bruvs-field-manual.github.io/)<br>
+    [stereo-DOVs](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189)<br>
+    [stereo-BOSS](https://drop-camera-field-manual.github.io/)
+    </td>
+    <td>
+    [EventMeasure](https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html)<br>
+    [TransectMeasure](https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html)
+    </td>
+    <td>
+    [Launch app](https://marine-ecology.shinyapps.io/CheckEM/)<br>
+    [User guide](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)<br>
+    [How to video](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html)
+    </td>
+    <td>
+    [Website](https://globalarchive.org/)<br>
+    [User guide](https://globalarchivemanual.github.io/)
+    </td>
+  </tr>
+</tbody>
+</table>
+
 ## 1. Data Collection
 Standardised protocols reduce variation in methodologies among researchers, and encourage the use of Findable, Accessible, Interoperable and Reusable (FAIR, Wilkinson et al., 2016) protocols, this increases collaborations and allows researchers to answer broadscale ecological questions. Two standard operating procedures for field data collection have been published:
 
