@@ -19,13 +19,13 @@ table {
 
 
 <style type="text/css">
-.tg  {border:none;border-collapse:collapse;border-spacing:0;}
-.tg td{border-style:solid;border-width:0px;font-size:18px;overflow:hidden;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-style:solid;border-width:2px;overflow:hidden;
   padding:10px 5px;word-break:normal;}
-.tg th{border-style:solid;border-width:0px;font-size:18px;font-weight:normal;
+.tg th{border-style:solid;border-width:0px;font-weight:normal;
   overflow:hidden;padding:10px 5px;word-break:normal;}
 </style>
-<table class="tg" style="undefined;table-layout: fixed; width: 807px"><colgroup>
+<table class="tg" style="undefined;table-layout: fixed"><colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
 <col style="width: 25%">
@@ -33,10 +33,10 @@ table {
 </colgroup>
 <thead>
   <tr>
-    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">Field Manuals</span></th>
-    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">Video Annotation Guides</span></th>
-    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">CheckEM</span></th>
-    <th><span style="font-weight:700;font-style:normal;text-decoration:none;background-color:transparent">GlobalArchive</span></th>
+    <th>Field Manuals</th>
+    <th>Video Annotation Guides</th>
+    <th>CheckEM</th>
+    <th>GlobalArchive</th>
   </tr></thead>
 <tbody>
   <tr>
@@ -55,7 +55,7 @@ table {
     </td>
     <td>
     <ul>
-    <a href="https://marine-ecology.shinyapps.io/CheckEM/" target="_blank" rel="noopener noreferrer">Launch app</a></li>
+    <li><a href="https://marine-ecology.shinyapps.io/CheckEM/" target="_blank" rel="noopener noreferrer">Launch app</a></li>
     <li><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html">User guide</a></li>
     <li><a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html">How to video</a></li>
     </ul>
