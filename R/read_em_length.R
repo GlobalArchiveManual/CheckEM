@@ -32,7 +32,7 @@ read_em_length <- function(dir, method = "BRUVs") {
   } else {
     
     dat <- dat %>%
-      dplyr::rename(sample = opcode)
+      dplyr::mutate(sample = opcode)
     
   }
   
