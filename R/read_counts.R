@@ -51,7 +51,7 @@ read_counts <- function(dir, method = "BRUVs") {
       if("opcode" %in% names(temp_dat)){
         
         temp_dat <- temp_dat %>%
-          dplyr::rename(sample = opcode)
+          dplyr::mutate(sample = opcode)
         
       }
       
