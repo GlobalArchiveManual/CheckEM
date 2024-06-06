@@ -157,62 +157,8 @@ metadata file “*_Metadata.csv”.</p>
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>, <span class="va">site</span>, <span class="va">depth_m</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span>, <span class="va">successful_habitat_forward</span>, <span class="va">successful_habitat_backward</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## reading metdata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2022-05_PtCloates_stereo-BRUVS_metadata.csv</span></span></code></pre>
-<pre><code><span><span class="co">## Rows: 62</span></span>
-<span><span class="co">## Columns: 16</span></span>
-<span><span class="co">## $ campaignid            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05_PtClo…</span></span>
-<span><span class="co">## $ sample                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6", "7", "8", "9", "11…</span></span>
-<span><span class="co">## $ opcode                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6", "7", "8", "9", "11…</span></span>
-<span><span class="co">## $ latitude_dd           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "-22.7221", "-22.6957", "-22.7379", "-22.7337", …</span></span>
-<span><span class="co">## $ longitude_dd          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "113.5447", "113.5628", "113.5515", "113.5555", …</span></span>
-<span><span class="co">## $ date_time             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T14:16:2…</span></span>
-<span><span class="co">## $ site                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">## $ location              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">## $ status                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take", "No-…</span></span>
-<span><span class="co">## $ depth_m               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "93.9", "77.3", "78.3", "73.9", "81.9", "74.3", …</span></span>
-<span><span class="co">## $ successful_count      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ successful_length     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ observer_count        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Kaitlin McCloghry", "Kaitlin McCloghry", "Kaitl…</span></span>
-<span><span class="co">## $ observer_length       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Henry Evans", "Henry Evans", "Henry Evans", "He…</span></span>
-<span><span class="co">## $ inclusion_probability <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">## $ visibility_m          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span></code></pre>
 <pre><code><span><span class="co">## reading metdata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2023-03_SwC_stereo-BRUVs_Metadata.csv</span></span></code></pre>
-<pre><code><span><span class="co">## Rows: 32</span></span>
-<span><span class="co">## Columns: 34</span></span>
-<span><span class="co">## $ system_number                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6…</span></span>
-<span><span class="co">## $ sample                                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "35", "5", "26", "23", "29"…</span></span>
-<span><span class="co">## $ latitude_dd                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "-34.13155", "-34.12952667"…</span></span>
-<span><span class="co">## $ longitude_dd                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "114.923645", "114.9292367"…</span></span>
-<span><span class="co">## $ date_time                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14/03/2023 23:36", "14/03/…</span></span>
-<span><span class="co">## $ site                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">## $ location                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">## $ status                                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-t…</span></span>
-<span><span class="co">## $ depth_m                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "39.6", "42.7", "36", "41",…</span></span>
-<span><span class="co">## $ successful_count                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ successful_length                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ observer_count                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Hannah Williams", "Hannah …</span></span>
-<span><span class="co">## $ observer_length                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Gidget Mirrabelle", "Gidge…</span></span>
-<span><span class="co">## $ observer_new_measurement_rules             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Gidget Mirrabelle", NA, "G…</span></span>
-<span><span class="co">## $ observer_labridaesp1                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">## $ left_cam                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "27", "30", "31", "33", "35…</span></span>
-<span><span class="co">## $ right_cam                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "28", "30", "32", "34", "36…</span></span>
-<span><span class="co">## $ rear_cam                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "19", "20", "21", "22", "23…</span></span>
-<span><span class="co">## $ video_notes                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "struggled with sha…</span></span>
-<span><span class="co">## $ raw_hdd_number                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1…</span></span>
-<span><span class="co">## $ fishnclips_saved                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ forwards_habitat_image_saved               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ backwards_habitat_image_saved              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ successful_habitat_forward                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ successful_habitat_backward                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
-<span><span class="co">## $ observer_habitat_forward                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">## $ observer_habitat_backward                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">## $ maxn_complete_date                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "11/07/2023", "7/07…</span></span>
-<span><span class="co">## $ maxn_checker                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Gidget Neunuebel", "Gidget…</span></span>
-<span><span class="co">## $ length_complete_date                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "31/07/2023", "31/07/2023",…</span></span>
-<span><span class="co">## $ length_new_measurement_rules_complete_date <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1/08/2023", NA, "2/08/2023…</span></span>
-<span><span class="co">## $ labridaesp1_complete_date                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">## $ comment                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "need to check feeding.…</span></span>
-<span><span class="co">## $ campaignid                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs",…</span></span>
-<span><span class="co">## Rows: 94</span></span>
+<pre><code><span><span class="co">## Rows: 94</span></span>
 <span><span class="co">## Columns: 12</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6", "7", "8", "9…</span></span>
@@ -228,11 +174,11 @@ metadata file “*_Metadata.csv”.</p>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span></code></pre>
 <p>Save the metadata as an R data file (this creates a lighter file than
 saving as a .csv or similar).</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">metadata</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>, <span class="va">name</span>, <span class="st">"_Metadata.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Read in the points data exported from Transect Measure, and then
 filter this into 2 dataframes for relief and habitat annotations.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_TM.html">read_TM</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span>,</span>
 <span>                               sample <span class="op">=</span> <span class="st">"opcode"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 2,483</span></span>
@@ -270,7 +216,7 @@ filter this into 2 dataframes for relief and habitat annotations.</p>
 <span><span class="co">## $ x                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</span></span>
 <span><span class="co">## $ radius           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "67.0", "24.7", "18.2", "97.8", "82.6", "34.1", "25.2…</span></span></code></pre>
 <p>Filter the data to only include habitat annotations.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">habitat</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">relief_annotated</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"no"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"level"</span><span class="op">)</span>, <span class="va">scientific</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -285,7 +231,7 @@ filter this into 2 dataframes for relief and habitat annotations.</p>
 <span><span class="co">## $ level_5    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "Coarse sand (with shell fragments)", NA, NA, NA, N…</span></span>
 <span><span class="co">## $ scientific <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "Thalassodendron spp", NA, NA, NA, "Thalassodendron spp…</span></span></code></pre>
 <p>Filter the data to only include relief annotations.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">relief</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">relief_annotated</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"yes"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"level"</span><span class="op">)</span>, <span class="va">scientific</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -304,11 +250,11 @@ filter this into 2 dataframes for relief and habitat annotations.</p>
 <h2 id="check-the-data-for-a-variety-of-errors">Check the data for a variety of errors<a class="anchor" aria-label="anchor" href="#check-the-data-for-a-variety-of-errors"></a>
 </h2>
 <p>Set the number of expected annotations to check against.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num.points</span> <span class="op">&lt;-</span> <span class="fl">20</span></span></code></pre></div>
 <p>Check if there are habitat annotations with an unexpected number of
 annotation points.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wrong.points.habitat</span> <span class="op">&lt;-</span> <span class="va">habitat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>points.annotated <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -338,7 +284,7 @@ annotation points.</p>
 <span><span class="co">## $ expected                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 40, 40, 40, 40, 40</span></span></code></pre>
 <p>Check if there are habitat annotations with an unexpected number of
 annotation points.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wrong.points.relief</span> <span class="op">&lt;-</span> <span class="va">relief</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>points.annotated <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -368,7 +314,7 @@ annotation points.</p>
 <span><span class="co">## $ expected                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 40, 40, 40, 40</span></span></code></pre>
 <p>Check to see if there are any samples in habitat that don’t have a
 match in the metadata.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">habitat.missing.metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">habitat</span>, <span class="va">metadata</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"campaignid"</span>, <span class="st">"sample"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 40</span></span>
@@ -382,7 +328,7 @@ match in the metadata.</p>
 <span><span class="co">## $ scientific <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, "Thalassodendron spp", NA, …</span></span></code></pre>
 <p>Check to see if there are any samples in the metadata that don’t have
 matching habitat.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata.missing.habitat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">metadata</span>, <span class="va">habitat</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"campaignid"</span>, <span class="st">"sample"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 62</span></span>
@@ -405,7 +351,7 @@ matching habitat.</p>
 </h2>
 <p>Tidy the habitat data by joining with the complete schema file that
 is loaded with the CheckEM package.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy.habitat</span> <span class="op">&lt;-</span> <span class="va">habitat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                                     </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">catami</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -439,11 +385,11 @@ is loaded with the CheckEM package.</p>
 <span><span class="co">## $ species    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, "ra…</span></span>
 <span><span class="co">## $ number     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2, 3, 2, 1, 14, 1, 1, 3, 5, 8, 1, 2, 3, 3, 7, 7, 7, 7, 7, 2…</span></span></code></pre>
 <p>Save the tidy habitat data as an R data file.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">tidy.habitat</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>, <span class="va">name</span>, <span class="st">"_habitat.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Tidy the relief data by joining with the complete schema file that is
 loaded with the CheckEM package.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy.relief</span> <span class="op">&lt;-</span> <span class="va">relief</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"level"</span><span class="op">)</span>, <span class="va">scientific</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">level_2</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>,<span class="st">"Unscorable"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>              </span>
@@ -468,7 +414,7 @@ loaded with the CheckEM package.</p>
 <span><span class="co">## $ level_8    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</span></span>
 <span><span class="co">## $ number     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8, 10, 5, 17, 4, 14, 3, 8, 16, 1, 4, 6, 20, 2, 13, 6, 14, 1…</span></span></code></pre>
 <p>Save the tidy relief data as an R data file.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">tidy.relief</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>, <span class="va">name</span>, <span class="st">"_relief.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
