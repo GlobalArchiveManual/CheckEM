@@ -56,8 +56,8 @@ read_metadata <- function(dir, method = "BRUVs") {
     
     temp_dat <- read_dat(file) %>%
       clean_names() %>%
-      dplyr::rename(any_of(lookup)) %>%
-      dplyr::glimpse()
+      dplyr::rename(any_of(lookup)) #%>%
+      #dplyr::glimpse()
     
     # TODO add BRUVs
     
@@ -85,7 +85,7 @@ read_metadata <- function(dir, method = "BRUVs") {
     
     if(!"date_time" %in% names(temp_dat)){
       
-      print("date_time col missing")
+      message(paste0("the date_time column is missing from: ", file, ". Creating column now...."))
       
       # TODO time fix ones that are decimal
       # TODO remove AM PM from times
