@@ -286,11 +286,14 @@ complete_length <- length %>%
   dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
   dplyr::mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
   dplyr::filter(!family %in% "Unknown")%>%
-  dplyr::right_join(metadata) %>%
-  dplyr::filter(successful_length %in% "Yes") %>%
+  # First make one row for every length measurement
   dplyr::mutate(number = as.numeric(number)) %>%
   tidyr::uncount(number) %>%
   dplyr::mutate(number = 1) %>% 
+  # Add in missing samples
+  dplyr::right_join(metadata) %>%
+  dplyr::filter(successful_length %in% "Yes") %>%
+  # Complete the data (add in zeros for every species)
   dplyr::select(campaignid, sample, family, genus, species, length_mm, number, any_of(c("range", "rms", "precision"))) %>% # this will keep EM only columns
   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
   replace_na(list(number = 0)) %>%
