@@ -110,6 +110,9 @@ read_metadata <- function(dir, method = "BRUVs") {
 
       metadata_sf <- sf::st_as_sf(x = temp_dat, coords = c("longitude_dd", "latitude_dd")) %>%
         dplyr::mutate(timezone = lutz::tz_lookup(., crs = NULL, method = "accurate", warn = TRUE))
+      
+      timezones_to_add <- metadata_sf %>%
+        dplyr::distinct(campaignid, sample, timezone)
 
       unique_timezones <- metadata_sf %>%
         dplyr::distinct(date, timezone)
@@ -131,10 +134,13 @@ read_metadata <- function(dir, method = "BRUVs") {
         dplyr::mutate(minutes = str_pad(minutes, 2, side = "left", pad = "0")) %>%
         dplyr::mutate(utc_offset = paste("+", hours, ":", minutes, sep = "")) %>% # IF i turn this into a function will have to come up with a way to do plus or negative
         dplyr::select(tz_name, date, utc_offset) %>%
-        dplyr::rename(timezone = tz_name) #%>%
+        dplyr::rename(timezone = tz_name) %>%
+        dplyr::distinct()
         #dplyr::glimpse()
 
-      temp_dat <- left_join(temp_dat, timezone_offsets_format) %>%
+      temp_dat <- temp_dat %>%
+        dplyr::left_join(timezones_to_add) %>%
+        dplyr::left_join(., timezone_offsets_format) %>%
         dplyr::mutate(date_time = paste(date_time, utc_offset, sep = "")) %>%
         dplyr::select(-c(hour, min, sec, year, month, day, time, timezone, utc_offset))
 
