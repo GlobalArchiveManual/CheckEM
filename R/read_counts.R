@@ -57,7 +57,7 @@ read_counts <- function(dir, method = "BRUVs") {
       
     }
   
-    dat <- bind_rows(dat, temp_dat)
+    dat <- bind_rows(dat, temp_dat) 
     
   }
   

@@ -56,9 +56,18 @@ read_gen_length <- function(dir, method = "BRUVs") {
       
     }
     
-    dat <- bind_rows(dat, temp_dat)
+    if("count" %in% names(dat)){
+      
+      dat <- dat %>%
+        dplyr::mutate(number = count)
+      
+    }
     
+    dat <- bind_rows(dat, temp_dat)
   }
+    
+
+    
   
   return(dat)
   
