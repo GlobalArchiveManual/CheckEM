@@ -25,7 +25,10 @@
     <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html</loc>
   </url>
   <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish.html</loc>
+    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish-point.html</loc>
+  </url>
+  <url>
+    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish-transect.html</loc>
   </url>
   <url>
     <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-habitat.html</loc>
