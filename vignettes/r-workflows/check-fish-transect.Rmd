@@ -381,7 +381,7 @@ This check is only important if you have used periods to define your sampling du
 It looks for any periods in the EMObs that do not have an end time. This is important if you want to check the duration of each period.
 
 ```{r load-periods}
-periods <- read_periods(here::here("r-workflows/data/DOV example/raw/")) %>%
+periods <- read_periods(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>%
   glimpse()
 
 periods_without_end <- periods %>%

@@ -43,8 +43,8 @@ read_periods <- function(dir, method = "BRUVs") {
       if("opcode" %in% names(temp_dat)){
         
         dat <- dat %>%
-          dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
-          dplyr::select(-c(opcode, period))
+          dplyr::mutate(sample = paste(opcode, period, sep = "-")) #%>%
+          #dplyr::select(-c(opcode, period))
         
       }
       
