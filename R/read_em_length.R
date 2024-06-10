@@ -25,7 +25,8 @@ read_em_length <- function(dir, method = "BRUVs") {
   
   cols_to_add <- c(
     campaignid = NA_real_,
-    sample = NA_real_)
+    sample = NA_real_,
+    length = NA_real_)
   
   if(nrow(dat > 0)){
     

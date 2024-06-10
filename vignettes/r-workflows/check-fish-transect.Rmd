@@ -224,7 +224,7 @@ It will combine all of the files into one data frame, and get the campaignid nam
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
 ```{r load-gen-lengths}
-gen_length <- read_gen_length(here::here("r-workflows/data/raw/"), method = "DOVs") %>% # Change here to "DOVs"
+gen_length <- read_gen_length(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
   dplyr::full_join(metadata, by = join_by(campaignid, sample)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
   glimpse()

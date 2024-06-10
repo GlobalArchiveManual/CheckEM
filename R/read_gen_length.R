@@ -66,9 +66,20 @@ read_gen_length <- function(dir, method = "BRUVs") {
     }
     }
     
+
+    
     dat <- bind_rows(dat, temp_dat)
   }
-    
+  
+  cols_to_add <- c(
+    campaignid = NA_real_,
+    sample = NA_real_,
+    length = NA_real_)
+  
+  dat <- dat %>%
+    tibble::add_column(!!!cols_to_add[!names(cols_to_add) %in% names(.)]) %>%
+    dplyr::mutate(campaignid = as.character(campaignid)) %>%
+    dplyr::mutate(sample = as.character(sample))
 
     
   
