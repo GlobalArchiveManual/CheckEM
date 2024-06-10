@@ -16,17 +16,17 @@ read_em_length <- function(dir, method = "BRUVs") {
                                                             "_Lengths.txt" = "")))
   }
   
+  lookup <- c(length_mm = "length")
+  
   dat <- list.files(path = dir,      
              recursive = F,
              pattern = "_Lengths.txt|_3DPoints",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
-    purrr::list_rbind()
+    purrr::list_rbind() %>%
+    dplyr::rename(any_of(lookup))
   
-  cols_to_add <- c(
-    campaignid = NA_real_,
-    sample = NA_real_,
-    length = NA_real_)
+
   
   if(nrow(dat > 0)){
     
@@ -43,6 +43,15 @@ read_em_length <- function(dir, method = "BRUVs") {
       
     }
   }
+  
+  cols_to_add <- c(
+    campaignid = NA_real_,
+    sample = NA_real_,
+    length_mm = NA_real_,
+    family = NA_real_,
+    genus = NA_real_,
+    species = NA_real_,
+    number = NA_real_)
   
   dat <- dat %>%
     tibble::add_column(!!!cols_to_add[!names(cols_to_add) %in% names(.)]) %>%

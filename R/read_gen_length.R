@@ -74,7 +74,11 @@ read_gen_length <- function(dir, method = "BRUVs") {
   cols_to_add <- c(
     campaignid = NA_real_,
     sample = NA_real_,
-    length = NA_real_)
+    length_mm = NA_real_,
+    family = NA_real_,
+    genus = NA_real_,
+    species = NA_real_,
+    number = NA_real_)
   
   dat <- dat %>%
     tibble::add_column(!!!cols_to_add[!names(cols_to_add) %in% names(.)]) %>%

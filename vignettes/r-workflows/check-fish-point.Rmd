@@ -218,7 +218,7 @@ em_length3dpoints <- read_em_length(here::here("r-workflows/data/raw/")) %>%
   dplyr::select(-c(comment))%>% # there is a comment column in metadata, so you will need to remove this column from EM data
   dplyr::inner_join(metadata, by = join_by(sample, campaignid)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
-  dplyr::rename(length_mm = length) %>%
+  # dplyr::rename(length_mm = length) %>%
   glimpse() 
 ```
 
