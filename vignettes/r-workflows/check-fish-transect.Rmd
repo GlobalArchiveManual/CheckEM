@@ -1,6 +1,6 @@
 ---
 title: 'Check fish data from transect based methods (e.g. stereo-DOVs or ROVs) from EventMeasure and/or Generic data'
-author: "Claude Spencer & Brooke Gibbons"
+author: "Brooke Gibbons, Claude Spencer & Jordan Goetze"
 date: "2024-01-19"
 output:
   html_vignette:
