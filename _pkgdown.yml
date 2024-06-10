@@ -81,8 +81,10 @@ navbar:
     - text: Check Data
     - text: Check habitat data from TransectMeasure
       href: articles/r-workflows/check-habitat.html
-    - text: Check fish data from EventMeasure
-      href: articles/r-workflows/check-fish.html
+    - text: Check fish data from single point based methods (e.g. stereo-BRUVs or stereo-BOSS) from EventMeasure and/or Generic data
+      href: articles/r-workflows/check-fish-point.html
+    - text: Check fish data from transect based methods (e.g. stereo-DOVs or ROVs) from EventMeasure and/or Generic data
+      href: articles/r-workflows/check-fish-transect.html
     - text: '-------'
     - text: Format Data
     - text: Generate spatial layers for modelling
