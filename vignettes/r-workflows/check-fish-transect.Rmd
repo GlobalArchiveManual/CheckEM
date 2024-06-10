@@ -59,68 +59,60 @@ Now we load and tidy the metadata.
 If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
 
 ```{r load-metadata}
-metadata <- read_metadata(here::here("r-workflows/data/raw/"), method = "DOVs") %>% # Change here to "DOVs"
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
-  glimpse()
+metadata <- read_metadata(here::here("r-workflows/data/raw_dov/"), method = "DOVs") %>% # Change here to "DOVs"
+  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length) %>%
+  dplyr::glimpse()
 ```
 
-<!-- Save the metadata as an R data file (this creates a lighter file than saving as a .csv or similar, it also maintains any column formatting). -->
+Save the metadata as an R data file (this creates a lighter file than saving as a .csv or similar, it also maintains any column formatting).
 
-<!-- ```{r save-metadata} -->
-<!-- saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", -->
-<!--                                 name, "_Metadata.rds"))) -->
-<!-- ``` -->
+```{r save-metadata}
+saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/",
+                                name, "_Metadata.rds")))
+```
 
-<!-- If you have already exported in the 'check-habitat' script then load the metadata. -->
-<!-- If you have just loaded and saved the metadata, then you can skip this chunk of code. -->
+## Marine Parks
+Load marine park shape files, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling.
+The data set used here is the 2022 Collaborative Australian Protected Areas Database, which you can download for free [here](https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore).
 
-<!-- ```{r tidy-metadata} -->
-<!-- metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/", -->
-<!--                                 name, "_Metadata.rds"))) -->
-<!-- ``` -->
+You may change this shape file to any suitable data set that is available for your study area.
 
-<!-- ## Marine Parks -->
-<!-- Load marine park shape files, and extract fishing status (e.g. 'Fished' or 'No-take') for use in modelling.  -->
-<!-- The data set used here is the 2022 Collaborative Australian Protected Areas Database, which you can download for free [here](https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore). -->
+```{r parks}
+marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
+  dplyr::select(geometry, ZONE_TYPE) %>%
+  st_transform(4326) %>%
+  st_make_valid()
 
-<!-- You may change this shape file to any suitable data set that is available for your study area.  -->
+metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
 
-<!-- ```{r parks} -->
-<!-- marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>% -->
-<!--   dplyr::select(geometry, ZONE_TYPE) %>% -->
-<!--   st_transform(4326) %>% -->
-<!--   st_make_valid() -->
+metadata <- metadata_sf %>%
+  st_intersection(marine_parks) %>%
+  bind_cols(st_coordinates(.)) %>%
+  as.data.frame() %>%
+  dplyr::select(-c(geometry)) %>%
+  dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+  dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),
+                                "No-take", "Fished")) %>%
+  clean_names() %>%
+  glimpse()
+```
+## Find nearest Marine Region
+Now we need to find the nearest marine region for each sample in the metadata.
+Then we can use the life history lists to find species that have not been observed in that marine region before.
 
-<!-- metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326) -->
+```{r marine region, warning=FALSE}
+metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
+regions <- st_as_sf(CheckEM::aus_regions, crs = st_crs(4326))
+regions <- st_transform(regions, 4326) %>%
+  dplyr::select(REGION)
 
-<!-- metadata <- metadata_sf %>% -->
-<!--   st_intersection(marine_parks) %>% -->
-<!--   bind_cols(st_coordinates(.)) %>% -->
-<!--   as.data.frame() %>% -->
-<!--   dplyr::select(-c(geometry)) %>% -->
-<!--   dplyr::rename(longitude_dd = X, latitude_dd = Y) %>% -->
-<!--   dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"), -->
-<!--                                 "No-take", "Fished")) %>% -->
-<!--   clean_names() %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
-<!-- ## Find nearest Marine Region -->
-<!-- Now we need to find the nearest marine region for each sample in the metadata.  -->
-<!-- Then we can use the life history lists to find species that have not been observed in that marine region before. -->
-
-<!-- ```{r marine region, warning=FALSE} -->
-<!-- metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326) -->
-<!-- regions <- st_as_sf(CheckEM::aus_regions, crs = st_crs(4326)) -->
-<!-- regions <- st_transform(regions, 4326) %>% -->
-<!--   dplyr::select(REGION) -->
-
-<!-- metadata <- st_join(metadata_sf, regions, join = st_nearest_feature) %>% -->
-<!--   dplyr::rename(marine_region = REGION) %>% -->
-<!--   dplyr::mutate(sample = as.character(sample)) %>% -->
-<!--   as.data.frame() %>% -->
-<!--   dplyr::select(-c(geometry)) %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
+metadata <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
+  dplyr::rename(marine_region = REGION) %>%
+  dplyr::mutate(sample = as.character(sample)) %>%
+  as.data.frame() %>%
+  dplyr::select(-c(geometry)) %>%
+  glimpse()
+```
 
 <!-- # Fish annotation data -->
 <!-- There are two types of fish annotation data formats that you can check and format using this script: *EventMeasure database outputs* or *Generic* files.  -->
