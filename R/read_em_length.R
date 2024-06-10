@@ -51,12 +51,25 @@ read_em_length <- function(dir, method = "BRUVs") {
     family = NA_real_,
     genus = NA_real_,
     species = NA_real_,
-    number = NA_real_)
+    number = NA_real_,
+    period = NA_real_,
+    rms = NA_real_,
+    range = NA_real_,
+    precision = NA_real_)
   
   dat <- dat %>%
     tibble::add_column(!!!cols_to_add[!names(cols_to_add) %in% names(.)]) %>%
     dplyr::mutate(campaignid = as.character(campaignid)) %>%
-    dplyr::mutate(sample = as.character(sample))
+    dplyr::mutate(sample = as.character(sample)) %>%
+    dplyr::mutate(length_mm = as.numeric(length_mm)) %>%
+    dplyr::mutate(rms = as.numeric(rms)) %>%
+    dplyr::mutate(range = as.numeric(range)) %>%
+    dplyr::mutate(precision = as.numeric(precision)) %>%
+    dplyr::mutate(number = as.numeric(number)) %>%
+    dplyr::mutate(family = as.character(family)) %>%
+    dplyr::mutate(genus = as.character(genus)) %>%
+    dplyr::mutate(species = as.character(species)) %>%
+    dplyr::mutate(period = as.character(period))
   
   return(dat)
   

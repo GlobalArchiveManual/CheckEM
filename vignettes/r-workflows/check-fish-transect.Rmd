@@ -381,7 +381,7 @@ This check is only important if you have used periods to define your sampling du
 It looks for any periods in the EMObs that do not have an end time. This is important if you want to check the duration of each period.
 
 ```{r load-periods}
-periods <- read_periods(here::here("r-workflows/data/raw/")) %>%
+periods <- read_periods(here::here("r-workflows/data/DOV example/raw/")) %>%
   glimpse()
 
 periods_without_end <- periods %>%
@@ -461,7 +461,7 @@ glimpse(lengths_outside_periods)
 
 This is the total number of individuals observed in the length data:
 ```{r total-in-lengths}
-total_length <- sum(complete_length$count)
+total_length <- sum(complete_length$number)
 message(paste(total_length, "fish counted in the length data"))
 ```
 
@@ -683,7 +683,7 @@ In this check you can set the range limit, and then identify any measurements th
 range_limit <- 10 # in metres
 
 over_range <- complete_length %>%
-  dplyr::filter(as.numeric(range) > (range_limit* 1000))
+  dplyr::filter(as.numeric(range) > (range_limit * 1000))
 
 message(paste(nrow(over_range), "lengths over range limit"))
 glimpse(over_range)

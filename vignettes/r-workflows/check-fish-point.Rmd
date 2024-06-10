@@ -465,7 +465,7 @@ message(paste(total_count, "fish counted in the count data"))
 
 This is the total number of individuals observed in the length data:
 ```{r total-in-lengths}
-total_length <- sum(complete_length$count)
+total_length <- sum(complete_length$number)
 message(paste(total_length, "fish counted in the length data"))
 ```
 

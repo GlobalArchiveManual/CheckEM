@@ -14,14 +14,14 @@ read_gen_length <- function(dir, method = "BRUVs") {
       clean_names() %>%
       dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Length.csv" = "",
                                                               "_length.csv" = ""))) #%>%
-      #dplyr::rename(sample = opcode)
+    #dplyr::rename(sample = opcode)
   }
   
   files <- list.files(path = dir,      
-             recursive = F,
-             pattern = "ength.csv",
-             full.names = T) 
-
+                      recursive = F,
+                      pattern = "ength.csv",
+                      full.names = T) 
+  
   dat <- data.frame()
   
   lookup <- c(length_mm = "length")
@@ -38,37 +38,36 @@ read_gen_length <- function(dir, method = "BRUVs") {
     # TODO add BRUVs
     
     if(nrow(temp_dat > 0)){
-    
-    if(method %in% c("DOVs")){
       
-      if("opcode" %in% names(temp_dat)){
+      if(method %in% c("DOVs")){
+        
+        if("opcode" %in% names(temp_dat)){
+          
+          temp_dat <- temp_dat %>%
+            dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
+            dplyr::select(-c(opcode, period))
+          
+        }
+        
+      } 
+      
+      if(method %in% c("BRUVs")){
         
         temp_dat <- temp_dat %>%
-          dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
-          dplyr::select(-c(opcode, period))
+          dplyr::mutate(sample = opcode)
         
       }
       
-    } 
-    
-    if(method %in% c("BRUVs")){
-      
-      temp_dat <- temp_dat %>%
-        dplyr::mutate(sample = opcode)
-      
+      if("count" %in% names(temp_dat)){
+        
+        temp_dat <- temp_dat %>%
+          dplyr::mutate(number = count)
+        
+      }
     }
-    
-    if("count" %in% names(temp_dat)){
-      
-      temp_dat <- temp_dat %>%
-        dplyr::mutate(number = count)
-      
-    }
-    }
-    
-
     
     dat <- bind_rows(dat, temp_dat)
+    
   }
   
   cols_to_add <- c(
@@ -78,14 +77,25 @@ read_gen_length <- function(dir, method = "BRUVs") {
     family = NA_real_,
     genus = NA_real_,
     species = NA_real_,
-    number = NA_real_)
+    number = NA_real_,
+    range = NA_real_,
+    rms = NA_real_,
+    precision = NA_real_)
   
   dat <- dat %>%
     tibble::add_column(!!!cols_to_add[!names(cols_to_add) %in% names(.)]) %>%
     dplyr::mutate(campaignid = as.character(campaignid)) %>%
-    dplyr::mutate(sample = as.character(sample))
-
-    
+    dplyr::mutate(sample = as.character(sample))%>%
+    dplyr::mutate(length_mm = as.numeric(length_mm)) %>%
+    dplyr::mutate(number = as.numeric(number)) %>%
+    dplyr::mutate(rms = as.numeric(rms)) %>%
+    dplyr::mutate(range = as.numeric(range)) %>%
+    dplyr::mutate(precision = as.numeric(precision)) %>%
+    dplyr::mutate(family = as.character(family)) %>%
+    dplyr::mutate(genus = as.character(genus)) %>%
+    dplyr::mutate(species = as.character(species))
+  
+  
   
   return(dat)
   
