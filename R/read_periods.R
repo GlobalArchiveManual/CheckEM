@@ -10,7 +10,7 @@
 #' 
 #' 
 
-read_periods <- function(dir) {
+read_periods <- function(dir, method = "BRUVs") {
   
   read_dat <- function(flnm){
     read_tsv(flnm, col_types = cols(.default = "c")) %>%
