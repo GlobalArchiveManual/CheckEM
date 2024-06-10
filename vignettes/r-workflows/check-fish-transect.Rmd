@@ -1,5 +1,5 @@
 ---
-title: 'Checking fish data from transect based methods, exported from EventMeasure and/or "Generic" data'
+title: 'Check fish data from transect based methods (e.g. stereo-DOVs or ROVs) from EventMeasure and/or Generic data'
 author: "Claude Spencer & Brooke Gibbons"
 date: "2024-01-19"
 output:

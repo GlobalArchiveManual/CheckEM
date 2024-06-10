@@ -1,5 +1,5 @@
 ---
-title: 'Checking fish data from single point methods, exported from EventMeasure and/or "Generic" data'
+title: 'Check fish data from single point based methods (e.g. stereo-BRUVs or stereo-BOSS) from EventMeasure and/or Generic data'
 author: "Claude Spencer & Brooke Gibbons"
 date: "2024-01-19"
 output:
