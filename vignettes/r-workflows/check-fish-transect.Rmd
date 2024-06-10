@@ -59,7 +59,7 @@ Now we load and tidy the metadata.
 If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
 
 ```{r load-metadata}
-metadata <- read_metadata(here::here("r-workflows/data/raw_dov/"), method = "DOVs") %>% # Change here to "DOVs"
+metadata <- read_metadata(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
   dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length) %>%
   dplyr::glimpse()
 ```
@@ -77,6 +77,10 @@ The data set used here is the 2022 Collaborative Australian Protected Areas Data
 
 You may change this shape file to any suitable data set that is available for your study area.
 
+### NOTE: You should only use this code if the Status column is not filled out
+
+<!-- # TODO Brooke - to make this work if does not overlap with any marine parks -->
+
 ```{r parks}
 marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
   dplyr::select(geometry, ZONE_TYPE) %>%
@@ -85,16 +89,16 @@ marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collabor
 
 metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
 
-metadata <- metadata_sf %>%
-  st_intersection(marine_parks) %>%
-  bind_cols(st_coordinates(.)) %>%
-  as.data.frame() %>%
-  dplyr::select(-c(geometry)) %>%
-  dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-  dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),
-                                "No-take", "Fished")) %>%
-  clean_names() %>%
-  glimpse()
+# metadata <- metadata_sf %>%
+#   st_intersection(marine_parks) %>%
+#   bind_cols(st_coordinates(.)) %>%
+#   as.data.frame() %>%
+#   dplyr::select(-c(geometry)) %>%
+#   dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+#   dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),
+#                                 "No-take", "Fished")) %>%
+#   clean_names() %>%
+#   dplyr::glimpse()
 ```
 ## Find nearest Marine Region
 Now we need to find the nearest marine region for each sample in the metadata.
@@ -114,38 +118,38 @@ metadata <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
   glimpse()
 ```
 
-<!-- # Fish annotation data -->
-<!-- There are two types of fish annotation data formats that you can check and format using this script: *EventMeasure database outputs* or *Generic* files.  -->
+# Fish annotation data
+There are two types of fish annotation data formats that you can check and format using this script: *EventMeasure database outputs* or *Generic* files.
 
-<!-- - For *EventMeasure database outputs* you will need to export the database outputs using the EventMeasure software and the .EMObs files. This will give you the '_Points.txt', '_Lengths.txt' and '_3DPoints.txt' files. -->
+- For *EventMeasure database outputs* you will need to export the database outputs using the EventMeasure software and the .EMObs files. This will give you the '_Points.txt', '_Lengths.txt' and '_3DPoints.txt' files.
 
-<!-- - *Generic* data is a much simpler format and allows users who haven’t used EventMeasure to format QC their annotation data. You will need a _Count.csv file and a _Length.csv file. -->
+- *Generic* data is a much simpler format and allows users who haven’t used EventMeasure to format QC their annotation data. You will need a _Count.csv file and a _Length.csv file.
 
-<!-- For more information on the format of these files please see the [CheckEM user guide](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html) -->
+For more information on the format of these files please see the [CheckEM user guide](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)
 
-<!-- We recommend using the *EventMeasure database outputs* if they are available and up to date. There are more checks possible with EventMeasure data than *Generic* data.  -->
-<!-- **Note:** If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as *Generic* annotation files (e.g. count and length). -->
+We recommend using the *EventMeasure database outputs* if they are available and up to date. There are more checks possible with EventMeasure data than *Generic* data.
+**Note:** If you have used EventMeasure software to annotate your samples BUT have made corrections on the exported data (e.g. in Excel), this corrected data is now the true copy of the data and you should import your data as *Generic* annotation files (e.g. count and length).
 
-<!-- ## Load any EventMeasure Points.txt files -->
-<!-- This section of code will read in any Points.txt files that you have saved in the directory you set. -->
-<!-- It will combine all of the files into one data-frame, and get the campaignid name from the name of the file. -->
-<!-- It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.') -->
+## Load any EventMeasure Points.txt files
+This section of code will read in any Points.txt files that you have saved in the directory you set.
+It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
+It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
-<!-- ```{r load-points} -->
-<!-- points <- read_points(here::here("r-workflows/data/raw/")) %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
+```{r load-points}
+points <- read_points(here::here("r-workflows/data/DOV example/raw/")) %>% 
+  glimpse()
+```
 
-<!-- ## Load any *Generic* count files -->
-<!-- This section of code will read in any Count.csv files that you have saved in the directory you set. -->
-<!-- It will combine all of the files into one data frame, and get the campaignid name from the name of the file. -->
+## Load any *Generic* count files
+This section of code will read in any Count.csv files that you have saved in the directory you set.
+It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
 
-<!-- It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.') -->
+It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
-<!-- ```{r load-counts} -->
-<!-- counts <- read_counts(here::here("r-workflows/data/raw/")) %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
+```{r load-counts}
+counts <- read_counts(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
+  glimpse()
+```
 <!-- ## Combine EventMeasure and *Generic* count together -->
 <!-- Create and tidy the MaxN file. -->
 
@@ -200,41 +204,41 @@ metadata <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
 <!-- maxn <- bind_rows(get0("maxn_points"), get0("maxn_counts")) # this works even if you only have one type of data -->
 <!-- ``` -->
 
-<!-- ## Load any EventMeasure Lengths.txt and/or 3DPoints.txt files -->
-<!-- This section of code will read in any Lengths.txt and/or 3DPoints.txt files that you have saved in the directory you set. -->
-<!-- It will combine all of the files into one data-frame, and get the campaignid name from the name of the file. -->
-<!-- It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.') -->
+## Load any EventMeasure Lengths.txt and/or 3DPoints.txt files
+This section of code will read in any Lengths.txt and/or 3DPoints.txt files that you have saved in the directory you set.
+It will combine all of the files into one data-frame, and get the campaignid name from the name of the file.
+It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
-<!-- ```{r load-lengths} -->
-<!-- em_length3dpoints <- read_em_length(here::here("r-workflows/data/raw/")) %>%                    -->
-<!--   dplyr::select(-c(comment))%>% # there is a comment column in metadata, so you will need to remove this column from EM data -->
-<!--   dplyr::inner_join(metadata, by = join_by(sample, campaignid)) %>% -->
-<!--   dplyr::filter(successful_length %in% "Yes") %>% -->
-<!--   dplyr::rename(length_mm = length) %>% -->
-<!--   glimpse()  -->
-<!-- ``` -->
+```{r load-lengths}
+em_length3dpoints <- read_em_length(here::here("r-workflows/data/DOV example/raw/")) %>%
+  dplyr::select(-c(comment))%>% # there is a comment column in metadata, so you will need to remove this column from EM data
+  dplyr::inner_join(metadata, by = join_by(sample, campaignid)) %>%
+  dplyr::filter(successful_length %in% "Yes") %>%
+  dplyr::rename(length_mm = length) %>%
+  glimpse()
+```
 
-<!-- ## Load any *Generic* length files -->
-<!-- This section of code will read in any _Length.csv files that you have saved in the directory you set. -->
-<!-- It will combine all of the files into one data frame, and get the campaignid name from the name of the file. -->
-<!-- It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.') -->
+## Load any *Generic* length files
+This section of code will read in any _Length.csv files that you have saved in the directory you set.
+It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
+It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
-<!-- ```{r load-gen-lengths} -->
-<!-- gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%                    -->
-<!--   dplyr::full_join(metadata, by = join_by(campaignid, sample)) %>% -->
-<!--   dplyr::filter(successful_length %in% "Yes") %>% -->
-<!--   glimpse()  -->
-<!-- ``` -->
+```{r load-gen-lengths}
+gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%
+  dplyr::full_join(metadata, by = join_by(campaignid, sample)) %>%
+  dplyr::filter(successful_length %in% "Yes") %>%
+  glimpse()
+```
 
-<!-- ## Combine EventMeasure and *Generic* length data -->
-<!-- ```{r combine-length} -->
-<!-- # If only EventMeasure data then length only includes Length and 3D points data -->
-<!-- # If only Generic data then length only includes generic length data -->
-<!-- # If both exist, then length includes both Length and 3D points and generic length data -->
-<!-- length <- bind_rows(get0("em_length3dpoints"), get0("gen_length")) # this works even if you only have one type of data -->
-<!-- ``` -->
+## Combine EventMeasure and *Generic* length data
+```{r combine-length}
+# If only EventMeasure data then length only includes Length and 3D points data
+# If only Generic data then length only includes generic length data
+# If both exist, then length includes both Length and 3D points and generic length data
+length <- bind_rows(get0("em_length3dpoints"), get0("gen_length")) # this works even if you only have one type of data
+```
 
-<!-- ## Format and add zeros where a species isn't present -->
+## Format and add zeros where a species isn't present
 <!-- ### In the count data -->
 <!-- Tidy and "complete" MaxN data (e.g. add zeros in the data where a species wasn't observed). -->
 <!-- The final data set will have a row for each species in every sample (deployment). -->
@@ -268,33 +272,33 @@ metadata <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
 <!--   glimpse() -->
 <!-- ``` -->
 
-<!-- ### In the length data -->
-<!-- Tidy and complete length data (e.g. complete zeroes in the data). -->
-<!-- The final data set will have a row for each species in every sample (deployment). -->
+### In the length data
+Tidy and complete length data (e.g. complete zeroes in the data).
+The final data set will have a row for each species in every sample (deployment).
 
-<!-- ```{r complete-length} -->
-<!-- complete_length <- length %>% -->
-<!--   dplyr::mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>% -->
-<!--   dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>% -->
-<!--   dplyr::mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>% -->
-<!--   dplyr::filter(!family %in% "Unknown")%>% -->
-<!--   # First make one row for every length measurement -->
-<!--   dplyr::mutate(number = as.numeric(number)) %>% -->
-<!--   tidyr::uncount(number) %>% -->
-<!--   dplyr::mutate(number = 1) %>%  -->
-<!--   # Add in missing samples -->
-<!--   dplyr::right_join(metadata) %>% -->
-<!--   dplyr::filter(successful_length %in% "Yes") %>% -->
-<!--   # Complete the data (add in zeros for every species) -->
-<!--   dplyr::select(campaignid, sample, family, genus, species, length_mm, number, any_of(c("range", "rms", "precision"))) %>% # this will keep EM only columns -->
-<!--   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>% -->
-<!--   replace_na(list(number = 0)) %>% -->
-<!--   ungroup() %>% -->
-<!--   dplyr::filter(!is.na(number)) %>% -->
-<!--   dplyr::mutate(length_mm = as.numeric(length_mm)) %>% -->
-<!--   left_join(., metadata) %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
+```{r complete-length}
+complete_length <- length %>%
+  dplyr::mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+  dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+  dplyr::mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
+  dplyr::filter(!family %in% "Unknown")%>%
+  # First make one row for every length measurement
+  dplyr::mutate(number = as.numeric(number)) %>%
+  tidyr::uncount(number) %>%
+  dplyr::mutate(number = 1) %>%
+  # Add in missing samples
+  dplyr::right_join(metadata) %>%
+  dplyr::filter(successful_length %in% "Yes") %>%
+  # Complete the data (add in zeros for every species)
+  dplyr::select(campaignid, sample, family, genus, species, length_mm, number, any_of(c("range", "rms", "precision"))) %>% # this will keep EM only columns
+  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
+  replace_na(list(number = 0)) %>%
+  ungroup() %>%
+  dplyr::filter(!is.na(number)) %>%
+  dplyr::mutate(length_mm = as.numeric(length_mm)) %>%
+  left_join(., metadata) %>%
+  glimpse()
+```
 <!-- # Quality Control Checks -->
 <!-- Now we have some-what tidy data we can begin to run some checks. -->
 
