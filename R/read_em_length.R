@@ -23,19 +23,30 @@ read_em_length <- function(dir, method = "BRUVs") {
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind()
   
-  if(method %in% "DOVs"){
+  cols_to_add <- c(
+    campaignid = NA_real_,
+    sample = NA_real_)
+  
+  if(nrow(dat > 0)){
     
-    dat <- dat %>%
-      dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
-      dplyr::select(-c(opcode, period))
-    
-  } else {
-    
-    dat <- dat %>%
-      dplyr::mutate(sample = opcode)
-    
+    if(method %in% "DOVs"){
+      
+      dat <- dat %>%
+        dplyr::mutate(sample = paste(opcode, period, sep = "-")) #%>%
+        #dplyr::select(-c(opcode, period))
+      
+    } else {
+      
+      dat <- dat %>%
+        dplyr::mutate(sample = opcode)
+      
+    }
   }
   
+  dat <- dat %>%
+    tibble::add_column(!!!cols_to_add[!names(cols_to_add) %in% names(.)]) %>%
+    dplyr::mutate(campaignid = as.character(campaignid)) %>%
+    dplyr::mutate(sample = as.character(sample))
   
   return(dat)
   

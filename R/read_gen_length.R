@@ -37,6 +37,8 @@ read_gen_length <- function(dir, method = "BRUVs") {
     
     # TODO add BRUVs
     
+    if(nrow(temp_dat > 0)){
+    
     if(method %in% c("DOVs")){
       
       if("opcode" %in% names(temp_dat)){
@@ -61,6 +63,7 @@ read_gen_length <- function(dir, method = "BRUVs") {
       temp_dat <- temp_dat %>%
         dplyr::mutate(number = count)
       
+    }
     }
     
     dat <- bind_rows(dat, temp_dat)
