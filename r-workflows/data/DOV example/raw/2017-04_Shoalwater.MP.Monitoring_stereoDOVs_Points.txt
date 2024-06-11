@@ -1,1 +1,0 @@
-OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	RectWidth	RectHeight	Family	Genus	Species	Code	Number	Stage	Activity	Comment	Attribute9	Attribute10
