@@ -1,0 +1,133 @@
+OpCode,Period,Status,Latitude,Longitude,Date,Time,Location,Site,Successful.count,Successful.length,Depth,Observer
+BP_SZ_20170428_DOV,T1,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T2,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T3,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T4,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T5,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T6,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T7,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T8,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T9,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T10,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T11,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+BP_SZ_20170428_DOV,T12,No-take,-32.3643,115.6915,20170428,11:30:00,Shoalwater Islands,Becher Point SZ 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T1,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T2,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T3,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T4,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T5,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T6,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T7,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T8,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T9,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T10,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T11,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_FirstRock_S1_20170427_DOV,T12,Fished,-32.313,115.6868,20170427,11:30:00,Shoalwater Islands,First Rock 1,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T1,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T2,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T3,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T4,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T5,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T6,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T7,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T8,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T9,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T10,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T11,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_Murry Reef_Ctrl2_20170428_DOV,T12,Fished,-32.3749,115.6854,20170428,11:30:00,Shoalwater Islands,Murray Reef Control 2,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T1,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T2,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T3,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T4,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T5,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T6,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T7,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T8,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T9,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T10,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T11,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,Yes,Yes,5,Caprice
+SIMP_MurrayReef_SPZ_20170428_DOV,T12,Fished,-32.36,115.6887,20170428,11:30:00,Shoalwater Islands,Murray Reef Special Purpose 1,No,No,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T1,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T2,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T3,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T4,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T5,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T6,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T7,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T8,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T9,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T10,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T11,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_PassageRock_S1_20170531_DOV,T12,Fished,-32.3291,115.6914,20170531,11:30:00,Shoalwater Islands,Passage Rock 1,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T1,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T2,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T3,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T4,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T5,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T6,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T7,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T8,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T9,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T10,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T11,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_Penguin Island_S2_20170427_DOV,T12,Fished,-32.309,115.6897,20170427,11:30:00,Shoalwater Islands,Penguin Island 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T1,Fished,-32.2628,115.6846,20170428-1,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T2,Fished,-32.2628,115.6846,20170428-2,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T3,Fished,-32.2628,115.6846,20170428-3,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T4,Fished,-32.2628,115.6846,20170428-4,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T5,Fished,-32.2628,115.6846,20170428-5,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T6,Fished,-32.2628,115.6846,20170428-6,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T7,Fished,-32.2628,115.6846,20170428-7,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T8,Fished,-32.2628,115.6846,20170428-8,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T9,Fished,-32.2628,115.6846,20170428-9,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T10,Fished,-32.2628,115.6846,20170428-10,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T11,Fished,-32.2628,115.6846,20170428-11,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronControl_S2_20170428,T12,Fished,-32.2628,115.6846,20170428-12,11:30:00,Shoalwater Islands,Peron Control 2,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T1,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T2,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T3,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T4,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T5,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T6,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T7,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T8,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T9,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T10,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T11,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_PeronSZ_S1_20170428_DOV,T12,Fished,-32.2684,115.6841,20170428,11:30:00,Shoalwater Islands,Peron SZ 1,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T1,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T2,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T3,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T4,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T5,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T6,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T7,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T8,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T9,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T10,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T11,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_Seal Island SZ_S2_20170427_DOV,T12,No-take,-32.2954,115.6905,20170427,11:30:00,Shoalwater Islands,Seal Island SZ 2,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T1,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T2,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T3,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T4,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T5,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T6,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T7,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T8,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T9,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T10,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T11,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_SecondRock_S1_20170427_DOV,T12,No-take,-32.315,115.6909,20170427,11:30:00,Shoalwater Islands,Second Rock SZ 1,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T1,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T2,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T3,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T4,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T5,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T6,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T7,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T8,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T9,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T10,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T11,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
+SIMP_ShoalwaterBay_S1B_20170531_DOV,T12,Fished,-32.278,115.6903,20170531,11:30:00,Shoalwater Islands,Shoalwater Bay 1B,Yes,Yes,5,Caprice
