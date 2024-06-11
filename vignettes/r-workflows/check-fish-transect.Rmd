@@ -1,5 +1,5 @@
 ---
-title: 'Check fish data from transect based methods (e.g. stereo-DOVs or ROVs) from EventMeasure and/or Generic data'
+title: 'Check fish data from transect based methods'
 author: "Brooke Gibbons, Claude Spencer & Jordan Goetze"
 date: "2024-01-19"
 output:
@@ -26,7 +26,7 @@ vignette: >
 ```
 
 # Introduction
-This script will take fish annotation data (either exported from EventMeasure or "Generic" format, see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)) and check for any errors in the annotation.
+This script will take fish annotation data from transect based methods (e.g. stereo-DOVs or ROVs), either exported from EventMeasure or "Generic" format (see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)), and check for any errors in the annotation.
 The script will then format the annotation data into a tidy format.
 
 You also need a formatted sample metadata file "*_Metadata.csv" (see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html))
