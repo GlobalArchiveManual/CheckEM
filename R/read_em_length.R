@@ -55,7 +55,14 @@ read_em_length <- function(dir, method = "BRUVs") {
     period = NA_real_,
     rms = NA_real_,
     range = NA_real_,
-    precision = NA_real_)
+    precision = NA_real_,
+    x = NA_real_,
+    y = NA_real_,
+    z = NA_real_,
+    midx = NA_real_,
+    midy = NA_real_,
+    midz = NA_real_
+    )
   
   dat <- dat %>%
     tibble::add_column(!!!cols_to_add[!names(cols_to_add) %in% names(.)]) %>%
