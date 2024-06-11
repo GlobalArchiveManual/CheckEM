@@ -29,7 +29,7 @@ read_counts <- function(dir, method = "BRUVs") {
     
     temp_dat <- read_dat(file) %>%
       clean_names() %>%
-      dplyr::glimpse()
+      dplyr::mutate(count = as.numeric(count))
     
     # TODO add BRUVs
     
@@ -39,7 +39,7 @@ read_counts <- function(dir, method = "BRUVs") {
         
         temp_dat <- temp_dat %>%
           dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
-          dplyr::select(-c(opcode, period))
+          dplyr::select(-c(opcode, period)) 
         
       }
       
@@ -51,7 +51,7 @@ read_counts <- function(dir, method = "BRUVs") {
       if("opcode" %in% names(temp_dat)){
         
         temp_dat <- temp_dat %>%
-          dplyr::mutate(sample = opcode)
+          dplyr::mutate(sample = opcode) 
         
       }
       

@@ -40,7 +40,7 @@ read_periods <- function(dir, method = "BRUVs") {
     
     if(method %in% c("DOVs")){
       
-      if("opcode" %in% names(temp_dat)){
+      if("opcode" %in% names(dat)){
         
         dat <- dat %>%
           dplyr::mutate(sample = paste(opcode, period, sep = "-")) #%>%

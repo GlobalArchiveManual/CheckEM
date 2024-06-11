@@ -223,11 +223,34 @@ This section of code will read in any _Length.csv files that you have saved in t
 It will combine all of the files into one data frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
+#### Note: In this section we also add any extra counts that were not measured.
+For example, if 10 of Species X were counted in a transect, but only 6 of them were measured, we add an extra 4 of Species X to the gen_length dataframe with length = NA (like a 3D point in EM data)
+
 ```{r load-gen-lengths}
 gen_length <- read_gen_length(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
   dplyr::full_join(metadata, by = join_by(campaignid, sample)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
   glimpse()
+
+counts_summary <- counts %>%
+  dplyr::group_by(campaignid, sample, family, genus, species) %>%
+  dplyr::summarise(total_count = sum(count)) %>%
+  dplyr::ungroup()
+
+gen_length_missing <- gen_length %>%
+  dplyr::group_by(campaignid, sample, family, genus, species) %>%
+  dplyr::summarise(total_length = sum(number)) %>%
+  dplyr::ungroup() %>%
+  dplyr::full_join(counts_summary) %>%
+  dplyr::mutate(difference = total_count - total_length) %>%
+  dplyr::filter(difference > 0) %>% # remove rows where there are more lengths than counts
+  tidyr::uncount(difference) %>%
+  dplyr::select(-c(total_length, total_count)) %>%
+  dplyr::mutate(number = 1, length_mm = NA) %>%
+  dplyr::left_join(metadata) 
+  
+gen_length_combined <- bind_rows(gen_length, gen_length_missing)
+
 ```
 
 ## Combine EventMeasure and *Generic* length data
@@ -235,7 +258,7 @@ gen_length <- read_gen_length(here::here("r-workflows/data/DOV example/raw/"), m
 # If only EventMeasure data then length only includes Length and 3D points data
 # If only Generic data then length only includes generic length data
 # If both exist, then length includes both Length and 3D points and generic length data
-length <- bind_rows(get0("em_length3dpoints"), get0("gen_length")) # this works even if you only have one type of data
+length <- bind_rows(get0("em_length3dpoints"), get0("gen_length_combined")) # this works even if you only have one type of data
 ```
 
 ## Format and add zeros where a species isn't present
@@ -687,6 +710,27 @@ over_range <- complete_length %>%
 
 message(paste(nrow(over_range), "lengths over range limit"))
 glimpse(over_range)
+```
+## Number of 3D points and length measurements outside transect (EM only)
+In this check you can set the transect belt width and then identify any measurements that are outside that transect.
+
+```{r outside_transect}
+transect_belt_width <- 5 # in metres
+
+transect_limit <- (transect_belt_width*1000)/2
+
+length_outside_transect <- length %>%
+  dplyr::mutate(x = as.numeric(x),
+                y = as.numeric(y),
+                z = as.numeric(z),
+                midx = as.numeric(midx),
+                midy = as.numeric(midy),
+                midz = as.numeric(midz)) %>%
+  tidyr::replace_na(list(x = 0, y = 0, midx = 0, midy = 0)) %>%
+  dplyr::filter(c(midx > transect_limit | midx < -transect_limit | midy > transect_limit | midy < -transect_limit | x > transect_limit | x < -transect_limit | y > transect_limit | y < -transect_limit)) 
+
+message(paste(nrow(length_outside_transect), "lengths outside transect limit"))
+glimpse(length_outside_transect)
 ```
 
 <!-- ## Samples where the MaxN does not equal the number of length measurements -->
