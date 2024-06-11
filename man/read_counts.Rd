@@ -4,7 +4,7 @@
 \alias{read_counts}
 \title{A function to read EventMeasure format point data (_Points.txt)}
 \usage{
-read_counts(dir)
+read_counts(dir, method = "BRUVs")
 }
 \arguments{
 \item{dir}{}

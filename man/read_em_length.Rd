@@ -4,7 +4,7 @@
 \alias{read_em_length}
 \title{A function to read EventMeasure format length data (_3DPoints.txt & _Lengths.txt)}
 \usage{
-read_em_length(dir)
+read_em_length(dir, method = "BRUVs")
 }
 \arguments{
 \item{dir}{}
