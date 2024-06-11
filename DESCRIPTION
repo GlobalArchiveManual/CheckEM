@@ -60,7 +60,6 @@ Imports:
     leaflegend,
     leaflet (>= 2.1.2),
     leaflet.minicharts,
-    lutz,
     mgcv,
     patchwork,
     png,
