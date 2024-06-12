@@ -77,8 +77,10 @@ read_gen_length <- function(dir, method = "BRUVs") {
       
       if(method %in% c("BRUVs")){
         
-        temp_dat <- temp_dat %>%
-          dplyr::mutate(sample = opcode)
+        if("opcode" %in% names(temp_dat)){
+          temp_dat <- temp_dat %>%
+            dplyr::mutate(sample = opcode)
+        }
         
       }
       
