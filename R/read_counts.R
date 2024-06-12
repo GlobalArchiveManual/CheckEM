@@ -9,7 +9,7 @@
 read_counts <- function(dir, method = "BRUVs") {
   
   read_dat_csv <- function(flnm){
-    readr::read_csv(flnm, col_types = cols(.default = "c")) %>%
+    readr::read_csv(flnm, col_types =  readr::cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = stringr::str_replace_all(campaignid,c("_Count.csv" = "", "_count.csv" = ""))) #%>%
@@ -17,7 +17,7 @@ read_counts <- function(dir, method = "BRUVs") {
   }
   
   read_dat_tsv <- function(flnm){
-    readr::read_tsv(flnm, col_types = cols(.default = "c")) %>%
+    readr::read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = stringr::str_replace_all(campaignid,c("_Count.csv" = "", "_count.csv" = ""))) #%>%

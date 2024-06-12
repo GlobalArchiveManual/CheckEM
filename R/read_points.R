@@ -13,7 +13,7 @@
 read_points <- function(dir) {
   
   read_dat <- function(flnm){
-    read_tsv(flnm, col_types = cols(.default = "c")) %>%
+    read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
     dplyr::mutate(campaignid = basename(flnm)) %>%
     clean_names() %>%
     dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Points.txt" = ""))) %>%
