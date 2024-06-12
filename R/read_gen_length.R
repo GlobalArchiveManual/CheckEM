@@ -38,10 +38,6 @@ read_gen_length <- function(dir, method = "BRUVs") {
   for(file in unique(files)){
     
     message(paste("reading length file:", file))
-    
-    for(file in unique(files)){
-      
-      message(paste("reading count file:", file))
       
       if(stringr::str_detect(file, ".csv")){
         
