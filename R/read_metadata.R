@@ -15,7 +15,7 @@ read_metadata <- function(dir, method = "BRUVs") {
   # dir <- here::here("r-workflows/data/raw/")
   
   read_dat <- function(flnm) {
-    read_csv(flnm, col_types = cols(.default = "c")) %>%
+    readr::read_csv(flnm, col_types = cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = str_replace_all(campaignid, c("_Metadata.csv" = "", "_metadata.csv" = "")))
