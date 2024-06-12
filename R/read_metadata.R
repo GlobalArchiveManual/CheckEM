@@ -93,12 +93,12 @@ read_metadata <- function(dir, method = "BRUVs") {
       
       temp_dat <- temp_dat %>%
         tidyr::separate(time, into = c("hour", "min", "sec"), sep = ":") %>%
-        dplyr::mutate(hour = str_pad(hour, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(min = str_pad(min, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(sec = str_pad(sec, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(year = str_sub(date, 1,4)) %>%
-        dplyr::mutate(month = str_sub(date, 5,6)) %>%
-        dplyr::mutate(day = str_sub(date, 7,8)) %>%
+        dplyr::mutate(hour = stringr::str_pad(hour, 2, side = "left", pad = "0")) %>%
+        dplyr::mutate(min = stringr::str_pad(min, 2, side = "left", pad = "0")) %>%
+        dplyr::mutate(sec = stringr::str_pad(sec, 2, side = "left", pad = "0")) %>%
+        dplyr::mutate(year = stringr::str_sub(date, 1,4)) %>%
+        dplyr::mutate(month = stringr::str_sub(date, 5,6)) %>%
+        dplyr::mutate(day = stringr::str_sub(date, 7,8)) %>%
         tidyr::replace_na(list(sec = "00", depth = 0)) %>%
         dplyr::mutate(time = paste(hour, min, sec, sep = ":")) %>%
         dplyr::mutate(date_time = paste(year, "-", month, "-", day, "T", time, sep = "")) %>%
@@ -130,8 +130,8 @@ read_metadata <- function(dir, method = "BRUVs") {
       timezone_offsets_format <- timezone_offsets %>%
         dplyr::mutate(hours = floor(utc_offset_h)) %>%
         dplyr::mutate(minutes = (utc_offset_h - hours) * 60) %>%
-        dplyr::mutate(hours = str_pad(hours, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(minutes = str_pad(minutes, 2, side = "left", pad = "0")) %>%
+        dplyr::mutate(hours = stringr::str_pad(hours, 2, side = "left", pad = "0")) %>%
+        dplyr::mutate(minutes = stringr::str_pad(minutes, 2, side = "left", pad = "0")) %>%
         dplyr::mutate(utc_offset = paste("+", hours, ":", minutes, sep = "")) %>% # IF i turn this into a function will have to come up with a way to do plus or negative
         dplyr::select(tz_name, date, utc_offset) %>%
         dplyr::rename(timezone = tz_name) %>%
