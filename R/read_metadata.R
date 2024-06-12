@@ -99,7 +99,7 @@ read_metadata <- function(dir, method = "BRUVs") {
         dplyr::mutate(year = str_sub(date, 1,4)) %>%
         dplyr::mutate(month = str_sub(date, 5,6)) %>%
         dplyr::mutate(day = str_sub(date, 7,8)) %>%
-        replace_na(list(sec = "00", depth = 0)) %>%
+        tidyr::replace_na(list(sec = "00", depth = 0)) %>%
         dplyr::mutate(time = paste(hour, min, sec, sep = ":")) %>%
         dplyr::mutate(date_time = paste(year, "-", month, "-", day, "T", time, sep = "")) %>%
         dplyr::mutate(date = paste(year, "-", month, "-", day, sep = "")) #%>%
