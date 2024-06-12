@@ -30,7 +30,7 @@ read_metadata <- function(dir, method = "BRUVs") {
   
   for(file in unique(files)){
     
-    message(paste("reading metdata file:", file))
+    message(paste("reading metadata file:", file))
     
     # If Sample exists keep sample, if opcode and period exist make sample = opcode-period
     
