@@ -568,7 +568,7 @@ function(input, output, session) {
       #message("uploaded metadata")
       
       metadata <- metadata %>%
-        dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Metadata.csv" = "", "_metadata.csv" = ""))) %>%
+        dplyr::mutate(campaignid = stringr::str_replace_all(.$campaignid, c("_Metadata.csv" = "", "_metadata.csv" = ""))) %>%
         dplyr::mutate(latitude_dd = as.numeric(latitude_dd)) %>%
         dplyr::mutate(longitude_dd = as.numeric(longitude_dd)) #%>%
         #glimpse()
@@ -1564,7 +1564,7 @@ function(input, output, session) {
     }
     
     metadata <- metadata %>%
-      dplyr::mutate(status = str_replace_all(status, c("No-Take" = "No-take")))
+      dplyr::mutate(status = stringr::str_replace_all(status, c("No-Take" = "No-take")))
     
     message("view status")
     print(unique(metadata$status))
@@ -1873,7 +1873,7 @@ function(input, output, session) {
       
       periods <- periods %>%
         clean_names() %>%
-        dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Period.txt" = ""))) #%>% glimpse()
+        dplyr::mutate(campaignid = stringr::str_replace_all(.$campaignid, c("_Period.txt" = ""))) #%>% glimpse()
       
       # If point method and samples are opcodes
       if(input$method == "point" & input$sample == "opcode") {
@@ -2434,7 +2434,7 @@ function(input, output, session) {
         
         points <- points %>%
           clean_names() %>%
-          dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Points.txt" = ""))) #%>% glimpse()
+          dplyr::mutate(campaignid = stringr::str_replace_all(.$campaignid, c("_Points.txt" = ""))) #%>% glimpse()
         
         # If point method and samples are opcodes
         if(input$method == "point" & input$sample == "opcode") {
