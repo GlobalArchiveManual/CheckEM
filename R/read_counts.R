@@ -35,7 +35,7 @@ read_counts <- function(dir, method = "BRUVs") {
     
     message(paste("reading count file:", file))
     
-    if(str_detect(file, ".csv")){
+    if(stringr::str_detect(file, ".csv")){
       
       message("file is a csv")
       
