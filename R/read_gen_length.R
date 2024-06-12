@@ -90,7 +90,7 @@ read_gen_length <- function(dir, method = "BRUVs") {
       }
     }
     
-    dat <- bind_rows(dat, temp_dat)
+    dat <- dplyr::bind_rows(dat, temp_dat)
     
   }
   
