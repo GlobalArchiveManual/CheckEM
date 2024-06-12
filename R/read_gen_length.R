@@ -8,7 +8,7 @@
 #' @examples
 read_gen_length <- function(dir, method = "BRUVs") {
   
-  read_dat <- function(flnm){
+  read_dat_csv <- function(flnm){
     readr::read_csv(flnm, col_types = cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
@@ -17,9 +17,18 @@ read_gen_length <- function(dir, method = "BRUVs") {
     #dplyr::rename(sample = opcode)
   }
   
+  read_dat_tsv <- function(flnm){
+    readr::read_csv(flnm, col_types = cols(.default = "c")) %>%
+      dplyr::mutate(campaignid = basename(flnm)) %>%
+      CheckEM::clean_names() %>%
+      dplyr::mutate(campaignid = stringr::str_replace_all(campaignid,c("_Length.csv" = "",
+                                                                       "_length.csv" = ""))) #%>%
+    #dplyr::rename(sample = opcode)
+  }
+  
   files <- list.files(path = dir,      
                       recursive = F,
-                      pattern = "ength.csv",
+                      pattern = "ength.csv|ength.txt",
                       full.names = T) 
   
   dat <- data.frame()
@@ -30,10 +39,29 @@ read_gen_length <- function(dir, method = "BRUVs") {
     
     message(paste("reading length file:", file))
     
-    temp_dat <- read_dat(file) %>%
-      CheckEM::clean_names() %>%
-      dplyr::rename(any_of(lookup)) %>%
-      dplyr::glimpse()
+    for(file in unique(files)){
+      
+      message(paste("reading count file:", file))
+      
+      if(stringr::str_detect(file, ".csv")){
+        
+        message("file is a csv")
+        
+        temp_dat <- read_dat_csv(file) %>%
+          CheckEM::clean_names() %>%
+          dplyr::rename(any_of(lookup)) %>%
+          dplyr::glimpse()
+        
+      } else {
+        
+        message("file is a txt")
+        
+        temp_dat <- read_dat_tsv(file) %>%
+          CheckEM::clean_names() %>%
+          dplyr::rename(any_of(lookup)) %>%
+          dplyr::glimpse()
+        
+      }
     
     # TODO add BRUVs
     
