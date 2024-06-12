@@ -8,7 +8,7 @@
 #' @examples
 read_counts <- function(dir, method = "BRUVs") {
   
-  read_dat <- function(flnm){
+  read_dat_csv <- function(flnm){
     readr::read_csv(flnm, col_types = cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
@@ -16,9 +16,17 @@ read_counts <- function(dir, method = "BRUVs") {
       # dplyr::rename(sample = opcode)
   }
   
+  read_dat_tsv <- function(flnm){
+    readr::read_tsv(flnm, col_types = cols(.default = "c")) %>%
+      dplyr::mutate(campaignid = basename(flnm)) %>%
+      CheckEM::clean_names() %>%
+      dplyr::mutate(campaignid = stringr::str_replace_all(campaignid,c("_Count.csv" = "", "_count.csv" = ""))) #%>%
+    # dplyr::rename(sample = opcode)
+  }
+  
   files <- list.files(path = dir,      
              recursive = F,
-             pattern = "ount.csv",
+             pattern = "ount.csv|ount.txt",
              full.names = T)
   
   dat <- data.frame()
@@ -27,12 +35,24 @@ read_counts <- function(dir, method = "BRUVs") {
     
     message(paste("reading count file:", file))
     
-    temp_dat <- read_dat(file) %>%
-      CheckEM::clean_names() %>%
-      dplyr::mutate(count = as.numeric(count))
-    
-    # TODO add BRUVs
-    
+    if(str_detect(file, ".csv")){
+      
+      message("file is a csv")
+      
+      temp_dat <- read_dat_csv(file) %>%
+        CheckEM::clean_names() %>%
+        dplyr::mutate(count = as.numeric(count))
+      
+    } else {
+      
+      message("file is a txt")
+      
+      temp_dat <- read_dat_tsv(file) %>%
+        CheckEM::clean_names() %>%
+        dplyr::mutate(count = as.numeric(count))
+      
+    }
+
     if(method %in% c("DOVs")){
       
       if("opcode" %in% names(temp_dat)){
