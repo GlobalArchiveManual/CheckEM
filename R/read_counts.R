@@ -28,7 +28,7 @@ read_counts <- function(dir, method = "BRUVs") {
     message(paste("reading count file:", file))
     
     temp_dat <- read_dat(file) %>%
-      clean_names() %>%
+      CheckEM::clean_names() %>%
       dplyr::mutate(count = as.numeric(count))
     
     # TODO add BRUVs
@@ -57,7 +57,7 @@ read_counts <- function(dir, method = "BRUVs") {
       
     }
   
-    dat <- bind_rows(dat, temp_dat) 
+    dat <- dplyr::bind_rows(dat, temp_dat) 
     
   }
   

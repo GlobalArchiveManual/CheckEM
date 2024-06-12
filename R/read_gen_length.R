@@ -31,7 +31,7 @@ read_gen_length <- function(dir, method = "BRUVs") {
     message(paste("reading length file:", file))
     
     temp_dat <- read_dat(file) %>%
-      clean_names() %>%
+      CheckEM::clean_names() %>%
       dplyr::rename(any_of(lookup)) %>%
       dplyr::glimpse()
     

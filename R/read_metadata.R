@@ -55,7 +55,7 @@ read_metadata <- function(dir, method = "BRUVs") {
     # Need to fix date and time to make them consistent
     
     temp_dat <- read_dat(file) %>%
-      clean_names() %>%
+      CheckEM::clean_names() %>%
       dplyr::rename(any_of(lookup)) #%>%
       #dplyr::glimpse()
     
@@ -124,7 +124,7 @@ read_metadata <- function(dir, method = "BRUVs") {
         temp_i <- unique_timezones[i,]
         temp <- lutz::tz_offset(temp_i$date, tz = temp_i$timezone) %>%
           dplyr::mutate(date = temp_i$date)
-        timezone_offsets <- bind_rows(temp, timezone_offsets)
+        timezone_offsets <- dplyr::bind_rows(temp, timezone_offsets)
       }
 
       timezone_offsets_format <- timezone_offsets %>%
@@ -146,7 +146,7 @@ read_metadata <- function(dir, method = "BRUVs") {
 
     }
     
-    dat <- bind_rows(dat, temp_dat)
+    dat <- dplyr::bind_rows(dat, temp_dat)
     
   }
   
