@@ -16,7 +16,7 @@ read_em_length <- function(dir, method = "BRUVs", recursive = FALSE) {
                                                         c("_3DPoints.txt" = "",
                                                           "_Lengths.txt" = "",
                                                           "_Lengths.TXT" = "",
-                                                          "_3DPoints.TXT")))
+                                                          "_3DPoints.TXT" = "")))
   }
   
   lookup <- c(length_mm = "length")
