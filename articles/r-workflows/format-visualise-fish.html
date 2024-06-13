@@ -276,12 +276,12 @@ subsequent fish modelling scripts.</p>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span>
 <span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span></code></pre>
-<pre><code><span><span class="co">## Rows: 3,488</span></span>
+<pre><code><span><span class="co">## Rows: 9,867</span></span>
 <span><span class="co">## Columns: 36</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", …</span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Acanthuridae", "Acanthuridae", "Acanthuri…</span></span>
-<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Naso", "Naso", "Naso", "Albula", "Abalist…</span></span>
+<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Naso", "Naso", "Naso", "Albula", "Aplodac…</span></span>
 <span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "brachycentron", "fageni", "hexacanthus", …</span></span>
 <span><span class="co">## $ length_mm                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ number                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …</span></span>
@@ -329,44 +329,44 @@ and highly-targeted species.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">scientific</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Choerodon rubescens"</span>, <span class="st">"Chrysophrys auratus"</span>, <span class="st">"Glaucosoma hebraicum"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 0</span></span>
+<pre><code><span><span class="co">## Rows: 144</span></span>
 <span><span class="co">## Columns: 36</span></span>
-<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ length_mm                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ number                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ rms                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ tpi                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ tri                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ roughness                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ detrended                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ mean_relief                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ sd_relief                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ reef                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
-<span><span class="co">## $ l50                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span></code></pre>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "12", "12", "12", "14", …</span></span>
+<span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Glaucosomatidae", "Labridae", "Sparidae",…</span></span>
+<span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Glaucosoma", "Choerodon", "Chrysophrys", …</span></span>
+<span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "hebraicum", "rubescens", "auratus", "hebr…</span></span>
+<span><span class="co">## $ length_mm                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ number                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …</span></span>
+<span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ rms                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "42.6", "42.6", "4…</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
+<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
+<span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "South-west", "South-west", "South-west", …</span></span>
+<span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Glaucosoma hebraicum", "Choerodon rubesce…</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8533, 114.8533, 114.8816, 11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.08387, -34.08387, -34.13249…</span></span>
+<span><span class="co">## $ depth                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "44.3", "44.3", "42.6", "42.6", "4…</span></span>
+<span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519, -42.77519, -42.77519, -42.02835…</span></span>
+<span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777, 0.005708777, 0.005708777, 0.0…</span></span>
+<span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942, 72.31942, 72.31942, 110.35012, 1…</span></span>
+<span><span class="co">## $ tpi                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.05208921, 0.05208921, 0.0389…</span></span>
+<span><span class="co">## $ tri                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.05208921, 0.05208921, 0.0624…</span></span>
+<span><span class="co">## $ roughness                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660, 0.11757660, 0.11757660, 0.3069…</span></span>
+<span><span class="co">## $ detrended                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883, -2.8542883, -2.8542883, -5.882…</span></span>
+<span><span class="co">## $ mean_relief                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391, 3.217391, 3.217391, 2.809524, 2.…</span></span>
+<span><span class="co">## $ sd_relief                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428, 0.7952428, 0.7952428, 0.4023739…</span></span>
+<span><span class="co">## $ reef                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9690722, 0.9690722, 0.9690722, 1.0000000…</span></span>
+<span><span class="co">## $ l50                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 310.5, 379.0, 352.0, 310.5, 379.0, 352.0, …</span></span></code></pre>
 <p>Create a unique list of the samples per campaign, to fill the zeroes
 back into processed length data.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -398,23 +398,23 @@ maturity.</p>
 <pre><code><span><span class="co">## Rows: 32</span></span>
 <span><span class="co">## Columns: 18</span></span>
 <span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "12", "14", "15", "16", "17", "19", "2", "21", "22"…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "15", "17", "19", "23", "24", "26", "29", "3", "31", "32"…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 8, 3, 2, 3, 4, 1, 4, 6, 1, 3, 1, 2, 4, 2, 6, 1, 13,…</span></span>
 <span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take", "No-take", "N…</span></span>
 <span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "greater than Lm", "greater than Lm", "greater than Lm", …</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8816, 114.8686, 114.8444, 114.8597, 114.857…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.13249, -34.07530, -34.08478, -34.11395, -3…</span></span>
-<span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "42.6", "42.7", "45.3", "45.4", "43.3", "73.6", "…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519, -42.02835, -41.07679, -44.29804, -43.53370, -4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777, 0.013768068, 0.078715764, 0.108975978, 0.063…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942, 110.35012, 215.54254, 264.03427, 199.56474, 30.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.03892708, 0.26110888, -0.19527912, -0.12452…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.06246567, 0.30964422, 0.34487247, 0.2351288…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660, 0.30690765, 0.79590225, 0.91366196, 0.9103851…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883, -5.8822656, -6.6460176, -0.2281526, -1.601304…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391, 2.809524, 2.440000, 2.518519, 4.000000, 3.33333…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428, 0.4023739, 0.7118052, 0.8024180, 0.0000000, 0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9690722, 1.0000000, 0.9420290, 0.8292683, 1.0000000, 1.…</span></span></code></pre>
+<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8444, 114.8576, 114.7822, 114.9190, 114.8485, 114.928…</span></span>
+<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08478, -34.09635, -34.12047, -34.12832, -34.11789, -3…</span></span>
+<span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "45.3", "43.3", "73.6", "41", "45.6", "36", "42.6", "46.7…</span></span>
+<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -44.29804, -42.74676, -71.60112, -38.25594, -44.23959, -4…</span></span>
+<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.108975978, 0.008719478, 0.880997142, 0.444838455, 0.103…</span></span>
+<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 264.03427, 30.76545, 262.35388, 294.10675, 257.20307, 40.…</span></span>
+<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.19527912, 0.02505112, 1.04176044, 0.47694588, 0.042278…</span></span>
+<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.34487247, 0.03473282, 2.80258274, 1.83670998, 0.3347983…</span></span>
+<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.91366196, 0.09923935, 9.01136017, 5.30128479, 1.2933082…</span></span>
+<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.2281526, -3.1375041, 17.9911461, -8.6934719, 2.9724391…</span></span>
+<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.518519, 3.333333, 2.583333, 3.555556, 3.360000, 4.00000…</span></span>
+<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8024180, 0.9128709, 0.5036102, 0.8555853, 0.4898979, 0.…</span></span>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8292683, 1.0000000, 0.9493671, 1.0000000, 1.0000000, 1.…</span></span></code></pre>
 <p>Create a dataframe of the indicator species smaller than length of
 maturity.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -435,23 +435,23 @@ maturity.</p>
 <pre><code><span><span class="co">## Rows: 32</span></span>
 <span><span class="co">## Columns: 18</span></span>
 <span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "12", "14", "15", "16", "17", "19", "2", "21", "22"…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "26", "4", "7", "10", "12", "14", "15", "16", "17", "19",…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
 <span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take", "No-take", "N…</span></span>
 <span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "smaller than Lm", "smaller than Lm", "smaller than Lm", …</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8816, 114.8686, 114.8444, 114.8597, 114.857…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.13249, -34.07530, -34.08478, -34.11395, -3…</span></span>
-<span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "42.6", "42.7", "45.3", "45.4", "43.3", "73.6", "…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519, -42.02835, -41.07679, -44.29804, -43.53370, -4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777, 0.013768068, 0.078715764, 0.108975978, 0.063…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942, 110.35012, 215.54254, 264.03427, 199.56474, 30.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.03892708, 0.26110888, -0.19527912, -0.12452…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.06246567, 0.30964422, 0.34487247, 0.2351288…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660, 0.30690765, 0.79590225, 0.91366196, 0.9103851…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883, -5.8822656, -6.6460176, -0.2281526, -1.601304…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391, 2.809524, 2.440000, 2.518519, 4.000000, 3.33333…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428, 0.4023739, 0.7118052, 0.8024180, 0.0000000, 0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9690722, 1.0000000, 0.9420290, 0.8292683, 1.0000000, 1.…</span></span></code></pre>
+<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9284, 114.9112, 114.7854, 114.8533, 114.8816, 114.868…</span></span>
+<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.12729, -34.11597, -34.09623, -34.08387, -34.13249, -3…</span></span>
+<span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "36", "45", "62.7", "44.3", "42.6", "42.7", "45.3", "45.4…</span></span>
+<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -40.68553, -42.80315, -60.38860, -42.77519, -42.02835, -4…</span></span>
+<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.694289634, 0.045436668, 0.115437569, 0.005708777, 0.013…</span></span>
+<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 40.87387, 319.32290, 319.71953, 72.31942, 110.35012, 215.…</span></span>
+<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.67607403, 0.17132854, 0.07896280, 0.05208921, 0.038927…</span></span>
+<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.39221191, 0.20512867, 0.37800837, 0.05208921, 0.0624656…</span></span>
+<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8.36493301, 0.54244614, 1.60873032, 0.11757660, 0.3069076…</span></span>
+<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -11.2637815, -12.7394981, 19.9898605, -2.8542883, -5.8822…</span></span>
+<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.000000, 3.761905, 3.000000, 3.217391, 2.809524, 2.44000…</span></span>
+<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.0000000, 0.4364358, 0.0000000, 0.7952428, 0.4023739, 0.…</span></span>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.0000000, 1.0000000, 1.0000000, 0.9690722, 1.0000000, 0.…</span></span></code></pre>
 <p>Join the two datasets.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy.length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">greater.mat</span>, <span class="va">smaller.mat</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -459,23 +459,23 @@ maturity.</p>
 <pre><code><span><span class="co">## Rows: 64</span></span>
 <span><span class="co">## Columns: 18</span></span>
 <span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "12", "14", "15", "16", "17", "19", "2", "21", "22"…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "15", "17", "19", "23", "24", "26", "29", "3", "31", "32"…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 8, 3, 2, 3, 4, 1, 4, 6, 1, 3, 1, 2, 4, 2, 6, 1, 13,…</span></span>
 <span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take", "No-take", "N…</span></span>
 <span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "greater than Lm", "greater than Lm", "greater than Lm", …</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533, 114.8816, 114.8686, 114.8444, 114.8597, 114.857…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387, -34.13249, -34.07530, -34.08478, -34.11395, -3…</span></span>
-<span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3", "42.6", "42.7", "45.3", "45.4", "43.3", "73.6", "…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519, -42.02835, -41.07679, -44.29804, -43.53370, -4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777, 0.013768068, 0.078715764, 0.108975978, 0.063…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942, 110.35012, 215.54254, 264.03427, 199.56474, 30.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.03892708, 0.26110888, -0.19527912, -0.12452…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921, 0.06246567, 0.30964422, 0.34487247, 0.2351288…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660, 0.30690765, 0.79590225, 0.91366196, 0.9103851…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883, -5.8822656, -6.6460176, -0.2281526, -1.601304…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391, 2.809524, 2.440000, 2.518519, 4.000000, 3.33333…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428, 0.4023739, 0.7118052, 0.8024180, 0.0000000, 0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9690722, 1.0000000, 0.9420290, 0.8292683, 1.0000000, 1.…</span></span></code></pre>
+<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8444, 114.8576, 114.7822, 114.9190, 114.8485, 114.928…</span></span>
+<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08478, -34.09635, -34.12047, -34.12832, -34.11789, -3…</span></span>
+<span><span class="co">## $ depth        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "45.3", "43.3", "73.6", "41", "45.6", "36", "42.6", "46.7…</span></span>
+<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -44.29804, -42.74676, -71.60112, -38.25594, -44.23959, -4…</span></span>
+<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.108975978, 0.008719478, 0.880997142, 0.444838455, 0.103…</span></span>
+<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 264.03427, 30.76545, 262.35388, 294.10675, 257.20307, 40.…</span></span>
+<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.19527912, 0.02505112, 1.04176044, 0.47694588, 0.042278…</span></span>
+<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.34487247, 0.03473282, 2.80258274, 1.83670998, 0.3347983…</span></span>
+<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.91366196, 0.09923935, 9.01136017, 5.30128479, 1.2933082…</span></span>
+<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.2281526, -3.1375041, 17.9911461, -8.6934719, 2.9724391…</span></span>
+<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.518519, 3.333333, 2.583333, 3.555556, 3.360000, 4.00000…</span></span>
+<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8024180, 0.9128709, 0.5036102, 0.8555853, 0.4898979, 0.…</span></span>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8292683, 1.0000000, 0.9493671, 1.0000000, 1.0000000, 1.…</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualise-the-fish-count-data">Visualise the fish count data<a class="anchor" aria-label="anchor" href="#visualise-the-fish-count-data"></a>
@@ -541,7 +541,7 @@ zeroes and the size of blue bubbles represents abundance.</p>
 <span>    <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addCircleMarkers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">equalzero</span>, lat <span class="op">=</span> <span class="op">~</span> <span class="va">latitude_dd</span>, lng <span class="op">=</span> <span class="op">~</span> <span class="va">longitude_dd</span>, radius <span class="op">=</span> <span class="fl">2</span>, fillOpacity <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">"white"</span>, stroke <span class="op">=</span> <span class="cn">FALSE</span>, label <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">sample</span><span class="op">)</span><span class="op">)</span><span class="op">}</span></span>
 <span><span class="va">bubble.plot</span></span></code></pre></div>
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"World Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addLayersControl","args":[["Open Street Map","World Imagery"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]},{"method":"addCircleMarkers","args":[[-34.083875,-34.13248667,-34.07530333,-34.084775,-34.11395,-34.09634667,-34.12047,-34.11190167,-34.06438333,-34.110025,-34.12832333,-34.11788833,-34.12729,-34.12295667,-34.10734167,-34.11714167,-34.11019667,-34.098625,-34.13155,-34.11534667,-34.10853667,-34.11577,-34.11596667,-34.08805667,-34.11804833,-34.10723,-34.09568833,-34.11413167,-34.12952667,-34.097395,-34.09623,-34.090365],[114.853305,114.8816483,114.8686033,114.8444033,114.85971,114.85758,114.7822167,114.9008467,114.857485,114.7779333,114.9189517,114.8485467,114.92843,114.9105167,114.9156417,114.7880917,114.9283567,114.8905567,114.923645,114.8613383,114.9235817,114.7936983,114.9112217,114.8886967,114.8597567,114.7893333,114.83982,114.7804383,114.9292367,114.7766617,114.7854017,114.838835],2,null,null,{"interactive":true,"className":"","stroke":false,"color":"white","weight":5,"opacity":0.5,"fill":true,"fillColor":"white","fillOpacity":0.5},null,null,null,null,["10","12","14","15","16","17","19","2","21","22","23","24","26","29","3","31","32","34","35","36","37","39","4","40","44","45","46","47","5","6","7","8"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-34.13248667,-34.06438333],"lng":[114.7766617,114.9292367]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"World Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addLayersControl","args":[["Open Street Map","World Imagery"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]},{"method":"addCircleMarkers","args":[[-34.084775,-34.09634667,-34.12047,-34.12832333,-34.11788833,-34.12729,-34.12295667,-34.10734167,-34.11714167,-34.11019667,-34.098625,-34.13155,-34.11534667,-34.11596667,-34.10723,-34.09568833,-34.11413167,-34.12952667,-34.097395,-34.09623],[114.8444033,114.85758,114.7822167,114.9189517,114.8485467,114.92843,114.9105167,114.9156417,114.7880917,114.9283567,114.8905567,114.923645,114.8613383,114.9112217,114.7893333,114.83982,114.7804383,114.9292367,114.7766617,114.7854017],[4,4,11,6,5,6,7,4,7,9,4,6,4,5,7,5,9,4,16,8],null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.5},null,null,null,null,["15","17","19","23","24","26","29","3","31","32","34","35","36","4","45","46","47","5","6","7"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[[-34.083875,-34.13248667,-34.07530333,-34.11395,-34.11190167,-34.06438333,-34.110025,-34.10853667,-34.11577,-34.08805667,-34.11804833,-34.090365],[114.853305,114.8816483,114.8686033,114.85971,114.9008467,114.857485,114.7779333,114.9235817,114.7936983,114.8886967,114.8597567,114.838835],2,null,null,{"interactive":true,"className":"","stroke":false,"color":"white","weight":5,"opacity":0.5,"fill":true,"fillColor":"white","fillOpacity":0.5},null,null,null,null,["10","12","14","16","2","21","22","37","39","40","44","8"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-34.13248667,-34.06438333],"lng":[114.7766617,114.9292367]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="save-tidy-datasets-for-modelling">Save tidy datasets for modelling<a class="anchor" aria-label="anchor" href="#save-tidy-datasets-for-modelling"></a>
