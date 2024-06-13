@@ -79,7 +79,10 @@ read_em_length <- function(dir, method = "BRUVs", recursive = FALSE) {
     dplyr::mutate(family = as.character(family)) %>%
     dplyr::mutate(genus = as.character(genus)) %>%
     dplyr::mutate(species = as.character(species)) %>%
-    dplyr::mutate(period = as.character(period))
+    dplyr::mutate(period = as.character(period)) %>%
+    dplyr::mutate(x = as.numeric(x)) %>%
+    dplyr::mutate(y = as.numeric(y)) %>%
+    dplyr::mutate(z = as.numeric(z))
   
   return(dat)
   
