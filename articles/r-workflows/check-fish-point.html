@@ -327,8 +327,8 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <code class="sourceCode R"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_points.html">read_points</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 17,425</span></span>
-<span><span class="co">## Columns: 22</span></span>
-<span><span class="co">## $ sample      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", "10", "10", "10"…</span></span>
+<span><span class="co">## Columns: 23</span></span>
+<span><span class="co">## $ opcode      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", "10", "10", "10"…</span></span>
 <span><span class="co">## $ pointindex  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1…</span></span>
 <span><span class="co">## $ filename    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Left_MAH00355.MP4", "Left_MAH00355.MP4", "Left_MAH00355.M…</span></span>
 <span><span class="co">## $ frame       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11347", "11403", "11403", "11473", "11473", "11473", "127…</span></span>
@@ -343,13 +343,14 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <span><span class="co">## $ genus       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Ophthalmolepis", "Ophthalmolepis", "Ophthalmolepis", "Pse…</span></span>
 <span><span class="co">## $ species     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "lineolata", "lineolata", "lineolata", "biserialis", "bise…</span></span>
 <span><span class="co">## $ code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "37384040", "37384040", "37384040", "37384149", "37384149"…</span></span>
-<span><span class="co">## $ number      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"…</span></span>
+<span><span class="co">## $ number      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…</span></span>
 <span><span class="co">## $ stage       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "AD", "AD", "AD", "AD", "AD", "AD", "AD", "AD", "AD", "AD"…</span></span>
 <span><span class="co">## $ activity    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Passing", "Passing", "Passing", "Passing", "Passing", "Pa…</span></span>
 <span><span class="co">## $ comment     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ attribute9  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ attribute10 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ campaignid  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "2…</span></span></code></pre>
+<span><span class="co">## $ campaignid  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "2…</span></span>
+<span><span class="co">## $ sample      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "10", "10", "10", "10", "10"…</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="load-any-generic-count-files">Load any <em>Generic</em> count files<a class="anchor" aria-label="anchor" href="#load-any-generic-count-files"></a>
@@ -885,13 +886,14 @@ a period.</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">points_outside_periods</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
-<span><span class="co">## Columns: 7</span></span>
+<span><span class="co">## Columns: 8</span></span>
 <span><span class="co">## $ campaignid <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ opcode     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ period     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ family     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ genus      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ species    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ number     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ number     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ frame      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level3">
@@ -979,8 +981,8 @@ sure no fish species accidentally had their number deleted.</p>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">points_without_number</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 11</span></span>
-<span><span class="co">## Columns: 22</span></span>
-<span><span class="co">## $ sample      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "21", "21", "21", "26", "26", "26", "34"…</span></span>
+<span><span class="co">## Columns: 23</span></span>
+<span><span class="co">## $ opcode      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "21", "21", "21", "26", "26", "26", "34"…</span></span>
 <span><span class="co">## $ pointindex  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "166", "485", "486", "238", "254", "256", "66", "67", "68"…</span></span>
 <span><span class="co">## $ filename    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Left_MAH00355.MP4", "Left_MAH00356.MP4", "Left_MAH00356.M…</span></span>
 <span><span class="co">## $ frame       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "17138", "31042", "31042", "32458", "35214", "45239", "311…</span></span>
@@ -995,13 +997,14 @@ sure no fish species accidentally had their number deleted.</p>
 <span><span class="co">## $ genus       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
 <span><span class="co">## $ species     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
 <span><span class="co">## $ code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
-<span><span class="co">## $ number      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">## $ number      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
 <span><span class="co">## $ stage       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
 <span><span class="co">## $ activity    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
 <span><span class="co">## $ comment     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "squid", "squid", "squid", "Squid", "Squid", "Squid", "squ…</span></span>
 <span><span class="co">## $ attribute9  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
 <span><span class="co">## $ attribute10 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
-<span><span class="co">## $ campaignid  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "2…</span></span></code></pre>
+<span><span class="co">## $ campaignid  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "2…</span></span>
+<span><span class="co">## $ sample      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "21", "21", "21", "26", "26", "26", "34"…</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="length-measurements-or-3d-points-without-a-number-em-only">Length measurements or 3D points without a number (EM only)<a class="anchor" aria-label="anchor" href="#length-measurements-or-3d-points-without-a-number-em-only"></a>
