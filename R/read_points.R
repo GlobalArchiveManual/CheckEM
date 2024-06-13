@@ -16,8 +16,7 @@ read_points <- function(dir, recursive = FALSE, method = "BRUVs") {
     readr::read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
     dplyr::mutate(campaignid = basename(flnm)) %>%
     clean_names() %>%
-    dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Points.txt" = ""))) %>%
-    dplyr::rename(sample = opcode) # TODO fix this if the sample is not defined by opcode
+    dplyr::mutate(campaignid = str_replace_all(campaignid,c("_Points.txt" = "", "_Points.TXT" = ""))) 
   }
 
   # lookup <- c(length_mm = "length")
