@@ -16,7 +16,8 @@ read_periods <- function(dir, method = "BRUVs", recursive = FALSE) {
     readr::read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
-      dplyr::mutate(campaignid = stringr::str_replace_all(campaignid,c("_Period.txt" = ""))) #%>%
+      dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, c("_Period.txt" = "",
+                                                                        "_Period.TXT" = ""))) #%>%
     #dplyr::rename(sample = opcode) # TODO fix this if the sample is not defined by opcode
   }
   
