@@ -4,7 +4,7 @@
 \alias{read_points}
 \title{A function to read EventMeasure format point data (_Points.txt)}
 \usage{
-read_points(dir)
+read_points(dir, recursive = FALSE)
 }
 \arguments{
 \item{dir}{The directory where the .txt files are saved}

@@ -4,7 +4,7 @@
 \alias{read_gen_length}
 \title{A function to read "Generic" format length data _Length.csv}
 \usage{
-read_gen_length(dir, method = "BRUVs")
+read_gen_length(dir, method = "BRUVs", recursive = FALSE)
 }
 \arguments{
 \item{dir}{}

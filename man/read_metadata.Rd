@@ -4,7 +4,7 @@
 \alias{read_metadata}
 \title{A function to read GlobalArchive format metadata}
 \usage{
-read_metadata(dir, method = "BRUVs")
+read_metadata(dir, method = "BRUVs", recursive = FALSE)
 }
 \arguments{
 \item{dir}{The directory where the .csv files are saved}

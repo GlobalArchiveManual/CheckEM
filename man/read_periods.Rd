@@ -4,7 +4,7 @@
 \alias{read_periods}
 \title{A function to read EventMeasure format period data (_Period.txt)}
 \usage{
-read_periods(dir, method = "BRUVs")
+read_periods(dir, method = "BRUVs", recursive = FALSE)
 }
 \arguments{
 \item{dir}{The directory where the .txt files are saved}
