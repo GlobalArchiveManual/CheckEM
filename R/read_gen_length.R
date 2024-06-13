@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-read_gen_length <- function(dir, method = "BRUVs") {
+read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   read_dat_csv <- function(flnm){
     readr::read_csv(flnm, col_types =  readr::cols(.default = "c")) %>%
@@ -27,7 +27,7 @@ read_gen_length <- function(dir, method = "BRUVs") {
   }
   
   files <- list.files(path = dir,      
-                      recursive = F,
+                      recursive = recursive,
                       pattern = "ength.csv|ength.txt",
                       full.names = T) 
   

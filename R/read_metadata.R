@@ -10,7 +10,7 @@
 #' 
 #' 
 
-read_metadata <- function(dir, method = "BRUVs") {
+read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   # dir <- here::here("r-workflows/data/raw/")
   
@@ -22,7 +22,7 @@ read_metadata <- function(dir, method = "BRUVs") {
   }
   
   files <- list.files(path = dir,      
-             recursive = F,
+             recursive = recursive,
              pattern = "etadata.csv",
              full.names = T) 
   

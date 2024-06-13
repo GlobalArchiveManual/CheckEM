@@ -10,7 +10,7 @@
 #' 
 #' 
 
-read_periods <- function(dir, method = "BRUVs") {
+read_periods <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   read_dat <- function(flnm){
     readr::read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
@@ -30,8 +30,8 @@ read_periods <- function(dir, method = "BRUVs") {
     hasend = NA_real_)
   
   dat <- list.files(path = dir,      
-                    recursive = F,
-                    pattern = "_Period.txt",
+                    recursive = recursive,
+                    pattern = "_Period.txt|_Period.TXT",
                     full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind() 

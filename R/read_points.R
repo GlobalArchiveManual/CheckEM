@@ -10,7 +10,7 @@
 #' 
 #' 
 
-read_points <- function(dir) {
+read_points <- function(dir, recursive = FALSE) {
   
   read_dat <- function(flnm){
     read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
@@ -21,8 +21,8 @@ read_points <- function(dir) {
   }
   
   list.files(path = dir,      
-             recursive = F,
-             pattern = "_Points.txt",
+             recursive = recursive,
+             pattern = "_Points.txt|_Points.TXT",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind()

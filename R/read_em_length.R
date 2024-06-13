@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-read_em_length <- function(dir, method = "BRUVs") {
+read_em_length <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   read_dat <- function(flnm){
     readr::read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
@@ -19,8 +19,8 @@ read_em_length <- function(dir, method = "BRUVs") {
   lookup <- c(length_mm = "length")
   
   dat <- list.files(path = dir,      
-             recursive = F,
-             pattern = "_Lengths.txt|_3DPoints",
+             recursive = recursive,
+             pattern = "_Lengths.txt|_3DPoints.txt|_Lengths.TXT|_3DPoints.TXT",
              full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
     purrr::list_rbind() %>%
