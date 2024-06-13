@@ -82,7 +82,10 @@ read_em_length <- function(dir, method = "BRUVs", recursive = FALSE) {
     dplyr::mutate(period = as.character(period)) %>%
     dplyr::mutate(x = as.numeric(x)) %>%
     dplyr::mutate(y = as.numeric(y)) %>%
-    dplyr::mutate(z = as.numeric(z))
+    dplyr::mutate(z = as.numeric(z)) %>%
+    dplyr::mutate(midx = as.numeric(midx)) %>%
+    dplyr::mutate(midy = as.numeric(midy)) %>%
+    dplyr::mutate(midz = as.numeric(midz)) 
   
   return(dat)
   
