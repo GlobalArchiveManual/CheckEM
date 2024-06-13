@@ -28,6 +28,7 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   dat <- data.frame()
   
+  
   for(file in unique(files)){
     
     message(paste("reading metadata file:", file))
