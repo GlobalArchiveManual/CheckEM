@@ -49,7 +49,9 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
                 depth_m = "Depth",
                 depth_m = "depth",
                 date_time = "date.time",
+                date_time = "Date.time",
                 observer_count = "Observer",
+                observer_count = "observer",
                 successful_count = "Successful.count",
                 successful_length	 = "Successful.length")
     

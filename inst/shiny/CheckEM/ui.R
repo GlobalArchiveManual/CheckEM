@@ -701,7 +701,11 @@ function(){
                 box(width = 4, title = "QC score",
                     plotOutput("score.plot", width = "100%"))
                 
-              )
+              ),
+              
+              fluidRow(
+                box(width = 12, title = "Quality control score table",
+                           dataTableOutput("scores.table")))
       ),
       
       # Create downloads - transect based data -----
