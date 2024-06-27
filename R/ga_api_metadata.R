@@ -6,8 +6,12 @@
 #' @export
 #'
 #' @examples
+#' 
+#' 
+#' 
+
 ga_api_metadata <- function(username, password, synthesis_id) {
-  
+  # TODO brooke rename sample
   # URL
   url <- paste0("https://dev.globalarchive.org/api/data/SynthesisSample/?synthesis=", synthesis_id, "&format=feather")
   
@@ -26,7 +30,7 @@ ga_api_metadata <- function(username, password, synthesis_id) {
     metadata_raw <- arrow::read_feather(raw_connection) %>%
       dplyr::mutate(coordinates = str_replace_all(.$coordinates, c("SRID=4326;POINT " = "", "[()]" = ""))) %>%
       tidyr::separate(coordinates, into = c("longitude", "latitude"), sep = " ") %>%
-      dplyr::mutate(latitude = as.numeric(latitude), longitude = as.numeric(longitude))%>%
+      dplyr::mutate(latitude_dd = as.numeric(latitude), longitude_dd = as.numeric(longitude)) %>%
       dplyr::mutate(sample = url) #%>%
     #dplyr::select(-c(status))
     
