@@ -6,7 +6,20 @@
 #' @export
 #'
 #' @examples
-ga_api_length <- function(username, password, synthesis_id) {
+ga_api_length <- function(username, password, synthesis_id, include_life_history = TRUE) {
+  
+  species_list <- CheckEM::ga_api_species_list("public", "sharedaccess")
+  
+  if(include_life_history %in% TRUE){
+    
+    species_list <- species_list
+    
+  } else{
+    
+    species_list <- species_list %>%
+      dplyr::select(subject, australian_common_name, family, genus, species, caab)
+    
+  }
   
   # URL
   url <- paste0("https://dev.globalarchive.org/api/data/SynthesisLengthEntry/?sample__synthesis=", synthesis_id, "&format=feather")
@@ -23,9 +36,11 @@ ga_api_length <- function(username, password, synthesis_id) {
     raw_connection <- rawConnection(raw_content, "rb")
     
     # Read the Feather file from the input stream
-    length <- arrow::read_feather(raw_connection)%>%
-      mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
-      left_join(., species_list, by = "subject")
+    length <- arrow::read_feather(raw_connection) %>%
+      dplyr::mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
+      dplyr::left_join(., species_list, by = "subject") %>%
+      dplyr::rename(sample_url = url) %>%
+      dplyr::select(-subject)
     
   } else {
     # Request was not successful
