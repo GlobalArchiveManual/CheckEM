@@ -25,7 +25,7 @@ ga_api_species_list <- function(username, password) {
     # Read the Feather file from the input stream
     species_list <- arrow::read_feather(raw_connection) %>%
       as.data.frame() %>%
-      dplyr::rename(subject = url)%>%
+      dplyr::rename(subject = url) %>%
       dplyr::select(-c(row, annotation_list, native_id_in_list, is_benthic_subject))
     # left_join(lm) %>%
     #dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(species_lm), fb_length_at_maturity_cm, species_lm))

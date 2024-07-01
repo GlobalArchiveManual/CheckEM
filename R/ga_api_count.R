@@ -10,7 +10,7 @@ ga_api_count <- function(username, password, synthesis_id, include_life_history 
   
   # TODO brooke to add functionality life_history = TRUE or FALSE
   
-  species_list <- CheckEM::ga_api_species_list("public", "sharedaccess")
+  species_list <- CheckEM::ga_api_species_list(username, password)
   
   if(include_life_history %in% TRUE){
     
@@ -42,7 +42,7 @@ ga_api_count <- function(username, password, synthesis_id, include_life_history 
       dplyr::mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
       dplyr::left_join(., species_list, by = "subject") %>%
       dplyr::rename(sample_url = url) %>%
-      dplyr::select(-subject)
+      dplyr::select(-c(subject, row))
     
   } else {
     # Request was not successful

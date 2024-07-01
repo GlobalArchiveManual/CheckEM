@@ -9,7 +9,7 @@
 ga_api_benthic_list <- function(username, password) {
   
   # URL
-  url <- paste0("https://dev.globalarchive.org/api/data/GlobalArchiveBenthicList/?format=feather")
+  url <- paste0("https://dev.globalarchive.org/api/data/AustralianBenthicBiotaAndSubstrateSubject/?format=feather")
   
   # Send GET request with basic authentication
   response <- GET(url, authenticate(username, password))
@@ -26,9 +26,8 @@ ga_api_benthic_list <- function(username, password) {
     species_list <- arrow::read_feather(raw_connection) %>%
       as.data.frame() %>%
       dplyr::rename(subject = url)%>%
-      dplyr::select(-row)
-    # left_join(lm) %>%
-    #dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(species_lm), fb_length_at_maturity_cm, species_lm))
+      # dplyr::select(-row) %>%
+      dplyr::select(-c(row, annotation_list, native_id_in_list, is_benthic_subject, subject_common_name, qualifiers))
     
     names(species_list)
     
