@@ -4,7 +4,7 @@
 \alias{ga_api_count}
 \title{Function to API call count data from a synthesis in GlobalArchive}
 \usage{
-ga_api_count(username, password, synthesis_id)
+ga_api_count(username, password, synthesis_id, include_life_history = TRUE)
 }
 \description{
 Function to API call count data from a synthesis in GlobalArchive
