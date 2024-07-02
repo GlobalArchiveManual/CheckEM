@@ -41,7 +41,7 @@ ga_api_count <- function(username, password, synthesis_id, include_life_history 
     count <- arrow::read_feather(raw_connection) %>%
       dplyr::mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
       dplyr::left_join(., species_list, by = "subject") %>%
-      dplyr::rename(sample_url = url) %>%
+      dplyr::rename(sample_url = sample) %>%
       dplyr::select(-c(subject, row))
     
   } else {

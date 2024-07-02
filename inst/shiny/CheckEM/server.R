@@ -721,7 +721,8 @@ function(input, output, session) {
           length_not_uploaded %in% TRUE ~ NA,
           .default = count_less_length
         )) %>%
-        dplyr::select(campaignid, count_less_length)
+        dplyr::select(campaignid, count_less_length) %>%
+        dplyr::mutate(count_less_length = 100 - count_less_length)
       
       
     } else {
@@ -789,7 +790,7 @@ function(input, output, session) {
     
   })
   
-  ## ► 7. Count greater length - score ----
+  ## ► 7. Count greater length ----
   # % of lengths more than expected from MaxN (no 3D points)
   
   #### ~ table ----
@@ -839,7 +840,9 @@ function(input, output, session) {
           length_not_uploaded %in% TRUE ~ NA,
           .default = count_greater_length
         )) %>%
-        dplyr::select(campaignid, count_greater_length)
+        dplyr::select(campaignid, count_greater_length) %>%
+        dplyr::mutate(count_greater_length = 100 - count_greater_length)
+      
     } else {
       
       count_greater_length <- metadata() %>%
@@ -963,7 +966,8 @@ function(input, output, session) {
           length_not_uploaded %in% TRUE ~ NA,
           .default = count_less_length_lbc
         )) %>%
-        dplyr::select(campaignid, count_less_length_lbc) 
+        dplyr::select(campaignid, count_less_length_lbc) %>%
+        dplyr::mutate(count_less_length_lbc = 100 - count_less_length_lbc)
     } else {
       
       count_less_length_lbc <- metadata() %>%
@@ -1092,7 +1096,8 @@ function(input, output, session) {
         length_not_uploaded %in% TRUE ~ NA,
         .default = count_greater_length_lbc
       )) %>%
-      dplyr::select(campaignid, count_greater_length_lbc) 
+      dplyr::select(campaignid, count_greater_length_lbc)  %>%
+      dplyr::mutate(count_greater_length_lbc = 100 - count_greater_length_lbc)
     
     } else {
       
@@ -1188,7 +1193,8 @@ function(input, output, session) {
       dplyr::full_join(total_measurements) %>%
       tidyr::replace_na(list(number_of_lengths_over = 0)) %>%
       dplyr::mutate(length_greater_maximum_size = (number_of_lengths_over/number_of_lengths)*100) %>%
-      dplyr::select(campaignid, length_greater_maximum_size)
+      dplyr::select(campaignid, length_greater_maximum_size) %>%
+      dplyr::mutate(length_greater_maximum_size = 100 - length_greater_maximum_size)
     
     } else {
       
@@ -1253,6 +1259,17 @@ function(input, output, session) {
       dplyr::left_join(count_less_length_lbc_table()) %>%
       dplyr::left_join(count_greater_length_lbc_table()) %>%
       dplyr::left_join(length_greater_maximum_size_table()) %>%
+      dplyr::mutate(metadata_format = round(metadata_format, 2),
+                    metadata_matches_count = round(metadata_matches_count, 2),
+                    metadata_matches_length = round(metadata_matches_length, 2),
+                    count_matches_schema = round(count_matches_schema, 2),
+                    count_vs_length = round(count_vs_length, 2),
+                    count_less_length = round(count_less_length, 2),
+                    count_greater_length = round(count_greater_length, 2),
+                    count_less_length_lbc = round(count_less_length_lbc, 2),
+                    count_greater_length_lbc = round(count_greater_length_lbc, 2),
+                    length_greater_maximum_size = round(length_greater_maximum_size, 2)
+                    ) %>%
       dplyr::glimpse()
     
   })
@@ -1292,12 +1309,17 @@ function(input, output, session) {
     if(input$length %in% "Yes"){
       
       count_vs_length_score <- round(count_vs_length_score(), 2)
-      cols["Count v Length"] <- "#99C3D1"
+      cols["Count v Length"] <- "#F8BEB3"
+      
+      count_vs_length_goal <- "#EE5C42"
+      count_vs_length_fill <- "#F8BEB3"
       
     } else {
       
-      count_vs_length_score <- NA
-      cols["Count v Length"] <- "grey"
+      count_vs_length_score <- 100
+      cols["Count v Length"] <- "darkgrey"
+      count_vs_length_goal <- "darkgrey"
+      count_vs_length_fill <- "darkgrey"
       
     }
     
@@ -1306,12 +1328,16 @@ function(input, output, session) {
     if(input$length %in% "Yes"){
       
       count_less_length_lbc_score <- 100 - round(count_less_length_lbc_score(), 2)
-      cols["Count < Length*"] <- "#bad0e8"
+      cols["Count < Length*"] <- "#99C3D1"
+      count_less_length_lbc_goal <- "#00688B"
+      count_less_length_lbc_fill <- "#99C3D1"
       
     } else {
       
-      count_less_length_lbc_score <- NA
-      cols["Count < Length*"] <- "grey"
+      count_less_length_lbc_score <- 100
+      cols["Count < Length*"] <- "darkgrey"
+      count_less_length_lbc_goal <- "darkgrey"
+      count_less_length_lbc_fill <- "darkgrey"
       
     }
     
@@ -1321,11 +1347,15 @@ function(input, output, session) {
       
       count_greater_length_lbc_score <- 100 - round(count_greater_length_lbc_score(), 2)
       cols["Count > Length*"] <- "#d6b3f8"
+      count_greater_length_lbc_goal <- "#b778f5"
+      count_greater_length_lbc_fill <- "#d6b3f8"
       
     } else {
-      
-      count_greater_length_lbc_score <- NA
-      cols["Count > Length*"] <- "grey"
+    
+      count_greater_length_lbc_score <- 100
+      cols["Count > Length*"] <- "darkgrey"
+      count_greater_length_lbc_goal <- "darkgrey"
+      count_greater_length_lbc_fill <- "darkgrey"
       
     }
     
@@ -1334,12 +1364,16 @@ function(input, output, session) {
     if(input$length %in% "Yes"){
       
       length_greater_maximum_size_score <- 100 - round(length_greater_maximum_size_score(), 2)
-      cols["Length > Max Size"] <- "#F8BEB3"
+      cols["Length > Max Size"] <- "#bad0e8"
+      length_greater_maximum_size_goal <- "#92bcea"
+      length_greater_maximum_size_fill <- "#bad0e8"
       
     } else {
       
-      length_greater_maximum_size_score <- NA
-      cols["Length > Max Size"] <- "grey"
+      length_greater_maximum_size_score <- 100
+      cols["Length > Max Size"] <- "darkgrey"
+      length_greater_maximum_size_goal <- "darkgrey"
+      length_greater_maximum_size_fill <- "darkgrey"
       
     }
     
@@ -1372,6 +1406,18 @@ function(input, output, session) {
                              "Length > Max Size",  
                              "Metadata")
     
+    if(input$length %in% "Yes"){
+      
+      dat_filtered <- dat
+      
+    } else {
+    
+    dat_filtered <- dat %>%
+      dplyr::filter(score %in% c("Metadata", "Count schema"))
+      
+    }
+    
+    
     p <- ggplot(dat, aes(score, value, fill = score)) +
       scale_fill_manual(values = cols) +
       xlab("") + ylab("") +
@@ -1401,29 +1447,29 @@ function(input, output, session) {
       geom_rect(xmin = 1.5, xmax = 2.5,
                 ymin = 0,
                 ymax = count_vs_length_score, 
-                fill = "#F8BEB3", color = "white", size = 2) +
+                fill = count_vs_length_fill, color = "white", size = 2) +
       
-      draw_line(x = c(1.51, 2.49), y = c(100, 100), color = "#EE5C42", size = 2) +
+      draw_line(x = c(1.51, 2.49), y = c(100, 100), color = count_vs_length_goal, size = 2) +
       
       geom_rect(xmin = 2.5, xmax = 3.5,
                 ymin = 0,
                 ymax = count_less_length_lbc_score, 
-                fill = "#99C3D1", color = "white", size = 2) +
+                fill = count_less_length_lbc_fill, color = "white", size = 2) +
       
-      draw_line(x = c(2.51, 3.49), y = c(100, 100), color = "#00688B", size = 2) +
+      draw_line(x = c(2.51, 3.49), y = c(100, 100), color = count_less_length_lbc_goal, size = 2) +
       
       geom_rect(xmin = 3.5, xmax = 4.5,
                 ymin = 0,
                 ymax = count_greater_length_lbc_score, 
-                fill = "#d6b3f8", color = "white", size = 2) +
+                fill = count_greater_length_lbc_fill, color = "white", size = 2) +
       
-      draw_line(x = c(3.51, 4.49), y = c(100, 100), color = "#b778f5", size = 2) +
+      draw_line(x = c(3.51, 4.49), y = c(100, 100), color = count_greater_length_lbc_goal, size = 2) +
       
       geom_rect(xmin = 4.5, xmax = 5.5,
                 ymin = 0,
-                ymax = length_greater_maximum_size_score, fill = "#bad0e8", color = "white", size = 2) +
+                ymax = length_greater_maximum_size_score, fill = length_greater_maximum_size_fill, color = "white", size = 2) +
       
-      draw_line(x = c(4.51, 5.49), y = c(100, 100), color = "#92bcea", size = 2) +
+      draw_line(x = c(4.51, 5.49), y = c(100, 100), color = length_greater_maximum_size_goal, size = 2) +
       
       
       geom_rect(xmin = 5.5, xmax = 6.5,
@@ -1434,22 +1480,22 @@ function(input, output, session) {
                 ymax = 150, fill = "#FFD966", color = "white", size = 2) +
       geom_rect(xmin = 1.5, xmax = 2.5,
                 ymin = 110,
-                ymax = 150, fill = "#EE5C42", color = "white", size = 2) +
+                ymax = 150, fill = count_vs_length_goal, color = "white", size = 2) +
       geom_rect(xmin = 2.5, xmax = 3.5,
                 ymin = 110,
-                ymax = 150, fill = "#00688B", color = "white", size = 2) +
+                ymax = 150, fill = count_less_length_lbc_goal, color = "white", size = 2) +
       geom_rect(xmin = 3.5, xmax = 4.5,
                 ymin = 110,
-                ymax = 150, fill = "#b778f5", color = "white", size = 2) +
+                ymax = 150, fill = count_greater_length_lbc_goal, color = "white", size = 2) +
       geom_rect(xmin = 4.5, xmax = 5.5,
                 ymin = 110,
-                ymax = 150, fill = "#92bcea", color = "white", size = 2) +
+                ymax = 150, fill = length_greater_maximum_size_goal, color = "white", size = 2) +
       
       geom_textpath(y = 128, aes(x = score, label = score), colour = "white", size = 5.5, fontface = "bold") + 
       
-      geom_textpath(aes(y = label_position, 
+      geom_textpath(dat = dat_filtered, aes(y = label_position, 
                         label = paste0(value, "%")), 
-                    colour = "white", size = 5, fontface = "bold") +
+                    colour = "grey100", size = 5, fontface = "bold") +
       coord_polar() #start = 1.05
     
     # cols <- c("Metadata" = "#99D199", 
@@ -1828,6 +1874,10 @@ function(input, output, session) {
       for (i in seq_along(files$datapath)) {
         tmp <- read_csv(files$datapath[i], col_types = cols(.default = "c")) 
         
+        message(paste("reading file:", files$datapath[i]))
+        
+        message("preview metadata")
+        
         if("campaignid" %in% colnames(metadata))
         {
           metadata <- metadata %>%
@@ -1836,7 +1886,8 @@ function(input, output, session) {
         
         
         tmp <- tmp %>%
-          dplyr::mutate(campaignid = files$name[i])
+          dplyr::mutate(campaignid = files$name[i]) %>%
+          dplyr::glimpse()
         
         metadata <- bind_rows(metadata, tmp)
         
@@ -1856,6 +1907,9 @@ function(input, output, session) {
         clean_names() #%>%
       #glimpse()
       
+      message("metadata campaigns")
+      print(unique(metadata$campaignid))
+      
       # Rename any old names
       lookup <- c(depth_m = "depth",
                   visibility_m = "visibility",
@@ -1864,6 +1918,9 @@ function(input, output, session) {
       
       metadata <- metadata %>%
         dplyr::rename(dplyr::any_of(lookup))
+      
+      message("metadata campaigns")
+      print(unique(metadata$campaignid))
       
       cols.missing <- ""
       
@@ -1917,16 +1974,18 @@ function(input, output, session) {
       }
       
       
-      #message("uploaded metadata")
+      message("uploaded metadata")
       
       metadata <- metadata %>%
         dplyr::mutate(campaignid = stringr::str_replace_all(.$campaignid, c("_Metadata.csv" = "", "_metadata.csv" = ""))) %>%
         dplyr::mutate(latitude_dd = as.numeric(latitude_dd)) %>%
-        dplyr::mutate(longitude_dd = as.numeric(longitude_dd)) #%>%
-      #glimpse()
+        dplyr::mutate(longitude_dd = as.numeric(longitude_dd)) %>% glimpse()
       
       message("metadata names")
       print(names(metadata))
+      
+      message("metadata campaigns")
+      print(unique(metadata$campaignid))
       
       original_metadata_names <- c(names(metadata))
       
