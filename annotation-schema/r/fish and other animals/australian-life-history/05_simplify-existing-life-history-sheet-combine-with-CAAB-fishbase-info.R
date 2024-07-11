@@ -14,6 +14,10 @@ gargle::gargle_oauth_cache()
 googlesheets4::gs4_auth()
 2
 
+se <- function(x) {
+  sd(x) / sqrt(length(x))
+}
+
 # Read in sheet from googledrive ----
 url <- "https://docs.google.com/spreadsheets/d/1SMLvR9t8_F-gXapR2EemQMEPSw_bUbPLcXd3lJ5g5Bo/edit?usp=sharing"
 lh <- read_sheet(url, sheet = "australia.life.history") %>%
@@ -161,6 +165,7 @@ fishbase <- readRDS("annotation-schema/data/staging/australia_fish_fishbase-info
   dplyr::mutate(caab_code = as.character(caab_code)) %>%
   dplyr::mutate(caab_scientific = if_else((caab_code %in% "37361005"), "Microcanthus joyceae", caab_scientific)) %>%
   distinct() %>%
+  dplyr::mutate(fb_trophic_level = as.numeric(fb_trophic_level)) %>%
   dplyr::filter(!caab_scientific %in% "Rhina ancylostoma")
 
 test <- fishbase %>%
@@ -226,6 +231,31 @@ test <- caab_combined %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
+genus_trophic_maturity <- fishbase %>%
+  left_join(caab_combined) %>%
+  dplyr::group_by(family, genus) %>%
+  dplyr::summarise(fb_trophic_level = mean(fb_trophic_level, na.rm = TRUE),
+                   # TODO add in SE
+                   # fb_trophic_level_se = se(fb_trophic_level), 
+                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE)) %>%
+  dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
+  dplyr::mutate(species = "spp")
+
+family_trophic_maturity <- fishbase %>%
+  left_join(caab_combined) %>%
+  dplyr::group_by(family) %>%
+  dplyr::summarise(fb_trophic_level = mean(fb_trophic_level, na.rm = TRUE), 
+                   fb_trophic_level_se = se(fb_trophic_level, na.rm = TRUE),
+                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE)) %>%
+  mutate_all(~ifelse(is.nan(.), NA, .)) %>%
+  dplyr::mutate(species = "spp", genus = "Unknown")
+
+spp_trophic_maturity <- bind_rows(genus_trophic_maturity, family_trophic_maturity) %>%
+  dplyr::rename(spp_fb_trophic_level = fb_trophic_level,
+               spp_fb_length_at_maturity_cm = fb_length_at_maturity_cm)
+
+# fishbase <- bind_rows(fishbase, spp_trophic_maturity)
+
 iucn_animals <- readRDS("annotation-schema/data/staging/iucn.RDS") %>%
   dplyr::mutate(iucn_ranking = case_when(
     category %in% "DD" ~ "Data Deficient",
@@ -266,7 +296,9 @@ spps <- readRDS("annotation-schema/data/staging/australia_fish_caab-codes_spps.R
   dplyr::mutate(australian_source = "CAAB",
                 global_source = "WoRMS"#,
                 #local_source = "Not Available"
-  )
+  ) 
+
+
 
 blank_class <- spps %>%
   filter(is.na(class)) %>%
@@ -296,7 +328,7 @@ test <- spps %>%
 # Make it simpler
 australia_life_history <- caab_combined %>%
   dplyr::left_join(fishbase) %>%
-  dplyr::rename(caab = caab_code, #TODO make caab_code consistent throughout all scripts
+  dplyr::rename(#caab = caab_code, #TODO make caab_code consistent throughout all scripts
                 australian_common_name = common_name,
                 fb_code = speccode,
                 fb_length_weight_measure = length_measure, #TODO make this happen in fishbase script
@@ -407,6 +439,14 @@ australia_life_history <- caab_combined %>%
   dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
   filter(!grepl("cf", species)) %>%
   filter(!grepl("sp\\.", species)) %>%
+  
+  dplyr::left_join(spp_trophic_maturity) %>%
+  dplyr::mutate(fb_trophic_level = if_else(is.na(fb_trophic_level), spp_fb_trophic_level, fb_trophic_level)) %>%
+  dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(fb_length_at_maturity_cm), spp_fb_length_at_maturity_cm, fb_length_at_maturity_cm)) %>%
+  dplyr::select(-c(spp_fb_trophic_level, )) %>%
+  
+  
+  
   
   dplyr::mutate(australian_source = "CAAB") %>%
   
