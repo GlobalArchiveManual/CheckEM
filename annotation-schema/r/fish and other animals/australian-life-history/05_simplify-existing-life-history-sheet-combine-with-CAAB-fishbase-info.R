@@ -351,7 +351,7 @@ australia_life_history <- caab_combined %>%
   dplyr::mutate(global_region = "Australia") %>%
   
   dplyr::select(c(australian_source,
-                caab,
+                caab_code,
                 class,
                 order,
                 family,
@@ -452,7 +452,7 @@ australia_life_history <- caab_combined %>%
   
   dplyr::select(# CAAB info
                 australian_source,
-                caab,
+                caab_code,
                 
                 # Taxanomic ranks
                 # kingdom,
