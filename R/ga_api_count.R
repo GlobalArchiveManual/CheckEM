@@ -1,11 +1,19 @@
-# 
-#' Function to API call count data from a synthesis in GlobalArchive
+# Retrieve count data from GlobalArchive
+#' @description
+#' Function to retrieve count data from a GlobalArchive synthesis using an API call 
 #'
+#' @param username your GlobalArchive username as a string. 
+#' @param password your GlobalArchive password as a string. 
+#' @param synthesis_id the GlobalArchive synthesis ID number.
+#' @param include_life_history if life history information should be included in the download.
 #'
-#' @return
+#' @returns A data frame of count data retrieved using the GlobalArchive API. 
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' count <- ga_api_count(username = "your_username", password = "your_password", synthesis_id = "your_synthesis_id, include_life_history = TRUE)
+#' }
 ga_api_count <- function(username, password, synthesis_id, include_life_history = TRUE) {
   
   # TODO brooke to add functionality life_history = TRUE or FALSE
