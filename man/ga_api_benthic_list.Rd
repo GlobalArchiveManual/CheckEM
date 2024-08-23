@@ -2,10 +2,28 @@
 % Please edit documentation in R/ga_api_benthic_list.R
 \name{ga_api_benthic_list}
 \alias{ga_api_benthic_list}
-\title{Function to API call to the GlobalArchive species list}
+\title{Retrieve Benthic Species List from the Global Archive API}
 \usage{
 ga_api_benthic_list(username, password)
 }
+\arguments{
+\item{username}{A character string representing the username for API authentication.}
+
+\item{password}{A character string representing the password for API authentication.}
+}
+\value{
+A data frame containing the list of benthic species. The data frame includes columns for
+species details, with some columns removed for clarity.
+}
 \description{
-Function to API call to the GlobalArchive species list
+This function retrieves a list of benthic species from the Global Archive API. It makes an API call to
+the specified endpoint using basic authentication, reads the response in Feather format, and returns
+the data as a data frame. The resulting data frame is cleaned by renaming and removing certain columns.
+}
+\examples{
+\dontrun{
+# Retrieve the benthic species list using API credentials
+species_list <- ga_api_benthic_list("your_username", "your_password")
+print(species_list)
+}
 }

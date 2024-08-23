@@ -2,16 +2,34 @@
 % Please edit documentation in R/expand_life_history.R
 \name{expand_life_history}
 \alias{expand_life_history}
-\title{A function to expand a life-history dataframe so there is one row per species per region}
+\title{Expand Life-History Data Frame for Species and Regions}
 \usage{
 expand_life_history(dat)
 }
 \arguments{
-\item{dat}{}
+\item{dat}{A data frame containing life history information with a column for marine regions.
+The \code{marine_region} column should contain comma-separated region codes (e.g., "NW, N, CS").}
 }
 \value{
-A life history dataframe, either australia_life_history or global_life_history
+A data frame where each species-region combination is represented in a separate row.
+The \code{marine_region} codes are expanded to their full names (e.g., "NW" to "North-west").
 }
 \description{
-A function to expand a life-history dataframe so there is one row per species per region
+This function takes a life-history data frame where multiple marine regions for each species
+are listed in a single cell, separated by commas. It expands this data frame so that each
+species-region combination gets its own row, with marine regions translated into their full names.
+}
+\examples{
+# Create a sample data frame with species and comma-separated marine regions
+dat <- data.frame(
+  species = c("Species A", "Species B"),
+  marine_region = c("NW, N, CS", "TE, SE")
+)
+
+# Expand the data frame to have one row per species-region combination
+expanded_dat <- expand_life_history(dat)
+
+# Check the result
+print(expanded_dat)
+
 }

@@ -1,37 +1,44 @@
-# Retrieve count data from GlobalArchive
-#' @description
-#' Function to retrieve count data from a GlobalArchive synthesis using an API call 
+#' Retrieve Count Data from the GlobalArchive API
 #'
-#' @param username your GlobalArchive username as a string. 
-#' @param password your GlobalArchive password as a string. 
-#' @param synthesis_id the GlobalArchive synthesis ID number.
-#' @param include_life_history if life history information should be included in the download.
+#' This function retrieves count data from a GlobalArchive synthesis using an API call. It allows you to 
+#' include or exclude life history information in the retrieved data and processes the data accordingly.
 #'
-#' @returns A data frame of count data retrieved using the GlobalArchive API. 
+#' @param username A character string representing your GlobalArchive username for API authentication.
+#' @param password A character string representing your GlobalArchive password for API authentication.
+#' @param synthesis_id A character string or numeric value representing the GlobalArchive synthesis ID 
+#' for which the count data should be retrieved.
+#' @param include_life_history A logical value indicating whether life history information should 
+#' be included in the retrieved data. Defaults to `TRUE`. If `FALSE`, only basic species information 
+#' is included.
+#'
+#' @return A data frame containing the count data retrieved from the GlobalArchive API. The data frame
+#' includes count data for various subjects, with optional life history details depending on the 
+#' `include_life_history` parameter.
+#' 
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' count <- ga_api_count(username = "your_username", password = "your_password", synthesis_id = "your_synthesis_id, include_life_history = TRUE)
+#' # Retrieve count data including life history information
+#' count_data <- ga_api_count(username = "your_username", password = "your_password", 
+#'                            synthesis_id = "your_synthesis_id", include_life_history = TRUE)
+#' 
+#' # Retrieve count data without life history information
+#' count_data <- ga_api_count(username = "your_username", password = "your_password", 
+#'                            synthesis_id = "your_synthesis_id", include_life_history = FALSE)
 #' }
 ga_api_count <- function(username, password, synthesis_id, include_life_history = TRUE) {
   
-  # TODO brooke to add functionality life_history = TRUE or FALSE
-  
+  # Retrieve the species list
   species_list <- CheckEM::ga_api_species_list(username, password)
   
-  if(include_life_history %in% TRUE){
-    
-    species_list <- species_list
-    
-  } else{
-    
+  # Conditionally modify the species list based on include_life_history parameter
+  if (!include_life_history) {
     species_list <- species_list %>%
       dplyr::select(subject, australian_common_name, family, genus, species, caab)
-      
   }
   
-  # URL
+  # URL for the API endpoint
   url <- paste0("https://dev.globalarchive.org/api/data/SynthesisCountEntry/?sample__synthesis=", synthesis_id, "&format=feather")
   
   # Send GET request with basic authentication
@@ -53,7 +60,7 @@ ga_api_count <- function(username, password, synthesis_id, include_life_history 
       dplyr::select(-c(subject, row))
     
   } else {
-    # Request was not successful
+    # Handle request failure
     cat("Request failed with status code:", status_code(response))
   }
   

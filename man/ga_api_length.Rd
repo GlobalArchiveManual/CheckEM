@@ -2,10 +2,48 @@
 % Please edit documentation in R/ga_api_length.R
 \name{ga_api_length}
 \alias{ga_api_length}
-\title{Function to API call length data from a synthesis in GlobalArchive}
+\title{Retrieve Length Data from the GlobalArchive API}
 \usage{
 ga_api_length(username, password, synthesis_id, include_life_history = TRUE)
 }
+\arguments{
+\item{username}{A character string representing your GlobalArchive username for API authentication.}
+
+\item{password}{A character string representing your GlobalArchive password for API authentication.}
+
+\item{synthesis_id}{A character string or numeric value representing the GlobalArchive synthesis ID for which the length data should be retrieved.}
+
+\item{include_life_history}{A logical value indicating whether to include life history data
+(default is TRUE). If FALSE, only basic species information is returned.}
+}
+\value{
+A data frame containing length data for the synthesis, with optional life history
+information and species data joined from GlobalArchive.
+
+The data frame includes the following columns:
+\itemize{
+\item \code{australian_common_name}: Common name of the species.
+\item \code{family}: The family of the species.
+\item \code{genus}: The genus of the species.
+\item \code{species}: The species name.
+\item \code{caab}: The CAAB (Codes for Australian Aquatic Biota) code.
+\item \code{length}: The recorded length.
+\item \code{sample_url}: The URL of the sample in GlobalArchive.
+\item \code{other_columns}: Any other columns present in the Feather file that were not removed.
+}
+}
 \description{
-Function to API call length data from a synthesis in GlobalArchive
+This function retrieves length data associated with a specific synthesis in GlobalArchive
+by making an API call. The data can optionally include life history information for species.
+The data is returned in a processed format with species information joined based on the
+synthesis data.
+}
+\examples{
+\dontrun{
+# Fetch length data including life history
+length <- ga_api_length("your_username", "your_password", synthesis_id = 1234)
+
+# Fetch length data without life history
+length <- ga_api_length("your_username", "your_password", synthesis_id = 1234, include_life_history = FALSE)
+}
 }

@@ -2,15 +2,39 @@
 % Please edit documentation in R/find_lw.R
 \name{find_lw}
 \alias{find_lw}
-\title{Find Bayesian length-weight equation}
+\title{Retrieve Bayesian Length-Weight Equation from FishBase}
 \usage{
 find_lw(sp, mirror = "us")
 }
 \arguments{
-\item{sp}{}
+\item{sp}{A character string representing the species name. The species name should be provided
+as it appears on FishBase, but spaces will be replaced with hyphens.}
 
-\item{mirror}{}
+\item{mirror}{A character string specifying the FishBase mirror site to use. Defaults to "us"
+(FishBase USA). Other mirrors can be specified if needed.}
+}
+\value{
+A data frame containing the Bayesian length-weight parameters for the species. The data frame
+includes the following columns:
+\itemize{
+\item \strong{species}: The species name.
+\item \strong{lwa_m}: The parameter for the length-weight equation (a).
+\item \strong{lwa_sd}: The standard deviation of the parameter for the length-weight equation (a).
+\item \strong{lwb_m}: The parameter for the length-weight equation (b).
+\item \strong{lwb_sd}: The standard deviation of the parameter for the length-weight equation (b).
+\item \strong{metric}: The metric used for length measurement (e.g., "based on LWR estimates for this species & (Sub)family-body").
+}
+If there is no internet connection or if the species page cannot be retrieved, the function returns
+\code{NULL}.
 }
 \description{
-Find Bayesian length-weight equation
+This function retrieves the Bayesian length-weight equation parameters for a given species
+from FishBase. It fetches data from the FishBase website and parses the Bayesian length-weight
+parameters including the mean (m), standard deviation (sd), and the metric used.
+}
+\examples{
+# Retrieve Bayesian length-weight parameters for a species
+lw_params <- find_lw("Lutjanus campechanus")
+print(lw_params)
+
 }

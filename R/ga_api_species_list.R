@@ -1,14 +1,36 @@
-# 
-#' Function to API call to the GlobalArchive species list
+#' Retrieve Species List from the Global Archive API
+#' 
+#' This function retrieves the species list from GlobalArchive by making an API call. The data 
+#' is returned as a data frame with relevant species information, excluding some columns that 
+#' are not needed for further analysis.
 #'
+#' @param username A character string representing your GlobalArchive username for API authentication.
+#' @param password A character string representing your GlobalArchive password for API authentication.
 #'
-#' @return
+#' @return A data frame containing the species list from GlobalArchive. 
+#' The data frame includes the following columns:
+#' \itemize{
+#'   \item \code{subject}: The URL or identifier of the species in GlobalArchive.
+#'   \item \code{australian_common_name}: Common name of the species.
+#'   \item \code{family}: The family of the species.
+#'   \item \code{genus}: The genus of the species.
+#'   \item \code{species}: The species name.
+#'   \item \code{caab}: The CAAB (Codes for Australian Aquatic Biota) code.
+#'   \item \code{other_columns}: Any other relevant columns included in the original dataset.
+#' }
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' # Fetch the species list from GlobalArchive
+#' species_list <- ga_api_species_list("your_username", "your_password")
+#' 
+#' # Display the first few rows of the species list
+#' head(species_list)
+#' }
 ga_api_species_list <- function(username, password) {
   
-  # URL
+  # URL for the API endpoint
   url <- paste0("https://dev.globalarchive.org/api/data/AustralianAquaticFaunaSubject/?format=feather")
   
   # Send GET request with basic authentication
@@ -26,14 +48,14 @@ ga_api_species_list <- function(username, password) {
     species_list <- arrow::read_feather(raw_connection) %>%
       as.data.frame() %>%
       dplyr::rename(subject = url) %>%
-      dplyr::select(-c(row, annotation_list, native_id_in_list, is_benthic_subject))
-    # left_join(lm) %>%
-    #dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(species_lm), fb_length_at_maturity_cm, species_lm))
+      dplyr::select(-c(row, annotation_list, 
+                       native_id_in_list, 
+                       is_benthic_subject))
     
     names(species_list)
     
   } else {
-    # Request was not successful
+    # Handle request failure
     cat("Request failed with status code:", status_code(response))
   }
   

@@ -1,26 +1,35 @@
-#' A function to standardise names in a data frame
+#' Standardise Column Names in a Data Frame
 #'
-#' @param dat 
+#' This function takes a data frame and standardises its column names by converting them to lower case, 
+#' replacing special characters with underscores, and ensuring that names are syntactically valid R names.
 #'
-#' @return A data frame with all lower case column names. This function also replaces any special characters with an "_".
+#' @param dat A data frame whose column names need to be standardized.
+#'
+#' @return A data frame with standardised column names. All column names are converted to lower case,
+#' special characters are replaced with underscores, and redundant underscores at the end of names are removed.
+#' 
 #' @export
 #'
 #' @examples
+#' # Create a data frame with various column names
+#' dat <- data.frame("NAmE1" = 1:3, "name-2" = 4:6, "nAMe.-72" = 7:9)
+#'
+#' # Clean the column names
+#' cleaned_dat <- clean_names(dat)
 #' 
-# dat <- as.data.frame(c("NAmE1", "name-2", "nAMe.-72")) %>%
-#   clean_names()
-#' 
-#' 
+#' # Check the result
+#' print(cleaned_dat)
+#'
 clean_names <- function(dat) {
   
   old_names <- names(dat)
   
   new_names <- old_names %>%
-    gsub("%", "percent", .) %>%
+    gsub("%", "percent", .) %>% # Replace any percent sybmols with the word percent
     make.names(.) %>%
-    gsub("[.]+", "_", .) %>%
-    tolower(.) %>%
-    gsub("_$", "", .)
+    gsub("[.]+", "_", .) %>% # Replace multiple consecutive underscores with a single underscore
+    tolower(.) %>% # Convert to lower case
+    gsub("_$", "", .) # Remove trailing underscore, if any
   
   setNames(dat, new_names)
 }

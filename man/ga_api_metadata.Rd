@@ -2,10 +2,40 @@
 % Please edit documentation in R/ga_api_metadata.R
 \name{ga_api_metadata}
 \alias{ga_api_metadata}
-\title{Function to API call metadata from a synthesis in GlobalArchive}
+\title{Retrieve Metadata from the GlobalArchive API}
 \usage{
 ga_api_metadata(username, password, synthesis_id)
 }
+\arguments{
+\item{username}{A character string representing your GlobalArchive username for API authentication.}
+
+\item{password}{A character string representing your GlobalArchive password for API authentication.}
+
+\item{synthesis_id}{A character string or numeric value representing the GlobalArchive synthesis ID for which the metadata should be retrieved.}
+}
+\value{
+A data frame containing metadata for the synthesis, including processed coordinates and other relevant information. If the API request fails, the function returns NULL and prints the status code.
+
+The data frame includes the following columns:TODO - brooke to add all columns
+
+\itemize{
+\item \code{latitude_dd}: The latitude in decimal degrees.
+\item \code{longitude_dd}: The longitude in decimal degrees.
+\item \code{sample_url}: The URL of the sample in GlobalArchive.
+\item \code{other_columns}: Any other columns present in the Feather file that were not removed.
+}
+}
 \description{
-Function to API call metadata from a synthesis in GlobalArchive
+This function retrieves metadata associated with a specific synthesis in GlobalArchive
+by making an API call. The metadata includes geographic coordinates, which are processed
+into separate latitude and longitude columns.
+}
+\examples{
+\dontrun{
+# Fetch metadata for a specific synthesis
+metadata <- ga_api_metadata("your_username", "your_password", synthesis_id = 1234)
+
+# Display the first few rows of metadata
+head(metadata)
+}
 }

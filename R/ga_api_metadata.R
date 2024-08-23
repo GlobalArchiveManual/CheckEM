@@ -1,18 +1,36 @@
-# 
-#' Function to API call metadata from a synthesis in GlobalArchive
+#' Retrieve Metadata from the GlobalArchive API
 #'
+#' This function retrieves metadata associated with a specific synthesis in GlobalArchive 
+#' by making an API call. The metadata includes geographic coordinates, which are processed 
+#' into separate latitude and longitude columns. 
 #'
-#' @return
+#' @param username A character string representing your GlobalArchive username for API authentication.
+#' @param password A character string representing your GlobalArchive password for API authentication.
+#' @param synthesis_id A character string or numeric value representing the GlobalArchive synthesis ID for which the metadata should be retrieved.
+#'
+#' @return A data frame containing metadata for the synthesis, including processed coordinates and other relevant information. If the API request fails, the function returns NULL and prints the status code.
+#' 
+#' The data frame includes the following columns:
+#' # TODO - brooke to add all columns
+#' \itemize{
+#'   \item \code{latitude_dd}: The latitude in decimal degrees.
+#'   \item \code{longitude_dd}: The longitude in decimal degrees.
+#'   \item \code{sample_url}: The URL of the sample in GlobalArchive.
+#'   \item \code{other_columns}: Any other columns present in the Feather file that were not removed.
+#' }
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' # Fetch metadata for a specific synthesis
+#' metadata <- ga_api_metadata("your_username", "your_password", synthesis_id = 1234)
 #' 
-#' 
-#' 
-
+#' # Display the first few rows of metadata
+#' head(metadata)
+#' }
 ga_api_metadata <- function(username, password, synthesis_id) {
-  # TODO brooke rename sample
-  # URL
+  
+  # URL for the API endpoint
   url <- paste0("https://dev.globalarchive.org/api/data/SynthesisSample/?synthesis=", synthesis_id, "&format=feather")
   
   # Send GET request with basic authentication
@@ -37,26 +55,8 @@ ga_api_metadata <- function(username, password, synthesis_id) {
     # Add marine parks to metadata ----
     metadata <- metadata_raw
     
-    # # Add spatial
-    # coordinates(metadata_spatial) <- c('longitude', 'latitude')
-    # proj4string(metadata_spatial) <- CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
-    
-    # # Add in marine spatial zoning information ----
-    # metadata <- bind_cols(metadata_raw, over(metadata_spatial, marineparks)) %>%
-    #   dplyr::rename(zone = ZONE_TYPE) %>%
-    #   tidyr::replace_na(list(status = "Fished"))
-    #
-    # metadata$zone <- fct_relevel(metadata$zone,
-    #                              "National Park Zone",
-    #                              "Sanctuary Zone",
-    #                              "General Use",
-    #                              "General Use Zone",
-    #                              "Habitat Protection Zone",
-    #                              "Multiple Use Zone",
-    #                              "Recreational Use Zone",
-    #                              "Special Purpose Zone (Mining Exclusion)")
   } else {
-    # Request was not successful
+    # Handle request failure
     cat("Request failed with status code:", status_code(response))
   }
   

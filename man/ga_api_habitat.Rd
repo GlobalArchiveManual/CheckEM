@@ -2,10 +2,30 @@
 % Please edit documentation in R/ga_api_habitat.R
 \name{ga_api_habitat}
 \alias{ga_api_habitat}
-\title{Function to API call metadata from a synthesis in GlobalArchive}
+\title{Retrieve Habitat Data from the GlobalArchive API}
 \usage{
 ga_api_habitat(username, password, synthesis_id)
 }
+\arguments{
+\item{username}{A character string representing your GlobalArchive username for API authentication.}
+
+\item{password}{A character string representing your GlobalArchive password for API authentication.}
+
+\item{synthesis_id}{A character string or numeric value representing the GlobalArchive synthesis ID for which the habitat data should be retrieved.}
+}
+\value{
+A data frame containing habitat data retrieved from the GlobalArchive API. The data frame
+includes species information merged from the benthic species list.
+}
 \description{
-Function to API call metadata from a synthesis in GlobalArchive
+This function retrieves habitat data from a GlobalArchive synthesis using an API call. It processes
+the data to include relevant species information by merging with a benthic species list.
+}
+\examples{
+\dontrun{
+# Retrieve habitat metadata from a synthesis
+habitat <- ga_api_habitat(username = "your_username", password = "your_password", 
+                                   synthesis_id = "your_synthesis_id")
+print(habitat)
+}
 }

@@ -2,16 +2,29 @@
 % Please edit documentation in R/clean_names.R
 \name{clean_names}
 \alias{clean_names}
-\title{A function to standardise names in a data frame}
+\title{Standardise Column Names in a Data Frame}
 \usage{
 clean_names(dat)
 }
 \arguments{
-\item{dat}{}
+\item{dat}{A data frame whose column names need to be standardized.}
 }
 \value{
-A data frame with all lower case column names. This function also replaces any special characters with an "_".
+A data frame with standardised column names. All column names are converted to lower case,
+special characters are replaced with underscores, and redundant underscores at the end of names are removed.
 }
 \description{
-A function to standardise names in a data frame
+This function takes a data frame and standardises its column names by converting them to lower case,
+replacing special characters with underscores, and ensuring that names are syntactically valid R names.
+}
+\examples{
+# Create a data frame with various column names
+dat <- data.frame("NAmE1" = 1:3, "name-2" = 4:6, "nAMe.-72" = 7:9)
+
+# Clean the column names
+cleaned_dat <- clean_names(dat)
+
+# Check the result
+print(cleaned_dat)
+
 }

@@ -1,27 +1,52 @@
-# 
-#' Function to API call length data from a synthesis in GlobalArchive
+#' Retrieve Length Data from the GlobalArchive API
 #'
+#' This function retrieves length data associated with a specific synthesis in GlobalArchive 
+#' by making an API call. The data can optionally include life history information for species. 
+#' The data is returned in a processed format with species information joined based on the 
+#' synthesis data.
 #'
-#' @return
+#' @param username A character string representing your GlobalArchive username for API authentication.
+#' @param password A character string representing your GlobalArchive password for API authentication.
+#' @param synthesis_id A character string or numeric value representing the GlobalArchive synthesis ID for which the length data should be retrieved.
+#' @param include_life_history A logical value indicating whether to include life history data 
+#' (default is TRUE). If FALSE, only basic species information is returned.
+#'
+#' @return A data frame containing length data for the synthesis, with optional life history 
+#' information and species data joined from GlobalArchive.
+#' 
+#' The data frame includes the following columns:
+#' \itemize{
+#'   \item \code{australian_common_name}: Common name of the species.
+#'   \item \code{family}: The family of the species.
+#'   \item \code{genus}: The genus of the species.
+#'   \item \code{species}: The species name.
+#'   \item \code{caab}: The CAAB (Codes for Australian Aquatic Biota) code.
+#'   \item \code{length}: The recorded length.
+#'   \item \code{sample_url}: The URL of the sample in GlobalArchive.
+#'   \item \code{other_columns}: Any other columns present in the Feather file that were not removed.
+#' }
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' # Fetch length data including life history
+#' length <- ga_api_length("your_username", "your_password", synthesis_id = 1234)
+#' 
+#' # Fetch length data without life history
+#' length <- ga_api_length("your_username", "your_password", synthesis_id = 1234, include_life_history = FALSE)
+#' }
 ga_api_length <- function(username, password, synthesis_id, include_life_history = TRUE) {
   
-  species_list <- ga_api_species_list(username, password)
+  # Retrieve the species list
+  species_list <- CheckEM::ga_api_species_list(username, password)
   
-  if(include_life_history %in% TRUE){
-    
-    species_list <- species_list
-    
-  } else{
-    
+  # Conditionally modify the species list based on include_life_history parameter
+  if (!include_life_history) {
     species_list <- species_list %>%
       dplyr::select(subject, australian_common_name, family, genus, species, caab)
-    
   }
   
-  # URL
+  # URL for the API endpoint
   url <- paste0("https://dev.globalarchive.org/api/data/SynthesisLengthEntry/?sample__synthesis=", synthesis_id, "&format=feather")
   
   # Send GET request with basic authentication
@@ -43,7 +68,7 @@ ga_api_length <- function(username, password, synthesis_id, include_life_history
       dplyr::select(-c(subject, row))
     
   } else {
-    # Request was not successful
+    # Handle request failure
     cat("Request failed with status code:", status_code(response))
   }
   
