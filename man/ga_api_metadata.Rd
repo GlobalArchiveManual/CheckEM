@@ -14,10 +14,11 @@ ga_api_metadata(username, password, synthesis_id)
 \item{synthesis_id}{A character string or numeric value representing the GlobalArchive synthesis ID for which the metadata should be retrieved.}
 }
 \value{
-A data frame containing metadata for the synthesis, including processed coordinates and other relevant information. If the API request fails, the function returns NULL and prints the status code.
+A data frame containing metadata for the synthesis, including processed coordinates and other relevant information.
+If the API request fails, the function returns NULL and prints the status code.
 
-The data frame includes the following columns:TODO - brooke to add all columns
-
+The data frame includes the following columns:
+TODO - brooke to add all columns
 \itemize{
 \item \code{latitude_dd}: The latitude in decimal degrees.
 \item \code{longitude_dd}: The longitude in decimal degrees.
