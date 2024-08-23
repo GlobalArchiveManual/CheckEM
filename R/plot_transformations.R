@@ -1,11 +1,11 @@
 #' Plot Basic Transformations of Predictor Variables for GAM Modelling
 #'
-#' This function generates diagnostic plots to visualize the distribution of predictor variables 
+#' This function generates diagnostic plots to visualise the distribution of predictor variables 
 #' and the effects of basic transformations (square root and log transformations) on these variables. 
 #' It creates scatter plots and histograms for the raw, square root, and log-transformed data. 
 #' The function is useful for exploring the suitability of different transformations before 
 #' fitting a Generalized Additive Model (GAM).
-#' #'
+#' 
 #' @param pred.vars A character vector of predictor variable names to be plotted.
 #' @param dat A data frame containing the predictor variables and a grouping variable, 
 #' either 'opcode' or 'sample', which is used for the scatter plots.
