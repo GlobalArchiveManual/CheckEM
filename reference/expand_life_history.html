@@ -110,11 +110,17 @@ The <code>marine_region</code> codes are expanded to their full names (e.g., "NW
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Expand the data frame to have one row per species-region combination</span></span></span>
 <span class="r-in"><span><span class="va">expanded_dat</span> <span class="op">&lt;-</span> <span class="fu">expand_life_history</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dat %&gt;% dplyr::mutate(marine_region = strsplit(as.character(marine_region),     split = ", ")) %&gt;% tidyr::unnest(marine_region) %&gt;% dplyr::mutate(marine_region = case_when(marine_region ==     "NW" ~ "North-west", marine_region == "N" ~ "North", marine_region ==     "CS" ~ "Coral Sea", marine_region == "TE" ~ "Temperate East",     marine_region == "SE" ~ "South-east", marine_region == "SW" ~         "South-west")):</span> could not find function "%&gt;%"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check the result</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">expanded_dat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'expanded_dat' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   species   marine_region </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Species A North-west    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Species A North         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Species A Coral Sea     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Species B Temperate East</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Species B South-east    </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

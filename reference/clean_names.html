@@ -103,11 +103,24 @@ special characters are replaced with underscores, and redundant underscores at t
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean the column names</span></span></span>
 <span class="r-in"><span><span class="va">cleaned_dat</span> <span class="op">&lt;-</span> <span class="fu">clean_names</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in old_names %&gt;% gsub("%", "percent", .) %&gt;% make.names(.) %&gt;% gsub("[.]+",     "_", .) %&gt;% tolower(.) %&gt;% gsub("_$", "", .):</span> could not find function "%&gt;%"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: tidyverse</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.2     </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use the conflicted package (<span style="color: #0000BB; font-style: italic;">&lt;http://conflicted.r-lib.org/&gt;</span>) to force all conflicts to become errors</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check the result</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">cleaned_dat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'cleaned_dat' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name1 name_2 name_72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     1      4       7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     2      5       8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3      6       9</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

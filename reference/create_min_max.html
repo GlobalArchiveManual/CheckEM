@@ -127,7 +127,7 @@ The final maximum size limit in millimeters is computed as <code>maximum * lengt
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Assume australia_life_history is a data frame with appropriate columns</span></span></span>
 <span class="r-in"><span><span class="va">life_history_with_min_max</span> <span class="op">&lt;-</span> <span class="fu">create_min_max</span><span class="op">(</span><span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span>, minimum <span class="op">=</span> <span class="fl">15</span>, maximum <span class="op">=</span> <span class="fl">85</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in life_history %&gt;% filter(!is.na(length_max_cm)) %&gt;% dplyr::group_by(family) %&gt;%     dplyr::summarise(famlength_max = mean(length_max_cm)) %&gt;%     ungroup():</span> could not find function "%&gt;%"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(genus)`</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
