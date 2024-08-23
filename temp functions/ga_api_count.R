@@ -29,7 +29,7 @@
 ga_api_count <- function(token, synthesis_id, include_life_history = TRUE) {
   
   # Retrieve the species list
-  species_list <- CheckEM::ga_api_species_list(token)
+  species_list <- ga_api_species_list(token)
   
   # Conditionally modify the species list based on include_life_history parameter
   if (!include_life_history) {
