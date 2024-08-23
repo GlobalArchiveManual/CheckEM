@@ -9,6 +9,7 @@
 #' special characters are replaced with underscores, and redundant underscores at the end of names are removed.
 #' 
 #' @export
+#' @import dplyr
 #'
 #' @examples
 #' # Create a data frame with various column names
@@ -21,6 +22,7 @@
 #' print(cleaned_dat)
 #'
 clean_names <- function(dat) {
+  require(tidyverse)
   
   old_names <- names(dat)
   

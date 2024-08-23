@@ -33,19 +33,22 @@
 #' life_history_with_min_max <- create_min_max(CheckEM::australia_life_history, minimum = 15, maximum = 85)
 #' 
 #' @export
+#' @import dplyr
 create_min_max <- function(life_history, minimum, maximum) {
   
+  require(dplyr)
+  
   family_max <- life_history %>%
-    filter(!is.na(length_max_cm)) %>%
+    dplyr::filter(!is.na(length_max_cm)) %>%
     dplyr::group_by(family) %>%
     dplyr::summarise(famlength_max = mean(length_max_cm)) %>%
-    ungroup()
+    dplyr::ungroup()
   
   genus_max <- life_history %>%
-    filter(!is.na(length_max_cm)) %>%
+    dplyr::filter(!is.na(length_max_cm)) %>%
     dplyr::group_by(genus) %>%
     dplyr::summarise(genuslength_max = mean(length_max_cm)) %>%
-    ungroup()
+    dplyr::ungroup()
   
   left_join(life_history, family_max, by = c("family")) %>% # add in family values
     left_join(., genus_max) %>% # add in genus values
@@ -53,11 +56,11 @@ create_min_max <- function(life_history, minimum, maximum) {
     dplyr::mutate(length_max_cm = ifelse((is.na(length_max_cm)), famlength_max, length_max_cm)) %>%
     dplyr::select(-c(famlength_max, genuslength_max)) %>%
     dplyr::mutate(length_max_mm = length_max_cm * 10) %>%
-    mutate(min_length_mm = minimum * length_max_mm) %>%
-    mutate(max_length_mm = maximum * length_max_mm) %>% 
+    dplyr::mutate(min_length_mm = minimum * length_max_mm) %>%
+    dplyr::mutate(max_length_mm = maximum * length_max_mm) %>% 
     dplyr::select(family, genus, species, min_length_mm, max_length_mm, length_max_mm) %>%
     dplyr::filter(!is.na(min_length_mm)) %>%
-    distinct()
+    dplyr::distinct()
 }
 
 

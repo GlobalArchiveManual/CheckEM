@@ -12,6 +12,7 @@
 #'
 #' @return The function generates and prints diagnostic plots but does not return a value.
 #' @export
+#' @import ggplot2 dplyr
 #'
 #' @examples
 #' \dontrun{
@@ -27,7 +28,7 @@ plot_transformations <- function(pred.vars, dat) {
     if (sum(str_count(names(dat), "opcode")) == 1) {
       
       # Raw data plots
-      point <- ggplot(data = dat) + 
+      point <- ggplot2::ggplot(data = dat) + 
         geom_point(aes(x = opcode, y = get(i)), fill = NA, colour = "black", shape = 1) +
         labs(x = "", y = i) +
         theme_classic() +
@@ -38,7 +39,7 @@ plot_transformations <- function(pred.vars, dat) {
         theme_classic()
       
       # Square root transformation
-      point.sqrt <- ggplot(data = dat) + 
+      point.sqrt <- ggplot2::ggplot(data = dat) + 
         geom_point(aes(x = opcode, y = sqrt(get(i))), fill = NA, colour = "black", shape = 1) +
         labs(x = "", y = paste0("sqrt(", i, ")")) +
         theme_classic() +
@@ -49,7 +50,7 @@ plot_transformations <- function(pred.vars, dat) {
         theme_classic()
       
       # Log transformation (x + 1)
-      point.log <- ggplot(data = dat) + 
+      point.log <- ggplot2::ggplot(data = dat) + 
         geom_point(aes(x = opcode, y = log(get(i) + 1)), fill = NA, colour = "black", shape = 1) +
         labs(x = "", y = paste0("log(", i, ")")) +
         theme_classic()+
@@ -66,7 +67,7 @@ plot_transformations <- function(pred.vars, dat) {
     else if (sum(str_count(names(dat), "sample")) == 1) {
       
       # Raw data plots
-      point <- ggplot(data = dat) + 
+      point <- ggplot2::ggplot(data = dat) + 
         geom_point(aes(x = sample, y = get(i)), fill = NA, colour = "black", shape = 1) +
         labs(x = "", y = i) +
         theme_classic() +
@@ -77,7 +78,7 @@ plot_transformations <- function(pred.vars, dat) {
         theme_classic()
       
       # Square root transformation
-      point.sqrt <- ggplot(data = dat) + 
+      point.sqrt <- ggplot2::ggplot(data = dat) + 
         geom_point(aes(x = sample, y = sqrt(get(i))), fill = NA, colour = "black", shape = 1) +
         labs(x = "", y = paste0("sqrt(", i, ")")) +
         theme_classic() +
@@ -88,7 +89,7 @@ plot_transformations <- function(pred.vars, dat) {
         theme_classic()
       
       # Log transformation (x + 1)
-      point.log <- ggplot(data = dat) + 
+      point.log <- ggplot2::ggplot(data = dat) + 
         geom_point(aes(x = sample, y = log(get(i) + 1)), fill = NA, colour = "black", shape = 1) +
         labs(x = "", y = paste0("log(", i, ")")) +
         theme_classic()+

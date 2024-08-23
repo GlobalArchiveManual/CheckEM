@@ -11,6 +11,7 @@
 #' The `marine_region` codes are expanded to their full names (e.g., "NW" to "North-west").
 #' 
 #' @export
+#' @import dplyr tidyr
 #'
 #' @examples
 #' # Create a sample data frame with species and comma-separated marine regions
@@ -26,6 +27,9 @@
 #' print(expanded_dat)
 #'
 expand_life_history <- function(dat) {
+  
+  require(dplyr)
+  require(tidyr)
   
   dat %>%
     dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) %>% # Split comma-separated regions into lists
