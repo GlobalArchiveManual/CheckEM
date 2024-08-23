@@ -1,23 +1,22 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
-  check-fish-point: r-workflows/check-fish-point.html
-  check-fish-transect: r-workflows/check-fish-transect.html
-  check-habitat: r-workflows/check-habitat.html
-  CheckEM_user_guide: manuals/CheckEM_user_guide.html
-  CheckEM_video: manuals/CheckEM_video.html
-  EventMeasure_annotation_guide: manuals/EventMeasure_annotation_guide.html
-  fish-modelling: r-workflows/fish-modelling.html
-  fish-predictions: r-workflows/fish-predictions.html
-  fish-spatial-prediction: r-workflows/fish-spatial-prediction.html
-  format-visualise-fish: r-workflows/format-visualise-fish.html
-  format-visualise-habitat: r-workflows/format-visualise-habitat.html
-  habitat-modelling: r-workflows/habitat-modelling.html
-  spatial-layers: r-workflows/spatial-layers.html
-  TransectMeasure_annotation_guide: manuals/TransectMeasure_annotation_guide.html
-last_built: 2024-07-02T03:24Z
+  r-workflows/check-fish-point: r-workflows/check-fish-point.html
+  r-workflows/check-fish-transect: r-workflows/check-fish-transect.html
+  r-workflows/check-habitat: r-workflows/check-habitat.html
+  manuals/CheckEM_user_guide: manuals/CheckEM_user_guide.html
+  manuals/CheckEM_video: manuals/CheckEM_video.html
+  manuals/EventMeasure_annotation_guide: manuals/EventMeasure_annotation_guide.html
+  r-workflows/fish-modelling: r-workflows/fish-modelling.html
+  r-workflows/fish-predictions: r-workflows/fish-predictions.html
+  r-workflows/fish-spatial-prediction: r-workflows/fish-spatial-prediction.html
+  r-workflows/format-visualise-fish: r-workflows/format-visualise-fish.html
+  r-workflows/format-visualise-habitat: r-workflows/format-visualise-habitat.html
+  r-workflows/habitat-modelling: r-workflows/habitat-modelling.html
+  r-workflows/spatial-layers: r-workflows/spatial-layers.html
+  manuals/TransectMeasure_annotation_guide: manuals/TransectMeasure_annotation_guide.html
+last_built: 2024-08-23T03:11Z
 urls:
   reference: https://globalarchivemanual.github.io/CheckEM/reference
   article: https://globalarchivemanual.github.io/CheckEM/articles
-

@@ -1,141 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/404.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish-point.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish-transect.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-habitat.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/fish-modelling.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/fish-predictions.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/fish-spatial-prediction.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-fish.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat_files/minichart-0.2.2/doc/index.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat_files/minichart-0.2.2/doc/introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat_files/minichart-0.2.2/html/00Index.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/habitat-modelling.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/spatial-layers.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/index.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/clean_names.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/create_min_max.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/expand_life_history.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/find_lw.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/find_tl.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_benthic_list.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_count.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_habitat.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_length.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_species_list.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/has_special_characters.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/plot_transformations.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_TM.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_counts.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_em_length.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_gen_length.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_periods.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/read_points.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/runCheckEM.html</loc>
-  </url>
-  <url>
-    <loc>https://globalarchivemanual.github.io/CheckEM/reference/standardize_tibble.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/404.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/LICENSE-text.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/LICENSE.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/index.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_video.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/EventMeasure_annotation_guide.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/manuals/TransectMeasure_annotation_guide.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish-point.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-fish-transect.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/check-habitat.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/fish-modelling.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/fish-predictions.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/fish-spatial-prediction.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-fish.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat_files/minichart-0.2.2/doc/index.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat_files/minichart-0.2.2/doc/introduction.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/format-visualise-habitat_files/minichart-0.2.2/html/00Index.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/habitat-modelling.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/articles/r-workflows/spatial-layers.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/authors.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/index.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/clean_names.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/create_min_max.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/expand_life_history.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/find_lw.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/find_tl.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_benthic_list.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_count.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_habitat.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_length.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_metadata.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_species_list.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/has_special_characters.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/index.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/plot_transformations.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_TM.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_counts.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_em_length.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_gen_length.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_metadata.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_periods.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_points.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/runCheckEM.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/standardize_tibble.html</loc></url>
 </urlset>
+
