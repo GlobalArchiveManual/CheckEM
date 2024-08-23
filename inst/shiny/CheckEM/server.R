@@ -1878,12 +1878,18 @@ function(input, output, session) {
         
         message("preview metadata")
         
-        if("campaignid" %in% colnames(metadata))
+        if("campaignid" %in% colnames(tmp))
         {
-          metadata <- metadata %>%
+          
+          message("file has a column called campaignid, removing column")
+          
+          tmp <- tmp %>%
             dplyr::select(-c(campaignid))
         }
         
+        # message("metadata with campaignid")
+        
+        print(files$name[i])
         
         tmp <- tmp %>%
           dplyr::mutate(campaignid = files$name[i]) %>%
@@ -8649,7 +8655,7 @@ function(input, output, session) {
     metadata.samples <- metadata() %>%
       dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), 
                     successful_count, successful_length, 
-                    successful_habitat_forward, successful_habitat_backward) %>%
+                    dplyr::any_of(c("successful_habitat_forward", "successful_habitat_backward"))) %>%
       dplyr::distinct()
     
     points.samples <- hab.annotations() %>%
@@ -8665,7 +8671,7 @@ function(input, output, session) {
     metadata.samples <- metadata() %>%
       dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), 
                     successful_count, successful_length, 
-                    successful_habitat_forward, successful_habitat_backward) %>%
+                    dplyr::any_of(c("successful_habitat_forward", "successful_habitat_backward"))) %>%
       dplyr::distinct()
     
     points.samples <- relief.annotations() %>%
@@ -8827,6 +8833,9 @@ function(input, output, session) {
   ## ► Habitat wrong number of annotations - dataframe ----
   habitat.wrong.annotations <- reactive({
     
+    if(input$habdirection %in% "both"){
+    
+    
     wrong <- habitat.annotations.per.sample() %>%
       dplyr::distinct(campaignid, sample, number.of.annotations) %>%
       dplyr::left_join(metadata()) %>%
@@ -8836,6 +8845,18 @@ function(input, output, session) {
                                          successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
       dplyr::filter(!number.of.annotations == expected) %>%
       dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+    
+    } else {
+      
+      wrong <- habitat.annotations.per.sample() %>%
+        dplyr::distinct(campaignid, sample, number.of.annotations) %>%
+        dplyr::left_join(metadata()) %>%
+        dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" ~ input$number.of.annotations,
+                                           successful_habitat_forward %in% "No" ~ 0)) %>%
+        dplyr::filter(!number.of.annotations == expected) %>%
+        dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+      
+    }
   })
   
   ## ► Habitat wrong number of annotations - valueBox ----
@@ -8880,6 +8901,8 @@ function(input, output, session) {
   ## ► Habitat wrong number of annotations - dataframe ----
   relief.wrong.annotations <- reactive({
     
+    if(input$habdirection %in% "both"){
+    
     wrong <- relief.annotations.per.sample() %>%
       dplyr::distinct(campaignid, sample, number.of.annotations) %>%
       dplyr::left_join(metadata()) %>%
@@ -8889,6 +8912,18 @@ function(input, output, session) {
                                          successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
       dplyr::filter(!number.of.annotations == expected) %>%
       dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+    
+  } else {
+    
+    wrong <- relief.annotations.per.sample() %>%
+      dplyr::distinct(campaignid, sample, number.of.annotations) %>%
+      dplyr::left_join(metadata()) %>%
+      dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" ~ input$number.of.annotations,
+                                         successful_habitat_forward %in% "No" ~ 0)) %>%
+      dplyr::filter(!number.of.annotations == expected) %>%
+      dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+    
+  }
   })
   
   ## ► relief wrong number of annotations - valueBox ----
