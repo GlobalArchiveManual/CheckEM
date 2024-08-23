@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_names.R
 \name{clean_names}
 \alias{clean_names}
-\title{A function to standardise names in a dataframe}
+\title{A function to standardise names in a data frame}
 \usage{
 clean_names(dat)
 }
@@ -10,8 +10,8 @@ clean_names(dat)
 \item{dat}{}
 }
 \value{
-A dataframe with all lower case names, with _ as separators
+A data frame with all lower case column names. This function also replaces any special characters with an "_".
 }
 \description{
-A function to standardise names in a dataframe
+A function to standardise names in a data frame
 }

@@ -2,16 +2,43 @@
 % Please edit documentation in R/create_min_max.R
 \name{create_min_max}
 \alias{create_min_max}
-\title{A function to create minimum and maximum size limits to check annotations against}
+\title{Calculate Minimum and Maximum Size Limits for Fish Species}
 \usage{
 create_min_max(life_history, minimum, maximum)
 }
 \arguments{
-\item{life_history}{}
+\item{life_history}{A data frame containing fish life history information. This data frame
+should include columns for \code{family}, \code{genus}, \code{species}, and \code{length_max_cm} (the maximum length
+in centimeters). Missing values in \code{length_max_cm} will be filled using average lengths from
+genus or family levels if available.}
+
+\item{minimum}{A numeric value representing the multiplier to calculate the minimum size limit.
+The final minimum size limit in millimeters is computed as \code{minimum * length_max_mm}.}
+
+\item{maximum}{A numeric value representing the multiplier to calculate the maximum size limit.
+The final maximum size limit in millimeters is computed as \code{maximum * length_max_mm}.}
 }
 \value{
-A life history dataframe, either australia_life_history or global_life_history
+A data frame with the following columns:
+\itemize{
+\item \strong{family}: Fish family.
+\item \strong{genus}: Fish genus.
+\item \strong{species}: Fish species.
+\item \strong{min_length_mm}: Calculated minimum size limit in millimeters.
+\item \strong{max_length_mm}: Calculated maximum size limit in millimeters.
+\item \strong{length_max_mm}: Maximum length of the fish in millimeters.
+}
+Rows with missing minimum length values are excluded from the result.
 }
 \description{
-A function to create minimum and maximum size limits to check annotations against
+This function processes a data frame containing fish life history information to compute
+minimum and maximum size limits for each species based on their maximum length to check your annotations against.
+It uses the maximum length data from genus and family levels to fill in any missing
+maximum lengths at the species level. The resulting data frame includes the computed
+minimum and maximum size limits in millimeters.
+}
+\examples{
+# Assume australia_life_history is a data frame with appropriate columns
+life_history_with_min_max <- create_min_max(australia_life_history, minimum = 15, maximum = 85)
+
 }
