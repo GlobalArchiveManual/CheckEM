@@ -1,14 +1,13 @@
-#' A function to create minimum and maximum size limits to check annotations against
+#' A function to create minimum and maximum size limits for fish to check annotations against
 #'
 #' @param life_history 
 #'
-#' @return A life history dataframe, either australia_life_history or global_life_history
+#' @return A life history data frame, either australia_life_history or global_life_history
 #' @export
 #'
 #' @examples
 #' 
-# dat <- as.data.frame(c("NAmE1", "name-2", "nAMe.-72")) %>%
-#   clean_names()
+# life_history_with_min_max <- create_min_max(australia_life_history, 15, 85)
 #' 
 #' 
 create_min_max <- function(life_history, minimum, maximum) {

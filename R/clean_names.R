@@ -1,8 +1,8 @@
-#' A function to standardise names in a dataframe
+#' A function to standardise names in a data frame
 #'
 #' @param dat 
 #'
-#' @return A dataframe with all lower case names, with _ as separators
+#' @return A data frame with all lower case column names. This function also replaces any special characters with an "_".
 #' @export
 #'
 #' @examples
