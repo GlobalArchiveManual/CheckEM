@@ -104,7 +104,7 @@ navbar:
     - text: Spatially predict fish distributions
       href: articles/r-workflows/fish-spatial-prediction.html
   - text: Functions
-    href: reference/r-workflows/index.html
+    href: reference
 authors:
   footer:
     roles: aut
