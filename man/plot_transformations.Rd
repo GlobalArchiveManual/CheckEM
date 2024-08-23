@@ -2,13 +2,30 @@
 % Please edit documentation in R/plot_transformations.R
 \name{plot_transformations}
 \alias{plot_transformations}
-\title{A function to test basic transformations on predictor variables for GAM modelling}
+\title{Plot Basic Transformations of Predictor Variables for GAM Modelling}
 \usage{
 plot_transformations(pred.vars, dat)
 }
 \arguments{
-\item{dat}{}
+\item{pred.vars}{A character vector of predictor variable names to be plotted.}
+
+\item{dat}{A data frame containing the predictor variables and a grouping variable,
+either 'opcode' or 'sample', which is used for the scatter plots.}
+}
+\value{
+The function generates and prints diagnostic plots but does not return a value.
 }
 \description{
-A function to test basic transformations on predictor variables for GAM modelling
+This function generates diagnostic plots to visualize the distribution of predictor variables
+and the effects of basic transformations (square root and log transformations) on these variables.
+It creates scatter plots and histograms for the raw, square root, and log-transformed data.
+The function is useful for exploring the suitability of different transformations before
+fitting a Generalized Additive Model (GAM).
+#'
+}
+\examples{
+\dontrun{
+# Assuming 'dat' is a data frame containing the predictor variables and 'opcode' or 'sample' column
+plot_transformations(pred.vars = c("var1", "var2"), dat = dat)
+}
 }

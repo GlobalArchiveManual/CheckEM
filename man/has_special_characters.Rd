@@ -2,13 +2,23 @@
 % Please edit documentation in R/has_special_characters.R
 \name{has_special_characters}
 \alias{has_special_characters}
-\title{Function to check if a string contains any special characters}
+\title{Check if a String Contains Special Characters}
 \usage{
 has_special_characters(string)
 }
 \arguments{
-\item{string}{}
+\item{string}{A character string to be checked for special characters.}
+}
+\value{
+A logical value: \code{TRUE} if the string contains any special characters,
+\code{FALSE} otherwise.
 }
 \description{
-Function to check if a string contains any special characters
+This function checks whether a given string contains any special characters.
+Special characters are defined as any character that is not alphanumeric (letters or numbers).
+}
+\examples{
+# Check if a string contains special characters
+has_special_characters("HelloWorld123") # Returns FALSE
+has_special_characters("Hello@World!")  # Returns TRUE
 }
