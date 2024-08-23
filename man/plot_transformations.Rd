@@ -16,12 +16,11 @@ either 'opcode' or 'sample', which is used for the scatter plots.}
 The function generates and prints diagnostic plots but does not return a value.
 }
 \description{
-This function generates diagnostic plots to visualize the distribution of predictor variables
+This function generates diagnostic plots to visualise the distribution of predictor variables
 and the effects of basic transformations (square root and log transformations) on these variables.
 It creates scatter plots and histograms for the raw, square root, and log-transformed data.
 The function is useful for exploring the suitability of different transformations before
 fitting a Generalized Additive Model (GAM).
-#'
 }
 \examples{
 \dontrun{

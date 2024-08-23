@@ -25,7 +25,7 @@ ga_api_habitat <- function(username, password, synthesis_id) {
   species_list <- ga_api_benthic_list(username, password)
   
   # URL for the API endpoint
-  url <- paste0("https://dev.globalarchive.org/api/data/SynthesisBenthosEntry/?synthesis=", synthesis_id, "&format=feather")
+  url <- paste0("https://dev.globalarchive.org/api/data/SynthesisBenthosEntry/?sample__synthesis=", synthesis_id, "&format=feather")
   
   # Send GET request with basic authentication
   response <- GET(url, authenticate(username, password))

@@ -21,6 +21,8 @@
 #' returns `NULL`.
 #' 
 #' @export
+#' 
+#' @import stringr
 #'
 #' @examples
 #' # Retrieve trophic level and standard error for a species
@@ -28,6 +30,8 @@
 #' print(tl_info)
 #'
 find_tl <- function(sp, mirror = "us") {
+  
+  require(stringr)
   
   sp_ <- gsub(" ", "-", sp)
   url <- paste("https://www.fishbase.", mirror, "/summary/", sp_, ".html", sep = "")
