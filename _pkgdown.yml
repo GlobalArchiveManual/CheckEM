@@ -49,11 +49,11 @@ navbar:
   right:
   - icon: fa-github
     href: https://github.com/GlobalArchiveManual/CheckEM
-    aria-label: GitHub
+    text: GitHub
   - href: https://www.nespmarinecoastal.edu.au/
     html: '<img src=''man/figures/mac.svg'' width=''200'' alt=''National Environmental
       Science Program: Marine and Coastal''/>'
-    aria-label: ARDC
+    text: ARDC
   left:
   - text: User Guides
     menu:
