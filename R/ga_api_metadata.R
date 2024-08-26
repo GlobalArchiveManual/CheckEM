@@ -51,7 +51,7 @@ ga_api_metadata <- function(username, password, synthesis_id) {
       tidyr::separate(coordinates, into = c("longitude_dd", "latitude_dd"), sep = " ") %>%
       dplyr::mutate(latitude_dd = as.numeric(latitude_dd), longitude_dd = as.numeric(longitude_dd)) %>%
       dplyr::rename(sample_url = url) %>%
-      dplyr::select(-c(row))
+      dplyr::select(-c(row, derived_from_sample, map_marker_colour_rgb, annotation_parameters))
     
     # Add marine parks to metadata ----
     metadata <- metadata_raw
