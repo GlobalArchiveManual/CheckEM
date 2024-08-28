@@ -17,6 +17,7 @@ reference:
   desc: Essential functionality for formatting stereo-video annotation
   contents:
   - clean_names
+  - create_cti
   - standardize_tibble
   - has_special_characters
   - read_metadata
