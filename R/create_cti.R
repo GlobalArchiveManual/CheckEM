@@ -8,7 +8,7 @@
 #' @param data A dataframe with columns for 'campaignid', 'sample', 'count', 'family', 'genus' and 'species'
 #' @param life_history A dataframe containing thermal niche data for fish species. For an example dataframe see CheckEM::australia_life_history.
 #'
-#' @return A data frame containing campaignid, sample and cti (the value for Community Temperature Index) 
+#' @return A data frame containing campaignid, sample and cti (the value for Community Temperature Index). Note that this dataframe may have less rows than your number of samples, as you may have samples that have no fish with valid thermal niche data.
 #' 
 #' @export
 #'
