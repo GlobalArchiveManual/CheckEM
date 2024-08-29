@@ -60,6 +60,7 @@ We have curated exisiting standard operating procedures and developed new tools 
 ```
 install.packages('devtools')
 library('devtools')
+options(timeout=9999999)
 
 devtools::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
