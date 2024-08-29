@@ -31,12 +31,14 @@ reference:
   - read_periods
   - expand_life_history
   - create_min_max
+  - load_rds_from_github
 - title: Shiny App
   desc: Functions for shiny app
   contents: runCheckEM
 - title: GlobalArchive API
   desc: Essential functionality for accessing data through the GlobalArchive API
   contents:
+  - ga_api_set_token
   - ga_api_count
   - ga_api_habitat
   - ga_api_length
