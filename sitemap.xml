@@ -33,9 +33,11 @@
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_habitat.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_length.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_metadata.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_set_token.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/ga_api_species_list.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/has_special_characters.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/index.html</loc></url>
+<url><loc>https://globalarchivemanual.github.io/CheckEM/reference/load_rds_from_github.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/plot_transformations.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_TM.html</loc></url>
 <url><loc>https://globalarchivemanual.github.io/CheckEM/reference/read_counts.html</loc></url>
