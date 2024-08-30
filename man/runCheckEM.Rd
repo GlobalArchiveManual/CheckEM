@@ -2,18 +2,21 @@
 % Please edit documentation in R/runCheckEM.R
 \name{runCheckEM}
 \alias{runCheckEM}
-\title{Run CheckEM shiny app locally}
+\title{Run the CheckEM Shiny App Locally}
 \usage{
 runCheckEM()
 }
 \value{
-Will launch a local version of CheckEM in the browser
+Launches the CheckEM Shiny app in the web browser.
 }
 \description{
-Run CheckEM shiny app locally
+This function launches a local version of the CheckEM Shiny app in your default web browser.
+The app allows users to perform quality control checks on metadata and annotations for fish
+and benthic stereo-imagery datasets.
 }
 \examples{
-## Not run:
-\dontrun{CheckEM::runCheckEM()}
-
+\dontrun{
+# To run the CheckEM Shiny app locally
+CheckEM::runCheckEM()
+}
 }

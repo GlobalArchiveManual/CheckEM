@@ -2,13 +2,30 @@
 % Please edit documentation in R/read_gen_length.R
 \name{read_gen_length}
 \alias{read_gen_length}
-\title{A function to read "Generic" format length data _Length.csv}
+\title{Read "Generic" length data}
 \usage{
 read_gen_length(dir, method = "BRUVs", recursive = FALSE)
 }
 \arguments{
-\item{dir}{}
+\item{dir}{The directory where the length data files are saved.}
+
+\item{method}{A character string indicating the method used ("BRUVs" or "DOVs"). Default is "BRUVs".}
+
+\item{recursive}{Logical, whether to search for files recursively in subdirectories. Default is \code{FALSE}.}
+}
+\value{
+A data frame containing all length data from the specified files, with standardised column names and formats.
 }
 \description{
-A function to read "Generic" format length data _Length.csv
+This function reads "Generic" length data files (either .csv or .txt) from a specified directory
+and processes them into a single data frame. The data frame contains information such as campaignID, sample, length (mm) and species information.
+}
+\examples{
+\dontrun{
+# To read length data from a directory using the BRUVs method
+length_data <- read_gen_length("path/to/directory")
+
+# To read length data from a directory recursively using the DOVs method
+length_data <- read_gen_length("path/to/directory", method = "DOVs", recursive = TRUE)
+}
 }

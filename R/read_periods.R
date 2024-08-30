@@ -1,15 +1,25 @@
-#' A function to read EventMeasure format period data (_Period.txt)
+#' Read Period Data from EventMeasure files (_Period.txt)
 #'
-#' @param dir  The directory where the .txt files are saved
+#' This function reads EventMeasure period data files (_Period.txt) from a specified directory 
+#' and processes them into a single dataframe. The dataframe contains period annotations, including 
+#' columns for the campaignID, sample, and other relevant information.
 #'
-#' @return A data frame which contains all Period annotations, with a column for campaignID and sample
+#' @param dir The directory where the .txt files are saved.
+#' @param method A character string indicating the method used ("BRUVs" or "DOVs"). Default is "BRUVs".
+#' @param recursive Logical, whether to search for files recursively in subdirectories. Default is `FALSE`.
+#'
+#' @return A data frame containing all period annotations from the specified files, with standardised columns 
+#' for campaign ID, sample, opcode, period, start time, end time, and whether there is an end time.
 #' @export
 #'
 #' @examples
-#' 
-#' 
-#' 
-
+#' \dontrun{
+#' # To read period data from a directory using the BRUVs method
+#' periods_data <- read_periods("path/to/directory")
+#'
+#' # To read period data from a directory recursively using the DOVs method
+#' periods_data <- read_periods("path/to/directory", method = "DOVs", recursive = TRUE)
+#' }
 read_periods <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   read_dat <- function(flnm){
@@ -17,8 +27,7 @@ read_periods <- function(dir, method = "BRUVs", recursive = FALSE) {
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, c("_Period.txt" = "",
-                                                                        "_Period.TXT" = ""))) #%>%
-    #dplyr::rename(sample = opcode) # TODO fix this if the sample is not defined by opcode
+                                                                        "_Period.TXT" = "")))
   }
   
   cols_to_add <- c(
@@ -44,11 +53,8 @@ read_periods <- function(dir, method = "BRUVs", recursive = FALSE) {
       if("opcode" %in% names(dat)){
         
         dat <- dat %>%
-          dplyr::mutate(sample = paste(opcode, period, sep = "-")) #%>%
-          #dplyr::select(-c(opcode, period))
-        
+          dplyr::mutate(sample = paste(opcode, period, sep = "-")) 
       }
-      
     } 
     
     if(method %in% c("BRUVs")){

@@ -2,13 +2,30 @@
 % Please edit documentation in R/standardize_tibble.R
 \name{standardize_tibble}
 \alias{standardize_tibble}
-\title{Function to standardize column names and types}
+\title{Standardize Column Names and Types in a Tibble}
 \usage{
 standardize_tibble(tibble)
 }
 \arguments{
-\item{tibble}{}
+\item{tibble}{A tibble or data frame to standardize.}
+}
+\value{
+A tibble with standardized column names and types, or \code{NULL} if the input tibble is empty.
 }
 \description{
-Function to standardize column names and types
+This function standardizes the column names and types in a given tibble.
+It renames the columns to a consistent set of names: "aphiaid", "scientific_name",
+"authority", and "status". If the tibble is not empty, it also ensures that the
+"scientific_name" column is of type character.
+}
+\examples{
+\dontrun{
+# Create a sample tibble
+sample_data <- tibble::tibble(aphiaid = c(1, 2), sci_name = c("Species A", "Species B"), 
+                              auth = c("Author A", "Author B"), stat = c("Valid", "Invalid"))
+
+# Standardize the tibble
+standardized_data <- standardize_tibble(sample_data)
+print(standardized_data)
+}
 }

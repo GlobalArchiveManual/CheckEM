@@ -2,16 +2,32 @@
 % Please edit documentation in R/read_points.R
 \name{read_points}
 \alias{read_points}
-\title{A function to read EventMeasure format point data (_Points.txt)}
+\title{Read Point Data from EventMeasure files (_Points.txt)}
 \usage{
 read_points(dir, recursive = FALSE, method = "BRUVs")
 }
 \arguments{
-\item{dir}{The directory where the .txt files are saved}
+\item{dir}{The directory where the .txt files are saved.}
+
+\item{recursive}{Logical, whether to search for files recursively in subdirectories. Default is \code{FALSE}.}
+
+\item{method}{A character string indicating the method used ("BRUVs" or "DOVs"). Default is "BRUVs".}
 }
 \value{
-A data frame which contains all Point annotations, with a column for campaignID and sample
+A data frame containing all point annotations from the specified files, with standardised columns
+for campaign ID, sample, family, genus, species, number, and period.
 }
 \description{
-A function to read EventMeasure format point data (_Points.txt)
+This function reads EventMeasure point data files (_Points.txt) from a specified directory
+and processes them into a single data frame. The data frame contains point annotations, including
+columns for the campaignID, sample, and other relevant information.
+}
+\examples{
+\dontrun{
+# To read point data from a directory using the BRUVs method
+points_data <- read_points("path/to/directory")
+
+# To read point data from a directory recursively using the DOVs method
+points_data <- read_points("path/to/directory", recursive = TRUE, method = "DOVs")
+}
 }

@@ -1,11 +1,23 @@
-#' A function to read "Generic" format length data _Length.csv
+#' Read "Generic" length data
 #'
-#' @param dir 
+#' This function reads "Generic" length data files (either .csv or .txt) from a specified directory 
+#' and processes them into a single data frame. The data frame contains information such as campaignID, sample, length (mm) and species information.
 #'
-#' @return
+#' @param dir The directory where the length data files are saved.
+#' @param method A character string indicating the method used ("BRUVs" or "DOVs"). Default is "BRUVs".
+#' @param recursive Logical, whether to search for files recursively in subdirectories. Default is `FALSE`.
+#'
+#' @return A data frame containing all length data from the specified files, with standardised column names and formats.
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' # To read length data from a directory using the BRUVs method
+#' length_data <- read_gen_length("path/to/directory")
+#'
+#' # To read length data from a directory recursively using the DOVs method
+#' length_data <- read_gen_length("path/to/directory", method = "DOVs", recursive = TRUE)
+#' }
 read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   read_dat_csv <- function(flnm){
@@ -14,8 +26,7 @@ read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
       CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, 
                                                           c("_Length.csv" = "",
-                                                            "_length.csv" = ""))) #%>%
-    #dplyr::rename(sample = opcode)
+                                                            "_length.csv" = ""))) 
   }
   
   read_dat_tsv <- function(flnm){
@@ -23,8 +34,7 @@ read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = stringr::str_replace_all(campaignid,c("_Length.txt" = "",
-                                                                       "_length.txt" = ""))) #%>%
-    #dplyr::rename(sample = opcode)
+                                                                       "_length.txt" = ""))) 
   }
   
   files <- list.files(path = dir,      
@@ -46,8 +56,7 @@ read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
         
         temp_dat <- read_dat_csv(file) %>%
           CheckEM::clean_names() %>%
-          dplyr::rename(any_of(lookup)) %>%
-          dplyr::glimpse()
+          dplyr::rename(any_of(lookup)) 
         
       } else {
         
@@ -55,12 +64,9 @@ read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
         
         temp_dat <- read_dat_tsv(file) %>%
           CheckEM::clean_names() %>%
-          dplyr::rename(any_of(lookup)) %>%
-          dplyr::glimpse()
+          dplyr::rename(any_of(lookup)) 
         
       }
-    
-    # TODO add BRUVs
     
     if(nrow(temp_dat > 0)){
       
@@ -121,8 +127,6 @@ read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
     dplyr::mutate(family = as.character(family)) %>%
     dplyr::mutate(genus = as.character(genus)) %>%
     dplyr::mutate(species = as.character(species))
-  
-  
   
   return(dat)
   

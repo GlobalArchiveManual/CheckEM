@@ -1,18 +1,25 @@
-#' A function to read GlobalArchive format metadata
+#' Read Metadata
 #'
-#' @param dir The directory where the .csv files are saved
+#' This function reads Metadata in a GlobalArchive format (as .csv files) from a specified directory 
+#' and processes them into a single dataframe. The dataframe includes campaignID, sample, depth_m, time, coordinates and other important information collected when deploying and annotating stere-video imagery.
 #'
-#' @return A dataframe with all a column for campaignID and sample
+#' @param dir The directory where the .csv files are saved.
+#' @param method A character string indicating the method used ("BRUVs" or "DOVs"). Default is "BRUVs".
+#' @param recursive Logical, whether to search for files recursively in subdirectories. Default is `FALSE`.
+#'
+#' @return A data frame containing all metadata from the specified files, with standardised columns 
+#' for campaignID, sample, and various other metadata details.
 #' @export
 #'
 #' @examples
-#' 
-#' 
-#' 
-
+#' \dontrun{
+#' # To read metadata from a directory using the BRUVs method
+#' metadata <- read_metadata("path/to/directory")
+#'
+#' # To read metadata from a directory recursively using the DOVs method
+#' metadata <- read_metadata("path/to/directory", method = "DOVs", recursive = TRUE)
+#' }
 read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
-  
-  # dir <- here::here("r-workflows/data/raw/")
   
   read_dat <- function(flnm) {
     readr::read_csv(flnm, col_types =  readr::cols(.default = "c")) %>%
@@ -28,12 +35,9 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
   
   dat <- data.frame()
   
-  
   for(file in unique(files)){
     
     message(paste("reading metadata file:", file))
-    
-    # If Sample exists keep sample, if opcode and period exist make sample = opcode-period
     
     # TODO fix these so it cleans names first
     
@@ -55,14 +59,9 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
                 successful_count = "Successful.count",
                 successful_length	 = "Successful.length")
     
-    # Need to fix date and time to make them consistent
-    
     temp_dat <- read_dat(file) %>%
       CheckEM::clean_names() %>%
-      dplyr::rename(any_of(lookup)) #%>%
-      #dplyr::glimpse()
-    
-    # TODO add BRUVs
+      dplyr::rename(any_of(lookup))
     
     if(method %in% c("DOVs")){
       
@@ -105,8 +104,7 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
         tidyr::replace_na(list(sec = "00", depth = 0)) %>%
         dplyr::mutate(time = paste(hour, min, sec, sep = ":")) %>%
         dplyr::mutate(date_time = paste(year, "-", month, "-", day, "T", time, sep = "")) %>%
-        dplyr::mutate(date = paste(year, "-", month, "-", day, sep = "")) #%>%
-        #dplyr::glimpse()
+        dplyr::mutate(date = paste(year, "-", month, "-", day, sep = "")) 
 
       coords_met <- temp_dat %>%
         dplyr::distinct(latitude_dd, longitude_dd)
@@ -135,11 +133,10 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
         dplyr::mutate(minutes = (utc_offset_h - hours) * 60) %>%
         dplyr::mutate(hours = stringr::str_pad(hours, 2, side = "left", pad = "0")) %>%
         dplyr::mutate(minutes = stringr::str_pad(minutes, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(utc_offset = paste("+", hours, ":", minutes, sep = "")) %>% # IF i turn this into a function will have to come up with a way to do plus or negative
+        dplyr::mutate(utc_offset = paste("+", hours, ":", minutes, sep = "")) %>% # TODO come up with a way to do plus or negative
         dplyr::select(tz_name, date, utc_offset) %>%
         dplyr::rename(timezone = tz_name) %>%
         dplyr::distinct()
-        #dplyr::glimpse()
 
       temp_dat <- temp_dat %>%
         dplyr::left_join(timezones_to_add) %>%

@@ -1,15 +1,25 @@
-#' A function to read EventMeasure format point data (_Points.txt)
+#' Read Point Data from EventMeasure files (_Points.txt)
 #'
-#' @param dir  The directory where the .txt files are saved
+#' This function reads EventMeasure point data files (_Points.txt) from a specified directory 
+#' and processes them into a single data frame. The data frame contains point annotations, including 
+#' columns for the campaignID, sample, and other relevant information.
 #'
-#' @return A data frame which contains all Point annotations, with a column for campaignID and sample
+#' @param dir The directory where the .txt files are saved.
+#' @param recursive Logical, whether to search for files recursively in subdirectories. Default is `FALSE`.
+#' @param method A character string indicating the method used ("BRUVs" or "DOVs"). Default is "BRUVs".
+#'
+#' @return A data frame containing all point annotations from the specified files, with standardised columns 
+#' for campaign ID, sample, family, genus, species, number, and period.
 #' @export
 #'
 #' @examples
-#' 
-#' 
-#' 
-
+#' \dontrun{
+#' # To read point data from a directory using the BRUVs method
+#' points_data <- read_points("path/to/directory")
+#'
+#' # To read point data from a directory recursively using the DOVs method
+#' points_data <- read_points("path/to/directory", recursive = TRUE, method = "DOVs")
+#' }
 read_points <- function(dir, recursive = FALSE, method = "BRUVs") {
   
   read_dat <- function(flnm){
@@ -19,26 +29,20 @@ read_points <- function(dir, recursive = FALSE, method = "BRUVs") {
     dplyr::mutate(campaignid = stringr::str_replace_all(campaignid,c("_Points.txt" = "", 
                                                                      "_Points.TXT" = ""))) 
   }
-
-  # lookup <- c(length_mm = "length")
   
   dat <- list.files(path = dir,      
                     recursive = recursive,
                     pattern = "_Points.txt|_Points.TXT",
                     full.names = T) %>%
     purrr::map(~read_dat(.)) %>%
-    purrr::list_rbind() #%>%
-    #dplyr::rename(any_of(lookup))
-  
-  
+    purrr::list_rbind() 
   
   if(nrow(dat > 0)){
     
     if(method %in% "DOVs"){
       
       dat <- dat %>%
-        dplyr::mutate(sample = paste(opcode, period, sep = "-")) #%>%
-      #dplyr::select(-c(opcode, period))
+        dplyr::mutate(sample = paste(opcode, period, sep = "-")) 
       
     } else {
       
@@ -51,21 +55,11 @@ read_points <- function(dir, recursive = FALSE, method = "BRUVs") {
   cols_to_add <- c(
     campaignid = NA_real_,
     sample = NA_real_,
-    # length_mm = NA_real_,
     family = NA_real_,
     genus = NA_real_,
     species = NA_real_,
     number = NA_real_,
-    period = NA_real_#,
-    # rms = NA_real_,
-    # range = NA_real_,
-    # precision = NA_real_,
-    # x = NA_real_,
-    # y = NA_real_,
-    # z = NA_real_,
-    # midx = NA_real_,
-    # midy = NA_real_,
-    # midz = NA_real_
+    period = NA_real_
   )
   
   dat <- dat %>%
@@ -79,8 +73,5 @@ read_points <- function(dir, recursive = FALSE, method = "BRUVs") {
     dplyr::mutate(period = as.character(period))
   
   return(dat)
-  
-  
-  
   
 }

@@ -2,16 +2,32 @@
 % Please edit documentation in R/read_periods.R
 \name{read_periods}
 \alias{read_periods}
-\title{A function to read EventMeasure format period data (_Period.txt)}
+\title{Read Period Data from EventMeasure files (_Period.txt)}
 \usage{
 read_periods(dir, method = "BRUVs", recursive = FALSE)
 }
 \arguments{
-\item{dir}{The directory where the .txt files are saved}
+\item{dir}{The directory where the .txt files are saved.}
+
+\item{method}{A character string indicating the method used ("BRUVs" or "DOVs"). Default is "BRUVs".}
+
+\item{recursive}{Logical, whether to search for files recursively in subdirectories. Default is \code{FALSE}.}
 }
 \value{
-A data frame which contains all Period annotations, with a column for campaignID and sample
+A data frame containing all period annotations from the specified files, with standardised columns
+for campaign ID, sample, opcode, period, start time, end time, and whether there is an end time.
 }
 \description{
-A function to read EventMeasure format period data (_Period.txt)
+This function reads EventMeasure period data files (_Period.txt) from a specified directory
+and processes them into a single dataframe. The dataframe contains period annotations, including
+columns for the campaignID, sample, and other relevant information.
+}
+\examples{
+\dontrun{
+# To read period data from a directory using the BRUVs method
+periods_data <- read_periods("path/to/directory")
+
+# To read period data from a directory recursively using the DOVs method
+periods_data <- read_periods("path/to/directory", method = "DOVs", recursive = TRUE)
+}
 }

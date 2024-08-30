@@ -2,18 +2,29 @@
 % Please edit documentation in R/read_TM.R
 \name{read_TM}
 \alias{read_TM}
-\title{A function to read .txt exports from SeaGIS TransectMeasure}
+\title{Read .txt Exports from SeaGIS TransectMeasure}
 \usage{
 read_TM(dir, sample)
 }
 \arguments{
-\item{dir}{The directory where the .txt files are saved}
+\item{dir}{The directory where the .txt files are saved.}
 
-\item{sample}{Either character value to define if sample is recorded as "opcode" or "period"}
+\item{sample}{A character string indicating the sample type; either "opcode" or "period".}
 }
 \value{
-A dataframe with all a column for campaignID and sample
+A dataframe containing combined data from all .txt files in the specified directory, including a column for the sample type.
 }
 \description{
-A function to read .txt exports from SeaGIS TransectMeasure
+This function reads and processes .txt files exported from SeaGIS TransectMeasure located in the specified directory.
+The files contain data from dot point measurements, which are read into a single dataframe with a column for the
+campaign ID and a specified sample type (either "opcode" or "period").
+}
+\examples{
+\dontrun{
+# To read .txt files with sample recorded as "opcode"
+data <- read_TM("path/to/directory", sample = "opcode")
+
+# To read .txt files with sample recorded as "period"
+data <- read_TM("path/to/directory", sample = "period")
+}
 }
