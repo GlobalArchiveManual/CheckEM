@@ -58,11 +58,11 @@ We have curated exisiting standard operating procedures and developed new tools 
 # CheckEM R Package
 ## To install in R
 ```
-install.packages('devtools')
-library('devtools')
+install.packages('remotes')
+library('remotes')
 options(timeout=9999999)
 
-devtools::install_github("GlobalArchiveManual/CheckEM")
+remotes::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
 ```
 
