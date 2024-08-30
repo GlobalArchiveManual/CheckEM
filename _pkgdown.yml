@@ -46,7 +46,7 @@ reference:
   - ga_api_metadata
   - ga_api_species_list
   - ga_api_benthic_list
-  - ga_api_all_data
+  # - ga_api_all_data
 navbar:
   title: ~
   type: default
