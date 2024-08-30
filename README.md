@@ -41,7 +41,7 @@ The R workflows are available here:
 
 * [Check habitat data exported from TransectMeasure](articles/r-workflows/check-habitat.html)
 * [Check fish data exported from EventMeasure](articles/r-workflows/check-fish.html)
-* [Generate sptaila layers for modelling](articles/r-workflows/spatial-layers.html)
+* [Generate spatial layers for modelling](articles/r-workflows/spatial-layers.html)
 * [Format & visualise habitat data](articles/r-workflows/format-visualise-fish.html)
 * [Format & visualise fish data](articles/r-workflows/format-visualise-fish.html)
 * [Generate spatial predictions of habitat using FSSgam](articles/r-workflows/habitat-modelling.html)
