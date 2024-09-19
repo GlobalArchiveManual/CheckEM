@@ -4,12 +4,10 @@
 \alias{ga_api_habitat}
 \title{Retrieve Habitat Data from the GlobalArchive API}
 \usage{
-ga_api_habitat(username, password, synthesis_id)
+ga_api_habitat(token, synthesis_id)
 }
 \arguments{
-\item{username}{A character string representing your GlobalArchive username for API authentication.}
-
-\item{password}{A character string representing your GlobalArchive password for API authentication.}
+\item{token}{A character string representing your GlobalArchive token for API authentication.}
 
 \item{synthesis_id}{A character string or numeric value representing the GlobalArchive synthesis ID for which the habitat data should be retrieved.}
 }

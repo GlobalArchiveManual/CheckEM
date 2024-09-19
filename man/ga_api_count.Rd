@@ -4,12 +4,10 @@
 \alias{ga_api_count}
 \title{Retrieve Count Data from the GlobalArchive API}
 \usage{
-ga_api_count(username, password, synthesis_id, include_life_history = TRUE)
+ga_api_count(token, synthesis_id, include_life_history = TRUE)
 }
 \arguments{
-\item{username}{A character string representing your GlobalArchive username for API authentication.}
-
-\item{password}{A character string representing your GlobalArchive password for API authentication.}
+\item{token}{A character string representing your GlobalArchive token for API authentication.}
 
 \item{synthesis_id}{A character string or numeric value representing the GlobalArchive synthesis ID
 for which the count data should be retrieved.}

@@ -40,6 +40,7 @@ reference:
   desc: Essential functionality for accessing data through the GlobalArchive API
   contents:
   - ga_api_set_token
+  - ga_api_all_data
   - ga_api_count
   - ga_api_habitat
   - ga_api_length

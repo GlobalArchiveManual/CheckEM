@@ -31,14 +31,22 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
     dplyr::select(sample_url, family, genus, species, length_mm, number) %>%
     dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) 
   
+  # Retrieve and process habitat data
+  habitat <- ga_api_habitat(synthesis_id = synthesis_id, token = token) %>%
+    dplyr::semi_join(metadata, by = "sample_url") #%>%
+    # dplyr::select(sample_url, family, genus, species, length_mm, number) %>%
+    # dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) 
+  
   assign("metadata", metadata, envir = .GlobalEnv)
   assign("count", count, envir = .GlobalEnv)
   assign("length", length, envir = .GlobalEnv)
+  assign("habitat", habitat, envir = .GlobalEnv)
   
   # Save processed data as RDS files
   saveRDS(metadata, file = file.path(dir, "metadata.RDS"))
   saveRDS(count, file = file.path(dir, "count.RDS"))
   saveRDS(length, file = file.path(dir, "length.RDS"))
+  saveRDS(habitat, file = file.path(dir, "habitat.RDS"))
   
   # Only complete the data is include_zeros == TRUE
   if (include_zeros) {

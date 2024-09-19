@@ -4,12 +4,10 @@
 \alias{ga_api_species_list}
 \title{Retrieve Species List from the Global Archive API}
 \usage{
-ga_api_species_list(username, password)
+ga_api_species_list(token)
 }
 \arguments{
-\item{username}{A character string representing your GlobalArchive username for API authentication.}
-
-\item{password}{A character string representing your GlobalArchive password for API authentication.}
+\item{token}{A character string representing your GlobalArchive token for API authentication.}
 }
 \value{
 A data frame containing the species list from GlobalArchive.

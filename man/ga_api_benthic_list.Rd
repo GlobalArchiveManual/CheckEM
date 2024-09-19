@@ -4,12 +4,10 @@
 \alias{ga_api_benthic_list}
 \title{Retrieve Benthic Species List from the Global Archive API}
 \usage{
-ga_api_benthic_list(username, password)
+ga_api_benthic_list(token)
 }
 \arguments{
-\item{username}{A character string representing the username for API authentication.}
-
-\item{password}{A character string representing the password for API authentication.}
+\item{token}{A character string representing your GlobalArchive token for API authentication.}
 }
 \value{
 A data frame containing the list of benthic species. The data frame includes columns for
