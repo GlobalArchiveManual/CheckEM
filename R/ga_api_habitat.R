@@ -3,8 +3,7 @@
 #' This function retrieves habitat data from a GlobalArchive synthesis using an API call. It processes
 #' the data to include relevant species information by merging with a benthic species list.
 #'
-#' @param username A character string representing your GlobalArchive username for API authentication.
-#' @param password A character string representing your GlobalArchive password for API authentication.
+#' @param token A character string representing your GlobalArchive token for API authentication.
 #' @param synthesis_id A character string or numeric value representing the GlobalArchive synthesis ID for which the habitat data should be retrieved.
 #'
 #' @return A data frame containing habitat data retrieved from the GlobalArchive API. The data frame
@@ -19,16 +18,19 @@
 #'                                    synthesis_id = "your_synthesis_id")
 #' print(habitat)
 #' }
-ga_api_habitat <- function(username, password, synthesis_id) {
+ga_api_habitat <- function(token, synthesis_id) {
   
   # Retrieve the benthic species list
-  species_list <- ga_api_benthic_list(username, password)
+  species_list <- ga_api_benthic_list(token)
   
   # URL for the API endpoint
   url <- paste0("https://dev.globalarchive.org/api/data/SynthesisBenthosEntry/?sample__synthesis=", synthesis_id, "&format=feather")
   
-  # Send GET request with basic authentication
-  response <- GET(url, authenticate(username, password))
+  # Include the token in the request headers
+  headers <- add_headers(Authorization = paste("Token", token))
+  
+  # Send GET request with token-based authentication
+  response <- GET(url, headers)
   
   # Check if the request was successful
   if (status_code(response) == 200) {

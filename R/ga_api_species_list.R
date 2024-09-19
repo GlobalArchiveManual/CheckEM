@@ -4,8 +4,7 @@
 #' is returned as a data frame with relevant species information, excluding some columns that 
 #' are not needed for further analysis.
 #'
-#' @param username A character string representing your GlobalArchive username for API authentication.
-#' @param password A character string representing your GlobalArchive password for API authentication.
+#' @param token A character string representing your GlobalArchive token for API authentication.
 #'
 #' @return A data frame containing the species list from GlobalArchive. 
 #' The data frame includes the following columns:
@@ -28,13 +27,16 @@
 #' # Display the first few rows of the species list
 #' head(species_list)
 #' }
-ga_api_species_list <- function(username, password) {
+ga_api_species_list <- function(token) {
   
   # URL for the API endpoint
   url <- paste0("https://dev.globalarchive.org/api/data/AustralianAquaticFaunaSubject/?format=feather")
   
-  # Send GET request with basic authentication
-  response <- GET(url, authenticate(username, password))
+  # Include the token in the request headers
+  headers <- add_headers(Authorization = paste("Token", token))
+  
+  # Send GET request with token-based authentication
+  response <- GET(url, headers)
   
   # Check if the request was successful
   if (status_code(response) == 200) {
