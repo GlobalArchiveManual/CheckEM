@@ -60,6 +60,19 @@ Now we load and tidy the metadata.
 If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
 
 ```{r load-metadata}
+
+# TODO remove all non-numeric from the period column in metadata, will also need to remove in EMOBs - make it optional
+# Do people call periods, a, b, c
+
+# TODO add a check to say how many files there are of a certain type
+# TODO flag if file type is different for all files
+# TODO fuzzy join naming to see if I can find the potential file it is meant to be
+# TODO check for missing metadata
+# TODO Have a think about generic count data - how to include this (e.g. JCU missing length data but having abundance)
+# TODO Check to see if the metadata has a fuzzy join if there is no matching count or length
+# TODO - Add examples of completing by location, campaign, marine_region - don't want zeros for australian species in Fiji
+# TODO - add biomass
+
 metadata <- read_metadata(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
   dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length) %>%
   dplyr::glimpse()
@@ -378,9 +391,22 @@ This could be due to samples not observing fish (not an error) or a sample that 
 It could also be due to a sample name spelt incorrectly in the EMObs or Length file or the sample metadata file.
 
 ```{r samples-missing-length}
+
+# TODO Check to see if any samples without abundance data
+# TODO check to see if any samples without length data (not including 3D points)
+# Do that by changing
+# samples <- length %>%
+# dplyr::filter(length_mm >0) %>%
+#   distinct(campaignid, sample)
+# TODO - include location, site
+# TODO - summarise % transects with zero by opcode
+# IDEA - if last or consective transects at the end of an opcode are empty but marked as successful
+# lead or lag - flag if the leading row is also zero.
+
 metadata_samples <- metadata %>%
   dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")),
-                successful_count, successful_length) %>%
+                successful_count, successful_length, location, site) %>%
+  dplyr::filter(successful_length %in% "Yes") %>%
   distinct()
 
 samples <- length %>%
@@ -405,6 +431,8 @@ This check is only important if you have used periods to define your sampling du
 It looks for any periods in the EMObs that do not have an end time. This is important if you want to check the duration of each period.
 
 ```{r load-periods}
+# TODO - only check these if both count and length are not successful
+
 periods <- read_periods(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>%
   glimpse()
 
@@ -679,6 +707,8 @@ glimpse(too_big)
 In this check you can set the RMS limit, and then identify any measurements that have a larger RMS.
 
 ```{r length-over-rms}
+# TODO split this by lengths and 3D points
+
 rms_limit <- 20 # in mm
 
 over_rms <- complete_length %>%
@@ -691,6 +721,8 @@ glimpse(over_rms)
 In this check you can set the precision limit, and then identify any measurements that have a larger precision.
 
 ```{r length-over-precision}
+# TODO - change to be a % precision/length_mm * 100
+
 precision_limit <- 10 # in %
 
 over_precision <- complete_length %>%
@@ -738,6 +770,59 @@ glimpse(length_outside_transect)
 
 
 <!-- ## Percent of MaxN Measured -->
+
+```{r biomass}
+# 1. Check for missing length weight relationship
+taxa_missing_lw <- complete_length %>%
+  dplyr::distinct(family, genus, species) %>%
+  dplyr::anti_join(filter(CheckEM::australia_life_history, !is.na(a)), by = c("family", "genus", "species"))
+
+#2. Fill length data with relevant a and b and if blank use family---
+length_species_ab <- CheckEM::australia_life_history %>% # done this way around to avoid duplicating Family coloum
+  dplyr::select(-family) %>%
+  dplyr::inner_join(length, ., by = c("genus", "species")) # only keeps row if has a and b
+
+# 3. Make family length.weight
+family_lw <- CheckEM::australia_life_history %>%
+  dplyr::group_by(family, length_max_type) %>%
+  dplyr::mutate(log.a = log10(a)) %>%
+  dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),
+                   b = mean(b, na.rm = T),
+                   all = mean(all, na.rm = T),
+                   bll = mean(bll, na.rm = T)) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(!is.na(a)) %>%
+  dplyr::mutate(all = str_replace_all(all, "NaN", "0")) %>%
+  dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
+  dplyr::mutate(all = as.numeric(all)) %>%
+  dplyr::mutate(bll = as.numeric(bll)) %>%
+  dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %>%
+  dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
+  dplyr::filter(min.rank ==  0)
+
+length_family_ab <- length %>%
+  dplyr::anti_join(australia_life_history(), by = c("genus", "species")) %>%
+  dplyr::left_join(family_lw, by = "family")
+
+# 5. Fill length data with relevant a and b and if blank use family---
+complete.length.number.mass <- length_species_ab %>%
+  bind_rows(length_family_ab) %>%
+  dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
+  dplyr::mutate(length.cm = length_mm/10) %>%
+  dplyr::mutate(all = ifelse(is.na(all) & length_max_type%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+  dplyr::mutate(bll = ifelse(is.na(bll) & length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+  dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>%
+  dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
+  dplyr::filter(mass.g>0) %>%
+  dplyr::full_join(metadata.regions()) %>%
+  dplyr::select(c(campaignid, sample, family, genus, species, length_mm, number, mass.g, length.cm, code)) %>% # removed EM columns
+  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
+  tidyr::replace_na(list(mass.g = 0)) %>%
+  dplyr::mutate(mass_kg = mass.g/1000)
+
+
+
+```
 
 
 # Save the checked data
