@@ -27,20 +27,32 @@
 #'
 #' @export
 ga_api_set_token <- function() {
-  # Prompt the user to enter the GlobalArchive API token
-  cat("Please enter your GlobalArchive API token:\n")
-  token <- readline(prompt = "API Token: ")
-  
-  # Define the path for the secrets directory
+  # Define the path for the secrets directory and the token file
   secrets_dir <- "secrets"
+  token_file <- file.path(secrets_dir, "api_token.rds")
   
-  # Create the secrets directory if it doesn't exist
+  # Check if the secrets directory exists, if not, create it
   if (!dir.exists(secrets_dir)) {
     dir.create(secrets_dir)
   }
   
+  # If the token file exists, ask for user confirmation before overwriting
+  if (file.exists(token_file)) {
+    cat("A token file already exists. Do you want to overwrite it? (y/n): ")
+    response <- readline()
+    
+    if (tolower(response) != "y") {
+      message("Token was not overwritten.")
+      return(invisible(NULL))
+    }
+  }
+  
+  # Prompt the user to enter the GlobalArchive API token
+  cat("Please enter your GlobalArchive API token:\n")
+  token <- readline(prompt = "API Token: ")
+  
   # Save the token as an RDS file
-  saveRDS(token, file = file.path(secrets_dir, "api_token.rds"))
+  saveRDS(token, file = token_file)
   
   # Check if the current directory is part of a Git repository
   if (dir.exists(".git")) {
@@ -52,6 +64,11 @@ ga_api_set_token <- function() {
       gitignore_contents <- readLines(gitignore_path)
     } else {
       gitignore_contents <- character(0)
+    }
+    
+    # Ensure the file has a newline at the end
+    if (length(gitignore_contents) > 0 && gitignore_contents[length(gitignore_contents)] != "") {
+      gitignore_contents <- c(gitignore_contents, "")
     }
     
     # Check if the "secrets" directory is already in .gitignore
