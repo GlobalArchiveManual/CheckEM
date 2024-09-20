@@ -773,52 +773,52 @@ glimpse(length_outside_transect)
 
 ```{r biomass}
 # 1. Check for missing length weight relationship
-taxa_missing_lw <- complete_length %>%
-  dplyr::distinct(family, genus, species) %>%
-  dplyr::anti_join(filter(CheckEM::australia_life_history, !is.na(a)), by = c("family", "genus", "species"))
-
-#2. Fill length data with relevant a and b and if blank use family---
-length_species_ab <- CheckEM::australia_life_history %>% # done this way around to avoid duplicating Family coloum
-  dplyr::select(-family) %>%
-  dplyr::inner_join(length, ., by = c("genus", "species")) # only keeps row if has a and b
-
-# 3. Make family length.weight
-family_lw <- CheckEM::australia_life_history %>%
-  dplyr::group_by(family, length_max_type) %>%
-  dplyr::mutate(log.a = log10(a)) %>%
-  dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),
-                   b = mean(b, na.rm = T),
-                   all = mean(all, na.rm = T),
-                   bll = mean(bll, na.rm = T)) %>%
-  dplyr::ungroup() %>%
-  dplyr::filter(!is.na(a)) %>%
-  dplyr::mutate(all = str_replace_all(all, "NaN", "0")) %>%
-  dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
-  dplyr::mutate(all = as.numeric(all)) %>%
-  dplyr::mutate(bll = as.numeric(bll)) %>%
-  dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %>%
-  dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
-  dplyr::filter(min.rank ==  0)
-
-length_family_ab <- length %>%
-  dplyr::anti_join(australia_life_history(), by = c("genus", "species")) %>%
-  dplyr::left_join(family_lw, by = "family")
-
-# 5. Fill length data with relevant a and b and if blank use family---
-complete.length.number.mass <- length_species_ab %>%
-  bind_rows(length_family_ab) %>%
-  dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
-  dplyr::mutate(length.cm = length_mm/10) %>%
-  dplyr::mutate(all = ifelse(is.na(all) & length_max_type%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
-  dplyr::mutate(bll = ifelse(is.na(bll) & length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
-  dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>%
-  dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
-  dplyr::filter(mass.g>0) %>%
-  dplyr::full_join(metadata.regions()) %>%
-  dplyr::select(c(campaignid, sample, family, genus, species, length_mm, number, mass.g, length.cm, code)) %>% # removed EM columns
-  tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
-  tidyr::replace_na(list(mass.g = 0)) %>%
-  dplyr::mutate(mass_kg = mass.g/1000)
+# taxa_missing_lw <- complete_length %>%
+#   dplyr::distinct(family, genus, species) %>%
+#   dplyr::anti_join(filter(CheckEM::australia_life_history, !is.na(a)), by = c("family", "genus", "species"))
+# 
+# #2. Fill length data with relevant a and b and if blank use family---
+# length_species_ab <- CheckEM::australia_life_history %>% # done this way around to avoid duplicating Family coloum
+#   dplyr::select(-family) %>%
+#   dplyr::inner_join(length, ., by = c("genus", "species")) # only keeps row if has a and b
+# 
+# # 3. Make family length.weight
+# family_lw <- CheckEM::australia_life_history %>%
+#   dplyr::group_by(family, length_max_type) %>%
+#   dplyr::mutate(log.a = log10(a)) %>%
+#   dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),
+#                    b = mean(b, na.rm = T),
+#                    all = mean(all, na.rm = T),
+#                    bll = mean(bll, na.rm = T)) %>%
+#   dplyr::ungroup() %>%
+#   dplyr::filter(!is.na(a)) %>%
+#   dplyr::mutate(all = str_replace_all(all, "NaN", "0")) %>%
+#   dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %>%
+#   dplyr::mutate(all = as.numeric(all)) %>%
+#   dplyr::mutate(bll = as.numeric(bll)) %>%
+#   dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %>%
+#   dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %>%
+#   dplyr::filter(min.rank ==  0)
+# 
+# length_family_ab <- length %>%
+#   dplyr::anti_join(australia_life_history(), by = c("genus", "species")) %>%
+#   dplyr::left_join(family_lw, by = "family")
+# 
+# # 5. Fill length data with relevant a and b and if blank use family---
+# complete.length.number.mass <- length_species_ab %>%
+#   bind_rows(length_family_ab) %>%
+#   dplyr::filter(!is.na(a)) %>% #this gets rid of species with no lw
+#   dplyr::mutate(length.cm = length_mm/10) %>%
+#   dplyr::mutate(all = ifelse(is.na(all) & length_max_type%in%c("TL", "FL", "SL"), 0, all)) %>% # Temporary fix, remove later
+#   dplyr::mutate(bll = ifelse(is.na(bll) & length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %>% # Temporary fix, remove later
+#   dplyr::mutate(adjLength = ((length.cm*bll)+all)) %>%
+#   dplyr::mutate(mass.g = (adjLength^b)*a*number) %>%
+#   dplyr::filter(mass.g>0) %>%
+#   dplyr::full_join(metadata.regions()) %>%
+#   dplyr::select(c(campaignid, sample, family, genus, species, length_mm, number, mass.g, length.cm, code)) %>% # removed EM columns
+#   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %>%
+#   tidyr::replace_na(list(mass.g = 0)) %>%
+#   dplyr::mutate(mass_kg = mass.g/1000)
 
 
 
