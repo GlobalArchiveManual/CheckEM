@@ -150,7 +150,19 @@ includes the method e.g. “2020_ningaloo_stereo-BRUVs”.</p>
 step while checking your habitat data, then you can skip these next two
 chunks of code and simply read in the metadata (see below).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_metadata.html">read_metadata</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/DOV example/raw/"</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"DOVs"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># Change here to "DOVs"</span></span>
+<code class="sourceCode R"><span><span class="co"># TODO remove all non-numeric from the period column in metadata, will also need to remove in EMOBs - make it optional</span></span>
+<span><span class="co"># Do people call periods, a, b, c</span></span>
+<span></span>
+<span><span class="co"># TODO add a check to say how many files there are of a certain type</span></span>
+<span><span class="co"># TODO flag if file type is different for all files</span></span>
+<span><span class="co"># TODO fuzzy join naming to see if I can find the potential file it is meant to be</span></span>
+<span><span class="co"># TODO check for missing metadata</span></span>
+<span><span class="co"># TODO Have a think about generic count data - how to include this (e.g. JCU missing length data but having abundance)</span></span>
+<span><span class="co"># TODO Check to see if the metadata has a fuzzy join if there is no matching count or length</span></span>
+<span><span class="co"># TODO - Add examples of completing by location, campaign, marine_region - don't want zeros for australian species in Fiji</span></span>
+<span><span class="co"># TODO - add biomass</span></span>
+<span></span>
+<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_metadata.html">read_metadata</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/DOV example/raw/"</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"DOVs"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># Change here to "DOVs"</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>, <span class="va">site</span>, <span class="va">depth_m</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## reading metadata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/DOV example/raw//2017-04_Marmion.MP.Monitoring_stereoDOVs_Metadata.csv</span></span></code></pre>
@@ -678,9 +690,21 @@ sample that should be marked as successful_length = No. It could also be
 due to a sample name spelt incorrectly in the EMObs or Length file or
 the sample metadata file.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">metadata_samples</span> <span class="op">&lt;-</span> <span class="va">metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="co"># TODO Check to see if any samples without abundance data</span></span>
+<span><span class="co"># TODO check to see if any samples without length data (not including 3D points)</span></span>
+<span><span class="co"># Do that by changing</span></span>
+<span><span class="co"># samples &lt;- length %&gt;%</span></span>
+<span><span class="co"># dplyr::filter(length_mm &gt;0) %&gt;%</span></span>
+<span><span class="co">#   distinct(campaignid, sample)</span></span>
+<span><span class="co"># TODO - include location, site</span></span>
+<span><span class="co"># TODO - summarise % transects with zero by opcode</span></span>
+<span><span class="co"># IDEA - if last or consective transects at the end of an opcode are empty but marked as successful</span></span>
+<span><span class="co"># lead or lag - flag if the leading row is also zero.</span></span>
+<span></span>
+<span><span class="va">metadata_samples</span> <span class="op">&lt;-</span> <span class="va">metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                <span class="va">successful_count</span>, <span class="va">successful_length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>                <span class="va">successful_count</span>, <span class="va">successful_length</span>, <span class="va">location</span>, <span class="va">site</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">successful_length</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="va">length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -710,7 +734,9 @@ sampling duration. It looks for any periods in the EMObs that do not
 have an end time. This is important if you want to check the duration of
 each period.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">periods</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_periods.html">read_periods</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/DOV example/raw/"</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"DOVs"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="co"># TODO - only check these if both count and length are not successful</span></span>
+<span></span>
+<span><span class="va">periods</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_periods.html">read_periods</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/DOV example/raw/"</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"DOVs"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 1</span></span>
 <span><span class="co">## Columns: 12</span></span>
@@ -1155,7 +1181,9 @@ only)<a class="anchor" aria-label="anchor" href="#number-of-3d-points-and-length
 <p>In this check you can set the RMS limit, and then identify any
 measurements that have a larger RMS.</p>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rms_limit</span> <span class="op">&lt;-</span> <span class="fl">20</span> <span class="co"># in mm</span></span>
+<code class="sourceCode R"><span><span class="co"># TODO split this by lengths and 3D points</span></span>
+<span></span>
+<span><span class="va">rms_limit</span> <span class="op">&lt;-</span> <span class="fl">20</span> <span class="co"># in mm</span></span>
 <span></span>
 <span><span class="va">over_rms</span> <span class="op">&lt;-</span> <span class="va">complete_length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">rms</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">rms_limit</span><span class="op">)</span></span>
@@ -1192,7 +1220,9 @@ only)<a class="anchor" aria-label="anchor" href="#number-of-length-measurements-
 <p>In this check you can set the precision limit, and then identify any
 measurements that have a larger precision.</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">precision_limit</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># in %</span></span>
+<code class="sourceCode R"><span><span class="co"># TODO - change to be a % precision/length_mm * 100</span></span>
+<span></span>
+<span><span class="va">precision_limit</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># in %</span></span>
 <span></span>
 <span><span class="va">over_precision</span> <span class="op">&lt;-</span> <span class="va">complete_length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">precision</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">precision_limit</span><span class="op">)</span></span>
@@ -1333,6 +1363,54 @@ any measurements that are outside that transect.</p>
 <span><span class="co">## $ transect          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 <!-- ## Samples where the MaxN does not equal the number of length measurements -->
 <!-- ## Percent of MaxN Measured -->
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1. Check for missing length weight relationship</span></span>
+<span><span class="co"># taxa_missing_lw &lt;- complete_length %&gt;%</span></span>
+<span><span class="co">#   dplyr::distinct(family, genus, species) %&gt;%</span></span>
+<span><span class="co">#   dplyr::anti_join(filter(CheckEM::australia_life_history, !is.na(a)), by = c("family", "genus", "species"))</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># #2. Fill length data with relevant a and b and if blank use family---</span></span>
+<span><span class="co"># length_species_ab &lt;- CheckEM::australia_life_history %&gt;% # done this way around to avoid duplicating Family coloum</span></span>
+<span><span class="co">#   dplyr::select(-family) %&gt;%</span></span>
+<span><span class="co">#   dplyr::inner_join(length, ., by = c("genus", "species")) # only keeps row if has a and b</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># # 3. Make family length.weight</span></span>
+<span><span class="co"># family_lw &lt;- CheckEM::australia_life_history %&gt;%</span></span>
+<span><span class="co">#   dplyr::group_by(family, length_max_type) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(log.a = log10(a)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::summarise(a = 10^(mean(log.a, na.rm = T)),</span></span>
+<span><span class="co">#                    b = mean(b, na.rm = T),</span></span>
+<span><span class="co">#                    all = mean(all, na.rm = T),</span></span>
+<span><span class="co">#                    bll = mean(bll, na.rm = T)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::ungroup() %&gt;%</span></span>
+<span><span class="co">#   dplyr::filter(!is.na(a)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(all = str_replace_all(all, "NaN", "0")) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(bll = str_replace_all(bll, "NaN", "1")) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(all = as.numeric(all)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(bll = as.numeric(bll)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(rank = ifelse(length_max_type == "FL", 1, ifelse(length_max_type == "TL", 2, 3))) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(min.rank = rank - min(rank, na.rm = TRUE)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::filter(min.rank ==  0)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># length_family_ab &lt;- length %&gt;%</span></span>
+<span><span class="co">#   dplyr::anti_join(australia_life_history(), by = c("genus", "species")) %&gt;%</span></span>
+<span><span class="co">#   dplyr::left_join(family_lw, by = "family")</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># # 5. Fill length data with relevant a and b and if blank use family---</span></span>
+<span><span class="co"># complete.length.number.mass &lt;- length_species_ab %&gt;%</span></span>
+<span><span class="co">#   bind_rows(length_family_ab) %&gt;%</span></span>
+<span><span class="co">#   dplyr::filter(!is.na(a)) %&gt;% #this gets rid of species with no lw</span></span>
+<span><span class="co">#   dplyr::mutate(length.cm = length_mm/10) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(all = ifelse(is.na(all) &amp; length_max_type%in%c("TL", "FL", "SL"), 0, all)) %&gt;% # Temporary fix, remove later</span></span>
+<span><span class="co">#   dplyr::mutate(bll = ifelse(is.na(bll) &amp; length_max_type%in%c("TL", "FL", "SL"), 1, bll)) %&gt;% # Temporary fix, remove later</span></span>
+<span><span class="co">#   dplyr::mutate(adjLength = ((length.cm*bll)+all)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(mass.g = (adjLength^b)*a*number) %&gt;%</span></span>
+<span><span class="co">#   dplyr::filter(mass.g&gt;0) %&gt;%</span></span>
+<span><span class="co">#   dplyr::full_join(metadata.regions()) %&gt;%</span></span>
+<span><span class="co">#   dplyr::select(c(campaignid, sample, family, genus, species, length_mm, number, mass.g, length.cm, code)) %&gt;% # removed EM columns</span></span>
+<span><span class="co">#   tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species, code)) %&gt;%</span></span>
+<span><span class="co">#   tidyr::replace_na(list(mass.g = 0)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(mass_kg = mass.g/1000)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -1345,7 +1423,7 @@ any measurements that are outside that transect.</p>
 <!--                        name, "_complete-count.rds"))) -->
 <!-- ``` -->
 <!-- Save lengths as an R data file. -->
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">complete_length</span>,</span>
 <span>          file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>,</span>
 <span>                       <span class="va">name</span>, <span class="st">"_complete-length.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
