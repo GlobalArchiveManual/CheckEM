@@ -23,4 +23,5 @@ A list containing \code{metadata}, \code{count}, and \code{length} data frames.
 This function retrieves metadata, count, and length data from a CheckEM synthesis, processes the data,
 and saves the results as RDS files in the specified directory with the given name. It also returns the
 processed data in the environment and allows users to add in zeros where a species is not present
+If the directory doesn't exist, it will be created, and the user will be informed.
 }

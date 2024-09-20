@@ -3,7 +3,8 @@
 #' This function retrieves metadata, count, and length data from a CheckEM synthesis, processes the data,
 #' and saves the results as RDS files in the specified directory with the given name. It also returns the
 #' processed data in the environment and allows users to add in zeros where a species is not present
-#'
+#' If the directory doesn't exist, it will be created, and the user will be informed.
+#' 
 #' @param token A character string representing your GlobalArchive token for API authentication.
 #' @param synthesis_id A character string or numeric value representing the GlobalArchive synthesis ID 
 #' for which the data should be retrieved.
@@ -18,14 +19,20 @@
 #' @export
 ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
   
+  # Check if the directory exists, if not create it
+  if (!dir.exists(dir)) {
+    dir.create(dir, recursive = TRUE)
+    message("Directory ", dir, " does not exist. Creating directory...")
+  }
+  
   # Retrieve metadata from the CheckEM API
   metadata <- ga_api_metadata(synthesis_id = synthesis_id, token = token)
   
   # Retrieve and process count data
   count <- ga_api_count(synthesis_id = synthesis_id, token = token) %>%
-    dplyr::select(sample_url, family, genus, species, count) %>%
-    dplyr::semi_join(metadata, by = "sample_url")
-  
+    dplyr::semi_join(metadata, by = "sample_url") %>%
+    dplyr::select(sample_url, family, genus, species, count) 
+    
   # Retrieve and process length data
   length <- ga_api_length(synthesis_id = synthesis_id, token = token) %>%
     dplyr::semi_join(metadata, by = "sample_url") %>%
