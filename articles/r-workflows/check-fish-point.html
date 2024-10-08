@@ -154,14 +154,15 @@ step while checking your habitat data, then you can skip these next two
 chunks of code and simply read in the metadata (see below).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_metadata.html">read_metadata</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"BRUVs"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># Change here to "DOVs"</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>, <span class="va">site</span>, <span class="va">depth_m</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span>, <span class="va">successful_habitat_forward</span>, <span class="va">successful_habitat_backward</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">status</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>, <span class="va">site</span>, <span class="va">depth_m</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span>, <span class="va">successful_habitat_forward</span>, <span class="va">successful_habitat_backward</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## reading metadata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2022-05_PtCloates_stereo-BRUVS_metadata.csv</span></span></code></pre>
 <pre><code><span><span class="co">## reading metadata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2023-03_SwC_stereo-BRUVs_Metadata.csv</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 94</span></span>
-<span><span class="co">## Columns: 12</span></span>
+<span><span class="co">## Columns: 13</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6", "7", "8", "9…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "113.5447", "113.5628", "113.5515", "113.5…</span></span>
 <span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "-22.7221", "-22.6957", "-22.7379", "-22.7…</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
@@ -193,6 +194,10 @@ here is the 2022 Collaborative Australian Protected Areas Database,
 which you can download for free <a href="https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore" class="external-link">here</a>.</p>
 <p>You may change this shape file to any suitable data set that is
 available for your study area.</p>
+<div class="section level4">
+<h4 id="note-you-should-only-use-this-code-if-the-status-column-is-not-filled-out">NOTE: You should only use this code if the Status column is not
+filled out<a class="anchor" aria-label="anchor" href="#note-you-should-only-use-this-code-if-the-status-column-is-not-filled-out"></a>
+</h4>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marine_parks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">geometry</span>, <span class="va">ZONE_TYPE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -208,34 +213,18 @@ available for your study area.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">metadata</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"longitude_dd"</span>, <span class="st">"latitude_dd"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="va">metadata_sf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html" class="external-link">st_intersection</a></span><span class="op">(</span><span class="va">marine_parks</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html" class="external-link">st_coordinates</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>longitude_dd <span class="op">=</span> <span class="va">X</span>, latitude_dd <span class="op">=</span> <span class="va">Y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>status <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">ZONE_TYPE</span>, <span class="st">"National|Sanctuary"</span><span class="op">)</span>,</span>
-<span>                                <span class="st">"No-take"</span>, <span class="st">"Fished"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span><span class="co">## all geometries</span></span></code></pre>
-<pre><code><span><span class="co">## Rows: 94</span></span>
-<span><span class="co">## Columns: 14</span></span>
-<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
-<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6", "7", "8", "9…</span></span>
-<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
-<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "93.9", "77.3", "78.3", "73.9", "81.9", "7…</span></span>
-<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
-<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
-<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
-<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 113.5447, 113.5628, 113.5515, 113.5555, 11…</span></span>
-<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -22.7221, -22.6957, -22.7379, -22.7337, -2…</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span></code></pre>
+<span><span class="co"># metadata &lt;- metadata_sf %&gt;%</span></span>
+<span><span class="co">#   st_join(marine_parks) %&gt;%</span></span>
+<span><span class="co">#   bind_cols(st_coordinates(.)) %&gt;%</span></span>
+<span><span class="co">#   as.data.frame() %&gt;%</span></span>
+<span><span class="co">#   dplyr::select(-c(geometry)) %&gt;%</span></span>
+<span><span class="co">#   dplyr::rename(longitude_dd = X, latitude_dd = Y) %&gt;%</span></span>
+<span><span class="co">#   dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),</span></span>
+<span><span class="co">#                                 "No-take", "Fished")) %&gt;%</span></span>
+<span><span class="co">#   tidyr::replace_na(list(status = "Fished")) %&gt;%</span></span>
+<span><span class="co">#   clean_names() %&gt;%</span></span>
+<span><span class="co">#   dplyr::glimpse()</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="find-nearest-marine-region">Find nearest Marine Region<a class="anchor" aria-label="anchor" href="#find-nearest-marine-region"></a>
@@ -243,11 +232,11 @@ available for your study area.</p>
 <p>Now we need to find the nearest marine region for each sample in the
 metadata. Then we can use the life history lists to find species that
 have not been observed in that marine region before.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">metadata</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"longitude_dd"</span>, <span class="st">"latitude_dd"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
 <span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="fu">CheckEM</span><span class="fu">::</span><span class="va">aus_regions</span>, crs <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required package: sp</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">regions</span>, <span class="fl">4326</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">REGION</span><span class="op">)</span></span>
 <span></span>
@@ -258,9 +247,10 @@ have not been observed in that marine region before.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 94</span></span>
-<span><span class="co">## Columns: 13</span></span>
+<span><span class="co">## Columns: 12</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "2", "3", "4", "5", "6", "7", "8", "9…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
@@ -269,8 +259,6 @@ have not been observed in that marine region before.</p>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-west", …</span></span></code></pre>
 </div>
 </div>
@@ -306,7 +294,7 @@ saved in the directory you set. It will combine all of the files into
 one data-frame, and get the campaignid name from the name of the file.
 It is important that you consistently name your files with the same
 campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_points.html">read_points</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 17,425</span></span>
@@ -344,7 +332,7 @@ one data frame, and get the campaignid name from the name of the
 file.</p>
 <p>It is important that you consistently name your files with the same
 campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_counts.html">read_counts</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## reading count file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2022-05_PtCloates_stereo-BRUVS_count.csv</span></span></code></pre>
@@ -363,7 +351,7 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <h3 id="combine-eventmeasure-and-generic-count-together">Combine EventMeasure and <em>Generic</em> count together<a class="anchor" aria-label="anchor" href="#combine-eventmeasure-and-generic-count-together"></a>
 </h3>
 <p>Create and tidy the MaxN file.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Only run this if there is data in the counts data frame</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">points</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">maxn_points</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -396,7 +384,7 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <span><span class="co">## $ genus      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Dasyatis", "Parequula", "Heterodontus", "Austrolabrus", "C…</span></span>
 <span><span class="co">## $ species    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "brevicaudata", "melbournensis", "portusjacksoni", "maculat…</span></span>
 <span><span class="co">## $ maxn       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 71, 9, 8, 1, 5, 2, 9, 1, 1, 2, 2, 1, 5, 12, 3, …</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Only run this if there is data in the counts data frame</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">maxn_counts</span> <span class="op">&lt;-</span> <span class="va">counts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -427,7 +415,7 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <span><span class="co">## $ genus      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abalistes", "Decapterus", "Turrum", "Gymnocranius", "Lethr…</span></span>
 <span><span class="co">## $ species    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "filamentosus", "spp", "fulvoguttatum", "sp1", "rubriopercu…</span></span>
 <span><span class="co">## $ maxn       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3, 4, 18, 2, 1, 9, 3, 2, 2, 1, 6, 3, 1, 3, 1, 2, 1, 1, 1, 1…</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If only EventMeasure data then MaxN only includes Points data</span></span>
 <span><span class="co"># If only Generic data then MaxN only includes Count data</span></span>
 <span><span class="co"># If both exist, then MaxN includes both Points and Count data</span></span>
@@ -442,7 +430,7 @@ of the files into one data-frame, and get the campaignid name from the
 name of the file. It is important that you consistently name your files
 with the same campaignid (look out for different separators e.g. ‘-’,
 ’_‘, or’.’)</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">em_length3dpoints</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_em_length.html">read_em_length</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                   </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">comment</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># there is a comment column in metadata, so you will need to remove this column from EM data</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">metadata</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">sample</span>, <span class="va">campaignid</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -450,7 +438,7 @@ with the same campaignid (look out for different separators e.g. ‘-’,
 <span>  <span class="co"># dplyr::rename(length_mm = length) %&gt;%</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 2,428</span></span>
-<span><span class="co">## Columns: 47</span></span>
+<span><span class="co">## Columns: 46</span></span>
 <span><span class="co">## $ opcode                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "12", "12", …</span></span>
 <span><span class="co">## $ imageptpair                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "72", "73", "75", "81", "93", "0", "11", "…</span></span>
 <span><span class="co">## $ filenameleft                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Left_MAH00355.MP4", "Left_MAH00355.MP4", …</span></span>
@@ -487,6 +475,7 @@ with the same campaignid (look out for different separators e.g. ‘-’,
 <span><span class="co">## $ midy                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ midz                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "10", "10", "10", "10", "12", "12", …</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "18/03/2023 2:44", "18/03/2023 2:44", "18/…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
@@ -495,8 +484,6 @@ with the same campaignid (look out for different separators e.g. ‘-’,
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "South-west", "South-west", "South-west", …</span></span></code></pre>
 </div>
 <div class="section level3">
@@ -508,7 +495,7 @@ into one data frame, and get the campaignid name from the name of the
 file. It is important that you consistently name your files with the
 same campaignid (look out for different separators e.g. ‘-’, ’</em>’, or
 ‘.’)</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gen_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_gen_length.html">read_gen_length</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                   </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">metadata</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">successful_length</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -516,7 +503,7 @@ same campaignid (look out for different separators e.g. ‘-’, ’</em>’, o
 <pre><code><span><span class="co">## reading length file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2022-05_PtCloates_stereo-BRUVS_length.csv</span></span></code></pre>
 <pre><code><span><span class="co">## file is a csv</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 2,162</span></span>
-<span><span class="co">## Columns: 23</span></span>
+<span><span class="co">## Columns: 22</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
 <span><span class="co">## $ opcode                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1…</span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae", "Balistidae", "Balistidae", …</span></span>
@@ -529,6 +516,7 @@ same campaignid (look out for different separators e.g. ‘-’, ’</em>’, o
 <span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 21.13063, 9.07687, 5.16125, 13.59407, 18.2…</span></span>
 <span><span class="co">## $ code                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "37465089", "37465089", "37465089", NA, NA…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
@@ -537,14 +525,12 @@ same campaignid (look out for different separators e.g. ‘-’, ’</em>’, o
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-west", …</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="combine-eventmeasure-and-generic-length-data">Combine EventMeasure and <em>Generic</em> length data<a class="anchor" aria-label="anchor" href="#combine-eventmeasure-and-generic-length-data"></a>
 </h3>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If only EventMeasure data then length only includes Length and 3D points data</span></span>
 <span><span class="co"># If only Generic data then length only includes generic length data</span></span>
 <span><span class="co"># If both exist, then length includes both Length and 3D points and generic length data</span></span>
@@ -559,7 +545,7 @@ same campaignid (look out for different separators e.g. ‘-’, ’</em>’, o
 <p>Tidy and “complete” MaxN data (e.g. add zeros in the data where a
 species wasn’t observed). The final data set will have a row for each
 species in every sample (deployment).</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">count</span> <span class="op">&lt;-</span> <span class="va">maxn</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">family</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"NANA"</span>, <span class="cn">NA</span>, <span class="st">"unknown"</span>, <span class="st">""</span>, <span class="cn">NULL</span>, <span class="st">" "</span>, <span class="cn">NA_character_</span><span class="op">)</span>, <span class="st">"Unknown"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">family</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>genus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">genus</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"NANA"</span>, <span class="cn">NA</span>, <span class="st">"unknown"</span>, <span class="st">""</span>, <span class="cn">NULL</span>, <span class="st">" "</span>, <span class="cn">NA_character_</span><span class="op">)</span>, <span class="st">"Unknown"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">genus</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -575,7 +561,7 @@ species in every sample (deployment).</p>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span><span class="va">scientific</span>, <span class="va">count</span>, fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## `summarise()` has grouped output by 'campaignid', 'sample', 'family', 'genus'.</span></span>
 <span><span class="co">## You can override using the `.groups` argument.</span></span></code></pre>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">count_families</span> <span class="op">&lt;-</span> <span class="va">maxn</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">family</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"Unknown"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -590,7 +576,7 @@ species in every sample (deployment).</p>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 17,766</span></span>
-<span><span class="co">## Columns: 18</span></span>
+<span><span class="co">## Columns: 17</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1…</span></span>
 <span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Acanthuridae Naso brachycentron", "Acanth…</span></span>
@@ -598,6 +584,7 @@ species in every sample (deployment).</p>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Acanthuridae", "Acanthuridae", "Acanthuri…</span></span>
 <span><span class="co">## $ genus                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Naso", "Naso", "Naso", "Albula", "Aplodac…</span></span>
 <span><span class="co">## $ species                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "brachycentron", "fageni", "hexacanthus", …</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
@@ -606,8 +593,6 @@ species in every sample (deployment).</p>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-west", …</span></span></code></pre>
 </div>
 <div class="section level4">
@@ -616,7 +601,7 @@ species in every sample (deployment).</p>
 <p>Tidy and complete length data (e.g. complete zeroes in the data). The
 final data set will have a row for each species in every sample
 (deployment).</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">complete_length</span> <span class="op">&lt;-</span> <span class="va">length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">family</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"NANA"</span>, <span class="cn">NA</span>, <span class="st">"unknown"</span>, <span class="st">""</span>, <span class="cn">NULL</span>, <span class="st">" "</span>, <span class="cn">NA_character_</span><span class="op">)</span>, <span class="st">"Unknown"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">family</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>genus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">genus</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"NANA"</span>, <span class="cn">NA</span>, <span class="st">"unknown"</span>, <span class="st">""</span>, <span class="cn">NULL</span>, <span class="st">" "</span>, <span class="cn">NA_character_</span><span class="op">)</span>, <span class="st">"Unknown"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">genus</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -638,12 +623,12 @@ final data set will have a row for each species in every sample
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>length_mm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, date_time, location, site,</span></span>
-<span><span class="co">## depth_m, successful_count, successful_length, successful_habitat_forward,</span></span>
-<span><span class="co">## successful_habitat_backward, zone_type, status, marine_region)`</span></span>
+<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, status, date_time, location,</span></span>
+<span><span class="co">## site, depth_m, successful_count, successful_length, successful_habitat_forward,</span></span>
+<span><span class="co">## successful_habitat_backward, marine_region)`</span></span>
 <span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 23,119</span></span>
-<span><span class="co">## Columns: 21</span></span>
+<span><span class="co">## Columns: 20</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1…</span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Acanthuridae", "Acanthuridae", "Acanthuri…</span></span>
@@ -654,6 +639,7 @@ final data set will have a row for each species in every sample
 <span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, 3775.308, 3918…</span></span>
 <span><span class="co">## $ rms                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, 11.10507, 14.1…</span></span>
 <span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, 21.13063, 9.07…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
@@ -662,8 +648,6 @@ final data set will have a row for each species in every sample
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-west", …</span></span></code></pre>
 </div>
 </div>
@@ -677,7 +661,7 @@ final data set will have a row for each species in every sample
 </h3>
 <p>This is the total number of unique samples in the sample metadata (it
 should also be the number of rows in the metadata data frame)</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">number_of_samples</span> <span class="op">&lt;-</span> <span class="va">metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span></span>
 <span></span>
@@ -689,7 +673,7 @@ should also be the number of rows in the metadata data frame)</p>
 </h3>
 <p>If you have any duplicate samples within a campaign they will be
 displayed here</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">duplicate_samples</span> <span class="op">&lt;-</span> <span class="va">metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -697,7 +681,7 @@ displayed here</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">n</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## `summarise()` has grouped output by 'campaignid'. You can override using the</span></span>
 <span><span class="co">## `.groups` argument.</span></span></code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">duplicate_samples</span><span class="op">)</span>, <span class="st">"samples duplicated in the metadata"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 samples duplicated in the metadata</span></span></code></pre>
 </div>
@@ -708,7 +692,7 @@ displayed here</p>
 sample that should be marked as successful_count = No.  It could also be
 due to a sample name spelt incorrectly in the count/points or sample
 metadata file.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata_samples</span> <span class="op">&lt;-</span> <span class="va">metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                <span class="va">successful_count</span>, <span class="va">successful_length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -727,7 +711,7 @@ metadata file.</p>
 </h3>
 <p>This next chunk checks for any samples that are in the count data but
 do not have a match in the sample metadata.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">missing_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">samples</span>, <span class="va">metadata_samples</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">missing_metadata</span><span class="op">)</span>, <span class="st">"samples in count data missing metadata"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 samples in count data missing metadata</span></span></code></pre>
@@ -739,7 +723,7 @@ do not have a match in the sample metadata.</p>
 sample that should be marked as successful_length = No.  It could also
 be due to a sample name spelt incorrectly in the EMObs or Length file or
 the sample metadata file.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata_samples</span> <span class="op">&lt;-</span> <span class="va">metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                <span class="va">successful_count</span>, <span class="va">successful_length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -758,7 +742,7 @@ the sample metadata file.</p>
 </h3>
 <p>This next chunk checks for any samples that are in the length data
 but do not have a match in the sample metadata.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">missing_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">samples</span>, <span class="va">metadata_samples</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">missing_metadata</span><span class="op">)</span>, <span class="st">"samples in length data missing metadata"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -771,7 +755,7 @@ but do not have a match in the sample metadata.</p>
 sampling duration. It looks for any periods in the EMObs that do not
 have an end time. This is important if you want to check the duration of
 each period.</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">periods</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_periods.html">read_periods</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/raw/"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 32</span></span>
@@ -788,13 +772,13 @@ each period.</p>
 <span><span class="co">## $ has_end       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "…</span></span>
 <span><span class="co">## $ campaignid    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", …</span></span>
 <span><span class="co">## $ sample        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10", "12", "14", "15", "16", "17", "19", "2", "21", "22…</span></span></code></pre>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">periods_without_end</span> <span class="op">&lt;-</span> <span class="va">periods</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">has_end</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">periods_without_end</span><span class="op">)</span>, <span class="st">"periods without an end"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 periods without an end</span></span></code></pre>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">periods_without_end</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
 <span><span class="co">## Columns: 12</span></span>
@@ -817,7 +801,7 @@ each period.</p>
 <p>This check is only important if you have used periods to define your
 sampling duration. You can use it to find any samples that are missing
 periods.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata_samples</span> <span class="op">&lt;-</span> <span class="va">metadata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -830,10 +814,10 @@ periods.</p>
 <span><span class="va">missing_periods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">metadata_samples</span>, <span class="va">periods_samples</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">sample</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span></code></pre>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">missing_periods</span><span class="op">)</span>, <span class="st">"samples missing period"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 62 samples missing period</span></span></code></pre>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">missing_periods</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 62</span></span>
 <span><span class="co">## Columns: 3</span></span>
@@ -846,14 +830,14 @@ periods.</p>
 </h3>
 <p>This check identifies any points that have been annotated outside of
 a period.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">points_outside_periods</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">period</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="cn">NULL</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">number</span>, <span class="va">frame</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">points_outside_periods</span><span class="op">)</span>, <span class="st">"points outside a period"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 points outside a period</span></span></code></pre>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">points_outside_periods</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
 <span><span class="co">## Columns: 8</span></span>
@@ -871,14 +855,14 @@ a period.</p>
 </h3>
 <p>This check identifies any length measurements or 3D points that have
 been annotated outside of a period.</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lengths_outside_periods</span> <span class="op">&lt;-</span> <span class="va">em_length3dpoints</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">period</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="cn">NULL</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">number</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">lengths_outside_periods</span><span class="op">)</span>, <span class="st">"lengths/3D points outside period"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 1 lengths/3D points outside period</span></span></code></pre>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">lengths_outside_periods</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 1</span></span>
 <span><span class="co">## Columns: 7</span></span>
@@ -896,7 +880,7 @@ been annotated outside of a period.</p>
 <p>In this check you define the correct sampling duration (e.g. 60
 minutes for stereo-BRUVs) and then identify any periods that are not
 that length.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">period_length</span> <span class="op">&lt;-</span> <span class="fl">60</span> <span class="co"># in minutes</span></span>
 <span></span>
 <span><span class="va">periods_wrong</span> <span class="op">&lt;-</span> <span class="va">periods</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -907,7 +891,7 @@ that length.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">periods_wrong</span><span class="op">)</span>, <span class="st">"periods not"</span>, <span class="va">period_length</span>, <span class="st">"minutes long"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 1 periods not 60 minutes long</span></span></code></pre>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">periods_wrong</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 1</span></span>
 <span><span class="co">## Columns: 7</span></span>
@@ -924,13 +908,13 @@ that length.</p>
 </h3>
 <p>This is the total number of individuals observed in the count
 data:</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">total_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">complete_count</span><span class="op">$</span><span class="va">count</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">total_count</span>, <span class="st">"fish counted in the count data"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 6411 fish counted in the count data</span></span></code></pre>
 <p>This is the total number of individuals observed in the length
 data:</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">total_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">complete_length</span><span class="op">$</span><span class="va">number</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">total_length</span>, <span class="st">"fish counted in the length data"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 6421 fish counted in the length data</span></span></code></pre>
@@ -942,13 +926,13 @@ data:</p>
 points of interest that are not fish/sharks and remove the number so
 they are not summed in total abundance metrics. You should check to make
 sure no fish species accidentally had their number deleted.</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">points_without_number</span> <span class="op">&lt;-</span> <span class="va">points</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">number</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="fl">0</span>, <span class="cn">NULL</span>, <span class="st">""</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">points_without_number</span><span class="op">)</span>, <span class="st">"points in the _Points.txt file that do not have a number"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 11 points in the _Points.txt file that do not have a number</span></span></code></pre>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">points_without_number</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 11</span></span>
 <span><span class="co">## Columns: 23</span></span>
@@ -982,16 +966,16 @@ sure no fish species accidentally had their number deleted.</p>
 <p>This is a check for EventMeasure data. Sometimes analysts will add 3D
 points to record the sync point. These can remain in the data but you
 should double check that no fish are accidentally missing a number.</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lengths_without_number</span> <span class="op">&lt;-</span> <span class="va">em_length3dpoints</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">number</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="cn">NA</span>, <span class="fl">0</span>, <span class="cn">NULL</span>, <span class="st">""</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">lengths_without_number</span><span class="op">)</span>, <span class="st">"lengths or 3D points in the EMObs that do not have a number"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 1 lengths or 3D points in the EMObs that do not have a number</span></span></code></pre>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">lengths_without_number</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 1</span></span>
-<span><span class="co">## Columns: 47</span></span>
+<span><span class="co">## Columns: 46</span></span>
 <span><span class="co">## $ opcode                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "32"</span></span>
 <span><span class="co">## $ imageptpair                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
 <span><span class="co">## $ filenameleft                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "L039_MAH00349.MP4"</span></span>
@@ -1028,6 +1012,7 @@ should double check that no fish are accidentally missing a number.</p>
 <span><span class="co">## $ midy                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA</span></span>
 <span><span class="co">## $ midz                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "32"</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "15/03/2023 0:23"</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
@@ -1036,8 +1021,6 @@ should double check that no fish are accidentally missing a number.</p>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)"</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"</span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "South-west"</span></span></code></pre>
 </div>
 <div class="section level3">
@@ -1053,7 +1036,7 @@ list (<em>TO ADD</em>).</p>
 <div class="section level4">
 <h4 id="synonyms-in-the-count-data">Synonyms in the count data<a class="anchor" aria-label="anchor" href="#synonyms-in-the-count-data"></a>
 </h4>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">synonyms_in_count</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">complete_count</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">aus_synonyms</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">genus_correct</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="st">'old name'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1061,10 +1044,10 @@ list (<em>TO ADD</em>).</p>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">'old name'</span>, <span class="st">'new name'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span></code></pre>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">synonyms_in_count</span><span class="op">)</span>, <span class="st">"synonyms used in the count data"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 12 synonyms used in the count data</span></span></code></pre>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">synonyms_in_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 12</span></span>
 <span><span class="co">## Columns: 2</span></span>
@@ -1074,7 +1057,7 @@ list (<em>TO ADD</em>).</p>
 <div class="section level4">
 <h4 id="synonyms-in-the-length-data">Synonyms in the length data<a class="anchor" aria-label="anchor" href="#synonyms-in-the-length-data"></a>
 </h4>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">synonyms_in_length</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">complete_length</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">aus_synonyms</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">genus_correct</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="st">'old name'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1082,10 +1065,10 @@ list (<em>TO ADD</em>).</p>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">'old name'</span>, <span class="st">'new name'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span></code></pre>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">synonyms_in_length</span><span class="op">)</span>, <span class="st">"synonyms used in the length data"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 12 synonyms used in the length data</span></span></code></pre>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">synonyms_in_length</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 12</span></span>
 <span><span class="co">## Columns: 2</span></span>
@@ -1102,7 +1085,7 @@ use the next two chunks. If you would like to retain the old names skip
 the next two chunks.</p>
 <p><strong>NOTE:</strong> this does not change your original annotation
 files, only the data you save at the end of the script.</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">complete_count</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">complete_count</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">aus_synonyms</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>genus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span><span class="va">genus_correct</span><span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, <span class="va">genus_correct</span>, <span class="va">genus</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">species_correct</span><span class="op">)</span>, <span class="va">species_correct</span>, <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1110,7 +1093,7 @@ files, only the data you save at the end of the script.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">family_correct</span>, <span class="va">genus_correct</span>, <span class="va">species_correct</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span></code></pre>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">complete_length</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">complete_length</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">aus_synonyms</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>genus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span><span class="va">genus_correct</span><span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, <span class="va">genus_correct</span>, <span class="va">genus</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">species_correct</span><span class="op">)</span>, <span class="va">species_correct</span>, <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1141,7 +1124,7 @@ about the species flagged by this check.</p>
 <h4 id="species-out-of-range-in-the-count-data">Species out of range in the count data<a class="anchor" aria-label="anchor" href="#species-out-of-range-in-the-count-data"></a>
 </h4>
 <p>Check for any species that are out of range in the count data.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">count_species_not_observed_region</span> <span class="op">&lt;-</span> <span class="va">complete_count</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">marine_region</span>, <span class="va">count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="../../reference/expand_life_history.html">expand_life_history</a></span><span class="op">(</span><span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span>, <span class="st">"marine_region"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1152,10 +1135,10 @@ about the species flagged by this check.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">'marine region not observed in'</span> <span class="op">=</span> <span class="va">marine_region</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">semi_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, marine_region)`</span></span></code></pre>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">count_species_not_observed_region</span><span class="op">)</span>, <span class="st">"species not observed in the region before"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 8 species not observed in the region before</span></span></code></pre>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">count_species_not_observed_region</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 8</span></span>
 <span><span class="co">## Columns: 5</span></span>
@@ -1169,7 +1152,7 @@ about the species flagged by this check.</p>
 <h4 id="species-out-of-range-in-the-length-data">Species out of range in the length data<a class="anchor" aria-label="anchor" href="#species-out-of-range-in-the-length-data"></a>
 </h4>
 <p>Check for any species that are out of range in the length data.</p>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">length_species_not_observed_region</span> <span class="op">&lt;-</span> <span class="va">complete_length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">marine_region</span>, <span class="va">number</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="../../reference/expand_life_history.html">expand_life_history</a></span><span class="op">(</span><span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span>, <span class="st">"marine_region"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1180,10 +1163,10 @@ about the species flagged by this check.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">'marine region not observed in'</span> <span class="op">=</span> <span class="va">marine_region</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">semi_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, marine_region)`</span></span></code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span>, <span class="st">"species not observed in the region before"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 8 species not observed in the region before</span></span></code></pre>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 8</span></span>
 <span><span class="co">## Columns: 5</span></span>
@@ -1215,20 +1198,20 @@ and which list it should be added to (Global or Australia).</p>
 </h4>
 <p>If you chose to update the names that have changed (synonyms) then
 this check won’t include the previously used names.</p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">count_species_not_in_list</span> <span class="op">&lt;-</span> <span class="va">complete_count</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">count</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, date_time, location, site,</span></span>
-<span><span class="co">## depth_m, successful_count, successful_length, successful_habitat_forward,</span></span>
-<span><span class="co">## successful_habitat_backward, zone_type, status, marine_region)`</span></span></code></pre>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, status, date_time, location,</span></span>
+<span><span class="co">## site, depth_m, successful_count, successful_length, successful_habitat_forward,</span></span>
+<span><span class="co">## successful_habitat_backward, marine_region)`</span></span></code></pre>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">count_species_not_in_list</span><span class="op">)</span>, <span class="st">"species not in chosen life history list"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 11 species not in chosen life history list</span></span></code></pre>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">count_species_not_in_list</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 11</span></span>
 <span><span class="co">## Columns: 4</span></span>
@@ -1240,20 +1223,20 @@ this check won’t include the previously used names.</p>
 <div class="section level4">
 <h4 id="species-in-the-length-data-that-are-not-listed">Species in the length data that are not listed<a class="anchor" aria-label="anchor" href="#species-in-the-length-data-that-are-not-listed"></a>
 </h4>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">length_species_not_in_list</span> <span class="op">&lt;-</span> <span class="va">complete_length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">number</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, date_time, location, site,</span></span>
-<span><span class="co">## depth_m, successful_count, successful_length, successful_habitat_forward,</span></span>
-<span><span class="co">## successful_habitat_backward, zone_type, status, marine_region)`</span></span></code></pre>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, status, date_time, location,</span></span>
+<span><span class="co">## site, depth_m, successful_count, successful_length, successful_habitat_forward,</span></span>
+<span><span class="co">## successful_habitat_backward, marine_region)`</span></span></code></pre>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">length_species_not_in_list</span><span class="op">)</span>, <span class="st">"species not in chosen life history list"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 12 species not in chosen life history list</span></span></code></pre>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">length_species_not_in_list</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 12</span></span>
 <span><span class="co">## Columns: 4</span></span>
@@ -1280,7 +1263,7 @@ you see fit. If you believe the size limits for a particular species is
 incorrect you fill out the feedback form on the <a href="https://marine-ecology.shinyapps.io/CheckEM/" class="external-link">CheckEM</a> web
 based app (see tab <em>Edit maximum lengths</em>) to supply a new
 maximum size limit.</p>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">incorrect_lengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">complete_length</span>, <span class="fu"><a href="../../reference/create_min_max.html">create_min_max</a></span><span class="op">(</span><span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span>, minimum <span class="op">=</span> <span class="fl">0.15</span>, maximum <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">length_mm</span> <span class="op">&lt;</span> <span class="va">min_length_mm</span> <span class="op">|</span> <span class="va">length_mm</span> <span class="op">&gt;</span> <span class="va">max_length_mm</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>reason <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">length_mm</span> <span class="op">&lt;</span> <span class="va">min_length_mm</span>, <span class="st">"too small"</span>, <span class="st">"too big"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1292,7 +1275,7 @@ maximum size limit.</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(genus)`</span></span>
 <span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span>
 <span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span></code></pre>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">too_small</span> <span class="op">&lt;-</span> <span class="va">incorrect_lengths</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">reason</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"too small"</span><span class="op">)</span></span>
 <span></span>
@@ -1301,7 +1284,7 @@ maximum size limit.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">too_small</span><span class="op">)</span>, <span class="st">"lengths are too small"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 183 lengths are too small</span></span></code></pre>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">too_small</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 183</span></span>
 <span><span class="co">## Columns: 11</span></span>
@@ -1316,10 +1299,10 @@ maximum size limit.</p>
 <span><span class="co">## $ reason            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "too small", "too small", "too small", "too small", …</span></span>
 <span><span class="co">## $ difference        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 11.5762633, 48.5411000, 23.3112300, 31.3004700, 94.6…</span></span>
 <span><span class="co">## $ percent_of_fb_max <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 11.100711, 10.587173, 12.880797, 12.154503, 6.395506…</span></span></code></pre>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">too_big</span><span class="op">)</span>, <span class="st">"lengths are too big"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 428 lengths are too big</span></span></code></pre>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">too_big</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 428</span></span>
 <span><span class="co">## Columns: 11</span></span>
@@ -1341,7 +1324,7 @@ only)<a class="anchor" aria-label="anchor" href="#number-of-3d-points-and-length
 </h3>
 <p>In this check you can set the RMS limit, and then identify any
 measurements that have a larger RMS.</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rms_limit</span> <span class="op">&lt;-</span> <span class="fl">20</span> <span class="co"># in mm</span></span>
 <span></span>
 <span><span class="va">over_rms</span> <span class="op">&lt;-</span> <span class="va">complete_length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1349,10 +1332,10 @@ measurements that have a larger RMS.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">over_rms</span><span class="op">)</span>, <span class="st">"lengths over RMS limit"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 lengths over RMS limit</span></span></code></pre>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">over_rms</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
-<span><span class="co">## Columns: 22</span></span>
+<span><span class="co">## Columns: 21</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1363,6 +1346,7 @@ measurements that have a larger RMS.</p>
 <span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ rms                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1371,8 +1355,6 @@ measurements that have a larger RMS.</p>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
@@ -1382,7 +1364,7 @@ only)<a class="anchor" aria-label="anchor" href="#number-of-length-measurements-
 </h3>
 <p>In this check you can set the precision limit, and then identify any
 measurements that have a larger precision.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">precision_limit</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># in %</span></span>
 <span></span>
 <span><span class="va">over_precision</span> <span class="op">&lt;-</span> <span class="va">complete_length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1390,10 +1372,10 @@ measurements that have a larger precision.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">over_precision</span><span class="op">)</span>, <span class="st">"lengths over precision limit"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 430 lengths over precision limit</span></span></code></pre>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">over_precision</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 430</span></span>
-<span><span class="co">## Columns: 22</span></span>
+<span><span class="co">## Columns: 21</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05…</span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1…</span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae", "Carangidae", "Carangidae", …</span></span>
@@ -1404,6 +1386,7 @@ measurements that have a larger precision.</p>
 <span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3775.308, 3356.762, 3562.630, 3514.671, 31…</span></span>
 <span><span class="co">## $ rms                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 11.10507, 16.32680, 15.62525, 11.23263, 11…</span></span>
 <span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 21.13063, 13.59407, 18.23430, 16.22170, 15…</span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05-22T10:03:24+08:00", "2022-05-22T1…</span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
@@ -1412,8 +1395,6 @@ measurements that have a larger precision.</p>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …</span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "National Park Zone (IUCN II)", "National …</span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take"…</span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-west", …</span></span>
 <span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae Abalistes filamentosus", "Cara…</span></span></code></pre>
 </div>
@@ -1423,7 +1404,7 @@ only)<a class="anchor" aria-label="anchor" href="#number-of-3d-points-and-length
 </h3>
 <p>In this check you can set the range limit, and then identify any
 measurements that have a larger range.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">range_limit</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># in metres</span></span>
 <span></span>
 <span><span class="va">over_range</span> <span class="op">&lt;-</span> <span class="va">complete_length</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1431,10 +1412,10 @@ measurements that have a larger range.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">over_range</span><span class="op">)</span>, <span class="st">"lengths over range limit"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 lengths over range limit</span></span></code></pre>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">over_range</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
-<span><span class="co">## Columns: 22</span></span>
+<span><span class="co">## Columns: 21</span></span>
 <span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ family                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1445,6 +1426,7 @@ measurements that have a larger range.</p>
 <span><span class="co">## $ range                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ rms                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ precision                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
+<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1453,8 +1435,6 @@ measurements that have a larger range.</p>
 <span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ zone_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">## $ status                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ marine_region               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ scientific                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
@@ -1472,12 +1452,12 @@ measurements<a class="anchor" aria-label="anchor" href="#samples-where-the-maxn-
 <h2 id="save-the-checked-data">Save the checked data<a class="anchor" aria-label="anchor" href="#save-the-checked-data"></a>
 </h2>
 <p>Save MaxN as an R data file.</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">complete_count</span>,</span>
 <span>          file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>,</span>
 <span>                       <span class="va">name</span>, <span class="st">"_complete-count.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Save lengths as an R data file.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">complete_length</span>,</span>
 <span>          file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/staging/"</span>,</span>
 <span>                       <span class="va">name</span>, <span class="st">"_complete-length.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>

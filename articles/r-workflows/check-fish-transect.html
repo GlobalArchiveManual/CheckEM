@@ -163,7 +163,7 @@ chunks of code and simply read in the metadata (see below).</p>
 <span><span class="co"># TODO - add biomass</span></span>
 <span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/read_metadata.html">read_metadata</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/DOV example/raw/"</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"DOVs"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># Change here to "DOVs"</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>, <span class="va">site</span>, <span class="va">depth_m</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">status</span>, <span class="va">longitude_dd</span>, <span class="va">latitude_dd</span>, <span class="va">date_time</span>, <span class="va">location</span>, <span class="va">site</span>, <span class="va">depth_m</span>, <span class="va">successful_count</span>, <span class="va">successful_length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## reading metadata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/DOV example/raw//2017-04_Marmion.MP.Monitoring_stereoDOVs_Metadata.csv</span></span></code></pre>
 <pre><code><span><span class="co">## the date_time column is missing from: /home/runner/work/CheckEM/CheckEM/r-workflows/data/DOV example/raw//2017-04_Marmion.MP.Monitoring_stereoDOVs_Metadata.csv. Creating column now....</span></span></code></pre>
@@ -178,9 +178,10 @@ chunks of code and simply read in the metadata (see below).</p>
 <span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span>
 <span><span class="co">## Joining with `by = join_by(date, timezone)`</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 2</span></span>
-<span><span class="co">## Columns: 10</span></span>
+<span><span class="co">## Columns: 11</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04_Marmion.MP.Monitoring_stereoDOVs", "2017-04…</span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3 Mile-01", "BP_SZ_20170428_DOV-T1"</span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Fished", "No-take"</span></span>
 <span><span class="co">## $ longitude_dd      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "115.67861", "115.6915"</span></span>
 <span><span class="co">## $ latitude_dd       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "-31.78333", "-32.3643"</span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04-01T11:00:00+08:00", "2017-04-28T11:30:00+08…</span></span>
@@ -208,7 +209,6 @@ available for your study area.</p>
 <h4 id="note-you-should-only-use-this-code-if-the-status-column-is-not-filled-out">NOTE: You should only use this code if the Status column is not
 filled out<a class="anchor" aria-label="anchor" href="#note-you-should-only-use-this-code-if-the-status-column-is-not-filled-out"></a>
 </h4>
-<!-- # TODO Brooke - to make this work if does not overlap with any marine parks -->
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marine_parks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">geometry</span>, <span class="va">ZONE_TYPE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -225,13 +225,14 @@ filled out<a class="anchor" aria-label="anchor" href="#note-you-should-only-use-
 <code class="sourceCode R"><span><span class="va">metadata_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">metadata</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"longitude_dd"</span>, <span class="st">"latitude_dd"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># metadata &lt;- metadata_sf %&gt;%</span></span>
-<span><span class="co">#   st_intersection(marine_parks) %&gt;%</span></span>
+<span><span class="co">#   st_join(marine_parks) %&gt;%</span></span>
 <span><span class="co">#   bind_cols(st_coordinates(.)) %&gt;%</span></span>
 <span><span class="co">#   as.data.frame() %&gt;%</span></span>
 <span><span class="co">#   dplyr::select(-c(geometry)) %&gt;%</span></span>
 <span><span class="co">#   dplyr::rename(longitude_dd = X, latitude_dd = Y) %&gt;%</span></span>
 <span><span class="co">#   dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),</span></span>
 <span><span class="co">#                                 "No-take", "Fished")) %&gt;%</span></span>
+<span><span class="co">#   tidyr::replace_na(list(status = "Fished")) %&gt;%</span></span>
 <span><span class="co">#   clean_names() %&gt;%</span></span>
 <span><span class="co">#   dplyr::glimpse()</span></span></code></pre></div>
 </div>
@@ -257,9 +258,10 @@ have not been observed in that marine region before.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 2</span></span>
-<span><span class="co">## Columns: 9</span></span>
+<span><span class="co">## Columns: 10</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04_Marmion.MP.Monitoring_stereoDOVs", "2017-04…</span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3 Mile-01", "BP_SZ_20170428_DOV-T1"</span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Fished", "No-take"</span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04-01T11:00:00+08:00", "2017-04-28T11:30:00+08…</span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Marmion Marine Park", "Shoalwater Islands"</span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3 Mile", "Becher Point SZ 1"</span></span>
@@ -420,7 +422,7 @@ with the same campaignid (look out for different separators e.g. ‘-’,
 <span>  <span class="co"># dplyr::rename(length_mm = length) %&gt;%</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 27</span></span>
-<span><span class="co">## Columns: 43</span></span>
+<span><span class="co">## Columns: 44</span></span>
 <span><span class="co">## $ opcode            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BP_SZ_20170428_DOV", "BP_SZ_20170428_DOV", "BP_SZ_2…</span></span>
 <span><span class="co">## $ imageptpair       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3", "4", "5", "6", "7", "8", "11", "12", "14", "19"…</span></span>
 <span><span class="co">## $ filenameleft      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Becher Point SZ_20170428_LEFT110.avi", "Becher Poin…</span></span>
@@ -457,6 +459,7 @@ with the same campaignid (look out for different separators e.g. ‘-’,
 <span><span class="co">## $ midy              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 80.6…</span></span>
 <span><span class="co">## $ midz              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, -297…</span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BP_SZ_20170428_DOV-T1", "BP_SZ_20170428_DOV-T1", "B…</span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take", "No-take", "No-take", "No-take…</span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04-28T11:30:00+08:00", "2017-04-28T11:30:00+08…</span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Shoalwater Islands", "Shoalwater Islands", "Shoalwa…</span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Becher Point SZ 1", "Becher Point SZ 1", "Becher Po…</span></span>
@@ -489,7 +492,7 @@ gen_length dataframe with length = NA (like a 3D point in EM data)</p>
 <pre><code><span><span class="co">## reading length file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/DOV example/raw//2017-04_Marmion.MP.Monitoring_stereoDOVs_Length.csv</span></span></code></pre>
 <pre><code><span><span class="co">## file is a csv</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 47</span></span>
-<span><span class="co">## Columns: 19</span></span>
+<span><span class="co">## Columns: 20</span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3 Mile-01", "3 Mile-01", "3 Mile-01", "3 Mile-01", …</span></span>
 <span><span class="co">## $ family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Labridae", "Labridae", "Labridae", "Labridae", "Lab…</span></span>
 <span><span class="co">## $ genus             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Austrolabrus", "Coris", "Coris", "Coris", "Coris", …</span></span>
@@ -502,6 +505,7 @@ gen_length dataframe with length = NA (like a 3D point in EM data)</p>
 <span><span class="co">## $ range             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">## $ rms               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">## $ precision         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Fished", "Fished", "Fished", "Fished", "Fished", "F…</span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04-01T11:00:00+08:00", "2017-04-01T11:00:00+08…</span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Marmion Marine Park", "Marmion Marine Park", "Marmi…</span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3 Mile", "3 Mile", "3 Mile", "3 Mile", "3 Mile", "3…</span></span>
@@ -605,11 +609,11 @@ final data set will have a row for each species in every sample
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>length_mm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, date_time, location, site,</span></span>
-<span><span class="co">## depth_m, successful_count, successful_length, marine_region)`</span></span>
+<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, status, date_time, location,</span></span>
+<span><span class="co">## site, depth_m, successful_count, successful_length, marine_region)`</span></span>
 <span><span class="co">## Joining with `by = join_by(campaignid, sample)`</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 113</span></span>
-<span><span class="co">## Columns: 17</span></span>
+<span><span class="co">## Columns: 18</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04_Marmion.MP.Monitoring_stereoDOVs", "2017-04…</span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3 Mile-01", "3 Mile-01", "3 Mile-01", "3 Mile-01", …</span></span>
 <span><span class="co">## $ family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Blenniidae", "Kyphosidae", "Labridae", "Labridae", …</span></span>
@@ -620,6 +624,7 @@ final data set will have a row for each species in every sample
 <span><span class="co">## $ range             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">## $ rms               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
 <span><span class="co">## $ precision         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Fished", "Fished", "Fished", "Fished", "Fished", "F…</span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04-01T11:00:00+08:00", "2017-04-01T11:00:00+08…</span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Marmion Marine Park", "Marmion Marine Park", "Marmi…</span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3 Mile", "3 Mile", "3 Mile", "3 Mile", "3 Mile", "3…</span></span>
@@ -881,7 +886,7 @@ should double check that no fish are accidentally missing a number.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">lengths_without_number</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
-<span><span class="co">## Columns: 43</span></span>
+<span><span class="co">## Columns: 44</span></span>
 <span><span class="co">## $ opcode            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ imageptpair       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ filenameleft      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -918,6 +923,7 @@ should double check that no fish are accidentally missing a number.</p>
 <span><span class="co">## $ midy              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ midz              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1087,8 +1093,8 @@ and which list it should be added to (Global or Australia).</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"opcode"</span>, <span class="st">"period"</span><span class="op">)</span><span class="op">)</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, date_time, location, site,</span></span>
-<span><span class="co">## depth_m, successful_count, successful_length, marine_region)`</span></span></code></pre>
+<pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, status, date_time, location,</span></span>
+<span><span class="co">## site, depth_m, successful_count, successful_length, marine_region)`</span></span></code></pre>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">length_species_not_in_list</span><span class="op">)</span>, <span class="st">"species not in chosen life history list"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 species not in chosen life history list</span></span></code></pre>
@@ -1193,7 +1199,7 @@ measurements that have a larger RMS.</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">over_rms</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
-<span><span class="co">## Columns: 18</span></span>
+<span><span class="co">## Columns: 19</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1204,6 +1210,7 @@ measurements that have a larger RMS.</p>
 <span><span class="co">## $ range             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ rms               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ precision         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1232,7 +1239,7 @@ measurements that have a larger precision.</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">over_precision</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 2</span></span>
-<span><span class="co">## Columns: 18</span></span>
+<span><span class="co">## Columns: 19</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04_Shoalwater.MP.Monitoring_stereoDOVs", "2017…</span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BP_SZ_20170428_DOV-T1", "BP_SZ_20170428_DOV-T1"</span></span>
 <span><span class="co">## $ family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Kyphosidae", "Kyphosidae"</span></span>
@@ -1243,6 +1250,7 @@ measurements that have a larger precision.</p>
 <span><span class="co">## $ range             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4077.000, 4166.826</span></span>
 <span><span class="co">## $ rms               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 12.28661, 10.75454</span></span>
 <span><span class="co">## $ precision         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 19.80021, 10.31061</span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take", "No-take"</span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04-28T11:30:00+08:00", "2017-04-28T11:30:00+08…</span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Shoalwater Islands", "Shoalwater Islands"</span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Becher Point SZ 1", "Becher Point SZ 1"</span></span>
@@ -1269,7 +1277,7 @@ measurements that have a larger range.</p>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">over_range</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
-<span><span class="co">## Columns: 18</span></span>
+<span><span class="co">## Columns: 19</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1280,6 +1288,7 @@ measurements that have a larger range.</p>
 <span><span class="co">## $ range             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ rms               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ precision         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1315,7 +1324,7 @@ any measurements that are outside that transect.</p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">length_outside_transect</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 0</span></span>
-<span><span class="co">## Columns: 45</span></span>
+<span><span class="co">## Columns: 46</span></span>
 <span><span class="co">## $ opcode            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ imageptpair       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ filenameleft      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -1352,6 +1361,7 @@ any measurements that are outside that transect.</p>
 <span><span class="co">## $ midy              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ midz              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span></span>
 <span><span class="co">## $ sample            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ status            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ date_time         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ location          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">## $ site              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
