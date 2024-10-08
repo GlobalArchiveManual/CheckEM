@@ -74,7 +74,7 @@ If you have already completed this step while checking your habitat data, then y
 # TODO - add biomass
 
 metadata <- read_metadata(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length) %>%
+  dplyr::select(campaignid, sample, status, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length) %>%
   dplyr::glimpse()
 ```
 
@@ -93,8 +93,6 @@ You may change this shape file to any suitable data set that is available for yo
 
 ### NOTE: You should only use this code if the Status column is not filled out
 
-<!-- # TODO Brooke - to make this work if does not overlap with any marine parks -->
-
 ```{r parks}
 marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
   dplyr::select(geometry, ZONE_TYPE) %>%
@@ -104,13 +102,14 @@ marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collabor
 metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
 
 # metadata <- metadata_sf %>%
-#   st_intersection(marine_parks) %>%
+#   st_join(marine_parks) %>%
 #   bind_cols(st_coordinates(.)) %>%
 #   as.data.frame() %>%
 #   dplyr::select(-c(geometry)) %>%
 #   dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
 #   dplyr::mutate(status = if_else(str_detect(ZONE_TYPE, "National|Sanctuary"),
 #                                 "No-take", "Fished")) %>%
+#   tidyr::replace_na(list(status = "Fished")) %>%
 #   clean_names() %>%
 #   dplyr::glimpse()
 ```
