@@ -1137,16 +1137,16 @@ about the species flagged by this check.</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, marine_region)`</span></span></code></pre>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">count_species_not_observed_region</span><span class="op">)</span>, <span class="st">"species not observed in the region before"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 8 species not observed in the region before</span></span></code></pre>
+<pre><code><span><span class="co">## 0 species not observed in the region before</span></span></code></pre>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">count_species_not_observed_region</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 8</span></span>
+<pre><code><span><span class="co">## Rows: 0</span></span>
 <span><span class="co">## Columns: 5</span></span>
-<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "202…</span></span>
-<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae", "Malacanthidae", "Labrid…</span></span>
-<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abalistes", "Malacanthus", "Oxycheili…</span></span>
-<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "filamentosus", "latovittatus", "orien…</span></span>
-<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-wes…</span></span></code></pre>
+<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="species-out-of-range-in-the-length-data">Species out of range in the length data<a class="anchor" aria-label="anchor" href="#species-out-of-range-in-the-length-data"></a>
@@ -1165,16 +1165,16 @@ about the species flagged by this check.</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, marine_region)`</span></span></code></pre>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span>, <span class="st">"species not observed in the region before"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 8 species not observed in the region before</span></span></code></pre>
+<pre><code><span><span class="co">## 0 species not observed in the region before</span></span></code></pre>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 8</span></span>
+<pre><code><span><span class="co">## Rows: 0</span></span>
 <span><span class="co">## Columns: 5</span></span>
-<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "202…</span></span>
-<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae", "Malacanthidae", "Labrid…</span></span>
-<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abalistes", "Malacanthus", "Oxycheili…</span></span>
-<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "filamentosus", "latovittatus", "orien…</span></span>
-<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west", "North-west", "North-wes…</span></span></code></pre>
+<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -1283,40 +1283,40 @@ maximum size limit.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">reason</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"too big"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">too_small</span><span class="op">)</span>, <span class="st">"lengths are too small"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 183 lengths are too small</span></span></code></pre>
+<pre><code><span><span class="co">## 184 lengths are too small</span></span></code></pre>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">too_small</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 183</span></span>
+<pre><code><span><span class="co">## Rows: 184</span></span>
 <span><span class="co">## Columns: 11</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05_PtCloates…</span></span>
 <span><span class="co">## $ family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Monacanthidae", "Echeneidae", "Echeneidae", "Echene…</span></span>
 <span><span class="co">## $ genus             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Unknown", "Echeneis", "Echeneis", "Echeneis", "Eche…</span></span>
 <span><span class="co">## $ species           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "spp", "naucrates", "naucrates", "naucrates", "naucr…</span></span>
 <span><span class="co">## $ length_mm         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 32.95594, 116.45890, 141.68877, 133.69953, 70.35057,…</span></span>
-<span><span class="co">## $ min_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 44.53220, 165.00000, 165.00000, 165.00000, 165.00000…</span></span>
-<span><span class="co">## $ max_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 252.3492, 935.0000, 935.0000, 935.0000, 935.0000, 38…</span></span>
-<span><span class="co">## $ length_max_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 296.8814, 1100.0000, 1100.0000, 1100.0000, 1100.0000…</span></span>
+<span><span class="co">## $ min_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 44.98729, 165.00000, 165.00000, 165.00000, 165.00000…</span></span>
+<span><span class="co">## $ max_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 254.9280, 935.0000, 935.0000, 935.0000, 935.0000, 38…</span></span>
+<span><span class="co">## $ length_max_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 299.9153, 1100.0000, 1100.0000, 1100.0000, 1100.0000…</span></span>
 <span><span class="co">## $ reason            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "too small", "too small", "too small", "too small", …</span></span>
-<span><span class="co">## $ difference        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 11.5762633, 48.5411000, 23.3112300, 31.3004700, 94.6…</span></span>
-<span><span class="co">## $ percent_of_fb_max <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 11.100711, 10.587173, 12.880797, 12.154503, 6.395506…</span></span></code></pre>
+<span><span class="co">## $ difference        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 12.0313480, 48.5411000, 23.3112300, 31.3004700, 94.6…</span></span>
+<span><span class="co">## $ percent_of_fb_max <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 10.988417, 10.587173, 12.880797, 12.154503, 6.395506…</span></span></code></pre>
 <div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">too_big</span><span class="op">)</span>, <span class="st">"lengths are too big"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 428 lengths are too big</span></span></code></pre>
+<pre><code><span><span class="co">## 381 lengths are too big</span></span></code></pre>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">too_big</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 428</span></span>
+<pre><code><span><span class="co">## Rows: 381</span></span>
 <span><span class="co">## Columns: 11</span></span>
 <span><span class="co">## $ campaignid        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS", "2022-05_PtCloates…</span></span>
 <span><span class="co">## $ family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae", "Balistidae", "Balistidae", "Lethrinid…</span></span>
 <span><span class="co">## $ genus             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abalistes", "Abalistes", "Abalistes", "Gymnocranius…</span></span>
 <span><span class="co">## $ species           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "filamentosus", "filamentosus", "filamentosus", "eua…</span></span>
 <span><span class="co">## $ length_mm         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 336.7789, 324.9078, 281.1703, 404.3352, 428.4275, 34…</span></span>
-<span><span class="co">## $ min_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 48.75, 48.75, 48.75, 67.50, 67.50, 48.75, 195.00, 19…</span></span>
-<span><span class="co">## $ max_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 276.25, 276.25, 276.25, 382.50, 382.50, 276.25, 1105…</span></span>
-<span><span class="co">## $ length_max_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 325, 325, 325, 450, 450, 325, 1300, 1300, 450, 450, …</span></span>
+<span><span class="co">## $ min_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 49.5, 49.5, 49.5, 67.5, 67.5, 49.5, 195.0, 195.0, 67…</span></span>
+<span><span class="co">## $ max_length_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 280.5, 280.5, 280.5, 382.5, 382.5, 280.5, 1105.0, 11…</span></span>
+<span><span class="co">## $ length_max_mm     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 330, 330, 330, 450, 450, 330, 1300, 1300, 450, 450, …</span></span>
 <span><span class="co">## $ reason            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "too big", "too big", "too big", "too big", "too big…</span></span>
-<span><span class="co">## $ difference        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 60.52888, 48.65775, 4.92035, 21.83520, 45.92747, 65.…</span></span>
-<span><span class="co">## $ percent_of_fb_max <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 103.62427, 99.97162, 86.51395, 89.85227, 95.20610, 1…</span></span></code></pre>
+<span><span class="co">## $ difference        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 56.27888, 44.40775, 0.67035, 21.83520, 45.92747, 61.…</span></span>
+<span><span class="co">## $ percent_of_fb_max <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 102.05421, 98.45689, 85.20314, 89.85227, 95.20610, 1…</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="number-of-3d-points-and-length-measurements-over-the-rms-limit-em-only">Number of 3D points and length measurements over the RMS limit (EM
