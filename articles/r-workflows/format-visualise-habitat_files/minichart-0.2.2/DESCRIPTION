@@ -34,10 +34,10 @@ Author: Veronique Bachelier [aut, cre],
 Maintainer: Veronique Bachelier <veronique.bachelier@rte-france.com>
 Repository: RSPM
 Date/Publication: 2021-05-11 09:20:10 UTC
-Built: R 4.4.0; ; 2024-04-25 01:42:29 UTC; unix
+Built: R 4.4.0; ; 2024-04-26 05:11:48 UTC; unix
 RemoteType: standard
 RemotePkgRef: leaflet.minicharts
 RemoteRef: leaflet.minicharts
-RemoteRepos: https://packagemanager.posit.co/cran/__linux__/jammy/latest
-RemotePkgPlatform: x86_64-pc-linux-gnu-ubuntu-22.04
+RemoteRepos: https://packagemanager.posit.co/cran/__linux__/noble/latest
+RemotePkgPlatform: x86_64-pc-linux-gnu-ubuntu-24.04
 RemoteSha: 0.6.2
