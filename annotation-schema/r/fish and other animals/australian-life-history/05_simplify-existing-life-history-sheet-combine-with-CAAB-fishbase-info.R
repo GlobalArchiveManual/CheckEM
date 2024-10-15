@@ -45,7 +45,8 @@ new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
 foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_maximum-sizes.RDS") %>%
   clean_names() %>%
   dplyr::rename(foa_min_depth = min_depth, foa_max_depth = max_depth, type_of_length_measure = length_type) %>%
-  dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth, type_of_length_measure)
+  dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth, type_of_length_measure) %>%
+  dplyr::rename(caab_code = caab)
 
 # Extra marine regions ----
 extra_marine_regions <- "https://docs.google.com/spreadsheets/d/10D3s-pB-GZJ6xcp93wOx2taJCa5HXqmljcVscaJQmYA/edit?resourcekey#gid=2055010068"
@@ -149,7 +150,7 @@ test <- caab_regions %>%
   dplyr::filter(n > 1)
 
 test <- caab_regions %>%
-  dplyr::group_by(genus, species) %>%
+  dplyr::group_by(family,genus, species) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
@@ -166,7 +167,8 @@ fishbase <- readRDS("annotation-schema/data/staging/australia_fish_fishbase-info
   dplyr::mutate(caab_scientific = if_else((caab_code %in% "37361005"), "Microcanthus joyceae", caab_scientific)) %>%
   distinct() %>%
   dplyr::mutate(fb_trophic_level = as.numeric(fb_trophic_level)) %>%
-  dplyr::filter(!caab_scientific %in% "Rhina ancylostoma")
+  dplyr::filter(!caab_scientific %in% "Rhina ancylostoma") %>%
+  dplyr::mutate(fb_trophic_level_se = as.numeric(fb_trophic_level_se))
 
 test <- fishbase %>%
   dplyr::group_by(caab_scientific) %>%
@@ -245,7 +247,7 @@ family_trophic_maturity <- fishbase %>%
   left_join(caab_combined) %>%
   dplyr::group_by(family) %>%
   dplyr::summarise(fb_trophic_level = mean(fb_trophic_level, na.rm = TRUE), 
-                   fb_trophic_level_se = se(fb_trophic_level, na.rm = TRUE),
+                   fb_trophic_level_se = se(fb_trophic_level),
                    fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE)) %>%
   mutate_all(~ifelse(is.nan(.), NA, .)) %>%
   dplyr::mutate(species = "spp", genus = "Unknown")
@@ -280,6 +282,7 @@ animals <- readRDS("annotation-schema/data/staging/australia_animals_caab-code-a
                 ) %>%
   
   dplyr::mutate(australian_common_name = str_replace_all(.$australian_common_name, "\\[|\\]", "")) %>%
+  dplyr::rename(caab_code = caab) %>%
   glimpse()
 
 taxonomy <- bind_rows(animals, caab_combined) %>%
@@ -290,22 +293,21 @@ test <- taxonomy %>%
   filter(is.na(order))
 
 spps <- readRDS("annotation-schema/data/staging/australia_fish_caab-codes_spps.RDS") %>%
-  dplyr::filter(!caab %in% c(unique(animals$caab))) %>%
-  dplyr::filter(!caab %in% c(unique(caab_combined$caab))) %>%
-  dplyr::filter(!caab %in% c(unique(fishbase$caab))) %>%
+  dplyr::filter(!caab %in% c(unique(animals$caab_code))) %>%
+  dplyr::filter(!caab %in% c(unique(caab_combined$caab_code))) %>%
+  dplyr::filter(!caab %in% c(unique(fishbase$caab_code))) %>%
   dplyr::mutate(australian_source = "CAAB",
                 global_source = "WoRMS"#,
                 #local_source = "Not Available"
-  ) 
-
-
+  ) %>%
+  dplyr::rename(caab_code = caab)
 
 blank_class <- spps %>%
   filter(is.na(class)) %>%
   distinct(family)
 
 test <- animals %>%
-  dplyr::group_by(caab) %>%
+  dplyr::group_by(caab_code) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
@@ -315,7 +317,7 @@ test <- animals %>%
   dplyr::filter(n > 1)
 
 test <- spps %>%
-  dplyr::group_by(caab) %>%
+  dplyr::group_by(caab_code) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
@@ -324,11 +326,10 @@ test <- spps %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
-
 # Make it simpler
 australia_life_history <- caab_combined %>%
   dplyr::left_join(fishbase) %>%
-  dplyr::rename(#caab = caab_code, #TODO make caab_code consistent throughout all scripts
+  dplyr::rename(#caab = caab_code, # TODO make caab_code consistent throughout all scripts
                 australian_common_name = common_name,
                 fb_code = speccode,
                 fb_length_weight_measure = length_measure, #TODO make this happen in fishbase script
@@ -338,7 +339,7 @@ australia_life_history <- caab_combined %>%
                 fb_b_ll = b_ll,
                 fb_length_max_type = fb_l_type_max,
                 fb_length_weight_source = source_level,
-                fb_length_weight_measure = length_measure)%>%
+                fb_length_weight_measure = length_measure) %>%
   
   dplyr::left_join(keep) %>%
   
@@ -445,9 +446,6 @@ australia_life_history <- caab_combined %>%
   dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(fb_length_at_maturity_cm), spp_fb_length_at_maturity_cm, fb_length_at_maturity_cm)) %>%
   dplyr::select(-c(spp_fb_trophic_level, )) %>%
   
-  
-  
-  
   dplyr::mutate(australian_source = "CAAB") %>%
   
   dplyr::select(# CAAB info
@@ -545,11 +543,11 @@ australia_life_history <- dplyr::left_join(australia_life_history, missing_regio
   mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", "))) %>%
   dplyr::select(-region_to_add) %>%
   dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", "")) %>%
-  dplyr::filter(!caab %in% c("37280000", "37384000", "37385000"))
+  dplyr::filter(!caab_code %in% c("37280000", "37384000", "37385000"))
 
 unique(australia_life_history$marine_region)
 test <- australia_life_history %>%
-  dplyr::group_by(caab) %>%
+  dplyr::group_by(caab_code) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
@@ -559,7 +557,7 @@ test <- australia_life_history %>%
   dplyr::filter(n > 1)
 
 test <- australia_life_history %>%
-  dplyr::filter(is.na(caab))
+  dplyr::filter(is.na(caab_code))
 
 test <- australia_life_history %>%
   dplyr::filter(is.na(global_region))
@@ -581,7 +579,6 @@ unique(test$family)
 australia_life_history <- australia_life_history %>%
   dplyr::filter(!is.na(class))
 
-
 test <- australia_life_history %>%
   dplyr::filter(is.na(order))
 
@@ -595,7 +592,7 @@ unique(australia_life_history$local_source)
 test <- australia_life_history %>%
   filter(!is.na(global_source))
 
-unique(australia_life_history$caab)
+unique(australia_life_history$caab_code)
 unique(australia_life_history$class)
 unique(australia_life_history$order)
 unique(australia_life_history$family)
