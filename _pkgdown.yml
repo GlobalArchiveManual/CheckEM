@@ -47,7 +47,11 @@ reference:
   - ga_api_metadata
   - ga_api_species_list
   - ga_api_benthic_list
-  # - ga_api_all_data
+- title: Investigating maximum sizes of fish
+  desc: Functions to plot and investigate size frequency and maximum sizes of fish
+  contents:
+  - plot_species_hdi
+  - hdi_table
 navbar:
   title: ~
   type: default
