@@ -20,28 +20,20 @@ plot_species_hdi <- function(species_data, max_lengths, dir) {
   scientific_name <- unique(species_data$scientific_name)
   species_length_max_mm <- max_lengths[max_lengths$scientific_name == scientific_name, "length_max_mm"]
   
-  # adjust the upper bound for outliers by incorporating skewness (through the medcouple, MC), which improves upon the traditional IQR method by accounting for asymmetry in the distribution.
-  
-  # IQR ----
-  
-  # # Calculate IQR, Q1, Q3, outliers
+  # # adjust the upper bound for outliers by incorporating skewness (through the medcouple, MC), which improves upon the traditional IQR method by accounting for asymmetry in the distribution.
+  # 
+  # # IQR ----
+  # # Calculate Q1, Q3, IQR, and Medcouple (MC)
   # Q1 <- quantile(species_data$length_mm, 0.25)
   # Q3 <- quantile(species_data$length_mm, 0.75)
   # IQR <- Q3 - Q1
-  # lower_bound <- Q1 - 1.5 * IQR
-  # upper_bound <- Q3 + 1.5 * IQR
-  
-  # Calculate Q1, Q3, IQR, and Medcouple (MC)
-  Q1 <- quantile(species_data$length_mm, 0.25)
-  Q3 <- quantile(species_data$length_mm, 0.75)
-  IQR <- Q3 - Q1
-  MC <- mc(species_data$length_mm)  # Calculate medcouple
-  
-  # Adjust the upper bound using the given formula
-  IQR_upper_bound <- Q3 + 1.5 * IQR * exp(3 * MC)
-  
-  # Traditional lower bound or modified lower bound based on MC (optional)
-  IQR_lower_bound <- Q1 - 1.5 * IQR * exp(3 * (-MC))  # Modified lower bound, depends on skewness
+  # MC <- mc(species_data$length_mm)  # Calculate medcouple
+  # 
+  # # Adjust the upper bound using the given formula
+  # IQR_upper_bound <- Q3 + 1.5 * IQR * exp(3 * MC)
+  # 
+  # # Traditional lower bound or modified lower bound based on MC (optional)
+  # IQR_lower_bound <- Q1 - 1.5 * IQR * exp(3 * (-MC))  # Modified lower bound, depends on skewness
   
   ## HDI ----
   hdi <- ggdist::median_hdci(species_data$length_mm, .width = 0.99) %>%
