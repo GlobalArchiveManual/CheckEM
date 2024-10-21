@@ -8,7 +8,7 @@
 #' @import dplyr
 #' @import tidyr
 #' @export
-complete_count <- function(count_data, metadata) {
+add_zeros_count <- function(count_data, metadata) {
   
   # Filter metadata for successful counts
   count_metadata <- metadata %>%

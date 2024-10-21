@@ -8,7 +8,7 @@
 #' @import dplyr
 #' @import tidyr
 #' @export
-complete_length <- function(length_data, metadata) {
+add_zeros_length <- function(length_data, metadata) {
   
   # Filter metadata for successful lengths
   length_metadata <- metadata %>%
