@@ -49,7 +49,7 @@ ga_api_metadata <- function(token, synthesis_id) {
     
     # Read the Feather file from the input stream
     metadata_raw <- arrow::read_feather(raw_connection) %>%
-      dplyr::mutate(coordinates = str_replace_all(.$coordinates, c("SRID=4326;POINT " = "", "[()]" = ""))) %>%
+      dplyr::mutate(coordinates = str_replace_all(.$coordinates, c("SRID=4326;POINT" = "", "[()]" = ""))) %>%
       tidyr::separate(coordinates, into = c("longitude_dd", "latitude_dd"), sep = " ") %>%
       dplyr::mutate(latitude_dd = as.numeric(latitude_dd), longitude_dd = as.numeric(longitude_dd)) %>%
       dplyr::rename(sample_url = url) %>%
