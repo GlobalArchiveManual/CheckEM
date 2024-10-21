@@ -33,6 +33,8 @@ reference:
   - expand_life_history
   - create_min_max
   - load_rds_from_github
+  - complete_count
+  - complete_length
 - title: Shiny App
   desc: Functions for shiny app
   contents: runCheckEM
