@@ -64,7 +64,7 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
     dplyr::filter(successful_count == TRUE)
   
   # Process count data into a wide format
-  count_wide <- count %>%
+  count_with_zeros <- count %>%
     dplyr::full_join(count_metadata, by = "sample_url") %>%
     dplyr::filter(successful_count == TRUE) %>%
     dplyr::select(campaignid, sample, family, genus, species, count) %>%
@@ -74,21 +74,8 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
     dplyr::summarise(count = sum(count)) %>%
     dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) %>%
     dplyr::select(campaignid, sample, scientific_name, count) %>%
-    tidyr::spread(scientific_name, count, fill = 0) 
-  
-  # Create a table of distinct families
-  count_families <- count %>%
-    dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(c(family, genus, species, scientific_name)) %>%
-    dplyr::distinct()
-  
-  # Complete count data
-  count_with_zeros <<- count_wide %>%
-    tidyr::pivot_longer(names_to = "scientific_name", values_to = "count", cols = 3:ncol(.)) %>%
-    dplyr::inner_join(count_families, by = "scientific_name") %>%
     dplyr::full_join(count_metadata, by = "sample_url") %>%
-    dplyr::filter(successful_count == TRUE)
+    dplyr::filter(successful_count == TRUE) 
   
   # Filter metadata for successful lengths
   length_metadata <- metadata %>%
