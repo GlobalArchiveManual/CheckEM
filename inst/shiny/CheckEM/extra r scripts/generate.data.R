@@ -33,7 +33,7 @@ lh.aus <- CheckEM::australia_life_history %>%
   dplyr::mutate(a = as.numeric(fb_a)) %>%
   dplyr::mutate(b = as.numeric(fb_b)) %>%
   dplyr::mutate(length_max_mm = length_max_cm * 10) %>%
-  dplyr::rename(code = caab) 
+  dplyr::rename(code = caab_code) 
 
 
 spp.lengths <- lh.aus %>%

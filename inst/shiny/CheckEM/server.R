@@ -90,10 +90,21 @@ function(input, output, session) {
   ## _______________________________________________________ ----
   synonyms <- reactive({
     
+    message("view synonyms list")
+    
     if(input$lifehistory %in% "aus"){
-      lh <- all_data$lh.aus.synonyms %>% dplyr::distinct()
+      
+      lh <- all_data$lh.aus.synonyms %>% 
+        dplyr::distinct() %>% 
+        dplyr::glimpse()
+      
     } else {
-      lh <- all_data$lh.glo.synonyms %>% dplyr::distinct()
+      
+      lh <- all_data$lh.glo.synonyms %>% 
+        dplyr::distinct() %>% 
+        dplyr::select(family_correct, genus_correct, species_correct, family, genus, species) %>% 
+        dplyr::glimpse() 
+      
     }
     
     lh
@@ -2229,29 +2240,30 @@ function(input, output, session) {
     Sys.sleep(2)
     shinyjs::runjs("swal.close();")
     
-    #message("viewing metadata")
+    message("viewing final metadata")
     metadata <- metadata %>%
       tibble::add_column(!!!metadata.cols[!names(metadata.cols) %in% names(.)]) %>%
       dplyr::filter(successful_count %in% c("Yes", "Y", "y", "yes")) %>%
       dplyr::mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(date_time = as.character(date_time)) %>% 
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, observer_count, observer_length, inclusion_probability, visibility_m, dplyr::any_of(c("successful_habitat_forward", "successful_habitat_backward")))  %>%
-      dplyr::distinct() #%>%
-    #glimpse()
+      dplyr::distinct() %>%
+    glimpse()
   })  
   
   ## ► Find nearest marine regions add commonwealth and state zoning ----
   metadata.regions <- reactive({
     metadata <- metadata()
     
-    metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
+    message("view metadata_sf")
+    metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326) %>% glimpse()
     
     regions <- marine.regions()
     regions <- st_as_sf(regions, crs = st_crs(4326))
     regions <- st_transform(regions, 4326) %>%
       dplyr::select(REGION)
     
-    #message("view nearest marine regions")
+    message("view nearest marine regions")
     
     metadata.2 <- st_join(metadata_sf, regions, join = st_nearest_feature) %>%
       dplyr::rename(marine_region = REGION) %>%
@@ -2259,8 +2271,8 @@ function(input, output, session) {
       bind_cols(st_coordinates(.)) %>%
       as.data.frame() %>%
       dplyr::select(-c(geometry)) %>%
-      dplyr::rename(longitude_dd = X, latitude_dd = Y) #%>%
-    #glimpse()
+      dplyr::rename(longitude_dd = X, latitude_dd = Y) %>% 
+      dplyr::glimpse()
     
     
     # add in marine parks
@@ -2271,66 +2283,47 @@ function(input, output, session) {
       
       metadata.marineparks <- metadata_sf %>%
         dplyr::select(-status) %>%
-        st_intersection(all_data$marineparks) %>%
+        st_join(all_data$marineparks, left = TRUE) %>%
+        dplyr::rename(zone = ZONE_TYPE) %>%
+        dplyr::group_by(geometry) %>%
+        dplyr::summarise(zone = paste(unique(zone), collapse = ", "),
+                         status = paste(unique(status), collapse = ", ")) %>%
+        tidyr::replace_na(list(status = "Fished")) %>%
+        st_join(metadata_sf %>% dplyr::select(-status)) %>%
         bind_cols(st_coordinates(.)) %>%
         as.data.frame() %>%
         dplyr::select(-c(geometry)) %>%
-        dplyr::select(!dplyr::any_of(c("latitude_dd", "longitude_dd", "X", "Y"))) #%>%
-      # dplyr::glimpse() 
-      
-      metadata.marineparks <- metadata.marineparks %>%
-        dplyr::rename(zone = ZONE_TYPE) %>%
-        dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")),  #"latitude_dd", "longitude_dd"
-                      zone, status, IUCN) %>%
-        distinct() %>%
-        arrange(campaignid, sample, IUCN) %>%
-        dplyr::group_by(campaignid, sample) %>%
-        slice(1) %>%
-        ungroup() %>%
-        full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) %>%
-        tidyr::replace_na(list(status = "Fished")) %>%
-        dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) #%>%
-      # glimpse()
-      
-      #message("test data - for duplicates")
-      
-      # test  <- metadata.marineparks %>%
-      #   group_by(campaignid, sample) %>%
-      #   dplyr::summarise(n = n()) %>%
-      #   dplyr::filter(n>1) #%>%
-      #   #glimpse()
-      # 
-      # print("test 2")
-      # test <- metadata.marineparks %>%
-      #   # semi_join(test) %>%
-      #   dplyr::filter(sample %in% "CABOO11") %>%
-      #   glimpse()
-      
-      #message("unique")
-      # print(unique(metadata.marineparks$IUCN))
+        dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+        dplyr::full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) %>%
+        # dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
+        glimpse()
       
       
     } else {
       
-      #message("view metadata.marineparks for Global")
+      message("view metadata.marineparks for Global")
+      
+      # metadata.marineparks <- metadata_sf %>%
+      #   dplyr::select(-status) %>%
+      #   st_intersection(all_data$world_marineparks) 
+      # 
       
       metadata.marineparks <- metadata_sf %>%
         dplyr::select(-status) %>%
-        st_intersection(all_data$world_marineparks) #%>%
-      #glimpse()
-      
-      # bind_cols(st_coordinates(.)) %>%
-      # as.data.frame() %>%
-      # dplyr::select(-c(geometry)) %>%
-      # glimpse()
-      
-      
-      
-      # dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-      # tidyr::replace_na(list(status = "Fished")) %>%
-      # # dplyr::rename(zone = ZONE_TYPE) %>%
-      # # dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
-      # glimpse()
+        st_join(all_data$world_marineparks, left = TRUE) %>%
+        dplyr::filter(!status %in% "Not Reported") %>%
+        dplyr::group_by(geometry) %>%
+        dplyr::summarise(status = paste(unique(status), collapse = ", "),
+                         zone = paste(unique(zone), collapse = ", ")) %>%
+        tidyr::replace_na(list(status = "Fished")) %>%
+        st_join(metadata_sf %>% dplyr::select(-status)) %>%
+        bind_cols(st_coordinates(.)) %>%
+        as.data.frame() %>%
+        dplyr::select(-c(geometry)) %>%
+        dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+        dplyr::full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) %>%
+        # dplyr::mutate(status = fct_recode(status, "No-take" = "No-take", "Fished" = "Fished")) %>%
+        dplyr::glimpse()
       
     }
     
@@ -6565,6 +6558,9 @@ function(input, output, session) {
   
   # ► Combine lengths and 3d points ----
   length3dpoints.t <- reactive({
+    
+    message("view length 3D points from Transect data")
+    
     length3dpoints <- length() %>%
       plyr::rbind.fill(threedpoints.t()) %>%
       mutate(family = ifelse(family%in%c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
@@ -6575,7 +6571,11 @@ function(input, output, session) {
       dplyr::select(-c(time)) %>%
       dplyr::mutate(sample = as.character(sample)) %>%
       dplyr::left_join(metadata.regions()) %>%
-      filter(!family %in% c("Unknown"))
+      filter(!family %in% c("Unknown")) %>%
+      dplyr::mutate(family = as.character(family),
+                    genus = as.character(genus),
+                    species = as.character(species)) %>%
+      dplyr::glimpse()
   })
   
   length3dpoints.clean.t <- reactive({
