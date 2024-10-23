@@ -8639,13 +8639,13 @@ function(input, output, session) {
   
   hab.annotations <- reactive({
     hab.points() %>%
-      dplyr::filter(relief_annotated %in% "no") %>%
+      dplyr::filter(relief_annotated %in% c("no", "No", "N", "n")) %>%
       dplyr::select(campaignid, sample, id, starts_with("level"), scientific, any_of(c("caab_code")))
   })
   
   relief.annotations <- reactive({
     hab.points() %>%
-      dplyr::filter(relief_annotated %in% "yes") %>%
+      dplyr::filter(relief_annotated %in% c("yes", "Yes", "Y", "y")) %>%
       dplyr::select(campaignid, sample, id, starts_with("level"), scientific, any_of(c("caab_code")))
   })
   
