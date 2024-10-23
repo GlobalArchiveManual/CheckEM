@@ -8535,7 +8535,7 @@ function(input, output, session) {
         message("habitat files detected")
         
         files <- input$folderdir %>%
-          dplyr::filter(grepl("_Dot Point Measurements.txt", name)) #%>% glimpse()
+          dplyr::filter(grepl("_Dot Point Measurements.txt", name)) %>% glimpse()
         
         points <- data.frame()
         
@@ -8550,8 +8550,8 @@ function(input, output, session) {
         message("habitat points")
         
         points <- points %>%
-          clean_names() #%>%
-        #glimpse()
+          clean_names()%>%
+        glimpse()
         
         # If point method and samples are opcodes
         if(input$method == "point" & input$sample == "opcode") {
@@ -8624,8 +8624,9 @@ function(input, output, session) {
                       scientific, any_of(c("qualifiers", "caab_code")),
                       relief_annotated) %>%
         dplyr::mutate(id = 1:nrow(.)) %>%
-        dplyr::left_join(schema) #%>%
-      #dplyr::glimpse()
+        dplyr::select(-any_of(c("caab_code"))) %>%
+        dplyr::left_join(schema) %>%
+      dplyr::glimpse()
       
       
     }
@@ -8972,8 +8973,7 @@ function(input, output, session) {
       replace_na(list(number = 0)) %>% # we add in zeros
       dplyr::left_join(metadata.regions()) %>%
       # filter(!is.na(level_2)) %>%
-      dplyr::left_join(schema) #%>%
-    #dplyr::glimpse()
+      dplyr::left_join(schema) %>% dplyr::glimpse()
     
   })
   
@@ -9002,8 +9002,7 @@ function(input, output, session) {
       # dplyr::glimpse() %>%
       dplyr::left_join(metadata.regions()) %>%
       dplyr::left_join(schema) %>%
-      dplyr::filter(!is.na(caab_code)) #%>%
-    #dplyr::glimpse()
+      dplyr::filter(!is.na(caab_code)) %>% dplyr::glimpse()
     
     message("end of tidy habitat")
     tidy.habitat
@@ -9443,16 +9442,21 @@ function(input, output, session) {
           
           for(i in unique(tidy.habitat()$campaignid)){
             
+            message("view habitat download")
+            
             dat <- tidy.habitat() %>%
               dplyr::filter(campaignid == i) %>%
-              dplyr::select(!sample)#%>% glimpse()
-            # 
+              dplyr::select(!sample) %>%
+              dplyr::glimpse()
+            
             # if(input$error.zeros.hab %in% FALSE){
             #   
             #   dat <- dat %>%
             #     dplyr::filter(number > 0)
             #   
             # }
+            
+            dat <- dat[,colSums(is.na(dat))<nrow(dat)]
             
             fileName <- paste(i, "_benthos.csv", sep = "")
             
@@ -9462,9 +9466,13 @@ function(input, output, session) {
           
           for(i in unique(tidy.relief()$campaignid)){
             
+            message("view relief download")
+            
             dat <- tidy.relief() %>%
               dplyr::filter(campaignid == i)%>%
-              dplyr::select(!sample) #%>% glimpse()
+              dplyr::select(!sample) %>% glimpse()
+            
+            dat <- dat[,colSums(is.na(dat))<nrow(dat)]
             
             # if(input$error.zeros.hab %in% FALSE){
             #   
