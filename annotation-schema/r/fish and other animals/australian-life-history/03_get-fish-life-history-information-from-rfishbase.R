@@ -101,8 +101,14 @@ info <- species(validated) %>%
   dplyr::rename(fishbase_scientific = species, 
                 fb_common_name = fbname) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
-  dplyr::filter(!fishbase_scientific %in% ("Genus Species"))
+  dplyr::filter(!fishbase_scientific %in% ("Genus Species")) %>%
+  dplyr::glimpse()
 
+not_fl <- info %>%
+  dplyr::filter(!fb_l_type_max %in% "FL") # majority are not forklength
+
+max_length_is_fl <- info %>%
+  dplyr::filter(fb_l_type_max %in% "FL") # only 104 fish species max length are givne in forklength
 
 # FB.countries and FB.Status ----
 country_dat <- country(validated) %>%
@@ -132,6 +138,163 @@ ll <- length_length(validated) %>%
   dplyr::group_by(species, type)%>%
   dplyr::summarise(all = mean(all), bll = mean(bll)) %>%
   dplyr::filter(!type %in% c("SL", "Other"))
+
+# Length 2 is the known length
+max_lengths_available <-  info %>%
+  dplyr::filter(!is.na(fb_length_max))
+
+summary(max_lengths_available)
+summary_length_type <- max_lengths_available %>%
+  dplyr::group_by(fb_l_type_max) %>%
+  dplyr::summarise(n = n())
+
+# 5087 species have a max length
+
+unique(max_lengths_available$fb_l_type_max)
+
+ll_for_max_lengths <- length_length(validated) %>%
+  clean_names() %>%
+  dplyr::select(species, length1, length2, a, b, lengthmin, lengthmax, r2, number) %>%
+  dplyr::rename(fishbase_scientific = species) %>%
+  left_join(info %>% select(fishbase_scientific, fb_length_max, fb_l_type_max)) %>%
+  glimpse()
+
+length(unique(ll_for_max_lengths$fishbase_scientific)) # 2811 species
+
+# Step 1: Identify max lengths already in FL
+max_lengths_already_fl <- info %>%
+  dplyr::filter(fb_l_type_max %in% "FL") %>%
+  dplyr::select(fishbase_scientific, fb_length_max, fb_l_type_max) %>%
+  dplyr::mutate(max_length_source = "FishBase")
+
+length(unique(max_lengths_already_fl$fishbase_scientific)) # 104 species
+  
+# Step 2: Direct conversions (TL to FL or SL to FL)
+max_lengths_conversion <- ll_for_max_lengths %>%
+  dplyr::filter(length1 == "FL") %>%
+  dplyr::mutate(conversion_possible = if_else(length2 == fb_l_type_max, TRUE, FALSE)) %>%
+  dplyr::filter(!conversion_possible %in% FALSE) %>%
+  dplyr::rename(known_length = length2,
+               unknown_length = length1) %>%
+  dplyr::mutate(fb_length_max = a + b * fb_length_max) %>%
+  dplyr::group_by(fishbase_scientific) %>%
+  dplyr::slice_max(fb_length_max, with_ties = FALSE) %>%
+  dplyr::mutate(max_length_source = "FishBase, converted to FL",
+                fb_l_type_max = "FL") %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(!fishbase_scientific %in% max_lengths_already_fl$fishbase_scientific) # don't include species where the max is actually given in forklength
+
+# Step 3: Reverse conversions (FL obtained from conversions like FL -> TL)
+max_lengths_conversion_reversed <- ll_for_max_lengths %>%
+  dplyr::filter(length2 == "FL") %>%
+  dplyr::mutate(conversion_possible = if_else(length1 == fb_l_type_max, TRUE, FALSE)) %>%
+  dplyr::filter(!conversion_possible %in% FALSE) %>%
+  dplyr::rename(known_length = length2,
+                unknown_length = length1) %>%
+  dplyr::mutate(fb_length_max = (fb_length_max - a)/b) %>%
+  dplyr::group_by(fishbase_scientific) %>%
+  dplyr::slice_max(fb_length_max, with_ties = FALSE) %>%
+  dplyr::mutate(max_length_source = "FishBase, reversed to FL",
+                fb_l_type_max = "FL") %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(!fishbase_scientific %in% max_lengths_already_fl$fishbase_scientific) %>% # don't include species where the max is actually given in forklength
+  dplyr::filter(!fishbase_scientific %in% max_lengths_conversion$fishbase_scientific) # don't include species where conversion equation was already given
+
+# Step 4: Multi-step conversions (TL -> SL, then SL -> FL)
+multi_step_conversion_1 <- ll_for_max_lengths %>%
+  filter(length1 == "SL", length2 == "TL") %>%
+  dplyr::rename(known_length = length2,
+                unknown_length = length1) %>%
+  dplyr::filter(known_length == fb_l_type_max) %>%
+  left_join(ll_for_max_lengths %>% 
+              filter(length1 == "FL", length2 == "SL") %>%
+              dplyr::select(-c(fb_length_max, fb_l_type_max)) %>%
+                              dplyr::rename(known_length = length2, unknown_length = length1),
+            by = "fishbase_scientific", suffix = c("_tl_to_sl", "_sl_to_fl")) %>%
+  mutate(intermediate_SL = a_tl_to_sl + b_tl_to_sl * fb_length_max,
+         fb_length_max_FL = a_sl_to_fl + b_sl_to_fl * intermediate_SL) %>%
+  dplyr::filter(!is.na(fb_length_max_FL)) %>%
+  group_by(fishbase_scientific) %>%
+  slice_max(fb_length_max_FL, with_ties = FALSE) %>%
+  mutate(max_length_source = "FishBase, multi-step TL->SL->FL",
+         fb_l_type_max = "FL") %>%
+  ungroup() %>%
+  filter(!fishbase_scientific %in% max_lengths_already_fl$fishbase_scientific &
+           !fishbase_scientific %in% max_lengths_conversion$fishbase_scientific &
+           !fishbase_scientific %in% max_lengths_conversion_reversed$fishbase_scientific)
+
+# Step 4: Multi-step conversions (SL -> TL, then TL -> FL)
+multi_step_conversion_2 <- ll_for_max_lengths %>%
+  filter(length1 == "TL", length2 == "SL") %>%
+  dplyr::rename(known_length = length2,
+                unknown_length = length1) %>%
+  dplyr::filter(known_length == fb_l_type_max) %>%
+  left_join(ll_for_max_lengths %>% 
+              filter(length1 == "FL", length2 == "TL") %>%
+              dplyr::select(-c(fb_length_max, fb_l_type_max)) %>%
+              dplyr::rename(known_length = length2, unknown_length = length1),
+            by = "fishbase_scientific", suffix = c("_sl_to_tl", "_tl_to_fl")) %>%
+  mutate(intermediate_TL = a_sl_to_tl + b_sl_to_tl * fb_length_max,
+         fb_length_max = a_tl_to_fl + b_tl_to_fl * intermediate_TL) %>%
+  dplyr::filter(!is.na(fb_length_max)) %>%
+  dplyr::select(fishbase_scientific, fb_length_max) %>%
+  group_by(fishbase_scientific) %>%
+  slice_max(fb_length_max, with_ties = FALSE) %>%
+  mutate(max_length_source = "FishBase, multi-step SL->TL->FL",
+         fb_l_type_max = "FL") %>%
+  ungroup() %>%
+  filter(!fishbase_scientific %in% max_lengths_already_fl$fishbase_scientific &
+           !fishbase_scientific %in% max_lengths_conversion$fishbase_scientific &
+           !fishbase_scientific %in% max_lengths_conversion_reversed$fishbase_scientific)
+
+all_max_lengths_fl <- bind_rows(max_lengths_already_fl,
+                                max_lengths_conversion,
+                                max_lengths_conversion_reversed,
+                                multi_step_conversion_2) %>%
+  dplyr::select(fishbase_scientific, fb_length_max, fb_l_type_max, max_length_source) %>%
+  dplyr::mutate(fb_length_max = as.numeric(fb_length_max)) %>%
+  glimpse()
+
+length(unique(all_max_lengths_fl$fishbase_scientific)) # 1946 species with forklength information
+
+# There are still 3152 species with forklength information missing
+# however there are some species where we could use multiple equations to get to FL
+# e.g. Abudefduf whitleyi the maximum length is given in SL, there is a and b values for SL -> TL and TL -> FL
+fl_missing <- max_lengths_available %>%
+  dplyr::filter(!fishbase_scientific %in% all_max_lengths_fl$fishbase_scientific) 
+
+# Some of these don't have any lenght-length information though e.g. Bodianus solatus
+
+fl_missing_but_has_length_length <- fl_missing %>%
+  dplyr::filter(fishbase_scientific %in% ll_for_max_lengths$fishbase_scientific) 
+# Only 880 fish that have length-length
+
+# Now check whihc ones actually have some FL calc
+length_length_to_fl <- ll_for_max_lengths %>%
+  dplyr::filter(length1 %in% "FL" | length2 %in% "FL")
+  
+fl_missing_but_has_length_length <- fl_missing %>%
+  dplyr::filter(fishbase_scientific %in% ll_for_max_lengths$fishbase_scientific) %>%
+  dplyr::filter(fishbase_scientific %in% length_length_to_fl$fishbase_scientific) 
+
+# only 427 fish species that have a/b for a FL calculation - still doesn't mean that I will be able to get them all but it is a much easier number to work with to see what I need to script
+
+
+
+test <- all_max_lengths_fl %>%
+  dplyr::group_by(fishbase_scientific) %>%
+  dplyr::summarise(n = n()) %>%
+  filter(n > 1)
+
+unique(ll_for_max_lengths$r2) %>%sort()
+
+
+# ok - so there are still a lot of 
+
+# have length length (to FL) info for 2336 species
+# 466 of these have multiple studies
+# Need a way to choose a study
+# Length type (2) = a + b × Length type (1)
 
 unique(ll$type)
 
