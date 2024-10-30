@@ -114,9 +114,9 @@ returns <code>NULL</code>.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Retrieve trophic level and standard error for a species</span></span></span>
 <span class="r-in"><span><span class="va">tl_info</span> <span class="op">&lt;-</span> <span class="fu">find_tl</span><span class="op">(</span><span class="st">"Lutjanus campechanus"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Timeout was reached: [www.fishbase.us] Operation timed out after 9911 milliseconds with 0 bytes received</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">tl_info</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                species trophic_level   se              metric</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Lutjanus campechanus           3.9 0.72 based on food items</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
