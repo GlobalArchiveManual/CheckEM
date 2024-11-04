@@ -9,6 +9,8 @@ library(openssl)
 library(CheckEM)
 library(taxize) # For IUCN
 library(rredlist)
+library(foreach)
+library(doParallel)
 
 # Use the list of Australian species created in the second script
 caab <- readRDS("annotation-schema/data/staging/australia_fish_caab-with-regions.RDS") %>%
@@ -403,33 +405,35 @@ complete_lw <- info %>%
 # Scrape trophic level ----
 # trophic_levels <- data.frame() # only use this if you want to run all fish again
 trophic_levels <- read_rds("annotation-schema/data/staging/trophic_levels.RDS")
-
-test <- as.data.frame(validated) %>%
-  filter(!validated %in% c(unique(trophic_levels$species))) %>%
-  dplyr::filter(!validated %in% c("Genus Species", NA))
-
-temp.validated <- as.data.frame(validated) %>%
-  filter(!validated %in% c(unique(trophic_levels$species))) %>%
-  dplyr::filter(!validated %in% c("Genus Species", NA)) %>%
-  pull(validated)
-
-for(species in seq(1:length(unique(temp.validated)))){
-  message(paste("getting trophic level info for:", temp.validated[species]))
-
-  try(temp_tl <- find_tl(temp.validated[species], "de"))
-  nrow(temp_tl)
-
-  if(!is.null(nrow(temp_tl))){
-    trophic_levels <- bind_rows(trophic_levels, temp_tl) %>%
-      glimpse()
-  }
-}
-
-trophic_levels <- trophic_levels %>%
-  distinct()
+# 
+# test <- as.data.frame(validated) %>%
+#   filter(!validated %in% c(unique(trophic_levels$species))) %>%
+#   dplyr::filter(!validated %in% c("Genus Species", NA))
+# 
+# temp.validated <- as.data.frame(validated) %>%
+#   filter(!validated %in% c(unique(trophic_levels$species))) %>%
+#   dplyr::filter(!validated %in% c("Genus Species", NA)) %>%
+#   pull(validated)
+# 
+# for(species in seq(1:length(unique(temp.validated)))){
+#   message(paste("getting trophic level info for:", temp.validated[species]))
+# 
+#   try(temp_tl <- find_tl(temp.validated[species], "de"))
+#   nrow(temp_tl)
+# 
+#   if(!is.null(nrow(temp_tl))){
+#     trophic_levels <- bind_rows(trophic_levels, temp_tl) %>%
+#       glimpse()
+#   }
+# }
+# 
+# trophic_levels <- trophic_levels %>%
+#   distinct()
 
 # Sys.time()
 # write_rds(trophic_levels, "annotation-schema/data/staging/trophic_levels.RDS")
+
+# trophic_levels <- readRDS( "annotation-schema/data/staging/trophic_levels.RDS")
 
 unique(trophic_levels$trophic_level)
 unique(trophic_levels$se)
@@ -452,6 +456,42 @@ tidy_trophic_levels <- trophic_levels %>%
 # IUCN_REDLIST_KEY='youractualkeynotthisstring'
 # Remove the hashes from this section to run again
 
+# # Set up parallel backend to use multiple cores
+# num_cores <- parallel::detectCores() - 1  # Use all cores except one to avoid overloading the system
+# cl <- makeCluster(num_cores)
+# registerDoParallel(cl)
+# 
+# # Placeholder for the final data frame
+# iucn <- data.frame()
+# 
+# # Use foreach for parallel processing
+# iucn_results <- foreach(species = validated, .combine = 'bind_rows', .packages = c('rredlist', 'dplyr')) %dopar% {
+#   if (!species %in% c("NA", NA)) {
+#     message(paste("accessing IUCN data for:", species))
+#     
+#     dat <- tryCatch({
+#       rl_search(species)
+#     }, error = function(e) {
+#       NULL  # Return NULL if there's an error
+#     })
+#     
+#     if (!is.null(dat) && !is.null(nrow(dat[[2]]))) {
+#       return(dat[[2]])
+#     }
+#   }
+#   return(NULL)  # Return NULL if no valid data
+# }
+# 
+# # Combine results into the main data frame
+# iucn <- bind_rows(iucn_results)
+# 
+# # Stop the cluster after processing
+# stopCluster(cl)
+# 
+# # Print the final data frame or save it as needed
+# print(iucn)
+
+
 # iucn <- data.frame()
 # 
 # for (species in validated) {
@@ -468,7 +508,7 @@ tidy_trophic_levels <- trophic_levels %>%
 #   }
 # }
 # 
-# # Format IUCN data
+# # # Format IUCN data
 # final_iucn <- iucn %>%
 #   dplyr::rename(fishbase_scientific = scientific_name) %>%
 #   dplyr::mutate(iucn_ranking = str_replace_all(.$category, c("EX" = "Extinct",
@@ -483,7 +523,7 @@ tidy_trophic_levels <- trophic_levels %>%
 #   distinct()
 # 
 # saveRDS(final_iucn, "annotation-schema/data/staging/australia_fish_iucn-categories.RDS")
-
+# 
 final_iucn <- readRDS("annotation-schema/data/staging/australia_fish_iucn-categories.RDS")
 
 # check which names don't match
