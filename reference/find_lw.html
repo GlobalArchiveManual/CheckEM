@@ -116,9 +116,10 @@ includes the following columns:</p><ul><li><p><strong>species</strong>: The spec
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Retrieve Bayesian length-weight parameters for a species</span></span></span>
 <span class="r-in"><span><span class="va">lw_params</span> <span class="op">&lt;-</span> <span class="fu">find_lw</span><span class="op">(</span><span class="st">"Lutjanus campechanus"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Timeout was reached [www.fishbase.us]: Operation timed out after 9856 milliseconds with 0 bytes received</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open URL 'http://www.fishbase.us/summary/SpeciesSummary.php?genusname=Lutjanus&amp;speciesname=campechanus': HTTP status was '520 Unknown Error'</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(con, "r"):</span> cannot open the connection to 'https://www.fishbase.us/summary/Lutjanus-campechanus.html'</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">lw_params</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'lw_params' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
