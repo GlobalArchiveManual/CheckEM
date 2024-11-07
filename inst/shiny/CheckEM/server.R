@@ -2396,8 +2396,8 @@ function(input, output, session) {
       
       
     }
-    # message("final metadata")
-    #glimpse(metadata.regions)
+    message("final metadata regions")
+    glimpse(metadata.regions)
     
     metadata.regions
     
@@ -2408,8 +2408,8 @@ function(input, output, session) {
   output$table.metadata <- renderDataTable({
     
     # Checks on metadata
-    #print("checking metadata")
-    #glimpse(metadata.regions())
+    message("checking metadata")
+    glimpse(metadata.regions())
     
     errors <- ""
     
@@ -2995,29 +2995,37 @@ function(input, output, session) {
   ## ► Total number of samples - valueBox ----
   output$metadata.no.samples.t <- renderValueBox({
     
+    message("number of samples in transect metadata")
+    
     metadata.samples <- metadata() %>%
-      dplyr::distinct(campaignid, sample)
+      dplyr::distinct(campaignid, sample) %>%
+      dplyr::glimpse()
     
     valueBox(width = 3, nrow(metadata.samples), "Samples in the Sample Metadata", 
              icon = icon("list"), color = "blue"
     )
   })
   
+  
+  
   ## ► Samples without lengths - dataframe----
   metadata.samples.without.fish.t <- reactive({
+    
+    message("metadata.samples.without.fish.t")
     
     metadata.samples <- metadata() %>%
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), successful_count, successful_length) %>%
       dplyr::distinct() %>%
       dplyr::mutate(sample = as.factor(sample)) %>%
-      dplyr::filter(successful_length %in% c("Yes", "Y","YES"))
+      dplyr::filter(successful_length %in% c("Yes", "Y","YES")) 
     
     length.samples <- length() %>%
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
       dplyr::distinct() 
     
     missing.fish <- anti_join(metadata.samples, length.samples) %>%
-      dplyr::select(!sample)
+      dplyr::select(!sample)%>%
+      glimpse()
   })
   
   ## ► Samples without lengths - valueBox ----
@@ -3191,8 +3199,8 @@ function(input, output, session) {
       dplyr::group_by(latitude_dd, longitude_dd) %>%
       dplyr::summarise(number_of_repeats = n()) %>%
       dplyr::filter(number_of_repeats > 1) %>%
-      dplyr::left_join(metadata.coordinates) %>%
-      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, everything())%>%
+      dplyr::left_join(metadata.coordinates.t) %>%
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, everything()) %>%
       dplyr::ungroup()
     
   })
@@ -3202,7 +3210,7 @@ function(input, output, session) {
     
     if (dim(metadata.coordinates.duplicated.t())[1] > 0) {
       total <- nrow(metadata.coordinates.duplicated.t())
-      col <- "orange"
+      col <- "yellow"
       
     } else {
       total = 0
@@ -6582,7 +6590,7 @@ function(input, output, session) {
     renderDataTable(length.out.of.range(),  rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
-  ## ► Over RMS - dataframe ----
+  ## ► Over RMS (both length and 3D point) - dataframe ----
   length.wrong.rms <- reactive({
     rms.limit <- (input$rms.limit)
     
@@ -6592,25 +6600,18 @@ function(input, output, session) {
       dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, code)
   })
   
-  ## ► Over RMS - valuebox ----
+  ## ► Over RMS (lengths) - valuebox ----
   output$length.wrong.rms <- renderValueBox({
     length.wrong.rms <- length.wrong.rms() %>%
       dplyr::mutate(count = 1)
     
     lengths <- length.wrong.rms %>%
-      dplyr::filter(length_mm > 0)
+      dplyr::filter(length_mm > 0) 
     
-    if (dim(length.wrong.rms)[1] > 0) {
-      total <- sum(length.wrong.rms$count)
-      
-      # If any RMS errors are lengths then make the box red otherwise make the box orange (only 3D points)
-      if(sum(lengths$count) > 0){
+    # If any RMS errors are lengths then make the box red
+    if (dim(lengths)[1] > 0) {
+      total <- sum(lengths$count)
         col = "red"
-      } else {
-        col = "yellow"
-      }
-      
-      
     }
     else{
       total = 0
@@ -6619,16 +6620,52 @@ function(input, output, session) {
     
     valueBox(width = 3, 
              total, 
-             "Measurements over RMS limit", 
+             "Length measurement(s) over RMS limit", 
              icon = icon("greater-than"), color = col
     )
   })
   
-  ## ► Over RMS - onclick ----
+  ## ► Over RMS (lengths) - onclick ----
   onclick('click.length.wrong.rms', showModal(modalDialog(
     title = "Length measurement(s) over RMS limit", size = "l", easyClose = TRUE, 
-    renderDataTable(length.wrong.rms(),  rownames = FALSE, 
+    renderDataTable(lengths <- length.wrong.rms() %>%
+                      dplyr::filter(length_mm > 0),  rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
+  
+  
+  ## ► Over RMS (3D points) - valuebox ----
+  output$length.wrong.rms.3dpoint <- renderValueBox({
+    length.wrong.rms <- length.wrong.rms() %>%
+      dplyr::mutate(count = 1)
+    
+    points3d <- length.wrong.rms %>%
+      dplyr::filter(is.na(length_mm))
+    
+    # If any RMS errors are 3D points then make the box yellow
+    if (dim(points3d)[1] > 0) {
+      total <- sum(points3d$count)
+      col = "yellow"
+    }
+    else{
+      total = 0
+      col = "green"
+    }
+    
+    valueBox(width = 3, 
+             total, 
+             "3D point(s) over RMS limit", 
+             icon = icon("greater-than"), color = col
+    )
+  })
+  
+  ## ► Over RMS (3D points) - onclick ----
+  onclick('click.length.wrong.rms.3dpoint', showModal(modalDialog(
+    title = "3D measurement(s) over RMS limit", size = "l", easyClose = TRUE, 
+    renderDataTable(length.wrong.rms() %>%
+                      dplyr::filter(is.na(length_mm)),  rownames = FALSE, 
+                    options = list(paging = FALSE, searching = TRUE)))))
+  
+  
   
   ## ► Over precision - dataframe ----
   length.wrong.precision <- reactive({
@@ -6657,7 +6694,7 @@ function(input, output, session) {
     
     valueBox(width = 3, 
              total, 
-             "Measurements over Precision limit", 
+             "Length measurements over precision limit", 
              icon = icon("greater-than"), color = col
     )
   })
@@ -7611,40 +7648,71 @@ function(input, output, session) {
       dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, code)
   })
   
-  ## ► Over RMS - valuebox ----
+  ## ► Over RMS (lengths) - valuebox ----
   output$length.wrong.rms.t <- renderValueBox({
     length.wrong.rms.t <- length.wrong.rms.t() %>%
       dplyr::mutate(count = 1)
     
     lengths <- length.wrong.rms.t %>%
-      dplyr::filter(length_mm > 0)
+      dplyr::filter(length_mm > 0) 
     
-    if (dim(length.wrong.rms.t)[1] > 0) {
-      total <- sum(length.wrong.rms.t$count)
-      # If any RMS errors are lengths then make the box red otherwise make the box orange (only 3D points)
-      if(sum(lengths$count) > 0){
-        col = "red"
-      } else {
-        col = "yellow"
-      }
+    # If any RMS errors are lengths then make the box red
+    if (dim(lengths)[1] > 0) {
+      total <- sum(lengths$count)
+      col = "red"
     }
     else{
       total = 0
       col = "green"
     }
     
-    valueBox(width =3,
-             total,
-             "Measurements over RMS limit",
+    valueBox(width = 3, 
+             total, 
+             "Length measurement(s) over RMS limit", 
              icon = icon("greater-than"), color = col
     )
   })
   
-  ## ► Over RMS - onclick ----
+  ## ► Over RMS (lengths) - onclick ----
   onclick('click.length.wrong.rms.t', showModal(modalDialog(
-    title = "Length measurement(s) over RMS limit", size = "l", easyClose = TRUE,
-    renderDataTable(length.wrong.rms.t(),  rownames = FALSE,
+    title = "Length measurement(s) over RMS limit", size = "l", easyClose = TRUE, 
+    renderDataTable(lengths <- length.wrong.rms.t() %>%
+                      dplyr::filter(length_mm > 0),  rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
+  
+  
+  ## ► Over RMS (3D points) - valuebox ----
+  output$length.wrong.rms.3dpoint.t <- renderValueBox({
+    length.wrong.rms <- length.wrong.rms.t() %>%
+      dplyr::mutate(count = 1)
+    
+    points3d <- length.wrong.rms %>%
+      dplyr::filter(is.na(length_mm))
+    
+    # If any RMS errors are 3D points then make the box yellow
+    if (dim(points3d)[1] > 0) {
+      total <- sum(points3d$count)
+      col = "yellow"
+    }
+    else{
+      total = 0
+      col = "green"
+    }
+    
+    valueBox(width = 3, 
+             total, 
+             "3D point(s) over RMS limit", 
+             icon = icon("greater-than"), color = col
+    )
+  })
+  
+  ## ► Over RMS (3D points)- onclick ----
+  onclick('click.length.wrong.rms.3dpoint.t', showModal(modalDialog(
+    title = "3D measurement(s) over RMS limit", size = "l", easyClose = TRUE, 
+    renderDataTable(length.wrong.rms.t() %>%
+                      dplyr::filter(is.na(length_mm)),  rownames = FALSE, 
+                    options = list(paging = FALSE, searching = TRUE)))))
+  
   
   ## ► Over precision - dataframe ----
   length.wrong.precision.t <- reactive({

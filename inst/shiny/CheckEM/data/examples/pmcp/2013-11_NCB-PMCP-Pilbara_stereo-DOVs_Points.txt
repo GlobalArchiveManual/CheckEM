@@ -1,0 +1,7 @@
+OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	RectWidth	RectHeight	Family	Genus	Species	Code	Number	Stage	Activity	Comment	Attribute9	Attribute10
+69421	0	69421_L349.avi	101614	67.74267	T10	0.11733	930.82686	861.55779	0.00000	0.00000	Pomacentridae	Stegastes	obreptus	37372136	1	AD	Passing			
+69430	0	69430_LC1.avi	21478	14.31867	T4	0.16533	915.22714	683.57374	0.00000	0.00000	Apogonidae	Cheilodipterus	macrodon	37327089	1	AD	Passing			
+69439	0	69439_L349.avi	28068	18.71200	T2	0.57267	777.08108	622.32893	0.00000	0.00000	Pomacentridae	Pomacentrus	moluccensis	37372118	1	AD	Passing			
+69444	0	69444_LC1.avi	28148	18.76533	T6	1.11600	1030.83004	680.37471	0.00000	0.00000	Pomacentridae	Chromis	cinerascens	37372039	1	AD	Passing			
+69454	0	69454_LC1.avi	12486	8.32400	T1	0.07800	449.91826	723.05085	0.00000	0.00000	Pomacentridae	Pomacentrus	milleri	37372117	1	AD	Passing			
+69464	0	69464_LC1.avi	53560	35.70667	T11	1.12067	564.61894	706.21067	0.00000	0.00000	Unknown				3	AD	Passing			
