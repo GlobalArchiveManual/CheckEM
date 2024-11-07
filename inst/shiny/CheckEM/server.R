@@ -86,6 +86,22 @@ function(input, output, session) {
   })
   
   ## _______________________________________________________ ----
+  ##                        CREATE LAND SHAPEFILE              ----
+  ## _______________________________________________________ ----
+  
+  land <- reactive({
+    
+    if(input$lifehistory %in% "aus"){
+      land <- all_data$aus
+    } else {
+      land <- all_data$world
+    }
+    
+    land
+    
+  })
+  
+  ## _______________________________________________________ ----
   ##                     CREATE SYNONYMS                     ----
   ## _______________________________________________________ ----
   synonyms <- reactive({
@@ -741,7 +757,7 @@ function(input, output, session) {
       count_less_length <- metadata() %>%
         dplyr::distinct(campaignid) %>%
         dplyr::mutate(count_less_length = NA)
-
+      
     }
     
     count_less_length
@@ -999,41 +1015,41 @@ function(input, output, session) {
       dplyr::summarise(length_not_uploaded = all(successful_length %in% "No"))
     
     if(input$length %in% "Yes"){
-    
-    if(input$upload %in% "EM"){
       
-      length <- length3dpoints.clean()
-      count <- maxn.clean() %>%
-        dplyr::rename(count = maxn)
+      if(input$upload %in% "EM"){
+        
+        length <- length3dpoints.clean()
+        count <- maxn.clean() %>%
+          dplyr::rename(count = maxn)
+        
+      } else {
+        
+        length <- gen.length.clean()
+        count <- count.clean()
+        
+      }
       
-    } else {
+      number_in_counts <- count %>%
+        semi_join(large_bodied_carnivores())
       
-      length <- gen.length.clean()
-      count <- count.clean()
+      count_less_length_lbc <- length %>%
+        dplyr::semi_join(large_bodied_carnivores()) %>%
+        dplyr::filter(!is.na(length_mm)) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>%
+        dplyr::summarise(number_length = sum(number)) %>%
+        ungroup() %>%
+        dplyr::left_join(count) %>%
+        dplyr::left_join(metadata.regions()) %>%
+        dplyr::filter(successful_count %in% "Yes") %>%
+        dplyr::filter(successful_length %in% "Yes") %>%
+        dplyr::filter(number_length > count) %>%
+        dplyr::mutate(difference = number_length - count)
       
-    }
-    
-    number_in_counts <- count %>%
-      semi_join(large_bodied_carnivores())
-    
-    count_less_length_lbc <- length %>%
-      dplyr::semi_join(large_bodied_carnivores()) %>%
-      dplyr::filter(!is.na(length_mm)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>%
-      dplyr::summarise(number_length = sum(number)) %>%
-      ungroup() %>%
-      dplyr::left_join(count) %>%
-      dplyr::left_join(metadata.regions()) %>%
-      dplyr::filter(successful_count %in% "Yes") %>%
-      dplyr::filter(successful_length %in% "Yes") %>%
-      dplyr::filter(number_length > count) %>%
-      dplyr::mutate(difference = number_length - count)
-    
-    total_count <- sum(number_in_counts$count) #%>% glimpse()
-    extra_lengths <- sum(count_less_length_lbc$difference) #%>% glimpse()
-    
-    score <- round((extra_lengths/ total_count) * 100, 2) 
-    
+      total_count <- sum(number_in_counts$count) #%>% glimpse()
+      extra_lengths <- sum(count_less_length_lbc$difference) #%>% glimpse()
+      
+      score <- round((extra_lengths/ total_count) * 100, 2) 
+      
     } else {
       
       score <- NA
@@ -1055,61 +1071,61 @@ function(input, output, session) {
       dplyr::summarise(length_not_uploaded = all(successful_length %in% "No"))
     
     if(input$length %in% "Yes"){
-    
-    if(input$upload %in% "EM"){
       
-      message("view EM data")
+      if(input$upload %in% "EM"){
+        
+        message("view EM data")
+        
+        length <- length3dpoints.clean() %>%
+          glimpse()
+        
+        count <- maxn.clean() %>%
+          dplyr::rename(count = maxn) %>%
+          glimpse()
+        
+      } else {
+        
+        length <- gen.length.clean()
+        count <- count.clean()
+        
+      }
       
-      length <- length3dpoints.clean() %>%
-        glimpse()
+      message("view counts")
       
-      count <- maxn.clean() %>%
-        dplyr::rename(count = maxn) %>%
-        glimpse()
+      number_in_counts <- count %>%
+        dplyr::semi_join(large_bodied_carnivores()) %>%
+        dplyr::group_by(campaignid) %>%
+        dplyr::summarise(total_count = sum(count)) %>%
+        dplyr::ungroup() %>% dplyr::glimpse()
       
-    } else {
+      message("view greater lbc")
       
-      length <- gen.length.clean()
-      count <- count.clean()
+      count_greater_length_lbc <- length %>%
+        dplyr::semi_join(large_bodied_carnivores()) %>%
+        dplyr::filter(!is.na(length_mm)) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>%
+        dplyr::summarise(number_length = sum(number)) %>%
+        ungroup() %>%
+        dplyr::left_join(count) %>%
+        dplyr::left_join(metadata()) %>%
+        dplyr::filter(successful_count %in% "Yes") %>%
+        dplyr::filter(successful_length %in% "Yes") %>%
+        dplyr::filter(number_length < count) %>%
+        dplyr::mutate(difference = count - number_length) %>%
+        dplyr::group_by(campaignid) %>%
+        dplyr::summarise(extra_count = sum(difference)) %>%
+        dplyr::ungroup() %>%
+        dplyr::full_join(number_in_counts) %>%
+        tidyr::replace_na(list(extra_count = 0)) %>%
+        dplyr::mutate(count_greater_length_lbc = extra_count/total_count*100) %>%
+        dplyr::left_join(campaigns_with_lengths) %>%
+        dplyr::mutate(count_greater_length_lbc = case_when(
+          length_not_uploaded %in% TRUE ~ NA,
+          .default = count_greater_length_lbc
+        )) %>%
+        dplyr::select(campaignid, count_greater_length_lbc)  %>%
+        dplyr::mutate(count_greater_length_lbc = 100 - count_greater_length_lbc)
       
-    }
-    
-    message("view counts")
-    
-    number_in_counts <- count %>%
-      dplyr::semi_join(large_bodied_carnivores()) %>%
-      dplyr::group_by(campaignid) %>%
-      dplyr::summarise(total_count = sum(count)) %>%
-      dplyr::ungroup() %>% dplyr::glimpse()
-    
-    message("view greater lbc")
-    
-    count_greater_length_lbc <- length %>%
-      dplyr::semi_join(large_bodied_carnivores()) %>%
-      dplyr::filter(!is.na(length_mm)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>%
-      dplyr::summarise(number_length = sum(number)) %>%
-      ungroup() %>%
-      dplyr::left_join(count) %>%
-      dplyr::left_join(metadata()) %>%
-      dplyr::filter(successful_count %in% "Yes") %>%
-      dplyr::filter(successful_length %in% "Yes") %>%
-      dplyr::filter(number_length < count) %>%
-      dplyr::mutate(difference = count - number_length) %>%
-      dplyr::group_by(campaignid) %>%
-      dplyr::summarise(extra_count = sum(difference)) %>%
-      dplyr::ungroup() %>%
-      dplyr::full_join(number_in_counts) %>%
-      tidyr::replace_na(list(extra_count = 0)) %>%
-      dplyr::mutate(count_greater_length_lbc = extra_count/total_count*100) %>%
-      dplyr::left_join(campaigns_with_lengths) %>%
-      dplyr::mutate(count_greater_length_lbc = case_when(
-        length_not_uploaded %in% TRUE ~ NA,
-        .default = count_greater_length_lbc
-      )) %>%
-      dplyr::select(campaignid, count_greater_length_lbc)  %>%
-      dplyr::mutate(count_greater_length_lbc = 100 - count_greater_length_lbc)
-    
     } else {
       
       count_greater_length_lbc <- metadata() %>%
@@ -1128,41 +1144,41 @@ function(input, output, session) {
       dplyr::summarise(length_not_uploaded = all(successful_length %in% "No"))
     
     if(input$length %in% "Yes"){
-    
-    if(input$upload %in% "EM"){
       
-      length <- length3dpoints.clean()
-      count <- maxn.clean() %>%
-        dplyr::rename(count = maxn)
+      if(input$upload %in% "EM"){
+        
+        length <- length3dpoints.clean()
+        count <- maxn.clean() %>%
+          dplyr::rename(count = maxn)
+        
+      } else {
+        
+        length <- gen.length.clean()
+        count <- count.clean()
+        
+      }
       
-    } else {
+      number_in_counts <- count %>%
+        dplyr::semi_join(large_bodied_carnivores())
       
-      length <- gen.length.clean()
-      count <- count.clean()
+      count_greater_length_lbc <- length %>%
+        dplyr::semi_join(large_bodied_carnivores()) %>%
+        dplyr::filter(!is.na(length_mm)) %>%
+        dplyr::group_by(campaignid, sample, family, genus, species) %>%
+        dplyr::summarise(number_length = sum(number)) %>%
+        ungroup() %>%
+        dplyr::left_join(count) %>%
+        dplyr::left_join(metadata.regions()) %>%
+        dplyr::filter(successful_count %in% "Yes") %>%
+        dplyr::filter(successful_length %in% "Yes") %>%
+        dplyr::filter(number_length < count) %>%
+        dplyr::mutate(difference = count - number_length)
       
-    }
-    
-    number_in_counts <- count %>%
-      dplyr::semi_join(large_bodied_carnivores())
-    
-    count_greater_length_lbc <- length %>%
-      dplyr::semi_join(large_bodied_carnivores()) %>%
-      dplyr::filter(!is.na(length_mm)) %>%
-      dplyr::group_by(campaignid, sample, family, genus, species) %>%
-      dplyr::summarise(number_length = sum(number)) %>%
-      ungroup() %>%
-      dplyr::left_join(count) %>%
-      dplyr::left_join(metadata.regions()) %>%
-      dplyr::filter(successful_count %in% "Yes") %>%
-      dplyr::filter(successful_length %in% "Yes") %>%
-      dplyr::filter(number_length < count) %>%
-      dplyr::mutate(difference = count - number_length)
-    
-    total_count <- sum(number_in_counts$count) #%>% glimpse()
-    extra_count <- sum(count_greater_length_lbc$difference) #%>% glimpse()
-    
-    score <- round((extra_count/ total_count) * 100, 2) 
-    
+      total_count <- sum(number_in_counts$count) #%>% glimpse()
+      extra_count <- sum(count_greater_length_lbc$difference) #%>% glimpse()
+      
+      score <- round((extra_count/ total_count) * 100, 2) 
+      
     } else {
       
       score <- NA
@@ -1178,35 +1194,35 @@ function(input, output, session) {
   length_greater_maximum_size_table <- reactive({
     
     if(input$length %in% "Yes"){
-    
-    if(input$upload %in% "EM"){
       
-      message("Em")
+      if(input$upload %in% "EM"){
+        
+        message("Em")
+        
+        length <- length3dpoints.clean() %>%
+          glimpse()
+        
+      } else {
+        
+        length <- gen.length.clean()
+        
+      }
       
-      length <- length3dpoints.clean() %>%
-        glimpse()
+      total_measurements <- length %>%
+        dplyr::group_by(campaignid) %>%
+        dplyr::summarise(number_of_lengths = sum(number)) %>% glimpse()
       
-    } else {
+      length_greater_maximum_size <- length.wrong() %>%
+        dplyr::filter(reason %in% c("too big")) %>%
+        dplyr::filter(length_max_mm < length_mm) %>%
+        dplyr::group_by(campaignid) %>%
+        dplyr::summarise(number_of_lengths_over = sum(number)) %>%
+        dplyr::full_join(total_measurements) %>%
+        tidyr::replace_na(list(number_of_lengths_over = 0)) %>%
+        dplyr::mutate(length_greater_maximum_size = (number_of_lengths_over/number_of_lengths)*100) %>%
+        dplyr::select(campaignid, length_greater_maximum_size) %>%
+        dplyr::mutate(length_greater_maximum_size = 100 - length_greater_maximum_size)
       
-      length <- gen.length.clean()
-      
-    }
-    
-    total_measurements <- length %>%
-      dplyr::group_by(campaignid) %>%
-      dplyr::summarise(number_of_lengths = sum(number)) %>% glimpse()
-    
-    length_greater_maximum_size <- length.wrong() %>%
-      dplyr::filter(reason %in% c("too big")) %>%
-      dplyr::filter(length_max_mm < length_mm) %>%
-      dplyr::group_by(campaignid) %>%
-      dplyr::summarise(number_of_lengths_over = sum(number)) %>%
-      dplyr::full_join(total_measurements) %>%
-      tidyr::replace_na(list(number_of_lengths_over = 0)) %>%
-      dplyr::mutate(length_greater_maximum_size = (number_of_lengths_over/number_of_lengths)*100) %>%
-      dplyr::select(campaignid, length_greater_maximum_size) %>%
-      dplyr::mutate(length_greater_maximum_size = 100 - length_greater_maximum_size)
-    
     } else {
       
       length_greater_maximum_size <- metadata() %>%
@@ -1224,29 +1240,29 @@ function(input, output, session) {
   length_greater_maximum_size_score <- reactive({
     
     if(input$length %in% "Yes"){
-    
-    if(input$upload %in% "EM"){
       
-      length <- length3dpoints.clean()
+      if(input$upload %in% "EM"){
+        
+        length <- length3dpoints.clean()
+        
+      } else {
+        
+        length <- gen.length.clean()
+        
+      }
       
-    } else {
+      total_measurements <- length %>%
+        dplyr::group_by(campaignid) %>%
+        dplyr::summarise(number_of_lengths = sum(number))
       
-      length <- gen.length.clean()
+      length_greater_maximum_size <- length.wrong() %>%
+        dplyr::filter(reason %in% c("too big")) %>%
+        dplyr::filter(length_max_mm < length_mm) 
       
-    }
-    
-    total_measurements <- length %>%
-      dplyr::group_by(campaignid) %>%
-      dplyr::summarise(number_of_lengths = sum(number))
-    
-    length_greater_maximum_size <- length.wrong() %>%
-      dplyr::filter(reason %in% c("too big")) %>%
-      dplyr::filter(length_max_mm < length_mm) 
-    
-    over_size <- sum(length_greater_maximum_size$number) #%>% glimpse()
-    
-    score <- round((over_size/ total_measurements$number_of_lengths) * 100, 2)
-    
+      over_size <- sum(length_greater_maximum_size$number) #%>% glimpse()
+      
+      score <- round((over_size/ total_measurements$number_of_lengths) * 100, 2)
+      
     } else {
       
       score <- NA
@@ -1280,7 +1296,7 @@ function(input, output, session) {
                     count_less_length_lbc = round(count_less_length_lbc, 2),
                     count_greater_length_lbc = round(count_greater_length_lbc, 2),
                     length_greater_maximum_size = round(length_greater_maximum_size, 2)
-                    ) %>%
+      ) %>%
       dplyr::glimpse()
     
   })
@@ -1362,7 +1378,7 @@ function(input, output, session) {
       count_greater_length_lbc_fill <- "#d6b3f8"
       
     } else {
-    
+      
       count_greater_length_lbc_score <- 100
       cols["Count > Length*"] <- "darkgrey"
       count_greater_length_lbc_goal <- "darkgrey"
@@ -1407,7 +1423,7 @@ function(input, output, session) {
     
     dat <- dat %>%
       dplyr::mutate(label_position = value *0.85)
-      # dplyr::mutate(label_position = if_else(value < 30, 20, value - 15)) #%>%
+    # dplyr::mutate(label_position = if_else(value < 30, 20, value - 15)) #%>%
     # #tidyr::replace_na(list(value = "Length missing"))
     
     dat$score <- fct_relevel(dat$score, "Count schema", 
@@ -1422,9 +1438,9 @@ function(input, output, session) {
       dat_filtered <- dat
       
     } else {
-    
-    dat_filtered <- dat %>%
-      dplyr::filter(score %in% c("Metadata", "Count schema"))
+      
+      dat_filtered <- dat %>%
+        dplyr::filter(score %in% c("Metadata", "Count schema"))
       
     }
     
@@ -1505,7 +1521,7 @@ function(input, output, session) {
       geom_textpath(y = 128, aes(x = score, label = score), colour = "white", size = 5.5, fontface = "bold") + 
       
       geom_textpath(dat = dat_filtered, aes(y = label_position, 
-                        label = paste0(value, "%")), 
+                                            label = paste0(value, "%")), 
                     colour = "grey100", size = 5, fontface = "bold") +
       coord_polar() #start = 1.05
     
@@ -2247,13 +2263,14 @@ function(input, output, session) {
       dplyr::mutate(sample = as.factor(sample)) %>%
       dplyr::mutate(date_time = as.character(date_time)) %>% 
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, observer_count, observer_length, inclusion_probability, visibility_m, dplyr::any_of(c("successful_habitat_forward", "successful_habitat_backward")))  %>%
-      dplyr::distinct() %>%
-    glimpse()
+      # dplyr::distinct() %>%
+      glimpse()
   })  
   
   ## ► Find nearest marine regions add commonwealth and state zoning ----
   metadata.regions <- reactive({
-    metadata <- metadata()
+    metadata <- metadata() %>%
+      dplyr::distinct()
     
     message("view metadata_sf")
     metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326) %>% glimpse()
@@ -2528,7 +2545,7 @@ function(input, output, session) {
   ## ► Samples without points - dataframe ----
   metadata.samples.without.fish <- reactive({
     
-    metadata.samples <- metadata() %>%
+    metadata.samples <- metadata.regions() %>%
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), successful_count, successful_length) %>%
       distinct() %>%
       mutate(sample = as.factor(sample))
@@ -2745,6 +2762,128 @@ function(input, output, session) {
             renderDataTable(length.samples.without.metadata(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
           ))
   
+  ## ► Metadata samples duplicated - dataframe ----
+  metadata.samples.duplicated <- reactive({
+    metadata.samples <- metadata() 
+    
+    duplicates <- metadata.samples %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(number_of_repeats = n()) %>%
+      dplyr::filter(number_of_repeats > 1) %>%
+      dplyr::left_join(metadata.samples) %>%
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, everything())%>%
+      dplyr::ungroup()
+  })
+  
+  ## ► Metadata samples duplicated - valueBox ----
+  output$metadata.samples.duplicated <- renderValueBox({
+    
+    if (dim(metadata.samples.duplicated())[1] > 0) {
+      total <- nrow(metadata.samples.duplicated())
+      col <- "red"
+      
+    } else {
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2, 
+             total, 
+             "Duplicated Sample(s) in metadata", 
+             icon = icon("exclamation-circle"), color = col
+    )
+  })
+  
+  ## ► Metadata samples duplicated - onclick ----
+  onclick('click.metadata.samples.duplicated', 
+          showModal(modalDialog(
+            title = "Duplicated Sample(s) in metadata", 
+            easyClose = TRUE,
+            renderDataTable(metadata.samples.duplicated(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          ))
+  
+  ## ► Metadata coordinates duplicated - dataframe ----
+  metadata.coordinates.duplicated <- reactive({
+    metadata.coordinates <- metadata() 
+    
+    duplicates <- metadata.coordinates %>%
+      dplyr::group_by(latitude_dd, longitude_dd) %>%
+      dplyr::summarise(number_of_repeats = n()) %>%
+      dplyr::filter(number_of_repeats > 1) %>%
+      dplyr::left_join(metadata.coordinates) %>%
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, everything()) %>%
+      dplyr::ungroup()
+    
+  })
+  
+  ## ► Metadata coordinates duplicated - valueBox ----
+  output$metadata.coordinates.duplicated <- renderValueBox({
+    
+    if (dim(metadata.coordinates.duplicated())[1] > 0) {
+      total <- nrow(metadata.coordinates.duplicated())
+      col <- "red"
+      
+    } else {
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2, 
+             total, 
+             "Duplicated coordinates in metadata", 
+             icon = icon("exclamation-circle"), color = col
+    )
+  })
+  
+  ## ► Metadata coordinates duplicated - onclick ----
+  onclick('click.metadata.coordinates.duplicated', 
+          showModal(modalDialog(
+            title = "Duplicated coordinates in metadata", 
+            easyClose = TRUE,
+            renderDataTable(metadata.coordinates.duplicated(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          ))
+  
+  ## ► Metadata coordinates on land - dataframe ----
+  metadata.on.land <- reactive({
+    metadata <- metadata()
+    metadata_sf <- st_as_sf(metadata(), coords = c("longitude_dd", "latitude_dd"), crs = 4326)
+    
+    # Perform spatial join to check if points are on land
+    message("land flags")
+    land_flags <- st_intersection(metadata_sf, land()) %>% glimpse()
+    
+    message("without geom")
+    land_flags <- sf::st_drop_geometry(land_flags) %>% glimpse()
+    
+  })
+  
+  ## ► Metadata coordinates on land - valueBox ----
+  output$metadata.on.land <- renderValueBox({
+    
+    if (dim(metadata.on.land())[1] > 0) {
+      total <- nrow(metadata.on.land())
+      col <- "yellow"
+      
+    } else {
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2, 
+             total, 
+             "Coordinates in metadata potentially on land", 
+             icon = icon("exclamation-circle"), color = col
+    )
+  })
+  
+  ## ► Metadata coordinates on land  - onclick ----
+  onclick('click.metadata.on.land', 
+          showModal(modalDialog(
+            title = "Coordinates on land", 
+            easyClose = TRUE,
+            renderDataTable(metadata.on.land(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          ))
+  
   ## ► Leaflet map ----
   
   # show shiny alert once user clicks on metadata tab
@@ -2801,6 +2940,20 @@ function(input, output, session) {
                 lat1 = min(metadata$latitude_dd), 
                 lng2 = max(metadata$longitude_dd), 
                 lat2 = max(metadata$latitude_dd))
+    
+    
+    if (dim(metadata.on.land())[1] > 0) {
+      
+      points.potentially.on.land <- metadata.on.land() %>%
+        mutate(content = "Potentially on land") %>%
+        mutate(land = "Land") %>%
+        left_join(metadata()) %>%
+        glimpse()
+      
+      map <- map %>%
+        addAwesomeMarkers(data = points.potentially.on.land,
+                          icon = ~icon.on.land[land], label = ~as.character(sample), popup = ~content, ~longitude_dd, ~latitude_dd) 
+    }
     
     if(input$lifehistory %in% "aus"){
       map <- map %>%
@@ -2990,6 +3143,126 @@ function(input, output, session) {
             renderDataTable(length.samples.without.metadata.t(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
           ))
   
+  ## ► Metadata samples duplicated - dataframe ----
+  metadata.samples.duplicated.t <- reactive({
+    metadata.samples <- metadata() 
+    
+    duplicates <- metadata.samples %>%
+      dplyr::group_by(campaignid, sample) %>%
+      dplyr::summarise(number_of_repeats = n()) %>%
+      dplyr::filter(number_of_repeats > 1) %>%
+      dplyr::left_join(metadata.samples) %>%
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, everything())%>%
+      dplyr::ungroup()
+  })
+  
+  ## ► Metadata samples duplicated - valueBox ----
+  output$metadata.samples.duplicated.t <- renderValueBox({
+    
+    if (dim(metadata.samples.duplicated.t())[1] > 0) {
+      total <- nrow(metadata.samples.duplicated.t())
+      col <- "red"
+      
+    } else {
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2, 
+             total, 
+             "Duplicated Sample(s) in metadata", 
+             icon = icon("exclamation-circle"), color = col
+    )
+  })
+  
+  ## ► Metadata samples duplicated - onclick ----
+  onclick('click.metadata.samples.duplicated.t', 
+          showModal(modalDialog(
+            title = "Duplicated Sample(s) in metadata", 
+            easyClose = TRUE,
+            renderDataTable(metadata.samples.duplicated.t(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          ))
+  
+  ## ► Metadata coordinates duplicated - dataframe ----
+  metadata.coordinates.duplicated.t <- reactive({
+    metadata.coordinates.t <- metadata() 
+    
+    duplicates <- metadata.coordinates.t %>%
+      dplyr::group_by(latitude_dd, longitude_dd) %>%
+      dplyr::summarise(number_of_repeats = n()) %>%
+      dplyr::filter(number_of_repeats > 1) %>%
+      dplyr::left_join(metadata.coordinates) %>%
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), latitude_dd, longitude_dd, everything())%>%
+      dplyr::ungroup()
+    
+  })
+  
+  ## ► Metadata coordinates duplicated - valueBox ----
+  output$metadata.coordinates.duplicated.t <- renderValueBox({
+    
+    if (dim(metadata.coordinates.duplicated.t())[1] > 0) {
+      total <- nrow(metadata.coordinates.duplicated.t())
+      col <- "orange"
+      
+    } else {
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2, 
+             total, 
+             "Duplicated coordinates in metadata", 
+             icon = icon("exclamation-circle"), color = col
+    )
+  })
+  
+  ## ► Metadata coordinates duplicated - onclick ----
+  onclick('click.metadata.coordinates.duplicated.t', 
+          showModal(modalDialog(
+            title = "Duplicated coordinates in metadata", 
+            easyClose = TRUE,
+            renderDataTable(metadata.coordinates.duplicated.t(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          ))
+  
+  ## ► Metadata coordinates on land - dataframe ----
+  metadata.on.land.t <- reactive({
+    metadata <- metadata()
+    metadata_sf <- st_as_sf(metadata(), coords = c("longitude_dd", "latitude_dd"), crs = 4326)
+    
+    # Perform spatial join to check if points are on land
+    land_flags <- st_intersection(metadata_sf, land())
+    land_flags <- sf::st_drop_geometry(land_flags) %>% glimpse()
+    
+  })
+  
+  ## ► Metadata coordinates on land - valueBox ----
+  output$metadata.on.land.t <- renderValueBox({
+    
+    if (dim(metadata.on.land.t())[1] > 0) {
+      total <- nrow(metadata.on.land.t())
+      col <- "yellow"
+      
+    } else {
+      total = 0
+      col <- "green"
+    }
+    
+    valueBox(width = 2, 
+             total, 
+             "Coordinates in metadata potentially on land", 
+             icon = icon("exclamation-circle"), color = col
+    )
+  })
+  
+  ## ► Metadata coordinates on land  - onclick ----
+  onclick('click.metadata.on.land.t', 
+          showModal(modalDialog(
+            title = "Coordinates on land", 
+            easyClose = TRUE,
+            renderDataTable(metadata.on.land.t(), rownames = FALSE, options = list(paging = FALSE, searching = TRUE)))
+          ))
+  
+  
   ## ► Leaflet map ----
   
   # show shiny alert once user clicks on metadata tab
@@ -3041,6 +3314,19 @@ function(input, output, session) {
                 lat1 = min(metadata$latitude_dd), 
                 lng2 = max(metadata$longitude_dd), 
                 lat2 = max(metadata$latitude_dd))
+    
+    if (dim(metadata.on.land.t())[1] > 0) {
+      
+      points.potentially.on.land <- metadata.on.land.t() %>%
+        mutate(content = "Potentially on land") %>%
+        mutate(land = "Land") %>%
+        left_join(metadata()) %>%
+        glimpse()
+      
+      map <- map %>%
+        addAwesomeMarkers(data = points.potentially.on.land,
+                          icon = ~icon.on.land[land], label = ~as.character(sample), popup = ~content, ~longitude_dd, ~latitude_dd) 
+    }
     
     if(input$lifehistory %in% "aus"){
       map <- map %>%
@@ -6261,10 +6547,12 @@ function(input, output, session) {
     
     range.limit <- (input$range.limit*1000)
     
+    print("OG length out of range")
     length.out.of.range <- length3dpoints() %>%
       dplyr::filter(range > range.limit) %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, range, frame_left, frame_right, em_comment, rms, precision, code)
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, range, frame_left, frame_right, em_comment, rms, precision, code) %>%
+      glimpse()
   })
   
   ## ► Out of range - valuebox ----
@@ -8551,7 +8839,7 @@ function(input, output, session) {
         
         points <- points %>%
           clean_names()%>%
-        glimpse()
+          glimpse()
         
         # If point method and samples are opcodes
         if(input$method == "point" & input$sample == "opcode") {
@@ -8626,7 +8914,7 @@ function(input, output, session) {
         dplyr::mutate(id = 1:nrow(.)) %>%
         dplyr::select(-any_of(c("caab_code"))) %>%
         dplyr::left_join(schema) %>%
-      dplyr::glimpse()
+        dplyr::glimpse()
       
       
     }
@@ -8835,18 +9123,18 @@ function(input, output, session) {
   habitat.wrong.annotations <- reactive({
     
     if(input$habdirection %in% "both"){
-    
-    
-    wrong <- habitat.annotations.per.sample() %>%
-      dplyr::distinct(campaignid, sample, number.of.annotations) %>%
-      dplyr::left_join(metadata()) %>%
-      dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 2,
-                                         successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ input$number.of.annotations * 1,
-                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 1,
-                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
-      dplyr::filter(!number.of.annotations == expected) %>%
-      dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
-    
+      
+      
+      wrong <- habitat.annotations.per.sample() %>%
+        dplyr::distinct(campaignid, sample, number.of.annotations) %>%
+        dplyr::left_join(metadata()) %>%
+        dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 2,
+                                           successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ input$number.of.annotations * 1,
+                                           successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 1,
+                                           successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
+        dplyr::filter(!number.of.annotations == expected) %>%
+        dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+      
     } else {
       
       wrong <- habitat.annotations.per.sample() %>%
@@ -8903,28 +9191,28 @@ function(input, output, session) {
   relief.wrong.annotations <- reactive({
     
     if(input$habdirection %in% "both"){
-    
-    wrong <- relief.annotations.per.sample() %>%
-      dplyr::distinct(campaignid, sample, number.of.annotations) %>%
-      dplyr::left_join(metadata()) %>%
-      dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 2,
-                                         successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ input$number.of.annotations * 1,
-                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 1,
-                                         successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
-      dplyr::filter(!number.of.annotations == expected) %>%
-      dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
-    
-  } else {
-    
-    wrong <- relief.annotations.per.sample() %>%
-      dplyr::distinct(campaignid, sample, number.of.annotations) %>%
-      dplyr::left_join(metadata()) %>%
-      dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" ~ input$number.of.annotations,
-                                         successful_habitat_forward %in% "No" ~ 0)) %>%
-      dplyr::filter(!number.of.annotations == expected) %>%
-      dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
-    
-  }
+      
+      wrong <- relief.annotations.per.sample() %>%
+        dplyr::distinct(campaignid, sample, number.of.annotations) %>%
+        dplyr::left_join(metadata()) %>%
+        dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 2,
+                                           successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ input$number.of.annotations * 1,
+                                           successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ input$number.of.annotations * 1,
+                                           successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ 0)) %>%
+        dplyr::filter(!number.of.annotations == expected) %>%
+        dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+      
+    } else {
+      
+      wrong <- relief.annotations.per.sample() %>%
+        dplyr::distinct(campaignid, sample, number.of.annotations) %>%
+        dplyr::left_join(metadata()) %>%
+        dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" ~ input$number.of.annotations,
+                                           successful_habitat_forward %in% "No" ~ 0)) %>%
+        dplyr::filter(!number.of.annotations == expected) %>%
+        dplyr::select(campaignid, any_of(c("opcode", "period")), number.of.annotations, expected)
+      
+    }
   })
   
   ## ► relief wrong number of annotations - valueBox ----
@@ -9513,113 +9801,221 @@ function(input, output, session) {
     sample.cols <- c(opcode = NA_real_,
                      period = NA_real_)
     
+    if (dim(metadata.samples.duplicated())[1] > 0) {
+      print("metadata.samples.duplicated")
+      metadata.samples.duplicated <- metadata.samples.duplicated() %>%
+        mutate(error = "sample.names.are.duplicated") %>%
+        mutate(across(everything(), as.character)) %>%
+        glimpse()
+    } else {
+      metadata.samples.duplicated <- data.frame()
+    }
+    
+    if (dim(metadata.coordinates.duplicated())[1] > 0) {
+      print("metadata.coordinates.duplicated")
+      metadata.coordinates.duplicated <- metadata.coordinates.duplicated() %>%
+        mutate(error = "sample.coordinates.are.duplicated") %>%
+        mutate(across(everything(), as.character)) %>%
+        glimpse()
+    } else {
+      metadata.coordinates.duplicated <- data.frame()
+    }
+    
+    print("metadata.on.land")
+    if (dim(metadata.on.land())[1] > 0) {
+      metadata.on.land <- metadata.on.land() %>%
+        mutate(error = "coordinates.potentially.on.land") %>%
+        dplyr::left_join(metadata()) %>%
+        dplyr::select(any_of(c("campaignid", "sample", "opcode", "period", "latitude_dd", "longitude_dd"))) %>%
+        mutate(across(everything(), as.character)) %>%
+        glimpse()
+    } else {
+      metadata.on.land <- data.frame()
+    }
+    
     if(input$upload %in% "EM"){
       print("samples.without.points ")
-      samples.without.points <- metadata.samples.without.fish() %>%
-        mutate(error = "sample.without.points") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
+      
+      if (dim(metadata.samples.without.fish())[1] > 0) {
+        samples.without.points <- metadata.samples.without.fish() %>%
+          mutate(error = "sample.without.points") %>%
+          mutate(across(everything(), as.character)) %>% glimpse()
+      } else {
+        samples.without.points <- data.frame()
+      }
       
       print("points.samples.without.metadata")
-      points.samples.without.metadata <- points.samples.without.metadata() %>%
-        mutate(error = "sample.in.points.without.metadata") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
+      if (dim(points.samples.without.metadata())[1] > 0) {
+        points.samples.without.metadata <- points.samples.without.metadata() %>%
+          mutate(error = "sample.in.points.without.metadata") %>%
+          mutate(across(everything(), as.character)) %>% glimpse()
+      } else {
+        points.samples.without.metadata <- data.frame()
+      }
       
       print("samples.without.periods")
-      samples.without.periods <- samples.without.periods()%>%
-        mutate(error = "sample.without.period") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
+      if (dim(samples.without.periods())[1] > 0) {
+        samples.without.periods <- samples.without.periods()%>%
+          mutate(error = "sample.without.period") %>%
+          mutate(across(everything(), as.character)) %>% glimpse()
+      } else {
+        samples.without.periods <- data.frame()
+      }
       
       print("periods.no.end")
-      periods.no.end <- periods.no.end() %>%
-        mutate(error = "period.with.no.end") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
+      if (dim(periods.no.end())[1] > 0) {
+        periods.no.end <- periods.no.end() %>%
+          mutate(error = "period.with.no.end") %>%
+          mutate(across(everything(), as.character)) %>% glimpse()
+      } else {
+        periods.no.end <- data.frame()
+      }
       
       print("periods.wrong")
-      periods.wrong <- periods() %>%
-        distinct(campaignid, sample, period, time_start, time_end, has_end) %>%
-        mutate(period_time = round(time_end - time_start)) %>%
-        filter(!period_time %in% c(input$error.period.length)) %>%
-        mutate(error = "period.wrong.length") %>%
-        mutate(across(everything(), as.character))# %>% glimpse()
+      if (dim(periods())[1] > 0) {
+        periods.wrong <- periods() %>%
+          distinct(campaignid, sample, period, time_start, time_end, has_end) %>%
+          mutate(period_time = round(time_end - time_start)) %>%
+          filter(!period_time %in% c(input$error.period.length)) %>%
+          mutate(error = "period.wrong.length") %>%
+          mutate(across(everything(), as.character)) %>% glimpse()
+      } else {
+        periods.wrong <- data.frame()
+      }
       
       print("points.outside.periods")
-      points.outside.periods <- points.outside.periods() %>%
-        mutate(error = "point.outside.period") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
+      if (dim(points.outside.periods())[1] > 0) {
+        points.outside.periods <- points.outside.periods() %>%
+          mutate(error = "point.outside.period") %>%
+          mutate(across(everything(), as.character)) %>% glimpse()
+      } else {
+        points.outside.periods <- data.frame()
+      }
       
       print("points.no.number")
-      points.no.number <- points.no.number() %>%
-        mutate(error = "point.without.a.number") %>%
-        mutate(across(everything(), as.character)) #%>% glimpse()
-      
+      if (dim(points.no.number())[1] > 0) {
+        points.no.number <- points.no.number() %>%
+          mutate(error = "point.without.a.number") %>%
+          mutate(across(everything(), as.character)) %>% glimpse()
+      } else {
+        points.no.number <- data.frame()
+      }
       
       print("maxn.species.not.observed")
-      maxn.species.not.observed <- maxn.species.not.observed() %>%
-        mutate(error = "species.not.observed.in.region.before") %>%
-        mutate(across(everything(), as.character))  #%>% glimpse()
+      if (dim(maxn.species.not.observed())[1] > 0) {
+        maxn.species.not.observed <- maxn.species.not.observed() %>%
+          mutate(error = "species.not.observed.in.region.before") %>%
+          mutate(across(everything(), as.character))  %>% glimpse()
+      } else {
+        maxn.species.not.observed <- data.frame()
+      }
       
       print("maxn.species.not.in.list")
-      maxn.species.not.in.lh <- maxn.species.not.observed.lh() %>%
-        mutate(error = "species.not.in.life.history.sheet") %>%
-        mutate(across(everything(), as.character))  #%>% glimpse()
+      if (dim(maxn.species.not.observed.lh())[1] > 0) {
+        maxn.species.not.in.lh <- maxn.species.not.observed.lh() %>%
+          mutate(error = "species.not.in.life.history.sheet") %>%
+          mutate(across(everything(), as.character))  %>% glimpse()
+      } else {
+        maxn.species.not.in.lh <- data.frame()
+      }
       
       if(input$length %in% "Yes"){
         print("length.samples.without.metadata")
-        length.samples.without.metadata <- length.samples.without.metadata() %>%
-          mutate(error = "sample.in.lengths.without.metadata") %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+        if (dim(length.samples.without.metadata())[1] > 0) {
+          length.samples.without.metadata <- length.samples.without.metadata() %>%
+            mutate(error = "sample.in.lengths.without.metadata") %>%
+            mutate(across(everything(), as.character)) %>% glimpse()
+        } else {
+          length.samples.without.metadata <- data.frame()
+        }
         
         print("lengths.outside.periods")
-        lengths.outside.periods <- lengths.outside.periods() %>%
-          mutate(error = "length.or.3D.point.outside.period") %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+        if (dim(lengths.outside.periods())[1] > 0) {
+          lengths.outside.periods <- lengths.outside.periods() %>%
+            mutate(error = "length.or.3D.point.outside.period") %>%
+            mutate(across(everything(), as.character)) %>% glimpse()
+        } else {
+          lengths.outside.periods <- data.frame()
+        }
         
         print("samples.without.length")
-        samples.without.length <- metadata.samples.without.length() %>%
-          mutate(error = "sample.without.length") %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+        if (dim(metadata.samples.without.length())[1] > 0) {
+          samples.without.length <- metadata.samples.without.length() %>%
+            mutate(error = "sample.without.length") %>%
+            mutate(across(everything(), as.character)) %>% glimpse()
+        } else {
+          samples.without.length <- data.frame()
+        }
         
         print("lengths.no.number")
-        lengths.no.number <- lengths.no.number() %>%
-          mutate(error = "length.without.a.number") %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+        if (dim(lengths.no.number())[1] > 0) {
+          lengths.no.number <- lengths.no.number() %>%
+            mutate(error = "length.without.a.number") %>%
+            mutate(across(everything(), as.character)) %>% glimpse()
+        } else {
+          lengths.no.number <- data.frame()
+        }
         
         print("3d.no.number")
-        threedpoints.no.number <- threedpoints.no.number() %>%
-          mutate(error = "3D.point.without.a.number") %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
-        
+        if (dim(threedpoints.no.number())[1] > 0) {
+          threedpoints.no.number <- threedpoints.no.number() %>%
+            mutate(error = "3D.point.without.a.number") %>%
+            mutate(across(everything(), as.character)) %>% glimpse()
+        } else {
+          threedpoints.no.number <- data.frame()
+        }
         
         print("length.species.not.observed")
-        length.species.not.observed <- length.species.not.observed() %>%
-          mutate(error = "species.not.observed.in.region.before") %>%
-          mutate(across(everything(), as.character))  #%>% glimpse()
+        if (dim(length.species.not.observed())[1] > 0) {
+          length.species.not.observed <- length.species.not.observed() %>%
+            mutate(error = "species.not.observed.in.region.before") %>%
+            mutate(across(everything(), as.character))  %>% glimpse()
+        } else {
+          length.species.not.observed <- data.frame()
+        }
         
         print("length.species.not.in.list")
-        length.species.not.in.lh <- length.species.not.observed.lh() %>%
-          mutate(error = "species.not.in.life.history.sheet") %>%
-          mutate(across(everything(), as.character))  #%>% glimpse()
+        if (dim(length.species.not.observed.lh())[1] > 0) {
+          length.species.not.in.lh <- length.species.not.observed.lh() %>%
+            mutate(error = "species.not.in.life.history.sheet") %>%
+            mutate(across(everything(), as.character))  %>% glimpse()
+        } else {
+          length.species.not.in.lh <- data.frame()
+        }
         
         range.limit <- (input$error.report.range*1000)
         
-        print("length.out.of.range")
-        length.out.of.range <- length3dpoints() %>%
-          dplyr::filter(range>range.limit) %>%
-          dplyr::select(campaignid, sample, family, genus, species, range, frame_left, frame_right, em_comment) %>%
-          mutate(error = "out.of.range") %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+        message("length.out.of.range")
+        
+        if (dim(length3dpoints())[1] > 0) {
+          length.out.of.range <- length3dpoints() %>%
+            dplyr::filter(range > range.limit) %>%
+            dplyr::select(campaignid, sample, family, genus, species, range, frame_left, frame_right, em_comment) %>%
+            mutate(error = "out.of.range") %>%
+            mutate(across(everything(), as.character)) %>% glimpse()
+        } else {
+          length.out.of.range <- data.frame()
+        }
         
         print("length.wrong.small")
-        length.wrong.small <- length.wrong() %>%
-          dplyr::filter(reason%in%c("too small")) %>%
-          dplyr::mutate(error = reason) %>%
-          mutate(across(everything(), as.character))
+        if (dim(length.wrong())[1] > 0) {
+          length.wrong.small <- length.wrong() %>%
+            dplyr::filter(reason%in%c("too small")) %>%
+            dplyr::mutate(error = reason) %>%
+            mutate(across(everything(), as.character))%>% glimpse()
+        } else {
+          length.wrong.small <- data.frame()
+        }
         
         print("length.wrong.big")
-        length.wrong.big <- length.wrong() %>%
-          dplyr::filter(reason%in%c("too big")) %>%
-          dplyr::mutate(error = reason)  %>%
-          mutate(across(everything(), as.character))
+        if (dim(length.wrong())[1] > 0) {
+          length.wrong.big <- length.wrong() %>%
+            dplyr::filter(reason%in%c("too big")) %>%
+            dplyr::mutate(error = reason)  %>%
+            mutate(across(everything(), as.character))%>% glimpse()
+        } else {
+          length.wrong.big <- data.frame()
+        }
         
         rms.limit <- (input$error.report.rms)
         
@@ -9628,7 +10024,7 @@ function(input, output, session) {
           dplyr::filter(rms > rms.limit) %>%
           dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, code)%>%
           mutate(error = "over.rms")  %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+          mutate(across(everything(), as.character)) %>% glimpse()
         
         precision.limit <- (input$error.report.precision)
         
@@ -9638,7 +10034,7 @@ function(input, output, session) {
           dplyr::filter(precision_percent > precision.limit) %>%
           dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, precision_percent, code)%>%
           mutate(error = "over.precision")  %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+          mutate(across(everything(), as.character)) %>% glimpse()
         
         print("stereo.maxn.does.not.equal.maxn")
         stereo.maxn.does.not.equal.maxn <- length.vs.maxn() %>%
@@ -9646,29 +10042,42 @@ function(input, output, session) {
           dplyr::filter(!length_maxn == maxn) %>%
           dplyr::filter(!percent_difference%in%c(0)) %>%
           mutate(error = "stereo.maxn.does.not.equal.maxn") %>%
-          mutate(across(everything(), as.character)) #%>% glimpse()
+          mutate(across(everything(), as.character)) %>% glimpse()
       }
       
       # all errors
-      print("all errors")
+      message("all errors")
       
       
       if(input$periods %in% "yes") {
         
-        errors <- bind_rows(samples.without.points,
-                            points.samples.without.metadata,
-                            
-                            samples.without.periods,
-                            periods.no.end,
-                            periods.wrong,
-                            points.outside.periods,
-                            
-                            points.no.number,
-                            
-                            maxn.species.not.observed,
-                            maxn.species.not.in.lh)
+        errors <- bind_rows(lapply(list(
+          metadata.samples.duplicated,
+          metadata.coordinates.duplicated,
+          metadata.on.land,
+          
+          samples.without.points,
+          points.samples.without.metadata,
+          
+          samples.without.periods,
+          periods.no.end,
+          periods.wrong,
+          points.outside.periods,
+          
+          points.no.number,
+          
+          maxn.species.not.observed,
+          maxn.species.not.in.lh), function(df) {
+            # )
+            df %>% mutate(across(everything(), as.character))})) %>%
+          dplyr::glimpse()
+        
+        
+        # bind_rows()
         
         if(input$length %in% "Yes"){
+          
+          message("length")
           
           errors <- bind_rows(errors,
                               samples.without.length,
@@ -9701,7 +10110,10 @@ function(input, output, session) {
         
       } else {
         
-        errors <- bind_rows(samples.without.points,
+        errors <- bind_rows(metadata.samples.duplicated,
+                            metadata.coordinates.duplicated,
+                            metadata.on.land,
+                            samples.without.points,
                             points.samples.without.metadata,
                             
                             points.no.number,
@@ -9731,8 +10143,27 @@ function(input, output, session) {
                               stereo.maxn.does.not.equal.maxn) 
         }
         
+        message("ALL ERRORS")
+        
         all.errors <- errors %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "number", "length_mm", "frame", "frame_left", "range", "min_length", "max_length", "length_max_mm", "em_comment", "rms", "precision", "code"))) %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", 
+                                                                                          "latitude_dd",
+                                                                                          "longitude_dd",
+                                                                                          "family", 
+                                                                                          "genus", 
+                                                                                          "species", 
+                                                                                          "number", 
+                                                                                          "length_mm", 
+                                                                                          "frame", 
+                                                                                          "frame_left", 
+                                                                                          "range", 
+                                                                                          "min_length", 
+                                                                                          "max_length", 
+                                                                                          "length_max_mm", 
+                                                                                          "em_comment", 
+                                                                                          "rms", 
+                                                                                          "precision", 
+                                                                                          "code"))) %>%
           distinct() %>%
           tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
           arrange(campaignid, opcode, period) %>%
@@ -9764,12 +10195,24 @@ function(input, output, session) {
       
       # all errors
       print("all errors")
-      all.errors <- bind_rows(samples.without.points,
+      all.errors <- bind_rows(metadata.samples.duplicated,
+                              metadata.coordinates.duplicated,
+                              metadata.on.land,
+                              samples.without.points,
                               points.samples.without.metadata,
                               
                               maxn.species.not.observed,
                               maxn.species.not.in.lh) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "length_max_mm"))) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("latitude_dd", 
+                                                                                        "longitude_dd",
+                                                                                        "error", 
+                                                                                        "family", 
+                                                                                        "genus", 
+                                                                                        "species", 
+                                                                                        "length_mm", 
+                                                                                        "min_length", 
+                                                                                        "max_length", 
+                                                                                        "length_max_mm"))) %>%
         distinct() %>%
         tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
         arrange(campaignid, opcode, period) %>%
@@ -9821,7 +10264,10 @@ function(input, output, session) {
         
         # all errors
         print("all errors")
-        all.errors <- bind_rows(samples.without.points,
+        all.errors <- bind_rows(metadata.samples.duplicated,
+                                metadata.coordinates.duplicated,
+                                metadata.on.land,
+                                samples.without.points,
                                 samples.without.length,
                                 points.samples.without.metadata,
                                 length.samples.without.metadata,
@@ -9836,7 +10282,7 @@ function(input, output, session) {
                                 length.wrong.big,
                                 
                                 stereo.maxn.does.not.equal.maxn) %>%
-          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("error", "family", "genus", "species", "length_mm", "min_length", "max_length", "length_max_mm"))) %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), dplyr::any_of(c("latitude_dd", "longitude_dd", "error", "family", "genus", "species", "length_mm", "min_length", "max_length", "length_max_mm"))) %>%
           distinct() %>%
           tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
           arrange(campaignid, opcode, period) %>%
@@ -9845,6 +10291,8 @@ function(input, output, session) {
       }
       
     }
+    
+    message("the end of errors")
     
     return(all.errors)
     # Remember to make this distinct!
@@ -9975,6 +10423,38 @@ function(input, output, session) {
     sample.cols <- c(opcode = NA_real_,
                      period = NA_real_)
     
+    if (dim(metadata.samples.duplicated.t())[1] > 0) {
+      print("metadata.samples.duplicated.t")
+      metadata.samples.duplicated.t <- metadata.samples.duplicated.t() %>%
+        mutate(error = "sample.names.are.duplicated") %>%
+        mutate(across(everything(), as.character)) %>%
+        glimpse()
+    } else {
+      metadata.samples.duplicated.t <- data.frame()
+    }
+    
+    if (dim(metadata.coordinates.duplicated.t())[1] > 0) {
+      print("metadata.coordinates.duplicated.t")
+      metadata.coordinates.duplicated.t <- metadata.coordinates.duplicated.t() %>%
+        mutate(error = "sample.coordinates.are.duplicated") %>%
+        mutate(across(everything(), as.character)) %>%
+        glimpse()
+    } else {
+      metadata.coordinates.duplicated.t <- data.frame()
+    }
+    
+    print("metadata.on.land")
+    if (dim(metadata.on.land.t())[1] > 0) {
+      metadata.on.land.t <- metadata.on.land.t() %>%
+        mutate(error = "coordinates.potentially.on.land") %>%
+        dplyr::left_join(metadata()) %>%
+        dplyr::select(any_of(c("campaignid", "sample", "opcode", "period", "latitude_dd", "longitude_dd"))) %>%
+        mutate(across(everything(), as.character)) %>%
+        glimpse()
+    } else {
+      metadata.on.land.t <- data.frame()
+    }
+    
     
     metadata.samples.without.lengths.t <- metadata.samples.without.fish.t() %>%
       mutate(error = "samples.without.lengths") %>%
@@ -10077,7 +10557,11 @@ function(input, output, session) {
       mutate(across(everything(), as.character))
     
     # points.samples.without.metadata.t,
-    all.errors <- bind_rows(metadata.samples.without.lengths.t,
+    all.errors <- bind_rows(metadata.samples.duplicated.t,
+                            metadata.coordinates.duplicated.t,
+                            metadata.on.land.t,
+                            
+                            metadata.samples.without.lengths.t,
                             metadata.samples.without.3dpoints.t,
                             length.samples.without.metadata.t,
                             
@@ -10099,7 +10583,7 @@ function(input, output, session) {
                             length.wrong.rms,
                             length.wrong.precision) %>%
       
-      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), error, family, genus, species, number, length_mm, frame, frame_left, range, min_length, max_length, length_max_mm, em_comment, rms, precision) %>%
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "latitude_dd", "longitude_dd")), error, family, genus, species, number, length_mm, frame, frame_left, range, min_length, max_length, length_max_mm, em_comment, rms, precision) %>%
       distinct() %>%
       tibble::add_column(!!!sample.cols[!names(sample.cols) %in% names(.)]) %>%
       arrange(campaignid, opcode, period) %>%

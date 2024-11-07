@@ -37,6 +37,7 @@ library(raster)
 library(leaflet)
 library(leaflet.minicharts)
 library(leafgl)
+library(rnaturalearth)
 
 # Global archive functions
 library(devtools)
@@ -180,5 +181,13 @@ iconSet <- awesomeIconList(
     icon = 'surf',
     iconColor = 'white',
     markerColor = 'yellow'
+  )
+)
+
+icon.on.land <- awesomeIconList(
+  'Land' = makeAwesomeIcon(
+    icon = 'surf',
+    iconColor = 'white',
+    markerColor = 'orange'
   )
 )

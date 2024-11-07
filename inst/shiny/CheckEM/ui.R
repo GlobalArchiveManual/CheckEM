@@ -256,6 +256,16 @@ function(){
                                                div(id="click.length.samples.without.metadata",
                                                    valueBoxOutput("length.samples.without.metadata"))),
                        
+                       div(id="click.metadata.samples.duplicated",
+                           valueBoxOutput("metadata.samples.duplicated")),
+                       
+                       div(id="click.metadata.coordinates.duplicated",
+                           valueBoxOutput("metadata.coordinates.duplicated")),
+                       
+                       div(id="click.metadata.on.land",
+                           valueBoxOutput("metadata.on.land")),
+                       
+                       
                        shiny::conditionalPanel("input.periods == 'yes'",
                                                
                                                shiny::conditionalPanel("input.upload == 'EM'",
@@ -293,6 +303,15 @@ function(){
                            valueBoxOutput("metadata.samples.without.3dpoints.t")),
                        div(id="click.length.samples.without.metadata.t",
                            valueBoxOutput("length.samples.without.metadata.t")),
+                       
+                       div(id="click.metadata.samples.duplicated.t",
+                           valueBoxOutput("metadata.samples.duplicated.t")),
+                       
+                       div(id="click.metadata.coordinates.duplicated.t",
+                           valueBoxOutput("metadata.coordinates.duplicated.t")),
+                       
+                       div(id="click.metadata.on.land.t",
+                           valueBoxOutput("metadata.on.land.t")),
                        
                        
                        shiny::conditionalPanel("input.upload == 'EM'",

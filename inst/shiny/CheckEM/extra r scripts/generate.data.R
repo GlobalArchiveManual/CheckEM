@@ -6,6 +6,7 @@ library(sf)
 library(RCurl)
 require(rgdal)
 library(mregions)
+library(rnaturalearth)
 devtools::install_github("GlobalArchiveManual/CheckEM")
 
 # designate project-specific cache
@@ -304,6 +305,17 @@ schema.fish <- readxl::read_xlsx("inst/shiny/CheckEM/data/schemas/fish.life.hist
 schema.habitat <- read_tsv("inst/shiny/CheckEM/data/schemas/benthic.habitat.annotation.schema.forward.facing.txt")
 schema.relief <- read_tsv("inst/shiny/CheckEM/data/schemas/benthic.relief.annotation.schema.forward.facing.txt")
 
+# Australia land shapefile ----
+aus <- st_read(here::here("H:/Files to big for CheckEM/spatial/aus-shapefile-w-investigator-stokes.shp")) %>%
+  st_transform(crs="+init=epsg:4326") %>%
+  dplyr::mutate(land = "land")
+
+world <- ne_countries(scale = "medium", returnclass = "sf") %>%
+  dplyr::mutate(land = "land")
+
+# plot(aus)
+# plot(world)
+
 all_data <- structure(
   list(
     # wgs.84 = wgs.84,
@@ -327,7 +339,10 @@ all_data <- structure(
     world_marineparks = world_marineparks,
     world_marineparks_oceans = world_marineparks_oceans,
     comm.pal = comm.pal,
-    iucn.pal = iucn.pal
+    iucn.pal = iucn.pal,
+    world = world,
+    aus = aus
+    
   ),
   class = "data"
 )

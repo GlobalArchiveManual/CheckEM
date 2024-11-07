@@ -1,5 +1,12 @@
 # Change log
 
+## 2.13 (released 07/11/2024)  <br />
+### Added <br />
+- A check for duplicated sample names
+- A check for duplicated coordinates in the metadata
+- A check for coordinates that are potentially on land. The shapefile used for all the countries in the world is not a high resolution, so this could be problematic for samples that are close to the coastline.
+
+
 ## 2.12 (released 26/09/2023)  <br />
 ### Added  <br />
 - A count and a length score to the QC score plot.
