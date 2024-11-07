@@ -6162,7 +6162,9 @@ function(input, output, session) {
     threedpoints.no.number <- threedpoints() %>%
       dplyr::filter(number %in% c("NA", NA, 0, NULL, "", " ")) %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, number, period_time, frame_left, em_comment)
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, number, period_time, frame_left, em_comment) %>%
+      dplyr::mutate(em_comment = tolower(em_comment)) %>%
+      dplyr::filter(!em_comment %in% c("sync"))
   })
   
   ## ►  3d points without a number - value box ----
@@ -10091,7 +10093,7 @@ function(input, output, session) {
         length.wrong.rms <- length3dpoints() %>%
           dplyr::filter(rms > rms.limit) %>%
           dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, code)%>%
-          mutate(error = "over.rms")  %>%
+          mutate(error = if_else(!is.na(length_mm), "length.measurement.over.rms", "3D.point.measurement.over.rms"))  %>%
           mutate(across(everything(), as.character)) %>% glimpse()
         
         precision.limit <- (input$error.report.precision)
@@ -10610,7 +10612,7 @@ function(input, output, session) {
     length.wrong.rms <- length3dpoints.t() %>%
       dplyr::filter(rms > rms.limit) %>%
       dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, code)%>%
-      mutate(error = "over.RMS")%>%
+      mutate(error = if_else(!is.na(length_mm), "length.measurement.over.rms", "3D.point.measurement.over.rms"))  %>%
       #glimpse()%>%
       mutate(across(everything(), as.character))
     
