@@ -36,7 +36,8 @@ max_url <- "https://docs.google.com/spreadsheets/d/1H7EXoTlpeg48LrNVszIa8irwIAh_
 
 new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
   clean_names() %>%
-  dplyr::select(family, genus, species, new_maximum_length_in_cm, type_of_length_measure) %>% 
+  dplyr::rename(source = please_provide_a_link_to_reference_information_e_g_website_or_paper) %>%
+  dplyr::select(family, genus, species, new_maximum_length_in_cm, type_of_length_measure, source) %>% 
   dplyr::group_by(family, genus, species) %>%
   slice(which.max(new_maximum_length_in_cm)) %>%
   ungroup()
@@ -424,7 +425,7 @@ australia_life_history <- caab_combined %>%
   
   dplyr::left_join(new_max_sizes) %>%
   dplyr::mutate(fb_length_max = if_else(!is.na(new_maximum_length_in_cm), new_maximum_length_in_cm, fb_length_max)) %>%
-  dplyr::mutate(length_max_source = if_else(!is.na(new_maximum_length_in_cm), "BRUV Expert", "Fishbase")) %>%
+  dplyr::mutate(length_max_source = if_else(!is.na(new_maximum_length_in_cm), source, "Fishbase")) %>% #BRUV expert
   dplyr::mutate(fb_length_max_type = if_else(!is.na(new_maximum_length_in_cm), type_of_length_measure, fb_length_max_type)) %>%
   dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
   
@@ -525,7 +526,7 @@ australia_life_history <- caab_combined %>%
   dplyr::rename(length_max_cm = fb_length_max, length_max_type = fb_length_max_type)
 
 names(australia_life_history)
-
+unique(australia_life_history$length_max_source)
 unique(australia_life_history$length_max_cm) %>% sort()
 
 expanded <- australia_life_history %>%

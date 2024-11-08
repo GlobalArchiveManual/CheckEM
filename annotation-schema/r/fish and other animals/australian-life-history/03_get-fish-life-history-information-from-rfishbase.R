@@ -75,7 +75,7 @@ true_matches <- double_fb %>%
   dplyr::filter(caab_scientific %in% fishbase_scientific) %>%
   dplyr::select(caab_code, caab_scientific, speccode, fishbase_scientific)
 
-still_missing <- anti_join(double_fb %>% select(speccode), true_matches)
+still_missing <- anti_join(double_fb %>% dplyr::select(speccode), true_matches)
 
 # Download maturity data ----
 # Filter to only Fork length measurements
@@ -181,7 +181,7 @@ max_lengths_conversion <- ll_for_max_lengths %>%
   dplyr::mutate(fb_length_max = a + b * fb_length_max) %>%
   dplyr::group_by(fishbase_scientific) %>%
   dplyr::slice_max(fb_length_max, with_ties = FALSE) %>%
-  dplyr::mutate(max_length_source = "FishBase, converted to FL",
+  dplyr::mutate(max_length_source = paste("FishBase:", known_length, "converted to FL using length-length equation"),
                 fb_l_type_max = "FL") %>%
   dplyr::ungroup() %>%
   dplyr::filter(!fishbase_scientific %in% max_lengths_already_fl$fishbase_scientific) # don't include species where the max is actually given in forklength
@@ -196,7 +196,7 @@ max_lengths_conversion_reversed <- ll_for_max_lengths %>%
   dplyr::mutate(fb_length_max = (fb_length_max - a)/b) %>%
   dplyr::group_by(fishbase_scientific) %>%
   dplyr::slice_max(fb_length_max, with_ties = FALSE) %>%
-  dplyr::mutate(max_length_source = "FishBase, reversed to FL",
+  dplyr::mutate(max_length_source = paste("FishBase:", known_length, "converted to Fl using inverse length-length equation"),
                 fb_l_type_max = "FL") %>%
   dplyr::ungroup() %>%
   dplyr::filter(!fishbase_scientific %in% max_lengths_already_fl$fishbase_scientific) %>% # don't include species where the max is actually given in forklength
@@ -265,7 +265,7 @@ length(unique(all_max_lengths_fl$fishbase_scientific)) # 1946 species with forkl
 fl_missing <- max_lengths_available %>%
   dplyr::filter(!fishbase_scientific %in% all_max_lengths_fl$fishbase_scientific) 
 
-# Some of these don't have any lenght-length information though e.g. Bodianus solatus
+# Some of these don't have any length-length information though e.g. Bodianus solatus
 
 fl_missing_but_has_length_length <- fl_missing %>%
   dplyr::filter(fishbase_scientific %in% ll_for_max_lengths$fishbase_scientific) 
@@ -277,26 +277,62 @@ length_length_to_fl <- ll_for_max_lengths %>%
   
 fl_missing_but_has_length_length <- fl_missing %>%
   dplyr::filter(fishbase_scientific %in% ll_for_max_lengths$fishbase_scientific) %>%
-  dplyr::filter(fishbase_scientific %in% length_length_to_fl$fishbase_scientific) 
+  dplyr::filter(fishbase_scientific %in% length_length_to_fl$fishbase_scientific) %>%
+  dplyr::filter(!fb_l_type_max %in% c("NG", "OT"))
 
-# only 427 fish species that have a/b for a FL calculation - still doesn't mean that I will be able to get them all but it is a much easier number to work with to see what I need to script
+# only 421 fish species that have a/b for a FL calculation - still doesn't mean that I will be able to get them all but it is a much easier number to work with to see what I need to script
 
+# Can remove ones where the type that is given does not occur in the length-length table as an option
+# e.g. Urogymnus granulatus is given in WD but there is not WD in the table
 
+fl_missing_but_has_length_length_and_type_exists <- fl_missing_but_has_length_length %>%
+  left_join(ll_for_max_lengths) %>%
+  dplyr::filter(length1 == fb_l_type_max | length2 == fb_l_type_max ) %>%
+  dplyr::distinct(fishbase_scientific, speccode, fb_length_max, fb_l_type_max)
 
-test <- all_max_lengths_fl %>%
+# Only left with SL and 404 species
+
+# Need to do three more calcs
+sl_to_tl_to_fl <- ll_for_max_lengths %>%
+  filter(length1 == "TL", length2 == "SL") %>%
+  dplyr::rename(known_length = length2,
+                unknown_length = length1) %>%
+  dplyr::filter(known_length == fb_l_type_max) %>%
+  mutate(intermediate_TL = a + b * fb_length_max) %>%
+  dplyr::filter(!is.na(intermediate_TL)) %>%
+  dplyr::select(fishbase_scientific, fb_length_max, fb_l_type_max, intermediate_TL) %>%
+  group_by(fishbase_scientific) %>%
+  slice_max(intermediate_TL, with_ties = FALSE) %>%
+  left_join(ll_for_max_lengths) %>%
+  dplyr::filter(length2 == "FL") %>%
+  dplyr::mutate(conversion_possible = if_else(length1 == "TL", TRUE, FALSE)) %>%
+  dplyr::filter(!conversion_possible %in% FALSE) %>%
+  dplyr::rename(known_length = length2,
+                unknown_length = length1) %>%
+  dplyr::mutate(fb_length_max = (intermediate_TL - a)/b) %>%
   dplyr::group_by(fishbase_scientific) %>%
-  dplyr::summarise(n = n()) %>%
-  filter(n > 1)
+  dplyr::slice_max(fb_length_max, with_ties = FALSE) %>%
+  dplyr::mutate(max_length_source = paste("FishBase:", known_length, "converted to Fl using multi-step SL->TL->FL"),
+                fb_l_type_max = "FL") %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(!fishbase_scientific %in% all_max_lengths_fl$fishbase_scientific) %>%# don't include species where we have already worked it out
+  dplyr::select(fishbase_scientific, fb_length_max, fb_l_type_max, max_length_source) 
 
-unique(ll_for_max_lengths$r2) %>%sort()
+test <- fl_missing_but_has_length_length %>%
+  filter(!fishbase_scientific %in% sl_to_tl_to_fl$fishbase_scientific)
 
+max_lengths_in_fl <- bind_rows(all_max_lengths_fl, sl_to_tl_to_fl)
 
-# ok - so there are still a lot of 
+other_max_lengths <- info %>%
+  dplyr::select(fishbase_scientific, fb_length_max, fb_l_type_max) %>%
+  filter(!fishbase_scientific %in% max_lengths_in_fl$fishbase_scientific) %>%
+  dplyr::mutate(max_length_source = if_else(!is.na(fb_length_max), "Fishbase", NA))
 
-# have length length (to FL) info for 2336 species
-# 466 of these have multiple studies
-# Need a way to choose a study
-# Length type (2) = a + b × Length type (1)
+all_max_lengths <- bind_rows(max_lengths_in_fl, other_max_lengths)
+
+info <- info %>%
+  dplyr::select(-c(fb_length_max, fb_l_type_max)) %>%
+  left_join(all_max_lengths)
 
 unique(ll$type)
 
@@ -540,6 +576,7 @@ all_fishbase <- info %>%
                 fb_length_at_maturity_cm, 
                 fb_length_max, 
                 fb_l_type_max, 
+                max_length_source,
                 fb_vulnerability, 
                 fb_countries, 
                 fb_status, 
