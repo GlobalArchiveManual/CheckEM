@@ -436,7 +436,7 @@ australia_life_history <- caab_combined %>%
   tidyr::replace_na(list(new_maximum_length_in_cm = 0)) %>%
   dplyr::mutate(length_max_source = if_else(new_maximum_length_in_cm > fb_length_max, "Fishes of Australia", length_max_source)) %>%
   dplyr::mutate(fb_length_max = if_else(new_maximum_length_in_cm > fb_length_max, new_maximum_length_in_cm, fb_length_max)) %>%
-  dplyr::mutate(fb_length_max_type = if_else(!is.na(new_maximum_length_in_cm > fb_length_max), type_of_length_measure, fb_length_max_type)) %>%
+  dplyr::mutate(fb_length_max_type = if_else((new_maximum_length_in_cm > fb_length_max), type_of_length_measure, fb_length_max_type)) %>%
   
   dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
   filter(!grepl("cf", species)) %>%

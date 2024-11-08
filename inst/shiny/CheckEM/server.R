@@ -6404,22 +6404,22 @@ function(input, output, session) {
       length.wrong <- left_join(length3dpoints.clean(), life.history.min.max(), by = c("family", "genus", "species")) %>%
         dplyr::filter(length_mm<min_length|length_mm>max_length) %>%
         mutate(reason = ifelse(length_mm<min_length, "too small", "too big")) %>%
-        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, em_comment, frame_left, number) %>%
+        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, em_comment, frame_left, number, length_max_type) %>%
         mutate(difference = ifelse(reason%in%c("too small"), (min_length-length_mm), (length_mm-max_length))) %>%
         dplyr::mutate(percent.of.fb.max = (length_mm/length_max_mm*100)) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, em_comment, frame_left, number)
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, length_max_mm, length_max_type, reason, em_comment, frame_left, number)
       
     } else {
       
       length.wrong <- left_join(gen.length.clean(), life.history.min.max(), by = c("family", "genus", "species")) %>%
         dplyr::filter(length_mm<min_length|length_mm>max_length) %>%
         mutate(reason = ifelse(length_mm<min_length, "too small", "too big")) %>%
-        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, number) %>%
+        dplyr::select(campaignid, sample, family, genus, species, length_mm, min_length, max_length, length_max_mm, length_max_type, reason, number) %>%
         mutate(difference = ifelse(reason%in%c("too small"), (min_length-length_mm), (length_mm-max_length))) %>%
         dplyr::mutate(percent.of.fb.max = (length_mm/length_max_mm*100)) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, length_max_mm, reason, number)
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, min_length, max_length, length_max_mm, length_max_type, reason, number)
       #glimpse()
       
     }
@@ -6462,8 +6462,9 @@ function(input, output, session) {
   onclick('click.length.wrong.small', showModal(modalDialog(
     title = "Length measurements smaller than 15% of the fishbase maximum", size = "l", easyClose = TRUE, 
     downloadButton("download.length.wrong.small", "Download as csv"), 
-    renderDataTable(filter(length.wrong()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
-                                                           '85%_fb_maximum_length' = max_length,
+    renderDataTable(filter(length.wrong()%>% dplyr::select(-c(max_length)) %>%
+      dplyr::rename('15%_fb_maximum_length' = min_length,
+                                                           # '85%_fb_maximum_length' = max_length,
                                                            'fb_maximum_length' = length_max_mm), reason == "too small"), rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
@@ -6503,8 +6504,9 @@ function(input, output, session) {
   onclick('click.length.wrong.big', showModal(modalDialog(
     title = "Length measurements bigger than 85% of the fishbase maximum", size = "l", easyClose = TRUE, 
     downloadButton("download.length.wrong.big", "Download as csv"), 
-    renderDataTable(filter(length.wrong()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
-                                                           '85%_fb_maximum_length' = max_length,
+    renderDataTable(filter(length.wrong()%>% dplyr::select(-c(min_length, max_length)) %>%
+                             dplyr::rename(#'15%_fb_maximum_length' = min_length,
+                                                           #'85%_fb_maximum_length' = max_length,
                                                            'fb_maximum_length' = length_max_mm), reason == "too big"), rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
@@ -6537,7 +6539,7 @@ function(input, output, session) {
       paste("length.100.percent.of.max", Sys.Date(), ".csv", sep = "")
     }, 
     content = function(file) {
-      write.csv(dplyr::filter(length.wrong(), length_max_mm < length_mm), file, row.names = FALSE)
+      write.csv(dplyr::filter(length.wrong()%>% dplyr::select(-c(min_length, max_length)), length_max_mm < length_mm), file, row.names = FALSE)
     }
   )
   
@@ -6545,8 +6547,9 @@ function(input, output, session) {
   onclick('click.length.wrong.big.100', showModal(modalDialog(
     title = "Length measurements bigger than 100% of the fishbase maximum", size = "l", easyClose = TRUE, 
     downloadButton("download.length.wrong.big.100", "Download as csv"), 
-    renderDataTable(filter(length.wrong()%>% dplyr::rename('15%_fb_maximum_length' = min_length,
-                                                           '85%_fb_maximum_length' = max_length,
+    renderDataTable(filter(length.wrong() %>% dplyr::select(-c(min_length, max_length)) %>%
+                             dplyr::rename(#'15%_fb_maximum_length' = min_length,
+                                                           #'85%_fb_maximum_length' = max_length,
                                                            'fb_maximum_length' = length_max_mm), fb_maximum_length < length_mm), rownames = FALSE, 
                     options = list(paging = FALSE, searching = TRUE)))))
   
