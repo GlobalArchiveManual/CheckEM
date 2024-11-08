@@ -2,7 +2,7 @@
 
 ## 2.14 (released 08/11/2024)  <br />
 ### Changed <br />
-- Upcated the lifehistory information - maximum lengths are now in Fork Length if the length-length equations are available on Fishbase
+- Upcated the life history information - maximum lengths are now in Fork Length if the length-length equations are available on Fishbase
 
 ## 2.13 (released 07/11/2024)  <br />
 ### Added <br />
