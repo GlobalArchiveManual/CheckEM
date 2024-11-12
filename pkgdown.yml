@@ -14,9 +14,10 @@ articles:
   r-workflows/format-visualise-fish: r-workflows/format-visualise-fish.html
   r-workflows/format-visualise-habitat: r-workflows/format-visualise-habitat.html
   r-workflows/habitat-modelling: r-workflows/habitat-modelling.html
+  r-workflows/sampling-design: r-workflows/sampling-design.html
   r-workflows/spatial-layers: r-workflows/spatial-layers.html
   manuals/TransectMeasure_annotation_guide: manuals/TransectMeasure_annotation_guide.html
-last_built: 2024-11-08T06:41Z
+last_built: 2024-11-12T04:46Z
 urls:
   reference: https://globalarchivemanual.github.io/CheckEM/reference
   article: https://globalarchivemanual.github.io/CheckEM/articles

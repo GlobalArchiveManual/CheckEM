@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>TransectMeasure Annotation Guide • CheckEM</title>
+<title>sampling-design • CheckEM</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <link href="../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../deps/search-1.0.0/fuse.min.js"></script><script src="../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><meta property="og:title" content="TransectMeasure Annotation Guide">
+<script src="../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../deps/search-1.0.0/fuse.min.js"></script><script src="../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><meta property="og:title" content="sampling-design">
 <!-- Global site tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -42,7 +42,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item dropdown">
+<li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-user-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">User Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-user-guides">
 <li><hr class="dropdown-divider"></li>
@@ -59,7 +59,7 @@
     <li><a class="dropdown-item" href="../../articles/manuals/CheckEM_video.html">CheckEM instructional video</a></li>
   </ul>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-r-workflows" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">R Workflows</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-r-workflows">
 <li><hr class="dropdown-divider"></li>
@@ -100,22 +100,49 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../../logo.png" class="logo" alt=""><h1>TransectMeasure Annotation Guide</h1>
+      <img src="../../logo.png" class="logo" alt=""><h1>sampling-design</h1>
+                        <h4 data-toc-skip class="author">Claude Spencer
+&amp; Brooke Gibbons</h4>
             
+            <h4 data-toc-skip class="date">2024-11-12</h4>
       
 
-      <div class="d-none name"><code>TransectMeasure_annotation_guide.Rmd</code></div>
+      <div class="d-none name"><code>sampling-design.Rmd</code></div>
     </div>
 
     
     
-<button class="btn" style="width:100%">
-<a href="https://docs.google.com/document/d/1c0lo-wQbJqHk0GPm824wP3o2zVROBeT_G25M46eV6js/export?format=pdf" class="external-link">
-<i class="fa fa-download"></i> Download PDF Version</a>
-</button>
-<iframe src="https://docs.google.com/document/d/e/2PACX-1vSRhXoEYYtMr-zCsy7zpCoSpKyMsQeFD2Az3KGgrHgWBOX--7a4goHYzE0czwlbkdPNkI_skPOuX4ky/pub?embedded=true" width="100%" height="1000">
-</iframe>
-  </main>
+<div class="section level2">
+<h2 id="r-markdown">R Markdown<a class="anchor" aria-label="anchor" href="#r-markdown"></a>
+</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting
+syntax for authoring HTML, PDF, and MS Word documents. For more details
+on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="external-link uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be
+generated that includes both content as well as the output of any
+embedded R code chunks within the document. You can embed an R code
+chunk like this:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##      speed           dist       </span></span>
+<span><span class="co">##  Min.   : 4.0   Min.   :  2.00  </span></span>
+<span><span class="co">##  1st Qu.:12.0   1st Qu.: 26.00  </span></span>
+<span><span class="co">##  Median :15.0   Median : 36.00  </span></span>
+<span><span class="co">##  Mean   :15.4   Mean   : 42.98  </span></span>
+<span><span class="co">##  3rd Qu.:19.0   3rd Qu.: 56.00  </span></span>
+<span><span class="co">##  Max.   :25.0   Max.   :120.00</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="including-plots">Including Plots<a class="anchor" aria-label="anchor" href="#including-plots"></a>
+</h2>
+<p>You can also embed plots, for example:</p>
+<p><img src="sampling-design_files/figure-html/pressure-1.png" width="700"></p>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the
+code chunk to prevent printing of the R code that generated the
+plot.</p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
