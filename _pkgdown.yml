@@ -89,6 +89,10 @@ navbar:
   - text: R Workflows
     menu:
     - text: '-------'
+    - text: Create sampling design
+    - text: Create a spatially-balanced sampling design using GRTS
+      href: articles/r-workflows/sampling-design.html
+    - text: '-------'
     - text: Check Data
     - text: Check habitat data from TransectMeasure
       href: articles/r-workflows/check-habitat.html
