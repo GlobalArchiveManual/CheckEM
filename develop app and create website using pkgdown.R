@@ -13,6 +13,12 @@ devtools::load_all()
 # The next line turns all the R function documentation into .Rd files for the man folder
 devtools::document()
 
+# create downloadable R scripts from R Markdown files
+rmd_files <- list.files("vignettes", pattern = "\\.Rmd$", full.names = TRUE)
+lapply(rmd_files, function(file) {
+  knitr::purl(file, output = sub("\\.Rmd$", ".R", file))
+})
+
 # PACKAGE DOWN WEBSITE ----
 
 # Install released version from CRAN
