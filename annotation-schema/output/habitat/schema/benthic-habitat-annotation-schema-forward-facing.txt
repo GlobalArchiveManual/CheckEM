@@ -1,0 +1,110 @@
+level_2	level_3	level_4	level_5	scientific	qualifiers	check
+Ascidians						*
+Bacterial mats						*
+Bryozoa						*
+Cnidaria	Colonial anemones					*
+Cnidaria	Corals	Black & Octocorals				*
+Cnidaria	Corals	Stony corals				*
+Cnidaria	Corals					*
+Cnidaria	Hydrocorals					*
+Cnidaria	Hydroids					*
+Cnidaria	True anemones					*
+Cnidaria	Tube anemones					*
+Cnidaria						*
+Crustacea	Barnacles					*
+Crustacea	Crabs					*
+Crustacea	Hermit crabs					*
+Crustacea	Lobsters					*
+Crustacea	Prawns / shrimps / mysids					*
+Crustacea						*
+Echinoderms	Feather stars					*
+Echinoderms	Ophiuroids					*
+Echinoderms	Sea cucumbers					*
+Echinoderms	Sea stars					*
+Echinoderms	Sea urchins					*
+Echinoderms						*
+Fishes	Bony fishes					*
+Fishes	Eels					*
+Fishes	Elasmobranchs					*
+Fishes						*
+Jellies						*
+Macroalgae	Articulated calcareous					*
+Macroalgae	Encrusting					*
+Macroalgae	Erect coarse branching					*
+Macroalgae	Erect coarse branching				Drift	*
+Macroalgae	Erect coarse branching				No epiphytes	*
+Macroalgae	Erect coarse branching				Epiphytes algae	*
+Macroalgae	Erect coarse branching				Epiphytes other	*
+Macroalgae	Erect fine branching					*
+Macroalgae	Erect fine branching				Drift	*
+Macroalgae	Erect fine branching				No epiphytes	*
+Macroalgae	Erect fine branching				Epiphytes algae	*
+Macroalgae	Erect fine branching				Epiphytes other	*
+Macroalgae	Filamentous / filiform					*
+Macroalgae	Filamentous / filiform				Drift	*
+Macroalgae	Filamentous / filiform				No epiphytes	*
+Macroalgae	Filamentous / filiform				Epiphytes algae	*
+Macroalgae	Filamentous / filiform				Epiphytes other	*
+Macroalgae	Globose / saccate					*
+Macroalgae	Globose / saccate				Drift	*
+Macroalgae	Globose / saccate				No epiphytes	*
+Macroalgae	Globose / saccate				Epiphytes algae	*
+Macroalgae	Globose / saccate				Epiphytes other	*
+Macroalgae	Laminate					*
+Macroalgae	Laminate				Drift	*
+Macroalgae	Laminate				No epiphytes	*
+Macroalgae	Laminate				Epiphytes algae	*
+Macroalgae	Laminate				Epiphytes other	*
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata		*
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Drift	*
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	No epiphytes	*
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Epiphytes algae	*
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Epiphytes other	*
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa		*
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Drift	*
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	No epiphytes	*
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Epiphytes algae	*
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Epiphytes other	*
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp		*
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Drift	*
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	No epiphytes	*
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Epiphytes algae	*
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Epiphytes other	*
+Macroalgae	Large canopy-forming	Brown		Sargassum spp		*
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Drift	*
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	No epiphytes	*
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes algae	*
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes other	*
+Macroalgae	Large canopy-forming					*
+Macroalgae	Large canopy-forming				Drift	*
+Macroalgae	Large canopy-forming				No epiphytes	*
+Macroalgae	Large canopy-forming				Epiphytes algae	*
+Macroalgae	Large canopy-forming				Epiphytes other	*
+Macroalgae	Sheet-like / membraneous					*
+Macroalgae						*
+Molluscs	Bivalves					*
+Molluscs	Cephalopods	Cuttlefish				*
+Molluscs	Cephalopods	Octopods				*
+Molluscs	Cephalopods	Squid				*
+Molluscs	Cephalopods					*
+Molluscs	Chitons					*
+Molluscs	Gastropods					*
+Molluscs						*
+Sea spiders						*
+Seagrasses	Elliptical leaves			Halophila spp		*
+Seagrasses	Elliptical leaves					*
+Seagrasses	Strap-like leaves			Amphibolis spp		*
+Seagrasses	Strap-like leaves			Posidonia spp		*
+Seagrasses	Strap-like leaves			Zostera spp		*
+Seagrasses	Strap-like leaves			Ruppia spp		*
+Seagrasses	Strap-like leaves			Thalassodendron spp		*
+Seagrasses	Strap-like leaves					*
+Seagrasses						*
+Sessile invertebrates						*
+Sponges						*
+Unscorable						*
+Worms						*
+Substrate	Consolidated (hard)					*
+Substrate	Unconsolidated (soft)					*
+Substrate						*
+						Yes
