@@ -4,6 +4,7 @@ library(RColorBrewer)
 library(viridis)
 # Load necessary library
 library(wesanderson)
+library(patchwork)
 
 
 # Specify the path to the folder with CSV files (change to your GitHub local repo or file paths)
@@ -85,7 +86,7 @@ palette_set2_8 <- c(
 # Define the color palette
 custom_palette <- c(
   "#BE4174", "#DA86A5", "#F5C19E", "#F2AB60", 
-  "#7BC6B4", "#4E9B9E", "#2A4F8C", "#79A0D0"
+  "#7BC6B4", "#4E9B9E", "#79A0D0", "#2A4F8C", "#363635"
 )
 
 # Create a stacked bar plot
@@ -130,3 +131,128 @@ ggplot(summary_data, aes(x = date, y = count, fill = error_recoded)) +
     legend.title = element_text(size = 12),  # Legend title size
     legend.text = element_text(size = 10)  # Legend text size
   )
+
+
+
+# Summarize the number of rows for each "error" type, grouped by file
+detailed_data <- combined_data %>%
+  dplyr::mutate(type_error = case_when(
+    error %in% c("period.with.no.end",
+                 "period.wrong.length",
+                 "point.outside.period",
+                 "sample.without.period",
+                 "length.or.3D.point.outside.period") ~ "Metadata",
+    
+    error %in% c("3D.point.measurement.over.rms",
+                 "length.measurement.over.rms") ~ "Measurements",
+    
+    error %in% c("sample.in.lengths.without.metadata",
+                 "sample.in.points.without.metadata") ~ "Metadata",
+    
+    error %in% c("sample.without.length", 
+                 "sample.without.points") ~ "Metadata",
+    
+    error %in% c("species.not.in.life.history.sheet",
+                 "species.not.observed.in.region.before") ~ "Annotations",
+    
+    error %in% c("3D.point.without.a.number",
+                 "point.without.a.number") ~ "Annotations",
+    
+    error %in% c("stereo.maxn.does.not.equal.maxn") ~ "Measurements",
+    
+    error %in% c("too big", 
+                 "too small") ~ "Measurements"
+    
+    
+  )) %>%
+  
+  
+  group_by(file_name, error, type_error) %>%
+  summarise(count = n(), .groups = 'drop') %>%
+  dplyr::filter(!type_error %in% c(NA, "")) %>%
+  separate(file_name, into = c("date", "extra"), sep = "_all.") %>%
+  dplyr::mutate(date = str_replace_all(date, c("_" = " ", "00" = ":00"))) %>%
+  arrange(date) %>%  # Ensure dates are in ascending order
+  mutate(date_sequence = as.numeric(factor(date))) %>%  # Create sequence 1:5
+  mutate(
+    error = str_replace_all(error, "\\.", " ") %>%  # Replace dots with spaces
+      str_to_sentence()) %>%                              # Capitalise first character of each word
+  mutate(error = str_replace_all(error, c("rms" = "RMS",
+                               "3d" = "3D")))
+
+
+# Subset palettes for each plot
+palette_metadata <- custom_palette  # Use all 9 colors
+palette_annotations <- custom_palette[c(1, 3, 5, 7)]
+palette_measurements <- custom_palette[c(1, 3, 5, 7, 9)]
+
+# Theme for publication
+publication_theme <- theme_classic() +
+  theme(
+    text = element_text(family = "sans", size = 12),  # Use sans-serif font
+    plot.title = element_text(size = 14, hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    legend.position = "right",
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10)
+  )
+
+# Plot for Metadata
+plot_metadata <- ggplot(
+  detailed_data %>% filter(type_error == "Metadata"), 
+  aes(x = date_sequence, y = count, fill = error)
+) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = palette_metadata) +
+  labs(
+    title = "Metadata",
+    y = "Number of Flagged Errors",
+    fill = "Type of Error"
+  ) +
+  publication_theme +
+  theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank()#,
+    # axis.ticks.x = element_blank()
+  )
+
+# Plot for Annotations
+plot_annotations <- ggplot(
+  detailed_data %>% filter(type_error == "Annotations"), 
+  aes(x = date_sequence, y = count, fill = error)
+) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = palette_annotations) +
+  labs(
+    title = "Annotations",
+    y = "Number of Flagged Errors",
+    fill = "Type of Error"
+  ) +
+  publication_theme +
+  theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank()#,
+    # axis.ticks.x = element_blank()
+  )
+
+# Plot for Measurements
+plot_measurements <- ggplot(
+  detailed_data %>% filter(type_error == "Measurements"), 
+  aes(x = date_sequence, y = count, fill = error)
+) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = palette_measurements) +
+  labs(
+    title = "Measurements",
+    x = "Iteration",
+    y = "Number of Flagged Errors",
+    fill = "Type of Error"
+  ) +
+  publication_theme
+
+# Combine plots with patchwork
+combined_plot <- (plot_metadata / plot_annotations / plot_measurements)
+
+combined_plot
+
