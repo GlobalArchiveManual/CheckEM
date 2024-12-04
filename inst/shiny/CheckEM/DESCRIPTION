@@ -1,0 +1,15 @@
+Package: CheckEM
+Type: Shiny
+Title: CheckEM
+Version: 0.1.0
+Authors@R: c(
+    person("Your", "Name", email = "your_email@example.com", role = c("aut", "cre"))
+)
+Description: A short description of your Shiny app.
+License: MIT
+Encoding: UTF-8
+RoxygenNote: 7.2.3
+Imports:
+    shiny
+Remotes:
+    UWAMEGFisheries/GlobalArchive

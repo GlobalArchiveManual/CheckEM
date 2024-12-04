@@ -7,7 +7,7 @@
 # Load the required libraries
 library(tidyverse)
 library(worrms)
-library(mregions)
+library(mregions2)
 library(CheckEM)
 library(sf)
 library(rfishbase)
