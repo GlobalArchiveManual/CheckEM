@@ -14,8 +14,8 @@ publication_theme <- theme_classic() +
     axis.title = element_text(size = 12),
     axis.text = element_text(size = 10),
     legend.position = "right",
-    legend.title = element_text(size = 12),
-    legend.text = element_text(size = 10)
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
   )
 
 # Load the dataset (replace 'data-export.csv' with your actual file path)
@@ -77,12 +77,12 @@ map <- ggplot() +
   geom_polygon(data = world_data,
                aes(long, lat, group = group, fill = active_users),
                color = "white",
-               size = 0.3) +  # Thin black outlines
+               size = 0.35) +  # Thin black outlines
   
   # Add labels at country centroids
   geom_text(data = label_data,
             aes(label = active_users, geometry = geometry),
-            stat = "sf_coordinates", size = 3, color = "black", fontface = "bold",
+            stat = "sf_coordinates", size = 4, color = "black", fontface = "bold",
             family = "Times New Roman") +  # Bigger text
   
   # Gradient fill from light blue to dark blue
@@ -115,11 +115,11 @@ scale_y_continuous(breaks = c(-50, -25, 0, 25, 50, 75), labels = c("50Â°S", "25Â
   publication_theme +
   theme(
     panel.grid.major = element_line(color = "gray80"),  # Add grid lines for both axes
-    axis.text = element_text(size = 10),               # Make axis text visible
+    axis.text = element_text(size = 14),               # Make axis text visible
     axis.title = element_blank(),                      # Remove axis titles
     axis.ticks = element_line(size = 0.5),              # Add axis ticks
     legend.position = "bottom",            # Move legend below the plot
-    text = element_text(family = "Times New Roman", size = 12)
+    text = element_text(family = "Times New Roman", size = 16)
   ) 
 
 map
@@ -130,7 +130,7 @@ ggsave(
   plot = map,                 # Use the last plotted ggplot object
   device = "png",                     # Save as PNG
   dpi = 300,                          # High resolution for publication
-  width = 7.27,                       # Width of A4 page in inches
-  height = 4.5,                         # Adjust height to fit the plot nicely
-  units = "in"                        # Specify dimensions in inches
+  width = 21,                       # Width of A4 page in inches
+  height = 12,                         # Adjust height to fit the plot nicely
+  units = "cm"                        # Specify dimensions in inches
 )
