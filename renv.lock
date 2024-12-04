@@ -124,14 +124,15 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "GlobalArchive",
       "RemoteUsername": "UWAMEGFisheries",
+      "RemoteRepo": "GlobalArchive",
+      "RemoteRef": "master",
       "RemoteSha": "f3c4315600a0396c7f72382b81d9073d346d431d",
       "Requirements": [
         "dplyr",
         "tidyr"
       ],
-      "Hash": "4d9c000432fb34dba068a2acb776fd11"
+      "Hash": "4015391c9cd834058b4509eade959294"
     },
     "Hmisc": {
       "Package": "Hmisc",
