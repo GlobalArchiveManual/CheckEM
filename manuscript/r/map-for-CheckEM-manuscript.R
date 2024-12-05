@@ -129,7 +129,7 @@ ggsave(
   filename = "manuscript/plots/map_plot_a4.png",  # File name
   plot = map,                 # Use the last plotted ggplot object
   device = "png",                     # Save as PNG
-  dpi = 300,                          # High resolution for publication
+  dpi = 600,                          # High resolution for publication
   width = 21,                       # Width of A4 page in inches
   height = 12,                         # Adjust height to fit the plot nicely
   units = "cm"                        # Specify dimensions in inches

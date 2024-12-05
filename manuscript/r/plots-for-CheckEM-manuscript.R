@@ -176,11 +176,11 @@ publication_theme <- theme_classic() +
   theme(
     text = element_text(family = "serif", size = 12),  # Use sans-serif font
     plot.title = element_text(family = "serif", size = 14, hjust = 0.5),
-    axis.title = element_text(family = "serif", size = 12),
-    axis.text = element_text(family = "serif", size = 10),
+    axis.title = element_text(family = "serif", size = 13),
+    axis.text = element_text(family = "serif", size = 12),
     legend.position = "right",
-    legend.title = element_text(family = "serif", size = 12),
-    legend.text = element_text(family = "serif", size = 10)
+    legend.title = element_text(family = "serif", size = 14),
+    legend.text = element_text(family = "serif", size = 12)
   )
 
 # Plot for Metadata
@@ -243,3 +243,9 @@ combined_plot <- (plot_metadata / plot_annotations / plot_measurements)
 
 combined_plot
 
+
+ggsave("manuscript/plots/plot-error-iterations.png", 
+       plot = combined_plot, device = "png", 
+       width = 18,                       # Width of A4 page in inches
+       height = 22, 
+       units = "cm", dpi = 600)

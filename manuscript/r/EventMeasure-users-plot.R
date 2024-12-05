@@ -29,4 +29,4 @@ ggsave("manuscript/plots/event_measure_licences_plot.png",
        plot = em_users, device = "png", 
        width = 21,                       # Width of A4 page in inches
        height = 8, 
-       units = "cm", dpi = 300)
+       units = "cm", dpi = 600)
