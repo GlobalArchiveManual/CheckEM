@@ -234,12 +234,16 @@ plot_measurements <- ggplot(
     y = "Number of Flagged Errors",
     fill = "Type of Error"
   ) +
+  scale_x_continuous(
+    breaks = 1:5,  # Positions to place the labels
+    labels = c("Before\nCheckEM", "1", "2", "3", "4")  # Custom labels
+  ) +
   publication_theme
 
 plot_measurements
 
 # Combine plots with patchwork
-combined_plot <- (plot_metadata / plot_annotations / plot_measurements)
+combined_plot <- (plot_metadata / plot_annotations / plot_measurements)+ plot_annotation(tag_levels = 'A')
 
 combined_plot
 
