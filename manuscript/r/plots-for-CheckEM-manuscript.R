@@ -3,7 +3,7 @@ library(tidyverse)
 library(RColorBrewer)
 library(viridis)
 # Load necessary library
-library(wesanderson)
+# library(wesanderson)
 library(patchwork)
 
 
@@ -64,24 +64,9 @@ summary_data <- combined_data %>%
 
 unique(summary_data$error_recoded)
 
-# Generate a palette with 18 colors
-palette_8_viridis <- viridis(8)
-
-# Generate a palette with 18 colors (use the 'FantasticFox1' palette and extend it)
-palette_8_wes <- wes_palette("FantasticFox1", 8, type = "continuous")
-
-# Display the palette
-print(palette_8_wes)
-
 total_data <- summary_data %>%
   group_by(date) %>%
   summarise(total_count = sum(count), .groups = 'drop')
-
-# Set2-8 color palette
-palette_set2_8 <- c(
-  "#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", 
-  "#a6d854", "#ff7f00", "#e5c494", "#b3b3b3"
-)
 
 # Define the color palette
 custom_palette <- c(
@@ -189,13 +174,13 @@ palette_measurements <- custom_palette[c(1, 3, 5, 7, 9)]
 # Theme for publication
 publication_theme <- theme_classic() +
   theme(
-    text = element_text(family = "sans", size = 12),  # Use sans-serif font
-    plot.title = element_text(size = 14, hjust = 0.5),
-    axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10),
+    text = element_text(family = "serif", size = 12),  # Use sans-serif font
+    plot.title = element_text(family = "serif", size = 14, hjust = 0.5),
+    axis.title = element_text(family = "serif", size = 12),
+    axis.text = element_text(family = "serif", size = 10),
     legend.position = "right",
-    legend.title = element_text(size = 12),
-    legend.text = element_text(size = 10)
+    legend.title = element_text(family = "serif", size = 12),
+    legend.text = element_text(family = "serif", size = 10)
   )
 
 # Plot for Metadata
@@ -250,6 +235,8 @@ plot_measurements <- ggplot(
     fill = "Type of Error"
   ) +
   publication_theme
+
+plot_measurements
 
 # Combine plots with patchwork
 combined_plot <- (plot_metadata / plot_annotations / plot_measurements)

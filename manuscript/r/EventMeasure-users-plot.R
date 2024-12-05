@@ -19,7 +19,7 @@ em_users <- ggplot(data, aes(x = year)) +
   theme(
     legend.title = element_blank(),
     axis.line = element_line(color = "black", size = 0.5),
-    text = element_text(family = "Times New Roman", size = 16),
+    text = element_text(family = "serif", size = 16),
     legend.text = element_text(size = 12)
   )
 
