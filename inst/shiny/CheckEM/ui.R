@@ -237,59 +237,63 @@ tabItems(
   
   # Check metadata - point based data -----
   tabItem(tabName = "checkmetadata",
-          fluidRow(valueBoxOutput("metadata.score"),
-                   
-                   div(id="click.metadata.no.samples",
-                       valueBoxOutput("metadata.no.samples")),
-                   div(id="click.metadata.samples.without.fish",
-                       valueBoxOutput("metadata.samples.without.fish")),
-                   
-                   shiny::conditionalPanel("input.length == 'Yes'",
-                                           
-                                           div(id="click.metadata.samples.without.length",
-                                               valueBoxOutput("metadata.samples.without.length"))),
-                   
-                   div(id="click.points.samples.without.metadata",
-                       valueBoxOutput("points.samples.without.metadata")),
-                   
-                   shiny::conditionalPanel("input.length == 'Yes'",
-                                           div(id="click.length.samples.without.metadata",
-                                               valueBoxOutput("length.samples.without.metadata"))),
-                   
-                   div(id="click.metadata.samples.duplicated",
-                       valueBoxOutput("metadata.samples.duplicated")),
-                   
-                   div(id="click.metadata.coordinates.duplicated",
-                       valueBoxOutput("metadata.coordinates.duplicated")),
-                   
-                   div(id="click.metadata.on.land",
-                       valueBoxOutput("metadata.on.land")),
-                   
-                   
-                   shiny::conditionalPanel("input.periods == 'yes'",
-                                           
-                                           shiny::conditionalPanel("input.upload == 'EM'",
-                                                                   div(id="click.periods.no.end",
-                                                                       valueBoxOutput("periods.no.end")),
-                                                                   div(id="click.samples.without.periods",
-                                                                       valueBoxOutput("samples.without.periods")),
-                                                                   
-                                                                   
-                                                                   div(id="click.points.outside.periods",
-                                                                       valueBoxOutput("points.outside.periods")),
-                                                                   div(id="click.lengths.outside.periods",
-                                                                       valueBoxOutput("lengths.outside.periods")),
-                                                                   
-                                                                   
-                                                                   box(width = 4, title = "Enter your correct period time (mins):", status = "primary", solidHeader = TRUE,
-                                                                       numericInput("period.limit", NULL, 60, min = 1, max = 300)),
-                                                                   
-                                                                   
-                                                                   div(id="click.periods.wrong",
-                                                                       valueBoxOutput("periods.wrong")))),
-                   
-                   
-                   box(width=12, height = 825, withSpinner(leafletOutput("map.metadata", height = 800))))
+          fluidRow(
+            
+            valueBoxOutput("metadata.score"),
+            
+            div(id="click.metadata.no.samples",
+                shinydashboard::valueBoxOutput("metadata.no.samples")#,
+            ),
+
+            div(id="click.metadata.samples.without.fish",
+                valueBoxOutput("metadata.samples.without.fish")),
+
+            shiny::conditionalPanel("input.length == 'Yes'",
+
+                                    div(id="click.metadata.samples.without.length",
+                                        valueBoxOutput("metadata.samples.without.length"))),
+
+            div(id="click.points.samples.without.metadata",
+                valueBoxOutput("points.samples.without.metadata")),
+
+            shiny::conditionalPanel("input.length == 'Yes'",
+                                    div(id="click.length.samples.without.metadata",
+                                        valueBoxOutput("length.samples.without.metadata"))),
+
+            div(id="click.metadata.samples.duplicated",
+                valueBoxOutput("metadata.samples.duplicated")),
+
+            div(id="click.metadata.coordinates.duplicated",
+                valueBoxOutput("metadata.coordinates.duplicated")),
+
+            div(id="click.metadata.on.land",
+                valueBoxOutput("metadata.on.land")),
+            
+            
+            shiny::conditionalPanel("input.periods == 'yes'",
+
+                                    shiny::conditionalPanel("input.upload == 'EM'",
+                                                            div(id="click.periods.no.end",
+                                                                valueBoxOutput("periods.no.end")),
+                                                            div(id="click.samples.without.periods",
+                                                                valueBoxOutput("samples.without.periods")),
+
+
+                                                            div(id="click.points.outside.periods",
+                                                                valueBoxOutput("points.outside.periods")),
+                                                            div(id="click.lengths.outside.periods",
+                                                                valueBoxOutput("lengths.outside.periods")),
+
+
+                                                            box(width = 4, title = "Enter your correct period time (mins):", status = "primary", solidHeader = TRUE,
+                                                                numericInput("period.limit", NULL, 60, min = 1, max = 300)),
+
+
+                                                            div(id="click.periods.wrong",
+                                                                valueBoxOutput("periods.wrong")))),
+            
+            
+            box(width=12, height = 825, withSpinner(leafletOutput("map.metadata", height = 800))))
   ),
   
   # Check metadata - transect based data ----
@@ -300,7 +304,7 @@ tabItems(
                                     
                                     valueBoxOutput("metadata.score.t"),
                                     div(valueBoxOutput("metadata.no.samples.t")),
-
+                                    
                                     
                                     div(id="click.metadata.samples.duplicated.t",
                                         valueBoxOutput("metadata.samples.duplicated.t")),
