@@ -1,8 +1,12 @@
 # Change log
 
+# 2.15 (released 10/12/2024)   <br />
+### Fixed <br />
+- Fixed bug in Global Life History information
+
 ## 2.14 (released 08/11/2024)  <br />
 ### Changed <br />
-- Upcated the life history information - maximum lengths are now in Fork Length if the length-length equations are available on Fishbase
+- Upcated the life history information for Australia - maximum lengths are now in Fork Length if the length-length equations are available on Fishbase
 
 ## 2.13 (released 07/11/2024)  <br />
 ### Added <br />

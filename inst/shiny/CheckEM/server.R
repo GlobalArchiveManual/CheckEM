@@ -54,7 +54,9 @@ function(input, output, session) {
     if(input$lifehistory %in% "aus"){
       lh <- all_data$lh.aus
     } else {
-      lh <- all_data$lh.glo
+      lh <- all_data$lh.glo %>%
+        dplyr::mutate(length_max_mm = 10 * length.max) %>%
+        dplyr::mutate(length_max_type = "") # TODO change this to actual data
     }
     
     lh
@@ -66,7 +68,9 @@ function(input, output, session) {
     if(input$lifehistory %in% "aus"){
       lh <- all_data$lh.aus.expanded
     } else {
-      lh <- all_data$lh.glo.expanded
+      lh <- all_data$lh.glo.expanded %>%
+        dplyr::mutate(length_max_mm = 10 * length.max) %>%
+        dplyr::mutate(length_max_type = "") # TODO change this to actual data
     }
     
     lh
@@ -78,7 +82,9 @@ function(input, output, session) {
     if(input$lifehistory %in% "aus"){
       lh <- all_data$lh.aus.min.max
     } else {
-      lh <- all_data$lh.glo.min.max
+      lh <- all_data$lh.glo.min.max %>%
+        dplyr::mutate(length_max_mm = 10 * length.max) %>%
+        dplyr::mutate(length_max_type = "") # TODO change this to actual data
     }
     
     lh
