@@ -36,8 +36,10 @@ First you will need to load the necessary libraries.
 If you haven't installed CheckEM before you will need to install CheckEM using the install_github function.
 
 ```{r libraries, message=FALSE, warning=FALSE, results='hide'}
-library(devtools)
-# devtools::install_github("GlobalArchiveManual/CheckEM") # Use this to install the CheckEM package if you have not already done so
+# install.packages('remotes')
+library('remotes')
+options(timeout=9999999)
+# remotes::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
 library(tidyverse)
 library(googlesheets4)

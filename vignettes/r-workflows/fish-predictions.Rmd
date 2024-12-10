@@ -21,6 +21,10 @@ devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
 Load libraries. All packages are available through CRAN, aside from ‘FSSgam’, which can be installed following the instructions provided in the GitHub repository https://github.com/beckyfisher/FSSgam.
 
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
+# install.packages('remotes')
+library('remotes')
+options(timeout=9999999)
+# remotes::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
 library(tidyverse)
 library(mgcv)

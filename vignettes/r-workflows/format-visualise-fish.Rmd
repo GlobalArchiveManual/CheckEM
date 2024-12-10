@@ -18,6 +18,9 @@ This script takes the checked fish data from the previous workflow steps, visual
 Load the necessary libraries.
 
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
+library('remotes')
+options(timeout=9999999)
+# remotes::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
 library(tidyverse)
 library(ggplot2)
