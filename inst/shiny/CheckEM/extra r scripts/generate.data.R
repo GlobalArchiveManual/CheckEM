@@ -143,8 +143,8 @@ lh.glo.min.max <- left_join(lh.glo, lh.glo.family.max.length, by = c("family")) 
   dplyr::mutate(fb_length_max = ifelse((is.na(length.max)), genuslength_max, length.max)) %>%
   dplyr::mutate(fb_length_max = ifelse((is.na(length.max)), famlength_max, fb_length_max)) %>%
   dplyr::select(-c(famlength_max, genuslength_max)) %>%
-  mutate(min_length = 0.15 * fb_length_max) %>% # change values here
-  mutate(max_length = 0.85 * fb_length_max) %>% # change values here
+  mutate(min_length = 0.15 * fb_length_max * 10) %>% # change values here
+  mutate(max_length = 0.85 * fb_length_max * 10) %>% # change values here
   glimpse()
 
 
