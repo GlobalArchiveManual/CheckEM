@@ -18,7 +18,9 @@ caab <- readRDS("annotation-schema/data/staging/australia_fish_caab-with-regions
                                                        "cfizaspilotai" = "zaspilota",
                                                        "icfifilamentosa" = "filamentosa"))) %>%
   dplyr::mutate(scientific_name = paste(genus, species, sep = " ")) %>%
-  dplyr::filter(!species == "spp") 
+  dplyr::filter(!species == "spp") %>%
+  dplyr::mutate(common_name = if_else(scientific_name %in% c("Lethrinus punctulatus"), "Bluespotted emperor", common_name)) %>%
+  dplyr::mutate(common_name = if_else(scientific_name %in% c("Caranx heberi"), "Blacktip trevally", common_name))
 
 # Validate scientific names to use in fishbase package ----
 validated <- rfishbase::validate_names(caab$scientific_name)
