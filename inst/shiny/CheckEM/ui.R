@@ -763,7 +763,7 @@ tabItems(
                        status = "primary", solidHeader = TRUE,
                        
                        numericInput("error.report.range.t", "Enter range limit (meters):", 10, min = 0.5, max = 20),
-                       numericInput("error.report.transect.t", "Enter transect belt width (metres):", 10, min = 0.5, max = 20),
+                       numericInput("error.report.transect.t", "Enter transect belt width (metres):", 5, min = 0.5, max = 10),
                        numericInput("error.report.rms.t", "Enter RMS limit (mm):", 20, min = 0, max = 100),
                        numericInput("error.report.precision.t", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100),
                        

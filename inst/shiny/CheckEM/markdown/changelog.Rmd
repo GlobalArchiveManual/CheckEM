@@ -1,5 +1,10 @@
 # Change log
 
+# 2.16 (released 13/12/2024)  <br />
+### Fixed <br />
+- Fixed bug in downloading length measurements outside of transect bounds
+- Fixed bug in downloading metadata points potentially on land
+
 # 2.15 (released 10/12/2024)   <br />
 ### Fixed <br />
 - Fixed bug in Global Life History information
