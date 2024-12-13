@@ -442,7 +442,7 @@ tabItems(
             
             shiny::conditionalPanel("input.upload == 'EM'",
                                     box(width = 3, title = "Range limit (m)?", status="primary", solidHeader = TRUE, 
-                                        numericInput("range.limit", NULL, 10, min = 0.5, max = 10)),
+                                        numericInput("range.limit", NULL, 8, min = 0.5, max = 10)),
                                     div(width = 3, id = "click.length.out.of.range",
                                         valueBoxOutput(width = 3, "length.out.of.range"))),
             
@@ -516,7 +516,7 @@ tabItems(
                    
                    
                    box(width = 3, title = "Range limit (m)?", status = "primary", solidHeader = TRUE, 
-                       numericInput("range.limit.t", NULL, 10, min = 0.5, max = 10)),
+                       numericInput("range.limit.t", NULL, 8, min = 0.5, max = 10)),
                    div(width = 3, id="click.length.out.of.range.t",
                        valueBoxOutput(width = 3, "length.out.of.range.t")),
                    column(width = 12),
@@ -701,7 +701,7 @@ tabItems(
                                                
                                                # shiny::conditionalPanel("input.upload == 'EM'",
                                                
-                                               numericInput("error.report.range", "Enter range limit (meters):", 10, min = 0.5, max = 20),
+                                               numericInput("error.report.range", "Enter range limit (meters):", 8, min = 0.5, max = 20),
                                                numericInput("error.report.rms", "Enter RMS limit (mm):", 20, min = 0, max = 100),
                                                numericInput("error.report.precision", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100)),
                        
@@ -728,7 +728,7 @@ tabItems(
                 h4("Filters for Length and Mass"),
                 checkboxInput("error.length.small", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
                 checkboxInput("error.length.big", label = "Filter out length measurements larger than fishbase maximum", value = FALSE),
-                numericInput("error.range.limit", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
+                numericInput("error.range.limit", "Remove 3D measurements greater than range limit (meters):", 8, min = 0.5, max = 20),
                 numericInput("error.rms.limit", "Enter RMS limit (mm):", 20, min = 0, max = 100),
                 numericInput("error.precision.limit", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100)),
             
@@ -762,7 +762,7 @@ tabItems(
                    box(width = NULL, title = "2. Download all errors",
                        status = "primary", solidHeader = TRUE,
                        
-                       numericInput("error.report.range.t", "Enter range limit (meters):", 10, min = 0.5, max = 20),
+                       numericInput("error.report.range.t", "Enter range limit (meters):", 8, min = 0.5, max = 20),
                        numericInput("error.report.transect.t", "Enter transect belt width (metres):", 5, min = 0.5, max = 10),
                        numericInput("error.report.rms.t", "Enter RMS limit (mm):", 20, min = 0, max = 100),
                        numericInput("error.report.precision.t", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100),
@@ -783,7 +783,7 @@ tabItems(
                 checkboxInput("error.length.small.t", label = "Filter out length measurements smaller than 15% of fishbase maximum", value = FALSE),
                 checkboxInput("error.length.big.t", label = "Filter out length measurements larger than fishbase maximum", value = FALSE),
                 
-                numericInput("error.range.limit.t", "Remove 3D measurements greater than range limit (meters):", 10, min = 0.5, max = 20),
+                numericInput("error.range.limit.t", "Remove 3D measurements greater than range limit (meters):", 8, min = 0.5, max = 20),
                 numericInput("error.transect.limit.t", "Remove 3D measurements outside transect bounds (meters):", 2.5, min = 0, max = 20),
                 numericInput("error.rms.limit.t", "Enter RMS limit (mm):", 20, min = 0, max = 100),
                 numericInput("error.precision.limit.t", "Enter precision:length ratio limit (%):", 10, min = 0, max = 100)),
