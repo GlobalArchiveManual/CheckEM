@@ -8647,13 +8647,28 @@ function(input, output, session) {
     
     if(input$upload %in% "EM"){
       
-      length <- length3dpoints.clean()
-      maxn <- maxn.clean()
+      message("length")
+      
+      length <- length3dpoints.clean() %>%
+        glimpse()
+      
+      length_samples <- length %>%
+        dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
+        distinct()
+      
+      message("maxn")
+      
+      maxn <- maxn.clean() %>%
+        glimpse()
       
     } else {
       
       length <- gen.length.clean()
       maxn <- count.clean()
+      
+      length_samples <- length %>%
+        dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
+        distinct()
       
     }
     
@@ -8667,6 +8682,7 @@ function(input, output, session) {
       dplyr::group_by(campaignid, sample, family, genus, species) %>%
       dplyr::summarise(length_maxn = sum(number)) %>%
       dplyr::ungroup() %>%
+      dplyr::left_join(length_samples) %>% # to bring back in opcode, period for missing 3D points with no MaxN
       dplyr::full_join(maxn) %>% # Changed to full join 22/08/2023
       replace_na(list(maxn = 0, length_maxn = 0)) %>%
       # dplyr::filter(!length_maxn == maxn) %>%
@@ -8678,7 +8694,8 @@ function(input, output, session) {
       dplyr::mutate(percent_difference = abs(percent_difference)) %>%
       arrange(-difference) %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), family, genus, species, maxn, length_maxn, difference, percent_difference)
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), family, genus, species, maxn, length_maxn, difference, percent_difference) %>%
+      glimpse()
   })
   
   
@@ -9825,7 +9842,7 @@ function(input, output, session) {
             #
             # }
             
-            dat <- dat[,colSums(is.na(dat))<nrow(dat)]
+            dat <- dat[,base::colSums(is.na(dat))<nrow(dat)]
             
             fileName <- paste(i, "_benthos.csv", sep = "")
             
@@ -9841,7 +9858,7 @@ function(input, output, session) {
               dplyr::filter(campaignid == i)%>%
               dplyr::select(!sample) #%>% dplyr::glimpse()
             
-            dat <- dat[,colSums(is.na(dat))<nrow(dat)]
+            dat <- dat[,base::colSums(is.na(dat))<nrow(dat)]
             
             # if(input$error.zeros.hab %in% FALSE){
             #
@@ -9952,7 +9969,11 @@ function(input, output, session) {
       print("periods.wrong")
       if (dim(periods())[1] > 0) {
         periods.wrong <- periods() %>%
-          distinct(campaignid, sample, period, time_start, time_end, has_end) %>%
+          dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), sample,
+                        period, time_start, time_end, has_end)%>%
+          
+          distinct() %>%
+          # distinct(campaignid, sample, period, time_start, time_end, has_end) %>%
           mutate(period_time = round(time_end - time_start)) %>%
           filter(!period_time %in% c(input$error.period.length)) %>%
           mutate(error = "period.wrong.length") %>%

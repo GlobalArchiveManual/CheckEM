@@ -33,7 +33,7 @@ library(RColorBrewer)# NEW 15/07/2022
 # Maps
 # library(rgdal)
 # library(rgeos)
-library(raster)
+# library(raster)
 library(leaflet)
 library(leaflet.minicharts)
 library(leafgl)

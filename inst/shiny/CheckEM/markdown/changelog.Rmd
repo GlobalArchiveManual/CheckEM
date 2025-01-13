@@ -1,4 +1,8 @@
 # Change log
+# 2.17 (released 13/01/2025)  <br />
+### Fixed <br />
+- Fixed bug not showing opcode/period when there is/are a 3D point/s and no MaxN.
+- Fixed bug not showing opcode in period.wrong.length error report
 
 # 2.16 (released 13/12/2024)  <br />
 ### Fixed <br />
