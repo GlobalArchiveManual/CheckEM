@@ -1,4 +1,9 @@
 # Change log
+# 2.18 (released 28/01/2025)  <br />
+### Added <br />
+- Added species table to MaxN (only working for EventMeasure data so far)
+
+
 # 2.17 (released 13/01/2025)  <br />
 ### Fixed <br />
 - Fixed bug not showing opcode/period when there is/are a 3D point/s and no MaxN.

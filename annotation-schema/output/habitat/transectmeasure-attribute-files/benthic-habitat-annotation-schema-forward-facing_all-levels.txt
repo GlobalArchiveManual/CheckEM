@@ -1,0 +1,616 @@
+level_2	level_3	level_4	level_5	scientific	qualifiers
+Ascidians	Stalked	Colonial			
+Ascidians	Stalked	Solitary			
+Ascidians	Stalked				
+Ascidians	Unstalked	Colonial			
+Ascidians	Unstalked	Solitary			
+Ascidians	Unstalked				
+Ascidians					
+Bacterial mats	Cyanobacteria				
+Bacterial mats	Other				
+Bacterial mats					
+Bedforms	2D	Ripples (<10cm height)			
+Bedforms	2D	Waves (>10cm height)			
+Bedforms	2D				
+Bedforms	3D	Ripples (<10cm height)			
+Bedforms	3D	Waves (>10cm height)			
+Bedforms	3D				
+Bedforms	Bioturbated				
+Bedforms	None				
+Bedforms					
+Bioturbation	Crawling traces	Complex trail			
+Bioturbation	Crawling traces	Crater row			
+Bioturbation	Crawling traces	Disturbed trace			
+Bioturbation	Crawling traces	Mounded trail			
+Bioturbation	Crawling traces	Perforated trail			
+Bioturbation	Crawling traces	Thick trail			
+Bioturbation	Crawling traces	Thin trail			
+Bioturbation	Crawling traces				
+Bioturbation	Dwelling traces	Burrow cluster			
+Bioturbation	Dwelling traces	Crater cone			
+Bioturbation	Dwelling traces	Elongate depression			
+Bioturbation	Dwelling traces	Fractured mound			
+Bioturbation	Dwelling traces	Large mound			
+Bioturbation	Dwelling traces	Oblique burrow			
+Bioturbation	Dwelling traces	Paired burrow			
+Bioturbation	Dwelling traces	Rounded crater ring			
+Bioturbation	Dwelling traces	Single burrow			
+Bioturbation	Dwelling traces	Small mound			
+Bioturbation	Dwelling traces	Spiked crater ring			
+Bioturbation	Dwelling traces	Spotted mound			
+Bioturbation	Dwelling traces	Trapdoor burrow			
+Bioturbation	Dwelling traces	Vertical burrow			
+Bioturbation	Dwelling traces				
+Bioturbation	Feeding traces	Large rosette			
+Bioturbation	Feeding traces	Petal rosette			
+Bioturbation	Feeding traces	Pincushion rosette			
+Bioturbation	Feeding traces	Rayed mound			
+Bioturbation	Feeding traces	Small rosette			
+Bioturbation	Feeding traces				
+Bioturbation	Organism tests	Globule xenophyophore			
+Bioturbation	Organism tests	Lumpy xenophyophore			
+Bioturbation	Organism tests				
+Bioturbation	Resting traces	Large depression			
+Bioturbation	Resting traces	Star impression			
+Bioturbation	Resting traces	Urchin trace			
+Bioturbation	Resting traces				
+Bioturbation	Unknown origin	Fern			
+Bioturbation	Unknown origin	Matchstick			
+Bioturbation	Unknown origin	Mesh			
+Bioturbation	Unknown origin	Ovoid pinnate			
+Bioturbation	Unknown origin	Pogostick			
+Bioturbation	Unknown origin	Round pinnate			
+Bioturbation	Unknown origin	Spider			
+Bioturbation	Unknown origin				
+Bioturbation	Waste casts	Coiled casts			
+Bioturbation	Waste casts	Curly casts			
+Bioturbation	Waste casts	Mounded casts			
+Bioturbation	Waste casts	Nest casts			
+Bioturbation	Waste casts	Round casts			
+Bioturbation	Waste casts	Spirals			
+Bioturbation	Waste casts	Switchbacks			
+Bioturbation	Waste casts	Wavy casts			
+Bioturbation	Waste casts				
+Bioturbation					
+Brachiopods					
+Bryozoa	Hard	Branching			
+Bryozoa	Hard	Encrusting			
+Bryozoa	Hard	Fenestrate			
+Bryozoa	Hard	Massive			
+Bryozoa	Hard				
+Bryozoa	Soft	Dendroid			
+Bryozoa	Soft	Foliaceous			
+Bryozoa	Soft				
+Bryozoa					
+Cnidaria	Colonial anemones	Corallimorphs			
+Cnidaria	Colonial anemones	Zoanthids			
+Cnidaria	Colonial anemones				
+Cnidaria	Corals	Black & Octocorals			
+Cnidaria	Corals	Black & Octocorals			Alive
+Cnidaria	Corals	Black & Octocorals			Recruit
+Cnidaria	Corals	Black & Octocorals			Bleached
+Cnidaria	Corals	Black & Octocorals			Dead
+Cnidaria	Corals	Black & Octocorals			Recently dead
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Alive
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Recruit
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Bleached
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Dead
+Cnidaria	Corals	Black & Octocorals	Blue coral (Heliopora)		Recently dead
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Alive
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Recruit
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Bleached
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Dead
+Cnidaria	Corals	Black & Octocorals	Branching (3D)		Recently dead
+Cnidaria	Corals	Black & Octocorals	Encrusting		
+Cnidaria	Corals	Black & Octocorals	Encrusting		Alive
+Cnidaria	Corals	Black & Octocorals	Encrusting		Recruit
+Cnidaria	Corals	Black & Octocorals	Encrusting		Bleached
+Cnidaria	Corals	Black & Octocorals	Encrusting		Dead
+Cnidaria	Corals	Black & Octocorals	Encrusting		Recently dead
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Alive
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Recruit
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Bleached
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Dead
+Cnidaria	Corals	Black & Octocorals	Fan (2D)		Recently dead
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Alive
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Recruit
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Bleached
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Dead
+Cnidaria	Corals	Black & Octocorals	Massive soft corals		Recently dead
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Alive
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Recruit
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Bleached
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Dead
+Cnidaria	Corals	Black & Octocorals	Organ pipe coral (Tubipora)		Recently dead
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Alive
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Recruit
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Bleached
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Dead
+Cnidaria	Corals	Black & Octocorals	Quill (seapen)		Recently dead
+Cnidaria	Corals	Black & Octocorals	Whip		
+Cnidaria	Corals	Black & Octocorals	Whip		Alive
+Cnidaria	Corals	Black & Octocorals	Whip		Recruit
+Cnidaria	Corals	Black & Octocorals	Whip		Bleached
+Cnidaria	Corals	Black & Octocorals	Whip		Dead
+Cnidaria	Corals	Black & Octocorals	Whip		Recently dead
+Cnidaria	Corals	Stony corals			
+Cnidaria	Corals	Stony corals			Alive
+Cnidaria	Corals	Stony corals			Recruit
+Cnidaria	Corals	Stony corals			Bleached
+Cnidaria	Corals	Stony corals			Dead
+Cnidaria	Corals	Stony corals			Recently dead
+Cnidaria	Corals	Stony corals	Bottlebrush		
+Cnidaria	Corals	Stony corals	Bottlebrush		Alive
+Cnidaria	Corals	Stony corals	Bottlebrush		Recruit
+Cnidaria	Corals	Stony corals	Bottlebrush		Bleached
+Cnidaria	Corals	Stony corals	Bottlebrush		Dead
+Cnidaria	Corals	Stony corals	Bottlebrush		Recently dead
+Cnidaria	Corals	Stony corals	Branching		
+Cnidaria	Corals	Stony corals	Branching		Alive
+Cnidaria	Corals	Stony corals	Branching		Recruit
+Cnidaria	Corals	Stony corals	Branching		Bleached
+Cnidaria	Corals	Stony corals	Branching		Dead
+Cnidaria	Corals	Stony corals	Branching		Recently dead
+Cnidaria	Corals	Stony corals	Columnar		
+Cnidaria	Corals	Stony corals	Columnar		Alive
+Cnidaria	Corals	Stony corals	Columnar		Recruit
+Cnidaria	Corals	Stony corals	Columnar		Bleached
+Cnidaria	Corals	Stony corals	Columnar		Dead
+Cnidaria	Corals	Stony corals	Columnar		Recently dead
+Cnidaria	Corals	Stony corals	Corymbose		
+Cnidaria	Corals	Stony corals	Corymbose		Alive
+Cnidaria	Corals	Stony corals	Corymbose		Recruit
+Cnidaria	Corals	Stony corals	Corymbose		Bleached
+Cnidaria	Corals	Stony corals	Corymbose		Dead
+Cnidaria	Corals	Stony corals	Corymbose		Recently dead
+Cnidaria	Corals	Stony corals	Digitate		
+Cnidaria	Corals	Stony corals	Digitate		Alive
+Cnidaria	Corals	Stony corals	Digitate		Recruit
+Cnidaria	Corals	Stony corals	Digitate		Bleached
+Cnidaria	Corals	Stony corals	Digitate		Dead
+Cnidaria	Corals	Stony corals	Digitate		Recently dead
+Cnidaria	Corals	Stony corals	Encrusting		
+Cnidaria	Corals	Stony corals	Encrusting		Alive
+Cnidaria	Corals	Stony corals	Encrusting		Recruit
+Cnidaria	Corals	Stony corals	Encrusting		Bleached
+Cnidaria	Corals	Stony corals	Encrusting		Dead
+Cnidaria	Corals	Stony corals	Encrusting		Recently dead
+Cnidaria	Corals	Stony corals	Foliose / plate		
+Cnidaria	Corals	Stony corals	Foliose / plate		Alive
+Cnidaria	Corals	Stony corals	Foliose / plate		Recruit
+Cnidaria	Corals	Stony corals	Foliose / plate		Bleached
+Cnidaria	Corals	Stony corals	Foliose / plate		Dead
+Cnidaria	Corals	Stony corals	Foliose / plate		Recently dead
+Cnidaria	Corals	Stony corals	Massive		
+Cnidaria	Corals	Stony corals	Massive		Alive
+Cnidaria	Corals	Stony corals	Massive		Recruit
+Cnidaria	Corals	Stony corals	Massive		Bleached
+Cnidaria	Corals	Stony corals	Massive		Dead
+Cnidaria	Corals	Stony corals	Massive		Recently dead
+Cnidaria	Corals	Stony corals	Solitary		
+Cnidaria	Corals	Stony corals	Solitary		Alive
+Cnidaria	Corals	Stony corals	Solitary		Recruit
+Cnidaria	Corals	Stony corals	Solitary		Bleached
+Cnidaria	Corals	Stony corals	Solitary		Dead
+Cnidaria	Corals	Stony corals	Solitary		Recently dead
+Cnidaria	Corals	Stony corals	Staghorn		
+Cnidaria	Corals	Stony corals	Staghorn		Alive
+Cnidaria	Corals	Stony corals	Staghorn		Recruit
+Cnidaria	Corals	Stony corals	Staghorn		Bleached
+Cnidaria	Corals	Stony corals	Staghorn		Dead
+Cnidaria	Corals	Stony corals	Staghorn		Recently dead
+Cnidaria	Corals	Stony corals	Sub-massive		
+Cnidaria	Corals	Stony corals	Sub-massive		Alive
+Cnidaria	Corals	Stony corals	Sub-massive		Recruit
+Cnidaria	Corals	Stony corals	Sub-massive		Bleached
+Cnidaria	Corals	Stony corals	Sub-massive		Dead
+Cnidaria	Corals	Stony corals	Sub-massive		Recently dead
+Cnidaria	Corals	Stony corals	Tabulate		
+Cnidaria	Corals	Stony corals	Tabulate		Alive
+Cnidaria	Corals	Stony corals	Tabulate		Recruit
+Cnidaria	Corals	Stony corals	Tabulate		Bleached
+Cnidaria	Corals	Stony corals	Tabulate		Dead
+Cnidaria	Corals	Stony corals	Tabulate		Recently dead
+Cnidaria	Corals				
+Cnidaria	Corals				Alive
+Cnidaria	Corals				Recruit
+Cnidaria	Corals				Bleached
+Cnidaria	Corals				Dead
+Cnidaria	Corals				Recently dead
+Cnidaria	Hydrocorals	Branching			
+Cnidaria	Hydrocorals	Submassive / encrusting			
+Cnidaria	Hydrocorals				
+Cnidaria	Hydroids				
+Cnidaria	True anemones	Flytrap			
+Cnidaria	True anemones	Fourlobed			
+Cnidaria	True anemones	Other anemones			
+Cnidaria	True anemones				
+Cnidaria	Tube anemones				
+Cnidaria					
+Crustacea	Barnacles	Acorn			
+Crustacea	Barnacles	Stalked			
+Crustacea	Barnacles				
+Crustacea	Crabs	King crabs			
+Crustacea	Crabs	Porcelain crabs			
+Crustacea	Crabs	True crabs			
+Crustacea	Crabs				
+Crustacea	Hermit crabs	With anemones			
+Crustacea	Hermit crabs	With shell or stone home 			
+Crustacea	Hermit crabs				
+Crustacea	Lobsters	Rock lobsters			
+Crustacea	Lobsters	Slipper lobsters / bugs			
+Crustacea	Lobsters	Squat lobsters			
+Crustacea	Lobsters	True lobsters			
+Crustacea	Lobsters				
+Crustacea	Prawns / shrimps / mysids				
+Crustacea					
+Echinoderms	Feather stars	Stalked crinoids			
+Echinoderms	Feather stars	Unstalked crinoids			
+Echinoderms	Feather stars				
+Echinoderms	Ophiuroids	Basket stars			
+Echinoderms	Ophiuroids	Brittle / snake stars			
+Echinoderms	Ophiuroids				
+Echinoderms	Sea cucumbers	Benthic			
+Echinoderms	Sea cucumbers	Pelagic / swimming			
+Echinoderms	Sea cucumbers				
+Echinoderms	Sea stars				
+Echinoderms	Sea urchins	Irregular urchins			
+Echinoderms	Sea urchins	Regular urchins			
+Echinoderms	Sea urchins				
+Echinoderms					
+Fishes	Bony fishes				
+Fishes	Eels				
+Fishes	Elasmobranchs	Chimaeras			
+Fishes	Elasmobranchs	Rays & skates			
+Fishes	Elasmobranchs	Sharks			
+Fishes	Elasmobranchs				
+Fishes					
+Jellies	Ctenophores				
+Jellies	Cubozoa				
+Jellies	Hydromedusae				
+Jellies	Pyrosomes				
+Jellies	Salps				
+Jellies	Scyphozoa				
+Jellies	Siphonophores				
+Jellies					
+Macroalgae	Articulated calcareous	Green			
+Macroalgae	Articulated calcareous	Green			Drift
+Macroalgae	Articulated calcareous	Green			No epiphytes
+Macroalgae	Articulated calcareous	Green			Epiphytes algae
+Macroalgae	Articulated calcareous	Green			Epiphytes other
+Macroalgae	Articulated calcareous	Red			
+Macroalgae	Articulated calcareous	Red			Drift
+Macroalgae	Articulated calcareous	Red			No epiphytes
+Macroalgae	Articulated calcareous	Red			Epiphytes algae
+Macroalgae	Articulated calcareous	Red			Epiphytes other
+Macroalgae	Articulated calcareous				
+Macroalgae	Articulated calcareous				Drift
+Macroalgae	Articulated calcareous				No epiphytes
+Macroalgae	Articulated calcareous				Epiphytes algae
+Macroalgae	Articulated calcareous				Epiphytes other
+Macroalgae	Encrusting	Brown			
+Macroalgae	Encrusting	Green			
+Macroalgae	Encrusting	Red			
+Macroalgae	Encrusting	Red	Calcareous		
+Macroalgae	Encrusting	Red	Non-calcareous		
+Macroalgae	Encrusting				
+Macroalgae	Erect coarse branching	Brown			
+Macroalgae	Erect coarse branching	Brown			Drift
+Macroalgae	Erect coarse branching	Brown			No epiphytes
+Macroalgae	Erect coarse branching	Brown			Epiphytes algae
+Macroalgae	Erect coarse branching	Brown			Epiphytes other
+Macroalgae	Erect coarse branching	Green			
+Macroalgae	Erect coarse branching	Green			Drift
+Macroalgae	Erect coarse branching	Green			No epiphytes
+Macroalgae	Erect coarse branching	Green			Epiphytes algae
+Macroalgae	Erect coarse branching	Green			Epiphytes other
+Macroalgae	Erect coarse branching	Red			
+Macroalgae	Erect coarse branching	Red			Drift
+Macroalgae	Erect coarse branching	Red			No epiphytes
+Macroalgae	Erect coarse branching	Red			Epiphytes algae
+Macroalgae	Erect coarse branching	Red			Epiphytes other
+Macroalgae	Erect coarse branching				
+Macroalgae	Erect coarse branching				Drift
+Macroalgae	Erect coarse branching				No epiphytes
+Macroalgae	Erect coarse branching				Epiphytes algae
+Macroalgae	Erect coarse branching				Epiphytes other
+Macroalgae	Erect fine branching	Brown			
+Macroalgae	Erect fine branching	Brown			Drift
+Macroalgae	Erect fine branching	Brown			No epiphytes
+Macroalgae	Erect fine branching	Brown			Epiphytes algae
+Macroalgae	Erect fine branching	Brown			Epiphytes other
+Macroalgae	Erect fine branching	Green			
+Macroalgae	Erect fine branching	Green			Drift
+Macroalgae	Erect fine branching	Green			No epiphytes
+Macroalgae	Erect fine branching	Green			Epiphytes algae
+Macroalgae	Erect fine branching	Green			Epiphytes other
+Macroalgae	Erect fine branching	Red			
+Macroalgae	Erect fine branching	Red			Drift
+Macroalgae	Erect fine branching	Red			No epiphytes
+Macroalgae	Erect fine branching	Red			Epiphytes algae
+Macroalgae	Erect fine branching	Red			Epiphytes other
+Macroalgae	Erect fine branching				
+Macroalgae	Erect fine branching				Drift
+Macroalgae	Erect fine branching				No epiphytes
+Macroalgae	Erect fine branching				Epiphytes algae
+Macroalgae	Erect fine branching				Epiphytes other
+Macroalgae	Filamentous / filiform	Brown			
+Macroalgae	Filamentous / filiform	Brown			Drift
+Macroalgae	Filamentous / filiform	Brown			No epiphytes
+Macroalgae	Filamentous / filiform	Brown			Epiphytes algae
+Macroalgae	Filamentous / filiform	Brown			Epiphytes other
+Macroalgae	Filamentous / filiform	Green			
+Macroalgae	Filamentous / filiform	Green			Drift
+Macroalgae	Filamentous / filiform	Green			No epiphytes
+Macroalgae	Filamentous / filiform	Green			Epiphytes algae
+Macroalgae	Filamentous / filiform	Green			Epiphytes other
+Macroalgae	Filamentous / filiform	Red			
+Macroalgae	Filamentous / filiform	Red			Drift
+Macroalgae	Filamentous / filiform	Red			No epiphytes
+Macroalgae	Filamentous / filiform	Red			Epiphytes algae
+Macroalgae	Filamentous / filiform	Red			Epiphytes other
+Macroalgae	Filamentous / filiform				
+Macroalgae	Filamentous / filiform				Drift
+Macroalgae	Filamentous / filiform				No epiphytes
+Macroalgae	Filamentous / filiform				Epiphytes algae
+Macroalgae	Filamentous / filiform				Epiphytes other
+Macroalgae	Globose / saccate	Brown			
+Macroalgae	Globose / saccate	Brown			Drift
+Macroalgae	Globose / saccate	Brown			No epiphytes
+Macroalgae	Globose / saccate	Brown			Epiphytes algae
+Macroalgae	Globose / saccate	Brown			Epiphytes other
+Macroalgae	Globose / saccate	Green			
+Macroalgae	Globose / saccate	Green			Drift
+Macroalgae	Globose / saccate	Green			No epiphytes
+Macroalgae	Globose / saccate	Green			Epiphytes algae
+Macroalgae	Globose / saccate	Green			Epiphytes other
+Macroalgae	Globose / saccate	Red			
+Macroalgae	Globose / saccate	Red			Drift
+Macroalgae	Globose / saccate	Red			No epiphytes
+Macroalgae	Globose / saccate	Red			Epiphytes algae
+Macroalgae	Globose / saccate	Red			Epiphytes other
+Macroalgae	Globose / saccate				
+Macroalgae	Globose / saccate				Drift
+Macroalgae	Globose / saccate				No epiphytes
+Macroalgae	Globose / saccate				Epiphytes algae
+Macroalgae	Globose / saccate				Epiphytes other
+Macroalgae	Laminate	Brown			
+Macroalgae	Laminate	Brown			Drift
+Macroalgae	Laminate	Brown			No epiphytes
+Macroalgae	Laminate	Brown			Epiphytes algae
+Macroalgae	Laminate	Brown			Epiphytes other
+Macroalgae	Laminate	Green			
+Macroalgae	Laminate	Green			Drift
+Macroalgae	Laminate	Green			No epiphytes
+Macroalgae	Laminate	Green			Epiphytes algae
+Macroalgae	Laminate	Green			Epiphytes other
+Macroalgae	Laminate	Red			
+Macroalgae	Laminate	Red			Drift
+Macroalgae	Laminate	Red			No epiphytes
+Macroalgae	Laminate	Red			Epiphytes algae
+Macroalgae	Laminate	Red			Epiphytes other
+Macroalgae	Laminate				
+Macroalgae	Laminate				Drift
+Macroalgae	Laminate				No epiphytes
+Macroalgae	Laminate				Epiphytes algae
+Macroalgae	Laminate				Epiphytes other
+Macroalgae	Large canopy-forming	Brown			
+Macroalgae	Large canopy-forming	Brown			Drift
+Macroalgae	Large canopy-forming	Brown			No epiphytes
+Macroalgae	Large canopy-forming	Brown			Epiphytes algae
+Macroalgae	Large canopy-forming	Brown			Epiphytes other
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Drift
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	No epiphytes
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Epiphytes algae
+Macroalgae	Large canopy-forming	Brown		Ecklonia radiata	Epiphytes other
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Drift
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	No epiphytes
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Epiphytes algae
+Macroalgae	Large canopy-forming	Brown		Scytothalia dorycarpa	Epiphytes other
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Drift
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	No epiphytes
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Epiphytes algae
+Macroalgae	Large canopy-forming	Brown		Phyllospora spp	Epiphytes other
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Drift
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	No epiphytes
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes algae
+Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes other
+Macroalgae	Large canopy-forming				
+Macroalgae	Large canopy-forming				Drift
+Macroalgae	Large canopy-forming				No epiphytes
+Macroalgae	Large canopy-forming				Epiphytes algae
+Macroalgae	Large canopy-forming				Epiphytes other
+Macroalgae	Sheet-like / membraneous	Brown			
+Macroalgae	Sheet-like / membraneous	Brown			Drift
+Macroalgae	Sheet-like / membraneous	Brown			No epiphytes
+Macroalgae	Sheet-like / membraneous	Brown			Epiphytes algae
+Macroalgae	Sheet-like / membraneous	Brown			Epiphytes other
+Macroalgae	Sheet-like / membraneous	Green			
+Macroalgae	Sheet-like / membraneous	Green			Drift
+Macroalgae	Sheet-like / membraneous	Green			No epiphytes
+Macroalgae	Sheet-like / membraneous	Green			Epiphytes algae
+Macroalgae	Sheet-like / membraneous	Green			Epiphytes other
+Macroalgae	Sheet-like / membraneous	Red			
+Macroalgae	Sheet-like / membraneous	Red			Drift
+Macroalgae	Sheet-like / membraneous	Red			No epiphytes
+Macroalgae	Sheet-like / membraneous	Red			Epiphytes algae
+Macroalgae	Sheet-like / membraneous	Red			Epiphytes other
+Macroalgae	Sheet-like / membraneous				
+Macroalgae	Sheet-like / membraneous				Drift
+Macroalgae	Sheet-like / membraneous				No epiphytes
+Macroalgae	Sheet-like / membraneous				Epiphytes algae
+Macroalgae	Sheet-like / membraneous				Epiphytes other
+Macroalgae					
+Molluscs	Bivalves				
+Molluscs	Cephalopods	Cuttlefish			
+Molluscs	Cephalopods	Octopods			
+Molluscs	Cephalopods	Squid			
+Molluscs	Cephalopods				
+Molluscs	Chitons				
+Molluscs	Gastropods				
+Molluscs					
+Sea spiders					
+Seagrasses	Elliptical leaves			Halophila spp	
+Seagrasses	Elliptical leaves			Halophila spp	No epiphytes
+Seagrasses	Elliptical leaves			Halophila spp	Epiphytes algae
+Seagrasses	Elliptical leaves			Halophila spp	Epiphytes other
+Seagrasses	Elliptical leaves				
+Seagrasses	Elliptical leaves				No epiphytes
+Seagrasses	Elliptical leaves				Epiphytes algae
+Seagrasses	Elliptical leaves				Epiphytes other
+Seagrasses	Strap-like leaves			Amphibolis spp	
+Seagrasses	Strap-like leaves			Amphibolis spp	No epiphytes
+Seagrasses	Strap-like leaves			Amphibolis spp	Epiphytes algae
+Seagrasses	Strap-like leaves			Amphibolis spp	Epiphytes other
+Seagrasses	Strap-like leaves			Posidonia spp	
+Seagrasses	Strap-like leaves			Posidonia spp	No epiphytes
+Seagrasses	Strap-like leaves			Posidonia spp	Epiphytes algae
+Seagrasses	Strap-like leaves			Posidonia spp	Epiphytes other
+Seagrasses	Strap-like leaves			Zostera spp	
+Seagrasses	Strap-like leaves			Zostera spp	No epiphytes
+Seagrasses	Strap-like leaves			Zostera spp	Epiphytes algae
+Seagrasses	Strap-like leaves			Zostera spp	Epiphytes other
+Seagrasses	Strap-like leaves			Ruppia spp	
+Seagrasses	Strap-like leaves			Ruppia spp	No epiphytes
+Seagrasses	Strap-like leaves			Ruppia spp	Epiphytes algae
+Seagrasses	Strap-like leaves			Ruppia spp	Epiphytes other
+Seagrasses	Strap-like leaves			Thalassodendron spp	
+Seagrasses	Strap-like leaves			Thalassodendron spp	No epiphytes
+Seagrasses	Strap-like leaves			Thalassodendron spp	Epiphytes algae
+Seagrasses	Strap-like leaves			Thalassodendron spp	Epiphytes other
+Seagrasses	Strap-like leaves				
+Seagrasses	Strap-like leaves				No epiphytes
+Seagrasses	Strap-like leaves				Epiphytes algae
+Seagrasses	Strap-like leaves				Epiphytes other
+Seagrasses					
+Seagrasses					No epiphytes
+Seagrasses					Epiphytes algae
+Seagrasses					Epiphytes other
+Sessile invertebrates					
+Sponges	Crusts	Creeping / ramose			
+Sponges	Crusts	Encrusting			
+Sponges	Crusts	Endolithic / bioeroding			
+Sponges	Crusts				
+Sponges	Cup-likes	Barrels			
+Sponges	Cup-likes	Cups			
+Sponges	Cup-likes	Cups	Cup / goblet		
+Sponges	Cup-likes	Cups	Incomplete cup / curled fan		
+Sponges	Cup-likes	Cups	Tables / discs		
+Sponges	Cup-likes	Tubes and chimneys			
+Sponges	Cup-likes				
+Sponges	Erect forms	Branching			
+Sponges	Erect forms	Laminar			
+Sponges	Erect forms	Palmate			
+Sponges	Erect forms	Simple			
+Sponges	Erect forms	Stalked			
+Sponges	Erect forms				
+Sponges	Massive forms	Balls			
+Sponges	Massive forms	Cryptic			
+Sponges	Massive forms	Simple			
+Sponges	Massive forms				
+Sponges					
+Unscorable					
+Unscorable	Reef				
+Worms	Acorn worms				
+Worms	Echiura				
+Worms	Flatworms				
+Worms	Penisworms				
+Worms	Polychaetes	Other polychaetes			
+Worms	Polychaetes	Tube worms			
+Worms	Polychaetes				
+Worms	Sipuncula				
+Worms					
+Substrate	Consolidated (hard)	Boulders			
+Substrate	Consolidated (hard)	Boulders			Veneer
+Substrate	Consolidated (hard)	Boulders			Iceberg scour
+Substrate	Consolidated (hard)	Boulders			Storm damage
+Substrate	Consolidated (hard)	Boulders			Urchin barren
+Substrate	Consolidated (hard)	Boulders			Turf mat
+Substrate	Consolidated (hard)	Cobbles			
+Substrate	Consolidated (hard)	Cobbles			Veneer
+Substrate	Consolidated (hard)	Cobbles			Iceberg scour
+Substrate	Consolidated (hard)	Cobbles			Storm damage
+Substrate	Consolidated (hard)	Cobbles			Urchin barren
+Substrate	Consolidated (hard)	Cobbles			Turf mat
+Substrate	Consolidated (hard)	Rock			
+Substrate	Consolidated (hard)	Rock			Veneer
+Substrate	Consolidated (hard)	Rock			Iceberg scour
+Substrate	Consolidated (hard)	Rock			Storm damage
+Substrate	Consolidated (hard)	Rock			Urchin barren
+Substrate	Consolidated (hard)	Rock			Turf mat
+Substrate	Consolidated (hard)				
+Substrate	Consolidated (hard)				Veneer
+Substrate	Consolidated (hard)				Iceberg scour
+Substrate	Consolidated (hard)				Storm damage
+Substrate	Consolidated (hard)				Urchin barren
+Substrate	Consolidated (hard)				Turf mat
+Substrate	Unconsolidated (soft)	Pebble / gravel			
+Substrate	Unconsolidated (soft)	Pebble / gravel			Veneer
+Substrate	Unconsolidated (soft)	Pebble / gravel			Iceberg scour
+Substrate	Unconsolidated (soft)	Pebble / gravel			Storm damage
+Substrate	Unconsolidated (soft)	Pebble / gravel			Urchin barren
+Substrate	Unconsolidated (soft)	Pebble / gravel			Turf mat
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Veneer
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Iceberg scour
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Storm damage
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Urchin barren
+Substrate	Unconsolidated (soft)	Pebble / gravel	Biologenic		Turf mat
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Veneer
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Iceberg scour
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Storm damage
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Urchin barren
+Substrate	Unconsolidated (soft)	Pebble / gravel	Gravel (2-10mm)		Turf mat
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Veneer
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Iceberg scour
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Storm damage
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Urchin barren
+Substrate	Unconsolidated (soft)	Pebble / gravel	Pebble (10-64mm)		Turf mat
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Veneer
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Iceberg scour
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Storm damage
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Urchin barren
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)			Turf mat
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Veneer
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Iceberg scour
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Storm damage
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Urchin barren
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Coarse sand (with shell fragments)		Turf mat
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Veneer
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Iceberg scour
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Storm damage
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Urchin barren
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Fine sand (no shell fragments)		Turf mat
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Veneer
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Iceberg scour
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Storm damage
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Urchin barren
+Substrate	Unconsolidated (soft)	Sand / mud (<2mm)	Mud / silt (<64um)		Turf mat
+Substrate	Unconsolidated (soft)				
+Substrate	Unconsolidated (soft)				Veneer
+Substrate	Unconsolidated (soft)				Iceberg scour
+Substrate	Unconsolidated (soft)				Storm damage
+Substrate	Unconsolidated (soft)				Urchin barren
+Substrate	Unconsolidated (soft)				Turf mat
+Substrate					
+Substrate					Veneer
+Substrate					Iceberg scour
+Substrate					Storm damage
+Substrate					Urchin barren
+Substrate					Turf mat

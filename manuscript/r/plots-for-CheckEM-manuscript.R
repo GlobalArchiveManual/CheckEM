@@ -5,6 +5,7 @@ library(viridis)
 # Load necessary library
 # library(wesanderson)
 library(patchwork)
+library(scales)
 
 
 # Specify the path to the folder with CSV files (change to your GitHub local repo or file paths)
@@ -60,7 +61,15 @@ summary_data <- combined_data %>%
   summarise(count = n(), .groups = 'drop') %>%
   dplyr::filter(!error_recoded %in% c(NA, "")) %>%
   separate(file_name, into = c("date", "extra"), sep = "_all.") %>%
-  dplyr::mutate(date = str_replace_all(date, c("_" = " ", "00" = ":00")))
+  dplyr::mutate(date = str_replace_all(date, c("_" = " ", "00" = ":00"))) %>%
+  
+  dplyr::filter(!date %in% c("20240822 15:00","20240822 16:00")) %>%
+  
+  glimpse()
+
+
+
+unique(summary_data$date)
 
 unique(summary_data$error_recoded)
 
@@ -84,7 +93,7 @@ ggplot(summary_data, aes(x = date, y = count, fill = error_recoded)) +
     fill = "Type of error"
   ) +
   # scale_fill_brewer(palette = "Set2") +
-  scale_fill_manual(values = custom_palette) +  # Use the Set2-8 color palette
+  scale_fill_manual(values = custom_palette, labels = wrap_format(40)) +  # Use the Set2-8 color palette
   theme_classic() +  # Clean theme
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Make x-axis labels readable
@@ -158,13 +167,58 @@ detailed_data <- combined_data %>%
   separate(file_name, into = c("date", "extra"), sep = "_all.") %>%
   dplyr::mutate(date = str_replace_all(date, c("_" = " ", "00" = ":00"))) %>%
   arrange(date) %>%  # Ensure dates are in ascending order
+  
+  dplyr::filter(!date %in% c("20240822 15:00","20240822 16:00")) %>%
+  
   mutate(date_sequence = as.numeric(factor(date))) %>%  # Create sequence 1:5
   mutate(
     error = str_replace_all(error, "\\.", " ") %>%  # Replace dots with spaces
       str_to_sentence()) %>%                              # Capitalise first character of each word
   mutate(error = str_replace_all(error, c("rms" = "RMS",
-                               "3d" = "3D")))
+                                          "3d" = "3D"))) %>%
+  dplyr::mutate(error = case_when(
+    error %in% "3D point measurement over RMS" ~ "Measurement over Root Mean Square limit",
+    error %in% "Length measurement over RMS" ~ "Measurement over Root Mean Square limit",
+    
+    error %in% "Stereo maxn does not equal maxn" ~ "Number of individuals measured does not equal number counted",
+    
+    error %in% "Length or 3D point outside period" ~ "Measurement made outside of sampling period",
+    error %in% "Period with no end" ~ "Sampling period lacks a defined endpoint",
+    error %in% "Period wrong length" ~ "Unexpected sampling duration",
+    error %in% "Point outside period" ~ "Observation made outside of sampling period",
+    
+    
+    
+    error %in% "3D point without a number" ~ "Measurement missing number of individuals",
+    error %in% "Point without a number" ~ "Observation missing number of individuals",
+    error %in% "Sample without period" ~ "Sampling duration unspecified",
+    error %in% "Sample without length" ~ "Deployment/Sample missing length data",
+    error %in% "Sample without points" ~ "Deployment/Sample missing count data",
+    error %in% "Sample in lengths without metadata" ~ "Measurement data with no match in metadata",
+    error %in% "Sample in points without metadata" ~ "Count data with no match in metadata",
+    # error %in% "" ~ "",
+    
+    error %in% "Too big" ~ "Bigger than expected",
+    error %in% "Too small" ~ "Smaller than expected",
+    error %in% "Species not observed in region before" ~ "Species not expected in region",
+    
+    error %in% "Species not in life history sheet" ~ "Species not listed in database",
+    
+    
+    
+    .default = as.character(error))) %>%
+  
+  glimpse
 
+
+info_for_paper <- detailed_data %>%
+  dplyr::group_by(type_error, error, date) %>%
+  dplyr::summarise(n = sum(count))
+
+
+unique(detailed_data$error) %>% sort()
+
+unique(detailed_data$date) %>% sort()
 
 # Subset palettes for each plot
 palette_metadata <- custom_palette  # Use all 9 colors
@@ -189,7 +243,7 @@ plot_metadata <- ggplot(
   aes(x = date_sequence, y = count, fill = error)
 ) +
   geom_bar(stat = "identity") +
-  scale_fill_manual(values = palette_metadata) +
+  scale_fill_manual(values = palette_metadata, labels = wrap_format(40)) +
   labs(
     title = "Metadata",
     y = "Number of Flagged Errors",
@@ -208,7 +262,7 @@ plot_annotations <- ggplot(
   aes(x = date_sequence, y = count, fill = error)
 ) +
   geom_bar(stat = "identity") +
-  scale_fill_manual(values = palette_annotations) +
+  scale_fill_manual(values = palette_annotations, labels = wrap_format(40)) +
   labs(
     title = "Annotations",
     y = "Number of Flagged Errors",
@@ -227,7 +281,7 @@ plot_measurements <- ggplot(
   aes(x = date_sequence, y = count, fill = error)
 ) +
   geom_bar(stat = "identity") +
-  scale_fill_manual(values = palette_measurements) +
+  scale_fill_manual(values = palette_measurements, labels = wrap_format(40)) +
   labs(
     title = "Measurements",
     x = "Iteration",
@@ -235,8 +289,9 @@ plot_measurements <- ggplot(
     fill = "Type of Error"
   ) +
   scale_x_continuous(
-    breaks = 1:5,  # Positions to place the labels
-    labels = c("Before\nCheckEM", "1", "2", "3", "4")  # Custom labels
+    breaks = 1:3,  # Positions to place the labels
+    labels = c("Before\nCheckEM", "1", "2"#, "3", "4"
+               )  # Custom labels
   ) +
   publication_theme
 
