@@ -119,11 +119,9 @@ includes the following columns:</p><ul><li><p><strong>species</strong>: The spec
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Retrieve Bayesian length-weight parameters for a species</span></span></span>
 <span class="r-in"><span><span class="va">lw_params</span> <span class="op">&lt;-</span> <span class="fu">find_lw</span><span class="op">(</span><span class="st">"Lutjanus campechanus"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Couldn't resolve host name [www.fishbase.us]: Could not resolve host: www.fishbase.us</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">lw_params</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                species   lwa_m lwa_sd lwb_m     lwb_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Lutjanus campechanus 0.01479  0.001  2.97 0.01020408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                           metric</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 a=0.01479 (0.01306 - 0.01675), b=2.97 (2.95 - 2.99)based on LWR estimates for this species (Ref. &lt;A href='../references/FBRefSummary.php?ID=93245'&gt;93245&lt;/A&gt;).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
