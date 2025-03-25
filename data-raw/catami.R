@@ -11,7 +11,7 @@ url <- "https://docs.google.com/spreadsheets/d/1tcvHnD8LtPmjro8eOMdOS6k6HKdND86m
 
 catami <- googlesheets4::read_sheet(url, sheet = "code crosswalk") %>%
   CheckEM::clean_names() %>%
-  dplyr::select(starts_with("level"), family, genus, species, qualifiers) %>%
+  dplyr::select(starts_with("level"), family, genus, species, qualifiers, caab_code) %>%
   glimpse()
 
 usethis::use_data(catami, overwrite = TRUE)
