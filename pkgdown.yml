@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   r-workflows/check-fish-point: r-workflows/check-fish-point.html
@@ -17,7 +17,7 @@ articles:
   r-workflows/sampling-design: r-workflows/sampling-design.html
   r-workflows/spatial-layers: r-workflows/spatial-layers.html
   manuals/TransectMeasure_annotation_guide: manuals/TransectMeasure_annotation_guide.html
-last_built: 2025-03-25T23:11Z
+last_built: 2025-05-09T01:46Z
 urls:
   reference: https://globalarchivemanual.github.io/CheckEM/reference
   article: https://globalarchivemanual.github.io/CheckEM/articles
