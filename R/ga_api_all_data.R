@@ -36,7 +36,7 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
   # Retrieve and process length data
   length <- ga_api_length(synthesis_id = synthesis_id, token = token) %>%
     dplyr::semi_join(metadata, by = "sample_url") %>%
-    dplyr::select(sample_url, family, genus, species, length_mm, number) %>%
+    dplyr::select(sample_url, family, genus, species, length_mm, count) %>%
     dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) 
   
   # # Retrieve and process habitat data
@@ -83,18 +83,18 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
   
   # Complete length data
   length_with_zeros <<- length %>%
-    dplyr::mutate(number = as.numeric(number)) %>%
-    dplyr::filter(!is.na(number)) %>%
-    tidyr::uncount(number) %>%
-    dplyr::mutate(number = 1) %>%
+    dplyr::mutate(count = as.numeric(count)) %>%
+    dplyr::filter(!is.na(count)) %>%
+    tidyr::uncount(count) %>%
+    dplyr::mutate(count = 1) %>%
     dplyr::full_join(length_metadata, by = "sample_url") %>%
     dplyr::filter(successful_length == TRUE) %>%
-    dplyr::select(campaignid, sample, family, genus, species, length_mm, number) %>%
+    dplyr::select(campaignid, sample, family, genus, species, length_mm, count) %>%
     tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-    tidyr::replace_na(list(number = 0)) %>%
+    tidyr::replace_na(list(count = 0)) %>%
     dplyr::mutate(length_mm = as.numeric(length_mm)) %>%
     dplyr::full_join(length_metadata, by = "sample_url") %>%
-    dplyr::filter(!is.na(number)) %>%
+    dplyr::filter(!is.na(count)) %>%
     dplyr::filter(successful_length == TRUE) %>%
     dplyr::glimpse()
   
