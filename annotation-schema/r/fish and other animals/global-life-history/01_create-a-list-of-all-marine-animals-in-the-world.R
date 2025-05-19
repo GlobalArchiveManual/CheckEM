@@ -37,42 +37,42 @@ unique(worms$taxonRank) # only Species rank
 
 animals <- worms %>%
   dplyr::filter(kingdom %in% "Animalia") %>%
-  dplyr::filter(phylum %in% c("Mollusca",
-                              "Arthropoda",
-                              "Echinodermata",
-                              "Chordata")) %>%
+  # dplyr::filter(phylum %in% c("Mollusca",
+  #                             "Arthropoda",
+  #                             "Echinodermata",
+  #                             "Chordata")) %>%
   filter(!str_detect(order, "\\[unassigned\\] Caenogastropod")) %>%
-  dplyr::filter(!class %in% c("Teleostei", # remove fish as have other list
-                              "Chondrostei", # remove fish
-                              "Cladistii", # remove fish
-                              "Coelacanthi", # remove fish
-                              "Holocephali", # remove fish
-                              "Holostei", # remove fish
-                              "Elasmobranchii", # remove sharks
-                              "Myxini", # remove fish
-                              "Anthozoa", # remove sea anemones and corals - need to talk to Tim
-                              "Appendicularia", # remove free swimming tunicates
-                              "Ascidiacea", # ascidians
-                              "Branchiopoda", # small freshwater shrimps
-                              "Cnidaria incertae sedis", # unknown
-                              "Mollusca incertae sedis", # unknown
-                              "Copepoda",
-                              "Crinoidea", # crinoids
-                              "Hydrozoa",
-                              "Ostracoda", # tiny seed shrimp
-                              "Symphyla",
-                              "Pauropoda",
-                              "Cephalocarida",
-                              "Diplopoda",
-                              "Remipedia",
-                              "Tantulocarida",
-                              "Chilopoda",
-                              "Ichthyostraca",
-                              "Thaliacea",
-                              "Caudofoveata",
-                              "Solenogastres",
-                              "Scaphopoda",
-                              "")) %>%
+  # dplyr::filter(!class %in% c("Teleostei", # remove fish as have other list
+  #                             "Chondrostei", # remove fish
+  #                             "Cladistii", # remove fish
+  #                             "Coelacanthi", # remove fish
+  #                             "Holocephali", # remove fish
+  #                             "Holostei", # remove fish
+  #                             "Elasmobranchii", # remove sharks
+  #                             "Myxini", # remove fish
+  #                             "Anthozoa", # remove sea anemones and corals - need to talk to Tim
+  #                             "Appendicularia", # remove free swimming tunicates
+  #                             "Ascidiacea", # ascidians
+  #                             "Branchiopoda", # small freshwater shrimps
+  #                             "Cnidaria incertae sedis", # unknown
+  #                             "Mollusca incertae sedis", # unknown
+  #                             "Copepoda",
+  #                             "Crinoidea", # crinoids
+  #                             "Hydrozoa",
+  #                             "Ostracoda", # tiny seed shrimp
+  #                             "Symphyla",
+  #                             "Pauropoda",
+  #                             "Cephalocarida",
+  #                             "Diplopoda",
+  #                             "Remipedia",
+  #                             "Tantulocarida",
+  #                             "Chilopoda",
+  #                             "Ichthyostraca",
+  #                             "Thaliacea",
+  #                             "Caudofoveata",
+  #                             "Solenogastres",
+  #                             "Scaphopoda",
+  #                             "")) %>%
   dplyr::filter(!is.na(class)) %>%
   clean_names() %>%
   dplyr::select(taxonid, scientificname, kingdom, phylum, class, order, family, genus) %>%
@@ -89,13 +89,13 @@ ids <- unique(animals$taxonid)
 # TODO add more annotation on this part
 # takes ~ 14 hours to run
 # Unhash to run again to update
-# distributions <- wm_distribution_(id = c(as.numeric(ids))) %>%
-#   dplyr::mutate(mrgid = as.integer(str_replace_all(locationID, "http://marineregions.org/mrgid/", "")))
-# 
-# saveRDS(distributions, "annotation-schema/data/staging/global_animals_distributions-from-worms.RDS")
+distributions <- wm_distribution_(id = c(as.numeric(ids))) %>%
+  dplyr::mutate(mrgid = as.integer(str_replace_all(locationID, "http://marineregions.org/mrgid/", "")))
 
-distributions <- readRDS("annotation-schema/data/staging/global_animals_distributions-from-worms.RDS") %>%
-  distinct()
+# saveRDS(distributions, "annotation-schema/data/staging/global_animals_distributions-from-worms.RDS")
+# 
+# distributions <- readRDS("annotation-schema/data/staging/global_animals_distributions-from-worms.RDS") %>%
+#   distinct()
 
 # Get shapefiles for the marine regions using the mregion package ----
 realm <- mr_shp(key = "Ecoregions:realm") %>%

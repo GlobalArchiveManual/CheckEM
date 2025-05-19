@@ -2,32 +2,69 @@ library(rfishbase)
 library(tidyverse)
 # devtools::install_github("UWAMEGFisheries/GlobalArchive", dependencies = TRUE)
 library(GlobalArchive)
+library(CheckEM)
 library(worrms)
 library(rredlist)
 library(openxlsx)
 
 # Get a list of all fish species in the world from fishbase ----
-all.species <- load_taxa() %>% 
-  ga.clean.names() %>%
+all_species <- load_taxa() %>% 
+  clean_names() %>%
   dplyr::mutate(scientific = species) %>%
   tidyr::separate(species, into = c("genus", "species"), sep = " ") %>%
   dplyr::select(speccode, superclass, class, order, family, genus, species, scientific) %>%
   dplyr::mutate(speccode = as.character(speccode)) 
 
 # Format basic info and min + max depths ----
-info <- species(all.species$scientific) %>% 
-  ga.clean.names() %>%
-  dplyr::rename(length.max = length, length.max.type = ltypemaxm) %>% # Length metrics are in cm
-  dplyr::mutate(max_published_weight_kg = weight/1000) %>%
-  dplyr::select(species, speccode, fbname, length.max, length.max.type, importance,
-                depthrangecomdeep, depthrangecomshallow, depthrangedeep,depthrangeshallow, max_published_weight_kg) %>%
-  dplyr::mutate(speccode = as.character(speccode)) %>%
-  dplyr::rename(scientific = species, 
-                common.name = fbname) %>%
-  dplyr::mutate(speccode = as.character(speccode))
+info <- species(all_species$scientific) %>% 
+  clean_names() %>%
+  
+  dplyr::rename(scientific_name = species, 
+                fb_common_name = fbname,
+                fb_length_max = length, 
+                fb_length_max_type = ltypemaxm,
+                fb_speccode = speccode,
+                
+                fb_depth_range_shallow = depthrangeshallow,
+                fb_depth_range_deep = depthrangedeep,
+                fb_commerical_importance = importance
+                ) %>% # Length metrics are in cm
+  
+  dplyr::mutate(fb_max_published_weight_kg = weight/1000) %>%
+  dplyr::select(scientific_name, 
+                fb_speccode, 
+                fb_common_name, 
+                fb_length_max, 
+                fb_length_max_type, 
+                fb_commerical_importance,
+                fb_depth_range_deep,
+                fb_depth_range_shallow, 
+                fb_max_published_weight_kg
+                ) %>%
+  
+  dplyr::mutate(fb_speccode = as.character(fb_speccode)) 
 
 
 names(info) %>% sort()
+unique(info$fb_common_name)
+
+# Function to find values with special characters
+find_special_values <- function(column) {
+  column[grepl("[^a-zA-Z0-9 ,'-.’]", column)]  # Extract values with special characters
+}
+
+# Apply to each column
+special_values <- lapply(info, find_special_values)
+
+# Remove empty results (columns with no special characters)
+special_values <- special_values[lengths(special_values) > 0]
+
+# Print the results
+print(special_values)
+
+
+
+
 
 weights <- info %>%
   filter(!is.na(max_published_weight_kg))
@@ -35,11 +72,13 @@ nrow(weights)/nrow(info)
 # only 8.3% have weight info
 
 # Validate species names ----
-validated <- validate_names(all.species$scientific)
+validated <- validate_names(all_species$scientific)
 
 # Distribution (Which FAO major fishing areas are species present in) -----
-distribution <- distribution(validated) %>%
-  ga.clean.names() %>%
+
+distribution <- rfishbase::faoareas(validated) %>%
+# distribution <- distribution(validated) %>% # old function
+  clean_names() %>%
   dplyr::select(species, speccode, status, fao) %>% 
   # dpl
   dplyr::filter(!status %in% c("stray", "extirpated", "unclear", "questionable", "NA", NA)) %>%
@@ -60,9 +99,13 @@ distribution <- distribution(validated) %>%
                 scientific = species)%>%
   dplyr::mutate(speccode = as.character(speccode))
 
+ecosystems <- rfishbase::ecosystem(validated)
+
+
+
 # Get size of maturity -----
 maturity <- maturity(validated) %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   # filter(type1 %in% "FL") %>% # Would be good to turn this on but it gets rid of a lot of species.
   filter(!is.na(lm)) %>%
   dplyr::group_by(species, speccode) %>%
@@ -74,7 +117,7 @@ maturity <- maturity(validated) %>%
 # TODO come back and make this for only one species
 
 lwr <- length_weight(validated) %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::mutate(speccode = as.character(speccode))
 
 # bay_lwrs <- data.frame() # turned off for now So i don't loose the data we have already downloaded
@@ -111,8 +154,8 @@ bay_lwrs <- read.csv("annotation-schema/data/staging/bayesian_length-weights.csv
 
 
 # Get list of synyonms
-synonyms <- synonyms(all.species$scientific) %>% 
-  ga.clean.names() %>%
+synonyms <- synonyms(all_species$scientific) %>% 
+  clean_names() %>%
   dplyr::filter(!status %in% "accepted name") %>% # Don't care about accepted names
   dplyr::filter(!synonym == species) # this is silly, but some lines had the same fish name as correct as a synonym. So had to remove
 
@@ -123,7 +166,7 @@ unique(synonyms$status)
 # ## 150 names takes around ~ 6 seconds to run
 # 
 # # Create a list of all species
-# species.to.use <- unique(all.species$scientific)
+# species.to.use <- unique(all_species$scientific)
 # 
 # # Break into chunks of 150
 # species.lists <- split(species.to.use, ceiling(seq_along(species.to.use)/150)) # 234 lists
@@ -144,7 +187,7 @@ unique(synonyms$status)
 # 
 # worms.final <- worms %>%
 #   distinct() %>%
-#   ga.clean.names() %>%
+#   clean_names() %>%
 #   dplyr::select(aphiaid, scientificname, status, kingdom, phylum, class, order, family, genus, ismarine, isbrackish, isfreshwater) %>%
 #   dplyr::rename(scientific = scientificname)
 # write.csv(worms.final, "annotation-schema/data/staging/worms.list.csv", row.names = FALSE)
@@ -172,7 +215,7 @@ unique(synonyms$status)
 # 
 # new.worms <- missing.worms %>%
 #   distinct() %>%
-#   ga.clean.names() %>%
+#   clean_names() %>%
 #   dplyr::select(aphiaid, scientificname, status, kingdom, phylum, class, order, family, genus, ismarine, isbrackish, isfreshwater) %>%
 #   dplyr::rename(scientific = scientificname) %>%
 #   filter(status == "accepted") %>%
@@ -194,7 +237,10 @@ unique(synonyms$status)
 all.worms <- read.csv("annotation-schema/data/staging/worms.list.csv") %>%
   group_by(scientific) %>% 
   slice(1) %>% # WORMS has duplicate rows but different AphiaIDs for some species e.g. Anabarilius liui (1007204 & 1012093)
-  ungroup()
+  ungroup() %>%
+  dplyr::select(aphiaid, scientific, genus, ismarine, isbrackish, isfreshwater)
+
+# unique(all.worms$status)
 
 # duplicates <- all.worms %>% 
 #   group_by(scientific) %>%
@@ -219,7 +265,7 @@ all.worms <- read.csv("annotation-schema/data/staging/worms.list.csv") %>%
 # 
 # syn.tidy <- syns %>%
 #   distinct() %>%
-#   ga.clean.names() %>%
+#   clean_names() %>%
 #   dplyr::select(scientificname, unacceptreason, valid_aphiaid, valid_name) %>%
 #   dplyr::filter(!scientificname == valid_name) %>% # a check to make sure the valid name isn't the same as the synonym
 #   dplyr::rename(scientific = valid_name,
@@ -269,7 +315,7 @@ iucn.all <- readRDS("annotation-schema/data/staging/iucn.RDS") %>%
 # Get vulnerability ----
 # Also going to keep body shape and dermersal/pelagic from this function
 fb.vul <- fb_tbl("species") %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::select(speccode, genus, species, vulnerability, bodyshapei, demerspelag) %>%
   dplyr::mutate(speccode = as.character(speccode)) 
 
@@ -291,12 +337,12 @@ unique(fb.vul$demerspelag)
 
 # And a Synonym list
 
-fblh <- all.species %>% # has 35,024 species
+fblh <- all_species %>% # has 35,731 species
   dplyr::select(-c(superclass, class, order, family)) %>%
-  full_join(info) %>% # has 35,024 species
-  full_join(distribution) %>% # has 34,850 species (less)
-  full_join(maturity) %>% # only available for 1913 species (much less)
-  full_join((all.worms)) %>% # Has 103 missing # the join increases the number of rows WHY?  # TODO
+  full_join(info) %>% # has 35,731 species
+  full_join(distribution) %>% # has 35,621 species (less)
+  full_join(maturity) %>% # only available for 2046 species (much less)
+  full_join(all.worms) %>% # Has 103 missing # the join increases the number of rows WHY?  # TODO
   full_join(fb.vul) %>%
   dplyr::select(-speccode) %>%
   full_join(bay_lwrs) %>%
@@ -311,9 +357,9 @@ fblh <- all.species %>% # has 35,024 species
                 fb_fao_fishing_area_introduced = fao.fishing.area.introduced,
                 fb_fao_fishing_area_native = fao.fishing.area.native,
                 fb_commerical_importance = importance,
-                fb_brackish = isbrackish,
-                fb_freshwater = isfreshwater,
-                fb_marine = ismarine,
+                worms_brackish = isbrackish,
+                worms_freshwater = isfreshwater,
+                worms_marine = ismarine,
                 fb_length_at_maturity_cm = length.at.maturity.cm,
                 fb_length_max = length.max,
                 fb_length_max_type = length.max.type,
@@ -338,7 +384,22 @@ fblh <- all.species %>% # has 35,024 species
   filter(!is.na(kingdom))
 
 names(fblh)
-  
+# 
+# missing_aphiaid <- fblh %>%
+#   filter(is.na(aphia_id)) # none missing
+# 
+# unique(fblh$aphia_id) %>% sort()
+
+
+
+missing_fb <- anti_join(all.worms, all_species)
+missing_aphia <- anti_join(all_species, all.worms)
+
+
+
+
+
+
 test <- fblh %>%
   select(fb_all_fao_fishing_areas) %>%
   mutate(marine.region = strsplit(as.character(fb_all_fao_fishing_areas), split = ", ")) %>%
@@ -377,13 +438,13 @@ saveRDS(species.also.a.synonym, "C:/GitHub/CheckEMV2/data/global_fish.ambiguous.
 
 
 
-# species.missing.distribution <- anti_join(all.species, distribution) #  174 missing distribution
-# species.missing.maturity <- anti_join(all.species, maturity) #  33,111 missing maturity
+# species.missing.distribution <- anti_join(all_species, distribution) #  174 missing distribution
+# species.missing.maturity <- anti_join(all_species, maturity) #  33,111 missing maturity
 
 # FISHBASE HAS SOME VALID NAMES THAT ARE SYNONYMS HECK
 # TODO once the worms synyonms have finished running - need to check which species are synonyms 
 # (this will be confusing because I will also need to know which ones aren't ambiguous synonyms
-species.missing.worms <- anti_join(all.species %>% dplyr::select(-c(superclass, class, order, family)), all.worms) # only 109
+species.missing.worms <- anti_join(all_species %>% dplyr::select(-c(superclass, class, order, family)), all.worms) # only 109
 are.they.valid <- validate_names(c(species.missing.worms$scientific))
 
 are.they.synonyms <- left_join(species.missing.worms, list.for.checking) %>%
@@ -391,13 +452,13 @@ are.they.synonyms <- left_join(species.missing.worms, list.for.checking) %>%
 
 # Have found 24 that could be synonyms
 # Need to check if these species exist in the data before though.
-do.they.exist <- all.species %>%
+do.they.exist <- all_species %>%
   filter(scientific %in% c(unique(are.they.synonyms$correct.name)))
 # 20 are already in the fishbase data - this is very confusing.
 
 # I think it is best to remove these species
 
-worms.missing.fishbase <- anti_join(all.worms, all.species %>% dplyr::select(-c(superclass, class, order, family))) # None - woo
+worms.missing.fishbase <- anti_join(all.worms, all_species %>% dplyr::select(-c(superclass, class, order, family))) # None - woo
 
 # Save information as an excel workbook ----
 # Define styles for excel
@@ -513,3 +574,7 @@ hour <- str_sub(time, 10, 15)
 # Save the workbook
 saveWorkbook(wb, paste("output/fish/global_fish.life.history", date, hour, "xlsx", sep = "."), overwrite = TRUE)
 
+
+# Save as CSV with UTF-8 encoding
+write.csv(info, "names_test.csv", row.names = FALSE, fileEncoding = "UTF-8")
+write.csv(info, "names_test.csv", row.names = FALSE, fileEncoding = "UTF-8-BOM")
