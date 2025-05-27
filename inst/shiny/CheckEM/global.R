@@ -42,7 +42,7 @@ library(rnaturalearth)
 # Global archive functions
 library(devtools)
 # devtools::install_github('UWAMEGFisheries/GlobalArchive')
-library(GlobalArchive)
+# library(GlobalArchive)
 
 # Googlesheets (for now)
 library(googlesheets4)
@@ -69,9 +69,9 @@ sf_use_s2(FALSE)
 load("data/all_data.Rdata")
 
 # TODO update once I have moved the LH workflow into CHECKEM
-schema <- read_csv("data/benthic-annotation-schema-forward-facing.csv",
+schema <- read_csv("inst/shiny/CheckEM/data/benthic-annotation-schema-forward-facing.csv",
                    col_types = "c", na = "") %>%
-  ga.clean.names() %>%
+  clean_names() %>%
   dplyr::select(-c(qualifiers)) %>% #parent_caab, 
   dplyr::mutate(scientific = dplyr::case_when(
     !is.na(genus) ~ paste(genus, species)
