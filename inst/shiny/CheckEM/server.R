@@ -4091,8 +4091,8 @@ function(input, output, session) {
       dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
       dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
       dplyr::mutate(species = as.character(tolower(species))) %>%
-      dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
-      dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+      dplyr::mutate(genus = as.character(stringr::str_to_sentence(genus))) %>%
+      dplyr::mutate(family = as.character(stringr::str_to_sentence(family))) %>%
       dplyr::mutate(number = as.numeric(number)) %>%
       replace_na(list(family = "Unknown", genus = "Unknown", species = "spp"))
     
@@ -5186,8 +5186,8 @@ function(input, output, session) {
         mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
         dplyr::filter(!is.na(family)) %>%
         dplyr::mutate(species = as.character(tolower(species))) %>%
-        dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
-        dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+        dplyr::mutate(genus = as.character(stringr::str_to_sentence(genus))) %>%
+        dplyr::mutate(family = as.character(stringr::str_to_sentence(family))) %>%
         dplyr::mutate(length_mm = as.numeric(length)) %>%
         dplyr::select(!length) %>%
         dplyr::mutate(rms = as.numeric(rms)) %>%
@@ -5337,8 +5337,8 @@ function(input, output, session) {
         mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "spp", as.character(species))) %>%
         dplyr::filter(!is.na(family)) %>%
         dplyr::mutate(species = as.character(tolower(species))) %>%
-        dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
-        dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+        dplyr::mutate(genus = as.character(stringr::str_to_sentence(genus))) %>%
+        dplyr::mutate(family = as.character(stringr::str_to_sentence(family))) %>%
         dplyr::mutate(rms = as.numeric(rms)) %>%
         dplyr::mutate(range = as.numeric(range)) %>%
         dplyr::mutate(number = as.numeric(number)) %>%
@@ -11137,8 +11137,8 @@ function(input, output, session) {
       mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_, "spp."), "spp", as.character(species))) %>%
       dplyr::filter(!is.na(family)) %>%
       dplyr::mutate(species = as.character(tolower(species))) %>%
-      dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
-      dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+      dplyr::mutate(genus = as.character(stringr::str_to_sentence(genus))) %>%
+      dplyr::mutate(family = as.character(stringr::str_to_sentence(family))) %>%
       dplyr::left_join(all_data$lh.aus)
     
   })
@@ -11501,8 +11501,8 @@ function(input, output, session) {
       mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_, "spp."), "spp", as.character(species))) %>%
       dplyr::filter(!is.na(family)) %>%
       dplyr::mutate(species = as.character(tolower(species))) %>%
-      dplyr::mutate(genus = as.character(ga.capitalise(genus))) %>%
-      dplyr::mutate(family = as.character(ga.capitalise(family))) %>%
+      dplyr::mutate(genus = as.character(stringr::str_to_sentence(genus))) %>%
+      dplyr::mutate(family = as.character(stringr::str_to_sentence(family))) %>%
       dplyr::rename(number = count) %>%
       dplyr::mutate(number = as.numeric(number)) %>%
       dplyr::select(campaignid, sample, family, genus, species, length_mm, number) %>%
