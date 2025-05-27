@@ -89,7 +89,7 @@ Imports:
 URL: https://globalarchivemanual.github.io/CheckEM/
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
     UWAMEGFisheries/GlobalArchive
 VignetteBuilder: knitr
 LazyData: true
