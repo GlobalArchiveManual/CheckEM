@@ -29,7 +29,7 @@ correctly before running this function.
 \examples{
 \dontrun{
   # Run the function to set a GlobalArchive API token
-  set_token()
+  ga_api_set_token()
 }
 
 }
