@@ -40,21 +40,53 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
     dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) 
   
   # # Retrieve and process habitat data
-  habitat <- ga_api_habitat(synthesis_id = synthesis_id, token = token) %>%
-    dplyr::semi_join(metadata, by = "sample_url") #%>%
-    # dplyr::select(sample_url, family, genus, species, length_mm, number) %>%
-    # dplyr::mutate(scientific_name = paste(family, genus, species, sep = " "))
+  benthos <- ga_api_benthos(synthesis_id = synthesis_id, token = token) %>%
+    dplyr::semi_join(metadata, by = "sample_url")
+  
+  relief <- ga_api_relief(synthesis_id = synthesis_id, token = token) %>%
+    dplyr::semi_join(metadata, by = "sample_url")
+  
+  benthos_summarised <- benthos %>%
+    dplyr::mutate(habitat = case_when(level_2 %in% "Macroalgae" ~ level_2, 
+                                      level_2 %in% "Seagrasses" ~ level_2, 
+                                      level_2 %in% "Substrate" & level_3 %in% "Consolidated (hard)" ~ level_3, 
+                                      level_2 %in% "Substrate" & level_3 %in% "Unconsolidated (soft)" ~ level_3,  
+                                      level_2 %in% "Sponges" ~ "Sessile invertebrates", 
+                                      level_2 %in% "Sessile invertebrates" ~ level_2, 
+                                      level_2 %in% "Bryozoa" ~ "Sessile invertebrates", 
+                                      level_2 %in% "Cnidaria" ~ "Sessile invertebrates")) %>% 
+    dplyr::select(campaignid, sample, habitat, number) %>%
+    group_by(campaignid, sample, habitat) %>% 
+    dplyr::tally(number, name = "number") %>% dplyr::mutate(total_points_annotated = sum(number)) %>% 
+    ungroup() %>% 
+    pivot_wider(names_from = "habitat", values_from = "number", values_fill = 0) #%>%
+    # dplyr::mutate(reef = Macroalgae + Seagrasses + `Sessile invertebrates` + `Consolidated (hard)`) %>%
+    #pivot_longer(cols = c("Macroalgae", "Seagrasses", "Sessile invertebrates", "Consolidated (hard)", "Unconsolidated (soft)", "reef"), 
+    #             names_to = "habitat", values_to = "number") #%>%
+    #glimpse()
+  
+  relief_summarised <- relief %>%
+    uncount(count) %>%
+    group_by(campaignid, sample) %>%
+    dplyr::summarise(mean_relief = mean(as.numeric(level_5)), sd_relief = sd(as.numeric(level_5), na.rm = T)) %>%
+    ungroup() 
   
   assign("metadata", metadata, envir = .GlobalEnv)
   assign("count", count, envir = .GlobalEnv)
   assign("length", length, envir = .GlobalEnv)
-  assign("habitat", habitat, envir = .GlobalEnv)
+  assign("benthos_raw", benthos, envir = .GlobalEnv)
+  assign("relief_raw", relief, envir = .GlobalEnv)
+  assign("benthos_summarised", benthos, envir = .GlobalEnv)
+  assign("relief_summarised", relief_summarised, envir = .GlobalEnv)
   
   # Save processed data as RDS files
   saveRDS(metadata, file = file.path(dir, "metadata.RDS"))
   saveRDS(count, file = file.path(dir, "count.RDS"))
   saveRDS(length, file = file.path(dir, "length.RDS"))
-  saveRDS(habitat, file = file.path(dir, "habitat.RDS"))
+  saveRDS(benthos, file = file.path(dir, "benthos_raw.RDS"))
+  saveRDS(benthos_summarised, file = file.path(dir, "benthos_summarised.RDS"))
+  saveRDS(relief, file = file.path(dir, "relief_raw.RDS"))
+  saveRDS(relief_summarised, file = file.path(dir, "relief_summarised.RDS"))
   
   # Only complete the data is include_zeros == TRUE
   if (include_zeros) {

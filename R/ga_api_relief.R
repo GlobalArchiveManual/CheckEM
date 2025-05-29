@@ -1,4 +1,4 @@
-#' Retrieve Habitat Data from the GlobalArchive API
+#' Retrieve Relief Data from the GlobalArchive API
 #'
 #' This function retrieves habitat data from a GlobalArchive synthesis using an API call. It processes
 #' the data to include relevant species information by merging with a benthic species list.
@@ -13,18 +13,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Retrieve habitat metadata from a synthesis
-#' habitat <- ga_api_habitat(username = "your_username", password = "your_password", 
+#' # Retrieve relief metadata from a synthesis
+#' relief <- ga_api_relief(username = "your_username", password = "your_password", 
 #'                                    synthesis_id = "your_synthesis_id")
-#' print(habitat)
+#' print(relief)
 #' }
-ga_api_habitat <- function(token, synthesis_id) {
+ga_api_relief <- function(token, synthesis_id) {
   
   # Retrieve the benthic species list
   species_list <- ga_api_benthic_list(token)
   
   # URL for the API endpoint
-  url <- paste0("https://dev.globalarchive.org/api/data/SynthesisBenthosCountEntry/?sample__synthesis=", synthesis_id, "&format=feather")
+  url <- paste0("https://dev.globalarchive.org/api/data/SynthesisBenthosReliefEntry/?sample__synthesis=", synthesis_id, "&format=feather")
   
   # Include the token in the request headers
   headers <- add_headers(Authorization = paste("Token", token))
@@ -41,7 +41,7 @@ ga_api_habitat <- function(token, synthesis_id) {
     raw_connection <- rawConnection(raw_content, "rb")
     
     # Read the Feather file from the input stream
-    habitat <- arrow::read_feather(raw_connection) %>%
+    relief <- arrow::read_feather(raw_connection) %>%
       dplyr::rename(sample_url = sample) %>%
       dplyr::mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianBenthicBiotaAndSubstrateSubject")) %>%
       dplyr::select(-c(row)) %>%
@@ -53,6 +53,6 @@ ga_api_habitat <- function(token, synthesis_id) {
     cat("Request failed with status code:", status_code(response))
   }
   
-  return(habitat)
+  return(relief)
   
 }
