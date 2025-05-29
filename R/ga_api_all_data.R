@@ -39,6 +39,9 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
     dplyr::select(sample_url, family, genus, species, length_mm, count) %>%
     dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) 
   
+  samples <- metadata %>%
+    dplyr::select(sample_url, campaignid, sample)
+  
   # # Retrieve and process habitat data
   benthos <- ga_api_habitat(synthesis_id = synthesis_id, token = token) %>%
     dplyr::semi_join(metadata, by = "sample_url")
@@ -49,17 +52,25 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
   benthos_summarised <- benthos %>%
     dplyr::mutate(habitat = case_when(level_2 %in% "Macroalgae" ~ level_2, 
                                       level_2 %in% "Seagrasses" ~ level_2, 
-                                      level_2 %in% "Substrate" & level_3 %in% "Consolidated (hard)" ~ level_3, 
-                                      level_2 %in% "Substrate" & level_3 %in% "Unconsolidated (soft)" ~ level_3,  
+                                      level_2 %in% "Substrate" & level_3 %in% "Consolidated (hard)" ~ "Consolidated", 
+                                      level_2 %in% "Substrate" & level_3 %in% "Unconsolidated (soft)" ~ "Unconsolidated",  
                                       level_2 %in% "Sponges" ~ "Sessile invertebrates", 
                                       level_2 %in% "Sessile invertebrates" ~ level_2, 
                                       level_2 %in% "Bryozoa" ~ "Sessile invertebrates", 
-                                      level_2 %in% "Cnidaria" ~ "Sessile invertebrates")) %>% 
-    dplyr::select(campaignid, sample, habitat, number) %>%
-    group_by(campaignid, sample, habitat) %>% 
-    dplyr::tally(number, name = "number") %>% dplyr::mutate(total_points_annotated = sum(number)) %>% 
-    ungroup() %>% 
-    pivot_wider(names_from = "habitat", values_from = "number", values_fill = 0) #%>%
+                                      level_2 %in% "Cnidaria" ~ "Sessile invertebrates",
+                                      level_2 %in% "Echinoderms" ~ "Sessile invertebrates",
+                                      level_2 %in% "Ascidians" ~ "Sessile invertebrates",
+                                      .default = level_2)) %>% 
+    dplyr::left_join(samples) %>%
+    dplyr::select(sample_url, campaignid, sample, habitat, count) %>%
+    dplyr::group_by(sample_url, campaignid, sample, habitat) %>% 
+    dplyr::tally(count, name = "count") %>% 
+    dplyr::mutate(total_points_annotated = sum(count)) %>% 
+    dplyr::ungroup() %>% 
+    tidyr::pivot_wider(names_from = "habitat", values_from = "count", values_fill = 0) %>%
+    dplyr::select(-c(any_of("Fishes"))) %>%
+    clean_names()
+    
     # dplyr::mutate(reef = Macroalgae + Seagrasses + `Sessile invertebrates` + `Consolidated (hard)`) %>%
     #pivot_longer(cols = c("Macroalgae", "Seagrasses", "Sessile invertebrates", "Consolidated (hard)", "Unconsolidated (soft)", "reef"), 
     #             names_to = "habitat", values_to = "number") #%>%
@@ -67,9 +78,11 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
   
   relief_summarised <- relief %>%
     uncount(count) %>%
-    group_by(campaignid, sample) %>%
+    group_by(sample_url) %>%
     dplyr::summarise(mean_relief = mean(as.numeric(level_5)), sd_relief = sd(as.numeric(level_5), na.rm = T)) %>%
-    ungroup() 
+    ungroup() %>%
+    dplyr::left_join(samples) %>%
+    dplyr::select(sample_url, campaignid, sample, everything())
   
   assign("metadata", metadata, envir = .GlobalEnv)
   assign("count", count, envir = .GlobalEnv)
