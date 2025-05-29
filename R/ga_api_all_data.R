@@ -40,7 +40,7 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
     dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) 
   
   # # Retrieve and process habitat data
-  benthos <- ga_api_benthos(synthesis_id = synthesis_id, token = token) %>%
+  benthos <- ga_api_habitat(synthesis_id = synthesis_id, token = token) %>%
     dplyr::semi_join(metadata, by = "sample_url")
   
   relief <- ga_api_relief(synthesis_id = synthesis_id, token = token) %>%
