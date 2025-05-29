@@ -69,12 +69,12 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
     dplyr::ungroup() %>% 
     tidyr::pivot_wider(names_from = "habitat", values_from = "count", values_fill = 0) %>%
     dplyr::select(-c(any_of("Fishes"))) %>%
-    clean_names()
-    
-    # dplyr::mutate(reef = Macroalgae + Seagrasses + `Sessile invertebrates` + `Consolidated (hard)`) %>%
-    #pivot_longer(cols = c("Macroalgae", "Seagrasses", "Sessile invertebrates", "Consolidated (hard)", "Unconsolidated (soft)", "reef"), 
-    #             names_to = "habitat", values_to = "number") #%>%
-    #glimpse()
+    clean_names() %>%
+    mutate(across(
+      .cols = 5:ncol(.), 
+      .fns = ~ .x / total_points_annotated,
+      .names = "{.col}_percent"
+    ))
   
   relief_summarised <- relief %>%
     uncount(count) %>%
