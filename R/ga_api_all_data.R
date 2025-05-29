@@ -89,7 +89,7 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE) {
   assign("length", length, envir = .GlobalEnv)
   assign("benthos_raw", benthos, envir = .GlobalEnv)
   assign("relief_raw", relief, envir = .GlobalEnv)
-  assign("benthos_summarised", benthos, envir = .GlobalEnv)
+  assign("benthos_summarised", benthos_summarised, envir = .GlobalEnv)
   assign("relief_summarised", relief_summarised, envir = .GlobalEnv)
   
   # Save processed data as RDS files
