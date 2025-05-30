@@ -119,7 +119,7 @@ methods (e.g. stereo-DOVs or ROVs), either exported from EventMeasure or
 “Generic” format (see format requirements <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html">here</a>),
 and check for any errors in the annotation. The script will then format
 the annotation data into a tidy format.</p>
-<p>You also need a formatted sample metadata file “*_Metadata.csv” (see
+<p>You also need a formatted sample metadata file “*_metadata.csv” (see
 format requirements <a href="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html">here</a>)</p>
 </div>
 <div class="section level2">
@@ -199,7 +199,7 @@ saving as a .csv or similar, it also maintains any column
 formatting).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">metadata</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>,</span>
-<span>                                <span class="va">name</span>, <span class="st">"_Metadata.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>                                <span class="va">name</span>, <span class="st">"_metadata.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="marine-parks">Marine Parks<a class="anchor" aria-label="anchor" href="#marine-parks"></a>
 </h3>
