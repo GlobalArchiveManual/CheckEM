@@ -134,7 +134,7 @@ tidy.habitat <- habitat %>%
   dplyr::select(campaignid, sample, number, starts_with("level"), family, genus, species) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
   group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
-  dplyr::tally(number, name = "number") %>%
+  dplyr::summarise(number = sum(number)) %>%
   ungroup() %>%                                                     
   dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()
@@ -155,7 +155,7 @@ tidy.relief <- relief %>%
   dplyr::mutate(number = 1) %>% 
   left_join(catami) %>%
   group_by(campaignid, sample, across(starts_with("level"))) %>% 
-  dplyr::tally(number, name = "number") %>%
+  dplyr::summarise(number = sum(number)) %>%
   ungroup() %>%                                                     
   glimpse()                                    
 ```                        

@@ -15,6 +15,7 @@ vignette: >
 This script takes the checked habitat data from the previous workflow steps, visualises the data and exports it into a format suitable for modelling. The exploratory visualisation of the data allows for trends and patterns in the raw data to be investigated.
 
 # R set up
+
 Load the necessary libraries.
 
 ```{r libraries, results='hide', warning=FALSE, message=FALSE}
@@ -37,6 +38,7 @@ name <- "example-bruv-workflow"
 ```
 
 # Read in the data
+
 Load the metadata with bathymetry derivatives joined on.
 
 ```{r load-metadata}
@@ -45,14 +47,15 @@ metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/"
   glimpse()
 ```
 
-Load the habitat data and format it into 'broad' classes for modelling. The classes included in the example are just a recommendation, however when deciding on your own habitat classes to model, we suggest using ecologically meaningful classes that will not be too rare to model. 
+Load the habitat data and format it into 'broad' classes for modelling. The classes included in the example are just a recommendation, however when deciding on your own habitat classes to model, we suggest using ecologically meaningful classes that will not be too rare to model.
 
 ```{r load-habitat}
 habitat <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_habitat.rds"))) %>%
   dplyr::mutate(habitat = case_when(level_2 %in% "Macroalgae" ~ level_2, level_2 %in% "Seagrasses" ~ level_2, level_2 %in% "Substrate" & level_3 %in% "Consolidated (hard)" ~ level_3, level_2 %in% "Substrate" & level_3 %in% "Unconsolidated (soft)" ~ level_3,  level_2 %in% "Sponges" ~ "Sessile invertebrates", level_2 %in% "Sessile invertebrates" ~ level_2, level_2 %in% "Bryozoa" ~ "Sessile invertebrates", level_2 %in% "Cnidaria" ~ "Sessile invertebrates")) %>% 
   dplyr::select(campaignid, sample, habitat, number) %>%
   group_by(campaignid, sample, habitat) %>% 
-  dplyr::tally(number, name = "number") %>% dplyr::mutate(total_points_annotated = sum(number)) %>% 
+  dplyr::summarise(number = sum(number)) %>% 
+  dplyr::mutate(total_points_annotated = sum(number)) %>% 
   ungroup() %>% 
   pivot_wider(names_from = "habitat", values_from = "number", values_fill = 0) %>%
   dplyr::mutate(reef = Macroalgae + Seagrasses + `Sessile invertebrates` + `Consolidated (hard)`) %>%
@@ -72,6 +75,7 @@ tidy.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_re
 ```
 
 # Format the habitat and relief data for plotting and modelling
+
 Join the habitat data with relief, metadata and bathymetry derivatives.
 
 ```{r format-habitat}
@@ -83,7 +87,9 @@ tidy.habitat <- metadata.bathy.derivatives %>%
   clean_names() %>%
   glimpse()
 ```
+
 Format the relief into a format suitable for exploratory plotting.
+
 ```{r format-relief}
 plot.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_relief.rds"))) %>%
   group_by(campaignid, sample, level_5) %>%
@@ -92,32 +98,43 @@ plot.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_re
   dplyr::mutate(class.relief = as.factor(level_5)) %>%
   glimpse()
 ```
+
 # Visualise the habitat and relief data
+
 Plot the occurence data per habitat class. Each data point represents a unique sample.
+
 ```{r plot-habitat}
 ggplot() +
-  geom_quasirandom(data = tidy.habitat, aes(x = total_points_annotated, y = habitat), groupOnX = F, method = "quasirandom", alpha = 0.25, size = 1.8, width = 0.2) +
+  geom_quasirandom(data = tidy.habitat, aes(x = (number/total_points_annotated), y = habitat), groupOnX = F, method = "quasirandom", alpha = 0.25, size = 1.8, width = 0.2) +
   labs(x = "Number of points", y = "") +
   theme_classic()
 ```
-Plot the occurence data for each level of relief. 
+
+Plot the occurence data for each level of relief.
+
 ```{r plot-relief}
 ggplot() +
   geom_quasirandom(data = plot.relief, aes(x = number, y = class.relief), groupOnX = F, method = "quasirandom", alpha = 0.25, size = 1.8, width = 0.05) +
   labs(x = "Number of points", y = "Relief (0-5)") + 
   theme_classic()
 ```
-Create a colour palette for plotting. 
+
+Create a colour palette for plotting.
+
 ```{r colours}
 cols <- colorRampPalette(brewer.pal(12, "Paired"))(length(unique(tidy.habitat$habitat))) 
 ```
+
 Format the habitat into wide format suitable for plotting.
+
 ```{r wide-habitat}
 plot.habitat <- tidy.habitat %>%
   pivot_wider(names_from = "habitat", values_from = "number", names_prefix = "broad.") %>%
   glimpse()
 ```
+
 Visualise the habitat classes as spatial pie charts.
+
 ```{r pie-charts}
 leaflet() %>%                                          
   addTiles(group = "Open Street Map") %>%                           
@@ -127,7 +144,9 @@ leaflet() %>%
   setView(mean(as.numeric(plot.habitat$longitude_dd)), 
           mean(as.numeric(plot.habitat$latitude_dd)), zoom = 12)
 ```
+
 Choose an individual habitat class to visualise as spatial bubble plots.
+
 ```{r individual-habitats}
 hab.name <- 'Sessile invertebrates'
 
@@ -137,7 +156,9 @@ overzero <-  tidy.habitat %>%
 equalzero <- tidy.habitat %>% 
   filter(habitat %in% hab.name & number == 0)
 ```
+
 Visualise the individual habitat classes.
+
 ```{r bubble-plots}
 bubble.plot <- leaflet(data = tidy.habitat) %>%                     
   addTiles() %>%                                                    
@@ -153,7 +174,9 @@ if (nrow(equalzero)) {
     addCircleMarkers(data = equalzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = 2, fillOpacity = 0.5, color = "white", stroke = FALSE, label = ~ as.character(sample))}
 bubble.plot
 ```
+
 # Save the final tidy habitat data
+
 ```{r save-habitat}
 saveRDS(tidy.habitat, file = here::here(paste("r-workflows/data/tidy/", paste(name,"tidy-habitat.rds", sep = "_"), sep = "/")))
 ```
