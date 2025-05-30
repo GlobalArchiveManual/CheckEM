@@ -24,7 +24,7 @@ ga_api_habitat <- function(token, synthesis_id) {
   species_list <- ga_api_benthic_list(token)
   
   # URL for the API endpoint
-  url <- paste0("https://dev.globalarchive.org/api/data/SynthesisBenthosEntry/?sample__synthesis=", synthesis_id, "&format=feather")
+  url <- paste0("https://dev.globalarchive.org/api/data/SynthesisBenthosCountEntry/?sample__synthesis=", synthesis_id, "&format=feather")
   
   # Include the token in the request headers
   headers <- add_headers(Authorization = paste("Token", token))

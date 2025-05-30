@@ -51,7 +51,7 @@ metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
 Save the metadata as an R data file (this creates a lighter file than saving as a .csv or similar).
 
 ```{r save-metadata}
-saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_Metadata.rds")))
+saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_metadata.rds")))
 ```
 
 Read in the points data exported from Transect Measure, and then filter this into 2 dataframes for relief and habitat annotations.
@@ -125,16 +125,35 @@ metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "s
 ```
 
 # Format and save the final tidy dataset
+Make a vector of columns included in the schema file to ensure proper joining with your tidy habitat dataset.
+
+```{r add-columns}
+catami_cols <- c("level_1" = NA,
+                 "level_2" = NA,
+                 "level_3" = NA,
+                 "level_4" = NA,
+                 "level_5" = NA,
+                 "level_6" = NA,
+                 "level_7" = NA,
+                 "level_8" = NA,
+                 "family" = NA,
+                 "genus" = NA,
+                 "species" = NA)
+ 
+```
+
 Tidy the habitat data by joining with the complete schema file that is loaded with the CheckEM package.
+
 
 ```{r tidy-habitat}
 tidy.habitat <- habitat %>%
-  dplyr::mutate(number = 1) %>%                                     
+  dplyr::mutate(count = 1) %>% 
+  add_column(!!!catami_cols[!names(catami_cols) %in% names(.)]) %>%
   left_join(catami) %>%
-  dplyr::select(campaignid, sample, number, starts_with("level"), family, genus, species) %>%
+  dplyr::select(campaignid, sample, count, starts_with("level"), family, genus, species) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
   group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
-  dplyr::summarise(number = sum(number)) %>%
+  dplyr::summarise(count = sum(count)) %>%
   ungroup() %>%                                                     
   dplyr::select(campaignid, sample, level_1, everything()) %>%
   glimpse()
@@ -152,10 +171,11 @@ Tidy the relief data by joining with the complete schema file that is loaded wit
 tidy.relief <- relief %>%
   dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%              
-  dplyr::mutate(number = 1) %>% 
+  dplyr::mutate(count = 1) %>%
+  add_column(!!!catami_cols[!names(catami_cols) %in% names(.)]) %>%
   left_join(catami) %>%
   group_by(campaignid, sample, across(starts_with("level"))) %>% 
-  dplyr::summarise(number = sum(number)) %>%
+  dplyr::summarise(count = sum(count)) %>%
   ungroup() %>%                                                     
   glimpse()                                    
 ```                        

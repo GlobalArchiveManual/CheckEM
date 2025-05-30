@@ -96,7 +96,7 @@ for(i in 1:length(resp.vars)){
   print(resp.vars[i])
   use.dat <- dat[dat$habitat == resp.vars[i],]
   use.dat   <- as.data.frame(use.dat)
-  Model1  <- gam(cbind(number, (total_points_annotated - number)) ~ 
+  Model1  <- gam(cbind(count, (total_points_annotated - count)) ~ 
                    s(mbdepth, bs = 'cr'),
                  family = binomial("logit"),  data = use.dat)
   
@@ -146,7 +146,7 @@ write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.
 Transform the habitat data into wide format for easy prediction.
 ```{r transform-habitat}
 widedat <- dat %>%
-  pivot_wider(values_from = "number", names_from = "habitat", values_fill = 0) %>%
+  pivot_wider(values_from = "count", names_from = "habitat", values_fill = 0) %>%
   clean_names() %>%
   glimpse()
 ```

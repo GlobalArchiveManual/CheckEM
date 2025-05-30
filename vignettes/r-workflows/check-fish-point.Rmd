@@ -29,7 +29,7 @@ vignette: >
 This script will take fish annotation data from single point based methods (e.g. stereo-BRUVs or stereo-BOSS), either exported from EventMeasure or "Generic" format (see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html)), and check for any errors in the annotation.
 The script will then format the annotation data into a tidy format.
 
-You also need a formatted sample metadata file "*_Metadata.csv" (see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html))
+You also need a formatted sample metadata file "*_metadata.csv" (see format requirements [here](https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html))
 
 # R set up
 First you will need to load the necessary libraries.
@@ -70,7 +70,7 @@ Save the metadata as an R data file (this creates a lighter file than saving as 
 
 ```{r save-metadata}
 saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/",
-                                name, "_Metadata.rds")))
+                                name, "_metadata.rds")))
 ```
 
 If you have already exported in the 'check-habitat' script then load the metadata.
@@ -78,7 +78,7 @@ If you have just loaded and saved the metadata, then you can skip this chunk of 
 
 ```{r tidy-metadata}
 metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
-                                name, "_Metadata.rds")))
+                                name, "_metadata.rds")))
 ```
 
 ## Marine Parks
