@@ -177,7 +177,7 @@ plot(m_inverts, pages = 1, residuals = T, cex = 5)
 
 # Rock
 m_rock <- gam(cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~ 
-                   s(aspect,     k = 5, bs = "cr") +
+                   s(aspect,     k = 5, bs = "cc") +
                    s(detrended, k = 5, bs = "cr") +
                    s(tpi, k = 5, bs = "cr"), 
                  data = widedat, method = "REML", family = binomial("logit"))
@@ -186,7 +186,7 @@ plot(m_rock, pages = 1, residuals = T, cex = 5)
 
 # Sand
 m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~ 
-                s(aspect,     k = 5, bs = "cr")  + 
+                s(aspect,     k = 5, bs = "cc")  + 
                 s(detrended, k = 5, bs = "cr") +
                 s(roughness, k = 5, bs = "cr"), 
               data = widedat, method = "REML", family = binomial("logit"))
@@ -195,7 +195,7 @@ plot(m_sand, pages = 1, residuals = T, cex = 5)
 
 # Seagrasses
 m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~ 
-                s(aspect,     k = 5, bs = "cr")  + 
+                s(aspect,     k = 5, bs = "cc")  + 
                 s(detrended, k = 5, bs = "cr") + 
                 s(roughness, k = 5, bs = "cr"), 
               data = widedat, method = "REML", family = binomial("logit"))
@@ -213,7 +213,7 @@ plot(m_macro, pages = 1, residuals = T, cex = 5)
 
 # Reef
 m_reef <- gam(cbind(reef, total_points_annotated - reef) ~ 
-                 s(aspect,     k = 5, bs = "cr")  + 
+                 s(aspect,     k = 5, bs = "cc")  + 
                  s(detrended, k = 5, bs = "cr") +
                  s(roughness, k = 5, bs = "cr"), 
                data = widedat, method = "REML", family = binomial("logit"))
