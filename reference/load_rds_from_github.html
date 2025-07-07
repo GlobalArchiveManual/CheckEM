@@ -211,9 +211,6 @@ access to the repository.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   if (verbose) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     message(sprintf("name=%s:\t found in Rdata.rds", </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       name), domain = NA)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   thispkg &lt;- sub(".*/([^/]*)/data$", "\\1", p)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   thispkg &lt;- sub("_.*$", "", thispkg)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   thispkg &lt;- paste0("package:", thispkg)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   objs &lt;- rds[[name]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   lazyLoad(file.path(p, "Rdata"), envir = tmp_env, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     filter = function(x) x %in% objs)</span>
@@ -282,7 +279,7 @@ access to the repository.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     invisible(names)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x558ce74bda78&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55d97e859670&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:utils&gt;</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
