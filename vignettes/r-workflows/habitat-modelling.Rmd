@@ -96,7 +96,7 @@ for(i in 1:length(resp.vars)){
   print(resp.vars[i])
   use.dat <- dat[dat$habitat == resp.vars[i],]
   use.dat   <- as.data.frame(use.dat)
-  Model1  <- gam(cbind(number, (total_points_annotated - number)) ~ 
+  Model1  <- gam(cbind(count, (total_points_annotated - count)) ~ 
                    s(mbdepth, bs = 'cr'),
                  family = binomial("logit"),  data = use.dat)
   
@@ -146,7 +146,7 @@ write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.
 Transform the habitat data into wide format for easy prediction.
 ```{r transform-habitat}
 widedat <- dat %>%
-  pivot_wider(values_from = "number", names_from = "habitat", values_fill = 0) %>%
+  pivot_wider(values_from = "count", names_from = "habitat", values_fill = 0) %>%
   clean_names() %>%
   glimpse()
 ```
@@ -177,7 +177,7 @@ plot(m_inverts, pages = 1, residuals = T, cex = 5)
 
 # Rock
 m_rock <- gam(cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~ 
-                   s(aspect,     k = 5, bs = "cr") +
+                   s(aspect,     k = 5, bs = "cc") +
                    s(detrended, k = 5, bs = "cr") +
                    s(tpi, k = 5, bs = "cr"), 
                  data = widedat, method = "REML", family = binomial("logit"))
@@ -186,7 +186,7 @@ plot(m_rock, pages = 1, residuals = T, cex = 5)
 
 # Sand
 m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~ 
-                s(aspect,     k = 5, bs = "cr")  + 
+                s(aspect,     k = 5, bs = "cc")  + 
                 s(detrended, k = 5, bs = "cr") +
                 s(roughness, k = 5, bs = "cr"), 
               data = widedat, method = "REML", family = binomial("logit"))
@@ -195,7 +195,7 @@ plot(m_sand, pages = 1, residuals = T, cex = 5)
 
 # Seagrasses
 m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~ 
-                s(aspect,     k = 5, bs = "cr")  + 
+                s(aspect,     k = 5, bs = "cc")  + 
                 s(detrended, k = 5, bs = "cr") + 
                 s(roughness, k = 5, bs = "cr"), 
               data = widedat, method = "REML", family = binomial("logit"))
@@ -213,7 +213,7 @@ plot(m_macro, pages = 1, residuals = T, cex = 5)
 
 # Reef
 m_reef <- gam(cbind(reef, total_points_annotated - reef) ~ 
-                 s(aspect,     k = 5, bs = "cr")  + 
+                 s(aspect,     k = 5, bs = "cc")  + 
                  s(detrended, k = 5, bs = "cr") +
                  s(roughness, k = 5, bs = "cr"), 
                data = widedat, method = "REML", family = binomial("logit"))
