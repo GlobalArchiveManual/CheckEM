@@ -12,7 +12,7 @@ library(CheckEM)
 # Read in extra caab codes -----
 # This is a manually made csv
 # It contains seagrass and kelp species which UWA commonly use when annotating habitat
-extra <- read.csv("annotation-schema/data/raw/extra-habitat-classes.csv") %>%
+extra <- read_csv("annotation-schema/data/raw/extra-habitat-classes.csv") %>%
   CheckEM::clean_names()
 
 # Read in catami codes ----
@@ -21,6 +21,7 @@ catami <- read.csv("annotation-schema/data/raw/catami-caab-codes_1.4.csv") %>%
   CheckEM::clean_names() %>%
   dplyr::rename(caab_code = species_code, parent_caab = catami_parent_id) %>%
   dplyr::select(caab_code, catami_display_name) %>% 
+  dplyr::mutate(caab_code = as.character(caab_code)) %>%
   tidyr::separate(catami_display_name, into = c("level_2", "level_3", "level_4", "level_5", "level_6", "level_7", "level_8"), sep = ": ") %>%
   dplyr::mutate(level_1 = if_else(level_2 %in% c("Substrate", "Relief"), "Physical", "Biota")) %>%
   bind_rows(extra) %>%

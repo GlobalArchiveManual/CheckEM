@@ -10,8 +10,8 @@ caab_code,level_1,level_2,level_3,level_4,level_5,level_6,level_7,family,genus,s
 54102902,Biota,Macroalgae,Large canopy-forming,Brown,,,,Seirococcaceae,Phyllospora,spp
 54105902,Biota,Macroalgae,Large canopy-forming,Brown,,,,Sargassaceae,Sargassum,spp
 82003008,Physical,Relief,High,Caves,,,,,,
-1,Biota,Unscorable,,,,,,,,
-3,Biota,Unscorable,Reef,,,,,,,
-2,Biota,Sessile invertebrates,,,,,,,,
+00000001,Biota,Unscorable,,,,,,,,
+00000003,Biota,Unscorable,Reef,,,,,,,
+00000002,Biota,Sessile invertebrates,,,,,,,,
 80300936,Biota,Macroalgae,Turfing,,,,,,,
 54102001,Biota,Macroalgae,Large canopy-forming,Brown,,,,Seirococcaceae,Phyllospora,comosa
