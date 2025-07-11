@@ -28,7 +28,7 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
   # Retrieve metadata from the CheckEM API
   metadata <- ga_api_metadata(synthesis_id = synthesis_id, token = token) # Error handling from metadata function
   
-  if (exists("metadata")) {
+  if (nrow(metadata) > 0) {
     
     # Retrieve and process count data
     count <- ga_api_count(synthesis_id = synthesis_id, token = token) %>%
