@@ -11,11 +11,14 @@ library(tidyverse)
 library(CheckEM)
 library(readxl)
 library(rvest)
+library(mregions)
 library(mregions2)
 library(worrms)
 library(sf)
 library(beepr)
 library(taxize)
+library(progressr)   # progress bars for purrr/future loops
+library(purrr)
 sf_use_s2(FALSE)
 
 # Spatial files ----
@@ -198,99 +201,164 @@ distributions <- readRDS("annotation-schema/data/staging/australia_animals_distr
   distinct()
 
 # Get shapefiles for the marine regions using the mregion package ----
-realm <- mr_shp(key = "Ecoregions:realm") %>%
-  dplyr::mutate(source = "realm") %>%
-  dplyr::rename(name = realm) %>%
-  dplyr::select(mrgid, name, geometry, source)
+# mregions has now changed to mregions2
 
-date <- mr_shp(key = "MarineRegions:cross_dateline_polygons") %>%
-  dplyr::mutate(source = "dateline") %>%
-  dplyr::select(mrgid, name, geometry, source)
+unique_mrgids <- distributions %>%
+  distinct(mrgid)
 
-faoreg <- mr_shp(key = "MarineRegions:fao") %>%
-  dplyr::mutate(source = "FAO") %>%
-  dplyr::select(mrgid, name, geometry, source)
+test <- (unique(unique_mrgids$mrgid))[1:10]
 
-tdwg <- mr_shp(key = "TDWG:level4") %>%
-  dplyr::mutate(source = "TDWG") %>%
-  dplyr::rename(name = level_4_na) %>%
-  dplyr::select(mrgid, name, geometry, source) %>%
-  dplyr::filter(!mrgid == 0)
+polygons <- gaz_geometry(test[1], format = "sf")
+plot(polygons)
 
-erms <- mr_shp(key = "Europe:europeislands") %>%
-  dplyr::mutate(source = "europe") %>%
-  dplyr::select(mrgid, name, geometry, source) %>%
-  dplyr::filter(!mrgid == 0)
+# -------------------------------------------------------------------------
+# 1.  Prepare the list of unique mrgids
+# -------------------------------------------------------------------------
+distributions <- readRDS("annotation-schema/data/staging/australia_animals_distributions-from-worms.RDS") %>% 
+  distinct()
 
-eco <- mr_shp(key = "Ecoregions:ecoregions") %>% # slow to run
-  dplyr::rename(name = ecoregion) %>%
-  dplyr::mutate(source = "eco") %>%
-  dplyr::select(mrgid, name, geometry, source)
+unique_mrgids <- distributions %>% 
+  distinct(mrgid) %>%               # keep one of each
+  pull(mrgid)                   # get as a plain vector
 
-eez <- mr_shp(key = "MarineRegions:eez") %>% # slow to run
-  dplyr::rename(name = geoname) %>%
-  dplyr::mutate(source = "EEZ")%>%
-  dplyr::select(mrgid, name, geometry, source)
+# unique_mrgids <- unique_mrgids[1:10]   # for testing
 
-eez_iho <- mr_shp(key = "MarineRegions:eez_iho") %>% # very slow to run
-  dplyr::rename(name = marregion) %>%
-  dplyr::mutate(source = "EEZ IHO")%>%
-  dplyr::select(mrgid, name, geometry, source)
+# -------------------------------------------------------------------------
+# 2.  Helper function: one call to gaz_geometry() with error handling
+# -------------------------------------------------------------------------
+fetch_geom <- function(id) {
+  tryCatch(
+    {
+      gaz_geometry(id, format = "sf") %>% 
+        mutate(mrgid = id)           # keep the id with the geometry
+    },
+    error = function(e) {
+      message("⚠️  mrgid ", id, " failed: ", e$message)
+      NULL                            # return nothing but keep loop alive
+    }
+  )
+}
 
-iho <- mr_shp(key = "MarineRegions:iho") %>%
-  dplyr::mutate(source = "IHO") %>%
-  dplyr::select(-c(id))%>%
-  dplyr::select(mrgid, name, geometry, source) # quick to run
+# -------------------------------------------------------------------------
+# 3.  Set up a nice console progress bar and loop through ids
+# -------------------------------------------------------------------------
+handlers("txtprogressbar")            # pick your favourite handler; this is base‑R‑like
 
-iho_quad <- mr_shp(key = "MarineRegions:iho_quadrants_20150810") # quick to run
+all_polygons <- with_progress({
+  map_dfr(unique_mrgids, fetch_geom)  # one row (or more) per mrgid, combined as sf
+})
 
-iho_q1 <- iho_quad %>%
-  dplyr::select(-c(name)) %>%
-  dplyr::rename(name = name_1, mrgid = mrgid_1) %>%
-  dplyr::mutate(source = "IHO Q1") %>%
-  dplyr::filter(!mrgid == 0)%>%
-  dplyr::select(mrgid, name, geometry, source)
+# polygons is now a single sf object with all successful geometries
+print(all_polygons)
+# plot(all_polygons["mrgid"])               # quick check
 
-iho_q2 <- iho_quad %>%
-  dplyr::select(-c(name)) %>%
-  dplyr::rename(name = name_2, mrgid = mrgid_2) %>%
-  dplyr::mutate(source = "IHO Q2")%>%
-  dplyr::filter(!mrgid == 0)%>%
-  dplyr::select(mrgid, name, geometry, source)
+# method 1 233.23 seconds
 
-iho_q3 <- iho_quad %>%
-  dplyr::select(-c(name)) %>%
-  dplyr::rename(name = name_3, mrgid = mrgid_3) %>%
-  dplyr::mutate(source = "IHO Q1")%>%
-  dplyr::filter(!mrgid == 0)%>%
-  dplyr::select(mrgid, name, geometry, source)
-
-nations <- mr_shp(key = "MarineRegions:worldcountries_esri_2014") # quick to run
-
-nat_q1 <- nations %>%
-  # dplyr::select(territory1, mrgid_ter1) %>%
-  dplyr::rename(name = territory1, mrgid = mrgid_ter1) %>%
-  dplyr::mutate(source = "Nations Q1") %>%
-  dplyr::filter(!mrgid == 0)%>%
-  dplyr::select(mrgid, name, geometry, source)
-
-nat_q2 <- nations %>%
-  # dplyr::select(territory2, mrgid_ter2) %>%
-  dplyr::rename(name = territory2, mrgid = mrgid_ter2) %>%
-  dplyr::mutate(source = "Nations Q2") %>%
-  dplyr::filter(!mrgid == 0)%>%
-  dplyr::select(mrgid, name, geometry, source)
-
-nat_q3 <- nations %>%
-  # dplyr::select(territory3, mrgid_ter3) %>%
-  dplyr::rename(name = territory3, mrgid = mrgid_ter3) %>%
-  dplyr::mutate(source = "Nations Q3") %>%
-  dplyr::filter(!mrgid == 0)%>%
-  dplyr::select(mrgid, name, geometry, source)
-
-# Combine all polygons together ----
-all_polygons <- bind_rows(eez, iho, iho_q1, iho_q2, iho_q3, nat_q1, nat_q2, nat_q3, eez_iho, eco, erms, tdwg, faoreg, realm, date) %>%
-  dplyr::select(mrgid, name, geometry, source)
+# t <- gaz_search(8323, with_geometry = TRUE)
+# 
+# t8914 <- gaz_search(8914, with_geometry = TRUE)
+# 
+# plot(t)
+# plot(t8914)
+# 
+# realm <- mrp_shp("Ecoregions:realm") %>%
+#   dplyr::mutate(source = "realm") %>%
+#   dplyr::rename(name = realm) %>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# realm <- mr_shp(key = "Ecoregions:realm") %>%
+#   dplyr::mutate(source = "realm") %>%
+#   dplyr::rename(name = realm) %>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# date <- mr_shp(key = "MarineRegions:cross_dateline_polygons") %>%
+#   dplyr::mutate(source = "dateline") %>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# faoreg <- mr_shp(key = "MarineRegions:fao") %>%
+#   dplyr::mutate(source = "FAO") %>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# tdwg <- mr_shp(key = "TDWG:level4") %>%
+#   dplyr::mutate(source = "TDWG") %>%
+#   dplyr::rename(name = level_4_na) %>%
+#   dplyr::select(mrgid, name, geometry, source) %>%
+#   dplyr::filter(!mrgid == 0)
+# 
+# erms <- mr_shp(key = "Europe:europeislands") %>%
+#   dplyr::mutate(source = "europe") %>%
+#   dplyr::select(mrgid, name, geometry, source) %>%
+#   dplyr::filter(!mrgid == 0)
+# 
+# eco <- mr_shp(key = "Ecoregions:ecoregions") %>% # slow to run
+#   dplyr::rename(name = ecoregion) %>%
+#   dplyr::mutate(source = "eco") %>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# eez <- mr_shp(key = "MarineRegions:eez") %>% # slow to run
+#   dplyr::rename(name = geoname) %>%
+#   dplyr::mutate(source = "EEZ")%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# eez_iho <- mr_shp(key = "MarineRegions:eez_iho") %>% # very slow to run
+#   dplyr::rename(name = marregion) %>%
+#   dplyr::mutate(source = "EEZ IHO")%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# iho <- mr_shp(key = "MarineRegions:iho") %>%
+#   dplyr::mutate(source = "IHO") %>%
+#   dplyr::select(-c(id))%>%
+#   dplyr::select(mrgid, name, geometry, source) # quick to run
+# 
+# iho_quad <- mr_shp(key = "MarineRegions:iho_quadrants_20150810") # quick to run
+# 
+# iho_q1 <- iho_quad %>%
+#   dplyr::select(-c(name)) %>%
+#   dplyr::rename(name = name_1, mrgid = mrgid_1) %>%
+#   dplyr::mutate(source = "IHO Q1") %>%
+#   dplyr::filter(!mrgid == 0)%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# iho_q2 <- iho_quad %>%
+#   dplyr::select(-c(name)) %>%
+#   dplyr::rename(name = name_2, mrgid = mrgid_2) %>%
+#   dplyr::mutate(source = "IHO Q2")%>%
+#   dplyr::filter(!mrgid == 0)%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# iho_q3 <- iho_quad %>%
+#   dplyr::select(-c(name)) %>%
+#   dplyr::rename(name = name_3, mrgid = mrgid_3) %>%
+#   dplyr::mutate(source = "IHO Q1")%>%
+#   dplyr::filter(!mrgid == 0)%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# nations <- mr_shp(key = "MarineRegions:worldcountries_esri_2014") # quick to run
+# 
+# nat_q1 <- nations %>%
+#   # dplyr::select(territory1, mrgid_ter1) %>%
+#   dplyr::rename(name = territory1, mrgid = mrgid_ter1) %>%
+#   dplyr::mutate(source = "Nations Q1") %>%
+#   dplyr::filter(!mrgid == 0)%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# nat_q2 <- nations %>%
+#   # dplyr::select(territory2, mrgid_ter2) %>%
+#   dplyr::rename(name = territory2, mrgid = mrgid_ter2) %>%
+#   dplyr::mutate(source = "Nations Q2") %>%
+#   dplyr::filter(!mrgid == 0)%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# nat_q3 <- nations %>%
+#   # dplyr::select(territory3, mrgid_ter3) %>%
+#   dplyr::rename(name = territory3, mrgid = mrgid_ter3) %>%
+#   dplyr::mutate(source = "Nations Q3") %>%
+#   dplyr::filter(!mrgid == 0)%>%
+#   dplyr::select(mrgid, name, geometry, source)
+# 
+# # Combine all polygons together ----
+# all_polygons <- bind_rows(eez, iho, iho_q1, iho_q2, iho_q3, nat_q1, nat_q2, nat_q3, eez_iho, eco, erms, tdwg, faoreg, realm, date) %>%
+#   dplyr::select(mrgid, name, geometry, source)
 
 codes <- st_set_geometry(all_polygons, NULL)
 

@@ -20,20 +20,25 @@ aus_regions <- st_read("annotation-schema/data/spatial/marine_regions.shp") %>%
 aus_regions$region <- as.character(aus_regions$REGION)
 st_crs(aus_regions) <- wgs_84
 
-caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
+imcra_regions <- st_read("annotation-schema/data/spatial/Integrated_Marine_and_Coastal_Regionalisation_of_Australia_(IMCRA)_v4.0_-_Provincial_Bioregions.shp")
+
+imcra_regions$region <- as.character(imcra_regions$PB_NAME)
+st_crs(imcra_regions) <- wgs_84
+
+caab_og <- read_csv("annotation-schema/data/raw/caab_species_20250714.csv") %>%
   clean_names()
 
-# Read in extra ones that are not included in CAAB dump that I have made by hand ----
+# Read in eread_csv_chunked()# Read in extra ones that are not included in CAAB dump that I have made by hand ----
 caab_extra <- read_csv("annotation-schema/data/raw/caab_not_included_in_dump.csv") %>%
   dplyr::rename(display_name = scientific_name, order_name = order) %>%
   dplyr::mutate(scientific_name = display_name) %>%
   dplyr::rename(spcode = caab) %>%
-  dplyr::filter(!spcode %in% unique(caab_og$spcode))
+  dplyr::filter(!spcode %in% unique(caab_og$spcode)) # appears these are now all here?
 
 # Read in the latest CAAB dump from CSIRO website ----
 # Download is available here: https://www.marine.csiro.au/datacentre/caab/caab_dump_latest.xlsx
 # We have manually edited some classes/phylums/kingdoms where missing
-caab_og <- read_excel("annotation-schema/data/raw/caab_dump_latest.xlsx") %>%
+caab_og <- read_csv("annotation-schema/data/raw/caab_species_20250714.csv") %>%
   clean_names() %>%
   dplyr::mutate(class = if_else(family %in% "Trygonorrhinidae", "Elasmobranchii", class)) %>%
   dplyr::mutate(phylum = if_else(family %in% "Trygonorrhinidae", "Chordata", phylum)) %>%
@@ -68,6 +73,8 @@ list_to_download <- caab #%>%
   # filter(!species %in% "spp")
 
 # # Download distribution files from CSIRO - remove the hashes to run again
+# Sys.time() #1:09 PM
+# 
 # for (caab in unique(list_to_download$spcode)){
 #   print(caab)
 # 
@@ -114,40 +121,91 @@ list_to_download <- caab #%>%
 # 
 # }
 # 
+# Sys.time()
+# 
 # saveRDS(polygons, "annotation-schema/data/staging/distributions-polygons.RDS")
 
 polygons <- readRDS("annotation-schema/data/staging/distributions-polygons.RDS")
 
 # Get Marine Regions based off CAAB distributions
 aus_regions <- st_as_sf(aus_regions)
-temp_with_regions <- data.frame()
+imcra_regions <- st_as_sf(imcra_regions)
 
-single <- st_cast(polygons, "POLYGON")
-
-test <- aus_regions %>%
-  dplyr::slice(st_nearest_feature(single, aus_regions)) %>%
-  st_set_geometry(NULL)
+temp_with_aus_regions <- data.frame()
 
 # # Takes 30 minutes to run ----
-# for (CAAB in unique(polygons$SPCODE)) {
-# 
-#   polygons.to.test <- polygons %>% filter(SPCODE == CAAB)
-# 
-#   single <- st_cast(polygons.to.test, "POLYGON")
-# 
-#   dat <- aus_regions %>%
-#     dplyr::slice(st_nearest_feature(single, aus_regions)) %>%
-#     st_set_geometry(NULL)%>%
-#     dplyr::distinct(Label) %>%
-#     dplyr::summarise(marine.region = toString(Label)) %>%
-#     dplyr::mutate(spcode = CAAB)
-# 
-#   temp_with_regions <- bind_rows(temp_with_regions, dat)
-# 
-# }
-# saveRDS(temp_with_regions, "annotation-schema/data/staging/distributions-regions-polygons.RDS")
+for (CAAB in unique(polygons$SPCODE)) {
 
-temp_with_regions <- readRDS("annotation-schema/data/staging/distributions-regions-polygons.RDS")
+  polygons.to.test <- polygons %>% filter(SPCODE == CAAB)
+  # single <- st_cast(polygons.to.test, "POLYGON")
+
+  dat <- st_intersection(polygons.to.test, aus_regions) %>%
+    st_set_geometry(NULL)%>%
+    dplyr::distinct(Label) %>%
+    dplyr::summarise(marine.region = toString(Label)) %>%
+    dplyr::mutate(spcode = CAAB)
+
+  temp_with_aus_regions <- bind_rows(temp_with_aus_regions, dat)
+
+}
+
+saveRDS(temp_with_aus_regions, "annotation-schema/data/staging/distributions-aus-regions-polygons.RDS")
+temp_with_aus_regions <- readRDS("annotation-schema/data/staging/distributions-aus-regions-polygons.RDS")
+
+temp_with_imcra_regions <- data.frame()
+
+# # Takes 30 minutes to run ----
+# ----- prep for progress bar  ---------------------------------------------------------------
+spcodes <- unique(polygons$SPCODE)
+n_total <- length(spcodes)
+
+temp_with_imcra_regions <- tibble()      # make sure it exists
+
+pb <- utils::txtProgressBar(min = 0, max = n_total, style = 3)
+
+# ----- loop ---------------------------------------------------------------
+# started at 2:52 PM
+for (i in seq_along(spcodes)) {
+  
+  CAAB <- spcodes[i]                 # current code
+  # message("Processing ", CAAB)
+  
+  polygons.to.test <- polygons %>%
+    filter(SPCODE == CAAB)
+  
+  dat <- st_intersection(polygons.to.test, imcra_regions) %>%
+    st_set_geometry(NULL) %>%
+    distinct(region) %>%
+    summarise(marine.region = toString(region)) %>%
+    mutate(spcode = CAAB)
+  
+  temp_with_imcra_regions <- bind_rows(temp_with_imcra_regions, dat)
+  
+  utils::setTxtProgressBar(pb, i)    # <‑‑ tick!
+}
+
+close(pb)                             # tidy up
+# 
+# 
+# for (CAAB in unique(polygons$SPCODE)) {
+#   
+#   message(CAAB)
+#   
+#   polygons.to.test <- polygons %>% filter(SPCODE == CAAB)
+#   # single <- st_cast(polygons.to.test, "POLYGON")
+#   
+#   dat <- st_intersection(polygons.to.test, imcra_regions) %>%
+#     st_set_geometry(NULL)%>%
+#     dplyr::distinct(region) %>%
+#     dplyr::summarise(marine.region = toString(region)) %>%
+#     dplyr::mutate(spcode = CAAB)
+#   
+#   temp_with_imcra_regions <- bind_rows(temp_with_imcra_regions, dat)
+#   
+# }
+
+saveRDS(temp_with_imcra_regions, "annotation-schema/data/staging/distributions-imcra-regions-polygons.RDS")
+temp_with_imcra_regions <- readRDS("annotation-schema/data/staging/distributions-imcra-regions-polygons.RDS")
 
 caab_format <- caab_og %>%
   dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali", "Myxini")) %>%
