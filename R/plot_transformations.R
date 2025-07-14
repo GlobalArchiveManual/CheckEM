@@ -22,6 +22,7 @@
 
 plot_transformations <- function(pred.vars, dat) {
   require(tidyverse)
+  require(patchwork)
   
   for (i in pred.vars) {
 
