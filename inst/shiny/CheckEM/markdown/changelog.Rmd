@@ -6,7 +6,8 @@
 - Add IMCRA marine region shapefiles
 ### Updates <br/>
 - Updated catami schema for habitat and CAAB codes for fish and animal species
-
+### Fixed <br />
+- Fixed bug in species table.
 
 # 2.18 (released 28/01/2025)  <br />
 ### Added <br />

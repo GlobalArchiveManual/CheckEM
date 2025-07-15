@@ -4521,13 +4521,13 @@ function(input, output, session) {
                          species = c("family", "genus", "species"))
     
     # Select columns dynamically based on the richness type
-    lh_cols <- if (rich_type == "species") {
-      c("class", "order", all_of(group_vars), "australian_common_name")  # Include australian_common_name for species
+    lh_cols <- if (rich_type == "species" & input$lifehistory %in% c("aus", "imcra")) {
+      c("class", "order", all_of(group_vars), "australian_common_name")  # TODO ,  include this for aus but not global # Include australian_common_name for species
     } else {
       c("class", "order", all_of(group_vars))  # Exclude australian_common_name for other richness types
     }
     
-    lh <- CheckEM::australia_life_history %>%
+    lh <- life.history() %>%
       dplyr::select(all_of(lh_cols))  # Dynamically select columns based on richness type
     
     if (input$upload %in% "EM") {
@@ -4555,8 +4555,29 @@ function(input, output, session) {
   ## ►  Species Richness EM - value box ----
   output$maxn.species.richness.em <- renderValueBox({
     total <- nrow(maxn.species.richness())
+    
+    
+    # Set a default value for `input$rich` if it is NULL
+    rich_type <- if (!is.null(input$rich)) input$rich else "species"
+    
+    if(rich_type %in% "family"){
+      
+      text <- "Number of families observed"
+      
+    } else if (rich_type %in% "genus"){
+      
+      text <- "Number of genera observed"
+      
+    } else {
+      
+      text <- "Number of species observed"
+      
+    }
+    
+    
+    
     valueBox(total,
-             "Species observed",
+             text,
              icon = icon("fish"), color = "blue"
     )
   })
@@ -5039,40 +5060,40 @@ function(input, output, session) {
   #'       Theme1
   #'   })
   #'   
-  #'   ## ►  top species ----
-  #'   output$maxn.top.species <- renderPlot({
-  #'     
-  #'     if(input$upload %in% "EM"){
-  #'       
-  #'       maxn.sum <- maxn.complete() %>%
-  #'         mutate(scientific = paste(genus, species, sep = " ")) %>%
-  #'         dplyr::group_by(scientific) %>%
-  #'         dplyr::summarise(maxn = sum(maxn)) %>%
-  #'         dplyr::ungroup() %>%
-  #'         top_n(input$species.limit)
-  #'       
-  #'     } else {
-  #'       
-  #'       maxn.sum <- count.complete() %>%
-  #'         mutate(scientific = paste(genus, species, sep = " ")) %>%
-  #'         dplyr::group_by(scientific) %>%
-  #'         dplyr::summarise(maxn = sum(maxn)) %>%
-  #'         dplyr::ungroup() %>%
-  #'         top_n(input$species.limit)
-  #'       
-  #'     }
-  #'     
-  #'     ## ►  Total frequency of occurrence ----
-  #'     ggplot(maxn.sum, aes(x = reorder(scientific, maxn), y = maxn)) +   
-  #'       geom_bar(stat = "identity", position = position_dodge()) +
-  #'       coord_flip() +
-  #'       xlab("Species") +
-  #'       ylab(expression(Overall~abundance~(Sigma~MaxN))) +
-  #'       Theme1 +
-  #'       theme(axis.text.y = element_text(face = "italic")) +
-  #'       theme_collapse +
-  #'       scale_y_continuous(expand = expand_scale(mult = c(0, .1)))
-  #'   })
+    ## ►  top species ----
+    output$maxn.top.species <- renderPlot({
+
+      if(input$upload %in% "EM"){
+
+        maxn.sum <- maxn.complete() %>%
+          mutate(scientific = paste(genus, species, sep = " ")) %>%
+          dplyr::group_by(scientific) %>%
+          dplyr::summarise(maxn = sum(maxn)) %>%
+          dplyr::ungroup() %>%
+          top_n(input$species.limit)
+
+      } else {
+
+        maxn.sum <- count.complete() %>%
+          mutate(scientific = paste(genus, species, sep = " ")) %>%
+          dplyr::group_by(scientific) %>%
+          dplyr::summarise(maxn = sum(maxn)) %>%
+          dplyr::ungroup() %>%
+          top_n(input$species.limit)
+
+      }
+
+      ## ►  Total frequency of occurrence ----
+      ggplot(maxn.sum, aes(x = reorder(scientific, maxn), y = maxn)) +
+        geom_bar(stat = "identity", position = position_dodge()) +
+        coord_flip() +
+        xlab("Species") +
+        ylab(expression(Overall~abundance~(Sigma~MaxN))) +
+        Theme1 +
+        theme(axis.text.y = element_text(face = "italic")) +
+        theme_collapse +
+        scale_y_continuous(expand = expand_scale(mult = c(0, .1)))
+    })
   #'   
   ## _______________________________________________________ ----
   ##                     LENGTH + 3D POINTS                  ----

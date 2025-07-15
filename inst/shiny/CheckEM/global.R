@@ -68,6 +68,21 @@ sf_use_s2(FALSE)
 # Load data
 load("data/all_data.Rdata")
 
+clean_names <- function(dat) {
+  require(tidyverse)
+  
+  old_names <- names(dat)
+  
+  new_names <- old_names %>%
+    gsub("%", "percent", .) %>% # Replace any percent sybmols with the word percent
+    make.names(.) %>%
+    gsub("[.]+", "_", .) %>% # Replace multiple consecutive underscores with a single underscore
+    tolower(.) %>% # Convert to lower case
+    gsub("_$", "", .) # Remove trailing underscore, if any
+  
+  setNames(dat, new_names)
+}
+
 # TODO update once I have moved the LH workflow into CHECKEM
 schema <- CheckEM::catami %>%
   #read_csv("inst/shiny/CheckEM/data/benthic-annotation-schema-forward-facing.csv", col_types = "c", na = "") %>%
@@ -193,17 +208,3 @@ icon.on.land <- awesomeIconList(
 )
 
 
-clean_names <- function(dat) {
-  require(tidyverse)
-  
-  old_names <- names(dat)
-  
-  new_names <- old_names %>%
-    gsub("%", "percent", .) %>% # Replace any percent sybmols with the word percent
-    make.names(.) %>%
-    gsub("[.]+", "_", .) %>% # Replace multiple consecutive underscores with a single underscore
-    tolower(.) %>% # Convert to lower case
-    gsub("_$", "", .) # Remove trailing underscore, if any
-  
-  setNames(dat, new_names)
-}
