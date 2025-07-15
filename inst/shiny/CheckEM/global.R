@@ -69,8 +69,8 @@ sf_use_s2(FALSE)
 load("data/all_data.Rdata")
 
 # TODO update once I have moved the LH workflow into CHECKEM
-schema <- read_csv("inst/shiny/CheckEM/data/benthic-annotation-schema-forward-facing.csv",
-                   col_types = "c", na = "") %>%
+schema <- CheckEM::catami %>%
+  #read_csv("inst/shiny/CheckEM/data/benthic-annotation-schema-forward-facing.csv", col_types = "c", na = "") %>%
   clean_names() %>%
   dplyr::select(-c(qualifiers)) %>% #parent_caab, 
   dplyr::mutate(scientific = dplyr::case_when(

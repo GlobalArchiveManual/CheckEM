@@ -4,7 +4,13 @@
 \alias{ga_api_all_data}
 \title{Retrieve all Data from a synthesis using the GlobalArchive API}
 \usage{
-ga_api_all_data(token, synthesis_id, dir, include_zeros = FALSE)
+ga_api_all_data(
+  token,
+  synthesis_id,
+  dir,
+  include_zeros = FALSE,
+  file_prefix = NULL
+)
 }
 \arguments{
 \item{token}{A character string representing your GlobalArchive token for API authentication.}

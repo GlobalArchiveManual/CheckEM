@@ -14,5 +14,12 @@ wgs_84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 # world_regions$REGION <- str_replace_all(world_regions$NAME_EN, c(", " = "_", " " ="."))
 # proj4string(world_regions) <- CRS(wgs_84)
 
+
+aus_regions <- st_read("annotation-schema/data/spatial/marine_regions_with_gbr.shp")
+
+aus_regions$REGION <- as.character(aus_regions$FULL_NAME)
+st_crs(aus_regions) <- wgs_84
+
+
 usethis::use_data(aus_regions, overwrite = TRUE)
 usethis::use_data(world_regions, overwrite = TRUE)
