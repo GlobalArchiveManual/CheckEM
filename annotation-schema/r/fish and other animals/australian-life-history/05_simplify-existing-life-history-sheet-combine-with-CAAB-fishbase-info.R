@@ -61,12 +61,13 @@ add_regions <- read_sheet(extra_marine_regions, sheet = "Form responses 1") %>%
   dplyr::mutate(marine_region = strsplit(as.character(marine_regions_the_species_occurs_in_see_regions_here), split = ", ")) %>% # changed from "/" for old LH
   tidyr::unnest(marine_region) %>%
   dplyr::select(family, genus, species, marine_region) %>%
-  dplyr::mutate(marine_region = case_when(marine_region %in% "North-west" ~ "NW",
-                                          marine_region %in% "North" ~ "N",
-                                          marine_region %in% "Coral Sea" ~ "CS",
-                                          marine_region %in% "Temperate East" ~ "TE",
-                                          marine_region %in% "South-east" ~ "SE",
-                                          marine_region %in% "South-west" ~ "SW"))
+  # dplyr::mutate(marine_region = case_when(marine_region %in% "North-west" ~ "NW",
+  #                                         marine_region %in% "North" ~ "N",
+  #                                         marine_region %in% "Coral Sea" ~ "CS",
+  #                                         # marine_region %in% "Temperate East" ~ "TE",
+  #                                         marine_region %in% "South-east" ~ "SE",
+  #                                         marine_region %in% "South-west" ~ "SW")) %>%
+  rename(aus_region = marine_region)
 
 # Get columns to keep from original life history
 names(lh)
@@ -361,7 +362,9 @@ australia_life_history <- caab_combined %>%
                 species,
                 scientific_name,
                 australian_common_name, # TODO need to add in 1st script or use the scraping
-                marine_region,
+                # marine_region,
+                aus_region,
+                imcra_region,
                 
                 global_source,
                 fb_code,
@@ -467,7 +470,9 @@ australia_life_history <- caab_combined %>%
                 
                 # Regions
                 global_region,
-                marine_region,
+                # marine_region,
+                aus_region,
+                imcra_region,
                 
                 # Fishbase info
                 global_source,
@@ -530,23 +535,33 @@ unique(australia_life_history$length_max_source)
 unique(australia_life_history$length_max_cm) %>% sort()
 
 expanded <- australia_life_history %>%
-  dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) %>% 
-  tidyr::unnest(marine_region)
+  dplyr::mutate(aus_region = strsplit(as.character(aus_region), split = ", ")) %>% 
+  tidyr::unnest(aus_region) %>%
+  # dplyr::mutate(aus_region = case_when(aus_region %in% "North-west" ~ "NW",
+  #                                      aus_region %in% "North" ~ "N",
+  #                                      aus_region %in% "Coral Sea" ~ "CS",
+  #                                      aus_region %in% "Temperate East" ~ "TE",
+  #                                      aus_region %in% "South-east" ~ "SE",
+  #                                      aus_region %in% "South-west" ~ "SW")) %>%
+  glimpse()
 
-unique(expanded$marine_region)
+unique(expanded$aus_region)
 
 missing_regions <- anti_join(add_regions, expanded) %>%
-  dplyr::rename(region_to_add = marine_region) %>%
+  dplyr::rename(region_to_add = aus_region) %>%
   dplyr::group_by(family, genus, species) %>%
   dplyr::summarise(region_to_add = toString(region_to_add))
   
 australia_life_history <- dplyr::left_join(australia_life_history, missing_regions) %>%
-  mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", "))) %>%
+  mutate(aus_region = if_else(is.na(aus_region), region_to_add, paste(aus_region, region_to_add, sep = ", "))) %>%
   dplyr::select(-region_to_add) %>%
-  dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", "")) %>%
-  dplyr::filter(!caab_code %in% c("37280000", "37384000", "37385000"))
+  dplyr::mutate(aus_region = str_replace_all(aus_region, "\\, NA", "")) %>%
+  dplyr::filter(!caab_code %in% c("37280000", "37384000", "37385000")) %>%
+  dplyr::rename(marine_region = aus_region)
 
 unique(australia_life_history$marine_region)
+unique(australia_life_history$imcra_region)
+
 test <- australia_life_history %>%
   dplyr::group_by(caab_code) %>%
   dplyr::summarise(n = n()) %>%
