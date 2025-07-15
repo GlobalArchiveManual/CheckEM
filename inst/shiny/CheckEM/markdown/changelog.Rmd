@@ -1,4 +1,13 @@
 # Change log
+# 2.19 (released 15/07/2025)  <br />
+### Added <br />
+- Added check for species out of range by using the Integrated Marine and Coastal Regionalisation of Australia (IMCRA) v4.0 - Provincial Bioregions
+- Added Great Barrier Reef to the Australian marine regions
+- Add IMCRA marine region shapefiles
+### Updates <br/>
+- Updated catami schema for habitat and CAAB codes for fish and animal species
+
+
 # 2.18 (released 28/01/2025)  <br />
 ### Added <br />
 - Added species table to MaxN (only working for EventMeasure data so far)

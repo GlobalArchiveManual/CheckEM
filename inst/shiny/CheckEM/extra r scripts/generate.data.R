@@ -6,7 +6,11 @@ library(sf)
 library(RCurl)
 library(mregions2)
 library(rnaturalearth)
-devtools::install_github("GlobalArchiveManual/CheckEM")
+
+options(timeout=9999999)
+remotes::install_github("GlobalArchiveManual/CheckEM")
+
+library(CheckEM)
 
 # designate project-specific cache
 options(gargle_oauth_cache = ".secrets")
@@ -19,15 +23,15 @@ googlesheets4::gs4_auth()
 aus.url <- "https://docs.google.com/spreadsheets/d/1SMLvR9t8_F-gXapR2EemQMEPSw_bUbPLcXd3lJ5g5Bo/edit?usp=sharing"
 
 lh.aus <- CheckEM::australia_life_history %>%
-  dplyr::mutate(marine_region = str_replace_all(.$marine_region, c("N/" = "North/",
-                                                                   "NW" = "North-west",
-                                                                   "CS" = "Coral Sea",
-                                                                   "TE" = "Temperate East",
-                                                                   "SE" = "South-east",
-                                                                   "SW" = "South-west",
-                                                                   "N" = "North",
-                                                                   "Northorth" = "North",
-                                                                   "Northor" = "North"))) %>%
+  # dplyr::mutate(marine_region = str_replace_all(.$marine_region, c("N/" = "North/",
+  #                                                                  "NW" = "North-west",
+  #                                                                  "CS" = "Coral Sea",
+  #                                                                  "TE" = "Temperate East",
+  #                                                                  "SE" = "South-east",
+  #                                                                  "SW" = "South-west",
+  #                                                                  "N" = "North",
+  #                                                                  "Northorth" = "North",
+  #                                                                  "Northor" = "North"))) %>%
   dplyr::mutate(all = as.numeric(fb_a_ll)) %>%
   dplyr::mutate(bll = as.numeric(fb_b_ll)) %>%
   dplyr::mutate(a = as.numeric(fb_a)) %>%
@@ -52,6 +56,10 @@ classes <- lh.aus %>%
 # Expand life history for checking regions ----
 lh.aus.expanded <- lh.aus %>%
   mutate(marine_region = strsplit(as.character(marine_region), split = ", "))%>% # changed from "/" for old LH
+  unnest(marine_region)
+
+lh.imcra.expanded <- lh.aus %>%
+  mutate(marine_region = strsplit(as.character(imcra_region), split = ", "))%>% # changed from "/" for old LH
   unnest(marine_region)
 
 # Create average max length for each family and each genus (used if species isn't in life history sheet e.g. Scarus spp) ---
@@ -185,6 +193,7 @@ lh.glo.synonyms <- readRDS("inst/shiny/CheckEM/data/global_fish.synonyms.RDS") %
 
 aus.regions <- CheckEM::aus_regions
 world.regions <- CheckEM::world_regions
+imcra.regions <- CheckEM::imcra_regions
 
 # New CAPAD 2022 ----
 iucn_levels <- c("Ia", "II", "III", "IV", "VI", "V", "NA")
@@ -321,6 +330,7 @@ all_data <- structure(
     lh.aus = lh.aus,
     lh.aus.synonyms = all.synonyms,
     lh.aus.expanded = lh.aus.expanded,
+    lh.imcra.expanded = lh.imcra.expanded,
     lh.aus.min.max = lh.aus.min.max,
     lh.glo = lh.glo,
     lh.glo.synonyms = lh.glo.synonyms,
@@ -331,6 +341,7 @@ all_data <- structure(
     marineparks.single = marineparks.single,
     aus.regions = aus.regions,
     world.regions = world.regions,
+    imcra.regions = imcra.regions,
     world.regions.display = world.regions.display,
     schema.fish = schema.fish,
     schema.habitat = schema.habitat,

@@ -177,6 +177,7 @@ tabItems(
                        
                        radioButtons("lifehistory", "Which life history list & regions would you like to check your annotations against?",
                                     c("Australian List (Based on the Codes for Australian Aquatic Biota) & Australian Marine Regions" = "aus",
+                                      "NEW! IMCRA Australian List (Based on the Codes for Australian Aquatic Biota) & Integrated Marine and Coastal Regionalisation of Australia (IMCRA) v4.0 - Provincial Bioregions" = "imcra",
                                       "Global List (Based on FishBase and the World Register of Marine Species) & FAO Major Fishing Areas" = "global"),
                                     selected = "aus",
                                     inline = FALSE),
