@@ -361,7 +361,13 @@ tabItems(
             
             shiny::conditionalPanel("input.upload != 'EM'",
                                     div(id="click.maxn.total.number.gen",
-                                        valueBoxOutput(width = 12, "maxn.total.number.gen"))),
+                                        valueBoxOutput(width = 6, "maxn.total.number.gen")),
+                                    
+                                    div(id="click.maxn.species.richness.gen",
+                                        valueBoxOutput(width = 6, "maxn.species.richness.gen")),
+                                    
+                                    
+                                    ),
             
             div(id = "click.maxn.synonym",
                 valueBoxOutput("maxn.synonym")),

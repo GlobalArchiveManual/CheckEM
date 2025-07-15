@@ -4541,7 +4541,7 @@ function(input, output, session) {
       
     } else {
       maxn <- count.clean() %>%
-        dplyr::group_by(campaignid, sample, across(all_of(group_vars))) %>%
+        dplyr::group_by(across(all_of(group_vars))) %>%
         dplyr::summarise(total_number_observed = sum(maxn), .groups = "drop") %>%
         dplyr::select(all_of(group_vars), total_number_observed) %>%
         left_join(lh, by = group_vars) %>%  # Join based on grouping columns
@@ -4555,7 +4555,6 @@ function(input, output, session) {
   ## ►  Species Richness EM - value box ----
   output$maxn.species.richness.em <- renderValueBox({
     total <- nrow(maxn.species.richness())
-    
     
     # Set a default value for `input$rich` if it is NULL
     rich_type <- if (!is.null(input$rich)) input$rich else "species"
@@ -4574,7 +4573,32 @@ function(input, output, session) {
       
     }
     
+    valueBox(total,
+             text,
+             icon = icon("fish"), color = "blue"
+    )
+  })
+  
+  ## ►  Species Richness GEN - value box ----
+  output$maxn.species.richness.gen <- renderValueBox({
+    total <- nrow(maxn.species.richness())
     
+    # Set a default value for `input$rich` if it is NULL
+    rich_type <- if (!is.null(input$rich)) input$rich else "species"
+    
+    if(rich_type %in% "family"){
+      
+      text <- "Number of families observed"
+      
+    } else if (rich_type %in% "genus"){
+      
+      text <- "Number of genera observed"
+      
+    } else {
+      
+      text <- "Number of species observed"
+      
+    }
     
     valueBox(total,
              text,
@@ -4582,6 +4606,7 @@ function(input, output, session) {
     )
   })
   
+  # Eventmeasure ----
   onclick('click.maxn.species.richness.em',
           {
             # Check if there are any rows in maxn.species.not.observed.lh()
@@ -4646,57 +4671,73 @@ function(input, output, session) {
               )
             ))
           })
-  # } else {
-  #   # Show the original modal directly if no warning is needed
-  #   showModal(modalDialog(
-  #     title = paste("Richness"),
-  #     size = "l",
-  #     easyClose = TRUE,
-  #     
-  #     # Radio buttons for richness type
-  #     radioButtons("rich", "Type of richness:",
-  #                  c("Family" = "family",
-  #                    "Genus" = "genus",
-  #                    "Species" = "species"), selected = "species", inline = TRUE),
-  #     
-  #     # Radio buttons for animal type
-  #     radioButtons("fish.sharks.rays", "Animals:",
-  #                  c("Only Fish, Sharks and Rays" = "fish",
-  #                    "Other animals" = "other"), selected = "fish", inline = TRUE),
-  #     
-  #     # Conditionally display checkboxInput
-  #     conditionalPanel(
-  #       condition = "input.rich == 'species'",
-  #       checkboxInput("species.richness.filter.spp", label = "Filter out sp1, sp2, spp etc.", value = FALSE)
-  #     ),
-  #     
-  #     renderDataTable(
-  #       {
-  #         # Initialize the dataset
-  #         richness_data <- maxn.species.richness()
-  #         
-  #         # Apply species filtering if selected
-  #         if (input$rich == "species" && input$species.richness.filter.spp) {
-  #           richness_data <- richness_data %>%
-  #             filter(!species %in% c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp"))
-  #         }
-  #         
-  #         # Apply animal type filtering based on the radio button
-  #         if (input$fish.sharks.rays == "fish") {
-  #           richness_data <- richness_data %>%
-  #             filter(class %in% c("Elasmobranchii", "Actinopterygii", "Myxini"))
-  #         } else {
-  #           richness_data <- richness_data %>%
-  #             filter(!class %in% c("Elasmobranchii", "Actinopterygii", "Myxini"))
-  #         }
-  #         
-  #         # Return the final filtered dataset
-  #         richness_data
-  #       }, options = list(paging = TRUE, row.names = FALSE, searching = TRUE)
-  #     )
-  #   ))
-  # }
-  # })
+  
+  
+  # Generic ----
+  onclick('click.maxn.species.richness.gen',
+          {
+            # Check if there are any rows in maxn.species.not.observed.lh()
+            warning_rows <- dim(maxn.species.not.observed.lh() %>%
+                                  distinct(family, genus, species))[1]
+            
+            # Show shinyalert warning if there are rows
+            if (warning_rows > 0) {
+              shinyalert("Warning",
+                         "You have uploaded data that includes species that are not in the chosen life history list. These species are not listed below. Please check the 'Species not in life history list' check",
+                         type = "warning", closeOnEsc = TRUE, closeOnClickOutside = FALSE,
+                         showCancelButton = FALSE, confirmButtonText = "OK")
+            }
+            
+            # Once the user closes the alert, show the original modal
+            # observeEvent(input$`shinyalert-close`, {
+            showModal(modalDialog(
+              title = paste("Richness"),
+              size = "l",
+              easyClose = TRUE,
+              
+              # Radio buttons for richness type
+              radioButtons("rich", "Type of richness:",
+                           c("Family" = "family",
+                             "Genus" = "genus",
+                             "Species" = "species"), selected = "species", inline = TRUE),
+              
+              # Radio buttons for animal type
+              radioButtons("fish.sharks.rays", "Animals:",
+                           c("Only Fish, Sharks and Rays" = "fish",
+                             "Other animals" = "other"), selected = "fish", inline = TRUE),
+              
+              # Conditionally display checkboxInput
+              conditionalPanel(
+                condition = "input.rich == 'species'",
+                checkboxInput("species.richness.filter.spp", label = "Filter out sp1, sp2, spp etc.", value = FALSE)
+              ),
+              
+              renderDataTable(
+                {
+                  # Initialize the dataset
+                  richness_data <- maxn.species.richness()
+                  
+                  # Apply species filtering if selected
+                  if (input$rich == "species" && input$species.richness.filter.spp) {
+                    richness_data <- richness_data %>%
+                      filter(!species %in% c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp"))
+                  }
+                  
+                  # Apply animal type filtering based on the radio button
+                  if (input$fish.sharks.rays == "fish") {
+                    richness_data <- richness_data %>%
+                      filter(class %in% c("Elasmobranchii", "Actinopterygii", "Myxini"))
+                  } else {
+                    richness_data <- richness_data %>%
+                      filter(!class %in% c("Elasmobranchii", "Actinopterygii", "Myxini"))
+                  }
+                  
+                  # Return the final filtered dataset
+                  richness_data
+                }, options = list(paging = TRUE, row.names = FALSE, searching = TRUE)
+              )
+            ))
+          })
   
   
   ## ► Species not observed in region- dataframe ----

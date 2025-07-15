@@ -4,6 +4,7 @@
 - Added check for species out of range by using the Integrated Marine and Coastal Regionalisation of Australia (IMCRA) v4.0 - Provincial Bioregions
 - Added Great Barrier Reef to the Australian marine regions
 - Add IMCRA marine region shapefiles
+- Species/genera/family richness for generic data.
 ### Updates <br/>
 - Updated catami schema for habitat and CAAB codes for fish and animal species
 ### Fixed <br />
