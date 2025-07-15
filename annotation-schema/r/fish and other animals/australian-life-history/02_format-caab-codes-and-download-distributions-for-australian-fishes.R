@@ -152,60 +152,62 @@ for (CAAB in unique(polygons$SPCODE)) {
 saveRDS(temp_with_aus_regions, "annotation-schema/data/staging/distributions-aus-regions-polygons.RDS")
 temp_with_aus_regions <- readRDS("annotation-schema/data/staging/distributions-aus-regions-polygons.RDS")
 
-temp_with_imcra_regions <- data.frame()
-
-# # Takes 30 minutes to run ----
-# ----- prep for progress bar  ---------------------------------------------------------------
-spcodes <- unique(polygons$SPCODE)
-n_total <- length(spcodes)
-
-temp_with_imcra_regions <- tibble()      # make sure it exists
-
-pb <- utils::txtProgressBar(min = 0, max = n_total, style = 3)
-
-# ----- loop ---------------------------------------------------------------
-# started at 2:52 PM
-for (i in seq_along(spcodes)) {
-  
-  CAAB <- spcodes[i]                 # current code
-  # message("Processing ", CAAB)
-  
-  polygons.to.test <- polygons %>%
-    filter(SPCODE == CAAB)
-  
-  dat <- st_intersection(polygons.to.test, imcra_regions) %>%
-    st_set_geometry(NULL) %>%
-    distinct(region) %>%
-    summarise(marine.region = toString(region)) %>%
-    mutate(spcode = CAAB)
-  
-  temp_with_imcra_regions <- bind_rows(temp_with_imcra_regions, dat)
-  
-  utils::setTxtProgressBar(pb, i)    # <‑‑ tick!
-}
-
-close(pb)                             # tidy up
+# # Reapeat again with IMCRA regions -----
+# temp_with_imcra_regions <- data.frame()
+# 
+# # # Takes ~60 minutes to run ----
+# # ----- prep for progress bar  ---------------------------------------------------------------
+# spcodes <- unique(polygons$SPCODE)
+# n_total <- length(spcodes)
+# 
+# temp_with_imcra_regions <- tibble()      # make sure it exists
+# 
+# pb <- utils::txtProgressBar(min = 0, max = n_total, style = 3)
+# 
+# # ----- loop ---------------------------------------------------------------
+# # started at 2:52 PM
+# for (i in seq_along(spcodes)) {
+#   
+#   CAAB <- spcodes[i]                 # current code
+#   # message("Processing ", CAAB)
+#   
+#   polygons.to.test <- polygons %>%
+#     filter(SPCODE == CAAB)
+#   
+#   dat <- st_intersection(polygons.to.test, imcra_regions) %>%
+#     st_set_geometry(NULL) %>%
+#     distinct(region) %>%
+#     summarise(marine.region = toString(region)) %>%
+#     mutate(spcode = CAAB)
+#   
+#   temp_with_imcra_regions <- bind_rows(temp_with_imcra_regions, dat)
+#   
+#   utils::setTxtProgressBar(pb, i)    # <‑‑ tick!
+# }
+# 
+# close(pb)                             # tidy up
 # 
 # 
 # for (CAAB in unique(polygons$SPCODE)) {
-#   
+# 
 #   message(CAAB)
-#   
+# 
 #   polygons.to.test <- polygons %>% filter(SPCODE == CAAB)
 #   # single <- st_cast(polygons.to.test, "POLYGON")
-#   
+# 
 #   dat <- st_intersection(polygons.to.test, imcra_regions) %>%
 #     st_set_geometry(NULL)%>%
 #     dplyr::distinct(region) %>%
 #     dplyr::summarise(marine.region = toString(region)) %>%
 #     dplyr::mutate(spcode = CAAB)
-#   
+# 
 #   temp_with_imcra_regions <- bind_rows(temp_with_imcra_regions, dat)
-#   
+# 
 # }
-
-saveRDS(temp_with_imcra_regions, "annotation-schema/data/staging/distributions-imcra-regions-polygons.RDS")
-temp_with_imcra_regions <- readRDS("annotation-schema/data/staging/distributions-imcra-regions-polygons.RDS")
+# 
+# saveRDS(temp_with_imcra_regions, "annotation-schema/data/staging/distributions-imcra-regions-polygons.RDS")
+temp_with_imcra_regions <- readRDS("annotation-schema/data/staging/distributions-imcra-regions-polygons.RDS") %>%
+  dplyr::rename(imcra.region = marine.region)
 
 caab_format <- caab_og %>%
   dplyr::filter(class %in% c("Actinopterygii", "Elasmobranchii", "Holocephali", "Myxini")) %>%
@@ -213,55 +215,59 @@ caab_format <- caab_og %>%
   # dplyr::filter(!is.na(parent_id)) %>%
   dplyr::filter(!stringr::str_detect(scientific_name, "non-current code")) %>%
   replace_na(list(genus = "Unknown", species = "spp")) %>%
-  dplyr::select(spcode, kingdom, phylum, class, family, genus, species, common_name, order_name) %>%
+  dplyr::select(spcode, kingdom, phylum, class, order_name, family, genus, species, common_name) %>%
   dplyr::rename(order = order_name)
 
-caab_with_regions <- full_join(temp_with_regions, caab_format) %>%
+caab_with_regions <- full_join(temp_with_imcra_regions, caab_format) %>%
   dplyr::rename(caab_code = spcode)
 
 # none missing
 missing <- caab_with_regions %>%
-  filter(is.na(marine.region))
+  filter(is.na(imcra.region))
 
 spps <- caab_with_regions %>%
   dplyr::filter(species %in% "spp") %>%
-  dplyr::select(!marine.region) 
+  dplyr::select(!imcra.region) 
 
 spp_regions_genus <- caab_format %>%
   dplyr::rename(caab_code = spcode) %>%
   dplyr::left_join(caab_with_regions) %>%
-  dplyr::distinct(family, genus, marine.region) %>%
-  dplyr::filter(!is.na(marine.region)) %>%
-  dplyr::mutate(marine.region = strsplit(as.character(marine.region), split = ", "))%>%
-  tidyr::unnest(marine.region) %>%
+  dplyr::distinct(family, genus, imcra.region) %>%
+  dplyr::filter(!is.na(imcra.region)) %>%
+  dplyr::mutate(imcra.region = strsplit(as.character(imcra.region), split = ", "))%>%
+  tidyr::unnest(imcra.region) %>%
   dplyr::distinct() %>%
   dplyr::mutate(species = "spp") %>%
   dplyr::group_by(family, genus, species) %>%
-  dplyr::summarise(new_marine_region = toString(marine.region))
+  dplyr::summarise(new_marine_region = toString(imcra.region))
 
 spp_regions_family <- caab_format %>%
   dplyr::rename(caab_code = spcode) %>%
   dplyr::left_join(caab_with_regions) %>%
-  dplyr::distinct(family, marine.region) %>%
-  dplyr::filter(!is.na(marine.region)) %>%
-  dplyr::mutate(marine.region = strsplit(as.character(marine.region), split = ", "))%>%
-  tidyr::unnest(marine.region) %>%
+  dplyr::distinct(family, imcra.region) %>%
+  dplyr::filter(!is.na(imcra.region)) %>%
+  dplyr::mutate(imcra.region = strsplit(as.character(imcra.region), split = ", "))%>%
+  tidyr::unnest(imcra.region) %>%
   dplyr::distinct() %>%
   dplyr::mutate(genus = "Unknown", species = "spp") %>%
   dplyr::group_by(family, genus, species) %>%
-  dplyr::summarise(new_marine_region = toString(marine.region))
+  dplyr::summarise(new_marine_region = toString(imcra.region))
 
 extras <- bind_rows(spp_regions_genus, spp_regions_family)
 
 caab_combined <- caab_with_regions %>%
   left_join(extras) %>%
-  dplyr::mutate(marine.region = if_else(is.na(marine.region), new_marine_region, marine.region)) %>%
+  dplyr::mutate(imcra.region = if_else(is.na(imcra.region), new_marine_region, imcra.region)) %>%
   dplyr::select(-c(new_marine_region)) %>%
   dplyr::filter(!caab_code %in% c(NA)) %>%
+  
+  dplyr::filter(!caab_code %in% c("37337902", "37337910", "37018901", "37280000", "37384000", 
+                                  "37385000", "37268900", "37096000", "37287901", "37311910")) %>%
   
   # temporary fixes to remove duplicate caabs
   dplyr::filter(!(caab_code %in% "37004001" & is.na(common_name))) %>%
   dplyr::filter(!(caab_code %in% "37004002" & is.na(common_name))) %>%
+  dplyr::filter(!(caab_code %in% "37441924" & is.na(common_name))) %>%
   dplyr::filter(!(caab_code %in% "37026002" & species %in% "ancylostoma")) %>%
   dplyr::mutate(common_name = if_else(caab_code %in% "37026002", "Shark Ray", common_name)) %>%
   dplyr::mutate(family = if_else(family %in% "Labridae: Scarinae", "Labridae", family)) %>%
@@ -270,8 +276,8 @@ caab_combined <- caab_with_regions %>%
   dplyr::mutate(family = if_else(family %in% "Centriscidae: Centriscinae", "Centriscidae", family)) %>%
   dplyr::mutate(family = if_else(family %in% "Centriscidae: Macroramphosinae", "Centriscidae", family)) %>%
   dplyr::mutate(family = if_else(family %in% "Scaridae", "Labridae", family)) %>%
-  dplyr::filter(!(caab_code %in% "37386905" & is.na(marine.region))) %>%
-  dplyr::filter(!(caab_code %in% "37386907" & is.na(marine.region))) %>%
+  dplyr::filter(!(caab_code %in% "37386905" & is.na(imcra.region))) %>%
+  dplyr::filter(!(caab_code %in% "37386907" & is.na(imcra.region))) %>%
   dplyr::mutate(family = if_else((family %in% "Scorpididae" & genus %in% "Microcanthus"), "Microcanthidae", family)) %>%
   dplyr::mutate(species = if_else((caab_code %in% "37361005"), "joyceae", species)) %>%
   dplyr::mutate(family = if_else(caab_code %in% "37386000", "Labridae: Scarinae", family)) %>%
@@ -280,7 +286,8 @@ caab_combined <- caab_with_regions %>%
   dplyr::mutate(common_name = gsub("\\]", "", common_name)) %>%
   filter(!grepl("[^A-Za-z]", family)) %>%
   filter(!grepl("[^A-Za-z]", genus)) %>%
-  filter(!grepl("[^A-Za-z]", species)) 
+  filter(!grepl("[^A-Za-z]", species)) %>%
+  distinct()
 
 test <- caab_with_regions %>%
   filter(grepl("[^A-Za-z]", family)) %>%
@@ -305,6 +312,18 @@ unique(caab_combined$species)
 37361028
 
 test <- caab_combined %>%
+  filter(grepl("[^A-Za-z]", family)) %>%
+  distinct(family)
+
+test <- caab_combined %>%
+  filter(grepl("[^A-Za-z]", genus)) %>%
+  distinct(genus)
+
+test <- caab_combined %>%
+  filter(grepl("[^A-Za-z]", species)) %>%
+  distinct(species)
+
+test <- caab_combined %>%
   filter(is.na(species))
 
 test <- caab_combined %>%
@@ -323,6 +342,6 @@ test <- caab_combined %>%
   dplyr::filter(n > 1)
 
 missing <- caab_combined %>%
-  filter(is.na(marine.region))
+  filter(is.na(imcra.region))
 
 saveRDS(caab_combined, "annotation-schema/data/staging/australia_fish_caab-with-regions.RDS")
