@@ -1,0 +1,57 @@
+2025-07-16 15:15:35 | 🔁 Starting chunk 1 with 5 IDs
+2025-07-16 15:16:05 | ✅ Finished chunk 1 - Writing to CSV
+2025-07-16 15:16:05 | 💾 CSV write complete for chunk 1
+2025-07-16 15:16:05 | 🔁 Starting chunk 2 with 5 IDs
+2025-07-16 15:16:33 | ✅ Finished chunk 2 - Writing to CSV
+2025-07-16 15:16:33 | 💾 CSV write complete for chunk 2
+2025-07-16 15:16:33 | 🔁 Starting chunk 3 with 5 IDs
+2025-07-16 15:17:01 | ✅ Finished chunk 3 - Writing to CSV
+2025-07-16 15:17:02 | 💾 CSV write complete for chunk 3
+2025-07-16 15:17:02 | 🔁 Starting chunk 4 with 5 IDs
+2025-07-16 15:18:55 | 🔁 Starting chunk 1 with 10 IDs
+2025-07-16 15:19:53 | ✅ Finished chunk 1 - Writing to CSV
+2025-07-16 15:19:53 | 💾 CSV write complete for chunk 1
+2025-07-16 15:19:53 | 🔁 Starting chunk 2 with 10 IDs
+2025-07-16 15:20:52 | ✅ Finished chunk 2 - Writing to CSV
+2025-07-16 15:20:52 | 💾 CSV write complete for chunk 2
+2025-07-16 15:20:52 | 🔁 Starting chunk 3 with 10 IDs
+2025-07-16 15:21:49 | ✅ Finished chunk 3 - Writing to CSV
+2025-07-16 15:21:50 | 💾 CSV write complete for chunk 3
+2025-07-16 15:21:50 | 🔁 Starting chunk 4 with 10 IDs
+2025-07-16 15:22:47 | ✅ Finished chunk 4 - Writing to CSV
+2025-07-16 15:22:48 | 💾 CSV write complete for chunk 4
+2025-07-16 15:22:48 | 🔁 Starting chunk 5 with 10 IDs
+2025-07-16 15:23:04 | 🔁 Starting chunk 1 with 100 IDs
+2025-07-16 15:23:45 | 🔁 Starting chunk 1 with 100 IDs
+2025-07-16 15:33:17 | ✅ Finished chunk 1 - Writing to CSV
+2025-07-16 15:33:23 | 💾 CSV write complete for chunk 1
+2025-07-16 15:33:23 | 🔁 Starting chunk 2 with 100 IDs
+2025-07-16 15:42:53 | ✅ Finished chunk 2 - Writing to CSV
+2025-07-16 15:42:59 | 💾 CSV write complete for chunk 2
+2025-07-16 15:42:59 | 🔁 Starting chunk 3 with 100 IDs
+2025-07-16 15:43:59 | 🔁 Starting chunk 1 with 100 IDs
+2025-07-16 15:58:56 | 🔁 Starting chunk 1 with 100 IDs
+2025-07-16 15:58:57 | 👷 Worker PID: 20624 - starting ID: 37460027
+2025-07-16 15:58:58 | 👷 Worker PID: 11564 - starting ID: 37460030
+2025-07-16 15:58:58 | 👷 Worker PID: 9512 - starting ID: 37467033
+2025-07-16 15:58:59 | 👷 Worker PID: 35984 - starting ID: 37467014
+2025-07-16 15:59:00 | 👷 Worker PID: 18108 - starting ID: 37344005
+2025-07-16 15:59:01 | 👷 Worker PID: 17624 - starting ID: 37462048
+2025-07-16 15:59:01 | 👷 Worker PID: 36392 - starting ID: 37462038
+2025-07-16 15:59:02 | 👷 Worker PID: 35380 - starting ID: 37408901
+2025-07-16 15:59:03 | 👷 Worker PID: 20476 - starting ID: 37313902
+2025-07-16 15:59:04 | 👷 Worker PID: 5716 - starting ID: 37460083
+2025-07-16 15:59:04 | 👷 Worker PID: 22344 - starting ID: 37428059
+2025-07-16 15:59:05 | 👷 Worker PID: 33632 - starting ID: 37108801
+2025-07-16 16:01:24 | 👷 Worker PID: 20624 - starting ID: 37460028
+2025-07-16 16:01:58 | 👷 Worker PID: 11564 - starting ID: 37460072
+2025-07-16 16:01:59 | 👷 Worker PID: 9512 - starting ID: 37467034
+2025-07-16 16:02:00 | 👷 Worker PID: 35984 - starting ID: 37234006
+2025-07-16 16:02:00 | 👷 Worker PID: 18108 - starting ID: 37405750
+2025-07-16 16:02:01 | 👷 Worker PID: 17624 - starting ID: 37462020
+2025-07-16 16:02:02 | 👷 Worker PID: 36392 - starting ID: 37462902
+2025-07-16 16:02:02 | 👷 Worker PID: 35380 - starting ID: 37408008
+2025-07-16 16:02:03 | 👷 Worker PID: 20476 - starting ID: 37313012
+2025-07-16 16:02:04 | 👷 Worker PID: 5716 - starting ID: 37460046
+2025-07-16 16:02:05 | 👷 Worker PID: 22344 - starting ID: 37428911
+2025-07-16 16:02:06 | 👷 Worker PID: 33632 - starting ID: 37108017

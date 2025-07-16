@@ -10,6 +10,15 @@ library(tidyr)
 library(furrr)
 library(sf)
 
+log_file <- "scraper-log.txt"
+
+log_message <- function(...) {
+  msg <- paste0(format(Sys.time(), "%Y-%m-%d %H:%M:%S"), " | ", paste(..., collapse = " "))
+  cat(msg, "\n")
+  write(msg, file = log_file, append = TRUE)
+}
+
+
 # -------------------------------------------------------------------
 # Helper: safely extract the next sibling’s text from an <h4> element
 # -------------------------------------------------------------------
@@ -23,7 +32,7 @@ next_text <- function(node) {
 # -------------------------------------------------------------------
 # Main function: get IBRA and IMCRA from AFD page by ID ----
 # -------------------------------------------------------------------
-get_regions <- function(id, pause = 0.5) {
+get_regions <- function(id, pause = 0.1) {
   url <- sprintf("https://biodiversity.org.au/afd/taxa/%s", id)
   Sys.sleep(pause)
   
@@ -42,6 +51,20 @@ get_regions <- function(id, pause = 0.5) {
   
   tibble(id = id, ibra = na_if(ibra, ""), imcra = na_if(imcra, ""))
 }
+
+# Safe version
+safe_get <- function(id) {
+  log_message("👷 Worker PID:", Sys.getpid(), "- starting ID:", id)
+  
+  tryCatch(
+    get_regions(id, pause = 0.1),
+    error = function(e) {
+      log_message("❌ Error for ID:", id, "|", conditionMessage(e))
+      tibble(id = id, ibra = NA_character_, imcra = NA_character_)
+    }
+  )
+}
+
 
 # -------------------------------------------------------------------
 # Prep your input/output ----
@@ -66,28 +89,63 @@ cat("🔁 Still to do:", length(todo_ids), "\n")
 # -------------------------------------------------------------------
 # Scrape and append to CSV row-by-row ----
 # -------------------------------------------------------------------
-# ----- Parallel scraper with checkpointing ----------------------------------
 
-plan(multisession, workers = 4)   # tweak workers to suit your CPU/RAM
+# # THIS WORKS - but slow
+# handlers(global = TRUE)
+# 
+# with_progress({
+#   p <- progressor(along = todo_ids)
+#   
+#   for (id in todo_ids) {
+#     result <- tryCatch(get_regions(id),
+#                        error = function(e) tibble(id = id, ibra = NA, imcra = NA))
+#     write_csv(result, output_file, append = TRUE)
+#     p()
+#   }
+# })
 
-safe_get <- purrr::possibly(
-  \(id) get_regions(id, pause = 0.5),
-  otherwise = tibble(id = id, ibra = NA_character_, imcra = NA_character_)
-)
+#######################################################
+# -------------------------------
+# Parallel scraping setup
+# -------------------------------
+plan(multisession, workers = 12)  # Adjust workers based on your CPU
 
-chunk_size <- 200                      # write every 200 species
+chunk_size <- 100
 chunk_ids  <- split(todo_ids, ceiling(seq_along(todo_ids) / chunk_size))
 
+# -------------------------------
+# Scrape and append in chunks
+# -------------------------------
 handlers(global = TRUE)
 with_progress({
   p <- progressor(along = chunk_ids)
   
-  for (ids in chunk_ids) {
-    res_chunk <- future_map_dfr(ids, safe_get, .progress = FALSE)
-    write_csv(res_chunk, output_file )
+  for (i in seq_along(chunk_ids)) {
+    ids <- chunk_ids[[i]]
+    log_message("🔁 Starting chunk", i, "with", length(ids), "IDs")
+    
+    res_chunk <- future_map_dfr(
+      ids, safe_get,
+      .options  = furrr_options(packages = c("rvest", "xml2", "stringr")),
+      .progress = TRUE
+    )
+    
+    log_message("✅ Finished chunk", i, "- Writing to CSV")
+    
+    first_write <- !file.exists(output_file) || file.size(output_file) == 0
+    write_csv(res_chunk, output_file,
+              append    = !first_write,
+              col_names =  first_write)
+    
+    log_message("💾 CSV write complete for chunk", i)
     p()
   }
+  
+  log_message("🏁 All chunks complete!")
 })
+
+# 3:18
+
 # ---------------------------------------------------------------------------
 
 # -------------------------------------------------------------------
