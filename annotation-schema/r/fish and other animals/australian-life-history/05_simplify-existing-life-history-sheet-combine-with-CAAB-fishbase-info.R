@@ -50,6 +50,14 @@ foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_max
   dplyr::rename(caab_code = caab)
 
 # Extra marine regions ----
+# Australian Faunal directory ----
+afd_extra_aus <- read_csv("annotation-schema/data/staging/australian-fanual-directory_distributions_extra_aus.csv") %>%
+  dplyr::mutate(caab_code = as.character(caab_code))
+
+afd_extra_imcra <- read_csv("annotation-schema/data/staging/australian-fanual-directory_distributions_extra_imcras.csv") %>%
+  dplyr::mutate(caab_code = as.character(caab_code))
+
+# Google sheet ----
 extra_marine_regions <- "https://docs.google.com/spreadsheets/d/10D3s-pB-GZJ6xcp93wOx2taJCa5HXqmljcVscaJQmYA/edit?resourcekey#gid=2055010068"
 
 add_regions <- read_sheet(extra_marine_regions, sheet = "Form responses 1") %>% 
@@ -537,12 +545,6 @@ unique(australia_life_history$length_max_cm) %>% sort()
 expanded <- australia_life_history %>%
   dplyr::mutate(aus_region = strsplit(as.character(aus_region), split = ", ")) %>% 
   tidyr::unnest(aus_region) %>%
-  # dplyr::mutate(aus_region = case_when(aus_region %in% "North-west" ~ "NW",
-  #                                      aus_region %in% "North" ~ "N",
-  #                                      aus_region %in% "Coral Sea" ~ "CS",
-  #                                      aus_region %in% "Temperate East" ~ "TE",
-  #                                      aus_region %in% "South-east" ~ "SE",
-  #                                      aus_region %in% "South-west" ~ "SW")) %>%
   glimpse()
 
 unique(expanded$aus_region)
@@ -551,13 +553,78 @@ missing_regions <- anti_join(add_regions, expanded) %>%
   dplyr::rename(region_to_add = aus_region) %>%
   dplyr::group_by(family, genus, species) %>%
   dplyr::summarise(region_to_add = toString(region_to_add))
-  
+
 australia_life_history <- dplyr::left_join(australia_life_history, missing_regions) %>%
   mutate(aus_region = if_else(is.na(aus_region), region_to_add, paste(aus_region, region_to_add, sep = ", "))) %>%
   dplyr::select(-region_to_add) %>%
   dplyr::mutate(aus_region = str_replace_all(aus_region, "\\, NA", "")) %>%
   dplyr::filter(!caab_code %in% c("37280000", "37384000", "37385000")) %>%
   dplyr::rename(marine_region = aus_region)
+
+number.with.distributions <- australia_life_history %>% 
+  filter(!is.na(marine_region))
+
+nrow(number.with.distributions)/nrow(australia_life_history) * 100 
+# 49.97% with distribution info available from worms package
+
+number.with.distributions <- australia_life_history %>% 
+  filter(!is.na(imcra_region))
+
+nrow(number.with.distributions)/nrow(australia_life_history) * 100 
+# 50.44% with distribution info available from worms package
+
+################# TESTING ADDING AFD MARINE REGIONS
+expanded <- australia_life_history %>%
+  dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) %>% 
+  tidyr::unnest(marine_region) %>%
+  glimpse()
+
+unique(expanded$marine_region)
+
+additional_afd_marine_regions <- anti_join(afd_extra_aus, expanded) %>%
+  dplyr::rename(region_to_add = marine_region) %>%
+  dplyr::group_by(caab_code) %>%
+  dplyr::summarise(region_to_add = toString(region_to_add))
+
+australia_life_history <- dplyr::left_join(australia_life_history, additional_afd_marine_regions) %>%
+  mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", "))) %>%
+  dplyr::select(-region_to_add) %>%
+  dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", ""))
+
+################
+
+
+################# TESTING ADDING AFD IMCRA REGIONS
+expanded <- australia_life_history %>%
+  dplyr::mutate(imcra_region = strsplit(as.character(imcra_region), split = ", ")) %>% 
+  tidyr::unnest(imcra_region) %>%
+  glimpse()
+
+unique(expanded$imcra_region)
+
+additional_afd_imcra_regions <- anti_join(afd_extra_imcra, expanded) %>%
+  dplyr::rename(region_to_add = imcra_region) %>%
+  dplyr::group_by(caab_code) %>%
+  dplyr::summarise(region_to_add = toString(region_to_add))
+
+australia_life_history <- dplyr::left_join(australia_life_history, additional_afd_imcra_regions) %>%
+  mutate(imcra_region = if_else(is.na(imcra_region), region_to_add, paste(imcra_region, region_to_add, sep = ", "))) %>%
+  dplyr::select(-region_to_add) %>%
+  dplyr::mutate(imcra_region = str_replace_all(imcra_region, "\\, NA", ""))
+
+################
+
+
+number.with.distributions <- australia_life_history %>% 
+  filter(!is.na(marine_region))
+nrow(number.with.distributions)/nrow(australia_life_history) * 100 
+# 50% with distribution info available from worms package
+
+number.with.distributions <- australia_life_history %>% 
+  filter(!is.na(imcra_region))
+nrow(number.with.distributions)/nrow(australia_life_history) * 100 
+# 50.44% with distribution info available from worms package
+  
 
 unique(australia_life_history$marine_region)
 unique(australia_life_history$imcra_region)
