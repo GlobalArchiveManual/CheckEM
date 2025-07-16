@@ -1,0 +1,914 @@
+id,imcra_names,imcra_codes
+37465089,Timor Transition,1
+37465089,Northwest Shelf Transition,26
+37465089,Northwest Shelf Province,27
+37465011,Northern Shelf Province,25
+37465011,Northwest Shelf Transition,26
+37465011,Northwest Shelf Province,27
+37465011,Southeast Shelf Transition,37
+37465011,Central Eastern Shelf Province,38
+37465011,Central Eastern Shelf Transition,39
+37465011,Northeast Shelf Province,40
+37465011,Northeast Shelf Transition,41
+37210016,Timor Province,2
+37210016,Christmas Island Province,23
+37210016,Northwest Transition,3
+37210017,Lord Howe Province,14
+37210017,Northeast Province,18
+37210017,Timor Province,2
+37210017,Cape Province,20
+37210017,Cocos (Keeling) Island Province,22
+37210017,Christmas Island Province,23
+37210017,Northern Shelf Province,25
+37210017,Northwest Shelf Transition,26
+37210017,Northwest Shelf Province,27
+37210017,Northwest Transition,3
+37210017,Central Eastern Shelf Province,38
+37210017,Central Eastern Shelf Transition,39
+37210017,Northeast Shelf Province,40
+37210017,Northeast Shelf Transition,41
+37210019,Timor Province,2
+37210019,Cocos (Keeling) Island Province,22
+37210019,Northwest Transition,3
+37210011,Timor Transition,1
+37210011,Lord Howe Province,14
+37210011,Central Eastern Transition,15
+37210011,Christmas Island Province,23
+37210011,Northern Shelf Province,25
+37210011,Northwest Shelf Transition,26
+37210011,Northwest Shelf Province,27
+37210011,Central Western Shelf Transition,28
+37210011,Central Western Shelf Province,29
+37210011,Southwest Shelf Transition,30
+37210011,Southeast Shelf Transition,37
+37210011,Central Eastern Shelf Province,38
+37210011,Central Eastern Shelf Transition,39
+37210011,Northeast Shelf Province,40
+37210011,Northeast Shelf Transition,41
+37210021,Central Eastern Province,12
+37210021,Lord Howe Province,14
+37210021,Timor Province,2
+37210021,Northwest Shelf Transition,26
+37210021,Northwest Shelf Province,27
+37210021,Central Eastern Shelf Province,38
+37287031,Lord Howe Province,14
+37287031,Timor Province,2
+37287031,Christmas Island Province,23
+37287031,Central Western Shelf Transition,28
+37287031,Central Eastern Shelf Province,38
+37287031,Central Eastern Shelf Transition,39
+37235001,Northeast Province,18
+37235001,Timor Province,2
+37235001,Norfolk Island Province,21
+37235001,Northern Shelf Province,25
+37235001,Northwest Shelf Transition,26
+37235001,Northwest Shelf Province,27
+37235001,Central Western Shelf Transition,28
+37235001,Central Western Shelf Province,29
+37235001,Southwest Shelf Transition,30
+37235001,Southeast Shelf Transition,37
+37235001,Central Eastern Shelf Province,38
+37235001,Central Eastern Shelf Transition,39
+37235001,Northeast Shelf Province,40
+37235001,Northeast Shelf Transition,41
+37372003,Lord Howe Province,14
+37372003,Timor Province,2
+37372003,Northern Shelf Province,25
+37372003,Northwest Shelf Transition,26
+37372003,Northwest Shelf Province,27
+37372003,Central Western Shelf Transition,28
+37372003,Central Western Shelf Province,29
+37372003,Southwest Shelf Transition,30
+37372003,Central Eastern Shelf Province,38
+37372003,Central Eastern Shelf Transition,39
+37372003,Northeast Shelf Province,40
+37372003,Northeast Shelf Transition,41
+37372145,Cocos (Keeling) Island Province,22
+37372145,Christmas Island Province,23
+37372010,Northeast Province,18
+37372010,Timor Province,2
+37372010,Cape Province,20
+37372010,Cocos (Keeling) Island Province,22
+37372010,Christmas Island Province,23
+37372010,Central Western Shelf Transition,28
+37372010,Northeast Shelf Province,40
+37372010,Northeast Shelf Transition,41
+37372011,Lord Howe Province,14
+37372011,Timor Province,2
+37372011,Norfolk Island Province,21
+37372011,Christmas Island Province,23
+37372011,Northern Shelf Province,25
+37372011,Northwest Shelf Transition,26
+37372011,Northwest Shelf Province,27
+37372011,Central Western Shelf Transition,28
+37372011,Central Western Shelf Province,29
+37372011,Southwest Shelf Transition,30
+37372011,Southeast Shelf Transition,37
+37372011,Central Eastern Shelf Province,38
+37372011,Central Eastern Shelf Transition,39
+37372011,Northeast Shelf Province,40
+37372011,Northeast Shelf Transition,41
+37372012,Lord Howe Province,14
+37372012,Northeast Province,18
+37372012,Timor Province,2
+37372012,Norfolk Island Province,21
+37372012,Cocos (Keeling) Island Province,22
+37372012,Christmas Island Province,23
+37372012,Northern Shelf Province,25
+37372012,Northwest Shelf Transition,26
+37372012,Northwest Shelf Province,27
+37372012,Central Western Shelf Transition,28
+37372012,Central Western Shelf Province,29
+37372012,Southwest Shelf Transition,30
+37372012,Southeast Shelf Transition,37
+37372012,Central Eastern Shelf Province,38
+37372012,Central Eastern Shelf Transition,39
+37372012,Northeast Shelf Province,40
+37372013,Lord Howe Province,14
+37372013,Northeast Province,18
+37372013,Timor Province,2
+37372013,Norfolk Island Province,21
+37372013,Cocos (Keeling) Island Province,22
+37372013,Christmas Island Province,23
+37372013,Northern Shelf Province,25
+37372013,Northwest Shelf Transition,26
+37372013,Northwest Shelf Province,27
+37372013,Central Western Shelf Transition,28
+37372013,Central Western Shelf Province,29
+37372013,Northwest Transition,3
+37372013,Southwest Shelf Transition,30
+37372013,Southeast Shelf Transition,37
+37372013,Central Eastern Shelf Province,38
+37372013,Central Eastern Shelf Transition,39
+37372013,Northeast Shelf Province,40
+37372013,Northeast Shelf Transition,41
+37372014,Lord Howe Province,14
+37372014,Central Eastern Shelf Province,38
+37372014,Central Eastern Shelf Transition,39
+37372014,Northeast Shelf Province,40
+37372014,Northeast Shelf Transition,41
+37465001,Central Western Shelf Province,29
+37465001,Southwest Shelf Transition,30
+37465001,Southwest Shelf Province,31
+37465001,Great Australian Bight Shelf Transition,32
+37465001,Spencer Gulf Shelf Province,33
+37465043,Southwest Shelf Transition,30
+37465043,Southwest Shelf Province,31
+37465043,Great Australian Bight Shelf Transition,32
+37465043,Spencer Gulf Shelf Province,33
+37465043,Western Bass Strait Shelf Transition,34
+37465043,Bass Strait Shelf Province,35
+37465043,Tasmanian Shelf Province,36
+37465043,Southeast Shelf Transition,37
+37465043,Central Eastern Shelf Province,38
+37465002,Southwest Shelf Transition,30
+37465002,Southwest Shelf Province,31
+37465002,Great Australian Bight Shelf Transition,32
+37465002,Spencer Gulf Shelf Province,33
+37465002,Western Bass Strait Shelf Transition,34
+37465002,Bass Strait Shelf Province,35
+37465002,Tasmanian Shelf Province,36
+37465002,Southeast Shelf Transition,37
+37465002,Central Eastern Shelf Province,38
+37465002,Central Eastern Shelf Transition,39
+37393010,Northeast Province,18
+37393010,Timor Province,2
+37393010,Northwest Shelf Province,27
+37393010,Northwest Transition,3
+37393010,Central Eastern Shelf Province,38
+37393010,Central Eastern Shelf Transition,39
+37393010,Northeast Shelf Province,40
+37393007,Northwest Shelf Province,27
+37393007,Northwest Transition,3
+37311131,Lord Howe Province,14
+37311131,Norfolk Island Province,21
+37311131,Central Eastern Shelf Province,38
+37311131,Central Eastern Shelf Transition,39
+37311090,Lord Howe Province,14
+37311090,Bass Strait Shelf Province,35
+37311090,Southeast Shelf Transition,37
+37311090,Central Eastern Shelf Province,38
+37311090,Central Eastern Shelf Transition,39
+37311132,Central Western Shelf Transition,28
+37311132,Central Western Shelf Province,29
+37311132,Southwest Shelf Transition,30
+37311132,Southwest Shelf Province,31
+37311133,Central Eastern Shelf Province,38
+37311035,Central Western Shelf Province,29
+37311035,Southwest Shelf Transition,30
+37311035,Southwest Shelf Province,31
+37311035,Great Australian Bight Shelf Transition,32
+37380002,Northern Shelf Province,25
+37380002,Northwest Shelf Transition,26
+37380002,Northwest Shelf Province,27
+37380002,Central Western Shelf Transition,28
+37380002,Central Western Shelf Province,29
+37380002,Northeast Shelf Province,40
+37380002,Northeast Shelf Transition,41
+37380003,Northern Shelf Province,25
+37380003,Central Eastern Shelf Transition,39
+37380003,Northeast Shelf Province,40
+37380003,Northeast Shelf Transition,41
+37380004,Timor Transition,1
+37380004,Central Eastern Shelf Transition,39
+37380004,Northeast Shelf Province,40
+37380004,Northeast Shelf Transition,41
+37372015,Northeast Province,18
+37372015,Northeast Transition,19
+37372015,Timor Province,2
+37372015,Cape Province,20
+37372015,Northwest Shelf Transition,26
+37372015,Northeast Shelf Province,40
+37372015,Northeast Shelf Transition,41
+37441024,Timor Transition,1
+37441024,Central Eastern Province,12
+37441024,Tasman Basin Province,13
+37441024,Lord Howe Province,14
+37441024,Central Eastern Transition,15
+37441024,Kenn Transition,16
+37441024,Kenn Province,17
+37441024,Northeast Province,18
+37441024,Northeast Transition,19
+37441024,Timor Province,2
+37441024,Cape Province,20
+37441024,Norfolk Island Province,21
+37441024,Cocos (Keeling) Island Province,22
+37441024,Christmas Island Province,23
+37441024,Northern Shelf Province,25
+37441024,Northwest Shelf Transition,26
+37441024,Northwest Shelf Province,27
+37441024,Northwest Transition,3
+37441024,Northwest Province,4
+37428030,Bass Strait Shelf Province,35
+37428030,Central Eastern Shelf Province,38
+37228062,Northwest Province,4
+37353004,Southeast Shelf Transition,37
+37353004,Central Eastern Shelf Province,38
+37353004,Central Eastern Shelf Transition,39
+37353004,Northeast Shelf Province,40
+37353003,Central Western Shelf Province,29
+37353003,Southwest Shelf Transition,30
+37353003,Southwest Shelf Province,31
+37353003,Great Australian Bight Shelf Transition,32
+37353003,Spencer Gulf Shelf Province,33
+37353003,Western Bass Strait Shelf Transition,34
+37353003,Bass Strait Shelf Province,35
+37353003,Tasmanian Shelf Province,36
+37353003,Southeast Shelf Transition,37
+37353012,Northern Shelf Province,25
+37353012,Northwest Shelf Transition,26
+37353012,Northwest Shelf Province,27
+37353012,Central Western Shelf Transition,28
+37353012,Central Western Shelf Province,29
+37353011,Northern Shelf Province,25
+37353011,Northwest Shelf Transition,26
+37353011,Northeast Shelf Province,40
+37353011,Northeast Shelf Transition,41
+37353014,Northern Shelf Province,25
+37353014,Northwest Shelf Transition,26
+37353014,Northwest Shelf Province,27
+37353014,Central Western Shelf Transition,28
+37353014,Central Western Shelf Province,29
+37290017,Northern Shelf Province,25
+37290017,Northwest Shelf Transition,26
+37290017,Northwest Shelf Province,27
+37290017,Central Western Shelf Transition,28
+37290017,Central Western Shelf Province,29
+37290017,Southwest Shelf Transition,30
+37290017,Central Eastern Shelf Transition,39
+37290017,Northeast Shelf Province,40
+37290017,Northeast Shelf Transition,41
+37466024,Northeast Shelf Transition,41
+37437004,Northeast Province,18
+37437004,Northeast Shelf Province,40
+37437005,Northeast Province,18
+37437005,Northeast Shelf Province,40
+37437005,Northeast Shelf Transition,41
+37437006,Timor Province,2
+37437006,Christmas Island Province,23
+37437006,Northeast Shelf Province,40
+37437006,Northeast Shelf Transition,41
+37437007,Lord Howe Province,14
+37437007,Northeast Province,18
+37437007,Timor Province,2
+37437007,Cocos (Keeling) Island Province,22
+37437007,Christmas Island Province,23
+37437007,Northwest Transition,3
+37437007,Southeast Shelf Transition,37
+37437007,Central Eastern Shelf Province,38
+37437007,Central Eastern Shelf Transition,39
+37437007,Northeast Shelf Province,40
+37437007,Northeast Shelf Transition,41
+37437008,Lord Howe Province,14
+37437008,Northeast Province,18
+37437008,Timor Province,2
+37437008,Norfolk Island Province,21
+37437008,Christmas Island Province,23
+37437008,Northwest Shelf Province,27
+37437008,Central Western Shelf Transition,28
+37437008,Central Western Shelf Province,29
+37437008,Northwest Transition,3
+37437008,Central Eastern Shelf Province,38
+37437008,Central Eastern Shelf Transition,39
+37437008,Northeast Shelf Province,40
+37437008,Northeast Shelf Transition,41
+37437044,Timor Province,2
+37437002,Timor Province,2
+37437002,Northern Shelf Province,25
+37437002,Northwest Shelf Transition,26
+37437002,Northwest Shelf Province,27
+37437002,Central Western Shelf Transition,28
+37437002,Central Western Shelf Province,29
+37437002,Southwest Shelf Transition,30
+37437002,Central Eastern Shelf Transition,39
+37437002,Northeast Shelf Province,40
+37437002,Northeast Shelf Transition,41
+37437009,Northeast Province,18
+37437009,Cocos (Keeling) Island Province,22
+37437009,Christmas Island Province,23
+37437009,Northeast Shelf Transition,41
+37437010,Northeast Province,18
+37437010,Timor Province,2
+37437010,Cape Province,20
+37437010,Cocos (Keeling) Island Province,22
+37437010,Christmas Island Province,23
+37437010,Northwest Shelf Province,27
+37437010,Central Western Shelf Transition,28
+37437010,Northwest Transition,3
+37437010,Central Eastern Shelf Province,38
+37437010,Central Eastern Shelf Transition,39
+37437010,Northeast Shelf Province,40
+37437010,Northeast Shelf Transition,41
+37437041,Northeast Province,18
+37437041,Cocos (Keeling) Island Province,22
+37437041,Christmas Island Province,23
+37437041,Northeast Shelf Transition,41
+37437011,Timor Province,2
+37437011,Cocos (Keeling) Island Province,22
+37437011,Christmas Island Province,23
+37437011,Northwest Shelf Province,27
+37437011,Central Western Shelf Transition,28
+37437011,Central Western Shelf Province,29
+37437011,Central Eastern Shelf Province,38
+37437011,Central Eastern Shelf Transition,39
+37437011,Northeast Shelf Province,40
+37437011,Northeast Shelf Transition,41
+37437012,Northeast Province,18
+37437012,Timor Province,2
+37437012,Cocos (Keeling) Island Province,22
+37437012,Christmas Island Province,23
+37437012,Northwest Shelf Transition,26
+37437012,Northwest Shelf Province,27
+37437012,Central Western Shelf Transition,28
+37437012,Northwest Transition,3
+37437012,Central Eastern Shelf Transition,39
+37437012,Northeast Shelf Province,40
+37437012,Northeast Shelf Transition,41
+37437013,Timor Province,2
+37437013,Cocos (Keeling) Island Province,22
+37437013,Christmas Island Province,23
+37437013,Northwest Transition,3
+37437013,Northeast Shelf Province,40
+37437013,Northeast Shelf Transition,41
+37437014,Lord Howe Province,14
+37437014,Northeast Province,18
+37437014,Northeast Transition,19
+37437014,Timor Province,2
+37437014,Cape Province,20
+37437014,Norfolk Island Province,21
+37437014,Cocos (Keeling) Island Province,22
+37437014,Christmas Island Province,23
+37437014,Northwest Shelf Province,27
+37437014,Central Western Shelf Transition,28
+37437014,Central Western Shelf Province,29
+37437014,Northwest Transition,3
+37437014,Southwest Shelf Transition,30
+37437014,Southwest Shelf Province,31
+37437014,Central Eastern Shelf Province,38
+37437014,Central Eastern Shelf Transition,39
+37437014,Northeast Shelf Province,40
+37437014,Northeast Shelf Transition,41
+37437015,Northeast Province,18
+37437015,Northeast Shelf Province,40
+37437015,Northeast Shelf Transition,41
+37437016,Lord Howe Province,14
+37437016,Northeast Province,18
+37437016,Timor Province,2
+37437016,Cocos (Keeling) Island Province,22
+37437016,Christmas Island Province,23
+37437016,Northwest Shelf Province,27
+37437016,Central Western Shelf Transition,28
+37437016,Central Western Shelf Province,29
+37437016,Northwest Transition,3
+37437016,Central Eastern Shelf Province,38
+37437016,Central Eastern Shelf Transition,39
+37437016,Northeast Shelf Province,40
+37437016,Northeast Shelf Transition,41
+37437017,Northeast Province,18
+37437017,Northeast Transition,19
+37437017,Timor Province,2
+37437017,Cocos (Keeling) Island Province,22
+37437017,Christmas Island Province,23
+37437017,Northwest Transition,3
+37437017,Southeast Shelf Transition,37
+37437017,Central Eastern Shelf Province,38
+37437017,Central Eastern Shelf Transition,39
+37437017,Northeast Shelf Province,40
+37437017,Northeast Shelf Transition,41
+37437050,Christmas Island Province,23
+37437018,Northeast Province,18
+37437018,Timor Province,2
+37437018,Cocos (Keeling) Island Province,22
+37437018,Christmas Island Province,23
+37437018,Northwest Transition,3
+37437018,Northeast Shelf Transition,41
+37437019,Lord Howe Province,14
+37437019,Northeast Province,18
+37437019,Timor Province,2
+37437019,Norfolk Island Province,21
+37437019,Cocos (Keeling) Island Province,22
+37437019,Christmas Island Province,23
+37437019,Northwest Shelf Province,27
+37437019,Central Western Shelf Transition,28
+37437019,Central Western Shelf Province,29
+37437019,Northwest Transition,3
+37437019,Southwest Shelf Transition,30
+37437019,Southwest Shelf Province,31
+37437019,Southeast Shelf Transition,37
+37437019,Central Eastern Shelf Province,38
+37437019,Central Eastern Shelf Transition,39
+37437019,Northeast Shelf Province,40
+37437019,Northeast Shelf Transition,41
+37437051,Christmas Island Province,23
+37437020,Northeast Province,18
+37437020,Timor Province,2
+37437020,Cocos (Keeling) Island Province,22
+37437020,Christmas Island Province,23
+37437020,Northwest Shelf Transition,26
+37437020,Northwest Shelf Province,27
+37437020,Northwest Transition,3
+37437020,Central Eastern Shelf Province,38
+37437020,Central Eastern Shelf Transition,39
+37437020,Northeast Shelf Province,40
+37437020,Northeast Shelf Transition,41
+37228054,Northern Shelf Province,25
+37428019,Northern Shelf Province,25
+37428019,Northwest Shelf Transition,26
+37428019,Northwest Shelf Province,27
+37428019,Central Eastern Shelf Transition,39
+37428019,Northeast Shelf Province,40
+37428019,Northeast Shelf Transition,41
+37428031,Northwest Shelf Transition,26
+37428031,Northwest Shelf Province,27
+37428031,Central Eastern Shelf Transition,39
+37428031,Northeast Shelf Province,40
+37428031,Northeast Shelf Transition,41
+37428361,Southwest Shelf Province,31
+37428361,Bass Strait Shelf Province,35
+37428361,Central Eastern Shelf Province,38
+37428021,Northern Shelf Province,25
+37428021,Northwest Shelf Transition,26
+37428021,Northwest Shelf Province,27
+37428021,Central Eastern Shelf Transition,39
+37428021,Northeast Shelf Province,40
+37428021,Northeast Shelf Transition,41
+37282035,Northeast Shelf Province,40
+37282035,Northeast Shelf Transition,41
+37384002,Southwest Shelf Transition,30
+37384002,Southwest Shelf Province,31
+37384002,Great Australian Bight Shelf Transition,32
+37384002,Spencer Gulf Shelf Province,33
+37384002,Western Bass Strait Shelf Transition,34
+37384043,Tasmanian Shelf Province,36
+37384043,Southeast Shelf Transition,37
+37384043,Central Eastern Shelf Province,38
+37384043,Central Eastern Shelf Transition,39
+37465044,Northwest Transition,3
+37465044,Northeast Shelf Province,40
+37465044,Northeast Shelf Transition,41
+37465042,Northern Shelf Province,25
+37465042,Central Eastern Shelf Transition,39
+37465042,Northeast Shelf Transition,41
+37311235,Timor Transition,1
+37311167,Timor Transition,1
+37311167,Timor Province,2
+37311167,Northern Shelf Province,25
+37311167,Northwest Shelf Transition,26
+37311167,Northwest Transition,3
+37311167,Northwest Province,4
+37311167,Central Western Transition,5
+37290004,Northern Shelf Province,25
+37290004,Northwest Shelf Transition,26
+37290004,Northwest Shelf Province,27
+37290004,Central Western Shelf Transition,28
+37290004,Central Western Shelf Province,29
+37290004,Central Eastern Shelf Transition,39
+37290004,Northeast Shelf Province,40
+37290004,Northeast Shelf Transition,41
+37280003,Cape Province,20
+37280003,Northeast Shelf Province,40
+37280003,Northeast Shelf Transition,41
+37462001,Northeast Province,18
+37462001,Timor Province,2
+37462001,Northwest Shelf Transition,26
+37462001,Northwest Shelf Province,27
+37462001,Central Western Shelf Transition,28
+37462001,Central Western Shelf Province,29
+37462001,Central Eastern Shelf Province,38
+37462001,Central Eastern Shelf Transition,39
+37462001,Northwest Province,4
+37462001,Northeast Shelf Province,40
+37292004,Central Western Shelf Province,29
+37292004,Southwest Shelf Transition,30
+37292004,Southwest Shelf Province,31
+37292004,Great Australian Bight Shelf Transition,32
+37292004,Spencer Gulf Shelf Province,33
+37292004,Western Bass Strait Shelf Transition,34
+37292004,Bass Strait Shelf Province,35
+37292004,Tasmanian Shelf Province,36
+37292004,Southeast Shelf Transition,37
+37311134,Timor Province,2
+37311134,Cocos (Keeling) Island Province,22
+37311134,Christmas Island Province,23
+37311134,Northwest Shelf Transition,26
+37311134,Northwest Transition,3
+37311134,Northeast Shelf Province,40
+37311134,Northeast Shelf Transition,41
+37039003,Timor Transition,1
+37039003,Christmas Island Province,23
+37039003,Northern Shelf Province,25
+37039003,Northwest Shelf Transition,26
+37039003,Northwest Shelf Province,27
+37039003,Central Western Shelf Transition,28
+37039003,Central Western Shelf Province,29
+37039003,Central Eastern Shelf Province,38
+37039003,Central Eastern Shelf Transition,39
+37039003,Northeast Shelf Province,40
+37039003,Northeast Shelf Transition,41
+37039002,Northern Shelf Province,25
+37039002,Northwest Shelf Transition,26
+37039002,Northwest Shelf Province,27
+37039002,Central Eastern Shelf Transition,39
+37039002,Northeast Shelf Province,40
+37039002,Northeast Shelf Transition,41
+37039005,Northern Shelf Province,25
+37039005,Northwest Shelf Transition,26
+37039005,Northwest Shelf Province,27
+37039005,Central Western Shelf Transition,28
+37039005,Central Western Shelf Province,29
+37039005,Northeast Shelf Province,40
+37039005,Northeast Shelf Transition,41
+37428143,Southwest Shelf Province,31
+37428004,Spencer Gulf Shelf Province,33
+37428004,Western Bass Strait Shelf Transition,34
+37428004,Bass Strait Shelf Province,35
+37428004,Tasmanian Shelf Province,36
+37428004,Southeast Shelf Transition,37
+37428004,Central Eastern Shelf Province,38
+37428004,Central Eastern Shelf Transition,39
+37272003,Tasmania Province,10
+37272003,Bass Strait Shelf Province,35
+37272003,Tasmanian Shelf Province,36
+37435025,Timor Province,2
+37435002,Northeast Shelf Transition,41
+37206036,Western Bass Strait Shelf Transition,34
+37206036,Bass Strait Shelf Province,35
+37206036,Tasmanian Shelf Province,36
+37206036,West Tasmania Transition,9
+37206007,Southwest Shelf Province,31
+37206008,Great Australian Bight Shelf Transition,32
+37206008,Spencer Gulf Shelf Province,33
+37206008,Western Bass Strait Shelf Transition,34
+37206008,Bass Strait Shelf Province,35
+37206008,Tasmanian Shelf Province,36
+37206008,Southeast Shelf Transition,37
+37206008,Central Eastern Shelf Province,38
+37206031,Southwest Shelf Transition,30
+37206031,Southwest Shelf Province,31
+37206031,Great Australian Bight Shelf Transition,32
+37206032,Southwest Shelf Province,31
+37206009,Southwest Shelf Province,31
+37206009,Great Australian Bight Shelf Transition,32
+37206009,Spencer Gulf Shelf Province,33
+37206009,Western Bass Strait Shelf Transition,34
+37206009,Bass Strait Shelf Province,35
+37206009,Tasmanian Shelf Province,36
+37206009,Southeast Shelf Transition,37
+37206009,Central Eastern Shelf Province,38
+37206033,Southwest Shelf Province,31
+37206033,Southeast Shelf Transition,37
+37206034,Southwest Shelf Transition,30
+37206034,Southwest Shelf Province,31
+37206034,Great Australian Bight Shelf Transition,32
+37206010,Spencer Gulf Shelf Province,33
+37206010,Western Bass Strait Shelf Transition,34
+37206010,Bass Strait Shelf Province,35
+37206010,Tasmanian Shelf Province,36
+37206010,Southeast Shelf Transition,37
+37206010,Central Eastern Shelf Province,38
+37206010,Central Eastern Shelf Transition,39
+37206035,Bass Strait Shelf Province,35
+37206035,Tasmanian Shelf Province,36
+37206035,Southeast Shelf Transition,37
+37206037,Norfolk Island Province,21
+37055001,Northern Shelf Province,25
+37055001,Northwest Shelf Transition,26
+37055001,Northwest Shelf Province,27
+37055001,Central Western Shelf Transition,28
+37055001,Central Eastern Shelf Province,38
+37055001,Central Eastern Shelf Transition,39
+37055001,Northeast Shelf Province,40
+37055001,Northeast Shelf Transition,41
+37055002,Lord Howe Province,14
+37055002,Northwest Shelf Province,27
+37055002,Central Eastern Shelf Transition,39
+37055002,Northeast Shelf Province,40
+37055002,Northeast Shelf Transition,41
+37381001,Central Western Shelf Province,29
+37381001,Southwest Shelf Transition,30
+37381001,Southwest Shelf Province,31
+37381001,Great Australian Bight Shelf Transition,32
+37381001,Spencer Gulf Shelf Province,33
+37381001,Western Bass Strait Shelf Transition,34
+37381001,Bass Strait Shelf Province,35
+37381001,Tasmanian Shelf Province,36
+37381001,Southeast Shelf Transition,37
+37381001,Central Eastern Shelf Province,38
+37381001,Central Eastern Shelf Transition,39
+37381001,Northeast Shelf Province,40
+37081004,Central Eastern Province,12
+37081004,Tasman Basin Province,13
+37081004,Lord Howe Province,14
+37081004,Central Eastern Transition,15
+37081004,Kenn Transition,16
+37081004,Northeast Province,18
+37081004,Northeast Transition,19
+37081004,Timor Province,2
+37081004,Cape Province,20
+37081004,Norfolk Island Province,21
+37081004,Northwest Transition,3
+37081004,Northwest Province,4
+37081004,Central Western Transition,5
+37081004,Central Western Province,6
+37081004,Southwest Transition,7
+37081005,Central Eastern Province,12
+37081005,Tasman Basin Province,13
+37081005,Lord Howe Province,14
+37081005,Central Eastern Transition,15
+37081005,Kenn Transition,16
+37081005,Northeast Province,18
+37081005,Northeast Transition,19
+37081005,Timor Province,2
+37081005,Cape Province,20
+37081005,Northwest Transition,3
+37081005,Northwest Province,4
+37081005,Central Western Transition,5
+37081005,Central Western Province,6
+37081005,Southwest Transition,7
+37337018,Lord Howe Province,14
+37337018,Norfolk Island Province,21
+37337018,Northern Shelf Province,25
+37337018,Northwest Shelf Transition,26
+37337018,Northwest Shelf Province,27
+37337018,Central Western Shelf Transition,28
+37337018,Central Western Shelf Province,29
+37337018,Southwest Shelf Transition,30
+37337018,Southwest Shelf Province,31
+37337018,Southeast Shelf Transition,37
+37337018,Central Eastern Shelf Province,38
+37337018,Central Eastern Shelf Transition,39
+37337018,Northeast Shelf Province,40
+37337018,Northeast Shelf Transition,41
+37337010,Timor Transition,1
+37337010,Northern Shelf Province,25
+37337010,Northwest Shelf Transition,26
+37337010,Northwest Shelf Province,27
+37337010,Central Eastern Shelf Transition,39
+37337010,Northeast Shelf Province,40
+37337010,Northeast Shelf Transition,41
+37337036,Timor Transition,1
+37337036,Northern Shelf Province,25
+37337036,Northwest Shelf Transition,26
+37337036,Northwest Shelf Province,27
+37337036,Central Eastern Shelf Transition,39
+37337036,Northeast Shelf Province,40
+37337036,Northeast Shelf Transition,41
+37337067,Northern Shelf Province,25
+37337067,Northwest Shelf Transition,26
+37337067,Northwest Shelf Province,27
+37337067,Northeast Shelf Province,40
+37337067,Northeast Shelf Transition,41
+37128002,Tasmania Province,10
+37128002,Macquarie Island Province,24
+37128002,Southwest Transition,7
+37128002,Southern Province,8
+37128001,Tasmania Province,10
+37128001,Southeast Transition,11
+37128001,Central Eastern Province,12
+37128001,Lord Howe Province,14
+37128001,Kenn Province,17
+37128001,Northeast Transition,19
+37128001,Southeast Shelf Transition,37
+37128001,Central Eastern Shelf Province,38
+37128001,Central Eastern Shelf Transition,39
+37128001,Northwest Province,4
+37128001,Southern Province,8
+37114014,Tasmania Province,10
+37114014,Southeast Transition,11
+37114014,Central Eastern Province,12
+37114014,Tasman Basin Province,13
+37114014,Lord Howe Province,14
+37114014,Norfolk Island Province,21
+37114014,Southwest Transition,7
+37114014,Southern Province,8
+37114014,West Tasmania Transition,9
+37114003,Northwest Transition,3
+37114003,Northwest Province,4
+37114029,Central Eastern Province,12
+37114029,Central Eastern Transition,15
+37114029,Northeast Province,18
+37114043,Central Eastern Province,12
+37114043,Norfolk Island Province,21
+37114042,Lord Howe Province,14
+37114042,Northwest Province,4
+37114042,Central Western Transition,5
+37114042,Central Western Province,6
+37114045,Northeast Province,18
+37114045,Northwest Province,4
+37114045,Central Western Transition,5
+37114045,Central Western Province,6
+37114045,Southwest Transition,7
+37228108,Northwest Shelf Transition,26
+37228108,Northwest Shelf Province,27
+37228106,Lord Howe Province,14
+37228106,Northeast Province,18
+37228106,Timor Province,2
+37228106,Northwest Shelf Province,27
+37228106,Northeast Shelf Transition,41
+37228043,Timor Province,2
+37228043,Cape Province,20
+37228043,Northern Shelf Province,25
+37228043,Northwest Shelf Transition,26
+37228043,Northwest Shelf Province,27
+37228043,Northeast Shelf Province,40
+37228043,Northeast Shelf Transition,41
+37210004,Northwest Shelf Province,27
+37210004,Central Western Shelf Transition,28
+37210004,Central Western Shelf Province,29
+37210004,Southwest Shelf Transition,30
+37210004,Southwest Shelf Province,31
+37210004,Spencer Gulf Shelf Province,33
+37068045,Timor Transition,1
+37068045,Northern Shelf Province,25
+37068045,Northwest Shelf Transition,26
+37068045,Northeast Shelf Province,40
+37266005,Tasmania Province,10
+37266005,Southeast Transition,11
+37266005,Southwest Transition,7
+37266005,Southern Province,8
+37266005,West Tasmania Transition,9
+37266004,Tasmania Province,10
+37266004,Southeast Transition,11
+37266004,Central Eastern Province,12
+37266004,Tasman Basin Province,13
+37266004,Lord Howe Province,14
+37266004,Norfolk Island Province,21
+37266004,Northwest Transition,3
+37266004,Northwest Province,4
+37266004,Central Western Transition,5
+37266004,Central Western Province,6
+37266004,Southwest Transition,7
+37266004,Southern Province,8
+37266004,West Tasmania Transition,9
+37429043,Northeast Transition,19
+37429043,Northeast Shelf Transition,41
+37469002,Tasmania Province,10
+37469002,Southeast Transition,11
+37469002,Central Eastern Province,12
+37469002,Tasman Basin Province,13
+37469002,Lord Howe Province,14
+37469002,Southwest Shelf Province,31
+37469002,Great Australian Bight Shelf Transition,32
+37469002,Spencer Gulf Shelf Province,33
+37469002,Western Bass Strait Shelf Transition,34
+37469002,Bass Strait Shelf Province,35
+37469002,Tasmanian Shelf Province,36
+37469002,Southeast Shelf Transition,37
+37469002,Central Eastern Shelf Province,38
+37469002,Central Eastern Shelf Transition,39
+37469002,Northeast Shelf Province,40
+37469002,Southern Province,8
+37469002,West Tasmania Transition,9
+37441021,Tasmania Province,10
+37441021,Southeast Transition,11
+37441021,Central Eastern Province,12
+37441021,Tasman Basin Province,13
+37441021,Southwest Shelf Province,31
+37441021,Great Australian Bight Shelf Transition,32
+37441021,Spencer Gulf Shelf Province,33
+37441021,Western Bass Strait Shelf Transition,34
+37441021,Tasmanian Shelf Province,36
+37441021,Central Western Transition,5
+37441021,Central Western Province,6
+37441021,Southwest Transition,7
+37441021,Southern Province,8
+37441021,West Tasmania Transition,9
+37012003,Timor Province,2
+37012003,Northwest Shelf Province,27
+37012003,Northwest Transition,3
+37012003,Northwest Province,4
+37012003,Central Western Transition,5
+37012002,Central Eastern Province,12
+37012002,Tasman Basin Province,13
+37012002,Lord Howe Province,14
+37012002,Central Eastern Transition,15
+37012002,Kenn Transition,16
+37012002,Kenn Province,17
+37012002,Northeast Province,18
+37012002,Northeast Transition,19
+37012002,Northwest Shelf Province,27
+37012002,Central Eastern Shelf Province,38
+37012002,Central Eastern Shelf Transition,39
+37012002,Northeast Shelf Province,40
+37012002,Southern Province,8
+37012001,Tasmania Province,10
+37012001,Southeast Transition,11
+37012001,Central Eastern Province,12
+37012001,Tasman Basin Province,13
+37012001,Timor Province,2
+37012001,Northwest Transition,3
+37012001,Northwest Province,4
+37012001,Central Western Transition,5
+37012001,Central Western Province,6
+37012001,Southwest Transition,7
+37012001,Southern Province,8
+37012001,West Tasmania Transition,9
+37465022,Lord Howe Province,14
+37465022,Northern Shelf Province,25
+37465022,Northwest Shelf Transition,26
+37465022,Northwest Shelf Province,27
+37465022,Central Western Shelf Transition,28
+37465022,Central Western Shelf Province,29
+37465022,Southwest Shelf Transition,30
+37465022,Southwest Shelf Province,31
+37465022,Central Eastern Shelf Province,38
+37465022,Central Eastern Shelf Transition,39
+37465022,Northeast Shelf Province,40
+37465022,Northeast Shelf Transition,41
+37465045,Timor Province,2
+37465045,Cocos (Keeling) Island Province,22
+37465045,Christmas Island Province,23
+37465045,Northern Shelf Province,25
+37465045,Northwest Shelf Transition,26
+37465045,Northwest Shelf Province,27
+37465045,Central Western Shelf Transition,28
+37465045,Central Western Shelf Province,29
+37465045,Northwest Transition,3
+37465045,Southwest Shelf Transition,30
+37465045,Central Eastern Shelf Province,38
+37465045,Central Eastern Shelf Transition,39
+37465045,Northeast Shelf Province,40
+37465045,Northeast Shelf Transition,41
+37465046,Timor Province,2
+37465046,Christmas Island Province,23
+37465046,Northwest Transition,3
+37465046,Central Eastern Shelf Transition,39
+37465046,Northeast Shelf Province,40
+37465046,Northeast Shelf Transition,41
+37446012,Northeast Province,18
+37446012,Northeast Transition,19
+37446012,Cape Province,20
+37310004,Northeast Shelf Province,40
+37310011,Northern Shelf Province,25
+37310011,Northwest Shelf Transition,26
+37310011,Northeast Shelf Province,40
+37310011,Northeast Shelf Transition,41
+37310012,Southeast Shelf Transition,37
+37310012,Central Eastern Shelf Province,38
+37310012,Central Eastern Shelf Transition,39
+37310018,Southeast Shelf Transition,37
+37310018,Central Eastern Shelf Province,38
+37310018,Central Eastern Shelf Transition,39
+37310005,Northern Shelf Province,25
+37310005,Northwest Shelf Transition,26
+37310005,Northeast Shelf Province,40
+37310005,Northeast Shelf Transition,41
+37310002,Northern Shelf Province,25
+37310002,Northwest Shelf Transition,26
+37310002,Northwest Shelf Province,27
+37310002,Central Western Shelf Transition,28
+37310002,Central Western Shelf Province,29
+37310002,Northeast Shelf Transition,41
+37296041,Central Eastern Shelf Province,38
+37296041,Central Eastern Shelf Transition,39
+37296041,Northeast Shelf Province,40
+37296041,Northeast Shelf Transition,41
+37374002,Northeast Transition,19
+37374002,Cape Province,20
+37374002,Cocos (Keeling) Island Province,22
+37374002,Christmas Island Province,23
+37374002,Northwest Shelf Province,27
+37374002,Central Western Shelf Transition,28
+37374002,Central Eastern Shelf Transition,39
+37374002,Northeast Shelf Province,40
+37374002,Northeast Shelf Transition,41

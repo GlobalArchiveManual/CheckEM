@@ -4751,9 +4751,10 @@ function(input, output, session) {
       maxn <- dplyr::anti_join(maxn.clean(), life.history.expanded(), by = c("family", "genus", "species", "marine_region")) %>%
         dplyr::filter(maxn > 0) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), family, genus, species, marine_region) %>%
-        dplyr::distinct() %>%
-        dplyr::rename('marine region not observed in' = marine_region) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), family, genus, species, marine_region, maxn) %>%
+        dplyr::group_by(campaignid, across(dplyr::any_of(c("opcode", "period", "stage"))), family, genus, species, marine_region) %>%
+        dplyr::summarise(total_observed = sum(maxn)) %>%
+        # dplyr::distinct() %>%
         dplyr::semi_join(., life.history.expanded(), by = c("family", "genus", "species"))
       
     } else {
@@ -4762,9 +4763,10 @@ function(input, output, session) {
         dplyr::anti_join(count.clean(), ., by = c("family", "genus", "species", "marine_region")) %>%
         dplyr::filter(maxn > 0) %>%
         dplyr::left_join(metadata.regions()) %>%
-        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), family, genus, species, marine_region) %>%
-        dplyr::distinct() %>%
-        dplyr::rename('marine region not observed in' = marine_region) %>%
+        dplyr::select(campaignid, dplyr::any_of(c("opcode", "period", "stage")), family, genus, species, marine_region, maxn) %>%
+        # dplyr::distinct() %>%
+        dplyr::group_by(campaignid, across(dplyr::any_of(c("opcode", "period", "stage"))), family, genus, species, marine_region) %>%
+        dplyr::summarise(total_observed = sum(maxn)) %>%
         dplyr::semi_join(., life.history.expanded(), by = c("family", "genus", "species"))
       
     }
@@ -4789,13 +4791,33 @@ function(input, output, session) {
     checkboxInput("maxn.observed.distinct", label = "Show unique species per campaign", value = TRUE),
     renderDataTable(
       if(input$maxn.filter.spp == TRUE & input$maxn.observed.distinct == TRUE)
-        maxn.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp")) %>% distinct(campaignid, family, genus, species)
+        
+        maxn.species.not.observed() %>% 
+        filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp")) %>% 
+        dplyr::group_by(campaignid, family, genus, species, marine_region) %>%
+        dplyr::summarise(total_observed = sum(total_observed)) %>%
+        dplyr::rename('marine region not observed in' = marine_region)#%>%
+        # distinct(campaignid, family, genus, species)
+      
       else if (input$maxn.filter.spp == TRUE & input$maxn.observed.distinct == FALSE)
-        maxn.species.not.observed() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp"))
+        
+        maxn.species.not.observed() %>% 
+        filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp")) %>%
+        dplyr::rename('marine region not observed in' = marine_region) 
+      
       else if (input$maxn.filter.spp == FALSE & input$maxn.observed.distinct == TRUE)
-        maxn.species.not.observed() %>% distinct(campaignid, family, genus, species)
+        
+        maxn.species.not.observed() %>% 
+        dplyr::group_by(campaignid, family, genus, species, marine_region) %>%
+        dplyr::summarise(total_observed = sum(total_observed)) %>%
+        dplyr::rename('marine region not observed in' = marine_region) 
+      #distinct(campaignid, family, genus, species)
+      
       else
-        maxn.species.not.observed(),  rownames = FALSE,
+        
+        maxn.species.not.observed() %>%
+        dplyr::rename('marine region not observed in' = marine_region),  rownames = FALSE,
+      
       options = list(paging = FALSE, row.names = FALSE, searching = TRUE)))))
   
   ## ►  Species not observed in region - valuebox ----

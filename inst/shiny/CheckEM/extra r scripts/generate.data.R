@@ -299,8 +299,6 @@ world.regions <- st_read(here::here("r-workflows/data/spatial/shapefiles/FAO_maj
 # world.regions$REGION <- str_replace_all(world.regions$NAME_EN, c(", " = "_", " " ="."))
 # proj4string(world.regions) <- CRS(wgs.84)
 
-
-
 unique(world.regions$NAME_EN) %>% sort()
 unique(world.regions$REGION) %>% sort()
 
