@@ -1,3 +1,8 @@
+# ─────────────────────────────────────────────────────
+# Config: Set to "laptop" or "desktop" on each machine
+# ─────────────────────────────────────────────────────
+mode <- "desktop"  # ← Change to "laptop" or "desktop"
+
 # Load packages
 library(rvest)
 library(stringr)
@@ -32,7 +37,7 @@ next_text <- function(node) {
 # -------------------------------------------------------------------
 # Main function: get IBRA and IMCRA from AFD page by ID ----
 # -------------------------------------------------------------------
-get_regions <- function(id, pause = 0.1) {
+get_regions <- function(id, pause = 0.5) {
   url <- sprintf("https://biodiversity.org.au/afd/taxa/%s", id)
   Sys.sleep(pause)
   
@@ -80,22 +85,29 @@ if (!file.exists(output_file)) {
 }
 
 # Load already completed rows
-done_ids <- read_csv(output_file, show_col_types = FALSE)$id
+done_ids <- (read_csv(output_file, show_col_types = FALSE)%>%
+  dplyr::filter(!imcra %in% NA))$id
 todo_ids <- setdiff(all_ids, done_ids)
 
 cat("✅ Already done:", length(done_ids), "\n")
 cat("🔁 Still to do:", length(todo_ids), "\n")
 
+output_file <- sprintf("annotation-schema/data/staging/australian-faunal-directory-imcra-%s.csv", mode)
+
+if (mode == "desktop") {
+  all_ids <- rev(all_ids)
+}
+
 # -------------------------------------------------------------------
 # Scrape and append to CSV row-by-row ----
 # -------------------------------------------------------------------
 
-# # THIS WORKS - but slow
+## THIS WORKS - but slow
 # handlers(global = TRUE)
 # 
 # with_progress({
 #   p <- progressor(along = todo_ids)
-#   
+# 
 #   for (id in todo_ids) {
 #     result <- tryCatch(get_regions(id),
 #                        error = function(e) tibble(id = id, ibra = NA, imcra = NA))
@@ -144,8 +156,6 @@ with_progress({
   log_message("🏁 All chunks complete!")
 })
 
-# 3:18
-
 # ---------------------------------------------------------------------------
 
 # -------------------------------------------------------------------
@@ -157,6 +167,7 @@ results <- read_csv(output_file, show_col_types = FALSE)
 pattern <- "\\s*([^,]+?)\\s*\\((\\d+)\\)"
 
 results <- results %>%
+  dplyr::filter(!imcra %in% NA) %>%
   mutate(
     imcra_match = str_match_all(imcra, pattern),
     imcra_names = map(imcra_match, ~ str_trim(.x[, 2])),

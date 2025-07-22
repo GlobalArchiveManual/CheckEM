@@ -118,7 +118,7 @@ cat("🔁 Still to do:", length(todo_ids), "\n")
 # Parallel scraping config
 # ─────────────────────────────────────
 total_cores <- future::availableCores()
-workers <- max(1, total_cores - 1)  # leave one core free
+workers <- max(1, total_cores - 20)  # leave one core free
 plan(multisession, workers = workers)
 
 cat("💻 Using", workers, "of", total_cores, "available cores\n")
