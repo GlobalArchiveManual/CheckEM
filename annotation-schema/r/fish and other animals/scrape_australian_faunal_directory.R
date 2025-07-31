@@ -94,18 +94,18 @@ cat("🔁 Still to do:", length(todo_ids), "\n")
 # -------------------------------------------------------------------
 
 # # THIS WORKS - but slow
-# handlers(global = TRUE)
-# 
-# with_progress({
-#   p <- progressor(along = todo_ids)
-#   
-#   for (id in todo_ids) {
-#     result <- tryCatch(get_regions(id),
-#                        error = function(e) tibble(id = id, ibra = NA, imcra = NA))
-#     write_csv(result, output_file, append = TRUE)
-#     p()
-#   }
-# })
+handlers(global = TRUE)
+
+with_progress({
+  p <- progressor(along = todo_ids)
+
+  for (id in todo_ids) {
+    result <- tryCatch(get_regions(id),
+                       error = function(e) tibble(id = id, ibra = NA, imcra = NA))
+    write_csv(result, output_file, append = TRUE)
+    p()
+  }
+})
 
 #######################################################
 # -------------------------------
@@ -147,7 +147,7 @@ with_progress({
   log_message("🏁 All chunks complete!")
 })
 
-# 9:48
+# 9:48 - 1:07
 
 # ---------------------------------------------------------------------------
 
