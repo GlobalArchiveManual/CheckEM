@@ -80,7 +80,10 @@ if (!file.exists(output_file)) {
 }
 
 # Load already completed rows
-done_ids <- read_csv(output_file, show_col_types = FALSE)$id
+all_done <- read_csv(output_file, show_col_types = FALSE) #%>%
+  #dplyr::filter(!is.na(imcra))
+
+done_ids <- all_done$id
 todo_ids <- setdiff(all_ids, done_ids)
 
 cat("✅ Already done:", length(done_ids), "\n")
@@ -144,7 +147,7 @@ with_progress({
   log_message("🏁 All chunks complete!")
 })
 
-# 3:18
+# 3:12
 
 # ---------------------------------------------------------------------------
 
