@@ -85,14 +85,23 @@ if (!file.exists(output_file)) {
 }
 
 # Load already completed rows
-done_ids <- (read_csv(output_file, show_col_types = FALSE)%>%
-  dplyr::filter(!imcra %in% NA))$id
+done_ids <- (read_csv(output_file, show_col_types = FALSE)) %>%
+  dplyr::filter(!id %in% c("<<<<<<< HEAD", ">>>>>>> 650df6e4397201e4b3cd5d6b4e8c0ac5029b30ef", "=======")) %>%
+  distinct() %>%
+  # dplyr::filter(!imcra %in% NA) %>%
+  pull(id)
+
+# TODO need to go back in and remove the ones that are NA - and run again coz some codes like 37327109 and 37015022 - have IMCRAs but aren't being picked up
+
+unique(done_ids$id) %>% sort()
+
+
 todo_ids <- setdiff(all_ids, done_ids)
 
 cat("✅ Already done:", length(done_ids), "\n")
 cat("🔁 Still to do:", length(todo_ids), "\n")
 
-output_file <- sprintf("annotation-schema/data/staging/australian-faunal-directory-imcra-%s.csv", mode)
+# output_file <- sprintf("annotation-schema/data/staging/australian-faunal-directory-imcra-%s.csv", mode)
 
 if (mode == "desktop") {
   all_ids <- rev(all_ids)
@@ -120,9 +129,9 @@ if (mode == "desktop") {
 # -------------------------------
 # Parallel scraping setup
 # -------------------------------
-plan(multisession, workers = 12)  # Adjust workers based on your CPU
+plan(multisession, workers = 4)  # Adjust workers based on your CPU
 
-chunk_size <- 100
+chunk_size <- 20
 chunk_ids  <- split(todo_ids, ceiling(seq_along(todo_ids) / chunk_size))
 
 # -------------------------------

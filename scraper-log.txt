@@ -4477,3 +4477,1730 @@
 2025-07-21 15:42:04 | 👷 Worker PID: 13492 - starting ID: 37388004
 2025-07-21 15:42:04 | 👷 Worker PID: 13492 - starting ID: 37388002
 2025-07-21 15:42:05 | 👷 Worker PID: 13492 - starting ID: 37388005
+2025-08-01 11:48:21 | 🔁 Starting chunk 1 with 20 IDs
+2025-08-01 11:48:22 | 👷 Worker PID: 7888 - starting ID: 37311117
+2025-08-01 11:48:22 | 👷 Worker PID: 27464 - starting ID: 37311114
+2025-08-01 11:48:22 | 👷 Worker PID: 11804 - starting ID: 37327183
+2025-08-01 11:48:22 | 👷 Worker PID: 26720 - starting ID: 37311122
+2025-08-01 11:48:46 | 👷 Worker PID: 11804 - starting ID: 37327110
+2025-08-01 11:48:49 | 👷 Worker PID: 27464 - starting ID: 37311115
+2025-08-01 11:48:49 | 👷 Worker PID: 7888 - starting ID: 37311226
+2025-08-01 11:48:49 | 👷 Worker PID: 26720 - starting ID: 37311123
+2025-08-01 11:49:12 | 👷 Worker PID: 11804 - starting ID: 37327917
+2025-08-01 11:49:15 | 👷 Worker PID: 7888 - starting ID: 37311094
+2025-08-01 11:49:15 | 👷 Worker PID: 27464 - starting ID: 37311116
+2025-08-01 11:49:15 | 👷 Worker PID: 26720 - starting ID: 37311124
+2025-08-01 11:49:34 | 👷 Worker PID: 11804 - starting ID: 37311112
+2025-08-01 11:49:38 | 👷 Worker PID: 7888 - starting ID: 37311120
+2025-08-01 11:49:38 | 👷 Worker PID: 26720 - starting ID: 37311176
+2025-08-01 11:49:38 | 👷 Worker PID: 27464 - starting ID: 37311227
+2025-08-01 11:49:46 | 🔁 Starting chunk 1 with 20 IDs
+2025-08-01 11:49:57 | 👷 Worker PID: 11804 - starting ID: 37311113
+2025-08-01 11:50:04 | 👷 Worker PID: 27464 - starting ID: 37311093
+2025-08-01 11:50:04 | 👷 Worker PID: 7888 - starting ID: 37311242
+2025-08-01 11:50:05 | 👷 Worker PID: 26720 - starting ID: 37311125
+2025-08-01 11:50:23 | 👷 Worker PID: 11804 - starting ID: 37327183
+2025-08-01 11:50:26 | 👷 Worker PID: 7888 - starting ID: 37311114
+2025-08-01 11:50:27 | 👷 Worker PID: 27464 - starting ID: 37311117
+2025-08-01 11:50:27 | 👷 Worker PID: 26720 - starting ID: 37311122
+2025-08-01 11:50:46 | 👷 Worker PID: 11804 - starting ID: 37327110
+2025-08-01 11:50:49 | 👷 Worker PID: 7888 - starting ID: 37311115
+2025-08-01 11:50:50 | 👷 Worker PID: 26720 - starting ID: 37311123
+2025-08-01 11:50:50 | 👷 Worker PID: 27464 - starting ID: 37311226
+2025-08-01 11:51:11 | 👷 Worker PID: 7888 - starting ID: 37311116
+2025-08-01 11:51:11 | 👷 Worker PID: 11804 - starting ID: 37327917
+2025-08-01 11:51:12 | 👷 Worker PID: 27464 - starting ID: 37311094
+2025-08-01 11:51:12 | 👷 Worker PID: 26720 - starting ID: 37311124
+2025-08-01 11:51:34 | 👷 Worker PID: 11804 - starting ID: 37311112
+2025-08-01 11:51:35 | 👷 Worker PID: 7888 - starting ID: 37311227
+2025-08-01 11:51:35 | 👷 Worker PID: 27464 - starting ID: 37311120
+2025-08-01 11:51:35 | 👷 Worker PID: 26720 - starting ID: 37311176
+2025-08-01 11:51:57 | 👷 Worker PID: 11804 - starting ID: 37311113
+2025-08-01 11:51:58 | 👷 Worker PID: 7888 - starting ID: 37311093
+2025-08-01 11:51:58 | 👷 Worker PID: 27464 - starting ID: 37311242
+2025-08-01 11:51:58 | 👷 Worker PID: 26720 - starting ID: 37311125
+2025-08-01 11:52:21 | ✅ Finished chunk 1 - Writing to CSV
+2025-08-01 11:52:21 | 💾 CSV write complete for chunk 1
+2025-08-01 11:52:21 | 🔁 Starting chunk 2 with 20 IDs
+2025-08-01 11:52:21 | 👷 Worker PID: 11804 - starting ID: 37311942
+2025-08-01 11:52:21 | 👷 Worker PID: 27464 - starting ID: 37428751
+2025-08-01 11:52:22 | 👷 Worker PID: 7888 - starting ID: 37465071
+2025-08-01 11:52:22 | 👷 Worker PID: 26720 - starting ID: 37427006
+2025-08-01 11:52:43 | 👷 Worker PID: 11804 - starting ID: 37311126
+2025-08-01 11:52:43 | 👷 Worker PID: 27464 - starting ID: 37428752
+2025-08-01 11:52:45 | 👷 Worker PID: 7888 - starting ID: 37465027
+2025-08-01 11:52:45 | 👷 Worker PID: 26720 - starting ID: 37427021
+2025-08-01 11:53:06 | 👷 Worker PID: 27464 - starting ID: 37428750
+2025-08-01 11:53:06 | 👷 Worker PID: 11804 - starting ID: 37403904
+2025-08-01 11:53:08 | 👷 Worker PID: 7888 - starting ID: 37465929
+2025-08-01 11:53:08 | 👷 Worker PID: 26720 - starting ID: 37427049
+2025-08-01 11:53:30 | 👷 Worker PID: 27464 - starting ID: 37060101
+2025-08-01 11:53:30 | 👷 Worker PID: 11804 - starting ID: 37403903
+2025-08-01 11:53:31 | 👷 Worker PID: 7888 - starting ID: 37427039
+2025-08-01 11:53:32 | 👷 Worker PID: 26720 - starting ID: 37427913
+2025-08-01 11:53:59 | 👷 Worker PID: 27464 - starting ID: 37060910
+2025-08-01 11:54:00 | 👷 Worker PID: 11804 - starting ID: 37403003
+2025-08-01 11:54:02 | 👷 Worker PID: 26720 - starting ID: 37337081
+2025-08-01 11:54:02 | 👷 Worker PID: 7888 - starting ID: 37427037
+2025-08-01 11:54:27 | ✅ Finished chunk 2 - Writing to CSV
+2025-08-01 11:54:27 | 💾 CSV write complete for chunk 2
+2025-08-01 11:54:28 | 🔁 Starting chunk 3 with 20 IDs
+2025-08-01 11:54:28 | 👷 Worker PID: 11804 - starting ID: 37337062
+2025-08-01 11:54:28 | 👷 Worker PID: 27464 - starting ID: 37009906
+2025-08-01 11:54:28 | 👷 Worker PID: 26720 - starting ID: 37313005
+2025-08-01 11:54:50 | 👷 Worker PID: 27464 - starting ID: 37384142
+2025-08-01 11:54:50 | 👷 Worker PID: 7888 - starting ID: 37313000
+2025-08-01 11:54:50 | 👷 Worker PID: 26720 - starting ID: 37313006
+2025-08-01 11:54:50 | 👷 Worker PID: 11804 - starting ID: 37337924
+2025-08-01 11:55:16 | 👷 Worker PID: 7888 - starting ID: 37313034
+2025-08-01 11:55:16 | 👷 Worker PID: 11804 - starting ID: 37337063
+2025-08-01 11:55:18 | 👷 Worker PID: 27464 - starting ID: 37384143
+2025-08-01 11:55:19 | 👷 Worker PID: 26720 - starting ID: 37313030
+2025-08-01 11:55:37 | 👷 Worker PID: 7888 - starting ID: 37313004
+2025-08-01 11:55:38 | 👷 Worker PID: 11804 - starting ID: 37009003
+2025-08-01 11:55:41 | 👷 Worker PID: 27464 - starting ID: 37384184
+2025-08-01 11:55:41 | 👷 Worker PID: 26720 - starting ID: 37313007
+2025-08-01 11:56:04 | 👷 Worker PID: 7888 - starting ID: 37313016
+2025-08-01 11:56:06 | 👷 Worker PID: 11804 - starting ID: 37009903
+2025-08-01 11:56:07 | 👷 Worker PID: 27464 - starting ID: 37384144
+2025-08-01 11:56:07 | 👷 Worker PID: 26720 - starting ID: 37313008
+2025-08-01 11:56:39 | ✅ Finished chunk 3 - Writing to CSV
+2025-08-01 11:56:39 | 💾 CSV write complete for chunk 3
+2025-08-01 11:56:39 | 🔁 Starting chunk 4 with 20 IDs
+2025-08-01 11:56:39 | 👷 Worker PID: 11804 - starting ID: 37313001
+2025-08-01 11:56:39 | 👷 Worker PID: 27464 - starting ID: 37313018
+2025-08-01 11:56:39 | 👷 Worker PID: 7888 - starting ID: 37384145
+2025-08-01 11:56:39 | 👷 Worker PID: 26720 - starting ID: 37428240
+2025-08-01 11:57:07 | 👷 Worker PID: 11804 - starting ID: 37313027
+2025-08-01 11:57:07 | 👷 Worker PID: 26720 - starting ID: 37428479
+2025-08-01 11:57:07 | 👷 Worker PID: 27464 - starting ID: 37384207
+
+2025-08-01 11:57:29 | 👷 Worker PID: 26720 - starting ID: 37428356
+2025-08-01 11:57:29 | 👷 Worker PID: 11804 - starting ID: 37313911
+2025-08-01 11:57:30 | 👷 Worker PID: 27464 - starting ID: 37384206
+2025-08-01 11:57:31 | 👷 Worker PID: 7888 - starting ID: 37266906
+2025-08-01 11:57:51 | 👷 Worker PID: 26720 - starting ID: 37428459
+2025-08-01 11:57:52 | 👷 Worker PID: 11804 - starting ID: 37313028
+2025-08-01 11:57:53 | 👷 Worker PID: 27464 - starting ID: 37384197
+2025-08-01 11:57:53 | 👷 Worker PID: 7888 - starting ID: 37384146
+2025-08-01 11:58:15 | 👷 Worker PID: 26720 - starting ID: 37428482
+2025-08-01 11:58:16 | 👷 Worker PID: 11804 - starting ID: 37313035
+2025-08-01 11:58:16 | 👷 Worker PID: 7888 - starting ID: 37384938
+2025-08-01 11:58:16 | 👷 Worker PID: 27464 - starting ID: 37384937
+2025-08-01 11:58:39 | ✅ Finished chunk 4 - Writing to CSV
+2025-08-01 11:58:39 | 💾 CSV write complete for chunk 4
+2025-08-01 11:58:39 | 🔁 Starting chunk 5 with 20 IDs
+2025-08-01 11:58:39 | 👷 Worker PID: 11804 - starting ID: 37428480
+2025-08-01 11:58:39 | 👷 Worker PID: 27464 - starting ID: 37314003
+2025-08-01 11:58:39 | 👷 Worker PID: 7888 - starting ID: 37445907
+2025-08-01 11:58:39 | 👷 Worker PID: 26720 - starting ID: 37384939
+2025-08-01 11:59:01 | 👷 Worker PID: 26720 - starting ID: 37384149
+2025-08-01 11:59:02 | 👷 Worker PID: 7888 - starting ID: 37384229
+2025-08-01 11:59:02 | 👷 Worker PID: 11804 - starting ID: 37428481
+2025-08-01 11:59:03 | 👷 Worker PID: 27464 - starting ID: 37314002
+2025-08-01 11:59:25 | 👷 Worker PID: 11804 - starting ID: 3742800
+
+2025-08-01 11:59:25 | 👷 Worker PID: 26720 - starting ID: 37384150
+2025-08-01 11:59:26 | 👷 Worker PID: 27464 - starting ID: 37314902
+2025-08-01 11:59:48 | 👷 Worker PID: 27464 - starting ID: 37314000
+2025-08-01 11:59:48 | 👷 Worker PID: 7888 - starting ID: 37384209
+2025-08-01 11:59:48 | 👷 Worker PID: 11804 - starting ID: 37428483
+2025-08-01 11:59:48 | 👷 Worker PID: 26720 - starting ID: 37384151
+2025-08-01 12:00:12 | 👷 Worker PID: 27464 - starting ID: 37445015
+2025-08-01 12:00:13 | 👷 Worker PID: 11804 - starting ID: 37428975
+2025-08-01 12:00:14 | 👷 Worker PID: 26720 - starting ID: 37384023
+2025-08-01 12:00:15 | 👷 Worker PID: 7888 - starting ID: 37384147
+2025-08-01 12:00:39 | ✅ Finished chunk 5 - Writing to CSV
+2025-08-01 12:00:39 | 💾 CSV write complete for chunk 5
+2025-08-01 12:00:39 | 🔁 Starting chunk 6 with 20 IDs
+2025-08-01 12:00:39 | 👷 Worker PID: 11804 - starting ID: 37384940
+2025-08-01 12:00:39 | 👷 Worker PID: 27464 - starting ID: 37245001
+2025-08-01 12:00:39 | 👷 Worker PID: 7888 - starting ID: 372450202
+2025-08-01 12:01:06 | 👷 Worker PID: 26720 - starting ID: 37228950
+2025-08-01 12:01:06 | 👷 Worker PID: 11804 - starting ID: 37465029
+2025-08-01 12:01:07 | 👷 Worker PID: 27464 - starting ID: 37245030
+2025-08-01 12:01:07 | 👷 Worker PID: 7888 - starting ID: 37245904
+2025-08-01 12:01:27 | 👷 Worker PID: 26720 - starting ID: 37228112
+2025-08-01 12:01:28 | 👷 Worker PID: 11804 - starting ID: 37465020
+2025-08-01 12:01:29 | 👷 Worker PID: 27464 - starting ID: 37245018
+2025-08-01 12:01:29 | 👷 Worker PID: 7888 - starting ID: 37245021
+2025-08-01 12:01:54 | 👷 Worker PID: 7888 - starting ID: 37245907
+2025-08-01 12:01:55 | 👷 Worker PID: 26720 - starting ID: 37290023
+2025-08-01 12:01:55 | 👷 Worker PID: 11804 - starting ID: 37465930
+2025-08-01 12:01:56 | 👷 Worker PID: 27464 - starting ID: 37245019
+2025-08-01 12:02:17 | 👷 Worker PID: 7888 - starting ID: 37232091
+2025-08-01 12:02:18 | 👷 Worker PID: 11804 - starting ID: 37245017
+2025-08-01 12:02:19 | 👷 Worker PID: 26720 - starting ID: 37290913
+2025-08-01 12:02:20 | 👷 Worker PID: 27464 - starting ID: 37245031
+2025-08-01 12:02:42 | ✅ Finished chunk 6 - Writing to CSV
+2025-08-01 12:02:42 | 💾 CSV write complete for chunk 6
+2025-08-01 12:02:42 | 🔁 Starting chunk 7 with 20 IDs
+2025-08-01 12:02:42 | 👷 Worker PID: 11804 - starting ID: 37290015
+2025-08-01 12:02:42 | 👷 Worker PID: 7888 - starting ID: 37313025
+2025-08-01 12:02:42 | 👷 Worker PID: 27464 - starting ID: 37224916
+2025-08-01 12:02:42 | 👷 Worker PID: 26720 - starting ID: 37460004
+2025-08-01 12:03:05 | 👷 Worker PID: 27464 - starting ID: 37313020
+2025-08-01 12:03:05 | 👷 Worker PID: 7888 - starting ID: 37313032
+2025-08-01 12:03:05 | 👷 Worker PID: 11804 - starting ID: 37367908
+2025-08-01 12:03:05 | 👷 Worker PID: 26720 - starting ID: 37460008
+2025-08-01 12:03:27 | 👷 Worker PID: 7888 - starting ID: 37460038
+2025-08-01 12:03:27 | 👷 Worker PID: 27464 - starting ID: 37313031
+2025-08-01 12:03:28 | 👷 Worker PID: 11804 - starting ID: 37224003
+2025-08-01 12:03:28 | 👷 Worker PID: 26720 - starting ID: 37460002
+2025-08-01 12:03:51 | 👷 Worker PID: 27464 - starting ID: 37313024
+2025-08-01 12:03:51 | 👷 Worker PID: 7888 - starting ID: 37460009
+2025-08-01 12:03:51 | 👷 Worker PID: 11804 - starting ID: 37224011
+2025-08-01 12:03:52 | 👷 Worker PID: 26720 - starting ID: 37460035
+2025-08-01 12:04:14 | 👷 Worker PID: 7888 - starting ID: 37460015
+2025-08-01 12:04:14 | 👷 Worker PID: 27464 - starting ID: 37313912
+2025-08-01 12:04:15 | 👷 Worker PID: 26720 - starting ID: 37460060
+2025-08-01 12:04:15 | 👷 Worker PID: 11804 - starting ID: 37224006
+2025-08-01 12:04:37 | ✅ Finished chunk 7 - Writing to CSV
+2025-08-01 12:04:37 | 💾 CSV write complete for chunk 7
+2025-08-01 12:04:37 | 🔁 Starting chunk 8 with 20 IDs
+2025-08-01 12:04:37 | 👷 Worker PID: 11804 - starting ID: 37460025
+2025-08-01 12:04:37 | 👷 Worker PID: 27464 - starting ID: 37402006
+2025-08-01 12:04:37 | 👷 Worker PID: 26720 - starting ID: 37117007
+2025-08-01 12:05:01 | 👷 Worker PID: 26720 - starting ID: 37428242
+2025-08-01 12:05:02 | 👷 Worker PID: 27464 - starting ID: 37402010
+2025-08-01 12:05:03 | 👷 Worker PID: 7888 - starting ID: 37016000
+2025-08-01 12:05:03 | 👷 Worker PID: 11804 - starting ID: 37460011
+2025-08-01 12:05:24 | 👷 Worker PID: 27464 - starting ID: 37402009
+2025-08-01 12:05:24 | 👷 Worker PID: 7888 - starting ID: 37016001
+2025-08-01 12:05:24 | 👷 Worker PID: 11804 - starting ID: 37460919
+2025-08-01 12:05:24 | 👷 Worker PID: 26720 - starting ID: 37428976
+2025-08-01 12:05:47 | 👷 Worker PID: 11804 - starting ID: 37460031
+2025-08-01 12:05:47 | 👷 Worker PID: 26720 - starting ID: 37305001
+2025-08-01 12:05:47 | 👷 Worker PID: 7888 - starting ID: 37016902
+2025-08-01 12:05:47 | 👷 Worker PID: 27464 - starting ID: 37402904
+2025-08-01 12:06:10 | 👷 Worker PID: 7888 - starting ID: 37117906
+2025-08-01 12:06:10 | 👷 Worker PID: 11804 - starting ID: 37460065
+2025-08-01 12:06:10 | 👷 Worker PID: 27464 - starting ID: 37464905
+2025-08-01 12:06:11 | 👷 Worker PID: 26720 - starting ID: 37305002
+2025-08-01 12:06:34 | ✅ Finished chunk 8 - Writing to CSV
+2025-08-01 12:06:34 | 💾 CSV write complete for chunk 8
+2025-08-01 12:06:34 | 🔁 Starting chunk 9 with 20 IDs
+2025-08-01 12:06:34 | 👷 Worker PID: 11804 - starting ID: 37305902
+2025-08-01 12:06:34 | 👷 Worker PID: 27464 - starting ID: 37384153
+2025-08-01 12:06:34 | 👷 Worker PID: 7888 - starting ID: 374350167
+
+2025-08-01 12:06:56 | 👷 Worker PID: 11804 - starting ID: 37305000
+2025-08-01 12:06:57 | 👷 Worker PID: 26720 - starting ID: 37435021
+2025-08-01 12:06:57 | 👷 Worker PID: 27464 - starting ID: 37384204
+2025-08-01 12:06:57 | 👷 Worker PID: 7888 - starting ID: 37435017
+2025-08-01 12:07:17 | 👷 Worker PID: 11804 - starting ID: 37342013
+2025-08-01 12:07:20 | 👷 Worker PID: 26720 - starting ID: 37435022
+2025-08-01 12:07:20 | 👷 Worker PID: 27464 - starting ID: 37384941
+2025-08-01 12:07:21 | 👷 Worker PID: 7888 - starting ID: 37435018
+2025-08-01 12:07:42 | 👷 Worker PID: 11804 - starting ID: 37342903
+2025-08-01 12:07:43 | 👷 Worker PID: 27464 - starting ID: 37384033
+2025-08-01 12:07:44 | 👷 Worker PID: 26720 - starting ID: 37346009
+2025-08-01 12:07:45 | 👷 Worker PID: 7888 - starting ID: 37435019
+2025-08-01 12:08:05 | 👷 Worker PID: 11804 - starting ID: 37342006
+2025-08-01 12:08:07 | 👷 Worker PID: 27464 - starting ID: 37435015
+2025-08-01 12:08:07 | 👷 Worker PID: 26720 - starting ID: 37346050
+2025-08-01 12:08:08 | 👷 Worker PID: 7888 - starting ID: 37435020
+2025-08-01 12:08:29 | ✅ Finished chunk 9 - Writing to CSV
+2025-08-01 12:08:30 | 💾 CSV write complete for chunk 9
+2025-08-01 12:08:30 | 🔁 Starting chunk 10 with 20 IDs
+2025-08-01 12:08:30 | 👷 Worker PID: 11804 - starting ID: 37346075
+2025-08-01 12:08:30 | 👷 Worker PID: 27464 - starting ID: 37346051
+2025-08-01 12:08:30 | 👷 Worker PID: 7888 - starting ID: 37287948
+2025-08-01 12:08:30 | 👷 Worker PID: 26720 - starting ID: 37287104
+2025-08-01 12:08:52 | 👷 Worker PID: 7888 - starting ID: 37287063
+2025-08-01 12:08:52 | 👷 Worker PID: 11804 - starting ID: 37346068
+2025-08-01 12:08:52 | 👷 Worker PID: 27464 - starting ID: 37435028
+2025-08-01 12:08:52 | 👷 Worker PID: 26720 - starting ID: 37287027
+2025-08-01 12:09:15 | 👷 Worker PID: 11804 - starting ID: 37346062
+2025-08-01 12:09:15 | 👷 Worker PID: 27464 - starting ID: 37435908
+2025-08-01 12:09:15 | 👷 Worker PID: 7888 - starting ID: 37287134
+2025-08-01 12:09:15 | 👷 Worker PID: 26720 - starting ID: 37287097
+2025-08-01 12:09:38 | 👷 Worker PID: 11804 - starting ID: 37346926
+2025-08-01 12:09:38 | 👷 Worker PID: 27464 - starting ID: 37353750
+2025-08-01 12:09:39 | 👷 Worker PID: 26720 - starting ID: 37287012
+2025-08-01 12:09:39 | 👷 Worker PID: 7888 - starting ID: 37287935
+2025-08-01 12:10:03 | 👷 Worker PID: 27464 - starting ID: 37353909
+2025-08-01 12:10:03 | 👷 Worker PID: 11804 - starting ID: 37346063
+2025-08-01 12:10:04 | 👷 Worker PID: 7888 - starting ID: 37287064
+2025-08-01 12:10:04 | 👷 Worker PID: 26720 - starting ID: 37287936
+2025-08-01 12:10:25 | ✅ Finished chunk 10 - Writing to CSV
+2025-08-01 12:10:25 | 💾 CSV write complete for chunk 10
+2025-08-01 12:10:25 | 🔁 Starting chunk 11 with 20 IDs
+2025-08-01 12:10:26 | 👷 Worker PID: 11804 - starting ID: 37287040
+2025-08-01 12:10:26 | 👷 Worker PID: 27464 - starting ID: 37427034
+2025-08-01 12:10:26 | 👷 Worker PID: 26720 - starting ID: 37288052
+25-08-01 12:10:26 | 👷 Worker PID: 7888 - starting ID: 37288046
+2025-08-01 12:10:49 | 👷 Worker PID: 7888 - starting ID: 37288054
+2025-08-01 12:10:49 | 👷 Worker PID: 26720 - starting ID: 37288057
+2025-08-01 12:10:49 | 👷 Worker PID: 27464 - starting ID: 37427914
+2025-08-01 12:10:49 | 👷 Worker PID: 11804 - starting ID: 37035905
+2025-08-01 12:11:11 | 👷 Worker PID: 11804 - starting ID: 37035010
+2025-08-01 12:11:11 | 👷 Worker PID: 27464 - starting ID: 37342007
+2025-08-01 12:11:12 | 👷 Worker PID: 7888 - starting ID: 37288009
+2025-08-01 12:11:12 | 👷 Worker PID: 26720 - starting ID: 37288006
+2025-08-01 12:11:35 | 👷 Worker PID: 27464 - starting ID: 37342904
+2025-08-01 12:11:35 | 👷 Worker PID: 7888 - starting ID: 37288066
+2025-08-01 12:11:35 | 👷 Worker PID: 26720 - starting ID: 37288058
+2025-08-01 12:11:35 | 👷 Worker PID: 11804 - starting ID: 37393907
+2025-08-01 12:11:56 | 👷 Worker PID: 27464 - starting ID: 37288005
+2025-08-01 12:11:58 | 👷 Worker PID: 11804 - starting ID: 37427033
+2025-08-01 12:11:58 | 👷 Worker PID: 7888 - starting ID: 37288055
+2025-08-01 12:11:58 | 👷 Worker PID: 26720 - starting ID: 37288060
+2025-08-01 12:12:21 | ✅ Finished chunk 11 - Writing to CSV
+2025-08-01 12:12:21 | 💾 CSV write complete for chunk 11
+2025-08-01 12:12:21 | 🔁 Starting chunk 12 with 20 IDs
+2025-08-01 12:12:21 | 👷 Worker PID: 11804 - starting ID: 37288056
+2025-08-01 12:12:21 | 👷 Worker PID: 27464 - starting ID: 37165903
+2025-08-01 12:12:21 | 👷 Worker PID: 7888 - starting ID: 37229011
+2025-08-01 12:12:21 | 👷 Worker PID: 26720 - starting ID: 37311119
+2025-08-01 12:12:44 | 👷 Worker PID: 11804 - starting ID: 37288911
+2025-08-01 12:12:44 | 👷 Worker PID: 27464 - starting ID: 37228951
+2025-08-01 12:12:44 | 👷 Worker PID: 7888 - starting ID: 37229906
+2025-08-01 12:12:45 | 👷 Worker PID: 26720 - starting ID: 37311228
+2025-08-01 12:13:06 | 👷 Worker PID: 11804 - starting ID: 37282021
+2025-08-01 12:13:06 | 👷 Worker PID: 27464 - starting ID: 37365082
+2025-08-01 12:13:07 | 👷 Worker PID: 7888 - starting ID: 37229012
+2025-08-01 12:13:08 | 👷 Worker PID: 26720 - starting ID: 37311972
+2025-08-01 12:13:30 | 👷 Worker PID: 26720 - starting ID: 37327111
+2025-08-01 12:13:30 | 👷 Worker PID: 11804 - starting ID: 37282933
+2025-08-01 12:13:30 | 👷 Worker PID: 7888 - starting ID: 37311196
+2025-08-01 12:13:31 | 👷 Worker PID: 27464 - starting ID: 37365917
+2025-08-01 12:13:53 | 👷 Worker PID: 26720 - starting ID: 37327918
+2025-08-01 12:13:53 | 👷 Worker PID: 11804 - starting ID: 37165004
+2025-08-01 12:13:53 | 👷 Worker PID: 27464 - starting ID: 37229016
+2025-08-01 12:13:54 | 👷 Worker PID: 7888 - starting ID: 37311203
+2025-08-01 12:14:17 | ✅ Finished chunk 12 - Writing to CSV
+2025-08-01 12:14:17 | 💾 CSV write complete for chunk 12
+2025-08-01 12:14:17 | 🔁 Starting chunk 13 with 20 IDs
+2025-08-01 12:14:18 | 👷 Worker PID: 11804 - starting ID: 37311943
+2025-08-01 12:14:18 | 👷 Worker PID: 27464 - starting ID: 37406759
+2025-08-01 12:14:18 | 👷 Worker PID: 7888 - starting ID: 37031040
+2025-08-01 12:14:18 | 👷 Worker PID: 26720 - starting ID: 37470004
+2025-08-01 12:14:40 | 👷 Worker PID: 11804 - starting ID: 37311194
+2025-08-01 12:14:40 | 👷 Worker PID: 27464 - starting ID: 37406908
+2025-08-01 12:14:40 | 👷 Worker PID: 7888 - starting ID: 37031911
+2025-08-01 12:14:40 | 👷 Worker PID: 26720 - starting ID: 37470903
+2025-08-01 12:15:04 | 👷 Worker PID: 11804 - starting ID: 37335000
+2025-08-01 12:15:04 | 👷 Worker PID: 27464 - starting ID: 37311163
+2025-08-01 12:15:05 | 👷 Worker PID: 26720 - starting ID: 37441750
+2025-08-01 12:15:05 | 👷 Worker PID: 7888 - starting ID: 37031914
+2025-08-01 12:15:26 | 👷 Worker PID: 11804 - starting ID: 37335001
+2025-08-01 12:15:27 | 👷 Worker PID: 27464 - starting ID: 37311944
+2025-08-01 12:15:27 | 👷 Worker PID: 7888 - starting ID: 37346073
+2025-08-01 12:15:27 | 👷 Worker PID: 26720 - starting ID: 37441012
+2025-08-01 12:15:50 | 👷 Worker PID: 27464 - starting ID: 37031900
+2025-08-01 12:15:50 | 👷 Worker PID: 11804 - starting ID: 37335901
+2025-08-01 12:15:51 | 👷 Worker PID: 7888 - starting ID: 37346927
+2025-08-01 12:15:51 | 👷 Worker PID: 26720 - starting ID: 37441922
+2025-08-01 12:16:14 | ✅ Finished chunk 13 - Writing to CSV
+2025-08-01 12:16:14 | 💾 CSV write complete for chunk 13
+2025-08-01 12:16:14 | 🔁 Starting chunk 14 with 20 IDs
+2025-08-01 12:16:14 | 👷 Worker PID: 11804 - starting ID: 37296011
+2025-08-01 12:16:14 | 👷 Worker PID: 27464 - starting ID: 37428244
+2025-08-01 12:16:14 | 👷 Worker PID: 7888 - starting ID: 372720009
+
+2025-08-01 12:16:37 | 👷 Worker PID: 7888 - starting ID: 37272002
+2025-08-01 12:16:38 | 👷 Worker PID: 26720 - starting ID: 37461793
+2025-08-01 12:16:38 | 👷 Worker PID: 11804 - starting ID: 37296060
+2025-08-01 12:16:40 | 👷 Worker PID: 27464 - starting ID: 37428245
+2025-08-01 12:17:06 | 👷 Worker PID: 26720 - starting ID: 37461911
+2025-08-01 12:17:07 | 👷 Worker PID: 11804 - starting ID: 37296914
+2025-08-01 12:17:07 | 👷 Worker PID: 27464 - starting ID: 37428246
+2025-08-01 12:17:07 | 👷 Worker PID: 7888 - starting ID: 37272004
+2025-08-01 12:17:30 | 👷 Worker PID: 26720 - starting ID: 37336007
+2025-08-01 12:17:31 | 👷 Worker PID: 11804 - starting ID: 37296052
+2025-08-01 12:17:31 | 👷 Worker PID: 27464 - starting ID: 37428402
+2025-08-01 12:17:32 | 👷 Worker PID: 7888 - starting ID: 37272902
+2025-08-01 12:17:58 | 👷 Worker PID: 26720 - starting ID: 37336004
+2025-08-01 12:17:58 | 👷 Worker PID: 27464 - starting ID: 37428977
+2025-08-01 12:18:02 | 👷 Worker PID: 7888 - starting ID: 37467050
+2025-08-01 12:18:02 | 👷 Worker PID: 11804 - starting ID: 37428243
+2025-08-01 12:18:24 | ✅ Finished chunk 14 - Writing to CSV
+2025-08-01 12:18:24 | 💾 CSV write complete for chunk 14
+2025-08-01 12:18:24 | 🔁 Starting chunk 15 with 20 IDs
+2025-08-01 12:18:24 | 👷 Worker PID: 11804 - starting ID: 37336005
+2025-08-01 12:18:24 | 👷 Worker PID: 27464 - starting ID: 37462910
+2025-08-01 12:18:24 | 👷 Worker PID: 26720 - starting ID: 37427051
+2025-08-01 12:18:24 | 👷 Worker PID: 7888 - starting ID: 37427046
+2025-08-01 12:18:47 | 👷 Worker PID: 27464 - starting ID: 37427016
+2025-08-01 12:18:47 | 👷 Worker PID: 11804 - starting ID: 37336006
+2025-08-01 12:18:47 | 👷 Worker PID: 7888 - starting ID: 37427048
+2025-08-01 12:18:47 | 👷 Worker PID: 26720 - starting ID: 37427022
+2025-08-01 12:19:09 | 👷 Worker PID: 27464 - starting ID: 37427011
+2025-08-01 12:19:10 | 👷 Worker PID: 11804 - starting ID: 37336002
+2025-08-01 12:19:10 | 👷 Worker PID: 7888 - starting ID: 37427012
+2025-08-01 12:19:10 | 👷 Worker PID: 26720 - starting ID: 37427024
+2025-08-01 12:19:56 | 👷 Worker PID: 27464 - starting ID: 37427015
+2025-08-01 12:20:02 | 👷 Worker PID: 11804 - starting ID: 37336903
+2025-08-01 12:20:03 | 👷 Worker PID: 7888 - starting ID: 37427023
+2025-08-01 12:20:04 | 👷 Worker PID: 26720 - starting ID: 37427915
+2025-08-01 12:21:34 | 👷 Worker PID: 11804 - starting ID: 37462032
+2025-08-01 12:21:35 | 👷 Worker PID: 27464 - starting ID: 37427040
+2025-08-01 12:21:36 | 👷 Worker PID: 7888 - starting ID: 37427019
+2025-08-01 12:21:37 | 👷 Worker PID: 26720 - starting ID: 37427010
+2025-08-01 12:23:13 | ✅ Finished chunk 15 - Writing to CSV
+2025-08-01 12:23:14 | 💾 CSV write complete for chunk 15
+2025-08-01 12:23:14 | 🔁 Starting chunk 16 with 20 IDs
+2025-08-01 12:23:14 | 👷 Worker PID: 11804 - starting ID: 37101001
+2025-08-01 12:23:14 | 👷 Worker PID: 27464 - starting ID: 37439007
+2025-08-01 12:23:14 | 👷 Worker PID: 7888 - starting ID: 37439911
+2025-08-01 12:23:14 | 👷 Worker PID: 26720 - starting ID: 37408112
+2025-08-01 12:24:55 | 👷 Worker PID: 7888 - starting ID: 37327022
+2025-08-01 12:24:56 | 👷 Worker PID: 26720 - starting ID: 37408922
+2025-08-01 12:24:59 | 👷 Worker PID: 27464 - starting ID: 37439006
+2025-08-01 12:25:01 | 👷 Worker PID: 11804 - starting ID: 37101901
+2025-08-01 12:26:34 | 👷 Worker PID: 26720 - starting ID: 37353013
+2025-08-01 12:26:37 | 👷 Worker PID: 11804 - starting ID: 37101002
+2025-08-01 12:26:39 | 👷 Worker PID: 7888 - starting ID: 37327190
+2025-08-01 12:26:40 | 👷 Worker PID: 27464 - starting ID: 37439002
+2025-08-01 12:28:11 | 👷 Worker PID: 26720 - starting ID: 37353907
+2025-08-01 12:28:11 | 👷 Worker PID: 7888 - starting ID: 37327919
+2025-08-01 12:28:11 | 👷 Worker PID: 11804 - starting ID: 37101000
+2025-08-01 12:28:11 | 👷 Worker PID: 27464 - starting ID: 37439910
+2025-08-01 12:29:42 | 👷 Worker PID: 7888 - starting ID: 37408077
+2025-08-01 12:29:44 | 👷 Worker PID: 27464 - starting ID: 37439014
+2025-08-01 12:29:45 | 👷 Worker PID: 26720 - starting ID: 37108021
+2025-08-01 12:29:46 | 👷 Worker PID: 11804 - starting ID: 37439009
+2025-08-01 12:31:19 | ✅ Finished chunk 16 - Writing to CSV
+2025-08-01 12:31:20 | 💾 CSV write complete for chunk 16
+2025-08-01 12:31:20 | 🔁 Starting chunk 17 with 20 IDs
+2025-08-01 12:31:20 | 👷 Worker PID: 11804 - starting ID: 37108906
+2025-08-01 12:31:20 | 👷 Worker PID: 27464 - starting ID: 37026002
+2025-08-01 12:31:20 | 👷 Worker PID: 7888 - starting ID: 37465092
+2025-08-01 12:31:20 | 👷 Worker PID: 26720 - starting ID: 37465074
+2025-08-01 12:32:53 | 👷 Worker PID: 7888 - starting ID: 37465028
+2025-08-01 12:32:53 | 👷 Worker PID: 11804 - starting ID: 37245022
+2025-08-01 12:32:56 | 👷 Worker PID: 27464 - starting ID: 37026901
+2025-08-01 12:32:57 | 👷 Worker PID: 26720 - starting ID: 37026000
+2025-08-01 12:34:30 | 👷 Worker PID: 27464 - starting ID: 37014901
+2025-08-01 12:34:30 | 👷 Worker PID: 11804 - starting ID: 37245905
+2025-08-01 12:34:30 | 👷 Worker PID: 7888 - starting ID: 37465072
+2025-08-01 12:34:31 | 👷 Worker PID: 26720 - starting ID: 37027907
+2025-08-01 12:36:04 | 👷 Worker PID: 26720 - starting ID: 37027003
+2025-08-01 12:36:04 | 👷 Worker PID: 11804 - starting ID: 37132002
+2025-08-01 12:36:04 | 👷 Worker PID: 27464 - starting ID: 37014001
+2025-08-01 12:36:06 | 👷 Worker PID: 7888 - starting ID: 37465073
+2025-08-01 12:37:39 | 👷 Worker PID: 11804 - starting ID: 37132903
+2025-08-01 12:37:39 | 👷 Worker PID: 26720 - starting ID: 37027905
+2025-08-01 12:37:39 | 👷 Worker PID: 7888 - starting ID: 37465931
+25-08-01 12:37:39 | 👷 Worker PID: 27464 - starting ID: 37014000
+2025-08-01 12:39:13 | ✅ Finished chunk 17 - Writing to CSV
+2025-08-01 12:39:14 | 💾 CSV write complete for chunk 17
+2025-08-01 12:39:14 | 🔁 Starting chunk 18 with 20 IDs
+2025-08-01 12:39:14 | 👷 Worker PID: 11804 - starting ID: 37044004
+2025-08-01 12:39:14 | 👷 Worker PID: 27464 - starting ID: 37381908
+2025-08-01 12:39:14 | 👷 Worker PID: 7888 - starting ID: 37287128
+2025-08-01 12:39:14 | 👷 Worker PID: 26720 - starting ID: 37364000
+2025-08-01 12:40:47 | 👷 Worker PID: 27464 - starting ID: 37060058
+2025-08-01 12:40:47 | 👷 Worker PID: 26720 - starting ID: 37040002
+2025-08-01 12:40:47 | 👷 Worker PID: 11804 - starting ID: 37044002
+2025-08-01 12:40:48 | 👷 Worker PID: 7888 - starting ID: 37287129
+2025-08-01 12:42:23 | 👷 Worker PID: 11804 - starting ID: 37044902
+2025-08-01 12:42:23 | 👷 Worker PID: 27464 - starting ID: 37060906
+2025-08-01 12:42:23 | 👷 Worker PID: 7888 - starting ID: 37287937
+2025-08-01 12:42:23 | 👷 Worker PID: 26720 - starting ID: 37040001
+2025-08-01 12:44:11 | 👷 Worker PID: 11804 - starting ID: 37044000
+2025-08-01 12:44:11 | 👷 Worker PID: 27464 - starting ID: 37287065
+2025-08-01 12:44:11 | 👷 Worker PID: 7888 - starting ID: 37364001
+2025-08-01 12:44:14 | 👷 Worker PID: 26720 - starting ID: 37040901
+2025-08-01 12:46:12 | 👷 Worker PID: 11804 - starting ID: 37381016
+2025-08-01 12:46:12 | 👷 Worker PID: 26720 - starting ID: 37040000
+2025-08-01 12:46:12 | 👷 Worker PID: 7888 - starting ID: 37364901
+2025-08-01 12:46:16 | 👷 Worker PID: 27464 - starting ID: 37287155
+2025-08-01 12:47:56 | ✅ Finished chunk 18 - Writing to CSV
+2025-08-01 12:47:57 | 💾 CSV write complete for chunk 18
+2025-08-01 12:47:57 | 🔁 Starting chunk 19 with 20 IDs
+2025-08-01 12:47:57 | 👷 Worker PID: 27464 - starting ID: 37461751
+2025-08-01 12:47:57 | 👷 Worker PID: 11804 - starting ID: 37018006
+2025-08-01 12:47:57 | 👷 Worker PID: 7888 - starting ID: 37210026
+2025-08-01 12:47:57 | 👷 Worker PID: 26720 - starting ID: 37067011
+2025-08-01 12:49:32 | 👷 Worker PID: 27464 - starting ID: 37461752
+2025-08-01 12:49:33 | 👷 Worker PID: 7888 - starting ID: 37210912
+2025-08-01 12:49:34 | 👷 Worker PID: 11804 - starting ID: 37018037
+2025-08-01 12:49:35 | 👷 Worker PID: 26720 - starting ID: 37067919
+2025-08-01 12:51:07 | 👷 Worker PID: 27464 - starting ID: 37461912
+2025-08-01 12:51:07 | 👷 Worker PID: 7888 - starting ID: 37026005
+2025-08-01 12:51:10 | 👷 Worker PID: 26720 - starting ID: 37099002
+2025-08-01 12:51:10 | 👷 Worker PID: 11804 - starting ID: 37018912
+2025-08-01 12:52:43 | 👷 Worker PID: 27464 - starting ID: 37461003
+2025-08-01 12:52:45 | 👷 Worker PID: 11804 - starting ID: 37018024
+2025-08-01 12:52:47 | 👷 Worker PID: 7888 - starting ID: 37026004
+2025-08-01 12:52:49 | 👷 Worker PID: 26720 - starting ID: 37099902
+2025-08-01 12:54:22 | 👷 Worker PID: 27464 - starting ID: 37210006
+2025-08-01 12:54:22 | 👷 Worker PID: 11804 - starting ID: 37461750
+2025-08-01 12:54:22 | 👷 Worker PID: 26720 - starting ID: 37234019
+2025-08-01 12:54:24 | 👷 Worker PID: 7888 - starting ID: 37026900
+2025-08-01 12:56:37 | ✅ Finished chunk 19 - Writing to CSV
+2025-08-01 12:56:37 | 💾 CSV write complete for chunk 19
+2025-08-01 12:56:37 | 🔁 Starting chunk 20 with 20 IDs
+2025-08-01 12:56:37 | 👷 Worker PID: 11804 - starting ID: 37234905
+2025-08-01 12:56:37 | 👷 Worker PID: 27464 - starting ID: 37365918
+2025-08-01 12:56:37 | 👷 Worker PID: 7888 - starting ID: 37296915
+2025-08-01 12:56:37 | 👷 Worker PID: 26720 - starting ID: 37327114
+2025-08-01 12:58:35 | 👷 Worker PID: 11804 - starting ID: 37466910
+2025-08-01 12:58:36 | 👷 Worker PID: 7888 - starting ID: 37296030
+2025-08-01 12:59:13 | 👷 Worker PID: 27464 - starting ID: 37296056
+2025-08-01 12:59:23 | 👷 Worker PID: 26720 - starting ID: 37327920
+2025-08-01 13:00:31 | 👷 Worker PID: 11804 - starting ID: 37287036
+2025-08-01 13:00:37 | 👷 Worker PID: 7888 - starting ID: 37133001
+2025-08-01 13:00:54 | 👷 Worker PID: 27464 - starting ID: 37296008
+2025-08-01 13:00:57 | 👷 Worker PID: 26720 - starting ID: 37131002
+2025-08-01 13:02:11 | 👷 Worker PID: 11804 - starting ID: 37287938
+2025-08-01 13:02:21 | 👷 Worker PID: 7888 - starting ID: 37133901
+2025-08-01 13:02:29 | 👷 Worker PID: 27464 - starting ID: 37296054
+2025-08-01 13:02:32 | 👷 Worker PID: 26720 - starting ID: 37131902
+2025-08-01 13:03:42 | 👷 Worker PID: 11804 - starting ID: 37365006
+2025-08-01 13:03:55 | 👷 Worker PID: 7888 - starting ID: 37133000
+2025-08-01 13:04:02 | 👷 Worker PID: 27464 - starting ID: 37296040
+2025-08-01 13:04:05 | 👷 Worker PID: 26720 - starting ID: 37114008
+2025-08-01 13:05:30 | ✅ Finished chunk 20 - Writing to CSV
+2025-08-01 13:05:30 | 💾 CSV write complete for chunk 20
+2025-08-01 13:05:30 | 🔁 Starting chunk 21 with 20 IDs
+2025-08-01 13:05:30 | 👷 Worker PID: 11804 - starting ID: 37114023
+2025-08-01 13:05:30 | 👷 Worker PID: 7888 - starting ID: 374390035
+
+2025-08-01 13:05:30 | 👷 Worker PID: 26720 - starting ID: 37228120
+2025-08-01 13:07:03 | 👷 Worker PID: 27464 - starting ID: 37465076
+2025-08-01 13:07:03 | 👷 Worker PID: 26720 - starting ID: 37228121
+2025-08-01 13:07:03 | 👷 Worker PID: 11804 - starting ID: 37114024
+2025-08-01 13:07:03 | 👷 Worker PID: 7888 - starting ID: 37439912
+2025-08-01 13:08:37 | 👷 Worker PID: 7888 - starting ID: 37390008
+2025-08-01 13:08:38 | 👷 Worker PID: 26720 - starting ID: 37228952
+2025-08-01 13:08:38 | 👷 Worker PID: 27464 - starting ID: 37465932
+2025-08-01 13:08:39 | 👷 Worker PID: 11804 - starting ID: 37114025
+2025-08-01 13:10:09 | 👷 Worker PID: 27464 - starting ID: 37165005
+2025-08-01 13:10:11 | 👷 Worker PID: 26720 - starting ID: 37228037
+2025-08-01 13:10:12 | 👷 Worker PID: 7888 - starting ID: 37390902
+2025-08-01 13:10:12 | 👷 Worker PID: 11804 - starting ID: 37114900
+2025-08-01 13:11:43 | 👷 Worker PID: 27464 - starting ID: 37165904
+2025-08-01 13:11:43 | 👷 Worker PID: 26720 - starting ID: 37078000
+2025-08-01 13:11:43 | 👷 Worker PID: 7888 - starting ID: 37228119
+2025-08-01 13:11:43 | 👷 Worker PID: 11804 - starting ID: 37114001
+2025-08-01 13:13:20 | ✅ Finished chunk 21 - Writing to CSV
+2025-08-01 13:13:20 | 💾 CSV write complete for chunk 21
+2025-08-01 13:13:20 | 🔁 Starting chunk 22 with 20 IDs
+2025-08-01 13:13:20 | 👷 Worker PID: 11804 - starting ID: 37078001
+2025-08-01 13:13:20 | 👷 Worker PID: 27464 - starting ID: 37100903
+2025-08-01 13:13:20 | 👷 Worker PID: 7888 - starting ID: 37408078
+2025-08-01 13:13:20 | 👷 Worker PID: 26720 - starting ID: 37094001
+2025-08-01 13:14:53 | 👷 Worker PID: 27464 - starting ID: 37100000
+2025-08-01 13:14:54 | 👷 Worker PID: 7888 - starting ID: 37408099
+2025-08-01 13:14:55 | 👷 Worker PID: 26720 - starting ID: 37094904
+2025-08-01 13:14:55 | 👷 Worker PID: 11804 - starting ID: 37078901
+2025-08-01 13:16:22 | 👷 Worker PID: 27464 - starting ID: 37408080
+2025-08-01 13:16:29 | 👷 Worker PID: 7888 - starting ID: 37408083
+2025-08-01 13:16:29 | 👷 Worker PID: 11804 - starting ID: 37311188
+2025-08-01 13:16:30 | 👷 Worker PID: 26720 - starting ID: 37094004
+2025-08-01 13:18:00 | 👷 Worker PID: 27464 - starting ID: 37408098
+2025-08-01 13:18:03 | 👷 Worker PID: 7888 - starting ID: 37408081
+2025-08-01 13:18:05 | 👷 Worker PID: 26720 - starting ID: 37094000
+2025-08-01 13:18:05 | 👷 Worker PID: 11804 - starting ID: 37311945
+2025-08-01 13:19:35 | 👷 Worker PID: 7888 - starting ID: 37408923
+2025-08-01 13:19:35 | 👷 Worker PID: 11804 - starting ID: 37100753
+2025-08-01 13:19:37 | 👷 Worker PID: 27464 - starting ID: 37408079
+2025-08-01 13:19:40 | 👷 Worker PID: 26720 - starting ID: 37311174
+2025-08-01 13:21:11 | ✅ Finished chunk 22 - Writing to CSV
+2025-08-01 13:21:12 | 💾 CSV write complete for chunk 22
+2025-08-01 13:21:12 | 🔁 Starting chunk 23 with 20 IDs
+2025-08-01 13:21:12 | 👷 Worker PID: 11804 - starting ID: 37311946
+2025-08-01 13:21:12 | 👷 Worker PID: 27464 - starting ID: 37461006
+2025-08-01 13:21:12 | 👷 Worker PID: 7888 - starting ID: 37461031
+2025-08-01 13:21:12 | 👷 Worker PID: 26720 - starting ID: 37085793
+2025-08-01 13:22:45 | 👷 Worker PID: 26720 - starting ID: 37085918
+2025-08-01 13:22:46 | 👷 Worker PID: 11804 - starting ID: 37094006
+2025-08-01 13:22:48 | 👷 Worker PID: 7888 - starting ID: 37461025
+2025-08-01 13:22:49 | 👷 Worker PID: 27464 - starting ID: 37461027
+2025-08-01 13:24:17 | 👷 Worker PID: 26720 - starting ID: 37085014
+2025-08-01 13:24:17 | 👷 Worker PID: 11804 - starting ID: 37094002
+2025-08-01 13:24:22 | 👷 Worker PID: 27464 - starting ID: 37461913
+2025-08-01 13:24:22 | 👷 Worker PID: 7888 - starting ID: 37441020
+2025-08-01 13:25:53 | 👷 Worker PID: 27464 - starting ID: 37461015
+2025-08-01 13:25:53 | 👷 Worker PID: 26720 - starting ID: 37085791
+2025-08-01 13:25:53 | 👷 Worker PID: 7888 - starting ID: 374410066
+
+2025-08-01 13:27:25 | 👷 Worker PID: 11804 - starting ID: 37461917
+2025-08-01 13:27:26 | 👷 Worker PID: 26720 - starting ID: 37085028
+2025-08-01 13:27:26 | 👷 Worker PID: 27464 - starting ID: 37461914
+2025-08-01 13:27:29 | 👷 Worker PID: 7888 - starting ID: 37441910
+2025-08-01 13:29:01 | ✅ Finished chunk 23 - Writing to CSV
+2025-08-01 13:29:01 | 💾 CSV write complete for chunk 23
+2025-08-01 13:29:01 | 🔁 Starting chunk 24 with 20 IDs
+2025-08-01 13:29:01 | 👷 Worker PID: 27464 - starting ID: 37085002
+2025-08-01 13:29:01 | 👷 Worker PID: 11804 - starting ID: 37085013
+2025-08-01 13:29:01 | 👷 Worker PID: 7888 - starting ID: 372610364
+2025-08-01 13:30:34 | 👷 Worker PID: 11804 - starting ID: 37085018
+2025-08-01 13:30:34 | 👷 Worker PID: 7888 - starting ID: 37261024
+2025-08-01 13:30:34 | 👷 Worker PID: 27464 - starting ID: 37085919
+2025-08-01 13:32:07 | 👷 Worker PID: 26720 - starting ID: 37261001
+2025-08-01 13:32:08 | 👷 Worker PID: 27464 - starting ID: 37261022
+2025-08-01 13:32:08 | 👷 Worker PID: 11804 - starting ID: 3708503
+2025-08-01 13:33:43 | 👷 Worker PID: 26720 - starting ID: 37261029
+2025-08-01 13:33:43 | 👷 Worker PID: 11804 - starting ID: 37085906
+2025-08-01 13:33:43 | 👷 Worker PID: 27464 - starting ID: 37261033
+2025-08-01 13:35:17 | 👷 Worker PID: 11804 - starting ID: 37085795
+2025-08-01 13:35:17 | 👷 Worker PID: 27464 - starting ID: 37261023
+2025-08-01 13:35:18 | 👷 Worker PID: 26720 - starting ID: 37261906
+2025-08-01 13:35:18 | 👷 Worker PID: 7888 - starting ID: 37261027
+2025-08-01 13:36:54 | ✅ Finished chunk 24 - Writing to CSV
+2025-08-01 13:36:54 | 💾 CSV write complete for chunk 24
+2025-08-01 13:36:54 | 🔁 Starting chunk 25 with 20 IDs
+2025-08-01 13:36:54 | 👷 Worker PID: 11804 - starting ID: 37261030
+2025-08-01 13:36:54 | 👷 Worker PID: 27464 - starting ID: 37288019
+2025-08-01 13:36:54 | 👷 Worker PID: 7888 - starting ID: 37118005
+2025-08-01 13:36:54 | 👷 Worker PID: 26720 - starting ID: 37118014
+2025-08-01 13:38:32 | 👷 Worker PID: 26720 - starting ID: 37118027
+2025-08-01 13:38:32 | 👷 Worker PID: 11804 - starting ID: 37261031
+2025-08-01 13:38:32 | 👷 Worker PID: 7888 - starting ID: 37118008
+25-08-01 13:38:32 | 👷 Worker PID: 27464 - starting ID: 37288912
+2025-08-01 13:40:05 | 👷 Worker PID: 27464 - starting ID: 37065005
+2025-08-01 13:40:05 | 👷 Worker PID: 7888 - starting ID: 37118032
+2025-08-01 13:40:06 | 👷 Worker PID: 26720 - starting ID: 37118901
+2025-08-01 13:41:39 | 👷 Worker PID: 7888 - starting ID: 37118013
+2025-08-01 13:41:39 | 👷 Worker PID: 26720 - starting ID: 37118028
+2025-08-01 13:41:41 | 👷 Worker PID: 11804 - starting ID: 37288030
+2025-08-01 13:41:41 | 👷 Worker PID: 27464 - starting ID: 37065903
+2025-08-01 13:43:14 | 👷 Worker PID: 26720 - starting ID: 37118033
+2025-08-01 13:43:16 | 👷 Worker PID: 7888 - starting ID: 37118016
+2025-08-01 13:43:16 | 👷 Worker PID: 27464 - starting ID: 37065006
+2025-08-01 13:43:21 | 👷 Worker PID: 11804 - starting ID: 37288063
+2025-08-01 13:44:50 | ✅ Finished chunk 25 - Writing to CSV
+2025-08-01 13:44:50 | 💾 CSV write complete for chunk 25
+2025-08-01 13:44:50 | 🔁 Starting chunk 26 with 20 IDs
+2025-08-01 13:44:50 | 👷 Worker PID: 11804 - starting ID: 37118001
+2025-08-01 13:44:50 | 👷 Worker PID: 27464 - starting ID: 37067920
+2025-08-01 13:44:50 | 👷 Worker PID: 26720 - starting ID: 3738601
+
+2025-08-01 13:46:24 | 👷 Worker PID: 7888 - starting ID: 37386010
+2025-08-01 13:46:24 | 👷 Worker PID: 27464 - starting ID: 37288043
+2025-08-01 13:46:25 | 👷 Worker PID: 26720 - starting ID: 37386015
+2025-08-01 13:46:26 | 👷 Worker PID: 11804 - starting ID: 37118029
+2025-08-01 13:47:57 | 👷 Worker PID: 27464 - starting ID: 37288031
+2025-08-01 13:48:01 | 👷 Worker PID: 11804 - starting ID: 37347020
+2025-08-01 13:48:03 | 👷 Worker PID: 7888 - starting ID: 37386012
+2025-08-01 13:48:03 | 👷 Worker PID: 26720 - starting ID: 37386016
+2025-08-01 13:49:36 | 👷 Worker PID: 27464 - starting ID: 37288913
+2025-08-01 13:49:36 | 👷 Worker PID: 11804 - starting ID: 37347905
+2025-08-01 13:49:36 | 👷 Worker PID: 7888 - starting ID: 37386013
+2025-08-01 13:49:36 | 👷 Worker PID: 26720 - starting ID: 37386046
+2025-08-01 13:51:11 | 👷 Worker PID: 11804 - starting ID: 37067020
+2025-08-01 13:51:11 | 👷 Worker PID: 26720 - starting ID: 37386001
+2025-08-01 13:51:11 | 👷 Worker PID: 27464 - starting ID: 37428247
+2025-08-01 13:51:12 | 👷 Worker PID: 7888 - starting ID: 37386045
+2025-08-01 13:52:47 | ✅ Finished chunk 26 - Writing to CSV
+2025-08-01 13:52:47 | 💾 CSV write complete for chunk 26
+2025-08-01 13:52:47 | 🔁 Starting chunk 27 with 20 IDs
+2025-08-01 13:52:47 | 👷 Worker PID: 11804 - starting ID: 37386018
+2025-08-01 13:52:47 | 👷 Worker PID: 27464 - starting ID: 37386024
+2025-08-01 13:52:47 | 👷 Worker PID: 7888 - starting ID: 37386031
+2025-08-01 13:52:47 | 👷 Worker PID: 26720 - starting ID: 37363000
+2025-08-01 13:54:21 | 👷 Worker PID: 26720 - starting ID: 37363002
+2025-08-01 13:54:22 | 👷 Worker PID: 7888 - starting ID: 37386907
+2025-08-01 13:54:22 | 👷 Worker PID: 11804 - starting ID: 37386019
+2025-08-01 13:54:22 | 👷 Worker PID: 27464 - starting ID: 37386026
+2025-08-01 13:56:14 | 👷 Worker PID: 7888 - starting ID: 37386036
+2025-08-01 13:56:16 | 👷 Worker PID: 27464 - starting ID: 37386027
+2025-08-01 13:56:16 | 👷 Worker PID: 11804 - starting ID: 37386021
+2025-08-01 13:56:21 | 👷 Worker PID: 26720 - starting ID: 37363900
+2025-08-01 13:58:12 | 👷 Worker PID: 7888 - starting ID: 37386042
+2025-08-01 13:58:16 | 👷 Worker PID: 11804 - starting ID: 37386022
+2025-08-01 13:58:16 | 👷 Worker PID: 26720 - starting ID: 37245906
+2025-08-01 13:58:17 | 👷 Worker PID: 27464 - starting ID: 37386028
+2025-08-01 13:59:52 | 👷 Worker PID: 7888 - starting ID: 37386032
+2025-08-01 13:59:54 | 👷 Worker PID: 26720 - starting ID: 37245023
+2025-08-01 13:59:56 | 👷 Worker PID: 11804 - starting ID: 37386023
+2025-08-01 13:59:57 | 👷 Worker PID: 27464 - starting ID: 37386029
+2025-08-01 14:01:29 | ✅ Finished chunk 27 - Writing to CSV
+2025-08-01 14:01:29 | 💾 CSV write complete for chunk 27
+2025-08-01 14:01:29 | 🔁 Starting chunk 28 with 20 IDs
+2025-08-01 14:01:29 | 👷 Worker PID: 11804 - starting ID: 37445003
+2025-08-01 14:01:29 | 👷 Worker PID: 26720 - starting ID: 37356001
+2025-08-01 14:03:02 | 👷 Worker PID: 7888 - starting ID: 37068035
+2025-08-01 14:03:03 | 👷 Worker PID: 26720 - starting ID: 37356902
+2025-08-01 14:03:04 | 👷 Worker PID: 11804 - starting ID: 37445014
+2025-08-01 14:03:04 | 👷 Worker PID: 27464 - starting ID: 37424002
+2025-08-01 14:04:37 | 👷 Worker PID: 26720 - starting ID: 37356003
+2025-08-01 14:04:38 | 👷 Worker PID: 7888 - starting ID: 37068919
+2025-08-01 14:04:38 | 👷 Worker PID: 11804 - starting ID: 37445017
+2025-08-01 14:04:38 | 👷 Worker PID: 27464 - starting ID: 37424901
+2025-08-01 14:06:12 | 👷 Worker PID: 7888 - starting ID: 37395006
+2025-08-01 14:06:13 | 👷 Worker PID: 27464 - starting ID: 37424000
+2025-08-01 14:06:13 | 👷 Worker PID: 26720 - starting ID: 37068048
+2025-08-01 14:06:13 | 👷 Worker PID: 11804 - starting ID: 37445908
+2025-08-01 14:07:46 | 👷 Worker PID: 11804 - starting ID: 37424003
+2025-08-01 14:07:46 | 👷 Worker PID: 27464 - starting ID: 37428248
+2025-08-01 14:07:46 | 👷 Worker PID: 26720 - starting ID: 3706892
+2025-08-01 14:09:20 | ✅ Finished chunk 28 - Writing to CSV
+2025-08-01 14:09:21 | 💾 CSV write complete for chunk 28
+2025-08-01 14:09:21 | 🔁 Starting chunk 29 with 20 IDs
+2025-08-01 14:09:21 | 👷 Worker PID: 11804 - starting ID: 37228129
+2025-08-01 14:09:21 | 👷 Worker PID: 27464 - starting ID: 37088002
+2025-08-01 14:09:21 | 👷 Worker PID: 7888 - starting ID: 37068004
+2025-08-01 14:09:21 | 👷 Worker PID: 26720 - starting ID: 37068022
+2025-08-01 14:10:53 | 👷 Worker PID: 11804 - starting ID: 37228123
+2025-08-01 14:10:54 | 👷 Worker PID: 27464 - starting ID: 37088901
+2025-08-01 14:10:54 | 👷 Worker PID: 7888 - starting ID: 37068054
+2025-08-01 14:10:54 | 👷 Worker PID: 26720 - starting ID: 37068023
+2025-08-01 14:12:27 | 👷 Worker PID: 11804 - starting ID: 37228963
+2025-08-01 14:12:27 | 👷 Worker PID: 27464 - starting ID: 37465007
+2025-08-01 14:12:29 | 👷 Worker PID: 7888 - starting ID: 37068049
+2025-08-01 14:12:29 | 👷 Worker PID: 26720 - starting ID: 37068037
+2025-08-01 14:12:39 | 🔁 Starting chunk 1 with 20 IDs
+2025-08-01 14:13:59 | 👷 Worker PID: 11804 - starting ID: 37354000
+2025-08-01 14:14:01 | 👷 Worker PID: 26720 - starting ID: 37068921
+2025-08-01 14:14:01 | 👷 Worker PID: 7888 - starting ID: 37068020
+2025-08-01 14:14:03 | 👷 Worker PID: 27464 - starting ID: 37465933
+2025-08-01 14:15:30 | 👷 Worker PID: 11804 - starting ID: 37088001
+2025-08-01 14:15:33 | 👷 Worker PID: 26720 - starting ID: 37018790
+2025-08-01 14:15:34 | 👷 Worker PID: 27464 - starting ID: 37068003
+2025-08-01 14:15:35 | 👷 Worker PID: 7888 - starting ID: 37068021
+2025-08-01 14:17:05 | 👷 Worker PID: 26720 - starting ID: 37228129
+2025-08-01 14:17:06 | 👷 Worker PID: 11804 - starting ID: 37088002
+2025-08-01 14:17:06 | 👷 Worker PID: 7888 - starting ID: 37068004
+2025-08-01 14:17:06 | 👷 Worker PID: 27464 - starting ID: 37068022
+2025-08-01 14:18:40 | 👷 Worker PID: 26720 - starting ID: 37228123
+2025-08-01 14:18:42 | 👷 Worker PID: 11804 - starting ID: 37088901
+2025-08-01 14:18:43 | 👷 Worker PID: 27464 - starting ID: 37068023
+2025-08-01 14:18:43 | 👷 Worker PID: 7888 - starting ID: 37068054
+2025-08-01 14:20:09 | 👷 Worker PID: 26720 - starting ID: 37228963
+2025-08-01 14:20:15 | 👷 Worker PID: 11804 - starting ID: 37465007
+2025-08-01 14:20:17 | 👷 Worker PID: 7888 - starting ID: 37068049
+2025-08-01 14:20:18 | 👷 Worker PID: 27464 - starting ID: 37068037
+2025-08-01 14:21:41 | 👷 Worker PID: 26720 - starting ID: 37354000
+2025-08-01 14:21:50 | 👷 Worker PID: 27464 - starting ID: 37068921
+2025-08-01 14:21:51 | 👷 Worker PID: 7888 - starting ID: 37068020
+2025-08-01 14:21:53 | 👷 Worker PID: 11804 - starting ID: 37465933
+2025-08-01 14:23:17 | 👷 Worker PID: 26720 - starting ID: 37088001
+2025-08-01 14:23:23 | 👷 Worker PID: 27464 - starting ID: 37018790
+2025-08-01 14:23:24 | 👷 Worker PID: 11804 - starting ID: 37068003
+2025-08-01 14:23:25 | 👷 Worker PID: 7888 - starting ID: 37068021
+2025-08-01 14:24:58 | ✅ Finished chunk 1 - Writing to CSV
+2025-08-01 14:24:58 | 💾 CSV write complete for chunk 1
+2025-08-01 14:24:58 | 🔁 Starting chunk 2 with 20 IDs
+2025-08-01 14:24:59 | 👷 Worker PID: 11804 - starting ID: 37018913
+2025-08-01 14:24:59 | 👷 Worker PID: 27464 - starting ID: 37347033
+2025-08-01 14:24:59 | 👷 Worker PID: 7888 - starting ID: 37347035
+2025-08-01 14:24:59 | 👷 Worker PID: 26720 - starting ID: 37236000
+2025-08-01 14:26:33 | 👷 Worker PID: 11804 - starting ID: 37347030
+2025-08-01 14:26:33 | 👷 Worker PID: 26720 - starting ID: 37236001
+2025-08-01 14:26:33 | 👷 Worker PID: 27464 - starting ID: 37347008
+2025-08-01 14:26:33 | 👷 Worker PID: 7888 - starting ID: 37441001
+2025-08-01 14:28:06 | 👷 Worker PID: 27464 - starting ID: 37347006
+2025-08-01 14:28:06 | 👷 Worker PID: 11804 - starting ID: 37347031
+2025-08-01 14:28:07 | 👷 Worker PID: 7888 - starting ID: 37441791
+2025-08-01 14:28:07 | 👷 Worker PID: 26720 - starting ID: 37236901
+2025-08-01 14:29:40 | 👷 Worker PID: 7888 - starting ID: 37441790
+2025-08-01 14:29:40 | 👷 Worker PID: 26720 - starting ID: 37337032
+2025-08-01 14:29:40 | 👷 Worker PID: 11804 - starting ID: 37347018
+2025-08-01 14:31:13 | 👷 Worker PID: 27464 - starting ID: 37347034
+2025-08-01 14:31:13 | 👷 Worker PID: 7888 - starting ID: 37441923
+2025-08-01 14:31:13 | 👷 Worker PID: 11804 - starting ID: 37347032
+2025-08-01 14:31:13 | 👷 Worker PID: 26720 - starting ID: 37337046
+2025-08-01 14:32:47 | ✅ Finished chunk 2 - Writing to CSV
+2025-08-01 14:32:48 | 💾 CSV write complete for chunk 2
+2025-08-01 14:32:48 | 🔁 Starting chunk 3 with 20 IDs
+2025-08-01 14:32:48 | 👷 Worker PID: 11804 - starting ID: 37337905
+2025-08-01 14:32:48 | 👷 Worker PID: 27464 - starting ID: 37441015
+2025-08-01 14:32:48 | 👷 Worker PID: 7888 - starting ID: 37439917
+2025-08-01 14:32:48 | 👷 Worker PID: 26720 - starting ID: 37131006
+2025-08-01 14:34:22 | 👷 Worker PID: 7888 - starting ID: 37439015
+2025-08-01 14:34:22 | 👷 Worker PID: 11804 - starting ID: 37337045
+2025-08-01 14:34:22 | 👷 Worker PID: 26720 - starting ID: 37131903
+2025-08-01 14:34:22 | 👷 Worker PID: 27464 - starting ID: 37441014
+2025-08-01 14:35:55 | 👷 Worker PID: 26720 - starting ID: 37131004
+2025-08-01 14:35:55 | 👷 Worker PID: 11804 - starting ID: 37337044
+2025-08-01 14:35:56 | 👷 Worker PID: 7888 - starting ID: 37439913
+2025-08-01 14:35:56 | 👷 Worker PID: 27464 - starting ID: 37441018
+2025-08-01 14:37:29 | 👷 Worker PID: 7888 - starting ID: 37131000
+2025-08-01 14:37:30 | 👷 Worker PID: 11804 - starting ID: 37441007
+2025-08-01 14:37:30 | 👷 Worker PID: 26720 - starting ID: 37131005
+2025-08-01 14:37:30 | 👷 Worker PID: 27464 - starting ID: 37441792
+2025-08-01 14:39:04 | 👷 Worker PID: 27464 - starting ID: 37441000
+2025-08-01 14:39:04 | 👷 Worker PID: 7888 - starting ID: 37131003
+2025-08-01 14:39:04 | 👷 Worker PID: 26720 - starting ID: 37131904
+2025-08-01 14:39:05 | 👷 Worker PID: 11804 - starting ID: 37441030
+2025-08-01 14:40:38 | ✅ Finished chunk 3 - Writing to CSV
+2025-08-01 14:40:38 | 💾 CSV write complete for chunk 3
+2025-08-01 14:40:38 | 🔁 Starting chunk 4 with 20 IDs
+2025-08-01 14:40:38 | 👷 Worker PID: 11804 - starting ID: 37121902
+2025-08-01 14:40:38 | 👷 Worker PID: 27464 - starting ID: 37251006
+2025-08-01 14:40:38 | 👷 Worker PID: 26720 - starting ID: 37125008
+
+2025-08-01 14:42:11 | 👷 Worker PID: 11804 - starting ID: 37121005
+2025-08-01 14:42:11 | 👷 Worker PID: 26720 - starting ID: 37125902
+2025-08-01 14:42:12 | 👷 Worker PID: 7888 - starting ID: 37125007
+2025-08-01 14:42:12 | 👷 Worker PID: 27464 - starting ID: 37251904
+2025-08-01 14:43:44 | 👷 Worker PID: 11804 - starting ID: 37251001
+2025-08-01 14:43:44 | 👷 Worker PID: 27464 - starting ID: 37122005
+2025-08-01 14:43:44 | 👷 Worker PID: 26720 - starting ID: 37287125
+2025-08-01 14:43:44 | 👷 Worker PID: 7888 - starting ID: 37125005
+2025-08-01 14:45:19 | 👷 Worker PID: 27464 - starting ID: 37122924
+2025-08-01 14:45:19 | 👷 Worker PID: 7888 - starting ID: 37125006
+2025-08-01 14:45:19 | 👷 Worker PID: 26720 - starting ID: 37287098
+
+2025-08-01 14:46:53 | 👷 Worker PID: 27464 - starting ID: 37125001
+2025-08-01 14:46:53 | 👷 Worker PID: 11804 - starting ID: 37251005
+2025-08-01 14:46:53 | 👷 Worker PID: 7888 - starting ID: 37125002
+2025-08-01 14:46:53 | 👷 Worker PID: 26720 - starting ID: 37287131
+2025-08-01 14:48:29 | ✅ Finished chunk 4 - Writing to CSV
+2025-08-01 14:48:29 | 💾 CSV write complete for chunk 4
+2025-08-01 14:48:29 | 🔁 Starting chunk 5 with 20 IDs
+2025-08-01 14:48:29 | 👷 Worker PID: 11804 - starting ID: 37287068
+2025-08-01 14:48:29 | 👷 Worker PID: 27464 - starting ID: 37287904
+2025-08-01 14:48:29 | 👷 Worker PID: 7888 - starting ID: 372870767
+
+2025-08-01 14:50:04 | 👷 Worker PID: 27464 - starting ID: 37287072
+2025-08-01 14:50:05 | 👷 Worker PID: 11804 - starting ID: 37287066
+2025-08-01 14:50:05 | 👷 Worker PID: 26720 - starting ID: 37287137
+2025-08-01 14:50:06 | 👷 Worker PID: 7888 - starting ID: 37287074
+2025-08-01 14:51:38 | 👷 Worker PID: 26720 - starting ID: 37287078
+2025-08-01 14:51:38 | 👷 Worker PID: 27464 - starting ID: 37287148
+2025-08-01 14:51:39 | 👷 Worker PID: 7888 - starting ID: 372870752
+2025-08-01 14:53:14 | 👷 Worker PID: 11804 - starting ID: 37287008
+2025-08-01 14:53:14 | 👷 Worker PID: 27464 - starting ID: 37287900
+2025-08-01 14:53:15 | 👷 Worker PID: 7888 - starting ID: 37287099
+2025-08-01 14:53:15 | 👷 Worker PID: 26720 - starting ID: 37287119
+2025-08-01 14:54:51 | 👷 Worker PID: 27464 - starting ID: 37287073
+2025-08-01 14:54:52 | 👷 Worker PID: 26720 - starting ID: 37287939
+2025-08-01 14:54:52 | 👷 Worker PID: 7888 - starting ID: 37287105
+2025-08-01 14:54:52 | 👷 Worker PID: 11804 - starting ID: 37287146
+2025-08-01 14:56:27 | ✅ Finished chunk 5 - Writing to CSV
+2025-08-01 14:56:28 | 💾 CSV write complete for chunk 5
+2025-08-01 14:56:28 | 🔁 Starting chunk 6 with 20 IDs
+2025-08-01 14:56:28 | 👷 Worker PID: 11804 - starting ID: 37287079
+2025-08-01 14:56:28 | 👷 Worker PID: 27464 - starting ID: 37287038
+2025-08-01 14:56:28 | 👷 Worker PID: 26720 - starting ID: 3728714
+2025-08-01 14:58:00 | 👷 Worker PID: 26720 - starting ID: 37361900
+2025-08-01 14:58:00 | 👷 Worker PID: 27464 - starting ID: 37287121
+2025-08-01 14:58:00 | 👷 Worker PID: 11804 - starting ID: 37287080
+2025-08-01 14:58:00 | 👷 Worker PID: 7888 - starting ID: 37287107
+2025-08-01 14:59:35 | 👷 Worker PID: 26720 - starting ID: 37361004
+2025-08-01 14:59:35 | 👷 Worker PID: 27464 - starting ID: 37287083
+2025-08-01 14:59:35 | 👷 Worker PID: 11804 - starting ID: 37287106
+2025-08-01 14:59:35 | 👷 Worker PID: 7888 - starting ID: 37287108
+2025-08-01 15:01:09 | 👷 Worker PID: 11804 - starting ID: 37287081
+2025-08-01 15:01:09 | 👷 Worker PID: 7888 - starting ID: 37287940
+2025-08-01 15:01:09 | 👷 Worker PID: 27464 - starting ID: 37287030
+2025-08-01 15:02:43 | 👷 Worker PID: 7888 - starting ID: 37287086
+2025-08-01 15:02:43 | 👷 Worker PID: 27464 - starting ID: 37287120
+2025-08-01 15:02:43 | 👷 Worker PID: 26720 - starting ID: 37361009
+
+2025-08-01 15:04:17 | ✅ Finished chunk 6 - Writing to CSV
+2025-08-01 15:04:17 | 💾 CSV write complete for chunk 6
+2025-08-01 15:04:17 | 🔁 Starting chunk 7 with 20 IDs
+2025-08-01 15:04:17 | 👷 Worker PID: 11804 - starting ID: 37361906
+2025-08-01 15:04:17 | 👷 Worker PID: 27464 - starting ID: 37321035
+2025-08-01 15:04:17 | 👷 Worker PID: 7888 - starting ID: 37020052
+2025-08-01 15:04:17 | 👷 Worker PID: 26720 - starting ID: 37337937
+2025-08-01 15:05:49 | 👷 Worker PID: 26720 - starting ID: 37287087
+2025-08-01 15:05:50 | 👷 Worker PID: 11804 - starting ID: 37361019
+2025-08-01 15:05:50 | 👷 Worker PID: 7888 - starting ID: 37020917
+2025-08-01 15:05:51 | 👷 Worker PID: 27464 - starting ID: 37321027
+2025-08-01 15:07:24 | 👷 Worker PID: 11804 - starting ID: 37321025
+2025-08-01 15:07:24 | 👷 Worker PID: 7888 - starting ID: 37020013
+2025-08-01 15:07:24 | 👷 Worker PID: 26720 - starting ID: 37287136
+2025-08-01 15:07:24 | 👷 Worker PID: 27464 - starting ID: 37321911
+2025-08-01 15:08:59 | 👷 Worker PID: 27464 - starting ID: 37015911
+2025-08-01 15:09:00 | 👷 Worker PID: 11804 - starting ID: 37321026
+2025-08-01 15:09:00 | 👷 Worker PID: 26720 - starting ID: 37287117
+2025-08-01 15:09:01 | 👷 Worker PID: 7888 - starting ID: 37020916
+2025-08-01 15:10:31 | 👷 Worker PID: 27464 - starting ID: 37020035
+2025-08-01 15:10:34 | 👷 Worker PID: 7888 - starting ID: 37337038
+2025-08-01 15:10:34 | 👷 Worker PID: 11804 - starting ID: 37321032
+2025-08-01 15:10:36 | 👷 Worker PID: 26720 - starting ID: 37287941
+2025-08-01 15:12:12 | ✅ Finished chunk 7 - Writing to CSV
+2025-08-01 15:12:12 | 💾 CSV write complete for chunk 7
+2025-08-01 15:12:12 | 🔁 Starting chunk 8 with 20 IDs
+2025-08-01 15:12:12 | 👷 Worker PID: 11804 - starting ID: 37287088
+2025-08-01 15:12:12 | 👷 Worker PID: 27464 - starting ID: 37287751
+2025-08-01 15:12:12 | 👷 Worker PID: 7888 - starting ID: 37341907
+2025-08-01 15:12:12 | 👷 Worker PID: 26720 - starting ID: 37337926
+2025-08-01 15:13:49 | 👷 Worker PID: 27464 - starting ID: 37287955
+2025-08-01 15:13:49 | 👷 Worker PID: 26720 - starting ID: 37311049
+2025-08-01 15:13:49 | 👷 Worker PID: 7888 - starting ID: 37337008
+2025-08-01 15:13:56 | 👷 Worker PID: 11804 - starting ID: 37287118
+2025-08-01 15:15:18 | 👷 Worker PID: 27464 - starting ID: 37287112
+2025-08-01 15:15:26 | 👷 Worker PID: 7888 - starting ID: 37337009
+2025-08-01 15:15:27 | 👷 Worker PID: 11804 - starting ID: 37287750
+2025-08-01 15:15:28 | 👷 Worker PID: 26720 - starting ID: 37311245
+2025-08-01 15:16:55 | 👷 Worker PID: 27464 - starting ID: 37287942
+2025-08-01 15:17:00 | 👷 Worker PID: 11804 - starting ID: 37287753
+2025-08-01 15:17:02 | 👷 Worker PID: 7888 - starting ID: 37337925
+2025-08-01 15:17:02 | 👷 Worker PID: 26720 - starting ID: 37311947
+2025-08-01 15:18:30 | 👷 Worker PID: 27464 - starting ID: 37341021
+2025-08-01 15:18:34 | 👷 Worker PID: 11804 - starting ID: 37287752
+2025-08-01 15:18:37 | 👷 Worker PID: 26720 - starting ID: 37231755
+2025-08-01 15:18:38 | 👷 Worker PID: 7888 - starting ID: 37337015
+2025-08-01 15:20:11 | ✅ Finished chunk 8 - Writing to CSV
+2025-08-01 15:20:12 | 💾 CSV write complete for chunk 8
+2025-08-01 15:20:12 | 🔁 Starting chunk 9 with 20 IDs
+2025-08-01 15:20:12 | 👷 Worker PID: 11804 - starting ID: 37231906
+2025-08-01 15:20:12 | 👷 Worker PID: 27464 - starting ID: 37337006
+2025-08-01 15:20:12 | 👷 Worker PID: 7888 - starting ID: 37445006
+2025-08-01 15:20:12 | 👷 Worker PID: 26720 - starting ID: 37311948
+2025-08-01 15:21:44 | 👷 Worker PID: 26720 - starting ID: 37075001
+2025-08-01 15:21:45 | 👷 Worker PID: 11804 - starting ID: 37363001
+2025-08-01 15:21:47 | 👷 Worker PID: 7888 - starting ID: 37445909
+2025-08-01 15:21:48 | 👷 Worker PID: 27464 - starting ID: 37337052
+2025-08-01 15:23:20 | 👷 Worker PID: 7888 - starting ID: 37337014
+2025-08-01 15:23:21 | 👷 Worker PID: 26720 - starting ID: 37075002
+2025-08-01 15:23:21 | 👷 Worker PID: 27464 - starting ID: 37337927
+2025-08-01 15:23:22 | 👷 Worker PID: 11804 - starting ID: 37363901
+2025-08-01 15:24:55 | 👷 Worker PID: 11804 - starting ID: 37337025
+2025-08-01 15:24:55 | 👷 Worker PID: 7888 - starting ID: 37337928
+2025-08-01 15:24:55 | 👷 Worker PID: 27464 - starting ID: 37445005
+2025-08-01 15:24:56 | 👷 Worker PID: 26720 - starting ID: 37075901
+2025-08-01 15:26:28 | 👷 Worker PID: 7888 - starting ID: 37311130
+2025-08-01 15:26:29 | 👷 Worker PID: 26720 - starting ID: 37075000
+2025-08-01 15:26:31 | 👷 Worker PID: 11804 - starting ID: 37337007
+2025-08-01 15:26:32 | 👷 Worker PID: 27464 - starting ID: 37445011
+2025-08-01 15:28:02 | ✅ Finished chunk 9 - Writing to CSV
+2025-08-01 15:28:03 | 💾 CSV write complete for chunk 9
+2025-08-01 15:28:03 | 🔁 Starting chunk 10 with 20 IDs
+2025-08-01 15:28:03 | 👷 Worker PID: 11804 - starting ID: 37287047
+2025-08-01 15:28:03 | 👷 Worker PID: 27464 - starting ID: 37086008
+2025-08-01 15:28:03 | 👷 Worker PID: 26720 - starting ID: 37438009
+2025-08-01 15:28:03 | 👷 Worker PID: 7888 - starting ID: 37428898
+2025-08-01 15:29:33 | 👷 Worker PID: 11804 - starting ID: 37287943
+2025-08-01 15:29:36 | 👷 Worker PID: 7888 - starting ID: 37438000
+2025-08-01 15:29:38 | 👷 Worker PID: 27464 - starting ID: 37428464
+2025-08-01 15:29:40 | 👷 Worker PID: 26720 - starting ID: 37438001
+2025-08-01 15:31:05 | 👷 Worker PID: 11804 - starting ID: 37287950
+2025-08-01 15:31:07 | 👷 Worker PID: 7888 - starting ID: 37438007
+2025-08-01 15:31:16 | 👷 Worker PID: 26720 - starting ID: 37438005
+2025-08-01 15:31:16 | 👷 Worker PID: 27464 - starting ID: 37428335
+2025-08-01 15:32:34 | 👷 Worker PID: 11804 - starting ID: 37086003
+2025-08-01 15:32:42 | 👷 Worker PID: 7888 - starting ID: 37438004
+2025-08-01 15:32:51 | 👷 Worker PID: 26720 - starting ID: 37438010
+2025-08-01 15:32:57 | 👷 Worker PID: 27464 - starting ID: 37428980
+2025-08-01 15:34:13 | 👷 Worker PID: 11804 - starting ID: 37086901
+2025-08-01 15:34:15 | 👷 Worker PID: 7888 - starting ID: 37438008
+2025-08-01 15:34:27 | 👷 Worker PID: 26720 - starting ID: 37438011
+2025-08-01 15:34:32 | 👷 Worker PID: 27464 - starting ID: 37428460
+2025-08-01 15:35:56 | ✅ Finished chunk 10 - Writing to CSV
+2025-08-01 15:35:57 | 💾 CSV write complete for chunk 10
+2025-08-01 15:35:57 | 🔁 Starting chunk 11 with 20 IDs
+2025-08-01 15:35:57 | 👷 Worker PID: 11804 - starting ID: 37438012
+2025-08-01 15:35:57 | 👷 Worker PID: 27464 - starting ID: 37438014
+2025-08-01 15:35:57 | 👷 Worker PID: 26720 - starting ID: 37428250
+2025-08-01 15:35:57 | 👷 Worker PID: 7888 - starting ID: 37106020
+2025-08-01 15:37:32 | 👷 Worker PID: 27464 - starting ID: 37438015
+2025-08-01 15:37:32 | 👷 Worker PID: 26720 - starting ID: 37428251
+2025-08-01 15:37:33 | 👷 Worker PID: 11804 - starting ID: 37438003
+2025-08-01 15:37:33 | 👷 Worker PID: 7888 - starting ID: 37106004
+2025-08-01 15:39:10 | 👷 Worker PID: 7888 - starting ID: 37106909
+2025-08-01 15:39:10 | 👷 Worker PID: 11804 - starting ID: 37438013
+2025-08-01 15:39:10 | 👷 Worker PID: 27464 - starting ID: 37438006
+2025-08-01 15:39:11 | 👷 Worker PID: 26720 - starting ID: 37428252
+2025-08-01 15:40:46 | 👷 Worker PID: 7888 - starting ID: 37428249
+2025-08-01 15:40:47 | 👷 Worker PID: 26720 - starting ID: 37428982
+2025-08-01 15:40:47 | 👷 Worker PID: 27464 - starting ID: 37438016
+2025-08-01 15:40:47 | 👷 Worker PID: 11804 - starting ID: 37438902
+2025-08-01 15:42:25 | 👷 Worker PID: 26720 - starting ID: 37330000
+2025-08-01 15:42:25 | 👷 Worker PID: 7888 - starting ID: 37428981
+2025-08-01 15:42:25 | 👷 Worker PID: 11804 - starting ID: 37438018
+2025-08-01 15:42:27 | 👷 Worker PID: 27464 - starting ID: 37438017
+2025-08-01 15:44:00 | ✅ Finished chunk 11 - Writing to CSV
+2025-08-01 15:44:01 | 💾 CSV write complete for chunk 11
+2025-08-01 15:44:01 | 🔁 Starting chunk 12 with 20 IDs
+2025-08-01 15:44:01 | 👷 Worker PID: 11804 - starting ID: 37330001
+2025-08-01 15:44:01 | 👷 Worker PID: 27464 - starting ID: 37330010
+2025-08-01 15:44:01 | 👷 Worker PID: 7888 - starting ID: 37330005
+2025-08-01 15:44:01 | 👷 Worker PID: 26720 - starting ID: 37175750
+2025-08-01 15:45:35 | 👷 Worker PID: 26720 - starting ID: 37175752
+2025-08-01 15:45:38 | 👷 Worker PID: 7888 - starting ID: 37330012
+2025-08-01 15:45:38 | 👷 Worker PID: 27464 - starting ID: 37330014
+2025-08-01 15:45:38 | 👷 Worker PID: 11804 - starting ID: 37330903
+2025-08-01 15:47:08 | 👷 Worker PID: 26720 - starting ID: 37175902
+2025-08-01 15:47:13 | 👷 Worker PID: 11804 - starting ID: 37330003
+2025-08-01 15:47:14 | 👷 Worker PID: 27464 - starting ID: 37330009
+2025-08-01 15:47:15 | 👷 Worker PID: 7888 - starting ID: 37330006
+2025-08-01 15:48:43 | 👷 Worker PID: 26720 - starting ID: 37070005
+2025-08-01 15:48:48 | 👷 Worker PID: 11804 - starting ID: 37330002
+2025-08-01 15:48:50 | 👷 Worker PID: 27464 - starting ID: 37330007
+2025-08-01 15:48:52 | 👷 Worker PID: 7888 - starting ID: 37330904
+2025-08-01 15:50:19 | 👷 Worker PID: 26720 - starting ID: 37070904
+2025-08-01 15:50:21 | 👷 Worker PID: 11804 - starting ID: 37330004
+2025-08-01 15:50:21 | 👷 Worker PID: 27464 - starting ID: 37330015
+2025-08-01 15:50:22 | 👷 Worker PID: 7888 - starting ID: 37330013
+2025-08-01 15:51:55 | ✅ Finished chunk 12 - Writing to CSV
+2025-08-01 15:51:55 | 💾 CSV write complete for chunk 12
+2025-08-01 15:51:55 | 🔁 Starting chunk 13 with 20 IDs
+2025-08-01 15:51:56 | 👷 Worker PID: 11804 - starting ID: 37390903
+2025-08-01 15:51:56 | 👷 Worker PID: 27464 - starting ID: 37033901
+2025-08-01 15:51:56 | 👷 Worker PID: 7888 - starting ID: 37327172
+2025-08-01 15:51:56 | 👷 Worker PID: 26720 - starting ID: 37327116
+2025-08-01 15:53:29 | 👷 Worker PID: 27464 - starting ID: 37251007
+2025-08-01 15:53:29 | 👷 Worker PID: 11804 - starting ID: 37390027
+2025-08-01 15:53:33 | 👷 Worker PID: 7888 - starting ID: 37327032
+2025-08-01 15:53:33 | 👷 Worker PID: 26720 - starting ID: 37327174
+2025-08-01 15:55:05 | 👷 Worker PID: 11804 - starting ID: 37033001
+2025-08-01 15:55:05 | 👷 Worker PID: 27464 - starting ID: 37251905
+2025-08-01 15:55:06 | 👷 Worker PID: 26720 - starting ID: 37327117
+2025-08-01 15:56:39 | 👷 Worker PID: 27464 - starting ID: 37282097
+2025-08-01 15:56:40 | 👷 Worker PID: 7888 - starting ID: 37327115
+2025-08-01 15:56:40 | 👷 Worker PID: 26720 - starting ID: 373270172025-08-01 15:56:40 | 👷 Worker PID: 11804 - starting ID: 37033003
+2025-08-01 15:58:14 | 👷 Worker PID: 7888 - starting ID: 37327176
+2025-08-01 15:58:14 | 👷 Worker PID: 11804 - starting ID: 37033002
+2025-08-01 15:58:14 | 👷 Worker PID: 27464 - starting ID: 37282934
+2025-08-01 15:59:50 | ✅ Finished chunk 13 - Writing to CSV
+2025-08-01 15:59:51 | 💾 CSV write complete for chunk 13
+2025-08-01 15:59:51 | 🔁 Starting chunk 14 with 20 IDs
+2025-08-01 15:59:51 | 👷 Worker PID: 11804 - starting ID: 37327021
+2025-08-01 15:59:51 | 👷 Worker PID: 27464 - starting ID: 37385011
+2025-08-01 15:59:51 | 👷 Worker PID: 7888 - starting ID: 372280052
+2025-08-01 16:01:27 | 👷 Worker PID: 26720 - starting ID: 37068042
+2025-08-01 16:01:27 | 👷 Worker PID: 27464 - starting ID: 37385007
+2025-08-01 16:01:27 | 👷 Worker PID: 11804 - starting ID: 37327118
+2025-08-01 16:01:27 | 👷 Worker PID: 7888 - starting ID: 37228009
+2025-08-01 16:03:04 | 👷 Worker PID: 7888 - starting ID: 37228038
+2025-08-01 16:03:04 | 👷 Worker PID: 11804 - starting ID: 37385008
+2025-08-01 16:03:04 | 👷 Worker PID: 27464 - starting ID: 37385905
+
+2025-08-01 16:04:42 | 👷 Worker PID: 27464 - starting ID: 37385012
+2025-08-01 16:04:42 | 👷 Worker PID: 26720 - starting ID: 37428461
+2025-08-01 16:04:42 | 👷 Worker PID: 7888 - starting ID: 37228953
+2025-08-01 16:04:42 | 👷 Worker PID: 11804 - starting ID: 37385004
+2025-08-01 16:06:19 | 👷 Worker PID: 7888 - starting ID: 37228122
+2025-08-01 16:06:19 | 👷 Worker PID: 11804 - starting ID: 37385006
+2025-08-01 16:06:19 | 👷 Worker PID: 26720 - starting ID: 37428465
+2025-08-01 16:07:57 | ✅ Finished chunk 14 - Writing to CSV
+2025-08-01 16:07:58 | 💾 CSV write complete for chunk 14
+2025-08-01 16:07:58 | 🔁 Starting chunk 15 with 20 IDs
+2025-08-01 16:07:58 | 👷 Worker PID: 11804 - starting ID: 37428897
+2025-08-01 16:07:58 | 👷 Worker PID: 27464 - starting ID: 37462790
+2025-08-01 16:07:58 | 👷 Worker PID: 7888 - starting ID: 37282029
+2025-08-01 16:07:58 | 👷 Worker PID: 26720 - starting ID: 37462047
+2025-08-01 16:09:35 | 👷 Worker PID: 27464 - starting ID: 37462911
+2025-08-01 16:09:35 | 👷 Worker PID: 11804 - starting ID: 37229018
+2025-08-01 16:09:39 | 👷 Worker PID: 26720 - starting ID: 37462046
+2025-08-01 16:09:49 | 👷 Worker PID: 7888 - starting ID: 37282935
+2025-08-01 16:11:02 | 👷 Worker PID: 27464 - starting ID: 37282098
+2025-08-01 16:11:03 | 👷 Worker PID: 11804 - starting ID: 37229907
+2025-08-01 16:11:11 | 👷 Worker PID: 26720 - starting ID: 37462912
+2025-08-01 16:11:40 | 👷 Worker PID: 7888 - starting ID: 37462015
+2025-08-01 16:12:40 | 👷 Worker PID: 11804 - starting ID: 37287954
+2025-08-01 16:12:45 | 👷 Worker PID: 27464 - starting ID: 37282003
+2025-08-01 16:12:51 | 👷 Worker PID: 26720 - starting ID: 37462000
+2025-08-01 16:13:21 | 👷 Worker PID: 7888 - starting ID: 37462045
+2025-08-01 16:14:16 | 👷 Worker PID: 11804 - starting ID: 37287141
+2025-08-01 16:14:24 | 👷 Worker PID: 27464 - starting ID: 37282004
+2025-08-01 16:14:28 | 👷 Worker PID: 26720 - starting ID: 37281000
+2025-08-01 16:14:57 | 👷 Worker PID: 7888 - starting ID: 37462033
+2025-08-01 16:16:07 | ✅ Finished chunk 15 - Writing to CSV
+2025-08-01 16:16:07 | 💾 CSV write complete for chunk 15
+2025-08-01 16:16:07 | 🔁 Starting chunk 16 with 20 IDs
+2025-08-01 16:16:07 | 👷 Worker PID: 11804 - starting ID: 37281004
+2025-08-01 16:16:07 | 👷 Worker PID: 27464 - starting ID: 37281901
+2025-08-01 16:16:07 | 👷 Worker PID: 26720 - starting ID: 37353908
+2025-08-01 16:17:39 | 👷 Worker PID: 11804 - starting ID: 37281001
+2025-08-01 16:17:39 | 👷 Worker PID: 26720 - starting ID: 37228084
+2025-08-01 16:17:39 | 👷 Worker PID: 7888 - starting ID: 37255010
+2025-08-01 16:17:40 | 👷 Worker PID: 27464 - starting ID: 37212042
+2025-08-01 16:19:14 | 👷 Worker PID: 26720 - starting ID: 37228954
+2025-08-01 16:19:14 | 👷 Worker PID: 27464 - starting ID: 37212907
+2025-08-01 16:19:17 | 👷 Worker PID: 7888 - starting ID: 37255906
+2025-08-01 16:19:18 | 👷 Worker PID: 11804 - starting ID: 37281003
+2025-08-01 16:20:43 | 👷 Worker PID: 26720 - starting ID: 37327119
+2025-08-01 16:20:46 | 👷 Worker PID: 27464 - starting ID: 37020924
+2025-08-01 16:20:49 | 👷 Worker PID: 7888 - starting ID: 37353000
+2025-08-01 16:20:51 | 👷 Worker PID: 11804 - starting ID: 37281006
+2025-08-01 16:22:19 | 👷 Worker PID: 27464 - starting ID: 37020036
+2025-08-01 16:22:23 | 👷 Worker PID: 7888 - starting ID: 37353017
+2025-08-01 16:22:23 | 👷 Worker PID: 11804 - starting ID: 37281002
+2025-08-01 16:22:25 | 👷 Worker PID: 26720 - starting ID: 37327184
+2025-08-01 16:23:55 | ✅ Finished chunk 16 - Writing to CSV
+2025-08-01 16:23:56 | 💾 CSV write complete for chunk 16
+2025-08-01 16:23:56 | 🔁 Starting chunk 17 with 20 IDs
+2025-08-01 16:23:56 | 👷 Worker PID: 11804 - starting ID: 37327922
+2025-08-01 16:23:56 | 👷 Worker PID: 27464 - starting ID: 37467004
+2025-08-01 16:23:56 | 👷 Worker PID: 7888 - starting ID: 37382011
+2025-08-01 16:23:56 | 👷 Worker PID: 26720 - starting ID: 37382006
+2025-08-01 16:25:29 | 👷 Worker PID: 11804 - starting ID: 37232069
+2025-08-01 16:25:30 | 👷 Worker PID: 7888 - starting ID: 37382004
+2025-08-01 16:25:30 | 👷 Worker PID: 26720 - starting ID: 37382009
+2025-08-01 16:25:30 | 👷 Worker PID: 27464 - starting ID: 37467910
+2025-08-01 16:27:05 | 👷 Worker PID: 27464 - starting ID: 37382003
+2025-08-01 16:27:05 | 👷 Worker PID: 26720 - starting ID: 37382901
+2025-08-01 16:27:05 | 👷 Worker PID: 11804 - starting ID: 37232103
+2025-08-01 16:27:05 | 👷 Worker PID: 7888 - starting ID: 37382002
+2025-08-01 16:28:41 | 👷 Worker PID: 26720 - starting ID: 37382012
+2025-08-01 16:28:42 | 👷 Worker PID: 27464 - starting ID: 37382008
+2025-08-01 16:28:42 | 👷 Worker PID: 7888 - starting ID: 373820073
+2025-08-01 16:30:17 | 👷 Worker PID: 26720 - starting ID: 37382000
+2025-08-01 16:30:18 | 👷 Worker PID: 11804 - starting ID: 37380904
+2025-08-01 16:30:22 | 👷 Worker PID: 27464 - starting ID: 37382005
+2025-08-01 16:30:22 | 👷 Worker PID: 7888 - starting ID: 37382001
+2025-08-01 16:31:53 | ✅ Finished chunk 17 - Writing to CSV
+2025-08-01 16:31:53 | 💾 CSV write complete for chunk 17
+2025-08-01 16:31:54 | 🔁 Starting chunk 18 with 20 IDs
+2025-08-01 16:31:54 | 👷 Worker PID: 11804 - starting ID: 37327169
+2025-08-01 16:31:54 | 👷 Worker PID: 27464 - starting ID: 37019004
+2025-08-01 16:31:54 | 👷 Worker PID: 26720 - starting ID: 37085030
+2025-08-01 16:31:54 | 👷 Worker PID: 7888 - starting ID: 37427017
+2025-08-01 16:33:30 | 👷 Worker PID: 11804 - starting ID: 37327923
+2025-08-01 16:33:30 | 👷 Worker PID: 7888 - starting ID: 37427916
+2025-08-01 16:33:30 | 👷 Worker PID: 27464 - starting ID: 37019000
+2025-08-01 16:35:06 | 👷 Worker PID: 7888 - starting ID: 37031912
+2025-08-01 16:35:07 | 👷 Worker PID: 11804 - starting ID: 37019001
+2025-08-01 16:35:08 | 👷 Worker PID: 27464 - starting ID: 37232081
+2025-08-01 16:35:08 | 👷 Worker PID: 26720 - starting ID: 37085920
+2025-08-01 16:36:41 | 👷 Worker PID: 7888 - starting ID: 37031006
+2025-08-01 16:36:42 | 👷 Worker PID: 26720 - starting ID: 37085004
+2025-08-01 16:36:42 | 👷 Worker PID: 11804 - starting ID: 37019002
+2025-08-01 16:36:43 | 👷 Worker PID: 27464 - starting ID: 37232057
+2025-08-01 16:38:16 | 👷 Worker PID: 26720 - starting ID: 37085921
+2025-08-01 16:38:17 | 👷 Worker PID: 11804 - starting ID: 37019902
+2025-08-01 16:38:17 | 👷 Worker PID: 27464 - starting ID: 37232924
+2025-08-01 16:38:17 | 👷 Worker PID: 7888 - starting ID: 37085029
+2025-08-01 16:39:50 | ✅ Finished chunk 18 - Writing to CSV
+2025-08-01 16:39:50 | 💾 CSV write complete for chunk 18
+2025-08-01 16:39:50 | 🔁 Starting chunk 19 with 20 IDs
+2025-08-01 16:39:50 | 👷 Worker PID: 11804 - starting ID: 37085792
+2025-08-01 16:39:50 | 👷 Worker PID: 27464 - starting ID: 37020923
+2025-08-01 16:39:50 | 👷 Worker PID: 7888 - starting ID: 37020008
+2025-08-01 16:39:50 | 👷 Worker PID: 26720 - starting ID: 37020046
+2025-08-01 16:41:22 | 👷 Worker PID: 27464 - starting ID: 37020017
+2025-08-01 16:41:22 | 👷 Worker PID: 11804 - starting ID: 37416033
+2025-08-01 16:41:23 | 👷 Worker PID: 26720 - starting ID: 37020041
+2025-08-01 16:41:24 | 👷 Worker PID: 7888 - starting ID: 37020038
+2025-08-01 16:42:57 | 👷 Worker PID: 27464 - starting ID: 37020919
+2025-08-01 16:42:57 | 👷 Worker PID: 7888 - starting ID: 37020018
+2025-08-01 16:42:57 | 👷 Worker PID: 26720 - starting ID: 37020054
+
+2025-08-01 16:44:30 | 👷 Worker PID: 11804 - starting ID: 37415049
+2025-08-01 16:44:31 | 👷 Worker PID: 26720 - starting ID: 37020006
+2025-08-01 16:44:31 | 👷 Worker PID: 27464 - starting ID: 37232070
+2025-08-01 16:44:31 | 👷 Worker PID: 7888 - starting ID: 37020048
+2025-08-01 16:46:05 | 👷 Worker PID: 7888 - starting ID: 37020039
+2025-08-01 16:46:05 | 👷 Worker PID: 11804 - starting ID: 37415909
+2025-08-01 16:46:05 | 👷 Worker PID: 26720 - starting ID: 370200472025-08-01 16:46:05 | 👷 Worker PID: 27464 - starting ID: 37232925
+2025-08-01 16:47:39 | ✅ Finished chunk 19 - Writing to CSV
+2025-08-01 16:47:39 | 💾 CSV write complete for chunk 19
+2025-08-01 16:47:39 | 🔁 Starting chunk 20 with 20 IDs
+2025-08-01 16:47:39 | 👷 Worker PID: 11804 - starting ID: 37020040
+2025-08-01 16:47:39 | 👷 Worker PID: 27464 - starting ID: 37393908
+2025-08-01 16:47:39 | 👷 Worker PID: 7888 - starting ID: 37024002
+2025-08-01 16:47:39 | 👷 Worker PID: 26720 - starting ID: 37408084
+2025-08-01 16:49:14 | 👷 Worker PID: 27464 - starting ID: 37024004
+2025-08-01 16:49:14 | 👷 Worker PID: 11804 - starting ID: 37020037
+2025-08-01 16:49:15 | 👷 Worker PID: 26720 - starting ID: 37408924
+2025-08-01 16:49:15 | 👷 Worker PID: 7888 - starting ID: 37024000
+2025-08-01 16:50:49 | 👷 Worker PID: 26720 - starting ID: 37408085
+2025-08-01 16:50:51 | 👷 Worker PID: 11804 - starting ID: 37020058
+2025-08-01 16:50:51 | 👷 Worker PID: 7888 - starting ID: 37388009
+2025-08-01 16:50:52 | 👷 Worker PID: 27464 - starting ID: 37024001
+2025-08-01 16:52:24 | 👷 Worker PID: 11804 - starting ID: 37020901
+2025-08-01 16:52:25 | 👷 Worker PID: 26720 - starting ID: 37316022
+2025-08-01 16:52:26 | 👷 Worker PID: 27464 - starting ID: 37024005
+2025-08-01 16:52:27 | 👷 Worker PID: 7888 - starting ID: 37388010
+2025-08-01 16:53:58 | 👷 Worker PID: 11804 - starting ID: 37393011
+2025-08-01 16:54:00 | 👷 Worker PID: 26720 - starting ID: 37316015
+2025-08-01 16:54:04 | 👷 Worker PID: 27464 - starting ID: 37024900
+2025-08-01 16:54:04 | 👷 Worker PID: 7888 - starting ID: 37388902
+2025-08-01 16:55:38 | ✅ Finished chunk 20 - Writing to CSV
+2025-08-01 16:55:38 | 💾 CSV write complete for chunk 20
+2025-08-01 16:55:38 | 🔁 Starting chunk 21 with 20 IDs
+2025-08-01 16:55:39 | 👷 Worker PID: 11804 - starting ID: 37316906
+2025-08-01 16:55:39 | 👷 Worker PID: 27464 - starting ID: 37372150
+2025-08-01 16:55:39 | 👷 Worker PID: 7888 - starting ID: 370139085
+2025-08-01 16:57:12 | 👷 Worker PID: 26720 - starting ID: 37126016
+2025-08-01 16:57:13 | 👷 Worker PID: 7888 - starting ID: 37013006
+2025-08-01 16:57:14 | 👷 Worker PID: 11804 - starting ID: 37372130
+2025-08-01 16:57:19 | 👷 Worker PID: 27464 - starting ID: 37372135
+2025-08-01 16:58:46 | 👷 Worker PID: 26720 - starting ID: 37126011
+2025-08-01 16:58:50 | 👷 Worker PID: 7888 - starting ID: 37013914
+2025-08-01 16:58:51 | 👷 Worker PID: 11804 - starting ID: 37372131
+2025-08-01 16:58:55 | 👷 Worker PID: 27464 - starting ID: 37372136
+2025-08-01 17:00:20 | 👷 Worker PID: 26720 - starting ID: 37126908
+2025-08-01 17:00:21 | 👷 Worker PID: 7888 - starting ID: 37126009
+2025-08-01 17:00:25 | 👷 Worker PID: 11804 - starting ID: 37372132
+2025-08-01 17:00:25 | 👷 Worker PID: 27464 - starting ID: 37372134
+2025-08-01 17:01:53 | 👷 Worker PID: 26720 - starting ID: 37246038
+2025-08-01 17:01:54 | 👷 Worker PID: 7888 - starting ID: 37126010
+2025-08-01 17:01:59 | 👷 Worker PID: 11804 - starting ID: 37372133
+2025-08-01 17:01:59 | 👷 Worker PID: 27464 - starting ID: 37372922
+2025-08-01 17:03:31 | ✅ Finished chunk 21 - Writing to CSV
+2025-08-01 17:03:31 | 💾 CSV write complete for chunk 21
+2025-08-01 17:03:32 | 🔁 Starting chunk 22 with 20 IDs
+2025-08-01 17:03:32 | 👷 Worker PID: 11804 - starting ID: 37246910
+2025-08-01 17:03:32 | 👷 Worker PID: 27464 - starting ID: 37107019
+2025-08-01 17:03:32 | 👷 Worker PID: 7888 - starting ID: 37384942
+2025-08-01 17:03:32 | 👷 Worker PID: 26720 - starting ID: 37414904
+2025-08-01 17:05:04 | 👷 Worker PID: 11804 - starting ID: 37250000
+2025-08-01 17:05:04 | 👷 Worker PID: 26720 - starting ID: 37282017
+2025-08-01 17:05:05 | 👷 Worker PID: 7888 - starting ID: 37384156
+2025-08-01 17:05:07 | 👷 Worker PID: 27464 - starting ID: 37107018
+2025-08-01 17:06:36 | 👷 Worker PID: 11804 - starting ID: 37465934
+2025-08-01 17:06:40 | 👷 Worker PID: 27464 - starting ID: 37107905
+2025-08-01 17:06:40 | 👷 Worker PID: 26720 - starting ID: 37282143
+2025-08-01 17:06:40 | 👷 Worker PID: 7888 - starting ID: 37384157
+2025-08-01 17:08:04 | 👷 Worker PID: 11804 - starting ID: 37107000
+2025-08-01 17:08:12 | 👷 Worker PID: 27464 - starting ID: 37384154
+2025-08-01 17:08:13 | 👷 Worker PID: 26720 - starting ID: 37282132
+2025-08-01 17:08:14 | 👷 Worker PID: 7888 - starting ID: 37414011
+2025-08-01 17:09:41 | 👷 Worker PID: 11804 - starting ID: 37107009
+2025-08-01 17:09:46 | 👷 Worker PID: 26720 - starting ID: 37282018
+2025-08-01 17:09:48 | 👷 Worker PID: 7888 - starting ID: 37414005
+2025-08-01 17:09:48 | 👷 Worker PID: 27464 - starting ID: 37384155
+2025-08-01 17:11:19 | ✅ Finished chunk 22 - Writing to CSV
+2025-08-01 17:11:19 | 💾 CSV write complete for chunk 22
+2025-08-01 17:11:19 | 🔁 Starting chunk 23 with 20 IDs
+2025-08-01 17:11:19 | 👷 Worker PID: 11804 - starting ID: 37282936
+2025-08-01 17:11:19 | 👷 Worker PID: 27464 - starting ID: 37428358
+2025-08-01 17:11:19 | 👷 Worker PID: 7888 - starting ID: 37086012
+2025-08-01 17:11:19 | 👷 Worker PID: 26720 - starting ID: 37086902
+2025-08-01 17:12:52 | 👷 Worker PID: 26720 - starting ID: 37086016
+2025-08-01 17:12:52 | 👷 Worker PID: 11804 - starting ID: 37282019
+2025-08-01 17:12:52 | 👷 Worker PID: 7888 - starting ID: 37086010
+2025-08-01 17:12:52 | 👷 Worker PID: 27464 - starting ID: 37428983
+2025-08-01 17:14:28 | 👷 Worker PID: 27464 - starting ID: 37428466
+2025-08-01 17:14:29 | 👷 Worker PID: 26720 - starting ID: 37112001
+2025-08-01 17:14:29 | 👷 Worker PID: 11804 - starting ID: 37282937
+
+2025-08-01 17:16:03 | 👷 Worker PID: 7888 - starting ID: 37086006
+2025-08-01 17:16:03 | 👷 Worker PID: 11804 - starting ID: 37428405
+2025-08-01 17:16:04 | 👷 Worker PID: 26720 - starting ID: 37112002
+2025-08-01 17:16:05 | 👷 Worker PID: 27464 - starting ID: 37086020
+2025-08-01 17:17:37 | 👷 Worker PID: 7888 - starting ID: 37086021
+2025-08-01 17:17:38 | 👷 Worker PID: 27464 - starting ID: 37086011
+2025-08-01 17:17:38 | 👷 Worker PID: 11804 - starting ID: 37428406
+2025-08-01 17:17:39 | 👷 Worker PID: 26720 - starting ID: 37112801
+2025-08-01 17:19:16 | ✅ Finished chunk 23 - Writing to CSV
+2025-08-01 17:19:16 | 💾 CSV write complete for chunk 23
+2025-08-01 17:19:16 | 🔁 Starting chunk 24 with 20 IDs
+2025-08-01 17:19:16 | 👷 Worker PID: 11804 - starting ID: 37112003
+2025-08-01 17:19:16 | 👷 Worker PID: 27464 - starting ID: 37428253
+2025-08-01 17:19:16 | 👷 Worker PID: 26720 - starting ID: 372730002025-08-01 17:19:16 | 👷 Worker PID: 7888 - starting ID: 37235903
+
+2025-08-01 17:20:53 | 👷 Worker PID: 7888 - starting ID: 37235004
+2025-08-01 17:20:53 | 👷 Worker PID: 26720 - starting ID: 37273001
+2025-08-01 17:20:53 | 👷 Worker PID: 11804 - starting ID: 37112902
+2025-08-01 17:20:53 | 👷 Worker PID: 27464 - starting ID: 37448000
+2025-08-01 17:22:27 | 👷 Worker PID: 26720 - starting ID: 37273900
+2025-08-01 17:22:28 | 👷 Worker PID: 27464 - starting ID: 37235007
+2025-08-01 17:22:30 | 👷 Worker PID: 11804 - starting ID: 37112000
+2025-08-01 17:22:34 | 👷 Worker PID: 7888 - starting ID: 37235010
+2025-08-01 17:24:00 | 👷 Worker PID: 26720 - starting ID: 37126012
+2025-08-01 17:24:03 | 👷 Worker PID: 27464 - starting ID: 37235009
+2025-08-01 17:24:06 | 👷 Worker PID: 11804 - starting ID: 37428334
+2025-08-01 17:24:06 | 👷 Worker PID: 7888 - starting ID: 37060060
+2025-08-01 17:25:39 | 👷 Worker PID: 26720 - starting ID: 37126909
+2025-08-01 17:25:39 | 👷 Worker PID: 27464 - starting ID: 37235003
+2025-08-01 17:25:39 | 👷 Worker PID: 7888 - starting ID: 370609074
+2025-08-01 17:27:16 | ✅ Finished chunk 24 - Writing to CSV
+2025-08-01 17:27:16 | 💾 CSV write complete for chunk 24
+2025-08-01 17:27:16 | 🔁 Starting chunk 25 with 20 IDs
+2025-08-01 17:27:16 | 👷 Worker PID: 11804 - starting ID: 37428254
+2025-08-01 17:27:16 | 👷 Worker PID: 27464 - starting ID: 37384159
+2025-08-01 17:27:16 | 👷 Worker PID: 7888 - starting ID: 373840265
+2025-08-01 17:28:51 | 👷 Worker PID: 26720 - starting ID: 37296043
+2025-08-01 17:28:51 | 👷 Worker PID: 7888 - starting ID: 37384943
+2025-08-01 17:28:52 | 👷 Worker PID: 27464 - starting ID: 37384160
+2025-08-01 17:28:52 | 👷 Worker PID: 11804 - starting ID: 37428255
+2025-08-01 17:30:25 | 👷 Worker PID: 7888 - starting ID: 37465078
+2025-08-01 17:30:27 | 👷 Worker PID: 27464 - starting ID: 37384161
+2025-08-01 17:30:27 | 👷 Worker PID: 11804 - starting ID: 37428256
+2025-08-01 17:30:29 | 👷 Worker PID: 26720 - starting ID: 37296046
+2025-08-01 17:32:00 | 👷 Worker PID: 7888 - starting ID: 37465079
+2025-08-01 17:32:00 | 👷 Worker PID: 27464 - starting ID: 37384195
+2025-08-01 17:32:00 | 👷 Worker PID: 11804 - starting ID: 37428985
+2025-08-01 17:32:01 | 👷 Worker PID: 26720 - starting ID: 37296055
+2025-08-01 17:33:36 | 👷 Worker PID: 11804 - starting ID: 37384158
+2025-08-01 17:33:37 | 👷 Worker PID: 27464 - starting ID: 37384163
+2025-08-01 17:33:37 | 👷 Worker PID: 26720 - starting ID: 37296917
+2025-08-01 17:33:37 | 👷 Worker PID: 7888 - starting ID: 37465014
+2025-08-01 17:35:12 | ✅ Finished chunk 25 - Writing to CSV
+2025-08-01 17:35:13 | 💾 CSV write complete for chunk 25
+2025-08-01 17:35:13 | 🔁 Starting chunk 26 with 20 IDs
+2025-08-01 17:35:13 | 👷 Worker PID: 11804 - starting ID: 37013909
+2025-08-01 17:35:13 | 👷 Worker PID: 27464 - starting ID: 37122103
+2025-08-01 17:35:13 | 👷 Worker PID: 7888 - starting ID: 37346017
+2025-08-01 17:35:13 | 👷 Worker PID: 26720 - starting ID: 37463903
+2025-08-01 17:36:46 | 👷 Worker PID: 11804 - starting ID: 37013012
+2025-08-01 17:36:47 | 👷 Worker PID: 26720 - starting ID: 37346930
+2025-08-01 17:36:52 | 👷 Worker PID: 7888 - starting ID: 37346929
+2025-08-01 17:36:52 | 👷 Worker PID: 27464 - starting ID: 37122059
+2025-08-01 17:38:20 | 👷 Worker PID: 26720 - starting ID: 37346071
+2025-08-01 17:38:24 | 👷 Worker PID: 11804 - starting ID: 37314004
+2025-08-01 17:38:26 | 👷 Worker PID: 7888 - starting ID: 37463020
+2025-08-01 17:38:28 | 👷 Worker PID: 27464 - starting ID: 37122925
+2025-08-01 17:39:58 | 👷 Worker PID: 26720 - starting ID: 37346933
+2025-08-01 17:40:02 | 👷 Worker PID: 27464 - starting ID: 37346052
+2025-08-01 17:40:02 | 👷 Worker PID: 11804 - starting ID: 37314903
+2025-08-01 17:40:03 | 👷 Worker PID: 7888 - starting ID: 37463026
+2025-08-01 17:41:30 | 👷 Worker PID: 26720 - starting ID: 37209016
+2025-08-01 17:41:34 | 👷 Worker PID: 11804 - starting ID: 37122007
+2025-08-01 17:41:36 | 👷 Worker PID: 7888 - starting ID: 37463023
+2025-08-01 17:41:37 | 👷 Worker PID: 27464 - starting ID: 37346928
+2025-08-01 17:43:09 | ✅ Finished chunk 26 - Writing to CSV
+2025-08-01 17:43:10 | 💾 CSV write complete for chunk 26
+2025-08-01 17:43:10 | 🔁 Starting chunk 27 with 20 IDs
+2025-08-01 17:43:10 | 👷 Worker PID: 11804 - starting ID: 37209904
+2025-08-01 17:43:10 | 👷 Worker PID: 27464 - starting ID: 37287944
+2025-08-01 17:43:10 | 👷 Worker PID: 26720 - starting ID: 37462051
+25-08-01 17:43:10 | 👷 Worker PID: 7888 - starting ID: 37070004
+2025-08-01 17:44:43 | 👷 Worker PID: 11804 - starting ID: 37209003
+2025-08-01 17:44:44 | 👷 Worker PID: 27464 - starting ID: 37287089
+2025-08-01 17:44:46 | 👷 Worker PID: 26720 - starting ID: 37462018
+2025-08-01 17:44:47 | 👷 Worker PID: 7888 - starting ID: 37070008
+2025-08-01 17:46:19 | 👷 Worker PID: 11804 - starting ID: 37311054
+2025-08-01 17:46:21 | 👷 Worker PID: 7888 - starting ID: 37070009
+2025-08-01 17:46:22 | 👷 Worker PID: 27464 - starting ID: 37287951
+2025-08-01 17:46:22 | 👷 Worker PID: 26720 - starting ID: 37462913
+2025-08-01 17:47:53 | 👷 Worker PID: 26720 - starting ID: 37321036
+2025-08-01 17:47:53 | 👷 Worker PID: 27464 - starting ID: 37070000
+2025-08-01 17:47:53 | 👷 Worker PID: 7888 - starting ID: 370709059
+2025-08-01 17:49:28 | 👷 Worker PID: 11804 - starting ID: 37287049
+2025-08-01 17:49:28 | 👷 Worker PID: 7888 - starting ID: 37285000
+2025-08-01 17:49:29 | 👷 Worker PID: 27464 - starting ID: 37070003
+2025-08-01 17:49:30 | 👷 Worker PID: 26720 - starting ID: 37321028
+2025-08-01 17:51:05 | ✅ Finished chunk 27 - Writing to CSV
+2025-08-01 17:51:05 | 💾 CSV write complete for chunk 27
+2025-08-01 17:51:05 | 🔁 Starting chunk 28 with 20 IDs
+2025-08-01 17:51:05 | 👷 Worker PID: 11804 - starting ID: 37321037
+2025-08-01 17:51:05 | 👷 Worker PID: 27464 - starting ID: 37321030
+2025-08-01 17:51:05 | 👷 Worker PID: 26720 - starting ID: 3711802
+2025-08-01 17:52:38 | 👷 Worker PID: 11804 - starting ID: 37321038
+2025-08-01 17:52:38 | 👷 Worker PID: 7888 - starting ID: 37282100
+2025-08-01 17:52:38 | 👷 Worker PID: 27464 - starting ID: 37321912
+2025-08-01 17:52:39 | 👷 Worker PID: 26720 - starting ID: 37118003
+2025-08-01 17:54:13 | 👷 Worker PID: 27464 - starting ID: 37321031
+2025-08-01 17:54:14 | 👷 Worker PID: 11804 - starting ID: 37321039
+2025-08-01 17:54:15 | 👷 Worker PID: 26720 - starting ID: 37118022
+2025-08-01 17:54:17 | 👷 Worker PID: 7888 - starting ID: 37282938
+2025-08-01 17:55:48 | 👷 Worker PID: 7888 - starting ID: 37118906
+2025-08-01 17:55:48 | 👷 Worker PID: 11804 - starting ID: 37321029
+2025-08-01 17:55:49 | 👷 Worker PID: 26720 - starting ID: 37118010
+2025-08-01 17:57:23 | 👷 Worker PID: 7888 - starting ID: 37118034
+2025-08-01 17:57:23 | 👷 Worker PID: 26720 - starting ID: 37118024
+2025-08-01 17:57:23 | 👷 Worker PID: 27464 - starting ID: 37321042
+
+2025-08-01 17:59:01 | ✅ Finished chunk 28 - Writing to CSV
+2025-08-01 17:59:02 | 💾 CSV write complete for chunk 28
+2025-08-01 17:59:02 | 🔁 Starting chunk 29 with 20 IDs
+2025-08-01 17:59:02 | 👷 Worker PID: 11804 - starting ID: 37118009
+2025-08-01 17:59:02 | 👷 Worker PID: 27464 - starting ID: 37118025
+2025-08-01 17:59:02 | 👷 Worker PID: 7888 - starting ID: 37118023
+2025-08-01 17:59:02 | 👷 Worker PID: 26720 - starting ID: 37327084
+2025-08-01 18:00:37 | 👷 Worker PID: 27464 - starting ID: 37118004
+2025-08-01 18:00:37 | 👷 Worker PID: 11804 - starting ID: 37118015
+2025-08-01 18:00:37 | 👷 Worker PID: 26720 - starting ID: 3732793
+2025-08-01 18:02:12 | 👷 Worker PID: 26720 - starting ID: 37327085
+2025-08-01 18:02:13 | 👷 Worker PID: 27464 - starting ID: 37118007
+2025-08-01 18:02:13 | 👷 Worker PID: 7888 - starting ID: 37122926
+2025-08-01 18:02:13 | 👷 Worker PID: 11804 - starting ID: 37118011
+2025-08-01 18:03:47 | 👷 Worker PID: 7888 - starting ID: 37327082
+2025-08-01 18:03:47 | 👷 Worker PID: 11804 - starting ID: 37118012
+2025-08-01 18:03:47 | 👷 Worker PID: 27464 - starting ID: 37118903
+2025-08-01 18:03:48 | 👷 Worker PID: 26720 - starting ID: 37287945
+2025-08-01 18:05:19 | 👷 Worker PID: 27464 - starting ID: 37118026
+2025-08-01 18:05:21 | 👷 Worker PID: 26720 - starting ID: 37287090
+2025-08-01 18:05:25 | 👷 Worker PID: 11804 - starting ID: 37118030
+2025-08-01 18:05:28 | 👷 Worker PID: 7888 - starting ID: 37327083
+2025-08-01 18:07:02 | ✅ Finished chunk 29 - Writing to CSV
+2025-08-01 18:07:03 | 💾 CSV write complete for chunk 29
+2025-08-01 18:07:03 | 🔁 Starting chunk 30 with 20 IDs
+2025-08-01 18:07:03 | 👷 Worker PID: 11804 - starting ID: 37428257
+2025-08-01 18:07:03 | 👷 Worker PID: 27464 - starting ID: 37460064
+2025-08-01 18:07:03 | 👷 Worker PID: 26720 - starting ID: 37192021
+2025-08-01 18:08:38 | 👷 Worker PID: 7888 - starting ID: 37114009
+2025-08-01 18:08:39 | 👷 Worker PID: 26720 - starting ID: 37192015
+2025-08-01 18:08:41 | 👷 Worker PID: 11804 - starting ID: 37428379
+2025-08-01 18:08:41 | 👷 Worker PID: 27464 - starting ID: 37460920
+2025-08-01 18:10:15 | 👷 Worker PID: 27464 - starting ID: 37035009
+2025-08-01 18:10:16 | 👷 Worker PID: 26720 - starting ID: 37192909
+2025-08-01 18:10:16 | 👷 Worker PID: 11804 - starting ID: 37428259
+2025-08-01 18:10:16 | 👷 Worker PID: 7888 - starting ID: 37114012
+2025-08-01 18:11:51 | 👷 Worker PID: 26720 - starting ID: 37192006
+2025-08-01 18:11:51 | 👷 Worker PID: 11804 - starting ID: 37428260
+2025-08-01 18:11:52 | 👷 Worker PID: 7888 - starting ID: 37114030
+2025-08-01 18:11:55 | 👷 Worker PID: 27464 - starting ID: 37035906
+2025-08-01 18:13:27 | 👷 Worker PID: 11804 - starting ID: 37428986
+2025-08-01 18:13:27 | 👷 Worker PID: 27464 - starting ID: 37035017
+2025-08-01 18:13:27 | 👷 Worker PID: 7888 - starting ID: 37114916
+2025-08-01 18:13:29 | 👷 Worker PID: 26720 - starting ID: 37192026
+2025-08-01 18:15:04 | ✅ Finished chunk 30 - Writing to CSV
+2025-08-01 18:15:04 | 💾 CSV write complete for chunk 30
+2025-08-01 18:15:04 | 🔁 Starting chunk 31 with 20 IDs
+2025-08-01 18:15:04 | 👷 Worker PID: 11804 - starting ID: 37165006
+2025-08-01 18:15:04 | 👷 Worker PID: 27464 - starting ID: 37342003
+2025-08-01 18:15:04 | 👷 Worker PID: 26720 - starting ID: 372109132025-08-01 18:15:04 | 👷 Worker PID: 7888 - starting ID: 37428261
+2025-08-01 18:16:35 | 👷 Worker PID: 11804 - starting ID: 37165905
+2025-08-01 18:16:36 | 👷 Worker PID: 26720 - starting ID: 37372162
+2025-08-01 18:16:37 | 👷 Worker PID: 27464 - starting ID: 37342906
+2025-08-01 18:16:37 | 👷 Worker PID: 7888 - starting ID: 37428262
+2025-08-01 18:18:09 | 👷 Worker PID: 26720 - starting ID: 37372923
+2025-08-01 18:18:09 | 👷 Worker PID: 11804 - starting ID: 37342008
+2025-08-01 18:18:09 | 👷 Worker PID: 27464 - starting ID: 37342015
+2025-08-01 18:18:13 | 👷 Worker PID: 7888 - starting ID: 37428010
+2025-08-01 18:19:41 | 👷 Worker PID: 26720 - starting ID: 37429066
+2025-08-01 18:19:41 | 👷 Worker PID: 11804 - starting ID: 37342014
+2025-08-01 18:19:42 | 👷 Worker PID: 27464 - starting ID: 37461011
+2025-08-01 18:19:46 | 👷 Worker PID: 7888 - starting ID: 37428987
+2025-08-01 18:21:09 | 👷 Worker PID: 11804 - starting ID: 37342905
+2025-08-01 18:21:10 | 👷 Worker PID: 7888 - starting ID: 37210003
+2025-08-01 18:21:20 | 👷 Worker PID: 26720 - starting ID: 37429924
+2025-08-01 18:21:24 | 👷 Worker PID: 27464 - starting ID: 37461915
+2025-08-01 18:22:49 | ✅ Finished chunk 31 - Writing to CSV
+2025-08-01 18:22:50 | 💾 CSV write complete for chunk 31
+2025-08-01 18:22:50 | 🔁 Starting chunk 32 with 20 IDs
+2025-08-01 18:22:50 | 👷 Worker PID: 11804 - starting ID: 37440006
+2025-08-01 18:22:50 | 👷 Worker PID: 7888 - starting ID: 37210916
+2025-08-01 18:22:50 | 👷 Worker PID: 27464 - starting ID: 373210032025-08-01 18:22:50 | 👷 Worker PID: 26720 - starting ID: 37467911
+2025-08-01 18:24:23 | 👷 Worker PID: 26720 - starting ID: 37449000
+2025-08-01 18:24:24 | 👷 Worker PID: 7888 - starting ID: 37210010
+2025-08-01 18:24:28 | 👷 Worker PID: 27464 - starting ID: 37321000
+2025-08-01 18:24:28 | 👷 Worker PID: 11804 - starting ID: 37440907
+2025-08-01 18:25:56 | 👷 Worker PID: 26720 - starting ID: 37449003
+2025-08-01 18:26:00 | 👷 Worker PID: 11804 - starting ID: 37321002
+2025-08-01 18:26:01 | 👷 Worker PID: 7888 - starting ID: 37210914
+2025-08-01 18:26:04 | 👷 Worker PID: 27464 - starting ID: 37384210
+2025-08-01 18:27:35 | 👷 Worker PID: 7888 - starting ID: 37467003
+2025-08-01 18:27:35 | 👷 Worker PID: 26720 - starting ID: 37449001
+2025-08-01 18:27:36 | 👷 Worker PID: 27464 - starting ID: 37384949
+2025-08-01 18:27:38 | 👷 Worker PID: 11804 - starting ID: 37321006
+2025-08-01 18:29:11 | 👷 Worker PID: 27464 - starting ID: 37384230
+2025-08-01 18:29:11 | 👷 Worker PID: 26720 - starting ID: 37449002
+2025-08-01 18:29:11 | 👷 Worker PID: 7888 - starting ID: 37467054
+2025-08-01 18:29:11 | 👷 Worker PID: 11804 - starting ID: 37321901
+2025-08-01 18:30:46 | ✅ Finished chunk 32 - Writing to CSV
+2025-08-01 18:30:47 | 💾 CSV write complete for chunk 32
+2025-08-01 18:30:47 | 🔁 Starting chunk 33 with 20 IDs
+2025-08-01 18:30:47 | 👷 Worker PID: 11804 - starting ID: 37449901
+2025-08-01 18:30:47 | 👷 Worker PID: 27464 - starting ID: 37444007
+2025-08-01 18:30:47 | 👷 Worker PID: 7888 - starting ID: 37028903
+2025-08-01 18:30:47 | 👷 Worker PID: 26720 - starting ID: 37429042
+2025-08-01 18:32:22 | 👷 Worker PID: 7888 - starting ID: 37466006
+2025-08-01 18:32:23 | 👷 Worker PID: 11804 - starting ID: 37467031
+2025-08-01 18:32:26 | 👷 Worker PID: 27464 - starting ID: 37444752
+2025-08-01 18:32:26 | 👷 Worker PID: 26720 - starting ID: 37429918
+2025-08-01 18:33:56 | 👷 Worker PID: 11804 - starting ID: 37467912
+2025-08-01 18:33:56 | 👷 Worker PID: 7888 - starting ID: 37466008
+2025-08-01 18:33:58 | 👷 Worker PID: 27464 - starting ID: 37444905
+2025-08-01 18:33:59 | 👷 Worker PID: 26720 - starting ID: 37384164
+2025-08-01 18:35:49 | 👷 Worker PID: 27464 - starting ID: 37287952
+2025-08-01 18:35:49 | 👷 Worker PID: 7888 - starting ID: 37466911
+2025-08-01 18:35:49 | 👷 Worker PID: 11804 - starting ID: 37467000
+2025-08-01 18:35:56 | 👷 Worker PID: 26720 - starting ID: 37384165
+2025-08-01 18:38:13 | 👷 Worker PID: 27464 - starting ID: 37028003
+2025-08-01 18:38:14 | 👷 Worker PID: 7888 - starting ID: 37429923
+2025-08-01 18:38:20 | 👷 Worker PID: 11804 - starting ID: 37444751
+2025-08-01 18:38:24 | 👷 Worker PID: 26720 - starting ID: 37384166
+2025-08-01 18:40:14 | ✅ Finished chunk 33 - Writing to CSV
+2025-08-01 18:40:14 | 💾 CSV write complete for chunk 33
+2025-08-01 18:40:14 | 🔁 Starting chunk 34 with 20 IDs
+2025-08-01 18:40:15 | 👷 Worker PID: 11804 - starting ID: 37384167
+2025-08-01 18:40:15 | 👷 Worker PID: 27464 - starting ID: 37384171
+2025-08-01 18:40:15 | 👷 Worker PID: 26720 - starting ID: 3737101
+2025-08-01 18:41:47 | 👷 Worker PID: 7888 - starting ID: 37465038
+2025-08-01 18:41:47 | 👷 Worker PID: 26720 - starting ID: 37371912
+2025-08-01 18:41:47 | 👷 Worker PID: 11804 - starting ID: 37384168
+
+2025-08-01 18:43:20 | 👷 Worker PID: 26720 - starting ID: 37086018
+2025-08-01 18:43:21 | 👷 Worker PID: 27464 - starting ID: 37384172
+2025-08-01 18:43:21 | 👷 Worker PID: 11804 - starting ID: 37384196
+2025-08-01 18:43:21 | 👷 Worker PID: 7888 - starting ID: 37465936
+2025-08-01 18:44:55 | 👷 Worker PID: 7888 - starting ID: 37465019
+2025-08-01 18:44:56 | 👷 Worker PID: 26720 - starting ID: 37086023
+2025-08-01 18:44:56 | 👷 Worker PID: 11804 - starting ID: 37384169
+2025-08-01 18:46:29 | 👷 Worker PID: 11804 - starting ID: 37384170
+2025-08-01 18:46:29 | 👷 Worker PID: 27464 - starting ID: 37465037
+2025-08-01 18:46:29 | 👷 Worker PID: 7888 - starting ID: 374650264
+
+2025-08-01 18:48:02 | ✅ Finished chunk 34 - Writing to CSV
+2025-08-01 18:48:03 | 💾 CSV write complete for chunk 34
+2025-08-01 18:48:03 | 🔁 Starting chunk 35 with 20 IDs
+2025-08-01 18:48:03 | 👷 Worker PID: 11804 - starting ID: 37086005
+2025-08-01 18:48:03 | 👷 Worker PID: 27464 - starting ID: 37086903
+2025-08-01 18:48:03 | 👷 Worker PID: 7888 - starting ID: 37441026
+2025-08-01 18:48:03 | 👷 Worker PID: 26720 - starting ID: 37209905
+2025-08-01 18:49:35 | 👷 Worker PID: 11804 - starting ID: 37086025
+2025-08-01 18:49:35 | 👷 Worker PID: 26720 - starting ID: 37209001
+2025-08-01 18:49:36 | 👷 Worker PID: 27464 - starting ID: 37441005
+2025-08-01 18:49:36 | 👷 Worker PID: 7888 - starting ID: 37441925
+2025-08-01 18:51:09 | 👷 Worker PID: 7888 - starting ID: 37441793
+2025-08-01 18:51:10 | 👷 Worker PID: 11804 - starting ID: 37086017
+2025-08-01 18:51:11 | 👷 Worker PID: 27464 - starting ID: 37441002
+2025-08-01 18:51:12 | 👷 Worker PID: 26720 - starting ID: 37439001
+2025-08-01 18:52:40 | 👷 Worker PID: 7888 - starting ID: 37441013
+2025-08-01 18:52:42 | 👷 Worker PID: 11804 - starting ID: 37086019
+2025-08-01 18:52:46 | 👷 Worker PID: 27464 - starting ID: 37441004
+2025-08-01 18:52:48 | 👷 Worker PID: 26720 - starting ID: 37439914
+2025-08-01 18:54:13 | 👷 Worker PID: 7888 - starting ID: 37209004
+2025-08-01 18:54:14 | 👷 Worker PID: 11804 - starting ID: 37086004
+2025-08-01 18:54:19 | 👷 Worker PID: 26720 - starting ID: 37439016
+2025-08-01 18:54:19 | 👷 Worker PID: 27464 - starting ID: 37441011
+2025-08-01 18:55:50 | ✅ Finished chunk 35 - Writing to CSV
+2025-08-01 18:55:51 | 💾 CSV write complete for chunk 35
+2025-08-01 18:55:51 | 🔁 Starting chunk 36 with 20 IDs
+2025-08-01 18:55:51 | 👷 Worker PID: 11804 - starting ID: 37439915
+2025-08-01 18:55:51 | 👷 Worker PID: 27464 - starting ID: 37296045
+2025-08-01 18:55:51 | 👷 Worker PID: 7888 - starting ID: 37371005
+2025-08-01 18:55:51 | 👷 Worker PID: 26720 - starting ID: 37165906
+2025-08-01 18:57:25 | 👷 Worker PID: 11804 - starting ID: 37109036
+2025-08-01 18:57:25 | 👷 Worker PID: 26720 - starting ID: 37165002
+2025-08-01 18:57:26 | 👷 Worker PID: 7888 - starting ID: 37361003
+2025-08-01 18:57:26 | 👷 Worker PID: 27464 - starting ID: 37296053
+2025-08-01 18:59:02 | 👷 Worker PID: 26720 - starting ID: 37428486
+2025-08-01 18:59:02 | 👷 Worker PID: 27464 - starting ID: 37296918
+2025-08-01 18:59:02 | 👷 Worker PID: 7888 - starting ID: 373619079
+2025-08-01 19:00:38 | 👷 Worker PID: 27464 - starting ID: 37371002
+2025-08-01 19:00:38 | 👷 Worker PID: 7888 - starting ID: 37228117
+2025-08-01 19:01:27 | 👷 Worker PID: 7888 - starting ID: 37228956
+2025-08-01 19:01:27 | 👷 Worker PID: 27464 - starting ID: 37371904
+2025-08-04 08:03:04 | 🔁 Starting chunk 1 with 20 IDs
+2025-08-04 08:03:04 | 👷 Worker PID: 37848 - starting ID: 37371005
+2025-08-04 08:03:04 | 👷 Worker PID: 29588 - starting ID: 37439915
+2025-08-04 08:03:15 | 👷 Worker PID: 29588 - starting ID: 37109036
+2025-08-04 08:03:16 | 👷 Worker PID: 37848 - starting ID: 37361003
+2025-08-04 08:03:27 | 👷 Worker PID: 29588 - starting ID: 37109909
+2025-08-04 08:03:28 | 👷 Worker PID: 37848 - starting ID: 37361907
+2025-08-04 08:03:38 | 👷 Worker PID: 29588 - starting ID: 37296044
+2025-08-04 08:03:40 | 👷 Worker PID: 37848 - starting ID: 37228117
+2025-08-04 08:03:52 | 👷 Worker PID: 29588 - starting ID: 37296034
+2025-08-04 08:03:52 | 👷 Worker PID: 37848 - starting ID: 37228956
+2025-08-04 08:04:03 | 👷 Worker PID: 37848 - starting ID: 37165906
+2025-08-04 08:04:03 | 👷 Worker PID: 29588 - starting ID: 37296045
+2025-08-04 08:04:14 | 👷 Worker PID: 37848 - starting ID: 37165002
+2025-08-04 08:04:15 | 👷 Worker PID: 29588 - starting ID: 37296053
+2025-08-04 08:04:28 | 👷 Worker PID: 37848 - starting ID: 37428486
+2025-08-04 08:04:29 | 👷 Worker PID: 29588 - starting ID: 37296918
+2025-08-04 08:04:40 | 👷 Worker PID: 37848 - starting ID: 37428289
+2025-08-04 08:04:42 | 👷 Worker PID: 29588 - starting ID: 37371002
+2025-08-04 08:04:53 | 👷 Worker PID: 37848 - starting ID: 37428263
+2025-08-04 08:04:53 | 👷 Worker PID: 29588 - starting ID: 37371904
+2025-08-04 08:05:05 | ✅ Finished chunk 1 - Writing to CSV
+2025-08-04 08:05:05 | 💾 CSV write complete for chunk 1
+2025-08-04 08:05:05 | 🔁 Starting chunk 2 with 20 IDs
+2025-08-04 08:05:05 | 👷 Worker PID: 29588 - starting ID: 37428435
+2025-08-04 08:05:05 | 👷 Worker PID: 37848 - starting ID: 37467058
+2025-08-04 08:05:16 | 👷 Worker PID: 37848 - starting ID: 37467009
+2025-08-04 08:05:16 | 👷 Worker PID: 29588 - starting ID: 37428439
+2025-08-04 08:05:27 | 👷 Worker PID: 37848 - starting ID: 37467029
+2025-08-04 08:05:29 | 👷 Worker PID: 29588 - starting ID: 37428474
+2025-08-04 08:05:38 | 👷 Worker PID: 37848 - starting ID: 37467059
+2025-08-04 08:05:40 | 👷 Worker PID: 29588 - starting ID: 37428988
+2025-08-04 08:05:50 | 👷 Worker PID: 37848 - starting ID: 37467060
+2025-08-04 08:05:52 | 👷 Worker PID: 29588 - starting ID: 37439018
+2025-08-04 08:06:02 | 👷 Worker PID: 37848 - starting ID: 37467030
+2025-08-04 08:06:04 | 👷 Worker PID: 29588 - starting ID: 37439916
+2025-08-04 08:06:14 | 👷 Worker PID: 37848 - starting ID: 37467913
+2025-08-04 08:06:15 | 👷 Worker PID: 29588 - starting ID: 37028900
+2025-08-04 08:06:26 | 👷 Worker PID: 37848 - starting ID: 37467061
+2025-08-04 08:06:28 | 👷 Worker PID: 29588 - starting ID: 37467056
+2025-08-04 08:06:44 | 👷 Worker PID: 37848 - starting ID: 37467062
+2025-08-04 08:06:45 | 👷 Worker PID: 29588 - starting ID: 37467057
+2025-08-04 08:06:58 | 👷 Worker PID: 37848 - starting ID: 37467063
+2025-08-04 08:07:01 | 👷 Worker PID: 29588 - starting ID: 37467026
+2025-08-04 08:07:11 | ✅ Finished chunk 2 - Writing to CSV
+2025-08-04 08:07:11 | 💾 CSV write complete for chunk 2
+2025-08-04 08:07:11 | 🔁 Starting chunk 3 with 20 IDs
+2025-08-04 08:07:11 | 👷 Worker PID: 29588 - starting ID: 37467028
+2025-08-04 08:07:11 | 👷 Worker PID: 37848 - starting ID: 37359004
+2025-08-04 08:07:22 | 👷 Worker PID: 29588 - starting ID: 37311243
+2025-08-04 08:07:22 | 👷 Worker PID: 37848 - starting ID: 37359003
+2025-08-04 08:07:34 | 👷 Worker PID: 29588 - starting ID: 37311229
+2025-08-04 08:07:34 | 👷 Worker PID: 37848 - starting ID: 37359901
+2025-08-04 08:07:45 | 👷 Worker PID: 37848 - starting ID: 37359000
+2025-08-04 08:07:45 | 👷 Worker PID: 29588 - starting ID: 37311967
+2025-08-04 08:07:56 | 👷 Worker PID: 37848 - starting ID: 37255000
+2025-08-04 08:07:57 | 👷 Worker PID: 29588 - starting ID: 37311230
+2025-08-04 08:08:08 | 👷 Worker PID: 37848 - starting ID: 37255015
+2025-08-04 08:08:10 | 👷 Worker PID: 29588 - starting ID: 37311968
+2025-08-04 08:08:22 | 👷 Worker PID: 37848 - starting ID: 37255907
+2025-08-04 08:08:23 | 👷 Worker PID: 29588 - starting ID: 37460080
+2025-08-04 08:08:33 | 👷 Worker PID: 37848 - starting ID: 37118904
+2025-08-04 08:08:34 | 👷 Worker PID: 29588 - starting ID: 37460921
+2025-08-04 08:08:44 | 👷 Worker PID: 37848 - starting ID: 37118002
+2025-08-04 08:08:45 | 👷 Worker PID: 29588 - starting ID: 37359001
+2025-08-04 08:08:57 | 👷 Worker PID: 37848 - starting ID: 37316016
+2025-08-04 08:08:57 | 👷 Worker PID: 29588 - starting ID: 37359002
+2025-08-04 08:09:10 | ✅ Finished chunk 3 - Writing to CSV
+2025-08-04 08:09:10 | 💾 CSV write complete for chunk 3
+2025-08-04 08:09:10 | 🔁 Starting chunk 4 with 20 IDs
+2025-08-04 08:09:10 | 👷 Worker PID: 29588 - starting ID: 37316001
+2025-08-04 08:09:10 | 👷 Worker PID: 37848 - starting ID: 37271000
+2025-08-04 08:09:21 | 👷 Worker PID: 37848 - starting ID: 37271001
+2025-08-04 08:09:21 | 👷 Worker PID: 29588 - starting ID: 37316017
+2025-08-04 08:09:32 | 👷 Worker PID: 29588 - starting ID: 37316900
+2025-08-04 08:09:32 | 👷 Worker PID: 37848 - starting ID: 37271900
+2025-08-04 08:09:43 | 👷 Worker PID: 29588 - starting ID: 37316018
+2025-08-04 08:09:43 | 👷 Worker PID: 37848 - starting ID: 37271004
+2025-08-04 08:09:55 | 👷 Worker PID: 37848 - starting ID: 37232076
+2025-08-04 08:09:55 | 👷 Worker PID: 29588 - starting ID: 37337073
+2025-08-04 08:10:10 | 👷 Worker PID: 37848 - starting ID: 37232092
+2025-08-04 08:10:10 | 👷 Worker PID: 29588 - starting ID: 37337074
+2025-08-04 08:10:22 | 👷 Worker PID: 29588 - starting ID: 37337075
+2025-08-04 08:10:23 | 👷 Worker PID: 37848 - starting ID: 37232926
+2025-08-04 08:10:34 | 👷 Worker PID: 37848 - starting ID: 37232071
+2025-08-04 08:10:34 | 👷 Worker PID: 29588 - starting ID: 37337066
+2025-08-04 08:10:46 | 👷 Worker PID: 37848 - starting ID: 37232093
+2025-08-04 08:10:46 | 👷 Worker PID: 29588 - starting ID: 37337076
+2025-08-04 08:10:57 | 👷 Worker PID: 37848 - starting ID: 37337002
+2025-08-04 08:10:57 | 👷 Worker PID: 29588 - starting ID: 37337904
+2025-08-04 08:11:09 | ✅ Finished chunk 4 - Writing to CSV
+2025-08-04 08:11:09 | 💾 CSV write complete for chunk 4
+2025-08-04 08:11:09 | 🔁 Starting chunk 5 with 20 IDs
+2025-08-04 08:11:09 | 👷 Worker PID: 29588 - starting ID: 37337077
+2025-08-04 08:11:09 | 👷 Worker PID: 37848 - starting ID: 37287103
+2025-08-04 08:11:26 | 👷 Worker PID: 37848 - starting ID: 37287046
+2025-08-04 08:11:26 | 👷 Worker PID: 29588 - starting ID: 37337003
+2025-08-04 08:11:37 | 👷 Worker PID: 37848 - starting ID: 37287902
+2025-08-04 08:11:37 | 👷 Worker PID: 29588 - starting ID: 37337907
+2025-08-04 08:11:48 | 👷 Worker PID: 29588 - starting ID: 37311164
+2025-08-04 08:11:48 | 👷 Worker PID: 37848 - starting ID: 37381011
+2025-08-04 08:12:00 | 👷 Worker PID: 37848 - starting ID: 37381909
+2025-08-04 08:12:00 | 👷 Worker PID: 29588 - starting ID: 37311950
+2025-08-04 08:12:11 | 👷 Worker PID: 37848 - starting ID: 37469004
+2025-08-04 08:12:11 | 👷 Worker PID: 29588 - starting ID: 37282006
+2025-08-04 08:12:23 | 👷 Worker PID: 37848 - starting ID: 37469907
+2025-08-04 08:12:23 | 👷 Worker PID: 29588 - starting ID: 37282101
+2025-08-04 08:12:32 | 👷 Worker PID: 37848 - starting ID: 37404753
+2025-08-04 08:12:36 | 👷 Worker PID: 29588 - starting ID: 37282939
+2025-08-04 08:12:43 | 👷 Worker PID: 37848 - starting ID: 37404791
+2025-08-04 08:12:47 | 👷 Worker PID: 29588 - starting ID: 37232028
+2025-08-04 08:12:55 | 👷 Worker PID: 37848 - starting ID: 37404754
+2025-08-04 08:12:59 | 👷 Worker PID: 29588 - starting ID: 37232927
+2025-08-04 08:13:09 | ✅ Finished chunk 5 - Writing to CSV
+2025-08-04 08:13:09 | 💾 CSV write complete for chunk 5
+2025-08-04 08:13:09 | 🔁 Starting chunk 6 with 20 IDs
+2025-08-04 08:13:09 | 👷 Worker PID: 29588 - starting ID: 37404755
+2025-08-04 08:13:09 | 👷 Worker PID: 37848 - starting ID: 37464906
+2025-08-04 08:13:20 | 👷 Worker PID: 29588 - starting ID: 37404756
+2025-08-04 08:13:20 | 👷 Worker PID: 37848 - starting ID: 37464912
+2025-08-04 08:13:31 | 👷 Worker PID: 29588 - starting ID: 37404757
+2025-08-04 08:13:32 | 👷 Worker PID: 37848 - starting ID: 37464002
+2025-08-04 08:13:43 | 👷 Worker PID: 29588 - starting ID: 37404758
+2025-08-04 08:13:44 | 👷 Worker PID: 37848 - starting ID: 37464009
+2025-08-04 08:13:55 | 👷 Worker PID: 29588 - starting ID: 37404759
+2025-08-04 08:13:56 | 👷 Worker PID: 37848 - starting ID: 37464907
+2025-08-04 08:14:06 | 👷 Worker PID: 29588 - starting ID: 37404760
+2025-08-04 08:14:07 | 👷 Worker PID: 37848 - starting ID: 37018038
+2025-08-04 08:14:18 | 👷 Worker PID: 29588 - starting ID: 37404909
+2025-08-04 08:14:19 | 👷 Worker PID: 37848 - starting ID: 37018914
+2025-08-04 08:14:29 | 👷 Worker PID: 29588 - starting ID: 37404761
+2025-08-04 08:14:30 | 👷 Worker PID: 37848 - starting ID: 37017000
+2025-08-04 08:14:40 | 👷 Worker PID: 29588 - starting ID: 37464911
+2025-08-04 08:14:42 | 👷 Worker PID: 37848 - starting ID: 37415027
+2025-08-04 08:14:51 | 👷 Worker PID: 29588 - starting ID: 37464003
+2025-08-04 08:14:54 | 👷 Worker PID: 37848 - starting ID: 37415910
+2025-08-04 08:15:05 | ✅ Finished chunk 6 - Writing to CSV
+2025-08-04 08:15:05 | 💾 CSV write complete for chunk 6
+2025-08-04 08:15:05 | 🔁 Starting chunk 7 with 20 IDs
+2025-08-04 08:15:05 | 👷 Worker PID: 29588 - starting ID: 37440000
+2025-08-04 08:15:05 | 👷 Worker PID: 37848 - starting ID: 37394003
+2025-08-04 08:15:19 | 👷 Worker PID: 29588 - starting ID: 37440015
+2025-08-04 08:15:19 | 👷 Worker PID: 37848 - starting ID: 37394004
+2025-08-04 08:15:30 | 👷 Worker PID: 29588 - starting ID: 37440017
+2025-08-04 08:15:30 | 👷 Worker PID: 37848 - starting ID: 37394005
+2025-08-04 08:15:41 | 👷 Worker PID: 37848 - starting ID: 37394001
+2025-08-04 08:15:41 | 👷 Worker PID: 29588 - starting ID: 37440004
+2025-08-04 08:15:52 | 👷 Worker PID: 37848 - starting ID: 37394901
+2025-08-04 08:15:53 | 👷 Worker PID: 29588 - starting ID: 37440014
+2025-08-04 08:16:03 | 👷 Worker PID: 37848 - starting ID: 37428989
+2025-08-04 08:16:05 | 👷 Worker PID: 29588 - starting ID: 37440901
+2025-08-04 08:16:14 | 👷 Worker PID: 37848 - starting ID: 37428264
+2025-08-04 08:16:16 | 👷 Worker PID: 29588 - starting ID: 37453750
+2025-08-04 08:16:27 | 👷 Worker PID: 37848 - starting ID: 37288900
+2025-08-04 08:16:27 | 👷 Worker PID: 29588 - starting ID: 37453901
+2025-08-04 08:16:38 | 👷 Worker PID: 37848 - starting ID: 37109037
+2025-08-04 08:16:39 | 👷 Worker PID: 29588 - starting ID: 37453001
+2025-08-04 08:16:50 | 👷 Worker PID: 37848 - starting ID: 37109910
+2025-08-04 08:16:50 | 👷 Worker PID: 29588 - starting ID: 37394000
+2025-08-04 08:17:02 | ✅ Finished chunk 7 - Writing to CSV
+2025-08-04 08:17:02 | 💾 CSV write complete for chunk 7
+2025-08-04 08:17:02 | 🔁 Starting chunk 8 with 20 IDs
+2025-08-04 08:17:02 | 👷 Worker PID: 29588 - starting ID: 37428336
+2025-08-04 08:17:02 | 👷 Worker PID: 37848 - starting ID: 37428431
+2025-08-04 08:17:14 | 👷 Worker PID: 37848 - starting ID: 37428266
+2025-08-04 08:17:15 | 👷 Worker PID: 29588 - starting ID: 37428398
+2025-08-04 08:17:24 | 👷 Worker PID: 37848 - starting ID: 37428273
+2025-08-04 08:17:26 | 👷 Worker PID: 29588 - starting ID: 37428331
+2025-08-04 08:17:36 | 👷 Worker PID: 37848 - starting ID: 37428426
+2025-08-04 08:17:37 | 👷 Worker PID: 29588 - starting ID: 37428380
+2025-08-04 08:17:47 | 👷 Worker PID: 37848 - starting ID: 37428427
+2025-08-04 08:17:48 | 👷 Worker PID: 29588 - starting ID: 37428425
+2025-08-04 08:17:59 | 👷 Worker PID: 37848 - starting ID: 37428383
+2025-08-04 08:18:00 | 👷 Worker PID: 29588 - starting ID: 37428442
+2025-08-04 08:18:11 | 👷 Worker PID: 37848 - starting ID: 37428268
+2025-08-04 08:18:12 | 👷 Worker PID: 29588 - starting ID: 37428265
+2025-08-04 08:18:22 | 👷 Worker PID: 37848 - starting ID: 37428404
+2025-08-04 08:18:23 | 👷 Worker PID: 29588 - starting ID: 37428399
+2025-08-04 08:18:34 | 👷 Worker PID: 37848 - starting ID: 37428428
+2025-08-04 08:18:35 | 👷 Worker PID: 29588 - starting ID: 37428443
+2025-08-04 08:18:46 | 👷 Worker PID: 37848 - starting ID: 37428345
+2025-08-04 08:18:46 | 👷 Worker PID: 29588 - starting ID: 37428396
+2025-08-04 08:18:57 | ✅ Finished chunk 8 - Writing to CSV
+2025-08-04 08:18:57 | 💾 CSV write complete for chunk 8
+2025-08-04 08:18:57 | 🔁 Starting chunk 9 with 20 IDs
+2025-08-04 08:18:58 | 👷 Worker PID: 29588 - starting ID: 37428390
+2025-08-04 08:18:58 | 👷 Worker PID: 37848 - starting ID: 37428267
+2025-08-04 08:19:09 | 👷 Worker PID: 37848 - starting ID: 37428433
+2025-08-04 08:19:09 | 👷 Worker PID: 29588 - starting ID: 37428269
+2025-08-04 08:19:21 | 👷 Worker PID: 37848 - starting ID: 37428462
+2025-08-04 08:19:21 | 👷 Worker PID: 29588 - starting ID: 37428429
+2025-08-04 08:19:32 | 👷 Worker PID: 37848 - starting ID: 37428274
+2025-08-04 08:19:32 | 👷 Worker PID: 29588 - starting ID: 37428270
+2025-08-04 08:19:43 | 👷 Worker PID: 37848 - starting ID: 37428275
+2025-08-04 08:19:43 | 👷 Worker PID: 29588 - starting ID: 37428430
+2025-08-04 08:19:54 | 👷 Worker PID: 29588 - starting ID: 37428432
+2025-08-04 08:19:54 | 👷 Worker PID: 37848 - starting ID: 37428276
+2025-08-04 08:20:09 | 👷 Worker PID: 37848 - starting ID: 37428347
+2025-08-04 08:20:10 | 👷 Worker PID: 29588 - starting ID: 37428990
+2025-08-04 08:20:19 | 👷 Worker PID: 37848 - starting ID: 37428424
+2025-08-04 08:20:22 | 👷 Worker PID: 29588 - starting ID: 37428346
+2025-08-04 08:20:31 | 👷 Worker PID: 37848 - starting ID: 37428991
+2025-08-04 08:20:33 | 👷 Worker PID: 29588 - starting ID: 37428271
+2025-08-04 08:20:42 | 👷 Worker PID: 37848 - starting ID: 37428277
+2025-08-04 08:20:44 | 👷 Worker PID: 29588 - starting ID: 37428272
+2025-08-04 08:20:55 | ✅ Finished chunk 9 - Writing to CSV
+2025-08-04 08:20:56 | 💾 CSV write complete for chunk 9
+2025-08-04 08:20:56 | 🔁 Starting chunk 10 with 20 IDs
+2025-08-04 08:20:56 | 👷 Worker PID: 29588 - starting ID: 37415005
+2025-08-04 08:20:56 | 👷 Worker PID: 37848 - starting ID: 37464006
+2025-08-04 08:21:07 | 👷 Worker PID: 37848 - starting ID: 37464005
+2025-08-04 08:21:07 | 👷 Worker PID: 29588 - starting ID: 37415023
+2025-08-04 08:21:19 | 👷 Worker PID: 37848 - starting ID: 37464908
+2025-08-04 08:21:19 | 👷 Worker PID: 29588 - starting ID: 37415024
+2025-08-04 08:21:29 | 👷 Worker PID: 37848 - starting ID: 37224004
+2025-08-04 08:21:30 | 👷 Worker PID: 29588 - starting ID: 37415911
+2025-08-04 08:21:41 | 👷 Worker PID: 29588 - starting ID: 37468001
+2025-08-04 08:21:41 | 👷 Worker PID: 37848 - starting ID: 37224917
+2025-08-04 08:21:52 | 👷 Worker PID: 37848 - starting ID: 37224029
+2025-08-04 08:21:52 | 👷 Worker PID: 29588 - starting ID: 37468901
+2025-08-04 08:22:04 | 👷 Worker PID: 37848 - starting ID: 37415000
+2025-08-04 08:22:04 | 👷 Worker PID: 29588 - starting ID: 37468000
+2025-08-04 08:22:15 | 👷 Worker PID: 29588 - starting ID: 37122071
+2025-08-04 08:22:16 | 👷 Worker PID: 37848 - starting ID: 37311165
+2025-08-04 08:22:27 | 👷 Worker PID: 29588 - starting ID: 37122927
+2025-08-04 08:22:27 | 👷 Worker PID: 37848 - starting ID: 37311951
+2025-08-04 08:22:38 | 👷 Worker PID: 29588 - starting ID: 37464007
+2025-08-04 08:22:38 | 👷 Worker PID: 37848 - starting ID: 37464909
+2025-08-04 08:22:50 | ✅ Finished chunk 10 - Writing to CSV
+2025-08-04 08:22:50 | 💾 CSV write complete for chunk 10
+2025-08-04 08:22:50 | 🔁 Starting chunk 11 with 20 IDs
+2025-08-04 08:22:50 | 👷 Worker PID: 29588 - starting ID: 37464001
+2025-08-04 08:22:50 | 👷 Worker PID: 37848 - starting ID: 37027906
+2025-08-04 08:23:01 | 👷 Worker PID: 37848 - starting ID: 37027909
+2025-08-04 08:23:01 | 👷 Worker PID: 29588 - starting ID: 37038013
+2025-08-04 08:23:13 | 👷 Worker PID: 37848 - starting ID: 37428409
+2025-08-04 08:23:13 | 👷 Worker PID: 29588 - starting ID: 37038014
+2025-08-04 08:23:23 | 👷 Worker PID: 37848 - starting ID: 37428992
+2025-08-04 08:23:25 | 👷 Worker PID: 29588 - starting ID: 37038015
+2025-08-04 08:23:34 | 👷 Worker PID: 37848 - starting ID: 37445910
+2025-08-04 08:23:37 | 👷 Worker PID: 29588 - starting ID: 37038016
+2025-08-04 08:23:45 | 👷 Worker PID: 37848 - starting ID: 37445019
+2025-08-04 08:23:49 | 👷 Worker PID: 29588 - starting ID: 37038017
+2025-08-04 08:23:57 | 👷 Worker PID: 37848 - starting ID: 37445002
+2025-08-04 08:24:01 | 👷 Worker PID: 29588 - starting ID: 37038902
+2025-08-04 08:24:07 | 👷 Worker PID: 37848 - starting ID: 37337021
+2025-08-04 08:24:12 | 👷 Worker PID: 29588 - starting ID: 37038006
+2025-08-04 08:24:21 | 👷 Worker PID: 37848 - starting ID: 37337037
+2025-08-04 08:24:22 | 👷 Worker PID: 29588 - starting ID: 37027011
+2025-08-04 08:24:32 | 👷 Worker PID: 37848 - starting ID: 37337022
+2025-08-04 08:24:34 | 👷 Worker PID: 29588 - starting ID: 37027006
+2025-08-04 08:24:45 | ✅ Finished chunk 11 - Writing to CSV
+2025-08-04 08:24:45 | 💾 CSV write complete for chunk 11
+2025-08-04 08:24:45 | 🔁 Starting chunk 12 with 20 IDs
+2025-08-04 08:24:45 | 👷 Worker PID: 29588 - starting ID: 37337938
+2025-08-04 08:24:45 | 👷 Worker PID: 37848 - starting ID: 37228124
