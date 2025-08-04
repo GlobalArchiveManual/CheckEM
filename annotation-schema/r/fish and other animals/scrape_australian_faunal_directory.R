@@ -1,8 +1,3 @@
-# ─────────────────────────────────────────────────────
-# Config: Set to "laptop" or "desktop" on each machine
-# ─────────────────────────────────────────────────────
-mode <- "desktop"  # ← Change to "laptop" or "desktop"
-
 # Load packages
 library(rvest)
 library(stringr)
@@ -23,7 +18,6 @@ log_message <- function(...) {
   write(msg, file = log_file, append = TRUE)
 }
 
-
 # -------------------------------------------------------------------
 # Helper: safely extract the next sibling’s text from an <h4> element
 # -------------------------------------------------------------------
@@ -42,7 +36,7 @@ get_regions <- function(id, pause = 0.5) {
   Sys.sleep(pause)
   
   page <- tryCatch(
-    read_html(url, timeout = 20),
+    read_html(url, timeout = 50),
     error = function(e) {
       attr(e, "type") <- "connection_error"
       return(e)
@@ -55,7 +49,7 @@ get_regions <- function(id, pause = 0.5) {
   
   # Check for the 'Taxon not found' message in body
   main_text <- page %>% html_element("body") %>% html_text2()
-  if (str_detect(main_text, regex("taxon not found", ignore_case = TRUE))) {
+  if (str_detect(main_text, regex("No Taxon for Name", ignore_case = TRUE))) {
     return(tibble(id = id, ibra = NA_character_, imcra = NA_character_, status = "taxon_not_found"))
   }
   
@@ -95,7 +89,9 @@ safe_get <- function(id) {
 output_file <- "annotation-schema/data/staging/australian-faunal-directory-imcra.csv"
 
 # Load all IDs to process
-all_ids <- readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS")$caab_code
+all_ids <- readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS") %>% # 32,525 individuals species - including spps
+  dplyr::filter(!species %in% "spp") %>% #9129 of them are spp - remove them, because I can create regions based on genus or family 
+  pull(caab_code)
 
 # Create output file if it doesn’t exist
 if (!file.exists(output_file)) {
@@ -264,6 +260,8 @@ extra_imcras <- caabs_with_all_regions %>%
 extra_aus <- caabs_with_all_regions %>%
   distinct(caab_code, marine_region) %>%
   dplyr::filter(!is.na(marine_region))
+
+# TODO - create a genus and family regions for spps
 
 # Save files -----
 write_csv(extra_imcras, "annotation-schema/data/staging/australian-fanual-directory_distributions_extra_imcras.csv")
