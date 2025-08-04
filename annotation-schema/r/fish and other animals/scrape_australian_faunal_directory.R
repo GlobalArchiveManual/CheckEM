@@ -41,11 +41,25 @@ get_regions <- function(id, pause = 0.5) {
   url <- sprintf("https://biodiversity.org.au/afd/taxa/%s", id)
   Sys.sleep(pause)
   
-  page <- tryCatch(read_html(url, timeout = 20), error = function(e) NA)
-  if (is.na(page)[1]) {
-    return(tibble(id = id, ibra = NA_character_, imcra = NA_character_))
+  page <- tryCatch(
+    read_html(url, timeout = 20),
+    error = function(e) {
+      attr(e, "type") <- "connection_error"
+      return(e)
+    }
+  )
+  
+  if (inherits(page, "error")) {
+    return(tibble(id = id, ibra = NA_character_, imcra = NA_character_, status = attr(page, "type")))
   }
   
+  # Check for the 'Taxon not found' message in body
+  main_text <- page %>% html_element("body") %>% html_text2()
+  if (str_detect(main_text, regex("taxon not found", ignore_case = TRUE))) {
+    return(tibble(id = id, ibra = NA_character_, imcra = NA_character_, status = "taxon_not_found"))
+  }
+  
+  # Extract regions
   ibra_node  <- html_node(page,
                           xpath = "//h4[translate(normalize-space(.),'ibra','IBRA')='IBRA']")
   imcra_node <- html_node(page,
@@ -54,7 +68,12 @@ get_regions <- function(id, pause = 0.5) {
   ibra  <- next_text(ibra_node)
   imcra <- next_text(imcra_node)
   
-  tibble(id = id, ibra = na_if(ibra, ""), imcra = na_if(imcra, ""))
+  tibble(
+    id     = id,
+    ibra   = na_if(ibra, ""),
+    imcra  = na_if(imcra, ""),
+    status = "ok"
+  )
 }
 
 # Safe version
@@ -64,12 +83,11 @@ safe_get <- function(id) {
   tryCatch(
     get_regions(id, pause = 0.1),
     error = function(e) {
-      log_message("❌ Error for ID:", id, "|", conditionMessage(e))
-      tibble(id = id, ibra = NA_character_, imcra = NA_character_)
+      log_message("❌ Unexpected error for ID:", id, "|", conditionMessage(e))
+      tibble(id = id, ibra = NA_character_, imcra = NA_character_, status = "unknown_error")
     }
   )
 }
-
 
 # -------------------------------------------------------------------
 # Prep your input/output ----
@@ -88,27 +106,21 @@ if (!file.exists(output_file)) {
 done_ids <- (read_csv(output_file, show_col_types = FALSE)) %>%
   dplyr::filter(!id %in% c("<<<<<<< HEAD", ">>>>>>> 650df6e4397201e4b3cd5d6b4e8c0ac5029b30ef", "=======")) %>%
   distinct() %>%
-  dplyr::filter(!imcra %in% NA) %>%
+  dplyr::filter(!(imcra %in% NA & ibra %in% NA)) %>%
+  arrange(id) %>%
   pull(id)
 
 # TODO need to go back in and remove the ones that are NA - and run again coz some codes like 37327109 and 37015022 - have IMCRAs but aren't being picked up
+todo_ids <- setdiff(all_ids, done_ids) %>% sort()
 
-unique(done_ids$id) %>% sort()
-
-
-todo_ids <- setdiff(all_ids, done_ids)
+# Filter to only those starting with "37"
+todo_ids <- Filter(function(x) startsWith(as.character(x), "37"), todo_ids) # TODO turn this off once all fish are done
 
 cat("✅ Already done:", length(done_ids), "\n")
 cat("🔁 Still to do:", length(todo_ids), "\n")
 
 to_do_dataframe <- readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS") %>%
   dplyr::filter(!caab_code %in% done_ids)
-
-# output_file <- sprintf("annotation-schema/data/staging/australian-faunal-directory-imcra-%s.csv", mode)
-
-if (mode == "desktop") {
-  all_ids <- rev(all_ids)
-}
 
 # -------------------------------------------------------------------
 # Scrape and append to CSV row-by-row ----

@@ -9717,3 +9717,83 @@ id,ibra,imcra,status
 37277901,NA,NA,
 37255011,NA,"Southeast Transition (11), Central Eastern Province (12), Central Eastern Transition (15), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Northeast Shelf Province (40)",
 37255012,NA,Spencer Gulf Shelf Province (33),
+37003901,NA,NA,connection_error
+37003902,NA,NA,connection_error
+37004000,NA,NA,ok
+37004002,NA,"Southeast Transition (11), Central Eastern Province (12), Central Eastern Transition (15)",ok
+37004005,NA,NA,connection_error
+37004901,NA,NA,connection_error
+37005000,NA,NA,ok
+37005002,NA,"Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Tasmanian Shelf Province (36), Southeast Shelf Transition (37), Central Eastern Shelf Province (38)",ok
+37005005,NA,"Tasmania Province (10), Southeast Transition (11), Central Eastern Province (12), Tasman Basin Province (13), Central Eastern Transition (15), Kenn Transition (16), Kenn Province (17), Northeast Province (18), Northeast Transition (19), Timor Province (2), Cape Province (20), Northwest Transition (3), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Southeast Shelf Transition (37), Northwest Province (4), West Tasmania Transition (9)",ok
+37005901,NA,NA,connection_error
+37005902,NA,NA,connection_error
+37005903,NA,NA,connection_error
+37006000,NA,NA,ok
+37006001,NA,"Tasmania Province (10), Southeast Transition (11), Central Eastern Province (12)",ok
+37006901,NA,NA,connection_error
+37007000,NA,NA,ok
+37007001,NA,"Southwest Shelf Transition (30), Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Tasmanian Shelf Province (36), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39)",ok
+37007002,NA,"Northwest Shelf Transition (26), Northwest Shelf Province (27)",ok
+37007003,NA,"Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Northeast Shelf Transition (41)",ok
+37007901,NA,NA,connection_error
+37008001,NA,"Northern Shelf Province (25), Northwest Shelf Transition (26), Northwest Shelf Province (27), Central Western Shelf Transition (28), Central Western Shelf Province (29), Southwest Shelf Transition (30), Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Northeast Shelf Province (40), Northeast Shelf Transition (41)",ok
+37008901,NA,NA,connection_error
+37008902,NA,NA,connection_error
+37008903,NA,NA,connection_error
+37008904,NA,NA,connection_error
+37009001,NA,Southwest Transition (7),ok
+37009002,NA,"Tasmania Province (10), Southeast Transition (11), Central Eastern Province (12), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), West Tasmania Transition (9)",ok
+37009901,NA,NA,connection_error
+37009902,NA,NA,connection_error
+37009903,NA,NA,connection_error
+37009904,NA,NA,connection_error
+37009905,NA,NA,connection_error
+37009906,NA,NA,connection_error
+37010000,NA,NA,ok
+37010001,NA,"Tasmania Province (10), Southeast Transition (11), Central Eastern Province (12), Central Western Shelf Province (29), Southwest Shelf Transition (30), Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Tasmanian Shelf Province (36), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Northeast Shelf Province (40), Northeast Shelf Transition (41), Central Western Transition (5), Central Western Province (6), Southwest Transition (7), Southern Province (8), West Tasmania Transition (9)",ok
+37010002,NA,"Central Eastern Province (12), Tasman Basin Province (13), Central Eastern Transition (15), Kenn Transition (16), Kenn Province (17), Northeast Province (18), Northeast Transition (19), Cape Province (20), Northwest Transition (3), Northwest Province (4), Central Western Transition (5), Central Western Province (6)",ok
+37010003,NA,"Tasmania Province (10), Southeast Transition (11), Central Eastern Province (12), Lord Howe Province (14), Norfolk Island Province (21), Central Western Shelf Transition (28), Central Western Shelf Province (29), Southwest Shelf Transition (30), Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Tasmanian Shelf Province (36), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Central Western Province (6), Southwest Transition (7), Southern Province (8), West Tasmania Transition (9)",ok
+37010004,NA,"Tasmania Province (10), Southeast Transition (11), Central Eastern Province (12), Southwest Shelf Transition (30), Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Tasmanian Shelf Province (36), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Central Western Province (6), Southwest Transition (7), Southern Province (8), West Tasmania Transition (9)",ok
+37010901,NA,NA,connection_error
+37010902,NA,NA,connection_error
+37010903,NA,NA,connection_error
+37011000,NA,NA,ok
+37011001,NA,"Tasmania Province (10), Southeast Transition (11), Central Eastern Province (12), Tasman Basin Province (13), Lord Howe Province (14), Northwest Shelf Province (27), Central Western Shelf Province (29), Southwest Shelf Province (31), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Tasmanian Shelf Province (36), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Northwest Province (4), Central Western Transition (5), Central Western Province (6), Southwest Transition (7), Southern Province (8), West Tasmania Transition (9)",ok
+37011901,NA,NA,connection_error
+37012000,NA,NA,ok
+37012901,NA,NA,connection_error
+37013001,NA,"Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Northeast Shelf Province (40), Northeast Shelf Transition (41)",ok
+37013003,NA,"Central Western Shelf Transition (28), Central Western Shelf Province (29), Southwest Shelf Transition (30), Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Northeast Shelf Province (40)",ok
+37013007,NA,"Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39)",ok
+37013008,NA,"Timor Transition (1), Northern Shelf Province (25), Northwest Shelf Transition (26), Northwest Shelf Province (27), Central Western Shelf Transition (28), Central Western Shelf Province (29), Central Eastern Shelf Transition (39), Northeast Shelf Province (40), Northeast Shelf Transition (41)",ok
+37013010,NA,"Timor Transition (1), Northern Shelf Province (25), Northwest Shelf Transition (26), Northwest Shelf Province (27), Central Western Shelf Transition (28), Northeast Shelf Province (40), Northeast Shelf Transition (41)",ok
+37013013,NA,"Central Eastern Shelf Transition (39), Northeast Shelf Province (40), Northeast Shelf Transition (41)",ok
+37013016,NA,"Central Western Shelf Transition (28), Central Western Shelf Province (29), Southwest Shelf Transition (30), Southwest Shelf Province (31)",ok
+37013017,NA,"Timor Transition (1), Northern Shelf Province (25), Northwest Shelf Transition (26), Northwest Shelf Province (27), Central Western Shelf Transition (28), Northeast Shelf Transition (41)",ok
+37013020,NA,"Central Western Shelf Transition (28), Central Western Shelf Province (29), Southwest Shelf Transition (30), Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39)",ok
+37013021,NA,"Southwest Shelf Transition (30), Southwest Shelf Province (31)",ok
+37013022,NA,"Central Western Shelf Province (29), Southwest Shelf Transition (30), Southwest Shelf Province (31)",ok
+37013023,NA,Northwest Shelf Transition (26),ok
+37013900,NA,NA,connection_error
+37013901,NA,NA,connection_error
+37013902,NA,NA,connection_error
+37013903,NA,NA,connection_error
+37013904,NA,NA,connection_error
+37013905,NA,NA,connection_error
+37013906,NA,NA,connection_error
+37013907,NA,NA,connection_error
+37013908,NA,NA,connection_error
+37013909,NA,NA,connection_error
+37013910,NA,NA,connection_error
+37013911,NA,NA,connection_error
+37013912,NA,NA,connection_error
+37013913,NA,NA,connection_error
+37013914,NA,NA,connection_error
+37014000,NA,NA,ok
+37014901,NA,NA,connection_error
+37015001,NA,"Southwest Shelf Province (31), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Western Bass Strait Shelf Transition (34), Bass Strait Shelf Province (35), Tasmanian Shelf Province (36), Southeast Shelf Transition (37)",ok
+37015007,NA,"Timor Province (2), Northwest Transition (3), Northwest Province (4), Central Western Transition (5), Central Western Province (6)",ok
+37015013,NA,"Tasmania Province (10), Southeast Transition (11), Great Australian Bight Shelf Transition (32), Spencer Gulf Shelf Province (33), Southern Province (8), West Tasmania Transition (9)",ok
+37015031,NA,"Southeast Transition (11), Central Eastern Province (12), Central Eastern Transition (15), Northeast Province (18), Southeast Shelf Transition (37), Central Eastern Shelf Province (38), Central Eastern Shelf Transition (39), Northeast Shelf Province (40)",ok
+37015032,NA,Northeast Province (18),ok
