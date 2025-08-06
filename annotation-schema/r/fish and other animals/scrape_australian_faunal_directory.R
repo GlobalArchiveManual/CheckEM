@@ -110,7 +110,12 @@ done_ids <- (read_csv(output_file, show_col_types = FALSE)) %>%
 todo_ids <- setdiff(all_ids, done_ids) %>% sort()
 
 # Filter to only those starting with "37"
-todo_ids <- Filter(function(x) startsWith(as.character(x), "37"), todo_ids) # TODO turn this off once all fish are done
+fish <- Filter(function(x) startsWith(as.character(x), "37"), todo_ids) # TODO turn this off once all fish are done
+mammals <- Filter(function(x) startsWith(as.character(x), "41"), todo_ids) 
+reptiles <- Filter(function(x) startsWith(as.character(x), "39"), todo_ids) 
+crust <- Filter(function(x) startsWith(as.character(x), "28"), todo_ids) 
+
+todo_ids <- c(fish, mammals, reptiles, crust)
 
 cat("✅ Already done:", length(done_ids), "\n")
 cat("🔁 Still to do:", length(todo_ids), "\n")

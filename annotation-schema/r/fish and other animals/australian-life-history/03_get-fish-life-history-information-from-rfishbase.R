@@ -143,6 +143,8 @@ ll <- length_length(validated) %>%
   dplyr::summarise(all = mean(all), bll = mean(bll)) %>%
   dplyr::filter(!type %in% c("SL", "Other"))
 
+unique(ll$type)
+
 # Length 2 is the known length
 max_lengths_available <-  info %>%
   dplyr::filter(!is.na(fb_length_max))
@@ -426,15 +428,30 @@ bay_lwrs <- read.csv("annotation-schema/data/staging/bayesian_length-weights.csv
                 bayesian_b = lwb_m,
                 bayesian_source_level = source_level,
                 fishbase_scientific = scientific) %>%
-  dplyr::select(fishbase_scientific, bayesian_a, bayesian_b, bayesian_source_level)
+  dplyr::select(fishbase_scientific, bayesian_a, bayesian_b, bayesian_source_level) %>%
+  dplyr::mutate(type = "TL") %>%
+  dplyr::mutate(species = fishbase_scientific) %>%
+  left_join(ll) %>%
+  dplyr::rename(bayesian_length_measure = type,
+                bayesian_all = all,
+                bayesian_bll = bll) %>%
+  select(-species)
+
+is_not_na <- bay_lwrs %>%
+  dplyr::filter(!is.na(bayesian_all))
+
+# TODO need to add TL to the l-w length measure for all the bayesian length-weights, and join in the FL -> TL a_ll and b_ll for the bayesians where possible
 
 complete_lw <- info %>%
   dplyr::select(fishbase_scientific) %>%
   full_join(tidy_lwr) %>%
   left_join(., bay_lwrs) %>%
   dplyr::filter(!is.na(fishbase_scientific)) %>%
+  dplyr::mutate(type = if_else(is.na(a), bayesian_length_measure, type)) %>%
   dplyr::mutate(a = if_else(is.na(a), bayesian_a, a)) %>%
   dplyr::mutate(b = if_else(is.na(b), bayesian_b, b)) %>%
+  dplyr::mutate(all = if_else(is.na(all), bayesian_all, all)) %>%
+  dplyr::mutate(bll = if_else(is.na(bll), bayesian_bll, bll)) %>%
   dplyr::rename(a_ll = all, b_ll = bll) %>%
   dplyr::mutate(source_level = if_else(is.na(source_level), bayesian_source_level, source_level)) %>%
   dplyr::select(fishbase_scientific, type, a, b, a_ll, b_ll, source_level) %>%
