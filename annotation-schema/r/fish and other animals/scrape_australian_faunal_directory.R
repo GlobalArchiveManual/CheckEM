@@ -287,8 +287,34 @@ imcras_family <- imcras_every_species %>%
 
 all_extra_imcras <- bind_rows(extra_imcras, imcras_genus, imcras_family)
 
+marine_region_every_species <- readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS") %>%
+  select(caab_code, family, genus, species) %>%
+  left_join(extra_aus) %>%
+  dplyr::filter(!species %in% "spp") %>%
+  dplyr::filter(!is.na(marine_region)) %>%
+  glimpse() 
+
+marine_region_genus <- marine_region_every_species %>%
+  dplyr::select(family, genus, marine_region) %>%
+  dplyr::distinct() %>%
+  dplyr::mutate(species = "spp") %>%
+  dplyr::left_join(readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS") %>% select(-imcra_region)) %>%
+  dplyr::select(caab_code, marine_region) %>%
+  dplyr::filter(!is.na(caab_code))
+
+marine_region_family <- marine_region_every_species %>%
+  dplyr::select(family, marine_region) %>%
+  dplyr::distinct() %>%
+  dplyr::mutate(genus = "Unknown", species = "spp") %>%
+  dplyr::left_join(readRDS("annotation-schema/output/fish/schema/australia_life-history.RDS") %>% select(-imcra_region)) %>%
+  dplyr::select(caab_code, marine_region) %>%
+  dplyr::filter(!is.na(caab_code))
+
+all_extra_marine_region <- bind_rows(extra_aus, marine_region_genus, marine_region_family) %>%
+  distinct()
+
 # Save files -----
-write_csv(extra_imcras, "annotation-schema/data/staging/australian-fanual-directory_distributions_extra_imcras.csv")
-write_csv(extra_aus, "annotation-schema/data/staging/australian-fanual-directory_distributions_extra_aus.csv")
+write_csv(all_extra_imcras, "annotation-schema/data/staging/australian-fanual-directory_distributions_extra_imcras.csv")
+write_csv(all_extra_marine_region, "annotation-schema/data/staging/australian-fanual-directory_distributions_extra_aus.csv")
 
 cat("✅ Scraping complete!\n")
