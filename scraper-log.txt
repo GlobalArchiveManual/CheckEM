@@ -11074,3 +11074,185 @@
 2025-08-07 10:09:11 | 🔁 Starting chunk 13 with 20 IDs
 2025-08-07 10:09:11 | 👷 Worker PID: 20408 - starting ID: 28091039
 2025-08-07 10:09:11 | 👷 Worker PID: 37576 - starting ID: 28091049
+2025-08-07 12:35:06 | 🔁 Starting chunk 1 with 20 IDs
+2025-08-07 12:35:06 | 👷 Worker PID: 72155 - starting ID: 280910392025-08-07 12:35:06 | 👷 Worker PID: 72154 - starting ID: 28091049
+
+2025-08-07 12:35:07 | 👷 Worker PID: 72154 - starting ID: 28091050
+2025-08-07 12:35:07 | 👷 Worker PID: 72155 - starting ID: 28091040
+2025-08-07 12:35:07 | 👷 Worker PID: 72154 - starting ID: 28091051
+2025-08-07 12:35:07 | 👷 Worker PID: 72155 - starting ID: 28091041
+2025-08-07 12:35:07 | 👷 Worker PID: 72155 - starting ID: 28091042
+2025-08-07 12:35:07 | 👷 Worker PID: 72154 - starting ID: 28091052
+2025-08-07 12:35:08 | 👷 Worker PID: 72155 - starting ID: 28091043
+2025-08-07 12:35:08 | 👷 Worker PID: 72154 - starting ID: 28091053
+2025-08-07 12:35:08 | 👷 Worker PID: 72155 - starting ID: 28091044
+2025-08-07 12:35:08 | 👷 Worker PID: 72154 - starting ID: 28091054
+2025-08-07 12:35:08 | 👷 Worker PID: 72154 - starting ID: 28091055
+2025-08-07 12:35:08 | 👷 Worker PID: 72155 - starting ID: 28091045
+2025-08-07 12:35:09 | 👷 Worker PID: 72154 - starting ID: 28091056
+2025-08-07 12:35:09 | 👷 Worker PID: 72155 - starting ID: 28091046
+2025-08-07 12:35:09 | 👷 Worker PID: 72154 - starting ID: 28091057
+2025-08-07 12:35:09 | 👷 Worker PID: 72155 - starting ID: 28091047
+2025-08-07 12:35:09 | 👷 Worker PID: 72155 - starting ID: 28091048
+2025-08-07 12:35:09 | 👷 Worker PID: 72154 - starting ID: 28091058
+2025-08-07 12:35:09 | ✅ Finished chunk 1 - Writing to CSV
+2025-08-07 12:35:09 | 💾 CSV write complete for chunk 1
+2025-08-07 12:35:09 | 🔁 Starting chunk 2 with 20 IDs
+2025-08-07 12:35:09 | 👷 Worker PID: 72155 - starting ID: 28091059
+2025-08-07 12:35:09 | 👷 Worker PID: 72154 - starting ID: 28091069
+2025-08-07 12:35:10 | 👷 Worker PID: 72154 - starting ID: 28091070
+2025-08-07 12:35:10 | 👷 Worker PID: 72155 - starting ID: 28091060
+2025-08-07 12:35:10 | 👷 Worker PID: 72154 - starting ID: 28091071
+2025-08-07 12:35:10 | 👷 Worker PID: 72155 - starting ID: 28091061
+2025-08-07 12:35:10 | 👷 Worker PID: 72155 - starting ID: 280910622025-08-07 12:35:10 | 👷 Worker PID: 72154 - starting ID: 28091072
+
+2025-08-07 12:35:11 | 👷 Worker PID: 72155 - starting ID: 28091063
+2025-08-07 12:35:11 | 👷 Worker PID: 72154 - starting ID: 28091073
+2025-08-07 12:35:11 | 👷 Worker PID: 72155 - starting ID: 28091064
+2025-08-07 12:35:11 | 👷 Worker PID: 72154 - starting ID: 28091074
+2025-08-07 12:35:11 | 👷 Worker PID: 72155 - starting ID: 28091065
+2025-08-07 12:35:11 | 👷 Worker PID: 72154 - starting ID: 28091075
+2025-08-07 12:35:11 | 👷 Worker PID: 72155 - starting ID: 28091066
+2025-08-07 12:35:11 | 👷 Worker PID: 72154 - starting ID: 28091076
+2025-08-07 12:35:12 | 👷 Worker PID: 72155 - starting ID: 28091067
+2025-08-07 12:35:12 | 👷 Worker PID: 72154 - starting ID: 28091077
+2025-08-07 12:35:12 | 👷 Worker PID: 72155 - starting ID: 28091068
+2025-08-07 12:35:12 | 👷 Worker PID: 72154 - starting ID: 28091078
+2025-08-07 12:35:12 | ✅ Finished chunk 2 - Writing to CSV
+2025-08-07 12:35:12 | 💾 CSV write complete for chunk 2
+2025-08-07 12:35:12 | 🔁 Starting chunk 3 with 20 IDs
+2025-08-07 12:35:12 | 👷 Worker PID: 72155 - starting ID: 28091079
+2025-08-07 12:35:12 | 👷 Worker PID: 72154 - starting ID: 28091089
+2025-08-07 12:35:13 | 👷 Worker PID: 72155 - starting ID: 28091080
+2025-08-07 12:35:13 | 👷 Worker PID: 72154 - starting ID: 28091090
+2025-08-07 12:35:13 | 👷 Worker PID: 72155 - starting ID: 28091081
+2025-08-07 12:35:13 | 👷 Worker PID: 72154 - starting ID: 28091091
+2025-08-07 12:35:13 | 👷 Worker PID: 72155 - starting ID: 28091082
+2025-08-07 12:35:13 | 👷 Worker PID: 72154 - starting ID: 28091092
+2025-08-07 12:35:13 | 👷 Worker PID: 72155 - starting ID: 28091083
+2025-08-07 12:35:13 | 👷 Worker PID: 72154 - starting ID: 28091093
+2025-08-07 12:35:14 | 👷 Worker PID: 72155 - starting ID: 28091084
+2025-08-07 12:35:14 | 👷 Worker PID: 72154 - starting ID: 28091094
+2025-08-07 12:35:14 | 👷 Worker PID: 72155 - starting ID: 28091085
+2025-08-07 12:35:14 | 👷 Worker PID: 72154 - starting ID: 28091095
+2025-08-07 12:35:14 | 👷 Worker PID: 72155 - starting ID: 28091086
+2025-08-07 12:35:14 | 👷 Worker PID: 72154 - starting ID: 28091096
+2025-08-07 12:35:14 | 👷 Worker PID: 72155 - starting ID: 28091087
+2025-08-07 12:35:14 | 👷 Worker PID: 72154 - starting ID: 28091097
+2025-08-07 12:35:15 | 👷 Worker PID: 72155 - starting ID: 28091088
+2025-08-07 12:35:15 | 👷 Worker PID: 72154 - starting ID: 28091116
+2025-08-07 12:35:15 | ✅ Finished chunk 3 - Writing to CSV
+2025-08-07 12:35:15 | 💾 CSV write complete for chunk 3
+2025-08-07 12:35:15 | 🔁 Starting chunk 4 with 20 IDs
+2025-08-07 12:35:15 | 👷 Worker PID: 72155 - starting ID: 28092001
+2025-08-07 12:35:15 | 👷 Worker PID: 72154 - starting ID: 28092011
+2025-08-07 12:35:15 | 👷 Worker PID: 72155 - starting ID: 28092002
+2025-08-07 12:35:15 | 👷 Worker PID: 72154 - starting ID: 28092012
+2025-08-07 12:35:16 | 👷 Worker PID: 72155 - starting ID: 28092003
+2025-08-07 12:35:16 | 👷 Worker PID: 72154 - starting ID: 28092013
+2025-08-07 12:35:16 | 👷 Worker PID: 72155 - starting ID: 28092004
+2025-08-07 12:35:16 | 👷 Worker PID: 72154 - starting ID: 28092014
+2025-08-07 12:35:16 | 👷 Worker PID: 72155 - starting ID: 28092005
+2025-08-07 12:35:16 | 👷 Worker PID: 72154 - starting ID: 28092015
+2025-08-07 12:35:16 | 👷 Worker PID: 72155 - starting ID: 28092006
+2025-08-07 12:35:16 | 👷 Worker PID: 72154 - starting ID: 28092016
+2025-08-07 12:35:17 | 👷 Worker PID: 72155 - starting ID: 28092007
+2025-08-07 12:35:17 | 👷 Worker PID: 72154 - starting ID: 28092017
+2025-08-07 12:35:17 | 👷 Worker PID: 72155 - starting ID: 28092008
+2025-08-07 12:35:17 | 👷 Worker PID: 72154 - starting ID: 28092018
+2025-08-07 12:35:17 | 👷 Worker PID: 72155 - starting ID: 28092009
+2025-08-07 12:35:17 | 👷 Worker PID: 72154 - starting ID: 28092019
+2025-08-07 12:35:17 | 👷 Worker PID: 72155 - starting ID: 28092010
+2025-08-07 12:35:17 | 👷 Worker PID: 72154 - starting ID: 28092020
+2025-08-07 12:35:18 | ✅ Finished chunk 4 - Writing to CSV
+2025-08-07 12:35:18 | 💾 CSV write complete for chunk 4
+2025-08-07 12:35:18 | 🔁 Starting chunk 5 with 20 IDs
+2025-08-07 12:35:18 | 👷 Worker PID: 72155 - starting ID: 28092021
+2025-08-07 12:35:18 | 👷 Worker PID: 72154 - starting ID: 28092035
+2025-08-07 12:35:18 | 👷 Worker PID: 72155 - starting ID: 28092022
+2025-08-07 12:35:18 | 👷 Worker PID: 72154 - starting ID: 28092036
+2025-08-07 12:35:18 | 👷 Worker PID: 72155 - starting ID: 28092023
+2025-08-07 12:35:18 | 👷 Worker PID: 72154 - starting ID: 28093001
+2025-08-07 12:35:19 | 👷 Worker PID: 72155 - starting ID: 28092028
+2025-08-07 12:35:19 | 👷 Worker PID: 72154 - starting ID: 28093002
+2025-08-07 12:35:19 | 👷 Worker PID: 72155 - starting ID: 28092029
+2025-08-07 12:35:19 | 👷 Worker PID: 72154 - starting ID: 28093003
+2025-08-07 12:35:19 | 👷 Worker PID: 72155 - starting ID: 28092030
+2025-08-07 12:35:19 | 👷 Worker PID: 72154 - starting ID: 28093004
+2025-08-07 12:35:20 | 👷 Worker PID: 72155 - starting ID: 28092031
+2025-08-07 12:35:20 | 👷 Worker PID: 72154 - starting ID: 28093005
+2025-08-07 12:35:20 | 👷 Worker PID: 72154 - starting ID: 28093006
+2025-08-07 12:35:20 | 👷 Worker PID: 72155 - starting ID: 28092032
+2025-08-07 12:35:20 | 👷 Worker PID: 72154 - starting ID: 28093007
+2025-08-07 12:35:20 | 👷 Worker PID: 72155 - starting ID: 28092033
+2025-08-07 12:35:20 | 👷 Worker PID: 72154 - starting ID: 28093008
+2025-08-07 12:35:21 | 👷 Worker PID: 72155 - starting ID: 28092034
+2025-08-07 12:35:21 | ✅ Finished chunk 5 - Writing to CSV
+2025-08-07 12:35:21 | 💾 CSV write complete for chunk 5
+2025-08-07 12:35:21 | 🔁 Starting chunk 6 with 20 IDs
+2025-08-07 12:35:21 | 👷 Worker PID: 72155 - starting ID: 28093009
+2025-08-07 12:35:21 | 👷 Worker PID: 72154 - starting ID: 28093019
+2025-08-07 12:35:21 | 👷 Worker PID: 72155 - starting ID: 28093010
+2025-08-07 12:35:21 | 👷 Worker PID: 72154 - starting ID: 28093020
+2025-08-07 12:35:21 | 👷 Worker PID: 72155 - starting ID: 28093011
+2025-08-07 12:35:21 | 👷 Worker PID: 72154 - starting ID: 28093021
+2025-08-07 12:35:22 | 👷 Worker PID: 72155 - starting ID: 28093012
+2025-08-07 12:35:22 | 👷 Worker PID: 72154 - starting ID: 28093022
+2025-08-07 12:35:22 | 👷 Worker PID: 72154 - starting ID: 28093023
+2025-08-07 12:35:22 | 👷 Worker PID: 72155 - starting ID: 28093013
+2025-08-07 12:35:22 | 👷 Worker PID: 72154 - starting ID: 28093024
+2025-08-07 12:35:22 | 👷 Worker PID: 72155 - starting ID: 28093014
+2025-08-07 12:35:23 | 👷 Worker PID: 72154 - starting ID: 28093026
+2025-08-07 12:35:23 | 👷 Worker PID: 72155 - starting ID: 28093015
+2025-08-07 12:35:23 | 👷 Worker PID: 72154 - starting ID: 28093027
+2025-08-07 12:35:23 | 👷 Worker PID: 72154 - starting ID: 28093028
+2025-08-07 12:35:23 | 👷 Worker PID: 72154 - starting ID: 28093029
+2025-08-07 12:35:24 | 👷 Worker PID: 72155 - starting ID: 28093016
+2025-08-07 12:35:24 | 👷 Worker PID: 72155 - starting ID: 28093017
+2025-08-07 12:35:24 | 👷 Worker PID: 72155 - starting ID: 28093018
+2025-08-07 12:35:26 | ✅ Finished chunk 6 - Writing to CSV
+2025-08-07 12:35:26 | 💾 CSV write complete for chunk 6
+2025-08-07 12:35:26 | 🔁 Starting chunk 7 with 20 IDs
+2025-08-07 12:35:26 | 👷 Worker PID: 72155 - starting ID: 28093030
+2025-08-07 12:35:26 | 👷 Worker PID: 72154 - starting ID: 28093041
+2025-08-07 12:35:26 | 👷 Worker PID: 72155 - starting ID: 28093031
+2025-08-07 12:35:26 | 👷 Worker PID: 72154 - starting ID: 28093042
+2025-08-07 12:35:26 | 👷 Worker PID: 72154 - starting ID: 28093043
+2025-08-07 12:35:26 | 👷 Worker PID: 72155 - starting ID: 28093032
+2025-08-07 12:35:26 | 👷 Worker PID: 72154 - starting ID: 28093044
+2025-08-07 12:35:27 | 👷 Worker PID: 72154 - starting ID: 28093045
+2025-08-07 12:35:27 | 👷 Worker PID: 72154 - starting ID: 28093046
+2025-08-07 12:35:27 | 👷 Worker PID: 72154 - starting ID: 28093047
+2025-08-07 12:35:28 | 👷 Worker PID: 72155 - starting ID: 28093033
+2025-08-07 12:35:28 | 👷 Worker PID: 72154 - starting ID: 28093048
+2025-08-07 12:35:28 | 👷 Worker PID: 72155 - starting ID: 28093034
+2025-08-07 12:35:28 | 👷 Worker PID: 72154 - starting ID: 28093049
+2025-08-07 12:35:28 | 👷 Worker PID: 72155 - starting ID: 28093036
+2025-08-07 12:35:28 | 👷 Worker PID: 72154 - starting ID: 28093050
+2025-08-07 12:35:28 | 👷 Worker PID: 72155 - starting ID: 28093037
+2025-08-07 12:35:28 | 👷 Worker PID: 72155 - starting ID: 28093038
+2025-08-07 12:35:29 | 👷 Worker PID: 72155 - starting ID: 28093039
+2025-08-07 12:35:29 | 👷 Worker PID: 72155 - starting ID: 28093040
+2025-08-07 12:35:29 | ✅ Finished chunk 7 - Writing to CSV
+2025-08-07 12:35:29 | 💾 CSV write complete for chunk 7
+2025-08-07 12:35:29 | 🔁 Starting chunk 8 with 20 IDs
+2025-08-07 12:35:29 | 👷 Worker PID: 72155 - starting ID: 28093051
+2025-08-07 12:35:29 | 👷 Worker PID: 72154 - starting ID: 28093061
+2025-08-07 12:35:30 | 👷 Worker PID: 72155 - starting ID: 28093052
+2025-08-07 12:35:30 | 👷 Worker PID: 72154 - starting ID: 28093062
+2025-08-07 12:35:30 | 👷 Worker PID: 72154 - starting ID: 28093063
+2025-08-07 12:35:30 | 👷 Worker PID: 72155 - starting ID: 28093053
+2025-08-07 12:35:30 | 👷 Worker PID: 72154 - starting ID: 28093064
+2025-08-07 12:35:30 | 👷 Worker PID: 72155 - starting ID: 28093054
+2025-08-07 12:35:31 | 👷 Worker PID: 72154 - starting ID: 28093065
+2025-08-07 12:35:31 | 👷 Worker PID: 72155 - starting ID: 28093055
+2025-08-07 12:35:31 | 👷 Worker PID: 72154 - starting ID: 28093066
+2025-08-07 12:35:31 | 👷 Worker PID: 72155 - starting ID: 28093056
+2025-08-07 12:35:31 | 👷 Worker PID: 72155 - starting ID: 28093057
+2025-08-07 12:35:31 | 👷 Worker PID: 72154 - starting ID: 28093067
+2025-08-07 12:35:31 | 👷 Worker PID: 72155 - starting ID: 28093058
+2025-08-07 12:35:31 | 👷 Worker PID: 72154 - starting ID: 28093068
+2025-08-07 12:35:31 | 👷 Worker PID: 72155 - starting ID: 28093059
+2025-08-07 12:35:31 | 👷 Worker PID: 72154 - starting ID: 28093069
+2025-08-07 12:35:32 | 👷 Worker PID: 72155 - starting ID: 28093060
+2025-08-07 12:35:32 | 👷 Worker PID: 72154 - starting ID: 28093070

@@ -616,12 +616,12 @@ australia_life_history <- dplyr::left_join(australia_life_history, additional_af
 number.with.distributions <- australia_life_history %>% 
   filter(!is.na(marine_region))
 nrow(number.with.distributions)/nrow(australia_life_history) * 100 
-# 50.14095% with distribution info available from worms package
+# 50.70781% with distribution info available from worms package
 
 number.with.distributions <- australia_life_history %>% 
   filter(!is.na(imcra_region))
 nrow(number.with.distributions)/nrow(australia_life_history) * 100 
-# 50.66491% with distribution info available from worms package
+# 51.46464% with distribution info available from worms package
   
 unique(australia_life_history$marine_region)
 unique(australia_life_history$imcra_region)
