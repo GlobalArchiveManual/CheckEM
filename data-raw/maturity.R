@@ -12,6 +12,8 @@ url <- "https://docs.google.com/spreadsheets/d/176genWqd_pc3NDVQtP2CmfMh66Ui6uwW
 
 maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
   CheckEM::clean_names() %>%
+  dplyr::select(family, genus, species, sex, l50_mm, measurement_type, marine_region,
+                hermaphrodite, source) %>%
   glimpse()
 
 usethis::use_data(maturity, overwrite = TRUE)
