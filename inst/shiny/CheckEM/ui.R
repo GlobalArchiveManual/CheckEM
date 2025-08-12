@@ -231,7 +231,9 @@ tabItems(
                           tabPanel("Lengths", dataTableOutput("table.length")),
                           tabPanel("3D Points", dataTableOutput("table.3dpoints")),
                           tabPanel("Periods", dataTableOutput("table.periods")),
-                          tabPanel("Habitat", dataTableOutput("table.habitat"))
+                          tabPanel("Habitat", dataTableOutput("table.habitat")),
+                          tabPanel("Generic Count", dataTableOutput("table.gencount")),
+                          tabPanel("Generic Length", dataTableOutput("table.genlength"))
                           
                    )
           )),
@@ -241,7 +243,7 @@ tabItems(
           fluidRow(
             
             valueBoxOutput("metadata.score"),
-            
+
             div(id="click.metadata.no.samples",
                 shinydashboard::valueBoxOutput("metadata.no.samples")#,
             ),

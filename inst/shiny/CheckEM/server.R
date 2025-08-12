@@ -62,7 +62,8 @@ function(input, output, session) {
     } else {
       lh <- all_data$lh.glo %>%
         dplyr::mutate(length_max_mm = 10 * length.max) %>%
-        dplyr::mutate(length_max_type = "") # TODO change this to actual data
+        dplyr::mutate(length_max_type = "") %>% # TODO change this to actual data
+        dplyr::mutate(code = "")# TODO change this to actual data
     }
     
     lh
@@ -81,7 +82,8 @@ function(input, output, session) {
     } else {
       lh <- all_data$lh.glo.expanded %>%
         dplyr::mutate(length_max_mm = 10 * length.max) %>%
-        dplyr::mutate(length_max_type = "") # TODO change this to actual data
+        dplyr::mutate(length_max_type = "") %>% # TODO change this to actual data
+        dplyr::mutate(code = "")# TODO change this to actual data
     }
     
     lh
@@ -446,7 +448,7 @@ function(input, output, session) {
       
     } else {
       
-      samples <- count() %>%
+      samples <- count_data() %>%
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")))
     }
     
@@ -489,9 +491,9 @@ function(input, output, session) {
       
     } else {
       
-      dat <- count()
+      dat <- count_data()
       
-      samples <- count() %>%
+      samples <- count_data() %>%
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")))
     }
     
@@ -592,7 +594,7 @@ function(input, output, session) {
         dplyr::distinct(campaignid, family, genus, species)
       
     } else {
-      unique_species <- count() %>%
+      unique_species <- count_data() %>%
         dplyr::distinct(campaignid, family, genus, species)
     }
     
@@ -619,7 +621,7 @@ function(input, output, session) {
         dplyr::distinct(family, genus, species)
       
     } else {
-      species <- count() %>%
+      species <- count_data() %>%
         dplyr::distinct(family, genus, species)
     }
     
@@ -2551,20 +2553,29 @@ function(input, output, session) {
   ## ► Samples without points - dataframe ----
   metadata.samples.without.fish <- reactive({
     
+    message("XX metadata samples")
+    
     metadata.samples <- metadata.regions() %>%
       dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), successful_count, successful_length) %>%
       distinct() %>%
-      mutate(sample = as.factor(sample))
+      mutate(sample = as.factor(sample)) %>%
+      glimpse()
     
     if(input$upload %in% "EM"){
       samples <- points() %>%
-        distinct(campaignid, sample)
+        distinct(campaignid, sample) 
     } else {
-      samples <- count() %>%
-        distinct(campaignid, sample)
+      
+      message("XX count samples")
+      # print(str(count_data()))
+      
+      samples <- count_data() %>%
+        distinct(campaignid, sample) %>% glimpse()
     }
     missing.fish <- anti_join(metadata.samples, samples) %>%
       dplyr::select(-sample)
+    
+    return(missing.fish)
   })
   
   ## ► Samples without points - valueBox ----
@@ -2615,7 +2626,7 @@ function(input, output, session) {
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
         distinct()
     } else {
-      samples <- count() %>%
+      samples <- count_data() %>%
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
         distinct()
     }
@@ -4743,8 +4754,8 @@ function(input, output, session) {
   ## ► Species not observed in region- dataframe ----
   maxn.species.not.observed <- reactive({
     
-    message("view expanded LH")
-    glimpse(life.history.expanded())
+    # message("view expanded LH")
+    # glimpse(life.history.expanded())
     
     if(input$upload %in% "EM"){
       
@@ -7890,8 +7901,8 @@ function(input, output, session) {
       tidyr::replace_na(list(x = 0, y = 0, midx = 0, midy = 0)) %>%
       dplyr::filter(c(midx > transect.limit | midx < -transect.limit | midy > transect.limit | midy < -transect.limit | x > transect.limit | x < -transect.limit | y > transect.limit | y < -transect.limit)) %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, range, length_mm, frame_left, frame_right, midx, midy, x, y, em_comment, rms, precision, code) %>%
-      glimpse()
+      dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, range, length_mm, frame_left, frame_right, midx, midy, x, y, em_comment, rms, precision, code) #%>%
+      #glimpse()
   })
   
   ## ► Out of transect - valuebox ----
@@ -8917,8 +8928,8 @@ function(input, output, session) {
       
       message("length")
       
-      length <- length3dpoints.clean() %>%
-        glimpse()
+      length <- length3dpoints.clean()# %>%
+       # glimpse()
       
       length_samples <- length %>%
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
@@ -8926,8 +8937,8 @@ function(input, output, session) {
       
       message("maxn")
       
-      maxn <- maxn.clean() %>%
-        glimpse()
+      maxn <- maxn.clean() #%>%
+        #glimpse()
       
     } else {
       
@@ -8962,8 +8973,8 @@ function(input, output, session) {
       dplyr::mutate(percent_difference = abs(percent_difference)) %>%
       arrange(-difference) %>%
       dplyr::left_join(metadata.regions()) %>%
-      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), family, genus, species, maxn, length_maxn, difference, percent_difference) %>%
-      glimpse()
+      dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), family, genus, species, maxn, length_maxn, difference, percent_difference) #%>%
+      #glimpse()
   })
   
   
@@ -10211,7 +10222,7 @@ function(input, output, session) {
       if (dim(points.samples.without.metadata())[1] > 0) {
         points.samples.without.metadata <- points.samples.without.metadata() %>%
           mutate(error = "sample.in.points.without.metadata") %>%
-          mutate(across(everything(), as.character)) %>% dplyr::glimpse()
+          mutate(across(everything(), as.character))# %>% dplyr::glimpse()
       } else {
         points.samples.without.metadata <- data.frame()
       }
@@ -10220,7 +10231,7 @@ function(input, output, session) {
       if (dim(samples.without.periods())[1] > 0) {
         samples.without.periods <- samples.without.periods()%>%
           mutate(error = "sample.without.period") %>%
-          mutate(across(everything(), as.character)) %>% dplyr::glimpse()
+          mutate(across(everything(), as.character)) #%>% dplyr::glimpse()
       } else {
         samples.without.periods <- data.frame()
       }
@@ -10229,7 +10240,7 @@ function(input, output, session) {
       if (dim(periods.no.end())[1] > 0) {
         periods.no.end <- periods.no.end() %>%
           mutate(error = "period.with.no.end") %>%
-          mutate(across(everything(), as.character)) %>% glimpse()
+          mutate(across(everything(), as.character)) #%>% glimpse()
       } else {
         periods.no.end <- data.frame()
       }
@@ -10245,7 +10256,7 @@ function(input, output, session) {
           mutate(period_time = round(time_end - time_start)) %>%
           filter(!period_time %in% c(input$error.period.length)) %>%
           mutate(error = "period.wrong.length") %>%
-          mutate(across(everything(), as.character)) %>% glimpse()
+          mutate(across(everything(), as.character)) #%>% glimpse()
       } else {
         periods.wrong <- data.frame()
       }
@@ -10254,7 +10265,7 @@ function(input, output, session) {
       if (dim(points.outside.periods())[1] > 0) {
         points.outside.periods <- points.outside.periods() %>%
           mutate(error = "point.outside.period") %>%
-          mutate(across(everything(), as.character)) %>% glimpse()
+          mutate(across(everything(), as.character)) #%>% glimpse()
       } else {
         points.outside.periods <- data.frame()
       }
@@ -10263,7 +10274,7 @@ function(input, output, session) {
       if (dim(points.no.number())[1] > 0) {
         points.no.number <- points.no.number() %>%
           mutate(error = "point.without.a.number") %>%
-          mutate(across(everything(), as.character)) %>% glimpse()
+          mutate(across(everything(), as.character)) #%>% glimpse()
       } else {
         points.no.number <- data.frame()
       }
@@ -10272,7 +10283,7 @@ function(input, output, session) {
       if (dim(maxn.species.not.observed())[1] > 0) {
         maxn.species.not.observed <- maxn.species.not.observed() %>%
           mutate(error = "species.not.observed.in.region.before") %>%
-          mutate(across(everything(), as.character))  %>% glimpse()
+          mutate(across(everything(), as.character))  #%>% glimpse()
       } else {
         maxn.species.not.observed <- data.frame()
       }
@@ -10281,7 +10292,7 @@ function(input, output, session) {
       if (dim(maxn.species.not.observed.lh())[1] > 0) {
         maxn.species.not.in.lh <- maxn.species.not.observed.lh() %>%
           mutate(error = "species.not.in.life.history.sheet") %>%
-          mutate(across(everything(), as.character))  %>% glimpse()
+          mutate(across(everything(), as.character))  #%>% glimpse()
       } else {
         maxn.species.not.in.lh <- data.frame()
       }
@@ -10291,7 +10302,7 @@ function(input, output, session) {
         if (dim(length.samples.without.metadata())[1] > 0) {
           length.samples.without.metadata <- length.samples.without.metadata() %>%
             mutate(error = "sample.in.lengths.without.metadata") %>%
-            mutate(across(everything(), as.character)) %>% glimpse()
+            mutate(across(everything(), as.character)) #%>% glimpse()
         } else {
           length.samples.without.metadata <- data.frame()
         }
@@ -10300,7 +10311,7 @@ function(input, output, session) {
         if (dim(lengths.outside.periods())[1] > 0) {
           lengths.outside.periods <- lengths.outside.periods() %>%
             mutate(error = "length.or.3D.point.outside.period") %>%
-            mutate(across(everything(), as.character)) %>% glimpse()
+            mutate(across(everything(), as.character)) #%>% glimpse()
         } else {
           lengths.outside.periods <- data.frame()
         }
@@ -10309,7 +10320,7 @@ function(input, output, session) {
         if (dim(metadata.samples.without.length())[1] > 0) {
           samples.without.length <- metadata.samples.without.length() %>%
             mutate(error = "sample.without.length") %>%
-            mutate(across(everything(), as.character)) %>% glimpse()
+            mutate(across(everything(), as.character)) #%>% glimpse()
         } else {
           samples.without.length <- data.frame()
         }
@@ -10318,7 +10329,7 @@ function(input, output, session) {
         if (dim(lengths.no.number())[1] > 0) {
           lengths.no.number <- lengths.no.number() %>%
             mutate(error = "length.without.a.number") %>%
-            mutate(across(everything(), as.character)) %>% glimpse()
+            mutate(across(everything(), as.character)) #%>% glimpse()
         } else {
           lengths.no.number <- data.frame()
         }
@@ -10327,7 +10338,7 @@ function(input, output, session) {
         if (dim(threedpoints.no.number())[1] > 0) {
           threedpoints.no.number <- threedpoints.no.number() %>%
             mutate(error = "3D.point.without.a.number") %>%
-            mutate(across(everything(), as.character)) %>% glimpse()
+            mutate(across(everything(), as.character)) #%>% glimpse()
         } else {
           threedpoints.no.number <- data.frame()
         }
@@ -10336,7 +10347,7 @@ function(input, output, session) {
         if (dim(length.species.not.observed())[1] > 0) {
           length.species.not.observed <- length.species.not.observed() %>%
             mutate(error = "species.not.observed.in.region.before") %>%
-            mutate(across(everything(), as.character))  %>% glimpse()
+            mutate(across(everything(), as.character))  #%>% glimpse()
         } else {
           length.species.not.observed <- data.frame()
         }
@@ -10345,7 +10356,7 @@ function(input, output, session) {
         if (dim(length.species.not.observed.lh())[1] > 0) {
           length.species.not.in.lh <- length.species.not.observed.lh() %>%
             mutate(error = "species.not.in.life.history.sheet") %>%
-            mutate(across(everything(), as.character))  %>% glimpse()
+            mutate(across(everything(), as.character))  #%>% glimpse()
         } else {
           length.species.not.in.lh <- data.frame()
         }
@@ -10359,7 +10370,7 @@ function(input, output, session) {
             dplyr::filter(range > range.limit) %>%
             dplyr::select(campaignid, sample, family, genus, species, range, frame_left, frame_right, em_comment) %>%
             mutate(error = "out.of.range") %>%
-            mutate(across(everything(), as.character)) %>% glimpse()
+            mutate(across(everything(), as.character)) #%>% glimpse()
         } else {
           length.out.of.range <- data.frame()
         }
@@ -10369,7 +10380,7 @@ function(input, output, session) {
           length.wrong.small <- length.wrong() %>%
             dplyr::filter(reason%in%c("too small")) %>%
             dplyr::mutate(error = reason) %>%
-            mutate(across(everything(), as.character))%>% glimpse()
+            mutate(across(everything(), as.character))#%>% glimpse()
         } else {
           length.wrong.small <- data.frame()
         }
@@ -10379,7 +10390,7 @@ function(input, output, session) {
           length.wrong.big <- length.wrong() %>%
             dplyr::filter(reason%in%c("too big")) %>%
             dplyr::mutate(error = reason)  %>%
-            mutate(across(everything(), as.character))%>% glimpse()
+            mutate(across(everything(), as.character))#%>% glimpse()
         } else {
           length.wrong.big <- data.frame()
         }
@@ -10391,7 +10402,7 @@ function(input, output, session) {
           dplyr::filter(rms > rms.limit) %>%
           dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, code)%>%
           mutate(error = if_else(!is.na(length_mm), "length.measurement.over.rms", "3D.point.measurement.over.rms"))  %>%
-          mutate(across(everything(), as.character)) %>% glimpse()
+          mutate(across(everything(), as.character)) #%>% glimpse()
         
         precision.limit <- (input$error.report.precision)
         
@@ -10401,7 +10412,7 @@ function(input, output, session) {
           dplyr::filter(precision_percent > precision.limit) %>%
           dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, length_mm, range, frame_left, frame_right, em_comment, rms, precision, precision_percent, code)%>%
           mutate(error = "over.precision")  %>%
-          mutate(across(everything(), as.character)) %>% glimpse()
+          mutate(across(everything(), as.character)) #%>% glimpse()
         
         print("stereo.maxn.does.not.equal.maxn")
         stereo.maxn.does.not.equal.maxn <- length.vs.maxn() %>%
@@ -10409,7 +10420,7 @@ function(input, output, session) {
           dplyr::filter(!length_maxn == maxn) %>%
           dplyr::filter(!percent_difference%in%c(0)) %>%
           mutate(error = "stereo.maxn.does.not.equal.maxn") %>%
-          mutate(across(everything(), as.character)) %>% glimpse()
+          mutate(across(everything(), as.character)) #%>% glimpse()
       }
       
       # all errors
@@ -10436,8 +10447,8 @@ function(input, output, session) {
           maxn.species.not.observed,
           maxn.species.not.in.lh), function(df) {
             # )
-            df %>% mutate(across(everything(), as.character))})) %>%
-          dplyr::glimpse()
+            df %>% mutate(across(everything(), as.character))}))# %>%
+         # dplyr::glimpse()
         
         
         # bind_rows()
@@ -10794,8 +10805,8 @@ function(input, output, session) {
       print("metadata.samples.duplicated.t")
       metadata.samples.duplicated.t <- metadata.samples.duplicated.t() %>%
         mutate(error = "sample.names.are.duplicated") %>%
-        mutate(across(everything(), as.character)) %>%
-        glimpse()
+        mutate(across(everything(), as.character)) #%>%
+        #glimpse()
     } else {
       metadata.samples.duplicated.t <- data.frame()
     }
@@ -10804,8 +10815,8 @@ function(input, output, session) {
       print("metadata.coordinates.duplicated.t")
       metadata.coordinates.duplicated.t <- metadata.coordinates.duplicated.t() %>%
         mutate(error = "sample.coordinates.are.duplicated") %>%
-        mutate(across(everything(), as.character)) %>%
-        glimpse()
+        mutate(across(everything(), as.character)) #%>%
+        #glimpse()
     } else {
       metadata.coordinates.duplicated.t <- data.frame()
     }
@@ -10816,8 +10827,8 @@ function(input, output, session) {
         mutate(error = "coordinates.potentially.on.land") %>%
         dplyr::left_join(metadata()) %>%
         dplyr::select(any_of(c("campaignid", "sample", "opcode", "period", "latitude_dd", "longitude_dd", "error"))) %>%
-        mutate(across(everything(), as.character)) %>%
-        glimpse()
+        mutate(across(everything(), as.character))# %>%
+        #glimpse()
     } else {
       metadata.on.land.t <- data.frame()
     }
@@ -10912,8 +10923,8 @@ function(input, output, session) {
       dplyr::filter(c(midx > transect.limit | midx < -transect.limit | midy > transect.limit | midy < -transect.limit | x > transect.limit | x < -transect.limit | y > transect.limit | y < -transect.limit)) %>%
       dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, range, length_mm, frame_left, frame_right, midx, midy, x, y, em_comment) %>%
       dplyr::mutate(error = "out.of.transect")%>%
-      mutate(across(everything(), as.character)) %>%
-      glimpse()
+      mutate(across(everything(), as.character)) #%>%
+      #glimpse()
     
     message(paste("number of rows in data: ", nrow(length.out.of.transect.t)))
     
@@ -11120,7 +11131,7 @@ function(input, output, session) {
   ##                    GENERIC COUNT                        ----
   ## _______________________________________________________ ----
   ## ► Read in count data ----
-  count <- reactive({
+  count_data <- reactive({
     # When folder chosen ----
     if(!is.null(input$folderdir)) {
       
@@ -11128,7 +11139,7 @@ function(input, output, session) {
       files <- input$folderdir%>%
         dplyr::filter(grepl("_Count.csv", name))
       
-      count <- data.frame()
+      count_data <- data.frame()
       
       if (is.null(files)) return(NULL)
       
@@ -11136,40 +11147,40 @@ function(input, output, session) {
         tmp <- read_csv(files$datapath[i], col_types = cols(.default = "c"))  %>%
           dplyr::mutate(campaignid = files$name[i])
         
-        count <- bind_rows(count, tmp)
+        count_data <- bind_rows(count_data, tmp)
         
-        if("CampaignID" %in% colnames(count))
+        if("CampaignID" %in% colnames(count_data))
         {
-          count <- count %>%
+          count_data <- count_data %>%
             dplyr::select(-c(CampaignID))
         }
       }
       
-      count <- count %>%
+      count_data <- count_data %>%
         clean_names() %>%
         dplyr::mutate(campaignid = str_replace_all(.$campaignid, c("_Count.csv" = "")))
     }
     
-    if(!"sample" %in% names(count)){
+    if(!"sample" %in% names(count_data)){
       
       # If point method and samples are opcodes
       if(input$method == "point" & input$sample == "opcode") {
         
-        count <- count %>%
+        count_data <- count_data %>%
           dplyr::mutate(sample = opcode)
       }
       
       # If point method and samples are periods
       if(input$method == "point" & input$sample == "period") {
         
-        count <- count %>%
+        count_data <- count_data %>%
           dplyr::mutate(sample = period)
       }
       
       # If transect method and sample = "opcode" + "period"
       if(input$method == "transect" & input$sample.t == "opcodeperiod") {
         
-        count <- count %>%
+        count_data <- count_data %>%
           dplyr::mutate(sample = paste(opcode, period, sep = "_"))
         
       }
@@ -11177,74 +11188,85 @@ function(input, output, session) {
       # If transect method and sample = "period"
       if(input$method == "transect" & input$sample.t == "period") {
         
-        count <- count %>%
+        count_data <- count_data %>%
           dplyr::mutate(sample = period)
       }
     }
     
-    
-    
-    family_accents <- count %>%
-      distinct(family) %>%
-      dplyr::mutate(fail = str_detect(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
-      dplyr::filter(!fail %in% FALSE)# %>%
-    #glimpse()
-    
-    if(nrow(family_accents > 0)){
-      errors <- paste0("<li>In the <b>Family</b> column.", "</li>", "<br>")
-    } else {
-      errors = ""
-    }
-    
-    genus_accents <- count %>%
-      distinct(genus) %>%
-      dplyr::mutate(fail = str_detect(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
-      dplyr::filter(!fail %in% FALSE) #%>%
-    #glimpse()
-    
-    if(nrow(genus_accents > 0)){
-      errors <- paste0(errors, "<li>In the <b>Genus</b> column.", "</li>", "<br>")
-    }
-    
-    species_accents <- count %>%
-      distinct(species) %>%
-      dplyr::mutate(fail = str_detect(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
-      dplyr::filter(!fail %in% FALSE) #%>%
-    #glimpse()
-    
-    if(nrow(species_accents > 0)){
-      errors <- paste0(errors, "<li>In the <b>Species</b> column.", "</li>", "<br>")
-    }
-    
-    accents <- bind_rows(family_accents, genus_accents, species_accents)
-    
-    if(nrow(accents > 0)){
-      shinyalert("Count Data Contains Special Characters:",
-                 paste0(errors, "<br> Please check the spelling before proceeding. The special characters will be removed, and the species names may not match your chosen vocabulary (life history information)"),
-                 type = "warning", html = TRUE)
-    }
-    
-    
-    count <- count %>%
-      dplyr::mutate(species = str_remove_all(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
-      dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
-      dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
-      mutate(sample = as.factor(sample)) %>%
-      mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
-      mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
-      mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_, "spp."), "spp", as.character(species))) %>%
+    # 
+    # 
+    # family_accents <- count_data %>%
+    #   distinct(family) %>%
+    #   dplyr::mutate(fail = str_detect(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+    #   dplyr::filter(!fail %in% FALSE)# %>%
+    # #glimpse()
+    # 
+    # if(nrow(family_accents > 0)){
+    #   errors <- paste0("<li>In the <b>Family</b> column.", "</li>", "<br>")
+    # } else {
+    #   errors = ""
+    # }
+    # 
+    # genus_accents <- count_data %>%
+    #   distinct(genus) %>%
+    #   dplyr::mutate(fail = str_detect(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+    #   dplyr::filter(!fail %in% FALSE) #%>%
+    # #glimpse()
+    # 
+    # if(nrow(genus_accents > 0)){
+    #   errors <- paste0(errors, "<li>In the <b>Genus</b> column.", "</li>", "<br>")
+    # }
+    # 
+    # species_accents <- count_data %>%
+    #   distinct(species) %>%
+    #   dplyr::mutate(fail = str_detect(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+    #   dplyr::filter(!fail %in% FALSE) #%>%
+    # #glimpse()
+    # 
+    # if(nrow(species_accents > 0)){
+    #   errors <- paste0(errors, "<li>In the <b>Species</b> column.", "</li>", "<br>")
+    # }
+    # 
+    # accents <- bind_rows(family_accents, genus_accents, species_accents)
+    # 
+    # if(nrow(accents > 0)){
+    #   shinyalert("Count Data Contains Special Characters:",
+    #              paste0(errors, "<br> Please check the spelling before proceeding. The special characters will be removed, and the species names may not match your chosen vocabulary (life history information)"),
+    #              type = "warning", html = TRUE)
+    # }
+    # 
+    # message("view count data")
+    # 
+    count_data <- count_data %>%
+      # dplyr::mutate(species = str_remove_all(species, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      # dplyr::mutate(genus = str_remove_all(genus, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      # dplyr::mutate(family = str_remove_all(family, "[^[:alnum:]]|á|é|ó|ū|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ý|Ý|à|è|ì|ò|ù|À|È|Ì|Ò|Ù|â|ê|î|ô|û|Â|Ê|Î|Ô|Û|ã|õ|Ã|Õ|ñ|Ñ|ä|ë|ï|ö|ü|Ä|Ë|Ï|Ö|Ü|ÿ|ç|Ç")) %>%
+      dplyr::mutate(sample = as.factor(sample)) %>%
+      dplyr::mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
+      dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
+      dplyr::mutate(species = ifelse(species %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_, "spp."), "spp", as.character(species))) %>%
       dplyr::filter(!is.na(family)) %>%
       dplyr::mutate(species = as.character(tolower(species))) %>%
       dplyr::mutate(genus = as.character(stringr::str_to_sentence(genus))) %>%
       dplyr::mutate(family = as.character(stringr::str_to_sentence(family))) %>%
-      dplyr::left_join(all_data$lh.aus)
+      dplyr::left_join(life.history()) #%>%
+      #dplyr::glimpse()
+    
+    return(count_data)
+    
+  })
+  
+  output$table.gencount <- renderDataTable({
+    
+    count_data()
+    
     
   })
   
   ## ► Create Count (Raw) ----
   count.raw <- reactive({
     #TODO add code column with lifehistory sheet
-    maxn <- count() %>%
+    maxn <- count_data() %>%
       dplyr::mutate(count = as.numeric(count)) %>%
       replace_na(list(family = "Unknown", genus = "Unknown", species = "spp")) #%>% # remove any NAs in taxa name
     
@@ -11270,6 +11292,8 @@ function(input, output, session) {
       
     }
     
+    message("view gen maxn")
+    
     maxn <- maxn %>%
       dplyr::filter(!is.na(maxn)) %>%
       tidyr::replace_na(list(maxn = 0)) %>%
@@ -11283,7 +11307,10 @@ function(input, output, session) {
       dplyr::mutate(species = as.character(species)) %>%
       dplyr::mutate(genus = as.character(genus)) %>%
       dplyr::mutate(family = as.character(family)) %>%
-      filter(!family %in% c("Unknown"))#%>% glimpse()
+      filter(!family %in% c("Unknown"))#%>% 
+      #glimpse()
+    
+    return(maxn)
     
   })
   
@@ -11317,6 +11344,8 @@ function(input, output, session) {
       
     }
     
+    return(count.clean)
+    
   })
   
   ## ►  Create MaxN (Complete) -----
@@ -11347,6 +11376,8 @@ function(input, output, session) {
         dplyr::ungroup() #%>% glimpse()
       
     }
+    
+    return(count.complete)
     
   })
   
