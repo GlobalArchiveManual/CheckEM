@@ -80,7 +80,6 @@ true_matches <- double_fb %>%
 still_missing <- anti_join(double_fb %>% dplyr::select(speccode), true_matches)
 
 # Download maturity data ----
-# Filter to only Fork length measurements
 # Remove any that are NA
 # Average the length at maturity (cm)
 # Then change synonyms
@@ -88,12 +87,87 @@ still_missing <- anti_join(double_fb %>% dplyr::select(speccode), true_matches)
 maturity <- maturity(validated) %>%
   clean_names() %>%
   # filter(type1 %in% "FL") %>% # Would be good to turn this on but it gets rid of a lot of species.
-  filter(!is.na(lm)) %>%
-  dplyr::group_by(species, speccode) %>%
+  dplyr::filter(!is.na(lm)) %>%
+  dplyr::filter(!is.na(type1)) %>% # This loses 28 species that don't specify a measure
+  # dplyr::mutate(test = if_else(type1 %in% "OT", comment, type1)) %>% # These are all wack
+  dplyr::filter(type1 %in% c("TL", "SL", "FL")) %>%
+  dplyr::group_by(species, speccode, type1) %>%
   dplyr::summarise(fb_length_at_maturity_cm = mean(lm)) %>%
   dplyr::rename(fishbase_scientific = species) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
   dplyr::ungroup()
+
+maturity_species <- unique(maturity$fishbase_scientific) 
+
+ll_eqs <- length_length(maturity_species) %>%
+  clean_names() %>%
+  dplyr::rename(unknown = length1, known = length2) %>%
+  dplyr::group_by(species, unknown, known) %>%
+  summarise(a_ll = mean(a, na.rm = T),
+            b_ll = mean(b, na.rm = T)) %>%
+  ungroup() %>%
+  dplyr::filter(known %in% c("TL", "FL", "SL"),
+                unknown %in% c("TL", "FL", "SL")) %>%
+  dplyr::rename(fishbase_scientific = species) %>%
+  glimpse()
+
+maturity_conv <- maturity %>%
+  left_join(ll_eqs) %>%
+  dplyr::mutate(lm_conv = case_when(type1 %in% "FL" ~ fb_length_at_maturity_cm,
+                                    type1 %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ (fb_length_at_maturity_cm * b_ll) + a_ll,
+                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (fb_length_at_maturity_cm - a_ll)/b_ll)) %>%
+  dplyr::filter(!is.na(lm_conv)) %>%
+  dplyr::select(fishbase_scientific, speccode, lm_conv) %>%
+  dplyr::rename(fb_length_at_maturity_cm = lm_conv) %>%
+  glimpse()
+
+ts_species <- maturity %>%
+  left_join(ll_eqs) %>%
+  group_by(fishbase_scientific) %>%
+  summarise(has_SL_to_TL = any(type1 == "SL" & known == "SL" & unknown == "TL"),
+            has_TL_to_FL = any(type1 == "SL" & known == "TL" & unknown == "FL")) %>%
+  dplyr::filter(has_SL_to_TL & has_TL_to_FL) %>%
+  pull(fishbase_scientific)
+
+maturity_ts <- maturity %>%
+  left_join(ll_eqs) %>%
+  dplyr::filter(fishbase_scientific %in% ts_species) %>%
+  # Convert SL to TL
+  dplyr::mutate(lm_conv_tl = case_when(type1 %in% "SL" & unknown %in% "TL" & known %in% "SL" ~ (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
+  group_by(fishbase_scientific) %>%
+  dplyr::filter((type1 %in% "SL" & unknown %in% "TL" & known %in% "SL") | 
+                  (type1 %in% "SL" & unknown %in% "FL" & known %in% "TL")) %>%
+  dplyr::mutate(lm_conv_tl = coalesce(lm_conv_tl, lm_conv_tl[!is.na(lm_conv_tl)][1])) %>%
+  dplyr::filter(unknown %in% "FL" & known %in% "TL") %>%
+  # Convert TL to FL
+  # dplyr::mutate(lm_conv = case_when(!is.na(lm_conv_tl) ~ (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
+  glimpse()
+  
+
+
+# 1.
+# direct_to_FL <- ll_eqs %>%
+#   filter(unknown == "FL") %>%
+#   distinct(species) %>%
+#   pull(species)
+# 
+# # 2. For those without direct FL, check if there's a 2-step path
+# two_step_candidates <- ll_eqs %>%
+#   filter(!(species %in% direct_to_FL)) %>%
+#   group_by(species) %>%
+#   summarise(
+#     step1 = list(known[unknown == "SL"]),
+#     step2 = list(known[unknown == "FL"])
+#   ) %>%
+#   rowwise() %>%
+#   mutate(has_path = any(step1 %in% step2)) %>%
+#   filter(has_path) %>%
+#   pull(species)
+# 
+# # 3. Final output: species that need 2-step conversion to FL
+# two_step_only <- setdiff(two_step_candidates, direct_to_FL)
+# 
+# two_step_only
 
 # Get fb_vulnerability, fb_length_max and fb_l_type_max, information from FishBase ----
 info <- species(validated) %>% 

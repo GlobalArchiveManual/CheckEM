@@ -14433,6 +14433,855 @@ caab_code,marine_region
 37388001,Great Barrier Reef
 37388001,North
 37388001,North-west
+37388002,North
+37388002,North-west
+37388003,Great Barrier Reef
+37388003,North
+37388003,North-west
+37388004,Great Barrier Reef
+37388004,Temperate East
+37388005,Temperate East
+37388005,Great Barrier Reef
+37388006,Great Barrier Reef
+37388006,North
+37388006,North-west
+37388008,North
+37388008,North-west
+37388011,North-west
+37388011,South-west
+37388012,North
+37388012,North-west
+37388012,Great Barrier Reef
+37388013,Great Barrier Reef
+37388013,North
+37388014,Great Barrier Reef
+37388014,North
+37388015,Great Barrier Reef
+37388015,Coral Sea
+37388015,North
+37388016,Temperate East
+37388017,Great Barrier Reef
+37388017,North
+37388017,North-west
+37388018,Great Barrier Reef
+37388018,North
+37388018,North-west
+37388019,North-west
+37393001,North-west
+37393003,North-west
+37393003,South-west
+37393005,Great Barrier Reef
+37393005,Coral Sea
+37393005,North-west
+37393005,North
+37393005,South-west
+37393012,North
+37393012,Great Barrier Reef
+37393012,Coral Sea
+37393012,North-west
+37393012,South-west
+37393013,North
+37393013,Great Barrier Reef
+37393013,Coral Sea
+37393013,North-west
+37393014,Temperate East
+37393014,South-east
+37393015,North
+37393015,North-west
+37393015,Great Barrier Reef
+37393015,South-west
+37393016,Temperate East
+37393016,South-east
+37393016,Great Barrier Reef
+37393016,Coral Sea
+37393016,North-west
+37393017,Great Barrier Reef
+37393017,Temperate East
+37395004,Temperate East
+37395004,North-west
+37395004,Great Barrier Reef
+37395004,Coral Sea
+37395004,North
+37395005,Temperate East
+37395005,Great Barrier Reef
+37395005,Coral Sea
+37395005,North-west
+37395005,South-west
+37395005,South-east
+37395005,North
+37397001,Great Barrier Reef
+37397001,North
+37397001,North-west
+37398001,North-west
+37398001,South-west
+37398001,South-east
+37398001,Temperate East
+37398001,Great Barrier Reef
+37400002,South-west
+37400002,South-east
+37400002,Temperate East
+37400003,South-west
+37400003,South-east
+37400003,Temperate East
+37400003,Great Barrier Reef
+37400004,North-west
+37400004,South-west
+37400004,South-east
+37400005,Temperate East
+37400005,South-east
+37400005,South-west
+37400006,North-west
+37400010,Great Barrier Reef
+37400010,North
+37400010,North-west
+37400012,North
+37400012,North-west
+37400012,South-west
+37400018,South-east
+37400018,Temperate East
+37400018,South-west
+37400022,Temperate East
+37400022,South-east
+37400022,Great Barrier Reef
+37400026,Temperate East
+37400026,Great Barrier Reef
+37400026,North
+37401001,North
+37401001,Great Barrier Reef
+37401001,Coral Sea
+37401001,North-west
+37401001,South-west
+37401001,Temperate East
+37401001,South-east
+37401002,Great Barrier Reef
+37401002,North
+37401005,Great Barrier Reef
+37401005,Temperate East
+37401005,Coral Sea
+37401005,North-west
+37401005,North
+37401005,South-east
+37401006,North
+37401006,North-west
+37401006,Great Barrier Reef
+37401007,Temperate East
+37401007,South-east
+37401007,Great Barrier Reef
+37401007,Coral Sea
+37401008,North-west
+37401008,South-west
+37401009,North-west
+37401009,North
+37401010,Temperate East
+37401010,Great Barrier Reef
+37401011,North
+37401011,Great Barrier Reef
+37401011,Coral Sea
+37401011,North-west
+37401011,South-west
+37402001,Temperate East
+37402001,South-east
+37402005,Temperate East
+37402005,South-east
+37402008,North-west
+37403001,South-west
+37403001,South-east
+37403001,Temperate East
+37408002,South-west
+37408002,South-east
+37408002,Temperate East
+37408004,Temperate East
+37408004,North-west
+37408004,Great Barrier Reef
+37408004,Coral Sea
+37408004,North
+37408004,South-west
+37408004,South-east
+37408005,North-west
+37408005,Great Barrier Reef
+37408005,North
+37408005,South-west
+37408005,Temperate East
+37408010,Temperate East
+37408010,Great Barrier Reef
+37408011,Temperate East
+37408011,North-west
+37408011,Great Barrier Reef
+37408011,Coral Sea
+37408011,North
+37408012,Temperate East
+37408012,Great Barrier Reef
+37408012,Coral Sea
+37408012,North
+37408013,Great Barrier Reef
+37408013,North
+37408013,North-west
+37408013,South-west
+37408014,North-west
+37408014,South-west
+37408015,North-west
+37408015,Great Barrier Reef
+37408015,Coral Sea
+37408015,North
+37408016,Great Barrier Reef
+37408016,North
+37408017,North-west
+37408017,Great Barrier Reef
+37408017,Coral Sea
+37408017,North
+37408042,North-west
+37408042,South-west
+37408042,Great Barrier Reef
+37408042,Temperate East
+37408042,North
+37408043,Temperate East
+37408043,North-west
+37408043,South-west
+37408043,Great Barrier Reef
+37408043,North
+37408044,Great Barrier Reef
+37408044,Coral Sea
+37408044,Temperate East
+37408044,North
+37408045,North-west
+37408045,Great Barrier Reef
+37408045,Coral Sea
+37408045,South-west
+37408045,North
+37408046,Great Barrier Reef
+37408046,North
+37408046,North-west
+37408046,South-west
+37408046,Temperate East
+37408048,Temperate East
+37408048,Great Barrier Reef
+37408048,Coral Sea
+37408048,North
+37408049,North-west
+37408050,Great Barrier Reef
+37408050,North
+37408050,North-west
+37408050,South-west
+37408050,Temperate East
+37408051,North-west
+37408051,Temperate East
+37408051,Great Barrier Reef
+37408051,North
+37408052,North-west
+37408052,Great Barrier Reef
+37408052,North
+37408053,Great Barrier Reef
+37408053,Coral Sea
+37408053,Temperate East
+37408053,North
+37408054,Great Barrier Reef
+37408054,North
+37408054,North-west
+37408054,Temperate East
+37408055,North-west
+37408056,North-west
+37408057,Great Barrier Reef
+37408057,Coral Sea
+37408057,North-west
+37408057,North
+37408058,Great Barrier Reef
+37408058,North
+37408058,South-west
+37408058,South-east
+37408058,Temperate East
+37408059,Great Barrier Reef
+37408059,North
+37408059,Temperate East
+37408060,Great Barrier Reef
+37408060,North
+37408060,North-west
+37408060,Temperate East
+37408061,Great Barrier Reef
+37408061,North
+37408061,North-west
+37408061,South-west
+37408062,Great Barrier Reef
+37408062,North
+37408062,North-west
+37408062,Temperate East
+37408063,Great Barrier Reef
+37408063,North
+37408063,North-west
+37408063,South-west
+37408063,Temperate East
+37408064,Great Barrier Reef
+37408064,North
+37408064,North-west
+37408064,South-west
+37408064,Temperate East
+37408065,Great Barrier Reef
+37408065,North
+37408065,North-west
+37408065,Temperate East
+37408066,Great Barrier Reef
+37408066,North
+37408066,North-west
+37408066,Temperate East
+37408067,Temperate East
+37408067,South-east
+37408067,Great Barrier Reef
+37408067,North
+37408068,North-west
+37408068,South-west
+37408075,Temperate East
+37408075,Great Barrier Reef
+37408075,Coral Sea
+37408075,North-west
+37408075,North
+37408076,Temperate East
+37408076,Great Barrier Reef
+37408076,Coral Sea
+37408076,North-west
+37408076,South-west
+37408076,North
+37408088,Great Barrier Reef
+37408088,North
+37408090,Temperate East
+37408092,Great Barrier Reef
+37408092,North
+37408095,North
+37408095,North-west
+37408096,Temperate East
+37408097,Great Barrier Reef
+37408097,Coral Sea
+37411001,Great Barrier Reef
+37411001,North
+37411001,North-west
+37411002,Great Barrier Reef
+37411002,North
+37411002,North-west
+37411003,Great Barrier Reef
+37411003,North
+37411003,North-west
+37411003,South-west
+37411004,Great Barrier Reef
+37411004,North
+37411004,North-west
+37411004,South-west
+37411005,Great Barrier Reef
+37411005,North
+37411006,North-west
+37412001,North-west
+37412001,Great Barrier Reef
+37412001,North
+37412001,South-west
+37412002,Great Barrier Reef
+37412002,North
+37412002,North-west
+37412002,South-west
+37414001,South-west
+37414001,South-east
+37414002,North-west
+37414002,South-west
+37414002,South-east
+37414002,Temperate East
+37414003,South-west
+37414003,South-east
+37414003,Temperate East
+37414004,South-west
+37414004,South-east
+37414004,Temperate East
+37414006,South-west
+37414006,South-east
+37414006,Temperate East
+37414007,South-west
+37414008,South-west
+37414008,South-east
+37414009,South-west
+37414009,South-east
+37414010,South-west
+37415001,South-west
+37415001,South-east
+37415001,Temperate East
+37415008,Great Barrier Reef
+37415008,North
+37415009,Great Barrier Reef
+37415009,Coral Sea
+37415009,North-west
+37415009,North
+37415009,Temperate East
+37415019,Great Barrier Reef
+37415019,Coral Sea
+37415019,North
+37415019,North-west
+37415019,South-west
+37415020,South-east
+37415020,Temperate East
+37415020,Great Barrier Reef
+37415021,South-west
+37415021,South-east
+37415025,Temperate East
+37415025,Great Barrier Reef
+37415026,Great Barrier Reef
+37415026,Temperate East
+37415026,North
+37415048,South-west
+37416008,North-west
+37416008,South-west
+37416008,South-east
+37416009,South-west
+37416009,South-east
+37416009,Temperate East
+37416010,South-west
+37416010,South-east
+37416010,Temperate East
+37416010,Great Barrier Reef
+37416011,South-west
+37416011,South-east
+37416011,Temperate East
+37416012,South-west
+37416012,South-east
+37416012,Temperate East
+37416014,South-west
+37416014,South-east
+37416014,Temperate East
+37416016,South-west
+37416016,South-east
+37416016,Temperate East
+37416018,North-west
+37416018,South-west
+37416021,South-west
+37416021,South-east
+37416023,Temperate East
+37416023,North-west
+37416023,South-west
+37416023,South-east
+37416023,Great Barrier Reef
+37416024,Temperate East
+37416024,South-east
+37416024,Great Barrier Reef
+37416025,South-west
+37416025,South-east
+37425001,Great Barrier Reef
+37425001,Coral Sea
+37425001,North-west
+37425002,North
+37425002,North-west
+37427003,North
+37427003,North-west
+37427007,Great Barrier Reef
+37427007,North
+37427007,North-west
+37427007,South-west
+37427007,Temperate East
+37427008,Great Barrier Reef
+37427008,North
+37427008,North-west
+37427009,Great Barrier Reef
+37427009,North
+37427009,North-west
+37427009,South-west
+37427009,Temperate East
+37427013,North-west
+37427013,South-west
+37427018,Great Barrier Reef
+37427018,North
+37427018,North-west
+37427018,South-west
+37427025,North-west
+37427031,Great Barrier Reef
+37427031,Coral Sea
+37427031,North-west
+37427031,South-west
+37427031,North
+37427032,North-west
+37427032,Great Barrier Reef
+37427032,Coral Sea
+37427032,Temperate East
+37427032,North
+37427036,Great Barrier Reef
+37427036,Temperate East
+37427036,North
+37427038,Great Barrier Reef
+37427038,Temperate East
+37427038,Coral Sea
+37427038,North
+37427041,North-west
+37427042,Great Barrier Reef
+37427042,Coral Sea
+37427042,North
+37427047,Great Barrier Reef
+37427047,North
+37427050,Temperate East
+37427053,North-west
+37427054,Temperate East
+37427054,South-east
+37427054,Great Barrier Reef
+37428003,North-west
+37428003,South-west
+37428003,South-east
+37428003,Temperate East
+37428006,South-west
+37428006,South-east
+37428007,South-west
+37428007,South-east
+37428007,Temperate East
+37428011,Great Barrier Reef
+37428011,Coral Sea
+37428011,North-west
+37428011,Temperate East
+37428011,North
+37428011,South-west
+37428015,North-west
+37428015,Great Barrier Reef
+37428015,North
+37428016,North-west
+37428016,Great Barrier Reef
+37428016,North
+37428018,Great Barrier Reef
+37428018,North
+37428018,North-west
+37428018,South-west
+37428018,Temperate East
+37428025,Great Barrier Reef
+37428025,North
+37428025,North-west
+37428025,Temperate East
+37428028,Great Barrier Reef
+37428028,North
+37428028,North-west
+37428060,Great Barrier Reef
+37428060,Temperate East
+37428060,North
+37428062,Great Barrier Reef
+37428062,North
+37428062,North-west
+37428062,South-west
+37428062,South-east
+37428064,Great Barrier Reef
+37428064,Coral Sea
+37428064,North-west
+37428064,North
+37428065,Temperate East
+37428065,Great Barrier Reef
+37428065,North
+37428065,North-west
+37428065,South-west
+37428065,South-east
+37428066,Great Barrier Reef
+37428066,North
+37428067,North-west
+37428067,South-west
+37428067,Temperate East
+37428067,Great Barrier Reef
+37428067,North
+37428068,Great Barrier Reef
+37428068,North
+37428068,North-west
+37428068,South-west
+37428068,Temperate East
+37428069,South-west
+37428069,South-east
+37428069,Temperate East
+37428069,Great Barrier Reef
+37428070,Great Barrier Reef
+37428070,North
+37428070,North-west
+37428070,South-west
+37428070,Temperate East
+37428071,Great Barrier Reef
+37428071,North
+37428071,North-west
+37428072,Great Barrier Reef
+37428072,North
+37428072,North-west
+37428073,Great Barrier Reef
+37428073,North
+37428073,North-west
+37428073,Temperate East
+37428074,Great Barrier Reef
+37428074,North
+37428074,North-west
+37428075,North-west
+37428075,Great Barrier Reef
+37428075,North
+37428075,Temperate East
+37428076,North-west
+37428076,Great Barrier Reef
+37428076,North
+37428077,North-west
+37428077,Great Barrier Reef
+37428077,Coral Sea
+37428077,North
+37428078,Temperate East
+37428078,North-west
+37428078,Great Barrier Reef
+37428078,Coral Sea
+37428078,North
+37428078,South-east
+37428079,North-west
+37428079,Great Barrier Reef
+37428079,North
+37428080,North-west
+37428080,Great Barrier Reef
+37428080,Coral Sea
+37428080,North
+37428081,North-west
+37428081,Great Barrier Reef
+37428081,North
+37428082,Great Barrier Reef
+37428082,Coral Sea
+37428082,North
+37428083,North-west
+37428083,Great Barrier Reef
+37428083,North
+37428084,North-west
+37428084,Great Barrier Reef
+37428085,North-west
+37428085,Great Barrier Reef
+37428085,North
+37428086,Great Barrier Reef
+37428086,North
+37428087,North-west
+37428087,South-west
+37428087,South-east
+37428087,Temperate East
+37428087,Great Barrier Reef
+37428088,Temperate East
+37428088,Great Barrier Reef
+37428089,Temperate East
+37428089,North-west
+37428089,Great Barrier Reef
+37428089,North
+37428090,Great Barrier Reef
+37428090,North
+37428091,Great Barrier Reef
+37428091,Coral Sea
+37428091,North-west
+37428091,North
+37428091,South-west
+37428091,Temperate East
+37428170,North-west
+37428173,Temperate East
+37428173,Great Barrier Reef
+37428173,Coral Sea
+37428173,North-west
+37428173,North
+37428173,South-west
+37428174,Great Barrier Reef
+37428174,North
+37428174,North-west
+37428174,Temperate East
+37428175,North-west
+37428175,Great Barrier Reef
+37428175,North
+37428175,Temperate East
+37428176,Temperate East
+37428176,Great Barrier Reef
+37428177,Great Barrier Reef
+37428177,North
+37428177,North-west
+37428177,South-west
+37428177,Temperate East
+37428178,Great Barrier Reef
+37428178,North
+37428178,North-west
+37428178,Temperate East
+37428179,Temperate East
+37428179,Great Barrier Reef
+37428179,Coral Sea
+37428179,North-west
+37428179,North
+37428180,Great Barrier Reef
+37428180,North
+37428180,Temperate East
+37428181,Great Barrier Reef
+37428181,North
+37428181,North-west
+37428183,North-west
+37428183,Great Barrier Reef
+37428183,North
+37428184,Great Barrier Reef
+37428184,North
+37428184,North-west
+37428184,Temperate East
+37428185,North-west
+37428186,North-west
+37428186,Great Barrier Reef
+37428186,North
+37428187,Temperate East
+37428187,Great Barrier Reef
+37428187,Coral Sea
+37428187,North-west
+37428187,North
+37428188,Great Barrier Reef
+37428188,North
+37428188,North-west
+37428188,Temperate East
+37428189,Great Barrier Reef
+37428189,North
+37428190,South-west
+37428190,South-east
+37428190,Temperate East
+37428190,Great Barrier Reef
+37428191,Great Barrier Reef
+37428191,North
+37428191,North-west
+37428192,Temperate East
+37428192,South-east
+37428192,Great Barrier Reef
+37428194,North
+37428194,North-west
+37428194,Great Barrier Reef
+37428195,South-west
+37428195,South-east
+37428195,Temperate East
+37428196,South-west
+37428196,South-east
+37428196,Temperate East
+37428203,Great Barrier Reef
+37428203,North
+37428203,North-west
+37428204,Great Barrier Reef
+37428204,North
+37428204,North-west
+37428204,South-west
+37428206,Great Barrier Reef
+37428206,Temperate East
+37428206,North
+37428207,Great Barrier Reef
+37428207,North
+37428208,Great Barrier Reef
+37428208,North
+37428208,Temperate East
+37428210,Great Barrier Reef
+37428210,North
+37428210,North-west
+37428210,Temperate East
+37428211,Great Barrier Reef
+37428211,North
+37428211,North-west
+37428211,South-west
+37428211,Temperate East
+37428212,Great Barrier Reef
+37428212,Coral Sea
+37428212,North-west
+37428212,North
+37428213,Temperate East
+37428213,North-west
+37428213,Great Barrier Reef
+37428213,Coral Sea
+37428213,North
+37428214,Great Barrier Reef
+37428214,Coral Sea
+37428214,North-west
+37428214,North
+37428215,Temperate East
+37428215,North-west
+37428215,Great Barrier Reef
+37428215,North
+37428216,Temperate East
+37428216,North-west
+37428216,Great Barrier Reef
+37428216,Coral Sea
+37428216,North
+37428224,North-west
+37428224,Great Barrier Reef
+37428225,North-west
+37428226,North-west
+37428226,Temperate East
+37428227,North-west
+37428227,North
+37428227,Great Barrier Reef
+37428228,North-west
+37428228,Great Barrier Reef
+37428228,North
+37428228,South-west
+37428229,Great Barrier Reef
+37428229,Coral Sea
+37428229,North-west
+37428229,North
+37428230,North-west
+37428230,Great Barrier Reef
+37428230,North
+37428231,Temperate East
+37428231,Great Barrier Reef
+37428231,Coral Sea
+37428231,North-west
+37428231,North
+37428232,North-west
+37428232,Great Barrier Reef
+37428232,Coral Sea
+37428232,North
+37428233,North-west
+37428234,North-west
+37428234,Great Barrier Reef
+37428234,Coral Sea
+37428234,North
+37428236,Temperate East
+37428236,Great Barrier Reef
+37428236,Coral Sea
+37428236,North-west
+37428236,South-west
+37428236,North
+37428237,Great Barrier Reef
+37428237,Coral Sea
+37428237,North
+37428238,North-west
+37428238,Great Barrier Reef
+37428238,Temperate East
+37428238,North
+37428239,Great Barrier Reef
+37428239,North
+37428239,North-west
+37428296,Great Barrier Reef
+37428296,Coral Sea
+37428296,North-west
+37428296,Temperate East
+37428296,North
+37428297,North-west
+37428297,South-west
+37428297,Temperate East
+37428297,Great Barrier Reef
+37428305,Great Barrier Reef
+37428305,North
+37428305,North-west
+37428337,Temperate East
+37428337,Great Barrier Reef
+37428337,North
+37428341,North
+37428341,North-west
+37428350,Great Barrier Reef
+37428350,North
+37428350,North-west
+37428351,Great Barrier Reef
+37428351,North
+37428351,North-west
+37428351,South-west
+37428352,Great Barrier Reef
+37428352,North
+37428352,Temperate East
+37428353,North
+37428353,North-west
+37428354,Great Barrier Reef
+37428354,North
+37428354,North-west
+37428355,North-west
+37428355,Great Barrier Reef
+37428355,North
+37428373,Great Barrier Reef
+37428373,North
+37428373,North-west
+37428373,Temperate East
+37428374,Great Barrier Reef
+37428374,North
+37428374,North-west
+37428376,North-west
+37428376,Great Barrier Reef
+37428376,Coral Sea
+37428377,Great Barrier Reef
+37428377,Coral Sea
+37428377,North
+37428378,Great Barrier Reef
+37428378,North
+37428391,Temperate East
+37428397,Great Barrier Reef
+37428397,North
 37228902,North
 37272901,South-east
 37435901,Great Barrier Reef
@@ -14459,6 +15308,7 @@ caab_code,marine_region
 37228909,North-west
 37282902,North-west
 37228929,South-east
+37425902,North-west
 37209902,South-east
 37282903,Great Barrier Reef
 37307901,Temperate East
@@ -14467,6 +15317,7 @@ caab_code,marine_region
 37132901,South-east
 37287910,North
 37059902,North-west
+37393903,North-west
 37188903,North
 37290906,Temperate East
 37114907,North-west
@@ -14503,11 +15354,13 @@ caab_code,marine_region
 37232912,South-west
 37076902,South-east
 37224910,Temperate East
+37428945,North-west
 37311750,Temperate East
 37114911,South-west
 37082901,Temperate East
 37103901,South-east
 37232901,South-east
+37393905,Great Barrier Reef
 37009901,South-west
 37231903,South-east
 37378902,South-east
