@@ -2108,14 +2108,15 @@ function(input, output, session) {
     # if no metadata file uploaded and method = single point. dataset = Ningloo BRUVs
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
-      metadata <-  read.csv("data/examples/2022-05_PtCloates_stereo-BRUVS_Metadata.csv") %>%
+      metadata <-  read.csv("data/examples/2024-05_Exmouth-Gulf_stereo-BRUVs_Metadata.csv") %>%
         clean_names() %>%
-        dplyr::rename(latitude_dd = latitude,
-                      longitude_dd = longitude,
-                      depth_m = depth) %>%
+        # dplyr::rename(latitude_dd = latitude,
+        #               longitude_dd = longitude,
+        #               depth_m = depth) %>%
         dplyr::mutate(sample = opcode) %>%
-        dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
+        dplyr::mutate(campaignid = "2024-05_Exmouth-Gulf_stereo-BRUVs") %>%
         dplyr::select(campaignid, opcode, sample, latitude_dd, longitude_dd, date_time, site, location, status, depth_m, successful_count, successful_length, observer_count, observer_length) %>% 
+        tidyr::replace_na(list(depth_m = 1, successful_length = "No")) %>%
         as.data.frame()
       
       original_metadata_names <- c("opcode")
@@ -3488,10 +3489,10 @@ function(input, output, session) {
     # if no folder chosen and method = single point. dataset = Ningloo BRUVs
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
-      periods <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_Period.txt", na.strings = "") %>%
+      periods <-  read.delim("data/examples/2024-05_Exmouth-Gulf_stereo-BRUVs_Period.txt", na.strings = "") %>%
         clean_names() %>%
         dplyr::mutate(sample = as.factor(opcode)) %>%
-        dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
+        dplyr::mutate(campaignid = "2024-05_Exmouth-Gulf_stereo-BRUVs") %>%
         as.data.frame()
       
       # TODO add an example dataset for DOVs
@@ -4018,11 +4019,11 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        points <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_Points.txt", na.strings = "") %>%
+        points <-  read.delim("data/examples/2024-05_Exmouth-Gulf_stereo-BRUVs_Points.txt", na.strings = "") %>%
           clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
-          dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
+          dplyr::mutate(campaignid = "2024-05_Exmouth-Gulf_stereo-BRUVs") %>%
           as.data.frame()
         
         # TODO add an example dataset for DOVs
@@ -5230,11 +5231,11 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        length <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_Lengths.txt", na.strings = "") %>%
+        length <-  read.delim("data/examples/2024-05_Exmouth-Gulf_stereo-BRUVs_Lengths.txt", na.strings = "") %>%
           clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
-          dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
+          dplyr::mutate(campaignid = "2024-05_Exmouth-Gulf_stereo-BRUVs") %>%
           as.data.frame()
         
         # TODO add an example dataset for DOVs
@@ -5382,11 +5383,11 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        threedpoints <-  read.delim("data/examples/2022-05_PtCloates_stereo-BRUVS_3DPoints.txt", na.strings = "") %>%
+        threedpoints <-  read.delim("data/examples/2024-05_Exmouth-Gulf_stereo-BRUVs_3DPoints.txt", na.strings = "") %>%
           clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
-          dplyr::mutate(campaignid = "2022-05_PtCloates_stereo-BRUVS") %>%
+          dplyr::mutate(campaignid = "2024-05_Exmouth-Gulf_stereo-BRUVs") %>%
           as.data.frame()
         
         # TODO add an example dataset for DOVs
