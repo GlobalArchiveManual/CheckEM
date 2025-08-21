@@ -40,7 +40,96 @@ new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
   dplyr::select(family, genus, species, new_maximum_length_in_cm, type_of_length_measure, source) %>% 
   dplyr::group_by(family, genus, species) %>%
   slice(which.max(new_maximum_length_in_cm)) %>%
-  ungroup()
+  dplyr::mutate(fishbase_scientific = paste(genus, species, sep = " ")) %>%
+  ungroup() %>%
+  glimpse()
+ 
+# CONVERT THESE INTO FL WHERE POSSIBLE
+library(rfishbase)
+
+# Extract the species ----
+checkem_length_species <- unique(new_max_sizes$fishbase_scientific)
+
+# Extract length-length relationships to convert non-FL measures
+ll_eqs <- length_length(checkem_length_species) %>%
+  clean_names() %>%
+  dplyr::rename(unknown = length1, known = length2) %>%
+  dplyr::group_by(species, unknown, known) %>%
+  summarise(a_ll = mean(a, na.rm = T),
+            b_ll = mean(b, na.rm = T)) %>%
+  ungroup() %>%
+  dplyr::filter(known %in% c("TL", "FL", "SL"),
+                unknown %in% c("TL", "FL", "SL")) %>%
+  dplyr::rename(fishbase_scientific = species) %>%
+  glimpse()
+
+
+################################################################################
+
+# Convert the length of maturity data into FL where possible ----
+new_max_sizes_conv <- new_max_sizes %>%
+  left_join(ll_eqs, relationship = "many-to-many") %>%
+  dplyr::mutate(new_max_length = case_when(type_of_length_measure %in% "FL" ~ new_maximum_length_in_cm,
+                                           type_of_length_measure == known & unknown %in% "FL" ~ (new_maximum_length_in_cm * b_ll) + a_ll,
+                                           type_of_length_measure == unknown & known %in% "FL" ~ (new_maximum_length_in_cm - a_ll)/b_ll)) %>%
+  # dplyr::mutate(new_max_length = case_when(type_of_length_measure %in% "FL" ~ new_maximum_length_in_cm,
+  #                                          type_of_length_measure %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ (new_maximum_length_in_cm * b_ll) + a_ll,
+  #                                          type_of_length_measure %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (new_maximum_length_in_cm - a_ll)/b_ll),
+  #               conversion_type = case_when(type_of_length_measure %in% "FL" ~ "no-conversion",
+  #                                           type_of_length_measure %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ "regular-eq",
+  #                                           type_of_length_measure %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ "reversed-eq")) %>%
+  dplyr::filter(!is.na(new_max_length)) %>%
+  dplyr::select(fishbase_scientific, new_max_length, conversion_type) %>%
+  dplyr::mutate(type_of_length_measure = "FL") %>%
+  glimpse()
+
+ts_species <- new_max_sizes %>%
+  left_join(ll_eqs, relationship = "many-to-many") %>%
+  group_by(fishbase_scientific) %>%
+  summarise(has_SL_to_TL = any(type_of_length_measure == "SL" & known == "SL" & unknown == "TL"),
+            has_TL_to_FL = any(type_of_length_measure == "SL" & known == "TL" & unknown == "FL")) %>%
+  dplyr::filter(has_SL_to_TL & has_TL_to_FL) %>%
+  pull(fishbase_scientific)
+
+maturity_ts <- maturity %>%
+  left_join(ll_eqs, relationship = "many-to-many") %>%
+  dplyr::filter(fishbase_scientific %in% ts_species) %>% # Only species with possible two-step conversions
+  # Convert SL to TL
+  dplyr::mutate(lm_tl = case_when(type1 %in% "SL" & 
+                                    unknown %in% "TL" & 
+                                    known %in% "SL" ~ 
+                                    (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
+  dplyr::filter((type1 %in% "SL" & unknown %in% "TL" & known %in% "SL") | 
+                  (type1 %in% "SL" & unknown %in% "FL" & known %in% "TL")) %>%
+  group_by(fishbase_scientific) %>%
+  dplyr::mutate(lm_tl = coalesce(lm_tl, lm_tl[!is.na(lm_tl)][1])) %>%
+  dplyr::filter(unknown %in% "FL" & known %in% "TL") %>%
+  # Convert TL to FL
+  dplyr::mutate(lm_fl = (lm_tl * b_ll) + a_ll) %>%
+  dplyr::select(fishbase_scientific, speccode, lm_fl) %>%
+  dplyr::rename(fb_length_at_maturity_cm = lm_fl) %>%
+  dplyr::mutate(conversion_type = "two-step") %>%
+  glimpse()
+
+# Join the straight converted and two-step conversion species
+maturity_final <- bind_rows(maturity_conv, maturity_ts) %>%
+  distinct() %>%
+  dplyr::mutate(ranking = case_when(conversion_type %in% "no-conversion" ~ 1,
+                                    conversion_type %in% "regular-eq" ~ 2,
+                                    conversion_type %in% "reversed-eq" ~ 3,
+                                    conversion_type %in% "two-step" ~ 4)) %>%
+  arrange(fishbase_scientific, ranking) %>%
+  group_by(fishbase_scientific) %>%
+  slice_head(n = 1) %>%
+  ungroup() %>%
+  dplyr::mutate(fb_length_at_maturity_source = case_when(conversion_type %in% "no-conversion" ~ "Fishbase",
+                                                         conversion_type %in% "regular-eq" ~ "Fishbase: Converted to TL using length-length equation",
+                                                         conversion_type %in% "reversed-eq" ~ "Fishbase: Converted to TL using inverse length-length relationship",
+                                                         conversion_type %in% "two-step" ~ "FishBase: Converted to FL using length-length equation")) %>%
+  dplyr::select(-c(ranking, conversion_type)) %>%
+  glimpse()
+
+################################################################################
 
 # TODO add fishes of australia max sizes and depth limits
 foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_maximum-sizes.RDS") %>%
