@@ -85,22 +85,60 @@ still_missing <- anti_join(double_fb %>% dplyr::select(speccode), true_matches)
 # Then change synonyms
 
 # Load all length of maturity data, tidy and filter ----
+
+## Summarise across all length of maturity studies
+# maturity <- maturity(validated) %>%
+#   clean_names() %>%
+#   dplyr::filter(!is.na(lm)) %>%
+#   dplyr::filter(!is.na(type1)) %>% # This loses species that don't specify a measurement type
+#   # dplyr::mutate(test = if_else(type1 %in% "OT", comment, type1)) %>% # These are all wack
+#   dplyr::filter(type1 %in% c("TL", "SL", "FL")) %>% # Remove non-standard length measures (131 entries removed)
+#   dplyr::group_by(species, speccode, type1) %>%
+#   dplyr::summarise(fb_length_at_maturity_cm = mean(lm)) %>% # Average length of maturity per measure
+#   dplyr::rename(fishbase_scientific = species) %>%
+#   dplyr::mutate(speccode = as.character(speccode)) %>%
+#   dplyr::ungroup()
+
 maturity <- maturity(validated) %>%
   clean_names() %>%
   dplyr::filter(!is.na(lm)) %>%
   dplyr::filter(!is.na(type1)) %>% # This loses species that don't specify a measurement type
   # dplyr::mutate(test = if_else(type1 %in% "OT", comment, type1)) %>% # These are all wack
-  dplyr::filter(type1 %in% c("TL", "SL", "FL")) %>% # Remove non-standard length measures
-  dplyr::group_by(species, speccode, type1) %>%
-  dplyr::summarise(fb_length_at_maturity_cm = mean(lm)) %>%
-  dplyr::rename(fishbase_scientific = species) %>%
+  dplyr::filter(type1 %in% c("TL", "SL", "FL")) %>% # Remove non-standard length measures (131 entries removed)
+  dplyr::rename(fishbase_scientific = species,
+                fb_length_at_maturity_cm = lm) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
-  dplyr::ungroup()
+  mutate(country_rank = case_when(c_code == "036" ~ 1,
+    str_detect(locality, "New Zealand") ~ 2)) %>%
+  mutate(number_rank = case_when(number >= 100 ~ 1,
+    number >= 20 & number < 100 ~ 2,
+    number >= 10 & number < 20 ~ 3,
+    number >= 1 & number < 10 ~ 4)) %>%
+  mutate(type_rank = case_when(type1 %in% "FL" ~ 1,
+    type1 %in% "TL" ~ 2,
+    type1 %in% c("SL","WD","OT","PC","NG","AF","LP") ~ 6)) %>%
+  mutate(sex_rank = case_when(sex %in% c("mixed","unsexed", "Unsexed") ~ 1,
+    sex %in% c(NA) ~ 2,
+    sex %in% c("juvenile") ~ 8)) %>%
+  replace_na(list(country_rank = 3, number_rank = 5, type_rank = 7, sex_rank = 2)) %>%
+  dplyr::mutate(final_rank = type_rank + sex_rank + country_rank * 0.5 + number_rank) %>%
+  # dplyr::select(fishbase_scientific, speccode, type1, fb_length_at_maturity_cm, final_rank) %>%
+  glimpse()
+
+maturity_ranked <- maturity %>%
+  group_by(fishbase_scientific, speccode) %>%
+  dplyr::slice_min(final_rank, n = 1) %>%
+  ungroup() %>%
+  glimpse()
+
+test <- maturity %>%
+  group_by(fishbase_scientific, speccode) %>%
+  dplyr::summarise(n = n())
 
 # Extract the species ----
 maturity_species <- unique(maturity$fishbase_scientific) 
 
-# Extract length-length relationships to convert non-FL measures
+# Extract length-length relationships to convert non-FL measures ----
 ll_eqs <- length_length(maturity_species) %>%
   clean_names() %>%
   dplyr::rename(unknown = length1, known = length2) %>%
@@ -130,9 +168,14 @@ maturity_conv <- maturity %>%
 ts_species <- maturity %>%
   left_join(ll_eqs, relationship = "many-to-many") %>%
   group_by(fishbase_scientific) %>%
+  dplyr::filter(!is.na(unknown)) %>% # Remove anything that doesn't have a length-length
   summarise(has_SL_to_TL = any(type1 == "SL" & known == "SL" & unknown == "TL"),
-            has_TL_to_FL = any(type1 == "SL" & known == "TL" & unknown == "FL")) %>%
-  dplyr::filter(has_SL_to_TL & has_TL_to_FL) %>%
+            has_SL_to_TL_rev = any(type1 == "SL" & known == "TL" & unknown == "SL"),
+            has_TL_to_FL = any(type1 == "SL" & known == "TL" & unknown == "FL"),
+            has_TL_to_FL_rev = any(type1 == "SL" & known == "FL" & unknown == "TL")) %>%
+  # dplyr::filter(has_SL_to_TL & has_TL_to_FL) %>%
+  dplyr::filter((has_SL_to_TL | has_SL_to_TL_rev) &
+      (has_TL_to_FL | has_TL_to_FL_rev)) %>%
   pull(fishbase_scientific)
 
 maturity_ts <- maturity %>%
@@ -143,6 +186,10 @@ maturity_ts <- maturity %>%
                                          unknown %in% "TL" & 
                                          known %in% "SL" ~ 
                                          (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
+  dplyr::mutate(lm_tl_rev = case_when(type1 %in% "SL" & 
+                                    unknown %in% "SL" & 
+                                    known %in% "TL" ~ 
+                                    (fb_length_at_maturity_cm - a_ll)/b_ll)) %>%
   dplyr::filter((type1 %in% "SL" & unknown %in% "TL" & known %in% "SL") | 
                   (type1 %in% "SL" & unknown %in% "FL" & known %in% "TL")) %>%
   group_by(fishbase_scientific) %>%

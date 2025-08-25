@@ -1,5 +1,5 @@
 # Code to prepare `maturity` dataset ----
-# This dataset contains length of maturity data for common West Australian targeted species
+# This is a Western Australian specific dataset with Length of Maturity for common fisheries important species
 # This data has been obtained from Western Australian Department of Fisheries public reports and publications
 # See here - https://www.fish.wa.gov.au/Documents/management_papers/fmp280.pdf
 
@@ -13,7 +13,7 @@ library(rfishbase)
 ## Load code crosswalks ----
 code_crosswalk_codes <- readRDS("annotation-schema/data/staging/code-crosswalk-codes.RDS")
 
-## Read in the fisheries length of maturity dataset from google sheet
+## Read in the fisheries length of maturity dataset from google sheet ----
 url <- "https://docs.google.com/spreadsheets/d/176genWqd_pc3NDVQtP2CmfMh66Ui6uwWrLoJU1Ny_qw/edit?usp=sharing"
 
 maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
@@ -26,7 +26,7 @@ maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
   left_join(code_crosswalk_codes) %>%
   glimpse()
 
-## Get the species to extract fishbase length-length relationships
+## Get the species to extract fishbase length-length relationships ----
 species_list <- maturity$fishbase_scientific %>%
   unique()
 
@@ -50,7 +50,7 @@ ll_eqs <- length_length(species_list) %>%
   dplyr::rename(fishbase_scientific = species) %>%
   glimpse()
 
-# Convert length of maturity to Fork Length or filter where not possible
+## Convert length of maturity to Fork Length or filter where not possible ----
 maturity <- maturity %>%
   left_join(ll_eqs) %>%
   # Add equations for important fish with truncate/flat tails (TL = FL)
@@ -72,7 +72,6 @@ maturity <- maturity %>%
                                     fishbase_scientific %in% "Platycephalus speculator" ~ "standard",
                                     fishbase_scientific %in% "Argyrosomus japonicus" ~ "standard",
                                     .default = eq_type)) %>%
-  # dplyr::filter(!is.na(a_ll) & !is.na(b_ll) & !is.na(eq_type)) %>%
   dplyr::mutate(adjusted_l50 = case_when(eq_type %in% "standard" ~ (l50_mm * b_ll) + a_ll,
                                          eq_type %in% "reversed" ~ (l50_mm - a_ll)/b_ll,
                                          .default = NA)) %>%
@@ -90,4 +89,5 @@ maturity <- maturity %>%
                 marine_region = marine_region_lm) %>%
   glimpse()
 
+## Save the package data ----
 usethis::use_data(maturity, overwrite = TRUE)
