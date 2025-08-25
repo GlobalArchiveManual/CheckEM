@@ -60,6 +60,11 @@ function(){
     
     
     tags$head(includeHTML("google-analytics.html")),
+    
+    tags$head(
+      tags$meta(name="google-site-verification", content="YsyUukZjCwtGE-ht7rOZRhcU3ArSMd3yZgqichiQkR8")
+    ),
+    
     HTML("<script type='text/javascript' src='getFolders.js'></script>"),
     tags$head(tags$link(rel = "shortcut icon", href = "favicon.ico")),
     tags$head(tags$style('.selectize-dropdown {z-index: 10000}')),
