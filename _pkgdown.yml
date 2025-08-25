@@ -1,5 +1,7 @@
 url: https://globalarchivemanual.github.io/CheckEM/
 template:
+  params:
+    google_site_verification: google53d2517dfd42801b
   includes:
     in_header: |
       <!-- Global site tag (gtag.js) -->

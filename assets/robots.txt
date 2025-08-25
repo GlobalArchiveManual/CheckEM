@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: globalarchivemanual.github.io/CheckEM/sitemap.xml
