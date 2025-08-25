@@ -1,7 +1,7 @@
 url: https://globalarchivemanual.github.io/CheckEM/
 template:
   params:
-    google_site_verification: google53d2517dfd42801b
+    google_site_verification: m4gXBtqSSJWTmWMwNasopAohP855o_IZ16gJxBTnZ1o
   includes:
     in_header: |
       <!-- Global site tag (gtag.js) -->
@@ -13,6 +13,8 @@ template:
 
         gtag('config', 'G-XRY4CFB9QS');
       </script>
+      
+      <meta name="google-site-verification" content="m4gXBtqSSJWTmWMwNasopAohP855o_IZ16gJxBTnZ1o" />
   bootstrap: 5
 reference:
 - title: Functions for data formatting
