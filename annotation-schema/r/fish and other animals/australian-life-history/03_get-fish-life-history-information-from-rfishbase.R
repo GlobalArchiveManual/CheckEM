@@ -84,21 +84,23 @@ still_missing <- anti_join(double_fb %>% dplyr::select(speccode), true_matches)
 # Average the length at maturity (cm)
 # Then change synonyms
 
+# Load all length of maturity data, tidy and filter ----
 maturity <- maturity(validated) %>%
   clean_names() %>%
-  # filter(type1 %in% "FL") %>% # Would be good to turn this on but it gets rid of a lot of species.
   dplyr::filter(!is.na(lm)) %>%
-  dplyr::filter(!is.na(type1)) %>% # This loses 28 species that don't specify a measure
+  dplyr::filter(!is.na(type1)) %>% # This loses species that don't specify a measurement type
   # dplyr::mutate(test = if_else(type1 %in% "OT", comment, type1)) %>% # These are all wack
-  dplyr::filter(type1 %in% c("TL", "SL", "FL")) %>%
+  dplyr::filter(type1 %in% c("TL", "SL", "FL")) %>% # Remove non-standard length measures
   dplyr::group_by(species, speccode, type1) %>%
   dplyr::summarise(fb_length_at_maturity_cm = mean(lm)) %>%
   dplyr::rename(fishbase_scientific = species) %>%
   dplyr::mutate(speccode = as.character(speccode)) %>%
   dplyr::ungroup()
 
+# Extract the species ----
 maturity_species <- unique(maturity$fishbase_scientific) 
 
+# Extract length-length relationships to convert non-FL measures
 ll_eqs <- length_length(maturity_species) %>%
   clean_names() %>%
   dplyr::rename(unknown = length1, known = length2) %>%
@@ -111,18 +113,22 @@ ll_eqs <- length_length(maturity_species) %>%
   dplyr::rename(fishbase_scientific = species) %>%
   glimpse()
 
+# Convert the length of maturity data into FL where possible ----
 maturity_conv <- maturity %>%
-  left_join(ll_eqs) %>%
+  left_join(ll_eqs, relationship = "many-to-many") %>% 
   dplyr::mutate(lm_conv = case_when(type1 %in% "FL" ~ fb_length_at_maturity_cm,
                                     type1 %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ (fb_length_at_maturity_cm * b_ll) + a_ll,
-                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (fb_length_at_maturity_cm - a_ll)/b_ll)) %>%
+                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (fb_length_at_maturity_cm - a_ll)/b_ll),
+                conversion_type = case_when(type1 %in% "FL" ~ "no-conversion",
+                                    type1 %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ "regular-eq",
+                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ "reversed-eq")) %>%
   dplyr::filter(!is.na(lm_conv)) %>%
-  dplyr::select(fishbase_scientific, speccode, lm_conv) %>%
+  dplyr::select(fishbase_scientific, speccode, lm_conv, conversion_type) %>%
   dplyr::rename(fb_length_at_maturity_cm = lm_conv) %>%
   glimpse()
 
 ts_species <- maturity %>%
-  left_join(ll_eqs) %>%
+  left_join(ll_eqs, relationship = "many-to-many") %>%
   group_by(fishbase_scientific) %>%
   summarise(has_SL_to_TL = any(type1 == "SL" & known == "SL" & unknown == "TL"),
             has_TL_to_FL = any(type1 == "SL" & known == "TL" & unknown == "FL")) %>%
@@ -130,20 +136,42 @@ ts_species <- maturity %>%
   pull(fishbase_scientific)
 
 maturity_ts <- maturity %>%
-  left_join(ll_eqs) %>%
-  dplyr::filter(fishbase_scientific %in% ts_species) %>%
+  left_join(ll_eqs, relationship = "many-to-many") %>%
+  dplyr::filter(fishbase_scientific %in% ts_species) %>% # Only species with possible two-step conversions
   # Convert SL to TL
-  dplyr::mutate(lm_conv_tl = case_when(type1 %in% "SL" & unknown %in% "TL" & known %in% "SL" ~ (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
-  group_by(fishbase_scientific) %>%
+  dplyr::mutate(lm_tl = case_when(type1 %in% "SL" & 
+                                         unknown %in% "TL" & 
+                                         known %in% "SL" ~ 
+                                         (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
   dplyr::filter((type1 %in% "SL" & unknown %in% "TL" & known %in% "SL") | 
                   (type1 %in% "SL" & unknown %in% "FL" & known %in% "TL")) %>%
-  dplyr::mutate(lm_conv_tl = coalesce(lm_conv_tl, lm_conv_tl[!is.na(lm_conv_tl)][1])) %>%
+  group_by(fishbase_scientific) %>%
+  dplyr::mutate(lm_tl = coalesce(lm_tl, lm_tl[!is.na(lm_tl)][1])) %>%
   dplyr::filter(unknown %in% "FL" & known %in% "TL") %>%
   # Convert TL to FL
-  # dplyr::mutate(lm_conv = case_when(!is.na(lm_conv_tl) ~ (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
+  dplyr::mutate(lm_fl = (lm_tl * b_ll) + a_ll) %>%
+  dplyr::select(fishbase_scientific, speccode, lm_fl) %>%
+  dplyr::rename(fb_length_at_maturity_cm = lm_fl) %>%
+  dplyr::mutate(conversion_type = "two-step") %>%
   glimpse()
   
-
+# Join the straight converted and two-step conversion species
+maturity_final <- bind_rows(maturity_conv, maturity_ts) %>%
+  distinct() %>%
+  dplyr::mutate(ranking = case_when(conversion_type %in% "no-conversion" ~ 1,
+                                    conversion_type %in% "regular-eq" ~ 2,
+                                    conversion_type %in% "reversed-eq" ~ 3,
+                                    conversion_type %in% "two-step" ~ 4)) %>%
+  arrange(fishbase_scientific, ranking) %>%
+  group_by(fishbase_scientific) %>%
+  slice_head(n = 1) %>%
+  ungroup() %>%
+  dplyr::mutate(fb_length_at_maturity_source = case_when(conversion_type %in% "no-conversion" ~ "Fishbase",
+                                                         conversion_type %in% "regular-eq" ~ "Fishbase: Converted to TL using length-length equation",
+                                                         conversion_type %in% "reversed-eq" ~ "Fishbase: Converted to TL using inverse length-length relationship",
+                                                         conversion_type %in% "two-step" ~ "FishBase: Converted to FL using length-length equation")) %>%
+  dplyr::select(-c(ranking, conversion_type)) %>%
+  glimpse()
 
 # 1.
 # direct_to_FL <- ll_eqs %>%
@@ -662,7 +690,7 @@ iucn_not_match <- anti_join(final_iucn, code_crosswalk_codes) # none - woo!
 all_fishbase <- info %>%
   dplyr::full_join(countries) %>%
   dplyr::full_join(status) %>%
-  dplyr::full_join(maturity) %>%
+  dplyr::full_join(maturity_final) %>%
   dplyr::full_join(complete_lw) %>%
   dplyr::full_join(tidy_trophic_levels) %>%
   dplyr::select(fishbase_scientific, speccode, 

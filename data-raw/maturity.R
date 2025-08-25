@@ -1,16 +1,20 @@
-## Code to prepare `maturity` dataset ----
+# Code to prepare `maturity` dataset ----
 # This dataset contains length of maturity data for common West Australian recreationally and commercially targeted species
 # The vast majority of this data has been obtained from Department of Fisheries public reports
 # See here - https://www.fish.wa.gov.au/Documents/management_papers/fmp280.pdf
+# NOTE - all raw length of maturity data is in total length!
 
+## Load libraries ----
 library(googlesheets4)
 library(usethis)
 library(tidyverse)
 library(CheckEM)
 library(rfishbase)
 
+## Load code crosswalks ----
 code_crosswalk_codes <- readRDS("annotation-schema/data/staging/code-crosswalk-codes.RDS")
 
+## Read in the fisheries length of maturity dataset from google sheet
 url <- "https://docs.google.com/spreadsheets/d/176genWqd_pc3NDVQtP2CmfMh66Ui6uwWrLoJU1Ny_qw/edit?usp=sharing"
 
 maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
@@ -23,6 +27,7 @@ maturity <- googlesheets4::read_sheet(url, sheet = "fisheries Lm") %>%
   left_join(code_crosswalk_codes) %>%
   glimpse()
 
+## Get the species to extract fishbase length-length relationships
 species_list <- maturity$fishbase_scientific %>%
   unique()
 
@@ -49,6 +54,7 @@ ll_eqs <- length_length(species_list) %>%
 # Convert length of maturity to Fork Length or filter where not possible
 maturity_conv <- maturity %>%
   left_join(ll_eqs) %>%
+  # Add equations for important fish with truncate/flat tails (TL = FL)
   dplyr::mutate(a_ll = case_when(fishbase_scientific %in% "Choerodon rubescens" ~ 0,
                                  fishbase_scientific %in% "Cnidoglanis macrocephalus" ~ 0,
                                  fishbase_scientific %in% "Platycephalus endrachtensis" ~ 0,
@@ -60,16 +66,23 @@ maturity_conv <- maturity %>%
                                  fishbase_scientific %in% "Platycephalus endrachtensis" ~ 1,
                                  fishbase_scientific %in% "Platycephalus speculator" ~ 1,
                                  fishbase_scientific %in% "Argyrosomus japonicus" ~ 1,
-                                 .default = b_ll)) %>%
-  dplyr::mutate(adjusted_l50 = if_else(eq_type %in% "standard",
-                                       (l50_mm * b_ll) + a_ll,
-                                       (l50_mm - a_ll)/b_ll)) %>%
+                                 .default = b_ll),
+                eq_type = case_when(fishbase_scientific %in% "Choerodon rubescens" ~ "standard",
+                                    fishbase_scientific %in% "Cnidoglanis macrocephalus" ~ "standard",
+                                    fishbase_scientific %in% "Platycephalus endrachtensis" ~ "standard",
+                                    fishbase_scientific %in% "Platycephalus speculator" ~ "standard",
+                                    fishbase_scientific %in% "Argyrosomus japonicus" ~ "standard",
+                                    .default = eq_type)) %>%
+  dplyr::filter(!is.na(a_ll) & !is.na(b_ll) & !is.na(eq_type)) %>%
+  dplyr::mutate(adjusted_l50 = case_when(eq_type %in% "standard" ~ (l50_mm * b_ll) + a_ll,
+                                         eq_type %in% "reversed" ~ (l50_mm - a_ll)/b_ll,
+                                         .default = NA)) %>%
   dplyr::filter(!is.na(adjusted_l50)) %>%
   dplyr::select(family, genus, species, sex, marine_region_lm, hermaphrodite,
                 source, adjusted_l50) %>%
   dplyr::rename(l50_mm = adjusted_l50,
                 marine_region = marine_region_lm) %>%
-  dplyr::mutate(measurement_type = "FL") %>% # We have now converted these or removed ones not able to be converted
+  # dplyr::mutate(measurement_type = "FL") %>% # We have now converted these or removed ones not able to be converted
   glimpse()
 
 usethis::use_data(maturity, overwrite = TRUE)
