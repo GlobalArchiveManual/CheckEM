@@ -1,8 +1,7 @@
 # Code to prepare `maturity` dataset ----
-# This dataset contains length of maturity data for common West Australian recreationally and commercially targeted species
-# The vast majority of this data has been obtained from Department of Fisheries public reports
+# This dataset contains length of maturity data for common West Australian targeted species
+# This data has been obtained from Western Australian Department of Fisheries public reports and publications
 # See here - https://www.fish.wa.gov.au/Documents/management_papers/fmp280.pdf
-# NOTE - all raw length of maturity data is in total length!
 
 ## Load libraries ----
 library(googlesheets4)
@@ -52,7 +51,7 @@ ll_eqs <- length_length(species_list) %>%
   glimpse()
 
 # Convert length of maturity to Fork Length or filter where not possible
-maturity_conv <- maturity %>%
+maturity <- maturity %>%
   left_join(ll_eqs) %>%
   # Add equations for important fish with truncate/flat tails (TL = FL)
   dplyr::mutate(a_ll = case_when(fishbase_scientific %in% "Choerodon rubescens" ~ 0,
@@ -73,16 +72,22 @@ maturity_conv <- maturity %>%
                                     fishbase_scientific %in% "Platycephalus speculator" ~ "standard",
                                     fishbase_scientific %in% "Argyrosomus japonicus" ~ "standard",
                                     .default = eq_type)) %>%
-  dplyr::filter(!is.na(a_ll) & !is.na(b_ll) & !is.na(eq_type)) %>%
+  # dplyr::filter(!is.na(a_ll) & !is.na(b_ll) & !is.na(eq_type)) %>%
   dplyr::mutate(adjusted_l50 = case_when(eq_type %in% "standard" ~ (l50_mm * b_ll) + a_ll,
                                          eq_type %in% "reversed" ~ (l50_mm - a_ll)/b_ll,
                                          .default = NA)) %>%
-  dplyr::filter(!is.na(adjusted_l50)) %>%
+  dplyr::mutate(measurement_source_l50 = case_when(eq_type %in% "standard" ~ "WA DPIRD: Converted to FL using length-length equation",
+                                                 eq_type %in% "reversed" ~ "WA DPIRD: Converted to FL using inverse length-length relationship",
+                                                 is.na(eq_type) ~ "WA DPIRD: No available length-length relationship to convert into FL"),
+                adjusted_l50 = if_else(measurement_source_l50 %in% "WA DPIRD: No available length-length relationship to convert into FL",
+                                       l50_mm, adjusted_l50),
+                measurement_type = if_else(measurement_source_l50 %in% "WA DPIRD: No available length-length relationship to convert into FL",
+                                           "TL", "FL")) %>%
+  dplyr::filter(!is.na(adjusted_l50)) %>% # Should do nothing
   dplyr::select(family, genus, species, sex, marine_region_lm, hermaphrodite,
-                source, adjusted_l50) %>%
+                measurement_source_l50, measurement_type, adjusted_l50) %>%
   dplyr::rename(l50_mm = adjusted_l50,
                 marine_region = marine_region_lm) %>%
-  # dplyr::mutate(measurement_type = "FL") %>% # We have now converted these or removed ones not able to be converted
   glimpse()
 
 usethis::use_data(maturity, overwrite = TRUE)
