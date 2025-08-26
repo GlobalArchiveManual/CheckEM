@@ -2,6 +2,9 @@
 # - validate names using rfishbase
 # - Get information on the size of maturity, maximum sizes, IUCN categories and length-weight parameters
 
+# Clear the environment
+rm(list = ls())
+
 # Load the required libraries
 library(tidyverse)
 library(rfishbase)
@@ -116,7 +119,7 @@ maturity <- maturity(validated) %>%
     number >= 1 & number < 10 ~ 4)) %>%
   mutate(type_rank = case_when(type1 %in% "FL" ~ 1,
     type1 %in% "TL" ~ 2,
-    type1 %in% c("SL","WD","OT","PC","NG","AF","LP") ~ 6)) %>%
+    type1 %in% c("SL") ~ 6)) %>%
   mutate(sex_rank = case_when(sex %in% c("mixed","unsexed", "Unsexed") ~ 1,
     sex %in% c(NA) ~ 2,
     sex %in% c("juvenile") ~ 8)) %>%
@@ -125,11 +128,30 @@ maturity <- maturity(validated) %>%
   # dplyr::select(fishbase_scientific, speccode, type1, fb_length_at_maturity_cm, final_rank) %>%
   glimpse()
 
-maturity_ranked <- maturity %>%
+maturity_ranked_mean <- maturity %>%
   group_by(fishbase_scientific, speccode) %>%
   dplyr::slice_min(final_rank, n = 1) %>%
+  dplyr::summarise(fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm)) %>%
   ungroup() %>%
   glimpse()
+
+maturity_ranked_first <- maturity %>%
+  group_by(fishbase_scientific, speccode) %>%
+  dplyr::slice_min(final_rank, n = 1, with_ties = F) %>%
+  ungroup() %>%
+  glimpse()
+
+comparison <- maturity_ranked_mean %>%
+  rename(fb_length1 = fb_length_at_maturity_cm) %>%
+  inner_join(maturity_ranked_first %>% rename(fb_length2 = fb_length_at_maturity_cm)) %>%
+  mutate(
+    difference = fb_length1 - fb_length2,
+    abs_difference = abs(difference),
+    equal = fb_length1 == fb_length2
+  ) %>%
+  dplyr::filter(!equal)
+
+# Some common species have very different length of maturity depending on your approach
 
 test <- maturity %>%
   group_by(fishbase_scientific, speccode) %>%
@@ -220,6 +242,12 @@ maturity_final <- bind_rows(maturity_conv, maturity_ts) %>%
   dplyr::select(-c(ranking, conversion_type)) %>%
   glimpse()
 
+# See if there are any with ties
+test <- maturity_final %>%
+  group_by(fishbase_scientific) %>%
+  summarise(n = n()) %>%
+  dplyr::filter(n > 1) # None - wonderful
+
 # 1.
 # direct_to_FL <- ll_eqs %>%
 #   filter(unknown == "FL") %>%
@@ -262,6 +290,8 @@ not_fl <- info %>%
 
 max_length_is_fl <- info %>%
   dplyr::filter(fb_l_type_max %in% "FL") # only 104 fish species max length are givne in forklength
+
+# Need to convert to FL here!!!
 
 # FB.countries and FB.Status ----
 country_dat <- country(validated) %>%
@@ -529,7 +559,7 @@ tidy_lwr <- lwr %>%
   dplyr::mutate(final_rank = type_rank + sex_rank + country_rank * 0.5 + number_rank + conv_rank) %>%
   arrange(species, final_rank) %>%
   dplyr::group_by(species) %>%
-  dplyr::slice(which.min(final_rank)) %>%
+  dplyr::slice(which.min(final_rank)) %>% # Will only return the first row if there are ties!!!
   dplyr::ungroup() %>%
   dplyr::mutate(source_level = "Species specific") %>%
   dplyr::select(species, speccode, type, a, b, all, bll, source_level) %>%
