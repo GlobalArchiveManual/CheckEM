@@ -102,6 +102,7 @@ still_missing <- anti_join(double_fb %>% dplyr::select(speccode), true_matches)
 #   dplyr::mutate(speccode = as.character(speccode)) %>%
 #   dplyr::ungroup()
 
+## Load the length of maturity data and rank it, only keeping one 'best' ranked per species
 maturity <- maturity(validated) %>%
   clean_names() %>%
   dplyr::filter(!is.na(lm)) %>%
@@ -123,39 +124,42 @@ maturity <- maturity(validated) %>%
   mutate(sex_rank = case_when(sex %in% c("mixed","unsexed", "Unsexed") ~ 1,
     sex %in% c(NA) ~ 2,
     sex %in% c("juvenile") ~ 8)) %>%
-  replace_na(list(country_rank = 3, number_rank = 5, type_rank = 7, sex_rank = 2)) %>%
+  replace_na(list(country_rank = 3, # Fills missing ranks
+                  number_rank = 5, 
+                  type_rank = 7, # Should be none
+                  sex_rank = 2)) %>%
   dplyr::mutate(final_rank = type_rank + sex_rank + country_rank * 0.5 + number_rank) %>%
-  # dplyr::select(fishbase_scientific, speccode, type1, fb_length_at_maturity_cm, final_rank) %>%
-  glimpse()
-
-maturity_ranked_mean <- maturity %>%
   group_by(fishbase_scientific, speccode) %>%
-  dplyr::slice_min(final_rank, n = 1) %>%
-  dplyr::summarise(fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm)) %>%
+  # Check the below approach - could change to slice all the draws and average them!!!
+  dplyr::slice_min(final_rank, n = 1, with_ties = F) %>% 
+  dplyr::select(fishbase_scientific, speccode, type1, fb_length_at_maturity_cm) %>%
   ungroup() %>%
   glimpse()
 
-maturity_ranked_first <- maturity %>%
-  group_by(fishbase_scientific, speccode) %>%
-  dplyr::slice_min(final_rank, n = 1, with_ties = F) %>%
-  ungroup() %>%
-  glimpse()
-
-comparison <- maturity_ranked_mean %>%
-  rename(fb_length1 = fb_length_at_maturity_cm) %>%
-  inner_join(maturity_ranked_first %>% rename(fb_length2 = fb_length_at_maturity_cm)) %>%
-  mutate(
-    difference = fb_length1 - fb_length2,
-    abs_difference = abs(difference),
-    equal = fb_length1 == fb_length2
-  ) %>%
-  dplyr::filter(!equal)
+# maturity_ranked_mean <- maturity %>%
+#   group_by(fishbase_scientific, speccode) %>%
+#   dplyr::slice_min(final_rank, n = 1) %>%
+#   dplyr::summarise(fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm)) %>%
+#   ungroup() %>%
+#   glimpse()
+# 
+# maturity_ranked_first <- maturity %>%
+#   group_by(fishbase_scientific, speccode) %>%
+#   dplyr::slice_min(final_rank, n = 1, with_ties = F) %>%
+#   ungroup() %>%
+#   glimpse()
+# 
+# comparison <- maturity_ranked_mean %>%
+#   rename(fb_length1 = fb_length_at_maturity_cm) %>%
+#   inner_join(maturity_ranked_first %>% rename(fb_length2 = fb_length_at_maturity_cm)) %>%
+#   mutate(
+#     difference = fb_length1 - fb_length2,
+#     abs_difference = abs(difference),
+#     equal = fb_length1 == fb_length2
+#   ) %>%
+#   dplyr::filter(!equal)
 
 # Some common species have very different length of maturity depending on your approach
-
-test <- maturity %>%
-  group_by(fishbase_scientific, speccode) %>%
-  dplyr::summarise(n = n())
 
 # Extract the species ----
 maturity_species <- unique(maturity$fishbase_scientific) 
@@ -164,6 +168,7 @@ maturity_species <- unique(maturity$fishbase_scientific)
 ll_eqs <- length_length(maturity_species) %>%
   clean_names() %>%
   dplyr::rename(unknown = length1, known = length2) %>%
+  # Check the below - might be best not to average the equations!!!
   dplyr::group_by(species, unknown, known) %>%
   summarise(a_ll = mean(a, na.rm = T),
             b_ll = mean(b, na.rm = T)) %>%
@@ -171,66 +176,177 @@ ll_eqs <- length_length(maturity_species) %>%
   dplyr::filter(known %in% c("TL", "FL", "SL"),
                 unknown %in% c("TL", "FL", "SL")) %>%
   dplyr::rename(fishbase_scientific = species) %>%
+  dplyr::select(fishbase_scientific, unknown, known, a_ll, b_ll) %>%
   glimpse()
 
 # Convert the length of maturity data into FL where possible ----
 maturity_conv <- maturity %>%
-  left_join(ll_eqs, relationship = "many-to-many") %>% 
-  dplyr::mutate(lm_conv = case_when(type1 %in% "FL" ~ fb_length_at_maturity_cm,
+  left_join(ll_eqs, relationship = "many-to-many") %>%
+  # Do all of the no-step and one-step conversion
+  dplyr::mutate(lm_conv = case_when(type1 %in% "FL" ~ fb_length_at_maturity_cm, # No conversion necessary
+                                    # Standard equations
                                     type1 %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ (fb_length_at_maturity_cm * b_ll) + a_ll,
-                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (fb_length_at_maturity_cm - a_ll)/b_ll),
+                                    type1 %in% "SL" & unknown %in% "FL" & known %in% "SL" ~ (fb_length_at_maturity_cm * b_ll) + a_ll,
+                                    # Inverse equations
+                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (fb_length_at_maturity_cm - a_ll)/b_ll,
+                                    type1 %in% "SL" & unknown %in% "SL" & known %in% "FL" ~ (fb_length_at_maturity_cm - a_ll)/b_ll),
                 conversion_type = case_when(type1 %in% "FL" ~ "no-conversion",
                                     type1 %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ "regular-eq",
-                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ "reversed-eq")) %>%
-  dplyr::filter(!is.na(lm_conv)) %>%
-  dplyr::select(fishbase_scientific, speccode, lm_conv, conversion_type) %>%
-  dplyr::rename(fb_length_at_maturity_cm = lm_conv) %>%
+                                    type1 %in% "SL" & unknown %in% "FL" & known %in% "SL" ~ "regular-eq",
+                                    type1 %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ "reversed-eq",
+                                    type1 %in% "SL" & unknown %in% "SL" & known %in% "FL" ~ "reversed-eq",
+                                    is.na(lm_conv) ~ "unconverted")) %>%
+  # This leaves all the unconverted ones, but we get rid of them with ranking
+  dplyr::mutate(measurement_type = if_else(conversion_type %in% "unconverted", type1, "FL"),
+                lm_conv = if_else(conversion_type %in% "unconverted", fb_length_at_maturity_cm, lm_conv)) %>% 
+  dplyr::select(fishbase_scientific, speccode, fb_length_at_maturity_cm = lm_conv, conversion_type, measurement_type) %>%
+  # dplyr::rename(fb_length_at_maturity_cm = lm_conv) %>%
   glimpse()
 
+only_unconverted_species <- maturity_conv %>%
+  group_by(fishbase_scientific) %>%
+  summarise(all_unconverted = all(conversion_type == "unconverted"), .groups = "drop") %>%
+  filter(all_unconverted) %>%
+  pull(fishbase_scientific)
+
+# Just get the list of species where a two-step conversion is possible
+# Also include them where you can get an inverse two-step
 ts_species <- maturity %>%
+  dplyr::filter(fishbase_scientific %in% only_unconverted_species) %>%
   left_join(ll_eqs, relationship = "many-to-many") %>%
   group_by(fishbase_scientific) %>%
   dplyr::filter(!is.na(unknown)) %>% # Remove anything that doesn't have a length-length
-  summarise(has_SL_to_TL = any(type1 == "SL" & known == "SL" & unknown == "TL"),
-            has_SL_to_TL_rev = any(type1 == "SL" & known == "TL" & unknown == "SL"),
-            has_TL_to_FL = any(type1 == "SL" & known == "TL" & unknown == "FL"),
-            has_TL_to_FL_rev = any(type1 == "SL" & known == "FL" & unknown == "TL")) %>%
-  # dplyr::filter(has_SL_to_TL & has_TL_to_FL) %>%
+  summarise(has_SL_to_TL = any(known == "SL" & unknown == "TL"),
+            has_SL_to_TL_rev = any(known == "TL" & unknown == "SL"),
+            has_TL_to_FL = any(known == "TL" & unknown == "FL"),
+            has_TL_to_FL_rev = any(known == "FL" & unknown == "TL")) %>%
+  # Filter it so it has to have both equations
   dplyr::filter((has_SL_to_TL | has_SL_to_TL_rev) &
       (has_TL_to_FL | has_TL_to_FL_rev)) %>%
+  pull(fishbase_scientific)
+
+ts_species <- maturity %>%
+  filter(fishbase_scientific %in% only_unconverted_species) %>%
+  distinct(fishbase_scientific, type1) %>%                     # keep starting type per species
+  left_join(ll_eqs, relationship = "many-to-many") %>%
+  mutate(other = dplyr::case_when(type1 == "SL" ~ "TL",
+                                  type1 == "TL" ~ "SL",
+                                  TRUE ~ NA_character_)) %>%
+  group_by(fishbase_scientific, type1, other) %>%
+  summarise(
+    has_direct = any((known == type1 & unknown == "FL") | (known == "FL" & unknown == type1)),
+    to_other   = any((known == type1 & unknown == other) | (known == other & unknown == type1)),
+    other_toFL = any((known == other & unknown == "FL") | (known == "FL" & unknown == other)),
+    .groups = "drop"
+  ) %>%
+  filter(!has_direct & to_other & other_toFL) %>%
   pull(fishbase_scientific)
 
 maturity_ts <- maturity %>%
   left_join(ll_eqs, relationship = "many-to-many") %>%
   dplyr::filter(fishbase_scientific %in% ts_species) %>% # Only species with possible two-step conversions
-  # Convert SL to TL
-  dplyr::mutate(lm_tl = case_when(type1 %in% "SL" & 
-                                         unknown %in% "TL" & 
-                                         known %in% "SL" ~ 
-                                         (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
-  dplyr::mutate(lm_tl_rev = case_when(type1 %in% "SL" & 
-                                    unknown %in% "SL" & 
-                                    known %in% "TL" ~ 
-                                    (fb_length_at_maturity_cm - a_ll)/b_ll)) %>%
-  dplyr::filter((type1 %in% "SL" & unknown %in% "TL" & known %in% "SL") | 
-                  (type1 %in% "SL" & unknown %in% "FL" & known %in% "TL")) %>%
+  dplyr::mutate(lm_ts = case_when(type1 %in% "SL" & 
+                                   unknown %in% "TL" & 
+                                   known %in% "SL" ~ 
+                                   (fb_length_at_maturity_cm * b_ll) + a_ll,
+                                 type1 %in% "SL" & 
+                                   unknown %in% "SL" & 
+                                   known %in% "TL" ~ 
+                                   (fb_length_at_maturity_cm - a_ll)/b_ll,
+                                 type1 %in% "TL" & 
+                                   unknown %in% "SL" & 
+                                   known %in% "TL" ~ 
+                                   (fb_length_at_maturity_cm * b_ll) + a_ll,
+                                 type1 %in% "TL" & 
+                                   unknown %in% "TL" & 
+                                   known %in% "SL" ~ 
+                                   (fb_length_at_maturity_cm - a_ll)/b_ll),
+                calc_method = case_when(
+                  type1 %in% "SL" & unknown %in% "TL" & known %in% "SL" ~ "SL → TL via SL",
+                  type1 %in% "SL" & unknown %in% "SL" & known %in% "TL" ~ "TL → SL inverse",
+                  type1 %in% "TL" & unknown %in% "SL" & known %in% "TL" ~ "TL → SL via TL",
+                  type1 %in% "TL" & unknown %in% "TL" & known %in% "SL" ~ "SL → TL inverse"
+                ),
+                mid_type = case_when(
+                  type1 == "TL" ~ "SL",
+                  type1 == "SL" ~ "TL",
+                  TRUE ~ NA_character_
+                )) 
+
+fl_forward <- ll_eqs %>%
+  dplyr::filter(unknown == "FL", known %in% c("SL", "TL")) %>%
+  dplyr::select(fishbase_scientific, known, a_fwd = a_ll, b_fwd = b_ll)
+
+fl_inverse <- ll_eqs %>%
+  filter(known == "FL", unknown %in% c("SL", "TL")) %>%
+  select(fishbase_scientific, unknown, a_inv = a_ll, b_inv = b_ll)
+
+maturity_fl <- maturity_ts %>%
+  # join forward on (speccode, mid_type == known)
+  left_join(fl_forward, by = c("fishbase_scientific", "mid_type" = "known")) %>%
+  # join inverse on (speccode, mid_type == unknown)
+  left_join(fl_inverse, by = c("fishbase_scientific", "mid_type" = "unknown")) %>%
+  mutate(
+    # If type1 already FL, just use the original value
+    fl_final = case_when(
+      type1 == "FL" ~ fb_length_at_maturity_cm,
+      # If we have forward eqn: FL = a + b * mid
+      !is.na(a_fwd) & !is.na(lm_ts) ~ (b_fwd * lm_ts) + a_fwd,
+      # Else if we have inverse eqn: FL = (mid - a) / b
+      !is.na(a_inv) & !is.na(lm_ts) ~ (lm_ts - a_inv) / b_inv,
+      TRUE ~ NA_real_
+    ),
+    fl_calc_method = case_when(
+      type1 == "FL" ~ "already FL",
+      !is.na(a_fwd) & !is.na(lm_ts) ~ paste0(mid_type, " → FL (forward)"),
+      !is.na(a_inv) & !is.na(lm_ts) ~ paste0(mid_type, " → FL (inverse)"),
+      TRUE ~ "no FL equation found"
+    )
+  ) %>%
+  select(-a_fwd, -b_fwd, -a_inv, -b_inv) %>%
+  dplyr::filter(!fl_calc_method %in% "no FL equation found") %>% # Get rid of these
+  # Conditional filter
   group_by(fishbase_scientific) %>%
-  dplyr::mutate(lm_tl = coalesce(lm_tl, lm_tl[!is.na(lm_tl)][1])) %>%
-  dplyr::filter(unknown %in% "FL" & known %in% "TL") %>%
-  # Convert TL to FL
-  dplyr::mutate(lm_fl = (lm_tl * b_ll) + a_ll) %>%
-  dplyr::select(fishbase_scientific, speccode, lm_fl) %>%
-  dplyr::rename(fb_length_at_maturity_cm = lm_fl) %>%
-  dplyr::mutate(conversion_type = "two-step") %>%
+  mutate(
+    # detect inverse at each stage (treat NA as not inverse)
+    inv_stage1 = str_detect(coalesce(calc_method, ""), "inverse"),
+    inv_stage2 = str_detect(coalesce(fl_calc_method, ""), "inverse"),
+    
+    # if any non-inverse exists in a stage, prefer non-inverse; otherwise prefer inverse
+    prefer_inverse_stage1 = !any(!inv_stage1),
+    prefer_inverse_stage2 = !any(!inv_stage2),
+    
+    keep_stage1 = if_else(prefer_inverse_stage1, inv_stage1, !inv_stage1),
+    keep_stage2 = if_else(prefer_inverse_stage2, inv_stage2, !inv_stage2),
+    
+    keep = keep_stage1 & keep_stage2
+  ) %>%
+  ungroup() %>%
+  filter(keep) %>%
+  dplyr::select(fishbase_scientific, speccode, fb_length_at_maturity_cm = fl_final) %>%
+  dplyr::mutate(conversion_type = "two-step",
+                measurement_type = "FL") %>%
   glimpse()
-  
+
 # Join the straight converted and two-step conversion species
-maturity_final <- bind_rows(maturity_conv, maturity_ts) %>%
+fl_is_tl <- read.csv("annotation-schema/data/raw/fishbase_maturity_species_fl_is_tl.csv") %>%
+  dplyr::mutate(fishbase_scientific = str_replace_all(fishbase_scientific, "�", " ")) %>% # Something weird with the file going on
+  glimpse()
+
+maturity_final <- bind_rows(maturity_conv, maturity_fl) %>%
   distinct() %>%
+  # Join with a list of species that have no length-length, but have been reviewed and FL = TL
+  dplyr::left_join(fl_is_tl) %>% 
+  dplyr::mutate(conversion_type = if_else(conversion_type %in% "unconverted" & 
+                                            measurement_type %in% "TL" &
+                                            fl_is_tl %in% "Y", "no-conversion", conversion_type), # Check if we want these to come up in a different way
+                measurement_type = if_else(measurement_type %in% "TL" &
+                                             fl_is_tl %in% "Y", "FL", measurement_type)) %>%
   dplyr::mutate(ranking = case_when(conversion_type %in% "no-conversion" ~ 1,
                                     conversion_type %in% "regular-eq" ~ 2,
                                     conversion_type %in% "reversed-eq" ~ 3,
-                                    conversion_type %in% "two-step" ~ 4)) %>%
+                                    conversion_type %in% "two-step" ~ 4,
+                                    conversion_type %in% "unconverted" ~ 5)) %>%
   arrange(fishbase_scientific, ranking) %>%
   group_by(fishbase_scientific) %>%
   slice_head(n = 1) %>%
@@ -238,8 +354,10 @@ maturity_final <- bind_rows(maturity_conv, maturity_ts) %>%
   dplyr::mutate(fb_length_at_maturity_source = case_when(conversion_type %in% "no-conversion" ~ "Fishbase",
                                                          conversion_type %in% "regular-eq" ~ "Fishbase: Converted to TL using length-length equation",
                                                          conversion_type %in% "reversed-eq" ~ "Fishbase: Converted to TL using inverse length-length relationship",
-                                                         conversion_type %in% "two-step" ~ "FishBase: Converted to FL using length-length equation")) %>%
-  dplyr::select(-c(ranking, conversion_type)) %>%
+                                                         conversion_type %in% "two-step" ~ "Fishbase: Converted to FL using two-step length-length equations",
+                                                         conversion_type %in% "unconverted" ~ "Fishbase: No equations exist to convert into fork length")) %>%
+  dplyr::select(-c(ranking, conversion_type, fl_is_tl)) %>%
+  dplyr::rename(fb_length_at_maturity_type = measurement_type) %>%
   glimpse()
 
 # See if there are any with ties
@@ -313,14 +431,27 @@ countries <- country_dat %>%
 # a and b values ----
 ll <- length_length(validated) %>%
   clean_names() %>%
-  dplyr::select(species, length1, length2, a, b)%>%
-  dplyr::filter(length2 == "FL")%>%
-  dplyr::rename(all = a)%>%
-  dplyr::rename(bll = b)%>%
-  dplyr::rename(type = length1)%>%
-  dplyr::group_by(species, type)%>%
-  dplyr::summarise(all = mean(all), bll = mean(bll)) %>%
-  dplyr::filter(!type %in% c("SL", "Other"))
+  dplyr::select(species, length1, length2, a, b) %>%
+  # dplyr::filter(length2 == "FL") %>%
+  dplyr::filter(length2 %in% c("FL", "TL") & length1 %in% c("FL", "TL")) %>%
+  dplyr::rename(all = a,
+                bll = b,
+                unknown = length1,
+                known = length2) %>%
+  dplyr::mutate(ll_equation_type = case_when(unknown %in% "FL" & known %in% "TL" ~ "TL → FL",
+                                                unknown %in% "TL" & known %in% "FL" ~ "FL → TL")) %>%
+  group_by(species) %>%
+  mutate(has_FL_to_TL = any(ll_equation_type == "FL → TL")) %>%
+  # If FL→TL exists for this species, keep only FL→TL; else keep TL→FL
+  dplyr::filter(ll_equation_type == if_else(has_FL_to_TL, "FL → TL", "TL → FL")) %>%
+  ungroup() %>%
+  dplyr::select(-has_FL_to_TL) %>%
+  dplyr::group_by(species, ll_equation_type) %>%
+  dplyr::summarise(all = mean(all), bll = mean(bll)) %>% # Not sure if we should just be ranking and picking one?
+  ungroup() %>%
+  glimpse()
+
+# Before we only had known length == FL, and now we have it both ways
 
 unique(ll$type)
 
@@ -562,12 +693,15 @@ tidy_lwr <- lwr %>%
   dplyr::slice(which.min(final_rank)) %>% # Will only return the first row if there are ties!!!
   dplyr::ungroup() %>%
   dplyr::mutate(source_level = "Species specific") %>%
-  dplyr::select(species, speccode, type, a, b, all, bll, source_level) %>%
+  dplyr::select(species, speccode, type, a, b, all, bll, ll_equation_type, source_level) %>%
   dplyr::filter(!is.na(a)) %>%
-  mutate(all = case_when(type %in% c("FL") ~ 0,
-                         !type %in% c("FL") ~ all)) %>%
-  mutate(bll = case_when(type %in% c("FL") ~ 1,
-                         !type %in% c("FL") ~ bll)) %>%
+  
+  # Have turned the below off as I can't work out why you would want to do that?
+  
+  # mutate(all = case_when(type %in% c("FL") ~ 0,
+  #                        !type %in% c("FL") ~ all)) %>%
+  # mutate(bll = case_when(type %in% c("FL") ~ 1,
+  #                        !type %in% c("FL") ~ bll)) %>%
   dplyr::rename(fishbase_scientific = species)
 
 # bay_lwrs <- data.frame() # turned off for now So i don't loose the data we have already downloaded
@@ -605,16 +739,18 @@ bay_lwrs <- read.csv("annotation-schema/data/staging/bayesian_length-weights.csv
   dplyr::mutate(source_level = paste0("Based on", keep)) %>%
   dplyr::rename(bayesian_a = lwa_m,
                 bayesian_b = lwb_m,
-                bayesian_source_level = source_level,
-                fishbase_scientific = scientific) %>%
+                bayesian_source_level = source_level) %>%
+  dplyr::mutate(fishbase_scientific = if_else(is.na(species), scientific, species)) %>% # Not sure why there a couple with scientific name in a different column
   dplyr::select(fishbase_scientific, bayesian_a, bayesian_b, bayesian_source_level) %>%
   dplyr::mutate(type = "TL") %>%
   dplyr::mutate(species = fishbase_scientific) %>%
   left_join(ll) %>%
+  # I don't think these ones are actually bayes derived ???
   dplyr::rename(bayesian_length_measure = type,
                 bayesian_all = all,
-                bayesian_bll = bll) %>%
-  select(-species)
+                bayesian_bll = bll,
+                bayesian_ll_equation_type = ll_equation_type) %>%
+  glimpse()
 
 is_not_na <- bay_lwrs %>%
   dplyr::filter(!is.na(bayesian_all))
@@ -631,9 +767,12 @@ complete_lw <- info %>%
   dplyr::mutate(b = if_else(is.na(b), bayesian_b, b)) %>%
   dplyr::mutate(all = if_else(is.na(all), bayesian_all, all)) %>%
   dplyr::mutate(bll = if_else(is.na(bll), bayesian_bll, bll)) %>%
+  dplyr::mutate(ll_equation_type = if_else(is.na(ll_equation_type), 
+                                           bayesian_ll_equation_type, 
+                                           ll_equation_type)) %>%
   dplyr::rename(a_ll = all, b_ll = bll) %>%
   dplyr::mutate(source_level = if_else(is.na(source_level), bayesian_source_level, source_level)) %>%
-  dplyr::select(fishbase_scientific, type, a, b, a_ll, b_ll, source_level) %>%
+  dplyr::select(fishbase_scientific, type, a, b, a_ll, b_ll, source_level, ll_equation_type) %>%
   dplyr::rename(length_measure = type)
 
 # Scrape trophic level ----
@@ -772,6 +911,7 @@ all_fishbase <- info %>%
   dplyr::full_join(tidy_trophic_levels) %>%
   dplyr::select(fishbase_scientific, speccode, 
                 fb_length_at_maturity_cm, 
+                fb_length_at_maturity_type,
                 fb_length_max, 
                 fb_l_type_max, 
                 max_length_source,
@@ -783,6 +923,7 @@ all_fishbase <- info %>%
                 b,
                 a_ll,
                 b_ll,
+                ll_equation_type, # Added this in - the direction of the length-length so you can use the inverse
                 fb_trophic_level,
                 fb_trophic_level_se,
                 fb_trophic_level_source,

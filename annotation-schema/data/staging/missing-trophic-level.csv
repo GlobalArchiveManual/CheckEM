@@ -1,8 +1,10 @@
 "caab_code","caab_scientific","fb_trophic_level"
 37007002,"Heterodontus marshallae",NA
 37035031,"Neotrygon trigonoides",NA
+37039001,"Myliobatis tenuicaudatus",NA
 37068058,"Muraenichthys velinasalis",NA
 37085001,"Etrumeus jacksoniensis",NA
+37085010,"Dussumieria elopsoides",NA
 37086017,"Thryssa nasuta",NA
 37109011,"Eustomias achirus",NA
 37109017,"Eustomias multifilis",NA
@@ -22,7 +24,9 @@
 37212049,"Halicmetus drypus",NA
 37212056,"Halieutopsis taiwanea",NA
 37224006,"Pseudophycis palmata",NA
+37228062,"Xyelacyba myersi",NA
 37228132,"Bassozetus squamosus",NA
+37251004,"Poromitra atlantica",NA
 37268001,"Lampris australensis",NA
 37282121,"Hippocampus montebelloensis",NA
 37282144,"Urocampus coelorhynchus",NA
@@ -38,7 +42,9 @@
 37296042,"Cymbacephalus parilis",NA
 37311059,"Epinephelus insularis",NA
 37311060,"Hyporthodus griseofasciatus",NA
+37311101,"Hypoplectrodes cardinalis",NA
 37311110,"Plectranthias mcgroutheri",NA
+37311128,"Pseudanthias ventralis",NA
 37311191,"Parascombrops analis",NA
 37311230,"Tosanoides bennetti",NA
 37311233,"Plectranthias cruentus",NA
@@ -108,6 +114,8 @@
 37428072,"Boleophthalmus birdsongi",NA
 37428073,"Boleophthalmus caeruleomaculatus",NA
 37428094,"Cryptocentroides argulus",NA
+37428118,"Eviota cometa",NA
+37428137,"Eviota zebrina",NA
 37428166,"Gobiopsis liolepis",NA
 37428182,"Dotsugobius bleekeri",NA
 37428202,"Hazeus diacanthus",NA
@@ -145,6 +153,7 @@
 37462030,"Pardachirus rautheri",NA
 37465005,"Meuschenia scabra",NA
 37466024,"Acanthostracion bucephalus",NA
+37015036,"Parmaturus bigus",NA
 37015041,"Apristurus ovicorrugatus",NA
 37086026,"Encrasicholina pseudoheteroloba",NA
 37100751,"Neosalanx brevirostris",NA
@@ -166,6 +175,7 @@
 37296061,"Platycephalus angustus",NA
 37296063,"Leviprora semermis",NA
 37297009,"Hoplichthys mimaseanus",NA
+37311192,"Odontanthias grahami",NA
 37311225,"Grammatonotus sp",NA
 37321028,"Syncomistes butleri",NA
 37321031,"Syncomistes trigonicus",NA
@@ -192,6 +202,7 @@
 37428405,"Stiphodon pelewensis",NA
 37428406,"Stiphodon rutilaureus",NA
 37428414,"Egglestonichthys ulbubunitj",NA
+37428416,"Grallenia arenicola",NA
 37428425,"Trimma capostriatum",NA
 37428426,"Trimma insularum",NA
 37428427,"Trimma kitrinum",NA
@@ -219,3 +230,33 @@
 37429067,"Hypseleotris moolooboolaensis",NA
 37437055,"Ctenochaetus truncatus",NA
 37437056,"Zebrasoma desjardinii",NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
+NA,NA,NA
