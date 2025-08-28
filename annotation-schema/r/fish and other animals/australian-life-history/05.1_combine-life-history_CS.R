@@ -1,3 +1,7 @@
+# Claude has duplicated this script from 05_simplify-existing-life-history-sheet-combine-with-CAAB-fishbase-info.R
+# Not sure why it looks like the data from 03_get-fish-life-history-information-from-rfishbase wasn't being fully used
+
+
 # This script uses the RLS information and targeted information from the old life history sheet and combine
 # it with the information scraped from FishBase, IUCN and CAAB
 
@@ -8,6 +12,7 @@ library(tidyverse)
 library(googlesheets4)
 library(openxlsx)
 library(CheckEM)
+library(rfishbase)
 
 # Set authorisation info for googlesheets
 options(gargle_oauth_cache = ".secrets")
@@ -18,7 +23,6 @@ googlesheets4::gs4_auth()
 
 se <- function(x) {
   sd(x) / sqrt(length(x))
-  
 }
 
 # Read in sheet from googledrive ----
@@ -40,106 +44,248 @@ max_url <- "https://docs.google.com/spreadsheets/d/1H7EXoTlpeg48LrNVszIa8irwIAh_
 new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
   clean_names() %>%
   dplyr::rename(source = please_provide_a_link_to_reference_information_e_g_website_or_paper) %>%
-  dplyr::select(family, genus, species, new_maximum_length_in_cm, type_of_length_measure, source) %>% 
-  dplyr::group_by(family, genus, species) %>%
-  slice(which.max(new_maximum_length_in_cm)) %>%
   dplyr::mutate(fishbase_scientific = paste(genus, species, sep = " ")) %>%
+  dplyr::select(fishbase_scientific, new_maximum_length_in_cm, type_of_length_measure, source) %>% 
+  dplyr::group_by(fishbase_scientific) %>%
+  # slice(which.max(new_maximum_length_in_cm)) %>%
+  slice_max(new_maximum_length_in_cm, n = 1, with_ties = F) %>% # More control over this, which.max just returns the first even if tied
   ungroup() %>%
   glimpse()
- 
-# CONVERT THESE INTO FL WHERE POSSIBLE
-library(rfishbase)
+
+test <- new_max_sizes %>%
+  group_by(fishbase_scientific) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1) # None, wonderful
+
+unique(new_max_sizes$type_of_length_measure)
+
+# TODO add fishes of australia max sizes and depth limits
+foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_maximum-sizes.RDS") %>%
+  clean_names() %>%
+  dplyr::mutate(fishbase_scientific = paste(genus, species, sep = " ")) %>%
+  dplyr::select(fishbase_scientific,
+                caab, 
+                foa_new_maximum_length_in_cm = new_maximum_length_in_cm,
+                foa_min_depth = min_depth, 
+                foa_max_depth = max_depth, 
+                foa_type_of_length_measure = length_type,
+                ) %>%
+  dplyr::mutate(source_foa = "Fishes of Australia",
+                foa_type_of_length_measure = if_else(foa_type_of_length_measure %in% "DL", # There is a typo for one species (Fowleria isostigma)
+                                                     "TL", foa_type_of_length_measure)) %>%
+  # dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth, type_of_length_measure) %>%
+  # dplyr::rename(caab_code = caab) %>%
+  glimpse()
+
+# Join CheckEM and Fishbase max sizes ----
+all_max_sizes <- left_join(foa_max_sizes, new_max_sizes) %>%
+  dplyr::mutate(new_maximum_length_in_cm = if_else(is.na(new_maximum_length_in_cm),
+                                                   foa_new_maximum_length_in_cm,
+                                                   new_maximum_length_in_cm),
+                type_of_length_measure = if_else(is.na(type_of_length_measure),
+                                                 foa_type_of_length_measure,
+                                                 type_of_length_measure),
+                source = if_else(is.na(source),
+                                 source_foa,
+                                 source),
+                type_of_length_measure = if_else(type_of_length_measure %in% "TL;", # Another typo here
+                                                 "TL", type_of_length_measure)) %>%
+  dplyr::select(-c(foa_new_maximum_length_in_cm, foa_type_of_length_measure,
+                   source_foa)) %>%
+  dplyr::filter(!is.na(type_of_length_measure)) %>% # There's ~300 that don't specify a type of length measure
+  glimpse()
 
 # Extract the species ----
-checkem_length_species <- unique(new_max_sizes$fishbase_scientific)
+max_length_species <- unique(all_max_sizes$fishbase_scientific) # Will there maybe be some where names don't match Fishbase?
 
 # Extract length-length relationships to convert non-FL measures
-ll_eqs <- length_length(checkem_length_species) %>%
+ll_eqs <- length_length(max_length_species) %>%
   clean_names() %>%
   dplyr::rename(unknown = length1, known = length2) %>%
   dplyr::group_by(species, unknown, known) %>%
   summarise(a_ll = mean(a, na.rm = T),
             b_ll = mean(b, na.rm = T)) %>%
   ungroup() %>%
+  # I am not going to try and convert any disk lengths/widths, so get rid of weird measures from ll table
   dplyr::filter(known %in% c("TL", "FL", "SL"),
                 unknown %in% c("TL", "FL", "SL")) %>%
   dplyr::rename(fishbase_scientific = species) %>%
   glimpse()
 
-
-################################################################################
-
 # Convert the length of maturity data into FL where possible ----
-new_max_sizes_conv <- new_max_sizes %>%
+max_size_conv <- all_max_sizes %>%
   left_join(ll_eqs, relationship = "many-to-many") %>%
-  dplyr::mutate(new_max_length = case_when(type_of_length_measure %in% "FL" ~ new_maximum_length_in_cm,
-                                           type_of_length_measure == known & unknown %in% "FL" ~ (new_maximum_length_in_cm * b_ll) + a_ll,
-                                           type_of_length_measure == unknown & known %in% "FL" ~ (new_maximum_length_in_cm - a_ll)/b_ll)) %>%
-  # dplyr::mutate(new_max_length = case_when(type_of_length_measure %in% "FL" ~ new_maximum_length_in_cm,
-  #                                          type_of_length_measure %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ (new_maximum_length_in_cm * b_ll) + a_ll,
-  #                                          type_of_length_measure %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (new_maximum_length_in_cm - a_ll)/b_ll),
-  #               conversion_type = case_when(type_of_length_measure %in% "FL" ~ "no-conversion",
-  #                                           type_of_length_measure %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ "regular-eq",
-  #                                           type_of_length_measure %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ "reversed-eq")) %>%
-  dplyr::filter(!is.na(new_max_length)) %>%
-  dplyr::select(fishbase_scientific, new_max_length, conversion_type) %>%
-  dplyr::mutate(type_of_length_measure = "FL") %>%
+  # Do all of the no-step and one-step conversion
+  dplyr::mutate(max_length_conv = case_when(type_of_length_measure %in% "FL" ~ new_maximum_length_in_cm, # No conversion necessary
+                                    # Standard equations
+                                    type_of_length_measure %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ (new_maximum_length_in_cm * b_ll) + a_ll,
+                                    type_of_length_measure %in% "SL" & unknown %in% "FL" & known %in% "SL" ~ (new_maximum_length_in_cm * b_ll) + a_ll,
+                                    # Inverse equations
+                                    type_of_length_measure %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ (new_maximum_length_in_cm - a_ll)/b_ll,
+                                    type_of_length_measure %in% "SL" & unknown %in% "SL" & known %in% "FL" ~ (new_maximum_length_in_cm - a_ll)/b_ll),
+                conversion_type = case_when(type_of_length_measure %in% "FL" ~ "no-conversion",
+                                            type_of_length_measure %in% "TL" & unknown %in% "FL" & known %in% "TL" ~ "regular-eq",
+                                            type_of_length_measure %in% "SL" & unknown %in% "FL" & known %in% "SL" ~ "regular-eq",
+                                            type_of_length_measure %in% "TL" & unknown %in% "TL" & known %in% "FL" ~ "reversed-eq",
+                                            type_of_length_measure %in% "SL" & unknown %in% "SL" & known %in% "FL" ~ "reversed-eq",
+                                            is.na(max_length_conv) ~ "unconverted")) %>%
+  # This leaves all the unconverted ones, but we get rid of them with ranking
+  dplyr::mutate(measurement_type = if_else(conversion_type %in% "unconverted", type_of_length_measure, "FL"),
+                max_length_conv = if_else(conversion_type %in% "unconverted", new_maximum_length_in_cm, max_length_conv)) %>% 
+  dplyr::select(fishbase_scientific, caab, new_maximum_length_in_cm = max_length_conv, conversion_type, measurement_type, source) %>%
   glimpse()
 
-ts_species <- new_max_sizes %>%
-  left_join(ll_eqs, relationship = "many-to-many") %>%
+only_unconverted_species <- max_size_conv %>%
   group_by(fishbase_scientific) %>%
-  summarise(has_SL_to_TL = any(type_of_length_measure == "SL" & known == "SL" & unknown == "TL"),
-            has_TL_to_FL = any(type_of_length_measure == "SL" & known == "TL" & unknown == "FL")) %>%
-  dplyr::filter(has_SL_to_TL & has_TL_to_FL) %>%
+  summarise(all_unconverted = all(conversion_type == "unconverted"), .groups = "drop") %>%
+  filter(all_unconverted) %>%
   pull(fishbase_scientific)
 
-maturity_ts <- maturity %>%
+# Just get the list of species where a two-step conversion is possible
+# Also include them where you can get an inverse two-step
+ts_species <- all_max_sizes %>%
+  dplyr::filter(fishbase_scientific %in% only_unconverted_species) %>%
+  left_join(ll_eqs, relationship = "many-to-many") %>%
+  group_by(fishbase_scientific) %>%
+  dplyr::filter(!is.na(unknown)) %>% # Remove anything that doesn't have a length-length
+  summarise(has_SL_to_TL = any(known == "SL" & unknown == "TL"),
+            has_SL_to_TL_rev = any(known == "TL" & unknown == "SL"),
+            has_TL_to_FL = any(known == "TL" & unknown == "FL"),
+            has_TL_to_FL_rev = any(known == "FL" & unknown == "TL")) %>%
+  # Filter it so it has to have both equations
+  dplyr::filter((has_SL_to_TL | has_SL_to_TL_rev) &
+                  (has_TL_to_FL | has_TL_to_FL_rev)) %>%
+  pull(fishbase_scientific)
+
+max_size_ts <- all_max_sizes %>%
   left_join(ll_eqs, relationship = "many-to-many") %>%
   dplyr::filter(fishbase_scientific %in% ts_species) %>% # Only species with possible two-step conversions
-  # Convert SL to TL
-  dplyr::mutate(lm_tl = case_when(type1 %in% "SL" & 
+  dplyr::mutate(lm_ts = case_when(type_of_length_measure %in% "SL" & 
                                     unknown %in% "TL" & 
                                     known %in% "SL" ~ 
-                                    (fb_length_at_maturity_cm * b_ll) + a_ll)) %>%
-  dplyr::filter((type1 %in% "SL" & unknown %in% "TL" & known %in% "SL") | 
-                  (type1 %in% "SL" & unknown %in% "FL" & known %in% "TL")) %>%
+                                    (new_maximum_length_in_cm * b_ll) + a_ll,
+                                  type_of_length_measure %in% "SL" & 
+                                    unknown %in% "SL" & 
+                                    known %in% "TL" ~ 
+                                    (new_maximum_length_in_cm - a_ll)/b_ll,
+                                  type_of_length_measure %in% "TL" & 
+                                    unknown %in% "SL" & 
+                                    known %in% "TL" ~ 
+                                    (new_maximum_length_in_cm * b_ll) + a_ll,
+                                  type_of_length_measure %in% "TL" & 
+                                    unknown %in% "TL" & 
+                                    known %in% "SL" ~ 
+                                    (new_maximum_length_in_cm - a_ll)/b_ll),
+                calc_method = case_when(
+                  type_of_length_measure %in% "SL" & unknown %in% "TL" & known %in% "SL" ~ "SL → TL via SL",
+                  type_of_length_measure %in% "SL" & unknown %in% "SL" & known %in% "TL" ~ "TL → SL inverse",
+                  type_of_length_measure %in% "TL" & unknown %in% "SL" & known %in% "TL" ~ "TL → SL via TL",
+                  type_of_length_measure %in% "TL" & unknown %in% "TL" & known %in% "SL" ~ "SL → TL inverse"
+                ),
+                mid_type = case_when(
+                  type_of_length_measure == "TL" ~ "SL",
+                  type_of_length_measure == "SL" ~ "TL",
+                  TRUE ~ NA_character_
+                )) 
+
+fl_forward <- ll_eqs %>%
+  dplyr::filter(unknown == "FL", known %in% c("SL", "TL")) %>%
+  dplyr::select(fishbase_scientific, known, a_fwd = a_ll, b_fwd = b_ll)
+
+fl_inverse <- ll_eqs %>%
+  filter(known == "FL", unknown %in% c("SL", "TL")) %>%
+  select(fishbase_scientific, unknown, a_inv = a_ll, b_inv = b_ll)
+
+max_size_fl <- max_size_ts %>%
+  # join forward on (speccode, mid_type == known)
+  left_join(fl_forward, by = c("fishbase_scientific", "mid_type" = "known")) %>%
+  # join inverse on (speccode, mid_type == unknown)
+  left_join(fl_inverse, by = c("fishbase_scientific", "mid_type" = "unknown")) %>%
+  mutate(
+    # If type1 already FL, just use the original value
+    fl_final = case_when(
+      type_of_length_measure == "FL" ~ new_maximum_length_in_cm,
+      # If we have forward eqn: FL = a + b * mid
+      !is.na(a_fwd) & !is.na(lm_ts) ~ (b_fwd * lm_ts) + a_fwd,
+      # Else if we have inverse eqn: FL = (mid - a) / b
+      !is.na(a_inv) & !is.na(lm_ts) ~ (lm_ts - a_inv) / b_inv,
+      TRUE ~ NA_real_
+    ),
+    fl_calc_method = case_when(
+      type_of_length_measure == "FL" ~ "already FL",
+      !is.na(a_fwd) & !is.na(lm_ts) ~ paste0(mid_type, " → FL (forward)"),
+      !is.na(a_inv) & !is.na(lm_ts) ~ paste0(mid_type, " → FL (inverse)"),
+      TRUE ~ "no FL equation found"
+    )
+  ) %>%
+  select(-a_fwd, -b_fwd, -a_inv, -b_inv) %>%
+  dplyr::filter(!fl_calc_method %in% "no FL equation found") %>% # Get rid of these
+  # Conditional filter
   group_by(fishbase_scientific) %>%
-  dplyr::mutate(lm_tl = coalesce(lm_tl, lm_tl[!is.na(lm_tl)][1])) %>%
-  dplyr::filter(unknown %in% "FL" & known %in% "TL") %>%
-  # Convert TL to FL
-  dplyr::mutate(lm_fl = (lm_tl * b_ll) + a_ll) %>%
-  dplyr::select(fishbase_scientific, speccode, lm_fl) %>%
-  dplyr::rename(fb_length_at_maturity_cm = lm_fl) %>%
-  dplyr::mutate(conversion_type = "two-step") %>%
+  mutate(
+    # detect inverse at each stage (treat NA as not inverse)
+    inv_stage1 = str_detect(coalesce(calc_method, ""), "inverse"),
+    inv_stage2 = str_detect(coalesce(fl_calc_method, ""), "inverse"),
+    
+    # if any non-inverse exists in a stage, prefer non-inverse; otherwise prefer inverse
+    prefer_inverse_stage1 = !any(!inv_stage1),
+    prefer_inverse_stage2 = !any(!inv_stage2),
+    
+    keep_stage1 = if_else(prefer_inverse_stage1, inv_stage1, !inv_stage1),
+    keep_stage2 = if_else(prefer_inverse_stage2, inv_stage2, !inv_stage2),
+    
+    keep = keep_stage1 & keep_stage2
+  ) %>%
+  ungroup() %>%
+  filter(keep) %>%
+  dplyr::select(fishbase_scientific, caab, new_maximum_length_in_cm = fl_final, source) %>%
+  dplyr::mutate(conversion_type = "two-step",
+                measurement_type = "FL") %>%
   glimpse()
 
 # Join the straight converted and two-step conversion species
-maturity_final <- bind_rows(maturity_conv, maturity_ts) %>%
+max_size_final <- bind_rows(max_size_conv, max_size_fl) %>%
   distinct() %>%
   dplyr::mutate(ranking = case_when(conversion_type %in% "no-conversion" ~ 1,
                                     conversion_type %in% "regular-eq" ~ 2,
                                     conversion_type %in% "reversed-eq" ~ 3,
-                                    conversion_type %in% "two-step" ~ 4)) %>%
+                                    conversion_type %in% "two-step" ~ 4,
+                                    conversion_type %in% "unconverted" ~ 5)) %>%
   arrange(fishbase_scientific, ranking) %>%
   group_by(fishbase_scientific) %>%
   slice_head(n = 1) %>%
   ungroup() %>%
-  dplyr::mutate(fb_length_at_maturity_source = case_when(conversion_type %in% "no-conversion" ~ "Fishbase",
-                                                         conversion_type %in% "regular-eq" ~ "Fishbase: Converted to TL using length-length equation",
-                                                         conversion_type %in% "reversed-eq" ~ "Fishbase: Converted to TL using inverse length-length relationship",
-                                                         conversion_type %in% "two-step" ~ "FishBase: Converted to FL using length-length equation")) %>%
-  dplyr::select(-c(ranking, conversion_type)) %>%
+  dplyr::mutate(source = case_when(str_detect(source, "fishesofaustralia") ~ "Fishes of Australia",
+                                   str_detect(source, "australian.museum") ~ "Australian Museum",
+                                   str_detect(source, "museumsvictoria") ~ "Museums Victoria",
+                                   str_detect(source, "fishbase") ~ "Fishbase",
+                                   str_detect(source, "reeflifesurvey") ~ "Reef Life Survey",
+                                   str_detect(source, "S0272771423001981") ~ "https://doi.org/10.1016/j.ecss.2023.108408",
+                                   str_detect(source, "https://doi.org/10.3354/meps11000") ~ "https://doi.org/10.3354/meps11000",
+                                   .default = source)) %>%
+  # dplyr::select(-c(ranking, conversion_type, fl_is_tl)) %>%
+  # dplyr::rename(fb_length_at_maturity_type = measurement_type) %>%
   glimpse()
 
 ################################################################################
 
-# TODO add fishes of australia max sizes and depth limits
-foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_maximum-sizes.RDS") %>%
-  clean_names() %>%
-  dplyr::rename(foa_min_depth = min_depth, foa_max_depth = max_depth, type_of_length_measure = length_type) %>%
-  dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth, type_of_length_measure) %>%
-  dplyr::rename(caab_code = caab)
+
+
+
+
+
+################################################################################
+
+
+
+
+
+
+################################################################################
+
+
+
+################################################################################
 
 # Extra marine regions ----
 # Australian Faunal directory ----
@@ -356,7 +502,7 @@ family_trophic_maturity <- fishbase %>%
 
 spp_trophic_maturity <- bind_rows(genus_trophic_maturity, family_trophic_maturity) %>%
   dplyr::rename(spp_fb_trophic_level = fb_trophic_level,
-               spp_fb_length_at_maturity_cm = fb_length_at_maturity_cm)
+                spp_fb_length_at_maturity_cm = fb_length_at_maturity_cm)
 
 # fishbase <- bind_rows(fishbase, spp_trophic_maturity)
 
@@ -381,7 +527,7 @@ animals <- readRDS("annotation-schema/data/staging/australia_animals_caab-code-a
   dplyr::mutate(australian_source = "CAAB",
                 global_source = "WoRMS"#,
                 #local_source = "Not Available"
-                ) %>%
+  ) %>%
   
   dplyr::mutate(australian_common_name = str_replace_all(.$australian_common_name, "\\[|\\]", "")) %>%
   dplyr::rename(caab_code = caab) %>%
@@ -432,16 +578,16 @@ test <- spps %>%
 australia_life_history <- caab_combined %>%
   dplyr::left_join(fishbase) %>%
   dplyr::rename(#caab = caab_code, # TODO make caab_code consistent throughout all scripts
-                australian_common_name = common_name,
-                fb_code = speccode,
-                fb_length_weight_measure = length_measure, #TODO make this happen in fishbase script
-                fb_a = a, # TODO also rename allthese in fishbase script
-                fb_b = b,
-                fb_a_ll = a_ll,
-                fb_b_ll = b_ll,
-                fb_length_max_type = fb_l_type_max,
-                fb_length_weight_source = source_level,
-                fb_length_weight_measure = length_measure) %>%
+    australian_common_name = common_name,
+    fb_code = speccode,
+    fb_length_weight_measure = length_measure, #TODO make this happen in fishbase script
+    fb_a = a, # TODO also rename allthese in fishbase script
+    fb_b = b,
+    fb_a_ll = a_ll,
+    fb_b_ll = b_ll,
+    fb_length_max_type = fb_l_type_max,
+    fb_length_weight_source = source_level,
+    fb_length_weight_measure = length_measure) %>%
   
   dplyr::left_join(keep) %>%
   
@@ -450,71 +596,71 @@ australia_life_history <- caab_combined %>%
                 local_source = "Harvey et al 2020") %>%
   
   dplyr::mutate(scientific_name = paste(genus, species)) %>%
-
+  
   dplyr::mutate(global_region = "Australia") %>%
   
   dplyr::select(c(australian_source,
-                caab_code,
-                class,
-                order,
-                family,
-                genus,
-                species,
-                scientific_name,
-                australian_common_name, # TODO need to add in 1st script or use the scraping
-                # marine_region,
-                aus_region,
-                imcra_region,
-                
-                global_source,
-                fb_code,
-                fb_length_at_maturity_cm,
-                # TODO need to add in 1st script
-                subfamily,
-                global_region,
-                
-                fb_length_weight_measure,
-                fb_a,
-                fb_b,
-                fb_a_ll,
-                fb_b_ll,
-                fb_length_weight_source,
-                
-                fb_trophic_level,
-                fb_trophic_level_se,
-                fb_trophic_level_source,
-                
-                fb_vulnerability,
-                fb_countries,
-                fb_status,
-                fb_length_max,
-                fb_length_max_type,
-                rls_trophic_group,
-                rls_water_column,
-                rls_substrate_type,
-                rls_thermal_niche,
-                
-                local_source,
-                epbc_threat_status,
-                iucn_ranking,
-                
-                fishing_mortality,
-                fishing_type,
-                min_legal_nt,
-                max_legal_nt,
-                min_legal_wa,
-                max_legal_wa,
-                min_legal_qld,
-                max_legal_qld,
-                min_legal_nsw,
-                max_legal_nsw,
-                min_legal_vic,
-                max_legal_vic,
-                min_legal_sa,
-                max_legal_sa,
-                min_legal_tas,
-                max_legal_tas
-                )) %>%
+                  caab_code,
+                  class,
+                  order,
+                  family,
+                  genus,
+                  species,
+                  scientific_name,
+                  australian_common_name, # TODO need to add in 1st script or use the scraping
+                  # marine_region,
+                  aus_region,
+                  imcra_region,
+                  
+                  global_source,
+                  fb_code,
+                  fb_length_at_maturity_cm,
+                  # TODO need to add in 1st script
+                  subfamily,
+                  global_region,
+                  
+                  fb_length_weight_measure,
+                  fb_a,
+                  fb_b,
+                  fb_a_ll,
+                  fb_b_ll,
+                  fb_length_weight_source,
+                  
+                  fb_trophic_level,
+                  fb_trophic_level_se,
+                  fb_trophic_level_source,
+                  
+                  fb_vulnerability,
+                  fb_countries,
+                  fb_status,
+                  fb_length_max,
+                  fb_length_max_type,
+                  rls_trophic_group,
+                  rls_water_column,
+                  rls_substrate_type,
+                  rls_thermal_niche,
+                  
+                  local_source,
+                  epbc_threat_status,
+                  iucn_ranking,
+                  
+                  fishing_mortality,
+                  fishing_type,
+                  min_legal_nt,
+                  max_legal_nt,
+                  min_legal_wa,
+                  max_legal_wa,
+                  min_legal_qld,
+                  max_legal_qld,
+                  min_legal_nsw,
+                  max_legal_nsw,
+                  min_legal_vic,
+                  max_legal_vic,
+                  min_legal_sa,
+                  max_legal_sa,
+                  min_legal_tas,
+                  max_legal_tas
+  )) %>%
   bind_rows(animals) %>%
   bind_rows(spps) %>%
   dplyr::mutate(family = if_else(genus %in% "Heteroscarus", "Labridae", family)) %>%
@@ -534,7 +680,7 @@ australia_life_history <- caab_combined %>%
   
   # dplyr::filter(species %in% "maculatus") %>%
   # dplyr::filter(genus %in% "Prionurus") %>%
-
+  
   dplyr::left_join(foa_max_sizes) %>%
   tidyr::replace_na(list(new_maximum_length_in_cm = 0)) %>%
   dplyr::mutate(length_max_source = if_else(new_maximum_length_in_cm > fb_length_max, "Fishes of Australia", length_max_source)) %>%
@@ -553,81 +699,81 @@ australia_life_history <- caab_combined %>%
   dplyr::mutate(australian_source = "CAAB") %>%
   
   dplyr::select(# CAAB info
-                australian_source,
-                caab_code,
-                
-                # Taxanomic ranks
-                # kingdom,
-                # phylum,
-                class,
-                order,
-                family,
-                subfamily,
-                genus,
-                species,
-                scientific_name,
-                australian_common_name,
-                
-                # Regions
-                global_region,
-                # marine_region,
-                aus_region,
-                imcra_region,
-                
-                # Fishbase info
-                global_source,
-                
-                fb_code,
-                fb_length_at_maturity_cm,
-                fb_length_weight_measure,
-                fb_a,
-                fb_b,
-                fb_a_ll,
-                fb_b_ll,
-                fb_length_weight_source,
-                fb_vulnerability,
-                fb_countries,
-                fb_status,
-                
-                # Maximum lenghs
-                fb_length_max, # NEED TO RENAME
-                fb_length_max_type,# NEED TO RENAME
-                length_max_source,
-                
-                fb_trophic_level,
-                fb_trophic_level_se,
-                fb_trophic_level_source,
-                
-                foa_min_depth,
-                foa_max_depth,
-                
-                rls_trophic_group,
-                rls_water_column,
-                rls_substrate_type,
-                rls_thermal_niche,
-                
-                local_source,
-                epbc_threat_status,
-                iucn_ranking,
-                
-                fishing_mortality,
-                fishing_type,
-                min_legal_nt,
-                max_legal_nt,
-                min_legal_wa,
-                max_legal_wa,
-                min_legal_qld,
-                max_legal_qld,
-                min_legal_nsw,
-                max_legal_nsw,
-                min_legal_vic,
-                max_legal_vic,
-                min_legal_sa,
-                max_legal_sa,
-                min_legal_tas,
-                max_legal_tas
-                
-                ) %>%
+    australian_source,
+    caab_code,
+    
+    # Taxanomic ranks
+    # kingdom,
+    # phylum,
+    class,
+    order,
+    family,
+    subfamily,
+    genus,
+    species,
+    scientific_name,
+    australian_common_name,
+    
+    # Regions
+    global_region,
+    # marine_region,
+    aus_region,
+    imcra_region,
+    
+    # Fishbase info
+    global_source,
+    
+    fb_code,
+    fb_length_at_maturity_cm,
+    fb_length_weight_measure,
+    fb_a,
+    fb_b,
+    fb_a_ll,
+    fb_b_ll,
+    fb_length_weight_source,
+    fb_vulnerability,
+    fb_countries,
+    fb_status,
+    
+    # Maximum lenghs
+    fb_length_max, # NEED TO RENAME
+    fb_length_max_type,# NEED TO RENAME
+    length_max_source,
+    
+    fb_trophic_level,
+    fb_trophic_level_se,
+    fb_trophic_level_source,
+    
+    foa_min_depth,
+    foa_max_depth,
+    
+    rls_trophic_group,
+    rls_water_column,
+    rls_substrate_type,
+    rls_thermal_niche,
+    
+    local_source,
+    epbc_threat_status,
+    iucn_ranking,
+    
+    fishing_mortality,
+    fishing_type,
+    min_legal_nt,
+    max_legal_nt,
+    min_legal_wa,
+    max_legal_wa,
+    min_legal_qld,
+    max_legal_qld,
+    min_legal_nsw,
+    max_legal_nsw,
+    min_legal_vic,
+    max_legal_vic,
+    min_legal_sa,
+    max_legal_sa,
+    min_legal_tas,
+    max_legal_tas
+    
+  ) %>%
   dplyr::rename(length_max_cm = fb_length_max, length_max_type = fb_length_max_type)
 
 names(australia_life_history)
@@ -714,7 +860,7 @@ number.with.distributions <- australia_life_history %>%
   filter(!is.na(imcra_region))
 nrow(number.with.distributions)/nrow(australia_life_history) * 100 
 # 51.64028% with distribution info available from worms package
-  
+
 unique(australia_life_history$marine_region)
 unique(australia_life_history$imcra_region)
 
