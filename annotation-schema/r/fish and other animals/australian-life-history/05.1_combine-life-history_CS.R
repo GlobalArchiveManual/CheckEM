@@ -64,7 +64,7 @@ foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_max
   clean_names() %>%
   dplyr::mutate(fishbase_scientific = paste(genus, species, sep = " ")) %>%
   dplyr::select(fishbase_scientific,
-                caab, 
+                caab_code = caab, 
                 foa_new_maximum_length_in_cm = new_maximum_length_in_cm,
                 foa_min_depth = min_depth, 
                 foa_max_depth = max_depth, 
@@ -73,8 +73,13 @@ foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_max
   dplyr::mutate(source_foa = "Fishes of Australia",
                 foa_type_of_length_measure = if_else(foa_type_of_length_measure %in% "DL", # There is a typo for one species (Fowleria isostigma)
                                                      "TL", foa_type_of_length_measure)) %>%
-  # dplyr::select(caab, new_maximum_length_in_cm, foa_min_depth, foa_max_depth, type_of_length_measure) %>%
-  # dplyr::rename(caab_code = caab) %>%
+  # The ones below had a blank length measure type, but have a length measure on Fishes of Australia
+  dplyr::mutate(foa_type_of_length_measure = case_when(fishbase_scientific %in% "Neatypus obliquus" ~ "TL",
+                                                       fishbase_scientific %in% "Lioscorpius longiceps" ~ "SL",
+                                                       fishbase_scientific %in% "Lioscorpius trifasciatus" ~ "SL",
+                                                       fishbase_scientific %in% "Hemitrygon fluviorum" ~ "DW",
+                                                       .default = foa_type_of_length_measure)) %>%
+  dplyr::filter(!fishbase_scientific %in% "Retropinna tasmanica") %>% # This was blank for length measure and doesn't specific on FoA
   glimpse()
 
 # Join CheckEM and Fishbase max sizes ----
@@ -92,7 +97,8 @@ all_max_sizes <- left_join(foa_max_sizes, new_max_sizes) %>%
                                                  "TL", type_of_length_measure)) %>%
   dplyr::select(-c(foa_new_maximum_length_in_cm, foa_type_of_length_measure,
                    source_foa)) %>%
-  dplyr::filter(!is.na(type_of_length_measure)) %>% # There's ~300 that don't specify a type of length measure
+  # There's ~300 that don't specify a type of length measure
+  dplyr::filter(!is.na(type_of_length_measure)) %>%  # Seems to align with FoA website
   glimpse()
 
 # Extract the species ----
@@ -132,7 +138,7 @@ max_size_conv <- all_max_sizes %>%
   # This leaves all the unconverted ones, but we get rid of them with ranking
   dplyr::mutate(measurement_type = if_else(conversion_type %in% "unconverted", type_of_length_measure, "FL"),
                 max_length_conv = if_else(conversion_type %in% "unconverted", new_maximum_length_in_cm, max_length_conv)) %>% 
-  dplyr::select(fishbase_scientific, caab, new_maximum_length_in_cm = max_length_conv, conversion_type, measurement_type, source) %>%
+  dplyr::select(fishbase_scientific, caab_code, new_maximum_length_in_cm = max_length_conv, conversion_type, measurement_type, source) %>%
   glimpse()
 
 only_unconverted_species <- max_size_conv %>%
@@ -238,7 +244,7 @@ max_size_fl <- max_size_ts %>%
   ) %>%
   ungroup() %>%
   filter(keep) %>%
-  dplyr::select(fishbase_scientific, caab, new_maximum_length_in_cm = fl_final, source) %>%
+  dplyr::select(fishbase_scientific, caab_code, new_maximum_length_in_cm = fl_final, source) %>%
   dplyr::mutate(conversion_type = "two-step",
                 measurement_type = "FL") %>%
   glimpse()
@@ -262,30 +268,25 @@ max_size_final <- bind_rows(max_size_conv, max_size_fl) %>%
                                    str_detect(source, "reeflifesurvey") ~ "Reef Life Survey",
                                    str_detect(source, "S0272771423001981") ~ "https://doi.org/10.1016/j.ecss.2023.108408",
                                    str_detect(source, "https://doi.org/10.3354/meps11000") ~ "https://doi.org/10.3354/meps11000",
+                                   str_detect(source, "Marine fishes of NW") ~ "Marine fishes of NW Australia",
+                                   str_detect(source, "Sea Fishes of Southern Australia Book") ~ "Sea Fishes of Southern Australia",
                                    .default = source)) %>%
-  # dplyr::select(-c(ranking, conversion_type, fl_is_tl)) %>%
-  # dplyr::rename(fb_length_at_maturity_type = measurement_type) %>%
+  dplyr::mutate(max_length_source = case_when(
+      conversion_type %in% "no-conversion" ~ source,
+      conversion_type %in% "reversed-eq"   ~ paste(source, "Converted to FL using inverse length-length relationship", sep = ": "),
+      conversion_type %in% "two-step"      ~ paste(source, "Converted to FL using two-step length-length equations", sep = ": "),
+      conversion_type %in% "regular-eq"    ~ paste(source, "Converted to FL using length-length equations", sep = ": "),
+      conversion_type %in% "unconverted"   ~ paste(source, "No equations exist to convert into FL", sep = ": "))) %>%
+  dplyr::select(-c(ranking, conversion_type, source)) %>%
+  dplyr::rename(max_length_type = measurement_type,
+                max_length_cm = new_maximum_length_in_cm) %>%
   glimpse()
 
-################################################################################
+unique(max_size_final$max_length_source)
 
-
-
-
-
-
-################################################################################
-
-
-
-
-
-
-################################################################################
-
-
-
-################################################################################
+test <- max_size_final %>%
+  group_by(max_length_type) %>%
+  dplyr::summarise(n = n())
 
 # Extra marine regions ----
 # Australian Faunal directory ----
@@ -320,7 +321,6 @@ names(lh)
 
 keep <- lh %>%
   dplyr::select(family, genus, species, 
-                
                 rls_trophic_level,
                 rls_trophic_breadth,
                 rls_trophic_group,
@@ -331,55 +331,32 @@ keep <- lh %>%
                 rls_gregariousness,
                 rls_thermal_niche,
                 rls_vulnerability,
-                
                 fishing_mortality,
                 fishing_type,
                 fishing_intensity,
-                
-                minlegal_nt,
-                maxlegal_nt,
-                bag_nt,
-                
-                minlegal_wa,
-                maxlegal_wa,
-                bag_wa,
-                
-                minlegal_qld,
-                maxlegal_qld,
-                bag_qld,
-                
-                minlegal_nsw,
-                maxlegal_nsw,
-                bag_nsw,
-                
-                minlegal_vic,
-                maxlegal_vic,
-                bag_vic,
-                
-                minlegal_sa,
-                maxlegal_sa,
-                bag_sa,
-                
-                minlegal_tas,
-                maxlegal_tas,
-                bag_tas,
-                
-                epbc_threat_status) %>%
-  
-  dplyr::rename(min_legal_nt = minlegal_nt,
+                min_legal_nt = minlegal_nt,
                 max_legal_nt = maxlegal_nt,
+                bag_nt,
                 min_legal_wa = minlegal_wa,
                 max_legal_wa = maxlegal_wa,
+                bag_wa,
                 min_legal_qld = minlegal_qld,
                 max_legal_qld = maxlegal_qld,
+                bag_qld,
                 min_legal_nsw = minlegal_nsw,
                 max_legal_nsw = maxlegal_nsw,
+                bag_nsw,
                 min_legal_vic = minlegal_vic,
                 max_legal_vic = maxlegal_vic,
+                bag_vic,
                 min_legal_sa = minlegal_sa,
                 max_legal_sa = maxlegal_sa,
+                bag_sa,
                 min_legal_tas = minlegal_tas,
-                max_legal_tas = maxlegal_tas)
+                max_legal_tas = maxlegal_tas,
+                bag_tas,
+                epbc_threat_status) %>%
+  glimpse()
 
 # Other data to read in from script 2, 3 & 4
 caab_regions <- readRDS("annotation-schema/data/staging/australia_fish_caab-with-regions.RDS") %>%
@@ -403,25 +380,24 @@ test <- caab_regions %>%
   dplyr::filter(n > 1)
 
 fishbase <- readRDS("annotation-schema/data/staging/australia_fish_fishbase-information-and-iucn-category.RDS") %>%
-  dplyr::filter(!(caab_scientific %in% "Epigonus macrops" & speccode %in% "14365"))%>%
-  dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
-  
-  dplyr::filter(!(caab_code %in% "37311059" & is.na(speccode)))%>%
-  dplyr::filter(!(caab_code %in% "37361005" & is.na(speccode)))%>%
-  
-  # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & speccode %in% "12239"))%>%
-  # dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & caab_code %in% "37361005"))%>%
-  dplyr::mutate(caab_code = as.character(caab_code)) %>%
-  dplyr::mutate(caab_scientific = if_else((caab_code %in% "37361005"), "Microcanthus joyceae", caab_scientific)) %>%
-  distinct() %>%
+  dplyr::filter(!(caab_scientific %in% "Epigonus macrops" & fb_code %in% "14365")) %>% # Duplicated species
+  dplyr::filter(!(caab_scientific %in% "Protosalanx chinensis" & fb_code %in% "12239")) %>% # Duplicated species
+  dplyr::filter(!(caab_code %in% "37311059" & is.na(fb_code))) %>% # Duplicated species
+  dplyr::filter(!(caab_code %in% "37361005" & is.na(fb_code))) %>% # Duplicated species
+  dplyr::mutate(caab_code = as.character(caab_code)) %>%                
+  dplyr::mutate(caab_scientific = if_else((caab_code %in% "37361005"), # Don't think this will do anything? species name already seems correct
+                                          "Microcanthus joyceae", caab_scientific)) %>%
+  # distinct() %>% # Does nothing
   dplyr::mutate(fb_trophic_level = as.numeric(fb_trophic_level)) %>%
-  dplyr::filter(!caab_scientific %in% "Rhina ancylostoma") %>%
-  dplyr::mutate(fb_trophic_level_se = as.numeric(fb_trophic_level_se))
+  # dplyr::filter(!caab_scientific %in% "Rhina ancylostoma") %>% # Does nothing
+  dplyr::mutate(fb_trophic_level_se = as.numeric(fb_trophic_level_se)) %>%
+  dplyr::filter(!is.na(caab_scientific)) %>% # Need to check this - may be some issue in script 03
+  glimpse()
 
 test <- fishbase %>%
   dplyr::group_by(caab_scientific) %>%
   dplyr::summarise(n = n()) %>%
-  dplyr::filter(n > 1)
+  dplyr::filter(n > 1) # 30 species with NA caab_scientific
 
 test <- fishbase %>%
   dplyr::group_by(caab_code) %>%
@@ -431,7 +407,6 @@ test <- fishbase %>%
 caab_scraped <- readRDS("annotation-schema/data/staging/australia_fish_caab-codes_common-names.RDS") %>%
   dplyr::mutate(family = str_replace_all(.$family, "[^[:alnum:]]", "")) %>%
   dplyr::mutate(species = str_replace_all(.$species, "cffilamentosa", "filamentosa")) %>%
-  
   dplyr::mutate(scraped_name = paste(family, genus, species)) %>%
   dplyr::rename(scraped_common_name = common_name,
                 scraped_family = family,
@@ -439,7 +414,8 @@ caab_scraped <- readRDS("annotation-schema/data/staging/australia_fish_caab-code
                 scraped_species = species) %>%
   dplyr::select(caab_code, scraped_name, scraped_family, scraped_genus, scraped_species, scraped_common_name) %>%
   # dplyr::select(!common_name) %>%
-  distinct()
+  distinct() %>%
+  glimpse()
 
 test <- caab_scraped %>%
   dplyr::group_by(caab_code) %>%
@@ -458,9 +434,7 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(scraped_family = if_else(is.na(scraped_family), family, scraped_family)) %>%
   dplyr::mutate(scraped_genus = if_else(is.na(scraped_genus), genus, scraped_genus)) %>%
   dplyr::mutate(scraped_species = if_else(is.na(scraped_species), species, scraped_species)) %>%
-  
   dplyr::mutate(common_name = if_else(is.na(common_name), scraped_common_name, common_name)) %>%
-  
   dplyr::mutate(family = if_else(name %in% c(scraped_name), family, scraped_family)) %>%
   dplyr::mutate(genus = if_else(name %in% scraped_name, genus, scraped_genus)) %>%
   dplyr::mutate(species = if_else(name %in% scraped_name, species, scraped_species)) %>%
@@ -468,8 +442,11 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(common_name = str_replace_all(.$common_name, "\\[|\\]", "")) %>%
   dplyr::filter(!is.na(species)) %>%
   clean_names() %>%
-  dplyr::filter(!caab_code %in% c("37246020Taxasupercededby37246019", "37118006", "37441924", "37311954", "37287949", "37096000", "37018915", "37337902")) %>%
-  distinct()
+  dplyr::filter(!caab_code %in% c("37246020Taxasupercededby37246019", "37118006", 
+                                  "37441924", "37311954", "37287949", "37096000", 
+                                  "37018915", "37337902")) %>%
+  distinct() %>%
+  glimpse()
 
 test <- caab_combined %>%
   dplyr::group_by(caab_code) %>%
@@ -487,7 +464,8 @@ genus_trophic_maturity <- fishbase %>%
   dplyr::summarise(fb_trophic_level = mean(fb_trophic_level, na.rm = TRUE),
                    # TODO add in SE
                    # fb_trophic_level_se = se(fb_trophic_level), 
-                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE)) %>%
+                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+                   .groups = "drop") %>% # Same as doing ungroup() afterwards
   dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
   dplyr::mutate(species = "spp")
 
@@ -496,7 +474,8 @@ family_trophic_maturity <- fishbase %>%
   dplyr::group_by(family) %>%
   dplyr::summarise(fb_trophic_level = mean(fb_trophic_level, na.rm = TRUE), 
                    fb_trophic_level_se = se(fb_trophic_level),
-                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE)) %>%
+                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+                   .groups = "drop") %>%
   mutate_all(~ifelse(is.nan(.), NA, .)) %>%
   dplyr::mutate(species = "spp", genus = "Unknown")
 
@@ -506,29 +485,32 @@ spp_trophic_maturity <- bind_rows(genus_trophic_maturity, family_trophic_maturit
 
 # fishbase <- bind_rows(fishbase, spp_trophic_maturity)
 
+# Where does the IUCN data get made??
 iucn_animals <- readRDS("annotation-schema/data/staging/iucn.RDS") %>%
   dplyr::mutate(iucn_ranking = case_when(
     category %in% "DD" ~ "Data Deficient",
-    category %in% "LC" ~ "Least Concern",
-    category %in% "NT" ~ "Near Threatened",
+    category %in% c("LC", "LR/lc") ~ "Least Concern", # Old classification - aligns with Least Concern
+    category %in% c("NT", "LR/nt") ~ "Near Threatened", # Old classification - aligns with Near Threatened
     category %in% "VU" ~ "Vulnerable",
     category %in% "EN" ~ "Endangered",
     category %in% "CR" ~ "Critically Endangered",
     category %in% "EW" ~ "Extinct in the Wild",
-    category %in% "EX" ~ "Extinct"
+    category %in% "EX" ~ "Extinct",
   )) %>%
+  # There are some that are ranked as "LR/cd" - Lower risk/conservation dependent
+  # That is an old category that doesn't have a mdoern equivalent
   dplyr::select(-c(category)) %>%
   glimpse()
+
+test <- dplyr::filter(iucn_animals, is.na(iucn_ranking)) # Should these get filtered? or is there a reason to keep
 
 animals <- readRDS("annotation-schema/data/staging/australia_animals_caab-code-and-distributions.RDS") %>%
   dplyr::mutate(caab = as.character(caab)) %>%
   left_join(iucn_animals) %>%
-  
   dplyr::mutate(australian_source = "CAAB",
                 global_source = "WoRMS"#,
                 #local_source = "Not Available"
   ) %>%
-  
   dplyr::mutate(australian_common_name = str_replace_all(.$australian_common_name, "\\[|\\]", "")) %>%
   dplyr::rename(caab_code = caab) %>%
   glimpse()
@@ -538,7 +520,7 @@ taxonomy <- bind_rows(animals, caab_combined) %>%
 
 test <- taxonomy %>%
   distinct(class, order, family) %>%
-  filter(is.na(order))
+  filter(is.na(order)) # There are some here missing order or class - fix?
 
 spps <- readRDS("annotation-schema/data/staging/australia_fish_caab-codes_spps.RDS") %>%
   dplyr::filter(!caab %in% c(unique(animals$caab_code))) %>%
@@ -578,28 +560,24 @@ test <- spps %>%
 australia_life_history <- caab_combined %>%
   dplyr::left_join(fishbase) %>%
   dplyr::rename(#caab = caab_code, # TODO make caab_code consistent throughout all scripts
-    australian_common_name = common_name,
-    fb_code = speccode,
-    fb_length_weight_measure = length_measure, #TODO make this happen in fishbase script
-    fb_a = a, # TODO also rename allthese in fishbase script
-    fb_b = b,
-    fb_a_ll = a_ll,
-    fb_b_ll = b_ll,
-    fb_length_max_type = fb_l_type_max,
-    fb_length_weight_source = source_level,
-    fb_length_weight_measure = length_measure) %>%
-  
-  dplyr::left_join(keep) %>%
-  
+    australian_common_name = common_name #,
+    # fb_code = speccode,
+    # fb_length_weight_measure = length_measure, #TODO make this happen in fishbase script
+    # fb_a = a, # TODO also rename all these in fishbase script
+    # fb_b = b,
+    # fb_a_ll = a_ll,
+    # fb_b_ll = b_ll,
+    # fb_ll_equation_type = ll_equation_type,
+    # fb_length_max_type = fb_l_type_max,
+    # fb_length_weight_source = source_level
+    ) %>%
+  dplyr::left_join(keep) %>% # This is the old life history sheet
   dplyr::mutate(australian_source = "CAAB",
                 global_source = "FishBase",
-                local_source = "Harvey et al 2020") %>%
-  
+                local_source = "Harvey et al 2020") %>% # What is this?
   dplyr::mutate(scientific_name = paste(genus, species)) %>%
-  
   dplyr::mutate(global_region = "Australia") %>%
-  
-  dplyr::select(c(australian_source,
+  dplyr::select(australian_source,
                   caab_code,
                   class,
                   order,
@@ -608,42 +586,39 @@ australia_life_history <- caab_combined %>%
                   species,
                   scientific_name,
                   australian_common_name, # TODO need to add in 1st script or use the scraping
-                  # marine_region,
                   aus_region,
                   imcra_region,
-                  
                   global_source,
                   fb_code,
                   fb_length_at_maturity_cm,
+                  fb_length_at_maturity_type,
+                  fb_length_at_maturity_source,
                   # TODO need to add in 1st script
                   subfamily,
                   global_region,
-                  
                   fb_length_weight_measure,
                   fb_a,
                   fb_b,
                   fb_a_ll,
                   fb_b_ll,
+                  fb_ll_equation_type,
                   fb_length_weight_source,
-                  
                   fb_trophic_level,
                   fb_trophic_level_se,
                   fb_trophic_level_source,
-                  
                   fb_vulnerability,
                   fb_countries,
                   fb_status,
-                  fb_length_max,
+                  fb_length_max_cm,
                   fb_length_max_type,
+                  fb_max_length_source,
                   rls_trophic_group,
                   rls_water_column,
                   rls_substrate_type,
                   rls_thermal_niche,
-                  
                   local_source,
                   epbc_threat_status,
                   iucn_ranking,
-                  
                   fishing_mortality,
                   fishing_type,
                   min_legal_nt,
@@ -659,52 +634,38 @@ australia_life_history <- caab_combined %>%
                   min_legal_sa,
                   max_legal_sa,
                   min_legal_tas,
-                  max_legal_tas
-  )) %>%
+                  max_legal_tas) %>%
   bind_rows(animals) %>%
   bind_rows(spps) %>%
-  dplyr::mutate(family = if_else(genus %in% "Heteroscarus", "Labridae", family)) %>%
-  dplyr::mutate(family = if_else(genus %in% "Olisthops", "Labridae", family)) %>%
-  dplyr::mutate(family = if_else(genus %in% "Siphonognathus", "Labridae", family)) %>%
-  dplyr::mutate(family = if_else(genus %in% "Neoodax", "Labridae", family)) %>%
-  dplyr::mutate(family = if_else(genus %in% "Haletta", "Labridae", family)) %>%
-  
-  
-  dplyr::mutate(order = if_else(family %in% "Siphonariidae", "Siphonariida", order)) %>%
-  
-  dplyr::left_join(new_max_sizes) %>%
-  dplyr::mutate(fb_length_max = if_else(!is.na(new_maximum_length_in_cm), new_maximum_length_in_cm, fb_length_max)) %>%
-  dplyr::mutate(length_max_source = if_else(!is.na(new_maximum_length_in_cm), source, "Fishbase")) %>% #BRUV expert
-  dplyr::mutate(fb_length_max_type = if_else(!is.na(new_maximum_length_in_cm), type_of_length_measure, fb_length_max_type)) %>%
-  dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
-  
-  # dplyr::filter(species %in% "maculatus") %>%
-  # dplyr::filter(genus %in% "Prionurus") %>%
-  
-  dplyr::left_join(foa_max_sizes) %>%
-  tidyr::replace_na(list(new_maximum_length_in_cm = 0)) %>%
-  dplyr::mutate(length_max_source = if_else(new_maximum_length_in_cm > fb_length_max, "Fishes of Australia", length_max_source)) %>%
-  dplyr::mutate(fb_length_max = if_else(new_maximum_length_in_cm > fb_length_max, new_maximum_length_in_cm, fb_length_max)) %>%
-  dplyr::mutate(fb_length_max_type = if_else((new_maximum_length_in_cm > fb_length_max), type_of_length_measure, fb_length_max_type)) %>%
-  
-  dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
+  # These replaces all don't seem to be doing anything??
+  # dplyr::mutate(family = if_else(genus %in% "Heteroscarus", "Labridae", family)) %>%
+  # dplyr::mutate(family = if_else(genus %in% "Olisthops", "Labridae", family)) %>%
+  # dplyr::mutate(family = if_else(genus %in% "Siphonognathus", "Labridae", family)) %>%
+  # dplyr::mutate(family = if_else(genus %in% "Neoodax", "Labridae", family)) %>%
+  # dplyr::mutate(family = if_else(genus %in% "Haletta", "Labridae", family)) %>%
+  # dplyr::mutate(order = if_else(family %in% "Siphonariidae", "Siphonariida", order)) %>%
+  dplyr::left_join(max_size_final) %>%
+  dplyr::mutate(max_length_cm = if_else(!is.na(max_length_cm), max_length_cm, fb_length_max_cm)) %>%
+  dplyr::mutate(max_length_source = if_else(!is.na(max_length_source), max_length_source, fb_max_length_source)) %>% # BRUV expert
+  dplyr::mutate(max_length_type = if_else(!is.na(max_length_type), max_length_type, fb_length_max_type)) %>%
+  dplyr::select(-c(fb_length_max_cm, fb_length_max_type, fb_max_length_source)) %>%
+  # dplyr::left_join(foa_max_sizes) %>%
+  # tidyr::replace_na(list(new_maximum_length_in_cm = 0)) %>%
+  # dplyr::mutate(length_max_source = if_else(new_maximum_length_in_cm > fb_length_max, "Fishes of Australia", length_max_source)) %>%
+  # dplyr::mutate(fb_length_max = if_else(new_maximum_length_in_cm > fb_length_max, new_maximum_length_in_cm, fb_length_max)) %>%
+  # dplyr::mutate(fb_length_max_type = if_else((new_maximum_length_in_cm > fb_length_max), type_of_length_measure, fb_length_max_type)) %>%
+  # dplyr::select(-c(new_maximum_length_in_cm, type_of_length_measure)) %>%
   filter(!grepl("cf", species)) %>%
   filter(!grepl("sp\\.", species)) %>%
-  
   dplyr::left_join(spp_trophic_maturity) %>%
   dplyr::mutate(fb_trophic_level = if_else(is.na(fb_trophic_level), spp_fb_trophic_level, fb_trophic_level)) %>%
   dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(fb_length_at_maturity_cm), spp_fb_length_at_maturity_cm, fb_length_at_maturity_cm)) %>%
-  dplyr::select(-c(spp_fb_trophic_level, )) %>%
-  
+  dplyr::select(-c(spp_fb_trophic_level)) %>%
   dplyr::mutate(australian_source = "CAAB") %>%
-  
+  dplyr::left_join(foa_max_sizes %>% dplyr::select(caab_code, foa_min_depth, foa_max_depth)) %>%
   dplyr::select(# CAAB info
     australian_source,
     caab_code,
-    
-    # Taxanomic ranks
-    # kingdom,
-    # phylum,
     class,
     order,
     family,
@@ -713,49 +674,39 @@ australia_life_history <- caab_combined %>%
     species,
     scientific_name,
     australian_common_name,
-    
-    # Regions
     global_region,
-    # marine_region,
     aus_region,
     imcra_region,
-    
-    # Fishbase info
     global_source,
-    
     fb_code,
-    fb_length_at_maturity_cm,
+    fb_length_at_maturity_cm, # Change name? I think there are multiple sources
+    fb_length_at_maturity_type,
+    fb_length_at_maturity_source, 
     fb_length_weight_measure,
     fb_a,
     fb_b,
     fb_a_ll,
     fb_b_ll,
+    fb_ll_equation_type, 
     fb_length_weight_source,
     fb_vulnerability,
     fb_countries,
     fb_status,
-    
-    # Maximum lenghs
-    fb_length_max, # NEED TO RENAME
-    fb_length_max_type,# NEED TO RENAME
-    length_max_source,
-    
+    max_length_cm,
+    max_length_type,
+    max_length_source,
     fb_trophic_level,
     fb_trophic_level_se,
     fb_trophic_level_source,
-    
     foa_min_depth,
     foa_max_depth,
-    
     rls_trophic_group,
     rls_water_column,
     rls_substrate_type,
     rls_thermal_niche,
-    
     local_source,
     epbc_threat_status,
     iucn_ranking,
-    
     fishing_mortality,
     fishing_type,
     min_legal_nt,
@@ -771,14 +722,9 @@ australia_life_history <- caab_combined %>%
     min_legal_sa,
     max_legal_sa,
     min_legal_tas,
-    max_legal_tas
-    
-  ) %>%
-  dplyr::rename(length_max_cm = fb_length_max, length_max_type = fb_length_max_type)
+    max_legal_tas)
 
 names(australia_life_history)
-unique(australia_life_history$length_max_source)
-unique(australia_life_history$length_max_cm) %>% sort()
 
 expanded <- australia_life_history %>%
   dplyr::mutate(aus_region = strsplit(as.character(aus_region), split = ", ")) %>% 

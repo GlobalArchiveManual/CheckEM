@@ -66,21 +66,23 @@ codes <- rfishbase::common_names(validated) %>%
 # 
 # saveRDS(code_crosswalk_codes, "annotation-schema/data/staging/code-crosswalk-codes.RDS")
 
-code_crosswalk_codes <- readRDS("annotation-schema/data/staging/code-crosswalk-codes.RDS")
+code_crosswalk_codes <- readRDS("annotation-schema/data/staging/code-crosswalk-codes.RDS") %>%
+  dplyr::rename(fb_code = speccode) %>% # Have renamed this here to match for in later scripts
+  glimpse()
 
 double_fb <- code_crosswalk_codes %>%
-  dplyr::group_by(speccode) %>%
+  dplyr::group_by(fb_code) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1) %>%
   ungroup() %>%
   dplyr::left_join(code_crosswalk_codes) %>%
-  dplyr::filter(!is.na(speccode))
+  dplyr::filter(!is.na(fb_code))
 
 true_matches <- double_fb %>%
   dplyr::filter(caab_scientific %in% fishbase_scientific) %>%
-  dplyr::select(caab_code, caab_scientific, speccode, fishbase_scientific)
+  dplyr::select(caab_code, caab_scientific, fb_code, fishbase_scientific)
 
-still_missing <- anti_join(double_fb %>% dplyr::select(speccode), true_matches)
+still_missing <- anti_join(double_fb %>% dplyr::select(fb_code), true_matches)
 
 # Download maturity data ----
 # Remove any that are NA
@@ -352,8 +354,8 @@ maturity_final <- bind_rows(maturity_conv, maturity_fl) %>%
   slice_head(n = 1) %>%
   ungroup() %>%
   dplyr::mutate(fb_length_at_maturity_source = case_when(conversion_type %in% "no-conversion" ~ "Fishbase",
-                                                         conversion_type %in% "regular-eq" ~ "Fishbase: Converted to TL using length-length equation",
-                                                         conversion_type %in% "reversed-eq" ~ "Fishbase: Converted to TL using inverse length-length relationship",
+                                                         conversion_type %in% "regular-eq" ~ "Fishbase: Converted to FL using length-length equations",
+                                                         conversion_type %in% "reversed-eq" ~ "Fishbase: Converted to FL using inverse length-length relationship",
                                                          conversion_type %in% "two-step" ~ "Fishbase: Converted to FL using two-step length-length equations",
                                                          conversion_type %in% "unconverted" ~ "Fishbase: No equations exist to convert into fork length")) %>%
   dplyr::select(-c(ranking, conversion_type, fl_is_tl)) %>%
@@ -450,10 +452,6 @@ ll <- length_length(validated) %>%
   dplyr::summarise(all = mean(all), bll = mean(bll)) %>% # Not sure if we should just be ranking and picking one?
   ungroup() %>%
   glimpse()
-
-# Before we only had known length == FL, and now we have it both ways
-
-unique(ll$type)
 
 # Length 2 is the known length
 max_lengths_available <-  info %>%
@@ -647,8 +645,6 @@ all_max_lengths <- bind_rows(max_lengths_in_fl, other_max_lengths)
 info <- info %>%
   dplyr::select(-c(fb_length_max, fb_l_type_max)) %>%
   left_join(all_max_lengths)
-
-unique(ll$type)
 
 test <- ll %>%
   dplyr::group_by(species) %>%
@@ -909,31 +905,33 @@ all_fishbase <- info %>%
   dplyr::full_join(maturity_final) %>%
   dplyr::full_join(complete_lw) %>%
   dplyr::full_join(tidy_trophic_levels) %>%
-  dplyr::select(fishbase_scientific, speccode, 
+  dplyr::select(fishbase_scientific, 
+                fb_code = speccode, 
                 fb_length_at_maturity_cm, 
                 fb_length_at_maturity_type,
-                fb_length_max, 
-                fb_l_type_max, 
-                max_length_source,
+                fb_length_at_maturity_source,
+                fb_length_max_cm = fb_length_max, 
+                fb_length_max_type = fb_l_type_max, 
+                fb_max_length_source = max_length_source,
                 fb_vulnerability, 
                 fb_countries, 
                 fb_status, 
-                length_measure,
-                a,
-                b,
-                a_ll,
-                b_ll,
-                ll_equation_type, # Added this in - the direction of the length-length so you can use the inverse
+                fb_length_weight_measure = length_measure,
+                fb_a = a,
+                fb_b = b,
+                fb_a_ll = a_ll,
+                fb_b_ll = b_ll,
+                fb_ll_equation_type = ll_equation_type, # Added this in - the direction of the length-length so you can use the inverse
                 fb_trophic_level,
                 fb_trophic_level_se,
                 fb_trophic_level_source,
-                source_level,
+                fb_length_weight_source = source_level,
                 subfamily) %>%
-  dplyr::filter(!speccode %in% c("0", NA)) %>% # to remove blank fishbase
+  dplyr::filter(!fb_code %in% c("0", NA)) %>% # to remove blank fishbase
   distinct()
 
 double_ups_fbcode <- all_fishbase %>%
-  dplyr::group_by(speccode) %>%
+  dplyr::group_by(fb_code) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
@@ -943,7 +941,7 @@ double_ups_fbname <- all_fishbase %>%
   dplyr::filter(n > 1)
 
 # Number of rows in all.fishbase does not match number of rows in info
-extra <- anti_join(info %>% dplyr::select(speccode, fishbase_scientific), all_fishbase)
+extra <- anti_join(info %>% dplyr::select(fb_code = speccode, fishbase_scientific), all_fishbase)
 
 # Join in caab data
 final_data <- dplyr::full_join(code_crosswalk_codes, all_fishbase) %>%
