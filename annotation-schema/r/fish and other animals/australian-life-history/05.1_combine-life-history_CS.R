@@ -458,30 +458,62 @@ test <- caab_combined %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
+# Things to consider for the below
+# Measurement type = can't average across different length measures
+# Standard error
+# Length at maturity source
+
+# A lot of the entries have a trophic level but no length of maturity
 genus_trophic_maturity <- fishbase %>%
   left_join(caab_combined) %>%
-  dplyr::group_by(family, genus) %>%
-  dplyr::summarise(fb_trophic_level = mean(fb_trophic_level, na.rm = TRUE),
-                   # TODO add in SE
-                   # fb_trophic_level_se = se(fb_trophic_level), 
-                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+  dplyr::group_by(family, genus, fb_length_at_maturity_type) %>%
+  dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE),
+                   spp_fb_trophic_level_se = se(fb_trophic_level),
+                   spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
                    .groups = "drop") %>% # Same as doing ungroup() afterwards
   dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
-  dplyr::mutate(species = "spp")
+  dplyr::mutate(species = "spp",
+                ranking = case_when(fb_length_at_maturity_type %in% 'FL' ~ 1,
+                                    fb_length_at_maturity_type %in% 'TL' ~ 2,
+                                    fb_length_at_maturity_type %in% 'SL' ~ 3,
+                                    is.na(fb_length_at_maturity_type)    ~ 4)) %>%
+  dplyr::group_by(family, genus) %>%
+  slice_min(ranking) %>%
+  ungroup() %>%
+  dplyr::mutate(spp_fb_length_at_maturity_source = case_when(is.na(fb_length_at_maturity_type) ~ NA,
+                                                         !is.na(fb_length_at_maturity_type) ~ "Fishbase: Genus-level average")) %>%
+  glimpse()
+
+test <- genus_trophic_maturity %>%
+  dplyr::group_by(family, genus) %>%
+  summarise(n = n()) %>%
+  dplyr::filter(n > 1)
 
 family_trophic_maturity <- fishbase %>%
   left_join(caab_combined) %>%
-  dplyr::group_by(family) %>%
-  dplyr::summarise(fb_trophic_level = mean(fb_trophic_level, na.rm = TRUE), 
-                   fb_trophic_level_se = se(fb_trophic_level),
-                   fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+  dplyr::group_by(family, fb_length_at_maturity_type) %>%
+  dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE), 
+                   spp_fb_trophic_level_se = se(fb_trophic_level),
+                   spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
                    .groups = "drop") %>%
   mutate_all(~ifelse(is.nan(.), NA, .)) %>%
-  dplyr::mutate(species = "spp", genus = "Unknown")
+  dplyr::mutate(species = "spp", genus = "Unknown",
+                ranking = case_when(fb_length_at_maturity_type %in% 'FL' ~ 1,
+                                    fb_length_at_maturity_type %in% 'TL' ~ 2,
+                                    fb_length_at_maturity_type %in% 'SL' ~ 3,
+                                    is.na(fb_length_at_maturity_type)    ~ 4)) %>%
+  dplyr::group_by(family) %>%
+  slice_min(ranking) %>%
+  ungroup() %>%
+  dplyr::mutate(spp_fb_length_at_maturity_source = case_when(is.na(fb_length_at_maturity_type) ~ NA,
+                                                         !is.na(fb_length_at_maturity_type) ~ "Fishbase: Family-level average")) %>%
+  glimpse()
 
 spp_trophic_maturity <- bind_rows(genus_trophic_maturity, family_trophic_maturity) %>%
-  dplyr::rename(spp_fb_trophic_level = fb_trophic_level,
-                spp_fb_length_at_maturity_cm = fb_length_at_maturity_cm)
+  dplyr::rename(spp_fb_length_at_maturity_type = fb_length_at_maturity_type) %>%
+  dplyr::select(family, genus, species, everything()) %>%
+  dplyr::select(-ranking) %>%
+  glimpse()
 
 # fishbase <- bind_rows(fishbase, spp_trophic_maturity)
 
@@ -658,11 +690,22 @@ australia_life_history <- caab_combined %>%
   filter(!grepl("cf", species)) %>%
   filter(!grepl("sp\\.", species)) %>%
   dplyr::left_join(spp_trophic_maturity) %>%
-  dplyr::mutate(fb_trophic_level = if_else(is.na(fb_trophic_level), spp_fb_trophic_level, fb_trophic_level)) %>%
+  # Spp length of maturity type
+  dplyr::mutate(fb_length_at_maturity_type = if_else(is.na(fb_length_at_maturity_type), spp_fb_length_at_maturity_type, fb_length_at_maturity_type)) %>%
+  # Spp trophic level mean
+  dplyr::mutate(fb_trophic_level = if_else(is.na(fb_trophic_level), spp_fb_trophic_level_mean, fb_trophic_level)) %>%
+  # Spp trophic level SE
+  dplyr::mutate(fb_trophic_level_se = if_else(is.na(fb_trophic_level_se), spp_fb_trophic_level_se, fb_trophic_level_se)) %>%
+  # Spp length of maturity
   dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(fb_length_at_maturity_cm), spp_fb_length_at_maturity_cm, fb_length_at_maturity_cm)) %>%
-  dplyr::select(-c(spp_fb_trophic_level)) %>%
+  # Spp length of maturity source
+  dplyr::mutate(fb_length_at_maturity_source = if_else(is.na(fb_length_at_maturity_source), spp_fb_length_at_maturity_source, fb_length_at_maturity_source)) %>%
+  # dplyr::mutate(fb_trophic_level = if_else(is.na(fb_trophic_level), spp_fb_trophic_level, fb_trophic_level)) %>%
+  # dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(fb_length_at_maturity_cm), spp_fb_length_at_maturity_cm, fb_length_at_maturity_cm)) %>%
+  # dplyr::mutate(fb_length_at_maturity_cm = if_else(is.na(fb_length_at_maturity_cm), spp_fb_length_at_maturity_cm, fb_length_at_maturity_cm)) %>%
+  dplyr::select(-c(spp_fb_length_at_maturity_type, spp_fb_trophic_level_mean, spp_fb_trophic_level_se, spp_fb_length_at_maturity_cm, spp_fb_length_at_maturity_source)) %>%
   dplyr::mutate(australian_source = "CAAB") %>%
-  dplyr::left_join(foa_max_sizes %>% dplyr::select(caab_code, foa_min_depth, foa_max_depth)) %>%
+  dplyr::left_join(foa_max_sizes %>% dplyr::select(caab_code, foa_min_depth, foa_max_depth)) %>% # This just joins the min and max depths
   dplyr::select(# CAAB info
     australian_source,
     caab_code,
@@ -876,7 +919,7 @@ test <- australia_life_history %>%
 
 saveRDS(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.RDS") # To share with people
 write.csv(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.csv", row.names = FALSE) # To share with people
-saveRDS(australia_life_history, "inst/shiny/CheckEM/data/australia_life-history.RDS") # to update shiny app
+# saveRDS(australia_life_history, "inst/shiny/CheckEM/data/australia_life-history.RDS") # to update shiny app ## Haven't ran this!!!
 
 # For CheckEM package - Save as an rda to use as package data
 usethis::use_data(australia_life_history, overwrite = TRUE)
