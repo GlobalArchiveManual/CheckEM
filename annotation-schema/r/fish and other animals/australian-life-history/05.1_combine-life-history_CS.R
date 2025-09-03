@@ -816,8 +816,12 @@ additional_afd_marine_regions <- anti_join(afd_extra_aus, expanded) %>%
 australia_life_history <- dplyr::left_join(australia_life_history, additional_afd_marine_regions) %>%
   mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", "))) %>%
   dplyr::select(-region_to_add) %>%
-  dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", ""))
-
+  dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", "")) %>%
+  # FIX THE BELOW FURTHER UP IN THE SCRIPT!!!
+  dplyr::rename(length_max_cm = max_length_cm,
+                length_max_type = max_length_type,
+                length_max_source = max_length_source)
+ 
 ################
 
 
