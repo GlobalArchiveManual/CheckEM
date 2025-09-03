@@ -464,12 +464,41 @@ test <- caab_combined %>%
 # Length at maturity source
 
 # A lot of the entries have a trophic level but no length of maturity
-genus_trophic_maturity <- fishbase %>%
+# genus_trophic_maturity <- fishbase %>%
+#   left_join(caab_combined) %>%
+#   dplyr::group_by(family, genus, fb_length_at_maturity_type) %>%
+#   dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE),
+#                    spp_fb_trophic_level_se = se(fb_trophic_level),
+#                    spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+#                    .groups = "drop") %>% # Same as doing ungroup() afterwards
+#   dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
+#   dplyr::mutate(species = "spp",
+#                 ranking = case_when(fb_length_at_maturity_type %in% 'FL' ~ 1,
+#                                     fb_length_at_maturity_type %in% 'TL' ~ 2,
+#                                     fb_length_at_maturity_type %in% 'SL' ~ 3,
+#                                     is.na(fb_length_at_maturity_type)    ~ 4)) %>%
+#   dplyr::group_by(family, genus) %>%
+#   slice_min(ranking) %>%
+#   ungroup() %>%
+#   dplyr::mutate(spp_fb_length_at_maturity_source = case_when(is.na(fb_length_at_maturity_type) ~ NA,
+#                                                          !is.na(fb_length_at_maturity_type) ~ "Fishbase: Genus-level average")) %>%
+#   glimpse()
+
+# Genus level trophic level
+genus_trophic <- fishbase %>%
   left_join(caab_combined) %>%
-  dplyr::group_by(family, genus, fb_length_at_maturity_type) %>%
+  dplyr::group_by(family, genus) %>%
   dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE),
                    spp_fb_trophic_level_se = se(fb_trophic_level),
-                   spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+                   .groups = "drop") %>% # Same as doing ungroup() afterwards
+  dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>% # These are only calculated off 1 value - no SE for single sample
+  dplyr::mutate(species = "spp") %>% 
+  glimpse()
+
+genus_maturity <- fishbase %>%
+  left_join(caab_combined) %>%
+  dplyr::group_by(family, genus, fb_length_at_maturity_type) %>%
+  dplyr::summarise(spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
                    .groups = "drop") %>% # Same as doing ungroup() afterwards
   dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
   dplyr::mutate(species = "spp",
@@ -482,37 +511,72 @@ genus_trophic_maturity <- fishbase %>%
   ungroup() %>%
   dplyr::mutate(spp_fb_length_at_maturity_source = case_when(is.na(fb_length_at_maturity_type) ~ NA,
                                                          !is.na(fb_length_at_maturity_type) ~ "Fishbase: Genus-level average")) %>%
+  dplyr::select(-ranking) %>%
   glimpse()
+
+genus_trophic_maturity <- genus_trophic %>%
+  dplyr::left_join(genus_maturity) # There are lots of length of maturities that are NA by genus, and some trophic levels
 
 test <- genus_trophic_maturity %>%
   dplyr::group_by(family, genus) %>%
   summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
-family_trophic_maturity <- fishbase %>%
+# family_trophic_maturity <- fishbase %>%
+#   left_join(caab_combined) %>%
+#   dplyr::group_by(family, fb_length_at_maturity_type) %>%
+#   dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE), 
+#                    spp_fb_trophic_level_se = se(fb_trophic_level),
+#                    spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+#                    .groups = "drop") %>%
+#   mutate_all(~ifelse(is.nan(.), NA, .)) %>%
+#   dplyr::mutate(species = "spp", genus = "Unknown",
+#                 ranking = case_when(fb_length_at_maturity_type %in% 'FL' ~ 1,
+#                                     fb_length_at_maturity_type %in% 'TL' ~ 2,
+#                                     fb_length_at_maturity_type %in% 'SL' ~ 3,
+#                                     is.na(fb_length_at_maturity_type)    ~ 4)) %>%
+#   dplyr::group_by(family) %>%
+#   slice_min(ranking) %>%
+#   ungroup() %>%
+#   dplyr::mutate(spp_fb_length_at_maturity_source = case_when(is.na(fb_length_at_maturity_type) ~ NA,
+#                                                          !is.na(fb_length_at_maturity_type) ~ "Fishbase: Family-level average")) %>%
+#   glimpse()
+
+family_trophic <- fishbase %>%
+  left_join(caab_combined) %>%
+  dplyr::group_by(family) %>%
+  dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE),
+                   spp_fb_trophic_level_se = se(fb_trophic_level),
+                   .groups = "drop") %>% # Same as doing ungroup() afterwards
+  dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>% # These are only calculated off 1 value - no SE for single sample
+  dplyr::mutate(genus = "Unknown", species = "spp") %>% 
+  glimpse()
+
+family_maturity <- fishbase %>%
   left_join(caab_combined) %>%
   dplyr::group_by(family, fb_length_at_maturity_type) %>%
-  dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE), 
-                   spp_fb_trophic_level_se = se(fb_trophic_level),
-                   spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
-                   .groups = "drop") %>%
-  mutate_all(~ifelse(is.nan(.), NA, .)) %>%
-  dplyr::mutate(species = "spp", genus = "Unknown",
+  dplyr::summarise(spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
+                   .groups = "drop") %>% # Same as doing ungroup() afterwards
+  dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
+  dplyr::mutate(genus = "Unknown", species = "spp",
                 ranking = case_when(fb_length_at_maturity_type %in% 'FL' ~ 1,
                                     fb_length_at_maturity_type %in% 'TL' ~ 2,
                                     fb_length_at_maturity_type %in% 'SL' ~ 3,
                                     is.na(fb_length_at_maturity_type)    ~ 4)) %>%
-  dplyr::group_by(family) %>%
+  dplyr::group_by(family, genus) %>%
   slice_min(ranking) %>%
   ungroup() %>%
   dplyr::mutate(spp_fb_length_at_maturity_source = case_when(is.na(fb_length_at_maturity_type) ~ NA,
-                                                         !is.na(fb_length_at_maturity_type) ~ "Fishbase: Family-level average")) %>%
+                                                             !is.na(fb_length_at_maturity_type) ~ "Fishbase: Family-level average")) %>%
+  dplyr::select(-ranking) %>%
   glimpse()
+
+family_trophic_maturity <- family_trophic %>%
+  dplyr::left_join(family_maturity)
 
 spp_trophic_maturity <- bind_rows(genus_trophic_maturity, family_trophic_maturity) %>%
   dplyr::rename(spp_fb_length_at_maturity_type = fb_length_at_maturity_type) %>%
   dplyr::select(family, genus, species, everything()) %>%
-  dplyr::select(-ranking) %>%
   glimpse()
 
 # fishbase <- bind_rows(fishbase, spp_trophic_maturity)
@@ -643,7 +707,7 @@ australia_life_history <- caab_combined %>%
                   fb_status,
                   fb_length_max_cm,
                   fb_length_max_type,
-                  fb_max_length_source,
+                  fb_length_max_source,
                   rls_trophic_group,
                   rls_water_column,
                   rls_substrate_type,
@@ -677,10 +741,11 @@ australia_life_history <- caab_combined %>%
   # dplyr::mutate(family = if_else(genus %in% "Haletta", "Labridae", family)) %>%
   # dplyr::mutate(order = if_else(family %in% "Siphonariidae", "Siphonariida", order)) %>%
   dplyr::left_join(max_size_final) %>%
-  dplyr::mutate(max_length_cm = if_else(!is.na(max_length_cm), max_length_cm, fb_length_max_cm)) %>%
-  dplyr::mutate(max_length_source = if_else(!is.na(max_length_source), max_length_source, fb_max_length_source)) %>% # BRUV expert
-  dplyr::mutate(max_length_type = if_else(!is.na(max_length_type), max_length_type, fb_length_max_type)) %>%
-  dplyr::select(-c(fb_length_max_cm, fb_length_max_type, fb_max_length_source)) %>%
+  dplyr::mutate(length_max_cm = if_else(!is.na(max_length_cm), max_length_cm, fb_length_max_cm)) %>%
+  dplyr::mutate(length_max_source = if_else(!is.na(max_length_source), max_length_source, fb_length_max_source)) %>% # BRUV expert
+  dplyr::mutate(length_max_type = if_else(!is.na(max_length_type), max_length_type, fb_length_max_type)) %>%
+  dplyr::select(-c(fb_length_max_cm, fb_length_max_type, fb_length_max_source,
+                   max_length_cm, max_length_source, max_length_type)) %>%
   # dplyr::left_join(foa_max_sizes) %>%
   # tidyr::replace_na(list(new_maximum_length_in_cm = 0)) %>%
   # dplyr::mutate(length_max_source = if_else(new_maximum_length_in_cm > fb_length_max, "Fishes of Australia", length_max_source)) %>%
@@ -722,7 +787,7 @@ australia_life_history <- caab_combined %>%
     imcra_region,
     global_source,
     fb_code,
-    fb_length_at_maturity_cm, # Change name? I think there are multiple sources
+    fb_length_at_maturity_cm,
     fb_length_at_maturity_type,
     fb_length_at_maturity_source, 
     fb_length_weight_measure,
@@ -735,9 +800,9 @@ australia_life_history <- caab_combined %>%
     fb_vulnerability,
     fb_countries,
     fb_status,
-    max_length_cm,
-    max_length_type,
-    max_length_source,
+    length_max_cm,
+    length_max_type,
+    length_max_source,
     fb_trophic_level,
     fb_trophic_level_se,
     fb_trophic_level_source,
@@ -766,6 +831,9 @@ australia_life_history <- caab_combined %>%
     max_legal_sa,
     min_legal_tas,
     max_legal_tas)
+
+spp_test <- australia_life_history %>%
+  dplyr::filter(species %in% "spp")
 
 names(australia_life_history)
 
@@ -816,11 +884,7 @@ additional_afd_marine_regions <- anti_join(afd_extra_aus, expanded) %>%
 australia_life_history <- dplyr::left_join(australia_life_history, additional_afd_marine_regions) %>%
   mutate(marine_region = if_else(is.na(marine_region), region_to_add, paste(marine_region, region_to_add, sep = ", "))) %>%
   dplyr::select(-region_to_add) %>%
-  dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", "")) %>%
-  # FIX THE BELOW FURTHER UP IN THE SCRIPT!!!
-  dplyr::rename(length_max_cm = max_length_cm,
-                length_max_type = max_length_type,
-                length_max_source = max_length_source)
+  dplyr::mutate(marine_region = str_replace_all(marine_region, "\\, NA", ""))
  
 ################
 
