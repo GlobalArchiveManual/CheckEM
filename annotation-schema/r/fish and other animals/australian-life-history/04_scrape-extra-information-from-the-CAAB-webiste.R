@@ -1,6 +1,9 @@
 # This script uses the CAAB codes and scientific names from script 01 to scrape from the CSIRO CAAB website
 # This is to get information on recent taxonomic name changes
 
+# TODO scrape Taxon notes from CAAB site to exclude non-native species
+# "This taxon does not occur in the wild in Australian waters, but is entered in CAAB as commercially obtainable in Australia in imported form."
+
 # Load libraries required
 library(rvest)
 library(httr)
