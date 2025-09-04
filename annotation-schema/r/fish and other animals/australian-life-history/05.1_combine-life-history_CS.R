@@ -25,6 +25,11 @@ se <- function(x) {
   sd(x) / sqrt(length(x))
 }
 
+code_crosswalk_codes <- readRDS("annotation-schema/data/staging/code-crosswalk-codes.RDS") %>%
+  dplyr::rename(fb_code = speccode) %>% # Have renamed this here to match for in later scripts
+  dplyr::mutate(caab_code = as.character(caab_code)) %>%
+  glimpse()
+
 # Read in sheet from googledrive ----
 url <- "https://docs.google.com/spreadsheets/d/1SMLvR9t8_F-gXapR2EemQMEPSw_bUbPLcXd3lJ5g5Bo/edit?usp=sharing"
 lh <- read_sheet(url, sheet = "australia.life.history") %>%
@@ -44,12 +49,13 @@ max_url <- "https://docs.google.com/spreadsheets/d/1H7EXoTlpeg48LrNVszIa8irwIAh_
 new_max_sizes <- read_sheet(max_url, sheet = "Responses") %>% distinct() %>%
   clean_names() %>%
   dplyr::rename(source = please_provide_a_link_to_reference_information_e_g_website_or_paper) %>%
-  dplyr::mutate(fishbase_scientific = paste(genus, species, sep = " ")) %>%
-  dplyr::select(fishbase_scientific, new_maximum_length_in_cm, type_of_length_measure, source) %>% 
-  dplyr::group_by(fishbase_scientific) %>%
+  dplyr::mutate(caab_scientific = paste(genus, species, sep = " ")) %>%
+  dplyr::select(caab_scientific, new_maximum_length_in_cm, type_of_length_measure, source) %>% 
+  dplyr::group_by(caab_scientific) %>%
   # slice(which.max(new_maximum_length_in_cm)) %>%
   slice_max(new_maximum_length_in_cm, n = 1, with_ties = F) %>% # More control over this, which.max just returns the first even if tied
   ungroup() %>%
+  left_join(code_crosswalk_codes) %>%
   glimpse()
 
 test <- new_max_sizes %>%
@@ -62,9 +68,11 @@ unique(new_max_sizes$type_of_length_measure)
 # TODO add fishes of australia max sizes and depth limits
 foa_max_sizes <- readRDS("annotation-schema/data/staging/fishes-of-australia_maximum-sizes.RDS") %>%
   clean_names() %>%
-  dplyr::mutate(fishbase_scientific = paste(genus, species, sep = " ")) %>%
+  dplyr::rename(caab_code = caab) %>%
+  left_join(code_crosswalk_codes) %>%
+  # dplyr::mutate(fishbase_scientific = paste(genus, species, sep = " ")) %>%
   dplyr::select(fishbase_scientific,
-                caab_code = caab, 
+                caab_code, 
                 foa_new_maximum_length_in_cm = new_maximum_length_in_cm,
                 foa_min_depth = min_depth, 
                 foa_max_depth = max_depth, 
@@ -102,7 +110,7 @@ all_max_sizes <- left_join(foa_max_sizes, new_max_sizes) %>%
   glimpse()
 
 # Extract the species ----
-max_length_species <- unique(all_max_sizes$fishbase_scientific) # Will there maybe be some where names don't match Fishbase?
+max_length_species <- unique(all_max_sizes$fishbase_scientific)
 
 # Extract length-length relationships to convert non-FL measures
 ll_eqs <- length_length(max_length_species) %>%
@@ -487,7 +495,7 @@ test <- caab_combined %>%
 # Genus level trophic level
 genus_trophic <- fishbase %>%
   left_join(caab_combined) %>%
-  dplyr::group_by(family, genus) %>%
+  dplyr::group_by(family, genus) %>% # This is using CAAB name
   dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE),
                    spp_fb_trophic_level_se = se(fb_trophic_level),
                    .groups = "drop") %>% # Same as doing ungroup() afterwards
@@ -497,7 +505,8 @@ genus_trophic <- fishbase %>%
 
 genus_maturity <- fishbase %>%
   left_join(caab_combined) %>%
-  dplyr::group_by(family, genus, fb_length_at_maturity_type) %>%
+  dplyr::group_by(family, genus,  # This is using CAAB name
+                  fb_length_at_maturity_type) %>%
   dplyr::summarise(spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
                    .groups = "drop") %>% # Same as doing ungroup() afterwards
   dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
@@ -544,7 +553,7 @@ test <- genus_trophic_maturity %>%
 
 family_trophic <- fishbase %>%
   left_join(caab_combined) %>%
-  dplyr::group_by(family) %>%
+  dplyr::group_by(family) %>% # This is using CAAB name
   dplyr::summarise(spp_fb_trophic_level_mean = mean(fb_trophic_level, na.rm = TRUE),
                    spp_fb_trophic_level_se = se(fb_trophic_level),
                    .groups = "drop") %>% # Same as doing ungroup() afterwards
@@ -554,7 +563,8 @@ family_trophic <- fishbase %>%
 
 family_maturity <- fishbase %>%
   left_join(caab_combined) %>%
-  dplyr::group_by(family, fb_length_at_maturity_type) %>%
+  dplyr::group_by(family, # This is using CAAB names
+                  fb_length_at_maturity_type) %>%
   dplyr::summarise(spp_fb_length_at_maturity_cm = mean(fb_length_at_maturity_cm, na.rm = TRUE),
                    .groups = "drop") %>% # Same as doing ungroup() afterwards
   dplyr::mutate_all(~ifelse(is.nan(.), NA, .)) %>%
@@ -983,6 +993,14 @@ test <- australia_life_history %>%
   dplyr::group_by(genus, species) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
+
+test <- australia_life_history %>%
+  dplyr::filter(length_max_type %in% c("SL", "TL"),
+                !is.na(fb_ll_equation_type)) %>%
+  dplyr::select(scientific_name, length_max_type, length_max_cm,
+                length_max_source,
+                fb_length_at_maturity_type,
+                fb_length_weight_measure, fb_ll_equation_type) # These 2 species make sense
 
 
 saveRDS(australia_life_history, "annotation-schema/output/fish/schema/australia_life-history.RDS") # To share with people
