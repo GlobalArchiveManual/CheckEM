@@ -124,6 +124,8 @@ ll_eqs <- length_length(max_length_species) %>%
   dplyr::filter(known %in% c("TL", "FL", "SL"),
                 unknown %in% c("TL", "FL", "SL")) %>%
   dplyr::rename(fishbase_scientific = species) %>%
+  add_row(fishbase_scientific = "Choerodon rubescens", unknown = "TL", known = "FL",
+          a_ll = 0, b_ll = 1) %>% # Add species here with a known length-length
   glimpse()
 
 # Convert the length of maturity data into FL where possible ----

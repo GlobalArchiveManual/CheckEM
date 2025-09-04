@@ -179,6 +179,8 @@ ll_eqs <- length_length(maturity_species) %>%
                 unknown %in% c("TL", "FL", "SL")) %>%
   dplyr::rename(fishbase_scientific = species) %>%
   dplyr::select(fishbase_scientific, unknown, known, a_ll, b_ll) %>%
+  add_row(fishbase_scientific = "Choerodon rubescens", unknown = "TL", known = "FL",
+          a_ll = 0, b_ll = 1) %>% # Add species here with a known length-length
   glimpse()
 
 # Convert the length of maturity data into FL where possible ----
@@ -451,6 +453,8 @@ ll <- length_length(validated) %>%
   dplyr::group_by(species, ll_equation_type) %>%
   dplyr::summarise(all = mean(all), bll = mean(bll)) %>% # Not sure if we should just be ranking and picking one?
   ungroup() %>%
+  add_row(species = "Choerodon rubescens", ll_equation_type = "FL → TL",
+          all = 0, bll = 1) %>% # Add species here with a known length-length
   glimpse()
 
 # Length 2 is the known length
@@ -470,9 +474,11 @@ ll_for_max_lengths <- length_length(validated) %>%
   clean_names() %>%
   dplyr::select(fishbase_scientific = species, 
                 unknown = length1, known = length2, 
-                a_ll = a, b_ll = b) %>% # Removed these, dont thinkn they are needed? , lengthmin, lengthmax, r2, number
+                a_ll = a, b_ll = b) %>% # Removed these, dont think they are needed? , lengthmin, lengthmax, r2, number
   # dplyr::rename(fishbase_scientific = species) %>%
   # left_join(info %>% select(fishbase_scientific, fb_length_max, fb_l_type_max)) %>%
+  add_row(fishbase_scientific = "Choerodon rubescens", unknown = "TL", known = "FL",
+          a_ll = 0, b_ll = 1) %>% # Add species here with a known length-length
   glimpse()
 
 length(unique(ll_for_max_lengths$fishbase_scientific)) # 2812 species
