@@ -1,4 +1,8 @@
 # Change log
+#2.20 (released 08/09/2025) <br/>
+### Added <br/>
+- Added a check for the number of spps in a campaign, and to investigate % by observer
+
 # 2.19 (released 15/07/2025)  <br />
 ### Added <br />
 - Added check for species out of range by using the Integrated Marine and Coastal Regionalisation of Australia (IMCRA) v4.0 - Provincial Bioregions

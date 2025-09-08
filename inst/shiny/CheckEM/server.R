@@ -4931,7 +4931,99 @@ function(input, output, session) {
     )
   })
   
+  ## ► MaxN spp - dataframe ----
+  maxn_spp <- reactive({
+    
+    if(input$upload %in% "EM"){
+      
+      number_of_spps <- maxn.clean() %>%
+        dplyr::filter(species %in% c("spp")) #, "sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10"
+      
+    } else {
+      
+      number_of_spps <- count.clean() %>%
+        dplyr::filter(species %in% c("spp")) #, "sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10"
+    }
+    
+    return(number_of_spps)
+    
+  })
   
+  maxn_spp_summary <- reactive({
+    
+    total_fish <- maxn.total.abundances() %>%
+      dplyr::group_by(campaignid) %>%
+      dplyr::summarise(total_abundance = sum(total_abundance))
+    
+    message("view maxn spps")
+    
+    maxn_spp() %>%
+      dplyr::group_by(campaignid) %>%
+      dplyr::summarise(number_of_spps = sum(maxn)) %>%
+      dplyr::ungroup() %>%
+      left_join(total_fish) %>%
+      glimpse() %>%
+      dplyr::mutate(percent_spp = round((number_of_spps/total_abundance)*100, digits = 1))
+    
+  })
+  
+  maxn_spp_observer <- reactive({
+    
+    total_fish <- maxn.total.abundances() %>%
+      left_join(metadata()) %>%
+      dplyr::group_by(campaignid, observer_count) %>%
+      dplyr::summarise(total_fish_observed = sum(total_abundance))
+    
+    deployments_watched <- metadata() %>%
+      dplyr::filter(successful_count %in% "Yes") %>%
+      dplyr::group_by(observer_count) %>%
+      dplyr::summarise(deployments_watched = n())
+    
+    maxn_spp() %>%
+      dplyr::group_by(campaignid, observer_count) %>%
+      dplyr::summarise(number_of_spps = sum(maxn)) %>%
+      left_join(total_fish) %>%
+      dplyr::mutate(percent_spp = round((number_of_spps/total_fish_observed)*100, digits = 1)) %>%
+      left_join(deployments_watched)
+    
+  })
+  
+  
+  ## ►  MaxN spp - onclick ----
+  onclick('click.maxn.spp', showModal(modalDialog(
+    
+    title = "Number of spps", size = "l", easyClose = TRUE,
+    checkboxInput("maxn.spp.observer", label = "Split by Observer_count", value = FALSE),
+    renderDataTable(
+      
+      if(input$maxn.spp.observer == FALSE)
+        maxn_spp_summary()
+      else if(input$maxn.spp.observer == TRUE)
+      maxn_spp_observer(),
+      # if(input$maxn.spp.observer == TRUE & input$maxn.observed.distinct.lh == TRUE)
+      #   maxn.species.not.observed.lh() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp")) %>% distinct(campaignid, family, genus, species)
+      # else if (input$maxn.filter.spp.lh == TRUE & input$maxn.observed.distinct.lh == FALSE)
+      #   maxn.species.not.observed.lh() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp"))
+      # else if (input$maxn.filter.spp.lh == FALSE & input$maxn.observed.distinct.lh == TRUE)
+      #   maxn.species.not.observed.lh() %>% distinct(campaignid, family, genus, species)
+      # else
+      #   maxn.species.not.observed.lh(),  
+      rownames = FALSE,
+      options = list(paging = FALSE, row.names = FALSE, searching = TRUE)))))
+  
+  ## ►  MaxN spp - valuebox ----
+  output$maxn.spp <- renderValueBox({
+    
+    total_spps <- sum(maxn_spp()$maxn)
+    
+    text <- paste0(total_spps, " (", round((total_spps/sum(maxn.total.abundances()$total_abundance))*100), "%)")
+    
+    valueBox(width = 2,
+             text,
+             "Number of spps",
+             icon = icon("list"), color = "blue"
+    )
+  })
   ## ► Spatial plot ----
   output$maxn.spatial.plot <- renderLeaflet({
     

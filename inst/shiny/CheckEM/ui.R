@@ -382,6 +382,8 @@ tabItems(
                 valueBoxOutput("maxn.species.not.observed")),
             div(id = "click.maxn.species.not.observed.lh",
                 valueBoxOutput("maxn.species.not.observed.lh")),
+            div(id = "click.maxn.spp",
+                valueBoxOutput("maxn.spp")),
             
             box(width = 12,title = "Species to plot", status = "primary", solidHeader = TRUE, numericInput("species.limit", "Number:", 15, min = 5, max = 20)),
             box(width = 12, height = 500,
