@@ -123,8 +123,8 @@ navbar:
       href: articles/r-workflows/fish-predictions.html
     - text: Spatially predict fish distributions
       href: articles/r-workflows/fish-spatial-prediction.html
-  - text: Help Improve CheckEM - Community Contributions to Species Records
-    href: community-updates
+  - text: Improve CheckEM - Contribute to Species Records
+    href: articles/community-updates
   - text: Functions
     href: reference
 authors:
