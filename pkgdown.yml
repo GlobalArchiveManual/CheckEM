@@ -7,6 +7,7 @@ articles:
   r-workflows/check-habitat: r-workflows/check-habitat.html
   manuals/CheckEM_user_guide: manuals/CheckEM_user_guide.html
   manuals/CheckEM_video: manuals/CheckEM_video.html
+  community-updates: community-updates.html
   manuals/EventMeasure_annotation_guide: manuals/EventMeasure_annotation_guide.html
   r-workflows/fish-modelling: r-workflows/fish-modelling.html
   r-workflows/fish-predictions: r-workflows/fish-predictions.html
@@ -17,7 +18,7 @@ articles:
   r-workflows/sampling-design: r-workflows/sampling-design.html
   r-workflows/spatial-layers: r-workflows/spatial-layers.html
   manuals/TransectMeasure_annotation_guide: manuals/TransectMeasure_annotation_guide.html
-last_built: 2025-09-09T03:10Z
+last_built: 2025-09-10T03:13Z
 urls:
   reference: https://globalarchivemanual.github.io/CheckEM/reference
   article: https://globalarchivemanual.github.io/CheckEM/articles
