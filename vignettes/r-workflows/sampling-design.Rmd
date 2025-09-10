@@ -1,5 +1,5 @@
 ---
-title: "sampling-design"
+title: "Create a spatially-balanced sampling design using GRTS"
 author: "Claude Spencer & Brooke Gibbons"
 date: "2024-11-12"
 output: html_document

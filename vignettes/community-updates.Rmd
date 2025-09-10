@@ -1,5 +1,5 @@
 ---
-title: CheckEM Community Specues Updates
+title: 'Community Contributions: Species Updates and Regional Records'
 output:
   html_vignette:
     toc: true
@@ -9,6 +9,7 @@ vignette: >
   %\VignetteIndexEntry{CheckEM Community Specues Updates}
   %\VignetteEncoding{UTF-8}
 ---
+Use the forms below to share new information on species — whether it’s updating maximum size records or adding marine regions where they are found. Every submission helps strengthen the database and supports better research, management, and community knowledge.
 
 # Update a species maximum body size:
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfDIxlLuxzdsXgWtdp6YI8s_LxpFLANnSHDnk9Io5USOyKGrQ/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
