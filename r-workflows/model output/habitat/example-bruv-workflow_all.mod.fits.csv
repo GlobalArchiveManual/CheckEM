@@ -1,4 +1,4 @@
-"","response","formula","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","depth","roughness","detrended","tpi","aspect","tri","cumsum.wi"
+"","response","formula","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","depth_m","roughness","detrended","tpi","aspect","tri","cumsum.wi"
 "detrended+roughness+tpi...1","Macroalgae","s(detrended, k = 5, bs = ""cr"") + s(roughness, k = 5, bs = ""cr"") + s(tpi, k = 5, bs = ""cr"")",228.38030673211,230.190111722255,0.60985,NA,11.67,0,0,0,0.974,0.993,0,1,1,1,0,0,0.974
 "detrended+tpi+tri","Seagrasses","s(detrended, k = 5, bs = ""cr"") + s(tpi, k = 5, bs = ""cr"") + s(tri, k = 5, bs = ""cr"")",157.046065008869,158.021299823347,0.23312,NA,12.09,0,0,0,1,1,0,0,1,1,0,1,1
 "detrended+roughness+tpi...3","Sessile invertebrates","s(detrended, k = 5, bs = ""cr"") + s(roughness, k = 5, bs = ""cr"") + s(tpi, k = 5, bs = ""cr"")",125.332069430978,129.988016330611,0.92187,NA,9.49,0,0,0,0.981,0.901,0,1,1,1,0,0,0.981

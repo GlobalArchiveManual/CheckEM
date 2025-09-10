@@ -1,9 +1,8 @@
 "","response","formula","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","mbdepth","roughness","detrended","tpi","aspect","reef","cumsum.wi"
-"detrended","total_abundance","s(detrended, k = 3, bs = ""cr"")",371.823026307176,375.363091158449,0.22284,NA,2,0,0,0,0.283,0.337,0,0,1,0,0,0,0.283
-"mbdepth...2","total_abundance","s(mbdepth, k = 3, bs = ""cr"")",372.621956527622,376.162021378918,0.20319,NA,2,0,0.799,0.799,0.19,0.226,1,0,0,0,0,0,0.473
-"mbdepth+reef...3","total_abundance","s(mbdepth, k = 3, bs = ""cr"") + s(reef, k = 3, bs = ""cr"")",372.662715731352,377.044177860997,0.26499,NA,3,0,0.84,1.681,0.186,0.145,1,0,0,0,0,1,0.659
-"mbdepth+reef...4","species_richness","s(mbdepth, k = 3, bs = ""cr"") + s(reef, k = 3, bs = ""cr"")",176.828464729643,181.209926859196,0.22769,NA,3,0,0,0,0.284,0.226,1,0,0,0,0,1,0.284
-"mbdepth...5","species_richness","s(mbdepth, k = 3, bs = ""cr"")",178.557438643737,182.097503495064,0.11514,NA,2,0,1.729,0.888,0.12,0.145,1,0,0,0,0,0,0.404
-"roughness","greater than Lm","s(roughness, k = 3, bs = ""cr"")",123.356374387614,128.258532834892,0.42821,NA,2.54,0,0,0,0.372,0.421,0,1,0,0,0,0,0.372
-"aspect+roughness","greater than Lm","s(aspect, k = 3, bs = ""cc"") + s(roughness, k = 3, bs = ""cr"")",124.599872855683,130.1278636278,0.46196,NA,3.67,0,1.243,1.869,0.2,0.165,0,1,0,0,1,0,0.572
-"mbdepth...8","greater than Lm","s(mbdepth, k = 3, bs = ""cr"")",124.911783286114,129.90232152178,0.46048,NA,2.76,0,1.555,1.644,0.171,0.185,1,0,0,0,0,0,0.743
+"detrended","total_abundance","s(detrended, k = 3, bs = ""cr"")",371.823026307176,375.363091158449,0.22284,NA,2,0,0,0,0.258,0.314,0,0,1,0,0,0,0.258
+"mbdepth+reef...2","total_abundance","s(mbdepth, k = 3, bs = ""cr"") + s(reef, k = 3, bs = ""cr"")",372.018849377615,376.400311507342,0.27964,NA,3,0,0.196,1.037,0.234,0.187,1,0,0,0,0,1,0.492
+"mbdepth...3","total_abundance","s(mbdepth, k = 3, bs = ""cr"")",372.621956527622,376.162021378918,0.20319,NA,2,0,0.799,0.799,0.173,0.21,1,0,0,0,0,0,0.665
+"mbdepth+reef...4","species_richness","s(mbdepth, k = 3, bs = ""cr"") + s(reef, k = 3, bs = ""cr"")",176.154874109256,180.536336238944,0.24378,NA,3,0,0,0,0.334,0.275,1,0,0,0,0,1,0.334
+"roughness","greater than Lm","s(roughness, k = 3, bs = ""cr"")",123.356374387614,128.258532834892,0.42821,NA,2.54,0,0,0,0.37,0.419,0,1,0,0,0,0,0.37
+"aspect+roughness","greater than Lm","s(aspect, k = 3, bs = ""cc"") + s(roughness, k = 3, bs = ""cr"")",124.599872855683,130.1278636278,0.46196,NA,3.67,0,1.243,1.869,0.199,0.165,0,1,0,0,1,0,0.569
+"mbdepth...7","greater than Lm","s(mbdepth, k = 3, bs = ""cr"")",124.911783286114,129.90232152178,0.46048,NA,2.76,0,1.555,1.644,0.17,0.184,1,0,0,0,0,0,0.739

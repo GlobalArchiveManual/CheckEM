@@ -8,7 +8,7 @@ output:
     code_folding: hide
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Checking fish data exported from EventMeasure}
+  %\VignetteIndexEntry{Check fish data from single point based methods}
   %\VignetteEncoding{UTF-8}
 ---
 

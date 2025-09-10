@@ -65,7 +65,7 @@ plot_transformations(pred.vars = pred.vars, dat = dat)
 
 Reset the predictor variables to remove any highly correlated variables and include any transformed variables.
 ```{r reset-predictors}
-pred.vars <- c("depth","roughness", "detrended", 
+pred.vars <- c("depth_m","roughness", "detrended", 
                "tpi", "aspect", "tri")
 ```
 
