@@ -37,7 +37,8 @@ function(){
                     ),
                     menuItem("Schema downloads", tabName = "schema", icon = icon("download", lib="font-awesome")),
                     menuItem("User guide", tabName = "guide", icon = icon("info", lib="font-awesome")),
-                    menuItem("Edit maximum lengths", tabName = "update", icon = icon("edit", lib="font-awesome")),
+                    menuItem("Edit maximum lengths", tabName = "updatelength", icon = icon("edit", lib="font-awesome")),
+                    menuItem("Edit marine regions", tabName = "updateregions", icon = icon("edit", lib="font-awesome")),
                     menuItem("Feedback", tabName = "feedback", icon = icon("comment", lib="font-awesome")),
                     menuItem("Change log", tabName = "change", icon = icon("edit", lib="font-awesome")),
                     menuItem("Acknowledgements", tabName = "acknowledgements", icon = icon("hands-helping", lib="font-awesome"))
@@ -384,6 +385,9 @@ tabItems(
                 valueBoxOutput("maxn.species.not.observed.lh")),
             div(id = "click.maxn.spp",
                 valueBoxOutput("maxn.spp")),
+            
+            div(id = "click.species_that_have_spps",
+                valueBoxOutput("species_that_have_spps")),
             
             box(width = 12,title = "Species to plot", status = "primary", solidHeader = TRUE, numericInput("species.limit", "Number:", 15, min = 5, max = 20)),
             box(width = 12, height = 500,
@@ -864,10 +868,19 @@ tabItems(
           )
   ),
   
-  tabItem(tabName= "update", 
+  tabItem(tabName= "updatelength", 
           fluidRow(
             
             HTML('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfDIxlLuxzdsXgWtdp6YI8s_LxpFLANnSHDnk9Io5USOyKGrQ/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>')
+          )
+          
+          
+  ),
+  
+  tabItem(tabName= "updateregions", 
+          fluidRow(
+            
+            HTML('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfninZpKuf3iLCF922Ig0uoJ7m3963eXKDd9GbNG84_TKpaeA/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>')
           )
           
           

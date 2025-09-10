@@ -5,6 +5,28 @@ function(input, output, session) {
   # Increase size of files that can be uploaded
   options(shiny.maxRequestSize = 50*1024^2)
   
+  # 1) Apply URL query (?tab=...) to the active sidebar tab
+  observeEvent(session$clientData$url_search, ignoreInit = FALSE, {
+    query <- parseQueryString(session$clientData$url_search)
+    tab <- query[["tab"]]
+    if (!is.null(tab) && nzchar(tab)) {
+      updateTabItems(session, "tabs", tab)
+    }
+  })
+  
+  # 2) When the user changes tabs, reflect it in the URL
+  observeEvent(input$tabs, ignoreInit = TRUE, {
+    # Merge/replace the ?tab=... parameter without reloading the page
+    existing <- parseQueryString(session$clientData$url_search)
+    existing[["tab"]] <- input$tabs
+    qs <- paste(
+      names(existing),
+      vapply(existing, URLencode, FUN.VALUE = character(1), reserved = TRUE),
+      sep = "=", collapse = "&"
+    )
+    updateQueryString(paste0("?", qs), mode = "push")
+  })
+
   observeEvent(input$new_user, {
     req(input$new_user)
     showModal(modalDialog(
@@ -5000,14 +5022,6 @@ function(input, output, session) {
         maxn_spp_summary()
       else if(input$maxn.spp.observer == TRUE)
       maxn_spp_observer(),
-      # if(input$maxn.spp.observer == TRUE & input$maxn.observed.distinct.lh == TRUE)
-      #   maxn.species.not.observed.lh() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp")) %>% distinct(campaignid, family, genus, species)
-      # else if (input$maxn.filter.spp.lh == TRUE & input$maxn.observed.distinct.lh == FALSE)
-      #   maxn.species.not.observed.lh() %>% filter(!species%in%c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10", "spp", "sp"))
-      # else if (input$maxn.filter.spp.lh == FALSE & input$maxn.observed.distinct.lh == TRUE)
-      #   maxn.species.not.observed.lh() %>% distinct(campaignid, family, genus, species)
-      # else
-      #   maxn.species.not.observed.lh(),  
       rownames = FALSE,
       options = list(paging = FALSE, row.names = FALSE, searching = TRUE)))))
   
@@ -5020,10 +5034,64 @@ function(input, output, session) {
     
     valueBox(width = 2,
              text,
+             "Number of individuals not identified to species level ",
+             icon = icon("list"), color = "blue"
+    )
+  })
+  
+  ## SASHAS IDEA ----
+  ## ► MaxN spp - dataframe ----
+  species_that_have_spps <- reactive({
+    
+    if(input$upload %in% "EM"){
+      maxn <- maxn.clean() 
+    } else {
+      maxn <- count.clean() 
+    }
+    
+    spps_taxa <- maxn %>%
+      dplyr::filter(species %in% c("spp", "sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10")) %>%
+      dplyr::distinct(family, genus)
+    
+    all_spps <- maxn %>%
+      semi_join(spps_taxa) %>%
+      dplyr::group_by(campaignid, family, genus, species) %>%
+      dplyr::summarise(total_observered = sum(maxn)) %>%
+      glimpse()
+    
+    return(all_spps)
+    
+  })
+  
+  ## ►  MaxN spp - onclick ----
+  onclick('click.species_that_have_spps', showModal(modalDialog(
+    
+    title = "species_that_have_spps", size = "l", easyClose = TRUE,
+    # checkboxInput("maxn.spp.observer", label = "Split by Observer_count", value = FALSE),
+    renderDataTable(
+      
+      species_that_have_spps(),
+      rownames = FALSE,
+      options = list(paging = FALSE, row.names = FALSE, searching = TRUE)))))
+  
+  ## ►  MaxN spp - valuebox ----
+  output$species_that_have_spps <- renderValueBox({
+    
+    total_spps <- sum(maxn_spp()$maxn)
+    
+    text <- paste0(total_spps, " (", round((total_spps/sum(maxn.total.abundances()$total_abundance))*100), "%)")
+    
+    valueBox(width = 2,
+             text,
              "Number of spps",
              icon = icon("list"), color = "blue"
     )
   })
+  
+  
+  
+  
+  
   ## ► Spatial plot ----
   output$maxn.spatial.plot <- renderLeaflet({
     
