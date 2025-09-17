@@ -1046,10 +1046,10 @@ list (<em>TO ADD</em>).</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span></code></pre>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">synonyms_in_count</span><span class="op">)</span>, <span class="st">"synonyms used in the count data"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 12 synonyms used in the count data</span></span></code></pre>
+<pre><code><span><span class="co">## 13 synonyms used in the count data</span></span></code></pre>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">synonyms_in_count</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 12</span></span>
+<pre><code><span><span class="co">## Rows: 13</span></span>
 <span><span class="co">## Columns: 2</span></span>
 <span><span class="co">## $ `old name` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Carangidae Carangoides spp"<span style="color: #949494;">, </span>"Dasyatidae Dasyatis brevicau…</span></span>
 <span><span class="co">## $ `new name` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Carangidae Unknown spp"<span style="color: #949494;">, </span>"Dasyatidae Bathytoshia brevicaud…</span></span></code></pre>
@@ -1067,10 +1067,10 @@ list (<em>TO ADD</em>).</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(family, genus, species)`</span></span></code></pre>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">synonyms_in_length</span><span class="op">)</span>, <span class="st">"synonyms used in the length data"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 12 synonyms used in the length data</span></span></code></pre>
+<pre><code><span><span class="co">## 13 synonyms used in the length data</span></span></code></pre>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">synonyms_in_length</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 12</span></span>
+<pre><code><span><span class="co">## Rows: 13</span></span>
 <span><span class="co">## Columns: 2</span></span>
 <span><span class="co">## $ `old name` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Carangidae Carangoides spp"<span style="color: #949494;">, </span>"Dasyatidae Dasyatis brevicau…</span></span>
 <span><span class="co">## $ `new name` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Carangidae Unknown spp"<span style="color: #949494;">, </span>"Dasyatidae Bathytoshia brevicaud…</span></span></code></pre>
@@ -1137,16 +1137,16 @@ about the species flagged by this check.</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, marine_region)`</span></span></code></pre>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">count_species_not_observed_region</span><span class="op">)</span>, <span class="st">"species not observed in the region before"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 181 species not observed in the region before</span></span></code></pre>
+<pre><code><span><span class="co">## 0 species not observed in the region before</span></span></code></pre>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">count_species_not_observed_region</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 181</span></span>
+<pre><code><span><span class="co">## Rows: 0</span></span>
 <span><span class="co">## Columns: 5</span></span>
-<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS"<span style="color: #949494;">, </span>"202…</span></span>
-<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae"<span style="color: #949494;">, </span>"Carangidae"<span style="color: #949494;">, </span>"Carangida…</span></span>
-<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abalistes"<span style="color: #949494;">, </span>"Decapterus"<span style="color: #949494;">, </span>"Turrum"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "filamentosus"<span style="color: #949494;">, </span>"spp"<span style="color: #949494;">, </span>"fulvoguttatum"…</span></span>
-<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west"<span style="color: #949494;">, </span>"North-west"<span style="color: #949494;">, </span>"North-wes…</span></span></code></pre>
+<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="species-out-of-range-in-the-length-data">Species out of range in the length data<a class="anchor" aria-label="anchor" href="#species-out-of-range-in-the-length-data"></a>
@@ -1165,16 +1165,16 @@ about the species flagged by this check.</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, marine_region)`</span></span></code></pre>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span>, <span class="st">"species not observed in the region before"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 182 species not observed in the region before</span></span></code></pre>
+<pre><code><span><span class="co">## 0 species not observed in the region before</span></span></code></pre>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 182</span></span>
+<pre><code><span><span class="co">## Rows: 0</span></span>
 <span><span class="co">## Columns: 5</span></span>
-<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS"<span style="color: #949494;">, </span>"202…</span></span>
-<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Balistidae"<span style="color: #949494;">, </span>"Carangidae"<span style="color: #949494;">, </span>"Carangida…</span></span>
-<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Abalistes"<span style="color: #949494;">, </span>"Decapterus"<span style="color: #949494;">, </span>"Turrum"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "filamentosus"<span style="color: #949494;">, </span>"spp"<span style="color: #949494;">, </span>"fulvoguttatum"…</span></span>
-<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "North-west"<span style="color: #949494;">, </span>"North-west"<span style="color: #949494;">, </span>"North-wes…</span></span></code></pre>
+<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">

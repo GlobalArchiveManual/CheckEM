@@ -1047,16 +1047,16 @@ about the species flagged by this check.</p>
 <pre><code><span><span class="co">## Joining with `by = join_by(campaignid, sample, marine_region)`</span></span></code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span>, <span class="st">"species not observed in the region before"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 10 species not observed in the region before</span></span></code></pre>
+<pre><code><span><span class="co">## 0 species not observed in the region before</span></span></code></pre>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">length_species_not_observed_region</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 10</span></span>
+<pre><code><span><span class="co">## Rows: 0</span></span>
 <span><span class="co">## Columns: 5</span></span>
-<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2017-04_Marmion.MP.Monitoring_stereoD…</span></span>
-<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Labridae"<span style="color: #949494;">, </span>"Labridae"<span style="color: #949494;">, </span>"Labridae"<span style="color: #949494;">, </span>"P…</span></span>
-<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Austrolabrus"<span style="color: #949494;">, </span>"Coris"<span style="color: #949494;">, </span>"Notolabrus"<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "maculatus"<span style="color: #949494;">, </span>"auricularis"<span style="color: #949494;">, </span>"parilus"<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "South-west"<span style="color: #949494;">, </span>"South-west"<span style="color: #949494;">, </span>"South-wes…</span></span></code></pre>
+<span><span class="co">## $ campaignid                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ family                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ genus                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ species                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">## $ `marine region not observed in` <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
