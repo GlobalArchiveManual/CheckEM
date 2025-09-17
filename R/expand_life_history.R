@@ -39,7 +39,8 @@ expand_life_history <- function(dat) {
                                             marine_region == "CS" ~ "Coral Sea",
                                             marine_region == "TE"  ~ "Temperate East",
                                             marine_region == "SE" ~ "South-east",
-                                            marine_region == "SW"  ~ "South-west"
+                                            marine_region == "SW"  ~ "South-west",
+                                            .default = marine_region
     )) # Replace region codes with full names
 }
 
