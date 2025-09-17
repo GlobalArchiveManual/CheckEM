@@ -519,8 +519,8 @@ function(input, output, session) {
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")))
     }
     
-    rows.missing.metadata <- anti_join(samples, metadata.samples) %>%
-      dplyr::select(-sample)
+    rows.missing.metadata <- anti_join(samples, metadata.samples) #%>%
+      #dplyr::select(-sample)
     
     score <- round(((nrow(dat) - nrow(rows.missing.metadata))/nrow(dat))*100, 2)
     
@@ -2595,8 +2595,8 @@ function(input, output, session) {
       samples <- count_data() %>%
         distinct(campaignid, sample) %>% glimpse()
     }
-    missing.fish <- anti_join(metadata.samples, samples) %>%
-      dplyr::select(-sample)
+    missing.fish <- anti_join(metadata.samples, samples) #%>%
+      #dplyr::select(-sample)
     
     return(missing.fish)
   })
@@ -2653,8 +2653,8 @@ function(input, output, session) {
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
         distinct()
     }
-    missing.metadata <- anti_join(samples, metadata.samples) %>%
-      dplyr::select(-sample)
+    missing.metadata <- anti_join(samples, metadata.samples) #%>%
+      #dplyr::select(-sample)
   })
   
   ## ► Samples without metadata - valueBox ----
@@ -2709,8 +2709,8 @@ function(input, output, session) {
         dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period"))) %>%
         distinct()
     }
-    missing.fish <- anti_join(metadata.samples, samples) %>%
-      dplyr::select(-sample)
+    missing.fish <- anti_join(metadata.samples, samples) #%>%
+      #dplyr::select(-sample)
     
   })
   
