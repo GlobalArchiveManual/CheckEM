@@ -5,27 +5,27 @@ function(input, output, session) {
   # Increase size of files that can be uploaded
   options(shiny.maxRequestSize = 50*1024^2)
   
-  # 1) Apply URL query (?tab=...) to the active sidebar tab
-  observeEvent(session$clientData$url_search, ignoreInit = FALSE, {
-    query <- parseQueryString(session$clientData$url_search)
-    tab <- query[["tab"]]
-    if (!is.null(tab) && nzchar(tab)) {
-      updateTabItems(session, "tabs", tab)
-    }
-  })
-  
-  # 2) When the user changes tabs, reflect it in the URL
-  observeEvent(input$tabs, ignoreInit = TRUE, {
-    # Merge/replace the ?tab=... parameter without reloading the page
-    existing <- parseQueryString(session$clientData$url_search)
-    existing[["tab"]] <- input$tabs
-    qs <- paste(
-      names(existing),
-      vapply(existing, URLencode, FUN.VALUE = character(1), reserved = TRUE),
-      sep = "=", collapse = "&"
-    )
-    updateQueryString(paste0("?", qs), mode = "push")
-  })
+  # # 1) Apply URL query (?tab=...) to the active sidebar tab
+  # observeEvent(session$clientData$url_search, ignoreInit = FALSE, {
+  #   query <- parseQueryString(session$clientData$url_search)
+  #   tab <- query[["tab"]]
+  #   if (!is.null(tab) && nzchar(tab)) {
+  #     updateTabItems(session, "tabs", tab)
+  #   }
+  # })
+  # 
+  # # 2) When the user changes tabs, reflect it in the URL
+  # observeEvent(input$tabs, ignoreInit = TRUE, {
+  #   # Merge/replace the ?tab=... parameter without reloading the page
+  #   existing <- parseQueryString(session$clientData$url_search)
+  #   existing[["tab"]] <- input$tabs
+  #   qs <- paste(
+  #     names(existing),
+  #     vapply(existing, URLencode, FUN.VALUE = character(1), reserved = TRUE),
+  #     sep = "=", collapse = "&"
+  #   )
+  #   updateQueryString(paste0("?", qs), mode = "push")
+  # })
 
   observeEvent(input$new_user, {
     req(input$new_user)
