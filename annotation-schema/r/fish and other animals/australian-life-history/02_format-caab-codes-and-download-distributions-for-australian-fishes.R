@@ -293,8 +293,18 @@ caab_combined <- caab_with_regions %>%
   dplyr::select(-c(new_aus_region, new_imcra_region)) %>%
   dplyr::filter(!caab_code %in% c(NA)) %>%
   
-  dplyr::filter(!caab_code %in% c("37337902", "37337910", "37018901", "37280000", "37384000", 
-                                  "37385000", "37268900", "37096000", "37287901", "37311910")) %>%
+  dplyr::filter(!caab_code %in% c("37337902", 
+                                  "37337910", 
+                                  # "37018901",  # TODO see if this breaks with 37018915
+                                  "37018915",
+                                  "37280000", 
+                                  "37384000", 
+                                  "37385000", 
+                                  "37268900", 
+                                  "37096000", 
+                                  "37287901", 
+                                  #"37311910",
+                                  "37311954")) %>%
   
   # temporary fixes to remove duplicate caabs
   dplyr::filter(!(caab_code %in% "37004001" & is.na(common_name))) %>%

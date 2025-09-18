@@ -452,9 +452,14 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(common_name = str_replace_all(.$common_name, "\\[|\\]", "")) %>%
   dplyr::filter(!is.na(species)) %>%
   clean_names() %>%
-  dplyr::filter(!caab_code %in% c("37246020Taxasupercededby37246019", "37118006", 
-                                  "37441924", "37311954", "37287949", "37096000", 
-                                  "37018915", "37337902")) %>%
+  dplyr::filter(!caab_code %in% c("37246020Taxasupercededby37246019", 
+                                  "37118006", 
+                                  "37441924", 
+                                  # "37311954",  # Serranidae spp
+                                  "37287949", 
+                                  "37096000", 
+                                  # "37018915", # Carcharhinidae spp
+                                  "37337902")) %>%
   distinct() %>%
   glimpse()
 
@@ -872,13 +877,13 @@ number.with.distributions <- australia_life_history %>%
   filter(!is.na(marine_region))
 
 nrow(number.with.distributions)/nrow(australia_life_history) * 100 
-# 49.97855% with distribution info available from worms package
+# 49.98008% with distribution info available from worms package
 
 number.with.distributions <- australia_life_history %>% 
   filter(!is.na(imcra_region))
 
 nrow(number.with.distributions)/nrow(australia_life_history) * 100 
-# 50.44736% with distribution info available from worms package
+# 50.44888% with distribution info available from worms package
 
 ################# TESTING ADDING AFD MARINE REGIONS
 expanded <- australia_life_history %>%
@@ -917,7 +922,8 @@ additional_afd_imcra_regions <- anti_join(afd_extra_imcra, expanded) %>%
 australia_life_history <- dplyr::left_join(australia_life_history, additional_afd_imcra_regions) %>%
   mutate(imcra_region = if_else(is.na(imcra_region), region_to_add, paste(imcra_region, region_to_add, sep = ", "))) %>%
   dplyr::select(-region_to_add) %>%
-  dplyr::mutate(imcra_region = str_replace_all(imcra_region, "\\, NA", ""))
+  dplyr::mutate(imcra_region = str_replace_all(imcra_region, "\\, NA", "")) %>%
+  distinct()
 
 ################
 number.with.distributions <- australia_life_history %>% 

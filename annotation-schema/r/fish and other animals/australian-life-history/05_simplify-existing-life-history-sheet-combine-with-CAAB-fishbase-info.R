@@ -322,7 +322,14 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
   dplyr::mutate(common_name = str_replace_all(.$common_name, "\\[|\\]", "")) %>%
   dplyr::filter(!is.na(species)) %>%
   clean_names() %>%
-  dplyr::filter(!caab_code %in% c("37246020Taxasupercededby37246019", "37118006", "37441924", "37311954", "37287949", "37096000", "37018915", "37337902")) %>%
+  dplyr::filter(!caab_code %in% c("37246020Taxasupercededby37246019", 
+                                  "37118006", 
+                                  "37441924", 
+                                  "37311954", 
+                                  "37287949", 
+                                  "37096000", 
+                                  "37018915", # TODO figure out why I filtered this out, this is Carcharhinidae spp
+                                  "37337902")) %>%
   distinct()
 
 test <- caab_combined %>%
