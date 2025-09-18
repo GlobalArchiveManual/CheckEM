@@ -456,7 +456,7 @@ caab_combined <- full_join(caab_regions, caab_scraped) %>%
                                   "37118006", 
                                   "37441924", 
                                   # "37311954",  # Serranidae spp
-                                  "37287949", 
+                                  # "37287949",  # Sebastidae
                                   "37096000", 
                                   # "37018915", # Carcharhinidae spp
                                   "37337902")) %>%
@@ -999,6 +999,11 @@ test <- australia_life_history %>%
 
 test <- australia_life_history %>%
   dplyr::group_by(genus, species) %>%
+  dplyr::summarise(n = n()) %>%
+  dplyr::filter(n > 1)
+
+test <- australia_life_history %>%
+  dplyr::group_by(caab_code) %>%
   dplyr::summarise(n = n()) %>%
   dplyr::filter(n > 1)
 
