@@ -65,7 +65,9 @@ Macroalgae	Large canopy-forming	Ecklonia radiata
 Macroalgae	Large canopy-forming	Scytothalia dorycarpa
 Macroalgae	Large canopy-forming	Phyllospora spp
 Macroalgae	Large canopy-forming	Sargassum spp
+Macroalgae	Large canopy-forming	Phyllospora comosa
 Macroalgae	Sheet-like / membraneous	
+Macroalgae	Turfing	
 Macroalgae		
 Molluscs	Bivalves	
 Molluscs	Cephalopods	
@@ -73,14 +75,14 @@ Molluscs	Chitons
 Molluscs	Gastropods	
 Molluscs		
 Sea spiders		
-Seagrasses	Elliptical leaves	Halophila spp
 Seagrasses	Elliptical leaves	
+Seagrasses	Elliptical leaves	Halophila spp
+Seagrasses	Strap-like leaves	
 Seagrasses	Strap-like leaves	Amphibolis spp
 Seagrasses	Strap-like leaves	Posidonia spp
 Seagrasses	Strap-like leaves	Zostera spp
 Seagrasses	Strap-like leaves	Ruppia spp
 Seagrasses	Strap-like leaves	Thalassodendron spp
-Seagrasses	Strap-like leaves	
 Seagrasses		
 Sessile invertebrates		
 Sponges	Crusts	
@@ -88,8 +90,8 @@ Sponges	Cup-likes
 Sponges	Erect forms	
 Sponges	Massive forms	
 Sponges		
-Unscorable		
 Unscorable	Reef	
+Unscorable		
 Worms	Acorn worms	
 Worms	Echiura	
 Worms	Flatworms	

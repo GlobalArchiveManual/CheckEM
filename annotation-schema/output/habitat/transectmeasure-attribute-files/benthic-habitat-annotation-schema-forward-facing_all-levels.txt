@@ -425,6 +425,11 @@ Macroalgae	Large canopy-forming	Brown		Sargassum spp	Drift
 Macroalgae	Large canopy-forming	Brown		Sargassum spp	No epiphytes
 Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes algae
 Macroalgae	Large canopy-forming	Brown		Sargassum spp	Epiphytes other
+Macroalgae	Large canopy-forming	Brown		Phyllospora comosa	
+Macroalgae	Large canopy-forming	Brown		Phyllospora comosa	Drift
+Macroalgae	Large canopy-forming	Brown		Phyllospora comosa	No epiphytes
+Macroalgae	Large canopy-forming	Brown		Phyllospora comosa	Epiphytes algae
+Macroalgae	Large canopy-forming	Brown		Phyllospora comosa	Epiphytes other
 Macroalgae	Large canopy-forming				
 Macroalgae	Large canopy-forming				Drift
 Macroalgae	Large canopy-forming				No epiphytes
@@ -450,6 +455,11 @@ Macroalgae	Sheet-like / membraneous				Drift
 Macroalgae	Sheet-like / membraneous				No epiphytes
 Macroalgae	Sheet-like / membraneous				Epiphytes algae
 Macroalgae	Sheet-like / membraneous				Epiphytes other
+Macroalgae	Turfing				
+Macroalgae	Turfing				Drift
+Macroalgae	Turfing				No epiphytes
+Macroalgae	Turfing				Epiphytes algae
+Macroalgae	Turfing				Epiphytes other
 Macroalgae					
 Molluscs	Bivalves				
 Molluscs	Cephalopods	Cuttlefish			
@@ -460,14 +470,18 @@ Molluscs	Chitons
 Molluscs	Gastropods				
 Molluscs					
 Sea spiders					
-Seagrasses	Elliptical leaves			Halophila spp	
-Seagrasses	Elliptical leaves			Halophila spp	No epiphytes
-Seagrasses	Elliptical leaves			Halophila spp	Epiphytes algae
-Seagrasses	Elliptical leaves			Halophila spp	Epiphytes other
 Seagrasses	Elliptical leaves				
 Seagrasses	Elliptical leaves				No epiphytes
 Seagrasses	Elliptical leaves				Epiphytes algae
 Seagrasses	Elliptical leaves				Epiphytes other
+Seagrasses	Elliptical leaves			Halophila spp	
+Seagrasses	Elliptical leaves			Halophila spp	No epiphytes
+Seagrasses	Elliptical leaves			Halophila spp	Epiphytes algae
+Seagrasses	Elliptical leaves			Halophila spp	Epiphytes other
+Seagrasses	Strap-like leaves				
+Seagrasses	Strap-like leaves				No epiphytes
+Seagrasses	Strap-like leaves				Epiphytes algae
+Seagrasses	Strap-like leaves				Epiphytes other
 Seagrasses	Strap-like leaves			Amphibolis spp	
 Seagrasses	Strap-like leaves			Amphibolis spp	No epiphytes
 Seagrasses	Strap-like leaves			Amphibolis spp	Epiphytes algae
@@ -488,10 +502,6 @@ Seagrasses	Strap-like leaves			Thalassodendron spp
 Seagrasses	Strap-like leaves			Thalassodendron spp	No epiphytes
 Seagrasses	Strap-like leaves			Thalassodendron spp	Epiphytes algae
 Seagrasses	Strap-like leaves			Thalassodendron spp	Epiphytes other
-Seagrasses	Strap-like leaves				
-Seagrasses	Strap-like leaves				No epiphytes
-Seagrasses	Strap-like leaves				Epiphytes algae
-Seagrasses	Strap-like leaves				Epiphytes other
 Seagrasses					
 Seagrasses					No epiphytes
 Seagrasses					Epiphytes algae
@@ -519,8 +529,8 @@ Sponges	Massive forms	Cryptic
 Sponges	Massive forms	Simple			
 Sponges	Massive forms				
 Sponges					
-Unscorable					
 Unscorable	Reef				
+Unscorable					
 Worms	Acorn worms				
 Worms	Echiura				
 Worms	Flatworms				
