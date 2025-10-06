@@ -133,7 +133,7 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
         dplyr::summarise(count = sum(count)) %>%
         dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) %>%
         dplyr::select(campaignid, sample, scientific_name, count) %>%
-        dplyr::full_join(count_metadata, by = "sample_url") %>%
+        dplyr::full_join(count_metadata) %>%
         dplyr::filter(successful_count == TRUE) 
       
       # Filter metadata for successful lengths
@@ -152,7 +152,7 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
         tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
         tidyr::replace_na(list(count = 0)) %>%
         dplyr::mutate(length_mm = as.numeric(length_mm)) %>%
-        dplyr::full_join(length_metadata, by = "sample_url") %>%
+        dplyr::full_join(length_metadata) %>%
         dplyr::filter(!is.na(count)) %>%
         dplyr::filter(successful_length == TRUE) %>%
         dplyr::glimpse()
