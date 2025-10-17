@@ -115,13 +115,13 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
       }
     }
     
-    save_with_prefix(metadata, "metadata", dir, file_prefix)
-    save_with_prefix(count, "count", dir, file_prefix)
-    save_with_prefix(length, "length", dir, file_prefix)
-    save_with_prefix(benthos, "benthos_raw", dir, file_prefix)
-    save_with_prefix(benthos_summarised, "benthos_summarised", dir, file_prefix)
-    save_with_prefix(relief, "relief_raw", dir, file_prefix)
-    save_with_prefix(relief_summarised, "relief_summarised", dir, file_prefix)
+    if (nrow(metadata) > 0)  {save_with_prefix(metadata, "metadata", dir, file_prefix)}
+    if (nrow(count) > 0)  {save_with_prefix(count, "count", dir, file_prefix)}
+    if (nrow(length) > 0)  {save_with_prefix(length, "length", dir, file_prefix)}
+   if (nrow(benthos) > 0)  { save_with_prefix(benthos, "benthos_raw", dir, file_prefix)}
+    if (nrow(benthos) > 0)  {save_with_prefix(benthos_summarised, "benthos_summarised", dir, file_prefix)}
+    if (nrow(relief) > 0)  {save_with_prefix(relief, "relief_raw", dir, file_prefix)}
+    if (nrow(relief) > 0)  {save_with_prefix(relief_summarised, "relief_summarised", dir, file_prefix)}
     
     # Only complete the data is include_zeros == TRUE
     if (include_zeros) {
