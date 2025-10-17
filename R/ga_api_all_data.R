@@ -54,7 +54,8 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
     
     relief <- ga_api_relief(synthesis_id = synthesis_id, token = token) %>%
       dplyr::semi_join(metadata, by = "sample_url")
-    
+
+    if (nrow(benthos   > 0)) {
     benthos_summarised <- benthos %>%
       dplyr::mutate(habitat = case_when(level_2 %in% "Macroalgae" ~ level_2, 
                                         level_2 %in% "Seagrasses" ~ level_2, 
@@ -81,7 +82,11 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
         .fns = ~ .x / total_points_annotated,
         .names = "{.col}_percent"
       ))
+
+      assign("benthos_summarised", benthos_summarised, envir = .GlobalEnv)
+      }
     
+      if (nrow(relief   > 0)) {
     relief_summarised <- relief %>%
       uncount(count) %>%
       group_by(sample_url) %>%
@@ -89,14 +94,17 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
       ungroup() %>%
       dplyr::left_join(samples) %>%
       dplyr::select(sample_url, campaignid, sample, everything())
+
+        assign("relief_summarised", relief_summarised, envir = .GlobalEnv)
+        }
     
     if (nrow(metadata) > 0)  {assign("metadata", metadata, envir = .GlobalEnv)}
     if (nrow(count     > 0)) {assign("count", count, envir = .GlobalEnv)}
     if (nrow(length    > 0)) {assign("length", length, envir = .GlobalEnv)}
     if (nrow(benthos   > 0)) {assign("benthos_raw", benthos, envir = .GlobalEnv)}
     if (nrow(relief    > 0)) {assign("relief_raw", relief, envir = .GlobalEnv)}
-    if (nrow(benthos_summarised > 0)) {assign("benthos_summarised", benthos_summarised, envir = .GlobalEnv)}
-    if (nrow(relief_summarised) > 0)  {assign("relief_summarised", relief_summarised, envir = .GlobalEnv)}
+   # if (nrow(benthos_summarised > 0)) {assign("benthos_summarised", benthos_summarised, envir = .GlobalEnv)}
+   # if (nrow(relief_summarised) > 0)  {assign("relief_summarised", relief_summarised, envir = .GlobalEnv)}
     
     # Save processed data as RDS files
     
