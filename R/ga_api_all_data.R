@@ -139,8 +139,9 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
         tidyr::replace_na(list(count = 0)) %>%
         dplyr::group_by(campaignid, sample, family, genus, species) %>%
         dplyr::summarise(count = sum(count)) %>%
+      dplyr::ungroup() %>%
         dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) %>%
-        dplyr::select(campaignid, sample, scientific_name, count) %>%
+        dplyr::select(campaignid, sample, scientific_name, family, genus, species, count) %>%
         dplyr::full_join(count_metadata) %>%
         dplyr::filter(successful_count == TRUE) 
       
