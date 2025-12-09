@@ -52,6 +52,11 @@ ga_api_metadata <- function(token, synthesis_id) {
       dplyr::mutate(coordinates = str_replace_all(.$coordinates, c("SRID=4326;POINT" = "", "[()]" = ""))) %>%
       tidyr::separate(coordinates, into = c("longitude_dd", "latitude_dd"), sep = " ") %>%
       dplyr::mutate(latitude_dd = as.numeric(latitude_dd), longitude_dd = as.numeric(longitude_dd)) %>%
+      dplyr::mutate(sample = case_when(
+        period %in% "nan" ~ opcode,
+        opcode %in% "nan" ~ period,
+        .default = paste(opcode, period, sep = "_")
+      )) %>%
       dplyr::rename(sample_url = url) %>%
       dplyr::select(-c(row))
     
