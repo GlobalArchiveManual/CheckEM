@@ -1,0 +1,340 @@
+# Checking habitat data exported from TransectMeasure
+
+This script documents the necessary steps to take raw data exported from
+TransectMeasure, check for any errors in the annotation and format it
+into tidy data. You are required to also have a GlobalArchive format
+metadata file “\*\_Metadata.csv”.
+
+## R set up
+
+Load the necessary libraries.
+
+``` r
+# install.packages('remotes')
+library('remotes')
+options(timeout=9999999)
+# remotes::install_github("GlobalArchiveManual/CheckEM")
+library(CheckEM)
+library(tidyverse)
+library(ggplot2)
+library(ggbeeswarm)
+library(leaflet)
+library(leaflet.minicharts)
+library(RColorBrewer)
+library(here)
+library(tidyverse)
+```
+
+Set the study name.
+
+``` r
+name <- "example-bruv-workflow"
+```
+
+## Read in the data
+
+Load and format the metadata.
+
+``` r
+metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
+    dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
+  glimpse()
+```
+
+    ## reading metadata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2022-05_PtCloates_stereo-BRUVS_metadata.csv
+
+    ## reading metadata file: /home/runner/work/CheckEM/CheckEM/r-workflows/data/raw//2023-03_SwC_stereo-BRUVs_Metadata.csv
+
+    ## Rows: 94
+    ## Columns: 12
+    ## $ campaignid                  <chr> "2022-05_PtCloates_stereo-BRUVS", "2022-05…
+    ## $ sample                      <chr> "1", "2", "3", "4", "5", "6", "7", "8", "9…
+    ## $ longitude_dd                <chr> "113.5447", "113.5628", "113.5515", "113.5…
+    ## $ latitude_dd                 <chr> "-22.7221", "-22.6957", "-22.7379", "-22.7…
+    ## $ date_time                   <chr> "2022-05-22T10:03:24+08:00", "2022-05-22T1…
+    ## $ location                    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ site                        <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ depth_m                     <chr> "93.9", "77.3", "78.3", "73.9", "81.9", "7…
+    ## $ successful_count            <chr> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …
+    ## $ successful_length           <chr> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …
+    ## $ successful_habitat_forward  <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ successful_habitat_backward <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+
+Save the metadata as an R data file (this creates a lighter file than
+saving as a .csv or similar).
+
+``` r
+saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_metadata.rds")))
+```
+
+Read in the points data exported from Transect Measure, and then filter
+this into 2 dataframes for relief and habitat annotations.
+
+``` r
+points <- read_TM(here::here("r-workflows/data/raw/"),
+                               sample = "opcode")
+```
+
+Filter the data to only include habitat annotations.
+
+``` r
+habitat <- points %>%
+  dplyr::filter(relief_annotated %in% "no") %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
+  glimpse()
+```
+
+    ## Rows: 1,241
+    ## Columns: 7
+    ## $ campaignid <chr> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "20…
+    ## $ sample     <chr> "10", "10", "10", "10", "10", "10", "10", "10", "10", "10",…
+    ## $ level_2    <chr> "Macroalgae", "Seagrasses", "Substrate", "Macroalgae", "Mac…
+    ## $ level_3    <chr> "Filamentous / filiform", "Strap-like leaves", "Unconsolida…
+    ## $ level_4    <chr> "Red", NA, "Sand / mud (<2mm)", "Red", "Red", NA, NA, "Brow…
+    ## $ level_5    <chr> NA, NA, "Coarse sand (with shell fragments)", NA, NA, NA, N…
+    ## $ scientific <chr> NA, "Thalassodendron spp", NA, NA, NA, "Thalassodendron spp…
+
+Filter the data to only include relief annotations.
+
+``` r
+relief <- points %>%
+  dplyr::filter(relief_annotated %in% "yes") %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
+  glimpse()
+```
+
+    ## Rows: 1,242
+    ## Columns: 7
+    ## $ campaignid <chr> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "20…
+    ## $ sample     <chr> "10", "10", "10", "10", "10", "10", "10", "10", "10", "10",…
+    ## $ level_2    <chr> NA, "Relief", "Relief", "Relief", NA, "Relief", "Relief", "…
+    ## $ level_3    <chr> NA, "High", "High", "High", NA, "High", "Low / moderate", "…
+    ## $ level_4    <chr> NA, "High (>3m)", "High (>3m)", "High (>3m)", NA, "High (>3…
+    ## $ level_5    <chr> NA, "3", "3", "3", NA, "3", "2", "3", NA, "3", "2", "2", NA…
+    ## $ scientific <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+
+## Check the data for a variety of errors
+
+Set the number of expected annotations to check against.
+
+``` r
+num.points <- 20
+```
+
+Check if there are habitat annotations with an unexpected number of
+annotation points.
+
+``` r
+wrong.points.habitat <- habitat %>%
+  group_by(campaignid, sample) %>%
+  summarise(points.annotated = n()) %>%
+  left_join(metadata) %>%
+  dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ num.points * 2, successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::filter(!points.annotated == expected) %>%
+  glimpse()
+```
+
+    ## `summarise()` has grouped output by 'campaignid'. You can override using the
+    ## `.groups` argument.
+    ## Joining with `by = join_by(campaignid, sample)`
+
+    ## Rows: 5
+    ## Columns: 14
+    ## Groups: campaignid [1]
+    ## $ campaignid                  <chr> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…
+    ## $ sample                      <chr> "21", "3", "37", "45", "47"
+    ## $ points.annotated            <int> 20, 41, 20, 20, 20
+    ## $ longitude_dd                <chr> "114.857485", "114.9156417", "114.9235817"…
+    ## $ latitude_dd                 <chr> "-34.06438333", "-34.10734167", "-34.10853…
+    ## $ date_time                   <chr> "18/03/2023 2:34", "15/03/2023 1:54", "15/…
+    ## $ location                    <chr> NA, NA, NA, NA, NA
+    ## $ site                        <chr> NA, NA, NA, NA, NA
+    ## $ depth_m                     <chr> "42.3", "46.7", "46.1", "61.9", "73"
+    ## $ successful_count            <chr> "Yes", "Yes", "Yes", "Yes", "Yes"
+    ## $ successful_length           <chr> "Yes", "Yes", "Yes", "Yes", "Yes"
+    ## $ successful_habitat_forward  <chr> "Yes", "Yes", "Yes", "Yes", "Yes"
+    ## $ successful_habitat_backward <chr> "Yes", "Yes", "Yes", "Yes", "Yes"
+    ## $ expected                    <dbl> 40, 40, 40, 40, 40
+
+Check if there are habitat annotations with an unexpected number of
+annotation points.
+
+``` r
+wrong.points.relief <- relief %>%
+  group_by(campaignid, sample) %>%
+  summarise(points.annotated = n()) %>%
+  left_join(metadata) %>%
+  dplyr::mutate(expected = case_when(successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "Yes" ~ num.points * 2, successful_habitat_forward %in% "Yes" & successful_habitat_backward %in% "No" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "Yes" ~ num.points * 1, successful_habitat_forward %in% "No" & successful_habitat_backward %in% "No" ~ num.points * 0)) %>%
+  dplyr::filter(!points.annotated == expected) %>%
+  glimpse()
+```
+
+    ## `summarise()` has grouped output by 'campaignid'. You can override using the
+    ## `.groups` argument.
+    ## Joining with `by = join_by(campaignid, sample)`
+
+    ## Rows: 4
+    ## Columns: 14
+    ## Groups: campaignid [1]
+    ## $ campaignid                  <chr> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_s…
+    ## $ sample                      <chr> "17", "21", "23", "47"
+    ## $ points.annotated            <int> 41, 20, 41, 20
+    ## $ longitude_dd                <chr> "114.85758", "114.857485", "114.9189517", …
+    ## $ latitude_dd                 <chr> "-34.09634667", "-34.06438333", "-34.12832…
+    ## $ date_time                   <chr> "15/03/2023 3:00", "18/03/2023 2:34", "15/…
+    ## $ location                    <chr> NA, NA, NA, NA
+    ## $ site                        <chr> NA, NA, NA, NA
+    ## $ depth_m                     <chr> "43.3", "42.3", "41", "73"
+    ## $ successful_count            <chr> "Yes", "Yes", "Yes", "Yes"
+    ## $ successful_length           <chr> "Yes", "Yes", "Yes", "Yes"
+    ## $ successful_habitat_forward  <chr> "Yes", "Yes", "Yes", "Yes"
+    ## $ successful_habitat_backward <chr> "Yes", "Yes", "Yes", "Yes"
+    ## $ expected                    <dbl> 40, 40, 40, 40
+
+Check to see if there are any samples in habitat that don’t have a match
+in the metadata.
+
+``` r
+habitat.missing.metadata <- anti_join(habitat, metadata, by = c("campaignid", "sample")) %>%
+  glimpse()
+```
+
+    ## Rows: 40
+    ## Columns: 7
+    ## $ campaignid <chr> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "20…
+    ## $ sample     <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ level_2    <chr> "Substrate", "Substrate", "Substrate", "Substrate", "Substr…
+    ## $ level_3    <chr> "Unconsolidated (soft)", "Unconsolidated (soft)", "Unconsol…
+    ## $ level_4    <chr> "Sand / mud (<2mm)", "Sand / mud (<2mm)", "Sand / mud (<2mm…
+    ## $ level_5    <chr> "Coarse sand (with shell fragments)", "Coarse sand (with sh…
+    ## $ scientific <chr> NA, NA, NA, NA, NA, NA, NA, NA, "Thalassodendron spp", NA, …
+
+Check to see if there are any samples in the metadata that don’t have
+matching habitat.
+
+``` r
+metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "sample")) %>%
+  glimpse()
+```
+
+    ## Rows: 62
+    ## Columns: 12
+    ## $ campaignid                  <chr> "2022-05_PtCloates_stereo-BRUVS", "2022-05…
+    ## $ sample                      <chr> "1", "2", "3", "4", "5", "6", "7", "8", "9…
+    ## $ longitude_dd                <chr> "113.5447", "113.5628", "113.5515", "113.5…
+    ## $ latitude_dd                 <chr> "-22.7221", "-22.6957", "-22.7379", "-22.7…
+    ## $ date_time                   <chr> "2022-05-22T10:03:24+08:00", "2022-05-22T1…
+    ## $ location                    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ site                        <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ depth_m                     <chr> "93.9", "77.3", "78.3", "73.9", "81.9", "7…
+    ## $ successful_count            <chr> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …
+    ## $ successful_length           <chr> "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …
+    ## $ successful_habitat_forward  <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ successful_habitat_backward <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+
+## Format and save the final tidy dataset
+
+Make a vector of columns included in the schema file to ensure proper
+joining with your tidy habitat dataset.
+
+``` r
+catami_cols <- c("level_1" = NA,
+                 "level_2" = NA,
+                 "level_3" = NA,
+                 "level_4" = NA,
+                 "level_5" = NA,
+                 "level_6" = NA,
+                 "level_7" = NA,
+                 "level_8" = NA,
+                 "family" = NA,
+                 "genus" = NA,
+                 "species" = NA)
+```
+
+Tidy the habitat data by joining with the complete schema file that is
+loaded with the CheckEM package.
+
+``` r
+tidy.habitat <- habitat %>%
+  dplyr::mutate(count = 1) %>% 
+  add_column(!!!catami_cols[!names(catami_cols) %in% names(.)]) %>%
+  left_join(catami) %>%
+  dplyr::select(campaignid, sample, count, starts_with("level"), family, genus, species) %>%
+  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%  
+  group_by(campaignid, sample, across(starts_with("level")), family, genus, species) %>%
+  dplyr::summarise(count = sum(count)) %>%
+  ungroup() %>%                                                     
+  dplyr::select(campaignid, sample, level_1, everything()) %>%
+  glimpse()
+```
+
+    ## Joining with `by = join_by(level_2, level_3, level_4, level_5, level_1,
+    ## level_6, level_7, level_8, family, genus, species)`
+    ## `summarise()` has grouped output by 'campaignid', 'sample', 'level_2',
+    ## 'level_3', 'level_4', 'level_5', 'level_1', 'level_6', 'level_7', 'level_8',
+    ## 'family', 'genus'. You can override using the `.groups` argument.
+
+    ## Rows: 233
+    ## Columns: 14
+    ## $ campaignid <chr> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "20…
+    ## $ sample     <chr> "10", "10", "10", "10", "10", "10", "10", "10", "12", "12",…
+    ## $ level_1    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ level_2    <chr> "Macroalgae", "Macroalgae", "Macroalgae", "Macroalgae", "Se…
+    ## $ level_3    <chr> "Erect coarse branching", "Erect coarse branching", "Erect …
+    ## $ level_4    <chr> "Brown", "Red", "Red", "Red", NA, "Laminar", "Simple", "San…
+    ## $ level_5    <chr> NA, NA, NA, NA, NA, NA, NA, "Coarse sand (with shell fragme…
+    ## $ level_6    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ level_7    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ level_8    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ family     <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ genus      <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ species    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ count      <dbl> 2, 3, 2, 1, 14, 1, 1, 3, 5, 8, 1, 2, 3, 3, 7, 2, 1, 1, 3, 1…
+
+Save the tidy habitat data as an R data file.
+
+``` r
+saveRDS(tidy.habitat, file = here::here(paste0("r-workflows/data/staging/", name, "_habitat.rds")))
+```
+
+Tidy the relief data by joining with the complete schema file that is
+loaded with the CheckEM package.
+
+``` r
+tidy.relief <- relief %>%
+  dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
+  dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%              
+  dplyr::mutate(count = 1) %>%
+  add_column(!!!catami_cols[!names(catami_cols) %in% names(.)]) %>%
+  left_join(catami) %>%
+  group_by(campaignid, sample, across(starts_with("level"))) %>% 
+  dplyr::summarise(count = sum(count)) %>%
+  ungroup() %>%                                                     
+  glimpse()                                    
+```
+
+    ## Joining with `by = join_by(level_2, level_3, level_4, level_5, level_1,
+    ## level_6, level_7, level_8, family, genus, species)`
+    ## `summarise()` has grouped output by 'campaignid', 'sample', 'level_2',
+    ## 'level_3', 'level_4', 'level_5', 'level_1', 'level_6', 'level_7'. You can
+    ## override using the `.groups` argument.
+
+    ## Rows: 73
+    ## Columns: 11
+    ## $ campaignid <chr> "2023-03_SwC_stereo-BRUVs", "2023-03_SwC_stereo-BRUVs", "20…
+    ## $ sample     <chr> "10", "10", "10", "12", "12", "14", "14", "14", "15", "15",…
+    ## $ level_2    <chr> "Relief", "Relief", "Relief", "Relief", "Relief", "Relief",…
+    ## $ level_3    <chr> "High", "High", "Low / moderate", "High", "Low / moderate",…
+    ## $ level_4    <chr> "High (>3m)", "Wall", "Moderate (1-3m)", "High (>3m)", "Mod…
+    ## $ level_5    <chr> "3", "4", "2", "3", "2", "3", "1", "2", "3", "4", "1", "2",…
+    ## $ level_1    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ level_6    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ level_7    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ level_8    <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ count      <dbl> 8, 10, 5, 17, 4, 14, 3, 8, 16, 1, 4, 6, 20, 2, 13, 6, 14, 1…
+
+Save the tidy relief data as an R data file.
+
+``` r
+saveRDS(tidy.relief, file = here::here(paste0("r-workflows/data/staging/", name, "_relief.rds")))
+```
