@@ -58,8 +58,14 @@ ga_api_count <- function(token, synthesis_id, include_life_history = TRUE) {
     count <- arrow::read_feather(raw_connection) %>%
       dplyr::mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
       dplyr::left_join(., species_list, by = "subject") %>%
-      dplyr::rename(sample_url = sample) %>%
-      dplyr::select(-c(subject, row))
+      dplyr::rename(sample_url = url) %>%
+      dplyr::mutate(sample = case_when(
+        period %in% "nan" ~ opcode,
+        opcode %in% "nan" ~ period,
+        .default = paste(opcode, period, sep = "_")
+      )) %>%
+      dplyr::select(-c(subject, row)) %>%
+      glimpse()
     
     cat("Request succeeded.\n")
     return(count)
