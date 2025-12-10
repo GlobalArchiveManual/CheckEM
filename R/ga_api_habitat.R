@@ -42,18 +42,18 @@ ga_api_habitat <- function(token, synthesis_id) {
     
     # Read the Feather file from the input stream
     habitat <- arrow::read_feather(raw_connection) %>%
-      dplyr::rename(sample_url = url) %>%
-      dplyr::mutate(sample = case_when(
-        period %in% "nan" ~ opcode,
-        opcode %in% "nan" ~ period,
-        .default = paste(opcode, period, sep = "_")
-      )) %>%
+      dplyr::rename(sample_url = sample) %>%
+      # dplyr::mutate(sample = case_when(
+      #   period %in% "nan" ~ opcode,
+      #   opcode %in% "nan" ~ period,
+      #   .default = paste(opcode, period, sep = "_")
+      # )) %>%
       dplyr::mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianBenthicBiotaAndSubstrateSubject")) %>%
       dplyr::select(-c(row)) %>%
       dplyr::left_join(., species_list, by = "subject") %>%
       dplyr::select(-c(subject))
     
-    cat("Request succeeded.\n")
+    cat("Request succeeded: Benthos count.\n")
     return(habitat)
     
   } else if (status_code(response) == 400) {

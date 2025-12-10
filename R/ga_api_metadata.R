@@ -66,7 +66,7 @@ ga_api_metadata <- function(token, synthesis_id) {
   } 
   
   if (status_code(response) == 200) {
-    cat("Request succeeded.\n")
+    cat("Request succeeded: Sample Metadata.\n")
     return(metadata)
     
   } else if (status_code(response) == 400) {

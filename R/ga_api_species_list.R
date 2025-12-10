@@ -56,7 +56,7 @@ ga_api_species_list <- function(token) {
     
     names(species_list)
     
-    cat("Request succeeded.\n")
+    cat("Request succeeded: Species list.\n")
     return(species_list)
     
   } 

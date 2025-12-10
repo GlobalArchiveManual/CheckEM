@@ -66,15 +66,15 @@ ga_api_length <- function(token, synthesis_id, include_life_history = TRUE) {
     length <- arrow::read_feather(raw_connection) %>%
       dplyr::mutate(subject = str_replace_all(.$subject, "AnnotationSubject", "AustralianAquaticFaunaSubject")) %>%
       dplyr::left_join(., species_list, by = "subject") %>%
-      dplyr::rename(sample_url = url) %>%
-      dplyr::mutate(sample = case_when(
-        period %in% "nan" ~ opcode,
-        opcode %in% "nan" ~ period,
-        .default = paste(opcode, period, sep = "_")
-      )) %>%
+      dplyr::rename(sample_url = sample) %>%
+      # dplyr::mutate(sample = case_when(
+      #   period %in% "nan" ~ opcode,
+      #   opcode %in% "nan" ~ period,
+      #   .default = paste(opcode, period, sep = "_")
+      # )) %>%
       dplyr::select(-c(subject, row))
     
-    cat("Request succeeded.\n")
+    cat("Request succeeded: Length data.\n")
     return(length)
     
   } 
