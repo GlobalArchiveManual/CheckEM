@@ -233,24 +233,20 @@ marineparks.single <- marineparks.single %>%
   dplyr::mutate(IUCN = fct_relevel(IUCN, iucn_levels))
 #filter(!is.na(zone)) # TODO work out if I should be doing this or not. I think probably not
 
-
-
 unique(marineparks.single$NAME) %>% sort()
 
 comm.pal <- 
   leaflet::colorFactor(palette = c("#F7C0D8", "#7BBC63", "#FDBA33", "#FFF8A3", "#6DAFE0", "#447191", "#B9E6FB", "#828282"), 
                        levels = c("Sanctuary", "Marine National Park", "Recreational Use", "Habitat Protection", "Special Purpose", "Multiple Use", "General Use"))
 
-
-
 # Testing Global Marine parks ----
-# takes a while to read in ----
-# world_marineparks_raw <- st_read(dsn = "C:/GitHub/Files to big for CheckEM/WDPA_WDOECM_Jul2023_Public_marine.shp")
-# 
+# # takes a while to read in ----
+# # world_marineparks_raw <- st_read(dsn = "I:/Files to big for CheckEM/WDPA_WDOECM_Jul2023_Public_marine.shp")
+# # 
 # world_marineparks <- world_marineparks_raw %>%
 #   # st_cast("POLYGON") %>%
 #   # st_make_valid() %>%
-#   st_as_sf() 
+#   st_as_sf()
 
 # saveRDS(world_marineparks, "data/spatial/WDPA_WDOECM_Jul2023_Public_marine.RDS")
 world_marineparks <- readRDS(here::here("r-workflows/data/spatial/shapefiles/WDPA_WDOECM_Jul2023_Public_marine.RDS")) %>%
@@ -316,7 +312,7 @@ schema.habitat <- read_tsv("inst/shiny/CheckEM/data/schemas/benthic.habitat.anno
 schema.relief <- read_tsv("inst/shiny/CheckEM/data/schemas/benthic.relief.annotation.schema.forward.facing.txt")
 
 # Australia land shapefile ----
-aus <- st_read(here::here("H:/Files to big for CheckEM/spatial/aus-shapefile-w-investigator-stokes.shp")) %>%
+aus <- st_read(here::here("I:/Files to big for CheckEM/spatial/aus-shapefile-w-investigator-stokes.shp")) %>%
   st_transform(crs="+init=epsg:4326") %>%
   dplyr::mutate(land = "land")
 
@@ -340,20 +336,20 @@ all_data <- structure(
     lh.glo.min.max = lh.glo.min.max,
     classes = classes,
     marineparks = marineparks,
-    # marineparks.single = marineparks.single,
+    marineparks.single = marineparks.single,
     aus.regions = aus.regions,
     world.regions = world.regions,
     imcra.regions = imcra.regions,
-    # world.regions.display = world.regions.display,
+    world.regions.display = world.regions.display,
     schema.fish = schema.fish,
     schema.habitat = schema.habitat,
     schema.relief = schema.relief,
-    # world_marineparks = world_marineparks,
-    # world_marineparks_oceans = world_marineparks_oceans,
-    # comm.pal = comm.pal,
+    world_marineparks = world_marineparks,
+    world_marineparks_oceans = world_marineparks_oceans,
+    comm.pal = comm.pal,
     iucn.pal = iucn.pal,
-    world = world#,
-    # aus = aus
+    world = world,
+    aus = aus
     
   ),
   class = "data"
