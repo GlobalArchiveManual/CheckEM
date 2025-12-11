@@ -192,7 +192,11 @@ lh.glo.synonyms <- readRDS("inst/shiny/CheckEM/data/global_fish.synonyms.RDS") %
 # aus.regions <- C
 
 aus.regions <- CheckEM::aus_regions
-world.regions <- CheckEM::world_regions
+
+world.regions <- CheckEM::world_regions %>% 
+  st_as_sf() %>%
+  st_cast("POLYGON")
+
 imcra.regions <- CheckEM::imcra_regions
 
 # New CAPAD 2022 ----
@@ -336,20 +340,20 @@ all_data <- structure(
     lh.glo.min.max = lh.glo.min.max,
     classes = classes,
     marineparks = marineparks,
-    marineparks.single = marineparks.single,
+    # marineparks.single = marineparks.single,
     aus.regions = aus.regions,
     world.regions = world.regions,
     imcra.regions = imcra.regions,
-    world.regions.display = world.regions.display,
+    # world.regions.display = world.regions.display,
     schema.fish = schema.fish,
     schema.habitat = schema.habitat,
     schema.relief = schema.relief,
-    world_marineparks = world_marineparks,
-    world_marineparks_oceans = world_marineparks_oceans,
-    comm.pal = comm.pal,
+    # world_marineparks = world_marineparks,
+    # world_marineparks_oceans = world_marineparks_oceans,
+    # comm.pal = comm.pal,
     iucn.pal = iucn.pal,
-    world = world,
-    aus = aus
+    world = world#,
+    # aus = aus
     
   ),
   class = "data"
