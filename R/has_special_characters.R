@@ -14,5 +14,5 @@
 #' has_special_characters("HelloWorld123") # Returns FALSE
 #' has_special_characters("Hello@World!")  # Returns TRUE
 has_special_characters <- function(string) {
-  any(str_detect(string, "[^[:alnum:]]"))
+  any(stringr::str_detect(string, "[^[:alnum:]]"))
 }

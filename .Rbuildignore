@@ -9,3 +9,7 @@
 ^LICENSE\.md$
 ^data-raw$
 ^\.secrets$
+^annotation-schema$
+^r-workflows$
+^inst/shiny/CheckEM/data/examples$
+^inst/shiny/CheckEM/data/habitat examples$

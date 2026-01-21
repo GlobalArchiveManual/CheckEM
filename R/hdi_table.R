@@ -85,8 +85,8 @@ hdi_table <- function(species_data, max_lengths) {
     }
     
     # Calculate HDI
-    hdi <- ggdist::median_hdci(species_subset$length_mm, .width = 0.99) %>%
-      dplyr::mutate(hdci_99 = ymax - ymin) %>%
+    hdi <- ggdist::median_hdci(species_subset$length_mm, .width = 0.99) |>
+      dplyr::mutate(hdci_99 = ymax - ymin) |>
       dplyr::rename(hdci_99_lower_bound = ymin, hdci_99_upper_bound = ymax)
     
     hdci_99_lower_bound <- unique(hdi$hdci_99_lower_bound)
