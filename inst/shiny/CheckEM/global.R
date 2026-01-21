@@ -21,7 +21,6 @@ library(stringr)
 library(tidyr)
 library(readr)
 library(forcats)
-library(fst)
 
 # Plotting
 library(ggplot2)
@@ -53,7 +52,6 @@ library(sf)
 
 library(reactlog) # reactlog::reactlog_enable()
 
-library(beepr)
 
 # remotes::install_github("AllanCameron/geomtextpath")
 library(geomtextpath)

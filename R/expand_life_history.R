@@ -28,13 +28,10 @@
 #'
 expand_life_history <- function(dat) {
   
-  require(dplyr)
-  require(tidyr)
-  
-  dat %>%
-    dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) %>% # Split comma-separated regions into lists
-    tidyr::unnest(marine_region) %>% # Expand lists into separate rows
-    dplyr::mutate(marine_region = case_when(marine_region == "NW" ~ "North-west",
+  dat |>
+    dplyr::mutate(marine_region = strsplit(as.character(marine_region), split = ", ")) |> # Split comma-separated regions into lists
+    tidyr::unnest(marine_region) |> # Expand lists into separate rows
+    dplyr::mutate(marine_region = dplyr::case_when(marine_region == "NW" ~ "North-west",
                                             marine_region == "N"  ~ "North",
                                             marine_region == "CS" ~ "Coral Sea",
                                             marine_region == "TE"  ~ "Temperate East",
@@ -43,8 +40,3 @@ expand_life_history <- function(dat) {
                                             .default = marine_region
     )) # Replace region codes with full names
 }
-
-
-
-
-

@@ -1,7 +1,8 @@
 #' Add in zeros for deployments not present in the length data
 #' 
-#' @param length_data 
-#' @param metadata 
+#' @param length_data A data frame of species lengths.
+#'
+#' @param metadata A data frame containing deployment-level metadata.
 #'
 #' @return A dataframe with a row for every species in the length data, in every sample in the metadata
 #'

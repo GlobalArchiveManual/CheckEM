@@ -21,7 +21,8 @@
 #'   glimpse()
 #'   
 #' cti <- create_cti(data = count) %>%
-#'   dplyr::rename(number = cti) %>% # Rename the column to number to match with other dataframes for FSSgam modelling
+#'   dplyr::rename(number = cti) %>%
+#'   # Rename the column to number to match with other dataframes for FSSgam modelling
 #'   dplyr::mutate(response = "cti") %>%
 #'   glimpse()
 #'   
@@ -29,9 +30,6 @@
 create_cti <- function(data, life_history = CheckEM::australia_life_history) {
   # Transform 'count' dataframe into new dataframe for Community Temperature Index
   # 'count' dataframe must have campaignid, sample, and count columns
-  require(CheckEM)
-  require(tidyverse)
-  
   # TODO Brooke - needs to add in RLS thermal niche col to global life history
   
   master <-  life_history %>%

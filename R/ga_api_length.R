@@ -32,7 +32,10 @@
 #' length <- ga_api_length("your_username", "your_password", synthesis_id = 1234)
 #' 
 #' # Fetch length data without life history
-#' length <- ga_api_length("your_username", "your_password", synthesis_id = 1234, include_life_history = FALSE)
+#' length <- ga_api_length("your_username", 
+#'                         "your_password", 
+#'                          synthesis_id = 1234, 
+#'                          include_life_history = FALSE)
 #' }
 ga_api_length <- function(token, synthesis_id, include_life_history = TRUE) {
   
@@ -52,7 +55,7 @@ ga_api_length <- function(token, synthesis_id, include_life_history = TRUE) {
   headers <- add_headers(Authorization = paste("Token", token))
   
   # Send GET request with token-based authentication
-  response <- GET(url, headers)
+  response <- httr::GET(url, headers)
   
   # Check if the request was successful
   if (status_code(response) == 200) {
@@ -80,27 +83,27 @@ ga_api_length <- function(token, synthesis_id, include_life_history = TRUE) {
   } 
   
     else if (status_code(response) == 400) {
-    cat("Request failed with status code 400: Bad Request – Your request is malformed.\n")
+    cat("Request failed with status code 400: Bad Request - Your request is malformed.\n")
   } else if (status_code(response) == 401) {
-    cat("Request failed with status code 401: Unauthorized – Your API token is likely expired or invalid.\n")
+    cat("Request failed with status code 401: Unauthorized - Your API token is likely expired or invalid.\n")
   } else if (status_code(response) == 403) {
-    cat("Request failed with status code 403: Forbidden – Your API token is correct but you don't have permission to access this synthesis.\n")
+    cat("Request failed with status code 403: Forbidden - Your API token is correct but you don't have permission to access this synthesis.\n")
   } else if (status_code(response) == 404) {
-    cat("Request failed with status code 404: Not Found – Check the synthesis ID.\n")
+    cat("Request failed with status code 404: Not Found - Check the synthesis ID.\n")
   } else if (status_code(response) == 405) {
-    cat("Request failed with status code 405: Method Not Allowed – Check the HTTP method (GET, POST, etc.).\n")
+    cat("Request failed with status code 405: Method Not Allowed - Check the HTTP method (GET, POST, etc.).\n")
   } else if (status_code(response) == 408) {
-    cat("Request failed with status code 408: Request Timeout – The server timed out waiting for the request.\n")
+    cat("Request failed with status code 408: Request Timeout - The server timed out waiting for the request.\n")
   } else if (status_code(response) == 429) {
-    cat("Request failed with status code 429: Too Many Requests – You have hit the rate limit.\n")
+    cat("Request failed with status code 429: Too Many Requests - You have hit the rate limit.\n")
   } else if (status_code(response) == 500) {
-    cat("Request failed with status code 500: Internal Server Error – Something went wrong on the server side.\n")
+    cat("Request failed with status code 500: Internal Server Error - Something went wrong on the server side.\n")
   } else if (status_code(response) == 502) {
-    cat("Request failed with status code 502: Bad Gateway – The server received an invalid response from the upstream server.\n")
+    cat("Request failed with status code 502: Bad Gateway - The server received an invalid response from the upstream server.\n")
   } else if (status_code(response) == 503) {
-    cat("Request failed with status code 503: Service Unavailable – The server is temporarily unavailable.\n")
+    cat("Request failed with status code 503: Service Unavailable - The server is temporarily unavailable.\n")
   } else if (status_code(response) == 504) {
-    cat("Request failed with status code 504: Gateway Timeout – The server didn't get a response in time.\n")
+    cat("Request failed with status code 504: Gateway Timeout - The server didn't get a response in time.\n")
   } else {
     cat("Request failed with status code", status_code(response), ": Unknown error.\n")
   }

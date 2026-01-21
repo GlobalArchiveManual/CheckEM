@@ -37,10 +37,10 @@ ga_api_metadata <- function(token, synthesis_id) {
   headers <- add_headers(Authorization = paste("Token", token))
   
   # Send GET request with token-based authentication
-  response <- GET(url, headers)
+  response <- httr::GET(url, headers)
   
   # Check if the request was successful
-  if (status_code(response) == 200) {
+  if (httr::status_code(response) == 200) {
     # Get the raw content
     raw_content <- content(response, "raw")
     
@@ -65,34 +65,34 @@ ga_api_metadata <- function(token, synthesis_id) {
   
   } 
   
-  if (status_code(response) == 200) {
+  if (httr::status_code(response) == 200) {
     cat("Request succeeded: Sample Metadata.\n")
     return(metadata)
     
-  } else if (status_code(response) == 400) {
-    cat("Request failed with status code 400: Bad Request – Your request is malformed.\n")
-  } else if (status_code(response) == 401) {
-    cat("Request failed with status code 401: Unauthorized – Your API token is likely expired or invalid.\n")
-  } else if (status_code(response) == 403) {
-    cat("Request failed with status code 403: Forbidden – Your API token is correct but you don't have permission to access this synthesis.\n")
-  } else if (status_code(response) == 404) {
-    cat("Request failed with status code 404: Not Found – Check the synthesis ID.\n")
-  } else if (status_code(response) == 405) {
-    cat("Request failed with status code 405: Method Not Allowed – Check the HTTP method (GET, POST, etc.).\n")
-  } else if (status_code(response) == 408) {
-    cat("Request failed with status code 408: Request Timeout – The server timed out waiting for the request.\n")
-  } else if (status_code(response) == 429) {
-    cat("Request failed with status code 429: Too Many Requests – You have hit the rate limit.\n")
-  } else if (status_code(response) == 500) {
-    cat("Request failed with status code 500: Internal Server Error – Something went wrong on the server side.\n")
-  } else if (status_code(response) == 502) {
-    cat("Request failed with status code 502: Bad Gateway – The server received an invalid response from the upstream server.\n")
-  } else if (status_code(response) == 503) {
-    cat("Request failed with status code 503: Service Unavailable – The server is temporarily unavailable.\n")
-  } else if (status_code(response) == 504) {
-    cat("Request failed with status code 504: Gateway Timeout – The server didn't get a response in time.\n")
+  } else if (httr::status_code(response) == 400) {
+    cat("Request failed with status code 400: Bad Request - Your request is malformed.\n")
+  } else if (httr::status_code(response) == 401) {
+    cat("Request failed with status code 401: Unauthorized - Your API token is likely expired or invalid.\n")
+  } else if (httr::status_code(response) == 403) {
+    cat("Request failed with status code 403: Forbidden - Your API token is correct but you don't have permission to access this synthesis.\n")
+  } else if (httr::status_code(response) == 404) {
+    cat("Request failed with status code 404: Not Found - Check the synthesis ID.\n")
+  } else if (httr::status_code(response) == 405) {
+    cat("Request failed with status code 405: Method Not Allowed - Check the HTTP method (GET, POST, etc.).\n")
+  } else if (httr::status_code(response) == 408) {
+    cat("Request failed with status code 408: Request Timeout - The server timed out waiting for the request.\n")
+  } else if (httr::status_code(response) == 429) {
+    cat("Request failed with status code 429: Too Many Requests - You have hit the rate limit.\n")
+  } else if (httr::status_code(response) == 500) {
+    cat("Request failed with status code 500: Internal Server Error - Something went wrong on the server side.\n")
+  } else if (httr::status_code(response) == 502) {
+    cat("Request failed with status code 502: Bad Gateway - The server received an invalid response from the upstream server.\n")
+  } else if (httr::status_code(response) == 503) {
+    cat("Request failed with status code 503: Service Unavailable - The server is temporarily unavailable.\n")
+  } else if (httr::status_code(response) == 504) {
+    cat("Request failed with status code 504: Gateway Timeout - The server didn't get a response in time.\n")
   } else {
-    cat("Request failed with status code", status_code(response), ": Unknown error.\n")
+    cat("Request failed with status code", httr::status_code(response), ": Unknown error.\n")
   }
   
 }

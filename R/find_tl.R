@@ -30,9 +30,7 @@
 #' print(tl_info)
 #'
 find_tl <- function(sp, mirror = "us") {
-  
-  require(stringr)
-  
+
   sp_ <- gsub(" ", "-", sp)
   url <- paste("https://www.fishbase.", mirror, "/summary/", sp_, ".html", sep = "")
   
@@ -82,12 +80,12 @@ find_tl <- function(sp, mirror = "us") {
   line <- trimws(line)
   line
   
-  try(value <- str_split(line, 'se; ', simplify = TRUE)[,1])
+  try(value <- stringr::str_split(line, 'se; ', simplify = TRUE)[,1])
   
-  try(level <- trimws(str_split(value, '&plusmn;', simplify = TRUE)[,1]))
-  try(se <- trimws(str_split(value, '&plusmn;', simplify = TRUE)[,2]))
+  try(level <- trimws(stringr::str_split(value, '&plusmn;', simplify = TRUE)[,1]))
+  try(se <- trimws(stringr::str_split(value, '&plusmn;', simplify = TRUE)[,2]))
   
-  try(metric <- str_split(line, 'se; ', simplify = TRUE)[,2])
+  try(metric <- stringr::str_split(line, 'se; ', simplify = TRUE)[,2])
   
   try(data.frame(species = sp, 
                  trophic_level = level,

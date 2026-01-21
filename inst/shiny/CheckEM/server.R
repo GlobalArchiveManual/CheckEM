@@ -2522,7 +2522,7 @@ function(input, output, session) {
     }
     
     if(!errors == ""){
-      beepr::beep("coin")
+      # beepr::beep("coin")
       
       shinyalert("Issues with Metadata", text = HTML(paste0("Please fix these before continuing<br><br>", errors)), type = "error", html = TRUE)
     }

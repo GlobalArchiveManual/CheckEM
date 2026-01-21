@@ -13,3 +13,7 @@
 ^r-workflows$
 ^inst/shiny/CheckEM/data/examples$
 ^inst/shiny/CheckEM/data/habitat examples$
+^inst/shiny/CheckEM/extra_r_scripts$
+^manuscript$
+^Manuals$
+^r-workflows$

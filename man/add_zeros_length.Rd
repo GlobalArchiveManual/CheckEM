@@ -7,9 +7,9 @@
 add_zeros_length(length_data, metadata)
 }
 \arguments{
-\item{length_data}{}
+\item{length_data}{A data frame of species lengths.}
 
-\item{metadata}{}
+\item{metadata}{A data frame containing deployment-level metadata.}
 }
 \value{
 A dataframe with a row for every species in the length data, in every sample in the metadata

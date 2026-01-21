@@ -29,7 +29,8 @@ count <- readRDS(paste0("data/geographe/raw/", name, "_complete_count.RDS")) \%>
   glimpse()
   
 cti <- create_cti(data = count) \%>\%
-  dplyr::rename(number = cti) \%>\% # Rename the column to number to match with other dataframes for FSSgam modelling
+  dplyr::rename(number = cti) \%>\%
+  # Rename the column to number to match with other dataframes for FSSgam modelling
   dplyr::mutate(response = "cti") \%>\%
   glimpse()
   

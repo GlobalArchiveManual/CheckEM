@@ -21,6 +21,9 @@ for which the data should be retrieved.}
 \item{dir}{A character string specifying the directory where the RDS files will be saved.}
 
 \item{include_zeros}{Either TRUE or FALSE, if you would like the data to include zeros where a species is not observed, warning: this can create large datasets that use a lot og RAM}
+
+\item{file_prefix}{Optional character string. If supplied, it is prepended to output filenames
+(e.g. "prefix_metadata.RDS"). Default NULL.}
 }
 \value{
 A list containing \code{metadata}, \code{count}, and \code{length} data frames.

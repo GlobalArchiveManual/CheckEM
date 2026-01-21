@@ -21,9 +21,7 @@
 #' }
 
 plot_transformations <- function(pred.vars, dat) {
-  require(tidyverse)
-  require(patchwork)
-  
+
   for (i in pred.vars) {
 
     if (sum(str_count(names(dat), "opcode")) == 1) {

@@ -10,6 +10,8 @@
 #' for which the data should be retrieved.
 #' @param dir A character string specifying the directory where the RDS files will be saved.
 #' @param include_zeros Either TRUE or FALSE, if you would like the data to include zeros where a species is not observed, warning: this can create large datasets that use a lot og RAM
+#' @param file_prefix Optional character string. If supplied, it is prepended to output filenames
+#' (e.g. "prefix_metadata.RDS"). Default NULL.
 #'
 #' @return A list containing `metadata`, `count`, and `length` data frames.
 #'
@@ -35,28 +37,28 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
   else if (nrow(metadata) > 0) {
     
     # Retrieve and process count data
-    count <- ga_api_count(synthesis_id = synthesis_id, token = token) %>%
-      dplyr::semi_join(metadata, by = "sample_url") %>%
+    count <- ga_api_count(synthesis_id = synthesis_id, token = token) |>
+      dplyr::semi_join(metadata, by = "sample_url") |>
       dplyr::select(sample_url, family, genus, species, count) 
     
     # Retrieve and process length data
-    length <- ga_api_length(synthesis_id = synthesis_id, token = token) %>%
-      dplyr::semi_join(metadata, by = "sample_url") %>%
-      dplyr::select(sample_url, family, genus, species, length_mm, count) %>%
+    length <- ga_api_length(synthesis_id = synthesis_id, token = token) |>
+      dplyr::semi_join(metadata, by = "sample_url") |>
+      dplyr::select(sample_url, family, genus, species, length_mm, count) |>
       dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) 
     
-    samples <- metadata %>%
+    samples <- metadata |>
       dplyr::select(sample_url, campaignid, sample)
     
     # # Retrieve and process habitat data
-    benthos <- ga_api_habitat(synthesis_id = synthesis_id, token = token) %>%
+    benthos <- ga_api_habitat(synthesis_id = synthesis_id, token = token) |>
       dplyr::semi_join(metadata, by = "sample_url")
     
-    relief <- ga_api_relief(synthesis_id = synthesis_id, token = token) %>%
+    relief <- ga_api_relief(synthesis_id = synthesis_id, token = token) |>
       dplyr::semi_join(metadata, by = "sample_url")
 
     if (nrow(benthos   > 0)) {
-    benthos_summarised <- benthos %>%
+    benthos_summarised <- benthos |>
       dplyr::mutate(habitat = case_when(level_2 %in% "Macroalgae" ~ level_2, 
                                         level_2 %in% "Seagrasses" ~ level_2, 
                                         level_2 %in% "Substrate" & level_3 %in% "Consolidated (hard)" ~ "Consolidated", 
@@ -67,16 +69,16 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
                                         level_2 %in% "Cnidaria" ~ "Sessile invertebrates",
                                         level_2 %in% "Echinoderms" ~ "Sessile invertebrates",
                                         level_2 %in% "Ascidians" ~ "Sessile invertebrates",
-                                        .default = level_2)) %>% 
-      dplyr::left_join(samples) %>%
-      dplyr::select(sample_url, campaignid, sample, habitat, count) %>%
-      dplyr::group_by(sample_url, campaignid, sample, habitat) %>% 
-      dplyr::tally(count, name = "count") %>% 
-      dplyr::mutate(total_points_annotated = sum(count)) %>% 
-      dplyr::ungroup() %>% 
-      tidyr::pivot_wider(names_from = "habitat", values_from = "count", values_fill = 0) %>%
-      dplyr::select(-c(any_of("Fishes"))) %>%
-      clean_names() %>%
+                                        .default = level_2)) |> 
+      dplyr::left_join(samples) |>
+      dplyr::select(sample_url, campaignid, sample, habitat, count) |>
+      dplyr::group_by(sample_url, campaignid, sample, habitat) |> 
+      dplyr::tally(count, name = "count") |> 
+      dplyr::mutate(total_points_annotated = sum(count)) |> 
+      dplyr::ungroup() |> 
+      tidyr::pivot_wider(names_from = "habitat", values_from = "count", values_fill = 0) |>
+      dplyr::select(-c(any_of("Fishes"))) |>
+      clean_names() |>
       mutate(across(
         .cols = 5:ncol(.), 
         .fns = ~ .x / total_points_annotated,
@@ -87,12 +89,12 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
       }
     
       if (nrow(relief   > 0)) {
-    relief_summarised <- relief %>%
-      uncount(count) %>%
-      group_by(sample_url) %>%
-      dplyr::summarise(mean_relief = mean(as.numeric(level_5)), sd_relief = sd(as.numeric(level_5), na.rm = T)) %>%
-      ungroup() %>%
-      dplyr::left_join(samples) %>%
+    relief_summarised <- relief |>
+      uncount(count) |>
+      group_by(sample_url) |>
+      dplyr::summarise(mean_relief = mean(as.numeric(level_5)), sd_relief = sd(as.numeric(level_5), na.rm = T)) |>
+      ungroup() |>
+      dplyr::left_join(samples) |>
       dplyr::select(sample_url, campaignid, sample, everything())
 
         assign("relief_summarised", relief_summarised, envir = .GlobalEnv)
@@ -127,43 +129,43 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
     if (include_zeros) {
       
       # Filter metadata for successful counts
-      count_metadata <- metadata %>%
+      count_metadata <- metadata |>
         dplyr::filter(successful_count == TRUE)
       
       # Process count data into a wide format
-      count_with_zeros <- count %>%
-        dplyr::full_join(count_metadata, by = "sample_url") %>%
-        dplyr::filter(successful_count == TRUE) %>%
-        dplyr::select(campaignid, sample, family, genus, species, count) %>%
-        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-        tidyr::replace_na(list(count = 0)) %>%
-        dplyr::group_by(campaignid, sample, family, genus, species) %>%
-        dplyr::summarise(count = sum(count)) %>%
-      dplyr::ungroup() %>%
-        dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) %>%
-        dplyr::select(campaignid, sample, scientific_name, family, genus, species, count) %>%
-        dplyr::full_join(count_metadata) %>%
+      count_with_zeros <- count |>
+        dplyr::full_join(count_metadata, by = "sample_url") |>
+        dplyr::filter(successful_count == TRUE) |>
+        dplyr::select(campaignid, sample, family, genus, species, count) |>
+        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) |>
+        tidyr::replace_na(list(count = 0)) |>
+        dplyr::group_by(campaignid, sample, family, genus, species) |>
+        dplyr::summarise(count = sum(count)) |>
+      dplyr::ungroup() |>
+        dplyr::mutate(scientific_name = paste(family, genus, species, sep = " ")) |>
+        dplyr::select(campaignid, sample, scientific_name, family, genus, species, count) |>
+        dplyr::full_join(count_metadata) |>
         dplyr::filter(successful_count == TRUE) 
       
       # Filter metadata for successful lengths
-      length_metadata <- metadata %>%
+      length_metadata <- metadata |>
         dplyr::filter(successful_length == TRUE)
       
       # Complete length data
-      length_with_zeros <<- length %>%
-        dplyr::mutate(count = as.numeric(count)) %>%
-        dplyr::filter(!is.na(count)) %>%
-        tidyr::uncount(count) %>%
-        dplyr::mutate(count = 1) %>%
-        dplyr::full_join(length_metadata, by = "sample_url") %>%
-        dplyr::filter(successful_length == TRUE) %>%
-        dplyr::select(campaignid, sample, family, genus, species, length_mm, count) %>%
-        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) %>%
-        tidyr::replace_na(list(count = 0)) %>%
-        dplyr::mutate(length_mm = as.numeric(length_mm)) %>%
-        dplyr::full_join(length_metadata) %>%
-        dplyr::filter(!is.na(count)) %>%
-        dplyr::filter(successful_length == TRUE) %>%
+      length_with_zeros <<- length |>
+        dplyr::mutate(count = as.numeric(count)) |>
+        dplyr::filter(!is.na(count)) |>
+        tidyr::uncount(count) |>
+        dplyr::mutate(count = 1) |>
+        dplyr::full_join(length_metadata, by = "sample_url") |>
+        dplyr::filter(successful_length == TRUE) |>
+        dplyr::select(campaignid, sample, family, genus, species, length_mm, count) |>
+        tidyr::complete(nesting(campaignid, sample), nesting(family, genus, species)) |>
+        tidyr::replace_na(list(count = 0)) |>
+        dplyr::mutate(length_mm = as.numeric(length_mm)) |>
+        dplyr::full_join(length_metadata) |>
+        dplyr::filter(!is.na(count)) |>
+        dplyr::filter(successful_length == TRUE) |>
         dplyr::glimpse()
       
       # Save additional processed data if complete_length was processed

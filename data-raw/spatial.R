@@ -1,5 +1,8 @@
 # library(rgdal)
 library(tidyverse)
+library(sf)
+
+Sys.setlocale("LC_CTYPE", "English_United States.utf8")
 
 # TODO - change this to use sf
 
@@ -9,10 +12,15 @@ wgs_84 <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 # aus_regions <- readOGR(dsn = "C:/GitHub/Files to big for CheckEM/spatial/marine_regions.shp")
 # aus_regions$REGION <- as.character(aus_regions$REGION)
 # # proj4string(aus_regions) <- CRS(wgs_84)
-# 
-# world_regions <- readOGR(dsn = "C:/GitHub/Files to big for CheckEM/spatial/FAO_major_areas.shp")
-# world_regions$REGION <- str_replace_all(world_regions$NAME_EN, c(", " = "_", " " ="."))
+
+world_regions <- st_read("I:/Files to big for CheckEM/spatial/FAO_major_areas.shp")
+world_regions$REGION <- str_replace_all(world_regions$NAME_EN, c(", " = "_", " " ="."))
 # proj4string(world_regions) <- CRS(wgs_84)
+
+world_regions$NAME_EN <- enc2utf8(world_regions$NAME_EN)
+world_regions$REGION  <- enc2utf8(world_regions$REGION)
+
+sf::st_crs(world_regions) <- 4326
 
 
 aus_regions <- st_read("annotation-schema/data/spatial/marine_regions_with_gbr.shp")

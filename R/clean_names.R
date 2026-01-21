@@ -22,16 +22,15 @@
 #' print(cleaned_dat)
 #'
 clean_names <- function(dat) {
-  require(tidyverse)
   
   old_names <- names(dat)
   
-  new_names <- old_names %>%
-    gsub("%", "percent", .) %>% # Replace any percent sybmols with the word percent
-    make.names(.) %>%
-    gsub("[.]+", "_", .) %>% # Replace multiple consecutive underscores with a single underscore
-    tolower(.) %>% # Convert to lower case
-    gsub("_$", "", .) # Remove trailing underscore, if any
+  new_names <- old_names |>
+    gsub("%", "percent") |> 
+    make.names() |>
+    gsub("[.]+", "_") |>
+    tolower() |>
+    gsub("_$", "")
   
   setNames(dat, new_names)
 }

@@ -1,7 +1,8 @@
 #' Add in zeros for deployments not present in the count data
 #' 
-#' @param count_data 
-#' @param metadata 
+#' @param count_data A data frame of species counts.
+#'
+#' @param metadata A data frame containing deployment-level metadata.
 #'
 #' @return A dataframe with a row for every species in the count data, in every sample in the metadata
 #'

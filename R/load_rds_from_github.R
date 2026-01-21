@@ -19,7 +19,7 @@
 #'
 #' @examples
 #' # Define the URL to the RDS file in your private GitHub repository
-#' rds_url <- "https://raw.githubusercontent.com/GlobalArchiveManual/australia-synthesis-2024/main/data/tidy/australian-synthesis_covariates.RDS"
+#' rds_url <- "https://raw.githubusercontent.com/.../australian-synthesis_covariates.RDS"
 #'
 #' # Call the function to load the RDS file
 #' data <- load_rds_from_github(rds_url)
@@ -51,23 +51,23 @@ load_rds_from_github <- function(url, pat = NULL) {
   }
   
   # Set up the GET request with the PAT for authentication
-  response <- GET(url, authenticate("", pat, type = "basic"))
+  response <- httr::GET(url, httr::authenticate("", pat, type = "basic"))
   
   # Check if the request was successful
-  if (status_code(response) == 200) {
+  if (httr::status_code(response) == 200) {
     # Check if the response content is valid
-    if (length(content(response, "raw")) > 0) {
+    if (length(httr::content(response, "raw")) > 0) {
       # Read the raw content from the response and load it as an RDS file
-      rds_data <- readRDS(gzcon(rawConnection(content(response, "raw"))))
+      rds_data <- readRDS(gzcon(rawConnection(httr::content(response, "raw"))))
       return(rds_data)
     } else {
       stop("The content of the RDS file is empty.")
     }
-  } else if (status_code(response) == 404) {
+  } else if (httr::status_code(response) == 404) {
     message("Access to the repository or file not found.")
     message("Please contact Brooke Gibbons at brooke.gibbons@uwa.edu.au with your GitHub username to request access.")
     return(NULL)
   } else {
-    stop("Failed to download the RDS file. Status code: ", status_code(response))
+    stop("Failed to download the RDS file. Status code: ", httr::status_code(response))
   }
 }

@@ -7,9 +7,9 @@
 add_zeros_count(count_data, metadata)
 }
 \arguments{
-\item{count_data}{}
+\item{count_data}{A data frame of species counts.}
 
-\item{metadata}{}
+\item{metadata}{A data frame containing deployment-level metadata.}
 }
 \value{
 A dataframe with a row for every species in the count data, in every sample in the metadata
