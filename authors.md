@@ -26,7 +26,7 @@
 
 ## Citation
 
-Gibbons B, Spencer C, Langlois T (2025). *CheckEM: An R package and
+Gibbons B, Spencer C, Langlois T (2026). *CheckEM: An R package and
 Shiny App for Formatting, Checking, Visualising and Analysing
 Stereo-Video Annotation Data*. R package version 0.1.0,
 <https://globalarchivemanual.github.io/CheckEM/>.
@@ -34,7 +34,7 @@ Stereo-Video Annotation Data*. R package version 0.1.0,
     @Manual{,
       title = {CheckEM: An R package and Shiny App for Formatting, Checking, Visualising and Analysing Stereo-Video Annotation Data},
       author = {Brooke Gibbons and Claude Spencer and Tim Langlois},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.0},
       url = {https://globalarchivemanual.github.io/CheckEM/},
     }

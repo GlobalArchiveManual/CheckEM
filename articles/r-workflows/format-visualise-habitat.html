@@ -292,7 +292,7 @@ a unique sample.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Orientation inferred to be along y-axis; override with</span></span>
 <span><span class="co">## `position_quasirandom(orientation = 'x')`</span></span></code></pre>
-<p><img src="format-visualise-habitat_files/figure-html/plot-habitat-1.png" class="r-plt" width="700"></p>
+<p><img src="format-visualise-habitat_files/figure-html/plot-habitat-1.png" class="r-plt" alt="" width="700"></p>
 <p>Plot the occurence data for each level of relief.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -301,7 +301,7 @@ a unique sample.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Orientation inferred to be along y-axis; override with</span></span>
 <span><span class="co">## `position_quasirandom(orientation = 'x')`</span></span></code></pre>
-<p><img src="format-visualise-habitat_files/figure-html/plot-relief-1.png" class="r-plt" width="700"></p>
+<p><img src="format-visualise-habitat_files/figure-html/plot-relief-1.png" class="r-plt" alt="" width="700"></p>
 <p>Create a colour palette for plotting.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span><span class="fl">12</span>, <span class="st">"Paired"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">tidy.habitat</span><span class="op">$</span><span class="va">habitat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
