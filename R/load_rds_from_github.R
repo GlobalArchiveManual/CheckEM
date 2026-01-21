@@ -19,7 +19,7 @@
 #'
 #' @examples
 #' # Define the URL to the RDS file in your private GitHub repository
-#' rds_url <- "https://raw.githubusercontent.com/.../australian-synthesis_covariates.RDS"
+#' rds_url <- "https://raw.githubusercontent.com/GlobalArchiveManual/australia-synthesis-2024/main/data/tidy/australian-synthesis_covariates.RDS"
 #'
 #' # Call the function to load the RDS file
 #' data <- load_rds_from_github(rds_url)
