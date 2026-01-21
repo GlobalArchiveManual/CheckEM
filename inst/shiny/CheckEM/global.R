@@ -20,7 +20,6 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 library(readr)
-library(fuzzyjoin)
 library(forcats)
 library(fst)
 
