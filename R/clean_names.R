@@ -23,6 +23,8 @@
 #'
 clean_names <- function(dat) {
   
+  x <- tibble::as_tibble(x, .name_repair = "unique")
+  
   old_names <- names(dat)
   
   new_names <- old_names |>
