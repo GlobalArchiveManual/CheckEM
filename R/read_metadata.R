@@ -147,8 +147,8 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
   #   }
   #   
     dat <- dplyr::bind_rows(dat, temp_dat)
-  #   
-  # }
+
+  }
   
   return(dat)
   
