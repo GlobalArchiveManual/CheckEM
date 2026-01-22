@@ -61,7 +61,11 @@ Now we load and tidy the metadata.
 If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
 
 ```{r load-metadata}
-here::here("r-workflows/data/raw/") |> list.files(recursive = TRUE)
+x <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs") 
+bad <- is.na(names(x)) | names(x) == ""
+if (any(bad)) {
+  stop("Bad column names in: ", basename(file), "\nNames: ", paste(names(x), collapse = " | "))
+}
 
 metadata <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs") %>% # Change here to "DOVs"
   dplyr::select(campaignid, sample, status, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
