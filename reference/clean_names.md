@@ -34,10 +34,8 @@ cleaned_dat <- clean_names(dat)
 
 # Check the result
 print(cleaned_dat)
-#> # A tibble: 3 × 3
-#>      ``    ``    ``
-#>   <int> <int> <int>
-#> 1     1     4     7
-#> 2     2     5     8
-#> 3     3     6     9
+#>     <NA> <NA>
+#> 1 1    4    7
+#> 2 2    5    8
+#> 3 3    6    9
 ```

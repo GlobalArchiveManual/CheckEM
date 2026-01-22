@@ -53,7 +53,7 @@ retrieved, the function returns `NULL`.
 ``` r
 # Retrieve Bayesian length-weight parameters for a species
 lw_params <- find_lw("Lutjanus campechanus")
-#> Service Unavailable (HTTP 503).
+#> Forbidden (HTTP 403).
 print(lw_params)
 #> NULL
 ```

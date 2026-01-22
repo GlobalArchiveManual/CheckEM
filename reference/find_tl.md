@@ -46,7 +46,7 @@ retrieved or parsed, the function returns `NULL`.
 ``` r
 # Retrieve trophic level and standard error for a species
 tl_info <- find_tl("Lutjanus campechanus")
-#> Service Unavailable (HTTP 503).
+#> Forbidden (HTTP 403).
 print(tl_info)
 #> NULL
 ```
