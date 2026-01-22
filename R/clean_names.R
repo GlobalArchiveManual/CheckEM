@@ -23,8 +23,6 @@
 #'
 clean_names <- function(dat) {
   
-  dat <- tibble::as_tibble(dat, .name_repair = "unique")
-  
   old_names <- names(dat)
   
   new_names <- old_names |>
@@ -34,5 +32,5 @@ clean_names <- function(dat) {
     tolower() |>
     gsub("_$", "")
   
-  stats::setNames(dat, new_names)
+  setNames(dat, new_names)
 }
