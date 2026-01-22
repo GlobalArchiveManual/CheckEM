@@ -5,32 +5,87 @@
 \alias{australia_life_history}
 \title{Australia life history}
 \format{
-A data frame with one row per species and the following variables (selected):
+A data frame with one row per species and the following variables:
 \describe{
-\item{family}{Family name.}
+\item{australian_source}{Source of Australian-specific information.}
+\item{caab_code}{CAAB (Codes for Australian Aquatic Biota) identifier.}
+\item{class}{Taxonomic class.}
+\item{order}{Taxonomic order.}
+\item{family}{Taxonomic family.}
+\item{subfamily}{Taxonomic subfamily (if available).}
 \item{genus}{Genus name.}
 \item{species}{Species epithet.}
 \item{scientific_name}{Full scientific name (genus + species).}
-\item{length_max_cm}{Maximum length (cm).}
-\item{length_max_source}{Source of the maximum length record.}
-\item{length_max_type}{Type of length measurement (e.g., TL/FL/SL if available).}
-\item{rls_thermal_niche}{Thermal niche category from Reef Life Survey (if present).}
-\item{iucn_ranking}{IUCN category (if present).}
-\item{epbc_threat_status}{EPBC threat listing (if present).}
+\item{australian_common_name}{Common name used in Australia.}
+
+\item{global_region}{Broad global biogeographic region.}
+\item{marine_region}{Marine bioregion.}
+\item{imcra_region}{IMCRA (Integrated Marine and Coastal Regionalisation of Australia) region.}
+\item{global_source}{Source of global distribution information.}
+
+\item{fb_code}{FishBase species code.}
+\item{fb_length_at_maturity_cm}{Length at maturity (cm) from FishBase.}
+\item{fb_length_at_maturity_type}{Type of length measurement used for maturity (e.g. TL, FL).}
+\item{fb_length_at_maturity_source}{Source of FishBase maturity information.}
+\item{fb_length_weight_measure}{Length–weight measurement type used in FishBase.}
+\item{fb_a}{FishBase length–weight parameter \eqn{a}.}
+\item{fb_b}{FishBase length–weight parameter \eqn{b}.}
+\item{fb_a_ll}{Lower-limit estimate of FishBase \eqn{a}.}
+\item{fb_b_ll}{Lower-limit estimate of FishBase \eqn{b}.}
+\item{fb_ll_equation_type}{Equation type used for lower-limit estimates.}
+\item{fb_length_weight_source}{Source of FishBase length–weight relationship.}
+\item{fb_vulnerability}{FishBase vulnerability index.}
+\item{fb_countries}{Countries in which the species is recorded in FishBase.}
+\item{fb_status}{FishBase conservation or population status.}
+
+\item{length_max_cm}{Maximum recorded length (cm).}
+\item{length_max_type}{Type of maximum length measurement (e.g. TL, FL, SL).}
+\item{length_max_source}{Source of maximum length information.}
+
+\item{fb_trophic_level}{Mean trophic level from FishBase.}
+\item{fb_trophic_level_se}{Standard error of FishBase trophic level estimate.}
+\item{fb_trophic_level_source}{Source of FishBase trophic level information.}
+
+\item{foa_min_depth}{Minimum recorded depth (m) from Fish of Australia.}
+\item{foa_max_depth}{Maximum recorded depth (m) from Fish of Australia.}
+
+\item{rls_trophic_group}{Trophic group classification from Reef Life Survey.}
+\item{rls_water_column}{Water-column position from Reef Life Survey.}
+\item{rls_substrate_type}{Primary substrate association from Reef Life Survey.}
+\item{rls_thermal_niche}{Thermal niche category from Reef Life Survey.}
+
+\item{local_source}{Source of locally derived information.}
+\item{epbc_threat_status}{Threat listing under the EPBC Act (if applicable).}
+\item{iucn_ranking}{IUCN Red List category.}
+
+\item{fishing_mortality}{Qualitative or quantitative indicator of fishing mortality.}
+\item{fishing_type}{Primary fishing method or sector.}
+
+\item{min_legal_nt}{Minimum legal size in the Northern Territory.}
+\item{max_legal_nt}{Maximum legal size in the Northern Territory.}
+\item{min_legal_wa}{Minimum legal size in Western Australia.}
+\item{max_legal_wa}{Maximum legal size in Western Australia.}
+\item{min_legal_qld}{Minimum legal size in Queensland.}
+\item{max_legal_qld}{Maximum legal size in Queensland.}
+\item{min_legal_nsw}{Minimum legal size in New South Wales.}
+\item{max_legal_nsw}{Maximum legal size in New South Wales.}
+\item{min_legal_vic}{Minimum legal size in Victoria.}
+\item{max_legal_vic}{Maximum legal size in Victoria.}
+\item{min_legal_sa}{Minimum legal size in South Australia.}
+\item{max_legal_sa}{Maximum legal size in South Australia.}
+\item{min_legal_tas}{Minimum legal size in Tasmania.}
+\item{max_legal_tas}{Maximum legal size in Tasmania.}
 }
 }
 \source{
-Compiled from multiple sources including FishBase/SeaLifeBase, Reef Life Survey,
-and Australian reference datasets (see package documentation for details).
+Compiled from multiple sources including FishBase/SeaLifeBase, Fish of Australia,
+Reef Life Survey, and Australian fisheries and conservation datasets.
 }
 \usage{
 australia_life_history
 }
 \description{
-A dataset containing life-history and related metadata for Australian fish species.
-}
-\details{
-This dataset contains additional columns not listed above. Use
-\code{names(australia_life_history)} to view all available fields.
+A dataset containing life-history, ecological, conservation, and fisheries
+management information for Australian fish species.
 }
 \keyword{datasets}

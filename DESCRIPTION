@@ -40,16 +40,10 @@ Depends:
     R (>= 4.1)
 Imports: 
     curl,
-    data.table,
+    dplyr,
     gitcreds,
-    geomtextpath,
-    ggbeeswarm,
     ggdist,
-    ggnewscale,
     ggplot2 (>= 3.4.2),
-    googledrive,
-    googlesheets4,
-    grid,
     httr,
     lutz,
     purrr,
@@ -62,13 +56,19 @@ Imports:
 URL: https://globalarchivemanual.github.io/CheckEM/
 Suggests: 
     cowplot,
+    data.table,
+    ggnewscale,
+    grid,
     devtools,
-    dplyr,
     forcats,
     here (>= 1.0.1),
     leaflegend,
     leaflet (>= 2.1.2),
     leaflet.minicharts,
+    googledrive,
+    googlesheets4,
+    geomtextpath,
+    ggbeeswarm,
     mgcv,
     patchwork,
     png,
@@ -95,4 +95,5 @@ Suggests:
     viridis
 VignetteBuilder: knitr
 LazyData: true
+LazyDataCompression: xz
 License: file LICENSE

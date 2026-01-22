@@ -54,6 +54,17 @@ reference:
   - ga_api_metadata
   - ga_api_species_list
   - ga_api_benthic_list
+  - title: Data
+    desc: Datasets included with CheckEM
+    contents:
+      - australia_life_history
+      - global_life_history
+      - aus_regions
+      - world_regions
+      - imcra_regions
+      - aus_synonyms
+      - catami
+      - maturity
 - title: Investigating maximum sizes of fish
   desc: Functions to plot and investigate size frequency and maximum sizes of fish
   contents:
