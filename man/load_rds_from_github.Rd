@@ -19,7 +19,7 @@ Load an RDS File from a Private GitHub Repository
 }
 \examples{
 \dontrun{
-rds_url <- "https://raw.githubusercontent.com/GlobalArchiveManual/australia-synthesis-2024/main/data/tidy/australian-synthesis_covariates.RDS"
+rds_url <- "https://raw.githubusercontent.com/OWNER/REPO/branch/path/file.RDS"
 data <- load_rds_from_github(rds_url)
 }
 }

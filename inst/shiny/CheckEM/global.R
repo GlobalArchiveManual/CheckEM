@@ -96,12 +96,28 @@ dbHeader$children[[2]]$children <-  tags$a(href='http://mycompanyishere.com',
 
 dbHeader <- dashboardHeader(title = "CheckEM",
                             
-                            ## DOWNLOAD
-                            tags$li(a(img(src = 'user-guide.png',
-                                          title = "Download User Guide", height = "60px"),
-                                      href = "CheckEM_user_guide.pdf", download = "CheckEM_user_guide.pdf",
-                                    style = "padding-top:10px; padding-bottom:10px;"),
-                            class = "dropdown"),
+                            ## USER GUIDE
+                            tags$li(
+                              a(
+                                img(
+                                  src = "user-guide.png",
+                                  title = "Open User Guide",
+                                  height = "60px"
+                                ),
+                                href = "https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html",
+                                target = "_blank",
+                                rel = "noopener noreferrer",
+                                style = "padding-top:10px; padding-bottom:10px;"
+                              ),
+                              class = "dropdown"
+                            ),
+                            
+                            
+                            # tags$li(a(img(src = 'user-guide.png',
+                            #               title = "Download User Guide", height = "60px"),
+                            #           href = "https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html", #download = "CheckEM_user_guide.pdf",
+                            #         style = "padding-top:10px; padding-bottom:10px;"),
+                            # class = "dropdown"),
                             
                             tags$li(a(href = 'https://marineecology.io/',
                                       img(src = 'https://github.com/UWAMEGFisheries/UWAMEGFisheries.github.io/blob/master/images/MEG-white.png?raw=true',

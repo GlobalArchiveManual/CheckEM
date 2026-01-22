@@ -9,7 +9,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' rds_url <- "https://raw.githubusercontent.com/GlobalArchiveManual/australia-synthesis-2024/main/data/tidy/australian-synthesis_covariates.RDS"
+#' rds_url <- "https://raw.githubusercontent.com/OWNER/REPO/branch/path/file.RDS"
 #' data <- load_rds_from_github(rds_url)
 #' }
 load_rds_from_github <- function(url, pat = NULL) {

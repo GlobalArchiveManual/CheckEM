@@ -60,7 +60,7 @@ function(){
     
     
     
-    tags$head(includeHTML("google-analytics.html")),
+    # tags$head(includeHTML("google-analytics.html")),
     
     tags$head(
       tags$meta(name="google-site-verification", content="YsyUukZjCwtGE-ht7rOZRhcU3ArSMd3yZgqichiQkR8")
@@ -853,7 +853,7 @@ tabItems(
   tabItem(tabName= "guide", 
           fluidRow(
             
-            tags$iframe(style="height:800px; width:100%", src="CheckEM_user_guide.pdf")#,
+            tags$iframe(style="height:800px; width:100%", src="https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html")#,
             
             # box(width = 12, status = "primary", collapsible = TRUE, title = "How to use CheckEM", solidHeader = TRUE, 
             #     includeMarkdown("howto.Rmd")#,

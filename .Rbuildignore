@@ -18,3 +18,5 @@
 ^manuscript$
 ^Manuals$
 ^r-workflows$
+^inst/dev$
+^inst/assets$

@@ -31,3 +31,43 @@ ensure_all_data <- function(version = utils::packageVersion("CheckEM")) {
   dest <- checkem_asset_path("data", ver, "all_data.Rdata")
   download_if_missing(url, dest)
 }
+
+ensure_examples_dir <- function(version = utils::packageVersion("CheckEM")) {
+  ver <- as.character(version)
+  tag <- paste0("v", ver)
+  
+  owner <- "GlobalArchiveManual"
+  repo  <- "CheckEM"
+  
+  zip_url <- sprintf(
+    "https://github.com/%s/%s/releases/download/%s/examples.zip",
+    owner, repo, tag
+  )
+  
+  # This matches what you currently have on disk:
+  zip_dest <- file.path(rappdirs::user_data_dir("CheckEM"), "examples", ver, "examples.zip")
+  unzip_root <- file.path(rappdirs::user_data_dir("CheckEM"), "examples", ver, "examples")
+  
+  if (!file.exists(zip_dest)) {
+    dir.create(dirname(zip_dest), recursive = TRUE, showWarnings = FALSE)
+    utils::download.file(zip_url, destfile = zip_dest, mode = "wb", quiet = TRUE)
+  }
+  
+  # Unzip if needed
+  if (!dir.exists(unzip_root) || length(list.files(unzip_root, recursive = TRUE)) == 0) {
+    dir.create(unzip_root, recursive = TRUE, showWarnings = FALSE)
+    utils::unzip(zip_dest, exdir = unzip_root)
+  }
+  
+  # FIX: return the folder that actually contains the files
+  file_dir <- file.path(unzip_root, "examples")
+  if (dir.exists(file_dir)) return(file_dir)
+  
+  unzip_root
+}
+
+# Convenience: return full path to a specific example file inside the unzipped folder
+checkem_example_path <- function(..., version = utils::packageVersion("CheckEM")) {
+  examples_dir <- ensure_examples_dir(version = version)
+  file.path(examples_dir, ...)
+}
