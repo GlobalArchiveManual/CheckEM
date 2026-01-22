@@ -32,5 +32,5 @@ clean_names <- function(dat) {
     tolower() |>
     gsub("_$", "")
   
-  stats::setNames(dat, new_names)
+  setNames(dat, new_names) #stats::
 }
