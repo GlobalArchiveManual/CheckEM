@@ -61,9 +61,13 @@ Now we load and tidy the metadata.
 If you have already completed this step while checking your habitat data, then you can skip these next two chunks of code and simply read in the metadata (see below).
 
 ```{r load-metadata}
-x <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs")
 
-glimpse(x)
+dir(here::here("r-workflows/data/raw/"))
+
+
+# x <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs")
+# 
+# glimpse(x)
 
 
 # bad <- is.na(names(x)) | names(x) == ""
