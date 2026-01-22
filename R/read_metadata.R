@@ -21,135 +21,157 @@
 #' }
 read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
   
-  read_dat <- function(flnm) {
-    readr::read_csv(flnm, col_types =  readr::cols(.default = "c")) %>%
-      dplyr::mutate(campaignid = basename(flnm)) %>%
-      CheckEM::clean_names() %>%
-      dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, c("_Metadata.csv" = "", "_metadata.csv" = "")))
+  # helper: fail early with useful message (great for CI logs)
+  assert_good_names <- function(x, file) {
+    bad <- is.na(names(x)) | names(x) == ""
+    if (any(bad)) {
+      stop(
+        "Bad column names (NA/blank) in file: ", basename(file), "\n",
+        "Names: ", paste0("[", names(x), "]", collapse = ", ")
+      )
+    }
+    x
   }
   
-  files <- list.files(path = dir,      
-             recursive = recursive,
-             pattern = "etadata.csv",
-             full.names = T) 
+  read_dat <- function(flnm) {
+    dat <- readr::read_csv(
+      flnm,
+      col_types = readr::cols(.default = "c"),
+      name_repair = "unique" # <-- KEY: fixes blank/NA/duplicate names
+    )
+    
+    dat <- tibble::as_tibble(dat, .name_repair = "unique")
+    dat <- assert_good_names(dat, flnm)
+    
+    dat %>%
+      dplyr::mutate(campaignid = basename(flnm)) %>%
+      CheckEM::clean_names() %>%  # your standardisation
+      dplyr::mutate(
+        campaignid = stringr::str_replace_all(
+          campaignid,
+          c("_Metadata.csv" = "", "_metadata.csv" = "")
+        )
+      )
+  }
   
-  dat <- data.frame()
+  files <- list.files(
+    path = dir,
+    recursive = recursive,
+    pattern = "etadata\\.csv$",
+    full.names = TRUE
+  )
   
-  for(file in unique(files)){
+  dat <- tibble::tibble()
+  
+  # Map *old column names* -> *new standard names*
+  # IMPORTANT: names() are the EXISTING possibilities, values are your desired standard names.
+  lookup <- c(
+    "Sample" = "sample",
+    "Latitude" = "latitude_dd",
+    "latitude" = "latitude_dd",
+    "Longitude" = "longitude_dd",
+    "longitude" = "longitude_dd",
+    "Location" = "location",
+    "Status" = "status",
+    "Site" = "site",
+    "Depth" = "depth_m",
+    "depth" = "depth_m",
+    "date.time" = "date_time",
+    "Date.time" = "date_time",
+    "Observer" = "observer_count",
+    "observer" = "observer_count",
+    "Successful.count" = "successful_count",
+    "Successful.length" = "successful_length"
+  )
+  
+  for (file in unique(files)) {
     
-    message(paste("reading metadata file:", file))
+    message("read_metadata(): reading ", file)
     
-    # TODO fix these so it cleans names first
+    temp_dat <- read_dat(file)
     
-    # Rename any old columns to new names
-    lookup <- c(sample = "Sample", # Need to figure out what to do here
-                latitude_dd = "Latitude", 
-                latitude_dd = "latitude", 
-                longitude_dd = "Longitude",
-                longitude_dd = "longitude",
-                location = "Location", 
-                status = "Status",
-                site = "Site",
-                depth_m = "Depth",
-                depth_m = "depth",
-                date_time = "date.time",
-                date_time = "Date.time",
-                observer_count = "Observer",
-                observer_count = "observer",
-                successful_count = "Successful.count",
-                successful_length	 = "Successful.length")
+    # Rename FIRST using known variants, then clean again (so downstream uses standard names)
+    temp_dat <- temp_dat %>%
+      dplyr::rename(!!!stats::setNames(names(lookup), lookup)) %>%
+      CheckEM::clean_names()
     
-    temp_dat <- read_dat(file) %>%
-      CheckEM::clean_names() %>%
-      dplyr::rename(any_of(lookup))
-    
-    if(method %in% c("DOVs")){
-      
-      if("opcode" %in% names(temp_dat)){
-        
+    # Method-specific sample logic
+    if (method %in% c("DOVs")) {
+      if ("opcode" %in% names(temp_dat)) {
         temp_dat <- temp_dat %>%
           dplyr::mutate(sample = paste(opcode, period, sep = "-")) %>%
-          dplyr::select(-c(opcode, period))
-        
+          dplyr::select(-dplyr::any_of(c("opcode", "period")))
       }
-      
-    } 
-    
-    if(method %in% c("BRUVs")){
-      
-      if("opcode" %in% names(temp_dat)){
-        
-      temp_dat <- temp_dat %>%
-        dplyr::mutate(sample = opcode)
-      }
-      
     }
     
-    if(!"date_time" %in% names(temp_dat)){
+    if (method %in% c("BRUVs")) {
+      if ("opcode" %in% names(temp_dat)) {
+        temp_dat <- temp_dat %>%
+          dplyr::mutate(sample = opcode)
+      }
+    }
+    
+    # If date_time missing, create it
+    if (!"date_time" %in% names(temp_dat)) {
       
-      message(paste0("the date_time column is missing from: ", file, ". Creating column now...."))
-      
-      # TODO time fix ones that are decimal
-      # TODO remove AM PM from times
-      # TODO fill blank times with midnight
+      message("read_metadata(): date_time missing in ", basename(file), " — creating it")
       
       temp_dat <- temp_dat %>%
-        tidyr::separate(time, into = c("hour", "min", "sec"), sep = ":") %>%
-        dplyr::mutate(hour = stringr::str_pad(hour, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(min = stringr::str_pad(min, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(sec = stringr::str_pad(sec, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(year = stringr::str_sub(date, 1,4)) %>%
-        dplyr::mutate(month = stringr::str_sub(date, 5,6)) %>%
-        dplyr::mutate(day = stringr::str_sub(date, 7,8)) %>%
-        tidyr::replace_na(list(sec = "00", depth = 0)) %>%
-        dplyr::mutate(time = paste(hour, min, sec, sep = ":")) %>%
-        dplyr::mutate(date_time = paste(year, "-", month, "-", day, "T", time, sep = "")) %>%
-        dplyr::mutate(date = paste(year, "-", month, "-", day, sep = "")) 
-
-      coords_met <- temp_dat %>%
-        dplyr::distinct(latitude_dd, longitude_dd)
-
-      metadata_sf <- sf::st_as_sf(x = temp_dat, coords = c("longitude_dd", "latitude_dd")) %>%
+        tidyr::separate(time, into = c("hour", "min", "sec"), sep = ":", fill = "right") %>%
+        dplyr::mutate(
+          hour = stringr::str_pad(hour, 2, side = "left", pad = "0"),
+          min  = stringr::str_pad(min,  2, side = "left", pad = "0"),
+          sec  = stringr::str_pad(sec,  2, side = "left", pad = "0"),
+          year = stringr::str_sub(date, 1, 4),
+          month = stringr::str_sub(date, 5, 6),
+          day = stringr::str_sub(date, 7, 8)
+        ) %>%
+        tidyr::replace_na(list(sec = "00")) %>%
+        dplyr::mutate(
+          time = paste(hour, min, sec, sep = ":"),
+          date_time = paste0(year, "-", month, "-", day, "T", time),
+          date = paste0(year, "-", month, "-", day)
+        )
+      
+      # timezone work (unchanged, just keep it)
+      metadata_sf <- sf::st_as_sf(temp_dat, coords = c("longitude_dd", "latitude_dd"), crs = 4326) %>%
         dplyr::mutate(timezone = lutz::tz_lookup(., crs = NULL, method = "accurate", warn = TRUE))
       
       timezones_to_add <- metadata_sf %>%
         dplyr::distinct(campaignid, sample, timezone)
-
+      
       unique_timezones <- metadata_sf %>%
         dplyr::distinct(date, timezone)
-
-      # Create a blank dataframe
+      
       timezone_offsets <- data.frame()
-
-      for(i in 1:nrow(unique_timezones)){
-        temp_i <- unique_timezones[i,]
+      for (i in seq_len(nrow(unique_timezones))) {
+        temp_i <- unique_timezones[i, ]
         temp <- lutz::tz_offset(temp_i$date, tz = temp_i$timezone) %>%
           dplyr::mutate(date = temp_i$date)
         timezone_offsets <- dplyr::bind_rows(temp, timezone_offsets)
       }
-
+      
       timezone_offsets_format <- timezone_offsets %>%
-        dplyr::mutate(hours = floor(utc_offset_h)) %>%
-        dplyr::mutate(minutes = (utc_offset_h - hours) * 60) %>%
-        dplyr::mutate(hours = stringr::str_pad(hours, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(minutes = stringr::str_pad(minutes, 2, side = "left", pad = "0")) %>%
-        dplyr::mutate(utc_offset = paste("+", hours, ":", minutes, sep = "")) %>% # TODO come up with a way to do plus or negative
+        dplyr::mutate(
+          hours = floor(utc_offset_h),
+          minutes = (utc_offset_h - hours) * 60,
+          hours = stringr::str_pad(hours, 2, side = "left", pad = "0"),
+          minutes = stringr::str_pad(minutes, 2, side = "left", pad = "0"),
+          utc_offset = paste0("+", hours, ":", minutes)
+        ) %>%
         dplyr::select(tz_name, date, utc_offset) %>%
         dplyr::rename(timezone = tz_name) %>%
         dplyr::distinct()
-
+      
       temp_dat <- temp_dat %>%
-        dplyr::left_join(timezones_to_add) %>%
-        dplyr::left_join(., timezone_offsets_format) %>%
-        dplyr::mutate(date_time = paste(date_time, utc_offset, sep = "")) %>%
-        dplyr::select(-c(hour, min, sec, year, month, day, time, timezone, utc_offset))
-
+        dplyr::left_join(timezones_to_add, by = c("campaignid", "sample")) %>%
+        dplyr::left_join(timezone_offsets_format, by = c("timezone", "date")) %>%
+        dplyr::mutate(date_time = paste0(date_time, utc_offset)) %>%
+        dplyr::select(-dplyr::any_of(c("hour", "min", "sec", "year", "month", "day", "time", "timezone", "utc_offset")))
     }
     
     dat <- dplyr::bind_rows(dat, temp_dat)
-    
   }
   
-  return(dat)
-    
+  dat
 }
