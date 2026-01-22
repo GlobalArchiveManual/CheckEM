@@ -75,9 +75,9 @@ dir(here::here("r-workflows/data/raw/"))
 #   stop("Bad column names in: ", basename(file), "\nNames: ", paste(names(x), collapse = " | "))
 # }
 
-# metadata <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs") %>% # Change here to "DOVs"
+metadata <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs") %>% # Change here to "DOVs"
 #   dplyr::select(campaignid, sample, status, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
-#   glimpse()
+  glimpse()
 ```
 
 <!-- Save the metadata as an R data file (this creates a lighter file than saving as a .csv or similar, it also maintains any column formatting). -->
