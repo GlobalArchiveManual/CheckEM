@@ -64,19 +64,8 @@ If you have already completed this step while checking your habitat data, then y
 
 dir(here::here("r-workflows/data/raw/"))
 
-
-# x <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs")
-# 
-# glimpse(x)
-
-
-# bad <- is.na(names(x)) | names(x) == ""
-# if (any(bad)) {
-#   stop("Bad column names in: ", basename(file), "\nNames: ", paste(names(x), collapse = " | "))
-# }
-
 metadata <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs") %>% # Change here to "DOVs"
-#   dplyr::select(campaignid, sample, status, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
+  dplyr::select(campaignid, sample, status, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
 ```
 
