@@ -41,27 +41,27 @@ read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
     
     # TODO fix these so it cleans names first
     
-    # Rename any old columns to new names
-    lookup <- c(sample = "Sample", # Need to figure out what to do here
-                latitude_dd = "Latitude", 
-                latitude_dd = "latitude", 
-                longitude_dd = "Longitude",
-                longitude_dd = "longitude",
-                location = "Location", 
-                status = "Status",
-                site = "Site",
-                depth_m = "Depth",
-                depth_m = "depth",
-                date_time = "date.time",
-                date_time = "Date.time",
-                observer_count = "Observer",
-                observer_count = "observer",
-                successful_count = "Successful.count",
-                successful_length	 = "Successful.length")
+    # # Rename any old columns to new names
+    # lookup <- c(sample = "Sample", # Need to figure out what to do here
+    #             latitude_dd = "Latitude", 
+    #             latitude_dd = "latitude", 
+    #             longitude_dd = "Longitude",
+    #             longitude_dd = "longitude",
+    #             location = "Location", 
+    #             status = "Status",
+    #             site = "Site",
+    #             depth_m = "Depth",
+    #             depth_m = "depth",
+    #             date_time = "date.time",
+    #             date_time = "Date.time",
+    #             observer_count = "Observer",
+    #             observer_count = "observer",
+    #             successful_count = "Successful.count",
+    #             successful_length	 = "Successful.length")
     
     temp_dat <- read_dat(file) %>%
-      CheckEM::clean_names() %>%
-      dplyr::rename(any_of(lookup))
+      CheckEM::clean_names() #%>%
+      # dplyr::rename(any_of(lookup))
     
     if(method %in% c("DOVs")){
       
