@@ -62,6 +62,9 @@ if (FALSE) { # \dontrun{
 length <- ga_api_length("your_username", "your_password", synthesis_id = 1234)
 
 # Fetch length data without life history
-length <- ga_api_length("your_username", "your_password", synthesis_id = 1234, include_life_history = FALSE)
+length <- ga_api_length("your_username", 
+                        "your_password", 
+                         synthesis_id = 1234, 
+                         include_life_history = FALSE)
 } # }
 ```

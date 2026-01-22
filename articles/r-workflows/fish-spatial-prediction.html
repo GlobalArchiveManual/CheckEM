@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../../index.html">CheckEM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,7 +101,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../../logo.png" class="logo" alt=""><h1>Spatially predict fish distributions</h1>
+
+      <h1>Spatially predict fish distributions</h1>
                         <h4 data-toc-skip class="author">Claude Spencer
 &amp; Brooke Gibbons</h4>
             
@@ -113,332 +114,150 @@
 
     
     
-<p>This script takes the tidy datasets created in the previous steps,
-uses the top models created in ‘Select top models for fish using
-FSSgam’. Once an appropriate model has been chosen by the user, we then
-provide R script to spatially predict the response variables and plot
-these in a tidy format.</p>
-<div class="section level2">
-<h2 id="r-setup">R setup<a class="anchor" aria-label="anchor" href="#r-setup"></a>
-</h2>
-<p>Load libraries. All packages are available through CRAN, aside from
-‘FSSgam’, which can be installed following the instructions provided in
-the GitHub repository <a href="https://github.com/beckyfisher/FSSgam" class="external-link uri">https://github.com/beckyfisher/FSSgam</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages('remotes')</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">'remotes'</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout<span class="op">=</span><span class="fl">9999999</span><span class="op">)</span></span>
-<span><span class="co"># remotes::install_github("GlobalArchiveManual/CheckEM")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://globalarchivemanual.github.io/CheckEM/">CheckEM</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">FSSgam</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://eliocamp.github.io/ggnewscale/" class="external-link">ggnewscale</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
-<p>Set the study name. Study names are used throughout to make for
-reproducible code that can be easily shifted between different campaigns
-and projects while still providing meaningful filenames.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">'example-bruv-workflow'</span></span></code></pre></div>
-<p>Load the fish length data. This data is created in the previous
-workflow, ‘Format &amp; visualise fish data’.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy.length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>, </span>
-<span>                      <span class="va">name</span>,<span class="st">'_tidy-length.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and create your spatial layers</span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 64</span></span>
-<span><span class="co">## Columns: 18</span></span>
-<span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "15"<span style="color: #949494;">, </span>"17"<span style="color: #949494;">, </span>"19"<span style="color: #949494;">, </span>"23"<span style="color: #949494;">, </span>"24"<span style="color: #949494;">, </span>"26"<span style="color: #949494;">, </span>"29"<span style="color: #949494;">, </span>"3"<span style="color: #949494;">, </span>"31"<span style="color: #949494;">, </span>"32"…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>8<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>13<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"N…</span></span>
-<span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "greater than Lm"<span style="color: #949494;">, </span>"greater than Lm"<span style="color: #949494;">, </span>"greater than Lm"<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8444<span style="color: #949494;">, </span>114.8576<span style="color: #949494;">, </span>114.7822<span style="color: #949494;">, </span>114.9190<span style="color: #949494;">, </span>114.8485<span style="color: #949494;">, </span>114.928…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08478<span style="color: #949494;">, </span>-34.09635<span style="color: #949494;">, </span>-34.12047<span style="color: #949494;">, </span>-34.12832<span style="color: #949494;">, </span>-34.11789<span style="color: #949494;">, </span>-3…</span></span>
-<span><span class="co">## $ depth_m      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "45.3"<span style="color: #949494;">, </span>"43.3"<span style="color: #949494;">, </span>"73.6"<span style="color: #949494;">, </span>"41"<span style="color: #949494;">, </span>"45.6"<span style="color: #949494;">, </span>"36"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"46.7…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -44.29804<span style="color: #949494;">, </span>-42.74676<span style="color: #949494;">, </span>-71.60112<span style="color: #949494;">, </span>-38.25594<span style="color: #949494;">, </span>-44.23959<span style="color: #949494;">, </span>-4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.108975978<span style="color: #949494;">, </span>0.008719478<span style="color: #949494;">, </span>0.880997142<span style="color: #949494;">, </span>0.444838455<span style="color: #949494;">, </span>0.103…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 264.03427<span style="color: #949494;">, </span>30.76545<span style="color: #949494;">, </span>262.35388<span style="color: #949494;">, </span>294.10675<span style="color: #949494;">, </span>257.20307<span style="color: #949494;">, </span>40.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.19527912<span style="color: #949494;">, </span>0.02505112<span style="color: #949494;">, </span>1.04176044<span style="color: #949494;">, </span>0.47694588<span style="color: #949494;">, </span>0.042278…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.34487247<span style="color: #949494;">, </span>0.03473282<span style="color: #949494;">, </span>2.80258274<span style="color: #949494;">, </span>1.83670998<span style="color: #949494;">, </span>0.3347983…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.91366196<span style="color: #949494;">, </span>0.09923935<span style="color: #949494;">, </span>9.01136017<span style="color: #949494;">, </span>5.30128479<span style="color: #949494;">, </span>1.2933082…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.2281526<span style="color: #949494;">, </span>-3.1375041<span style="color: #949494;">, </span>17.9911461<span style="color: #949494;">, </span>-8.6934719<span style="color: #949494;">, </span>2.9724391…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.518519<span style="color: #949494;">, </span>3.333333<span style="color: #949494;">, </span>2.583333<span style="color: #949494;">, </span>3.555556<span style="color: #949494;">, </span>3.360000<span style="color: #949494;">, </span>4.00000…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8024180<span style="color: #949494;">, </span>0.9128709<span style="color: #949494;">, </span>0.5036102<span style="color: #949494;">, </span>0.8555853<span style="color: #949494;">, </span>0.4898979<span style="color: #949494;">, </span>0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7741935<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>0.8823529<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.…</span></span></code></pre>
-<p>Load the fish count data. This data is created in the previous
-workflow, ‘Format &amp; visualise fish data’.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy.count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>, </span>
-<span>                      <span class="va">name</span>,<span class="st">'_tidy-count.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and create your spatial layers</span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 64</span></span>
-<span><span class="co">## Columns: 18</span></span>
-<span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10"<span style="color: #949494;">, </span>"10"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"16"<span style="color: #949494;">, </span>"16…</span></span>
-<span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"N…</span></span>
-<span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance"<span style="color: #949494;">, </span>"species_richness"<span style="color: #949494;">, </span>"total_abundance"<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>94<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>191<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>146<span style="color: #949494;">, </span>16<span style="color: #949494;">, </span>99<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>312<span style="color: #949494;">, </span>18<span style="color: #949494;">, </span>38<span style="color: #949494;">, </span>13…</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533<span style="color: #949494;">, </span>114.8533<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8686<span style="color: #949494;">, </span>114.868…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387<span style="color: #949494;">, </span>-34.08387<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.07530<span style="color: #949494;">, </span>-3…</span></span>
-<span><span class="co">## $ depth_m      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3"<span style="color: #949494;">, </span>"44.3"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"45.3"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519<span style="color: #949494;">, </span>-42.77519<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-41.07679<span style="color: #949494;">, </span>-4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777<span style="color: #949494;">, </span>0.005708777<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.078…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942<span style="color: #949494;">, </span>72.31942<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>215.54254<span style="color: #949494;">, </span>215.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.2611088…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.3096442…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660<span style="color: #949494;">, </span>0.11757660<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.7959022…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883<span style="color: #949494;">, </span>-2.8542883<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-6.646017…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391<span style="color: #949494;">, </span>3.217391<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.440000<span style="color: #949494;">, </span>2.44000…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428<span style="color: #949494;">, </span>0.7952428<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.7118052<span style="color: #949494;">, </span>0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8888889<span style="color: #949494;">, </span>0.8888889<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>0.8857143<span style="color: #949494;">, </span>0.…</span></span></code></pre>
-<p>Combine the count and length data for easy spatial prediction.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">tidy.count</span>, <span class="va">tidy.length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 128</span></span>
-<span><span class="co">## Columns: 18</span></span>
-<span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10"<span style="color: #949494;">, </span>"10"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"16"<span style="color: #949494;">, </span>"16…</span></span>
-<span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"N…</span></span>
-<span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance"<span style="color: #949494;">, </span>"species_richness"<span style="color: #949494;">, </span>"total_abundance"<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>94<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>191<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>146<span style="color: #949494;">, </span>16<span style="color: #949494;">, </span>99<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>312<span style="color: #949494;">, </span>18<span style="color: #949494;">, </span>38<span style="color: #949494;">, </span>13…</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533<span style="color: #949494;">, </span>114.8533<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8686<span style="color: #949494;">, </span>114.868…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387<span style="color: #949494;">, </span>-34.08387<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.07530<span style="color: #949494;">, </span>-3…</span></span>
-<span><span class="co">## $ depth_m      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3"<span style="color: #949494;">, </span>"44.3"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"45.3"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519<span style="color: #949494;">, </span>-42.77519<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-41.07679<span style="color: #949494;">, </span>-4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777<span style="color: #949494;">, </span>0.005708777<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.078…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942<span style="color: #949494;">, </span>72.31942<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>215.54254<span style="color: #949494;">, </span>215.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.2611088…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.3096442…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660<span style="color: #949494;">, </span>0.11757660<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.7959022…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883<span style="color: #949494;">, </span>-2.8542883<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-6.646017…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391<span style="color: #949494;">, </span>3.217391<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.440000<span style="color: #949494;">, </span>2.44000…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428<span style="color: #949494;">, </span>0.7952428<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.7118052<span style="color: #949494;">, </span>0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8888889<span style="color: #949494;">, </span>0.8888889<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>0.8857143<span style="color: #949494;">, </span>0.…</span></span></code></pre>
-<p>Read in the bathymetry derivatives.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">preds</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/rasters/"</span>, </span>
-<span>                         <span class="va">name</span>, <span class="st">"_bathymetry_derivatives.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">preds</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fish-spatial-prediction_files/figure-html/read-derivatives-1.png" class="r-plt" alt="" width="700"></p>
-<p>Transform the spatial bathymetry derivatives into a dataframe to
-predict onto.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">preddf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">preds</span>, xy <span class="op">=</span> <span class="cn">TRUE</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 73,350</span></span>
-<span><span class="co">## Columns: 9</span></span>
-<span><span class="co">## $ x         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 115.1714<span style="color: #949494;">, </span>115.1739<span style="color: #949494;">, </span>115.1764<span style="color: #949494;">, </span>115.1789<span style="color: #949494;">, </span>115.1814<span style="color: #949494;">, </span>115.1839<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ y         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.6…</span></span>
-<span><span class="co">## $ mbdepth   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -14.83014<span style="color: #949494;">, </span>-13.89184<span style="color: #949494;">, </span>-14.18757<span style="color: #949494;">, </span>-14.48647<span style="color: #949494;">, </span>-14.47323<span style="color: #949494;">, </span>-14.3…</span></span>
-<span><span class="co">## $ slope     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.24350203<span style="color: #949494;">, </span>0.19746646<span style="color: #949494;">, </span>0.17799167<span style="color: #949494;">, </span>0.18316828<span style="color: #949494;">, </span>0.22091857<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ aspect    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 339.995240<span style="color: #949494;">, </span>341.597571<span style="color: #949494;">, </span>21.180346<span style="color: #949494;">, </span>12.600024<span style="color: #949494;">, </span>356.337121<span style="color: #949494;">, </span>35…</span></span>
-<span><span class="co">## $ tpi       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -3.721524e-01<span style="color: #949494;">, </span>5.277313e-01<span style="color: #949494;">, </span>1.502453e-01<span style="color: #949494;">, </span>-1.123428e-03<span style="color: #949494;">, </span>9.…</span></span>
-<span><span class="co">## $ tri       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9656481<span style="color: #949494;">, </span>0.8277034<span style="color: #949494;">, </span>0.6934198<span style="color: #949494;">, </span>0.6945946<span style="color: #949494;">, </span>0.8081013<span style="color: #949494;">, </span>0.902…</span></span>
-<span><span class="co">## $ roughness <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.807414<span style="color: #949494;">, </span>2.421717<span style="color: #949494;">, </span>2.196986<span style="color: #949494;">, </span>2.156502<span style="color: #949494;">, </span>2.581898<span style="color: #949494;">, </span>2.606502<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.871674<span style="color: #949494;">, </span>-2.161609<span style="color: #949494;">, </span>-2.683798<span style="color: #949494;">, </span>-3.207528<span style="color: #949494;">, </span>-3.417629<span style="color: #949494;">, </span>-3.56…</span></span></code></pre>
-<p>Manually set the best model from the full subsets model selection
-process. We select the ‘best’ model as the most parsimonious model
-within 2 AICc of the lowest AICc. We suggest you select your models
-using statistically rigorous criteria that best suits your analysis or
-project.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Indicator species greater than size of maturity</span></span>
-<span><span class="va">m_mature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">number</span> <span class="op">~</span> </span>
-<span>                 <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">aspect</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">"cc"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                  <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">tpi</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
-<span>               data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">response</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"greater than Lm"</span><span class="op">)</span>, </span>
-<span>               family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/Tweedie.html" class="external-link">tw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in smooth.construct.cc.smooth.spec(object, dk$data, dk$knots): basis dimension, k, increased to minimum possible</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_mature</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Family: Tweedie(p=1.257) </span></span>
-<span><span class="co">## Link function: log </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Formula:</span></span>
-<span><span class="co">## number ~ s(aspect, k = 3, bs = "cc") + s(tpi, k = 3, bs = "cr")</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Parametric coefficients:</span></span>
-<span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)   </span></span>
-<span><span class="co">## (Intercept)   0.6831     0.2130   3.206  0.00331 **</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##             edf Ref.df     F p-value  </span></span>
-<span><span class="co">## s(aspect) 1.487  2.000 2.757  0.0369 *</span></span>
-<span><span class="co">## s(tpi)    1.000  1.001 0.042  0.8404  </span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.0554   Deviance explained = 16.7%</span></span>
-<span><span class="co">## -REML = 62.912  Scale est. = 2.3328    n = 32</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_mature</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fish-spatial-prediction_files/figure-html/set-models-1.png" class="r-plt" alt="" width="700"></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Total abundance</span></span>
-<span><span class="va">m_totabund</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">number</span> <span class="op">~</span> </span>
-<span>                  <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
-<span>                data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">response</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"total_abundance"</span><span class="op">)</span>, </span>
-<span>                family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">gaussian</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_totabund</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Family: gaussian </span></span>
-<span><span class="co">## Link function: identity </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Formula:</span></span>
-<span><span class="co">## number ~ s(detrended, k = 3, bs = "cr")</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Parametric coefficients:</span></span>
-<span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)   131.22      13.24   9.913 5.61e-11 ***</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##              edf Ref.df     F p-value   </span></span>
-<span><span class="co">## s(detrended)   1      1 8.602 0.00638 **</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.197   Deviance explained = 22.3%</span></span>
-<span><span class="co">## GCV = 5981.2  Scale est. = 5607.4    n = 32</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_totabund</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fish-spatial-prediction_files/figure-html/set-models-2.png" class="r-plt" alt="" width="700"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Species richness</span></span>
-<span><span class="va">m_specrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">number</span> <span class="op">~</span> </span>
-<span>                    <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">mbdepth</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span>, </span>
-<span>                  data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">response</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"species_richness"</span><span class="op">)</span>, </span>
-<span>                  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">gaussian</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m_specrich</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Family: gaussian </span></span>
-<span><span class="co">## Link function: identity </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Formula:</span></span>
-<span><span class="co">## number ~ s(mbdepth, k = 3, bs = "cr")</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Parametric coefficients:</span></span>
-<span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)  13.9688     0.6462   21.62   &lt;2e-16 ***</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Approximate significance of smooth terms:</span></span>
-<span><span class="co">##            edf Ref.df     F p-value  </span></span>
-<span><span class="co">## s(mbdepth)   1      1 3.904  0.0574 .</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## R-sq.(adj) =  0.0856   Deviance explained = 11.5%</span></span>
-<span><span class="co">## GCV = 14.251  Scale est. = 13.36     n = 32</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">m_specrich</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, cex <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fish-spatial-prediction_files/figure-html/set-models-3.png" class="r-plt" alt="" width="700"></p>
-<p>Predict each of the response variables across the extent of the
-bathymetry derivatives.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">preddf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">preddf</span>, </span>
-<span>                <span class="st">"pmature"</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m_mature</span>, <span class="va">preddf</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>,</span>
-<span>                <span class="st">"ptotabund"</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m_totabund</span>, <span class="va">preddf</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>,</span>
-<span>                <span class="st">"pspecrich"</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m_specrich</span>, <span class="va">preddf</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 73,350</span></span>
-<span><span class="co">## Columns: 12</span></span>
-<span><span class="co">## $ x         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 115.1714<span style="color: #949494;">, </span>115.1739<span style="color: #949494;">, </span>115.1764<span style="color: #949494;">, </span>115.1789<span style="color: #949494;">, </span>115.1814<span style="color: #949494;">, </span>115.1839<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ y         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.6…</span></span>
-<span><span class="co">## $ mbdepth   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -14.83014<span style="color: #949494;">, </span>-13.89184<span style="color: #949494;">, </span>-14.18757<span style="color: #949494;">, </span>-14.48647<span style="color: #949494;">, </span>-14.47323<span style="color: #949494;">, </span>-14.3…</span></span>
-<span><span class="co">## $ slope     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.24350203<span style="color: #949494;">, </span>0.19746646<span style="color: #949494;">, </span>0.17799167<span style="color: #949494;">, </span>0.18316828<span style="color: #949494;">, </span>0.22091857<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ aspect    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 339.995240<span style="color: #949494;">, </span>341.597571<span style="color: #949494;">, </span>21.180346<span style="color: #949494;">, </span>12.600024<span style="color: #949494;">, </span>356.337121<span style="color: #949494;">, </span>35…</span></span>
-<span><span class="co">## $ tpi       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -3.721524e-01<span style="color: #949494;">, </span>5.277313e-01<span style="color: #949494;">, </span>1.502453e-01<span style="color: #949494;">, </span>-1.123428e-03<span style="color: #949494;">, </span>9.…</span></span>
-<span><span class="co">## $ tri       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9656481<span style="color: #949494;">, </span>0.8277034<span style="color: #949494;">, </span>0.6934198<span style="color: #949494;">, </span>0.6945946<span style="color: #949494;">, </span>0.8081013<span style="color: #949494;">, </span>0.902…</span></span>
-<span><span class="co">## $ roughness <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.807414<span style="color: #949494;">, </span>2.421717<span style="color: #949494;">, </span>2.196986<span style="color: #949494;">, </span>2.156502<span style="color: #949494;">, </span>2.581898<span style="color: #949494;">, </span>2.606502<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.871674<span style="color: #949494;">, </span>-2.161609<span style="color: #949494;">, </span>-2.683798<span style="color: #949494;">, </span>-3.207528<span style="color: #949494;">, </span>-3.417629<span style="color: #949494;">, </span>-3.56…</span></span>
-<span><span class="co">## $ pmature   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.508352<span style="color: #949494;">, </span>1.380291<span style="color: #949494;">, </span>1.540683<span style="color: #949494;">, </span>1.758228<span style="color: #949494;">, </span>1.203778<span style="color: #949494;">, </span>1.207899<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ ptotabund <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 140.7683<span style="color: #949494;">, </span>138.4064<span style="color: #949494;">, </span>140.1434<span style="color: #949494;">, </span>141.8855<span style="color: #949494;">, </span>142.5844<span style="color: #949494;">, </span>143.0622<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ pspecrich <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 17.83208<span style="color: #949494;">, </span>17.94093<span style="color: #949494;">, </span>17.90662<span style="color: #949494;">, </span>17.87195<span style="color: #949494;">, </span>17.87349<span style="color: #949494;">, </span>17.88257<span style="color: #949494;">, </span>…</span></span></code></pre>
-<p>Save out the spatial predictions. If your computer crashes this way
-you don’t need to run the whole script again.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">preddf</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/model output/fish/"</span>, </span>
-<span>                              <span class="va">name</span>, <span class="st">"_fish-prediction.RDS"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Pivot the data to long format for easy plotting.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">preddf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"p"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"response"</span>, values_to <span class="op">=</span> <span class="st">"value"</span>,</span>
-<span>               cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 220,050</span></span>
-<span><span class="co">## Columns: 4</span></span>
-<span><span class="co">## $ x        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 115.1714<span style="color: #949494;">, </span>115.1714<span style="color: #949494;">, </span>115.1714<span style="color: #949494;">, </span>115.1739<span style="color: #949494;">, </span>115.1739<span style="color: #949494;">, </span>115.1739<span style="color: #949494;">, </span>1…</span></span>
-<span><span class="co">## $ y        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60…</span></span>
-<span><span class="co">## $ response <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "pmature"<span style="color: #949494;">, </span>"ptotabund"<span style="color: #949494;">, </span>"pspecrich"<span style="color: #949494;">, </span>"pmature"<span style="color: #949494;">, </span>"ptotabund"<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ value    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.508352<span style="color: #949494;">, </span>140.768348<span style="color: #949494;">, </span>17.832085<span style="color: #949494;">, </span>1.380291<span style="color: #949494;">, </span>138.406351<span style="color: #949494;">, </span>17.940…</span></span></code></pre>
-<p>Reset the response variables to loop through when plotting.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">resp.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">response</span><span class="op">)</span></span></code></pre></div>
-<p>Load marine park data. The dataset used here is the 2022
-Collaborative Australian Protected Areas Database, which is available
-for free download from <a href="https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore" class="external-link uri">https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore</a>.
-Feel free to replace this shapefile with any suitable dataset that is
-available for your study area.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">marine.parks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_make_valid</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>ZONE_TYPE <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">ZONE_TYPE</span>, </span>
-<span>                                            <span class="st">"\\s*\\([^\\)]+\\)"</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">ZONE_TYPE</span>, <span class="st">"Sanctuary|National Park"</span><span class="op">)</span>,</span>
-<span>                <span class="va">STATE</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"WA"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                        </span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Reading layer `Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine' from data source `/home/runner/work/CheckEM/CheckEM/r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp' </span></span>
-<span><span class="co">##   using driver `ESRI Shapefile'</span></span>
-<span><span class="co">## Simple feature collection with 3775 features and 26 fields</span></span>
-<span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
-<span><span class="co">## Dimension:     XY</span></span>
-<span><span class="co">## Bounding box:  xmin: 70.71702 ymin: -58.44947 xmax: 170.3667 ymax: -8.473407</span></span>
-<span><span class="co">## Geodetic CRS:  WGS 84</span></span></code></pre>
-<p>Loop through each response variable and create a ggplot figure for
-each.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">resp.vars</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">use.dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">response</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">use.dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, fill <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span>colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#fde725"</span>, <span class="st">"#21918c"</span>, <span class="st">"#440154"</span><span class="op">)</span>, na.value <span class="op">=</span> <span class="st">"transparent"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://eliocamp.github.io/ggnewscale/reference/new_scale.html" class="external-link">new_scale_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>                     </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">marine.parks</span>, fill <span class="op">=</span> <span class="cn">NA</span>, colour <span class="op">=</span> <span class="st">"#7bbc63"</span>, </span>
-<span>            size <span class="op">=</span> <span class="fl">0.2</span>, show.legend <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">coord_sf</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>             ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/assign.html" class="external-link">assign</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"gg_"</span>, <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, <span class="va">p</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p>Combine the plots using patchwork.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gg_pmature</span> <span class="op">+</span> <span class="va">gg_ptotabund</span> <span class="op">+</span> <span class="va">gg_pspecrich</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.justification <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fish-spatial-prediction_files/figure-html/combine-fish-plots-1.png" class="r-plt" alt="" width="700"></p>
-</div>
+<!-- This script takes the tidy datasets created in the previous steps, uses the top models created in 'Select top models for fish using FSSgam'. Once an appropriate model has been chosen by the user, we then provide R script to spatially predict the response variables and plot these in a tidy format. -->
+<!-- ```{r install-fssgam, include=FALSE} -->
+<!-- devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never") -->
+<!-- ``` -->
+<!-- # R setup -->
+<!-- Load libraries. All packages are available through CRAN, aside from 'FSSgam', which can be installed following the instructions provided in the GitHub repository https://github.com/beckyfisher/FSSgam.  -->
+<!-- ```{r libraries, results='hide', warning=FALSE, message=FALSE} -->
+<!-- # install.packages('remotes') -->
+<!-- library('remotes') -->
+<!-- options(timeout=9999999) -->
+<!-- # remotes::install_github("GlobalArchiveManual/CheckEM") -->
+<!-- library(CheckEM) -->
+<!-- library(tidyverse) -->
+<!-- library(mgcv) -->
+<!-- library(devtools) -->
+<!-- library(FSSgam) -->
+<!-- library(here) -->
+<!-- library(ggplot2) -->
+<!-- library(ggnewscale) -->
+<!-- library(viridis) -->
+<!-- library(terra) -->
+<!-- library(sf) -->
+<!-- library(patchwork) -->
+<!-- ``` -->
+<!-- Set the study name. Study names are used throughout to make for reproducible code that can be easily shifted between different campaigns and projects while still providing meaningful filenames. -->
+<!-- ```{r study-name} -->
+<!-- name <- 'example-bruv-workflow' -->
+<!-- ``` -->
+<!-- Load the fish length data. This data is created in the previous workflow, 'Format & visualise fish data'. -->
+<!-- ```{r read-length} -->
+<!-- tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
+<!--                       name,'_tidy-length.rds'))) %>% -->
+<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Load the fish count data. This data is created in the previous workflow, 'Format & visualise fish data'. -->
+<!-- ```{r load-count} -->
+<!-- tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
+<!--                       name,'_tidy-count.rds'))) %>% -->
+<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Combine the count and length data for easy spatial prediction. -->
+<!-- ```{r combine-data} -->
+<!-- dat <- bind_rows(tidy.count, tidy.length) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Read in the bathymetry derivatives. -->
+<!-- ```{r read-derivatives} -->
+<!-- preds  <- readRDS(here::here(paste0("r-workflows/data/spatial/rasters/",  -->
+<!--                          name, "_bathymetry_derivatives.rds"))) -->
+<!-- plot(preds) -->
+<!-- ``` -->
+<!-- Transform the spatial bathymetry derivatives into a dataframe to predict onto. -->
+<!-- ```{r derivative-dataframe} -->
+<!-- preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>% -->
+<!--   clean_names() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Manually set the best model from the full subsets model selection process. We select the 'best' model as the most parsimonious model within 2 AICc of the lowest AICc. We suggest you select your models using statistically rigorous criteria that best suits your analysis or project. -->
+<!-- ```{r set-models} -->
+<!-- # Indicator species greater than size of maturity -->
+<!-- m_mature <- gam(number ~  -->
+<!--                  s(aspect, k = 3, bs = "cc") + -->
+<!--                   s(tpi, k = 3, bs = "cr"),  -->
+<!--                data = dplyr::filter(dat, response %in% "greater than Lm"),  -->
+<!--                family = tw()) -->
+<!-- summary(m_mature) -->
+<!-- plot(m_mature, pages = 1, residuals = T, cex = 5) -->
+<!-- # Total abundance -->
+<!-- m_totabund <- gam(number ~  -->
+<!--                   s(detrended, k = 3, bs = "cr"),  -->
+<!--                 data = dplyr::filter(dat, response %in% "total_abundance"),  -->
+<!--                 family = gaussian(link = "identity")) -->
+<!-- summary(m_totabund) -->
+<!-- plot(m_totabund, pages = 1, residuals = T, cex = 5) -->
+<!-- # Species richness -->
+<!-- m_specrich <- gam(number ~  -->
+<!--                     s(mbdepth, k = 3, bs = "cr"),  -->
+<!--                   data = dplyr::filter(dat, response %in% "species_richness"),  -->
+<!--                   family = gaussian(link = "identity")) -->
+<!-- summary(m_specrich) -->
+<!-- plot(m_specrich, pages = 1, residuals = T, cex = 5) -->
+<!-- ``` -->
+<!-- Predict each of the response variables across the extent of the bathymetry derivatives. -->
+<!-- ```{r predict-gam} -->
+<!-- preddf <- cbind(preddf,  -->
+<!--                 "pmature" = predict(m_mature, preddf, type = "response"), -->
+<!--                 "ptotabund" = predict(m_totabund, preddf, type = "response"), -->
+<!--                 "pspecrich" = predict(m_specrich, preddf, type = "response")) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Save out the spatial predictions. If your computer crashes this way you don't need to run the whole script again. -->
+<!-- ```{r save-predictions} -->
+<!-- saveRDS(preddf, file = here::here(paste0("r-workflows/model output/fish/",  -->
+<!--                               name, "_fish-prediction.RDS"))) -->
+<!-- ``` -->
+<!-- Pivot the data to long format for easy plotting. -->
+<!-- ```{r data-long} -->
+<!-- dat <- preddf %>% -->
+<!--   dplyr::select(x, y, starts_with("p")) %>% -->
+<!--   pivot_longer(names_to = "response", values_to = "value", -->
+<!--                cols = !c(x, y)) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Reset the response variables to loop through when plotting.  -->
+<!-- ```{r reset-resp-vars} -->
+<!-- resp.vars <- unique(dat$response) -->
+<!-- ``` -->
+<!-- Load marine park data. The dataset used here is the 2022 Collaborative Australian Protected Areas Database, which is available for free download from https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore. Feel free to replace this shapefile with any suitable dataset that is available for your study area. -->
+<!-- ```{r marine-parks} -->
+<!-- marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>% -->
+<!--   st_make_valid() %>% -->
+<!--   dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE,  -->
+<!--                                             "\\s*\\([^\\)]+\\)", "")) %>% -->
+<!--   dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National Park"), -->
+<!--                 STATE %in% "WA") %>%                         -->
+<!--   st_transform(4326) -->
+<!-- ``` -->
+<!-- Loop through each response variable and create a ggplot figure for each.  -->
+<!-- ```{r plot-fish} -->
+<!-- for (i in 1:length(resp.vars)) { -->
+<!--   use.dat <- dat %>% -->
+<!--     dplyr::filter(response %in% resp.vars[i]) -->
+<!--   p <- ggplot() + -->
+<!--     geom_tile(data = use.dat, aes(x, y, fill = value)) + -->
+<!--     scale_fill_gradientn(colours = c("#fde725", "#21918c", "#440154"), na.value = "transparent") + -->
+<!--     labs(fill = resp.vars[i], x = NULL, y = NULL) + -->
+<!--     new_scale_fill() +                      -->
+<!--     geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63",  -->
+<!--             size = 0.2, show.legend = F) + -->
+<!--     coord_sf(xlim = c(min(dat$x), max(dat$x)), -->
+<!--              ylim = c(min(dat$y), max(dat$y))) + -->
+<!--     theme_minimal() + -->
+<!--     theme(axis.text.x = element_text(size = 7)) -->
+<!--   assign(paste0("gg_", resp.vars[i]), p) -->
+<!-- } -->
+<!-- ``` -->
+<!-- Combine the plots using patchwork. -->
+<!-- ```{r combine-fish-plots} -->
+<!-- gg_pmature + gg_ptotabund + gg_pspecrich + -->
+<!--   theme(legend.justification = "left") + -->
+<!--   plot_layout(ncol = 2, nrow = 2) -->
+<!-- ``` -->
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>

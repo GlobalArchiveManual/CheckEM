@@ -57,6 +57,9 @@ Rows with missing minimum length values are excluded from the result.
 
 ``` r
 # Assume australia_life_history is a data frame with appropriate columns
-life_history_with_min_max <- create_min_max(CheckEM::australia_life_history, minimum = 15, maximum = 85)
-#> Joining with `by = join_by(genus)`
+life_history_with_min_max <- create_min_max(
+  CheckEM::australia_life_history,
+  minimum = 15,
+  maximum = 85
+)
 ```

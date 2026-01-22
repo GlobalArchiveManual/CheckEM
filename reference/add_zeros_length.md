@@ -11,7 +11,12 @@ add_zeros_length(length_data, metadata)
 ## Arguments
 
 - length_data:
+
+  A data frame of species lengths.
+
 - metadata:
+
+  A data frame containing deployment-level metadata.
 
 ## Value
 

@@ -7,7 +7,7 @@ minimum and maximum size limits in millimeters."><meta property="og:description"
 minimum and maximum size limits for each species based on their maximum length to check your annotations against.
 It uses the maximum length data from genus and family levels to fill in any missing
 maximum lengths at the species level. The resulting data frame includes the computed
-minimum and maximum size limits in millimeters."><meta property="og:image" content="https://globalarchivemanual.github.io/CheckEM/logo.png"><meta name="google-site-verification" content="m4gXBtqSSJWTmWMwNasopAohP855o_IZ16gJxBTnZ1o"><!-- Global site tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script><script>
+minimum and maximum size limits in millimeters."><meta name="google-site-verification" content="m4gXBtqSSJWTmWMwNasopAohP855o_IZ16gJxBTnZ1o"><!-- Global site tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -21,7 +21,7 @@ minimum and maximum size limits in millimeters."><meta property="og:image" conte
 
     <a class="navbar-brand me-2" href="../index.html">CheckEM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,8 @@ minimum and maximum size limits in millimeters."><meta property="og:image" conte
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Calculate Minimum and Maximum Size Limits for Fish Species</h1>
+
+      <h1>Calculate Minimum and Maximum Size Limits for Fish Species</h1>
 
       <div class="d-none name"><code>create_min_max.Rd</code></div>
     </div>
@@ -130,8 +131,11 @@ The final maximum size limit in millimeters is computed as <code>maximum * lengt
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Assume australia_life_history is a data frame with appropriate columns</span></span></span>
-<span class="r-in"><span><span class="va">life_history_with_min_max</span> <span class="op">&lt;-</span> <span class="fu">create_min_max</span><span class="op">(</span><span class="fu">CheckEM</span><span class="fu">::</span><span class="va">australia_life_history</span>, minimum <span class="op">=</span> <span class="fl">15</span>, maximum <span class="op">=</span> <span class="fl">85</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(genus)`</span>
+<span class="r-in"><span><span class="va">life_history_with_min_max</span> <span class="op">&lt;-</span> <span class="fu">create_min_max</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">CheckEM</span><span class="fu">::</span><span class="va"><a href="australia_life_history.html">australia_life_history</a></span>,</span></span>
+<span class="r-in"><span>  minimum <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>  maximum <span class="op">=</span> <span class="fl">85</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -246,6 +246,27 @@ Essential functionality for accessing data through the GlobalArchive API
 - [`ga_api_benthic_list()`](https://globalarchivemanual.github.io/CheckEM/reference/ga_api_benthic_list.md)
   : Retrieve Benthic Species List from the Global Archive API
 
+## Data
+
+Datasets included with CheckEM
+
+- [`australia_life_history`](https://globalarchivemanual.github.io/CheckEM/reference/australia_life_history.md)
+  : Australia life history
+- [`global_life_history`](https://globalarchivemanual.github.io/CheckEM/reference/global_life_history.md)
+  : Global life-history reference table
+- [`aus_regions`](https://globalarchivemanual.github.io/CheckEM/reference/aus_regions.md)
+  : Australian marine regions
+- [`world_regions`](https://globalarchivemanual.github.io/CheckEM/reference/world_regions.md)
+  : World marine regions reference table
+- [`imcra_regions`](https://globalarchivemanual.github.io/CheckEM/reference/imcra_regions.md)
+  : IMCRA regions reference table
+- [`aus_synonyms`](https://globalarchivemanual.github.io/CheckEM/reference/aus_synonyms.md)
+  : Australian species synonym table
+- [`catami`](https://globalarchivemanual.github.io/CheckEM/reference/catami.md)
+  : CATAMI classification reference table
+- [`maturity`](https://globalarchivemanual.github.io/CheckEM/reference/maturity.md)
+  : Maturity reference table
+
 ## Investigating maximum sizes of fish
 
 Functions to plot and investigate size frequency and maximum sizes of

@@ -40,7 +40,12 @@ ga_api_all_data(
 
   Either TRUE or FALSE, if you would like the data to include zeros
   where a species is not observed, warning: this can create large
-  datasets that use a lot og RAM
+  datasets that use a lot of RAM
+
+- file_prefix:
+
+  Optional character string. If supplied, it is used a prefix to output
+  filenames (e.g. "prefix_metadata.RDS"). Default NULL.
 
 ## Value
 

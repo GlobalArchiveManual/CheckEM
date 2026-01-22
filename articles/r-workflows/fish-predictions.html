@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../../index.html">CheckEM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,7 +101,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../../logo.png" class="logo" alt=""><h1>Generate Generalized Additive Model predictions of fish</h1>
+
+      <h1>Generate Generalized Additive Model predictions of fish</h1>
                         <h4 data-toc-skip class="author">Claude Spencer
 &amp; Brooke Gibbons</h4>
             
@@ -118,234 +119,158 @@ with the top models selection using FSSgam, and creates GAM regression
 plots. These plots are useful to correctly interpret the relationships
 between response and predictor variables, and allow for ecological
 investigation of top models.</p>
-<div class="section level2">
-<h2 id="r-setup">R setup<a class="anchor" aria-label="anchor" href="#r-setup"></a>
-</h2>
-<p>Load libraries. All packages are available through CRAN, aside from
-‘FSSgam’, which can be installed following the instructions provided in
-the GitHub repository <a href="https://github.com/beckyfisher/FSSgam" class="external-link uri">https://github.com/beckyfisher/FSSgam</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages('remotes')</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">'remotes'</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout<span class="op">=</span><span class="fl">9999999</span><span class="op">)</span></span>
-<span><span class="co"># remotes::install_github("GlobalArchiveManual/CheckEM")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://globalarchivemanual.github.io/CheckEM/">CheckEM</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">FSSgam</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://eliocamp.github.io/ggnewscale/" class="external-link">ggnewscale</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
-<p>Set the study name. Study names are used throughout to make for
-reproducible code that can be easily shifted between different campaigns
-and projects while still providing meaningful filenames.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">'example-bruv-workflow'</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="set-up-data-for-prediction">Set up data for prediction<a class="anchor" aria-label="anchor" href="#set-up-data-for-prediction"></a>
-</h2>
-<p>Load the count data (MaxN). This data is crated in the previous
-workflow, ‘Format and visualise fish data’.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy.count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>, </span>
-<span>                      <span class="va">name</span>,<span class="st">'_tidy-count.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and create your spatial layers</span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 64</span></span>
-<span><span class="co">## Columns: 18</span></span>
-<span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10"<span style="color: #949494;">, </span>"10"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"16"<span style="color: #949494;">, </span>"16…</span></span>
-<span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"N…</span></span>
-<span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance"<span style="color: #949494;">, </span>"species_richness"<span style="color: #949494;">, </span>"total_abundance"<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>94<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>191<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>146<span style="color: #949494;">, </span>16<span style="color: #949494;">, </span>99<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>312<span style="color: #949494;">, </span>18<span style="color: #949494;">, </span>38<span style="color: #949494;">, </span>13…</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533<span style="color: #949494;">, </span>114.8533<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8686<span style="color: #949494;">, </span>114.868…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387<span style="color: #949494;">, </span>-34.08387<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.07530<span style="color: #949494;">, </span>-3…</span></span>
-<span><span class="co">## $ depth_m      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3"<span style="color: #949494;">, </span>"44.3"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"45.3"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519<span style="color: #949494;">, </span>-42.77519<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-41.07679<span style="color: #949494;">, </span>-4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777<span style="color: #949494;">, </span>0.005708777<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.078…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942<span style="color: #949494;">, </span>72.31942<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>215.54254<span style="color: #949494;">, </span>215.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.2611088…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.3096442…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660<span style="color: #949494;">, </span>0.11757660<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.7959022…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883<span style="color: #949494;">, </span>-2.8542883<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-6.646017…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391<span style="color: #949494;">, </span>3.217391<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.440000<span style="color: #949494;">, </span>2.44000…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428<span style="color: #949494;">, </span>0.7952428<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.7118052<span style="color: #949494;">, </span>0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8888889<span style="color: #949494;">, </span>0.8888889<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>0.8857143<span style="color: #949494;">, </span>0.…</span></span></code></pre>
-<p>Load the fish length data. This data is created in the previous
-workflow, ‘Format &amp; visualise fish data’.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy.length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>, </span>
-<span>                      <span class="va">name</span>,<span class="st">'_tidy-length.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and check your spatial layers</span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 64</span></span>
-<span><span class="co">## Columns: 18</span></span>
-<span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"…</span></span>
-<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "15"<span style="color: #949494;">, </span>"17"<span style="color: #949494;">, </span>"19"<span style="color: #949494;">, </span>"23"<span style="color: #949494;">, </span>"24"<span style="color: #949494;">, </span>"26"<span style="color: #949494;">, </span>"29"<span style="color: #949494;">, </span>"3"<span style="color: #949494;">, </span>"31"<span style="color: #949494;">, </span>"32"…</span></span>
-<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>8<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>13<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"N…</span></span>
-<span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "greater than Lm"<span style="color: #949494;">, </span>"greater than Lm"<span style="color: #949494;">, </span>"greater than Lm"<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8444<span style="color: #949494;">, </span>114.8576<span style="color: #949494;">, </span>114.7822<span style="color: #949494;">, </span>114.9190<span style="color: #949494;">, </span>114.8485<span style="color: #949494;">, </span>114.928…</span></span>
-<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08478<span style="color: #949494;">, </span>-34.09635<span style="color: #949494;">, </span>-34.12047<span style="color: #949494;">, </span>-34.12832<span style="color: #949494;">, </span>-34.11789<span style="color: #949494;">, </span>-3…</span></span>
-<span><span class="co">## $ depth_m      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "45.3"<span style="color: #949494;">, </span>"43.3"<span style="color: #949494;">, </span>"73.6"<span style="color: #949494;">, </span>"41"<span style="color: #949494;">, </span>"45.6"<span style="color: #949494;">, </span>"36"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"46.7…</span></span>
-<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -44.29804<span style="color: #949494;">, </span>-42.74676<span style="color: #949494;">, </span>-71.60112<span style="color: #949494;">, </span>-38.25594<span style="color: #949494;">, </span>-44.23959<span style="color: #949494;">, </span>-4…</span></span>
-<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.108975978<span style="color: #949494;">, </span>0.008719478<span style="color: #949494;">, </span>0.880997142<span style="color: #949494;">, </span>0.444838455<span style="color: #949494;">, </span>0.103…</span></span>
-<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 264.03427<span style="color: #949494;">, </span>30.76545<span style="color: #949494;">, </span>262.35388<span style="color: #949494;">, </span>294.10675<span style="color: #949494;">, </span>257.20307<span style="color: #949494;">, </span>40.…</span></span>
-<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.19527912<span style="color: #949494;">, </span>0.02505112<span style="color: #949494;">, </span>1.04176044<span style="color: #949494;">, </span>0.47694588<span style="color: #949494;">, </span>0.042278…</span></span>
-<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.34487247<span style="color: #949494;">, </span>0.03473282<span style="color: #949494;">, </span>2.80258274<span style="color: #949494;">, </span>1.83670998<span style="color: #949494;">, </span>0.3347983…</span></span>
-<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.91366196<span style="color: #949494;">, </span>0.09923935<span style="color: #949494;">, </span>9.01136017<span style="color: #949494;">, </span>5.30128479<span style="color: #949494;">, </span>1.2933082…</span></span>
-<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.2281526<span style="color: #949494;">, </span>-3.1375041<span style="color: #949494;">, </span>17.9911461<span style="color: #949494;">, </span>-8.6934719<span style="color: #949494;">, </span>2.9724391…</span></span>
-<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.518519<span style="color: #949494;">, </span>3.333333<span style="color: #949494;">, </span>2.583333<span style="color: #949494;">, </span>3.555556<span style="color: #949494;">, </span>3.360000<span style="color: #949494;">, </span>4.00000…</span></span>
-<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8024180<span style="color: #949494;">, </span>0.9128709<span style="color: #949494;">, </span>0.5036102<span style="color: #949494;">, </span>0.8555853<span style="color: #949494;">, </span>0.4898979<span style="color: #949494;">, </span>0.…</span></span>
-<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7741935<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>0.8823529<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.…</span></span></code></pre>
-<p>Combine the count and length datasets to make for more simple
-code.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">tidy.count</span>, <span class="va">tidy.length</span><span class="op">)</span></span></code></pre></div>
-<p>Filter the data to only include 1 response variable. The example
-included here models fish total abundance, and uses a dummy model not
-selected in FSSgam, in order to provide all the necessary code to
-produce fish predictions for all types of response variable. As all
-example data here are in a Commonwealth National Park Zone (status =
-“No-take”), we have overwritten the status column to include both
-“Fished” and “No-take”.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat_total</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">response</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="st">"total_abundance"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fished"</span>, <span class="st">"No-take"</span><span class="op">)</span>, times <span class="op">=</span> <span class="fl">16</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Manually set the top model selected in the previous workflow, ‘Select
-top model for fish using FSSgam’. Take care to make sure that it matches
-the model provided by FSSgam (eg. number of knots (k), smooth terms
-(bs), random effects). Remember this is an example model, hence the
-warning message if using these example data!</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">number</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">detrended</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">'cr'</span><span class="op">)</span> <span class="op">+</span> <span class="va">status</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">aspect</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">'cc'</span><span class="op">)</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/Tweedie.html" class="external-link">tw</a></span><span class="op">(</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dat_total</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in smooth.construct.cc.smooth.spec(object, dk$data, dk$knots): basis dimension, k, increased to minimum possible</span></span></code></pre>
-<p>Generate a dataframe with the values for detrended bathymetry while
-holding the other predictor variables at their mean.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">testdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>detrended <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">detrended</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">detrended</span><span class="op">)</span>,length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
-<span>                        aspect <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">aspect</span><span class="op">)</span>,</span>
-<span>                        status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fished"</span>, <span class="st">"No-take"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 40</span></span>
-<span><span class="co">## Columns: 3</span></span>
-<span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -12.9594803<span style="color: #949494;">, </span>-11.1420918<span style="color: #949494;">, </span>-9.3247032<span style="color: #949494;">, </span>-7.5073147<span style="color: #949494;">, </span>-5.6899261…</span></span>
-<span><span class="co">## $ aspect    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 211.1597<span style="color: #949494;">, </span>211.1597<span style="color: #949494;">, </span>211.1597<span style="color: #949494;">, </span>211.1597<span style="color: #949494;">, </span>211.1597<span style="color: #949494;">, </span>211.1597<span style="color: #949494;">, </span>…</span></span>
-<span><span class="co">## $ status    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fish…</span></span></code></pre>
-<p>Predict total abundance across the range of detrended bathymetry,
-using the ‘predict.gam’ function.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/predict.gam.html" class="external-link">predict.gam</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">testdata</span>, type <span class="op">=</span> <span class="st">'response'</span>, se.fit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>Combine the two dataframes to create mean and standard deviation
-values for the relationship between total abundance and detrended
-bathymetry.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">predicts_total_detrended</span> <span class="op">&lt;-</span> <span class="va">testdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">detrended</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># Only change here</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>, se.fit <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">se.fit</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Generate a dataframe with the values for status (factor variable)
-while holding the other predictor variables at their mean.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">testdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fished"</span>, <span class="st">"No-take"</span><span class="op">)</span>,</span>
-<span>                        detrended <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">detrended</span><span class="op">)</span>,</span>
-<span>                        aspect <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">aspect</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 2</span></span>
-<span><span class="co">## Columns: 3</span></span>
-<span><span class="co">## $ status    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Fished<span style="color: #949494;">, </span>No-take</span></span>
-<span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.0008681719<span style="color: #949494;">, </span>-0.0008681719</span></span>
-<span><span class="co">## $ aspect    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 211.1597<span style="color: #949494;">, </span>211.1597</span></span></code></pre>
-<p>Predict total abundance for the two levels of the factor variable
-status, using the ‘predict.gam’ function.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/predict.gam.html" class="external-link">predict.gam</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">testdata</span>, type <span class="op">=</span> <span class="st">'response'</span>, se.fit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>Combine the two dataframes to create mean and standard deviation
-values for the relationship between total abundance and status.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">predicts_total_status</span> <span class="op">&lt;-</span> <span class="va">testdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">status</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># Only change here</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>, se.fit <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">se.fit</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Generate a dataframe with the values for aspect while holding the
-other predictor variables at their mean.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">testdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>aspect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">aspect</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">aspect</span><span class="op">)</span>,length.out <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
-<span>                        status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fished"</span>, <span class="st">"No-take"</span><span class="op">)</span>,</span>
-<span>                        detrended <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">detrended</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 40</span></span>
-<span><span class="co">## Columns: 3</span></span>
-<span><span class="co">## $ aspect    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 30.76545<span style="color: #949494;">, </span>47.30724<span style="color: #949494;">, </span>63.84903<span style="color: #949494;">, </span>80.39082<span style="color: #949494;">, </span>96.93261<span style="color: #949494;">, </span>113.47439<span style="color: #949494;">,</span>…</span></span>
-<span><span class="co">## $ status    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fished<span style="color: #949494;">, </span>Fish…</span></span>
-<span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.0008681719<span style="color: #949494;">, </span>-0.0008681719<span style="color: #949494;">, </span>-0.0008681719<span style="color: #949494;">, </span>-0.0008681719<span style="color: #949494;">, </span>…</span></span></code></pre>
-<p>Predict total abundance across the range of aspect, using the
-‘predict.gam’ function.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/predict.gam.html" class="external-link">predict.gam</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">testdata</span>, type <span class="op">=</span> <span class="st">'response'</span>, se.fit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>Combine the two dataframes to create mean and standard deviation
-values for the relationship between total abundance and aspect.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">predicts_total_aspect</span> <span class="op">&lt;-</span> <span class="va">testdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">aspect</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># Only change here</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>, se.fit <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">se.fit</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Create tidy plots to visualise the relationship between fish total
-abundance and detrended bathymetry.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gg_total_detrended</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dat_total</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">detrended</span>, y <span class="op">=</span> <span class="va">number</span><span class="op">)</span>,  alpha <span class="op">=</span> <span class="fl">0.2</span>, size <span class="op">=</span> <span class="fl">1</span>, show.legend <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_detrended</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">detrended</span>, y <span class="op">=</span> <span class="va">number</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_detrended</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">detrended</span>, y <span class="op">=</span> <span class="va">number</span> <span class="op">-</span> <span class="va">se.fit</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_detrended</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">detrended</span>, y <span class="op">=</span> <span class="va">number</span> <span class="op">+</span> <span class="va">se.fit</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Detrended bathymetry"</span>, y <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="st">"Total abundance"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">gg_total_detrended</span></span></code></pre></div>
-<p><img src="fish-predictions_files/figure-html/plot-detrended-1.png" class="r-plt" alt="" width="700"></p>
-<p>Create tidy plots to visualise the relationship between fish total
-abundance and status. Note that as this plot is for a factor variable,
-the relationship is represented as bar plots.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gg_total_status</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_status</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">status</span>, y <span class="op">=</span> <span class="va">number</span>, fill <span class="op">=</span> <span class="va">status</span><span class="op">)</span>, stat <span class="op">=</span> <span class="st">"identity"</span>, show.legend <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"No-take"</span> <span class="op">=</span> <span class="st">"#7bbc63"</span>, </span>
-<span>                                 <span class="st">"Fished"</span> <span class="op">=</span> <span class="st">"#b9e6fb"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_errorbar</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_status</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">status</span>, ymin <span class="op">=</span> <span class="va">number</span> <span class="op">-</span> <span class="va">se.fit</span>, ymax <span class="op">=</span> <span class="va">number</span> <span class="op">+</span> <span class="va">se.fit</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Status"</span>, y <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
-<span><span class="va">gg_total_status</span></span></code></pre></div>
-<p><img src="fish-predictions_files/figure-html/plot-status-1.png" class="r-plt" alt="" width="700"></p>
-<p>Create tidy plots to visualise the relationship between fish total
-abundance and aspect. Note that aspect is a circular variable (compasss
-bearing from 0 to 360 degrees), and thus the relationship is represented
-as a polar plot.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gg_total_aspect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dat_total</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">aspect</span>, y <span class="op">=</span> <span class="va">number</span><span class="op">)</span>,  alpha <span class="op">=</span> <span class="fl">0.2</span>, size <span class="op">=</span> <span class="fl">1</span>, show.legend <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_aspect</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">aspect</span>, y <span class="op">=</span> <span class="va">number</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_aspect</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">aspect</span>, y <span class="op">=</span> <span class="va">number</span> <span class="op">-</span> <span class="va">se.fit</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">predicts_total_aspect</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">aspect</span>, y <span class="op">=</span> <span class="va">number</span> <span class="op">+</span> <span class="va">se.fit</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Aspect"</span>, y <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="st">"Total abundance"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_radial.html" class="external-link">coord_polar</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">gg_total_aspect</span></span></code></pre></div>
-<p><img src="fish-predictions_files/figure-html/plot-aspect-1.png" class="r-plt" alt="" width="700"></p>
-</div>
+<!-- ```{r install-fssgam, include=FALSE} -->
+<!-- devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never") -->
+<!-- ``` -->
+<!-- # R setup -->
+<!-- Load libraries. All packages are available through CRAN, aside from ‘FSSgam’, which can be installed following the instructions provided in the GitHub repository https://github.com/beckyfisher/FSSgam. -->
+<!-- ```{r libraries, results='hide', warning=FALSE, message=FALSE} -->
+<!-- # install.packages('remotes') -->
+<!-- library('remotes') -->
+<!-- options(timeout=9999999) -->
+<!-- # remotes::install_github("GlobalArchiveManual/CheckEM") -->
+<!-- library(CheckEM) -->
+<!-- library(tidyverse) -->
+<!-- library(mgcv) -->
+<!-- library(devtools) -->
+<!-- library(FSSgam) -->
+<!-- library(here) -->
+<!-- library(ggplot2) -->
+<!-- library(ggnewscale) -->
+<!-- library(viridis) -->
+<!-- library(terra) -->
+<!-- library(sf) -->
+<!-- library(patchwork) -->
+<!-- ``` -->
+<!-- Set the study name. Study names are used throughout to make for reproducible code that can be easily shifted between different campaigns and projects while still providing meaningful filenames. -->
+<!-- ```{r study-name} -->
+<!-- name <- 'example-bruv-workflow' -->
+<!-- ``` -->
+<!-- # Set up data for prediction -->
+<!-- Load the count data (MaxN). This data is crated in the previous workflow, 'Format and visualise fish data'. -->
+<!-- ```{r load-count} -->
+<!-- tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
+<!--                       name,'_tidy-count.rds'))) %>% -->
+<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Load the fish length data. This data is created in the previous workflow, 'Format & visualise fish data'. -->
+<!-- ```{r read-length} -->
+<!-- tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
+<!--                       name,'_tidy-length.rds'))) %>% -->
+<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and check your spatial layers -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Combine the count and length datasets to make for more simple code. -->
+<!-- ```{r combine-data} -->
+<!-- dat <- bind_rows(tidy.count, tidy.length) -->
+<!-- ``` -->
+<!-- Filter the data to only include 1 response variable. The example included here models fish total abundance, and uses a dummy model not selected in FSSgam, in order to provide all the necessary code to produce fish predictions for all types of response variable. As all example data here are in a Commonwealth National Park Zone (status = "No-take"), we have overwritten the status column to include both "Fished" and "No-take".   -->
+<!-- ```{r filter-data} -->
+<!-- dat_total <- dat %>%  -->
+<!--   dplyr::filter(response %in% "total_abundance") %>% -->
+<!--   dplyr::mutate(status = rep(c("Fished", "No-take"), times = 16)) -->
+<!-- ``` -->
+<!-- Manually set the top model selected in the previous workflow, 'Select top model for fish using FSSgam'. Take care to make sure that it matches the model provided by FSSgam (eg. number of knots (k), smooth terms (bs), random effects). Remember this is an example model, hence the warning message if using these example data! -->
+<!-- ```{r set-model} -->
+<!-- mod <- gam(number ~ s(detrended, k = 3, bs = 'cr') + status + s(aspect, k = 3, bs = 'cc'), family = tw(), data = dat_total) -->
+<!-- ``` -->
+<!-- Generate a dataframe with the values for detrended bathymetry while holding the other predictor variables at their mean. -->
+<!-- ```{r expand-detrended} -->
+<!-- testdata <- expand.grid(detrended = seq(min(dat$detrended), max(dat$detrended),length.out = 20), -->
+<!--                         aspect = mean(mod$model$aspect), -->
+<!--                         status = c("Fished", "No-take")) %>% -->
+<!--   distinct() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Predict total abundance across the range of detrended bathymetry, using the 'predict.gam' function.  -->
+<!-- ```{r predict-detrended} -->
+<!-- fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T) -->
+<!-- ``` -->
+<!-- Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and detrended bathymetry. -->
+<!-- ```{r mean-detrended} -->
+<!-- predicts_total_detrended <- testdata %>% -->
+<!--   data.frame(fits) %>% -->
+<!--   group_by(detrended) %>% # Only change here -->
+<!--   summarise(number = mean(fit), se.fit = mean(se.fit)) %>% -->
+<!--   ungroup() -->
+<!-- ``` -->
+<!-- Generate a dataframe with the values for status (factor variable) while holding the other predictor variables at their mean. -->
+<!-- ```{r expand-status} -->
+<!-- testdata <- expand.grid(status = c("Fished", "No-take"), -->
+<!--                         detrended = mean(mod$model$detrended), -->
+<!--                         aspect = mean(mod$model$aspect)) %>% -->
+<!--   distinct() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Predict total abundance for the two levels of the factor variable status, using the 'predict.gam' function.  -->
+<!-- ```{r predict-status} -->
+<!-- fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T) -->
+<!-- ``` -->
+<!-- Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and status. -->
+<!-- ```{r mean-status} -->
+<!-- predicts_total_status <- testdata %>% -->
+<!--   data.frame(fits) %>% -->
+<!--   group_by(status) %>% # Only change here -->
+<!--   summarise(number = mean(fit), se.fit = mean(se.fit)) %>% -->
+<!--   ungroup() -->
+<!-- ``` -->
+<!-- Generate a dataframe with the values for aspect while holding the other predictor variables at their mean. -->
+<!-- ```{r expand-aspect} -->
+<!-- testdata <- expand.grid(aspect = seq(min(dat$aspect), max(dat$aspect),length.out = 20), -->
+<!--                         status = c("Fished", "No-take"), -->
+<!--                         detrended = mean(mod$model$detrended)) %>% -->
+<!--   distinct() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
+<!-- Predict total abundance across the range of aspect, using the 'predict.gam' function.  -->
+<!-- ```{r predict-aspect} -->
+<!-- fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T) -->
+<!-- ``` -->
+<!-- Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and aspect. -->
+<!-- ```{r mean-aspect} -->
+<!-- predicts_total_aspect <- testdata %>% -->
+<!--   data.frame(fits) %>% -->
+<!--   group_by(aspect) %>% # Only change here -->
+<!--   summarise(number = mean(fit), se.fit = mean(se.fit))%>% -->
+<!--   ungroup() -->
+<!-- ``` -->
+<!-- Create tidy plots to visualise the relationship between fish total abundance and detrended bathymetry. -->
+<!-- ```{r plot-detrended} -->
+<!-- gg_total_detrended <- ggplot() + -->
+<!--   geom_point(data = dat_total, aes(x = detrended, y = number),  alpha = 0.2, size = 1, show.legend = F) + -->
+<!--   geom_line(data = predicts_total_detrended, aes(x = detrended, y = number), alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_detrended, aes(x = detrended, y = number - se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_detrended, aes(x = detrended, y = number + se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   theme_classic() + -->
+<!--   labs(x = "Detrended bathymetry", y = "", title = "Total abundance") + -->
+<!--   theme(plot.title = element_text(hjust = 0)) -->
+<!-- gg_total_detrended -->
+<!-- ``` -->
+<!-- Create tidy plots to visualise the relationship between fish total abundance and status. Note that as this plot is for a factor variable, the relationship is represented as bar plots. -->
+<!-- ```{r plot-status} -->
+<!-- gg_total_status <- ggplot() + -->
+<!--   geom_bar(data = predicts_total_status, aes(x = status, y = number, fill = status), stat = "identity", show.legend = F) + -->
+<!--   scale_fill_manual(values = c("No-take" = "#7bbc63",  -->
+<!--                                  "Fished" = "#b9e6fb")) + -->
+<!--   geom_errorbar(data = predicts_total_status, aes(x = status, ymin = number - se.fit, ymax = number + se.fit), width = 0.5) + -->
+<!--   theme_classic() + -->
+<!--   labs(x = "Status", y = "") -->
+<!-- gg_total_status -->
+<!-- ``` -->
+<!-- Create tidy plots to visualise the relationship between fish total abundance and aspect. Note that aspect is a circular variable (compasss bearing from 0 to 360 degrees), and thus the relationship is represented as a polar plot. -->
+<!-- ```{r plot-aspect} -->
+<!-- gg_total_aspect <- ggplot() + -->
+<!--   geom_point(data = dat_total, aes(x = aspect, y = number),  alpha = 0.2, size = 1, show.legend = F) + -->
+<!--   geom_line(data = predicts_total_aspect, aes(x = aspect, y = number), alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_aspect, aes(x = aspect, y = number - se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_aspect, aes(x = aspect, y = number + se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   theme_classic() + -->
+<!--   labs(x = "Aspect", y = "", title = "Total abundance") + -->
+<!--   theme(plot.title = element_text(hjust = 0)) + -->
+<!--   coord_polar() -->
+<!-- gg_total_aspect -->
+<!-- ``` -->
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>

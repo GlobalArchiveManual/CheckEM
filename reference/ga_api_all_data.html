@@ -5,7 +5,7 @@ processed data in the environment and allows users to add in zeros where a speci
 If the directory doesn't exist, it will be created, and the user will be informed."><meta property="og:description" content="This function retrieves metadata, count, and length data from a CheckEM synthesis, processes the data,
 and saves the results as RDS files in the specified directory with the given name. It also returns the
 processed data in the environment and allows users to add in zeros where a species is not present
-If the directory doesn't exist, it will be created, and the user will be informed."><meta property="og:image" content="https://globalarchivemanual.github.io/CheckEM/logo.png"><meta name="google-site-verification" content="m4gXBtqSSJWTmWMwNasopAohP855o_IZ16gJxBTnZ1o"><!-- Global site tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script><script>
+If the directory doesn't exist, it will be created, and the user will be informed."><meta name="google-site-verification" content="m4gXBtqSSJWTmWMwNasopAohP855o_IZ16gJxBTnZ1o"><!-- Global site tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XRY4CFB9QS"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -19,7 +19,7 @@ If the directory doesn't exist, it will be created, and the user will be informe
 
     <a class="navbar-brand me-2" href="../index.html">CheckEM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,8 @@ If the directory doesn't exist, it will be created, and the user will be informe
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Retrieve all Data from a synthesis using the GlobalArchive API</h1>
+
+      <h1>Retrieve all Data from a synthesis using the GlobalArchive API</h1>
 
       <div class="d-none name"><code>ga_api_all_data.Rd</code></div>
     </div>
@@ -116,7 +117,12 @@ for which the data should be retrieved.</p></dd>
 
 
 <dt id="arg-include-zeros">include_zeros<a class="anchor" aria-label="anchor" href="#arg-include-zeros"></a></dt>
-<dd><p>Either TRUE or FALSE, if you would like the data to include zeros where a species is not observed, warning: this can create large datasets that use a lot og RAM</p></dd>
+<dd><p>Either TRUE or FALSE, if you would like the data to include zeros where a species is not observed, warning: this can create large datasets that use a lot of RAM</p></dd>
+
+
+<dt id="arg-file-prefix">file_prefix<a class="anchor" aria-label="anchor" href="#arg-file-prefix"></a></dt>
+<dd><p>Optional character string. If supplied, it is used a prefix to output filenames
+(e.g. "prefix_metadata.RDS"). Default NULL.</p></dd>
 
 </dl></div>
     <div class="section level2">

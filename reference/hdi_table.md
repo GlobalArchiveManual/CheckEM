@@ -88,10 +88,11 @@ max, HDI bounds, number of individuals measured, and metrics like the
 number of lengths exceeding the max or HDI upper bound.
 
 The function first loops through each species in the `species_data`,
-calculates the 99% HDI using the `ggdist::median_hdci()` function, and
-compares the species' maximum length (from `max_lengths`) with the HDI
-statistics. It then appends the results for each species into a final
-dataframe.
+calculates the 99% HDI using the
+[`ggdist::median_hdci()`](https://mjskay.github.io/ggdist/reference/point_interval.html)
+function, and compares the species' maximum length (from `max_lengths`)
+with the HDI statistics. It then appends the results for each species
+into a final dataframe.
 
 ## Examples
 
@@ -103,5 +104,12 @@ species_data <- data.frame(family = c("Acanthuridae"), genus = c("Acanthurus"),
 max_lengths <- data.frame(scientific_name = c("Acanthurus triostegus"), length_max_mm = c(270))
 
 hdi_table(species_data, max_lengths)
-#> Error in loadNamespace(x): there is no package called ‘ggdist’
+#>         family      genus    species       scientific_name
+#> 1 Acanthuridae Acanthurus triostegus Acanthurus triostegus
+#>   species_length_max_mm hdci_99_lower_bound hdci_99_upper_bound
+#> 1                   270                 120                 290
+#>   num_measurements highest_metric num_lengths_over_max
+#> 1               11        HDI 99%                    2
+#>   num_lengths_over_hdi_upper num_lengths_smaller_hdi_lower
+#> 1                          0                             0
 ```
