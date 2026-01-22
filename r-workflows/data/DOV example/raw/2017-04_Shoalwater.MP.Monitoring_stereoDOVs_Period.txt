@@ -1,2 +1,0 @@
-OpCode	PeriodIndex	Period	FilenameStart	FrameStart	TimeStart	FilenameEnd	FrameEnd	TimeEnd	HasEnd
-BP_SZ_20170428_DOV	0	T1	Becher Point SZ_20170428_LEFT110.avi	16883	11.25533	Becher Point SZ_20170428_LEFT110.avi	18942	12.628	1
