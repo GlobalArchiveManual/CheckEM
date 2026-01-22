@@ -8,6 +8,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^data-raw$
+^data-raw/release-assets$
 ^\.secrets$
 ^annotation-schema$
 ^r-workflows$
