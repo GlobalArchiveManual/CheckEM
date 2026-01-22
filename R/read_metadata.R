@@ -21,12 +21,27 @@
 #' }
 read_metadata <- function(dir, method = "BRUVs", recursive = FALSE) {
   
+  # read_dat <- function(flnm) {
+  #   readr::read_csv(flnm, col_types =  readr::cols(.default = "c")) %>%
+  #     dplyr::mutate(campaignid = basename(flnm)) %>%
+  #     CheckEM::clean_names() %>%
+  #     dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, c("_Metadata.csv" = "", "_metadata.csv" = "")))
+  # }
+  
   read_dat <- function(flnm) {
-    readr::read_csv(flnm, col_types =  readr::cols(.default = "c")) %>%
+    readr::read_csv(
+      flnm,
+      col_types = readr::cols(.default = "c"),
+      name_repair = "unique"   # <--- IMPORTANT
+    ) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
       CheckEM::clean_names() %>%
-      dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, c("_Metadata.csv" = "", "_metadata.csv" = "")))
+      dplyr::mutate(campaignid = stringr::str_replace_all(
+        campaignid,
+        c("_Metadata.csv" = "", "_metadata.csv" = "")
+      ))
   }
+  
   
   files <- list.files(path = dir,      
                       recursive = recursive,
