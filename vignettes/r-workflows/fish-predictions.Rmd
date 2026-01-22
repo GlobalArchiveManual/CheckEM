@@ -13,193 +13,193 @@ vignette: >
 ---
 This script takes the tidy datasets created in previous steps, along with the top models selection using FSSgam, and creates GAM regression plots. These plots are useful to correctly interpret the relationships between response and predictor variables, and allow for ecological investigation of top models.
 
-```{r install-fssgam, include=FALSE}
-devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never")
-```
+<!-- ```{r install-fssgam, include=FALSE} -->
+<!-- devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never") -->
+<!-- ``` -->
 
-# R setup
-Load libraries. All packages are available through CRAN, aside from ‘FSSgam’, which can be installed following the instructions provided in the GitHub repository https://github.com/beckyfisher/FSSgam.
+<!-- # R setup -->
+<!-- Load libraries. All packages are available through CRAN, aside from ‘FSSgam’, which can be installed following the instructions provided in the GitHub repository https://github.com/beckyfisher/FSSgam. -->
 
-```{r libraries, results='hide', warning=FALSE, message=FALSE}
-# install.packages('remotes')
-library('remotes')
-options(timeout=9999999)
-# remotes::install_github("GlobalArchiveManual/CheckEM")
-library(CheckEM)
-library(tidyverse)
-library(mgcv)
-library(devtools)
-library(FSSgam)
-library(here)
-library(ggplot2)
-library(ggnewscale)
-library(viridis)
-library(terra)
-library(sf)
-library(patchwork)
-```
+<!-- ```{r libraries, results='hide', warning=FALSE, message=FALSE} -->
+<!-- # install.packages('remotes') -->
+<!-- library('remotes') -->
+<!-- options(timeout=9999999) -->
+<!-- # remotes::install_github("GlobalArchiveManual/CheckEM") -->
+<!-- library(CheckEM) -->
+<!-- library(tidyverse) -->
+<!-- library(mgcv) -->
+<!-- library(devtools) -->
+<!-- library(FSSgam) -->
+<!-- library(here) -->
+<!-- library(ggplot2) -->
+<!-- library(ggnewscale) -->
+<!-- library(viridis) -->
+<!-- library(terra) -->
+<!-- library(sf) -->
+<!-- library(patchwork) -->
+<!-- ``` -->
 
-Set the study name. Study names are used throughout to make for reproducible code that can be easily shifted between different campaigns and projects while still providing meaningful filenames.
+<!-- Set the study name. Study names are used throughout to make for reproducible code that can be easily shifted between different campaigns and projects while still providing meaningful filenames. -->
 
-```{r study-name}
-name <- 'example-bruv-workflow'
-```
+<!-- ```{r study-name} -->
+<!-- name <- 'example-bruv-workflow' -->
+<!-- ``` -->
 
-# Set up data for prediction
-Load the count data (MaxN). This data is crated in the previous workflow, 'Format and visualise fish data'.
+<!-- # Set up data for prediction -->
+<!-- Load the count data (MaxN). This data is crated in the previous workflow, 'Format and visualise fish data'. -->
 
-```{r load-count}
-tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
-                      name,'_tidy-count.rds'))) %>%
-  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers
-  glimpse()
-```
+<!-- ```{r load-count} -->
+<!-- tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
+<!--                       name,'_tidy-count.rds'))) %>% -->
+<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Load the fish length data. This data is created in the previous workflow, 'Format & visualise fish data'.
+<!-- Load the fish length data. This data is created in the previous workflow, 'Format & visualise fish data'. -->
 
-```{r read-length}
-tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/', 
-                      name,'_tidy-length.rds'))) %>%
-  dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and check your spatial layers
-  glimpse()
-```
+<!-- ```{r read-length} -->
+<!-- tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
+<!--                       name,'_tidy-length.rds'))) %>% -->
+<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and check your spatial layers -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Combine the count and length datasets to make for more simple code.
+<!-- Combine the count and length datasets to make for more simple code. -->
 
-```{r combine-data}
-dat <- bind_rows(tidy.count, tidy.length)
-```
+<!-- ```{r combine-data} -->
+<!-- dat <- bind_rows(tidy.count, tidy.length) -->
+<!-- ``` -->
 
-Filter the data to only include 1 response variable. The example included here models fish total abundance, and uses a dummy model not selected in FSSgam, in order to provide all the necessary code to produce fish predictions for all types of response variable. As all example data here are in a Commonwealth National Park Zone (status = "No-take"), we have overwritten the status column to include both "Fished" and "No-take".  
+<!-- Filter the data to only include 1 response variable. The example included here models fish total abundance, and uses a dummy model not selected in FSSgam, in order to provide all the necessary code to produce fish predictions for all types of response variable. As all example data here are in a Commonwealth National Park Zone (status = "No-take"), we have overwritten the status column to include both "Fished" and "No-take".   -->
 
-```{r filter-data}
-dat_total <- dat %>% 
-  dplyr::filter(response %in% "total_abundance") %>%
-  dplyr::mutate(status = rep(c("Fished", "No-take"), times = 16))
-```
+<!-- ```{r filter-data} -->
+<!-- dat_total <- dat %>%  -->
+<!--   dplyr::filter(response %in% "total_abundance") %>% -->
+<!--   dplyr::mutate(status = rep(c("Fished", "No-take"), times = 16)) -->
+<!-- ``` -->
 
-Manually set the top model selected in the previous workflow, 'Select top model for fish using FSSgam'. Take care to make sure that it matches the model provided by FSSgam (eg. number of knots (k), smooth terms (bs), random effects). Remember this is an example model, hence the warning message if using these example data!
+<!-- Manually set the top model selected in the previous workflow, 'Select top model for fish using FSSgam'. Take care to make sure that it matches the model provided by FSSgam (eg. number of knots (k), smooth terms (bs), random effects). Remember this is an example model, hence the warning message if using these example data! -->
 
-```{r set-model}
-mod <- gam(number ~ s(detrended, k = 3, bs = 'cr') + status + s(aspect, k = 3, bs = 'cc'), family = tw(), data = dat_total)
-```
+<!-- ```{r set-model} -->
+<!-- mod <- gam(number ~ s(detrended, k = 3, bs = 'cr') + status + s(aspect, k = 3, bs = 'cc'), family = tw(), data = dat_total) -->
+<!-- ``` -->
 
-Generate a dataframe with the values for detrended bathymetry while holding the other predictor variables at their mean.
+<!-- Generate a dataframe with the values for detrended bathymetry while holding the other predictor variables at their mean. -->
 
-```{r expand-detrended}
-testdata <- expand.grid(detrended = seq(min(dat$detrended), max(dat$detrended),length.out = 20),
-                        aspect = mean(mod$model$aspect),
-                        status = c("Fished", "No-take")) %>%
-  distinct() %>%
-  glimpse()
-```
+<!-- ```{r expand-detrended} -->
+<!-- testdata <- expand.grid(detrended = seq(min(dat$detrended), max(dat$detrended),length.out = 20), -->
+<!--                         aspect = mean(mod$model$aspect), -->
+<!--                         status = c("Fished", "No-take")) %>% -->
+<!--   distinct() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Predict total abundance across the range of detrended bathymetry, using the 'predict.gam' function. 
+<!-- Predict total abundance across the range of detrended bathymetry, using the 'predict.gam' function.  -->
 
-```{r predict-detrended}
-fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T)
-```
+<!-- ```{r predict-detrended} -->
+<!-- fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T) -->
+<!-- ``` -->
 
-Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and detrended bathymetry.
+<!-- Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and detrended bathymetry. -->
 
-```{r mean-detrended}
-predicts_total_detrended <- testdata %>%
-  data.frame(fits) %>%
-  group_by(detrended) %>% # Only change here
-  summarise(number = mean(fit), se.fit = mean(se.fit)) %>%
-  ungroup()
-```
+<!-- ```{r mean-detrended} -->
+<!-- predicts_total_detrended <- testdata %>% -->
+<!--   data.frame(fits) %>% -->
+<!--   group_by(detrended) %>% # Only change here -->
+<!--   summarise(number = mean(fit), se.fit = mean(se.fit)) %>% -->
+<!--   ungroup() -->
+<!-- ``` -->
 
-Generate a dataframe with the values for status (factor variable) while holding the other predictor variables at their mean.
+<!-- Generate a dataframe with the values for status (factor variable) while holding the other predictor variables at their mean. -->
 
-```{r expand-status}
-testdata <- expand.grid(status = c("Fished", "No-take"),
-                        detrended = mean(mod$model$detrended),
-                        aspect = mean(mod$model$aspect)) %>%
-  distinct() %>%
-  glimpse()
-```
+<!-- ```{r expand-status} -->
+<!-- testdata <- expand.grid(status = c("Fished", "No-take"), -->
+<!--                         detrended = mean(mod$model$detrended), -->
+<!--                         aspect = mean(mod$model$aspect)) %>% -->
+<!--   distinct() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Predict total abundance for the two levels of the factor variable status, using the 'predict.gam' function. 
+<!-- Predict total abundance for the two levels of the factor variable status, using the 'predict.gam' function.  -->
 
-```{r predict-status}
-fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T)
-```
+<!-- ```{r predict-status} -->
+<!-- fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T) -->
+<!-- ``` -->
 
-Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and status.
+<!-- Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and status. -->
 
-```{r mean-status}
-predicts_total_status <- testdata %>%
-  data.frame(fits) %>%
-  group_by(status) %>% # Only change here
-  summarise(number = mean(fit), se.fit = mean(se.fit)) %>%
-  ungroup()
-```
+<!-- ```{r mean-status} -->
+<!-- predicts_total_status <- testdata %>% -->
+<!--   data.frame(fits) %>% -->
+<!--   group_by(status) %>% # Only change here -->
+<!--   summarise(number = mean(fit), se.fit = mean(se.fit)) %>% -->
+<!--   ungroup() -->
+<!-- ``` -->
 
-Generate a dataframe with the values for aspect while holding the other predictor variables at their mean.
+<!-- Generate a dataframe with the values for aspect while holding the other predictor variables at their mean. -->
 
-```{r expand-aspect}
-testdata <- expand.grid(aspect = seq(min(dat$aspect), max(dat$aspect),length.out = 20),
-                        status = c("Fished", "No-take"),
-                        detrended = mean(mod$model$detrended)) %>%
-  distinct() %>%
-  glimpse()
-```
+<!-- ```{r expand-aspect} -->
+<!-- testdata <- expand.grid(aspect = seq(min(dat$aspect), max(dat$aspect),length.out = 20), -->
+<!--                         status = c("Fished", "No-take"), -->
+<!--                         detrended = mean(mod$model$detrended)) %>% -->
+<!--   distinct() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Predict total abundance across the range of aspect, using the 'predict.gam' function. 
+<!-- Predict total abundance across the range of aspect, using the 'predict.gam' function.  -->
 
-```{r predict-aspect}
-fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T)
-```
+<!-- ```{r predict-aspect} -->
+<!-- fits <- predict.gam(mod, newdata = testdata, type = 'response', se.fit = T) -->
+<!-- ``` -->
 
-Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and aspect.
+<!-- Combine the two dataframes to create mean and standard deviation values for the relationship between total abundance and aspect. -->
 
-```{r mean-aspect}
-predicts_total_aspect <- testdata %>%
-  data.frame(fits) %>%
-  group_by(aspect) %>% # Only change here
-  summarise(number = mean(fit), se.fit = mean(se.fit))%>%
-  ungroup()
-```
+<!-- ```{r mean-aspect} -->
+<!-- predicts_total_aspect <- testdata %>% -->
+<!--   data.frame(fits) %>% -->
+<!--   group_by(aspect) %>% # Only change here -->
+<!--   summarise(number = mean(fit), se.fit = mean(se.fit))%>% -->
+<!--   ungroup() -->
+<!-- ``` -->
 
-Create tidy plots to visualise the relationship between fish total abundance and detrended bathymetry.
+<!-- Create tidy plots to visualise the relationship between fish total abundance and detrended bathymetry. -->
 
-```{r plot-detrended}
-gg_total_detrended <- ggplot() +
-  geom_point(data = dat_total, aes(x = detrended, y = number),  alpha = 0.2, size = 1, show.legend = F) +
-  geom_line(data = predicts_total_detrended, aes(x = detrended, y = number), alpha = 0.5) +
-  geom_line(data = predicts_total_detrended, aes(x = detrended, y = number - se.fit), linetype = "dashed", alpha = 0.5) +
-  geom_line(data = predicts_total_detrended, aes(x = detrended, y = number + se.fit), linetype = "dashed", alpha = 0.5) +
-  theme_classic() +
-  labs(x = "Detrended bathymetry", y = "", title = "Total abundance") +
-  theme(plot.title = element_text(hjust = 0))
-gg_total_detrended
-```
+<!-- ```{r plot-detrended} -->
+<!-- gg_total_detrended <- ggplot() + -->
+<!--   geom_point(data = dat_total, aes(x = detrended, y = number),  alpha = 0.2, size = 1, show.legend = F) + -->
+<!--   geom_line(data = predicts_total_detrended, aes(x = detrended, y = number), alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_detrended, aes(x = detrended, y = number - se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_detrended, aes(x = detrended, y = number + se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   theme_classic() + -->
+<!--   labs(x = "Detrended bathymetry", y = "", title = "Total abundance") + -->
+<!--   theme(plot.title = element_text(hjust = 0)) -->
+<!-- gg_total_detrended -->
+<!-- ``` -->
 
-Create tidy plots to visualise the relationship between fish total abundance and status. Note that as this plot is for a factor variable, the relationship is represented as bar plots.
+<!-- Create tidy plots to visualise the relationship between fish total abundance and status. Note that as this plot is for a factor variable, the relationship is represented as bar plots. -->
 
-```{r plot-status}
-gg_total_status <- ggplot() +
-  geom_bar(data = predicts_total_status, aes(x = status, y = number, fill = status), stat = "identity", show.legend = F) +
-  scale_fill_manual(values = c("No-take" = "#7bbc63", 
-                                 "Fished" = "#b9e6fb")) +
-  geom_errorbar(data = predicts_total_status, aes(x = status, ymin = number - se.fit, ymax = number + se.fit), width = 0.5) +
-  theme_classic() +
-  labs(x = "Status", y = "")
-gg_total_status
-```
+<!-- ```{r plot-status} -->
+<!-- gg_total_status <- ggplot() + -->
+<!--   geom_bar(data = predicts_total_status, aes(x = status, y = number, fill = status), stat = "identity", show.legend = F) + -->
+<!--   scale_fill_manual(values = c("No-take" = "#7bbc63",  -->
+<!--                                  "Fished" = "#b9e6fb")) + -->
+<!--   geom_errorbar(data = predicts_total_status, aes(x = status, ymin = number - se.fit, ymax = number + se.fit), width = 0.5) + -->
+<!--   theme_classic() + -->
+<!--   labs(x = "Status", y = "") -->
+<!-- gg_total_status -->
+<!-- ``` -->
 
-Create tidy plots to visualise the relationship between fish total abundance and aspect. Note that aspect is a circular variable (compasss bearing from 0 to 360 degrees), and thus the relationship is represented as a polar plot.
+<!-- Create tidy plots to visualise the relationship between fish total abundance and aspect. Note that aspect is a circular variable (compasss bearing from 0 to 360 degrees), and thus the relationship is represented as a polar plot. -->
 
-```{r plot-aspect}
-gg_total_aspect <- ggplot() +
-  geom_point(data = dat_total, aes(x = aspect, y = number),  alpha = 0.2, size = 1, show.legend = F) +
-  geom_line(data = predicts_total_aspect, aes(x = aspect, y = number), alpha = 0.5) +
-  geom_line(data = predicts_total_aspect, aes(x = aspect, y = number - se.fit), linetype = "dashed", alpha = 0.5) +
-  geom_line(data = predicts_total_aspect, aes(x = aspect, y = number + se.fit), linetype = "dashed", alpha = 0.5) +
-  theme_classic() +
-  labs(x = "Aspect", y = "", title = "Total abundance") +
-  theme(plot.title = element_text(hjust = 0)) +
-  coord_polar()
-gg_total_aspect
-```
+<!-- ```{r plot-aspect} -->
+<!-- gg_total_aspect <- ggplot() + -->
+<!--   geom_point(data = dat_total, aes(x = aspect, y = number),  alpha = 0.2, size = 1, show.legend = F) + -->
+<!--   geom_line(data = predicts_total_aspect, aes(x = aspect, y = number), alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_aspect, aes(x = aspect, y = number - se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   geom_line(data = predicts_total_aspect, aes(x = aspect, y = number + se.fit), linetype = "dashed", alpha = 0.5) + -->
+<!--   theme_classic() + -->
+<!--   labs(x = "Aspect", y = "", title = "Total abundance") + -->
+<!--   theme(plot.title = element_text(hjust = 0)) + -->
+<!--   coord_polar() -->
+<!-- gg_total_aspect -->
+<!-- ``` -->

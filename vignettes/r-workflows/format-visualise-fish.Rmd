@@ -17,212 +17,212 @@ This script takes the checked fish data from the previous workflow steps, visual
 # R set up
 Load the necessary libraries.
 
-```{r libraries, results='hide', warning=FALSE, message=FALSE}
-library('remotes')
-options(timeout=9999999)
-# remotes::install_github("GlobalArchiveManual/CheckEM")
-library(CheckEM)
-library(tidyverse)
-library(ggplot2)
-library(sf)
-library(here)
-library(leaflet)
-```
+<!-- ```{r libraries, results='hide', warning=FALSE, message=FALSE} -->
+<!-- library('remotes') -->
+<!-- options(timeout=9999999) -->
+<!-- # remotes::install_github("GlobalArchiveManual/CheckEM") -->
+<!-- library(CheckEM) -->
+<!-- library(tidyverse) -->
+<!-- library(ggplot2) -->
+<!-- library(sf) -->
+<!-- library(here) -->
+<!-- library(leaflet) -->
+<!-- ``` -->
 
-Set the study name.
+<!-- Set the study name. -->
 
-```{r study-name}
-name <- "example-bruv-workflow"
-```
+<!-- ```{r study-name} -->
+<!-- name <- "example-bruv-workflow" -->
+<!-- ``` -->
 
-# Read in the data
-Load and format the metadata.
+<!-- # Read in the data -->
+<!-- Load and format the metadata. -->
 
-```{r load-metadata}
-metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))) %>%
-  glimpse()
-```
+<!-- ```{r load-metadata} -->
+<!-- metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Load and format the habitat data. Here we create a 'reef' column that consists of reef-forming habitat found in the study area, which will be used in subsequent fish modelling scripts.
+<!-- Load and format the habitat data. Here we create a 'reef' column that consists of reef-forming habitat found in the study area, which will be used in subsequent fish modelling scripts. -->
 
-```{r load-habitat}
-habitat <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_tidy-habitat.rds"))) %>%
-  dplyr::mutate(number = count / total_points_annotated) %>%
-  dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth_m, mbdepth, slope, aspect, tpi, tri, roughness, detrended, habitat, number, mean_relief, sd_relief) %>%
-  pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>%
-  CheckEM::clean_names() %>%
-  dplyr::mutate(reef = consolidated_hard + macroalgae + seagrasses + sessile_invertebrates) %>%           
-  dplyr::select(-c(consolidated_hard, macroalgae, seagrasses, sessile_invertebrates, unconsolidated_soft)) %>%
-  glimpse()
-```
+<!-- ```{r load-habitat} -->
+<!-- habitat <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_tidy-habitat.rds"))) %>% -->
+<!--   dplyr::mutate(number = count / total_points_annotated) %>% -->
+<!--   dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth_m, mbdepth, slope, aspect, tpi, tri, roughness, detrended, habitat, number, mean_relief, sd_relief) %>% -->
+<!--   pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>% -->
+<!--   CheckEM::clean_names() %>% -->
+<!--   dplyr::mutate(reef = consolidated_hard + macroalgae + seagrasses + sessile_invertebrates) %>%            -->
+<!--   dplyr::select(-c(consolidated_hard, macroalgae, seagrasses, sessile_invertebrates, unconsolidated_soft)) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Load length of maturity data. The maturity dataset is loaded when the package is installed.
+<!-- Load length of maturity data. The maturity dataset is loaded when the package is installed. -->
 
-```{r load-maturity}
-maturity.mean <- maturity %>%
-  dplyr::group_by(family, genus, species, sex) %>%
-  dplyr::slice(which.min(l50_mm)) %>%
-  ungroup() %>%
-  dplyr::group_by(family, genus, species) %>%
-  dplyr::summarise(l50 = mean(l50_mm)) %>%
-  ungroup() %>%
-  glimpse()
-```
+<!-- ```{r load-maturity} -->
+<!-- maturity.mean <- maturity %>% -->
+<!--   dplyr::group_by(family, genus, species, sex) %>% -->
+<!--   dplyr::slice(which.min(l50_mm)) %>% -->
+<!--   ungroup() %>% -->
+<!--   dplyr::group_by(family, genus, species) %>% -->
+<!--   dplyr::summarise(l50 = mean(l50_mm)) %>% -->
+<!--   ungroup() %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Load and format count data, and transform this into total abundance and species richness. These two response variables will be used in subsequent fish modelling scripts.
+<!-- Load and format count data, and transform this into total abundance and species richness. These two response variables will be used in subsequent fish modelling scripts. -->
 
-```{r tidy-count}
-tidy.count <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-count.rds"))) %>%
-  dplyr::filter(campaignid %in% "2023-03_SwC_stereo-BRUVs") %>% # Remove Pt Cloates campaign for now             
-  dplyr::group_by(campaignid, sample, status, scientific) %>%
-  dplyr::summarise(count = sum(count)) %>%
-  pivot_wider(names_from = "scientific", values_from = count, values_fill = 0) %>%
-  dplyr::ungroup() %>%
-  dplyr::mutate(total_abundance = rowSums(.[, 4:(ncol(.))], na.rm = TRUE), species_richness = rowSums(.[, 4:(ncol(.))] > 0)) %>% 
-  dplyr::select(campaignid, sample, status, total_abundance, species_richness) %>%
-  pivot_longer(cols = c("total_abundance", "species_richness"), names_to = "response", values_to = "number") %>%
-  dplyr::left_join(habitat) %>%
-  glimpse()
-```
+<!-- ```{r tidy-count} -->
+<!-- tidy.count <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-count.rds"))) %>% -->
+<!--   dplyr::filter(campaignid %in% "2023-03_SwC_stereo-BRUVs") %>% # Remove Pt Cloates campaign for now              -->
+<!--   dplyr::group_by(campaignid, sample, status, scientific) %>% -->
+<!--   dplyr::summarise(count = sum(count)) %>% -->
+<!--   pivot_wider(names_from = "scientific", values_from = count, values_fill = 0) %>% -->
+<!--   dplyr::ungroup() %>% -->
+<!--   dplyr::mutate(total_abundance = rowSums(.[, 4:(ncol(.))], na.rm = TRUE), species_richness = rowSums(.[, 4:(ncol(.))] > 0)) %>%  -->
+<!--   dplyr::select(campaignid, sample, status, total_abundance, species_richness) %>% -->
+<!--   pivot_longer(cols = c("total_abundance", "species_richness"), names_to = "response", values_to = "number") %>% -->
+<!--   dplyr::left_join(habitat) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Load and format length data.
+<!-- Load and format length data. -->
 
-```{r load-lengths}
-lengths <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-length.rds"))) %>%
-  dplyr::filter(campaignid %in% "2023-03_SwC_stereo-BRUVs") %>% # Remove Pt Cloates campaign for now 
-  # dplyr::mutate(depth = as.numeric(depth)) %>%                      
-  left_join(habitat) %>%
-  left_join(maturity.mean) %>%
-  dplyr::mutate(number = 1) %>%
-  glimpse()
-```
+<!-- ```{r load-lengths} -->
+<!-- lengths <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-length.rds"))) %>% -->
+<!--   dplyr::filter(campaignid %in% "2023-03_SwC_stereo-BRUVs") %>% # Remove Pt Cloates campaign for now  -->
+<!--   # dplyr::mutate(depth = as.numeric(depth)) %>%                       -->
+<!--   left_join(habitat) %>% -->
+<!--   left_join(maturity.mean) %>% -->
+<!--   dplyr::mutate(number = 1) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-# Format data for visualisation and modelling
-Filter length data to only include 'indicator species'. In our case study, these are three species that have been defined as bioregional-scale demersal fish indicators by the West Australian Department of Primary Industries and Regional Development. If there is no equivalent in your study area, we suggest using ecologically-relevant and highly-targeted species.
+<!-- # Format data for visualisation and modelling -->
+<!-- Filter length data to only include 'indicator species'. In our case study, these are three species that have been defined as bioregional-scale demersal fish indicators by the West Australian Department of Primary Industries and Regional Development. If there is no equivalent in your study area, we suggest using ecologically-relevant and highly-targeted species. -->
 
-```{r indicator species}
-indicator.species <- lengths %>%
-  dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
-  dplyr::filter(scientific %in% c("Choerodon rubescens", "Chrysophrys auratus", "Glaucosoma hebraicum")) %>%
-  glimpse()
-```
+<!-- ```{r indicator species} -->
+<!-- indicator.species <- lengths %>% -->
+<!--   dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>% -->
+<!--   dplyr::filter(scientific %in% c("Choerodon rubescens", "Chrysophrys auratus", "Glaucosoma hebraicum")) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Create a unique list of the samples per campaign, to fill the zeroes back into processed length data.
+<!-- Create a unique list of the samples per campaign, to fill the zeroes back into processed length data. -->
 
-```{r metadata-length}
-metadata.length <- lengths %>%
-  distinct(campaignid, sample, status) %>%
-  glimpse()
-```
+<!-- ```{r metadata-length} -->
+<!-- metadata.length <- lengths %>% -->
+<!--   distinct(campaignid, sample, status) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-Create a dataframe of the indicator species greater than length of maturity.
+<!-- Create a dataframe of the indicator species greater than length of maturity. -->
 
-```{r greater-than-maturity}
-greater.mat <- indicator.species %>%
-  dplyr::filter(length_mm > l50) %>%
-  dplyr::group_by(campaignid, sample) %>%
-  dplyr::summarise(number = sum(number)) %>%
-  ungroup() %>%
-  right_join(metadata.length) %>%
-  dplyr::mutate(number = ifelse(is.na(number), 0, number)) %>%
-  dplyr::mutate(response = "greater than Lm") %>%
-  left_join(habitat) %>%
-  dplyr::glimpse()
-```
+<!-- ```{r greater-than-maturity} -->
+<!-- greater.mat <- indicator.species %>% -->
+<!--   dplyr::filter(length_mm > l50) %>% -->
+<!--   dplyr::group_by(campaignid, sample) %>% -->
+<!--   dplyr::summarise(number = sum(number)) %>% -->
+<!--   ungroup() %>% -->
+<!--   right_join(metadata.length) %>% -->
+<!--   dplyr::mutate(number = ifelse(is.na(number), 0, number)) %>% -->
+<!--   dplyr::mutate(response = "greater than Lm") %>% -->
+<!--   left_join(habitat) %>% -->
+<!--   dplyr::glimpse() -->
+<!-- ``` -->
 
-Create a dataframe of the indicator species smaller than length of maturity.
+<!-- Create a dataframe of the indicator species smaller than length of maturity. -->
 
-```{r smaller-than-maturity}
-smaller.mat <- indicator.species %>%
-  dplyr::filter(length_mm < l50) %>%
-  dplyr::group_by(campaignid, sample) %>%
-  dplyr::summarise(number = sum(number)) %>%
-  ungroup() %>%
-  right_join(metadata.length) %>%
-  dplyr::mutate(number = ifelse(is.na(number), 0, number)) %>%
-  dplyr::mutate(response = "smaller than Lm") %>%
-  left_join(habitat) %>%
-  dplyr::glimpse()
-```
+<!-- ```{r smaller-than-maturity} -->
+<!-- smaller.mat <- indicator.species %>% -->
+<!--   dplyr::filter(length_mm < l50) %>% -->
+<!--   dplyr::group_by(campaignid, sample) %>% -->
+<!--   dplyr::summarise(number = sum(number)) %>% -->
+<!--   ungroup() %>% -->
+<!--   right_join(metadata.length) %>% -->
+<!--   dplyr::mutate(number = ifelse(is.na(number), 0, number)) %>% -->
+<!--   dplyr::mutate(response = "smaller than Lm") %>% -->
+<!--   left_join(habitat) %>% -->
+<!--   dplyr::glimpse() -->
+<!-- ``` -->
 
-Join the two datasets.
+<!-- Join the two datasets. -->
 
-```{r tidy-length}
-tidy.length <- bind_rows(greater.mat, smaller.mat) %>%
-  glimpse()
-```
+<!-- ```{r tidy-length} -->
+<!-- tidy.length <- bind_rows(greater.mat, smaller.mat) %>% -->
+<!--   glimpse() -->
+<!-- ``` -->
 
-# Visualise the fish count data
-Filter the count (maxn) data to only include one response. In this example the count metrics included are total abundance and species richness.
+<!-- # Visualise the fish count data -->
+<!-- Filter the count (maxn) data to only include one response. In this example the count metrics included are total abundance and species richness. -->
 
-```{r count-plotdata}
-response.name <- 'total_abundance'
+<!-- ```{r count-plotdata} -->
+<!-- response.name <- 'total_abundance' -->
 
-overzero <-  tidy.count %>% 
-  filter(response %in% response.name & number > 0) 
+<!-- overzero <-  tidy.count %>%  -->
+<!--   filter(response %in% response.name & number > 0)  -->
 
-equalzero <- tidy.count %>% 
-  filter(response %in% response.name & number == 0)
-```
+<!-- equalzero <- tidy.count %>%  -->
+<!--   filter(response %in% response.name & number == 0) -->
+<!-- ``` -->
 
-Visualise the count data as a bubble plot. White bubbles represent zeroes and the size of blue bubbles represents abundance.
+<!-- Visualise the count data as a bubble plot. White bubbles represent zeroes and the size of blue bubbles represents abundance. -->
 
-```{r visualise-count}
-bubble.plot <- leaflet(data = tidy.count) %>%                     
-  addTiles() %>%                                                    
-  addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
-  addLayersControl(baseGroups = c("Open Street Map", "World Imagery"), options = layersControlOptions(collapsed = FALSE))
+<!-- ```{r visualise-count} -->
+<!-- bubble.plot <- leaflet(data = tidy.count) %>%                      -->
+<!--   addTiles() %>%                                                     -->
+<!--   addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>% -->
+<!--   addLayersControl(baseGroups = c("Open Street Map", "World Imagery"), options = layersControlOptions(collapsed = FALSE)) -->
 
-if (nrow(overzero)) {                                               
-  bubble.plot <- bubble.plot %>%
-    addCircleMarkers(data = overzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = ~ number / 10, fillOpacity = 0.5, stroke = FALSE, label = ~ as.character(sample))}
+<!-- if (nrow(overzero)) {                                                -->
+<!--   bubble.plot <- bubble.plot %>% -->
+<!--     addCircleMarkers(data = overzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = ~ number / 10, fillOpacity = 0.5, stroke = FALSE, label = ~ as.character(sample))} -->
 
-if (nrow(equalzero)) {                                            
-  bubble.plot <- bubble.plot %>%
-    addCircleMarkers(data = equalzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = 2, fillOpacity = 0.5, color = "white", stroke = FALSE, label = ~ as.character(sample))}
-bubble.plot
-```
+<!-- if (nrow(equalzero)) {                                             -->
+<!--   bubble.plot <- bubble.plot %>% -->
+<!--     addCircleMarkers(data = equalzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = 2, fillOpacity = 0.5, color = "white", stroke = FALSE, label = ~ as.character(sample))} -->
+<!-- bubble.plot -->
+<!-- ``` -->
 
-# Visualise the fish length data
-Filter the length data to only include one response. In this example the length metrics included are indicator species greater than and smaller than the length of maturity.
+<!-- # Visualise the fish length data -->
+<!-- Filter the length data to only include one response. In this example the length metrics included are indicator species greater than and smaller than the length of maturity. -->
 
-```{r length-plotdata}
-response.name <- 'greater than Lm'
+<!-- ```{r length-plotdata} -->
+<!-- response.name <- 'greater than Lm' -->
 
-overzero <-  tidy.length %>% 
-  dplyr::filter(response %in% response.name & number > 0) 
+<!-- overzero <-  tidy.length %>%  -->
+<!--   dplyr::filter(response %in% response.name & number > 0)  -->
 
-equalzero <- tidy.length %>% 
-  dplyr::filter(response %in% response.name & number == 0)
-```
+<!-- equalzero <- tidy.length %>%  -->
+<!--   dplyr::filter(response %in% response.name & number == 0) -->
+<!-- ``` -->
 
-Visualise the count data as a bubble plot. White bubbles represent zeroes and the size of blue bubbles represents abundance.
+<!-- Visualise the count data as a bubble plot. White bubbles represent zeroes and the size of blue bubbles represents abundance. -->
 
-```{r visualise-length}
-bubble.plot <- leaflet(data = tidy.length) %>%                     
-  addTiles() %>%                                                    
-  addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
-  addLayersControl(baseGroups = c("Open Street Map", "World Imagery"), options = layersControlOptions(collapsed = FALSE))
+<!-- ```{r visualise-length} -->
+<!-- bubble.plot <- leaflet(data = tidy.length) %>%                      -->
+<!--   addTiles() %>%                                                     -->
+<!--   addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>% -->
+<!--   addLayersControl(baseGroups = c("Open Street Map", "World Imagery"), options = layersControlOptions(collapsed = FALSE)) -->
 
-if (nrow(overzero)) {                                               
-  bubble.plot <- bubble.plot %>%
-    addCircleMarkers(data = overzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = ~ number + 3, fillOpacity = 0.5, stroke = FALSE, label = ~ as.character(sample))}
+<!-- if (nrow(overzero)) {                                                -->
+<!--   bubble.plot <- bubble.plot %>% -->
+<!--     addCircleMarkers(data = overzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = ~ number + 3, fillOpacity = 0.5, stroke = FALSE, label = ~ as.character(sample))} -->
 
-if (nrow(equalzero)) {                                            
-  bubble.plot <- bubble.plot %>%
-    addCircleMarkers(data = equalzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = 2, fillOpacity = 0.5, color = "white", stroke = FALSE, label = ~ as.character(sample))}
-bubble.plot
-```
+<!-- if (nrow(equalzero)) {                                             -->
+<!--   bubble.plot <- bubble.plot %>% -->
+<!--     addCircleMarkers(data = equalzero, lat = ~ latitude_dd, lng = ~ longitude_dd, radius = 2, fillOpacity = 0.5, color = "white", stroke = FALSE, label = ~ as.character(sample))} -->
+<!-- bubble.plot -->
+<!-- ``` -->
 
-# Save tidy datasets for modelling
-Save count response data (total abundance and species richness).
+<!-- # Save tidy datasets for modelling -->
+<!-- Save count response data (total abundance and species richness). -->
 
-```{r save-count}
-saveRDS(tidy.count, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-count.rds")))
-```
+<!-- ```{r save-count} -->
+<!-- saveRDS(tidy.count, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-count.rds"))) -->
+<!-- ``` -->
 
-Save length response data (indicator species greater than and smaller than the length of maturity).
+<!-- Save length response data (indicator species greater than and smaller than the length of maturity). -->
 
-```{r save-length}
-saveRDS(tidy.length, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-length.rds")))
-```
+<!-- ```{r save-length} -->
+<!-- saveRDS(tidy.length, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-length.rds"))) -->
+<!-- ``` -->
