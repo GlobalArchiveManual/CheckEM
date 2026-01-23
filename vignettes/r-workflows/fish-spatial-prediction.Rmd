@@ -129,7 +129,7 @@ preddf <- cbind(preddf,
 Save out the spatial predictions. If your computer crashes this way you don't need to run the whole script again.
 
 ```{r save-predictions}
-saveRDS(preddf, file = here::here(paste0("r-workflows/model output/fish/",
+saveRDS(preddf, file = here::here(paste0("r-workflows/model-output/fish/",
                               name, "_fish-prediction.RDS")))
 ```
 
