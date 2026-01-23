@@ -23,7 +23,7 @@ read_gen_length <- function(dir, method = "BRUVs", recursive = FALSE) {
   read_dat_csv <- function(flnm){
     readr::read_csv(flnm, col_types =  readr::cols(.default = "c")) %>%
       dplyr::mutate(campaignid = basename(flnm)) %>%
-      # CheckEM::clean_names() %>%
+      CheckEM::clean_names() %>%
       dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, 
                                                           c("_Length.csv" = "",
                                                             "_length.csv" = ""))) 

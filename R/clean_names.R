@@ -26,11 +26,14 @@ clean_names <- function(dat) {
   old_names <- names(dat)
   
   new_names <- old_names |>
-    gsub("%", "percent") |> 
-    make.names() |>
-    gsub("[.]+", "_") |>
-    tolower() |>
-    gsub("_$", "")
+    trimws() |>
+    gsub("%", "percent", x = _) |>
+    make.names(unique = FALSE) |>
+    gsub("[.]+", "_", x = _) |>
+    tolower()
+  
+  # ensure uniqueness AFTER cleaning (critical)
+  new_names <- make.unique(new_names, sep = "_")
   
   stats::setNames(dat, new_names) 
 }
