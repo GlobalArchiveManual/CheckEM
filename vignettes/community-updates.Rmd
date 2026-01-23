@@ -6,7 +6,7 @@ output:
     code_folding: hide
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{CheckEM Community Specues Updates}
+  %\VignetteIndexEntry{Community Contributions: Species Updates and Regional Records}
   %\VignetteEncoding{UTF-8}
 ---
 Please use the forms below to update information on species, including maximum size data and regional distribution. By sharing your knowledge, you support the continual improvement of the life history information used by CheckEM.
