@@ -175,14 +175,14 @@ m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_i
 summary(m_inverts)
 plot(m_inverts, pages = 1, residuals = T, cex = 5)
 
-# Rock
-m_rock <- gam(cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~
-                   s(aspect,     k = 5, bs = "cc") +
-                   s(detrended, k = 5, bs = "cr") +
-                   s(tpi, k = 5, bs = "cr"),
-                 data = widedat, method = "REML", family = binomial("logit"))
-summary(m_rock)
-plot(m_rock, pages = 1, residuals = T, cex = 5)
+# # Rock
+# m_rock <- gam(cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~
+#                    s(aspect,     k = 5, bs = "cc") +
+#                    s(detrended, k = 5, bs = "cr") +
+#                    s(tpi, k = 5, bs = "cr"),
+#                  data = widedat, method = "REML", family = binomial("logit"))
+# summary(m_rock)
+# plot(m_rock, pages = 1, residuals = T, cex = 5)
 
 # Sand
 m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~
@@ -225,7 +225,7 @@ plot(m_reef, pages = 1, residuals = T, cex = 5)
 ```{r spatial-prediction}
 preddf <- cbind(preddf,
                 "pmacro" = predict(m_macro, preddf, type = "response"),
-                "prock" = predict(m_rock, preddf, type = "response"),
+                # "prock" = predict(m_rock, preddf, type = "response"),
                 "psand" = predict(m_sand, preddf, type = "response"),
                 "pseagrass" = predict(m_seagrass, preddf, type = "response"),
                 "pinverts" = predict(m_inverts, preddf, type = "response"),
@@ -236,7 +236,10 @@ preddf <- cbind(preddf,
 # Tidy and save the final dataset
 Create a column for the 'dominant' habitat
 ```{r dominant-tag}
-preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, prock, psand, pseagrass, pinverts), 1,
+preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, #prock, 
+                                                 psand, 
+                                                 pseagrass, 
+                                                 pinverts), 1,
                          FUN = function(x){names(which.max(x))})
 glimpse(preddf)
 ```
@@ -287,7 +290,7 @@ indclass <- preddf %>%
                values_to = "Probability") %>%
   dplyr::mutate(habitat = case_when(habitat %in% "pinverts" ~ "Sessile invertebrates",
                                     habitat %in% "pmacro" ~ "Macroalgae",
-                                    habitat %in% "prock" ~ "Rock",
+                                    # habitat %in% "prock" ~ "Rock",
                                     habitat %in% "psand" ~ "Sand",
                                     habitat %in% "pseagrass" ~ "Seagrass",
                                     habitat %in% "preef" ~ "Reef")) %>%
