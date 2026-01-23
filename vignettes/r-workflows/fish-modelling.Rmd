@@ -99,7 +99,7 @@ resp.vars
 Add the directory to save model outputs, and set up the R environment for model selection.
 
 ```{r environment-setup}
-outdir <- ("r-workflows/model output/fish/")
+outdir <- ("r-workflows/model-output/fish/")
 out.all <- list()
 var.imp <- list()
 ```

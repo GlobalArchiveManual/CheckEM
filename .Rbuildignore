@@ -20,5 +20,5 @@
 ^inst/assets$
 ^r-workflows/R$
 ^r-workflows/plots$
-^r-workflows/R$
 ^r-workflows/model-output$
+^r-workflows/data$
