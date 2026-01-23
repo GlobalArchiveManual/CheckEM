@@ -75,7 +75,7 @@ If you have already completed this step while checking your habitat data, then y
 # TODO - Add examples of completing by location, campaign, marine_region - don't want zeros for australian species in Fiji
 # TODO - add biomass
 
-metadata <- read_metadata(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
+metadata <- read_metadata(here::here("r-workflows/data/raw/DOVs/"), method = "DOVs") %>% # Change here to "DOVs"
   dplyr::select(campaignid, sample, status, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length) %>%
   dplyr::glimpse()
 ```
@@ -151,7 +151,7 @@ It will combine all of the files into one data-frame, and get the campaignid nam
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
 ```{r load-points}
-points <- read_points(here::here("r-workflows/data/DOV example/raw/")) %>%
+points <- read_points(here::here("r-workflows/data/raw/DOVs/")) %>%
   glimpse()
 ```
 
@@ -162,7 +162,7 @@ It will combine all of the files into one data frame, and get the campaignid nam
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
 ```{r load-counts}
-counts <- read_counts(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
+counts <- read_counts(here::here("r-workflows/data/raw/DOVs/"), method = "DOVs") %>% # Change here to "DOVs"
   glimpse()
 ```
 <!-- ## Combine EventMeasure and *Generic* count together -->
@@ -225,7 +225,7 @@ It will combine all of the files into one data-frame, and get the campaignid nam
 It is important that you consistently name your files with the same campaignid (look out for different separators e.g. '-', '_', or '.')
 
 ```{r load-lengths}
-em_length3dpoints <- read_em_length(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
+em_length3dpoints <- read_em_length(here::here("r-workflows/data/raw/DOVs/"), method = "DOVs") %>% # Change here to "DOVs"
   dplyr::select(-c(any_of("comment"))) %>% # there is a comment column in metadata, so you will need to remove this column from EM data
   dplyr::inner_join(metadata, by = join_by(sample, campaignid)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
@@ -242,7 +242,7 @@ It is important that you consistently name your files with the same campaignid (
 For example, if 10 of Species X were counted in a transect, but only 6 of them were measured, we add an extra 4 of Species X to the gen_length dataframe with length = NA (like a 3D point in EM data)
 
 ```{r load-gen-lengths}
-gen_length <- read_gen_length(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>% # Change here to "DOVs"
+gen_length <- read_gen_length(here::here("r-workflows/data/raw/DOVs/"), method = "DOVs") %>% # Change here to "DOVs"
   dplyr::full_join(metadata, by = join_by(campaignid, sample)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
   glimpse()
@@ -434,7 +434,7 @@ It looks for any periods in the EMObs that do not have an end time. This is impo
 ```{r load-periods}
 # TODO - only check these if both count and length are not successful
 
-periods <- read_periods(here::here("r-workflows/data/DOV example/raw/"), method = "DOVs") %>%
+periods <- read_periods(here::here("r-workflows/data/raw/DOVs/"), method = "DOVs") %>%
   glimpse()
 
 periods_without_end <- periods %>%
