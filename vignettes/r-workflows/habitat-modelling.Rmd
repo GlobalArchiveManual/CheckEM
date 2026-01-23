@@ -185,13 +185,13 @@ plot(m_inverts, pages = 1, residuals = T, cex = 5)
 # plot(m_rock, pages = 1, residuals = T, cex = 5)
 
 # Sand
-m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~
-                s(aspect,     k = 5, bs = "cc")  +
-                s(detrended, k = 5, bs = "cr") +
-                s(roughness, k = 5, bs = "cr"),
-              data = widedat, method = "REML", family = binomial("logit"))
-summary(m_sand)
-plot(m_sand, pages = 1, residuals = T, cex = 5)
+# m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~
+#                 s(aspect,     k = 5, bs = "cc")  +
+#                 s(detrended, k = 5, bs = "cr") +
+#                 s(roughness, k = 5, bs = "cr"),
+#               data = widedat, method = "REML", family = binomial("logit"))
+# summary(m_sand)
+# plot(m_sand, pages = 1, residuals = T, cex = 5)
 
 # Seagrasses
 m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~
@@ -226,7 +226,7 @@ plot(m_reef, pages = 1, residuals = T, cex = 5)
 preddf <- cbind(preddf,
                 "pmacro" = predict(m_macro, preddf, type = "response"),
                 # "prock" = predict(m_rock, preddf, type = "response"),
-                "psand" = predict(m_sand, preddf, type = "response"),
+                # "psand" = predict(m_sand, preddf, type = "response"),
                 "pseagrass" = predict(m_seagrass, preddf, type = "response"),
                 "pinverts" = predict(m_inverts, preddf, type = "response"),
                 "preef" = predict(m_reef, preddf, type = "response")) %>%
