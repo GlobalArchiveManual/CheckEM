@@ -30,12 +30,11 @@ dat <- data.frame("NAmE1" = 1:3, "name-2" = 4:6, "nAMe.-72" = 7:9)
 
 # Clean the column names
 cleaned_dat <- clean_names(dat)
-#> Warning: argument 'pattern' has length > 1 and only the first element will be used
 
 # Check the result
 print(cleaned_dat)
-#>     <NA> <NA>
-#> 1 1    4    7
-#> 2 2    5    8
-#> 3 3    6    9
+#>   name1 name_2 name_72
+#> 1     1      4       7
+#> 2     2      5       8
+#> 3     3      6       9
 ```
