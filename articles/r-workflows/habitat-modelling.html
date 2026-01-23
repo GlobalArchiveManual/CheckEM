@@ -118,203 +118,318 @@
 steps, visualises the data and exports it into a format suitable for
 modelling. The exploratory visualisation of the data allows for trends
 and patterns in the raw data to be investigated.</p>
-<!-- ```{r install-fssgam, include=FALSE} -->
-<!-- devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never") -->
-<!-- ``` -->
-<!-- # R setup -->
-<!-- Load libraries. -->
-<!-- ```{r libraries, results='hide', warning=FALSE, message=FALSE} -->
-<!-- library('remotes') -->
-<!-- options(timeout=9999999) -->
-<!-- # remotes::install_github("GlobalArchiveManual/CheckEM") -->
-<!-- library(CheckEM) -->
-<!-- library(tidyverse) -->
-<!-- library(mgcv) -->
-<!-- library(devtools) -->
-<!-- library(FSSgam) -->
-<!-- library(here) -->
-<!-- library(ggplot2) -->
-<!-- library(ggnewscale) -->
-<!-- library(viridis) -->
-<!-- library(terra) -->
-<!-- library(sf) -->
-<!-- library(patchwork) -->
-<!-- ``` -->
-<!-- Set the study name. -->
-<!-- ```{r name} -->
-<!-- name <- 'example-bruv-workflow' -->
-<!-- ``` -->
-<!-- # Load data -->
-<!-- Load the habitat point annotation data. -->
-<!-- ```{r raw-data} -->
-<!-- dat <- readRDS(here::here(paste0("r-workflows/data/tidy/",  -->
-<!--                       name, "_tidy-habitat.rds"))) %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
-<!-- # Set up data for modelling -->
-<!-- Set the predictor variables. -->
-<!-- ```{r predictors} -->
-<!-- names(dat) -->
-<!-- pred.vars <- c("mbdepth","roughness", "detrended",  -->
-<!--                "slope", "tpi", "aspect", "tri")   -->
-<!-- ``` -->
-<!-- Check for correlation of predictor variables and remove anything highly correlated (>0.95). -->
-<!-- ```{r correlations} -->
-<!-- round(cor(dat[ , pred.vars]), 2) -->
-<!-- ``` -->
-<!-- Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example dataset, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed. -->
-<!-- ```{r transformations, warning = FALSE, message = FALSE} -->
-<!-- plot_transformations(pred.vars = pred.vars, dat = dat) -->
-<!-- ``` -->
-<!-- Reset the predictor variables to remove any highly correlated variables and include any transformed variables. -->
-<!-- ```{r reset-predictors} -->
-<!-- pred.vars <- c("depth_m","roughness", "detrended",  -->
-<!--                "tpi", "aspect", "tri") -->
-<!-- ``` -->
-<!-- Check to make sure response variables have less than 80% zeroes. Full-subset GAM modelling will produce unreliable results if your data is too zero inflated. -->
-<!-- ```{r check-responses} -->
-<!-- resp.vars.all = unique(as.character(dat$habitat)) -->
-<!-- resp.vars = character() -->
-<!-- for(i in 1:length(resp.vars.all)){ -->
-<!--   temp.dat = dat[which(dat$habitat == resp.vars.all[i]),] -->
-<!--   if(length(which(temp.dat$habitat == 0)) / nrow(temp.dat) < 0.8){ -->
-<!--     resp.vars = c(resp.vars, resp.vars.all[i])} -->
-<!-- } -->
-<!-- resp.vars  -->
-<!-- ``` -->
-<!-- Add the directory to save model outputs, and set up the R environment for model selection. -->
-<!-- ```{r environment-setup} -->
-<!-- outdir    <- ("r-workflows/model output/habitat/") -->
-<!-- out.all   <- list() -->
-<!-- var.imp   <- list() -->
-<!-- ``` -->
-<!-- # Run the full subset model selection process -->
-<!-- This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134 -->
-<!-- ```{r FSSgam, results='hide', warning=FALSE, message=FALSE} -->
-<!-- for(i in 1:length(resp.vars)){ -->
-<!--   print(resp.vars[i]) -->
-<!--   use.dat <- dat[dat$habitat == resp.vars[i],] -->
-<!--   use.dat   <- as.data.frame(use.dat) -->
-<!--   Model1  <- gam(cbind(count, (total_points_annotated - count)) ~  -->
-<!--                    s(mbdepth, bs = 'cr'), -->
-<!--                  family = binomial("logit"),  data = use.dat) -->
-<!--   model.set <- generate.model.set(use.dat = use.dat, -->
-<!--                                   test.fit = Model1, -->
-<!--                                   pred.vars.cont = pred.vars, -->
-<!--                                   cyclic.vars = c("aspect"), -->
-<!--                                   k = 5, -->
-<!--                                   cov.cutoff = 0.7 -->
-<!--   ) -->
-<!--   out.list <- fit.model.set(model.set, -->
-<!--                             max.models = 600, -->
-<!--                             parallel = T) -->
-<!--   names(out.list) -->
-<!--   out.list$failed.models  -->
-<!--   mod.table <- out.list$mod.data.out -->
-<!--   mod.table <- mod.table[order(mod.table$AICc), ] -->
-<!--   mod.table$cumsum.wi <- cumsum(mod.table$wi.AICc) -->
-<!--   out.i     <- mod.table[which(mod.table$delta.AICc <= 2), ] -->
-<!--   out.all   <- c(out.all, list(out.i)) -->
-<!--   var.imp   <- c(var.imp, list(out.list$variable.importance$aic$variable.weights.raw)) -->
-<!--   for(m in 1:nrow(out.i)){ -->
-<!--     best.model.name <- as.character(out.i$modname[m]) -->
-<!--     png(file = here::here(paste(outdir, m, resp.vars[i], "mod_fits.png", sep = ""))) -->
-<!--     if(best.model.name != "null"){ -->
-<!--       par(mfrow = c(3, 1), mar = c(9, 4, 3, 1)) -->
-<!--       best.model = out.list$success.models[[best.model.name]] -->
-<!--       plot(best.model, all.terms = T, pages = 1, residuals = T, pch = 16) -->
-<!--       mtext(side = 2, text = resp.vars[i], outer = F)}   -->
-<!--     dev.off() -->
-<!--   } -->
-<!-- } -->
-<!-- ``` -->
-<!-- Save the model fits and importance scores. -->
-<!-- ```{r save-gam-data} -->
-<!-- names(out.all) <- resp.vars -->
-<!-- names(var.imp) <- resp.vars -->
-<!-- all.mod.fits <- list_rbind(out.all, names_to = "response") -->
-<!-- all.var.imp  <- do.call("rbind",var.imp) -->
-<!-- write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv"))) -->
-<!-- write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv"))) -->
-<!-- ``` -->
-<!-- # Spatially predict the top model from the model selection process -->
-<!-- Transform the habitat data into wide format for easy prediction. -->
-<!-- ```{r transform-habitat} -->
-<!-- widedat <- dat %>% -->
-<!--   pivot_wider(values_from = "count", names_from = "habitat", values_fill = 0) %>% -->
-<!--   clean_names() %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
-<!-- Load the raster of bathymetry data and derivatives. -->
-<!-- ```{r load-bathymetry, fig.width = 7, fig.height = 4} -->
-<!-- preds  <- rast(here::here(paste0("r-workflows/data/spatial/rasters/",  -->
-<!--                          name, "_bathymetry_derivatives.rds"))) -->
-<!-- plot(preds) -->
-<!-- ``` -->
-<!-- Transform the raster to a dataframe to predict onto. -->
-<!-- ```{r bathymetry-dataframe} -->
-<!-- preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>% -->
-<!--   dplyr::mutate(depth = abs(mbdepth)) %>%                                        -->
-<!--   clean_names() %>% -->
-<!--   glimpse() -->
-<!-- ``` -->
+<div class="section level2">
+<h2 id="r-setup">R setup<a class="anchor" aria-label="anchor" href="#r-setup"></a>
+</h2>
+<p>Load libraries.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">'remotes'</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout<span class="op">=</span><span class="fl">9999999</span><span class="op">)</span></span>
+<span><span class="co"># remotes::install_github("GlobalArchiveManual/CheckEM")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://globalarchivemanual.github.io/CheckEM/">CheckEM</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">FSSgam</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://eliocamp.github.io/ggnewscale/" class="external-link">ggnewscale</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
+<p>Set the study name.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">'example-bruv-workflow'</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="load-data">Load data<a class="anchor" aria-label="anchor" href="#load-data"></a>
+</h2>
+<p>Load the habitat point annotation data.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/tidy/"</span>,</span>
+<span>                      <span class="va">name</span>, <span class="st">"_tidy-habitat.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Rows: 192</span></span>
+<span><span class="co">## Columns: 27</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_s…</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "35"<span style="color: #949494;">, </span>"35"<span style="color: #949494;">, </span>"35"<span style="color: #949494;">, </span>"35"<span style="color: #949494;">, </span>"35"<span style="color: #949494;">, </span>"35"<span style="color: #949494;">, </span>"5"<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14/03/2023 23:36"<span style="color: #949494;">, </span>"14/03/2023 23:36"<span style="color: #949494;">, </span>"1…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span>…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span>…</span></span>
+<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "39.6"<span style="color: #949494;">, </span>"39.6"<span style="color: #949494;">, </span>"39.6"<span style="color: #949494;">, </span>"39.6"<span style="color: #949494;">, </span>"39.6"<span style="color: #949494;">, </span>"3…</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ x                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236<span style="color: #949494;">, </span>114.9236<span style="color: #949494;">, </span>114.9236<span style="color: #949494;">, </span>114.9236<span style="color: #949494;">, </span>11…</span></span>
+<span><span class="co">## $ y                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155<span style="color: #949494;">, </span>-34.13155<span style="color: #949494;">, </span>-34.13155<span style="color: #949494;">, </span>-34.13155…</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236<span style="color: #949494;">, </span>114.9236<span style="color: #949494;">, </span>114.9236<span style="color: #949494;">, </span>114.9236<span style="color: #949494;">, </span>11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155<span style="color: #949494;">, </span>-34.13155<span style="color: #949494;">, </span>-34.13155<span style="color: #949494;">, </span>-34.13155…</span></span>
+<span><span class="co">## $ id                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 63<span style="color: #949494;">, </span>63<span style="color: #949494;">, </span>63<span style="color: #949494;">, </span>63<span style="color: #949494;">, </span>63<span style="color: #949494;">, </span>63<span style="color: #949494;">, </span>64<span style="color: #949494;">, </span>64<span style="color: #949494;">, </span>64<span style="color: #949494;">, </span>64<span style="color: #949494;">, </span>64…</span></span>
+<span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.97151<span style="color: #949494;">, </span>-34.97151<span style="color: #949494;">, </span>-34.97151<span style="color: #949494;">, </span>-34.97151…</span></span>
+<span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1468434<span style="color: #949494;">, </span>0.1468434<span style="color: #949494;">, </span>0.1468434<span style="color: #949494;">, </span>0.1468434…</span></span>
+<span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 209.89577<span style="color: #949494;">, </span>209.89577<span style="color: #949494;">, </span>209.89577<span style="color: #949494;">, </span>209.89577…</span></span>
+<span><span class="co">## $ tpi                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.4215345<span style="color: #949494;">, </span>0.4215345<span style="color: #949494;">, </span>0.4215345<span style="color: #949494;">, </span>0.4215345…</span></span>
+<span><span class="co">## $ tri                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7555733<span style="color: #949494;">, </span>0.7555733<span style="color: #949494;">, </span>0.7555733<span style="color: #949494;">, </span>0.7555733…</span></span>
+<span><span class="co">## $ roughness                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.211193<span style="color: #949494;">, </span>2.211193<span style="color: #949494;">, </span>2.211193<span style="color: #949494;">, </span>2.211193<span style="color: #949494;">, </span>2.…</span></span>
+<span><span class="co">## $ detrended                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -5.663174<span style="color: #949494;">, </span>-5.663174<span style="color: #949494;">, </span>-5.663174<span style="color: #949494;">, </span>-5.663174…</span></span>
+<span><span class="co">## $ total_points_annotated      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 37<span style="color: #949494;">, </span>37<span style="color: #949494;">, </span>37<span style="color: #949494;">, </span>37<span style="color: #949494;">, </span>37<span style="color: #949494;">, </span>37<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>36…</span></span>
+<span><span class="co">## $ habitat                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Macroalgae"<span style="color: #949494;">, </span>"Seagrasses"<span style="color: #949494;">, </span>"Sessile inver…</span></span>
+<span><span class="co">## $ count                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 24<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>8<span style="color: #949494;">, </span>29<span style="color: #949494;">, </span>30<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>21…</span></span>
+<span><span class="co">## $ mean_relief                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.034483<span style="color: #949494;">, </span>3.034483<span style="color: #949494;">, </span>3.034483<span style="color: #949494;">, </span>3.034483<span style="color: #949494;">, </span>3.…</span></span>
+<span><span class="co">## $ sd_relief                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.1174831<span style="color: #949494;">, </span>1.1174831<span style="color: #949494;">, </span>1.1174831<span style="color: #949494;">, </span>1.1174831…</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="set-up-data-for-modelling">Set up data for modelling<a class="anchor" aria-label="anchor" href="#set-up-data-for-modelling"></a>
+</h2>
+<p>Set the predictor variables.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "campaignid"                  "sample"                     </span></span>
+<span><span class="co">##  [3] "date_time"                   "location"                   </span></span>
+<span><span class="co">##  [5] "site"                        "depth_m"                    </span></span>
+<span><span class="co">##  [7] "successful_count"            "successful_length"          </span></span>
+<span><span class="co">##  [9] "successful_habitat_forward"  "successful_habitat_backward"</span></span>
+<span><span class="co">## [11] "x"                           "y"                          </span></span>
+<span><span class="co">## [13] "longitude_dd"                "latitude_dd"                </span></span>
+<span><span class="co">## [15] "id"                          "mbdepth"                    </span></span>
+<span><span class="co">## [17] "slope"                       "aspect"                     </span></span>
+<span><span class="co">## [19] "tpi"                         "tri"                        </span></span>
+<span><span class="co">## [21] "roughness"                   "detrended"                  </span></span>
+<span><span class="co">## [23] "total_points_annotated"      "habitat"                    </span></span>
+<span><span class="co">## [25] "count"                       "mean_relief"                </span></span>
+<span><span class="co">## [27] "sd_relief"</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pred.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mbdepth"</span>,<span class="st">"roughness"</span>, <span class="st">"detrended"</span>,</span>
+<span>               <span class="st">"slope"</span>, <span class="st">"tpi"</span>, <span class="st">"aspect"</span>, <span class="st">"tri"</span><span class="op">)</span></span></code></pre></div>
+<p>Check for correlation of predictor variables and remove anything
+highly correlated (&gt;0.95).</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span> , <span class="va">pred.vars</span><span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##           mbdepth roughness detrended slope   tpi aspect   tri</span></span>
+<span><span class="co">## mbdepth      1.00     -0.66     -0.89 -0.65  0.03  -0.32 -0.59</span></span>
+<span><span class="co">## roughness   -0.66      1.00      0.48  0.99  0.29   0.06  0.99</span></span>
+<span><span class="co">## detrended   -0.89      0.48      1.00  0.47  0.00   0.39  0.42</span></span>
+<span><span class="co">## slope       -0.65      0.99      0.47  1.00  0.29   0.06  0.99</span></span>
+<span><span class="co">## tpi          0.03      0.29      0.00  0.29  1.00  -0.02  0.35</span></span>
+<span><span class="co">## aspect      -0.32      0.06      0.39  0.06 -0.02   1.00  0.04</span></span>
+<span><span class="co">## tri         -0.59      0.99      0.42  0.99  0.35   0.04  1.00</span></span></code></pre>
+<p>Plot the individual predictors to assess if any transformations are
+necessary. We suggest to only use transformations when absolutely
+necessary. In the example dataset, most of the response variables have
+relatively balanced distributions, and therefor we have left them
+untransformed.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/plot_transformations.html">plot_transformations</a></span><span class="op">(</span>pred.vars <span class="op">=</span> <span class="va">pred.vars</span>, dat <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
+<p><img src="habitat-modelling_files/figure-html/transformations-1.png" class="r-plt" alt="" width="700"><img src="habitat-modelling_files/figure-html/transformations-2.png" class="r-plt" alt="" width="700"><img src="habitat-modelling_files/figure-html/transformations-3.png" class="r-plt" alt="" width="700"><img src="habitat-modelling_files/figure-html/transformations-4.png" class="r-plt" alt="" width="700"><img src="habitat-modelling_files/figure-html/transformations-5.png" class="r-plt" alt="" width="700"><img src="habitat-modelling_files/figure-html/transformations-6.png" class="r-plt" alt="" width="700"><img src="habitat-modelling_files/figure-html/transformations-7.png" class="r-plt" alt="" width="700"></p>
+<p>Reset the predictor variables to remove any highly correlated
+variables and include any transformed variables.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pred.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"depth_m"</span>,<span class="st">"roughness"</span>, <span class="st">"detrended"</span>,</span>
+<span>               <span class="st">"tpi"</span>, <span class="st">"aspect"</span>, <span class="st">"tri"</span><span class="op">)</span></span></code></pre></div>
+<p>Check to make sure response variables have less than 80% zeroes.
+Full-subset GAM modelling will produce unreliable results if your data
+is too zero inflated.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resp.vars.all</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">habitat</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">resp.vars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">resp.vars.all</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">temp.dat</span> <span class="op">=</span> <span class="va">dat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">habitat</span> <span class="op">==</span> <span class="va">resp.vars.all</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">temp.dat</span><span class="op">$</span><span class="va">habitat</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">temp.dat</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">resp.vars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">resp.vars</span>, <span class="va">resp.vars.all</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">resp.vars</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "Macroalgae"            "Seagrasses"            "Sessile invertebrates"</span></span>
+<span><span class="co">## [4] "Consolidated (hard)"   "Unconsolidated (soft)" "reef"</span></span></code></pre>
+<p>Add the directory to save model outputs, and set up the R environment
+for model selection.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">outdir</span>    <span class="op">&lt;-</span> <span class="op">(</span><span class="st">"r-workflows/model-output/habitat/"</span><span class="op">)</span></span>
+<span><span class="va">out.all</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">var.imp</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="run-the-full-subset-model-selection-process">Run the full subset model selection process<a class="anchor" aria-label="anchor" href="#run-the-full-subset-model-selection-process"></a>
+</h2>
+<p>This loop has been adapted from <span class="citation">@beckyfisher/FSSgam</span>, and examples and
+documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin,
+TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple
+regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. <a href="https://doi.org/10.1002/ece3.4134" class="external-link uri">https://doi.org/10.1002/ece3.4134</a></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">resp.vars</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">use.dat</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">habitat</span> <span class="op">==</span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="op">]</span></span>
+<span>  <span class="va">use.dat</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">use.dat</span><span class="op">)</span></span>
+<span>  <span class="va">Model1</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">count</span>, <span class="op">(</span><span class="va">total_points_annotated</span> <span class="op">-</span> <span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">~</span></span>
+<span>                   <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">mbdepth</span>, bs <span class="op">=</span> <span class="st">'cr'</span><span class="op">)</span>,</span>
+<span>                 family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="st">"logit"</span><span class="op">)</span>,  data <span class="op">=</span> <span class="va">use.dat</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">model.set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FSSgam/man/generate.model.set.html" class="external-link">generate.model.set</a></span><span class="op">(</span>use.dat <span class="op">=</span> <span class="va">use.dat</span>,</span>
+<span>                                  test.fit <span class="op">=</span> <span class="va">Model1</span>,</span>
+<span>                                  pred.vars.cont <span class="op">=</span> <span class="va">pred.vars</span>,</span>
+<span>                                  cyclic.vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"aspect"</span><span class="op">)</span>,</span>
+<span>                                  k <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>                                  cov.cutoff <span class="op">=</span> <span class="fl">0.7</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="va">out.list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FSSgam/man/fit.model.set.html" class="external-link">fit.model.set</a></span><span class="op">(</span><span class="va">model.set</span>,</span>
+<span>                            max.models <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>                            parallel <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">out.list</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">out.list</span><span class="op">$</span><span class="va">failed.models</span></span>
+<span>  <span class="va">mod.table</span> <span class="op">&lt;-</span> <span class="va">out.list</span><span class="op">$</span><span class="va">mod.data.out</span></span>
+<span>  <span class="va">mod.table</span> <span class="op">&lt;-</span> <span class="va">mod.table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">AICc</span><span class="op">)</span>, <span class="op">]</span></span>
+<span>  <span class="va">mod.table</span><span class="op">$</span><span class="va">cumsum.wi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">wi.AICc</span><span class="op">)</span></span>
+<span>  <span class="va">out.i</span>     <span class="op">&lt;-</span> <span class="va">mod.table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">delta.AICc</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span>, <span class="op">]</span></span>
+<span>  <span class="va">out.all</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">out.all</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">var.imp</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">var.imp</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">out.list</span><span class="op">$</span><span class="va">variable.importance</span><span class="op">$</span><span class="va">aic</span><span class="op">$</span><span class="va">variable.weights.raw</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">m</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">best.model.name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">$</span><span class="va">modname</span><span class="op">[</span><span class="va">m</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">outdir</span>, <span class="va">m</span>, <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"mod_fits.png"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="va">best.model.name</span> <span class="op">!=</span> <span class="st">"null"</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">best.model</span> <span class="op">=</span> <span class="va">out.list</span><span class="op">$</span><span class="va">success.models</span><span class="op">[[</span><span class="va">best.model.name</span><span class="op">]</span><span class="op">]</span></span>
+<span>      <span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">best.model</span>, all.terms <span class="op">=</span> <span class="cn">T</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, text <span class="op">=</span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, outer <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">}</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Save the model fits and importance scores.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">out.all</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">resp.vars</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">var.imp</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">resp.vars</span></span>
+<span><span class="va">all.mod.fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="va">out.all</span>, names_to <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
+<span><span class="va">all.var.imp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>,<span class="va">var.imp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">all.mod.fits</span><span class="op">[</span> , <span class="op">-</span><span class="fl">2</span><span class="op">]</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">outdir</span>, <span class="va">name</span>, <span class="st">"_all.mod.fits.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">all.var.imp</span>,         file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">outdir</span>, <span class="va">name</span>, <span class="st">"_all.var.imp.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="spatially-predict-the-top-model-from-the-model-selection-process">Spatially predict the top model from the model selection
+process<a class="anchor" aria-label="anchor" href="#spatially-predict-the-top-model-from-the-model-selection-process"></a>
+</h2>
+<p>Transform the habitat data into wide format for easy prediction.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">widedat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>values_from <span class="op">=</span> <span class="st">"count"</span>, names_from <span class="op">=</span> <span class="st">"habitat"</span>, values_fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../../reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Rows: 32</span></span>
+<span><span class="co">## Columns: 31</span></span>
+<span><span class="co">## $ campaignid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_s…</span></span>
+<span><span class="co">## $ sample                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "35"<span style="color: #949494;">, </span>"5"<span style="color: #949494;">, </span>"26"<span style="color: #949494;">, </span>"23"<span style="color: #949494;">, </span>"29"<span style="color: #949494;">, </span>"4"<span style="color: #949494;">, </span>"32"<span style="color: #949494;">, </span>"3…</span></span>
+<span><span class="co">## $ date_time                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14/03/2023 23:36"<span style="color: #949494;">, </span>"14/03/2023 23:49"<span style="color: #949494;">, </span>"1…</span></span>
+<span><span class="co">## $ location                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span>…</span></span>
+<span><span class="co">## $ site                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span>…</span></span>
+<span><span class="co">## $ depth_m                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "39.6"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"36"<span style="color: #949494;">, </span>"41"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"45"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ successful_count            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ successful_length           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ successful_habitat_forward  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ successful_habitat_backward <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>"Yes"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ x                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236<span style="color: #949494;">, </span>114.9292<span style="color: #949494;">, </span>114.9284<span style="color: #949494;">, </span>114.9190<span style="color: #949494;">, </span>11…</span></span>
+<span><span class="co">## $ y                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155<span style="color: #949494;">, </span>-34.12953<span style="color: #949494;">, </span>-34.12729<span style="color: #949494;">, </span>-34.12832…</span></span>
+<span><span class="co">## $ longitude_dd                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.9236<span style="color: #949494;">, </span>114.9292<span style="color: #949494;">, </span>114.9284<span style="color: #949494;">, </span>114.9190<span style="color: #949494;">, </span>11…</span></span>
+<span><span class="co">## $ latitude_dd                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.13155<span style="color: #949494;">, </span>-34.12953<span style="color: #949494;">, </span>-34.12729<span style="color: #949494;">, </span>-34.12832…</span></span>
+<span><span class="co">## $ id                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 63<span style="color: #949494;">, </span>64<span style="color: #949494;">, </span>65<span style="color: #949494;">, </span>66<span style="color: #949494;">, </span>67<span style="color: #949494;">, </span>68<span style="color: #949494;">, </span>69<span style="color: #949494;">, </span>70<span style="color: #949494;">, </span>71<span style="color: #949494;">, </span>72<span style="color: #949494;">, </span>73…</span></span>
+<span><span class="co">## $ mbdepth                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.97151<span style="color: #949494;">, </span>-36.35807<span style="color: #949494;">, </span>-40.68553<span style="color: #949494;">, </span>-38.25594…</span></span>
+<span><span class="co">## $ slope                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.146843375<span style="color: #949494;">, </span>0.812689749<span style="color: #949494;">, </span>0.694289634<span style="color: #949494;">, </span>0.4…</span></span>
+<span><span class="co">## $ aspect                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 209.89577<span style="color: #949494;">, </span>62.41434<span style="color: #949494;">, </span>40.87387<span style="color: #949494;">, </span>294.10675<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ tpi                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.42153454<span style="color: #949494;">, </span>2.39535522<span style="color: #949494;">, </span>-0.67607403<span style="color: #949494;">, </span>0.476…</span></span>
+<span><span class="co">## $ tri                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.75557327<span style="color: #949494;">, </span>3.29823494<span style="color: #949494;">, </span>2.39221191<span style="color: #949494;">, </span>1.8367…</span></span>
+<span><span class="co">## $ roughness                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.21119308<span style="color: #949494;">, </span>8.36493301<span style="color: #949494;">, </span>8.36493301<span style="color: #949494;">, </span>5.3012…</span></span>
+<span><span class="co">## $ detrended                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -5.6631737<span style="color: #949494;">, </span>-7.0394716<span style="color: #949494;">, </span>-11.2637815<span style="color: #949494;">, </span>-8.69…</span></span>
+<span><span class="co">## $ total_points_annotated      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 37<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>39<span style="color: #949494;">, </span>32<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>22<span style="color: #949494;">, </span>25<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>24<span style="color: #949494;">, </span>35<span style="color: #949494;">, </span>33…</span></span>
+<span><span class="co">## $ mean_relief                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.034483<span style="color: #949494;">, </span>3.900000<span style="color: #949494;">, </span>4.000000<span style="color: #949494;">, </span>3.555556<span style="color: #949494;">, </span>4.…</span></span>
+<span><span class="co">## $ sd_relief                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.1174831<span style="color: #949494;">, </span>0.4472136<span style="color: #949494;">, </span>0.0000000<span style="color: #949494;">, </span>0.8555853…</span></span>
+<span><span class="co">## $ macroalgae                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 24<span style="color: #949494;">, </span>30<span style="color: #949494;">, </span>21<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>8<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>7<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>12<span style="color: #949494;">, </span>26<span style="color: #949494;">, </span>29<span style="color: #949494;">, </span>2…</span></span>
+<span><span class="co">## $ seagrasses                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>18<span style="color: #949494;">, </span>11<span style="color: #949494;">, </span>28<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>14<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">## $ sessile_invertebrates       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>7<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ consolidated_hard_          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ unconsolidated_soft_        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>12<span style="color: #949494;">, </span>11<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ reef                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 29<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>39<span style="color: #949494;">, </span>32<span style="color: #949494;">, </span>36<span style="color: #949494;">, </span>22<span style="color: #949494;">, </span>12<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>35<span style="color: #949494;">, </span>33<span style="color: #949494;">,</span>…</span></span></code></pre>
+<p>Load the raster of bathymetry data and derivatives.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">preds</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"r-workflows/data/spatial/rasters/"</span>,</span>
+<span>                         <span class="va">name</span>, <span class="st">"_bathymetry_derivatives.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">preds</span><span class="op">)</span></span></code></pre></div>
+<p><img src="habitat-modelling_files/figure-html/load-bathymetry-1.png" class="r-plt" alt="" width="672"></p>
+<p>Transform the raster to a dataframe to predict onto.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">preddf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">preds</span>, xy <span class="op">=</span> <span class="cn">TRUE</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>depth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../../reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Rows: 73,350</span></span>
+<span><span class="co">## Columns: 10</span></span>
+<span><span class="co">## $ x         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 115.1714<span style="color: #949494;">, </span>115.1739<span style="color: #949494;">, </span>115.1764<span style="color: #949494;">, </span>115.1789<span style="color: #949494;">, </span>115.1814<span style="color: #949494;">, </span>115.1839<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ y         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.60361<span style="color: #949494;">, </span>-33.6…</span></span>
+<span><span class="co">## $ mbdepth   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -14.83014<span style="color: #949494;">, </span>-13.89184<span style="color: #949494;">, </span>-14.18757<span style="color: #949494;">, </span>-14.48647<span style="color: #949494;">, </span>-14.47323<span style="color: #949494;">, </span>-14.3…</span></span>
+<span><span class="co">## $ slope     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.24350203<span style="color: #949494;">, </span>0.19746646<span style="color: #949494;">, </span>0.17799167<span style="color: #949494;">, </span>0.18316828<span style="color: #949494;">, </span>0.22091857<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ aspect    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 339.995240<span style="color: #949494;">, </span>341.597571<span style="color: #949494;">, </span>21.180346<span style="color: #949494;">, </span>12.600024<span style="color: #949494;">, </span>356.337121<span style="color: #949494;">, </span>35…</span></span>
+<span><span class="co">## $ tpi       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -3.721524e-01<span style="color: #949494;">, </span>5.277313e-01<span style="color: #949494;">, </span>1.502453e-01<span style="color: #949494;">, </span>-1.123428e-03<span style="color: #949494;">, </span>9.…</span></span>
+<span><span class="co">## $ tri       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.9656481<span style="color: #949494;">, </span>0.8277034<span style="color: #949494;">, </span>0.6934198<span style="color: #949494;">, </span>0.6945946<span style="color: #949494;">, </span>0.8081013<span style="color: #949494;">, </span>0.902…</span></span>
+<span><span class="co">## $ roughness <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.807414<span style="color: #949494;">, </span>2.421717<span style="color: #949494;">, </span>2.196986<span style="color: #949494;">, </span>2.156502<span style="color: #949494;">, </span>2.581898<span style="color: #949494;">, </span>2.606502<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ detrended <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.871674<span style="color: #949494;">, </span>-2.161609<span style="color: #949494;">, </span>-2.683798<span style="color: #949494;">, </span>-3.207528<span style="color: #949494;">, </span>-3.417629<span style="color: #949494;">, </span>-3.56…</span></span>
+<span><span class="co">## $ depth     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 14.83014<span style="color: #949494;">, </span>13.89184<span style="color: #949494;">, </span>14.18757<span style="color: #949494;">, </span>14.48647<span style="color: #949494;">, </span>14.47323<span style="color: #949494;">, </span>14.39490<span style="color: #949494;">, </span>…</span></span></code></pre>
 <!-- Manually set the top model from the full subset model selection. -->
 <!-- ```{r set-models, fig.width = 7, fig.height = 6} -->
 <!-- # Sessile invertebrates -->
-<!-- m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~  -->
-<!--                  s(detrended,     k = 5, bs = "cr")  +  -->
+<!-- m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~ -->
+<!--                  s(detrended,     k = 5, bs = "cr")  + -->
 <!--                  s(roughness, k = 5, bs = "cr") + -->
-<!--                  s(tpi, k = 5, bs = "cr"),  -->
+<!--                  s(tpi, k = 5, bs = "cr"), -->
 <!--                data = widedat, method = "REML", family = binomial("logit")) -->
 <!-- summary(m_inverts) -->
 <!-- plot(m_inverts, pages = 1, residuals = T, cex = 5) -->
-<!-- # Rock -->
-<!-- m_rock <- gam(cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~  -->
-<!--                    s(aspect,     k = 5, bs = "cc") + -->
-<!--                    s(detrended, k = 5, bs = "cr") + -->
-<!--                    s(tpi, k = 5, bs = "cr"),  -->
-<!--                  data = widedat, method = "REML", family = binomial("logit")) -->
-<!-- summary(m_rock) -->
-<!-- plot(m_rock, pages = 1, residuals = T, cex = 5) -->
+<!-- # # Rock -->
+<!-- # m_rock <- gam(cbind(consolidated_hard, total_points_annotated - consolidated_hard) ~ -->
+<!-- #                    s(aspect,     k = 5, bs = "cc") + -->
+<!-- #                    s(detrended, k = 5, bs = "cr") + -->
+<!-- #                    s(tpi, k = 5, bs = "cr"), -->
+<!-- #                  data = widedat, method = "REML", family = binomial("logit")) -->
+<!-- # summary(m_rock) -->
+<!-- # plot(m_rock, pages = 1, residuals = T, cex = 5) -->
 <!-- # Sand -->
-<!-- m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~  -->
-<!--                 s(aspect,     k = 5, bs = "cc")  +  -->
-<!--                 s(detrended, k = 5, bs = "cr") + -->
-<!--                 s(roughness, k = 5, bs = "cr"),  -->
-<!--               data = widedat, method = "REML", family = binomial("logit")) -->
-<!-- summary(m_sand) -->
-<!-- plot(m_sand, pages = 1, residuals = T, cex = 5) -->
+<!-- # m_sand <- gam(cbind(unconsolidated_soft, total_points_annotated - unconsolidated_soft) ~ -->
+<!-- #                 s(aspect,     k = 5, bs = "cc")  + -->
+<!-- #                 s(detrended, k = 5, bs = "cr") + -->
+<!-- #                 s(roughness, k = 5, bs = "cr"), -->
+<!-- #               data = widedat, method = "REML", family = binomial("logit")) -->
+<!-- # summary(m_sand) -->
+<!-- # plot(m_sand, pages = 1, residuals = T, cex = 5) -->
 <!-- # Seagrasses -->
-<!-- m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~  -->
-<!--                 s(aspect,     k = 5, bs = "cc")  +  -->
-<!--                 s(detrended, k = 5, bs = "cr") +  -->
-<!--                 s(roughness, k = 5, bs = "cr"),  -->
+<!-- m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~ -->
+<!--                 s(aspect,     k = 5, bs = "cc")  + -->
+<!--                 s(detrended, k = 5, bs = "cr") + -->
+<!--                 s(roughness, k = 5, bs = "cr"), -->
 <!--               data = widedat, method = "REML", family = binomial("logit")) -->
 <!-- summary(m_seagrass) -->
 <!-- plot(m_seagrass, pages = 1, residuals = T, cex = 5) -->
 <!-- # Macroalgae -->
-<!-- m_macro <- gam(cbind(macroalgae, total_points_annotated - macroalgae) ~  -->
-<!--                  s(mbdepth,     k = 5, bs = "cr")  +  -->
+<!-- m_macro <- gam(cbind(macroalgae, total_points_annotated - macroalgae) ~ -->
+<!--                  s(mbdepth,     k = 5, bs = "cr")  + -->
 <!--                  s(detrended, k = 5, bs = "cr") + -->
-<!--                  s(tpi, k = 5, bs = "cr"),  -->
+<!--                  s(tpi, k = 5, bs = "cr"), -->
 <!--                data = widedat, method = "REML", family = binomial("logit")) -->
 <!-- summary(m_macro) -->
 <!-- plot(m_macro, pages = 1, residuals = T, cex = 5) -->
 <!-- # Reef -->
-<!-- m_reef <- gam(cbind(reef, total_points_annotated - reef) ~  -->
-<!--                  s(aspect,     k = 5, bs = "cc")  +  -->
+<!-- m_reef <- gam(cbind(reef, total_points_annotated - reef) ~ -->
+<!--                  s(aspect,     k = 5, bs = "cc")  + -->
 <!--                  s(detrended, k = 5, bs = "cr") + -->
-<!--                  s(roughness, k = 5, bs = "cr"),  -->
+<!--                  s(roughness, k = 5, bs = "cr"), -->
 <!--                data = widedat, method = "REML", family = binomial("logit")) -->
 <!-- summary(m_reef) -->
 <!-- plot(m_reef, pages = 1, residuals = T, cex = 5) -->
 <!-- ``` -->
 <!-- # Predict, rasterise and plot habitat predictions -->
 <!-- ```{r spatial-prediction} -->
-<!-- preddf <- cbind(preddf,  -->
+<!-- preddf <- cbind(preddf, -->
 <!--                 "pmacro" = predict(m_macro, preddf, type = "response"), -->
-<!--                 "prock" = predict(m_rock, preddf, type = "response"), -->
-<!--                 "psand" = predict(m_sand, preddf, type = "response"), -->
+<!--                 # "prock" = predict(m_rock, preddf, type = "response"), -->
+<!--                 # "psand" = predict(m_sand, preddf, type = "response"), -->
 <!--                 "pseagrass" = predict(m_seagrass, preddf, type = "response"), -->
 <!--                 "pinverts" = predict(m_inverts, preddf, type = "response"), -->
 <!--                 "preef" = predict(m_reef, preddf, type = "response")) %>% -->
@@ -323,13 +438,16 @@ and patterns in the raw data to be investigated.</p>
 <!-- # Tidy and save the final dataset -->
 <!-- Create a column for the 'dominant' habitat -->
 <!-- ```{r dominant-tag} -->
-<!-- preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, prock, psand, pseagrass, pinverts), 1, -->
+<!-- preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, #prock,  -->
+<!--                                                  # psand,  -->
+<!--                                                  pseagrass,  -->
+<!--                                                  pinverts), 1, -->
 <!--                          FUN = function(x){names(which.max(x))}) -->
 <!-- glimpse(preddf) -->
 <!-- ``` -->
 <!-- Save final predictions -->
 <!-- ```{r save-final} -->
-<!-- saveRDS(preddf, file = here::here(paste0("r-workflows/model output/habitat/",  -->
+<!-- saveRDS(preddf, file = here::here(paste0("r-workflows/model-output/habitat/", -->
 <!--                               name, "_habitat-prediction.RDS"))) -->
 <!-- ``` -->
 <!-- # Set up for plotting -->
@@ -338,14 +456,14 @@ and patterns in the raw data to be investigated.</p>
 <!-- marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>% -->
 <!--   st_make_valid() %>% -->
 <!--   dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE,"\\s*\\([^\\)]+\\)", "")) %>% -->
-<!--   dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National Park"), STATE %in% "WA") %>%                         -->
-<!--   st_transform(4326)  -->
+<!--   dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National Park"), STATE %in% "WA") %>% -->
+<!--   st_transform(4326) -->
 <!-- ``` -->
-<!-- Set colours for habitat plotting.  -->
+<!-- Set colours for habitat plotting. -->
 <!-- ```{r habitat-colours} -->
 <!-- unique(preddf$dom_tag) -->
 <!-- hab_fills <- scale_fill_manual(values = c( -->
-<!--   "psand" = "wheat", -->
+<!--   # "psand" = "wheat", -->
 <!--   "pinverts" = "plum", -->
 <!--   "pseagrass" = "forestgreen", -->
 <!--   "pmacro" = "darkgoldenrod4" -->
@@ -356,9 +474,9 @@ and patterns in the raw data to be investigated.</p>
 <!-- ```{r plot-dominant, fig.width = 7, fig.height = 4} -->
 <!-- ggplot() + -->
 <!--   geom_tile(data = preddf, aes(x, y, fill = dom_tag)) + -->
-<!--   hab_fills +  -->
+<!--   hab_fills + -->
 <!--   new_scale_fill() + -->
-<!--   geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63",  -->
+<!--   geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63", -->
 <!--           size = 0.2, show.legend = F) + -->
 <!--   coord_sf(xlim = c(min(preddf$x), max(preddf$x)), -->
 <!--            ylim = c(min(preddf$y), max(preddf$y))) + -->
@@ -369,31 +487,32 @@ and patterns in the raw data to be investigated.</p>
 <!-- Transform habitat predictions into long format for easy plotting with ggplot::facet_wrap. -->
 <!-- ```{r wide-habitat} -->
 <!-- indclass <- preddf %>% -->
-<!--   pivot_longer(cols = starts_with("p"), names_to = "habitat",  -->
+<!--   pivot_longer(cols = starts_with("p"), names_to = "habitat", -->
 <!--                values_to = "Probability") %>% -->
 <!--   dplyr::mutate(habitat = case_when(habitat %in% "pinverts" ~ "Sessile invertebrates", -->
 <!--                                     habitat %in% "pmacro" ~ "Macroalgae", -->
-<!--                                     habitat %in% "prock" ~ "Rock", -->
-<!--                                     habitat %in% "psand" ~ "Sand", -->
+<!--                                     # habitat %in% "prock" ~ "Rock", -->
+<!--                                     # habitat %in% "psand" ~ "Sand", -->
 <!--                                     habitat %in% "pseagrass" ~ "Seagrass", -->
 <!--                                     habitat %in% "preef" ~ "Reef")) %>% -->
 <!--   glimpse() -->
 <!-- ``` -->
 <!-- Build plot elements for individual habitat probabilities. -->
-<!-- ```{r plot-individual, fig.width = 7, fig.height = 4} -->
-<!-- ggplot() + -->
-<!--   geom_tile(data = indclass, aes(x, y, fill = Probability)) + -->
-<!--   scale_fill_viridis(option = "D", direction = -1) + -->
-<!--   new_scale_fill() +                      -->
-<!--   geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63",  -->
-<!--           size = 0.2, show.legend = F) + -->
-<!--   coord_sf(xlim = c(min(preddf$x), max(preddf$x)), -->
-<!--            ylim = c(min(preddf$y), max(preddf$y))) + -->
-<!--   labs(x = NULL, y = NULL, fill = "Probability") + -->
-<!--   theme_minimal() + -->
-<!--   facet_wrap(~habitat) + -->
-<!--   theme(axis.text.x = element_text(size = 7)) -->
-<!-- ``` -->
+<!-- # ```{r plot-individual, fig.width = 7, fig.height = 4} -->
+<!-- # ggplot() + -->
+<!-- #   geom_tile(data = indclass, aes(x, y, fill = Probability)) + -->
+<!-- #   scale_fill_viridis(option = "D", direction = -1) + -->
+<!-- #   new_scale_fill() + -->
+<!-- #   geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63", -->
+<!-- #           size = 0.2, show.legend = F) + -->
+<!-- #   coord_sf(xlim = c(min(preddf$x), max(preddf$x)), -->
+<!-- #            ylim = c(min(preddf$y), max(preddf$y))) + -->
+<!-- #   labs(x = NULL, y = NULL, fill = "Probability") + -->
+<!-- #   theme_minimal() + -->
+<!-- #   facet_wrap(~habitat) + -->
+<!-- #   theme(axis.text.x = element_text(size = 7)) -->
+<!-- # ``` -->
+</div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>

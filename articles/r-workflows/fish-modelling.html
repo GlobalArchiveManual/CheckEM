@@ -121,190 +121,284 @@ predictors and response variables, and create sensible models. Once an
 appropriate model has been chosen by the user, we then provide R script
 to spatially predict the response variables and plot these in a tidy
 format.</p>
-<!-- ```{r install-fssgam, include=FALSE} -->
-<!-- devtools::install_github("beckyfisher/FSSgam_package", upgrade = "never") -->
-<!-- ``` -->
-<!-- # R setup -->
-<!-- Load libraries. All packages are available through CRAN, aside from 'FSSgam', which can be installed following the instructions provided in the GitHub repository https://github.com/beckyfisher/FSSgam.  -->
-<!-- ```{r libraries, results='hide', warning=FALSE, message=FALSE} -->
-<!-- # install.packages('remotes') -->
-<!-- library('remotes') -->
-<!-- options(timeout=9999999) -->
-<!-- # remotes::install_github("GlobalArchiveManual/CheckEM") -->
-<!-- library(CheckEM) -->
-<!-- library(tidyverse) -->
-<!-- library(mgcv) -->
-<!-- library(devtools) -->
-<!-- library(FSSgam) -->
-<!-- library(here) -->
-<!-- library(ggplot2) -->
-<!-- library(ggnewscale) -->
-<!-- library(viridis) -->
-<!-- library(terra) -->
-<!-- library(sf) -->
-<!-- library(patchwork) -->
-<!-- ``` -->
-<!-- Set the study name. Study names are used throughout to make for reproducible code that can be easily shifted between different campaigns and projects while still providing meaningful filenames. -->
-<!-- ```{r study-name} -->
-<!-- name <- 'example-bruv-workflow' -->
-<!-- ``` -->
-<!-- Load the fish count data. This data is created in the previous workflow, 'Format & visualise fish data'. -->
-<!-- ```{r load-count} -->
-<!-- tidy.count <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
-<!--                       name,'_tidy-count.rds'))) %>% -->
-<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers -->
-<!--   glimpse() -->
-<!-- ``` -->
-<!-- # Set up data for modelling -->
-<!-- Set the potential predictor variables that may be used to explain the patterns found in the response variables. It is important here to select ecologically meaningful variables that could influence the chosen response variable.  -->
-<!-- ```{r pred-vars} -->
-<!-- pred.vars <- c("mbdepth", "roughness", "slope", "detrended", -->
-<!--                "tpi", "tri", "aspect", "reef")  -->
-<!-- ``` -->
-<!-- Create a correlation matrix to assess correlations between predictor variables. If any variables have a correlation greater than 0.95, then only one of these variables should be included in the model selection. In this example data set, 'roughness', 'slope' and 'tri' are all highly correlated, so we will only include roughness as a final predictor variable.  -->
-<!-- ```{r correlations} -->
-<!-- round(cor(tidy.count[ , pred.vars]), 2) -->
-<!-- ``` -->
-<!-- Plot the individual predictors to assess if any transformations are necessary. We suggest to only use transformations when absolutely necessary. In the example data set, most of the response variables have relatively balanced distributions, and therefor we have left them untransformed. It is important to note that in this example dataset, the spread of most predictor variables across their full range is not ideal, with gaps in key predictors such as depth and detrended bathymetry. When working with GAMs, gaps and outliers like this may create spurious relationships, and therefor we suggest running these scripts with more complete data than the small example data set provided here. -->
-<!-- ```{r transformations, warning = FALSE, message = FALSE} -->
-<!-- CheckEM::plot_transformations(pred.vars = pred.vars, dat = tidy.count) -->
-<!-- ``` -->
-<!-- Reset the predictor variables to remove any highly correlated variables and include any transformed variables. -->
-<!-- ```{r reset-pred-vars} -->
-<!-- pred.vars <- c("mbdepth", "roughness", "detrended", -->
-<!--                "tpi", "aspect", "reef")  -->
-<!-- ``` -->
-<!-- Check to make sure response variables have less than 80% zeroes. Full-subset GAM modelling will produce unreliable results if your data is too zero inflated. -->
-<!-- ```{r check-responses} -->
-<!-- unique.vars <- unique(as.character(tidy.count$response)) -->
-<!-- resp.vars <- character() -->
-<!-- for(i in 1:length(unique.vars)){ -->
-<!--   temp.dat <- tidy.count[which(tidy.count$response == unique.vars[i]), ] -->
-<!--   if(length(which(temp.dat$number == 0)) / nrow(temp.dat) < 0.8){ -->
-<!--     resp.vars <- c(resp.vars, unique.vars[i])} -->
-<!-- } -->
-<!-- resp.vars   -->
-<!-- ``` -->
-<!-- Add the directory to save model outputs, and set up the R environment for model selection. -->
-<!-- ```{r environment-setup} -->
-<!-- outdir <- ("r-workflows/model output/fish/")  -->
-<!-- out.all <- list() -->
-<!-- var.imp <- list() -->
-<!-- ``` -->
-<!-- # Run the full subset model selection process for count metrics -->
-<!-- This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134. -->
-<!-- ```{r FSSgam-count, results='hide', warning=FALSE, message=FALSE} -->
-<!-- for(i in 1:length(resp.vars)){ -->
-<!--   use.dat = as.data.frame(tidy.count[which(tidy.count$response == resp.vars[i]),]) -->
-<!--   print(resp.vars[i]) -->
-<!--   Model1  <- gam(number ~ s(mbdepth, k = 3, bs = 'cr'), -->
-<!--                  family = gaussian(link = "identity"),  data = use.dat) -->
-<!--   model.set <- generate.model.set(use.dat = use.dat, -->
-<!--                                test.fit = Model1, -->
-<!--                                pred.vars.cont = pred.vars, -->
-<!--                                factor.smooth.interactions = NA, -->
-<!--                                cyclic.vars = "aspect", -->
-<!--                                k = 3) -->
-<!--   out.list <- fit.model.set(model.set, -->
-<!--                          max.models = 600, -->
-<!--                          parallel = T) -->
-<!--   names(out.list) -->
-<!--   out.list$failed.models  -->
-<!--   mod.table = out.list$mod.data.out  -->
-<!--   mod.table = mod.table[order(mod.table$AICc),] -->
-<!--   mod.table$cumsum.wi = cumsum(mod.table$wi.AICc) -->
-<!--   out.i = mod.table[which(mod.table$delta.AICc <= 2),] -->
-<!--   out.all = c(out.all,list(out.i)) -->
-<!--   var.imp = c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw)) -->
-<!--   for(m in 1:nrow(out.i)){ -->
-<!--     best.model.name = as.character(out.i$modname[m]) -->
-<!--     png(file = here::here(paste(outdir, paste(name, m, resp.vars[i], "mod_fits.png", sep = "_"), sep = "/"))) -->
-<!--     if(best.model.name != "null"){ -->
-<!--       par(mfrow = c(3,1), mar = c(9, 4, 3, 1)) -->
-<!--       best.model = out.list$success.models[[best.model.name]] -->
-<!--       plot(best.model, all.terms = T,pages = 1,residuals = T,pch = 16) -->
-<!--       mtext(side = 2, text = resp.vars[i], outer = F)}   -->
-<!--     dev.off() -->
-<!--   } -->
-<!-- } -->
-<!-- ``` -->
-<!-- Tidy the model fits and importance scores. These will be combined with the models fits and importance scores from the model selection for lenght metrics. -->
-<!-- ```{r save-gam-data} -->
-<!-- names(out.all) <- resp.vars -->
-<!-- names(var.imp) <- resp.vars -->
-<!-- all.mod.fits <- list_rbind(out.all, names_to = "response") -->
-<!-- all.var.imp  <- as.data.frame(do.call("rbind", var.imp)) -->
-<!-- ``` -->
-<!-- Load the fish length data. This data is created in the previous workflow, 'Format & visualise fish data'. -->
-<!-- ```{r read-length} -->
-<!-- tidy.length <- readRDS(here::here(paste0('r-workflows/data/tidy/',  -->
-<!--                       name,'_tidy-length.rds'))) %>% -->
-<!--   dplyr::filter(!is.na(mbdepth)) %>% # If this filters out any then you need to go back and create your spatial layers -->
-<!--   glimpse() -->
-<!-- ``` -->
-<!-- Check to make sure response variables have less than 80% zeroes. Full-subset GAM modelling will produce unreliable results if your data is too zero inflated. -->
-<!-- ```{r length-responses} -->
-<!-- unique.vars <- unique(as.character(tidy.length$response)) -->
-<!-- resp.vars <- character() -->
-<!-- for(i in 1:length(unique.vars)){ -->
-<!--   temp.dat <- tidy.length[which(tidy.length$response == unique.vars[i]), ] -->
-<!--   if(length(which(temp.dat$number == 0)) / nrow(temp.dat) < 0.8){ -->
-<!--     resp.vars <- c(resp.vars, unique.vars[i])} -->
-<!-- } -->
-<!-- resp.vars  -->
-<!-- ``` -->
-<!-- Set up the R environment for model selection. -->
-<!-- ```{r set-up} -->
-<!-- out.all = list() -->
-<!-- var.imp = list() -->
-<!-- ``` -->
-<!-- # Run the full subset model selection process for length metrics -->
-<!-- This loop has been adapted from @beckyfisher/FSSgam, and examples and documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin, TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. https://doi.org/10.1002/ece3.4134. -->
-<!-- ```{r FSSgam-length, results='hide', warning=FALSE, message=FALSE} -->
-<!-- for(i in 1:length(resp.vars)){ -->
-<!--   use.dat = as.data.frame(tidy.length[which(tidy.length$response == resp.vars[i]),]) -->
-<!--   print(resp.vars[i]) -->
-<!--   Model1  <- gam(number ~ s(mbdepth, k = 3, bs = 'cr'), -->
-<!--                  family = tw(),  data = use.dat) -->
-<!--   model.set <- generate.model.set(use.dat = use.dat, -->
-<!--                                test.fit = Model1, -->
-<!--                                pred.vars.cont = pred.vars, -->
-<!--                                factor.smooth.interactions = NA, -->
-<!--                                cyclic.vars = "aspect",  -->
-<!--                                k = 3 -->
-<!--                                ) -->
-<!--   out.list <- fit.model.set(model.set, -->
-<!--                          max.models = 600, -->
-<!--                          parallel = T) -->
-<!--   names(out.list) -->
-<!--   out.list$failed.models -->
-<!--   mod.table = out.list$mod.data.out -->
-<!--   mod.table = mod.table[order(mod.table$AICc),] -->
-<!--   mod.table$cumsum.wi = cumsum(mod.table$wi.AICc) -->
-<!--   out.i = mod.table[which(mod.table$delta.AICc<=2),] -->
-<!--   out.all = c(out.all, list(out.i)) -->
-<!--   var.imp = c(var.imp, list(out.list$variable.importance$aic$variable.weights.raw)) -->
-<!--   for(m in 1:nrow(out.i)){ -->
-<!--     best.model.name = as.character(out.i$modname[m]) -->
-<!--     png(file = here::here(paste(outdir, paste(name, m, resp.vars[i], "mod_fits.png", sep = "_"), sep = "/"))) -->
-<!--     if(best.model.name != "null"){ -->
-<!--       par(mfrow = c(3,1), mar = c(9, 4, 3, 1)) -->
-<!--       best.model = out.list$success.models[[best.model.name]] -->
-<!--       plot(best.model, all.terms = T, pages = 1, residuals = T, pch = 16) -->
-<!--       mtext(side = 2, text = resp.vars[i], outer = F)}   -->
-<!--     dev.off() -->
-<!--   } -->
-<!-- } -->
-<!-- ``` -->
-<!-- Combine the model fits and importance scores with those previously created in full subsets modelling of count metrics, and save out these files. -->
-<!-- ```{r save-outputs} -->
-<!-- names(out.all) <- resp.vars -->
-<!-- names(var.imp) <- resp.vars -->
-<!-- all.mod.fits <- bind_rows(all.mod.fits, list_rbind(out.all, names_to = "response")) -->
-<!-- all.var.imp  <- bind_rows(all.var.imp, as.data.frame(do.call("rbind",var.imp))) -->
-<!-- write.csv(all.mod.fits[ , -2], file = here::here(paste0(outdir, name, "_all.mod.fits.csv"))) -->
-<!-- write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.imp.csv"))) -->
-<!-- ``` -->
+<div class="section level2">
+<h2 id="r-setup">R setup<a class="anchor" aria-label="anchor" href="#r-setup"></a>
+</h2>
+<p>Load libraries. All packages are available through CRAN, aside from
+‘FSSgam’, which can be installed following the instructions provided in
+the GitHub repository <a href="https://github.com/beckyfisher/FSSgam" class="external-link uri">https://github.com/beckyfisher/FSSgam</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages('remotes')</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">'remotes'</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout<span class="op">=</span><span class="fl">9999999</span><span class="op">)</span></span>
+<span><span class="co"># remotes::install_github("GlobalArchiveManual/CheckEM")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://globalarchivemanual.github.io/CheckEM/">CheckEM</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">FSSgam</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://eliocamp.github.io/ggnewscale/" class="external-link">ggnewscale</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
+<p>Set the study name. Study names are used throughout to make for
+reproducible code that can be easily shifted between different campaigns
+and projects while still providing meaningful filenames.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">'example-bruv-workflow'</span></span></code></pre></div>
+<p>Load the fish count data. This data is created in the previous
+workflow, ‘Format &amp; visualise fish data’.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tidy.count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>,</span>
+<span>                      <span class="va">name</span>,<span class="st">'_tidy-count.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and create your spatial layers</span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Rows: 64</span></span>
+<span><span class="co">## Columns: 18</span></span>
+<span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10"<span style="color: #949494;">, </span>"10"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"12"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"14"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"15"<span style="color: #949494;">, </span>"16"<span style="color: #949494;">, </span>"16…</span></span>
+<span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"N…</span></span>
+<span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total_abundance"<span style="color: #949494;">, </span>"species_richness"<span style="color: #949494;">, </span>"total_abundance"<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111<span style="color: #949494;">, </span>13<span style="color: #949494;">, </span>94<span style="color: #949494;">, </span>15<span style="color: #949494;">, </span>191<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>146<span style="color: #949494;">, </span>16<span style="color: #949494;">, </span>99<span style="color: #949494;">, </span>14<span style="color: #949494;">, </span>312<span style="color: #949494;">, </span>18<span style="color: #949494;">, </span>38<span style="color: #949494;">, </span>13…</span></span>
+<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8533<span style="color: #949494;">, </span>114.8533<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8816<span style="color: #949494;">, </span>114.8686<span style="color: #949494;">, </span>114.868…</span></span>
+<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08387<span style="color: #949494;">, </span>-34.08387<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.13249<span style="color: #949494;">, </span>-34.07530<span style="color: #949494;">, </span>-3…</span></span>
+<span><span class="co">## $ depth_m      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "44.3"<span style="color: #949494;">, </span>"44.3"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"42.7"<span style="color: #949494;">, </span>"45.3"<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -42.77519<span style="color: #949494;">, </span>-42.77519<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-42.02835<span style="color: #949494;">, </span>-41.07679<span style="color: #949494;">, </span>-4…</span></span>
+<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.005708777<span style="color: #949494;">, </span>0.005708777<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.013768068<span style="color: #949494;">, </span>0.078…</span></span>
+<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 72.31942<span style="color: #949494;">, </span>72.31942<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>110.35012<span style="color: #949494;">, </span>215.54254<span style="color: #949494;">, </span>215.…</span></span>
+<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.03892708<span style="color: #949494;">, </span>0.2611088…</span></span>
+<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.05208921<span style="color: #949494;">, </span>0.05208921<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.06246567<span style="color: #949494;">, </span>0.3096442…</span></span>
+<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11757660<span style="color: #949494;">, </span>0.11757660<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.30690765<span style="color: #949494;">, </span>0.7959022…</span></span>
+<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -2.8542883<span style="color: #949494;">, </span>-2.8542883<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-5.8822656<span style="color: #949494;">, </span>-6.646017…</span></span>
+<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.217391<span style="color: #949494;">, </span>3.217391<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.809524<span style="color: #949494;">, </span>2.440000<span style="color: #949494;">, </span>2.44000…</span></span>
+<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7952428<span style="color: #949494;">, </span>0.7952428<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.4023739<span style="color: #949494;">, </span>0.7118052<span style="color: #949494;">, </span>0.…</span></span>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8888889<span style="color: #949494;">, </span>0.8888889<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>0.8857143<span style="color: #949494;">, </span>0.…</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="set-up-data-for-modelling">Set up data for modelling<a class="anchor" aria-label="anchor" href="#set-up-data-for-modelling"></a>
+</h2>
+<p>Set the potential predictor variables that may be used to explain the
+patterns found in the response variables. It is important here to select
+ecologically meaningful variables that could influence the chosen
+response variable.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pred.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mbdepth"</span>, <span class="st">"roughness"</span>, <span class="st">"slope"</span>, <span class="st">"detrended"</span>,</span>
+<span>               <span class="st">"tpi"</span>, <span class="st">"tri"</span>, <span class="st">"aspect"</span>, <span class="st">"reef"</span><span class="op">)</span></span></code></pre></div>
+<p>Create a correlation matrix to assess correlations between predictor
+variables. If any variables have a correlation greater than 0.95, then
+only one of these variables should be included in the model selection.
+In this example data set, ‘roughness’, ‘slope’ and ‘tri’ are all highly
+correlated, so we will only include roughness as a final predictor
+variable.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">tidy.count</span><span class="op">[</span> , <span class="va">pred.vars</span><span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##           mbdepth roughness slope detrended   tpi   tri aspect  reef</span></span>
+<span><span class="co">## mbdepth      1.00     -0.66 -0.65     -0.89  0.03 -0.59  -0.32 -0.19</span></span>
+<span><span class="co">## roughness   -0.66      1.00  0.99      0.48  0.29  0.99   0.06  0.20</span></span>
+<span><span class="co">## slope       -0.65      0.99  1.00      0.47  0.29  0.99   0.06  0.19</span></span>
+<span><span class="co">## detrended   -0.89      0.48  0.47      1.00  0.00  0.42   0.39  0.35</span></span>
+<span><span class="co">## tpi          0.03      0.29  0.29      0.00  1.00  0.35  -0.02  0.00</span></span>
+<span><span class="co">## tri         -0.59      0.99  0.99      0.42  0.35  1.00   0.04  0.21</span></span>
+<span><span class="co">## aspect      -0.32      0.06  0.06      0.39 -0.02  0.04   1.00  0.00</span></span>
+<span><span class="co">## reef        -0.19      0.20  0.19      0.35  0.00  0.21   0.00  1.00</span></span></code></pre>
+<p>Plot the individual predictors to assess if any transformations are
+necessary. We suggest to only use transformations when absolutely
+necessary. In the example data set, most of the response variables have
+relatively balanced distributions, and therefor we have left them
+untransformed. It is important to note that in this example dataset, the
+spread of most predictor variables across their full range is not ideal,
+with gaps in key predictors such as depth and detrended bathymetry. When
+working with GAMs, gaps and outliers like this may create spurious
+relationships, and therefor we suggest running these scripts with more
+complete data than the small example data set provided here.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">CheckEM</span><span class="fu">::</span><span class="fu"><a href="../../reference/plot_transformations.html">plot_transformations</a></span><span class="op">(</span>pred.vars <span class="op">=</span> <span class="va">pred.vars</span>, dat <span class="op">=</span> <span class="va">tidy.count</span><span class="op">)</span></span></code></pre></div>
+<p><img src="fish-modelling_files/figure-html/transformations-1.png" class="r-plt" alt="" width="700"><img src="fish-modelling_files/figure-html/transformations-2.png" class="r-plt" alt="" width="700"><img src="fish-modelling_files/figure-html/transformations-3.png" class="r-plt" alt="" width="700"><img src="fish-modelling_files/figure-html/transformations-4.png" class="r-plt" alt="" width="700"><img src="fish-modelling_files/figure-html/transformations-5.png" class="r-plt" alt="" width="700"><img src="fish-modelling_files/figure-html/transformations-6.png" class="r-plt" alt="" width="700"><img src="fish-modelling_files/figure-html/transformations-7.png" class="r-plt" alt="" width="700"><img src="fish-modelling_files/figure-html/transformations-8.png" class="r-plt" alt="" width="700"></p>
+<p>Reset the predictor variables to remove any highly correlated
+variables and include any transformed variables.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pred.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mbdepth"</span>, <span class="st">"roughness"</span>, <span class="st">"detrended"</span>,</span>
+<span>               <span class="st">"tpi"</span>, <span class="st">"aspect"</span>, <span class="st">"reef"</span><span class="op">)</span></span></code></pre></div>
+<p>Check to make sure response variables have less than 80% zeroes.
+Full-subset GAM modelling will produce unreliable results if your data
+is too zero inflated.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">unique.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">tidy.count</span><span class="op">$</span><span class="va">response</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">resp.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">unique.vars</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">temp.dat</span> <span class="op">&lt;-</span> <span class="va">tidy.count</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">tidy.count</span><span class="op">$</span><span class="va">response</span> <span class="op">==</span> <span class="va">unique.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, <span class="op">]</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">temp.dat</span><span class="op">$</span><span class="va">number</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">temp.dat</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">resp.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">resp.vars</span>, <span class="va">unique.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">resp.vars</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "total_abundance"  "species_richness"</span></span></code></pre>
+<p>Add the directory to save model outputs, and set up the R environment
+for model selection.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">outdir</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="st">"r-workflows/model-output/fish/"</span><span class="op">)</span></span>
+<span><span class="va">out.all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">var.imp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="run-the-full-subset-model-selection-process-for-count-metrics">Run the full subset model selection process for count metrics<a class="anchor" aria-label="anchor" href="#run-the-full-subset-model-selection-process-for-count-metrics"></a>
+</h2>
+<p>This loop has been adapted from <span class="citation">@beckyfisher/FSSgam</span>, and examples and
+documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin,
+TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple
+regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. <a href="https://doi.org/10.1002/ece3.4134" class="external-link uri">https://doi.org/10.1002/ece3.4134</a>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">resp.vars</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">use.dat</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">tidy.count</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">tidy.count</span><span class="op">$</span><span class="va">response</span> <span class="op">==</span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">Model1</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">number</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">mbdepth</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">'cr'</span><span class="op">)</span>,</span>
+<span>                 family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">gaussian</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span>,  data <span class="op">=</span> <span class="va">use.dat</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">model.set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FSSgam/man/generate.model.set.html" class="external-link">generate.model.set</a></span><span class="op">(</span>use.dat <span class="op">=</span> <span class="va">use.dat</span>,</span>
+<span>                               test.fit <span class="op">=</span> <span class="va">Model1</span>,</span>
+<span>                               pred.vars.cont <span class="op">=</span> <span class="va">pred.vars</span>,</span>
+<span>                               factor.smooth.interactions <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>                               cyclic.vars <span class="op">=</span> <span class="st">"aspect"</span>,</span>
+<span>                               k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="va">out.list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FSSgam/man/fit.model.set.html" class="external-link">fit.model.set</a></span><span class="op">(</span><span class="va">model.set</span>,</span>
+<span>                         max.models <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>                         parallel <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">out.list</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">out.list</span><span class="op">$</span><span class="va">failed.models</span></span>
+<span>  <span class="va">mod.table</span> <span class="op">=</span> <span class="va">out.list</span><span class="op">$</span><span class="va">mod.data.out</span></span>
+<span>  <span class="va">mod.table</span> <span class="op">=</span> <span class="va">mod.table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">AICc</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  <span class="va">mod.table</span><span class="op">$</span><span class="va">cumsum.wi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">wi.AICc</span><span class="op">)</span></span>
+<span>  <span class="va">out.i</span> <span class="op">=</span> <span class="va">mod.table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">delta.AICc</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  <span class="va">out.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">out.all</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">var.imp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">var.imp</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">out.list</span><span class="op">$</span><span class="va">variable.importance</span><span class="op">$</span><span class="va">aic</span><span class="op">$</span><span class="va">variable.weights.raw</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">m</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">best.model.name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">$</span><span class="va">modname</span><span class="op">[</span><span class="va">m</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">outdir</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">m</span>, <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"mod_fits.png"</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="va">best.model.name</span> <span class="op">!=</span> <span class="st">"null"</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">best.model</span> <span class="op">=</span> <span class="va">out.list</span><span class="op">$</span><span class="va">success.models</span><span class="op">[[</span><span class="va">best.model.name</span><span class="op">]</span><span class="op">]</span></span>
+<span>      <span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">best.model</span>, all.terms <span class="op">=</span> <span class="cn">T</span>,pages <span class="op">=</span> <span class="fl">1</span>,residuals <span class="op">=</span> <span class="cn">T</span>,pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, text <span class="op">=</span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, outer <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">}</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Tidy the model fits and importance scores. These will be combined
+with the models fits and importance scores from the model selection for
+lenght metrics.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">out.all</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">resp.vars</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">var.imp</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">resp.vars</span></span>
+<span><span class="va">all.mod.fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="va">out.all</span>, names_to <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
+<span><span class="va">all.var.imp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="va">var.imp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Load the fish length data. This data is created in the previous
+workflow, ‘Format &amp; visualise fish data’.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tidy.length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/serialize.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'r-workflows/data/tidy/'</span>,</span>
+<span>                      <span class="va">name</span>,<span class="st">'_tidy-length.rds'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mbdepth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># If this filters out any then you need to go back and create your spatial layers</span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Rows: 64</span></span>
+<span><span class="co">## Columns: 18</span></span>
+<span><span class="co">## $ campaignid   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">## $ sample       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "15"<span style="color: #949494;">, </span>"17"<span style="color: #949494;">, </span>"19"<span style="color: #949494;">, </span>"23"<span style="color: #949494;">, </span>"24"<span style="color: #949494;">, </span>"26"<span style="color: #949494;">, </span>"29"<span style="color: #949494;">, </span>"3"<span style="color: #949494;">, </span>"31"<span style="color: #949494;">, </span>"32"…</span></span>
+<span><span class="co">## $ number       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>8<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>13<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">## $ status       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"No-take"<span style="color: #949494;">, </span>"N…</span></span>
+<span><span class="co">## $ response     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "greater than Lm"<span style="color: #949494;">, </span>"greater than Lm"<span style="color: #949494;">, </span>"greater than Lm"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ longitude_dd <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 114.8444<span style="color: #949494;">, </span>114.8576<span style="color: #949494;">, </span>114.7822<span style="color: #949494;">, </span>114.9190<span style="color: #949494;">, </span>114.8485<span style="color: #949494;">, </span>114.928…</span></span>
+<span><span class="co">## $ latitude_dd  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -34.08478<span style="color: #949494;">, </span>-34.09635<span style="color: #949494;">, </span>-34.12047<span style="color: #949494;">, </span>-34.12832<span style="color: #949494;">, </span>-34.11789<span style="color: #949494;">, </span>-3…</span></span>
+<span><span class="co">## $ depth_m      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "45.3"<span style="color: #949494;">, </span>"43.3"<span style="color: #949494;">, </span>"73.6"<span style="color: #949494;">, </span>"41"<span style="color: #949494;">, </span>"45.6"<span style="color: #949494;">, </span>"36"<span style="color: #949494;">, </span>"42.6"<span style="color: #949494;">, </span>"46.7…</span></span>
+<span><span class="co">## $ mbdepth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -44.29804<span style="color: #949494;">, </span>-42.74676<span style="color: #949494;">, </span>-71.60112<span style="color: #949494;">, </span>-38.25594<span style="color: #949494;">, </span>-44.23959<span style="color: #949494;">, </span>-4…</span></span>
+<span><span class="co">## $ slope        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.108975978<span style="color: #949494;">, </span>0.008719478<span style="color: #949494;">, </span>0.880997142<span style="color: #949494;">, </span>0.444838455<span style="color: #949494;">, </span>0.103…</span></span>
+<span><span class="co">## $ aspect       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 264.03427<span style="color: #949494;">, </span>30.76545<span style="color: #949494;">, </span>262.35388<span style="color: #949494;">, </span>294.10675<span style="color: #949494;">, </span>257.20307<span style="color: #949494;">, </span>40.…</span></span>
+<span><span class="co">## $ tpi          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.19527912<span style="color: #949494;">, </span>0.02505112<span style="color: #949494;">, </span>1.04176044<span style="color: #949494;">, </span>0.47694588<span style="color: #949494;">, </span>0.042278…</span></span>
+<span><span class="co">## $ tri          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.34487247<span style="color: #949494;">, </span>0.03473282<span style="color: #949494;">, </span>2.80258274<span style="color: #949494;">, </span>1.83670998<span style="color: #949494;">, </span>0.3347983…</span></span>
+<span><span class="co">## $ roughness    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.91366196<span style="color: #949494;">, </span>0.09923935<span style="color: #949494;">, </span>9.01136017<span style="color: #949494;">, </span>5.30128479<span style="color: #949494;">, </span>1.2933082…</span></span>
+<span><span class="co">## $ detrended    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.2281526<span style="color: #949494;">, </span>-3.1375041<span style="color: #949494;">, </span>17.9911461<span style="color: #949494;">, </span>-8.6934719<span style="color: #949494;">, </span>2.9724391…</span></span>
+<span><span class="co">## $ mean_relief  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.518519<span style="color: #949494;">, </span>3.333333<span style="color: #949494;">, </span>2.583333<span style="color: #949494;">, </span>3.555556<span style="color: #949494;">, </span>3.360000<span style="color: #949494;">, </span>4.00000…</span></span>
+<span><span class="co">## $ sd_relief    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8024180<span style="color: #949494;">, </span>0.9128709<span style="color: #949494;">, </span>0.5036102<span style="color: #949494;">, </span>0.8555853<span style="color: #949494;">, </span>0.4898979<span style="color: #949494;">, </span>0.…</span></span>
+<span><span class="co">## $ reef         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.7741935<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>0.8823529<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.0000000<span style="color: #949494;">, </span>1.…</span></span></code></pre>
+<p>Check to make sure response variables have less than 80% zeroes.
+Full-subset GAM modelling will produce unreliable results if your data
+is too zero inflated.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">unique.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">tidy.length</span><span class="op">$</span><span class="va">response</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">resp.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">unique.vars</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">temp.dat</span> <span class="op">&lt;-</span> <span class="va">tidy.length</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">tidy.length</span><span class="op">$</span><span class="va">response</span> <span class="op">==</span> <span class="va">unique.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, <span class="op">]</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">temp.dat</span><span class="op">$</span><span class="va">number</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">temp.dat</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">resp.vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">resp.vars</span>, <span class="va">unique.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">resp.vars</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "greater than Lm"</span></span></code></pre>
+<p>Set up the R environment for model selection.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">var.imp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="run-the-full-subset-model-selection-process-for-length-metrics">Run the full subset model selection process for length metrics<a class="anchor" aria-label="anchor" href="#run-the-full-subset-model-selection-process-for-length-metrics"></a>
+</h2>
+<p>This loop has been adapted from <span class="citation">@beckyfisher/FSSgam</span>, and examples and
+documentation is available on GitHub and in Fisher, R, Wilson, SK, Sin,
+TM, Lee, AC, Langlois, TJ. A simple function for full-subsets multiple
+regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113. <a href="https://doi.org/10.1002/ece3.4134" class="external-link uri">https://doi.org/10.1002/ece3.4134</a>.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">resp.vars</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">use.dat</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">tidy.length</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">tidy.length</span><span class="op">$</span><span class="va">response</span> <span class="op">==</span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">Model1</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">number</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">mbdepth</span>, k <span class="op">=</span> <span class="fl">3</span>, bs <span class="op">=</span> <span class="st">'cr'</span><span class="op">)</span>,</span>
+<span>                 family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/Tweedie.html" class="external-link">tw</a></span><span class="op">(</span><span class="op">)</span>,  data <span class="op">=</span> <span class="va">use.dat</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">model.set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FSSgam/man/generate.model.set.html" class="external-link">generate.model.set</a></span><span class="op">(</span>use.dat <span class="op">=</span> <span class="va">use.dat</span>,</span>
+<span>                               test.fit <span class="op">=</span> <span class="va">Model1</span>,</span>
+<span>                               pred.vars.cont <span class="op">=</span> <span class="va">pred.vars</span>,</span>
+<span>                               factor.smooth.interactions <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>                               cyclic.vars <span class="op">=</span> <span class="st">"aspect"</span>,</span>
+<span>                               k <span class="op">=</span> <span class="fl">3</span></span>
+<span>                               <span class="op">)</span></span>
+<span>  <span class="va">out.list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/FSSgam/man/fit.model.set.html" class="external-link">fit.model.set</a></span><span class="op">(</span><span class="va">model.set</span>,</span>
+<span>                         max.models <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>                         parallel <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">out.list</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">out.list</span><span class="op">$</span><span class="va">failed.models</span></span>
+<span>  <span class="va">mod.table</span> <span class="op">=</span> <span class="va">out.list</span><span class="op">$</span><span class="va">mod.data.out</span></span>
+<span>  <span class="va">mod.table</span> <span class="op">=</span> <span class="va">mod.table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">AICc</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  <span class="va">mod.table</span><span class="op">$</span><span class="va">cumsum.wi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">wi.AICc</span><span class="op">)</span></span>
+<span>  <span class="va">out.i</span> <span class="op">=</span> <span class="va">mod.table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">mod.table</span><span class="op">$</span><span class="va">delta.AICc</span><span class="op">&lt;=</span><span class="fl">2</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  <span class="va">out.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">out.all</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">var.imp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">var.imp</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">out.list</span><span class="op">$</span><span class="va">variable.importance</span><span class="op">$</span><span class="va">aic</span><span class="op">$</span><span class="va">variable.weights.raw</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">m</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">best.model.name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">out.i</span><span class="op">$</span><span class="va">modname</span><span class="op">[</span><span class="va">m</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">outdir</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">m</span>, <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"mod_fits.png"</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="va">best.model.name</span> <span class="op">!=</span> <span class="st">"null"</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">best.model</span> <span class="op">=</span> <span class="va">out.list</span><span class="op">$</span><span class="va">success.models</span><span class="op">[[</span><span class="va">best.model.name</span><span class="op">]</span><span class="op">]</span></span>
+<span>      <span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">best.model</span>, all.terms <span class="op">=</span> <span class="cn">T</span>, pages <span class="op">=</span> <span class="fl">1</span>, residuals <span class="op">=</span> <span class="cn">T</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">2</span>, text <span class="op">=</span> <span class="va">resp.vars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, outer <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">}</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Combine the model fits and importance scores with those previously
+created in full subsets modelling of count metrics, and save out these
+files.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">out.all</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">resp.vars</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">var.imp</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">resp.vars</span></span>
+<span><span class="va">all.mod.fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">all.mod.fits</span>, <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="va">out.all</span>, names_to <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">all.var.imp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">all.var.imp</span>, <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>,<span class="va">var.imp</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">all.mod.fits</span><span class="op">[</span> , <span class="op">-</span><span class="fl">2</span><span class="op">]</span>, file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">outdir</span>, <span class="va">name</span>, <span class="st">"_all.mod.fits.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">all.var.imp</span>,         file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">outdir</span>, <span class="va">name</span>, <span class="st">"_all.var.imp.csv"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
