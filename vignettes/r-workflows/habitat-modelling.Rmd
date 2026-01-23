@@ -237,7 +237,7 @@ preddf <- cbind(preddf,
 Create a column for the 'dominant' habitat
 ```{r dominant-tag}
 preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, #prock, 
-                                                 psand, 
+                                                 # psand, 
                                                  pseagrass, 
                                                  pinverts), 1,
                          FUN = function(x){names(which.max(x))})
@@ -261,7 +261,7 @@ Set colours for habitat plotting.
 ```{r habitat-colours}
 unique(preddf$dom_tag)
 hab_fills <- scale_fill_manual(values = c(
-  "psand" = "wheat",
+  # "psand" = "wheat",
   "pinverts" = "plum",
   "pseagrass" = "forestgreen",
   "pmacro" = "darkgoldenrod4"
@@ -291,7 +291,7 @@ indclass <- preddf %>%
   dplyr::mutate(habitat = case_when(habitat %in% "pinverts" ~ "Sessile invertebrates",
                                     habitat %in% "pmacro" ~ "Macroalgae",
                                     # habitat %in% "prock" ~ "Rock",
-                                    habitat %in% "psand" ~ "Sand",
+                                    # habitat %in% "psand" ~ "Sand",
                                     habitat %in% "pseagrass" ~ "Seagrass",
                                     habitat %in% "preef" ~ "Reef")) %>%
   glimpse()
