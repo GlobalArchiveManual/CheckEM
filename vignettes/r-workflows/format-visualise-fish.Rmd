@@ -46,14 +46,18 @@ metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/"
 Load and format the habitat data. Here we create a 'reef' column that consists of reef-forming habitat found in the study area, which will be used in subsequent fish modelling scripts.
 
 ```{r load-habitat}
+reef_cols <- c("consolidated_hard", "macroalgae", "seagrasses", "sessile_invertebrates")
+
 habitat <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_tidy-habitat.rds"))) %>%
   dplyr::mutate(number = count / total_points_annotated) %>%
   dplyr::select(campaignid, sample, longitude_dd, latitude_dd, depth_m, mbdepth, slope, aspect, tpi, tri, roughness, detrended, habitat, number, mean_relief, sd_relief) %>%
-  pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>%
+  tidyr::pivot_wider(names_from = habitat, values_from = number, values_fill = 0) %>%
   CheckEM::clean_names() %>%
-  dplyr::mutate(reef = consolidated_hard + macroalgae + seagrasses + sessile_invertebrates) %>%
-  dplyr::select(-c(consolidated_hard, macroalgae, seagrasses, sessile_invertebrates, unconsolidated_soft)) %>%
-  glimpse()
+  dplyr::mutate(
+    reef = rowSums(dplyr::across(dplyr::any_of(reef_cols), ~ tidyr::replace_na(.x, 0)))
+  ) %>%
+  dplyr::select(-dplyr::any_of(c(reef_cols, "unconsolidated_soft"))) %>%
+  dplyr::glimpse()
 ```
 
 Load length of maturity data. The maturity dataset is loaded when the package is installed.
