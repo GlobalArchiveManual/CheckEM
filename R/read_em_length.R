@@ -23,7 +23,7 @@ read_em_length <- function(dir, method = "BRUVs", recursive = FALSE) {
   read_dat <- function(flnm){
     readr::read_tsv(flnm, col_types =  readr::cols(.default = "c")) %>%
     dplyr::mutate(campaignid = basename(flnm)) %>%
-    CheckEM::clean_names() %>%
+    # CheckEM::clean_names() %>%
     dplyr::mutate(campaignid = stringr::str_replace_all(campaignid, 
                                                         c("_3DPoints.txt" = "",
                                                           "_Lengths.txt" = "",
