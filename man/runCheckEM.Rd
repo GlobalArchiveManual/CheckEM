@@ -4,19 +4,28 @@
 \alias{runCheckEM}
 \title{Run the CheckEM Shiny App Locally}
 \usage{
-runCheckEM()
+runCheckEM(
+  install_missing = TRUE,
+  ask = interactive(),
+  repos = getOption("repos")
+)
+}
+\arguments{
+\item{install_missing}{Logical. If TRUE, install missing packages automatically.}
+
+\item{ask}{Logical. If TRUE, ask before installing packages.}
+
+\item{repos}{Character. CRAN repo to use.}
 }
 \value{
-Launches the CheckEM Shiny app in the web browser.
+Launches the CheckEM Shiny app.
 }
 \description{
-This function launches a local version of the CheckEM Shiny app in your default web browser.
-The app allows users to perform quality control checks on metadata and annotations for fish
-and benthic stereo-imagery datasets.
+Launches the CheckEM Shiny app in the default web browser. Optionally installs
+required packages if they are missing.
 }
 \examples{
 \dontrun{
-# To run the CheckEM Shiny app locally
 CheckEM::runCheckEM()
 }
 }
