@@ -35,8 +35,7 @@ runCheckEM <- function(install_missing = TRUE,
   # GitHub remotes used by the app (only include if truly needed at runtime)
   github_pkgs <- list(
     # package_name = "owner/repo"
-    GlobalArchive   = "UWAMEGFisheries/GlobalArchive",
-    FSSgam_package  = "beckyfisher/FSSgam_package"
+    GlobalArchive   = "UWAMEGFisheries/GlobalArchive"
   )
   
   # ---- 2) Install missing CRAN packages ----
