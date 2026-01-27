@@ -1076,7 +1076,7 @@ glimpse(lengths_without_number)
 
 ### Species names that have been updated
 
-Taxanomic advances means that species names are updated all the time,
+Taxonomic advances means that species names are updated all the time,
 and analysts sometimes spell species names incorrectly. This check uses
 a data-frame saved inside the CheckEM package to identifies species
 names that have been updated or spelt incorrectly.

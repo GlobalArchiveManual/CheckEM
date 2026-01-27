@@ -207,7 +207,7 @@ for(i in 1:length(resp.vars)){
 
 Tidy the model fits and importance scores. These will be combined with
 the models fits and importance scores from the model selection for
-lenght metrics.
+length metrics.
 
 ``` r
 names(out.all) <- resp.vars

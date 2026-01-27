@@ -186,7 +186,7 @@ plot.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_re
 
 ## Visualise the habitat and relief data
 
-Plot the occurence data per habitat class. Each data point represents a
+Plot the occurrence data per habitat class. Each data point represents a
 unique sample.
 
 ``` r

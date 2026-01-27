@@ -284,8 +284,8 @@ plotting.</p>
 <div class="section level2">
 <h2 id="visualise-the-habitat-and-relief-data">Visualise the habitat and relief data<a class="anchor" aria-label="anchor" href="#visualise-the-habitat-and-relief-data"></a>
 </h2>
-<p>Plot the occurence data per habitat class. Each data point represents
-a unique sample.</p>
+<p>Plot the occurrence data per habitat class. Each data point
+represents a unique sample.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html" class="external-link">geom_quasirandom</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tidy.habitat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="va">total_points_annotated</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">habitat</span><span class="op">)</span>, groupOnX <span class="op">=</span> <span class="cn">F</span>, method <span class="op">=</span> <span class="st">"quasirandom"</span>, alpha <span class="op">=</span> <span class="fl">0.25</span>, size <span class="op">=</span> <span class="fl">1.8</span>, width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
