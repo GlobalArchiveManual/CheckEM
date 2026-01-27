@@ -37,7 +37,7 @@ RoxygenNote: 7.3.3
 Remotes: beckyfisher/FSSgam_package,
          UWAMEGFisheries/GlobalArchive
 Depends: 
-    R (>= 4.1)
+    R (>= 4.2.0)
 Imports: 
     curl,
     dplyr,
