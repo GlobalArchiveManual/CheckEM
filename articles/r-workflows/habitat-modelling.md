@@ -302,3 +302,440 @@ preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
     ## $ roughness <dbl> 2.807414, 2.421717, 2.196986, 2.156502, 2.581898, 2.606502, …
     ## $ detrended <dbl> -2.871674, -2.161609, -2.683798, -3.207528, -3.417629, -3.56…
     ## $ depth     <dbl> 14.83014, 13.89184, 14.18757, 14.48647, 14.47323, 14.39490, …
+
+Manually set the top model from the full subset model selection.
+
+``` r
+# Sessile invertebrates
+m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~
+                 s(detrended,     k = 5, bs = "cr")  +
+                 s(roughness, k = 5, bs = "cr") +
+                 s(tpi, k = 5, bs = "cr"),
+               data = widedat, method = "REML", family = binomial("logit"))
+summary(m_inverts)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: logit 
+    ## 
+    ## Formula:
+    ## cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~ 
+    ##     s(detrended, k = 5, bs = "cr") + s(roughness, k = 5, bs = "cr") + 
+    ##         s(tpi, k = 5, bs = "cr")
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -2.2574     0.1817  -12.42   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                edf Ref.df Chi.sq p-value    
+    ## s(detrended) 3.351  3.728 178.14  <2e-16 ***
+    ## s(roughness) 1.000  1.000  29.05  <2e-16 ***
+    ## s(tpi)       3.562  3.874  38.06  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.951   Deviance explained = 92.1%
+    ## -REML =  60.66  Scale est. = 1         n = 32
+
+``` r
+plot(m_inverts, pages = 1, residuals = T, cex = 5)
+```
+
+![](habitat-modelling_files/figure-html/set-models-1.png)
+
+``` r
+# Rock
+m_rock <- gam(cbind(consolidated_hard_, total_points_annotated - consolidated_hard_) ~
+                   s(aspect,     k = 5, bs = "cc") +
+                   s(detrended, k = 5, bs = "cr") +
+                   s(tpi, k = 5, bs = "cr"),
+                 data = widedat, method = "REML", family = binomial("logit"))
+summary(m_rock)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: logit 
+    ## 
+    ## Formula:
+    ## cbind(consolidated_hard_, total_points_annotated - consolidated_hard_) ~ 
+    ##     s(aspect, k = 5, bs = "cc") + s(detrended, k = 5, bs = "cr") + 
+    ##         s(tpi, k = 5, bs = "cr")
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -4.7864     0.4335  -11.04   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                edf Ref.df Chi.sq p-value   
+    ## s(aspect)    2.297  3.000 10.675 0.00404 **
+    ## s(detrended) 2.996  3.415 14.238 0.00295 **
+    ## s(tpi)       1.000  1.000  2.636 0.10449   
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.847   Deviance explained = 76.7%
+    ## -REML = 26.081  Scale est. = 1         n = 32
+
+``` r
+plot(m_rock, pages = 1, residuals = T, cex = 5)
+```
+
+![](habitat-modelling_files/figure-html/set-models-2.png)
+
+``` r
+# Sand
+m_sand <- gam(cbind(unconsolidated_soft_, total_points_annotated - unconsolidated_soft_) ~
+                s(aspect,     k = 5, bs = "cc")  +
+                s(detrended, k = 5, bs = "cr") +
+                s(roughness, k = 5, bs = "cr"),
+              data = widedat, method = "REML", family = binomial("logit"))
+summary(m_sand)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: logit 
+    ## 
+    ## Formula:
+    ## cbind(unconsolidated_soft_, total_points_annotated - unconsolidated_soft_) ~ 
+    ##     s(aspect, k = 5, bs = "cc") + s(detrended, k = 5, bs = "cr") + 
+    ##         s(roughness, k = 5, bs = "cr")
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -2.8798     0.1732  -16.62   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                edf Ref.df Chi.sq p-value    
+    ## s(aspect)    2.653  3.000  53.05  <2e-16 ***
+    ## s(detrended) 3.627  3.900  61.87  <2e-16 ***
+    ## s(roughness) 2.021  2.252   7.65    0.04 *  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.612   Deviance explained = 61.5%
+    ## -REML = 82.943  Scale est. = 1         n = 32
+
+``` r
+plot(m_sand, pages = 1, residuals = T, cex = 5)
+```
+
+![](habitat-modelling_files/figure-html/set-models-3.png)
+
+``` r
+# Seagrasses
+m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~
+                s(aspect,     k = 5, bs = "cc")  +
+                s(detrended, k = 5, bs = "cr") +
+                s(roughness, k = 5, bs = "cr"),
+              data = widedat, method = "REML", family = binomial("logit"))
+summary(m_seagrass)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: logit 
+    ## 
+    ## Formula:
+    ## cbind(seagrasses, total_points_annotated - seagrasses) ~ s(aspect, 
+    ##     k = 5, bs = "cc") + s(detrended, k = 5, bs = "cr") + s(roughness, 
+    ##     k = 5, bs = "cr")
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)
+    ## (Intercept)   -5.343      4.109    -1.3    0.194
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                edf Ref.df Chi.sq  p-value    
+    ## s(aspect)    2.213  3.000  18.38 2.76e-05 ***
+    ## s(detrended) 3.071  3.276  33.38 2.20e-06 ***
+    ## s(roughness) 3.060  3.418  27.59 1.06e-05 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.511   Deviance explained = 70.4%
+    ## -REML = 93.264  Scale est. = 1         n = 32
+
+``` r
+plot(m_seagrass, pages = 1, residuals = T, cex = 5)
+```
+
+![](habitat-modelling_files/figure-html/set-models-4.png)
+
+``` r
+# Macroalgae
+m_macro <- gam(cbind(macroalgae, total_points_annotated - macroalgae) ~
+                 s(mbdepth,     k = 5, bs = "cr")  +
+                 s(detrended, k = 5, bs = "cr") +
+                 s(tpi, k = 5, bs = "cr"),
+               data = widedat, method = "REML", family = binomial("logit"))
+summary(m_macro)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: logit 
+    ## 
+    ## Formula:
+    ## cbind(macroalgae, total_points_annotated - macroalgae) ~ s(mbdepth, 
+    ##     k = 5, bs = "cr") + s(detrended, k = 5, bs = "cr") + s(tpi, 
+    ##     k = 5, bs = "cr")
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -0.6311     0.1663  -3.795 0.000148 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                edf Ref.df Chi.sq p-value    
+    ## s(mbdepth)   3.832  3.975  46.61  <2e-16 ***
+    ## s(detrended) 3.847  3.977  43.80  <2e-16 ***
+    ## s(tpi)       3.906  3.989  59.57  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.667   Deviance explained = 78.6%
+    ## -REML = 114.51  Scale est. = 1         n = 32
+
+``` r
+plot(m_macro, pages = 1, residuals = T, cex = 5)
+```
+
+![](habitat-modelling_files/figure-html/set-models-5.png)
+
+``` r
+# Reef
+m_reef <- gam(cbind(reef, total_points_annotated - reef) ~
+                 s(aspect,     k = 5, bs = "cc")  +
+                 s(detrended, k = 5, bs = "cr") +
+                 s(roughness, k = 5, bs = "cr"),
+               data = widedat, method = "REML", family = binomial("logit"))
+summary(m_reef)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: logit 
+    ## 
+    ## Formula:
+    ## cbind(reef, total_points_annotated - reef) ~ s(aspect, k = 5, 
+    ##     bs = "cc") + s(detrended, k = 5, bs = "cr") + s(roughness, 
+    ##     k = 5, bs = "cr")
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)   2.8798     0.1732   16.62   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                edf Ref.df Chi.sq p-value    
+    ## s(aspect)    2.653  3.000  53.05  <2e-16 ***
+    ## s(detrended) 3.627  3.900  61.87  <2e-16 ***
+    ## s(roughness) 2.021  2.252   7.65    0.04 *  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.612   Deviance explained = 61.5%
+    ## -REML = 82.943  Scale est. = 1         n = 32
+
+``` r
+plot(m_reef, pages = 1, residuals = T, cex = 5)
+```
+
+![](habitat-modelling_files/figure-html/set-models-6.png)
+
+## Predict, rasterise and plot habitat predictions
+
+``` r
+preddf <- cbind(preddf,
+                "pmacro" = predict(m_macro, preddf, type = "response"),
+                # "prock" = predict(m_rock, preddf, type = "response"),
+                # "psand" = predict(m_sand, preddf, type = "response"),
+                "pseagrass" = predict(m_seagrass, preddf, type = "response"),
+                "pinverts" = predict(m_inverts, preddf, type = "response"),
+                "preef" = predict(m_reef, preddf, type = "response")) %>%
+  glimpse()
+```
+
+    ## Rows: 73,350
+    ## Columns: 14
+    ## $ x         <dbl> 115.1714, 115.1739, 115.1764, 115.1789, 115.1814, 115.1839, …
+    ## $ y         <dbl> -33.60361, -33.60361, -33.60361, -33.60361, -33.60361, -33.6…
+    ## $ mbdepth   <dbl> -14.83014, -13.89184, -14.18757, -14.48647, -14.47323, -14.3…
+    ## $ slope     <dbl> 0.24350203, 0.19746646, 0.17799167, 0.18316828, 0.22091857, …
+    ## $ aspect    <dbl> 339.995240, 341.597571, 21.180346, 12.600024, 356.337121, 35…
+    ## $ tpi       <dbl> -3.721524e-01, 5.277313e-01, 1.502453e-01, -1.123428e-03, 9.…
+    ## $ tri       <dbl> 0.9656481, 0.8277034, 0.6934198, 0.6945946, 0.8081013, 0.902…
+    ## $ roughness <dbl> 2.807414, 2.421717, 2.196986, 2.156502, 2.581898, 2.606502, …
+    ## $ detrended <dbl> -2.871674, -2.161609, -2.683798, -3.207528, -3.417629, -3.56…
+    ## $ depth     <dbl> 14.83014, 13.89184, 14.18757, 14.48647, 14.47323, 14.39490, …
+    ## $ pmacro    <dbl> 0.9999988, 0.9999997, 0.9999997, 0.9999996, 0.9999998, 0.999…
+    ## $ pseagrass <dbl> 0.74856767, 0.70851935, 0.56005940, 0.44444870, 0.70421256, …
+    ## $ pinverts  <dbl> 0.02670296, 0.02153814, 0.03403026, 0.04372656, 0.04610491, …
+    ## $ preef     <dbl> 0.9944933, 0.9951140, 0.9929270, 0.9890364, 0.9953727, 0.995…
+
+## Tidy and save the final dataset
+
+Create a column for the ‘dominant’ habitat
+
+``` r
+preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, #prock,
+                                                 # psand,
+                                                 pseagrass,
+                                                 pinverts), 1,
+                         FUN = function(x){names(which.max(x))})
+glimpse(preddf)
+```
+
+    ## Rows: 73,350
+    ## Columns: 15
+    ## $ x         <dbl> 115.1714, 115.1739, 115.1764, 115.1789, 115.1814, 115.1839, …
+    ## $ y         <dbl> -33.60361, -33.60361, -33.60361, -33.60361, -33.60361, -33.6…
+    ## $ mbdepth   <dbl> -14.83014, -13.89184, -14.18757, -14.48647, -14.47323, -14.3…
+    ## $ slope     <dbl> 0.24350203, 0.19746646, 0.17799167, 0.18316828, 0.22091857, …
+    ## $ aspect    <dbl> 339.995240, 341.597571, 21.180346, 12.600024, 356.337121, 35…
+    ## $ tpi       <dbl> -3.721524e-01, 5.277313e-01, 1.502453e-01, -1.123428e-03, 9.…
+    ## $ tri       <dbl> 0.9656481, 0.8277034, 0.6934198, 0.6945946, 0.8081013, 0.902…
+    ## $ roughness <dbl> 2.807414, 2.421717, 2.196986, 2.156502, 2.581898, 2.606502, …
+    ## $ detrended <dbl> -2.871674, -2.161609, -2.683798, -3.207528, -3.417629, -3.56…
+    ## $ depth     <dbl> 14.83014, 13.89184, 14.18757, 14.48647, 14.47323, 14.39490, …
+    ## $ pmacro    <dbl> 0.9999988, 0.9999997, 0.9999997, 0.9999996, 0.9999998, 0.999…
+    ## $ pseagrass <dbl> 0.74856767, 0.70851935, 0.56005940, 0.44444870, 0.70421256, …
+    ## $ pinverts  <dbl> 0.02670296, 0.02153814, 0.03403026, 0.04372656, 0.04610491, …
+    ## $ preef     <dbl> 0.9944933, 0.9951140, 0.9929270, 0.9890364, 0.9953727, 0.995…
+    ## $ dom_tag   <chr> "pmacro", "pmacro", "pmacro", "pmacro", "pmacro", "pmacro", …
+
+Save final predictions
+
+``` r
+saveRDS(preddf, file = here::here(paste0("r-workflows/model-output/habitat/",
+                              name, "_habitat-prediction.RDS")))
+```
+
+## Set up for plotting
+
+Load marine park data. The dataset used here is the 2022 Collaborative
+Australian Protected Areas Database, which is available for free
+download from
+<https://fed.dcceew.gov.au/datasets/782c02c691014efe8ffbd27445fe41d7_0/explore>.
+Feel free to replace this shapefile with any suitable dataset that is
+available for your study area.
+
+``` r
+marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
+  st_make_valid() %>%
+  dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE,"\\s*\\([^\\)]+\\)", "")) %>%
+  dplyr::filter(str_detect(ZONE_TYPE, "Sanctuary|National Park"), STATE %in% "WA") %>%
+  st_transform(4326)
+```
+
+    ## Reading layer `Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine' from data source `/home/runner/work/CheckEM/CheckEM/r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp' 
+    ##   using driver `ESRI Shapefile'
+    ## Simple feature collection with 3775 features and 26 fields
+    ## Geometry type: MULTIPOLYGON
+    ## Dimension:     XY
+    ## Bounding box:  xmin: 70.71702 ymin: -58.44947 xmax: 170.3667 ymax: -8.473407
+    ## Geodetic CRS:  WGS 84
+
+Set colours for habitat plotting.
+
+``` r
+unique(preddf$dom_tag)
+```
+
+    ## [1] "pmacro"    "pinverts"  "pseagrass"
+
+``` r
+hab_fills <- scale_fill_manual(values = c(
+  # "psand" = "wheat",
+  "pinverts" = "plum",
+  "pseagrass" = "forestgreen",
+  "pmacro" = "darkgoldenrod4"
+), name = "Habitat")
+```
+
+## Plot the dominant habitats
+
+Build plot elements and display.
+
+``` r
+ggplot() +
+  geom_tile(data = preddf, aes(x, y, fill = dom_tag)) +
+  hab_fills +
+  new_scale_fill() +
+  geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63",
+          size = 0.2, show.legend = F) +
+  coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
+           ylim = c(min(preddf$y), max(preddf$y))) +
+  labs(x = NULL, y = NULL, colour = NULL) +
+  theme_minimal()
+```
+
+![](habitat-modelling_files/figure-html/plot-dominant-1.png)
+
+## Plot the individual habitat probabilities
+
+Transform habitat predictions into long format for easy plotting with
+ggplot::facet_wrap.
+
+``` r
+indclass <- preddf %>%
+  pivot_longer(cols = starts_with("p"), names_to = "habitat",
+               values_to = "Probability") %>%
+  dplyr::mutate(habitat = case_when(habitat %in% "pinverts" ~ "Sessile invertebrates",
+                                    habitat %in% "pmacro" ~ "Macroalgae",
+                                    # habitat %in% "prock" ~ "Rock",
+                                    # habitat %in% "psand" ~ "Sand",
+                                    habitat %in% "pseagrass" ~ "Seagrass",
+                                    habitat %in% "preef" ~ "Reef")) %>%
+  glimpse()
+```
+
+    ## Rows: 293,400
+    ## Columns: 13
+    ## $ x           <dbl> 115.1714, 115.1714, 115.1714, 115.1714, 115.1739, 115.1739…
+    ## $ y           <dbl> -33.60361, -33.60361, -33.60361, -33.60361, -33.60361, -33…
+    ## $ mbdepth     <dbl> -14.83014, -14.83014, -14.83014, -14.83014, -13.89184, -13…
+    ## $ slope       <dbl> 0.2435020, 0.2435020, 0.2435020, 0.2435020, 0.1974665, 0.1…
+    ## $ aspect      <dbl> 339.99524, 339.99524, 339.99524, 339.99524, 341.59757, 341…
+    ## $ tpi         <dbl> -0.372152448, -0.372152448, -0.372152448, -0.372152448, 0.…
+    ## $ tri         <dbl> 0.9656481, 0.9656481, 0.9656481, 0.9656481, 0.8277034, 0.8…
+    ## $ roughness   <dbl> 2.807414, 2.807414, 2.807414, 2.807414, 2.421717, 2.421717…
+    ## $ detrended   <dbl> -2.871674, -2.871674, -2.871674, -2.871674, -2.161609, -2.…
+    ## $ depth       <dbl> 14.83014, 14.83014, 14.83014, 14.83014, 13.89184, 13.89184…
+    ## $ dom_tag     <chr> "pmacro", "pmacro", "pmacro", "pmacro", "pmacro", "pmacro"…
+    ## $ habitat     <chr> "Macroalgae", "Seagrass", "Sessile invertebrates", "Reef",…
+    ## $ Probability <dbl> 0.99999878, 0.74856767, 0.02670296, 0.99449333, 0.99999970…
+
+Build plot elements for individual habitat probabilities.
+
+``` r
+ggplot() +
+  geom_tile(data = indclass, aes(x, y, fill = Probability)) +
+  scale_fill_viridis(option = "D", direction = -1) +
+  new_scale_fill() +
+  geom_sf(data = marine.parks, fill = NA, colour = "#7bbc63",
+          size = 0.2, show.legend = F) +
+  coord_sf(xlim = c(min(preddf$x), max(preddf$x)),
+           ylim = c(min(preddf$y), max(preddf$y))) +
+  labs(x = NULL, y = NULL, fill = "Probability") +
+  theme_minimal() +
+  facet_wrap(~habitat) +
+  theme(axis.text.x = element_text(size = 7))
+```
+
+    ## Ignoring unknown labels:
+    ## • fill : "Probability"
+
+![](habitat-modelling_files/figure-html/plot-individual-1.png)
