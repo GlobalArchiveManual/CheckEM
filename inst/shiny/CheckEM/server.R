@@ -2130,7 +2130,7 @@ function(input, output, session) {
     # if no metadata file uploaded and method = single point. dataset = Ningloo BRUVs
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
-      metadata <-  read.csv(checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Metadata.csv")) %>%
+      metadata <-  read.csv(CheckEM::checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Metadata.csv")) %>%
         clean_names() %>%
         # dplyr::rename(latitude_dd = latitude,
         #               longitude_dd = longitude,
@@ -3511,7 +3511,7 @@ function(input, output, session) {
     # if no folder chosen and method = single point. dataset = Ningloo BRUVs
     if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
       
-      periods <-  read.delim(checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Period.txt"), na.strings = "") %>%
+      periods <-  read.delim(CheckEM::checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Period.txt"), na.strings = "") %>%
         clean_names() %>%
         dplyr::mutate(sample = as.factor(opcode)) %>%
         dplyr::mutate(campaignid = "2024-05_Exmouth-Gulf_stereo-BRUVs") %>%
@@ -4041,7 +4041,7 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        points <-  read.delim(checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Points.txt"), na.strings = "") %>%
+        points <-  read.delim(CheckEM::checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Points.txt"), na.strings = "") %>%
           clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
@@ -5391,7 +5391,7 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        length <-  read.delim(checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Lengths.txt"), na.strings = "") %>%
+        length <-  read.delim(CheckEM::checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_Lengths.txt"), na.strings = "") %>%
           clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%
@@ -5543,7 +5543,7 @@ function(input, output, session) {
       # if no folder chosen and method = single point. dataset = Ningloo BRUVs
       if(is.null(input$folderdir) & input$method == "point" & input$sample == "opcode") {
         
-        threedpoints <-  read.delim(checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_3DPoints.txt"), na.strings = "") %>%
+        threedpoints <-  read.delim(CheckEM::checkem_example_path("2024-05_Exmouth-Gulf_stereo-BRUVs_3DPoints.txt"), na.strings = "") %>%
           clean_names() %>%
           dplyr::mutate(sample = opcode) %>%
           mutate(sample = as.factor(sample)) %>%

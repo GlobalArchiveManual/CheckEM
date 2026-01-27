@@ -64,7 +64,7 @@ sf_use_s2(FALSE)
 
 # Load data
 # load("data/all_data.Rdata")
-load(ensure_all_data())
+load(CheckEM::ensure_all_data())
 
 clean_names <- function(dat) {
   require(tidyverse)
