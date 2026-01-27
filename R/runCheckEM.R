@@ -29,7 +29,7 @@ runCheckEM <- function(install_missing = TRUE,
     "rmarkdown", "markdown", "sf",
     "reactlog",
     "geomtextpath",
-    "png", "cowplot"
+    "png", "cowplot", "devtools"
   )
   
   # GitHub remotes used by the app (only include if truly needed at runtime)
