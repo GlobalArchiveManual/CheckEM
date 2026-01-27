@@ -184,7 +184,7 @@ m_rock <- gam(cbind(consolidated_hard_, total_points_annotated - consolidated_ha
 summary(m_rock)
 plot(m_rock, pages = 1, residuals = T, cex = 5)
 
-Sand
+# Sand
 m_sand <- gam(cbind(unconsolidated_soft_, total_points_annotated - unconsolidated_soft_) ~
                 s(aspect,     k = 5, bs = "cc")  +
                 s(detrended, k = 5, bs = "cr") +
