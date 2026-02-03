@@ -73,8 +73,13 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
     # -------------------------
     # BENTHIC DATA
     # -------------------------
-    benthos_raw <- ga_api_benthic_list(
-      token = token) |>
+    # benthos_raw <- ga_api_benthic_list(
+    #   token = token) |>
+    #   dplyr::semi_join(metadata, by = "sample_url")
+    
+    benthos_raw <- ga_api_habitat(
+      token = token,
+      synthesis_id = synthesis_id) |>
       dplyr::semi_join(metadata, by = "sample_url")
     
     if (nrow(benthos_raw   > 0)) {
@@ -100,7 +105,8 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
         dplyr::select(-c(any_of("Fishes"))) |>
         clean_names() |>
         mutate(across(
-          .cols = 5:ncol(.), 
+          # .cols = 5:ncol(.), 
+          .cols = 5:last_col(), 
           .fns = ~ .x / total_points_annotated,
           .names = "{.col}_percent"
         ))
