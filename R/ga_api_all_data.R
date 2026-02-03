@@ -211,6 +211,8 @@ ga_api_all_data <- function(token, synthesis_id, dir, include_zeros = FALSE, fil
     # -------------------------
     # RETURN EVERYTHING
     # -------------------------
-    out
+    
+    list2env(out, envir = .GlobalEnv)
+    invisible(out)
   }
 }
