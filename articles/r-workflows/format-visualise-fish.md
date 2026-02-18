@@ -114,8 +114,12 @@ maturity.mean <- maturity %>%
   glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'family', 'genus'. You can override using
-    ## the `.groups` argument.
+    ## `summarise()` has regrouped the output.
+    ## ℹ Summaries were computed grouped by family, genus, and species.
+    ## ℹ Output is grouped by family and genus.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(family, genus, species))` for per-operation grouping
+    ##   (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 39
     ## Columns: 4
@@ -142,9 +146,14 @@ tidy.count <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_com
   glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid', 'sample', 'status'. You can
-    ## override using the `.groups` argument.
+    ## `summarise()` has regrouped the output.
     ## Joining with `by = join_by(campaignid, sample)`
+    ## ℹ Summaries were computed grouped by campaignid, sample, status, and
+    ##   scientific.
+    ## ℹ Output is grouped by campaignid, sample, and status.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample, status, scientific))` for
+    ##   per-operation grouping (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 64
     ## Columns: 20
@@ -309,10 +318,14 @@ greater.mat <- indicator.species %>%
   dplyr::glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has regrouped the output.
     ## Joining with `by = join_by(campaignid, sample)`
     ## Joining with `by = join_by(campaignid, sample)`
+    ## ℹ Summaries were computed grouped by campaignid and sample.
+    ## ℹ Output is grouped by campaignid.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample))` for per-operation grouping
+    ##   (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 32
     ## Columns: 20
@@ -353,10 +366,14 @@ smaller.mat <- indicator.species %>%
   dplyr::glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has regrouped the output.
     ## Joining with `by = join_by(campaignid, sample)`
     ## Joining with `by = join_by(campaignid, sample)`
+    ## ℹ Summaries were computed grouped by campaignid and sample.
+    ## ℹ Output is grouped by campaignid.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample))` for per-operation grouping
+    ##   (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 32
     ## Columns: 20

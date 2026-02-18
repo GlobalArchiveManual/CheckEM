@@ -428,9 +428,15 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">maxn</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'campaignid', 'sample', 'filename',</span></span>
-<span><span class="co">## 'periodtime', 'frame', 'family', 'genus'. You can override using the `.groups`</span></span>
-<span><span class="co">## argument.</span></span></code></pre>
+<pre><code><span><span class="co">## `summarise()` has regrouped the output.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Summaries were computed grouped by <span style="color: #0000BB;">campaignid</span>, <span style="color: #0000BB;">sample</span>, <span style="color: #0000BB;">filename</span>, <span style="color: #0000BB;">periodtime</span>,</span></span>
+<span><span class="co">##   <span style="color: #0000BB;">frame</span>, <span style="color: #0000BB;">family</span>, <span style="color: #0000BB;">genus</span>, and <span style="color: #0000BB;">species</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Output is grouped by <span style="color: #0000BB;">campaignid</span>, <span style="color: #0000BB;">sample</span>, <span style="color: #0000BB;">filename</span>, <span style="color: #0000BB;">periodtime</span>, <span style="color: #0000BB;">frame</span>, <span style="color: #0000BB;">family</span>,</span></span>
+<span><span class="co">##   and <span style="color: #0000BB;">genus</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.groups = "drop_last")` to silence this message.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.by = c(campaignid, sample, filename, periodtime, frame,</span></span>
+<span><span class="co">##   family, genus, species))` for per-operation grouping (`?dplyr::dplyr_by`)</span></span>
+<span><span class="co">##   instead.</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 462</span></span>
 <span><span class="co">## Columns: 6</span></span>
 <span><span class="co">## $ campaignid <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"2023-03_SwC_stereo-BRUVs"<span style="color: #949494;">, </span>"20…</span></span>
@@ -460,8 +466,13 @@ campaignid (look out for different separators e.g. ‘-’, ’_‘, or’.’)
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, <span class="va">maxn</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'campaignid', 'sample', 'family', 'genus'.</span></span>
-<span><span class="co">## You can override using the `.groups` argument.</span></span></code></pre>
+<pre><code><span><span class="co">## `summarise()` has regrouped the output.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Summaries were computed grouped by <span style="color: #0000BB;">campaignid</span>, <span style="color: #0000BB;">sample</span>, <span style="color: #0000BB;">family</span>, <span style="color: #0000BB;">genus</span>, and</span></span>
+<span><span class="co">##   <span style="color: #0000BB;">species</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Output is grouped by <span style="color: #0000BB;">campaignid</span>, <span style="color: #0000BB;">sample</span>, <span style="color: #0000BB;">family</span>, and <span style="color: #0000BB;">genus</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.groups = "drop_last")` to silence this message.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.by = c(campaignid, sample, family, genus, species))` for</span></span>
+<span><span class="co">##   per-operation grouping (`?dplyr::dplyr_by`) instead.</span></span></code></pre>
 <pre><code><span><span class="co">## Rows: 802</span></span>
 <span><span class="co">## Columns: 6</span></span>
 <span><span class="co">## $ campaignid <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2022-05_PtCloates_stereo-BRUVS"<span style="color: #949494;">, </span>"2022-05_PtCloates_stereo…</span></span>
@@ -614,8 +625,13 @@ species in every sample (deployment).</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">campaignid</span>, <span class="va">sample</span>, <span class="va">scientific</span>, <span class="va">count</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span><span class="va">scientific</span>, <span class="va">count</span>, fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'campaignid', 'sample', 'family', 'genus'.</span></span>
-<span><span class="co">## You can override using the `.groups` argument.</span></span></code></pre>
+<pre><code><span><span class="co">## `summarise()` has regrouped the output.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Summaries were computed grouped by <span style="color: #0000BB;">campaignid</span>, <span style="color: #0000BB;">sample</span>, <span style="color: #0000BB;">family</span>, <span style="color: #0000BB;">genus</span>, and</span></span>
+<span><span class="co">##   <span style="color: #0000BB;">species</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Output is grouped by <span style="color: #0000BB;">campaignid</span>, <span style="color: #0000BB;">sample</span>, <span style="color: #0000BB;">family</span>, and <span style="color: #0000BB;">genus</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.groups = "drop_last")` to silence this message.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.by = c(campaignid, sample, family, genus, species))` for</span></span>
+<span><span class="co">##   per-operation grouping (`?dplyr::dplyr_by`) instead.</span></span></code></pre>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">count_families</span> <span class="op">&lt;-</span> <span class="va">maxn</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">family</span>, <span class="va">genus</span>, <span class="va">species</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -734,8 +750,12 @@ displayed here</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">n</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## `summarise()` has grouped output by 'campaignid'. You can override using the</span></span>
-<span><span class="co">## `.groups` argument.</span></span></code></pre>
+<pre><code><span><span class="co">## `summarise()` has regrouped the output.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Summaries were computed grouped by <span style="color: #0000BB;">campaignid</span> and <span style="color: #0000BB;">sample</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Output is grouped by <span style="color: #0000BB;">campaignid</span>.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.groups = "drop_last")` to silence this message.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `summarise(.by = c(campaignid, sample))` for per-operation grouping</span></span>
+<span><span class="co">##   (`?dplyr::dplyr_by`) instead.</span></span></code></pre>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">duplicate_samples</span><span class="op">)</span>, <span class="st">"samples duplicated in the metadata"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 0 samples duplicated in the metadata</span></span></code></pre>

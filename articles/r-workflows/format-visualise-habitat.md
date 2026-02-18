@@ -82,8 +82,12 @@ habitat <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_habita
   glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid', 'sample'. You can override
-    ## using the `.groups` argument.
+    ## `summarise()` has regrouped the output.
+    ## ℹ Summaries were computed grouped by campaignid, sample, and habitat.
+    ## ℹ Output is grouped by campaignid and sample.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample, habitat))` for per-operation
+    ##   grouping (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 198
     ## Columns: 5
@@ -105,8 +109,12 @@ tidy.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_re
   glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has regrouped the output.
+    ## ℹ Summaries were computed grouped by campaignid and sample.
+    ## ℹ Output is grouped by campaignid.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample))` for per-operation grouping
+    ##   (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 32
     ## Columns: 4
@@ -173,8 +181,12 @@ plot.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_re
   glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid', 'sample'. You can override
-    ## using the `.groups` argument.
+    ## `summarise()` has regrouped the output.
+    ## ℹ Summaries were computed grouped by campaignid, sample, and level_5.
+    ## ℹ Output is grouped by campaignid and sample.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample, level_5))` for per-operation
+    ##   grouping (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 73
     ## Columns: 5

@@ -189,9 +189,13 @@ wrong.points.habitat <- habitat %>%
   glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has regrouped the output.
     ## Joining with `by = join_by(campaignid, sample)`
+    ## ℹ Summaries were computed grouped by campaignid and sample.
+    ## ℹ Output is grouped by campaignid.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample))` for per-operation grouping
+    ##   (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 5
     ## Columns: 14
@@ -224,9 +228,13 @@ wrong.points.relief <- relief %>%
   glimpse()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has regrouped the output.
     ## Joining with `by = join_by(campaignid, sample)`
+    ## ℹ Summaries were computed grouped by campaignid and sample.
+    ## ℹ Output is grouped by campaignid.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample))` for per-operation grouping
+    ##   (`?dplyr::dplyr_by`) instead.
 
     ## Rows: 4
     ## Columns: 14
@@ -325,9 +333,7 @@ tidy.habitat <- habitat %>%
 
     ## Joining with `by = join_by(level_2, level_3, level_4, level_5, level_1,
     ## level_6, level_7, level_8, family, genus, species)`
-    ## `summarise()` has grouped output by 'campaignid', 'sample', 'level_2',
-    ## 'level_3', 'level_4', 'level_5', 'level_1', 'level_6', 'level_7', 'level_8',
-    ## 'family', 'genus'. You can override using the `.groups` argument.
+    ## `summarise()` has regrouped the output.
 
     ## Rows: 233
     ## Columns: 14
@@ -370,9 +376,7 @@ tidy.relief <- relief %>%
 
     ## Joining with `by = join_by(level_2, level_3, level_4, level_5, level_1,
     ## level_6, level_7, level_8, family, genus, species)`
-    ## `summarise()` has grouped output by 'campaignid', 'sample', 'level_2',
-    ## 'level_3', 'level_4', 'level_5', 'level_1', 'level_6', 'level_7'. You can
-    ## override using the `.groups` argument.
+    ## `summarise()` has regrouped the output.
 
     ## Rows: 73
     ## Columns: 11

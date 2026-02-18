@@ -425,8 +425,13 @@ counts_summary <- counts %>%
   dplyr::ungroup()
 ```
 
-    ## `summarise()` has grouped output by 'campaignid', 'sample', 'family', 'genus'.
-    ## You can override using the `.groups` argument.
+    ## `summarise()` has regrouped the output.
+    ## ℹ Summaries were computed grouped by campaignid, sample, family, genus, and
+    ##   species.
+    ## ℹ Output is grouped by campaignid, sample, family, and genus.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample, family, genus, species))` for
+    ##   per-operation grouping (`?dplyr::dplyr_by`) instead.
 
 ``` r
 gen_length_missing <- gen_length %>%
@@ -442,8 +447,13 @@ gen_length_missing <- gen_length %>%
   dplyr::left_join(metadata)
 ```
 
-    ## `summarise()` has grouped output by 'campaignid', 'sample', 'family', 'genus'.
-    ## You can override using the `.groups` argument.
+    ## `summarise()` has regrouped the output.
+    ## ℹ Summaries were computed grouped by campaignid, sample, family, genus, and
+    ##   species.
+    ## ℹ Output is grouped by campaignid, sample, family, and genus.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample, family, genus, species))` for
+    ##   per-operation grouping (`?dplyr::dplyr_by`) instead.
 
     ## Joining with `by = join_by(campaignid, sample, family, genus, species)`
     ## Joining with `by = join_by(campaignid, sample)`
@@ -549,8 +559,12 @@ duplicate_samples <- metadata %>%
   dplyr::filter(n > 1)
 ```
 
-    ## `summarise()` has grouped output by 'campaignid'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has regrouped the output.
+    ## ℹ Summaries were computed grouped by campaignid and sample.
+    ## ℹ Output is grouped by campaignid.
+    ## ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ## ℹ Use `summarise(.by = c(campaignid, sample))` for per-operation grouping
+    ##   (`?dplyr::dplyr_by`) instead.
 
 ``` r
 message(paste(nrow(duplicate_samples), "samples duplicated in the metadata"))
