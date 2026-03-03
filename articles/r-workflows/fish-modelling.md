@@ -20,7 +20,9 @@ library('remotes')
 options(timeout=9999999)
 # remotes::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(stringr)
 library(mgcv)
 library(devtools)
 library(FSSgam)
@@ -31,6 +33,7 @@ library(viridis)
 library(terra)
 library(sf)
 library(patchwork)
+library(purrr)
 ```
 
 Set the study name. Study names are used throughout to make for

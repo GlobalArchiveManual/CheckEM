@@ -15,14 +15,16 @@ library('remotes')
 options(timeout=9999999)
 # remotes::install_github("GlobalArchiveManual/CheckEM")
 library(CheckEM)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(stringr)
 library(ggplot2)
 library(ggbeeswarm)
 library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
 library(here)
-library(tidyverse)
+library(tibble)
 ```
 
 Set the study name.

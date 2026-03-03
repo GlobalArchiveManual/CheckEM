@@ -9,7 +9,9 @@ library(sf)
 library(terra)
 library(stars)
 library(starsExtra)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(stringr)
 library(here)
 ```
 

@@ -100,15 +100,15 @@ A data frame with one row per species and the following variables:
 
 - fb_a_ll:
 
-  Lower-limit estimate of FishBase \\a\\.
+  FishBase length-length parameter \\a\\.
 
 - fb_b_ll:
 
-  Lower-limit estimate of FishBase \\b\\.
+  FishBase length-length parameter \\b\\.
 
 - fb_ll_equation_type:
 
-  Equation type used for lower-limit estimates.
+  Equation type used for length-length calculation
 
 - fb_length_weight_source:
 
