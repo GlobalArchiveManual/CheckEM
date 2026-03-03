@@ -32,6 +32,7 @@ library(leaflet)
 library(leaflet.minicharts)
 library(RColorBrewer)
 library(here)
+library(tibble)
 ```
 
 Set the study name.
