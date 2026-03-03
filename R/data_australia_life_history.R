@@ -28,9 +28,9 @@
 #'   \item{fb_length_weight_measure}{Length–weight measurement type used in FishBase.}
 #'   \item{fb_a}{FishBase length–weight parameter \eqn{a}.}
 #'   \item{fb_b}{FishBase length–weight parameter \eqn{b}.}
-#'   \item{fb_a_ll}{Lower-limit estimate of FishBase \eqn{a}.}
-#'   \item{fb_b_ll}{Lower-limit estimate of FishBase \eqn{b}.}
-#'   \item{fb_ll_equation_type}{Equation type used for lower-limit estimates.}
+#'   \item{fb_a_ll}{FishBase length-length parameter \eqn{a}.}
+#'   \item{fb_b_ll}{FishBase length-length parameter \eqn{b}.}
+#'   \item{fb_ll_equation_type}{Equation type used for length-length calculation}
 #'   \item{fb_length_weight_source}{Source of FishBase length–weight relationship.}
 #'   \item{fb_vulnerability}{FishBase vulnerability index.}
 #'   \item{fb_countries}{Countries in which the species is recorded in FishBase.}

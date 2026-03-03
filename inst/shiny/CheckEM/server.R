@@ -2328,10 +2328,29 @@ function(input, output, session) {
     # add in marine parks
     if(input$lifehistory %in% c("aus", "imcra")){
       
-      # message("view metadata.marineparks for Australia")
+      message("view metadata.marineparks for Australia")
       # message("two glimpses on one dataframe")
       
-      metadata.marineparks <- metadata_sf %>%
+      # ORIGINAL
+      # metadata.marineparks <- metadata_sf %>%
+      #   dplyr::select(-status) %>%
+      #   st_join(all_data$marineparks, left = TRUE) %>%
+      #   dplyr::rename(zone = ZONE_TYPE) %>%
+      #   glimpse() %>%
+      #   dplyr::group_by(geometry) %>%
+      #   dplyr::summarise(zone = paste(unique(zone), collapse = ", "),
+      #                    status = paste(unique(status), collapse = ", ")) %>%
+      #   tidyr::replace_na(list(status = "Fished")) %>%
+      #   st_join(metadata_sf %>% dplyr::select(-status)) %>%
+      #   bind_cols(st_coordinates(.)) %>%
+      #   as.data.frame() %>%
+      #   dplyr::select(-c(geometry)) %>%
+      #   dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
+      #   dplyr::full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) #%>% dplyr::glimpse()
+      
+      message("PARKS")
+      
+      metadata.marineparks.temp <- metadata_sf %>%
         dplyr::select(-status) %>%
         st_join(all_data$marineparks, left = TRUE) %>%
         dplyr::rename(zone = ZONE_TYPE) %>%
@@ -2339,12 +2358,19 @@ function(input, output, session) {
         dplyr::summarise(zone = paste(unique(zone), collapse = ", "),
                          status = paste(unique(status), collapse = ", ")) %>%
         tidyr::replace_na(list(status = "Fished")) %>%
-        st_join(metadata_sf %>% dplyr::select(-status)) %>%
+        dplyr::ungroup() %>%
+        dplyr::glimpse()
+        
+      
+      message("NEXT STEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEP")
+      metadata.marineparks <- st_join(metadata_sf %>% dplyr::select(-status), metadata.marineparks.temp) %>%
         bind_cols(st_coordinates(.)) %>%
         as.data.frame() %>%
         dplyr::select(-c(geometry)) %>%
         dplyr::rename(longitude_dd = X, latitude_dd = Y) %>%
-        dplyr::full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) #%>% dplyr::glimpse()
+        dplyr::full_join(metadata %>% dplyr::select(campaignid, sample, latitude_dd, longitude_dd), .) %>% 
+        tidyr::replace_na(list(status = "Fished")) %>%
+        dplyr::glimpse()
       
       
     } else {
