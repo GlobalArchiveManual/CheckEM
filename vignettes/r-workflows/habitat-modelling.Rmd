@@ -37,6 +37,7 @@ library(viridis)
 library(terra)
 library(sf)
 library(patchwork)
+library(purrr)
 ```
 Set the study name.
 ```{r name}
