@@ -10,6 +10,7 @@ and patterns in the raw data to be investigated.
 Load libraries.
 
 ``` r
+
 library('remotes')
 options(timeout=9999999)
 # remotes::install_github("GlobalArchiveManual/CheckEM")
@@ -33,6 +34,7 @@ library(purrr)
 Set the study name.
 
 ``` r
+
 name <- 'example-bruv-workflow'
 ```
 
@@ -41,6 +43,7 @@ name <- 'example-bruv-workflow'
 Load the habitat point annotation data.
 
 ``` r
+
 dat <- readRDS(here::here(paste0("r-workflows/data/tidy/",
                       name, "_tidy-habitat.rds"))) %>%
   glimpse()
@@ -81,6 +84,7 @@ dat <- readRDS(here::here(paste0("r-workflows/data/tidy/",
 Set the predictor variables.
 
 ``` r
+
 names(dat)
 ```
 
@@ -100,6 +104,7 @@ names(dat)
     ## [27] "sd_relief"
 
 ``` r
+
 pred.vars <- c("mbdepth","roughness", "detrended",
                "slope", "tpi", "aspect", "tri")
 ```
@@ -108,6 +113,7 @@ Check for correlation of predictor variables and remove anything highly
 correlated (\>0.95).
 
 ``` r
+
 round(cor(dat[ , pred.vars]), 2)
 ```
 
@@ -127,6 +133,7 @@ relatively balanced distributions, and therefor we have left them
 untransformed.
 
 ``` r
+
 plot_transformations(pred.vars = pred.vars, dat = dat)
 ```
 
@@ -136,6 +143,7 @@ Reset the predictor variables to remove any highly correlated variables
 and include any transformed variables.
 
 ``` r
+
 pred.vars <- c("depth_m","roughness", "detrended",
                "tpi", "aspect", "tri")
 ```
@@ -145,6 +153,7 @@ Full-subset GAM modelling will produce unreliable results if your data
 is too zero inflated.
 
 ``` r
+
 resp.vars.all = unique(as.character(dat$habitat))
 resp.vars = character()
 for(i in 1:length(resp.vars.all)){
@@ -162,6 +171,7 @@ Add the directory to save model outputs, and set up the R environment
 for model selection.
 
 ``` r
+
 outdir    <- ("r-workflows/model-output/habitat/")
 out.all   <- list()
 var.imp   <- list()
@@ -176,6 +186,7 @@ regression in ecology with R. Ecol Evol. 2018; 8: 6104–6113.
 <https://doi.org/10.1002/ece3.4134>
 
 ``` r
+
 for(i in 1:length(resp.vars)){
   print(resp.vars[i])
   use.dat <- dat[dat$habitat == resp.vars[i],]
@@ -221,6 +232,7 @@ for(i in 1:length(resp.vars)){
 Save the model fits and importance scores.
 
 ``` r
+
 names(out.all) <- resp.vars
 names(var.imp) <- resp.vars
 all.mod.fits <- list_rbind(out.all, names_to = "response")
@@ -234,6 +246,7 @@ write.csv(all.var.imp,         file = here::here(paste0(outdir, name, "_all.var.
 Transform the habitat data into wide format for easy prediction.
 
 ``` r
+
 widedat <- dat %>%
   pivot_wider(values_from = "count", names_from = "habitat", values_fill = 0) %>%
   clean_names() %>%
@@ -277,6 +290,7 @@ widedat <- dat %>%
 Load the raster of bathymetry data and derivatives.
 
 ``` r
+
 preds  <- rast(here::here(paste0("r-workflows/data/spatial/rasters/",
                          name, "_bathymetry_derivatives.rds")))
 plot(preds)
@@ -287,6 +301,7 @@ plot(preds)
 Transform the raster to a dataframe to predict onto.
 
 ``` r
+
 preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
   dplyr::mutate(depth = abs(mbdepth)) %>%
   clean_names() %>%
@@ -309,6 +324,7 @@ preddf <- as.data.frame(preds, xy = TRUE, na.rm = TRUE) %>%
 Manually set the top model from the full subset model selection.
 
 ``` r
+
 # Sessile invertebrates
 m_inverts <- gam(cbind(sessile_invertebrates, total_points_annotated - sessile_invertebrates) ~
                  s(detrended,     k = 5, bs = "cr")  +
@@ -345,12 +361,14 @@ summary(m_inverts)
     ## -REML =  60.66  Scale est. = 1         n = 32
 
 ``` r
+
 plot(m_inverts, pages = 1, residuals = T, cex = 5)
 ```
 
 ![](habitat-modelling_files/figure-html/set-models-1.png)
 
 ``` r
+
 # Rock
 m_rock <- gam(cbind(consolidated_hard_, total_points_annotated - consolidated_hard_) ~
                    s(aspect,     k = 5, bs = "cc") +
@@ -387,12 +405,14 @@ summary(m_rock)
     ## -REML = 26.081  Scale est. = 1         n = 32
 
 ``` r
+
 plot(m_rock, pages = 1, residuals = T, cex = 5)
 ```
 
 ![](habitat-modelling_files/figure-html/set-models-2.png)
 
 ``` r
+
 # Sand
 m_sand <- gam(cbind(unconsolidated_soft_, total_points_annotated - unconsolidated_soft_) ~
                 s(aspect,     k = 5, bs = "cc")  +
@@ -429,12 +449,14 @@ summary(m_sand)
     ## -REML = 82.943  Scale est. = 1         n = 32
 
 ``` r
+
 plot(m_sand, pages = 1, residuals = T, cex = 5)
 ```
 
 ![](habitat-modelling_files/figure-html/set-models-3.png)
 
 ``` r
+
 # Seagrasses
 m_seagrass <- gam(cbind(seagrasses, total_points_annotated - seagrasses) ~
                 s(aspect,     k = 5, bs = "cc")  +
@@ -469,12 +491,14 @@ summary(m_seagrass)
     ## -REML = 93.264  Scale est. = 1         n = 32
 
 ``` r
+
 plot(m_seagrass, pages = 1, residuals = T, cex = 5)
 ```
 
 ![](habitat-modelling_files/figure-html/set-models-4.png)
 
 ``` r
+
 # Macroalgae
 m_macro <- gam(cbind(macroalgae, total_points_annotated - macroalgae) ~
                  s(mbdepth,     k = 5, bs = "cr")  +
@@ -511,12 +535,14 @@ summary(m_macro)
     ## -REML = 114.51  Scale est. = 1         n = 32
 
 ``` r
+
 plot(m_macro, pages = 1, residuals = T, cex = 5)
 ```
 
 ![](habitat-modelling_files/figure-html/set-models-5.png)
 
 ``` r
+
 # Reef
 m_reef <- gam(cbind(reef, total_points_annotated - reef) ~
                  s(aspect,     k = 5, bs = "cc")  +
@@ -553,6 +579,7 @@ summary(m_reef)
     ## -REML = 82.943  Scale est. = 1         n = 32
 
 ``` r
+
 plot(m_reef, pages = 1, residuals = T, cex = 5)
 ```
 
@@ -561,6 +588,7 @@ plot(m_reef, pages = 1, residuals = T, cex = 5)
 ## Predict, rasterise and plot habitat predictions
 
 ``` r
+
 preddf <- cbind(preddf,
                 "pmacro" = predict(m_macro, preddf, type = "response"),
                 # "prock" = predict(m_rock, preddf, type = "response"),
@@ -593,6 +621,7 @@ preddf <- cbind(preddf,
 Create a column for the ‘dominant’ habitat
 
 ``` r
+
 preddf$dom_tag <- apply(preddf %>% dplyr::select(pmacro, #prock,
                                                  # psand,
                                                  pseagrass,
@@ -622,6 +651,7 @@ glimpse(preddf)
 Save final predictions
 
 ``` r
+
 saveRDS(preddf, file = here::here(paste0("r-workflows/model-output/habitat/",
                               name, "_habitat-prediction.RDS")))
 ```
@@ -636,6 +666,7 @@ Feel free to replace this shapefile with any suitable dataset that is
 available for your study area.
 
 ``` r
+
 marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp")) %>%
   st_make_valid() %>%
   dplyr::mutate(ZONE_TYPE = str_replace_all(ZONE_TYPE,"\\s*\\([^\\)]+\\)", "")) %>%
@@ -654,12 +685,14 @@ marine.parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collabor
 Set colours for habitat plotting.
 
 ``` r
+
 unique(preddf$dom_tag)
 ```
 
     ## [1] "pmacro"    "pinverts"  "pseagrass"
 
 ``` r
+
 hab_fills <- scale_fill_manual(values = c(
   # "psand" = "wheat",
   "pinverts" = "plum",
@@ -673,6 +706,7 @@ hab_fills <- scale_fill_manual(values = c(
 Build plot elements and display.
 
 ``` r
+
 ggplot() +
   geom_tile(data = preddf, aes(x, y, fill = dom_tag)) +
   hab_fills +
@@ -693,6 +727,7 @@ Transform habitat predictions into long format for easy plotting with
 ggplot::facet_wrap.
 
 ``` r
+
 indclass <- preddf %>%
   pivot_longer(cols = starts_with("p"), names_to = "habitat",
                values_to = "Probability") %>%
@@ -724,6 +759,7 @@ indclass <- preddf %>%
 Build plot elements for individual habitat probabilities.
 
 ``` r
+
 ggplot() +
   geom_tile(data = indclass, aes(x, y, fill = Probability)) +
   scale_fill_viridis(option = "D", direction = -1) +

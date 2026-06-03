@@ -20,6 +20,7 @@ installed CheckEM before you will need to install CheckEM using the
 install_github function.
 
 ``` r
+
 # install.packages('remotes')
 library('remotes')
 options(timeout=9999999)
@@ -40,6 +41,7 @@ that is too long. We recommend using a short project name that includes
 the method e.g. “2020_ningaloo_stereo-BRUVs”.
 
 ``` r
+
 name <- "example-bruv-workflow"
 ```
 
@@ -50,6 +52,7 @@ step while checking your habitat data, then you can skip these next two
 chunks of code and simply read in the metadata (see below).
 
 ``` r
+
 metadata <- read_metadata(here::here("r-workflows/data/raw/"), method = "BRUVs") %>% # Change here to "DOVs"
   dplyr::select(campaignid, sample, status, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
@@ -134,6 +137,7 @@ Save the metadata as an R data file (this creates a lighter file than
 saving as a .csv or similar, it also maintains any column formatting).
 
 ``` r
+
 saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/",
                                 name, "_metadata.rds")))
 ```
@@ -143,6 +147,7 @@ metadata. If you have just loaded and saved the metadata, then you can
 skip this chunk of code.
 
 ``` r
+
 metadata <- readRDS(here::here(paste0("r-workflows/data/tidy/",
                                 name, "_metadata.rds")))
 ```
@@ -161,6 +166,7 @@ available for your study area.
 #### NOTE: You should only use this code if the Status column is not filled out
 
 ``` r
+
 marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collaborative_Australian_Protected_Areas_Database_(CAPAD)_2022_-_Marine.shp"))  %>%
   dplyr::select(geometry, ZONE_TYPE) %>%
   st_transform(4326) %>%
@@ -176,6 +182,7 @@ marine_parks <- st_read(here::here("r-workflows/data/spatial/shapefiles/Collabor
     ## Geodetic CRS:  WGS 84
 
 ``` r
+
 metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
 
 # metadata <- metadata_sf %>%
@@ -198,6 +205,7 @@ metadata. Then we can use the life history lists to find species that
 have not been observed in that marine region before.
 
 ``` r
+
 metadata_sf <- st_as_sf(metadata, coords = c("longitude_dd", "latitude_dd"), crs = 4326)
 regions <- st_as_sf(CheckEM::aus_regions, crs = st_crs(4326))
 regions <- st_transform(regions, 4326) %>%
@@ -262,6 +270,7 @@ It is important that you consistently name your files with the same
 campaignid (look out for different separators e.g. ‘-’, ’\_‘, or’.’)
 
 ``` r
+
 points <- read_points(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
@@ -302,6 +311,7 @@ It is important that you consistently name your files with the same
 campaignid (look out for different separators e.g. ‘-’, ’\_‘, or’.’)
 
 ``` r
+
 counts <- read_counts(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
@@ -325,6 +335,7 @@ counts <- read_counts(here::here("r-workflows/data/raw/")) %>%
 Create and tidy the MaxN file.
 
 ``` r
+
 # Only run this if there is data in the counts data frame
 if(nrow(points) > 1){
   maxn_points <- points %>%
@@ -368,6 +379,7 @@ if(nrow(points) > 1){
     ## $ maxn       <dbl> 1, 1, 1, 1, 71, 9, 8, 1, 5, 2, 9, 1, 1, 2, 2, 1, 5, 12, 3, …
 
 ``` r
+
 # Only run this if there is data in the counts data frame
 if(nrow(counts) > 1){
   maxn_counts <- counts %>%
@@ -408,6 +420,7 @@ if(nrow(counts) > 1){
     ## $ maxn       <dbl> 3, 4, 18, 2, 1, 9, 3, 2, 2, 1, 6, 3, 1, 3, 1, 2, 1, 1, 1, 1…
 
 ``` r
+
 # If only EventMeasure data then MaxN only includes Points data
 # If only Generic data then MaxN only includes Count data
 # If both exist, then MaxN includes both Points and Count data
@@ -424,6 +437,7 @@ with the same campaignid (look out for different separators e.g. ‘-’,
 ’\_‘, or’.’)
 
 ``` r
+
 em_length3dpoints <- read_em_length(here::here("r-workflows/data/raw/")) %>%
   dplyr::select(-c(comment))%>% # there is a comment column in metadata, so you will need to remove this column from EM data
   dplyr::inner_join(metadata, by = join_by(sample, campaignid)) %>%
@@ -490,6 +504,7 @@ It is important that you consistently name your files with the same
 campaignid (look out for different separators e.g. ‘-’, ’*’, or ‘.’)
 
 ``` r
+
 gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%
   dplyr::full_join(metadata, by = join_by(campaignid, sample)) %>%
   dplyr::filter(successful_length %in% "Yes") %>%
@@ -528,6 +543,7 @@ gen_length <- read_gen_length(here::here("r-workflows/data/raw/")) %>%
 ### Combine EventMeasure and *Generic* length data
 
 ``` r
+
 # If only EventMeasure data then length only includes Length and 3D points data
 # If only Generic data then length only includes generic length data
 # If both exist, then length includes both Length and 3D points and generic length data
@@ -543,6 +559,7 @@ species wasn’t observed). The final data set will have a row for each
 species in every sample (deployment).
 
 ``` r
+
 count <- maxn %>%
   dplyr::mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
   dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
@@ -567,6 +584,7 @@ count <- maxn %>%
     ##   per-operation grouping (`?dplyr::dplyr_by`) instead.
 
 ``` r
+
 count_families <- maxn %>%
   dplyr::mutate(scientific = paste(family, genus, species, sep = " ")) %>%
   filter(!(family %in% "Unknown")) %>%
@@ -610,6 +628,7 @@ final data set will have a row for each species in every sample
 (deployment).
 
 ``` r
+
 complete_length <- length %>%
   dplyr::mutate(family = ifelse(family %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(family))) %>%
   dplyr::mutate(genus = ifelse(genus %in% c("NA", "NANA", NA, "unknown", "", NULL, " ", NA_character_), "Unknown", as.character(genus))) %>%
@@ -671,6 +690,7 @@ This is the total number of unique samples in the sample metadata (it
 should also be the number of rows in the metadata data frame)
 
 ``` r
+
 number_of_samples <- metadata %>%
   dplyr::distinct(campaignid, sample)
 
@@ -685,6 +705,7 @@ If you have any duplicate samples within a campaign they will be
 displayed here
 
 ``` r
+
 duplicate_samples <- metadata %>%
   dplyr::group_by(campaignid, sample) %>%
   dplyr::summarise(n = n()) %>%
@@ -700,6 +721,7 @@ duplicate_samples <- metadata %>%
     ##   (`?dplyr::dplyr_by`) instead.
 
 ``` r
+
 message(paste(nrow(duplicate_samples), "samples duplicated in the metadata"))
 ```
 
@@ -713,6 +735,7 @@ due to a sample name spelt incorrectly in the count/points or sample
 metadata file.
 
 ``` r
+
 metadata_samples <- metadata %>%
   dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")),
                 successful_count, successful_length) %>%
@@ -734,6 +757,7 @@ This next chunk checks for any samples that are in the count data but do
 not have a match in the sample metadata.
 
 ``` r
+
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
 message(paste(nrow(missing_metadata), "samples in count data missing metadata"))
 ```
@@ -748,6 +772,7 @@ due to a sample name spelt incorrectly in the EMObs or Length file or
 the sample metadata file.
 
 ``` r
+
 metadata_samples <- metadata %>%
   dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")),
                 successful_count, successful_length) %>%
@@ -769,6 +794,7 @@ This next chunk checks for any samples that are in the length data but
 do not have a match in the sample metadata.
 
 ``` r
+
 missing_metadata <- anti_join(samples, metadata_samples, by = join_by(campaignid, sample))
 
 message(paste(nrow(missing_metadata), "samples in length data missing metadata"))
@@ -784,6 +810,7 @@ have an end time. This is important if you want to check the duration of
 each period.
 
 ``` r
+
 periods <- read_periods(here::here("r-workflows/data/raw/")) %>%
   glimpse()
 ```
@@ -804,6 +831,7 @@ periods <- read_periods(here::here("r-workflows/data/raw/")) %>%
     ## $ sample        <chr> "10", "12", "14", "15", "16", "17", "19", "2", "21", "22…
 
 ``` r
+
 periods_without_end <- periods %>%
   dplyr::filter(has_end == 0)
 
@@ -813,6 +841,7 @@ message(paste(nrow(periods_without_end), "periods without an end"))
     ## 0 periods without an end
 
 ``` r
+
 glimpse(periods_without_end)
 ```
 
@@ -838,6 +867,7 @@ sampling duration. You can use it to find any samples that are missing
 periods.
 
 ``` r
+
 metadata_samples <- metadata %>%
   dplyr::select(campaignid, sample, dplyr::any_of(c("opcode", "period")), successful_count, successful_length) %>%
   dplyr::distinct() %>%
@@ -854,12 +884,14 @@ missing_periods <- anti_join(metadata_samples, periods_samples) %>%
     ## Joining with `by = join_by(campaignid, sample)`
 
 ``` r
+
 message(paste(nrow(missing_periods), "samples missing period"))
 ```
 
     ## 62 samples missing period
 
 ``` r
+
 glimpse(missing_periods)
 ```
 
@@ -875,6 +907,7 @@ This check identifies any points that have been annotated outside of a
 period.
 
 ``` r
+
 points_outside_periods <- points %>%
   dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
   dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, number, frame)
@@ -885,6 +918,7 @@ message(paste(nrow(points_outside_periods), "points outside a period"))
     ## 0 points outside a period
 
 ``` r
+
 glimpse(points_outside_periods)
 ```
 
@@ -905,6 +939,7 @@ This check identifies any length measurements or 3D points that have
 been annotated outside of a period.
 
 ``` r
+
 lengths_outside_periods <- em_length3dpoints %>%
   dplyr::filter(period %in% c("NA", NA, NULL, "")) %>%
   dplyr::select(campaignid, dplyr::any_of(c("opcode", "period")), family, genus, species, number)
@@ -915,6 +950,7 @@ message(paste(nrow(lengths_outside_periods), "lengths/3D points outside period")
     ## 1 lengths/3D points outside period
 
 ``` r
+
 glimpse(lengths_outside_periods)
 ```
 
@@ -935,6 +971,7 @@ for stereo-BRUVs) and then identify any periods that are not that
 length.
 
 ``` r
+
 period_length <- 60 # in minutes
 
 periods_wrong <- periods %>%
@@ -949,6 +986,7 @@ message(paste(nrow(periods_wrong), "periods not", period_length, "minutes long")
     ## 1 periods not 60 minutes long
 
 ``` r
+
 glimpse(periods_wrong)
 ```
 
@@ -967,6 +1005,7 @@ glimpse(periods_wrong)
 This is the total number of individuals observed in the count data:
 
 ``` r
+
 total_count <- sum(complete_count$count)
 message(paste(total_count, "fish counted in the count data"))
 ```
@@ -976,6 +1015,7 @@ message(paste(total_count, "fish counted in the count data"))
 This is the total number of individuals observed in the length data:
 
 ``` r
+
 total_length <- sum(complete_length$number)
 message(paste(total_length, "fish counted in the length data"))
 ```
@@ -990,6 +1030,7 @@ they are not summed in total abundance metrics. You should check to make
 sure no fish species accidentally had their number deleted.
 
 ``` r
+
 points_without_number <- points %>%
   filter(number %in% c("NA", NA, 0, NULL, "", " "))
 
@@ -999,6 +1040,7 @@ message(paste(nrow(points_without_number), "points in the _Points.txt file that 
     ## 11 points in the _Points.txt file that do not have a number
 
 ``` r
+
 glimpse(points_without_number)
 ```
 
@@ -1035,6 +1077,7 @@ points to record the sync point. These can remain in the data but you
 should double check that no fish are accidentally missing a number.
 
 ``` r
+
 lengths_without_number <- em_length3dpoints %>%
   filter(number %in% c("NA", NA, 0, NULL, "", " "))
 
@@ -1044,6 +1087,7 @@ message(paste(nrow(lengths_without_number), "lengths or 3D points in the EMObs t
     ## 1 lengths or 3D points in the EMObs that do not have a number
 
 ``` r
+
 glimpse(lengths_without_number)
 ```
 
@@ -1109,6 +1153,7 @@ specific list (*CheckEM::aus_synonyms*) or a Global list (*TO ADD*).
 #### Synonyms in the count data
 
 ``` r
+
 synonyms_in_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
       dplyr::filter(!is.na(genus_correct)) %>%
       dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
@@ -1120,12 +1165,14 @@ synonyms_in_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
     ## Joining with `by = join_by(family, genus, species)`
 
 ``` r
+
 message(paste(nrow(synonyms_in_count), "synonyms used in the count data"))
 ```
 
     ## 13 synonyms used in the count data
 
 ``` r
+
 glimpse(synonyms_in_count)
 ```
 
@@ -1137,6 +1184,7 @@ glimpse(synonyms_in_count)
 #### Synonyms in the length data
 
 ``` r
+
 synonyms_in_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %>%
       dplyr::filter(!is.na(genus_correct)) %>%
       dplyr::mutate('old name' = paste(family, genus, species, sep = " ")) %>%
@@ -1148,12 +1196,14 @@ synonyms_in_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %
     ## Joining with `by = join_by(family, genus, species)`
 
 ``` r
+
 message(paste(nrow(synonyms_in_length), "synonyms used in the length data"))
 ```
 
     ## 13 synonyms used in the length data
 
 ``` r
+
 glimpse(synonyms_in_length)
 ```
 
@@ -1174,6 +1224,7 @@ the next two chunks.
 data you save at the end of the script.
 
 ``` r
+
 complete_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
   dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
   dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
@@ -1185,6 +1236,7 @@ complete_count <- dplyr::left_join(complete_count, CheckEM::aus_synonyms) %>%
     ## Joining with `by = join_by(family, genus, species)`
 
 ``` r
+
 complete_length <- dplyr::left_join(complete_length, CheckEM::aus_synonyms) %>%
   dplyr::mutate(genus = ifelse(!genus_correct%in%c(NA), genus_correct, genus)) %>%
   dplyr::mutate(species = ifelse(!is.na(species_correct), species_correct, species)) %>%
@@ -1219,6 +1271,7 @@ about the species flagged by this check.
 Check for any species that are out of range in the count data.
 
 ``` r
+
 count_species_not_observed_region <- complete_count %>%
   dplyr::distinct(campaignid, sample, family, genus, species, marine_region, count) %>%
   dplyr::anti_join(., expand_life_history(CheckEM::australia_life_history), by = c("family", "genus", "species", "marine_region")) %>%
@@ -1233,12 +1286,14 @@ count_species_not_observed_region <- complete_count %>%
     ## Joining with `by = join_by(campaignid, sample, marine_region)`
 
 ``` r
+
 message(paste(nrow(count_species_not_observed_region), "species not observed in the region before"))
 ```
 
     ## 0 species not observed in the region before
 
 ``` r
+
 glimpse(count_species_not_observed_region)
 ```
 
@@ -1255,6 +1310,7 @@ glimpse(count_species_not_observed_region)
 Check for any species that are out of range in the length data.
 
 ``` r
+
 length_species_not_observed_region <- complete_length %>%
   dplyr::distinct(campaignid, sample, family, genus, species, marine_region, number) %>%
   dplyr::anti_join(., expand_life_history(CheckEM::australia_life_history), by = c("family", "genus", "species", "marine_region")) %>%
@@ -1269,12 +1325,14 @@ length_species_not_observed_region <- complete_length %>%
     ## Joining with `by = join_by(campaignid, sample, marine_region)`
 
 ``` r
+
 message(paste(nrow(length_species_not_observed_region), "species not observed in the region before"))
 ```
 
     ## 0 species not observed in the region before
 
 ``` r
+
 glimpse(length_species_not_observed_region)
 ```
 
@@ -1311,6 +1369,7 @@ If you chose to update the names that have changed (synonyms) then this
 check won’t include the previously used names.
 
 ``` r
+
 count_species_not_in_list <- complete_count %>%
   dplyr::anti_join(., CheckEM::australia_life_history, by = c("family", "genus", "species")) %>%
   dplyr::filter(count > 0) %>%
@@ -1324,12 +1383,14 @@ count_species_not_in_list <- complete_count %>%
     ## successful_habitat_backward, marine_region)`
 
 ``` r
+
 message(paste(nrow(count_species_not_in_list), "species not in chosen life history list"))
 ```
 
     ## 11 species not in chosen life history list
 
 ``` r
+
 glimpse(count_species_not_in_list)
 ```
 
@@ -1343,6 +1404,7 @@ glimpse(count_species_not_in_list)
 #### Species in the length data that are not listed
 
 ``` r
+
 length_species_not_in_list <- complete_length %>%
   dplyr::anti_join(., CheckEM::australia_life_history, by = c("family", "genus", "species")) %>%
   dplyr::filter(number > 0) %>%
@@ -1356,12 +1418,14 @@ length_species_not_in_list <- complete_length %>%
     ## successful_habitat_backward, marine_region)`
 
 ``` r
+
 message(paste(nrow(length_species_not_in_list), "species not in chosen life history list"))
 ```
 
     ## 12 species not in chosen life history list
 
 ``` r
+
 glimpse(length_species_not_in_list)
 ```
 
@@ -1390,6 +1454,7 @@ incorrect you fill out the feedback form on the
 (see tab *Edit maximum lengths*) to supply a new maximum size limit.
 
 ``` r
+
 incorrect_lengths <- left_join(complete_length, create_min_max(CheckEM::australia_life_history, minimum = 0.15, maximum = 0.85)) %>%
   dplyr::filter(length_mm < min_length_mm | length_mm > max_length_mm) %>%
   mutate(reason = ifelse(length_mm < min_length_mm, "too small", "too big")) %>%
@@ -1404,6 +1469,7 @@ incorrect_lengths <- left_join(complete_length, create_min_max(CheckEM::australi
     ## Joining with `by = join_by(campaignid, sample)`
 
 ``` r
+
 too_small <- incorrect_lengths %>%
   dplyr::filter(reason %in% "too small")
 
@@ -1416,6 +1482,7 @@ message(paste(nrow(too_small), "lengths are too small"))
     ## 172 lengths are too small
 
 ``` r
+
 glimpse(too_small)
 ```
 
@@ -1434,12 +1501,14 @@ glimpse(too_small)
     ## $ percent_of_fb_max <dbl> 11.203784, 10.587173, 12.880797, 12.154503, 6.395506…
 
 ``` r
+
 message(paste(nrow(too_big), "lengths are too big"))
 ```
 
     ## 488 lengths are too big
 
 ``` r
+
 glimpse(too_big)
 ```
 
@@ -1463,6 +1532,7 @@ In this check you can set the RMS limit, and then identify any
 measurements that have a larger RMS.
 
 ``` r
+
 rms_limit <- 20 # in mm
 
 over_rms <- complete_length %>%
@@ -1474,6 +1544,7 @@ message(paste(nrow(over_rms), "lengths over RMS limit"))
     ## 0 lengths over RMS limit
 
 ``` r
+
 glimpse(over_rms)
 ```
 
@@ -1507,6 +1578,7 @@ In this check you can set the precision limit, and then identify any
 measurements that have a larger precision.
 
 ``` r
+
 precision_limit <- 10 # in %
 
 over_precision <- complete_length %>%
@@ -1518,6 +1590,7 @@ message(paste(nrow(over_precision), "lengths over precision limit"))
     ## 430 lengths over precision limit
 
 ``` r
+
 glimpse(over_precision)
 ```
 
@@ -1551,6 +1624,7 @@ In this check you can set the range limit, and then identify any
 measurements that have a larger range.
 
 ``` r
+
 range_limit <- 10 # in metres
 
 over_range <- complete_length %>%
@@ -1562,6 +1636,7 @@ message(paste(nrow(over_range), "lengths over range limit"))
     ## 0 lengths over range limit
 
 ``` r
+
 glimpse(over_range)
 ```
 
@@ -1598,6 +1673,7 @@ glimpse(over_range)
 Save MaxN as an R data file.
 
 ``` r
+
 saveRDS(complete_count,
           file = here::here(paste0("r-workflows/data/staging/",
                        name, "_complete-count.rds")))
@@ -1606,6 +1682,7 @@ saveRDS(complete_count,
 Save lengths as an R data file.
 
 ``` r
+
 saveRDS(complete_length,
           file = here::here(paste0("r-workflows/data/staging/",
                        name, "_complete-length.rds")))

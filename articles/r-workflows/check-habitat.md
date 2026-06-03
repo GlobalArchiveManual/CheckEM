@@ -10,6 +10,7 @@ metadata file “\*\_Metadata.csv”.
 Load the necessary libraries.
 
 ``` r
+
 # install.packages('remotes')
 library('remotes')
 options(timeout=9999999)
@@ -30,6 +31,7 @@ library(tibble)
 Set the study name.
 
 ``` r
+
 name <- "example-bruv-workflow"
 ```
 
@@ -38,6 +40,7 @@ name <- "example-bruv-workflow"
 Load and format the metadata.
 
 ``` r
+
 metadata <- read_metadata(here::here("r-workflows/data/raw/")) %>%
     dplyr::select(campaignid, sample, longitude_dd, latitude_dd, date_time, location, site, depth_m, successful_count, successful_length, successful_habitat_forward, successful_habitat_backward) %>%
   glimpse()
@@ -121,6 +124,7 @@ Save the metadata as an R data file (this creates a lighter file than
 saving as a .csv or similar).
 
 ``` r
+
 saveRDS(metadata, file = here::here(paste0("r-workflows/data/tidy/", name, "_metadata.rds")))
 ```
 
@@ -128,6 +132,7 @@ Read in the points data exported from Transect Measure, and then filter
 this into 2 dataframes for relief and habitat annotations.
 
 ``` r
+
 points <- read_TM(here::here("r-workflows/data/raw/"),
                                sample = "opcode")
 ```
@@ -135,6 +140,7 @@ points <- read_TM(here::here("r-workflows/data/raw/"),
 Filter the data to only include habitat annotations.
 
 ``` r
+
 habitat <- points %>%
   dplyr::filter(relief_annotated %in% "no") %>%
   dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
@@ -154,6 +160,7 @@ habitat <- points %>%
 Filter the data to only include relief annotations.
 
 ``` r
+
 relief <- points %>%
   dplyr::filter(relief_annotated %in% "yes") %>%
   dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
@@ -175,6 +182,7 @@ relief <- points %>%
 Set the number of expected annotations to check against.
 
 ``` r
+
 num.points <- 20
 ```
 
@@ -182,6 +190,7 @@ Check if there are habitat annotations with an unexpected number of
 annotation points.
 
 ``` r
+
 wrong.points.habitat <- habitat %>%
   group_by(campaignid, sample) %>%
   summarise(points.annotated = n()) %>%
@@ -221,6 +230,7 @@ Check if there are habitat annotations with an unexpected number of
 annotation points.
 
 ``` r
+
 wrong.points.relief <- relief %>%
   group_by(campaignid, sample) %>%
   summarise(points.annotated = n()) %>%
@@ -260,6 +270,7 @@ Check to see if there are any samples in habitat that don’t have a match
 in the metadata.
 
 ``` r
+
 habitat.missing.metadata <- anti_join(habitat, metadata, by = c("campaignid", "sample")) %>%
   glimpse()
 ```
@@ -278,6 +289,7 @@ Check to see if there are any samples in the metadata that don’t have
 matching habitat.
 
 ``` r
+
 metadata.missing.habitat <- anti_join(metadata, habitat, by = c("campaignid", "sample")) %>%
   glimpse()
 ```
@@ -303,6 +315,7 @@ Make a vector of columns included in the schema file to ensure proper
 joining with your tidy habitat dataset.
 
 ``` r
+
 catami_cols <- c("level_1" = NA,
                  "level_2" = NA,
                  "level_3" = NA,
@@ -320,6 +333,7 @@ Tidy the habitat data by joining with the complete schema file that is
 loaded with the CheckEM package.
 
 ``` r
+
 tidy.habitat <- habitat %>%
   dplyr::mutate(count = 1) %>%
   add_column(!!!catami_cols[!names(catami_cols) %in% names(.)]) %>%
@@ -357,6 +371,7 @@ tidy.habitat <- habitat %>%
 Save the tidy habitat data as an R data file.
 
 ``` r
+
 saveRDS(tidy.habitat, file = here::here(paste0("r-workflows/data/staging/", name, "_habitat.rds")))
 ```
 
@@ -364,6 +379,7 @@ Tidy the relief data by joining with the complete schema file that is
 loaded with the CheckEM package.
 
 ``` r
+
 tidy.relief <- relief %>%
   dplyr::select(campaignid, sample, starts_with("level"), scientific) %>%
   dplyr::filter(!level_2 %in% c("","Unscorable", NA)) %>%
@@ -397,5 +413,6 @@ tidy.relief <- relief %>%
 Save the tidy relief data as an R data file.
 
 ``` r
+
 saveRDS(tidy.relief, file = here::here(paste0("r-workflows/data/staging/", name, "_relief.rds")))
 ```

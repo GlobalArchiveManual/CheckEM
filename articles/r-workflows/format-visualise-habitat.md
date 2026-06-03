@@ -10,6 +10,7 @@ and patterns in the raw data to be investigated.
 Load the necessary libraries.
 
 ``` r
+
 library('remotes')
 options(timeout=9999999)
 # remotes::install_github("GlobalArchiveManual/CheckEM")
@@ -27,6 +28,7 @@ library(here)
 Set the study name.
 
 ``` r
+
 name <- "example-bruv-workflow"
 ```
 
@@ -35,6 +37,7 @@ name <- "example-bruv-workflow"
 Load the metadata with bathymetry derivatives joined on.
 
 ``` r
+
 metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))) %>%
   dplyr::mutate(sample = as.character(sample)) %>%
   glimpse()
@@ -71,6 +74,7 @@ when deciding on your own habitat classes to model, we suggest using
 ecologically meaningful classes that will not be too rare to model.
 
 ``` r
+
 habitat <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_habitat.rds"))) %>%
   dplyr::mutate(habitat = case_when(level_2 %in% "Macroalgae" ~ level_2, level_2 %in% "Seagrasses" ~ level_2, level_2 %in% "Substrate" & level_3 %in% "Consolidated (hard)" ~ level_3, level_2 %in% "Substrate" & level_3 %in% "Unconsolidated (soft)" ~ level_3,  level_2 %in% "Sponges" ~ "Sessile invertebrates", level_2 %in% "Sessile invertebrates" ~ level_2, level_2 %in% "Bryozoa" ~ "Sessile invertebrates", level_2 %in% "Cnidaria" ~ "Sessile invertebrates")) %>%
   dplyr::select(campaignid, sample, habitat, count) %>%
@@ -103,6 +107,7 @@ Load the relief data and summarise this into mean and standard deviation
 relief.
 
 ``` r
+
 tidy.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_relief.rds"))) %>%
   uncount(count) %>%
   group_by(campaignid, sample) %>%
@@ -130,6 +135,7 @@ tidy.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_re
 Join the habitat data with relief, metadata and bathymetry derivatives.
 
 ``` r
+
 tidy.habitat <- metadata.bathy.derivatives %>%
   left_join(habitat) %>%
   left_join(tidy.relief) %>%
@@ -175,6 +181,7 @@ tidy.habitat <- metadata.bathy.derivatives %>%
 Format the relief into a format suitable for exploratory plotting.
 
 ``` r
+
 plot.relief <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_relief.rds"))) %>%
   group_by(campaignid, sample, level_5) %>%
   dplyr::summarise(count = sum(count)) %>%
@@ -204,6 +211,7 @@ Plot the occurrence data per habitat class. Each data point represents a
 unique sample.
 
 ``` r
+
 ggplot() +
   geom_quasirandom(data = tidy.habitat, aes(x = (count/total_points_annotated), y = habitat), groupOnX = F, method = "quasirandom", alpha = 0.25, size = 1.8, width = 0.2) +
   labs(x = "Number of points", y = "") +
@@ -218,6 +226,7 @@ ggplot() +
 Plot the occurence data for each level of relief.
 
 ``` r
+
 ggplot() +
   geom_quasirandom(data = plot.relief, aes(x = count, y = class.relief), groupOnX = F, method = "quasirandom", alpha = 0.25, size = 1.8, width = 0.05) +
   labs(x = "Number of points", y = "Relief (0-5)") +
@@ -232,12 +241,14 @@ ggplot() +
 Create a colour palette for plotting.
 
 ``` r
+
 cols <- colorRampPalette(brewer.pal(12, "Paired"))(length(unique(tidy.habitat$habitat)))
 ```
 
 Format the habitat into wide format suitable for plotting.
 
 ``` r
+
 plot.habitat <- tidy.habitat %>%
   pivot_wider(names_from = "habitat", values_from = "count", names_prefix = "broad.") %>%
   glimpse()
@@ -280,6 +291,7 @@ plot.habitat <- tidy.habitat %>%
 Visualise the habitat classes as spatial pie charts.
 
 ``` r
+
 leaflet() %>%
   addTiles(group = "Open Street Map") %>%
   addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
@@ -292,6 +304,7 @@ leaflet() %>%
 Choose an individual habitat class to visualise as spatial bubble plots.
 
 ``` r
+
 hab.name <- 'Sessile invertebrates'
 
 overzero <-  tidy.habitat %>%
@@ -304,6 +317,7 @@ equalzero <- tidy.habitat %>%
 Visualise the individual habitat classes.
 
 ``` r
+
 bubble.plot <- leaflet(data = tidy.habitat) %>%
   addTiles() %>%
   addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
@@ -322,5 +336,6 @@ bubble.plot
 ## Save the final tidy habitat data
 
 ``` r
+
 saveRDS(tidy.habitat, file = here::here(paste("r-workflows/data/tidy/", paste(name,"tidy-habitat.rds", sep = "_"), sep = "/")))
 ```

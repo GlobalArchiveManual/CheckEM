@@ -26,15 +26,22 @@
 
 ## Citation
 
-Gibbons B, Spencer C, Langlois T (2026). *CheckEM: An R package and
-Shiny App for Formatting, Checking, Visualising and Analysing
-Stereo-Video Annotation Data*. R package version 1.0.0,
-<https://globalarchivemanual.github.io/CheckEM/>.
+Gibbons B, Spencer C, Goetze J, McLean D, Bond T, Monk J, Navarro M,
+Agnello D, Aston C, Huveneers C, Newman S, Wilson S, Hoey A, Radford B,
+Speed C, Ierodiaconou D, Langlois T (2026). “CheckEM: An open-source
+toolkit for standardising, cleaning and visualising stereo-video fish
+survey data.” *Methods in Ecology and Evolution*, **17**(5), 1606-1616.
+[doi:10.1111/2041-210X.70287](https://doi.org/10.1111/2041-210X.70287).
+<https://doi.org/10.1111/2041-210X.70287>.
 
-    @Manual{,
-      title = {CheckEM: An R package and Shiny App for Formatting, Checking, Visualising and Analysing Stereo-Video Annotation Data},
-      author = {Brooke Gibbons and Claude Spencer and Tim Langlois},
+    @Article{,
+      title = {CheckEM: An open-source toolkit for standardising, cleaning and visualising stereo-video fish survey data},
+      author = {Brooke A. Gibbons and Claude Spencer and Jordan Goetze and Dianne McLean and Todd Bond and Jacquomo Monk and Matthew Navarro and Daniel Agnello and Charlotte Aston and Charlie Huveneers and Stephen J. Newman and Shaun Wilson and Andrew Hoey and Ben Radford and Conrad W. Speed and Daniel Ierodiaconou and Tim Langlois},
+      journal = {Methods in Ecology and Evolution},
       year = {2026},
-      note = {R package version 1.0.0},
-      url = {https://globalarchivemanual.github.io/CheckEM/},
+      volume = {17},
+      number = {5},
+      pages = {1606-1616},
+      doi = {10.1111/2041-210X.70287},
+      url = {https://doi.org/10.1111/2041-210X.70287},
     }

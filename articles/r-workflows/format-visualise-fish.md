@@ -10,6 +10,7 @@ and patterns in the raw data to be investigated.
 Load the necessary libraries.
 
 ``` r
+
 library('remotes')
 options(timeout=9999999)
 # remotes::install_github("GlobalArchiveManual/CheckEM")
@@ -26,6 +27,7 @@ library(leaflet)
 Set the study name.
 
 ``` r
+
 name <- "example-bruv-workflow"
 ```
 
@@ -34,6 +36,7 @@ name <- "example-bruv-workflow"
 Load and format the metadata.
 
 ``` r
+
 metadata.bathy.derivatives <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_metadata-bathymetry-derivatives.rds"))) %>%
   glimpse()
 ```
@@ -68,6 +71,7 @@ consists of reef-forming habitat found in the study area, which will be
 used in subsequent fish modelling scripts.
 
 ``` r
+
 reef_cols <- c("consolidated_hard", "macroalgae", "seagrasses", "sessile_invertebrates")
 
 habitat <- readRDS(here::here(paste0("r-workflows/data/tidy/", name, "_tidy-habitat.rds"))) %>%
@@ -106,6 +110,7 @@ Load length of maturity data. The maturity dataset is loaded when the
 package is installed.
 
 ``` r
+
 maturity.mean <- maturity %>%
   dplyr::group_by(family, genus, species, sex) %>%
   dplyr::slice(which.min(l50_mm)) %>%
@@ -135,6 +140,7 @@ species richness. These two response variables will be used in
 subsequent fish modelling scripts.
 
 ``` r
+
 tidy.count <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-count.rds"))) %>%
   dplyr::filter(campaignid %in% "2023-03_SwC_stereo-BRUVs") %>% # Remove Pt Cloates campaign for now
   dplyr::group_by(campaignid, sample, status, scientific) %>%
@@ -183,6 +189,7 @@ tidy.count <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_com
 Load and format length data.
 
 ``` r
+
 lengths <- readRDS(here::here(paste0("r-workflows/data/staging/", name, "_complete-length.rds"))) %>%
   dplyr::filter(campaignid %in% "2023-03_SwC_stereo-BRUVs") %>% # Remove Pt Cloates campaign for now
   # dplyr::mutate(depth = as.numeric(depth)) %>%
@@ -244,6 +251,7 @@ no equivalent in your study area, we suggest using ecologically-relevant
 and highly-targeted species.
 
 ``` r
+
 indicator.species <- lengths %>%
   dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
   dplyr::filter(scientific %in% c("Choerodon rubescens", "Chrysophrys auratus", "Glaucosoma hebraicum")) %>%
@@ -293,6 +301,7 @@ Create a unique list of the samples per campaign, to fill the zeroes
 back into processed length data.
 
 ``` r
+
 metadata.length <- lengths %>%
   distinct(campaignid, sample, status) %>%
   glimpse()
@@ -308,6 +317,7 @@ Create a dataframe of the indicator species greater than length of
 maturity.
 
 ``` r
+
 greater.mat <- indicator.species %>%
   dplyr::filter(length_mm > l50) %>%
   dplyr::group_by(campaignid, sample) %>%
@@ -356,6 +366,7 @@ Create a dataframe of the indicator species smaller than length of
 maturity.
 
 ``` r
+
 smaller.mat <- indicator.species %>%
   dplyr::filter(length_mm < l50) %>%
   dplyr::group_by(campaignid, sample) %>%
@@ -403,6 +414,7 @@ smaller.mat <- indicator.species %>%
 Join the two datasets.
 
 ``` r
+
 tidy.length <- bind_rows(greater.mat, smaller.mat) %>%
   glimpse()
 ```
@@ -437,6 +449,7 @@ example the count metrics included are total abundance and species
 richness.
 
 ``` r
+
 response.name <- 'total_abundance'
 
 overzero <-  tidy.count %>%
@@ -450,6 +463,7 @@ Visualise the count data as a bubble plot. White bubbles represent
 zeroes and the size of blue bubbles represents abundance.
 
 ``` r
+
 bubble.plot <- leaflet(data = tidy.count) %>%
   addTiles() %>%
   addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
@@ -472,6 +486,7 @@ length metrics included are indicator species greater than and smaller
 than the length of maturity.
 
 ``` r
+
 response.name <- 'greater than Lm'
 
 overzero <-  tidy.length %>%
@@ -485,6 +500,7 @@ Visualise the count data as a bubble plot. White bubbles represent
 zeroes and the size of blue bubbles represents abundance.
 
 ``` r
+
 bubble.plot <- leaflet(data = tidy.length) %>%
   addTiles() %>%
   addProviderTiles('Esri.WorldImagery', group = "World Imagery") %>%
@@ -505,6 +521,7 @@ bubble.plot
 Save count response data (total abundance and species richness).
 
 ``` r
+
 saveRDS(tidy.count, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-count.rds")))
 ```
 
@@ -512,5 +529,6 @@ Save length response data (indicator species greater than and smaller
 than the length of maturity).
 
 ``` r
+
 saveRDS(tidy.length, file = here::here(paste0("r-workflows/data/tidy/", name, "_tidy-length.rds")))
 ```
