@@ -58,6 +58,7 @@ library(geomtextpath)
 
 library(png)
 library(cowplot)
+library(waiter)
 
 # library(CheckEM)
 sf_use_s2(FALSE)

@@ -711,6 +711,7 @@ tabItems(
   # Create downloads - point based data -----
   tabItem(tabName = "downloads",
           fluidRow(
+            useWaiter(),
             
             column(width = 4,
                    box(width = NULL, title = "1. Add project information",

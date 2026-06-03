@@ -1,0 +1,32 @@
+citHeader("To cite CheckEM in publications, please cite:")
+
+bibentry(
+  bibtype = "Article",
+  title = "CheckEM: An open-source toolkit for standardising, cleaning and visualising stereo-video fish survey data",
+  author = c(
+    person("Brooke A.", "Gibbons"),
+    person("Claude", "Spencer"),
+    person("Jordan", "Goetze"),
+    person("Dianne", "McLean"),
+    person("Todd", "Bond"),
+    person("Jacquomo", "Monk"),
+    person("Matthew", "Navarro"),
+    person("Daniel", "Agnello"),
+    person("Charlotte", "Aston"),
+    person("Charlie", "Huveneers"),
+    person("Stephen J.", "Newman"),
+    person("Shaun", "Wilson"),
+    person("Andrew", "Hoey"),
+    person("Ben", "Radford"),
+    person("Conrad W.", "Speed"),
+    person("Daniel", "Ierodiaconou"),
+    person("Tim", "Langlois")
+  ),
+  journal = "Methods in Ecology and Evolution",
+  year = "2026",
+  volume = "17",
+  number = "5",
+  pages = "1606-1616",
+  doi = "10.1111/2041-210X.70287",
+  url = "https://doi.org/10.1111/2041-210X.70287"
+)

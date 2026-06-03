@@ -10130,15 +10130,33 @@ function(input, output, session) {
       # TODO add some css to make modals pretty
       
       if (TRUE){
+        # showModal(
+        #   modalDialog(
+        #     title = 'Downloading data...',
+        #     includeMarkdown("markdown/downloading.md"),
+        #     easyClose = FALSE,
+        #     footer = NULL
+        #   )
+        # )
+        
         showModal(
           modalDialog(
-            title = 'Downloading data...',
-            includeMarkdown("markdown/downloading.md"),
+            title = "Downloading data...",
+            tagList(
+              tags$div(
+                style = "text-align:center;",
+                tags$img(
+                  src = "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
+                  height = "180px"
+                ),
+                tags$br(),
+                # includeMarkdown("markdown/downloading.md")
+              )
+            ),
             easyClose = FALSE,
             footer = NULL
           )
         )
-        
         # print("glimpse downloading data")
         # glimpse(maxn.complete.download())
         
@@ -10147,48 +10165,101 @@ function(input, output, session) {
         
         # EVENTMEASURE ----
         if(input$upload %in% "EM"){
-          for(i in unique(maxn.complete.download()$campaignid)){
-            
-            print(i)
-            
-            dat <- maxn.complete.download() %>%
-              dplyr::rename(count = maxn) %>%
-              dplyr::filter(campaignid == i) #%>%
-            #dplyr::glimpse()
-            
-            fileName <- paste(i, "_count.csv", sep = "")
-            
-            write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+          
+          count_dat <- maxn.complete.download() %>%
+            dplyr::rename(count = maxn)
+          
+          count_split <- split(count_dat, count_dat$campaignid)
+          
+          message("downloading count")
+          
+          for (i in names(count_split)) {
+            write.csv(
+              count_split[[i]],
+              file.path(temp_directory, paste0(i, "_count.csv")),
+              row.names = FALSE
+            )
           }
+          
+          message("downloaded count")
+          rm(count_dat, count_split)
+          gc()
+        
+          # for(i in unique(maxn.complete.download()$campaignid)){
+          #   
+          #   print(i)
+          #   
+          #   dat <- maxn.complete.download() %>%
+          #     dplyr::rename(count = maxn) %>%
+          #     dplyr::filter(campaignid == i) #%>%
+          #   #dplyr::glimpse()
+          #   
+          #   fileName <- paste(i, "_count.csv", sep = "")
+          #   
+          #   write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+          # }
           
           if(input$length %in% "Yes"){
             
-            for(i in unique(length.complete.download()$campaignid)){
-              
-              print("campaignid length")
-              print(i)
-              
-              dat <- length.complete.download() %>%
-                dplyr::filter(campaignid == i)# %>% glimpse()
-              
-              fileName <- paste(i, "_length.csv", sep = "")
-              
-              write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
-            }
+            # for(i in unique(length.complete.download()$campaignid)){
+            #   
+            #   print("campaignid length")
+            #   print(i)
+            #   
+            #   dat <- length.complete.download() %>%
+            #     dplyr::filter(campaignid == i)# %>% glimpse()
+            #   
+            #   fileName <- paste(i, "_length.csv", sep = "")
+            #   
+            #   write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+            # }
+            message("downloading length")
+            length_dat <- length.complete.download() 
             
-            for(i in unique(mass.complete.download()$campaignid)){
-              
-              # print("campaignid mass")
-              # print(i)
-              
-              dat <- mass.complete.download() %>%
-                dplyr::filter(campaignid == i) #%>% glimpse()
-              
-              fileName <- paste(i, "_mass.csv", sep = "")
-              
-              write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+            length_split <- split(length_dat, length_dat$campaignid)
+            
+            for (i in names(length_split)) {
+              write.csv(
+                length_split[[i]],
+                file.path(temp_directory, paste0(i, "_length.csv")),
+                row.names = FALSE
+              )
             }
+            rm(length_dat, length_split)
+            gc()
+            message("downloaded length")
+            
+            message("downloading mass")
+            mass_dat <- mass.complete.download()
+            
+            mass_split <- split(mass_dat, mass_dat$campaignid)
+            
+            for (i in names(mass_split)) {
+              write.csv(
+                mass_split[[i]],
+                file.path(temp_directory, paste0(i, "_mass.csv")),
+                row.names = FALSE
+              )
+            }
+            rm(mass_dat, mass_split)
+            gc()
+            message("downloaded mass")
+
+            # for(i in unique(mass.complete.download()$campaignid)){
+            #   
+            #   # print("campaignid mass")
+            #   # print(i)
+            #   
+            #   dat <- mass.complete.download() %>%
+            #     dplyr::filter(campaignid == i) #%>% glimpse()
+            #   
+            #   fileName <- paste(i, "_mass.csv", sep = "")
+            #   
+            #   write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
+            # }
           }
+          
+          message("downloading meta")
           
           if (input$error.zeros == FALSE) {
             
@@ -10216,6 +10287,8 @@ function(input, output, session) {
               write.csv(dat, file.path(temp_directory, fileName), row.names = FALSE)
             }
           }
+          
+          message("downloaded metadata")
           
         } else {
           # GENERIC -----
@@ -10342,7 +10415,9 @@ function(input, output, session) {
         }
         
         #create the zip file
-        zip::zip(zipfile = file, files = dir(temp_directory), root = temp_directory)
+        files_to_zip <- list.files(temp_directory, full.names = TRUE)
+        zip::zip(zipfile = file, files = files_to_zip, mode = "cherry-pick")
+        # zip::zip(zipfile = file, files = dir(temp_directory), root = temp_directory)
         
       }}, contentType = "application/zip"
   )
@@ -10966,7 +11041,9 @@ function(input, output, session) {
         }
         
         #create the zip file
-        zip::zip(zipfile = file, files = dir(temp_directory), root = temp_directory)
+        # zip::zip(zipfile = file, files = dir(temp_directory), root = temp_directory)
+        files_to_zip <- list.files(temp_directory, full.names = TRUE)
+        zip::zip(zipfile = file, files = files_to_zip, mode = "cherry-pick")
         
       }}, contentType = "application/zip"
   )
