@@ -77,7 +77,6 @@ Suggests:
     raster,
     reactlog,
     rmarkdown,
-    rpivotTable,
     DT,
     knitr,
     terra,
