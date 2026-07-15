@@ -234,19 +234,19 @@ abundance and length of fish assemblages. A standard operating procedure
 for collecting stereo-BRUV imagery was published in 2020 (Langlois et
 al., 2020). The field manual describes the standard system design and
 field procedures and  is available online at
-[besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189](https://www.google.com/url?q=https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189&sa=D&source=editors&ust=1784100602354257&usg=AOvVaw17pVPxwSKm0a0UiOBYIoVi).
+[besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189](https://www.google.com/url?q=https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189&sa=D&source=editors&ust=1784101001299881&usg=AOvVaw3V9JV5fwNRQp3IXLDXTYqd).
 
 This document was prepared as a standard means of attaining count and
 length metrics from stereo-BRUV imagery using the EventMeasure software.
 The outputs from EventMeasure are compatible with the CheckEM quality
 control [r
-package](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/&sa=D&source=editors&ust=1784100602355489&usg=AOvVaw21SlOoBI-d2NGYUKqflFrb) and
+package](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/&sa=D&source=editors&ust=1784101001300459&usg=AOvVaw1aiwCcMPedhzmjuU4VpMwP) and
 [shiny
-app](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784100602356037&usg=AOvVaw3CvV6c0G0-MdR6uLISFt24),
+app](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784101001300600&usg=AOvVaw0alHOh6KVHo9Z1w5vgWlOP),
 which allows stereo-video users to rapidly and effectively quality
 control their data. The exports from EventMeasure are also compatible
 with the data repository GlobalArchive
-([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784100602356779&usg=AOvVaw2IMNlpKtDwX_UdUkks5qUy)).
+([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784101001300948&usg=AOvVaw1rz3-YrfwlvkRxyTbm9vK5)).
 
 ## Using this manual
 
@@ -269,7 +269,7 @@ field of view.
 
 We suggest keeping a version of the sample metadata (See the [CheckEM
 user
-guide](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784100602359649&usg=AOvVaw2SWtwafECVwbB9yILtkeFo) for
+guide](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784101001302620&usg=AOvVaw0kZ4JElkGsZ5lkrDeYamxS) for
 a description of the sample metadata and required column names and
 formats) on an online spreadsheet (e.g. Google Sheets, Onedrive), so
 multiple analysts can edit at the same time. From the sample metadata
@@ -284,11 +284,11 @@ videos are currently being analysed.
 2.  ## Opening EventMeasure
 
 You can download the EventMeasure software from
-[www.seagis.com.au/download](https://www.google.com/url?q=https://www.seagis.com.au/download.php&sa=D&source=editors&ust=1784100602362247&usg=AOvVaw33ZbhY0vyVtuKETzElJmuL) You
+[www.seagis.com.au/download](https://www.google.com/url?q=https://www.seagis.com.au/download.php&sa=D&source=editors&ust=1784101001304015&usg=AOvVaw358_1pWnPMGwY-JjrubazA) You
 will require a software license to use EventMeasure. The keys associated
 with your software license will typically be stored on a USB available
 from
-[www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/index.html%23home&sa=D&source=editors&ust=1784100602363175&usg=AOvVaw1TiaDmhRyHl8M_ZN2wLxN1).
+[www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/index.html%23home&sa=D&source=editors&ust=1784101001304381&usg=AOvVaw3ntz201VYAjXPhpkVEU50B).
 Ensure this USB is plugged into your device before opening the software.
 If successful, your screen should look like [Fig. 2](#h.4804dp3csd6i).
 
@@ -389,7 +389,7 @@ Select Measurement \>  Attributes \> Edit/load species file … Double
 click on tick next to Species File ([Fig. 9](#h.176aa2wtf6tt))  and
 select an attribute file. An attribute file created from CAAB Codes is
 available online via the [CheckEM github
-repository](https://www.google.com/url?q=https://github.com/GlobalArchiveManual/CheckEM/tree/main/annotation-schema/output/fish/eventmeasure-attribute-files&sa=D&source=editors&ust=1784100602376790&usg=AOvVaw0RB9DKelE6benTE5DS3F_H).
+repository](https://www.google.com/url?q=https://github.com/GlobalArchiveManual/CheckEM/tree/main/annotation-schema/output/fish/eventmeasure-attribute-files&sa=D&source=editors&ust=1784101001313111&usg=AOvVaw0hNkbdMw7s5iAGW3eQ2meg).
 This .txt file contains the current CSIRO standard for fish naming
 conventions for Australian fishes and their associated unique CAAB code.
 
@@ -571,9 +571,9 @@ and then highlight all but the first file from the right camera. Open
 them and then select OK on the Movie sequence configuration window
 ([Fig. 19](#h.sjjjf5nlg2dt)).
 
-![](https://docs.google.com/docs-images-rt/APuouOcL4B4k0G3ucg4nQtyKyB1BBEw2TQh7aaV2OXIkym2GpPtegJFUFEjrJXZHOSiNWCKDDY5-GaCh4yJLwg5POEWT5AHQQQfdClDKKIz-UocD-Q16XhwzUnkWCZnhkG3b0KwtPeJNNP18X7V55sQd1xQ1mBvP51KHRFLuTds=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdHlztGusl_Pl8YOPVzCx9uAIAllr2033mxViLeXejnB4KpcuA1ZDu_uJmqICIc7lW_3mLref_ph7Hy0zNTJuBiY1g8gEjpRVrJG-aNTt3HuVmLIQXPVN_3xxrN2_DAh54oGzLjsfyEP9BFgyCQNZqIFZdiBDHgG3GxLXQ=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOdfc42ZZQzGVgUxaEs4GxjohvmsIjZ4e59gRAOppwIyWbSSpJDmRTdm3vsbQN8Bl8Pn93QrgUDa9RhbYJQ1gAkOxX4IahEfqk3U6PsN9M_wfrr4YBMfdmDGHpHyqqIRZuiVYmMfEbVWc3QlLHIt0_SWTuWcGQkfXI08Z5fLzg=s2048)![](https://docs.google.com/docs-images-rt/APuouOdqS9lCrI13BRwJeGGKFwSWTeLx1uNNzKmrJItWN-LFlofwL6F5AvFemtWc3Vsu9wPYyk8otJQXw6-ZC036ZKrnVuyNAyfC2W_Fi85XjiIGgonw3FoMOHwAwEu2bBQTw9llWlkVVUX7QaYfBc73t3i0KzbJsoP-pQFu_ULd6A=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdfc42ZZQzGVgUxaEs4GxjohvmsIjZ4e59gRAOppwIyWbSSpJDmRTdm3vsbQN8Bl8Pn93QrgUDa9RhbYJQ1gAkOxX4IahEfqk3U6PsN9M_wfrr4YBMfdmDGHpHyqqIRZuiVYmMfEbVWc3QlLHIt0_SWTuWcGQkfXI08Z5fLzg=s2048)![](https://docs.google.com/docs-images-rt/APuouOezfdSsEm1buOP16Edm1kbLYTFH_SU8HzghfyKx4gXEFvFMru_0_QthCw8ZodvKqduOYIYQntBRUI5iCBy0LWk6oDtm_araR6xvP_mQsBWe44queVth0NuLgAZg3HCEo93Dr0YuaS7rwXsjjrwU7-G3jV4HAm42FXyzjRQXog=s2048)
 
 ##### Figure 19. Load the right side video (top panel) and select the first of the right side files (bottom left panel). Set your movie sequence by adding the rest of the files and clicking OK (bottom right panel)
 
@@ -690,7 +690,7 @@ are measuring.
 
 ##### ![](https://docs.google.com/docs-images-rt/APuouOcrOUtufCBPHy5Nt4g6zWrOer3tWDMgVWqG5DcvwqmkhLb7cwdxZdM5t31kM7xvTsW8vrxE9UB-GOvZGlESXizPYMvlTfNWDRdm1Om6kE_rQYxRH5jDZ-Tlhdqp9bHvlPCptThpV57t1QSG0aGE237V5yw3GTZjsKeE-RqOuA=s2048)![](https://docs.google.com/docs-images-rt/APuouOfvuhkUmDkQETSAPr1f4GZa5zWadoQJTDryPwHXJeOWBxmCNUa0oajAyJsV8NqkgVOyE-P-RXDRnHkcBa0tx7m4jXS_XwvlQsk8N0ZoO8Uvhwyi3YIjyU8pUliKJQZiX3PJIbBOf4Otrfc1Cyra29xHX7WrMIdct5raltvhlw=s2048)
 
-##### ![](https://docs.google.com/docs-images-rt/APuouOexfC9tl5HEINc5yq3c3zlYXXa2HCVJ93jMBCFQ-2fm0Xpnd4dde2dC3T3bVYmNXzXT69KPIGNhOy2KCvLMrvL4jh5YIX0RN8SfpslJo6BfsYfRPmOHGWUqdHE5nd4vrfJ3Nguqo1imujdgmy6mYUeRj0vxCtZxLVBSyQgUgg=s2048)![](https://docs.google.com/docs-images-rt/APuouOccivypdwCMN6cYAyYUIpCQpXmZujuagmz3sy69CH939kPq__XT_kF6l0Bu2m91n_5S0BERCBiR9b7mJWu8ikm9YKMIAUzd02urxolBczzPKFJ_nPRN5XA7J7AVb6SKXt5utTV3HYPXPCAo_pVVA3nXBtl0FWjn8GbhNDFWkA=s2048)Figure 26. Sequence of clicks when making a length measurement. The top two panels show a zoomed in point on the snout and then of the tail on the left video. The middle panel then shows the point being made on the snout of the same fish on the right video. The bottom panel shows the resulting 3D measurement on the successful click of the tail of the same fish on the right video.
+##### ![](https://docs.google.com/docs-images-rt/APuouOexfC9tl5HEINc5yq3c3zlYXXa2HCVJ93jMBCFQ-2fm0Xpnd4dde2dC3T3bVYmNXzXT69KPIGNhOy2KCvLMrvL4jh5YIX0RN8SfpslJo6BfsYfRPmOHGWUqdHE5nd4vrfJ3Nguqo1imujdgmy6mYUeRj0vxCtZxLVBSyQgUgg=s2048)![](https://docs.google.com/docs-images-rt/APuouOe-6VTSPyHoIuhytywgWJkJBMvuzmarSjz9ghfCn5mM2SP5pD4Bhh4WmO9nPX1NA_R7OQmrOG7bpbp1lSlcwnaGhFtujXuWWkRT5iFdoPaRpOC6bvyD8YTSq1t_Z5hoAppCnJu1ht6PQd4w33t2LWSbfhCRWxmPt5WTc5JeXA=s2048)Figure 26. Sequence of clicks when making a length measurement. The top two panels show a zoomed in point on the snout and then of the tail on the left video. The middle panel then shows the point being made on the snout of the same fish on the right video. The bottom panel shows the resulting 3D measurement on the successful click of the tail of the same fish on the right video.
 
 13. ## Annotator rules for measuring
 
@@ -814,17 +814,17 @@ summarised data and error reports to download, and in addition the
 ability to compile multiple discrete annotation data sets into a single
 synthesis ready for databasing or analysis. A free online version of the
 app can be accessed via [this
-link](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784100602431858&usg=AOvVaw3pLZK0jhmH6jwIWtk7TpsB) or
+link](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784101001349639&usg=AOvVaw0602TWxlLdnU7jBvHOp70k) or
 you can run a local version of the CheckEM application (without the
 internet) using
-[R](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23shiny-app&sa=D&source=editors&ust=1784100602432769&usg=AOvVaw3t-8cdtgZ6J2ZbRpDzWT8A).
+[R](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23shiny-app&sa=D&source=editors&ust=1784101001349962&usg=AOvVaw0_soo0pLZje8OrsAwn1hic).
 A user guide for the CheckEM shiny app is available
-[here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784100602433554&usg=AOvVaw0edpi00sRoU9lamOKIHEW_).
+[here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784101001350193&usg=AOvVaw1wYQoV1SKHQAZkH9OU7vo6).
 
 ## Data storage
 
 GlobalArchive
-([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784100602434681&usg=AOvVaw1-XzCnl-ItBl5GsFsQZOL2))
+([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784101001350552&usg=AOvVaw2yMmZ5R-G0w516KwtlYM9s))
 is a centralised repository of ecological survey data and associated
 information, with a focus on stereo techniques. We encourage you to
 upload and store your stereo-video data in GlobalArchive to enable
@@ -833,4 +833,4 @@ future collaborations to answer broad-scale ecological questions.
 ## Data analysis
 
 Workflows for formatting and modelling data are [available
-here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23id_3-quality-control&sa=D&source=editors&ust=1784100602436298&usg=AOvVaw1SxYMCYfodXttbj14khKs6).
+here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23id_3-quality-control&sa=D&source=editors&ust=1784101001351290&usg=AOvVaw2ZYiN-KXaFNI83dbjSyjEm).
