@@ -5,7 +5,7 @@ Version](https://docs.google.com/document/d/15Z2rU9MZZj2J4tzwIQaUjgoOBNwsbaONkxJ
 
 [TABLE]
 
-![](https://docs.google.com/docs-images-rt/APuouOcAnx4X_3Vl6y2_KpwUQywO7v14Z5AQ6E8KPdY0mmkA4PyNlFEo84IRvApEZLs7YlSw9j4odktRTafeKWJqVQYunrXsGslU_3CbiGya32Sxv0NkQ16szosbQ7JjsiZUOvOnwXbxiyYMGMkk=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfVUnTp0malWlkBkkgk6DtguZEXzQvF861FzEZ8Ja6iN7DlU-406PO2TaV8yQRB-3XZ8slS03ESCqN31fBnZRPg-sc_9s6VFE3zxo_brKlmD0jhIsQn9qvdHfME-rKpEqwHb2R1ArAyiFDzmJC9=s2048)
 
 Table of Contents
 
@@ -206,7 +206,7 @@ EventMeasure
 
 - A commonly used software for logging and reporting events occurring in
   digital underwater imagery. Available from
-  [www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/&sa=D&source=editors&ust=1780455906577448&usg=AOvVaw0k3ktxY9mGDUiM64yzdeZP)
+  [www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/&sa=D&source=editors&ust=1784100600534015&usg=AOvVaw1mCbqPE5IgdpVNDoENjaR6)
 
 Floating point number
 
@@ -224,7 +224,7 @@ GlobalArchive
 - An online repository of ecological data and science communications. A
   platform for users to store and share ecological datasets and
   synthesis products. Accessed via
-  [globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1780455906578158&usg=AOvVaw1vFLqrbvnA15IPAdIS2UJU)
+  [globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784100600535787&usg=AOvVaw1w6DG81Gig-jwnmsg3XYhW)
 
 Integer
 
@@ -283,7 +283,7 @@ Stage
 CheckEM is an open-source web based application which provides quality
 control assessments on metadata and image annotations of fish
 stereo-imagery. It is available at
-[marine-ecology.shinyapps.io/CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1780455906580145&usg=AOvVaw1-DpFFUlU86oqiArIfLUQ7).
+[marine-ecology.shinyapps.io/CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784100600540168&usg=AOvVaw1tyJIiDb5Di0N4jaAW8-P_).
 The application can assess a range of sampling methods and annotation
 data formats for common inaccuracies made whilst annotating stereo
 imagery. CheckEM creates interactive plots and tables in a graphical
@@ -303,7 +303,7 @@ imagery and annotations. This ensures that the link between the raw
 annotations and the data exported is maintained.
 
 A video summarising this user guide is available on
-[vimeo](https://www.google.com/url?q=https://vimeo.com/873182345&sa=D&source=editors&ust=1780455906581064&usg=AOvVaw1AfTyRB7S8Mswe53jee_2h) and
+[vimeo](https://www.google.com/url?q=https://vimeo.com/873182345&sa=D&source=editors&ust=1784100600542834&usg=AOvVaw3VHd4Ws5id6BmVoxQ3Lkpw) and
 walks you through all steps of preparing data, uploading data and
 downloading data.
 
@@ -315,7 +315,7 @@ CheckEM. Because the manual uses links within the document and to
 external websites it is best used in electronic form. This manual can be
 accessed through the User guide tab on CheckEM or through the PDF
 download or online on the R package documentation website
-[here](https://www.google.com/url?q=http://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1780455906581616&usg=AOvVaw1xyXcZhLK3IkffYB77Whus).
+[here](https://www.google.com/url?q=http://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784100600544564&usg=AOvVaw2O9DiS32W4wQpZiifBR7Mx).
 
 ## Version Information
 
@@ -348,7 +348,7 @@ field is maintained in a shareable, online spreadsheet (e.g.
 GoogleSheets or OneDrive) so multiple annotators can fill out the extra
 columns whilst they are annotating, an example google sheet version of a
 template sample metadata spreadsheet is available
-[here](https://www.google.com/url?q=https://docs.google.com/spreadsheets/d/1Cu11abZmN5NgRA9HSOPZMLhzvaUHAuCnU8iVs6yU_HA/edit?usp%3Dsharing&sa=D&source=editors&ust=1780455906583048&usg=AOvVaw2G88xMMYOBiNrhtP-B2jWo).
+[here](https://www.google.com/url?q=https://docs.google.com/spreadsheets/d/1Cu11abZmN5NgRA9HSOPZMLhzvaUHAuCnU8iVs6yU_HA/edit?usp%3Dsharing&sa=D&source=editors&ust=1784100600548395&usg=AOvVaw2EXZZNwqvgUjIGleBVzr4J).
 
 ### Defining a sample
 
@@ -406,7 +406,7 @@ annotations.
 The required and optional columns to be included in the sample metadata
 are listed in [Table 1.](#h.fh6r703cg36v) These are the same columns
 required by
-[GlobalArchive](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1780455906585870&usg=AOvVaw2yTM0ctWARa2jkqhxU-TAz).
+[GlobalArchive](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784100600556159&usg=AOvVaw0EfYirV4em3v0HHWGQk4Vf).
 If you are missing any required columns CheckEM will add the columns but
 they will be blank and you will receive an error message (as shown in
 [Figure 1](#h.7duqbkupnwcg)). Any errors in the metadata should be fixed
@@ -415,9 +415,9 @@ can be added to the end of the sample metadata as required. An example
 of a stereo-BRUV sample metadata file is given in [Table
 2](#h.sw171m2ivdbp) and a google sheet version with examples for a
 stereo-BRUV, stereo drop camera and stereo-DOV are available
-[here](https://www.google.com/url?q=https://docs.google.com/spreadsheets/u/0/d/1BQbWKHUYnED91CrRS2f5wYNElTUBd4yl-4uWURZzW-A/edit&sa=D&source=editors&ust=1780455906586419&usg=AOvVaw3PpGsTvDmWU0hP4TnaNoxh).  
-![](https://docs.google.com/docs-images-rt/APuouOeA-HKEwNEjU3D5a0XqxFrrKfTiJKvWjdWXKIIZNpGlILQCfJLN4KeWk74UYLmxKt2982o8EweyEzBLQl4cEToCH7ohLS0bN5C6ci_IIU6YUXUV4xNmAdox_yWcE_1ltngO1_YETgvhM75gVlo=s2048)  
-![](https://docs.google.com/docs-images-rt/APuouOd3kSRWtE4SGAkDTsar8fIlbpHUz06z_806V9lNXdzcNraaqp1jLuHE2p-S58c_Xtj8ZDnRLFvKIhntfPgM9GI6Hx9st_mijKzUdn9oKa15zNHyczU8ryKm368j7h2Nb8zjI2TKrhbjr5fN=s2048)
+[here](https://www.google.com/url?q=https://docs.google.com/spreadsheets/u/0/d/1BQbWKHUYnED91CrRS2f5wYNElTUBd4yl-4uWURZzW-A/edit&sa=D&source=editors&ust=1784100600557489&usg=AOvVaw37x5FtDNOtY_s0tR4Z5EoN).  
+![](https://docs.google.com/docs-images-rt/APuouOcZn8eHpjRhZOkQ3VYzDU2MgDPkW3ShcUvVlxdqvZDbWPgHSV033Wqp3d8ZEdo5gIyCUEz6UGNqZLE1OIipRPy6iS3-Fr9GlaRWTXZpIJ5W7eAFVVMuSGB_J7TSHq5MfZg_IV2oINwhTyhHsZ0lw6k=s2048)  
+![](https://docs.google.com/docs-images-rt/APuouOfhrTlaqDORCgqw1M6WElhZX_HS-IL7qxOjOOr_RQQk1Mvs-56d0CRWrSGXDWpx0sg0ZtDV63dSwDdMc0nMBUyxr4ko74_s_HwtQhIfrdFLH3gTqLkfn3l7KD__LRFLmtRkui5xfdQgrmXlqa0Z=s2048)
 
 ###### Figure 1. Example of errors in sample metadata. 
 
@@ -428,11 +428,11 @@ These should be fixed before continuing.
 - We recommended using the sample metadata template for new Campaigns to
   reduce data manipulation and re-formatting before uploading to CheckEM
   and
-  [GlobalArchive](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1780455906586886&usg=AOvVaw0K7g3jg2SUORdBXh6Afv_c).
+  [GlobalArchive](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784100600558752&usg=AOvVaw2GOW6HKKAHohWEScoffuA_).
 
 - If your longitude and latitude are not in the required format use a
   batch converter tool such as:
-  [www.earthpoint.us](https://www.google.com/url?q=http://www.earthpoint.us&sa=D&source=editors&ust=1780455906587064&usg=AOvVaw10O9P3fcR0nJ2utkxp5RR_).
+  [www.earthpoint.us](https://www.google.com/url?q=http://www.earthpoint.us&sa=D&source=editors&ust=1784100600559191&usg=AOvVaw0ck8c-jYft6QvTnzYwLLLg).
   A free account can be requested if it is for educational purposes.
 
 &nbsp;
@@ -514,7 +514,7 @@ outputs to.
 - Go to Program
 - Generate database output ([Figure 2](#h.3n86jfrz6zsk)).
 
-![](https://docs.google.com/docs-images-rt/APuouOd_d5SUENm68UtaDohKAQwcnRbDfE7Y6EB0_8KClieiMkWLSrMuYcFG_LLGwScUMh1Fv15KUVSbBoASzBHj0C28j7pOxN_UjhYNEXdYGEnryOFdvqPMsuJQexcfyxmhtwBhgkxRwOGu3mPrCa7RBauKnJZcXqohcRiufg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdMg3Vb5wZUrUMv1Jf0X_wFn7pfMeMCJtn3V5cJ90wBNEncxFt4Me6JopIDYk0SrPtg7eezF4TgBhz9vfRCvlJAXlr0f_9lGLsi9f4lzxBUxwkBdTYsHQ0xryCmmn8hiixiN7pd1FCn8wZq0OoU_xSaVJujnQvKEi6pelL2lA=s2048)
 
 ###### Figure 2. Generating database output from EventMeasure. 
 
@@ -526,7 +526,7 @@ outputs to.
   same as the CampaignID prefix of the metadata file ([Figure
   3](#h.9tv7fgjdqsx4)).
 
-![](https://docs.google.com/docs-images-rt/APuouOdVDAipI30r3Zo8EGcMnH4V-8lE1MO9gqoyFGpKfxhiGtBQ7QubHJgptvNQH6PkK7RIC1T0_2yLn4XYs0wXD6f_H6HQSxRH4VFSpmdAiAwEDFL7o7G-QbgXyAO0eAo0VCUvD2__KBodjxtsKpLgmtKLteiqpTXwd1sldg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdCUzJvXoprZjKFO-bHObSDBoKApiTX1OyhHhuQ66kTNUMlwr7Cmkrn45zt-bHthZogD0kB9qviB9dt4wtA3D29jna4KftqIv6axFuDPGpEEdljawkCMsbFdz6l03_VwF88NkAms7EB5bxfp79XVqHQqLItysydpYKT_tiadA=s2048)
 
 ###### Figure 3. Example settings to export database output from EventMeasure. 
 
@@ -536,7 +536,7 @@ outputs to.
   and that there are no errors shown. The summary table should look like
   the following screenshot ([Figure 4](#h.9tgyxjcnhdc0)).
 
-![](https://docs.google.com/docs-images-rt/APuouOfKmB_OPQFYJ0yR4SCTbfjMPbKlEoGDT4sEGHme2OVDWIZRLpwlR7TCA_Q5rhdAwMEhGUzZYlQ7lZaTxA9Et-QTfIuNjqmkLd2QcrZIVxijhrix8qNxLzAeJPjHDoGmMy2PfMkQdUGI_RwkzE45sHsWPHm6NNZgTuY4Ng=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfuaTTC1FCDFoHgENhU8Gobxlrwh5IKpI0ScKCJrk_L4EOOJvahj5C2bsKSO4eaNjC6j6bGiWBNsoimQIyKAT0xFzxpGinOlmVlwJuBGWp9ITQ5M41toeTQqxrUOcQdJnRDwQh7UZF6X06QGxfS3h6MLqn03VixpU8N-s3NxQ=s2048)
 
 ###### Figure 4. Example summary whilst exporting database output from EventMeasure. 
 
@@ -545,7 +545,7 @@ outputs to.
   ([Figure 5](#h.en6444d0r1m)). Repeat the above process for each
   campaign you would like to assess in CheckEM.
 
-![](https://docs.google.com/docs-images-rt/APuouOfh-C4brSC0Q0xsmUVmurkoVX-eSk1s2NPboivFTbwSIPRXbVKaCAP7bhfgqfpXL89oHrZHYEo43j1JORVzPwsxh41dGLldAhxO0XzPLJa2vkE-PLBoLDhuSKcsdUzULz51sFaFClh1Mr29e3TeVIJPJA0_XdDz7XM=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcR6E_iK2DrtV8cbenAFDEdq-7aLMscgC5PFio0_FByirw-oYJDWFQ_QgOA8yyAl7qSOYUUp01nPUxKWVUMmjR5fouD2D_qwLQeUcD1i9vb_6qyqm51VyhhgU0Zu1uyikG8Gf0_ZAjHrQ09fG8A0Z2yMwEsoXALNnCJ51A=s2048)
 
 ###### Figure 5. Example database output from EventMeasure. 
 
@@ -620,7 +620,7 @@ applications memory. All uploaded data remains the property of the user.
 ## How to upload
 
 - Navigate to
-  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1780455906625436&usg=AOvVaw2Xjp3jFZvV6udM5SGPiLzk).
+  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784100600661986&usg=AOvVaw1DOMSryauqKlPDZ_mFA2l2).
   We recommend using Google Chrome.
 
 ### Setting the format of uploads
@@ -669,7 +669,7 @@ applications memory. All uploaded data remains the property of the user.
   and chosen annotation files (EventMeasure or “Generic”) to be located
   in one folder.
 
-![](https://docs.google.com/docs-images-rt/APuouOf2eNCGLvtyGlSl9-TxVvnNqOAhMiA0amOJOwxV87oOeuF0bledFUaoPDzADEVwNhCM7ft4M50F2m2tf12NdpLWpnS4aoYinRnJ3bHOjgktHMx5O_dMSx7oCPu8LBuhdm6AuQaVuPhnrfOZ1w0=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfjuGUaxocbZ9QfxTG6pWAVZxE-QaK_hR5N519C_fdU7cS9JX7PG9rSc42TqjPPnf2zGuYxYCQBjrNAWov7phALkEgahPUN2AX25KY_UAq3NoTf8SfYs5_1itFfu9QJW4s2x4djO8QcvVwxP6b2Zdk=s2048)
 
 ###### Figure 6. Setting the format of data to be uploaded. 
 
@@ -690,10 +690,10 @@ applications memory. All uploaded data remains the property of the user.
   list based on fishbase and the World Register of Marine Species
   (WoRMS). The Australian list uses the CAAB distributions but at
   [Australia’s marine
-  bioregion](https://www.google.com/url?q=https://www.imosoceanreport.org.au/australias-oceans/&sa=D&source=editors&ust=1780455906628643&usg=AOvVaw39qlDZMKh1-eKO0bX6Utzw) scale,
+  bioregion](https://www.google.com/url?q=https://www.imosoceanreport.org.au/australias-oceans/&sa=D&source=editors&ust=1784100600668622&usg=AOvVaw1Pw7lsBYaxapxrVQWmoVzJ) scale,
   the global list uses the fishbase distributions at the [Food and
   Agriculture Organisation of the United Nations Major Fishing
-  Areas](https://www.google.com/url?q=https://www.fao.org/fishery/en/area/search&sa=D&source=editors&ust=1780455906628837&usg=AOvVaw3MGvWHtFGcRfaR903Ka5Lg) scale.
+  Areas](https://www.google.com/url?q=https://www.fao.org/fishery/en/area/search&sa=D&source=editors&ust=1784100600669038&usg=AOvVaw0BU5Pqdd0ne1sW6ejcDIUV) scale.
 - Marine region for your data: Once you have chosen if you want to use
   the Australian or Global marine regions, you need to choose if you
   require one marine region per campaign or a marine region per sample.
@@ -701,7 +701,7 @@ applications memory. All uploaded data remains the property of the user.
   of Australia or Multiple Countries) you should choose a marine region
   per sample.
 
-![](https://docs.google.com/docs-images-rt/APuouOdvbgoBimr1N2vA--_AJ92Ra2WhYPhk18BKNifVuE4yjvcZTkFobQ7eHVmLoyLb3XRa_4WMtbBfTfrBmn6Gl4wSFe4RaLA1ENq1ppbAMFE1V1FIOzQGQ2WSo5TQvEVChPmgi1ct4XGZIkCKmA8=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfH4zgMx2Rq-jdcqmCdNuiROUVhhxxd832zbrAR3HK7DKGWUtFNHfULOK5om2IW4ZNVn_4dSW0jQlr_QrTTfKpl-WFpXOjha6D8-ZtQTQUN5fwo74X-pKpfNenPmwFoD_uSidEPy-R8Cok5tNrg_Do=s2048)
 
 ###### Figure 7. Setting the life history information to use. 
 
@@ -711,7 +711,7 @@ applications memory. All uploaded data remains the property of the user.
   used to identify species that have not been observed in that marine
   region before ([Figure 8](#h.movg72nunsge)).
 
-![](https://docs.google.com/docs-images-rt/APuouOdYD2MidF9WH79wm0IXyB1dd3R8gaYoGsNO5WreST4vFoAu5xeF28nZ9BdLh8A5jv0y6K4Xbq3PQ3pbc_2hyJix4TVcKk-_T8YiNd_m_T0dhvyOWaW5-b6sQDaesmdc9H0Ej0is9Nj51keqoRn5F770edcwxZeKDKQkVQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdYJYY_6VR7QHUbZ2zcK6o8lzjKM4jGcSpn4wWfjZGWNpZg01oU7y7k9I01lomwC6I9bsJSAAiP33zxPp52vFVPOYyDmID8mBNnYWhZshqQVKKWkLUsmTZGAvmNBayUWnyWILFCaFnMENBmQpCvd0qtJywr9CB5-H2ioYtRfg=s2048)
 
 ###### Figure 8. Sample metadata preview in CheckEM. 
 
@@ -756,7 +756,7 @@ information can be downloaded by clicking the Download as csv button (or
 [download all errors](#h.syon0cvqjqe1) at once on the Download data and
 QC score tab).
 
-![](https://docs.google.com/docs-images-rt/APuouOd5orrudpgi__SDXG46E6ckDIIUZwZmtABaU_F1Nd3VhcnFjyPAvdKRMgPxXbahg-Ci1XOEL3Bd_tynFXZKK3TIvSQc8BTw4Kj0OZlTuoJe8N0iOyAFE7_C0FxcFOkLUTayXWrq5VGDOb_IxuTgp1yVRsJd1wspTeI=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOc2fDQG7dXSa1GZ17L2SKkKOO3buVoHVyPkm16_15ib_3bj6xZ_46-QG0AB2ZXzQrSYmiXRApmMzgqliXyTE-FhPGucwWh34LGkxSRzDGUIHr2wzclol3BfpGldoB2B7GWD-nnmmqfyMxVuCmnCDW8Jd9imMYk5jvYC0ew=s2048)
 
 ###### Figure 9. Example of more detail that is shown when clicking a QC assessment box.
 
@@ -785,14 +785,14 @@ datasets the spatial zoning will also be displayed, clicking on the
 polygons will display the type and IUCN category of the zone (e.g.
 National Park (IUCN II), Multiple Use (IUCN VI) etc.).
 
-![](https://docs.google.com/docs-images-rt/APuouOcAnx4X_3Vl6y2_KpwUQywO7v14Z5AQ6E8KPdY0mmkA4PyNlFEo84IRvApEZLs7YlSw9j4odktRTafeKWJqVQYunrXsGslU_3CbiGya32Sxv0NkQ16szosbQ7JjsiZUOvOnwXbxiyYMGMkk=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfVUnTp0malWlkBkkgk6DtguZEXzQvF861FzEZ8Ja6iN7DlU-406PO2TaV8yQRB-3XZ8slS03ESCqN31fBnZRPg-sc_9s6VFE3zxo_brKlmD0jhIsQn9qvdHfME-rKpEqwHb2R1ArAyiFDzmJC9=s2048)
 
 ###### Figure 10. Screenshot from the Check Metadata & periods tab showing the QC assessments.
 
 In this example a stereo-BRUvs campaign that used periods to define the
 sampling duration was uploaded using EventMeasure database outputs.
 
-![](https://docs.google.com/docs-images-rt/APuouOentcLcnYiWj9c1FyQ-3qA5fGE2ZXDWR-Kim4QEsRCKPl9Sl5cz2xBAhsVXl85x8kt54dFL5Twyx0-LemtgcrIuUmRFZMcRcqmvV_ELrgJSVDlHg6bhkqGnJRTxJknjInltBimMw75SBRZxphpoRxNspDv5-pRzOfAE0g=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd5mkDWli3kw3vkQgG2FPiI1z8F7b9lKIEuFcJ2gbGiyjEN19fOEA1KDsSKm4E3nmxrzCLurfwZbtpPITqDxnEnR7b6aQdovssBNNiG_L_tVm4tI8uIlZLoloQcbnmnn5_RrrXSxZ6XmolTYhWy1NCCG7Gw9IVEgz_CsU4cfA=s2048)
 
 ###### Figure 11. Screenshot from the Check Metadata & periods tab of a map.
 
@@ -805,7 +805,7 @@ information for 10 samples (the cells are blank) you will receive a
 score of 80% (as only 80% of your sample metadata includes all the
 necessary metadata).
 
-![](https://docs.google.com/docs-images-rt/APuouOckC2a9rE0FjOK5K5yJYOeIspoQz_rz56kL3UNmDvJTP7X43A2sGO0Drt9gXZZRZipE4MoGpn5ANPy0qE1WCzUTZ_SrEbB9TQ0a_n7C1zCopgg1UfmQIJl8hQYcB9UjxO9r3taoC62g8wCK-iOjPXRQrFMs0aJagtwDGA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOc33-hK3xPFyWvgcxicjnl7S-hThQ5UjT6CmKuGLIZ_caGoyl16OAymY8zQD_iBYptmhJW090MBtl_tJ0sWVznjsAp9cWLrWuwG1B-31pyR-Vpu-wWzdp4OtOPThroQX5aZOPS1J-Jc6bsmkwrj7DSF834Nm2L-iUgtTeGKqg=s2048)
 
 ##### Table 7. QC assessments on the Metadata tab.
 
@@ -833,14 +833,14 @@ average abundance per sample for each status, location and site (taken
 from the sample metadata) and zone (from the spatial zoning chosen on
 the upload tab).
 
-![](https://docs.google.com/docs-images-rt/APuouOd0x4K8xzdUw0uElH3V9O2GYwEzI0n_cuci3kC6m7WdmOekR35fjLk1n85Z_P789x0Zhcfr3hhxbwK7kmyw0CnqpDbMUaLM1sETHg6ozzs2GC9tpwgXetyMXDx3ZFcl7jVW-z0j4csHTkDv6JSWRJg2iKTNd7NxsjBBeA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOf4YSqW3-1JVmgXUE5d8viDNueR2up1qhSwoBZ1DMg4LMRwuYh3BVxzBQ9jtjeMrdBB3ez-BE9V4lH67sKummCmLmF2Ubb6hnbdPaklSguqSsnLjEQpEXrFd77swmoTaSPoF1nXmNtjebgvO37DdVGRuUbSxFbyQnvFa2lWpg=s2048)
 
 ###### Figure 12. Screenshot from the Create & Check MaxN tab showing the QC assessments.
 
 In this example a stereo-BRUvs campaign that used periods to define the
 sampling duration was uploaded using EventMeasure database outputs.
 
-![](https://docs.google.com/docs-images-rt/APuouOea7mSqGm86TWvnowFXOmPteBofaA0XJkm9-1H8lK1dofhEBVZiqH0YrdX2Pk5WFNn0vOCFdookUqi8sHUFgDHXVc_plp6llb3tj9JOxslRZuz49lNUOb1QZtiQLBrPa9QGII3jKs2LkEfYoC49RxcKWADIRHItlhKB1g=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfG6pqz37ghiXC10WuHfnG2I3VFI8d_zrxHyXFDGZzCCpLVgIN9PxvQ9XirCY3zvo09F65cTbIQ5Faph2vkA5uB1IHNHqSZlcqECleH3mfiYZPgM7XYvtd-bQ7b4UYSMKhgkGM9iuKahtdOFXwPYG3fqNQ3h3ROwmQuMLk1RQ=s2048)
 
 ###### Figure 13. Screenshot from the Create & Check MaxN tab showing the spatial and status plot.
 
@@ -869,14 +869,14 @@ The species dropdown will also update the two box plots showing the
 length for each status (taken from the sample metadata) and zone (from
 the spatial zoning chosen on the upload tab).
 
-![](https://docs.google.com/docs-images-rt/APuouOfOlOC8qZ-WSJjHRAP4j1p9MOTBCuKM3cqH3EOv5YbZ3oPR59gq4shK8dXcyUNYQDFKMFxP09vUxNGAikD347wB-eYR_9PSnn850tAaE6GF7Xyz2assqpe86ZgneQeM5sznaA-STNPLIBpbVHo=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd_JBvLS7Ijc6o6lNcGdYXk36EWxx3KIYyc6uXH_iYjLXM_HUJDs653XC-C3Z9CGAZYGe3NIAbNFSheFGnJkINymYJz07yZyFD3jr8OwU2XwWKwvxUUzIrJjMn4qPlH6KS9WZPIO3abHOfZcOV-y1E=s2048)
 
 ###### Figure 14. Screenshot from the Check Length & 3D points tab showing the QC assessments.
 
 In this example a stereo-BRUvs campaign was uploaded using EventMeasure
 database outputs.
 
-![](https://docs.google.com/docs-images-rt/APuouOeoNegvuo75BjKALHUEQR_jyDPwEwiDTbaDea3tBhfSfr57iF58-Co0mUcMeqPcC_B91e7_iGShSysldG5cA_0arpJ9Bw3cu7uEUljSdGYgFzQzOIznEjKcwH74KvZJdkXOOXOtEjR-rwkRH04rp563bEkTI3_8u9q8xQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOepiB6iVKOxxuMYLAYbZSEu7Xvxi6UuCYxBJfaaB9oar4oEGIl-QH7NQYHQ3ARn1ejNOdrFvxuSOaxm-igdLGgB6xkD1sEV1OVQ3BeIY8JZ2i9KZqazQi7gstKEY4Gd-3fEDpZDuwC22g9HHeu4yOhRcJH0UJLi7SmqYd1jNg=s2048)
 
 ###### Figure 15. Screenshot from the Check Length & 3D points tab showing an example length histogram.
 
@@ -888,7 +888,7 @@ database outputs.
 
 We recommend the [length measurement procedures outlined in the field
 and video annotation guide for
-stereo-BRUVs](https://www.google.com/url?q=https://benthic-bruvs-field-manual.github.io/image-annotations%23body-size-measurements&sa=D&source=editors&ust=1780455906661925&usg=AOvVaw3QJms5yqO3YzGCwuU2-VgF) for
+stereo-BRUVs](https://www.google.com/url?q=https://benthic-bruvs-field-manual.github.io/image-annotations%23body-size-measurements&sa=D&source=editors&ust=1784100600759386&usg=AOvVaw1EDeEoyorGXTdJAcpWci3w) for
 all stereo-video methods where MaxN is used. The guide outlines that if
 fish cannot be measured, a 3D point measurement may be used for
 annotation, which records the 3D location of the fish to ensure it is
@@ -923,7 +923,7 @@ represents individuals in the MaxN that were not measured. A \* denotes
 a sample where the sum of the length measurements and 3D points is
 greater than the MaxN. If you are following the [length measurement
 procedures outlined in the field and video annotation guide for
-stereo-BRUVs](https://www.google.com/url?q=https://benthic-bruvs-field-manual.github.io/image-annotations%23body-size-measurements&sa=D&source=editors&ust=1780455906663693&usg=AOvVaw227tkwBjbV41eQFy806r0d) these
+stereo-BRUVs](https://www.google.com/url?q=https://benthic-bruvs-field-manual.github.io/image-annotations%23body-size-measurements&sa=D&source=editors&ust=1784100600763437&usg=AOvVaw2mxa5Zw68V0EVzNMJtZ_zH) these
 any MaxNs that haven’t been measured should be, and any excess
 measurements should be removed.  A similar plot displaying the same data
 but as a proportion is displayed to easily compare if there are any
@@ -935,21 +935,21 @@ measurements to 3D points differs between length analysts.
 The above three plots are available for each species in the campaign.
 Use the dropdown to select a species.
 
-![](https://docs.google.com/docs-images-rt/APuouOc7AaMoDrzgHdFKtYBQbT-toxc0NYXhJ8qdijKevyUNWEfDEVbsrgcA-jSTD9L8gFc9x4VSgXjvbP76caOV3vd40hZHXsTtJQy5cik-tb58Gom39m1U_RC1xrID_c3q7sMf8C48UqzqnNd6EHVUYn8Ob1QOsCiodN9Yhw=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOetXR6W8nuT7iX-3oDibt6ryZ1CPSbcrZh2XzeBk9Gvojd-Kc4NZIWa_hhBq-wEt0APJKP1sLA65OKKMcSMCRhayHlI3iAFqDSgAbYR4V5vIJApNqb-hskBKGpQqhiNkz_T-5yUJDzc5xRhsmMd3nJqmTqB2L5K11e6ZyInjA=s2048)
 
 ###### Figure 16. Screenshot from the Compare MaxN and length tab showing the QC assessments.
 
 In this example a stereo-BRUvs campaign was uploaded using EventMeasure
 database outputs.
 
-![](https://docs.google.com/docs-images-rt/APuouOdbWQIhBQZdNjnifmiYvtzb33cAbpZ5fDcQGff6W0VrwswKv0Z9TG8O09fUMupkL_TyqjGNR2_ZZ-i-WAcIyR-dJ_4zo7a7lRAvDSD9tJFO11RdQG_MuTA2UhYBJdQKLTGKwhFumhoPO_3PEgUIbHAn81Dr9k6zv7A=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfpVq4vt2KePS3DOVzfWg4fmFazWqnsiEfIPkfjkSLPt0cfSdy2h1tWjS6I55y--nG2nsCjU33OgXl7JcZ7owuvUIuLVD2Tnw-UPIBLeGXuYdTXu4fQE82YrwkwmTMQ7JsPy8oBvhioNdQWtaln0Jbjvc4e1h5eFquqnkU=s2048)
 
 ###### Figure 17. Screenshot from the Compare MaxN and length tab showing the length measurements versus 3D points plot.
 
 In this example a stereo-BRUvs campaign was uploaded using EventMeasure
 database outputs.
 
-![](https://docs.google.com/docs-images-rt/APuouOck-yyf2hmBGOS_TgvZ7E_hYmcqHhh4l2_qxU8p9cjlwkLqfM0cztrr48xdY_4VJA0uMjei57_iTxU5PoC0swrfojyl4CZO9cuvfZIogsZEwXDnU_O4OQqnr16zLpVGDRLnD03VdGyFEU4zw5SVeSchgr7HLGkt91L1_g=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeF_Ui1lHWQ8w12cKDcBxnnwrMfBDgDmc5-9zn--wE9__7EQ_3aKg8mz6dVNTLUCWhduup3ZBtOdvTOznjFGE2PRotKufmqYUheV-ViczOqThPOEZ0y1wqK2nWQNjhSO0sYcM39z-R68URsY8v7SiBssNFBfo_Km8nqzniSjA=s2048)
 
 ###### Figure 18. Screenshot from the Compare MaxN and length tab showing the length measurements versus 3D points as a proportion plot.
 
@@ -963,7 +963,7 @@ Once you are ready to download a report of all the ‘errors’ (or the
 final ‘cleaned’ data), add a project name ([Figure
 19](#h.vvgvj7apac6b)).
 
-![](https://docs.google.com/docs-images-rt/APuouOdW2wDXkOQHtCnUmQd7pWMEd8LIN1ZzaFlV0YhW1Di0ldzGj9X-_QvAmRYzM3FItdJgTr3BB7M876HpbKMu5-xBxJWtFPo0sXPu67LctMu5wgyuJGhPGWojcGeTRW4y8iAR-cxArelHMI5OsAbemLfD-oUNM5LEB0w=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdoaOvxcN1KojFiOlkVeZ5fdvL43eNWTVVvJLYHezP8LzpKxpU7w318lOuAMqq_yyQRnXmlT0FF5T3o0sd8OS6Dv2hLqh5VuzHicVBVcb4Ra7b_IOd4lG6QLUOIRkumOkPpCl8MEiFRPptjdd-ERw7Wk1xNqHpF-JiCsD8=s2048)
 
 ###### Figure 19. Adding a project name.
 
@@ -984,7 +984,7 @@ at a time. Once you have edited the EMObs or generic data to fix up the
 errors, we recommend running the data through CheckEM once more to
 ensure you have removed all the errors.
 
-![](https://docs.google.com/docs-images-rt/APuouOeOdteBbinwEJiLyJ5ysggEiWlRHnWwJkeKo5LcM4bnBHC15DwgY-hIfNVGHYeG2rvizHCWsxJ9kEV75-ERIA9yCbJID4UvauP4aQzkqI5mS3wpapcmUZAPnaHARcEzK8KOSzFCOpWtBIwiQs7zawmV_N399szJBno=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfCMhYhonc0IJhENscqMsQ3RFXPSyUgpBPB_ciSuLgNj3WVRHwatn2SGR4A6buFF2bfvsCa9xTq4nrO_jR15aIWH5qBIqerB3nJVo8mOEj_lPCR565M1h1E1JTEdnjcH_PeYz6pCHOTK6jZNo1QZacpuCfo1266vLVJ8nY=s2048)
 
 ###### Figure 20. Setting the limits to download all potential errors.
 
@@ -1010,7 +1010,7 @@ metadata file will be downloaded as a separate csv file.
 Clicking the Download all files button will download a zip file
 containing files for each campaign that was uploaded.
 
-![](https://docs.google.com/docs-images-rt/APuouOcHEABVb9Li-tzgYAt02ftnEHqh3s6OI_36gI_zBENYWvgIGtQMCeyeDGfdby_IVcfWRmb0E0JX3A0mqA8tp600g8QPA-x_4XwWl5wR6BDtNfM-Vg5VVFyw60deClfjjp5WDW7W8rHISqm7er5xg7fYe5XA_B35MuiNqA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdLoS_DTRWGpJmfHal3B4WJWr-3NpaAUQJLVf45BgDkf7orbAwDgmJazkLJsjjZ0-kakRp4yAFFw9JWpXlMzefoDEzs6WBLtPLHVsT3K0HNzaWgZq2SCLGV7gsM6pPjaVl2250ozTDV0ssB0kBBJuxYSdc3xZfjIl3FWZkMBg=s2048)
 
 ###### Figure 21. Setting the errors to remove from the final downloaded data.
 
@@ -1029,7 +1029,7 @@ important. The five scores are defined below:
   score of 80% (as only 80% of your sample metadata includes all the
   necessary metadata).
 
-![](https://docs.google.com/docs-images-rt/APuouOdgj4-dHCIgLn5-uEz0AUQbCmPqDLi_x0ceo4xkypC9e4w6YbECDgdurARy29NZOzasZ0m5ja0m5TbPP1dwhu2LF8j9mwN7fi8eHHOXL4gSKKAQQIywS0OV5zMsd4qwq8cbcwpbAPhUTxnDLZzvkJ_zGSLIdmV_ku4=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdZ66nf5Usqox90P8m52Lg-kBPb6wLdJEwAvVgRJVmfU6jZyA_FqP8y0vOjcVSOsPGYwb5VOslSFj1yDdDLBbgp8YI2uOyEe_BOkRwq46MuDAjMSDeChBPedyUfMp8pIudqxoSFadp760w4yUfQDuH1I3C5XodmgQ9SvXo=s2048)
 
 - The Count score indicates if all the samples in your count data have a
   match in the sample metadata. For example if you have a count dataset
@@ -1040,7 +1040,7 @@ important. The five scores are defined below:
   datasets together to analyse patterns in depth, no-take status or
   locations.
 
-![](https://docs.google.com/docs-images-rt/APuouOc0UWO-dyEtssZFRpOukMoR8lKBWIKsocYs7rZJnz0MfS9buuUBpkgLespzUg78yAfnfpc4Q18XRJETc_3q6-6kAnTeLPCNHjQn6epfcDPMbjPla-bcf6T2uGkSE4gt0yf9dqbJ2j4wtwY45P97OdSCw1qLxUN2d6ivrw=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd19qxCJjaGPuhmAe3nO3ULJPiSU6a50iEpT3lV2Ab4_8RrMdoopA-B9qdfKUjqFYTtLtFdWZPf7SRQtRHwlXDAGDughItouSMqJ07I1bc6uEmj4IU4lLwuPSf7t-B3z66yvEaL4Bz0j-wx3iKOjAiCkT1dnAJjL2ex3H8wkg=s2048)
 
 - The Count vs. length score indicates if the MaxNs are equal to the
   number of length measurements + number of 3D point measurements. A
@@ -1049,7 +1049,7 @@ important. The five scores are defined below:
   there are either too many or not enough length measurements compared
   to the MaxN.
 
-![](https://docs.google.com/docs-images-rt/APuouOfqgiyJckradFWVdlDkaOLyvr7S723bA8KFlFZV2152BcZlMResiz3M830sCOQcpByGRBWJSPCtPMmjsmRqOHipSE8o2X-9wqSkieDpgOcXSCYKo7dgL02e9MP6iUJp84t6P5zUGyXsX4nfd4YOdCPBHwelkAzV9IrgeA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeZycjbeEPt3bXQz-Y5-RbnRu0KdVHGRmed8RAmit_K6GQpZabOgeLqV3xf38MAxse21h1BtWdJKmmXutMT34ACX4WK5woiBfJ2ZOXe7buh7mmlSShrb1q97KcgEhWgTRlEIouMTQi3Y4NrdaZev4usmBMymy2lgGpgC5o3yA=s2048)
 
 - The % Length score indicates the proportion of measurements that have
   a value in length. If you have not used 3D points to ensure that every
@@ -1060,7 +1060,7 @@ important. The five scores are defined below:
   you upload “generic” data you will not have this segment present in
   the QC plot.
 
-![](https://docs.google.com/docs-images-rt/APuouOflQK4yOBssrM9A22EVZr1TefyPPrWOS_ScE8au87M8sauIzeapCojYstWJ0wRKmUH9qDxZXA0gB6bO_w-prRVEKDfFZrS5sy2S2ByUf2Iz6F96DD4R2FdtD0xYqw1kCGsKyV4ziy9y5arXO1PbWl7YQod1DdXtXCh3rw=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcoMspMi4AEg_cvznqqTcTN5u2GLCMQnbzWUGmr5nEfVFZTBc2TkPj1EtR6P4tjgVdhg0YFz5c_DMXdQFESXk-bOcCqoPkSz_RUusEiGb-eXhzpRN8LqDiax0dT3G7kEMvekNkjjeo54Ch__dVptQynwnkegtG491itm8wOsw=s2048)
 
 - The Length score if all the samples in your length data have a match
   in the sample metadata. For example if you have a length dataset with
@@ -1071,7 +1071,7 @@ important. The five scores are defined below:
   datasets together to analyse patterns in depth, no-take status or
   locations.
 
-![](https://docs.google.com/docs-images-rt/APuouOfAB4y4mLFYdeeBHmsmbplQE88exyuMtu1rWWmOeIuu_H_FvdiWI-mTif4Xo_DMr1oJ2KJWhlbn8AsNvKE69c9A_2lt8yimiMJRFDBguRlAZzyec4D2zWT0tcAWDgmJrr7R46IIDpMUcIGX9iIyaaH9C9QZXQ5bK9dBDA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeh6u6NDTWJRoFThgSz1xWpX5d3ylwt6EluE0zfZFty-9OhRjwD__EZ3TPdz7mrFkgbnk86qeyIFI75XrfsZaoaNWoTHd_gggRtuLsUjMCnnTYfDF-9B0gFBbX8HLF24C_cRAJ8W4Xs1_VXC7WrvBrte5eLFeqBZ2ELvVCPiQ=s2048)
 
 Three example quality control score plots are shown below ([Figure
 22](#h.10r4cxe43pto)). In example A and C the user has uploaded sample
@@ -1101,7 +1101,7 @@ sample metadata (light blue segment). In example B, 99.66% of samples in
 the length data have a match in the sample metadata. The solid light
 blue line represents the score users should aim for.
 
-![](https://docs.google.com/docs-images-rt/APuouOc9HfJbxPfR8L-MQzZgMt3LtM8LSh1hT_P98_CWrDKW9J6IngrTOxHi9UUjCHFL8DtNn1prMtPSkzZ_C1RKgycchI3EuaWpmBdKJNK205YFVkTwzNy5qgA1AO-Whrem-ef8haJ4Foe4I0mAnvp9Njws8d2b4kq3y8dbHw=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdTmB5yAlgqPQ63grqqJLcXXaDxgRTdN7sGq6Aei9RJ_or6tNOMiLw1p1fcZZnozKCGwt6OCRwvUs1NuNc5ghMEgkhyZEzGdnwnyhBgnJFAbJs5RZrUoXiAfsnXxaQgs0j3X50eWaBqthVrO91W2fWmuv7AcTFGyMlLD9q7yQ=s2048)
 
 ###### Figure 22. Example Quality Control Score plots.
 
@@ -1113,12 +1113,12 @@ that quality control assessment.
 
 CheckEM uses maximum lengths for fish species from FishBase, sometimes
 this length is smaller than that listed on [Fishes of
-Australia](https://www.google.com/url?q=https://fishesofaustralia.net.au/&sa=D&source=editors&ust=1780455906674858&usg=AOvVaw3VyrZm7ookoIzJGE-Lt1Pl) or
+Australia](https://www.google.com/url?q=https://fishesofaustralia.net.au/&sa=D&source=editors&ust=1784100600788142&usg=AOvVaw2Wmr0bR3AmdPPmQ3mNCQ3M) or
 other reputable sources. A google form is hosted in CheckEM to collect
 information on maximum lengths that are greater than those on FishBase.
 The form is available through the CheckEM tab Exit maximum lengths or
 through [this
-link](https://www.google.com/url?q=https://docs.google.com/forms/d/e/1FAIpQLSfDIxlLuxzdsXgWtdp6YI8s_LxpFLANnSHDnk9Io5USOyKGrQ/viewform&sa=D&source=editors&ust=1780455906675140&usg=AOvVaw2YUMYcvzOR34vxCl-OiMl6).
+link](https://www.google.com/url?q=https://docs.google.com/forms/d/e/1FAIpQLSfDIxlLuxzdsXgWtdp6YI8s_LxpFLANnSHDnk9Io5USOyKGrQ/viewform&sa=D&source=editors&ust=1784100600788788&usg=AOvVaw1iTv84xJCU9GMiCM-Ez7Ph).
 To fill out the form you will need the Family, Genus and Species of the
 fish species to update, the new maximum length (in centimetres), the
 type of length measure (e.g. Total Length or Fork Length) and a link to
@@ -1126,7 +1126,7 @@ the source material ([Figure 23](#h.v640ezri2eb0)). Any maximum lengths
 submitted will not be immediately reflected in CheckEM and will go
 through a verification process.
 
-###### Figure 23. The form to edit species maximum lengths.![](https://docs.google.com/docs-images-rt/APuouOfOFE5PB5IdmuguODskNy11VSVIyvxmJLXKOoRcMrYqUs3TgtFWEdwhiq71RVeJjGjNvV5cPzQyDPEoF8MjM-VQ9fHa6gHQDjiI6qUalwIsCf-26y9cIfhMQKr9iXlOoDf7Dt3FklFQlwKasYqrAttzlk4zxQgP7PhtwQ=s2048)
+###### Figure 23. The form to edit species maximum lengths.![](https://docs.google.com/docs-images-rt/APuouOfWUOaUmqVrFi2qJCoMCBMlnfrF9RIKZ5sHWq13ugP5410tOCXwB59QIJtVyDtBfFsWCqoUC4RNBDYch1GdrWXAX94Pc5rLNR4kRD8kjZIk6H9vupy7N1fbKrZTc2zFwH2hHxOnp0X5zpo4ss4yy0v_DfuxgW0ZTdkRXURN_Q=s2048)
 
 # Feedback
 
@@ -1134,8 +1134,8 @@ Our development process has been heavily influenced by user feedback. We
 strongly encourage and incorporate feedback on CheckEM, a feedback form
 is available on the Feedback tab in CheckEM ([Figure
 24](#h.450i5gf5cbf6)) or through this
-[link](https://www.google.com/url?q=https://forms.gle/vMjymdYaEpMDvUYM8&sa=D&source=editors&ust=1780455906675894&usg=AOvVaw3V-M375ttn0NGF4mG1Sts3).
+[link](https://www.google.com/url?q=https://forms.gle/vMjymdYaEpMDvUYM8&sa=D&source=editors&ust=1784100600790296&usg=AOvVaw2eGxkz-1ZmrRBe0brOuLlm).
 
-![](https://docs.google.com/docs-images-rt/APuouOcErf86V75qLl-Q7nOGuEgJODGR5MHCyqMwuVJ7Vnoudq07ytupG_XBC3KAgC-zHRwxcAtS6B8rc6SOLU_HtMp7Z2jj14APcITixM8PNrR69zAgKyC4IPCATKGQWahjY3HawJgqPwgsl2b5zk4mXXo-Vf0ji9bB5W6CeQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfiKFDRFU_mtRBn6iOa8IxtmPL-hZ4i59h7RRbb6jiQBUJwu3DyAJKNyVzE0DjhxiaZYuFM616vk-ecUztzBcHRO-MDa2FBVW16NaA74CLFc6oGvpQPbeViGaVJZ9jjgVU0y8nyoqUkfAWP61f0yJOQof2IGtsp_3RIW6wsMw=s2048)
 
 ###### Figure 24. The form to give feedback on CheckEM.

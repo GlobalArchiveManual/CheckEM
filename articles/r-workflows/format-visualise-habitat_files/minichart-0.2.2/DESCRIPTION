@@ -32,12 +32,12 @@ Author: Tatiana Vargas [aut, cre],
   Francois Guillem [aut],
   RTE [cph]
 Maintainer: Tatiana Vargas <tatiana.vargas@rte-france.com>
-Repository: CRAN
+Repository: RSPM
 Date/Publication: 2025-10-29 11:40:02 UTC
-Built: R 4.6.0; ; 2026-06-03 02:00:24 UTC; unix
+Built: R 4.6.0; ; 2026-04-24 23:03:50 UTC; unix
 RemoteType: standard
 RemotePkgRef: leaflet.minicharts
 RemoteRef: leaflet.minicharts
-RemoteRepos: https://cran.rstudio.com
-RemotePkgPlatform: source
+RemoteRepos: https://packagemanager.posit.co/cran/__linux__/noble/latest
+RemotePkgPlatform: x86_64-pc-linux-gnu-ubuntu-24.04
 RemoteSha: 0.6.3
