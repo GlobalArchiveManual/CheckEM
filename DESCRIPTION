@@ -39,6 +39,7 @@ Remotes: beckyfisher/FSSgam_package,
 Depends: 
     R (>= 4.2.0)
 Imports: 
+    arrow,
     curl,
     dplyr,
     rappdirs,

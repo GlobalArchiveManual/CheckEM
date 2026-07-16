@@ -8,7 +8,7 @@ library(mregions2)
 library(rnaturalearth)
 
 options(timeout=9999999)
-remotes::install_github("GlobalArchiveManual/CheckEM")
+# remotes::install_github("GlobalArchiveManual/CheckEM")
 
 library(CheckEM)
 
@@ -172,13 +172,13 @@ regions.for.synonyms <- lh.glo.expanded %>%
   dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
   dplyr::distinct(scientific, marine_region)
 
-# lh.glo.synonyms <- readRDS("inst/shiny/CheckEM/data/global_fish.synonyms.RDS") %>%
-#   full_join(regions.for.synonyms) %>%
-#   distinct() %>%
-#   dplyr::filter(!is.na(marine_region)) %>%
-#   # full_join(lh.glo.ambiguous.synonyms) %>%
-#   # dplyr::filter(!remove %in% TRUE) %>%
-#   glimpse()
+lh.glo.synonyms <- readRDS("inst/shiny/CheckEM/data/global_fish.synonyms.RDS") %>%
+  full_join(regions.for.synonyms) %>%
+  distinct() %>%
+  dplyr::filter(!is.na(marine_region)) %>%
+  # full_join(lh.glo.ambiguous.synonyms) %>%
+  # dplyr::filter(!remove %in% TRUE) %>%
+  glimpse()
 
 
 # Spatial files ----
@@ -331,7 +331,7 @@ all_data <- structure(
     lh.imcra.expanded = lh.imcra.expanded,
     lh.aus.min.max = lh.aus.min.max,
     lh.glo = lh.glo,
-    # lh.glo.synonyms = lh.glo.synonyms,
+    lh.glo.synonyms = lh.glo.synonyms,
     lh.glo.expanded = lh.glo.expanded,
     lh.glo.min.max = lh.glo.min.max,
     classes = classes,

@@ -70,6 +70,25 @@ source("R/assets.R")
 load(ensure_all_data())
 # load(CheckEM:::ensure_all_data())
 
+
+# Code to manually delete cached data and download again
+# 
+# version <- "1.0.2"
+# 
+# cached_file <- checkem_asset_path(
+#   "data",
+#   version,
+#   "all_data.Rdata"
+# )
+# 
+# unlink(cached_file, force = TRUE)
+# 
+# options(timeout = 1800)
+# 
+# load(
+#   ensure_all_data(version = version)
+# )
+
 clean_names <- function(dat) {
   require(tidyverse)
   
