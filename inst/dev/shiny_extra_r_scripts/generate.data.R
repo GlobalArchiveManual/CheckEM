@@ -172,13 +172,13 @@ regions.for.synonyms <- lh.glo.expanded %>%
   dplyr::mutate(scientific = paste(genus, species, sep = " ")) %>%
   dplyr::distinct(scientific, marine_region)
 
-lh.glo.synonyms <- readRDS("inst/shiny/CheckEM/data/global_fish.synonyms.RDS") %>%
-  full_join(regions.for.synonyms) %>%
-  distinct() %>%
-  dplyr::filter(!is.na(marine_region)) %>%
-  # full_join(lh.glo.ambiguous.synonyms) %>%
-  # dplyr::filter(!remove %in% TRUE) %>%
-  glimpse()
+# lh.glo.synonyms <- readRDS("inst/shiny/CheckEM/data/global_fish.synonyms.RDS") %>%
+#   full_join(regions.for.synonyms) %>%
+#   distinct() %>%
+#   dplyr::filter(!is.na(marine_region)) %>%
+#   # full_join(lh.glo.ambiguous.synonyms) %>%
+#   # dplyr::filter(!remove %in% TRUE) %>%
+#   glimpse()
 
 
 # Spatial files ----
@@ -241,12 +241,12 @@ comm.pal <-
 
 # Testing Global Marine parks ----
 # # takes a while to read in ----
-# # world_marineparks_raw <- st_read(dsn = "I:/Files to big for CheckEM/WDPA_WDOECM_Jul2023_Public_marine.shp")
+world_marineparks_raw <- st_read(dsn = "I:/Files to big for CheckEM/WDPA_WDOECM_Jul2023_Public_marine.shp")
 # # 
-# world_marineparks <- world_marineparks_raw %>%
-#   # st_cast("POLYGON") %>%
-#   # st_make_valid() %>%
-#   st_as_sf()
+world_marineparks <- world_marineparks_raw %>%
+  # st_cast("POLYGON") %>%
+  # st_make_valid() %>%
+  st_as_sf()
 
 # saveRDS(world_marineparks, "data/spatial/WDPA_WDOECM_Jul2023_Public_marine.RDS")
 world_marineparks <- readRDS(here::here("r-workflows/data/spatial/shapefiles/WDPA_WDOECM_Jul2023_Public_marine.RDS")) %>%
@@ -331,7 +331,7 @@ all_data <- structure(
     lh.imcra.expanded = lh.imcra.expanded,
     lh.aus.min.max = lh.aus.min.max,
     lh.glo = lh.glo,
-    lh.glo.synonyms = lh.glo.synonyms,
+    # lh.glo.synonyms = lh.glo.synonyms,
     lh.glo.expanded = lh.glo.expanded,
     lh.glo.min.max = lh.glo.min.max,
     classes = classes,
@@ -349,6 +349,7 @@ all_data <- structure(
     comm.pal = comm.pal,
     iucn.pal = iucn.pal,
     world = world,
+    world_marineparks = world_marineparks,
     aus = aus
     
   ),
