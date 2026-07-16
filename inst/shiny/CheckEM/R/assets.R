@@ -16,7 +16,7 @@ download_if_missing <- function(url, dest) {
   dest
 }
 
-ensure_all_data <- function(version = "1.0.0") {
+ensure_all_data <- function(version = "1.0.2") {
   # Keep the version string simple, like "0.1.0"
   ver <- as.character(version)
   tag <- paste0("v", ver)
