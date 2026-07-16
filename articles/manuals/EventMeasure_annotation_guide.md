@@ -3,11 +3,11 @@
 [ Download PDF
 Version](https://docs.google.com/document/d/1uFzjvADB4alVhFEDqsyd8VW-HBlBD77TcmP28iVTkcA/export?format=pdf)
 
-![](https://docs.google.com/docs-images-rt/APuouOdjyn1ZyUtMRpagX8gF8U8uN_CTQ7MR-9XmiwSS_r5kLw06d_VS-mxdANOkr0s5GzZsmwVAzUC5JJV1jmI1xmPFD1KuJiVBK8ZdOGuJMEgG_04xT-H00zgEMVjl66HW1s_co1IBFboe4uF5V662TR-wd3CovQh9nuq-Nc7IqA=s2048) 
+![](https://docs.google.com/docs-images-rt/APuouOdimGqzf-z7Li3n8ryhAh2Y-Sf2V_-6DFkdno0pcQ1XrpplMyCgMcw4tvEuGGTLnq-h2I0RDuYGKLqq3hSNMHqaeqH6_MMgrBjWcItmcAFpp0547VQDs_XpvnVWz89HYKze7xzHqHesV91GvH2TE7INQc6vclLt_v4-aL76pA=s2048) 
      
-![](https://docs.google.com/docs-images-rt/APuouOfbKjdyf0lgjRc-45MHEZZtDJDubQ42ZMKloYwK8jl7lcqJLrBX_I0yzMKIXreH0E5_3aNAlmYAv-b4TCwMonkRjVaPtb52LOTyXJoSzVwD60afjum_ZYBetJkmqbrKyTx0O2KDIdKUeYebSI0VTQ6Tjpeh9Fmr_l9aEP75Jg=s2048) 
+![](https://docs.google.com/docs-images-rt/APuouOfp1Nwc6rU5wX04cIJYbUC7SunnaNrDMlYtykZLExeNTzoyd-aF8c1C5Cg3QNfwyL5SK9zwy_B9CjDniHIFIX3vKQY6T3xkRNk412h8z0TnIkMIokPIbu9Ls7tm1dRVYdOCBsy5rZfbN-7dprnztvRwTGQgx_IuT9-LX0PfPA=s2048) 
  
- ![](https://docs.google.com/docs-images-rt/APuouOfRNqakx1_I8rwjIO5ReYKTGiOYjEyZzYG2f9TUOkufBR0GIZA7IL3SONUFVuVxDiElHQ86QKnVcUYC2Gl2yGY765jFLvyTFJPCSnyo1ElkpqcI6foBEsoiMJ2f8WVNYfxWHTQkfPBQztacVNPnP5pK7hFi7IkJyA28MlaR6g=s2048)  
+ ![](https://docs.google.com/docs-images-rt/APuouOcUw5kH09Q4RzE3J80Gy0E5gMkqi_BS_Ha5dQsgtiJD5jY1O4XlwxsU5ixBTTfDGfPV4diNNdS0gbUqnt50a0BFNBvp8Qz9j5hYdzYULr-tuxUjUssIQ2BExsopa28DcyqfisMf2DAcRVtEPX1dcN3p3SjgDZ2Idx8ROHyEIA=s2048)  
 
 EventMeasure annotation guide for baited remote underwater stereo video
 systems (stereo-BRUVs)  
@@ -15,7 +15,7 @@ for count and length
 
 Updated: October 2024
 
-![](https://docs.google.com/docs-images-rt/APuouOc-njXVR-5iDZhBJyLL0fsqhQ-9ZXZGC9dKcBFl3xnpMZnxTrOf0LrAUMRdbXsAqtLDXfl4f1IDQ0EhKaK9EfzmcCRMnCDrAJz8UjSqH6Xl4Pwno2TT_JzSaG0DX0eHqbCQhlippuUoUxRAcN2bss3rt5GUlMP47eQiL3hDtQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeZz23IOSqteJx9lC9UVhORWO1Va4Xs5xqYlnZe3GwwhdWLUVSveLtkSirWNBcXaUFkAyYau1swc7AT_bvcd34s-4CumlAwNogKITRs5gcsOSEewLRxqcmvZYGSmN-siiuvWZvHPN_1z_y7s_xcYPfhjDs_xKB1UJN4dLKqAA=s2048)
 
 ------------------------------------------------------------------------
 
@@ -234,19 +234,19 @@ abundance and length of fish assemblages. A standard operating procedure
 for collecting stereo-BRUV imagery was published in 2020 (Langlois et
 al., 2020). The field manual describes the standard system design and
 field procedures and  is available online at
-[besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189](https://www.google.com/url?q=https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189&sa=D&source=editors&ust=1784101001299881&usg=AOvVaw3V9JV5fwNRQp3IXLDXTYqd).
+[besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189](https://www.google.com/url?q=https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189&sa=D&source=editors&ust=1784178059895381&usg=AOvVaw0OoMPHVbNBKc1Yh4O62TiN).
 
 This document was prepared as a standard means of attaining count and
 length metrics from stereo-BRUV imagery using the EventMeasure software.
 The outputs from EventMeasure are compatible with the CheckEM quality
 control [r
-package](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/&sa=D&source=editors&ust=1784101001300459&usg=AOvVaw1aiwCcMPedhzmjuU4VpMwP) and
+package](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/&sa=D&source=editors&ust=1784178059895752&usg=AOvVaw3tIZZCyc6oDpe055m282sF) and
 [shiny
-app](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784101001300600&usg=AOvVaw0alHOh6KVHo9Z1w5vgWlOP),
+app](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178059895844&usg=AOvVaw01_yM_LmJWtnfyO9nihNhI),
 which allows stereo-video users to rapidly and effectively quality
 control their data. The exports from EventMeasure are also compatible
 with the data repository GlobalArchive
-([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784101001300948&usg=AOvVaw1rz3-YrfwlvkRxyTbm9vK5)).
+([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784178059896059&usg=AOvVaw1i6NuatwPbzeIazWakzN6F)).
 
 ## Using this manual
 
@@ -269,7 +269,7 @@ field of view.
 
 We suggest keeping a version of the sample metadata (See the [CheckEM
 user
-guide](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784101001302620&usg=AOvVaw0kZ4JElkGsZ5lkrDeYamxS) for
+guide](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784178059897060&usg=AOvVaw3P6dxl7rJTM4WeYZuo0vie) for
 a description of the sample metadata and required column names and
 formats) on an online spreadsheet (e.g. Google Sheets, Onedrive), so
 multiple analysts can edit at the same time. From the sample metadata
@@ -277,22 +277,22 @@ sheet (example presented in [Fig. 1](#h.nr54x1gflx3y)), pick a sample
 that has not yet been analysed and enter your full name in the
 ‘observer_count’ column. This will allow other analysts to see which
 videos are currently being analysed.
-![](https://docs.google.com/docs-images-rt/APuouOfaWqbsdzKp-Sv4MrhBR3sydqPbh5Y83yEa-_zZnjsY4jpXw8W5YialmWCLlIP9TPVPt7wWKX5Zrp0FFZGbpPtAKNBuEm20OpyN9cs8jUG8t7husmySDUh2cj2-VIKjJLavbAiNZ1AiCllGHa8gJSHIm3PuUI12xSCzfzDebg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfKmufPrAp6NV0B3lnrmXIcdoCzvovGo4ExqFRuGnscZ-GMOHD1-E_fPFTGHj7xXk1W_Pxzc4hLxEG2Wc6qhJojcZBY8w3fKWQGxzWmOfrsn1JyubONxVx1hpTOfvCnl0AFdbZ54Q5Qr4ksg0H2T9f53stTV6onLmp5YExNFw=s2048)
 
 ##### Figure 1. Suggested format of the sample metadata sheet, available to all analysts via a google sheet.
 
 2.  ## Opening EventMeasure
 
 You can download the EventMeasure software from
-[www.seagis.com.au/download](https://www.google.com/url?q=https://www.seagis.com.au/download.php&sa=D&source=editors&ust=1784101001304015&usg=AOvVaw358_1pWnPMGwY-JjrubazA) You
+[www.seagis.com.au/download](https://www.google.com/url?q=https://www.seagis.com.au/download.php&sa=D&source=editors&ust=1784178059897929&usg=AOvVaw3tNO_538JINJgNx6f2_Hp4) You
 will require a software license to use EventMeasure. The keys associated
 with your software license will typically be stored on a USB available
 from
-[www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/index.html%23home&sa=D&source=editors&ust=1784101001304381&usg=AOvVaw3ntz201VYAjXPhpkVEU50B).
+[www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/index.html%23home&sa=D&source=editors&ust=1784178059898142&usg=AOvVaw1hWsH832ScgHr2w89ZrdSg).
 Ensure this USB is plugged into your device before opening the software.
 If successful, your screen should look like [Fig. 2](#h.4804dp3csd6i).
 
-![](https://docs.google.com/docs-images-rt/APuouOf5Wk7YUnwyGWgb2cH6_2Op96zzrdUKH30dHhP1T1XBcag1xD7mn4H2CMXh_jYHM33Ylq8KzpRyFhw6skxNtG9DpEKx4knYnYejbh-AI2q-EOoYa-wJQywoRb51feXIET5AHf9ujnhWnreMYh4_NHgu-2_SWUk6dy5KY7s=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfVQbM9KiM8Ubi8TxSP9eZ4uMD52zaGyPqWJaIoS6DKEwYPXWJkk-WSKdKd-GS3sehR77BoEiZObaSyM7b4SsY-1Z0JYfwkyhybjl_MZ6bqtvy9o1F4RVYmxHPikm60xhOQPhcudEXOp78Rz34a60Vwaar3LXAZ8YpMjeE=s2048)
 
 ##### Figure 2. The blank EventMeasure interface will be presented upon successful opening of the software.
 
@@ -301,7 +301,7 @@ If successful, your screen should look like [Fig. 2](#h.4804dp3csd6i).
 Select Measurement \> New measurement file, following the steps in [Fig.
 3](#h.9b6fwkwj2xq0).
 
-![](https://docs.google.com/docs-images-rt/APuouOeVHvsbO8PPxBaDY3EdGu96pFe3-2T8ZBasSm5frY-Z1LtrhDJZLG7N-mFWMU8Ur-TebEtzTmnzwUtjnHE7RVv_GKqhmopezwDmZvEJ48n6-i3Z6ZOwDyZdJic26BtfLLE8v3W8Az7_OrlPcu36nwQ1HuciI4RLBp-TbYw=s2048)![](https://docs.google.com/docs-images-rt/APuouOdrTE3DGvVN3Y9f1GAGhlyAmkTZ2YPXNTNic1HOb3mT_zC2ygUecz2nQ0QrnPBLXLA2p9x2ihu18EGK6ac6glFK42b5RrCB7MidKcqwfQLY6al2Fq_0LVqgOr_LUQF2P_yxpBxCBrNquSXHuDBcr9CwE9Th6jNoKbH3lzt5mw=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcKDwoUwliyC6WrfROU-Bv3RFcvi473QkFL3rZzbG83O2ya5ymAD4MYTNbaKxuNEO4slyV0zM-q0HaO-S_EvTXeS4H0xLUsb3w-4-axYakkQXVoRwel7kiG_No6Kn2QAaobW-FCZ7VhoLzW7tqXJ8Bh0v9WOu632EDLF28=s2048)![](https://docs.google.com/docs-images-rt/APuouOfNYReBdZz6jZkocMpgFqKZ_yEfOJWNxSH87kDIDzOSay8WAsgtpSzp9eKYACnN8nMOkDQUHxDg-GjyXNHIFb58OcUjpEqt5VF9DV0DnRh8_GB_zSaNPk93IT5JpBglkq8hNnN7MmYsAfXBbcA-Go8GVqDAHtjlcabZ2SsuoA=s2048)
 
 ##### Figure 3. Opening a new measurement file. Top panel shows how to open a new measurement file whilst the lower panel is the resulting data box that will open if the new measurement file is successful. 
 
@@ -313,9 +313,9 @@ This will open up a file explorer window (see [Fig.
 stored and select OK. It is important that all videos (both left and
 right) are stored in the one folder.
 
-![](https://docs.google.com/docs-images-rt/APuouOdjchsyyzelWf87AA5HlFBd4s2aF0fBdHi9gEVf15_o2SuDpNniAf9iE1RVkQutglAyI-s1OGepdoHH6hba4WdR8kNzqPQ5N_nJaOLNJ8vVHX4w4EW6crNoe6mVvxrl1a5CKCXICliLwsskSBCYpvBECL6MM9OEbl0xIDM=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfsWbyHPEvghUrew-jjMLf4ABI5oTkB7GqoMpPfQPS7z04l0xqzZLGXJjC0okgSD2FF0akv_j-06GphV7YjHeUjGShMhdZ0mfb0GCUfzYo0kY7IYYwOLFQK7rW_y5W8PIhkpMZT12tBFiYm1hY5nLT-kuFFtQ6xTSaZdG0=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOcSQw8h5oC2FF_5_DchIU1ZlvQKGQ5r9sRG1hBfxzR0SB6TqCjtUrFW6jcitYsjk4P9ajex9Cp5asC7u_QSAlDAni3n86FRgL6qtgQNVPffCYSAXJud1IKqtRFqzeZC_eBU3uxsPLPKUrm5CQlStXgr-GWt6aNfK8YCPj8vjg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdt-RXkEEtp6HefMLmyCkZuQo-bfM1mFw1BYOLL3PzWapBZ3GKfOelEp3VEXALEURL-jvY1A_6za2dw9udnzd-FK930miuyBBnF9TjXRso0Vkqgm68jIl08Zhv3wM5IBrRu5L5RBtYVLUWOrWPhm8IOV_iOzaJyzHysEz0MBw=s2048)
 
 ##### Figure 4.  Direct the software to the folder where left and right videos are located by selecting Picture \> Set picture directory. This will open the file explorer window shown in the right panel.
 
@@ -327,9 +327,9 @@ labelled left and right with a sequential number to differentiate (see
 suggested file naming convention and file storage in [Fig.
 5](#h.hpv03zkf414r).
 
-![](https://docs.google.com/docs-images-rt/APuouOfxN9sMGVAlsTVnUhIbZXgflg2a9vM7PgaH3WeUrsOP-3Lt96Y0Bt09kq0gKZ2mAqndco7_vgPYMA52u8SA1ERooC2F7Z8HfvF7S2sa_-vWsPonBwOpHqYo8ng_sgj5zJ7EILwar0tYDCYh0bGs_bRuCnIwk4z0R3KrE3_iTg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdN7e7dg51QqPZ8FKa2WXdqHd9Nv2I2bENoAHW2TujqX7b5M-qcFb4db8eEEnP6TmEkxcQ7EOR6xeMoqnN7BdbNgBzRjXwVH73JflgVU7BCZpva4chrKnZr6mJW65KH8ubXADzkRCb4qt5X9bJeIYa81eqLq98W5o-URVOs4g=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOfP1wIcdeeyPC42C0BiY-KtwvkM54Tk9SmfutBTlG3350N3DZsKje7q5umzyhpD7Ofi3-09ZeFSQG94jA458Hv450se5OjkB6BHxZNLk_rIkcCuZ0Fp7qIOwC2Uy3plI8q5dfaaM4hCoI1fUOjWz6GGvvp5wa6oWdvWEWFmmw=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeNnBHf-UbqtniAlk9TFzlfktX73eFb29U0pxwdCE2O-FkiUmLkvBW1Yx1u2knB1VrmVMyzLgZndT2eoRiB_gt7iMeZU15jG51nPiuPJO0GQsxjQrE-rNaT55CTmLM_3KbYX6-LSp_vEOX2f7rvi36aCNS2sl81m9ZYamOUEQ=s2048)
 
 ##### Figure 5. Load the first file from the left camera. 
 
@@ -341,11 +341,11 @@ but the first file from the left camera (this was loaded in the previous
 step). Open them and then select OK on the Movie sequence configuration
 screen ([Fig. 6](#h.ej59p1dbuzxs)).
 
-![](https://docs.google.com/docs-images-rt/APuouOd-cYaEuV4BwKoSX7S2sgYYAR3_4GyPhmKhhLpXMie0Wkb4JGDiF-so3_QDbTscLALVfnPC4fDYLW4Cx8QVuGeUHW9FxwaN7Ff_SZyjB7Dj3Q1Cezya6O1iV-6CpuOOG34yiE7qeJ-PWdOlBNV3ew30AsLtqUofpM5eWfoSlA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdHesy_l7nfbBctnOzELfhTuPC2SGJuRafCDibjtPDCnseI3x_j0CBKK8JVzF4lv3lDc37oKQL4WahtzJmIL4qPuadRJ5l7JzJUUlvCMoJCLTB8ggaaJj0fa98QTIgxypsp4HlaVhQHcJg51KnthPkbWIj4G1NunGX9v6VVKg=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOcYLYrSPv9wD3XVABMS57zOcLqa-wji_9hL5gB3WpQivcK-s2rMI4BuUjR69rWz9h1dgvv5E0e1RiaW5xZ2tDIys-VB4KiXDQi5rJM4fCSizT3s55OIWxP7PU8sD33MXQL29WVBGwK21UijYGhv_jQU0gRGmxKThXW2rQY6UQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeEsN1uyhJOYB4blnwXkG9ot6mSaLzW-jmWFMTFrPX3MjiXgwAyKpdRSWzh6OaPjsCEgk4ruuQYqNevZnUsTuZixVRYNfWCQB_49Vk6yJttMLfiiI5CJJNsWmdqT-Nq-O84EdYVOtpXzhdTTxhjO32EJUxmsAVO223m6LD-8w=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOf3DbORdjiSvuNXeWc9gpveFf-jP3BSyM5XTXoapSl2Ng8oogoTHBep1x3qP4DSXyJ5N1A943XavtPUcFes6DTD5WmHeH1VhwvUYenRmeV_eRkogxtfVGwzIQuxxcvsqJSbPO6flAgZnxm9Umso3UV9L8gDinR1FJJ3z_8=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdZPAApvyAmcNmgKsJNnZuPrqi5y20bCgTTK9ATriP-c_I9BYUkx_v3H-yt524FZZlNEHE4lgop-7gSxcGxvab7d5n1ZcFSrLXiv18yNcgpgVfvDpDRmF6haed8sVA0z02UBnzUPNZIXpHtuqV_kLuPwS4ZO1A0P6y_TGI=s2048)
 
 ##### Figure 6. Setting your movie sequence involves adding all other left camera files (other than the first in the sequence, middle panel) then hitting OK.
 
@@ -361,9 +361,9 @@ TapeReader sections.
 If you are using OpCode to define a sample it is important that your
 OpCode matches your metadata exactly.
 
-![](https://docs.google.com/docs-images-rt/APuouOeWjwXLQsaBi-hqmsaaj9c1oTwXdKn4zCHDsTQmc94JxIIwkBKwxYBhoojXOhe_Y5U8_wKtrwchOTCT8hATL6TXAb7xF8U0fpujd2HWeRx5cRVZANRrukp3Z3FfHuDVdTeUaByIRhKGaJPUrrRNNHRBNfs8t40_cEzI3Ms=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdpPOcQTgU0cLWo0aNcpjWDgTDw23V3dxFerBmqp0Di4sTrxFXEMSq2ABdHuUMmaQhfv0QIjgjMY20MdTvBEmaY0CJGujXwJdTYKpnwRKphYsr2tK8rR8NrbgbOp0yXUZSJS3Q2xi5LRMvxqfJ9NYPLp0eetAViOkAbE-4=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOdZmDay0_kRdT_GXBFNOXUpXGOvAdxq7j3NansM_q2HB9fN47966PN5WLfk0LGTRqinYGfkYZH5Oz52Rqg1vG6njw2FSEJ0RfTEBp7HSnpgpn29kMcSkHGBwtoX6yq6EXhnq2fWX7S6-3K6h_nKOK47_uRn80ZcLoo6MrU=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOesVtLTInIun0u8ggMXahXEyyJIBwcn-0B8SeNSuovdbahiO9Fv0OJ10TkLynqYiTr5LfcY184j9U3S2xvpi5px9n0CneNdWzkesYECi8YEYS4hur3vn9J0mWoW_EsnC6zXu_JKvOwaYWUMk8cQuvmDdighqNLT_PC7I_A=s2048)
 
 ##### Figure 7. Edit the information field values with the OpCode and the observer’s name.
 
@@ -377,9 +377,9 @@ name and saving within a folder structure that includes a separate
 folder for EMObs within a campaign-specific folder. It is a good idea to
 save regularly throughout MaxN annotations.
 
-![](https://docs.google.com/docs-images-rt/APuouOfKUJeFSMWU3fDoHd1w1AgbXL9DQ69986j77OWVNqqItlujAQb4LLaq5A0v4SyO6Q5OOLo8inLW4AhA3rEW_IClmqIL6_DxjLhgsKfp2EqWvIalItberm6nmUcFlFW03jlx1v11DNPa_A4kSeU1ySpYJlBM9hsXxZGPc0lSBA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfDiwE2XcpSnaNS_BrrGObw2uG-ildC-sWpzjRH77ulOrpOoziGP9J7Uil1Drnaj_UMiwq3qcB23k3XzlXXCo0Snp_sNYqd_rxrV29i9xs49b-jNAJieEt0LQin_H6sJXZ3QHm8mmKmRcdds5caPYyv1uvWMajSBwCzENnMhQ=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOc43aZCNYxCniEH0Gued80yqTX2eGESHqBUiIKEuPGFvRvrTk5d4Rs6weItJ9sEXJM92fdtvQ4K6DOKidETOpTIHQClQWhpyq-48EibkWKTu9HjTwPcqa6Aq77lZCNcvyqIA_xJVRYh2ZSPQWYmVYqlufO6cDUDYlX_MRKn8g=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdANGQlil8uZ3UctCWVYBaigcd-XUfo0vczGsATRkx6gXBR9Cm-V8kgP41qL0eVCqDZtMl7jPWAEITSnj-1j6sOakxD3-rBK_NwCZEncpel8JfqMn3_02bQh1pZoECEY9egeV1SkBvPI8SWmNWYzURyRSiBvZlgv4cdp9l9MQ=s2048)
 
 ##### Figure 8. Suggested folder structure with a dedicated folder for .EMOb files within the campaign folder.
 
@@ -389,13 +389,13 @@ Select Measurement \>  Attributes \> Edit/load species file … Double
 click on tick next to Species File ([Fig. 9](#h.176aa2wtf6tt))  and
 select an attribute file. An attribute file created from CAAB Codes is
 available online via the [CheckEM github
-repository](https://www.google.com/url?q=https://github.com/GlobalArchiveManual/CheckEM/tree/main/annotation-schema/output/fish/eventmeasure-attribute-files&sa=D&source=editors&ust=1784101001313111&usg=AOvVaw0hNkbdMw7s5iAGW3eQ2meg).
+repository](https://www.google.com/url?q=https://github.com/GlobalArchiveManual/CheckEM/tree/main/annotation-schema/output/fish/eventmeasure-attribute-files&sa=D&source=editors&ust=1784178059905022&usg=AOvVaw0NE9TKbSXVYBu0ktzuyynm).
 This .txt file contains the current CSIRO standard for fish naming
 conventions for Australian fishes and their associated unique CAAB code.
 
-![](https://docs.google.com/docs-images-rt/APuouOdII7BenTW1cJ6Nu9bDoxsl4dJkrLMnph63v3zCaPoxQO7Xk8wQJT_Jw8wCAjWDfMejUeybqOVdO9RxCFYcKt0yDtf8yPly44YYnKez2diBo8PduPpfxQWLTMm4HaYRwZotIunqpks8Hm_LTfNf_IW03xwqw-D3MA2620Q=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeejPOpLrYS37oTcsl8hT4lGBNIvaXTAv9F8omAiVPY97gxRs_sI3n7WbTZD2CqQLhYjpNikie__wQmt6yv0kj1OTMuCrbI5QLVL0rw7MSI5L_qPy7pwUJnBZ7GOX9OIt9cnozHtIiKEGVVu5FDU218-cG1vVF638UM0WU=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOdpTTGgrWfyp-1HZHvi7eh6AoPuWC7XEjvCGJFGpnK10dT-y4K_7M2sI4Cm7n3aOQgaQ48BS00E4leM0MIpcR6A5WdQVhFGAySU51tIgpzAnbM_JottmfwP_Vf-1G0ilFRUkdmmWZpaaifKJHqLR0kmjERm90b42XoVJhM=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfcE_WDOHuuS1eGeE3fCVtpQYjVLfPyYyOWevMt0bXwVjap8AY0kjfCReDQ42o062IH6sK1fyPk8QxkuDZMf-bKQgpqaJbrcVRJWzUFkcViwy-5Gr8gRuT-2jcUp2dy_2HF-jdpdK4f_wGpE5kBohyKa9DO3ERAQWI4bfE=s2048)
 
 ##### Figure 9. Species and attribute file window.
 
@@ -410,9 +410,9 @@ seafloor/stops descending and select Close player and update
 position (hotkey alternative is the ⏎/enter/return key) ([Fig.
 10](#h.rh6hijlmqxfq)).
 
-![](https://docs.google.com/docs-images-rt/APuouOe9Rkukbu9jeJXLqacT1qQdD_88cHIizkJyU2ab9WJcQcwn3cUQkcBvwrmfiiqA5Dh8cNLNjM7YeJbd-RJXkwEeb9eJ-n0C2-XiQWslTAvrtpeWDywzTlGnf6wTyO2cuIn-2xUpmPgzufI5lrxmymGUQNp0GNvUzJzGpyg7Wg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd7wHzI9YXacCWhDdCiIoD7ho5_7KPbXcHjsG1x7P9sV1O-ndHS9aBxjgqOFYPCFHKU3mQsPjkbEVI08axKWdBH4VfjiRFS_wW1Xf1ru0kSNbCR2FNtmGtXGf9KUvhs9_MHWXUWBH6xm4YZu9I2ua7LL-q0LS-JOLnPxDcJyQ=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOdQe-Vz4q0zPRfZZPjulWUqZH-NWk_nSNXvAOjVu5xBki6bJDg--BMpPG4fNMQkwq7u1_c3SfxdIR-jDmQsxaKQvW4UG-B3lZ8zmzplZA00H9M35oETxhcMd2tLYIlqmLboSYK0mj1dicgertojcaFVww7TwJvPPS_-Gto=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOe236jCVxdVgre0bmg26Wo2wvJKgNyj9V-uq0Hdny1PccOrykKHLYltU4JFewzdzMOqvdUIAmIALSYw8hyXTWeQdgFy2v7_ADGa7D7L7KxVEs5vctS3Q8Q61A3AfWLefGQH88tlwuR-Kag1aeGW6F2Qr9P7xbXWwApnifA=s2048)
 
 ##### Figure 10. The Play movie button is located to the top left of the video (top panel), this will open up the movie player window. The bottom panel shows the movie player buttons including the Close player and update position button.
 
@@ -428,9 +428,9 @@ period end … choose the Period defined and click OK. Your period will
 now be 60 minutes long. You can now go back to the start of the period
 by going back 60 minutes or by clicking the period in the Data window.
 
-![](https://docs.google.com/docs-images-rt/APuouOdUk9q0na__dz8xT0VkAJYz3AfkFfmQ2tjGirLlp76QuLKK9Vn0uIRsudmHIYL3cCDpbX5-Jhz2DVWiNGkoaiarixK0TmDK_GvMu221oun6P9cgbyXVlPq0d49nwqLtD40fd-KTnehHjIMe2galLUwMrnBI2UaiGneGJdM=s2048)![](https://docs.google.com/docs-images-rt/APuouOeF344Tl43tyxeQGN2EGwUxSrqWk6oyF2tgZhDqIlVGEd9Te20_nztlaknK4de4sg6PEMycbsoZ4TXI7MBRdmK0kkunj9s6Oo4odfvLNjdDluWiqzKNttqg0VaqFXp-K5MxeQ8FiDE-t8ycvR6y8CWNGOPzmmQ6De7kBqTh8w=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdpvyvBhYIllqgE9VxYgTc0zRdAjCVHArCbRtAO7EVCo7SgiWcnOWaxlRIkenmxmyKYhtsuqsFnGag5MOkS5jW0wLe1ahMtdcmFJfk59eNxtCoAq2FXeJcB1tU7Z4_n1NdghmoH-eVF1zisJc_BllY0e3-gfqmJE11-VJE=s2048)![](https://docs.google.com/docs-images-rt/APuouOeR7Pg6pBfK1OPtNdiJ9JiiHUaYlfOikFIkX6Ch-xwp4v9WbY42AQ2SMSm8t13ppsdFqSWcLhqKpvFkpD8KpsLP1cZjJ_Q88v6-B7n8O_x__kXrOgKGvTR1ZwtGkEDA_t1-6ifsWkXCGBCGYdVGc9vx79dtCLLD1C0eD4ChyA=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOfxfKNy1o4Z5jgD_eP8PJc7ZE0Kkz9SOrMUK2n8jBdq1ZR0xdhuc4WLCOTdd8ltmpPPdd6eBfsiM7Cd67P2YQlK31wSTPWojCG6i_3LLmPehwKj4LFg0Klfg0DTsz-p32ruE-XEnjQdPPsg6IPE9L9i5ICuUV2LWfC-29vJlA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcY3OKNadErNGbl_tImtycTuTSxkfbT4cJQZNb9Z4HblX6-VaG7o6xqovGjY9XV_BNwg595gvlAcKER1hErCOa8PpRFFQgxL-fBClU36VpUtjFKZNWkW7fewxB2tyH1uX_2fDi514Dke7NS5K1ritnLiWKjHvEQTkhweiLEgg=s2048)
 
 ##### Figure 11. Define the period to which you limit recorded observations by setting the start point (top panel), then skip forward 60 minutes (middle panel) and set the end to the period (bottom panel).
 
@@ -455,9 +455,9 @@ distinguish beyond their shared genus this can be annotated as a
 species-complex by typing in the correct genus and typing ‘spp’ in the
 species box.
 
-![](https://docs.google.com/docs-images-rt/APuouOey6jz4WXj635_lkz_1DfwcFCoaX92-TcsTZIgu8_DEz7cl5tZ3F_mwMPFud6clWeErsESGUw4buAT9OyhA8xayD-6G5qpRmzRE847GacMu5tJbT9JsLMURwy5MOR6GmfgJBO3_I1ruAYI1jIrptwH5H8VBoDDvzqy0aqBxpQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfLGH1WafeN2dDsMxHpi3ucyHKVOWqYXn1Iqi7s9NrKHgBoZsIqEBjlDRq5DVKoMcO2qeaw9Sb2jXFORuH_ljLPMGNP7K6hiQ7uKSs_D8Dg35M15jiTLoaMphC5Q3oAvf8Z3mTlE0hsJrQ5J5GfxhZdr52CN5OeKbkOMtjFAg=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOc2SFFYXZUYL39hiD0jOS1YnUW46ILcmi1b45nP4UOmQanp-3yqbrbE4EHAn3J_HmzUoBuoid9EnCR_pJcVY355LA5rVIr5J7QD9bOYWmOVeZXPeAXpgbe79OOeFjHQyrU9xR3yYqtDdaxnerbnFhoBlBLRTBOONQGLqDXZVA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfAr0U5A57mRqpACJ4tQS5-dlrpCvM4ILoRBVZ12Qr7Ua1KvRlbWG-POmz43qPb9lzyOuulRC74e81n1TgtoH6NJGBTg8gL6CmCMmVYoBs5PH7paRVrzF3wm1kzeqJo168NBTZ1yNet49YmigdLe3IS8JoNi9kjf4KTncnnhQ=s2048)
 
 ##### Figure 12. Right-click on the fish and select Add point (left panel), this will open up the attributes table where you can fill in the species name (right panel). 
 
@@ -482,9 +482,9 @@ identify all fish and update MaxN when a new maximum of individuals
 appear within the FOV at once. You can tell the time of your period at
 the top of the screen ([Fig. 14](#h.3r816ffkrst)).
 
-![](https://docs.google.com/docs-images-rt/APuouOdz0TpRuqVfZQd9VKfWC9QVlvrEUwOwvIzlHNhp-CZPD8g13QOreWVMpYb5JF980TKK8GSnHnWiObrdEGW71AgYZPO0cyz_EdCqoOjpRp9IvDA9byeQQ4EXabPq1r_Cw5hJVEIEfFqHm-f7eCPKvE_Dd-lrL9F_PYpsCohw9w=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfOtE0kRVQzpqnOKCbv5zg9zMxqzZsanFlU728pweFXLziP8-r9rCr8RpKZVnFwBgJ9otUa3dLmc3Acdq5WomCAlNYUHYd9Xdi5CEaxRxXk-PBXB2mJo8Y0Dch66USTRZJ_1ChkHT5BNpZYEFKL4m-hMEBTnE9DTMvHlRnMdA=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOf7EuskYRQYN32dIn4LOamdHVhmIcZPyznkp0miILdA1hGlZm0rtaRrgLReogxndZRZBWjakwODNj5iZI7Vtkx8Z5nWt4QeyHnb9vwBQbv2RD_4ny4WzCVhWPh9mQmJCddZrwVbwI0ttvRvdTRMa_0MZYYKJP2RFWbloQI=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcLkp1CsmHMYPaGz1C5Y5bJwdzUacJea3OA_BG_IBIyiOqjddrC4iXh6Mxp9d7KJGygZysL2TAdzEBHFlfc95uQJriCBZBPxFEMaPnJH-nIyBRzlbTtb1zeVbhDjoakbTJr2rVjsj8H9-DBBlL0vuGKnWAcQ2P7E3teOpg=s2048)
 
 ##### Figure 14. The time elapsed for the period is located next to the full time and frame number of the movie player (top panel). The MaxN for all species identified will be displayed in the data window (bottom panel).
 
@@ -537,7 +537,7 @@ EMOb folder within the project folder ([Fig. 16](#h.w6skj9aa5jqa)),
 select the .EMOb for the opcode you selected in Step 1. The data window
 will now have the MaxNs available.
 
-![](https://docs.google.com/docs-images-rt/APuouOdVerVQbkPw72srpUPb9EwEwXwnxb_jSOCp9hx621ABKIuIgz-FfFTpv1ika29crPVDji306AjPGDsOUy5Z_KmND8hV-j_T8-Eaep16kAY9C7pQ893KrVLpPlRFi50LaB__vjdrD6AJFkhpM452niBpoqexWj_Vokxzu2GW_w=s2048)![](https://docs.google.com/docs-images-rt/APuouOfmgkhZ8LMlwwdyITeZbTAsKMQ6ZTSoNzgMvsbREyvlWz5drgco0AEqugHssofg5fjszW6QUVbT4FwdV7qZt3DErWh6AeM4ff5RA41AefcZzfU9JdtgfOIVqlKJGLKj-6i9rIGFNrf1HaMlI-RvkO5OnWfihGmyUstLIR8=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd9c-sOmXwqHIruffj8IO_K1pUvFDDgtt58xp25fsS74pV2X74OzE9ZUDc9Hhxe5JxhWj57Ox3n3EXCq1M-OlAx2WiX50UqhHiNyXFZGV5l1O2Xq8c2uyCESODkYb0qCRB2G3_Wzubxo7u0AQ-TESz-rayF3ZU-FBGXO8eQNg=s2048)![](https://docs.google.com/docs-images-rt/APuouOcC-gTDLjW0HsEhDI3OK7GPNbCM7zVnVAXo0WcuHLkzSmk65rcGj9unIncSy9Nlz8RmgKNvRyyG1RaQPyJwqVpmbIhn7yUvTbyMiSeUBR-gr5nKSvQNJfWV5uhXFne4g7OhiM9LbMhFShD88ExfyF8n6iBX5_5Y1hdfxa8=s2048)
 
 ##### Figure 16. In a new EventMeasure window, open up the EMOb file from the project folder.
 
@@ -548,7 +548,7 @@ saved in ([Step 4](#h.li71hhc1mlun) above) and double click any of the
 MaxN points to load the full left-side movie sequence ([Fig.
 17](#h.qo3rb7fvk1ds)) (this skips Steps 5-6 above).
 
-![](https://docs.google.com/docs-images-rt/APuouOe6t-XT2o4ni8roseOOY5zqPXCRoaJ3Q0wvKBil__FdxZAOKcv1tmx4MT1kqkePyPtCaS3e-mbsvv7UKI5ivDhWnrjND5tFPeSEiYwC3mYYEF74iYZ0KTZRiFV6pVs6LPCab1vLMZjOQrM2CxU3hOstQh7uwa2H4JubaPz9BQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfpvlRd_3ffFkko-RCyeEC9SlO4J_YY211uePA7uNAEuhbxcfVmNTsF09N9EIPw0Ij1xj7AA-yEr8ENnkAcbPMmTWZ6yPiXJa2y7PwoRa-3-8XcYDncckz0T2BX9CPKd5a6WDtCz11vywBSURA0poMcVjNnDl0Y4k-pkvSPzQ=s2048)
 
 ##### Figure 17. If you double click any of the MaxN points, as long as your picture directory is pointing to the same file path the video was analysed in, the full movie sequence should load in, saving you from loading and defining the sequence.
 
@@ -558,7 +558,7 @@ Click the Toggle view button ([Fig. 18](#h.y7svh17hscny)) to enable
 stereo-mode (both the left and right cameras can be viewed at the same
 time).
 
-![](https://docs.google.com/docs-images-rt/APuouOd57V1Z-FucrQHn9gF1I8DGO5I9tdIK2oOv1j_PDKhDZ_0WnR483ZcWN9KDrM4kqwU7GFDwkTl45POL2TLZrbQZejrj23CpoR9tw-C8rBuwHuWBTt9N_iOGAqdsQ2AVCdK2FgO8z5wTaTNGSrhg-UXcK3c_NwXramP19ho=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcpRFfy3wisiErwoHgvvcocvzy3XYLCACZPb3XGJBfFT9NtzrAyjpexFQAKAYFHKGZYSjXc7wgPBGfrkIHVE4M3HPipRIkABc8itGOiVpJzHoyGKVMuw6gxCH5MRstA9VMSZxuRZoCBDh-U-D6Qrlc1fKiiIzjTdaBS2CU=s2048)
 
 ##### Figure 18. The toggle view button 
 
@@ -571,9 +571,9 @@ and then highlight all but the first file from the right camera. Open
 them and then select OK on the Movie sequence configuration window
 ([Fig. 19](#h.sjjjf5nlg2dt)).
 
-![](https://docs.google.com/docs-images-rt/APuouOdHlztGusl_Pl8YOPVzCx9uAIAllr2033mxViLeXejnB4KpcuA1ZDu_uJmqICIc7lW_3mLref_ph7Hy0zNTJuBiY1g8gEjpRVrJG-aNTt3HuVmLIQXPVN_3xxrN2_DAh54oGzLjsfyEP9BFgyCQNZqIFZdiBDHgG3GxLXQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfobzx32rh54gisN1AZbBOGh2-1yXUwR6tkYjTxWj-Gv3_2K_JEkRoOVikIZ7yzFuLg1nXbnDWjHG9RE5_C9_prVYQGycBhavdedaB_XNlzMMf-QNYF8Ffp_lCj4Xenhj_ctuCINWdEnFbaQmV_5weMCsnK5O5ZSZYQGp4=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOdfc42ZZQzGVgUxaEs4GxjohvmsIjZ4e59gRAOppwIyWbSSpJDmRTdm3vsbQN8Bl8Pn93QrgUDa9RhbYJQ1gAkOxX4IahEfqk3U6PsN9M_wfrr4YBMfdmDGHpHyqqIRZuiVYmMfEbVWc3QlLHIt0_SWTuWcGQkfXI08Z5fLzg=s2048)![](https://docs.google.com/docs-images-rt/APuouOezfdSsEm1buOP16Edm1kbLYTFH_SU8HzghfyKx4gXEFvFMru_0_QthCw8ZodvKqduOYIYQntBRUI5iCBy0LWk6oDtm_araR6xvP_mQsBWe44queVth0NuLgAZg3HCEo93Dr0YuaS7rwXsjjrwU7-G3jV4HAm42FXyzjRQXog=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd-4I7Bovvqu1ly2wxyD2rSCt4l8hYhUH_sGRBb08nnC7X6tOD1fqUmrRbl8ZUPqHhoLFiPaC81G3yRp3y6zwBfJWuabZvUkzpNhXpcnRPPglwnZnfqeZXDol2eDVruoXAx3s4osqSMhw17TVG5yAN9b9vUluxRxBYhVrw6kA=s2048)![](https://docs.google.com/docs-images-rt/APuouOdHhfyAgamtCU0SHEL19rqxDYZj48hT79CGJJgvhVqJDUMa6MDzaoyBKleHd2Kwys_cPgT_3n3SO2JFdKDDVxNV3-cXZSf1ZbkhPSeOICJtUMwwdG4kH5vB6GJ4UwwTDVYOtzrCqF2UnkvogqjudL8iKIM4FGIVf72ASdnY1Q=s2048)
 
 ##### Figure 19. Load the right side video (top panel) and select the first of the right side files (bottom left panel). Set your movie sequence by adding the rest of the files and clicking OK (bottom right panel)
 
@@ -585,9 +585,9 @@ recommend that these are located in a separate calibration folder in
 your campaign folder ([Fig. 20](#h.1as2j5ccu0db)). Check the sample’s
 metadata for the camera files to load.
 
-![](https://docs.google.com/docs-images-rt/APuouOc-DifUI87BY5Br7PbTnGPRRvfORzJAtgrO2BJtVch4SQ1RuRIJw3pTKo73S1Z3jEjZuxkLWqw4tMmG3lJaIMNVQfqp6YanjKdz3E-l_aR-rBMAinL_qdCWU5HrYt72IzE3g_LADXFO35GrWng457R1jEenT3ZrdxK2xRM=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcUWlj8dxHlick7owp7kPZ6GWn7c3Muj1aafiQ2bWHngmlW8_VMsp6TjT8HdppxU4uMGNdqfp_vDnjwkZ2pIludu0ZWTSqaGi6hnn49SEqpEhzTRpyKId7NZqe1H7ZhsjGESy39RpwQlFDMq7pnUFnuLqq473y1wfeZd00=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOeym8uAkG3UjNYlqYb2wtx8G2pRhXa_yVh7ue8tt8mZ_wlNQb1WWXaNg7RXQdORpGsYF2iMGi1l5Hijrd6QdtkLqsNl7GOWYS8ymRy9-eYVkqftAmXUJP6kmTZqJUsF0lMF-nDrxNlvirxLo9W9wveTpBOQabn6xKIpH1oomg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeyga5ZJy5q7Z0cRgEctKQgbMUiPCwGeVlQvh0qmHPZ3cPkFmzeTFcL-u1Us8CSmvo6tGFUxerPSYTW1_qDfeqRZWHdWWY7Y1FBwdNsxdRtZtoYEylCarCmt8mwHOUyJOiZlfRyD5vKMMnEGPnA5-g6UFM-OQK652dYaIXpQQ=s2048)
 
 ##### Figure 20. We suggest storing your .CAM files in a separate folder within your campaign folder clearly labelled for left and right, camera number, and whether it was a calibration pre- or post-field trip. 
 
@@ -606,9 +606,9 @@ and close and update the right view will move to the same point in time.
 Once the frames have been locked, move frame by frame to the next clap
 or chop to ensure the videos are perfectly in-sync.
 
-![](https://docs.google.com/docs-images-rt/APuouOc7apH6mZby99wua7O4X2M8LPNJljhc2iJXqNRz0VSGzp99tuNHPzYmLhAEOWZe8MJSftFj7C5gGys6viYb42ol4mDaNh8wGo_jTjCXM0Ysr-UFpfsfrJvW-di5nfKeeSLYKlPYXvnBESpSqeHBAiyJhq5ByDyFkB68jyPx3A=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOf5Ox-CwCvWazo_LcOL8Ba-PEZtRdWFKC6xJzmhfj83TcWCKtjNgKZcF-BBhjCeaMtOPk9KldPL4dUJKTn70zlhl1PqNnZGrzQBYoFhDxjAY5EcmnCImrrZ0w5Q-9bUREB4vP9UW2YNi1bzye9NhOhU3-9ViD1k9v5Q1jEWVg=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOdg-hMkaKgmeVHMEIFjUzhZUZFKliUa0nxaV9NP1sh8kh7xw7zoos4uMvATk5NfG7xTBiSGocvwAqF0p95JZSDqtXZ5f5RRdCU9ZxpiF0e8vQqM21qA4dtTRqLUOtyknYpHq9Lqy2fq_ae6HbuRsWq5J4GE7bqy8KTCCp0=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOeMwOEjqms_G2u4Fk2_MFqpqPvbsdbk_Tk110H-bIK6Lv5c7NHDAsQsbBGoJna9dcqpQ4kC6p6kpdjGMe-BD5VWFGfSFITAqmnYSDnbzwR5Z9wV1zM0-SA-edYx-xXFt3gboGxT06HsOXkImKPBtCKjre4FXM8LBAw_x6U=s2048)
 
 ##### Figure 21. Both videos have been stopped at the same event (top panel). Lock the frames by checking the Lock box (bottom panel). 
 
@@ -624,9 +624,9 @@ frames. Click on the same point in the right-side camera, generating a
 click Add 3D point. Clear the pre-filled Attributes and write “SYNC”
 into the Comment section.
 
-![](https://docs.google.com/docs-images-rt/APuouOf6vUodIkJC3WCejzvEiztlZmEojrlGMNzlvCkqh6Xt49cGVC2DwZT_Wcs0StIo3WYqpV-miSDzuxjdZNLUc_0fTrgDnYyREuGhN0IfCeEV8KVHM0zNJb18EghPf5LpZ3dHkYwNy5-qJCzaDIFCVeAb5JRPKZdGLmvRcJSgSQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOc0AN926VEcRC8vzCfIi4p4UupWqNAcUe5y8RTfCC_ctBYJJcRsTb6l5gih8MFI7h9vde-fsAmnf7K7W96PAqIBWVcKqJqIBHfmpmbGKLHZp_Dt0-iUUrI4WFKgewze8Ty9pQ2mR88WFz2ATp9Ug2Zm15h1FjuGNShr9ZaqDw=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOc-89a5I3b0jjAPNdRayJ_V7op4E81dQDCX5xTAopLxi5Hd8GLhFLmWAqHTi0SooGJCXCLLCvSBMwv6K2SHMKWul6O9xGLkwenUkA-qF7lj7i2B4VcXwaONizRwHtir5x1bAHQGNl6fhFF0BrelSd9jYbAAb_QOrHNMWhk=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfq5lRx_IGaZ1ymiPJMuxcyNc6BXx2NU0bfoQg0jwRlaiuT56iY3lZub0wBCBVMrk9pr5xDALSFlpPn0SIg3a1cdKmCeLwlrGC8s0x_HI9L40TDUCknFu5Yzo2Hktvv4bu1NuGs3HNDgJXps8pxfYaKX8aGju8Bv_dtdfc=s2048)
 
 ##### Figure 22. After adding a 3D point, clear attributes and leave the comment “SYNC” to come back to.
 
@@ -638,7 +638,7 @@ change the rule, double click the value and correct it. Close the
 dialogue box. This only needs to be done once per user per computer but
 it is advised to check before each annotation session.
 
-![](https://docs.google.com/docs-images-rt/APuouOdy43q9jSO9gAk92Z_H5nOyhDipS_LZZBQ9Z56gcPI2vSRvA5oQRPuET04GypNWu8tfHr7Nc36vazCq1NPkiEVwBTZcctidvD8cEYYnCTN6FX23Waa3iOLWUNa0wpx_NGwUu29EFnnyFeOMmeC88scOBX7R8YfqnBiuTkA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfqIlzWzntuHWIP6wOIzSOo3MFOcv_rtKWPv2vBrL84f8yI_pI6t6wkijvkLndYq4hdbtAniC-YZehoWk4uDYqdL_risMUE1xvfp8voevmc6ZKqMBuILIp5RfvIvrbFJDBZUBBsqZHs-BrSxnHRv9wjR_nPBSGUDFuX1SM=s2048)
 
 ##### Figure 23. 3D measurement rules. If your rules do not match the above, double click on the value and correct it.
 
@@ -648,7 +648,7 @@ Save the EMOb ([Fig. 24](#h.ugnv56g3nog2)). You can save over the EMOb
 generated during the MaxN annotation. It is a good idea to save
 regularly throughout length annotations.
 
-![](https://docs.google.com/docs-images-rt/APuouOc43aZCNYxCniEH0Gued80yqTX2eGESHqBUiIKEuPGFvRvrTk5d4Rs6weItJ9sEXJM92fdtvQ4K6DOKidETOpTIHQClQWhpyq-48EibkWKTu9HjTwPcqa6Aq77lZCNcvyqIA_xJVRYh2ZSPQWYmVYqlufO6cDUDYlX_MRKn8g=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdANGQlil8uZ3UctCWVYBaigcd-XUfo0vczGsATRkx6gXBR9Cm-V8kgP41qL0eVCqDZtMl7jPWAEITSnj-1j6sOakxD3-rBK_NwCZEncpel8JfqMn3_02bQh1pZoECEY9egeV1SkBvPI8SWmNWYzURyRSiBvZlgv4cdp9l9MQ=s2048)
 
 ##### Figure 24. Suggested folder structure with a dedicated folder for .EMOb files within the campaign folder.
 
@@ -662,7 +662,7 @@ check the ID of the fish counted as a quality control protocol.
 NOTE: If only the left video skips ahead it is because you haven’t
 locked the frames at the sync point.
 
-![](https://docs.google.com/docs-images-rt/APuouOeB2u3ME9idlbMtbVR8mBvEuf5FgCqHddkJlkP1ZNNOT8351pP82tdjJiomeKhzJGIG4W4YJNT1UmYMcL-Db-mxk8rwWux8-NpwT9_fiCmV9uVuCfEBcKzzQVIU4O2RlxTi9CguU0agMu4g_tsRmDxSHu7U3PCs7fyWOU0=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcF9jmVOghiBrFnpKQ7_dGY8x09MAqd3MgyjdiuDtK3I3aJ6lrjwW947om4du1EVp27yEOnQJOZY5kQJYtyJqNdcbkklJ58vxgpyQSqkfGlBmPcLHvWJgkAZ7SnIRuozEcxA1OksfW7at7ZoipnSlU7HB0vvbBKT3uTK1c=s2048)
 
 ##### Figure 25. Double clicking a 3D point will skip the video ahead to the frame at which the count was made.
 
@@ -688,9 +688,9 @@ have turned the length measurement rules on: [Step
 13](#h.l35yspse5k47)). Fill in the attributes box to match the fish you
 are measuring.
 
-##### ![](https://docs.google.com/docs-images-rt/APuouOcrOUtufCBPHy5Nt4g6zWrOer3tWDMgVWqG5DcvwqmkhLb7cwdxZdM5t31kM7xvTsW8vrxE9UB-GOvZGlESXizPYMvlTfNWDRdm1Om6kE_rQYxRH5jDZ-Tlhdqp9bHvlPCptThpV57t1QSG0aGE237V5yw3GTZjsKeE-RqOuA=s2048)![](https://docs.google.com/docs-images-rt/APuouOfvuhkUmDkQETSAPr1f4GZa5zWadoQJTDryPwHXJeOWBxmCNUa0oajAyJsV8NqkgVOyE-P-RXDRnHkcBa0tx7m4jXS_XwvlQsk8N0ZoO8Uvhwyi3YIjyU8pUliKJQZiX3PJIbBOf4Otrfc1Cyra29xHX7WrMIdct5raltvhlw=s2048)
+##### ![](https://docs.google.com/docs-images-rt/APuouOfBN4_YcHeuCRY4QjxEaBjs4HTN5QPK27Dw7A1RXmKsGn8WegkzXhs_wKrenJphWRdOmTaG798nzxzyLnK0GG1Pn6skXVhivshftpxgpC_4BHfEHmjKeiVR4s-7UNTr_mGPs_ypqS2F3CeOVPxVKI-q7cA-M1j1PrDveChT3w=s2048)![](https://docs.google.com/docs-images-rt/APuouOfcm7W8Ec3f850PQ7X8Fvnbnf_E9Axq_6ZgMVU1mjGqouBMFMeekz8WfINfT3O61oEqopSMefOfPukTtuiWYpz-9fHsJwGogpNn3UGLEO8rFXeHP9qKuBHUCXyAkfYfjfzivCfbE8uG3jAJkLNm9xBiZ_T5eGKc6FFR_6JhFw=s2048)
 
-##### ![](https://docs.google.com/docs-images-rt/APuouOexfC9tl5HEINc5yq3c3zlYXXa2HCVJ93jMBCFQ-2fm0Xpnd4dde2dC3T3bVYmNXzXT69KPIGNhOy2KCvLMrvL4jh5YIX0RN8SfpslJo6BfsYfRPmOHGWUqdHE5nd4vrfJ3Nguqo1imujdgmy6mYUeRj0vxCtZxLVBSyQgUgg=s2048)![](https://docs.google.com/docs-images-rt/APuouOe-6VTSPyHoIuhytywgWJkJBMvuzmarSjz9ghfCn5mM2SP5pD4Bhh4WmO9nPX1NA_R7OQmrOG7bpbp1lSlcwnaGhFtujXuWWkRT5iFdoPaRpOC6bvyD8YTSq1t_Z5hoAppCnJu1ht6PQd4w33t2LWSbfhCRWxmPt5WTc5JeXA=s2048)Figure 26. Sequence of clicks when making a length measurement. The top two panels show a zoomed in point on the snout and then of the tail on the left video. The middle panel then shows the point being made on the snout of the same fish on the right video. The bottom panel shows the resulting 3D measurement on the successful click of the tail of the same fish on the right video.
+##### ![](https://docs.google.com/docs-images-rt/APuouOcLZ4VmwUM8R-r8_cunglf2rVi7h_8YB3_oa2LiiaH-qcVD4ICw-Jv9WT93tILdEpoJpnRt_QEie3Mk-YI8iGDtxQr7CdLzh5sY1WOlXM4ayulggxbWZ_GfG_UMgV_8RfBlbKTRAXY0NM0f98SG2uALKobE2TPsMvQwdLZxVw=s2048)![](https://docs.google.com/docs-images-rt/APuouOdeG6Lq3kkjTcQm_wDFSCUI31d2s9MhAHIILk_rGpokM0J87ZVHzff-yGn9BBHkQebv4gp12FCqcjVwaWIfMd0EdrC7xIwsHcsyrpZ2o_xyqOfuoUzJIlMy18JVUWWAUj8JWJGHkN6eZRMLRIxOrP9e9YVXYOG3rNKFLQE7bg=s2048)Figure 26. Sequence of clicks when making a length measurement. The top two panels show a zoomed in point on the snout and then of the tail on the left video. The middle panel then shows the point being made on the snout of the same fish on the right video. The bottom panel shows the resulting 3D measurement on the successful click of the tail of the same fish on the right video.
 
 13. ## Annotator rules for measuring
 
@@ -764,7 +764,7 @@ have done in the data viewer ([Fig. 28](#h.x5z7nzdeqzfg)). The total
 number of lengths + 3D points (last column in the data viewer) needs to
 match the MaxN.
 
-![](https://docs.google.com/docs-images-rt/APuouOdFnst7v-d70g86gTDhkUpa2E37Ho8SLkRawxOZq6ztkl9ostjxDHj3erFEilXppUcNvZMwlWo9wObAqw9FjLsgKaHsFwCpwLwwpA2aeTiEaLtAUV3Nz-nsgkF1WNNxhuW63Cq9M5g_PRP336BvBXt3J3aaN4BWj0wA3eMPnQ=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOfLx9xS5BmwwLTJKELEhUm7N-cY1_WoveDn1OXgFT6P4hww_DlSVQbl7d3zqRcQDIuJUI_Lm_4mVs9bJ4U1II8Cru53pSUJKJ3pW7CV4hsu-4HkK0iR8fH2ht0umuiIiTWLSesYQRJagJMqxN-dUcLUJWswLkAzEaOYS7vqkQ=s2048)
 
 ##### Figure 28. A completed data viewer - note that the total of Lengths and 3D points matches the MaxN.
 
@@ -784,7 +784,7 @@ measure a fish of a similar length and change the number to ‘2’ or if
 it’s the only individual of this species, add a 3D point, see [next
 step](#h.qaway2rng63y).
 
-![](https://docs.google.com/docs-images-rt/APuouOcB72afiHUSXiRxw0Yw24CJrnp8dNCrYI-xwWrhrPoFqE5Y3Yj7aoyoh35XeQByNZBE2GENaG7cH5FpwNrLIYrL1aio9hUjiK-X3R6p-9iqgR4og8-pWO19ciDbmRB1lya_iHVqmYqibQ3bVHcZEfJ3Q_FMT9huNsrNtLA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOcrkahtBrM6ycd2XxJx4cJBpeMogAxsXpx1pgyexjUaF5hDtc6LVqZPiz1KGZyKIRlHZgwE-3UQRSfHtGvpa5GzwJanWh_1l9RhDpRvXkscaPyqslzYYQQF_srBJC0nkpDEIaUPHbtIaFjlW0dUjCa9epoeeXmOnOYK7tY=s2048)
 
 ##### Figure 27. An example of a rule violation: the RMS is too high in comparison to the threshold set in step 9.
 
@@ -814,17 +814,17 @@ summarised data and error reports to download, and in addition the
 ability to compile multiple discrete annotation data sets into a single
 synthesis ready for databasing or analysis. A free online version of the
 app can be accessed via [this
-link](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784101001349639&usg=AOvVaw0602TWxlLdnU7jBvHOp70k) or
+link](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178059934131&usg=AOvVaw1JWPPKORmYCAtM6auqbSsM) or
 you can run a local version of the CheckEM application (without the
 internet) using
-[R](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23shiny-app&sa=D&source=editors&ust=1784101001349962&usg=AOvVaw0_soo0pLZje8OrsAwn1hic).
+[R](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23shiny-app&sa=D&source=editors&ust=1784178059934328&usg=AOvVaw0Qa_3xBk7v61H7-DYrPsJO).
 A user guide for the CheckEM shiny app is available
-[here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784101001350193&usg=AOvVaw1wYQoV1SKHQAZkH9OU7vo6).
+[here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784178059934479&usg=AOvVaw1DOO2aOcL9NGTYvovCxviI).
 
 ## Data storage
 
 GlobalArchive
-([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784101001350552&usg=AOvVaw2yMmZ5R-G0w516KwtlYM9s))
+([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784178059934694&usg=AOvVaw1YZFAHnOHF9WyEZ2Gu4BUp))
 is a centralised repository of ecological survey data and associated
 information, with a focus on stereo techniques. We encourage you to
 upload and store your stereo-video data in GlobalArchive to enable
@@ -833,4 +833,4 @@ future collaborations to answer broad-scale ecological questions.
 ## Data analysis
 
 Workflows for formatting and modelling data are [available
-here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23id_3-quality-control&sa=D&source=editors&ust=1784101001351290&usg=AOvVaw2ZYiN-KXaFNI83dbjSyjEm).
+here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23id_3-quality-control&sa=D&source=editors&ust=1784178059935169&usg=AOvVaw31w6FbHq5gN0jT32ZIsWvE).
