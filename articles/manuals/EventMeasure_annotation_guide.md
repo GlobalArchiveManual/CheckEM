@@ -234,19 +234,19 @@ abundance and length of fish assemblages. A standard operating procedure
 for collecting stereo-BRUV imagery was published in 2020 (Langlois et
 al., 2020). The field manual describes the standard system design and
 field procedures and  is available online at
-[besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189](https://www.google.com/url?q=https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189&sa=D&source=editors&ust=1784185507413930&usg=AOvVaw1Rwj9OpY99445wmyD699yT).
+[besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189](https://www.google.com/url?q=https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13189&sa=D&source=editors&ust=1784185920075396&usg=AOvVaw39HToHQhhmosjpsvobb3cT).
 
 This document was prepared as a standard means of attaining count and
 length metrics from stereo-BRUV imagery using the EventMeasure software.
 The outputs from EventMeasure are compatible with the CheckEM quality
 control [r
-package](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/&sa=D&source=editors&ust=1784185507414513&usg=AOvVaw1rh7OUgh2cK8HHRoO_tX6T) and
+package](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/&sa=D&source=editors&ust=1784185920075711&usg=AOvVaw2QGka67P5tW6MaFcoJeyD6) and
 [shiny
-app](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784185507414641&usg=AOvVaw2nPnNL6WBrDL3P0Nv_uTIo),
+app](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784185920075781&usg=AOvVaw2RvtDjLUIRjyq7RbVh6DhQ),
 which allows stereo-video users to rapidly and effectively quality
 control their data. The exports from EventMeasure are also compatible
 with the data repository GlobalArchive
-([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784185507414970&usg=AOvVaw0JJgaAWsnATIwCh59S1-AL)).
+([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784185920075971&usg=AOvVaw0tVH-Zx62gWjcd3rIo8gPS)).
 
 ## Using this manual
 
@@ -269,7 +269,7 @@ field of view.
 
 We suggest keeping a version of the sample metadata (See the [CheckEM
 user
-guide](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784185507416609&usg=AOvVaw0YDtdfTNMZIKuMBMZSchn_) for
+guide](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784185920076785&usg=AOvVaw1hWLfWTzc2zcaF9E9SpFoc) for
 a description of the sample metadata and required column names and
 formats) on an online spreadsheet (e.g. Google Sheets, Onedrive), so
 multiple analysts can edit at the same time. From the sample metadata
@@ -284,11 +284,11 @@ videos are currently being analysed.
 2.  ## Opening EventMeasure
 
 You can download the EventMeasure software from
-[www.seagis.com.au/download](https://www.google.com/url?q=https://www.seagis.com.au/download.php&sa=D&source=editors&ust=1784185507417981&usg=AOvVaw3HbycA4q2mgXQGq8RhFmzT) You
+[www.seagis.com.au/download](https://www.google.com/url?q=https://www.seagis.com.au/download.php&sa=D&source=editors&ust=1784185920077600&usg=AOvVaw0w6i_GcXWjthFXVK7jAhbC) You
 will require a software license to use EventMeasure. The keys associated
 with your software license will typically be stored on a USB available
 from
-[www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/index.html%23home&sa=D&source=editors&ust=1784185507418366&usg=AOvVaw2aTn9PXD2sqCZHi63WRKsj).
+[www.seagis.com.au](https://www.google.com/url?q=https://www.seagis.com.au/index.html%23home&sa=D&source=editors&ust=1784185920077797&usg=AOvVaw29o22_8IKMo0t9D_8I0DkO).
 Ensure this USB is plugged into your device before opening the software.
 If successful, your screen should look like [Fig. 2](#h.4804dp3csd6i).
 
@@ -327,7 +327,7 @@ labelled left and right with a sequential number to differentiate (see
 suggested file naming convention and file storage in [Fig.
 5](#h.hpv03zkf414r).
 
-![](https://docs.google.com/docs-images-rt/APuouOcjCAZYlI75fxqVSpK4zjzCA-nwItzXqxKFn_F6aC8nsN-_UaCHVABB-hg9W08BLmqYoJnC31dYmxkRIyT0-2xwE51BtrEvsOfVQRPvHa31L9uU6CyuJMQppEfi-cFM5UJTWe7M9mhsk6QVSpdS51StSkj9YfOMCQQyJhM-5w=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOceV00j8bR5qeRhlpSSidVrX8XQJ8VrLPhvMw-l9Pl3lhHachrSve7V5Ojc4PiAIG5h-rF5nla4YgZk6jDVk9I1GPcHerQpDwFgoydFB8M2TaqPRsb64iA9BLl_KAHcLdQfXdqyquKm-m49dJwiJ54Ad3xemtaN-PKo9KYJTg=s2048)
 
 ![](https://docs.google.com/docs-images-rt/APuouOdV9qHx9DinnxIJWaPpYTKKCKdsh_AH40g1_0E8mKWjkZpoccRnteNopb_vLV8faJgIcf9TTy82eIfLN7Ig2HZYsWnimkqd_fmwNwvTYYr8m-d35Qv5QmNdfSo5npob81DnxeqBkZ2EqIRf54kNwjDmyK2SVomNPn5ClqtSrQ=s2048)
 
@@ -379,7 +379,7 @@ save regularly throughout MaxN annotations.
 
 ![](https://docs.google.com/docs-images-rt/APuouOf_uVpqjjrLhVfzLKjJCebTYiHQS76IOOuKkLmHn41QzqeWlu-Fc5estwv0TeW8qr3-ZxLK3KW7rYW95drx-8jQNeiHg9V7zndYGmfYjJs4DVxEd5Z50XvzHSUG3eiEKVrbe5OEtqHP_m8uvgaN8tOVFBgtxOVcuCuWXZF05g=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOcVr-3aZNPDIee6JDkEEhTv0xFaWCIeLcPH4Arng_xEOCNAQvYrNH1FKeJa9E4-Fciz7R2nBIDT7zD0NsjeOZlZya80GoD_YZRs_qRMWGtQvyJRlYIvwtv7cUeGTKRUD9c5SFU-KeLZa0RBm26mLahTD4kiKiXXgb9h0VPHlg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd2ioPtTpZDTfXyovpEbLLs1VttsaEuF7bEcSX0marBDTsu0nE2y6bKzc-av7yJi7VFfyuHB0oV5EPCvsnri2Z5AAWXSpWFp7dhBjUZgR6_mPlmQq9I7A8Fv2AzoUjlxeKAQnF55jNFKc3Im8rzCh9ipuQD27i_BAfnrnpcsw=s2048)
 
 ##### Figure 8. Suggested folder structure with a dedicated folder for .EMOb files within the campaign folder.
 
@@ -389,13 +389,13 @@ Select Measurement \>  Attributes \> Edit/load species file … Double
 click on tick next to Species File ([Fig. 9](#h.176aa2wtf6tt))  and
 select an attribute file. An attribute file created from CAAB Codes is
 available online via the [CheckEM github
-repository](https://www.google.com/url?q=https://github.com/GlobalArchiveManual/CheckEM/tree/main/annotation-schema/output/fish/eventmeasure-attribute-files&sa=D&source=editors&ust=1784185507427103&usg=AOvVaw1MiKcF28uwkFbBVWPADge2).
+repository](https://www.google.com/url?q=https://github.com/GlobalArchiveManual/CheckEM/tree/main/annotation-schema/output/fish/eventmeasure-attribute-files&sa=D&source=editors&ust=1784185920082228&usg=AOvVaw3haQ8EvHz1TV0tX33q6CU2).
 This .txt file contains the current CSIRO standard for fish naming
 conventions for Australian fishes and their associated unique CAAB code.
 
 ![](https://docs.google.com/docs-images-rt/APuouOcjgc44a1nDXbjodsOvV5gbl-JPRjCBEGJZ8QnRPylZk1C1oir-0wHJ5xQwBypyfiiLANga2z4VbdBDCBRHIR6sJlpIRGUDySLcGu8FLWi4m6Nk10z73q_rTFCRq-ZY8P4sORwkN26nfhFsBW5rsThi5RmxFV4sTXReMS0=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOeYM642t1sLPvgd75Im12A8Skw_6k9Sznp_mepGo3y4RMqQASqv-Vi89U6OptcvFymcRHICfvq9WqOvmfJ1LRl7ZgITREpHMyYWGNIe9RVaK1dra4mL2a8BY_AJGu2rJI20D3AbWwne0gCMyblUNnP1_hxjDRnPKf6n7NE=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOceoGy4JvGZWY263MIUb2zdX4qBOr4aimGbrNNknbzGh-td961BZoTIORRJfEsIkZrkLmHqGxCm6Z0B55AZw_Guc7wohZADZiWRkGrlCsHTmMKgmKKUosSuE6019bBHV2IHBIan-bTgqypT5O6JlzQa_kAdXr5JihVK1n8=s2048)
 
 ##### Figure 9. Species and attribute file window.
 
@@ -573,7 +573,7 @@ them and then select OK on the Movie sequence configuration window
 
 ![](https://docs.google.com/docs-images-rt/APuouOclXW0oLrl1nh0itmrzqZefB_5RU-UMOj-GLTfXEERQSFasvrNBlB6hyOwgT-uMafCIXTiIC6oRRkrVKEdyFJpgtJ0XZ-c86z3DdAohhkx2SS1XFMymuyBdEmsq5ioES-jCvdqmGypjHbPeG24yiq81Bzud6vABqNaiYlE=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOdvctvYKR-aOhMHCT0RwwRZvZiBMwmnqlWKHmtyanqJhjgrYdw527WGQsVcxQEsdJL43GyUrH-gVl7APY8Hn_uKCLkoYKzh9B2hOpPII2NfFPeixhU5U4L4A3AJlGKJxWjEb5KIbwOHnRgDt3HNTvi63mb5UOhaFbwNOMAgRQ=s2048)![](https://docs.google.com/docs-images-rt/APuouOfe7gxa6zHbytbN39VdEKTDC7-bGI3B8PZZ7-4jEnSnQEETn6kw8iyGsrdDg2FaLFuX36_CFW1Py4vJQOIJf5mlaSYF22NMZCmZZTdYaFJQXcyw2iXMhqwua36jvhFkWhD_xo4Vc2OgRgD-xz0IloEXJBWpXjXh6EtKgtVhnA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOe08azX7t2hB8u4TJtBKq2VvigmSHDY7g4Yyrann0ECMyGTnbTrOFVMge8yDav5sUYeWfJRBps3lYTgsIig82cXukIjde3fA9PWblYlL4zHUKIuyMw5rRSXMzHxaydzFLeBeflhtyH0M76VEFJEmxgnvn5xxZpS3FJMmA5ejA=s2048)![](https://docs.google.com/docs-images-rt/APuouOfe7gxa6zHbytbN39VdEKTDC7-bGI3B8PZZ7-4jEnSnQEETn6kw8iyGsrdDg2FaLFuX36_CFW1Py4vJQOIJf5mlaSYF22NMZCmZZTdYaFJQXcyw2iXMhqwua36jvhFkWhD_xo4Vc2OgRgD-xz0IloEXJBWpXjXh6EtKgtVhnA=s2048)
 
 ##### Figure 19. Load the right side video (top panel) and select the first of the right side files (bottom left panel). Set your movie sequence by adding the rest of the files and clicking OK (bottom right panel)
 
@@ -624,9 +624,9 @@ frames. Click on the same point in the right-side camera, generating a
 click Add 3D point. Clear the pre-filled Attributes and write “SYNC”
 into the Comment section.
 
-![](https://docs.google.com/docs-images-rt/APuouOeuoou5UdQkZQLE6YDXg0GPq7_S72qOpfioIK3Eo41l0N_HyIYY_yNZBRG7HcOz0fsMiz-ry7NAsSSEc_uFmxAxrehp3-fKkBLc1yabgOPcQHDCTELL4w1dgJbHRPwE1YBUq8TK6EAOp08XUJG1Q2PP9OsZayUxeu6QctsdBg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOebJgv9oR1kELCE7Rvs_y3O08XDIJO3F9tADAPwMoWOb5ununaqTrDWgS4PnQWD9ot93EBgxkmzZ5VvJ41UlOFTUEjNC_c9VG9gnZbkFU19EbGzu0msGcUelOL4qwiE0p5erKr49hvY7RR1-5h4WKqw28nnIon0U23C_DULOA=s2048)
 
-![](https://docs.google.com/docs-images-rt/APuouOekz4neXYJRy3uXxVBBH4JTzg9AKrKtW3hLWzhFnEsfiA-wh2mrbkb0qyLzYg0L3BCV_Mg5qJEpDBi6Y-7DiyS77rr6Q-Ry5wVp8Fu-E87NP5PQ8N3ayw7wet8GQpohXm7pRRhkoZWL_WSomkWq8ztyFe2cD0TvUXbReAE=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOdYhI8eZigN8JU69_C_FS4W_SM8vCFp3a6J--wsTK1fdrvYo3WBvfxyHYHSsrOLkKBeBlTg3PdHP2CB87Fe0ZJVX6eqCvIp4f__VDu2SP2GYjKqVzvlKu9L9SrwvSmXpAWfKUDf6j2nUS1isxoJl4fyB1BVVOAodj9_bnQ=s2048)
 
 ##### Figure 22. After adding a 3D point, clear attributes and leave the comment “SYNC” to come back to.
 
@@ -648,7 +648,7 @@ Save the EMOb ([Fig. 24](#h.ugnv56g3nog2)). You can save over the EMOb
 generated during the MaxN annotation. It is a good idea to save
 regularly throughout length annotations.
 
-![](https://docs.google.com/docs-images-rt/APuouOcVr-3aZNPDIee6JDkEEhTv0xFaWCIeLcPH4Arng_xEOCNAQvYrNH1FKeJa9E4-Fciz7R2nBIDT7zD0NsjeOZlZya80GoD_YZRs_qRMWGtQvyJRlYIvwtv7cUeGTKRUD9c5SFU-KeLZa0RBm26mLahTD4kiKiXXgb9h0VPHlg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd2ioPtTpZDTfXyovpEbLLs1VttsaEuF7bEcSX0marBDTsu0nE2y6bKzc-av7yJi7VFfyuHB0oV5EPCvsnri2Z5AAWXSpWFp7dhBjUZgR6_mPlmQq9I7A8Fv2AzoUjlxeKAQnF55jNFKc3Im8rzCh9ipuQD27i_BAfnrnpcsw=s2048)
 
 ##### Figure 24. Suggested folder structure with a dedicated folder for .EMOb files within the campaign folder.
 
@@ -814,17 +814,17 @@ summarised data and error reports to download, and in addition the
 ability to compile multiple discrete annotation data sets into a single
 synthesis ready for databasing or analysis. A free online version of the
 app can be accessed via [this
-link](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784185507463224&usg=AOvVaw0zm3drn5mftaz3ZB4Lmk5U) or
+link](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784185920101059&usg=AOvVaw0KLiQDMKeE9fG4YPLxzuAw) or
 you can run a local version of the CheckEM application (without the
 internet) using
-[R](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23shiny-app&sa=D&source=editors&ust=1784185507463501&usg=AOvVaw2vwkWaCTyzKlBgtWRekRlq).
+[R](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23shiny-app&sa=D&source=editors&ust=1784185920101213&usg=AOvVaw30SY6AmKjRYE46d9WSOTKk).
 A user guide for the CheckEM shiny app is available
-[here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784185507463704&usg=AOvVaw2K62O_DZmglyLJIR9I0z0A).
+[here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/articles/manuals/CheckEM_user_guide.html&sa=D&source=editors&ust=1784185920101336&usg=AOvVaw00mOWsBpx8iQCDm_ZU0Hzu).
 
 ## Data storage
 
 GlobalArchive
-([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784185507464023&usg=AOvVaw0nXp1n9kJIzuf349DIt0pq))
+([globalarchive.org](https://www.google.com/url?q=https://globalarchive.org/&sa=D&source=editors&ust=1784185920101487&usg=AOvVaw3BIc-mISisEHImiawzs7iY))
 is a centralised repository of ecological survey data and associated
 information, with a focus on stereo techniques. We encourage you to
 upload and store your stereo-video data in GlobalArchive to enable
@@ -833,4 +833,4 @@ future collaborations to answer broad-scale ecological questions.
 ## Data analysis
 
 Workflows for formatting and modelling data are [available
-here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23id_3-quality-control&sa=D&source=editors&ust=1784185507464693&usg=AOvVaw0jD014VoOrrg6FtqnXfFnG).
+here](https://www.google.com/url?q=https://globalarchivemanual.github.io/CheckEM/index.html%23id_3-quality-control&sa=D&source=editors&ust=1784185920101837&usg=AOvVaw13rhKLzcMzlmuqkOQk9Fcp).
