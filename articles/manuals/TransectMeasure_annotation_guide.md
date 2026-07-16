@@ -3,9 +3,9 @@
 [ Download PDF
 Version](https://docs.google.com/document/d/1c0lo-wQbJqHk0GPm824wP3o2zVROBeT_G25M46eV6js/export?format=pdf)
 
-![](https://docs.google.com/docs-images-rt/APuouOePiMiA5o5Qs3vTNNlt4xjpNrD9xCnhVYTMKwe69tEihmAevooJKzHjgzLGrW5DfFuqdXgebP2xhVSI7QW2K9S89eMjd2e_EjH1Letr0xGpJ_o-6LQ_-g-Zpj5C8vDbfoKoDerWwhzdFvXAvVl5Wk7ONdk3PHVKvmymvbgqRA=s2048) 
+![](https://docs.google.com/docs-images-rt/APuouOdpP7u_qCSRLAQRrYGMIuQc8N5DdC8asS-SFDUFFmIdaKhVU3h7bzV-nVPNbkhhAjTnbUo2XMqv7WCI2IaKB3ZcvbfBodIEGKtp4rwN74Tw_vkiVjkEW9b2Q2a-PvXdhyNUPzGEwyd4AWXwG6zcmA8-NFfkEGW4SlSbAhXadw=s2048) 
      
-![](https://docs.google.com/docs-images-rt/APuouOcESeByxP9mNtQNJdOd3xMK4oWnu6_IAUlqTUg-ITeT9lSoSUFSeleQq5YO34QMjAez2pugksCmTHfcnlTWI6bFXbGmtGOPKbXqq9FWZt-uuaFKdh9z1rqeB4ZB3TyuQ0poL4FRni9Zm43B6Kg59csyhUSUDr7wS5ifA6oDow=s2048) 
+![](https://docs.google.com/docs-images-rt/APuouOc1KnrQCH4CbbxlTD6GYtk2Vmppf7CXv59n0vvnk45Bks92WdV9Julu1NFsHyvzwZjTnOHwC5aFHhDVLwMsQXdYzzwXION7c0y5SS9ANCJJx7txic5hQB__R9SCqM1ckvAfAJBK90coL3Fj9T41_2SZYL5vrq54AtpQtZKCUg=s2048) 
  
  ![](https://docs.google.com/docs-images-rt/APuouOd6glZ4dL_PgAkm20Gv_X-LwbweeJKbI_SnGFF_e1H5qvH-V0WbyA3diOl3T3MD5ll9d_k0mFhZlJXwkH2THXdeQUCr-S9NBVtZczKDdx3pBf8GZNWAHRbUEOajBL8P7xpQRgl1gEKfr0kcwuYjCTj7Fcz-pGVwhBwlcUljNA=s2048)
 
@@ -148,7 +148,7 @@ and complexity from horizontally-facing imagery (including Baited Remote
 Underwater stereo-Video and Benthic Observation Survey System), adapting
 existing standardised schema for benthic composition ([CATAMI
 classification
-scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1784178062089198&usg=AOvVaw0YilE6OPwFlQiKGbMnvN0J))
+scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1784178457488706&usg=AOvVaw2t0u0CJApYPcfGRamdevc7))
 and benthic complexity (Polunin and Roberts 1993).
 
 The annotation approach is rapid and produces point annotation-level
@@ -162,7 +162,7 @@ assurance and quality control are also provided.
 1.  Classifying the benthos composition
 
 Our recommended approach to characterise benthic composition utilises
-[TransectMeasure](https://www.google.com/url?q=https://www.seagis.com.au/transect.html&sa=D&source=editors&ust=1784178062090552&usg=AOvVaw3EdvxGOBcjObbZISBwcnfb),
+[TransectMeasure](https://www.google.com/url?q=https://www.seagis.com.au/transect.html&sa=D&source=editors&ust=1784178457490470&usg=AOvVaw3AZFVzNdlpVPHYBCU71HN4),
 a flexible software designed for the analysis of marine imagery. Benthic
 composition is classified using a random-point approach, wherein the
 biota directly under twenty randomly assigned points per image are
@@ -173,7 +173,7 @@ benthic imagery. Benthic composition is classified using a hierarchical
 scheme that allows for standardised annotation labels which are
 consistent across different locations, over a wide range of depths, and
 in variable water visibility ([CATAMI classification
-scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1784178062091652&usg=AOvVaw04ozlH1lE0q6uJHcFXEoop)).
+scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1784178457492163&usg=AOvVaw208iEdeECnfplQIHSzHk2E)).
  
 
 2.  Classifying the relief
@@ -192,7 +192,7 @@ across an image or deployment can be calculated.
 
 The annotation schema we provide, adapted from the [CATAMI
 classification
-scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1784178062093150&usg=AOvVaw22RrjxyCV467wE3p6govyS),
+scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1784178457494021&usg=AOvVaw0_ISnxig8GIE-YCtJGKQNi),
 uses a hierarchical system to allow for accurate and consistent
 annotation labels. This schema uses ‘levels’ that increase in taxonomic
 and morphological resolution, with low levels representing coarse
@@ -262,12 +262,12 @@ annotation efficiency and allow for rapid data analysis.
   The attribute file is a text file containing the information necessary
   for populating the drop down tabs when classifying your image (Fig.
   4). This is available for download via
-  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178062098658&usg=AOvVaw0Q-lAplaSzwwA00OL451HY) -
+  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178457499552&usg=AOvVaw1zTLuqHKlE9CHF1f7Wq3Pd) -
   ‘Schema downloads - benthic-habitat-annotation…’. See [Levels in
   annotation schema](#h.cf5m2n6emqar) for more information about
   choosing a schema.
 
-![](https://docs.google.com/docs-images-rt/APuouOdNsqcauYQM62CbVjpYrKl0SBFmr5RO30_609IIcavNbI7CN26p8iqRgW_ESygDwSS4IVgLBF7ib2EfDbRgeteQadgiyrteStGiEPiw-Rl56s3TRD1TOBiP1DzU6oUN9aUx6S35qv1h0hVRRsLVJmgtjfld6ykguLbcTg=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOca3Eb7kxiVvsBDqrzgF_9vaR4HQeCCktmgCugVWQvCSXzHJMXui8YOW-2PYG3OT4So9kE-UgMdUv07giPYGTkvxdMsGoS8R83fWq2Kqdc0yzskbc9JSt6frb9YdRFe2twaKHE7mV-C5-QMfthxMvjv7tbNpiCYZmhggQ=s2048)
 
 ##### Figure 4: Loading the attribute file in TransectMeasure.
 
@@ -310,7 +310,7 @@ imagery.
   (e.g. 2024-05_Investigator_stereo-BRUVs) and “No” for
   “relief_annotated”.
 
-![](https://docs.google.com/docs-images-rt/APuouOcpTiiQkQ95fEOxbLwBx2U6eotRiJGB90RUFEXnGgQNUVqwygfxDgf7zleBsQqQBhYLkuteOVmHZ00IATpoQkZhdBN0_KVIG89BUkeK3mgask5_wj9sZNm8qrBGZmS3THGeeVjTwXIf79gybMomcr6NNR0iwWJezu9GSejyIA=s2048)
+![](https://docs.google.com/docs-images-rt/APuouOd1m0U3cjvgCyeGOnJsGEJNGBHuHhn3ASzIHqSLUCNpvNdBBYE65KcX2J9TOBDcfu8T7n7dEayQqxZE9g-ivybkBCmSsteo2XS_4RkKsA1wDUzgjZx8B9EXsqMmimGsfmtrGesqSOfJzH74mdsR4SySYZqWvLohf2DqT8pbCQ=s2048)
 
 ##### Fig x: Information field value editor, with values for “campaignid” and “relief_annotated” entered for a benthic annotation measurement file.
 
@@ -547,10 +547,10 @@ Figure
 ### 4. Classifying the relief of an image
 
 A separate schema for relief is available for download via
-[CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178062126746&usg=AOvVaw1nS0kLvx46rCeYLdIes-9j) -
+[CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178457520135&usg=AOvVaw0J4A53wV-5srB9uQ1cmPY-) -
 ‘Schema downloads’. 
 
-[Here](https://www.google.com/url?q=https://docs.google.com/presentation/d/17UJJwhTpNy2hRC4jBb_Hz24ppvlwIHj1dMp-URR7bc8/edit?usp%3Dsharing&sa=D&source=editors&ust=1784178062127275&usg=AOvVaw1ihcx4VAw_im8vtiRuzEeb) are
+[Here](https://www.google.com/url?q=https://docs.google.com/presentation/d/17UJJwhTpNy2hRC4jBb_Hz24ppvlwIHj1dMp-URR7bc8/edit?usp%3Dsharing&sa=D&source=editors&ust=1784178457520438&usg=AOvVaw21DCipcvTP0VX9c9BE2aFw) are
 some examples of relief annotations.
 
 This section is split into a set of instructions for [single imagery
@@ -571,7 +571,7 @@ imagery.
 
 - A separate attribute file is required for annotation of benthic
   relief, which is available for download via
-  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178062130076&usg=AOvVaw3IGF-ATmA--hUPzAYVVkMK) -
+  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178457521935&usg=AOvVaw3wXeHApC7mFdTevB1UTj0P) -
   ‘Schema downloads - benthic-relief-annotation…’.
 
 &nbsp;
@@ -611,7 +611,7 @@ Figure
 
 - A separate attribute file is required for annotation of benthic
   relief, which is available for download via
-  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178062134613&usg=AOvVaw2oAt84rm4ISNFDcvW3VmUv) -
+  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1784178457524371&usg=AOvVaw027eHcWTHHG8qJEwFsrFta) -
   ‘Schema downloads - benthic-relief-annotation…’.
 
 &nbsp;
@@ -735,7 +735,7 @@ to ensure quality control:
 
 - Check that all annotation points have been assigned values (see R
   scripts included in the GitHub repository -
-  ‘[forward-facing-benthic-composition-annotation](https://www.google.com/url?q=https://github.com/UWA-Marine-Ecology-Group-projects/forward-facing-benthic-composition-annotation&sa=D&source=editors&ust=1784178062149289&usg=AOvVaw0nT6tazno4246YH2VOfL5u)’).
+  ‘[forward-facing-benthic-composition-annotation](https://www.google.com/url?q=https://github.com/UWA-Marine-Ecology-Group-projects/forward-facing-benthic-composition-annotation&sa=D&source=editors&ust=1784178457533022&usg=AOvVaw1TPGJ2X47QLpXtKNKTKuiz)’).
 - Check that the image names match the metadata sample names.
 - Check all successful deployments have benthic composition data.
 - Visually assess data for trends, outliers and potential errors (Figs
@@ -758,145 +758,145 @@ to ensure quality control:
 ## Examples of publications that have used this or earlier versions of this SOP
 
 1.        [McLean, D.
-L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178062151604&usg=AOvVaw3uQQRf9n_PDoGpOiWe2AMf)
+L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178457534857&usg=AOvVaw1UQQDaYTBpaA8AAQJDAlXJ)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178062151705&usg=AOvVaw1nLvxJiCinbQZ8oivC-FyK)[ Distribution,
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178457534939&usg=AOvVaw3Vw9ky5dQlHtDRAje8pAqf)[ Distribution,
 abundance, diversity and habitat associations of fishes across a
 bioregion experiencing rapid coastal
-development.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178062151959&usg=AOvVaw0Qjl7yApMbtFj1bXEWjMpZ)
+development.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178457535206&usg=AOvVaw0im6iYVGGgOeJzWRAi4H3I)
 [Estuarine, Coastal and Shelf
-Science](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178062152073&usg=AOvVaw3qDddVuSW_lgP82_xWTzUz)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178062152135&usg=AOvVaw3yxdv6Zmk_w_Y7uwhDa3PX)[178](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178062152203&usg=AOvVaw0vbhUV-5NGtswS5yK60OPc)[,
+Science](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178457535329&usg=AOvVaw2ktCEcWbCmjFaqz52Ij9n_)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178457535395&usg=AOvVaw3gS_9G6ah8Eug2xpEPDOB-)[178](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178457535466&usg=AOvVaw0-2Yrr3ZyiRph2KBbOa61-)[,
 36–47
-(2016).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178062152285&usg=AOvVaw0Ef7OkLLmMgs5oL65tPq98)
+(2016).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1784178457535551&usg=AOvVaw0ujNUiVJ2zNujaU1iT5mIR)
 
 2.        [McLean, D.
-L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178062152443&usg=AOvVaw2x1F4aH_B0aSdk5NR3BxDM)
+L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178457535705&usg=AOvVaw0GsigUrbZTsr1xFWWYPEKM)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178062152514&usg=AOvVaw1GTwuzvTUCLcgUkqHalRxV)[ Using
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178457535777&usg=AOvVaw383cMiHGQtzczqQkqVmqgo)[ Using
 industry ROV videos to assess fish associations with subsea
-pipelines.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178062152693&usg=AOvVaw1gIpXDEFTSyjPWbqqvRBVi)
+pipelines.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178457535955&usg=AOvVaw0UicA9XZMPFjFBKFbXO_mt)
 [Cont. Shelf
-Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178062152790&usg=AOvVaw20LYUswKekdtQZW4HBeR5N)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178062152851&usg=AOvVaw3vZysapGV2d3D11CxTz8U4)[141](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178062152914&usg=AOvVaw1Pie3ScxuNzTs7qribDjk8)[,
+Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178457536039&usg=AOvVaw13Tcwx5HCnrE-qphu9ioM8)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178457536102&usg=AOvVaw1BIfi7WFIbP29oEwMw5vBs)[141](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178457536169&usg=AOvVaw1P66ejBZZGvV3B61JaGl7u)[,
 76–97
-(2017).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178062152995&usg=AOvVaw0jCcTh6fcxNOnoILPij8_K)
+(2017).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1784178457536256&usg=AOvVaw2vXsu50_jyt3l9eF_LMy0A)
 
 3.        [Bond, T., Partridge, J. C., Taylor, M. D., Cooper, T. F. &
 McLean, D. L. The influence of depth and a subsea pipeline on fish
 assemblages and commercially fished
-species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178062153395&usg=AOvVaw26aRmb3u52FPj39AYfGEJ8)
+species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178457536623&usg=AOvVaw3Wfu4yCd1eCHzSVPgWX_Gr)
 [PLoS
-One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178062153467&usg=AOvVaw2TDNaE8Uo1EHduzWgkVVoO)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178062153526&usg=AOvVaw1e0MxVGIBKfNt35pr8bv6n)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178062153588&usg=AOvVaw16VGZ6xCN33D2YppLpdAGl)[,
+One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178457536703&usg=AOvVaw2zbTbS_GQuphj0tNzYrQku)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178457536765&usg=AOvVaw2NbX8zg5lM5KIWca75OsJd)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178457536828&usg=AOvVaw3XmRELZN1lrwj28wNhXO9z)[,
 e0207703
-(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178062153671&usg=AOvVaw2gR5vE1kOiSrI2XIK4OLxn)
+(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1784178457536912&usg=AOvVaw3UITXXvhomSg2riDVzMGbx)
 
 4.        [Bond,
-T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178062153822&usg=AOvVaw19mMUFGJojjPP_0kpMJZ6c)
+T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178457537048&usg=AOvVaw1ncGc1v2zV36Y8mF6zkf47)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178062153892&usg=AOvVaw0-yB4p1y_OYCfKOda1hQfN)[ Fish
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178457537123&usg=AOvVaw2zk40vNUFNNRo4TzcLsznA)[ Fish
 associated with a subsea pipeline and adjacent seafloor of the North
 West Shelf of Western
-Australia.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178062154116&usg=AOvVaw3R7YeUxnIpUDvj7NKk4aev)
+Australia.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178457537350&usg=AOvVaw1bm6zsGu4zrN6C3t21MVG2)
 [Mar. Environ.
-Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178062154200&usg=AOvVaw27PtQ8zKgMYzNlysn1OeSy)[ (2018)
-doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178062154275&usg=AOvVaw02HMdYYU8lCYwKD56SgKqi)[10.1016/j.marenvres.2018.08.003](https://www.google.com/url?q=http://dx.doi.org/10.1016/j.marenvres.2018.08.003&sa=D&source=editors&ust=1784178062154399&usg=AOvVaw2_trglx8nihM0QZNr_yfoR)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178062154486&usg=AOvVaw2SenitfjY2x99j-80TM-9U)
+Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178457537440&usg=AOvVaw1KN1wo2smggdBWCnKTqzOR)[ (2018)
+doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178457537518&usg=AOvVaw1MGlsknnJ0N3o0__P4Rgg1)[10.1016/j.marenvres.2018.08.003](https://www.google.com/url?q=http://dx.doi.org/10.1016/j.marenvres.2018.08.003&sa=D&source=editors&ust=1784178457537639&usg=AOvVaw3S7OdW6JL01fMGgadGIXNz)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1784178457537709&usg=AOvVaw1eHOvFXyg7UNO_NNV7HOTy)
 
 5.        [Bond,
-T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178062154627&usg=AOvVaw23xGpd-g0PMdWXB56ifVEE)
+T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178457537847&usg=AOvVaw11IsvdGAQi6FOVjecY0IUy)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178062154713&usg=AOvVaw1Bw93JjB1HRZItHKZFo5Kj)[ Diel
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178457537917&usg=AOvVaw0v0T8M3Nin3duN4xa_ppDq)[ Diel
 shifts and habitat associations of fish assemblages on a subsea
-pipeline.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178062154893&usg=AOvVaw3uO4BBnM4nk9pqUgMKZaPm)
+pipeline.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178457538088&usg=AOvVaw1cAsHYBxIVsd4g5o1HeK0x)
 [Fish.
-Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178062154967&usg=AOvVaw0rs91oNlzxo1vI42zfqMUq)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178062155026&usg=AOvVaw06K_P5UXTGncaX3cBKYybK)[206](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178062155093&usg=AOvVaw3Jk9G4nrpSdVWjUIZXgWgm)[,
+Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178457538168&usg=AOvVaw1LvYzjFYAQMWKv_CbYmYAP)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178457538232&usg=AOvVaw07P0HV1Np49hGoemelgBCM)[206](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178457538296&usg=AOvVaw0xMARY_hOL5CC4dTLHeEYP)[,
 220–234
-(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178062155175&usg=AOvVaw2xax_S0fkf1t2J6eyi1P2C)
+(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1784178457538384&usg=AOvVaw3Xt71U3HvjPvg_gX1nZxsb)
 
 6.        [Lester,
-E.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178062155313&usg=AOvVaw1QxIfBAU-7HVizQabxt7zG)
+E.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178457538521&usg=AOvVaw3J1MpAR5VlPRMolDNCG5mM)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178062155381&usg=AOvVaw3SvlmiQEAoOM4q76spkmxJ)[ Drivers
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178457538591&usg=AOvVaw0I12Ce02YY7BOZrcUlNd-k)[ Drivers
 of variation in occurrence, abundance, and behaviour of sharks on coral
-reefs.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178062155569&usg=AOvVaw0OasoRecLfvJIMrYPat0f3)
+reefs.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178457538788&usg=AOvVaw3RBJdw7-0gPrNHObFgc_LG)
 [Sci.
-Rep.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178062155640&usg=AOvVaw0um--fbWAw8PvBU6VdyJ7q)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178062155705&usg=AOvVaw34ompPfmPLJ-N7KSGpW_r9)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178062155766&usg=AOvVaw2lx71TcW53tpMbOR2UA1l1)[,
+Rep.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178457538864&usg=AOvVaw1hqo_gaNCu9FbF_Kr6821-)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178457538924&usg=AOvVaw1XTcm4VikzuW7dD1aRYDdC)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178457538988&usg=AOvVaw0k5Zs2uIFeZtLeEvbIwk3Y)[,
 728
-(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178062155845&usg=AOvVaw3d7gKh9qDvVa62T9he83hw)
+(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1784178457539068&usg=AOvVaw12hlhmgJmdkfJr71Hn_GXa)
 
 7.        [Lester, E.
-K.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178062156033&usg=AOvVaw0fPPc2Y295nVRJ9GkR_Qrk)
+K.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178457539213&usg=AOvVaw3ZdR2L-hHYsTwft5LT4OLA)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178062156108&usg=AOvVaw0BIVAf2qq5ld9V2f_h3LER)[ Relative
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178457539285&usg=AOvVaw2ldal15bN-EpJmv-gs8zpX)[ Relative
 influence of predators, competitors and seascape heterogeneity on
 behaviour and abundance of coral reef
-mesopredators.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178062156402&usg=AOvVaw3JXnHBEXzgbQJBYbgJcmBq)
-[Oikos](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178062156477&usg=AOvVaw0-3em1IaetrgIYOdmgCN7n)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178062156538&usg=AOvVaw1OTgJJRAv3jbcUm14bB-Zm)[130](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178062156601&usg=AOvVaw1ezWQ7hLGmj_Yg4HwKTKoK)[,
+mesopredators.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178457539540&usg=AOvVaw1fPEyWHXP5LKvDw04xo5ot)
+[Oikos](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178457539611&usg=AOvVaw17skCSwgLi5ln30V6dB8g-)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178457539676&usg=AOvVaw3i1a13215URCssW01s1Kal)[130](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178457539742&usg=AOvVaw2M0Qb8KnMhvkamxlCAjPPV)[,
 2239–2249
-(2021).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178062156728&usg=AOvVaw28GBqVEc5PMkII16o_LfLZ)
+(2021).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1784178457539837&usg=AOvVaw3mR-oYvO1LEZ3wLltiZl9l)
 
 8.        [Rolim, F.
-A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178062156909&usg=AOvVaw2injQan6doBvqqBVJkYn6f)
+A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178457539981&usg=AOvVaw370RE75sSMOk1Z6sHtTp8L)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178062157001&usg=AOvVaw2flmGF-3o1uxw-iSd_mphH)[ Network
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178457540054&usg=AOvVaw3VMF-w7rmMjfG5tCoAa9Km)[ Network
 of small no-take marine reserves reveals greater abundance and body size
 of fisheries target
-species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178062157254&usg=AOvVaw3fVrkUQRp0Cm6SaA0zb2u7)
+species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178457540290&usg=AOvVaw0EAOyBRYgVRV57PthRINOr)
 [PLoS
-One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178062157353&usg=AOvVaw0Opx03ffx-_LDAJ9stfkDi)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178062157439&usg=AOvVaw28yCoDecqyKSvHwOcDxUA3)[14](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178062157523&usg=AOvVaw2KtCg9HaTnU3S8eKsaKi6B)[,
+One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178457540385&usg=AOvVaw1hWeQ7hnDg2OptmRhZ4tdi)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178457540457&usg=AOvVaw2TaxYJoFE4bY1ilsp5jFcV)[14](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178457540524&usg=AOvVaw3oWM9dsIKqtD3ET3_9x954)[,
 e0204970
-(2019).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178062157623&usg=AOvVaw0a2Rkbnbhxk9tKQOtCzEwB)
+(2019).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1784178457540616&usg=AOvVaw343lprsY9jtBSL0rt_Pua0)
 
 9.        [Rolim, F. A., Rodrigues, P. F. C. & Gadig, O. B. F. Baited
 videos to assess semi-aquatic mammals: occurrence of the neotropical
 otter Lontra longicaudis (Carnivora: Mustelidae) in a marine coastal
 island in São Paulo, Southeast
-Brazil.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178062158178&usg=AOvVaw2V-o7bDwA9UZHMfg4fX3gI)
+Brazil.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178457541104&usg=AOvVaw0SIdR2myat4_Y59O3pAk6F)
 [Mar.
-Biodivers.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178062158268&usg=AOvVaw2N21nxxTG_BvoT12VFjCjv)[ (2018)
-doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178062158349&usg=AOvVaw0E3_ao6SxYOgPwGSOJ1Ado)[10.1007/s12526-018-0868-7](https://www.google.com/url?q=http://dx.doi.org/10.1007/s12526-018-0868-7&sa=D&source=editors&ust=1784178062158462&usg=AOvVaw34_LjxiEiMtAKl9RUt1XHn)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178062158531&usg=AOvVaw2wuaABKHU2_oIEBbe4MLSA)
+Biodivers.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178457541198&usg=AOvVaw0zkxt4ZG3AugiOUOv46-Ax)[ (2018)
+doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178457541278&usg=AOvVaw07JZeureHyL70_6_BW2rF6)[10.1007/s12526-018-0868-7](https://www.google.com/url?q=http://dx.doi.org/10.1007/s12526-018-0868-7&sa=D&source=editors&ust=1784178457541392&usg=AOvVaw3OOWb-znvBdZuLA46ysyk8)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1784178457541461&usg=AOvVaw2X2GgoK3BrrR8T3iCk0QN8)
 
 10.        [Haberstroh, A. J., McLean, D., Holmes, T. H. & Langlois, T.
 Baited video, but not diver video, detects a greater contrast in the
 abundance of two legal-size target species between no-take and fished
-zones.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178062159057&usg=AOvVaw0yqobXiVxJKGhPRYwPIfQS)
+zones.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178457541913&usg=AOvVaw0T9AOPZIVIHN6bliJ6mp3A)
 [Mar.
-Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178062159148&usg=AOvVaw3Xdu2dVIJ3g7LJUXfKbSS4)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178062159214&usg=AOvVaw0HT4MYUVhXfH3HGbFCYYZV)[169](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178062159289&usg=AOvVaw3fiq1oA4v5PAFjvqpQujFs)[,
-(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178062159399&usg=AOvVaw3wdJakimyDAwxC9DhEGmBL)
+Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178457541991&usg=AOvVaw2KIgZ38Sai7UyGfWQoyL7w)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178457542054&usg=AOvVaw2rXkWa5BPYm7sW9xiyYuaA)[169](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178457542120&usg=AOvVaw3tFJBeMO_wSlS4js8BeGVb)[,
+(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1784178457542199&usg=AOvVaw2lgHXrzMdqD8HTASeDX5ok)
 
 11.        [Piggott, C. V. H., Depczynski, M., Gagliano, M. & Langlois,
 T. J. Remote video methods for studying juvenile fish populations in
 challenging
-environments.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178062160051&usg=AOvVaw0EKOpD4l2FBWAVifNsZPfA)
+environments.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178457542549&usg=AOvVaw0u3Rg7cFAJ-xIDISf-Fful)
 [J. Exp. Mar. Bio.
-Ecol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178062160218&usg=AOvVaw3fmMWvAcl0TYsWgtkXY6uz)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178062160313&usg=AOvVaw2XNtkLprp43kftUViClC40)[532](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178062160415&usg=AOvVaw39UHTmX-YFrvtno2XpVcp0)[,
+Ecol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178457542643&usg=AOvVaw1bVlkuuhDBkW1c8_cEa7mY)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178457542713&usg=AOvVaw1YkVlVVBDaFTzoTthlZyYm)[532](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178457542782&usg=AOvVaw0gIMm0MJuXlZL_Qm4RbxJe)[,
 151454
-(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178062160540&usg=AOvVaw1ZDmrkCVV2UL3nFRH70u5h)
+(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1784178457542864&usg=AOvVaw21V8Knm8XajtY5-vCiqMpV)
 
 12.        [MacNeil, M.
-A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178062160785&usg=AOvVaw1pqqFCi51-CF_l4SrIJXWj)
+A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178457543011&usg=AOvVaw0WWG2RdNWxR4mSgXyRheak)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178062160901&usg=AOvVaw2AzxyefmOU8HBM-l1EhqqD)[ Global
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178457543089&usg=AOvVaw2ZdKzV8Pds78xclfNsmd1S)[ Global
 status and conservation potential of reef
-sharks.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178062161138&usg=AOvVaw0xhQW817PC88wbNgZY_9XR)
-[Nature](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178062161250&usg=AOvVaw2gmj1y2JWl9WWiHg1nkpDM)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178062161355&usg=AOvVaw1e1TOaL0-kn-HpBcyeyXm4)[583](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178062161428&usg=AOvVaw0MFfX_qADc0JzDPQBW0vf4)[,
+sharks.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178457543273&usg=AOvVaw3nVihgvP5BbbWehJa5pWrG)
+[Nature](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178457543345&usg=AOvVaw0BskDm9Bl9Ej9s_yHX7voH)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178457543409&usg=AOvVaw3r-Qgp4-uAi-oe3pAdOCF6)[583](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178457543478&usg=AOvVaw1PP1LJkT5PxFrLurNVWPsI)[,
 801–806
-(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178062161524&usg=AOvVaw09UZtuFEpKjxO3ux-alPgu)
+(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1784178457543573&usg=AOvVaw0gV2f973RYzuyI6ZjtyjXc)
 
 13.        [Goetze, J.
-S.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178062161714&usg=AOvVaw2-DBojIt6nXQejXFJr80AL)
+S.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178457543727&usg=AOvVaw0O_URJLXi0442WpmE-iA_d)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178062161818&usg=AOvVaw1eB2zRqk96GotBTcigkxu6)[ Drivers
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178457543802&usg=AOvVaw02qSey9W-Z3vub9RTSbuih)[ Drivers
 of reef shark abundance and biomass in the Solomon
-Islands.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178062162045&usg=AOvVaw12vJsANoRf8HneeqSFJMLf)
+Islands.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178457543968&usg=AOvVaw3BttLkxyCO9UQGaUq-j2uN)
 [PLoS
-One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178062162152&usg=AOvVaw0T29rgkFgYkqb6B4GFin4D)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178062162247&usg=AOvVaw2Cq7TuPMaN_52C472H8AYk)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178062162325&usg=AOvVaw1wX9_EsgrVDs7XHVJy6eo9)[,
+One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178457544046&usg=AOvVaw3ZieJtbapMayV8zjDffLTy)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178457544109&usg=AOvVaw0xfqFD1DCzh2pCra0OH5m0)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178457544178&usg=AOvVaw2Cb8LRKStsNFVs5f1UGumA)[,
 e0200960
-(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178062162438&usg=AOvVaw1ytnjU09OC2Dz88pIJB-0w)
+(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1784178457544265&usg=AOvVaw0SPYxaPx6ZELCBrQmocuLf)
 
 14.        [Wilson, S. K., Graham, N. A. J., Pratchett, M. S., Jones, G.
 P. & Polunin, N. V. C. Multiple disturbances and the global degradation
 of coral reefs: are reef fishes at risk or
-resilient?](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178062163031&usg=AOvVaw1MNokDohAtH7MUaQfGua3b)
+resilient?](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178457544677&usg=AOvVaw3VwLu5iaZwYUrdu14IZzJX)
 [Glob. Chang.
-Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178062163158&usg=AOvVaw2a-_ldKPvARSCiBMHOsnyO)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178062163251&usg=AOvVaw0zwfLWXaP-gw7bBAQ2mrRZ)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178062163337&usg=AOvVaw0AUY_tkcH0jfzRfCRdACym)[,
+Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178457544767&usg=AOvVaw3Or9knd5PDDoOHNG0VGxkt)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178457544828&usg=AOvVaw3M6YkGBXd-ws5yU_0lFXY3)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178457544912&usg=AOvVaw3fLEmwvZYdbe01bBfaw0Wq)[,
 2220–2234
-(2006).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178062163462&usg=AOvVaw1-3ifQoQlLx0Hnb1FuwgeB)
+(2006).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1784178457545031&usg=AOvVaw1PDM-9RHGX0ZsXgDsq2dVr)
