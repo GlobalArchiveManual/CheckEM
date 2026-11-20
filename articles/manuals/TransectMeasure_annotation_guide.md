@@ -3,18 +3,18 @@
 [ Download PDF
 Version](https://docs.google.com/document/d/1c0lo-wQbJqHk0GPm824wP3o2zVROBeT_G25M46eV6js/export?format=pdf)
 
-![](https://docs.google.com/docs-images-rt/ALKuztYDX3j3Ngev3CP6xo0Pvsyfa6hUoghyXodmMxpTo3PSRU4N2p7W03OKNg3_1WZfNJ-63nkiQzN2hNtR6-PXrVaesGBN3qsejI6WUEcxL1lwjUZyKPdzEaVefG3abenwSWwMKtiTFCTeEsPY0ectICoCsL_8lms34HaBJw0=s2048) 
+![](https://docs.google.com/docs-images-rt/AIpPl2D5BS24FODfYF7dVQX6x6NOTc73lqHDlCeVUrl2ZYN8DlyDkBHmHk0GtKJBrxKFtJH9cJv4uQ2gmV1mTJcKyfA7s_VTUxItQnc6COsVvFpxG8kxImhPn0NmppehNRMmb10lzuixR72sdsvWt14-YymH_woCYYmS718Esm8=s2048) 
      
-![](https://docs.google.com/docs-images-rt/ALKuztaG2AfL97CEkOxX3EzgkEp_X7zUB8ir8BXx6oMx_b2un2qSnjMMwGmewYkORGUQ55itEpkwymDXBk1kAsEqFGIQg63E7CcSKv6aB7eZPklS6nI0S_nyENqPuW6PM2JB3q3C4HCgcodh1sWkvaklcWL8iKMNyAIdjSDjql0=s2048) 
+![](https://docs.google.com/docs-images-rt/AIpPl2ADP3lksCDju05NfUqBs59CuUYU-INxaWj1kcINAMneX5zukqwAv6C7agBw79meNHObhC-mrQaVdkptcBaZY1JBT4z-dE0-fZxNnndncDN6XxwDPM0QemaP9fsa0m9KnyKz8DA1V85Ry9kVjfayeXcRiKbmgKvtwpSbbNc=s2048) 
  
- ![](https://docs.google.com/docs-images-rt/ALKuztba5egat0MDMTxM3lCnvshMgFKxZRcseMEgQ_yZ_qRVsrj5Bpa3IE82fPcHaA6JLeDjlvE3SmIdiQSCEyDqjD64Ck34cpMHofjTQVR742AdrqctPyb6C7ETRhDowe1IDkdoQQOw2mHPaSOW928zWIStzOz47QI5Dl5f_xI=s2048)
+ ![](https://docs.google.com/docs-images-rt/AIpPl2D5pgaCj8kxHZe6O1ryda7xK4FbTU40d68jBpkqSWoU0XHYYAQdIOz4Qrbd-4RZzBBE5Qg8GGuw5bEhwx7PmH0LJB6a5p3ePjhz3cnYuiejvco6hXZglyVMb1JDXjFDf_jGiJHBEnx2f-Lh9pAjn1fzcNUhaHBNulr-z3s=s2048)
 
 Annotation guide: benthic composition and relief for horizontally facing
 imagery
 
 Updated: July 2024
 
-![](https://docs.google.com/docs-images-rt/ALKuztawYlZGD2IYI1mxx60gCgtFRpC4q4v1SDCMD1X6u-ln5Fs7tOYha6X7xfQSJTfEoNRlGo4S_kbWxa9vBt5wfvz7YDrdUVpvOunyq-yNtR_Nku8wy34XjJKKQw8gL9zLNHOXGKvTipVttUF8ETfrUN1RRTyireMyNCwxMlg=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2DPz6YKKI7dCKKyLbll7982pzmdlrNO0nY3zJdMpo8yJ-lZLyKdpdObFwpUNsCfdhMUauL1Kg_8Vtfn40YwcECUAqGlkCYd3ffmG0KdsEkNxuhtnk_CA0kPk6aN0htlIF6GiOqXfRuWAJmDzlUGLsYMUZP0IViWdAx9Sb0=s2048)
 
 ------------------------------------------------------------------------
 
@@ -148,7 +148,7 @@ and complexity from horizontally-facing imagery (including Baited Remote
 Underwater stereo-Video and Benthic Observation Survey System), adapting
 existing standardised schema for benthic composition ([CATAMI
 classification
-scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1788152134832835&usg=AOvVaw2XtUS2PPJMdW4sb6cioXBX))
+scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1795165526959514&usg=AOvVaw1TCO0yaQvz9m37BjSiRDQC))
 and benthic complexity (Polunin and Roberts 1993).
 
 The annotation approach is rapid and produces point annotation-level
@@ -162,7 +162,7 @@ assurance and quality control are also provided.
 1.  Classifying the benthos composition
 
 Our recommended approach to characterise benthic composition utilises
-[TransectMeasure](https://www.google.com/url?q=https://www.seagis.com.au/transect.html&sa=D&source=editors&ust=1788152134833831&usg=AOvVaw3lYThb1u3m3DHxpOL0A1Vp),
+[TransectMeasure](https://www.google.com/url?q=https://www.seagis.com.au/transect.html&sa=D&source=editors&ust=1795165526959829&usg=AOvVaw2RlE8rc6q5vSrwnsAB2l6y),
 a flexible software designed for the analysis of marine imagery. Benthic
 composition is classified using a random-point approach, wherein the
 biota directly under twenty randomly assigned points per image are
@@ -173,7 +173,7 @@ benthic imagery. Benthic composition is classified using a hierarchical
 scheme that allows for standardised annotation labels which are
 consistent across different locations, over a wide range of depths, and
 in variable water visibility ([CATAMI classification
-scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1788152134834796&usg=AOvVaw14Df8H2qDQySpB2eVAJ8ca)).
+scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1795165526959957&usg=AOvVaw1HM-2mD_TDJWkMP1KH3te7)).
  
 
 2.  Classifying the relief
@@ -192,7 +192,7 @@ across an image or deployment can be calculated.
 
 The annotation schema we provide, adapted from the [CATAMI
 classification
-scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1788152134836576&usg=AOvVaw3xTQN2N7E5tu81jv1hr0JS),
+scheme](https://www.google.com/url?q=https://github.com/catami/catami.github.com/blob/master/catami-docs/CATAMI%2520class_PDFGuide_V4_20141218.pdf&sa=D&source=editors&ust=1795165526960226&usg=AOvVaw0Eu1K3NZTNdYaeC6przS-n),
 uses a hierarchical system to allow for accurate and consistent
 annotation labels. This schema uses ‘levels’ that increase in taxonomic
 and morphological resolution, with low levels representing coarse
@@ -221,21 +221,21 @@ annotation efficiency and allow for rapid data analysis.
 - Open the program TransectMeasure and you will be welcomed with a blank
   screen ([Fig. 1](#h.3hytau3jewf2)).
 
-![](https://docs.google.com/docs-images-rt/ALKuztY17oknEJr9TbrcQUbCwZi3LyeCPfH9BlOHkc871qGmJfAZ_LPCh5ZRwUac8khdKEp-tyu6EKDuQAFNvZLCbzQYG6NoZQdPMpv85cZYoQX2G84a6wh5wmkfYqZ20W_FYLpaX_eR2tebMGiW4pAqRvXLlsV8TYUmiUk=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2Cym9KG9MYqdpK7k2gNnlQyoOusZjAigThdvmv0zI-Eme7XEn1T1y7a-JRzmOhJkxoUoDv15sInLze-NG54S6y1OiEM_rdlODsupVojTC6GiUs-ScPSb4NO4A6zhLdbycmt4ljSYzkHSIKHy8CPoloIaeYqgu-I3QQ=s2048)
 
 ##### Figure 1: TransectMeasure initial opening screen. 
 
 - To start an analysis for a new set of images: Go to “Measurement” \>
   “New measurement file” ([Fig. 2](#h.xxy7mnve9pur)).
 
-![alt_text](https://docs.google.com/docs-images-rt/ALKuztb0Ydut730gF52kPTyqGV18fuLDZQaAPTUYrjq-NkQWvnOegAS9SJESLI964k4vYG47zJK7IYmNaFvUP6_c88PPuczvNgzl5XZxiBJg4MvRvUhjU4XUOwshjbGpPl6pC2ONrOnKP6WwagI5hbOJAO2OzkvDf8mb1wlynQ=s2048 "image_tooltip")
+![alt_text](https://docs.google.com/docs-images-rt/AIpPl2DqIG2HJkHpQF78KwDp6C_tbaPJe4qJCcePPFbfmXuSH6YGoj80-qIKKwh-0CBOt7rEVsUK4VvDHx94r9_RJN_rZwEsY1NxVKjiUVqR5rF_US3gaMz9l25o7r8bQvnBigKWuBpzl9rM5HNHr3jOM7ot5s91bMKxy5ChlA=s2048 "image_tooltip")
 
 ##### Figure 2: Creating a new measurement file in TransectMeasure.
 
 - Locate the folder where your images have been stored: Go to “Picture”
   \> “Set picture directory ...” ([Fig. 3](#h.5braz3xbt2)).
 
-![alt_text](https://docs.google.com/docs-images-rt/ALKuztb3ZyJ-EPPSfmQl2xUk5JrLAUH5rYGtqRHTQGhV_VNoTxAvXo7U-9zT9sJE7GOvtIrYN3wqG65G5-JzSLvHKqbK5FTd8G0RatzK6f5rLmRzsqlUFQlVHMnODRUNBBHGtaK_wyDlNuH_8XcKaVzdDHSDvuKAr9D_aME=s2048 "image_tooltip")
+![alt_text](https://docs.google.com/docs-images-rt/AIpPl2AsEQalZi2cC1pdUP8y9U_ikhxsJmEpyuR0fkp_Jm-Qm33EahULRxElXmwXTvTKXsvDw2nSzWRZGEAWF-IwHVKFLChk-lEje_MA9j9Q8U_3mBETGIC7UlJmkTKSX_DpcM660H9u47brunWqyrD6sN65BZi9BgCT09I=s2048 "image_tooltip")
 
 ##### Figure 3: Setting the picture directory and loading the image in TransectMeasure.
 
@@ -262,12 +262,12 @@ annotation efficiency and allow for rapid data analysis.
   The attribute file is a text file containing the information necessary
   for populating the drop down tabs when classifying your image (Fig.
   4). This is available for download via
-  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1788152134844319&usg=AOvVaw12FL8lf4hUdeVH_ObojRgJ) -
+  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1795165526961315&usg=AOvVaw1uaqFiMfu-4j6xHhJfCuyc) -
   ‘Schema downloads - benthic-habitat-annotation…’. See [Levels in
   annotation schema](#h.cf5m2n6emqar) for more information about
   choosing a schema.
 
-![](https://docs.google.com/docs-images-rt/ALKuztbHdQDsnw8ui9_1akhcAAStyqtbHH8mD8oJ2VqTjJiUUkGSnBHN9nMFCnoKJryq0xjGJUswa27ALOvlt4GTEb_Cfdb8zXDeLhf30YXrG37oiWeCgP3dMiVLxR0mK-9EAHLy3qmsoJYfySuSwCSNnHhb8FY0gZJBidI=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2Bq1dr2uVqBOe8bPfiWknb0tgsnjbfNB1fIaw5QzXOx_2KFZ9A9doW38HZYf9pjuVXLdKy-qlCTowkOxpYBmYQ3Hf5a3lmEwrZ5hEkMYDzrJK1MJpUH8C9RADi0RR2D08vuGKJisSTIA5anhVK0Is3AFOnWqf84Cnw=s2048)
 
 ##### Figure 4: Loading the attribute file in TransectMeasure.
 
@@ -280,7 +280,7 @@ annotation efficiency and allow for rapid data analysis.
 - Field heading 11 = “campaignid”
 - Field heading 12 = “relief_annotated”
 
-![](https://docs.google.com/docs-images-rt/ALKuztYYG-Gu3JekMsLAWw-C9CdQao0qLdHofi8j4awsenJ4TDrJiiVnv-zM59W-iEkn2cofDlNcDI7arJTmjqJ4GccaD3RQGJmInojnWBtZbd_OmsMSdWiHqVZXUaQzuzWMYipIFuMVfoaVzCfk27_spfziVbtaYtWjtHD7AVs=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2DiHIWCN1XVnykvwsOnUOEZubvpG8eK79iiIQ1nx0x25C57u87hiPeS3oB9b1zKJn3vMGpR-T1q7tGxInUIMS9BxhXlo4X-7Fb2uH3UXsk5E-NhFYQlWF5bQaRsUsQtDoY2zcb-zpl5T8jcnB7LuWoG8mA94sq61tc9ILY=s2048)
 
 ##### Figure x: Setting the information field names.
 
@@ -291,7 +291,7 @@ annotation efficiency and allow for rapid data analysis.
   dedicated ‘TransectMeasure’ folder for each campaign, and periodically
   saving your work throughout the annotation process. 
 
-##### ![](https://docs.google.com/docs-images-rt/ALKuztYSj08lEE3zgKa8GtVvr3acND_ltqIK5YaJnNrGxwklB_2m8KprGBBhLh2atTkWIpoHTvZ1c5eEpDQg7OEXqbpUgrXNmpteLoePVPTVqhkY5YtYLi-QFApBSZJXSYBO9TY-go01ae3j4oZnDeTwr97uyqeXD49l8Oth=s2048)Figure x: Saving the measurement file. 
+##### ![](https://docs.google.com/docs-images-rt/AIpPl2BunuM8B7dMvIrd89el2WnDg5Vaoy2GdSWq3IatppuN-WjRzpfBiNegKQmOXO5kW9SEI_Gvb_7ZPzMkZbSwqrekhI9W3xZ3OSx0bTq7kAcyDeh8zCWzq0j6Zmh6ZXXbRvXMN3OxNEFj82mfvHhemdxZfmMJaR_vXBwx=s2048)Figure x: Saving the measurement file. 
 
 ### 2. Setting and overlaying the annotation points and adding frame information
 
@@ -310,7 +310,7 @@ imagery.
   (e.g. 2024-05_Investigator_stereo-BRUVs) and “No” for
   “relief_annotated”.
 
-![](https://docs.google.com/docs-images-rt/ALKuztYAFqtPAegZPAZmIKiHrHu0eve_BJN_xz78G5t6Af4RXqE_gV39V4I4z3rlHsMKW3881-SNOYdPg8R9COosqU4V2Ni67GE0iYAgD8DRW7z4NpEttFy_2AqoAXdPZfQDTchXfqTPDLzHe3gdouvZcaK4Hs2wXzhAKG-oHbw=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2CTG-P9fYhodcRRqEBzr5_q46IWX25h3ddmlZ1uUtWOzBK7DP8tiPHHTs3eIvhhtLCQhiWBHAzizlc3pD2bEWZpWrdGqDsovbeJ_lDpAVCJjj9TVioZWnVNNQlIvNwHQKTZvla7lRZhmMvhoF1jeOBWbXR_Zo0c9gAdi8g=s2048)
 
 ##### Fig x: Information field value editor, with values for “campaignid” and “relief_annotated” entered for a benthic annotation measurement file.
 
@@ -327,11 +327,11 @@ imagery.
   of the rectangle that forms the lower 50% of the image \> then Right
   click \> Click “Add new area of interest” (Fig. 5).
 
-![](https://docs.google.com/docs-images-rt/ALKuztbkmjEftH7_1J3V9b-wqhG-zTunSusSKKXO28isBWglPszZSAE13mc5N8TfGyCAEbonw5baQ0_V_YQJ6KCuUdjsZeTz6C6MrSbMoS_0ymQ1z1zDDCmya1v1RvuG9fTkKEgRt3JtV6u1SPAqdiqR-3bvTGb2skFjZ6lEcQ=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2DCi_DftTNaTcWKXcQplbtIW7WOrFf68ob-L7cm6prHDp5F6DzEK3Q8e7-IxQ_deD8knDx0p2pyuaI0yNsZ-PtVC9d4R_YtJmDo_3By3COMmeBbNuXK_ynGfQYlQSMDAP7jZVSpQVgOub1O_jwVd68sTPCR6EHnmQW8sw=s2048)
 
 Figure 5: Adding a new area of interest in TransectMeasure.
 
-![](https://docs.google.com/docs-images-rt/ALKuztb05RGy70qvGUR4qgjZdoMnxESziZoCM8C-8pfZkegBeQQILh5uHQmM95AscwdUauV2UcEY_ja381nqbJsyWXR4lPTVx8N5tSrpJiyzMBHIg6iTMqzzju1HomCPBqJhe7c4P7bM_Y1HBRjoQ6YXTrES3UjgBBDltGLS9QQ=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2AfdYUNJpUDGJOAH2q2e3HrzM_gJHcjQ01fWGb9pX4cBS8Ow1fMNCWUFuLIicKx2O96pG01NMo4rs4VOPI-UelvjRLv6uLnMmVN2U53ijCa3-CMdY9ySbHnQroj_ZB_s3Ngyt8CuRIJznuzwh57TAdXH8VdDDLhnJCVdQI=s2048)
 
 - To set up the random points:
 
@@ -342,7 +342,7 @@ Figure 5: Adding a new area of interest in TransectMeasure.
   allow you to classify the benthic composition according to 20 randomly
   generated points over the lower 50% of the screen.
 
-![](https://docs.google.com/docs-images-rt/ALKuztakcCnwX01EJ_EkrhneSSiKrIqwBsDaigEG5JJQV66OiRaAzJnT_x_B6WRK2slAnUKaGi3ADgRHVMpGIvbsz0XozMRWYgQUYp1x9DGgSPC5ufOabJRJ5MHbKk1N5Gx_D8VlJvQuFHr9tt4HwXTFIxMwlnjAKWPmh02L0g=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2CBZcWm4qOR4Ve21eM7CI--Htx_Bv0qbNSJXU05CJZdkHzFIo5uxOH3Dh_3lR_bmax4Wn-yU_kJYofYtQyCW-dyokUQKNsgx5Gp4WEqRGSLHEhqC09ewLrca5_c58MSyjeIhoHij9y_FRNWY3aix76KeKW4Jx6D59t7Ng=s2048)
 
 ##### Figure 6: Setting the dot configuration in TransectMeasure.
 
@@ -360,15 +360,15 @@ Figure 5: Adding a new area of interest in TransectMeasure.
   the total number of successful images recorded in your metadata (Fig
   XX).
 
-![](https://docs.google.com/docs-images-rt/ALKuztam6jCbIk8B-1fsMhlauinlW6P_1mfReiW1gAzyehj2VFFZOMQy4oCi7PIQk7qLflsBm5lrQoAzQQslY7_vCiTUk_MQiYwgH7M6Q4u2bawvGz7LZow9X5a37JWxajL4bh2vJo5rjwWHWkjyBYizusuA-hQOt9f8nXxBfy8=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2CcZ6jrXNjmAXx1AMzdJ6sVBER3eaT4tn72GEDRlSPNjFamYNGHyXpXOKQHMd3bIDTHpp6kodsh6tBV0f_IcedLsYap_AmzNrz2aNxOr47YoQ4mMPaZB7lIymQkk83w2A44mdM3b9UpH19CP894sL11jx_U0CCCofa5cVM=s2048)
 
 ##### Figure XX. Total number of images/measurements in the TMobs file.
 
-![](https://docs.google.com/docs-images-rt/ALKuztYxKIB_DMfTRnIgT1X6P6wbgKGlTOQxj1mRbu9rOYAUBpyu9hHS0PsOZdt1zDsBlxyqRvyJ9uULU_upCBPkS-u1TmCcC2WB4JoeVDo_OsY8_yTUuwHzwBnYBbwYfrktcrew3HX_DYXivX962-Ljn_cmrAypzsoQATEEjw=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2CXFwQ0tB0w1-rwPX7kgK8AoQ74lQ4u9e4g5uehef9wM7AZ-0YBdcXx_e-sTjf3piGGIENjC4rJkBEI62PVQSNl4FOhGo28SZ0BX3DwA3lshU7mOqhj8p-4wsurE9nOqSfZg3Jk_m3Qlevg3y8UW7PdvKC5B9jxpmKzLg=s2048)
 
 ##### Figure 7: Adding dots in TransectMeasure.
 
-![](https://docs.google.com/docs-images-rt/ALKuztYciEYW463MXcdasNtu7HQtZCYQcweuTtzY7ipOe60hL5Nf_3M7OQ3v0QYyKXOIbLFmoQnppeNYOn2C4IXFMJoWPuCQ9C16FprPuEC1U1YSAn0H_sJNv_seIKpbWRgijaiSkKQcY-BFwNbLKvseYcAYoE7pOWn6Pstp5Qo=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2BLRODjbsrFbtuWoAtm6Q5Pi6YonvzHhxhm_ZkqVlG84UWrA02GDoF6pN3UyY7j-car4VzKIqAsiWx9x9UYEWq0a-0b43K82Kxmm5OOuziynAKoWXQfELvpNpI-wnsZUqsYLYSkQ0aqv7wMHIQ1rzyP8JQ9F0gKbhGbDdY=s2048)
 
 ##### Figure 8: Example of a stereo-BRUV image with random points added to the lower 50% of the image ready for annotation. 
 
@@ -387,7 +387,7 @@ EventMeasure, or name your images to match the following structure -
 underscores as separators and parse the information from these into the
 frame information fields.
 
-![](https://docs.google.com/docs-images-rt/ALKuztalTKfNwgKpoarMo5SlJ2r8x4WrEyMo3TyamBTR3KDHe6W0JQtREOw1szeyvUS2s_O7eSip38lF5hAlRbvgFwWju89RZtsrLCQyS12IpMfc5aEGhxoVEQzLbKViNybRiyWDRTuMvvy5pLgObbVfcw28z2YqLTNZ2jqD=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2ApvbguLMxpTN7TSmVRBydM8LUPgMxlcrhuVyvJtnbFfpr4tC1lZ6-gWfqqg1_knpJFhqn4CPGpdG-3mUG6RbKcjGg0h9DX_sg4B2m-NzKY5AaoUYiePpjGDYhZc_r8N8C8UCxOZk8iRTgAGV5v9CcdN1R5LztG2gcv=s2048)
 
 ##### Figure 9: Example of adding frame information fields to a stereo-BRUV image using the “ctrl + t” shortcut. 
 
@@ -415,7 +415,7 @@ Figure
   screen (Fig. 10X). We have requested a change to TransectMeasure and
   will update this guide once the changes have been made.
 
-![](https://docs.google.com/docs-images-rt/ALKuztaKMrszt61eBmcxev_m6PYCl8_KMRI8e7TOPM-W4jkOyL4lNyx7mS7G8QJqTw6hoL1gdHWViONgMx8BHERCQ8oXg4NUjqMw0SLYg3iW-BqMdxejr4hycAHDDYHl5sYMxTUe2EesaYHiEfwTkaHpnFpnL6dpM5FyFwdNNek=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2AJ20LYlDyHq2NIlhQbHJN5Kz9053mR_IAGGXNFw7lkBRLLwKdaAnAX3tdavH_9TmWdo6QOy8scVMGCeryoc_xwf7Sft-Drqv7_qSzW1kkJv-QuIdO4Qr_iBFShyUibDqqQujNvRTLHwXeTz1hMz4BQeg7A0lNFXC9Wu30=s2048)
 
 ##### Figure 10X: Adding sticky notes to your monitor to accurately define the lower 50% of each of the panels.
 
@@ -464,7 +464,7 @@ Figure
 
 - Repeat this process for the third and fourth panes.
 
-![](https://docs.google.com/docs-images-rt/ALKuztYX2dAK3JZRLZ9YOhpzgnr5dxyVLSknkGlN26JCuWSel55ZAETWtUJ5d5mGAd5yDwIuAVnYcz5IMq7Li6QNwP0bDhvMPPZND8axsz8VJnS3JjE39ZZvsaY_Yzndua_r4M8C1OGyX9y4_NVIwqXZ8iqwbIzZX9L4uIZs=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2DV0Ry-MFe_2W9ulRIh83pvBKs7WH597NKybzsiyes4DdDfI498ApSznZf2s6_6_zqTTqYjNBPeQTb5UvEeOKC-34yiztoluLxQtd-igG3kyWVWdeRyKjqTkgJ8Vbmmxoo32FiEgxJaQS76288z0S4Sku6UGA18aerJ=s2048)
 
 ##### Figure 9: Example of a panoramic drop camera image with random points added to the lower 50% of each pane. The red box in the bottom right image denotes the custom area of interest used to overlay the annotation points in TransectMeasure.
 
@@ -510,7 +510,7 @@ Figure
 
 - Repeat for all other points to annotate.
 
-![](https://docs.google.com/docs-images-rt/ALKuztbREnxRa_epWjAd_p8tclwnWL3VTkuUgTdtF4foDMsgkn-M0zSF7NNI6AmuwXsDAql70V9yFRpw93S7DiK0zORda93RPxpN3UEQcuqxB10R9NhfeGp21ZOqZii4qYs5q6lqM5zPd4Uadx2Lyvnw02HkqaNgkffKInkMrHg=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2Ac90P-Gw9mtda481S_AzFfJ0vfOqMfu_0BEk9QD1T_hBGJyrGWMSrXc7V2iFuPovS2ZmuI44QYo8OFmkoHhlEJ-rGPGvJ5R1J6SnxBOWmPGVE31pRtXpDJ-CKeNC4L6VzCADJlbFKN5lCf1Gc5LY3qU-c4Y3jrD8J6nGA=s2048)
 
 ##### Figure 10: The ‘attribute editor’ window within TransectMeasure.
 
@@ -532,11 +532,11 @@ Figure
   be made: hold shift + left click around the desired points (Fig. x) \>
   right click and “Edit attributes (polygon selection)” (Fig. x).
 
-![](https://docs.google.com/docs-images-rt/ALKuztY9ToKOH34Xds-kF6TS7NsqvI3z9sLOkDSeYLkiAFoT1UbokKmNnP3Ny75uyu29isvxVaJ0HYPBDlqnHNyLxD8fk2WDuB9Xnwv6vfkTkI1V-Rr2AO_sPj542jUl_PZ_b2arEzPI2FryJ4BzXenU9PvXPkWmal3ldEpeFnw=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2BXelZXsGzZ_yKvrAwTma4EFYr7tbOnhk9MKFa0A2ObMQdZGXAQTFxlm2FsBSm39ucMAYxM8Cm9wLj5wYzCsPPvFNMEKmmhNpN9HhZxoGphv63uoo1vPF2cI98i2fpL5E2hWn38WrmAoyF2AmHN0YRRrwsDQxziTtX2gz8=s2048)
 
 ##### Fig xx. An example polygon selection made around multiple annotation points. This selection allows multiple points to be assigned the same attribute.
 
-![](https://docs.google.com/docs-images-rt/ALKuztYIAYhluONtxm5YJsx7hB8oL20pQHOqnuJi5ONSAfaiubayTkPRUniqk5IdR7wQtP4KFLo4HLpHdRJs-gknzt2hv_OeviU9PoLrzYwM1ABwl7Ao3VvaJRIIPdaTDmeOj_H2CRvb7cJ6zP1NcBiEt7RFGxrRQN91-ZmP7s4=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2CgCmSg4nFWlSSZmGvv-U60MqZm_-W7L278Rk4Di_84P53Z_Si40zBTzeUZ-bJ5QdUy955sRsVEh7oF8wTs2FpNxj6ZMbsgJE4W_gWIf8LaLcJ76P303DCehNsyH44jsyKyO66qG6A2J1_4hfD8peDj1sfAY_DCReiRNdc=s2048)
 
 ##### Fig xx. Editing a polygon selection to assign multiple annotation points the same attribute selection from the schema.
 
@@ -547,10 +547,10 @@ Figure
 ### 4. Classifying the relief of an image
 
 A separate schema for relief is available for download via
-[CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1788152134869254&usg=AOvVaw1djmluwq6KPUQ9T0Y89yon) -
+[CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1795165526965871&usg=AOvVaw1cudCTRgd-M1PgUKzBSFrt) -
 ‘Schema downloads’. 
 
-[Here](https://www.google.com/url?q=https://docs.google.com/presentation/d/17UJJwhTpNy2hRC4jBb_Hz24ppvlwIHj1dMp-URR7bc8/edit?usp%3Dsharing&sa=D&source=editors&ust=1788152134869507&usg=AOvVaw1mZcoMMy3DCo_G2yW0T3DW) are
+[Here](https://www.google.com/url?q=https://docs.google.com/presentation/d/17UJJwhTpNy2hRC4jBb_Hz24ppvlwIHj1dMp-URR7bc8/edit?usp%3Dsharing&sa=D&source=editors&ust=1795165526966014&usg=AOvVaw24JSiqoOXruBelLzraeU8p) are
 some examples of relief annotations.
 
 This section is split into a set of instructions for [single imagery
@@ -571,7 +571,7 @@ imagery.
 
 - A separate attribute file is required for annotation of benthic
   relief, which is available for download via
-  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1788152134871175&usg=AOvVaw1yEbpzS94HivGsSBGJj_4j) -
+  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1795165526966353&usg=AOvVaw14xZcSjpudOja5BPfWOaY3) -
   ‘Schema downloads - benthic-relief-annotation…’.
 
 &nbsp;
@@ -588,7 +588,7 @@ Figure
   4 and check the “Overlay rectangles” box (Fig. 11). This will allow
   you to classify the relief according to 20 gridded rectangles.
 
-![](https://docs.google.com/docs-images-rt/ALKuztaQfQmCCLCrkD-bt6TWzDkE1bB_YKEnbewME6ia8-lqs2rodO_C0wnZCro2Zp1zPpr4dggAW67vhWGPWxkis54hOLiuci-uolo5y0jZH9rLVWrhW3hsHwNvM08B_3IudEC5LUbo_tci50MG3TFrbvQMWRY76s2EhntoiQ=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2D8ABZnIS7WDTWlQKMpvyTxG4YWksf0x1yEOXQfsPB_kXZsFkRJI5DoFITHGbuElZK8g9bVBUb4Uf6N2BAjI1ZPZboSjfoIqj1kW3jk0qSsg4Ay0hItFS0UyHTtAQL54J8EUyq37bzRNZ8P0pIHAJy3BO9GacsWMzGvnQ=s2048)
 
 ##### Figure 11: Setting the dot configuration in TransectMeasure.
 
@@ -596,7 +596,7 @@ Figure
   (Fig. 12). The name of the image will then appear in the table to the
   left of the image.
 
-![](https://docs.google.com/docs-images-rt/ALKuztYxKIB_DMfTRnIgT1X6P6wbgKGlTOQxj1mRbu9rOYAUBpyu9hHS0PsOZdt1zDsBlxyqRvyJ9uULU_upCBPkS-u1TmCcC2WB4JoeVDo_OsY8_yTUuwHzwBnYBbwYfrktcrew3HX_DYXivX962-Ljn_cmrAypzsoQATEEjw=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2CXFwQ0tB0w1-rwPX7kgK8AoQ74lQ4u9e4g5uehef9wM7AZ-0YBdcXx_e-sTjf3piGGIENjC4rJkBEI62PVQSNl4FOhGo28SZ0BX3DwA3lshU7mOqhj8p-4wsurE9nOqSfZg3Jk_m3Qlevg3y8UW7PdvKC5B9jxpmKzLg=s2048)
 
 ##### Figure 12: Adding dots to an image in TransectMeasure.
 
@@ -611,7 +611,7 @@ Figure
 
 - A separate attribute file is required for annotation of benthic
   relief, which is available for download via
-  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1788152134874402&usg=AOvVaw0tcVO8Pcc-ldl5wmTd1rGa) -
+  [CheckEM](https://www.google.com/url?q=https://marine-ecology.shinyapps.io/CheckEM/&sa=D&source=editors&ust=1795165526966943&usg=AOvVaw04xaEXU9hJU0jhm1PljBl2) -
   ‘Schema downloads - benthic-relief-annotation…’.
 
 &nbsp;
@@ -681,7 +681,7 @@ open water should also be left blank.
 
 #### 
 
-![](https://docs.google.com/docs-images-rt/ALKuztYxbpepnAVu6xXUGy6h0XuBhKulY5cwanJ8B-tBANgLeXPQeCbpII7_hqQJXLXBr7MjuRxLToyTeMNYb0Bpn86V8GF5zCic3O5MGsrtT7LHzS6uhee8p9u_CPQ12-h4uJJWT-opOxAwnMzwVDg3ZPMnx3ghSRMBj4op4Z8=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2AOj5b-kJ_OjB9zETxefYexdh_gf1F9bqymRSkePgFLZIphTyw55xJrPVEDJ5KpbhUd2D97tgIy5602c1v1DEJ1zVbGUHHYuJG_MX3Em5CTYzBrv84pKtF2Nf6F6e1RUPoYmuWbhsiTfaO643-uGCOfO3RLmlbkrsBA314=s2048)
 
 Figure 14: Example of a stereo-BRUV image annotated for relief.
 
@@ -689,7 +689,7 @@ Figure 14: Example of a stereo-BRUV image annotated for relief.
 
 #### 
 
-##### ![](https://docs.google.com/docs-images-rt/ALKuztaFUcCV6G7qqY3OsGuTHYaDj1_G-69C5x2nfD4zssYJx6jOWKYNjYoNbAHGGZsP1nvEBloNs4rS-LNnvyzoNIDhPS7LjWtzFjov_kmJEsL0oYieknAnxRidK4-SafhQGrQRSnPHPnDhKaGl484b4xtAjhnNO6arRljpSVE=s2048)Figure 15: Example of a panoramic drop camera composite image annotated for relief.
+##### ![](https://docs.google.com/docs-images-rt/AIpPl2CA7iYHObKXbpcyS24KMe7iPS3IIq5J_mPhzf0WsnVy-GGMJzPfEch7N1z1huD67jUfT6osGcUuvvZCONLnFyw9VcOQu2dIodG2et0YFcssaZLjoltLfkPMV-iwZDHFOHd8LqqLrp7AkwpOrKpwt5OvK5UcQPHowHu5Fzc=s2048)Figure 15: Example of a panoramic drop camera composite image annotated for relief.
 
 ### 5. Exporting from TransectMeasure
 
@@ -699,14 +699,14 @@ Figure 14: Example of a stereo-BRUV image annotated for relief.
   “Current settings” \> “Include frame information fields in text
   reports” = “True” . You will only need to do this once per computer.
 
-![](https://docs.google.com/docs-images-rt/ALKuztauo39ZrLe501xzz-d-E-emkmr_luqduhsWE0nNRKVC4LCJhiL4Ud6RLJXwPUwcSm7prngnlObSyXWHsbxZTUVWg6xS-iAxWPt6xT3bs2kDQ155Y1OqbsZhYJdi117Bz7weOObWELSF9vSeI1sTlY-tnUN1Q0kKUT2rXVQ=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2AGQirJ-uJPyplA0sWvG6kFKpmGxMjRiedKF6LPdWCAwHovF_guY0mTMAyzHLmyfhpluSLrisCzI7mVWsFcOvXlPkvMUsnItUETL885ua3_MDlcy8kJufheZI1vEO7Okt3ZTS1JMlCBypEjp0REneZq6oZ9_QXjO2MuPaA=s2048)
 
 ##### Figure 17: Changing current settings to include frame information fields in text reports.
 
 - To export text file summaries of annotation data: “Program” \> “Batch
   text file output ...” (Fig. 18)
 
-![alt_text](https://docs.google.com/docs-images-rt/ALKuztaS5k9Y4x4MUuTPigUeK-1DVqKjFElwfqcpjw3LTgJz1GpQVDTRGozGyBeLhWT1ENxkzCTw1VWWVNH51VAh4vGeAOK4TnR-J7RLV1rijazmPe623DyQuqNJ947HK6-qbJR96rqhAwiScq8aaoWetnVmAZ1kpQq2AyDvgw=s2048 "image_tooltip")
+![alt_text](https://docs.google.com/docs-images-rt/AIpPl2Cu_rWJyD-YWZ3FkRhPhDUOyOQ0jYQFOXBRzsnSUzmzlmqqE2RBDgVmxI4usrzXBuISVTrJ-l2bVGDwx8juh8DYuR2DKxB1OvGDsmQ9_i9Yp5kA3kau9NYeaAzVFnwDatQvJRaNTOtWmjo6ZEtoTqQ7R0IAR2kHpvdqoA=s2048 "image_tooltip")
 
 ##### Figure 18: The ‘batch text file output’ option in TransectMeasure.
 
@@ -723,7 +723,7 @@ Figure 14: Example of a stereo-BRUV image annotated for relief.
 
 #### 
 
-![alt_text](https://docs.google.com/docs-images-rt/ALKuztYuITmQHdhCbtem0O5mhXmyGTbm-G4ZVVssaU6SAnSqBq7nidIvCuCG-zPFU2BklHFtBrbGv-Cr6DH67HsiIdARYmpMtC8Wi9KnMlo9EPKNxK1X1_yVG4eV8XNNnjg2Le2zUXNNc0GyiyPIVpD6H__Mm0Bd4cXShIc=s2048 "image_tooltip")
+![alt_text](https://docs.google.com/docs-images-rt/AIpPl2CYf3vAiwhiRXKvMQwBuMov82o5j7GKJcAT3P62nElp86NJqtPzk324uvqjIrvrl1TpWHoM6S2yAHKV7Thi9xix2h06TR2wPN8MfXjkPBIZbX2UxbEDga-LL51bZ5xVeTjpO49T-TDmAyY5OZmnOUOlLCk9oxK9yEg=s2048 "image_tooltip")
 
 ##### Figure 19: Input and output file directory options for batch text file outputs in TransectMeasure.
 
@@ -735,7 +735,7 @@ to ensure quality control:
 
 - Check that all annotation points have been assigned values (see R
   scripts included in the GitHub repository -
-  ‘[forward-facing-benthic-composition-annotation](https://www.google.com/url?q=https://github.com/UWA-Marine-Ecology-Group-projects/forward-facing-benthic-composition-annotation&sa=D&source=editors&ust=1788152134885947&usg=AOvVaw2DsU1ebKA3AYkdu538m82N)’).
+  ‘[forward-facing-benthic-composition-annotation](https://www.google.com/url?q=https://github.com/UWA-Marine-Ecology-Group-projects/forward-facing-benthic-composition-annotation&sa=D&source=editors&ust=1795165526969376&usg=AOvVaw1YNDuwm2DpgQ1x274-KdUt)’).
 - Check that the image names match the metadata sample names.
 - Check all successful deployments have benthic composition data.
 - Visually assess data for trends, outliers and potential errors (Figs
@@ -743,160 +743,160 @@ to ensure quality control:
 - Spatially visualise the data for patterns in the distribution of key
   benthic classes (Fig. 21).
 
-![](https://docs.google.com/docs-images-rt/ALKuztbrZFRuoTXzHTRucJw2Tdm6ITH9odTd4XfaleJj0cUCnsHWLqcTKSg0XPpzw-fTCfuK9oPEdm6AnyDPrrYcfCZhEpTfU_uQWpcAVrCsPbj4R8Nhkfr5cdiWdZURnsgCHdZKOQdFq9Aq9StkxUygFvdH02nZQApMyiaBtLk=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2A0Tqpa1r7cGMjlqnPkQpnTmPwHaGppEmNB0yP34TSHAzySE5mb-IMD7GshtEA8g1tnOGTAiDOBG6j-0jQbhAPPCl2YfMtwF_UnLFYLJ5ErL6945pN-m7LogDqRZqZXEC6PhB-OBinn8IA9llePo13vFBUOR136KXLOWa4=s2048)
 
 ##### Figure 19: Quality control visualisation of the benthic annotations. 
 
-![](https://docs.google.com/docs-images-rt/ALKuztY6gOsnib9aJysvD_mAWOArG6MIDYdigu8fPE5jWD554Y6mvLC3r-1NoL0MhaPgc8z7W5Y528PUdPpEbXX8I3aACE4tEhDb_wPLsWhF_McDw4iswRRttjWroBQT9UqfqkAXupezKiQZoi8YM2zb5UuSyCQVY3t_VLSYBJQ=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2AehY0xa-zhKGFC5THjxxRzGLK-XCgWvcv0Rp_oPHReS5E0fT4k6g07klqVLW09BqPcNk46SuxmBacenKX3Y0h4Pjz7Z3-lOPwUuht4Z-UZwsrKVrAZNRrzJjaeI11f884rQdeyV1abiZ5XxFp_kCWwz4_SrU5-GxF15Lw=s2048)
 
 ##### Figure 20: Quality control visualisation of the relief annotations. 
 
-![](https://docs.google.com/docs-images-rt/ALKuztbuXlC57DhdhDu7SSANAk4MGVJwZ3HmCt4jIaMmVuYFDzDlBpQhmztI5taeOCwMZX4jFdngI_Lt0tk2hOw3zErsNs4jWZbr_WmLgUlRJQIymn_aZ3E3-hfiBW82p_jucb8TppWFHzPXqe5aXuz5xUJFkGz6rClplMCh4es=s2048)
+![](https://docs.google.com/docs-images-rt/AIpPl2DWCmoGSxynaWwR68dgqhxS_14j8oMOuhNg6noBmFyxG9HSAjT9UoJcVRp9Wk93tZFvgiMddg1W1j_ZRZfiH-UpLXa6DLbE7oWpxoWYUvRLr2NHKk6qamkMbRy9-V7XF2eSOeiTDvCGNpJ_KikjtcqkblBku-s_aONq5ng=s2048)
 
 ##### Figure 21: Quality control spatial visualisation of broad benthic classes annotated. 
 
 ## Examples of publications that have used this or earlier versions of this SOP
 
 1.        [McLean, D.
-L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1788152134888688&usg=AOvVaw2NGz71l6TF1rWH7iffJ7jK)
+L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1795165526969973&usg=AOvVaw1aoji-K5Of9cCE_PwQOnJR)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1788152134888846&usg=AOvVaw3i_nLdog5qir4__G75k_Hk)[ Distribution,
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1795165526970013&usg=AOvVaw3pJLtX3zmQw_CkoowUhTHI)[ Distribution,
 abundance, diversity and habitat associations of fishes across a
 bioregion experiencing rapid coastal
-development.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1788152134889239&usg=AOvVaw3HIT2TtxlK621v0zIEjZEZ)
+development.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1795165526970054&usg=AOvVaw2lW_uIwOlcGQWQJ76XkN3H)
 [Estuarine, Coastal and Shelf
-Science](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1788152134889403&usg=AOvVaw35QzrPoX2VI_cAtlYZ3S5M)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1788152134889478&usg=AOvVaw1ilTdveR_ZuBSMol8LOIjR)[178](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1788152134889558&usg=AOvVaw2G19Vu6p8nW_LOzOE6fEAf)[,
+Science](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1795165526970087&usg=AOvVaw03I8dIeoMDVnKUy-Ww55Wa)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1795165526970121&usg=AOvVaw1dnKpwLKjMaLizCA-eW-tn)[178](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1795165526970150&usg=AOvVaw3FxZqT3LuszjD32zMnv0Wy)[,
 36–47
-(2016).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1788152134889666&usg=AOvVaw1N9etzrN0ahedzcfY7Z-vx)
+(2016).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/4g9p&sa=D&source=editors&ust=1795165526970181&usg=AOvVaw37GDP_1PtIfs8aEi1Sn42w)
 
 2.        [McLean, D.
-L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1788152134889891&usg=AOvVaw0ZD-8UMi51lXoqnVzKJt5-)
+L.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1795165526970247&usg=AOvVaw1KYMaAXa_TJ39sVTsbGY40)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1788152134890023&usg=AOvVaw1K5JuBC3_BaleRWexD6IQP)[ Using
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1795165526970277&usg=AOvVaw0f2bdFpiWK41l8LUKsLKzW)[ Using
 industry ROV videos to assess fish associations with subsea
-pipelines.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1788152134890396&usg=AOvVaw3aQZqVKRl6psAWsryXmh6I)
+pipelines.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1795165526970310&usg=AOvVaw25nQrgSyyqUAgHLi_dDhP_)
 [Cont. Shelf
-Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1788152134890532&usg=AOvVaw0rvzIsKqka3Eu78liLsdb6)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1788152134890633&usg=AOvVaw3j3EYXY7i4AsqKZMEt2InN)[141](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1788152134890731&usg=AOvVaw3VNYOHexwkWb5cd191Upsv)[,
+Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1795165526970340&usg=AOvVaw1m2DBCNyLcwbHhuh4QiLhw)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1795165526970368&usg=AOvVaw2aOkOhBGBX0mqxgEt0CL2h)[141](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1795165526970425&usg=AOvVaw2-AJ_DzDw-AsUumZif0qXf)[,
 76–97
-(2017).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1788152134890869&usg=AOvVaw2-MANQiLh51myDoOaoN7xk)
+(2017).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/UzhQ&sa=D&source=editors&ust=1795165526970463&usg=AOvVaw0z7DfnvHQIhw-RcyPa1rsv)
 
 3.        [Bond, T., Partridge, J. C., Taylor, M. D., Cooper, T. F. &
 McLean, D. L. The influence of depth and a subsea pipeline on fish
 assemblages and commercially fished
-species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1788152134891630&usg=AOvVaw2eoAskJKLd3iMMDV1Ml37T)
+species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1795165526970541&usg=AOvVaw28dRKP70YZJR1oEY2GobR9)
 [PLoS
-One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1788152134891789&usg=AOvVaw3wSaTa5Jhb3Cx3zzjVojqM)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1788152134891883&usg=AOvVaw3XTLDLzELcgBssopGPNht3)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1788152134891974&usg=AOvVaw2fU1GDN_hrADgSc5Iaq3dP)[,
+One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1795165526970573&usg=AOvVaw2O4TR0XO9WCE0srfPViypg)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1795165526970603&usg=AOvVaw1imZCAsUc0veQN4ymoXcv6)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1795165526970632&usg=AOvVaw273bVd0rFlCvqqkBHe5cvC)[,
 e0207703
-(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1788152134892111&usg=AOvVaw042C3nfKDyZ9-xHyr4O7Xu)
+(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/whHg&sa=D&source=editors&ust=1795165526970663&usg=AOvVaw2sc8JkW16k7tUYBShYW7ey)
 
 4.        [Bond,
-T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1788152134892420&usg=AOvVaw3VR3l3Dxlamx0j5yjkUiCc)
+T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1795165526970723&usg=AOvVaw3zegb_rzoFRISQCYSpE6lO)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1788152134892557&usg=AOvVaw2b_M9ir8L_65b6UIc065qk)[ Fish
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1795165526970753&usg=AOvVaw2RZb7ysa_z0lX0NhcOCmKi)[ Fish
 associated with a subsea pipeline and adjacent seafloor of the North
 West Shelf of Western
-Australia.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1788152134892946&usg=AOvVaw32rBT7yUyWGQUUHRB3s3aU)
+Australia.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1795165526970788&usg=AOvVaw0fZR7ZmAhzxz2gW9Dokt5d)
 [Mar. Environ.
-Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1788152134893112&usg=AOvVaw2Awv9NOsstb73V6KGNqN_n)[ (2018)
-doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1788152134893258&usg=AOvVaw2Dd4LjcmFDGPykY6trPfS-)[10.1016/j.marenvres.2018.08.003](https://www.google.com/url?q=http://dx.doi.org/10.1016/j.marenvres.2018.08.003&sa=D&source=editors&ust=1788152134893457&usg=AOvVaw1V71FXn3nrAyPdAvMaAtHO)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1788152134893555&usg=AOvVaw2QcPQyf5PxuDCTlI9i9KvX)
+Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1795165526970819&usg=AOvVaw0WHQOhazOH5mqOLXBP8xtG)[ (2018)
+doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1795165526970871&usg=AOvVaw20k7_dAoMqP8rnAUB194CW)[10.1016/j.marenvres.2018.08.003](https://www.google.com/url?q=http://dx.doi.org/10.1016/j.marenvres.2018.08.003&sa=D&source=editors&ust=1795165526970911&usg=AOvVaw3xXSy9y9eOZLTWWzAqkiDV)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/moP5&sa=D&source=editors&ust=1795165526970943&usg=AOvVaw1iTLxziWbHMjbFhWa7c2BL)
 
 5.        [Bond,
-T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1788152134893805&usg=AOvVaw1F8nvrlhJLGnL0Svir-4oM)
+T.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1795165526971006&usg=AOvVaw0XNisMkCJmWNYEq83iiwoj)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1788152134893908&usg=AOvVaw2PZIHeRh5XN88R_N4Zz4oH)[ Diel
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1795165526971036&usg=AOvVaw0VKP4qSRQZL79fu7OjGv8a)[ Diel
 shifts and habitat associations of fish assemblages on a subsea
-pipeline.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1788152134894179&usg=AOvVaw1q7Ru901ivwQ-2XZQDyVb5)
+pipeline.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1795165526971070&usg=AOvVaw0Z31ofYwbnJrx_yZiEU5D-)
 [Fish.
-Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1788152134894291&usg=AOvVaw3x15JOKEj9zJDrEUzXQXvY)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1788152134894387&usg=AOvVaw1ZxlpXGsrE6qQMGLs6H2UB)[206](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1788152134894509&usg=AOvVaw2-qB8o8lf4Uebv6cVY_2Hu)[,
+Res.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1795165526971105&usg=AOvVaw3NliGCiYJoU5FtrTuaGB8k)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1795165526971141&usg=AOvVaw3_DzOVy26nXWssy0V_Rvkd)[206](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1795165526971172&usg=AOvVaw1DHr_IPIeNbPm1vWkHLPiZ)[,
 220–234
-(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1788152134894658&usg=AOvVaw3G6KdG-6qdVsIb2THV-DG0)
+(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/bRFC&sa=D&source=editors&ust=1795165526971203&usg=AOvVaw1pPl5IX-Vl1_nlSf2uXROi)
 
 6.        [Lester,
-E.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1788152134894897&usg=AOvVaw27FbWtc6ZXENnHS5dGGiag)
+E.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1795165526971267&usg=AOvVaw0MEZsNkQ7EX8wjXEDl15db)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1788152134895003&usg=AOvVaw2arMj29fGWVzK2i34A7LAH)[ Drivers
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1795165526971296&usg=AOvVaw2n1-ga3VgXziyX34ifqEp2)[ Drivers
 of variation in occurrence, abundance, and behaviour of sharks on coral
-reefs.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1788152134895272&usg=AOvVaw0D9cx5Lzxri2k7WNjN6UiD)
+reefs.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1795165526971331&usg=AOvVaw1M-jhGetYDiV3kauRpf2WN)
 [Sci.
-Rep.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1788152134895370&usg=AOvVaw19XLuw_V3t_dd8Lj_SI3yB)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1788152134895438&usg=AOvVaw0qtQ_SvMg_ItxWA1wpqEVI)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1788152134895517&usg=AOvVaw1cyhGO532MtcBoIGmenfNe)[,
+Rep.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1795165526971361&usg=AOvVaw3T_vRs1_M1jNw3pn-yso7Q)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1795165526971389&usg=AOvVaw1vbC8lIcSy6bFkQ3SciMuR)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1795165526971418&usg=AOvVaw3ctC7gDKK-2wl5CAFNE7rm)[,
 728
-(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1788152134895629&usg=AOvVaw0ekdmNKmTKQsDuw3H2cAZS)
+(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/70U7&sa=D&source=editors&ust=1795165526971448&usg=AOvVaw3AFPa4SkMkup5NL6iat1EV)
 
 7.        [Lester, E.
-K.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1788152134895843&usg=AOvVaw2HdwB1mLKu8iTdpuRkj4gP)
+K.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1795165526971514&usg=AOvVaw2WoxGFOgVvRmZMuGhupDGX)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1788152134895944&usg=AOvVaw3UXVWFM8bNNKYqLl2zZHy0)[ Relative
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1795165526971548&usg=AOvVaw1TkN90CASIEM754Rvu6uic)[ Relative
 influence of predators, competitors and seascape heterogeneity on
 behaviour and abundance of coral reef
-mesopredators.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1788152134896282&usg=AOvVaw0d4oRWsJ1efDmM3E9uhOzr)
-[Oikos](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1788152134896379&usg=AOvVaw21EHEuvSi4N0gS6TgtivyH)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1788152134896443&usg=AOvVaw0_mZTNb0U5_UpvA93BQAuy)[130](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1788152134896511&usg=AOvVaw1ljf4YlXtLreCEjIqmO9Iy)[,
+mesopredators.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1795165526971601&usg=AOvVaw0_VNC3YWGnZvDeYFHtfSFB)
+[Oikos](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1795165526971636&usg=AOvVaw2W2f6eCNfOP5SOTvOFt4Lk)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1795165526971667&usg=AOvVaw0TLj-6dDL5MPZhTyQOALDL)[130](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1795165526971697&usg=AOvVaw3QxmIT62rLRBR4bCLqG-rK)[,
 2239–2249
-(2021).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1788152134896661&usg=AOvVaw1GtlE1QUocPKL3cXPxE8Rq)
+(2021).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/ZVgq&sa=D&source=editors&ust=1795165526971731&usg=AOvVaw1qZ9CIl_LhSGyFR0UbAYnz)
 
 8.        [Rolim, F.
-A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1788152134896867&usg=AOvVaw0-VlAsqafFjN-LkYaDZDzW)
+A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1795165526971796&usg=AOvVaw1OJ2jau3c6A0hpG2yXB4wj)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1788152134896941&usg=AOvVaw2mgo0bo_W2I5nT_CXhjnyu)[ Network
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1795165526971826&usg=AOvVaw2QNrYQZwfjyChlSNhDoac-)[ Network
 of small no-take marine reserves reveals greater abundance and body size
 of fisheries target
-species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1788152134897228&usg=AOvVaw1LbMQwzZoJT7sjcVCXkdgo)
+species.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1795165526971862&usg=AOvVaw15eJktCP3BNjBh8HCca_Co)
 [PLoS
-One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1788152134897324&usg=AOvVaw1XtQq005BqDjESJZuBpRRk)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1788152134897395&usg=AOvVaw0QL3gGb5Sh0WRO5IJGSAsR)[14](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1788152134897468&usg=AOvVaw0mQCNy1iDd9VGHLUNFXXBx)[,
+One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1795165526971891&usg=AOvVaw3BVNE0JlLipxKOanj1c2x2)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1795165526971952&usg=AOvVaw0xKg4d0mNATZVIoKcQMIEf)[14](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1795165526971981&usg=AOvVaw1-jTKoKmBfXBpnD8EwOPZ6)[,
 e0204970
-(2019).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1788152134897572&usg=AOvVaw0qIJaFT_0FR_ZSvhGJN0WW)
+(2019).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/1H8t&sa=D&source=editors&ust=1795165526972013&usg=AOvVaw3o8kTI_58SVZcbVAa61x-m)
 
 9.        [Rolim, F. A., Rodrigues, P. F. C. & Gadig, O. B. F. Baited
 videos to assess semi-aquatic mammals: occurrence of the neotropical
 otter Lontra longicaudis (Carnivora: Mustelidae) in a marine coastal
 island in São Paulo, Southeast
-Brazil.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1788152134898219&usg=AOvVaw10FJavpS9cgpWKfbHFI7W3)
+Brazil.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1795165526972089&usg=AOvVaw2WUijxb3P4Z3wkR-LiPWXS)
 [Mar.
-Biodivers.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1788152134898357&usg=AOvVaw15jPPvZ_nPcZOyGIAr8CBZ)[ (2018)
-doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1788152134898468&usg=AOvVaw3Fsfs9qE0fYwZCSJ4Mm3xO)[10.1007/s12526-018-0868-7](https://www.google.com/url?q=http://dx.doi.org/10.1007/s12526-018-0868-7&sa=D&source=editors&ust=1788152134898638&usg=AOvVaw0sD1tjTQKqB8RyWTLcevEW)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1788152134898763&usg=AOvVaw1ZtzN4q2GLeRWB8X3jfUCq)
+Biodivers.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1795165526972125&usg=AOvVaw2XpORe29Iff2JWwapfxa96)[ (2018)
+doi:](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1795165526972160&usg=AOvVaw1oHEHhksCAc1268it5axxn)[10.1007/s12526-018-0868-7](https://www.google.com/url?q=http://dx.doi.org/10.1007/s12526-018-0868-7&sa=D&source=editors&ust=1795165526972195&usg=AOvVaw0ngdQyJ9F_2rTHlVSEFoGM)[.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/pPIR&sa=D&source=editors&ust=1795165526972228&usg=AOvVaw2ISUA78pGmYB54pNcmiCOh)
 
 10.        [Haberstroh, A. J., McLean, D., Holmes, T. H. & Langlois, T.
 Baited video, but not diver video, detects a greater contrast in the
 abundance of two legal-size target species between no-take and fished
-zones.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1788152134899599&usg=AOvVaw0x0DSz3OYMmGTx5ZZmyWKs)
+zones.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1795165526972318&usg=AOvVaw3QnAzrW5Q2waNb0RgEiMEF)
 [Mar.
-Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1788152134899740&usg=AOvVaw3GwhU7NAJTsbcuD1GhmKNY)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1788152134899818&usg=AOvVaw096aF5YR6bvdOD6r5ZGIfH)[169](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1788152134899886&usg=AOvVaw1r2BmwXZEvenT9FM8PswFg)[,
-(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1788152134899974&usg=AOvVaw0DAZjcxHnCKTMNzN7gY5KP)
+Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1795165526972353&usg=AOvVaw2lZ2ME_-P58CfZp97G8svE)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1795165526972384&usg=AOvVaw1YBsVBL3rQa49n3pwWUfeE)[169](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1795165526972416&usg=AOvVaw3w8XzZvI82lw9rHW62eF77)[,
+(2022).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/cHif&sa=D&source=editors&ust=1795165526972448&usg=AOvVaw1UiBWarnqY7K6A4ts5edp3)
 
 11.        [Piggott, C. V. H., Depczynski, M., Gagliano, M. & Langlois,
 T. J. Remote video methods for studying juvenile fish populations in
 challenging
-environments.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1788152134900458&usg=AOvVaw36-IJPez6Y8EZCpSJsqU2d)
+environments.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1795165526972521&usg=AOvVaw2JMBJF3ZHdlKAiXBtc_SH4)
 [J. Exp. Mar. Bio.
-Ecol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1788152134900598&usg=AOvVaw3Ut6CQxvBU2mZ3D2cGVRWv)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1788152134900729&usg=AOvVaw1k0DSVALcB8PrOTyKsjG8m)[532](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1788152134900814&usg=AOvVaw0MlCgkSslbQEMbzTgg7pOT)[,
+Ecol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1795165526972552&usg=AOvVaw1OZyZN0H7yIQ0cscQ5c5HU)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1795165526972580&usg=AOvVaw1bU9EzBrjcV62SwpgTeb-U)[532](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1795165526972609&usg=AOvVaw0Qim_a0muqfvYSx2pwOvWQ)[,
 151454
-(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1788152134900920&usg=AOvVaw2iCW6EMRa96Jv-UCMN7ca0)
+(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/LrAF&sa=D&source=editors&ust=1795165526972639&usg=AOvVaw2bd0sQ2foWAmYjRDp5twA9)
 
 12.        [MacNeil, M.
-A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1788152134901109&usg=AOvVaw2zBdLd3KIAw7pBUNFHq4jE)
+A.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1795165526972697&usg=AOvVaw3m-2BKjl6wCcDZ_CqlFea7)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1788152134901201&usg=AOvVaw3qWtHWlb-tP2n1U3kFJ27c)[ Global
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1795165526972726&usg=AOvVaw0N1U2_vJlABDfInQVJbnW3)[ Global
 status and conservation potential of reef
-sharks.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1788152134901397&usg=AOvVaw0XnT8JTWZosSFSytDu2Lu8)
-[Nature](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1788152134901489&usg=AOvVaw0e27uo0d2hgaaNduWh-OoM)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1788152134901575&usg=AOvVaw3ApnvXNCtriW1aW9b6XGGv)[583](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1788152134901667&usg=AOvVaw2sXAAvJFcllH_9wSFxYN5m)[,
+sharks.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1795165526972759&usg=AOvVaw1GB30BNge6fQBQZTZSikXY)
+[Nature](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1795165526972787&usg=AOvVaw2aFXiQn2v5BMprTUtcc4Jy)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1795165526972816&usg=AOvVaw3bZD4V-bek16h9vEyn0gLT)[583](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1795165526972844&usg=AOvVaw3pQW_-T_wy9nDxHgvXfVzT)[,
 801–806
-(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1788152134901786&usg=AOvVaw1XeaHhWem3lGcr3Q4dP8qL)
+(2020).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/uWWg&sa=D&source=editors&ust=1795165526972874&usg=AOvVaw3ggJbEY_LnT_fC3Tb0XJpx)
 
 13.        [Goetze, J.
-S.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1788152134902000&usg=AOvVaw0pEOhxaDKby6GmkRnNgQIH)
+S.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1795165526972955&usg=AOvVaw3waCX3xnr_sedxgeR0a0Fd)
 [et
-al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1788152134902094&usg=AOvVaw2t2O4YPCYiB_8hhKXfB9PF)[ Drivers
+al.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1795165526972985&usg=AOvVaw1HWMPWv-ftd3zNGzzd0bKy)[ Drivers
 of reef shark abundance and biomass in the Solomon
-Islands.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1788152134902318&usg=AOvVaw3vUuEXg6ga4n7LEW6UTH20)
+Islands.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1795165526973021&usg=AOvVaw0R1rBZlkjEENJKxjzw3ygg)
 [PLoS
-One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1788152134902416&usg=AOvVaw3BOnoORyjQ4kRtrdoB2BON)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1788152134902488&usg=AOvVaw33dCoNGLBxFUfCzLbvrMNc)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1788152134902565&usg=AOvVaw0M3DhLwfcWNgWefZLYunC2)[,
+One](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1795165526973052&usg=AOvVaw20VQh5u84CfnSF4_FTHLJK)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1795165526973082&usg=AOvVaw2OgVpbH7N-bjBZTgNHSDMj)[13](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1795165526973115&usg=AOvVaw0CQT5JJnRJVfe-Km0XTfdX)[,
 e0200960
-(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1788152134902685&usg=AOvVaw2zOdkL_gl3Rc2UuqVXFKvw)
+(2018).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/wTym&sa=D&source=editors&ust=1795165526973149&usg=AOvVaw0VZaRPaCId_sL04_HU0k8-)
 
 14.        [Wilson, S. K., Graham, N. A. J., Pratchett, M. S., Jones, G.
 P. & Polunin, N. V. C. Multiple disturbances and the global degradation
 of coral reefs: are reef fishes at risk or
-resilient?](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1788152134903238&usg=AOvVaw03_FgaJH9dFfMELcJtkVOt)
+resilient?](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1795165526973226&usg=AOvVaw0NUAu6mUISve5PBNqGzPkj)
 [Glob. Chang.
-Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1788152134903384&usg=AOvVaw2MJp2en9XaiFOf9uLWLBqD)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1788152134903473&usg=AOvVaw1TYhzAVbNvTaMKbAtEUg8_)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1788152134903559&usg=AOvVaw0cNXXlAlPkZdFob5vLkYqg)[,
+Biol.](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1795165526973259&usg=AOvVaw2_oHIr9S3xaD-cp9UyWsoC)[ ](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1795165526973290&usg=AOvVaw3kkZlCyDs2DvwIdUFOB2qf)[12](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1795165526973321&usg=AOvVaw0U96rioRVk3Ze3h5EyfWMf)[,
 2220–2234
-(2006).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1788152134903673&usg=AOvVaw3sDTbhUmbxOnbAqc_fX9Bi)
+(2006).](https://www.google.com/url?q=http://paperpile.com/b/0wnItn/M1vE&sa=D&source=editors&ust=1795165526973352&usg=AOvVaw0FfMwx2h6TrUZDv6E1oPDp)
